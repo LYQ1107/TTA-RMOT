@@ -1,0 +1,91 @@
+protocol:
+  source_free_at_adaptation: true
+  online: true
+  predict_then_adapt: true
+  reset_unit: video_expression
+  allow_future_frames: false
+  seed: 20261020
+
+model:
+  baseline: temprmot
+  source_root: /data2/user/reference_envs/temprmot/source
+  checkpoint: /data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth
+  text_root: /data2/user/reference_envs/temprmot/roberta-base
+  freeze_backbone: true
+  freeze_text_encoder: true
+  freeze_tracker: true
+  external_referring_only: true
+  source_domain: refer_kitti_v2
+  target_domain: aerialmind
+
+data:
+  dataset: aerialmind_two_episode_relative_rank
+  data_root: /data2/user/LocateMOT/data
+  runtime_manifest: results/manifests/aerialmind_two_episode_runtime_manifest.jsonl
+  evaluation_manifest: results/manifests/aerialmind_two_episode_evaluation_manifest.jsonl
+  image_root: data/AerialMind/image_02
+  expression_root: data/AerialMind/expression
+  label_root: data/AerialMind/labels_with_ids
+  query_text_source: filename
+  trackeval_frame_offset: 0
+  label_format_by_video_prefix:
+    uav: xywh_topleft
+    M: cxcywh
+  videos:
+    - uav0000009_03358_v
+    - M0203
+
+inference:
+  # The relative gate intentionally does not use an absolute referring
+  # probability threshold.  The two zero base thresholds admit the frozen
+  # tracker's valid candidates; ranking is then performed per frame.
+  objectness_threshold: 0.0
+  area_threshold: 0.0
+  referring_threshold: 0.4
+  selection:
+    mode: relative_margin
+    relative_logit_margin: 0.75
+    max_candidates_per_frame: 16
+  cuda_visible_devices: "auto"
+
+probe:
+  enabled: true
+  every_n_frames: 16
+  max_query_count: 3
+  static_history_frames: 1
+  dynamic_history_frames: 4
+  shared_raw_backbone: false
+  min_match_iou: 0.6
+  ambiguity_iou_margin: 0.05
+
+evidence:
+  positive_threshold: 0.8
+  negative_threshold: 0.2
+  equivalent_tolerance: 0.1
+  contrast_margin: 0.3
+  allow_forced_top1: false
+  missing_probe_is_negative: false
+
+memory:
+  capacity: 512
+  per_track_capacity: 16
+  semantic_state_aware: true
+  fixed_ttl_frames: 16
+
+adaptation:
+  optimizer: adamw
+  lr: 0.001
+  weight_decay: 0.0
+  update_every_n_frames: 4
+  steps_per_update: 1
+  batch_size: 32
+  minimum_distinct_track_time_samples: 2
+  grad_clip: 1.0
+  max_abs_residual: 6.0
+  hidden_dim: 32
+
+methods:
+  - FROZEN
+  - PROBE_CACHE
+  - QCS_TTA
+  - NO_STATE

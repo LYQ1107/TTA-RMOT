@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "locatemot"
+version = "0.1.0"
+description = "LocateAnything-based Persistent Multi-Object Tracking"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "torch>=2.2",
+  "einops>=0.8",
+]
+
+[tool.setuptools.packages.find]
+include = ["locatemot*"]

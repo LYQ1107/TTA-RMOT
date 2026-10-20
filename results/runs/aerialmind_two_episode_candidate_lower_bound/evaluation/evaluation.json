@@ -1,0 +1,49 @@
+{
+  "format": "locatemot-qcs-trackeval-v1",
+  "status": "EVALUATION_COMPLETE",
+  "run_dir": "/data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound",
+  "evaluation_manifest": "/data2/user/LocateMOT/results/manifests/aerialmind_two_episode_evaluation_manifest.jsonl",
+  "evaluation_manifest_sha256": "1d51eafb9d26fa4c085fa804ff207ddd394837b951b92c165c4f26b2d44663e1",
+  "trackeval_source": "/data2/user/reference_envs/temprmot/source/TrackEval",
+  "sequence_count": 2,
+  "sequences": [
+    "M0203+Auto stopped at red stoplight",
+    "uav0000009_03358_v+Automobiles driving in approaching direction"
+  ],
+  "methods": [
+    {
+      "method": "FROZEN",
+      "returncode": 0,
+      "command": "/usr/bin/python3 /data2/user/LocateMOT/scripts/run_locatemot_trackeval.py --source-root /data2/user/reference_envs/temprmot/source --gt-folder /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data --trackers-folder /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data --tracker /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/predictions/FROZEN --seqmap /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data/seqmap.txt --seq-info-file /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data/seq_info.json --error-log /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/evaluation/logs/FROZEN_trackeval_error.log",
+      "log": "/data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/evaluation/logs/FROZEN.log",
+      "summary": {
+        "HOTA": 2.7327,
+        "DetA": 1.0171,
+        "AssA": 7.3499,
+        "DetRe": 5.2083,
+        "DetPr": 1.1268,
+        "IDF1": 0.0
+      }
+    },
+    {
+      "method": "QCS_TTA",
+      "returncode": 0,
+      "command": "/usr/bin/python3 /data2/user/LocateMOT/scripts/run_locatemot_trackeval.py --source-root /data2/user/reference_envs/temprmot/source --gt-folder /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data --trackers-folder /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data --tracker /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/predictions/QCS_TTA --seqmap /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data/seqmap.txt --seq-info-file /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/trackeval_data/seq_info.json --error-log /data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/evaluation/logs/QCS_TTA_trackeval_error.log",
+      "log": "/data2/user/LocateMOT/results/runs/aerialmind_two_episode_candidate_lower_bound/evaluation/logs/QCS_TTA.log",
+      "summary": {
+        "HOTA": 2.7327,
+        "DetA": 1.0171,
+        "AssA": 7.3499,
+        "DetRe": 5.2083,
+        "DetPr": 1.1268,
+        "IDF1": 0.0
+      }
+    }
+  ],
+  "episodes": [
+    "M0203/Auto stopped at red stoplight",
+    "uav0000009_03358_v/Automobiles driving in approaching direction"
+  ],
+  "gt_materialized_after_prediction": true,
+  "runtime_manifest_opened": false
+}

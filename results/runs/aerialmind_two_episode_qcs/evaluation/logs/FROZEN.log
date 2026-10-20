@@ -1,0 +1,20 @@
+
+CLEAR Config:
+METRICS              : ['HOTA', 'CLEAR', 'Identity'] 
+THRESHOLD            : 0.5                           
+PRINT_CONFIG         : True                          
+
+Identity Config:
+METRICS              : ['HOTA', 'CLEAR', 'Identity'] 
+THRESHOLD            : 0.5                           
+PRINT_CONFIG         : True                          
+
+Evaluating 1 tracker(s) on 2 sequence(s) for 1 class(es) on MotChallenge2DBox dataset using the following metrics: HOTA, CLEAR, Identity, Count
+
+
+Evaluating /data2/user/LocateMOT/results/runs/aerialmind_two_episode_qcs/predictions/FROZEN
+
+1 eval_sequence(M0203+Auto stopped at red stoplight, /data2/user/LocateMOT/results/runs/aerialmind_two_episode_qcs/predictions/FROZEN) 0.0886 sec
+2 eval_sequence(uav0000009_03358_v+Automobiles driving in approaching direction, /data2/user/LocateMOT/results/runs/aerialmind_two_episode_qcs/predictions/FROZEN) 0.0218 sec
+
+All sequences for /data2/user/LocateMOT/results/runs/aerialmind_two_episode_qcs/predictions/FROZEN finished in 0.11 seconds
