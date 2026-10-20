@@ -1,0 +1,4938 @@
+{
+  "format": "locatemot-refer-bdd-asset-audit-v1",
+  "status": "COMPLETE",
+  "dataset": "refer_bdd",
+  "official_sources": {
+    "echotrack_repository": "https://github.com/lab206/EchoTrack",
+    "seqmap_url": "https://raw.githubusercontent.com/lab206/EchoTrack/main/assets/seqmap_bdd.txt",
+    "google_drive_folder": "https://drive.google.com/drive/folders/12jXjL9wJ9keB-vD-kWKI8IzK6mrIfmAN?usp=sharing"
+  },
+  "paths": {
+    "image_root": "/data2/user/LocateMOT/data/ReferBDD/refer-bdd/images/track/train",
+    "expression_root": "/data2/user/LocateMOT/data/ReferBDD/refer-bdd/expressions",
+    "label_root": "/data2/user/LocateMOT/data/ReferBDD/label_with_ids",
+    "seqmap": "/data2/user/LocateMOT/data/downloads/EchoTrack/assets/seqmap_bdd.txt",
+    "archive_root": "/data2/user/LocateMOT/data/downloads/ReferBDD"
+  },
+  "seqmap": {
+    "sha256": "9cb1ba2a8dc145bfa84612dbb5a7f04948745b5a71dfa191a449a9ecdb64bdf4",
+    "entries": 673,
+    "unique_entries": 673,
+    "videos": [
+      "0000f77c-cb820c98",
+      "00abd8a7-ecd6fc56",
+      "00fcfec9-7ba5dabf",
+      "02a17951-3d88d95e",
+      "002b562f-e0ac84fe",
+      "00f7eac8-5193d600",
+      "0081da60-5fa22cc6",
+      "00de601c-858a8a8d"
+    ],
+    "entries_by_video": {
+      "0000f77c-cb820c98": 64,
+      "00abd8a7-ecd6fc56": 106,
+      "00fcfec9-7ba5dabf": 107,
+      "02a17951-3d88d95e": 60,
+      "002b562f-e0ac84fe": 50,
+      "00f7eac8-5193d600": 109,
+      "0081da60-5fa22cc6": 106,
+      "00de601c-858a8a8d": 71
+    }
+  },
+  "archives": {
+    "refer-bdd.zip": {
+      "path": "/data2/user/LocateMOT/data/downloads/ReferBDD/refer-bdd.zip",
+      "exists": true,
+      "bytes": 2863924583,
+      "sha256": "7af91415c71a8c1eb802e2b9295e86514195f745fb0b4f98af89b69140830759",
+      "members": 24776,
+      "testzip_bad_member": null
+    },
+    "label_with_ids.zip": {
+      "path": "/data2/user/LocateMOT/data/downloads/ReferBDD/label_with_ids.zip",
+      "exists": true,
+      "bytes": 8119776,
+      "sha256": "288b402c6180a96ac8b1c2653eda5b1c6f6e093651bf32ebb7620a11aa7195f6",
+      "members": 10046,
+      "testzip_bad_member": null
+    }
+  },
+  "checkpoint": {
+    "path": "/data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth",
+    "sha256": "4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b",
+    "exists": true
+  },
+  "totals": {
+    "videos": 8,
+    "expressions": 673,
+    "images": 1619,
+    "label_files": 1610,
+    "expression_target_references": 74924,
+    "expression_target_objects": 216613
+  },
+  "videos": [
+    {
+      "video_id": "0000f77c-cb820c98",
+      "seqmap_expressions": 64,
+      "expression_files": 64,
+      "images": 203,
+      "image_frame_min": 1,
+      "image_frame_max": 203,
+      "image_dimensions": {
+        "1280x720": 203
+      },
+      "label_files": 203,
+      "missing_label_frames": [],
+      "expression_target_references": 7620,
+      "expression_target_objects": 21005,
+      "expressions": [
+        {
+          "expression_id": "im-searching-for-the-silvery-cars-on-the-left-side",
+          "sentence": "i'm searching for the silvery cars on the left side",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 222
+        },
+        {
+          "expression_id": "black-cars-at-rest-on-the-right",
+          "sentence": "black cars at rest on the right",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 398
+        },
+        {
+          "expression_id": "cars-stop-on-the-left",
+          "sentence": "cars stop on the left",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 490
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-cars",
+          "sentence": "on the right, there are some cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 706
+        },
+        {
+          "expression_id": "ont-the-right-lane-the-cars-are-at-rest",
+          "sentence": "ont the right lane, the cars are at rest",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 695
+        },
+        {
+          "expression_id": "cars-on-the-right",
+          "sentence": "cars on the right",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 706
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-black-vehicles-on-the-left-side",
+          "sentence": "i'm trying to spot the black vehicles on the left side",
+          "label_frames": 198,
+          "target_references": 198,
+          "target_objects": 409
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-black-cars",
+          "sentence": "on the right, there are some black cars",
+          "label_frames": 198,
+          "target_references": 198,
+          "target_objects": 409
+        },
+        {
+          "expression_id": "watch-out-for-each-vehicle",
+          "sentence": "watch out for each vehicle",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1385
+        },
+        {
+          "expression_id": "watch-out-for-each-moving-vehicle",
+          "sentence": "watch out for each moving vehicle",
+          "label_frames": 101,
+          "target_references": 101,
+          "target_objects": 163
+        },
+        {
+          "expression_id": "gray-cars-halt-on-the-right",
+          "sentence": "gray cars halt on the right",
+          "label_frames": 86,
+          "target_references": 86,
+          "target_objects": 98
+        },
+        {
+          "expression_id": "left-cars",
+          "sentence": "left cars",
+          "label_frames": 199,
+          "target_references": 199,
+          "target_objects": 605
+        },
+        {
+          "expression_id": "im-looking-for-the-parked-cars-on-the-right",
+          "sentence": "i'm looking for the parked cars on the right",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 695
+        },
+        {
+          "expression_id": "white-cars",
+          "sentence": "white cars",
+          "label_frames": 183,
+          "target_references": 183,
+          "target_objects": 391
+        },
+        {
+          "expression_id": "vehicles-on-the-road-are-slowing-down",
+          "sentence": "vehicles on the road are slowing down",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1222
+        },
+        {
+          "expression_id": "moving-vehicles-on-the-left-side",
+          "sentence": "moving vehicles on the left side",
+          "label_frames": 80,
+          "target_references": 80,
+          "target_objects": 115
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1385
+        },
+        {
+          "expression_id": "i-want-to-identify-the-cars-that-are-parked-on-the-right",
+          "sentence": "i want to identify the cars that are parked on the right",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 695
+        },
+        {
+          "expression_id": "follow-the-tracks-of-the-moving-cars",
+          "sentence": "follow the tracks of the moving cars",
+          "label_frames": 101,
+          "target_references": 101,
+          "target_objects": 163
+        },
+        {
+          "expression_id": "cars-are-driving-along-the-left-lane",
+          "sentence": "cars are driving along the left lane",
+          "label_frames": 80,
+          "target_references": 80,
+          "target_objects": 115
+        },
+        {
+          "expression_id": "gray-vehicles",
+          "sentence": "gray vehicles",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 221
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-moving-cars",
+          "sentence": "right road is occupied by moving cars",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "i-want-to-find-the-silvery-parked-cars",
+          "sentence": "i want to find the silvery parked cars",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 221
+        },
+        {
+          "expression_id": "red-cars",
+          "sentence": "red cars",
+          "label_frames": 51,
+          "target_references": 51,
+          "target_objects": 51
+        },
+        {
+          "expression_id": "gray-vehicles-stop-on-the-left-side",
+          "sentence": "gray vehicles stop on the left side",
+          "label_frames": 111,
+          "target_references": 111,
+          "target_objects": 111
+        },
+        {
+          "expression_id": "truck-on-the-road",
+          "sentence": "truck on the road",
+          "label_frames": 5,
+          "target_references": 5,
+          "target_objects": 5
+        },
+        {
+          "expression_id": "cars-are-driving-along-the-right-side",
+          "sentence": "cars are driving along the right side",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "there-are-dark-cars-on-the-left-side",
+          "sentence": "there are dark cars on the left side",
+          "label_frames": 155,
+          "target_references": 155,
+          "target_objects": 199
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-parked-cars",
+          "sentence": "i'm trying to spot the parked cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1222
+        },
+        {
+          "expression_id": "yellow-vehicles-are-parking",
+          "sentence": "yellow vehicles are parking",
+          "label_frames": 26,
+          "target_references": 26,
+          "target_objects": 26
+        },
+        {
+          "expression_id": "cars-on-the-left",
+          "sentence": "cars on the left",
+          "label_frames": 199,
+          "target_references": 199,
+          "target_objects": 605
+        },
+        {
+          "expression_id": "the-cars-in-front-of-us",
+          "sentence": "the cars in front of us",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 74
+        },
+        {
+          "expression_id": "dark-cars-in-front-are-driving",
+          "sentence": "dark cars in front are driving",
+          "label_frames": 15,
+          "target_references": 15,
+          "target_objects": 16
+        },
+        {
+          "expression_id": "moving-trucks",
+          "sentence": "moving trucks",
+          "label_frames": 5,
+          "target_references": 5,
+          "target_objects": 5
+        },
+        {
+          "expression_id": "the-left-lane-is-occupied-by-cars",
+          "sentence": "the left lane is occupied by cars",
+          "label_frames": 199,
+          "target_references": 199,
+          "target_objects": 605
+        },
+        {
+          "expression_id": "white-cars-on-the-left-side",
+          "sentence": "white cars on the left side",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 222
+        },
+        {
+          "expression_id": "white-parked-vehicles",
+          "sentence": "white parked vehicles",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 328
+        },
+        {
+          "expression_id": "notice-the-vehicles-in-front-of-us",
+          "sentence": "notice the vehicles in front of us",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 74
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 5,
+          "target_references": 5,
+          "target_objects": 5
+        },
+        {
+          "expression_id": "im-searching-for-the-white-car-that-stops-on-the-left",
+          "sentence": "i'm searching for the white car that stops on the left",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 176
+        },
+        {
+          "expression_id": "blue-vehicles-are-parked-on-the-right-road",
+          "sentence": "blue vehicles are parked on the right road",
+          "label_frames": 49,
+          "target_references": 49,
+          "target_objects": 50
+        },
+        {
+          "expression_id": "i-want-to-find-the-dark-vehicles-that-are-going-by",
+          "sentence": "i want to find the dark vehicles that are going by",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 84
+        },
+        {
+          "expression_id": "on-the-left-there-are-gray-cars",
+          "sentence": "on the left, there are gray cars",
+          "label_frames": 111,
+          "target_references": 111,
+          "target_objects": 111
+        },
+        {
+          "expression_id": "right-cars",
+          "sentence": "right cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 706
+        },
+        {
+          "expression_id": "vehicles-go-by-on-the-left",
+          "sentence": "vehicles go by on the left",
+          "label_frames": 80,
+          "target_references": 80,
+          "target_objects": 115
+        },
+        {
+          "expression_id": "i-want-to-identify-the-dark-cars-on-the-left",
+          "sentence": "i want to identify the dark cars on the left",
+          "label_frames": 155,
+          "target_references": 155,
+          "target_objects": 199
+        },
+        {
+          "expression_id": "cars-at-rest",
+          "sentence": "cars at rest",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1222
+        },
+        {
+          "expression_id": "red-vehicles-are-driving",
+          "sentence": "red vehicles are driving",
+          "label_frames": 16,
+          "target_references": 16,
+          "target_objects": 16
+        },
+        {
+          "expression_id": "gray-cars-on-the-left-side",
+          "sentence": "gray cars on the left side",
+          "label_frames": 111,
+          "target_references": 111,
+          "target_objects": 111
+        },
+        {
+          "expression_id": "white-parked-cars-on-the-right",
+          "sentence": "white parked cars on the right",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 149
+        },
+        {
+          "expression_id": "cars-that-are-already-parked-on-the-left-side",
+          "sentence": "cars that are already parked on the left side",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 490
+        },
+        {
+          "expression_id": "cars-in-front",
+          "sentence": "cars in front",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 74
+        },
+        {
+          "expression_id": "im-searching-for-the-silvery-cars-on-th-right",
+          "sentence": "i'm searching for the silvery cars on th right",
+          "label_frames": 86,
+          "target_references": 86,
+          "target_objects": 98
+        },
+        {
+          "expression_id": "white-cars-which-are-moving",
+          "sentence": "white cars which are moving",
+          "label_frames": 41,
+          "target_references": 41,
+          "target_objects": 63
+        },
+        {
+          "expression_id": "cars-are-going-on-the-right",
+          "sentence": "cars are going on the right",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "left-lane-is-occupied-by-moving-black-vehicles",
+          "sentence": "left lane is occupied by moving black vehicles",
+          "label_frames": 55,
+          "target_references": 55,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "i-want-to-find-the-blue-parked-cars",
+          "sentence": "i want to find the blue parked cars",
+          "label_frames": 49,
+          "target_references": 49,
+          "target_objects": 50
+        },
+        {
+          "expression_id": "the-white-vehicles",
+          "sentence": "the white vehicles",
+          "label_frames": 183,
+          "target_references": 183,
+          "target_objects": 391
+        },
+        {
+          "expression_id": "driving-red-vehicles-on-the-left-side",
+          "sentence": "driving red vehicles on the left side",
+          "label_frames": 12,
+          "target_references": 12,
+          "target_objects": 12
+        },
+        {
+          "expression_id": "black-cars-on-the-right-are-moving",
+          "sentence": "black cars on the right are moving",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "on-the-left-the-yellow-cars-are-at-rest",
+          "sentence": "on the left, the yellow cars are at rest",
+          "label_frames": 26,
+          "target_references": 26,
+          "target_objects": 26
+        },
+        {
+          "expression_id": "gray-cars-on-the-right",
+          "sentence": "gray cars on the right",
+          "label_frames": 86,
+          "target_references": 86,
+          "target_objects": 98
+        },
+        {
+          "expression_id": "can-you-help-me-find-the-silvery-vehicles",
+          "sentence": "can you help me find the silvery vehicles",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 221
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1385
+        }
+      ]
+    },
+    {
+      "video_id": "00abd8a7-ecd6fc56",
+      "seqmap_expressions": 106,
+      "expression_files": 106,
+      "images": 202,
+      "image_frame_min": 1,
+      "image_frame_max": 202,
+      "image_dimensions": {
+        "1280x720": 202
+      },
+      "label_files": 202,
+      "missing_label_frames": [],
+      "expression_target_references": 12068,
+      "expression_target_objects": 44409,
+      "expressions": [
+        {
+          "expression_id": "the-females-are-walking-on-the-right",
+          "sentence": "the females are walking on the right",
+          "label_frames": 177,
+          "target_references": 177,
+          "target_objects": 498
+        },
+        {
+          "expression_id": "males-wearing-gray-clothes-are-going-on-foot",
+          "sentence": "males wearing gray clothes are going on foot",
+          "label_frames": 155,
+          "target_references": 155,
+          "target_objects": 324
+        },
+        {
+          "expression_id": "people-who-stand",
+          "sentence": "people who stand",
+          "label_frames": 154,
+          "target_references": 154,
+          "target_objects": 860
+        },
+        {
+          "expression_id": "vehicles-in-front-of-us-are-pausing",
+          "sentence": "vehicles in front of us are pausing",
+          "label_frames": 55,
+          "target_references": 55,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "humans-on-the-left-are-standing",
+          "sentence": "humans on the left are standing",
+          "label_frames": 96,
+          "target_references": 96,
+          "target_objects": 160
+        },
+        {
+          "expression_id": "darkclad-persons-are-on-the-left",
+          "sentence": "dark-clad persons are on the left",
+          "label_frames": 120,
+          "target_references": 120,
+          "target_objects": 371
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-cars",
+          "sentence": "on the right, there are some cars",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 507
+        },
+        {
+          "expression_id": "females-wearing-white-clothes-on-the-right-are-going-on-foot",
+          "sentence": "females wearing white clothes on the right are going on foot",
+          "label_frames": 118,
+          "target_references": 118,
+          "target_objects": 177
+        },
+        {
+          "expression_id": "i-wearing-blue-clothes-want-to-locate-the-standing-persons",
+          "sentence": "i wearing blue clothes want to locate the standing persons,",
+          "label_frames": 92,
+          "target_references": 92,
+          "target_objects": 115
+        },
+        {
+          "expression_id": "yellow-cars-go-by",
+          "sentence": "yellow cars go by",
+          "label_frames": 98,
+          "target_references": 98,
+          "target_objects": 156
+        },
+        {
+          "expression_id": "persons-in-white-who-stand-there",
+          "sentence": "persons in white who stand there",
+          "label_frames": 90,
+          "target_references": 90,
+          "target_objects": 215
+        },
+        {
+          "expression_id": "cars-on-the-right",
+          "sentence": "cars on the right",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 507
+        },
+        {
+          "expression_id": "people-in-white",
+          "sentence": "people in white",
+          "label_frames": 189,
+          "target_references": 189,
+          "target_objects": 909
+        },
+        {
+          "expression_id": "persons-are-walking",
+          "sentence": "persons are walking",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 2430
+        },
+        {
+          "expression_id": "cars-are-driving-the-same-route",
+          "sentence": "cars are driving the same route",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 408
+        },
+        {
+          "expression_id": "people-in-gray",
+          "sentence": "people in gray",
+          "label_frames": 173,
+          "target_references": 173,
+          "target_objects": 571
+        },
+        {
+          "expression_id": "men-dressed-in-blue-are-at-the-forefront",
+          "sentence": "men dressed in blue are at the forefront",
+          "label_frames": 16,
+          "target_references": 16,
+          "target_objects": 16
+        },
+        {
+          "expression_id": "people-in-black-are-standing-on-the-right",
+          "sentence": "people in black are standing on the right",
+          "label_frames": 117,
+          "target_references": 117,
+          "target_objects": 238
+        },
+        {
+          "expression_id": "to-the-right-persons-dressed-in-green-have-come-to-a-halt",
+          "sentence": "to the right, persons dressed in green have come to a halt",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 73
+        },
+        {
+          "expression_id": "persons-are-walking-in-the-front",
+          "sentence": "persons are walking in the front",
+          "label_frames": 86,
+          "target_references": 86,
+          "target_objects": 262
+        },
+        {
+          "expression_id": "vehicles-coming-from-the-opposite-side",
+          "sentence": "vehicles coming from the opposite side",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 406
+        },
+        {
+          "expression_id": "person-in-black",
+          "sentence": "person in black",
+          "label_frames": 191,
+          "target_references": 191,
+          "target_objects": 1056
+        },
+        {
+          "expression_id": "ahead-of-us-there-are-male-pedestrians",
+          "sentence": "ahead of us, there are male pedestrians",
+          "label_frames": 83,
+          "target_references": 83,
+          "target_objects": 161
+        },
+        {
+          "expression_id": "parked-cars-in-front-of-us",
+          "sentence": "parked cars in front of us",
+          "label_frames": 55,
+          "target_references": 55,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "the-moving-cars",
+          "sentence": "the moving cars",
+          "label_frames": 191,
+          "target_references": 191,
+          "target_objects": 933
+        },
+        {
+          "expression_id": "female-riders-in-red-are-moving",
+          "sentence": "female riders in red are moving",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "parked-cars",
+          "sentence": "parked cars",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 498
+        },
+        {
+          "expression_id": "cars-are-following-the-same-route-on-the-left",
+          "sentence": "cars are following the same route on the left",
+          "label_frames": 76,
+          "target_references": 76,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 1431
+        },
+        {
+          "expression_id": "white-trucks",
+          "sentence": "white trucks",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 73
+        },
+        {
+          "expression_id": "the-parked-cars-in-front",
+          "sentence": "the parked cars in front",
+          "label_frames": 55,
+          "target_references": 55,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "left-lane-is-occupied-by-cars",
+          "sentence": "left lane is occupied by cars",
+          "label_frames": 181,
+          "target_references": 181,
+          "target_objects": 627
+        },
+        {
+          "expression_id": "the-female-on-the-left-wearing-green-have-come-to-a-stop",
+          "sentence": "the female on the left, wearing green, have come to a stop",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "males-in-white-clothes-stand-on-the-left",
+          "sentence": "males in white clothes stand on the left",
+          "label_frames": 2,
+          "target_references": 2,
+          "target_objects": 4
+        },
+        {
+          "expression_id": "cars-are-moving-ahead-of-us",
+          "sentence": "cars are moving ahead of us",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 236
+        },
+        {
+          "expression_id": "the-bicycles",
+          "sentence": "the bicycles",
+          "label_frames": 35,
+          "target_references": 35,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "males-on-the-right-dressed-in-blue-come-to-a-pause",
+          "sentence": "males on the right, dressed in blue, come to a pause",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 48
+        },
+        {
+          "expression_id": "people",
+          "sentence": "people",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 3313
+        },
+        {
+          "expression_id": "gray-vehicles-stop-on-the-left-side",
+          "sentence": "gray vehicles stop on the left side",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "yellow-cars-shine-brightly-on-the-right",
+          "sentence": "yellow cars shine brightly on the right",
+          "label_frames": 50,
+          "target_references": 50,
+          "target_objects": 50
+        },
+        {
+          "expression_id": "moving-white-trucks",
+          "sentence": "moving white trucks",
+          "label_frames": 33,
+          "target_references": 33,
+          "target_objects": 33
+        },
+        {
+          "expression_id": "grayclothed-pedestrians-on-the-right-come-to-a-stop",
+          "sentence": "gray-clothed pedestrians on the right come to a stop",
+          "label_frames": 76,
+          "target_references": 76,
+          "target_objects": 85
+        },
+        {
+          "expression_id": "women-stand-for-a-moment",
+          "sentence": "women stand for a moment",
+          "label_frames": 129,
+          "target_references": 129,
+          "target_objects": 452
+        },
+        {
+          "expression_id": "someones-wearing-black-clothes-on-the-right-are-going-on-foot",
+          "sentence": "someones wearing black clothes on the right are going on foot",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 358
+        },
+        {
+          "expression_id": "humans-in-red-on-the-right",
+          "sentence": "humans in red on the right",
+          "label_frames": 62,
+          "target_references": 62,
+          "target_objects": 70
+        },
+        {
+          "expression_id": "standing-women-in-blue",
+          "sentence": "standing women in blue",
+          "label_frames": 28,
+          "target_references": 28,
+          "target_objects": 28
+        },
+        {
+          "expression_id": "moving-cars-in-the-same-direction",
+          "sentence": "moving cars in the same direction",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 408
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-parked-cars",
+          "sentence": "i'm trying to spot the parked cars",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 498
+        },
+        {
+          "expression_id": "id-like-to-locate-people-who-are-in-black-in-front-of-us",
+          "sentence": "i'd like to locate people who are in black in front of us",
+          "label_frames": 47,
+          "target_references": 47,
+          "target_objects": 84
+        },
+        {
+          "expression_id": "men-in-front-of-us",
+          "sentence": "men in front of us",
+          "label_frames": 83,
+          "target_references": 83,
+          "target_objects": 161
+        },
+        {
+          "expression_id": "cars-on-the-left",
+          "sentence": "cars on the left",
+          "label_frames": 181,
+          "target_references": 181,
+          "target_objects": 627
+        },
+        {
+          "expression_id": "somebodies-wearing-gray-clothes-on-the-right-are-going-on-foot",
+          "sentence": "somebodies wearing gray clothes on the right are going on foot",
+          "label_frames": 132,
+          "target_references": 132,
+          "target_objects": 205
+        },
+        {
+          "expression_id": "standing-persons",
+          "sentence": "standing persons",
+          "label_frames": 154,
+          "target_references": 154,
+          "target_objects": 860
+        },
+        {
+          "expression_id": "somebodies-wearing-red-clothes-are-walking",
+          "sentence": "somebodies wearing red clothes are walking",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 78
+        },
+        {
+          "expression_id": "males-wearing-gray-clothes-on-the-right-are-going-on-foot",
+          "sentence": "males wearing gray clothes on the right are going on foot",
+          "label_frames": 96,
+          "target_references": 96,
+          "target_objects": 112
+        },
+        {
+          "expression_id": "on-the-left-the-cars-are-moving-in-the-opposite-direction",
+          "sentence": "on the left, the cars are moving in the opposite direction",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 406
+        },
+        {
+          "expression_id": "male-pedestrians-in-green-clothes-on-the-right-walk-along",
+          "sentence": "male pedestrians in green clothes on the right walk along",
+          "label_frames": 110,
+          "target_references": 110,
+          "target_objects": 139
+        },
+        {
+          "expression_id": "someones-wearing-blue-clothes-are-walking",
+          "sentence": "someones wearing blue clothes are walking",
+          "label_frames": 140,
+          "target_references": 140,
+          "target_objects": 250
+        },
+        {
+          "expression_id": "ladies-who-are-in-white-clothes-stand-there",
+          "sentence": "ladies who are in white clothes stand there",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 139
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 73
+        },
+        {
+          "expression_id": "left-vehicles",
+          "sentence": "left vehicles",
+          "label_frames": 181,
+          "target_references": 181,
+          "target_objects": 627
+        },
+        {
+          "expression_id": "moving-vehicles-in-front-of-us",
+          "sentence": "moving vehicles in front of us",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 236
+        },
+        {
+          "expression_id": "standing-ladies",
+          "sentence": "standing ladies",
+          "label_frames": 129,
+          "target_references": 129,
+          "target_objects": 452
+        },
+        {
+          "expression_id": "humans",
+          "sentence": "humans",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 3313
+        },
+        {
+          "expression_id": "those-people-are-dressed-in-green",
+          "sentence": "those people are dressed in green",
+          "label_frames": 135,
+          "target_references": 135,
+          "target_objects": 218
+        },
+        {
+          "expression_id": "moving-buses-up-ahead",
+          "sentence": "moving buses up ahead",
+          "label_frames": 5,
+          "target_references": 5,
+          "target_objects": 5
+        },
+        {
+          "expression_id": "bicycles",
+          "sentence": "bicycles",
+          "label_frames": 35,
+          "target_references": 35,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "cars-on-the-left-move-in-a-same-direction",
+          "sentence": "cars on the left move in a same direction",
+          "label_frames": 76,
+          "target_references": 76,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "take-a-look-at-the-humans-wearing-black-clothes-standing-on-the-left",
+          "sentence": "take a look at the humans wearing black clothes standing on the left",
+          "label_frames": 66,
+          "target_references": 66,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "please-follow-the-tracks-of-all-cars",
+          "sentence": "please follow the tracks of all cars",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 1431
+        },
+        {
+          "expression_id": "gray-cars-in-the-left-lane",
+          "sentence": "gray cars in the left lane",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 155
+        },
+        {
+          "expression_id": "cars-heading-the-other-way",
+          "sentence": "cars heading the other way",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 406
+        },
+        {
+          "expression_id": "those-on-the-left-wear-green-clothes",
+          "sentence": "those on the left wear green clothes",
+          "label_frames": 61,
+          "target_references": 61,
+          "target_objects": 67
+        },
+        {
+          "expression_id": "ahead-of-us-there-are-persons-in-green",
+          "sentence": "ahead of us, there are persons in green",
+          "label_frames": 6,
+          "target_references": 6,
+          "target_objects": 6
+        },
+        {
+          "expression_id": "on-the-left-there-are-gray-cars",
+          "sentence": "on the left, there are gray cars",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 155
+        },
+        {
+          "expression_id": "youll-find-cars-on-the-left-moving",
+          "sentence": "you'll find cars on the left moving",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 509
+        },
+        {
+          "expression_id": "moving-vehicles",
+          "sentence": "moving vehicles",
+          "label_frames": 191,
+          "target_references": 191,
+          "target_objects": 933
+        },
+        {
+          "expression_id": "right-cars",
+          "sentence": "right cars",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 507
+        },
+        {
+          "expression_id": "notice-the-black-cars-in-front-of-us",
+          "sentence": "notice the black cars in front of us",
+          "label_frames": 167,
+          "target_references": 167,
+          "target_objects": 181
+        },
+        {
+          "expression_id": "vehicles-go-by-on-the-left",
+          "sentence": "vehicles go by on the left",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 509
+        },
+        {
+          "expression_id": "persons-in-white-clothes-wait-on-the-right",
+          "sentence": "persons in white clothes wait on the right",
+          "label_frames": 87,
+          "target_references": 87,
+          "target_objects": 209
+        },
+        {
+          "expression_id": "please-observe-that-the-persons-who-are-clad-in-white-attire-on-the-left",
+          "sentence": "please observe that the persons who are clad in white attire on the left",
+          "label_frames": 135,
+          "target_references": 135,
+          "target_objects": 362
+        },
+        {
+          "expression_id": "cars-on-the-left-are-going-the-other-way",
+          "sentence": "cars on the left are going the other way",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 406
+        },
+        {
+          "expression_id": "blackclothed-pedestrians-come-to-a-stop",
+          "sentence": "black-clothed pedestrians come to a stop",
+          "label_frames": 131,
+          "target_references": 131,
+          "target_objects": 306
+        },
+        {
+          "expression_id": "id-like-to-follow-all-persons",
+          "sentence": "i'd like to follow all persons",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 3313
+        },
+        {
+          "expression_id": "cars-at-rest",
+          "sentence": "cars at rest",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 498
+        },
+        {
+          "expression_id": "men-in-red-on-the-left-side",
+          "sentence": "men in red on the left side",
+          "label_frames": 2,
+          "target_references": 2,
+          "target_objects": 2
+        },
+        {
+          "expression_id": "counterdirection-moving-cars",
+          "sentence": "counter-direction moving cars",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 406
+        },
+        {
+          "expression_id": "vehicles-are-headed-in-the-same-way",
+          "sentence": "vehicles are headed in the same way",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 408
+        },
+        {
+          "expression_id": "on-the-left-the-cars-painted-yellow-are-moving",
+          "sentence": "on the left, the cars, painted yellow, are moving",
+          "label_frames": 85,
+          "target_references": 85,
+          "target_objects": 103
+        },
+        {
+          "expression_id": "somebodies-wearing-green-stop-their-steps",
+          "sentence": "somebodies wearing green stop their steps",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 116
+        },
+        {
+          "expression_id": "silvery-cars-are-moving-in-reverse",
+          "sentence": "silvery cars are moving in reverse",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 87
+        },
+        {
+          "expression_id": "cars-are-going-on-the-left",
+          "sentence": "cars are going on the left",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 509
+        },
+        {
+          "expression_id": "black-cars-on-the-left-come-to-a-halt",
+          "sentence": "black cars on the left come to a halt",
+          "label_frames": 45,
+          "target_references": 45,
+          "target_objects": 45
+        },
+        {
+          "expression_id": "people-in-blue-stop-on-the-left",
+          "sentence": "people in blue stop on the left",
+          "label_frames": 25,
+          "target_references": 25,
+          "target_objects": 26
+        },
+        {
+          "expression_id": "the-black-cars-ahead",
+          "sentence": "the black cars ahead",
+          "label_frames": 167,
+          "target_references": 167,
+          "target_objects": 181
+        },
+        {
+          "expression_id": "women-dressed-in-dark-halt-their-steps",
+          "sentence": "women dressed in dark halt their steps",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 140
+        },
+        {
+          "expression_id": "those-pedestrians-wearing-blue-clothes-on-the-right-pause-in-their-walk",
+          "sentence": "those pedestrians wearing blue clothes on the right pause in their walk",
+          "label_frames": 70,
+          "target_references": 70,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "men-in-white-stop-their-steps",
+          "sentence": "men in white stop their steps",
+          "label_frames": 73,
+          "target_references": 73,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "gentlemen-who-are-in-white-clothes",
+          "sentence": "gentlemen who are in white clothes",
+          "label_frames": 173,
+          "target_references": 173,
+          "target_objects": 424
+        },
+        {
+          "expression_id": "someones-wearing-white-clothes-on-the-right-are-going-on-foot",
+          "sentence": "someones wearing white clothes on the right are going on foot",
+          "label_frames": 163,
+          "target_references": 163,
+          "target_objects": 289
+        },
+        {
+          "expression_id": "persons-in-gray-stop-their-steps",
+          "sentence": "persons in gray stop their steps",
+          "label_frames": 83,
+          "target_references": 83,
+          "target_objects": 103
+        },
+        {
+          "expression_id": "people-stand-on-the-right",
+          "sentence": "people stand on the right",
+          "label_frames": 140,
+          "target_references": 140,
+          "target_objects": 685
+        },
+        {
+          "expression_id": "persons-are-going-on-foot-on-the-left",
+          "sentence": "persons are going on foot on the left",
+          "label_frames": 147,
+          "target_references": 147,
+          "target_objects": 932
+        },
+        {
+          "expression_id": "people-on-the-right-are-dressed-in-blue",
+          "sentence": "people on the right are dressed in blue",
+          "label_frames": 141,
+          "target_references": 141,
+          "target_objects": 236
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 1431
+        }
+      ]
+    },
+    {
+      "video_id": "00fcfec9-7ba5dabf",
+      "seqmap_expressions": 107,
+      "expression_files": 107,
+      "images": 203,
+      "image_frame_min": 1,
+      "image_frame_max": 203,
+      "image_dimensions": {
+        "1280x720": 203
+      },
+      "label_files": 203,
+      "missing_label_frames": [],
+      "expression_target_references": 9676,
+      "expression_target_objects": 19404,
+      "expressions": [
+        {
+          "expression_id": "cars-stop-on-the-left",
+          "sentence": "cars stop on the left",
+          "label_frames": 125,
+          "target_references": 125,
+          "target_objects": 183
+        },
+        {
+          "expression_id": "humans-on-the-left-are-standing",
+          "sentence": "humans on the left are standing",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 18
+        },
+        {
+          "expression_id": "right-vehicles",
+          "sentence": "right vehicles",
+          "label_frames": 90,
+          "target_references": 90,
+          "target_objects": 182
+        },
+        {
+          "expression_id": "people-on-the-right-stop-their-steps",
+          "sentence": "people on the right stop their steps",
+          "label_frames": 61,
+          "target_references": 61,
+          "target_objects": 78
+        },
+        {
+          "expression_id": "standing-people",
+          "sentence": "standing people",
+          "label_frames": 71,
+          "target_references": 71,
+          "target_objects": 104
+        },
+        {
+          "expression_id": "on-the-left-there-are-persons",
+          "sentence": "on the left, there are persons",
+          "label_frames": 74,
+          "target_references": 74,
+          "target_objects": 107
+        },
+        {
+          "expression_id": "persons-in-white-who-stand-there",
+          "sentence": "persons in white who stand there",
+          "label_frames": 12,
+          "target_references": 12,
+          "target_objects": 13
+        },
+        {
+          "expression_id": "cars-on-the-right",
+          "sentence": "cars on the right",
+          "label_frames": 90,
+          "target_references": 90,
+          "target_objects": 182
+        },
+        {
+          "expression_id": "cars-ahead",
+          "sentence": "cars ahead",
+          "label_frames": 87,
+          "target_references": 87,
+          "target_objects": 142
+        },
+        {
+          "expression_id": "traffic-ahead-is-at-a-standstill",
+          "sentence": "traffic ahead is at a standstill",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "watch-out-for-each-moving-vehicle",
+          "sentence": "watch out for each moving vehicle",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 270
+        },
+        {
+          "expression_id": "trucks-up-ahead",
+          "sentence": "trucks up ahead",
+          "label_frames": 72,
+          "target_references": 72,
+          "target_objects": 83
+        },
+        {
+          "expression_id": "persons-are-walking",
+          "sentence": "persons are walking",
+          "label_frames": 185,
+          "target_references": 185,
+          "target_objects": 454
+        },
+        {
+          "expression_id": "cars-are-driving-the-same-route",
+          "sentence": "cars are driving the same route",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 141
+        },
+        {
+          "expression_id": "im-looking-for-the-persons-who-are-dressed-in-black-on-the-right",
+          "sentence": "i'm looking for the persons who are dressed in black on the right",
+          "label_frames": 150,
+          "target_references": 150,
+          "target_objects": 242
+        },
+        {
+          "expression_id": "ladies-who-are-going-on-twowheelers",
+          "sentence": "ladies who are going on two-wheelers",
+          "label_frames": 96,
+          "target_references": 96,
+          "target_objects": 116
+        },
+        {
+          "expression_id": "men-in-green-clothing-halt-their-steps",
+          "sentence": "men in green clothing halt their steps",
+          "label_frames": 52,
+          "target_references": 52,
+          "target_objects": 52
+        },
+        {
+          "expression_id": "black-bicycles-in-the-left-lane",
+          "sentence": "black bicycles in the left lane",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 111
+        },
+        {
+          "expression_id": "parked-cars-in-front-of-us",
+          "sentence": "parked cars in front of us",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-humans-standing-ahead",
+          "sentence": "i'm trying to spot the humans standing ahead",
+          "label_frames": 75,
+          "target_references": 75,
+          "target_objects": 193
+        },
+        {
+          "expression_id": "bicycles-which-are-moving-in-the-same-direction",
+          "sentence": "bicycles which are moving in the same direction",
+          "label_frames": 63,
+          "target_references": 63,
+          "target_objects": 99
+        },
+        {
+          "expression_id": "parked-vehicles",
+          "sentence": "parked vehicles",
+          "label_frames": 158,
+          "target_references": 158,
+          "target_objects": 437
+        },
+        {
+          "expression_id": "watch-out-for-the-bicycles-ahead-of-us",
+          "sentence": "watch out for the bicycles ahead of us",
+          "label_frames": 82,
+          "target_references": 82,
+          "target_objects": 112
+        },
+        {
+          "expression_id": "search-for-the-motorcycles",
+          "sentence": "search for the motorcycles",
+          "label_frames": 131,
+          "target_references": 131,
+          "target_objects": 229
+        },
+        {
+          "expression_id": "persons-in-yellow-clothes-on-the-right",
+          "sentence": "persons in yellow clothes on the right",
+          "label_frames": 13,
+          "target_references": 13,
+          "target_objects": 13
+        },
+        {
+          "expression_id": "parked-cars",
+          "sentence": "parked cars",
+          "label_frames": 158,
+          "target_references": 158,
+          "target_objects": 437
+        },
+        {
+          "expression_id": "persons-on-the-left",
+          "sentence": "persons on the left",
+          "label_frames": 74,
+          "target_references": 74,
+          "target_objects": 107
+        },
+        {
+          "expression_id": "bicycles-up-ahead",
+          "sentence": "bicycles up ahead",
+          "label_frames": 82,
+          "target_references": 82,
+          "target_objects": 112
+        },
+        {
+          "expression_id": "cars-are-following-the-same-route-on-the-left",
+          "sentence": "cars are following the same route on the left",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 141
+        },
+        {
+          "expression_id": "parked-bicycles-on-the-left",
+          "sentence": "parked bicycles on the left",
+          "label_frames": 58,
+          "target_references": 58,
+          "target_objects": 65
+        },
+        {
+          "expression_id": "someones-wearing-green-stop-their-steps",
+          "sentence": "someones wearing green stop their steps",
+          "label_frames": 52,
+          "target_references": 52,
+          "target_objects": 52
+        },
+        {
+          "expression_id": "on-the-left-there-are-some-bikes",
+          "sentence": "on the left, there are some bikes",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 191,
+          "target_references": 191,
+          "target_objects": 707
+        },
+        {
+          "expression_id": "ladies-in-white-stand-on-the-right",
+          "sentence": "ladies in white stand on the right",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "blue-moving-bicycles-in-the-right-lane",
+          "sentence": "blue moving bicycles in the right lane",
+          "label_frames": 56,
+          "target_references": 56,
+          "target_objects": 60
+        },
+        {
+          "expression_id": "parked-trucks",
+          "sentence": "parked trucks",
+          "label_frames": 74,
+          "target_references": 74,
+          "target_objects": 74
+        },
+        {
+          "expression_id": "the-left-road-is-occupied-by-parked-black-motorcycles",
+          "sentence": "the left road is occupied by parked black motorcycles",
+          "label_frames": 115,
+          "target_references": 115,
+          "target_objects": 115
+        },
+        {
+          "expression_id": "persons",
+          "sentence": "persons",
+          "label_frames": 188,
+          "target_references": 188,
+          "target_objects": 792
+        },
+        {
+          "expression_id": "dark-parked-vehicles",
+          "sentence": "dark parked vehicles",
+          "label_frames": 2,
+          "target_references": 2,
+          "target_objects": 2
+        },
+        {
+          "expression_id": "people",
+          "sentence": "people",
+          "label_frames": 188,
+          "target_references": 188,
+          "target_objects": 792
+        },
+        {
+          "expression_id": "humans-in-front-of-us",
+          "sentence": "humans in front of us",
+          "label_frames": 75,
+          "target_references": 75,
+          "target_objects": 193
+        },
+        {
+          "expression_id": "men-in-front-stop-walking",
+          "sentence": "men in front stop walking",
+          "label_frames": 8,
+          "target_references": 8,
+          "target_objects": 8
+        },
+        {
+          "expression_id": "riding-people",
+          "sentence": "riding people",
+          "label_frames": 112,
+          "target_references": 112,
+          "target_objects": 234
+        },
+        {
+          "expression_id": "black-parked-bikes-on-the-right-side-of-the-road",
+          "sentence": "black parked bikes on the right side of the road",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 102
+        },
+        {
+          "expression_id": "moving-cars-in-the-same-direction",
+          "sentence": "moving cars in the same direction",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 141
+        },
+        {
+          "expression_id": "women-dressed-in-shades-of-red-are-just-in-front-of-us",
+          "sentence": "women dressed in shades of red are just in front of us",
+          "label_frames": 7,
+          "target_references": 7,
+          "target_objects": 7
+        },
+        {
+          "expression_id": "cars-on-the-left-are-going-the-same-way",
+          "sentence": "cars on the left are going the same way",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 141
+        },
+        {
+          "expression_id": "someones-wearing-white-clothes-are-walking",
+          "sentence": "someones wearing white clothes are walking",
+          "label_frames": 95,
+          "target_references": 95,
+          "target_objects": 124
+        },
+        {
+          "expression_id": "parked-black-motorcycles",
+          "sentence": "parked black motorcycles",
+          "label_frames": 126,
+          "target_references": 126,
+          "target_objects": 126
+        },
+        {
+          "expression_id": "humans-on-the-right-are-dressed-in-blue",
+          "sentence": "humans on the right are dressed in blue",
+          "label_frames": 56,
+          "target_references": 56,
+          "target_objects": 75
+        },
+        {
+          "expression_id": "there-are-the-which-parked-bicycles",
+          "sentence": "there are the which parked bicycles",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 51
+        },
+        {
+          "expression_id": "moving-trucks",
+          "sentence": "moving trucks",
+          "label_frames": 77,
+          "target_references": 77,
+          "target_objects": 77
+        },
+        {
+          "expression_id": "white-parked-vehicles",
+          "sentence": "white parked vehicles",
+          "label_frames": 149,
+          "target_references": 149,
+          "target_objects": 417
+        },
+        {
+          "expression_id": "standing-persons",
+          "sentence": "standing persons",
+          "label_frames": 71,
+          "target_references": 71,
+          "target_objects": 104
+        },
+        {
+          "expression_id": "standing-men",
+          "sentence": "standing men",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 71
+        },
+        {
+          "expression_id": "white-vehicles-in-the-left-lane-are-currently-driving",
+          "sentence": "white vehicles in the left lane are currently driving",
+          "label_frames": 112,
+          "target_references": 112,
+          "target_objects": 175
+        },
+        {
+          "expression_id": "somebodies-wearing-gray-clothes-are-walking",
+          "sentence": "somebodies wearing gray clothes are walking",
+          "label_frames": 34,
+          "target_references": 34,
+          "target_objects": 36
+        },
+        {
+          "expression_id": "pay-attention-to-people-who-are-riding-on-twowheelers",
+          "sentence": "pay attention to people who are riding on two-wheelers",
+          "label_frames": 112,
+          "target_references": 112,
+          "target_objects": 234
+        },
+        {
+          "expression_id": "somebodies-wearing-black-clothes-are-walking",
+          "sentence": "somebodies wearing black clothes are walking",
+          "label_frames": 148,
+          "target_references": 148,
+          "target_objects": 184
+        },
+        {
+          "expression_id": "humans-in-blue",
+          "sentence": "humans in blue",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 122
+        },
+        {
+          "expression_id": "notice-the-vehicles-in-front-of-us",
+          "sentence": "notice the vehicles in front of us",
+          "label_frames": 87,
+          "target_references": 87,
+          "target_objects": 142
+        },
+        {
+          "expression_id": "persons-on-the-right",
+          "sentence": "persons on the right",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 492
+        },
+        {
+          "expression_id": "can-you-help-me-find-the-bikes-on-the-left",
+          "sentence": "can you help me find the bikes on the left",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 151
+        },
+        {
+          "expression_id": "i-want-to-find-the-black-bikes-that-are-going-by-on-the-left",
+          "sentence": "i want to find the black bikes that are going by on the left",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "white-motorcycles-which-are-parked",
+          "sentence": "white motorcycles which are parked",
+          "label_frames": 92,
+          "target_references": 92,
+          "target_objects": 93
+        },
+        {
+          "expression_id": "the-truck-in-front-of-us",
+          "sentence": "the truck in front of us",
+          "label_frames": 72,
+          "target_references": 72,
+          "target_objects": 83
+        },
+        {
+          "expression_id": "persons-in-front-of-us",
+          "sentence": "persons in front of us",
+          "label_frames": 75,
+          "target_references": 75,
+          "target_objects": 193
+        },
+        {
+          "expression_id": "white-cars-in-front-are-at-a-stop",
+          "sentence": "white cars in front are at a stop",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "the-red-trucks",
+          "sentence": "the red trucks",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 114
+        },
+        {
+          "expression_id": "those-people-are-dressed-in-green",
+          "sentence": "those people are dressed in green",
+          "label_frames": 52,
+          "target_references": 52,
+          "target_objects": 52
+        },
+        {
+          "expression_id": "white-bicycles-on-the-right",
+          "sentence": "white bicycles on the right",
+          "label_frames": 62,
+          "target_references": 62,
+          "target_objects": 102
+        },
+        {
+          "expression_id": "white-cars-on-the-right",
+          "sentence": "white cars on the right",
+          "label_frames": 90,
+          "target_references": 90,
+          "target_objects": 160
+        },
+        {
+          "expression_id": "parked-cars-in-front",
+          "sentence": "parked cars in front",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "bicycles",
+          "sentence": "bicycles",
+          "label_frames": 115,
+          "target_references": 115,
+          "target_objects": 502
+        },
+        {
+          "expression_id": "men-on-the-right-stop-walking",
+          "sentence": "men on the right stop walking",
+          "label_frames": 60,
+          "target_references": 60,
+          "target_objects": 63
+        },
+        {
+          "expression_id": "on-the-left-there-are-riders-in-gray-moving",
+          "sentence": "on the left, there are riders in gray moving",
+          "label_frames": 10,
+          "target_references": 10,
+          "target_objects": 12
+        },
+        {
+          "expression_id": "please-follow-the-tracks-of-all-cars",
+          "sentence": "please follow the tracks of all cars",
+          "label_frames": 191,
+          "target_references": 191,
+          "target_objects": 707
+        },
+        {
+          "expression_id": "the-males-halt-their-steps",
+          "sentence": "the males halt their steps",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 71
+        },
+        {
+          "expression_id": "bikes",
+          "sentence": "bikes",
+          "label_frames": 115,
+          "target_references": 115,
+          "target_objects": 502
+        },
+        {
+          "expression_id": "female-in-white-clothes-on-the-right",
+          "sentence": "female in white clothes on the right",
+          "label_frames": 80,
+          "target_references": 80,
+          "target_objects": 95
+        },
+        {
+          "expression_id": "watch-out-for-the-bikes-which-are-following-the-same-route",
+          "sentence": "watch out for the bikes which are following the same route",
+          "label_frames": 63,
+          "target_references": 63,
+          "target_objects": 112
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-people-on-the-right",
+          "sentence": "i'm trying to spot the people on the right",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 492
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-people-on-the-left",
+          "sentence": "i'm trying to spot the people on the left",
+          "label_frames": 74,
+          "target_references": 74,
+          "target_objects": 107
+        },
+        {
+          "expression_id": "moving-vehicles",
+          "sentence": "moving vehicles",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 270
+        },
+        {
+          "expression_id": "persons-are-walking-on-the-right",
+          "sentence": "persons are walking on the right",
+          "label_frames": 169,
+          "target_references": 169,
+          "target_objects": 300
+        },
+        {
+          "expression_id": "men-in-black",
+          "sentence": "men in black",
+          "label_frames": 104,
+          "target_references": 104,
+          "target_objects": 223
+        },
+        {
+          "expression_id": "humans-who-are-in-dark",
+          "sentence": "humans who are in dark",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 332
+        },
+        {
+          "expression_id": "males-ride-on-the-right",
+          "sentence": "males ride on the right",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 75
+        },
+        {
+          "expression_id": "right-cars",
+          "sentence": "right cars",
+          "label_frames": 90,
+          "target_references": 90,
+          "target_objects": 182
+        },
+        {
+          "expression_id": "there-are-some-red-trucks-on-the-road",
+          "sentence": "there are some red trucks on the road",
+          "label_frames": 62,
+          "target_references": 62,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "cars-in-front-of-us",
+          "sentence": "cars in front of us",
+          "label_frames": 87,
+          "target_references": 87,
+          "target_objects": 142
+        },
+        {
+          "expression_id": "notice-the-men-who-are-standing-on-the-right",
+          "sentence": "notice the men who are standing on the right",
+          "label_frames": 60,
+          "target_references": 60,
+          "target_objects": 63
+        },
+        {
+          "expression_id": "on-the-left-there-are-some-bicycles",
+          "sentence": "on the left, there are some bicycles",
+          "label_frames": 79,
+          "target_references": 79,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "id-like-to-follow-all-persons",
+          "sentence": "i'd like to follow all persons",
+          "label_frames": 188,
+          "target_references": 188,
+          "target_objects": 792
+        },
+        {
+          "expression_id": "bikes-in-front-are-parked",
+          "sentence": "bikes in front are parked",
+          "label_frames": 46,
+          "target_references": 46,
+          "target_objects": 65
+        },
+        {
+          "expression_id": "cars-at-rest",
+          "sentence": "cars at rest",
+          "label_frames": 158,
+          "target_references": 158,
+          "target_objects": 437
+        },
+        {
+          "expression_id": "notice-that-persons-that-are-standing-ahead",
+          "sentence": "notice that persons that are standing ahead",
+          "label_frames": 8,
+          "target_references": 8,
+          "target_objects": 8
+        },
+        {
+          "expression_id": "persons-wearing-gray-clothes-on-the-left-are-going-on-foot",
+          "sentence": "persons wearing gray clothes on the left are going on foot",
+          "label_frames": 5,
+          "target_references": 5,
+          "target_objects": 5
+        },
+        {
+          "expression_id": "motorcycles",
+          "sentence": "motorcycles",
+          "label_frames": 131,
+          "target_references": 131,
+          "target_objects": 229
+        },
+        {
+          "expression_id": "bikes-are-going-on-the-right",
+          "sentence": "bikes are going on the right",
+          "label_frames": 71,
+          "target_references": 71,
+          "target_objects": 121
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-cars-on-the-left",
+          "sentence": "i want to find the parked cars on the left",
+          "label_frames": 125,
+          "target_references": 125,
+          "target_objects": 183
+        },
+        {
+          "expression_id": "parked-bicycles",
+          "sentence": "parked bicycles",
+          "label_frames": 103,
+          "target_references": 103,
+          "target_objects": 279
+        },
+        {
+          "expression_id": "men-are-in-white-clothes",
+          "sentence": "men are in white clothes",
+          "label_frames": 1,
+          "target_references": 1,
+          "target_objects": 1
+        },
+        {
+          "expression_id": "cars-are-driving-forward-in-the-same-direction",
+          "sentence": "cars are driving forward in the same direction",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 141
+        },
+        {
+          "expression_id": "people-on-the-right",
+          "sentence": "people on the right",
+          "label_frames": 178,
+          "target_references": 178,
+          "target_objects": 492
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-bikes",
+          "sentence": "i want to find the parked bikes",
+          "label_frames": 103,
+          "target_references": 103,
+          "target_objects": 222
+        }
+      ]
+    },
+    {
+      "video_id": "02a17951-3d88d95e",
+      "seqmap_expressions": 60,
+      "expression_files": 60,
+      "images": 202,
+      "image_frame_min": 1,
+      "image_frame_max": 202,
+      "image_dimensions": {
+        "1280x720": 202
+      },
+      "label_files": 202,
+      "missing_label_frames": [],
+      "expression_target_references": 8247,
+      "expression_target_objects": 23574,
+      "expressions": [
+        {
+          "expression_id": "im-searching-for-the-silvery-cars-on-the-left-side",
+          "sentence": "i'm searching for the silvery cars on the left side",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 241
+        },
+        {
+          "expression_id": "right-vehicles",
+          "sentence": "right vehicles",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 631
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-cars",
+          "sentence": "on the right, there are some cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 631
+        },
+        {
+          "expression_id": "yellow-cars-are-driving-in-the-opposite-direction-on-the-left",
+          "sentence": "yellow cars are driving in the opposite direction on the left",
+          "label_frames": 25,
+          "target_references": 25,
+          "target_objects": 25
+        },
+        {
+          "expression_id": "yellow-cars-go-by",
+          "sentence": "yellow cars go by",
+          "label_frames": 165,
+          "target_references": 165,
+          "target_objects": 290
+        },
+        {
+          "expression_id": "on-the-right-you-can-see-moving-red-cars",
+          "sentence": "on the right, you can see moving red cars",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 114
+        },
+        {
+          "expression_id": "trucks-heading-the-other-way",
+          "sentence": "trucks heading the other way",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "red-cars-driving-in-the-opposite-direction-of-ours",
+          "sentence": "red cars driving in the opposite direction of ours",
+          "label_frames": 7,
+          "target_references": 7,
+          "target_objects": 7
+        },
+        {
+          "expression_id": "watch-out-for-each-vehicle",
+          "sentence": "watch out for each vehicle",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1920
+        },
+        {
+          "expression_id": "red-cars-are-on-the-right",
+          "sentence": "red cars are on the right",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 114
+        },
+        {
+          "expression_id": "left-cars",
+          "sentence": "left cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "cars-ahead-are-driving-in-a-same-direction",
+          "sentence": "cars ahead are driving in a same direction",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 284
+        },
+        {
+          "expression_id": "vehicles-coming-from-the-opposite-side",
+          "sentence": "vehicles coming from the opposite side",
+          "label_frames": 180,
+          "target_references": 180,
+          "target_objects": 363
+        },
+        {
+          "expression_id": "white-cars-on-the-left-side-travel-in-the-same-direction",
+          "sentence": "white cars on the left side travel in the same direction",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 176
+        },
+        {
+          "expression_id": "gray-cars-ahead-are-headed-in-the-same-way",
+          "sentence": "gray cars ahead are headed in the same way",
+          "label_frames": 28,
+          "target_references": 28,
+          "target_objects": 34
+        },
+        {
+          "expression_id": "yellow-trucks-are-moving-in-the-opposite-direction",
+          "sentence": "yellow trucks are moving in the opposite direction",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "on-the-left-side-of-the-road-the-trucks-come-from-the-opposite-side",
+          "sentence": "on the left side of the road, the trucks come from the opposite side",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "red-cars-in-front-which-are-driving",
+          "sentence": "red cars in front which are driving",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 78
+        },
+        {
+          "expression_id": "search-for-the-buses",
+          "sentence": "search for the buses",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1920
+        },
+        {
+          "expression_id": "left-lane-is-occupied-by-cars",
+          "sentence": "left lane is occupied by cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "white-vehicles",
+          "sentence": "white vehicles",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 424
+        },
+        {
+          "expression_id": "white-buses-are-flowing",
+          "sentence": "white buses are flowing",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "cars-on-the-left-are-going-the-same-way",
+          "sentence": "cars on the left are going the same way",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 642
+        },
+        {
+          "expression_id": "cars-are-driving-on-the-left-side",
+          "sentence": "cars are driving on the left side",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "cars-on-the-left",
+          "sentence": "cars on the left",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "white-buses-on-the-left-are-driving-in-the-same-direction",
+          "sentence": "white buses on the left are driving in the same direction",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "black-cars-are-moving-in-the-same-direction",
+          "sentence": "black cars are moving in the same direction",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 648
+        },
+        {
+          "expression_id": "black-vehicles-are-flowing-in-one-direction-in-the-right-lane",
+          "sentence": "black vehicles are flowing in one direction in the right lane",
+          "label_frames": 189,
+          "target_references": 189,
+          "target_objects": 334
+        },
+        {
+          "expression_id": "notice-the-vehicles-in-front-of-us",
+          "sentence": "notice the vehicles in front of us",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 284
+        },
+        {
+          "expression_id": "vehicles-ahead",
+          "sentence": "vehicles ahead",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 284
+        },
+        {
+          "expression_id": "red-cars-stand-out",
+          "sentence": "red cars stand out",
+          "label_frames": 161,
+          "target_references": 161,
+          "target_objects": 199
+        },
+        {
+          "expression_id": "moving-buses",
+          "sentence": "moving buses",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "blue-cars",
+          "sentence": "blue cars",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "vehicles-ahead-are-moving-in-a-same-way",
+          "sentence": "vehicles ahead are moving in a same way",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 284
+        },
+        {
+          "expression_id": "driving-cars-in-the-opposite-direction-of-ours",
+          "sentence": "driving cars in the opposite direction of ours",
+          "label_frames": 180,
+          "target_references": 180,
+          "target_objects": 363
+        },
+        {
+          "expression_id": "cars-on-the-left-move-in-a-same-direction",
+          "sentence": "cars on the left move in a same direction",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 642
+        },
+        {
+          "expression_id": "can-you-help-me-identify-the-buses-moving-in-the-same-way-on-the-road",
+          "sentence": "can you help me identify the buses moving in the same way on the road",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "yellow-cars-move-forward-in-the-same-route",
+          "sentence": "yellow cars move forward in the same route",
+          "label_frames": 165,
+          "target_references": 165,
+          "target_objects": 265
+        },
+        {
+          "expression_id": "gray-cars-in-the-left-lane",
+          "sentence": "gray cars in the left lane",
+          "label_frames": 105,
+          "target_references": 105,
+          "target_objects": 147
+        },
+        {
+          "expression_id": "black-vehicles-on-the-left-which-are-currently-driving",
+          "sentence": "black vehicles on the left which are currently driving",
+          "label_frames": 182,
+          "target_references": 182,
+          "target_objects": 317
+        },
+        {
+          "expression_id": "on-the-left-there-are-gray-cars",
+          "sentence": "on the left, there are gray cars",
+          "label_frames": 105,
+          "target_references": 105,
+          "target_objects": 147
+        },
+        {
+          "expression_id": "white-cars-on-the-left",
+          "sentence": "white cars on the left",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 241
+        },
+        {
+          "expression_id": "left-road-is-occupied-by-buses",
+          "sentence": "left road is occupied by buses",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "right-cars",
+          "sentence": "right cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 631
+        },
+        {
+          "expression_id": "vehicles-go-by-on-the-left",
+          "sentence": "vehicles go by on the left",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "red-cars-in-front-of-us",
+          "sentence": "red cars in front of us",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 78
+        },
+        {
+          "expression_id": "the-white-cars",
+          "sentence": "the white cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 424
+        },
+        {
+          "expression_id": "counterdirection-moving-cars",
+          "sentence": "counter-direction moving cars",
+          "label_frames": 180,
+          "target_references": 180,
+          "target_objects": 363
+        },
+        {
+          "expression_id": "the-cars-ahead",
+          "sentence": "the cars ahead",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 284
+        },
+        {
+          "expression_id": "white-cars-on-the-left-are-moving",
+          "sentence": "white cars on the left are moving",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 241
+        },
+        {
+          "expression_id": "can-you-help-me-find-the-buses-on-the-road",
+          "sentence": "can you help me find the buses on the road",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "on-the-left-the-cars-painted-yellow-are-moving",
+          "sentence": "on the left, the cars, painted yellow, are moving",
+          "label_frames": 165,
+          "target_references": 165,
+          "target_objects": 290
+        },
+        {
+          "expression_id": "white-cars-which-are-moving",
+          "sentence": "white cars which are moving",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 424
+        },
+        {
+          "expression_id": "cars-are-going-on-the-left",
+          "sentence": "cars are going on the left",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1005
+        },
+        {
+          "expression_id": "im-searching-for-the-buses-on-the-left",
+          "sentence": "i'm searching for the buses on the left",
+          "label_frames": 57,
+          "target_references": 57,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "blue-cars-on-the-left-which-are-moving",
+          "sentence": "blue cars on the left which are moving",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "black-cars-on-the-right-are-moving",
+          "sentence": "black cars on the right are moving",
+          "label_frames": 189,
+          "target_references": 189,
+          "target_objects": 334
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1920
+        },
+        {
+          "expression_id": "yellow-trucks-drive-on-the-left",
+          "sentence": "yellow trucks drive on the left",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        }
+      ]
+    },
+    {
+      "video_id": "002b562f-e0ac84fe",
+      "seqmap_expressions": 50,
+      "expression_files": 50,
+      "images": 202,
+      "image_frame_min": 1,
+      "image_frame_max": 202,
+      "image_dimensions": {
+        "1280x720": 202
+      },
+      "label_files": 193,
+      "missing_label_frames": [
+        40,
+        41,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202
+      ],
+      "expression_target_references": 5981,
+      "expression_target_objects": 13464,
+      "expressions": [
+        {
+          "expression_id": "im-searching-for-the-silvery-cars-on-the-left-side",
+          "sentence": "i'm searching for the silvery cars on the left side",
+          "label_frames": 82,
+          "target_references": 82,
+          "target_objects": 103
+        },
+        {
+          "expression_id": "i-want-to-identify-the-black-cars-on-the-left",
+          "sentence": "i want to identify the black cars on the left",
+          "label_frames": 127,
+          "target_references": 127,
+          "target_objects": 180
+        },
+        {
+          "expression_id": "right-vehicles",
+          "sentence": "right vehicles",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-cars",
+          "sentence": "on the right, there are some cars",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "red-cars-on-the-right-have-come-to-a-halt",
+          "sentence": "red cars on the right have come to a halt",
+          "label_frames": 17,
+          "target_references": 17,
+          "target_objects": 17
+        },
+        {
+          "expression_id": "gray-vehicles-in-the-right-lane-are-parked",
+          "sentence": "gray vehicles in the right lane are parked",
+          "label_frames": 99,
+          "target_references": 99,
+          "target_objects": 145
+        },
+        {
+          "expression_id": "black-cars",
+          "sentence": "black cars",
+          "label_frames": 163,
+          "target_references": 163,
+          "target_objects": 338
+        },
+        {
+          "expression_id": "there-are-black-cars-on-the-left-side",
+          "sentence": "there are black cars on the left side",
+          "label_frames": 127,
+          "target_references": 127,
+          "target_objects": 180
+        },
+        {
+          "expression_id": "left-cars",
+          "sentence": "left cars",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 395
+        },
+        {
+          "expression_id": "im-looking-for-the-parked-cars-on-the-right",
+          "sentence": "i'm looking for the parked cars on the right",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "white-cars",
+          "sentence": "white cars",
+          "label_frames": 122,
+          "target_references": 122,
+          "target_objects": 214
+        },
+        {
+          "expression_id": "parked-vehicles",
+          "sentence": "parked vehicles",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 837
+        },
+        {
+          "expression_id": "black-cars-on-the-right-have-come-to-a-stop",
+          "sentence": "black cars on the right have come to a stop",
+          "label_frames": 116,
+          "target_references": 116,
+          "target_objects": 154
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 837
+        },
+        {
+          "expression_id": "i-want-to-identify-the-cars-that-are-parked-on-the-right",
+          "sentence": "i want to identify the cars that are parked on the right",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "left-lane-is-occupied-by-cars",
+          "sentence": "left lane is occupied by cars",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 395
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-vehicles",
+          "sentence": "i want to find the parked vehicles",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 837
+        },
+        {
+          "expression_id": "parked-trucks",
+          "sentence": "parked trucks",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "gray-parked-cars",
+          "sentence": "gray parked cars",
+          "label_frames": 148,
+          "target_references": 148,
+          "target_objects": 260
+        },
+        {
+          "expression_id": "dark-parked-vehicles",
+          "sentence": "dark parked vehicles",
+          "label_frames": 163,
+          "target_references": 163,
+          "target_objects": 338
+        },
+        {
+          "expression_id": "gray-vehicles-stop-on-the-left-side",
+          "sentence": "gray vehicles stop on the left side",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 104
+        },
+        {
+          "expression_id": "white-parked-vehicles",
+          "sentence": "white parked vehicles",
+          "label_frames": 122,
+          "target_references": 122,
+          "target_objects": 214
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-dark-cars",
+          "sentence": "on the right, there are some dark cars",
+          "label_frames": 116,
+          "target_references": 116,
+          "target_objects": 154
+        },
+        {
+          "expression_id": "gray-cars",
+          "sentence": "gray cars",
+          "label_frames": 148,
+          "target_references": 148,
+          "target_objects": 260
+        },
+        {
+          "expression_id": "the-vehicles",
+          "sentence": "the vehicles",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 837
+        },
+        {
+          "expression_id": "id-like-to-locate-the-nonmoving-vehicles-to-the-right",
+          "sentence": "i'd like to locate the non-moving vehicles to the right",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "im-searching-for-the-white-car-that-stops-on-the-left",
+          "sentence": "i'm searching for the white car that stops on the left",
+          "label_frames": 82,
+          "target_references": 82,
+          "target_objects": 103
+        },
+        {
+          "expression_id": "white-cars-in-front-are-at-a-stop",
+          "sentence": "white cars in front are at a stop",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-gray-vehicles-on-the-left-side",
+          "sentence": "i'm trying to spot the gray vehicles on the left side",
+          "label_frames": 99,
+          "target_references": 99,
+          "target_objects": 145
+        },
+        {
+          "expression_id": "white-cars-on-the-right",
+          "sentence": "white cars on the right",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 102
+        },
+        {
+          "expression_id": "the-left-vehicles",
+          "sentence": "the left vehicles",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 395
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-vehicles",
+          "sentence": "right road is occupied by vehicles",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 418
+        },
+        {
+          "expression_id": "the-parked-cars-on-the-left",
+          "sentence": "the parked cars on the left",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 395
+        },
+        {
+          "expression_id": "on-the-left-there-are-gray-cars",
+          "sentence": "on the left, there are gray cars",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 104
+        },
+        {
+          "expression_id": "white-cars-on-the-left",
+          "sentence": "white cars on the left",
+          "label_frames": 82,
+          "target_references": 82,
+          "target_objects": 103
+        },
+        {
+          "expression_id": "notice-the-black-cars-in-front-of-us",
+          "sentence": "notice the black cars in front of us",
+          "label_frames": 4,
+          "target_references": 4,
+          "target_objects": 4
+        },
+        {
+          "expression_id": "black-cars-are-on-the-right",
+          "sentence": "black cars are on the right",
+          "label_frames": 116,
+          "target_references": 116,
+          "target_objects": 154
+        },
+        {
+          "expression_id": "i-want-to-find-the-white-parked-trucks",
+          "sentence": "i want to find the white parked trucks",
+          "label_frames": 11,
+          "target_references": 11,
+          "target_objects": 11
+        },
+        {
+          "expression_id": "im-searching-for-the-black-vehicles",
+          "sentence": "i'm searching for the black vehicles",
+          "label_frames": 163,
+          "target_references": 163,
+          "target_objects": 338
+        },
+        {
+          "expression_id": "cars-at-rest",
+          "sentence": "cars at rest",
+          "label_frames": 193,
+          "target_references": 193,
+          "target_objects": 837
+        },
+        {
+          "expression_id": "gray-cars-on-the-left-side",
+          "sentence": "gray cars on the left side",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 104
+        },
+        {
+          "expression_id": "white-parked-cars-on-the-right",
+          "sentence": "white parked cars on the right",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 102
+        },
+        {
+          "expression_id": "red-cars-in-the-right-lane",
+          "sentence": "red cars in the right lane",
+          "label_frames": 17,
+          "target_references": 17,
+          "target_objects": 17
+        },
+        {
+          "expression_id": "black-cars-on-the-left-come-to-a-halt",
+          "sentence": "black cars on the left come to a halt",
+          "label_frames": 127,
+          "target_references": 127,
+          "target_objects": 180
+        },
+        {
+          "expression_id": "black-vehicles-are-driving-ahead",
+          "sentence": "black vehicles are driving ahead",
+          "label_frames": 4,
+          "target_references": 4,
+          "target_objects": 4
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-cars-on-the-left",
+          "sentence": "i want to find the parked cars on the left",
+          "label_frames": 179,
+          "target_references": 179,
+          "target_objects": 395
+        },
+        {
+          "expression_id": "gray-cars-on-the-right",
+          "sentence": "gray cars on the right",
+          "label_frames": 99,
+          "target_references": 99,
+          "target_objects": 145
+        },
+        {
+          "expression_id": "the-red-cars-stand-out",
+          "sentence": "the red cars stand out",
+          "label_frames": 25,
+          "target_references": 25,
+          "target_objects": 25
+        },
+        {
+          "expression_id": "can-you-help-me-find-the-silvery-vehicles",
+          "sentence": "can you help me find the silvery vehicles",
+          "label_frames": 148,
+          "target_references": 148,
+          "target_objects": 260
+        },
+        {
+          "expression_id": "observe-the-white-cars",
+          "sentence": "observe the white cars",
+          "label_frames": 122,
+          "target_references": 122,
+          "target_objects": 214
+        }
+      ]
+    },
+    {
+      "video_id": "00f7eac8-5193d600",
+      "seqmap_expressions": 109,
+      "expression_files": 109,
+      "images": 202,
+      "image_frame_min": 1,
+      "image_frame_max": 202,
+      "image_dimensions": {
+        "1280x720": 202
+      },
+      "label_files": 202,
+      "missing_label_frames": [],
+      "expression_target_references": 10481,
+      "expression_target_objects": 25370,
+      "expressions": [
+        {
+          "expression_id": "the-cars-on-the-left-are-going-the-other-way",
+          "sentence": "the cars on the left are going the other way",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "right-vehicles",
+          "sentence": "right vehicles",
+          "label_frames": 161,
+          "target_references": 161,
+          "target_objects": 462
+        },
+        {
+          "expression_id": "red-cars-on-the-right-have-come-to-a-halt",
+          "sentence": "red cars on the right have come to a halt",
+          "label_frames": 46,
+          "target_references": 46,
+          "target_objects": 64
+        },
+        {
+          "expression_id": "standing-people",
+          "sentence": "standing people",
+          "label_frames": 147,
+          "target_references": 147,
+          "target_objects": 350
+        },
+        {
+          "expression_id": "persons-in-white-who-stand-there",
+          "sentence": "persons in white who stand there",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 65
+        },
+        {
+          "expression_id": "cars-on-the-right",
+          "sentence": "cars on the right",
+          "label_frames": 161,
+          "target_references": 161,
+          "target_objects": 462
+        },
+        {
+          "expression_id": "women-on-the-left-come-to-a-standstill",
+          "sentence": "women on the left come to a standstill",
+          "label_frames": 97,
+          "target_references": 97,
+          "target_objects": 97
+        },
+        {
+          "expression_id": "parked-cars-on-the-left",
+          "sentence": "parked cars on the left",
+          "label_frames": 112,
+          "target_references": 112,
+          "target_objects": 302
+        },
+        {
+          "expression_id": "watch-out-for-each-moving-vehicle",
+          "sentence": "watch out for each moving vehicle",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 601
+        },
+        {
+          "expression_id": "moving-bicycles",
+          "sentence": "moving bicycles",
+          "label_frames": 51,
+          "target_references": 51,
+          "target_objects": 51
+        },
+        {
+          "expression_id": "persons-who-are-riding-on-the-road",
+          "sentence": "persons who are riding on the road",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "can-you-help-me-identify-the-gentlemen-on-the-road",
+          "sentence": "can you help me identify the gentlemen on the road",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 848
+        },
+        {
+          "expression_id": "people-in-brown-are-standing-on-the-left",
+          "sentence": "people in brown are standing on the left",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "people-in-black-are-standing-on-the-right",
+          "sentence": "people in black are standing on the right",
+          "label_frames": 19,
+          "target_references": 19,
+          "target_objects": 33
+        },
+        {
+          "expression_id": "im-looking-for-the-persons-who-are-dressed-in-black-on-the-right",
+          "sentence": "i'm looking for the persons who are dressed in black on the right",
+          "label_frames": 167,
+          "target_references": 167,
+          "target_objects": 253
+        },
+        {
+          "expression_id": "standing-pedestrians-in-brown",
+          "sentence": "standing pedestrians in brown",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "vehicles-coming-from-the-opposite-side",
+          "sentence": "vehicles coming from the opposite side",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "persons-are-dressed-in-gray",
+          "sentence": "persons are dressed in gray",
+          "label_frames": 46,
+          "target_references": 46,
+          "target_objects": 46
+        },
+        {
+          "expression_id": "men-in-green-clothing-halt-their-steps",
+          "sentence": "men in green clothing halt their steps",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "someones-in-green-on-the-left-stop-to-wait",
+          "sentence": "someones in green on the left stop to wait",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "white-cars-on-the-left-side-travel-in-the-same-direction",
+          "sentence": "white cars on the left side travel in the same direction",
+          "label_frames": 59,
+          "target_references": 59,
+          "target_objects": 59
+        },
+        {
+          "expression_id": "females-wearing-brown-clothes-are-going-on-foot",
+          "sentence": "females wearing brown clothes are going on foot",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "vehicles-on-the-road-are-slowing-down",
+          "sentence": "vehicles on the road are slowing down",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 730
+        },
+        {
+          "expression_id": "truck-on-the-left",
+          "sentence": "truck on the left",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 84
+        },
+        {
+          "expression_id": "parked-cars",
+          "sentence": "parked cars",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 730
+        },
+        {
+          "expression_id": "on-the-left-you-can-see-gray-cars-in-action",
+          "sentence": "on the left, you can see gray cars in action",
+          "label_frames": 41,
+          "target_references": 41,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "parked-bicycles-on-the-left",
+          "sentence": "parked bicycles on the left",
+          "label_frames": 47,
+          "target_references": 47,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "someones-wearing-green-stop-their-steps",
+          "sentence": "someones wearing green stop their steps",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1331
+        },
+        {
+          "expression_id": "the-left-road-is-occupied-by-trucks",
+          "sentence": "the left road is occupied by trucks",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 84
+        },
+        {
+          "expression_id": "there-are-person-in-red-clothes",
+          "sentence": "there are person in red clothes",
+          "label_frames": 81,
+          "target_references": 81,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "ahead-of-us-there-are-female-pedestrians-who-are-dressed-in-brown",
+          "sentence": "ahead of us, there are female pedestrians who are dressed in brown",
+          "label_frames": 96,
+          "target_references": 96,
+          "target_objects": 96
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-vehicles",
+          "sentence": "i want to find the parked vehicles",
+          "label_frames": 168,
+          "target_references": 168,
+          "target_objects": 730
+        },
+        {
+          "expression_id": "males-in-white-clothes-stand-on-the-left",
+          "sentence": "males in white clothes stand on the left",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 65
+        },
+        {
+          "expression_id": "cars-are-moving-ahead-of-us",
+          "sentence": "cars are moving ahead of us",
+          "label_frames": 195,
+          "target_references": 195,
+          "target_objects": 270
+        },
+        {
+          "expression_id": "follow-the-tracks-of-the-moving-cars",
+          "sentence": "follow the tracks of the moving cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 601
+        },
+        {
+          "expression_id": "parked-trucks",
+          "sentence": "parked trucks",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 113
+        },
+        {
+          "expression_id": "driving-ahead-the-bikes-are-black",
+          "sentence": "driving ahead, the bikes are black",
+          "label_frames": 7,
+          "target_references": 7,
+          "target_objects": 7
+        },
+        {
+          "expression_id": "persons",
+          "sentence": "persons",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 1109
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-moving-cars",
+          "sentence": "right road is occupied by moving cars",
+          "label_frames": 66,
+          "target_references": 66,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "gentlemen",
+          "sentence": "gentlemen",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 848
+        },
+        {
+          "expression_id": "white-buses-on-the-left",
+          "sentence": "white buses on the left",
+          "label_frames": 17,
+          "target_references": 17,
+          "target_objects": 17
+        },
+        {
+          "expression_id": "somebodies-wearing-green-clothes-on-the-right-are-going-on-foot",
+          "sentence": "somebodies wearing green clothes on the right are going on foot",
+          "label_frames": 100,
+          "target_references": 100,
+          "target_objects": 106
+        },
+        {
+          "expression_id": "there-are-people-on-the-left-side-of-the-road",
+          "sentence": "there are people on the left side of the road",
+          "label_frames": 162,
+          "target_references": 162,
+          "target_objects": 594
+        },
+        {
+          "expression_id": "moving-cars-in-the-same-direction",
+          "sentence": "moving cars in the same direction",
+          "label_frames": 153,
+          "target_references": 153,
+          "target_objects": 244
+        },
+        {
+          "expression_id": "search-the-men-in-green-who-are-riding-on-twowheelers",
+          "sentence": "search the men in green who are riding on two-wheelers",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "moving-trucks",
+          "sentence": "moving trucks",
+          "label_frames": 77,
+          "target_references": 77,
+          "target_objects": 80
+        },
+        {
+          "expression_id": "cars-ahead-of-us-which-are-moving",
+          "sentence": "cars ahead of us which are moving",
+          "label_frames": 195,
+          "target_references": 195,
+          "target_objects": 270
+        },
+        {
+          "expression_id": "red-cars-in-front-are-following-the-same-route",
+          "sentence": "red cars in front are following the same route",
+          "label_frames": 106,
+          "target_references": 106,
+          "target_objects": 106
+        },
+        {
+          "expression_id": "people-on-the-left",
+          "sentence": "people on the left",
+          "label_frames": 162,
+          "target_references": 162,
+          "target_objects": 594
+        },
+        {
+          "expression_id": "men-on-the-left-wear-green-clothes",
+          "sentence": "men on the left wear green clothes",
+          "label_frames": 76,
+          "target_references": 76,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "on-the-left-the-cars-are-moving-in-the-opposite-direction",
+          "sentence": "on the left, the cars are moving in the opposite direction",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "male-pedestrians-in-green-clothes-on-the-right-walk-along",
+          "sentence": "male pedestrians in green clothes on the right walk along",
+          "label_frames": 104,
+          "target_references": 104,
+          "target_objects": 111
+        },
+        {
+          "expression_id": "black-cars-ahead-of-us-are-following-the-same-route",
+          "sentence": "black cars ahead of us are following the same route",
+          "label_frames": 50,
+          "target_references": 50,
+          "target_objects": 50
+        },
+        {
+          "expression_id": "gray-vehicles-which-are-driving",
+          "sentence": "gray vehicles which are driving",
+          "label_frames": 81,
+          "target_references": 81,
+          "target_objects": 109
+        },
+        {
+          "expression_id": "parked-buses",
+          "sentence": "parked buses",
+          "label_frames": 55,
+          "target_references": 55,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 166,
+          "target_references": 166,
+          "target_objects": 193
+        },
+        {
+          "expression_id": "gray-buses-ahead",
+          "sentence": "gray buses ahead",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 107
+        },
+        {
+          "expression_id": "humans",
+          "sentence": "humans",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 1109
+        },
+        {
+          "expression_id": "those-people-are-dressed-in-green",
+          "sentence": "those people are dressed in green",
+          "label_frames": 132,
+          "target_references": 132,
+          "target_objects": 223
+        },
+        {
+          "expression_id": "white-cars-on-the-right",
+          "sentence": "white cars on the right",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 159
+        },
+        {
+          "expression_id": "moving-vehicles-in-the-opposite-direction-on-a-road",
+          "sentence": "moving vehicles in the opposite direction on a road",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "im-searching-for-the-green-trucks-on-th-right",
+          "sentence": "i'm searching for the green trucks on th right",
+          "label_frames": 86,
+          "target_references": 86,
+          "target_objects": 86
+        },
+        {
+          "expression_id": "id-like-to-locate-humans-who-are-in-black-in-front-of-us",
+          "sentence": "i'd like to locate humans who are in black in front of us",
+          "label_frames": 49,
+          "target_references": 49,
+          "target_objects": 55
+        },
+        {
+          "expression_id": "take-a-look-at-the-humans-wearing-black-clothes-standing-on-the-left",
+          "sentence": "take a look at the humans wearing black clothes standing on the left",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 112
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-vehicles",
+          "sentence": "right road is occupied by vehicles",
+          "label_frames": 161,
+          "target_references": 161,
+          "target_objects": 462
+        },
+        {
+          "expression_id": "someones-are-going-on-foot",
+          "sentence": "someones are going on foot",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 671
+        },
+        {
+          "expression_id": "notice-that-the-cars-that-are-driving-in-the-same-direction",
+          "sentence": "notice that the cars that are driving in the same direction",
+          "label_frames": 153,
+          "target_references": 153,
+          "target_objects": 244
+        },
+        {
+          "expression_id": "please-follow-the-tracks-of-all-cars",
+          "sentence": "please follow the tracks of all cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1331
+        },
+        {
+          "expression_id": "please-notice-the-people-in-white-clothes-standing-on-the-left",
+          "sentence": "please notice the people in white clothes standing on the left",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 65
+        },
+        {
+          "expression_id": "gray-cars-ahead",
+          "sentence": "gray cars ahead",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 79
+        },
+        {
+          "expression_id": "bikes",
+          "sentence": "bikes",
+          "label_frames": 98,
+          "target_references": 98,
+          "target_objects": 108
+        },
+        {
+          "expression_id": "gray-cars-in-the-left-lane",
+          "sentence": "gray cars in the left lane",
+          "label_frames": 103,
+          "target_references": 103,
+          "target_objects": 119
+        },
+        {
+          "expression_id": "cars-heading-the-other-way",
+          "sentence": "cars heading the other way",
+          "label_frames": 40,
+          "target_references": 40,
+          "target_objects": 81
+        },
+        {
+          "expression_id": "can-you-spot-the-males-halting-on-the-left",
+          "sentence": "can you spot the males halting on the left",
+          "label_frames": 97,
+          "target_references": 97,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "black-moving-cars",
+          "sentence": "black moving cars",
+          "label_frames": 110,
+          "target_references": 110,
+          "target_objects": 137
+        },
+        {
+          "expression_id": "vehicles-are-driving-in-the-right-lane",
+          "sentence": "vehicles are driving in the right lane",
+          "label_frames": 66,
+          "target_references": 66,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "buses-up-ahead",
+          "sentence": "buses up ahead",
+          "label_frames": 59,
+          "target_references": 59,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-people-on-the-left",
+          "sentence": "i'm trying to spot the people on the left",
+          "label_frames": 162,
+          "target_references": 162,
+          "target_objects": 594
+        },
+        {
+          "expression_id": "black-cars-are-following-the-same-route",
+          "sentence": "black cars are following the same route",
+          "label_frames": 54,
+          "target_references": 54,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "persons-are-going-on-foot-in-the-front",
+          "sentence": "persons are going on foot in the front",
+          "label_frames": 60,
+          "target_references": 60,
+          "target_objects": 99
+        },
+        {
+          "expression_id": "buses-which-are-in-front-of-us",
+          "sentence": "buses which are in front of us",
+          "label_frames": 59,
+          "target_references": 59,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "people-in-red-clothes-on-the-left-have-come-to-a-halt",
+          "sentence": "people in red clothes on the left have come to a halt",
+          "label_frames": 54,
+          "target_references": 54,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "those-in-brown-clothes-on-the-left-are-females",
+          "sentence": "those in brown clothes on the left are females",
+          "label_frames": 64,
+          "target_references": 64,
+          "target_objects": 64
+        },
+        {
+          "expression_id": "red-cars-in-front-of-us",
+          "sentence": "red cars in front of us",
+          "label_frames": 114,
+          "target_references": 114,
+          "target_objects": 114
+        },
+        {
+          "expression_id": "buses",
+          "sentence": "buses",
+          "label_frames": 84,
+          "target_references": 84,
+          "target_objects": 107
+        },
+        {
+          "expression_id": "riding-persons",
+          "sentence": "riding persons",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "gray-vehicles-are-driving-on-the-right-side",
+          "sentence": "gray vehicles are driving on the right side",
+          "label_frames": 19,
+          "target_references": 19,
+          "target_objects": 19
+        },
+        {
+          "expression_id": "i-want-to-find-the-white-parked-trucks",
+          "sentence": "i want to find the white parked trucks",
+          "label_frames": 62,
+          "target_references": 62,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "blackclothed-pedestrians-come-to-a-stop",
+          "sentence": "black-clothed pedestrians come to a stop",
+          "label_frames": 83,
+          "target_references": 83,
+          "target_objects": 145
+        },
+        {
+          "expression_id": "red-vehicles-are-driving",
+          "sentence": "red vehicles are driving",
+          "label_frames": 155,
+          "target_references": 155,
+          "target_objects": 155
+        },
+        {
+          "expression_id": "white-buses-in-front-of-us",
+          "sentence": "white buses in front of us",
+          "label_frames": 59,
+          "target_references": 59,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "gray-cars-on-the-left-side",
+          "sentence": "gray cars on the left side",
+          "label_frames": 103,
+          "target_references": 103,
+          "target_objects": 119
+        },
+        {
+          "expression_id": "person-who-stand-on-the-street",
+          "sentence": "person who stand on the street",
+          "label_frames": 147,
+          "target_references": 147,
+          "target_objects": 350
+        },
+        {
+          "expression_id": "cars-are-going-on-the-right",
+          "sentence": "cars are going on the right",
+          "label_frames": 66,
+          "target_references": 66,
+          "target_objects": 76
+        },
+        {
+          "expression_id": "red-cars-in-the-right-lane",
+          "sentence": "red cars in the right lane",
+          "label_frames": 50,
+          "target_references": 50,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "left-turns-are-happening-with-the-black-cars-on-the-left",
+          "sentence": "left turns are happening with the black cars on the left",
+          "label_frames": 4,
+          "target_references": 4,
+          "target_objects": 4
+        },
+        {
+          "expression_id": "the-males-are-going-on-foot-on-the-left",
+          "sentence": "the males are going on foot on the left",
+          "label_frames": 99,
+          "target_references": 99,
+          "target_objects": 150
+        },
+        {
+          "expression_id": "please-help-me-locate-the-men-on-the-road",
+          "sentence": "please help me locate the men on the road",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 848
+        },
+        {
+          "expression_id": "people-on-the-left-are-standing",
+          "sentence": "people on the left are standing",
+          "label_frames": 137,
+          "target_references": 137,
+          "target_objects": 317
+        },
+        {
+          "expression_id": "i-want-to-find-the-parked-cars-on-the-left",
+          "sentence": "i want to find the parked cars on the left",
+          "label_frames": 112,
+          "target_references": 112,
+          "target_objects": 302
+        },
+        {
+          "expression_id": "parked-bicycles",
+          "sentence": "parked bicycles",
+          "label_frames": 47,
+          "target_references": 47,
+          "target_objects": 57
+        },
+        {
+          "expression_id": "people-stand-on-the-right",
+          "sentence": "people stand on the right",
+          "label_frames": 19,
+          "target_references": 19,
+          "target_objects": 33
+        },
+        {
+          "expression_id": "people-in-red-clothes-have-paused",
+          "sentence": "people in red clothes have paused",
+          "label_frames": 54,
+          "target_references": 54,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "cars-are-driving-forward-in-the-same-direction",
+          "sentence": "cars are driving forward in the same direction",
+          "label_frames": 153,
+          "target_references": 153,
+          "target_objects": 244
+        },
+        {
+          "expression_id": "gray-vehicles-ahead",
+          "sentence": "gray vehicles ahead",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 79
+        },
+        {
+          "expression_id": "gentlemen-ahead-in-green",
+          "sentence": "gentlemen ahead in green",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 1331
+        },
+        {
+          "expression_id": "men-in-black-clothes-on-the-left-seem-to-stand-still",
+          "sentence": "men in black clothes on the left seem to stand still",
+          "label_frames": 68,
+          "target_references": 68,
+          "target_objects": 112
+        }
+      ]
+    },
+    {
+      "video_id": "0081da60-5fa22cc6",
+      "seqmap_expressions": 106,
+      "expression_files": 106,
+      "images": 202,
+      "image_frame_min": 1,
+      "image_frame_max": 202,
+      "image_dimensions": {
+        "1280x720": 202
+      },
+      "label_files": 202,
+      "missing_label_frames": [],
+      "expression_target_references": 11013,
+      "expression_target_objects": 31807,
+      "expressions": [
+        {
+          "expression_id": "women-on-the-left-side",
+          "sentence": "women on the left side",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 92
+        },
+        {
+          "expression_id": "ont-the-right-lane-the-cars-are-at-rest",
+          "sentence": "ont the right lane, the cars are at rest",
+          "label_frames": 197,
+          "target_references": 197,
+          "target_objects": 712
+        },
+        {
+          "expression_id": "females-are-going-on-foot-on-the-left",
+          "sentence": "females are going on foot on the left",
+          "label_frames": 52,
+          "target_references": 52,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "ladies-on-the-right-stop-walking",
+          "sentence": "ladies on the right stop walking",
+          "label_frames": 25,
+          "target_references": 25,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "please-pay-attention-to-the-cars-on-the-right-that-are-moving-in-the-same-direction",
+          "sentence": "please pay attention to the cars on the right that are moving in the same direction",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 146
+        },
+        {
+          "expression_id": "on-the-right-you-can-see-moving-red-cars",
+          "sentence": "on the right, you can see moving red cars",
+          "label_frames": 10,
+          "target_references": 10,
+          "target_objects": 10
+        },
+        {
+          "expression_id": "cars-ahead",
+          "sentence": "cars ahead",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "gray-vehicles-in-the-right-lane-are-parked",
+          "sentence": "gray vehicles in the right lane are parked",
+          "label_frames": 71,
+          "target_references": 71,
+          "target_objects": 110
+        },
+        {
+          "expression_id": "cars-are-turning",
+          "sentence": "cars are turning",
+          "label_frames": 91,
+          "target_references": 91,
+          "target_objects": 134
+        },
+        {
+          "expression_id": "red-cars-are-on-the-right",
+          "sentence": "red cars are on the right",
+          "label_frames": 10,
+          "target_references": 10,
+          "target_objects": 10
+        },
+        {
+          "expression_id": "watch-out-for-each-moving-vehicle",
+          "sentence": "watch out for each moving vehicle",
+          "label_frames": 199,
+          "target_references": 199,
+          "target_objects": 566
+        },
+        {
+          "expression_id": "men-in-green",
+          "sentence": "men in green",
+          "label_frames": 88,
+          "target_references": 88,
+          "target_objects": 174
+        },
+        {
+          "expression_id": "males-halt-their-steps",
+          "sentence": "males halt their steps",
+          "label_frames": 139,
+          "target_references": 139,
+          "target_objects": 344
+        },
+        {
+          "expression_id": "people-in-black-are-standing-on-the-right",
+          "sentence": "people in black are standing on the right",
+          "label_frames": 26,
+          "target_references": 26,
+          "target_objects": 29
+        },
+        {
+          "expression_id": "white-trucks-in-front-of-us",
+          "sentence": "white trucks in front of us",
+          "label_frames": 63,
+          "target_references": 63,
+          "target_objects": 63
+        },
+        {
+          "expression_id": "gray-cars-on-the-left-are-at-a-stop",
+          "sentence": "gray cars on the left are at a stop",
+          "label_frames": 150,
+          "target_references": 150,
+          "target_objects": 276
+        },
+        {
+          "expression_id": "cars-ahead-are-driving-in-a-same-direction",
+          "sentence": "cars ahead are driving in a same direction",
+          "label_frames": 100,
+          "target_references": 100,
+          "target_objects": 100
+        },
+        {
+          "expression_id": "persons-wearing-green-stop-their-steps",
+          "sentence": "persons wearing green stop their steps",
+          "label_frames": 88,
+          "target_references": 88,
+          "target_objects": 174
+        },
+        {
+          "expression_id": "yellow-bicycles-which-are-stopped",
+          "sentence": "yellow bicycles which are stopped",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "the-white-cars-move-in-front-of-us",
+          "sentence": "the white cars move in front of us",
+          "label_frames": 74,
+          "target_references": 74,
+          "target_objects": 98
+        },
+        {
+          "expression_id": "men-in-green-clothing-halt-their-steps",
+          "sentence": "men in green clothing halt their steps",
+          "label_frames": 88,
+          "target_references": 88,
+          "target_objects": 174
+        },
+        {
+          "expression_id": "someones-in-green-on-the-left-stop-to-wait",
+          "sentence": "someones in green on the left stop to wait",
+          "label_frames": 88,
+          "target_references": 88,
+          "target_objects": 174
+        },
+        {
+          "expression_id": "im-looking-for-the-parked-cars-on-the-right",
+          "sentence": "i'm looking for the parked cars on the right",
+          "label_frames": 197,
+          "target_references": 197,
+          "target_objects": 712
+        },
+        {
+          "expression_id": "vehicles-on-the-road-are-slowing-down",
+          "sentence": "vehicles on the road are slowing down",
+          "label_frames": 201,
+          "target_references": 201,
+          "target_objects": 1804
+        },
+        {
+          "expression_id": "parked-vehicles",
+          "sentence": "parked vehicles",
+          "label_frames": 201,
+          "target_references": 201,
+          "target_objects": 1804
+        },
+        {
+          "expression_id": "the-moving-vehicles",
+          "sentence": "the moving vehicles",
+          "label_frames": 199,
+          "target_references": 199,
+          "target_objects": 566
+        },
+        {
+          "expression_id": "cars-are-going-left-at-the-intersection",
+          "sentence": "cars are going left at the intersection",
+          "label_frames": 42,
+          "target_references": 42,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "parked-cars",
+          "sentence": "parked cars",
+          "label_frames": 201,
+          "target_references": 201,
+          "target_objects": 1804
+        },
+        {
+          "expression_id": "the-cars",
+          "sentence": "the cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 2370
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 2370
+        },
+        {
+          "expression_id": "cars-are-making-a-rightward-turn",
+          "sentence": "cars are making a rightward turn",
+          "label_frames": 42,
+          "target_references": 42,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "the-cars-are-turning-which-are-white",
+          "sentence": "the cars are turning which are white",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 84
+        },
+        {
+          "expression_id": "black-cars-come-to-a-halt",
+          "sentence": "black cars come to a halt",
+          "label_frames": 198,
+          "target_references": 198,
+          "target_objects": 784
+        },
+        {
+          "expression_id": "the-females-are-walking",
+          "sentence": "the females are walking",
+          "label_frames": 113,
+          "target_references": 113,
+          "target_objects": 131
+        },
+        {
+          "expression_id": "cars-are-making-a-right-turn",
+          "sentence": "cars are making a right turn",
+          "label_frames": 42,
+          "target_references": 42,
+          "target_objects": 61
+        },
+        {
+          "expression_id": "males-in-white-clothes-stand-on-the-left",
+          "sentence": "males in white clothes stand on the left",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "cars-are-moving-ahead-of-us",
+          "sentence": "cars are moving ahead of us",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "parked-trucks",
+          "sentence": "parked trucks",
+          "label_frames": 62,
+          "target_references": 62,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "cars-are-following-the-same-route-on-the-right",
+          "sentence": "cars are following the same route on the right",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 146
+        },
+        {
+          "expression_id": "i-want-to-find-the-silvery-parked-cars",
+          "sentence": "i want to find the silvery parked cars",
+          "label_frames": 165,
+          "target_references": 165,
+          "target_objects": 386
+        },
+        {
+          "expression_id": "people",
+          "sentence": "people",
+          "label_frames": 164,
+          "target_references": 164,
+          "target_objects": 591
+        },
+        {
+          "expression_id": "trucks-are-turning",
+          "sentence": "trucks are turning",
+          "label_frames": 75,
+          "target_references": 75,
+          "target_objects": 75
+        },
+        {
+          "expression_id": "persons-wearing-red-clothes-are-going-on-foot",
+          "sentence": "persons wearing red clothes are going on foot",
+          "label_frames": 89,
+          "target_references": 89,
+          "target_objects": 89
+        },
+        {
+          "expression_id": "white-cars-on-the-right-turn-left-carefully",
+          "sentence": "white cars on the right turn left carefully",
+          "label_frames": 6,
+          "target_references": 6,
+          "target_objects": 6
+        },
+        {
+          "expression_id": "vehicles-in-front-are-driving-in-a-same-direction",
+          "sentence": "vehicles in front are driving in a same direction",
+          "label_frames": 100,
+          "target_references": 100,
+          "target_objects": 100
+        },
+        {
+          "expression_id": "truck-on-the-road",
+          "sentence": "truck on the road",
+          "label_frames": 137,
+          "target_references": 137,
+          "target_objects": 137
+        },
+        {
+          "expression_id": "moving-cars-in-the-same-direction",
+          "sentence": "moving cars in the same direction",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 246
+        },
+        {
+          "expression_id": "ladies-in-red-clothes-are-on-the-right",
+          "sentence": "ladies in red clothes are on the right",
+          "label_frames": 67,
+          "target_references": 67,
+          "target_objects": 72
+        },
+        {
+          "expression_id": "bikes-on-the-right",
+          "sentence": "bikes on the right",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "men-in-red-clothes-have-paused",
+          "sentence": "men in red clothes have paused",
+          "label_frames": 97,
+          "target_references": 97,
+          "target_objects": 97
+        },
+        {
+          "expression_id": "men-in-red-clothes-on-the-right-come-to-a-stop",
+          "sentence": "men in red clothes on the right come to a stop",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "moving-trucks",
+          "sentence": "moving trucks",
+          "label_frames": 75,
+          "target_references": 75,
+          "target_objects": 75
+        },
+        {
+          "expression_id": "white-parked-vehicles",
+          "sentence": "white parked vehicles",
+          "label_frames": 134,
+          "target_references": 134,
+          "target_objects": 324
+        },
+        {
+          "expression_id": "standing-persons",
+          "sentence": "standing persons",
+          "label_frames": 150,
+          "target_references": 150,
+          "target_objects": 437
+        },
+        {
+          "expression_id": "males",
+          "sentence": "males",
+          "label_frames": 145,
+          "target_references": 145,
+          "target_objects": 367
+        },
+        {
+          "expression_id": "white-vehicles-in-the-left-lane-are-currently-driving",
+          "sentence": "white vehicles in the left lane are currently driving",
+          "label_frames": 71,
+          "target_references": 71,
+          "target_objects": 75
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-bikes",
+          "sentence": "on the right, there are some bikes",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "persons-in-yellow",
+          "sentence": "persons in yellow",
+          "label_frames": 34,
+          "target_references": 34,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "men-on-the-left-wear-green-clothes",
+          "sentence": "men on the left wear green clothes",
+          "label_frames": 88,
+          "target_references": 88,
+          "target_objects": 174
+        },
+        {
+          "expression_id": "black-cars-are-moving-in-the-same-direction",
+          "sentence": "black cars are moving in the same direction",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 216
+        },
+        {
+          "expression_id": "notice-the-vehicles-in-front-of-us",
+          "sentence": "notice the vehicles in front of us",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "persons-stop-on-the-left",
+          "sentence": "persons stop on the left",
+          "label_frames": 122,
+          "target_references": 122,
+          "target_objects": 317
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 137,
+          "target_references": 137,
+          "target_objects": 137
+        },
+        {
+          "expression_id": "moving-vehicles-in-front-of-us",
+          "sentence": "moving vehicles in front of us",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "the-white-trucks-are-making-a-leftward-turn-in-front-of-us",
+          "sentence": "the white trucks are making a leftward turn in front of us",
+          "label_frames": 33,
+          "target_references": 33,
+          "target_objects": 33
+        },
+        {
+          "expression_id": "humans",
+          "sentence": "humans",
+          "label_frames": 164,
+          "target_references": 164,
+          "target_objects": 591
+        },
+        {
+          "expression_id": "driving-cars-in-the-opposite-direction-of-ours",
+          "sentence": "driving cars in the opposite direction of ours",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "moving-vehicles-in-the-opposite-direction-on-a-road",
+          "sentence": "moving vehicles in the opposite direction on a road",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "cars-are-stopped-on-the-right",
+          "sentence": "cars are stopped on the right",
+          "label_frames": 197,
+          "target_references": 197,
+          "target_objects": 712
+        },
+        {
+          "expression_id": "standing-gentlemen",
+          "sentence": "standing gentlemen",
+          "label_frames": 139,
+          "target_references": 139,
+          "target_objects": 344
+        },
+        {
+          "expression_id": "notice-the-persons-in-red-clothes-stand-on-the-right",
+          "sentence": "notice the persons in red clothes stand on the right",
+          "label_frames": 26,
+          "target_references": 26,
+          "target_objects": 26
+        },
+        {
+          "expression_id": "notice-that-the-cars-that-are-driving-in-the-same-direction",
+          "sentence": "notice that the cars that are driving in the same direction",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 246
+        },
+        {
+          "expression_id": "i-want-to-identify-the-red-cars-on-the-left-road",
+          "sentence": "i want to identify the red cars on the left road",
+          "label_frames": 141,
+          "target_references": 141,
+          "target_objects": 154
+        },
+        {
+          "expression_id": "please-notice-the-people-in-white-clothes-standing-on-the-left",
+          "sentence": "please notice the people in white clothes standing on the left",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "gray-cars-in-the-left-lane",
+          "sentence": "gray cars in the left lane",
+          "label_frames": 156,
+          "target_references": 156,
+          "target_objects": 295
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-bicycles",
+          "sentence": "on the right, there are some bicycles",
+          "label_frames": 3,
+          "target_references": 3,
+          "target_objects": 3
+        },
+        {
+          "expression_id": "can-you-spot-the-males-halting-on-the-left",
+          "sentence": "can you spot the males halting on the left",
+          "label_frames": 120,
+          "target_references": 120,
+          "target_objects": 286
+        },
+        {
+          "expression_id": "somebodies-are-walking",
+          "sentence": "somebodies are walking",
+          "label_frames": 127,
+          "target_references": 127,
+          "target_objects": 154
+        },
+        {
+          "expression_id": "people-in-red-are-on-the-left",
+          "sentence": "people in red are on the left",
+          "label_frames": 94,
+          "target_references": 94,
+          "target_objects": 134
+        },
+        {
+          "expression_id": "females",
+          "sentence": "females",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 224
+        },
+        {
+          "expression_id": "men-on-the-street",
+          "sentence": "men on the street",
+          "label_frames": 145,
+          "target_references": 145,
+          "target_objects": 367
+        },
+        {
+          "expression_id": "female-pedestrians-on-the-right-halt-their-steps",
+          "sentence": "female pedestrians on the right halt their steps",
+          "label_frames": 25,
+          "target_references": 25,
+          "target_objects": 62
+        },
+        {
+          "expression_id": "women",
+          "sentence": "women",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 224
+        },
+        {
+          "expression_id": "people-in-red-clothes-on-the-left-have-come-to-a-halt",
+          "sentence": "people in red clothes on the left have come to a halt",
+          "label_frames": 94,
+          "target_references": 94,
+          "target_objects": 106
+        },
+        {
+          "expression_id": "persons-in-white-clothes-wait-on-the-right",
+          "sentence": "persons in white clothes wait on the right",
+          "label_frames": 21,
+          "target_references": 21,
+          "target_objects": 21
+        },
+        {
+          "expression_id": "cars-in-front-of-us",
+          "sentence": "cars in front of us",
+          "label_frames": 159,
+          "target_references": 159,
+          "target_objects": 220
+        },
+        {
+          "expression_id": "blackclothed-pedestrians-come-to-a-stop",
+          "sentence": "black-clothed pedestrians come to a stop",
+          "label_frames": 30,
+          "target_references": 30,
+          "target_objects": 36
+        },
+        {
+          "expression_id": "id-like-to-follow-all-persons",
+          "sentence": "i'd like to follow all persons",
+          "label_frames": 164,
+          "target_references": 164,
+          "target_objects": 591
+        },
+        {
+          "expression_id": "cars-are-turning-in-the-front",
+          "sentence": "cars are turning in the front",
+          "label_frames": 66,
+          "target_references": 66,
+          "target_objects": 73
+        },
+        {
+          "expression_id": "counterdirection-moving-cars",
+          "sentence": "counter-direction moving cars",
+          "label_frames": 48,
+          "target_references": 48,
+          "target_objects": 68
+        },
+        {
+          "expression_id": "vehicles-are-headed-in-the-same-way",
+          "sentence": "vehicles are headed in the same way",
+          "label_frames": 146,
+          "target_references": 146,
+          "target_objects": 246
+        },
+        {
+          "expression_id": "gray-cars-on-the-left-side",
+          "sentence": "gray cars on the left side",
+          "label_frames": 156,
+          "target_references": 156,
+          "target_objects": 295
+        },
+        {
+          "expression_id": "female-pedestrians-on-the-right",
+          "sentence": "female pedestrians on the right",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "person-who-stand-on-the-street",
+          "sentence": "person who stand on the street",
+          "label_frames": 150,
+          "target_references": 150,
+          "target_objects": 437
+        },
+        {
+          "expression_id": "white-cars-which-are-moving",
+          "sentence": "white cars which are moving",
+          "label_frames": 158,
+          "target_references": 158,
+          "target_objects": 235
+        },
+        {
+          "expression_id": "ladies-on-the-left",
+          "sentence": "ladies on the left",
+          "label_frames": 65,
+          "target_references": 65,
+          "target_objects": 92
+        },
+        {
+          "expression_id": "ladies-on-the-right-side",
+          "sentence": "ladies on the right side",
+          "label_frames": 78,
+          "target_references": 78,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "please-help-me-locate-the-men-on-the-road",
+          "sentence": "please help me locate the men on the road",
+          "label_frames": 145,
+          "target_references": 145,
+          "target_objects": 367
+        },
+        {
+          "expression_id": "black-cars-on-the-left-come-to-a-halt",
+          "sentence": "black cars on the left come to a halt",
+          "label_frames": 192,
+          "target_references": 192,
+          "target_objects": 495
+        },
+        {
+          "expression_id": "men-in-blue-clothes-stand-on-the-left",
+          "sentence": "men in blue clothes stand on the left",
+          "label_frames": 7,
+          "target_references": 7,
+          "target_objects": 7
+        },
+        {
+          "expression_id": "humans-stand-on-the-right",
+          "sentence": "humans stand on the right",
+          "label_frames": 44,
+          "target_references": 44,
+          "target_objects": 120
+        },
+        {
+          "expression_id": "please-help-me-find-the-ladies-on-the-road",
+          "sentence": "please help me find the ladies on the road",
+          "label_frames": 136,
+          "target_references": 136,
+          "target_objects": 224
+        },
+        {
+          "expression_id": "people-in-red-clothes-have-paused",
+          "sentence": "people in red clothes have paused",
+          "label_frames": 120,
+          "target_references": 120,
+          "target_objects": 132
+        },
+        {
+          "expression_id": "white-cars-on-the-right-side-are-parked",
+          "sentence": "white cars on the right side are parked",
+          "label_frames": 97,
+          "target_references": 97,
+          "target_objects": 164
+        },
+        {
+          "expression_id": "white-trucks-move-in-front-of-us",
+          "sentence": "white trucks move in front of us",
+          "label_frames": 63,
+          "target_references": 63,
+          "target_objects": 63
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 202,
+          "target_references": 202,
+          "target_objects": 2370
+        }
+      ]
+    },
+    {
+      "video_id": "00de601c-858a8a8d",
+      "seqmap_expressions": 71,
+      "expression_files": 71,
+      "images": 203,
+      "image_frame_min": 1,
+      "image_frame_max": 203,
+      "image_dimensions": {
+        "1280x720": 203
+      },
+      "label_files": 203,
+      "missing_label_frames": [],
+      "expression_target_references": 9838,
+      "expression_target_objects": 37580,
+      "expressions": [
+        {
+          "expression_id": "red-trucks-on-the-ride-side-travel-in-the-same-direction",
+          "sentence": "red trucks on the ride side travel in the same direction",
+          "label_frames": 144,
+          "target_references": 144,
+          "target_objects": 144
+        },
+        {
+          "expression_id": "im-searching-for-the-silvery-cars-on-the-left-side",
+          "sentence": "i'm searching for the silvery cars on the left side",
+          "label_frames": 177,
+          "target_references": 177,
+          "target_objects": 443
+        },
+        {
+          "expression_id": "the-truck-on-the-road",
+          "sentence": "the truck on the road",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 489
+        },
+        {
+          "expression_id": "right-vehicles",
+          "sentence": "right vehicles",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 803
+        },
+        {
+          "expression_id": "moving-red-trucks",
+          "sentence": "moving red trucks",
+          "label_frames": 144,
+          "target_references": 144,
+          "target_objects": 144
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-cars",
+          "sentence": "on the right, there are some cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 803
+        },
+        {
+          "expression_id": "buses-on-the-right-of-the-road",
+          "sentence": "buses on the right of the road",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "trucks-heading-the-other-way",
+          "sentence": "trucks heading the other way",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 245
+        },
+        {
+          "expression_id": "cars-on-the-right",
+          "sentence": "cars on the right",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 803
+        },
+        {
+          "expression_id": "red-cars-driving-in-the-opposite-direction-of-ours",
+          "sentence": "red cars driving in the opposite direction of ours",
+          "label_frames": 19,
+          "target_references": 19,
+          "target_objects": 34
+        },
+        {
+          "expression_id": "cars-ahead",
+          "sentence": "cars ahead",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 282
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-black-vehicles-on-the-left-side",
+          "sentence": "i'm trying to spot the black vehicles on the left side",
+          "label_frames": 70,
+          "target_references": 70,
+          "target_objects": 180
+        },
+        {
+          "expression_id": "gray-vehicles-in-the-right-lane-are-parked",
+          "sentence": "gray vehicles in the right lane are parked",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 10
+        },
+        {
+          "expression_id": "on-the-right-there-are-some-black-cars",
+          "sentence": "on the right, there are some black cars",
+          "label_frames": 70,
+          "target_references": 70,
+          "target_objects": 180
+        },
+        {
+          "expression_id": "watch-out-for-each-vehicle",
+          "sentence": "watch out for each vehicle",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 2739
+        },
+        {
+          "expression_id": "blue-cars-are-on-the-left",
+          "sentence": "blue cars are on the left",
+          "label_frames": 33,
+          "target_references": 33,
+          "target_objects": 55
+        },
+        {
+          "expression_id": "there-are-black-cars-on-the-left-side",
+          "sentence": "there are black cars on the left side",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 479
+        },
+        {
+          "expression_id": "vehicles-coming-from-the-opposite-side",
+          "sentence": "vehicles coming from the opposite side",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1616
+        },
+        {
+          "expression_id": "black-trucks-drive-on-the-left-side-of-the-road",
+          "sentence": "black trucks drive on the left side of the road",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "counterdirection-trucks-are-moving-on-the-right",
+          "sentence": "counter-direction trucks are moving on the right",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 176
+        },
+        {
+          "expression_id": "parked-vehicles",
+          "sentence": "parked vehicles",
+          "label_frames": 18,
+          "target_references": 18,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "truck-on-the-left",
+          "sentence": "truck on the left",
+          "label_frames": 61,
+          "target_references": 61,
+          "target_objects": 69
+        },
+        {
+          "expression_id": "white-vehicles-move-in-the-same-direction",
+          "sentence": "white vehicles move in the same direction",
+          "label_frames": 30,
+          "target_references": 30,
+          "target_objects": 30
+        },
+        {
+          "expression_id": "parked-cars",
+          "sentence": "parked cars",
+          "label_frames": 18,
+          "target_references": 18,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "yellow-trucks-are-moving-in-the-opposite-direction",
+          "sentence": "yellow trucks are moving in the opposite direction",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 176
+        },
+        {
+          "expression_id": "cars",
+          "sentence": "cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 2739
+        },
+        {
+          "expression_id": "left-lane-is-occupied-by-cars",
+          "sentence": "left lane is occupied by cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1654
+        },
+        {
+          "expression_id": "gray-vehicles",
+          "sentence": "gray vehicles",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1454
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-moving-cars",
+          "sentence": "right road is occupied by moving cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 749
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-trucks",
+          "sentence": "right road is occupied by trucks",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 420
+        },
+        {
+          "expression_id": "the-silvery-buses",
+          "sentence": "the silvery buses",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "gray-cars-are-coming-from-the-opposite-side-on-the-left",
+          "sentence": "gray cars are coming from the opposite side on the left",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 613
+        },
+        {
+          "expression_id": "moving-white-trucks",
+          "sentence": "moving white trucks",
+          "label_frames": 195,
+          "target_references": 195,
+          "target_objects": 246
+        },
+        {
+          "expression_id": "cars-are-driving-along-the-right-side",
+          "sentence": "cars are driving along the right side",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 749
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-parked-cars",
+          "sentence": "i'm trying to spot the parked cars",
+          "label_frames": 18,
+          "target_references": 18,
+          "target_objects": 54
+        },
+        {
+          "expression_id": "dark-trucks-are-moving-in-the-opposite-direction",
+          "sentence": "dark trucks are moving in the opposite direction",
+          "label_frames": 9,
+          "target_references": 9,
+          "target_objects": 9
+        },
+        {
+          "expression_id": "cars-on-the-left",
+          "sentence": "cars on the left",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1654
+        },
+        {
+          "expression_id": "gray-trucks-are-following-the-same-route-on-the-left",
+          "sentence": "gray trucks are following the same route on the left",
+          "label_frames": 43,
+          "target_references": 43,
+          "target_objects": 43
+        },
+        {
+          "expression_id": "yellow-cars-on-the-right-travel-in-the-same-direction",
+          "sentence": "yellow cars on the right travel in the same direction",
+          "label_frames": 13,
+          "target_references": 13,
+          "target_objects": 13
+        },
+        {
+          "expression_id": "gray-cars",
+          "sentence": "gray cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1454
+        },
+        {
+          "expression_id": "trucks-which-are-going-by-on-the-left",
+          "sentence": "trucks which are going by on the left",
+          "label_frames": 61,
+          "target_references": 61,
+          "target_objects": 69
+        },
+        {
+          "expression_id": "notice-the-vehicles-in-front-of-us",
+          "sentence": "notice the vehicles in front of us",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 282
+        },
+        {
+          "expression_id": "trucks",
+          "sentence": "trucks",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 489
+        },
+        {
+          "expression_id": "truck-on-the-left-of-the-road",
+          "sentence": "truck on the left of the road",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 420
+        },
+        {
+          "expression_id": "gray-buses-are-driving-in-the-same-way",
+          "sentence": "gray buses are driving in the same way",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "im-trying-to-spot-the-gray-vehicles-on-the-left-side",
+          "sentence": "i'm trying to spot the gray vehicles on the left side",
+          "label_frames": 198,
+          "target_references": 198,
+          "target_objects": 551
+        },
+        {
+          "expression_id": "the-left-vehicles",
+          "sentence": "the left vehicles",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1654
+        },
+        {
+          "expression_id": "gray-buses-are-flowing-in-the-identical-direction-on-the-right",
+          "sentence": "gray buses are flowing in the identical direction on the right",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "white-cars-are-coming-from-the-opposite-side",
+          "sentence": "white cars are coming from the opposite side",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 420
+        },
+        {
+          "expression_id": "gray-cars-ahead",
+          "sentence": "gray cars ahead",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 275
+        },
+        {
+          "expression_id": "cars-heading-the-other-way",
+          "sentence": "cars heading the other way",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1616
+        },
+        {
+          "expression_id": "gray-vehicles-are-driving-against-the-flow",
+          "sentence": "gray vehicles are driving against the flow",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 613
+        },
+        {
+          "expression_id": "im-searching-for-the-trucks-on-the-right",
+          "sentence": "i'm searching for the trucks on the right",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 420
+        },
+        {
+          "expression_id": "white-trucks-are-moving-in-reverse",
+          "sentence": "white trucks are moving in reverse",
+          "label_frames": 176,
+          "target_references": 176,
+          "target_objects": 211
+        },
+        {
+          "expression_id": "left-road-is-occupied-by-trucks",
+          "sentence": "left road is occupied by trucks",
+          "label_frames": 61,
+          "target_references": 61,
+          "target_objects": 69
+        },
+        {
+          "expression_id": "white-cars-on-the-left",
+          "sentence": "white cars on the left",
+          "label_frames": 177,
+          "target_references": 177,
+          "target_objects": 443
+        },
+        {
+          "expression_id": "black-vehicles-cars-on-the-left",
+          "sentence": "black vehicles cars on the left",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 479
+        },
+        {
+          "expression_id": "buses",
+          "sentence": "buses",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "cars-in-front-of-us",
+          "sentence": "cars in front of us",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 282
+        },
+        {
+          "expression_id": "counterdirection-moving-cars",
+          "sentence": "counter-direction moving cars",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 1616
+        },
+        {
+          "expression_id": "gray-trucks-ahead",
+          "sentence": "gray trucks ahead",
+          "label_frames": 51,
+          "target_references": 51,
+          "target_objects": 51
+        },
+        {
+          "expression_id": "truck-on-the-right",
+          "sentence": "truck on the right",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 420
+        },
+        {
+          "expression_id": "red-trucks-move-in-a-same-direction",
+          "sentence": "red trucks move in a same direction",
+          "label_frames": 144,
+          "target_references": 144,
+          "target_objects": 144
+        },
+        {
+          "expression_id": "right-road-is-occupied-by-buses",
+          "sentence": "right road is occupied by buses",
+          "label_frames": 53,
+          "target_references": 53,
+          "target_objects": 53
+        },
+        {
+          "expression_id": "blue-moving-cars",
+          "sentence": "blue moving cars",
+          "label_frames": 33,
+          "target_references": 33,
+          "target_objects": 55
+        },
+        {
+          "expression_id": "moving-cars-on-the-right",
+          "sentence": "moving cars on the right",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 749
+        },
+        {
+          "expression_id": "gray-cars-on-the-right",
+          "sentence": "gray cars on the right",
+          "label_frames": 198,
+          "target_references": 198,
+          "target_objects": 551
+        },
+        {
+          "expression_id": "gray-vehicles-ahead",
+          "sentence": "gray vehicles ahead",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 275
+        },
+        {
+          "expression_id": "black-cars-on-the-left-are-driving-in-the-opposite-direction",
+          "sentence": "black cars on the left are driving in the opposite direction",
+          "label_frames": 175,
+          "target_references": 175,
+          "target_objects": 479
+        },
+        {
+          "expression_id": "vehicles",
+          "sentence": "vehicles",
+          "label_frames": 203,
+          "target_references": 203,
+          "target_objects": 2739
+        },
+        {
+          "expression_id": "black-trucks-on-the-right-which-are-driving",
+          "sentence": "black trucks on the right which are driving",
+          "label_frames": 22,
+          "target_references": 22,
+          "target_objects": 22
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "runtime_gt_isolation": {
+    "runtime_manifest_contains_gt": false,
+    "labels_read_by_online_runner": false,
+    "gt_materialized_only_after_prediction_sealed": true
+  }
+}

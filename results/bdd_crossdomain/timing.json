@@ -1,0 +1,156 @@
+{
+  "counter_correction": {
+    "episode_count": 673,
+    "note": "The original runner reset controller/probe counters at each expression; these values are cumulative over the complete suite.",
+    "previous_final_episode_values": {
+      "ENTROPY_HEAD": {
+        "optimizer_steps": 50,
+        "probe_calls": 0
+      },
+      "FROZEN": {
+        "optimizer_steps": 0,
+        "probe_calls": 0
+      },
+      "NO_STATE": {
+        "optimizer_steps": 0,
+        "probe_calls": 36
+      },
+      "PROBE_CACHE": {
+        "optimizer_steps": 0,
+        "probe_calls": 36
+      },
+      "PROBE_ST": {
+        "optimizer_steps": 0,
+        "probe_calls": 36
+      },
+      "QCS_TTA": {
+        "optimizer_steps": 0,
+        "probe_calls": 36
+      }
+    },
+    "shared_probe_calls": 17616,
+    "source": "update_trace.jsonl"
+  },
+  "cuda_visible_devices": "6",
+  "format": "locatemot-refer-bdd-timing-v1",
+  "frame_query_count": 136188,
+  "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+  "method_stats": {
+    "ENTROPY_HEAD": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 460001,
+      "evidence_pos": 86,
+      "evidence_unknown": 0,
+      "frame_query_count": 136188,
+      "optimizer_steps": 31656,
+      "p50_latency_sec": 0.08499954547733068,
+      "p95_latency_sec": 0.36423438412020914,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 0,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 1455,
+      "shared_source_forward": true,
+      "supported_candidates": 86
+    },
+    "FROZEN": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 0,
+      "evidence_pos": 0,
+      "evidence_unknown": 0,
+      "frame_query_count": 136188,
+      "optimizer_steps": 0,
+      "p50_latency_sec": 0.07450416800566018,
+      "p95_latency_sec": 0.3149016564304475,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 0,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 9183,
+      "shared_source_forward": true,
+      "supported_candidates": 0
+    },
+    "NO_STATE": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 0,
+      "evidence_pos": 0,
+      "evidence_unknown": 33531,
+      "frame_query_count": 136188,
+      "optimizer_steps": 0,
+      "p50_latency_sec": 0.1122731359791942,
+      "p95_latency_sec": 0.5081734696868806,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 17616,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 9183,
+      "shared_source_forward": true,
+      "supported_candidates": 0
+    },
+    "PROBE_CACHE": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 0,
+      "evidence_pos": 0,
+      "evidence_unknown": 33531,
+      "frame_query_count": 136188,
+      "optimizer_steps": 0,
+      "p50_latency_sec": 0.09850964049110189,
+      "p95_latency_sec": 0.4367894422088283,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 17616,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 9183,
+      "shared_source_forward": true,
+      "supported_candidates": 0
+    },
+    "PROBE_ST": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 0,
+      "evidence_pos": 0,
+      "evidence_unknown": 0,
+      "frame_query_count": 136188,
+      "optimizer_steps": 0,
+      "p50_latency_sec": 0.0918443005066365,
+      "p95_latency_sec": 0.4004081366176248,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 17616,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 9183,
+      "shared_source_forward": true,
+      "supported_candidates": 0
+    },
+    "QCS_TTA": {
+      "candidate_total": 565186,
+      "elapsed_sec": 32494.771531776758,
+      "end_to_end_fps_shared_source": 4.191074243030798,
+      "evidence_neg": 0,
+      "evidence_pos": 0,
+      "evidence_unknown": 33531,
+      "frame_query_count": 136188,
+      "optimizer_steps": 0,
+      "p50_latency_sec": 0.10542326496215537,
+      "p95_latency_sec": 0.47282764955889417,
+      "peak_memory_allocated_bytes": 8435824128,
+      "peak_memory_reserved_bytes": 8556380160,
+      "probe_calls": 17616,
+      "ring_peak_bytes": 54604800,
+      "selected_rows": 9183,
+      "shared_source_forward": true,
+      "supported_candidates": 0
+    }
+  },
+  "run_dir": "/data2/user/LocateMOT/results/runs/refer_bdd_full_qcs_20261020",
+  "wall_seconds": 32513.32247123297
+}

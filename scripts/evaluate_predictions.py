@@ -66,8 +66,14 @@ def _label_rows(label_path: Path, image_path: Path, ids: set[int], frame_index: 
     if image is None:
         raise FileNotFoundError(image_path)
     height, width = image.shape[:2]
+    # The official label package omits files for frames with no tracked
+    # objects.  The expression JSON is the authoritative target-id set; when
+    # it asks for no IDs, an absent file is therefore an empty GT frame.  A
+    # missing file with requested IDs remains an actionable data error.
     if not label_path.is_file():
-        raise FileNotFoundError(label_path)
+        if ids:
+            raise FileNotFoundError(label_path)
+        return []
     lines: list[str] = []
     content = label_path.read_text(encoding="utf-8").splitlines()
     for raw in content:

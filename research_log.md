@@ -1385,3 +1385,43 @@ videos have zero overlap with the 30-video official test partition. Receipt:
 target-domain supervised checkpoint path reproducible, but it is deliberately
 not used by the source-free QCS experiments; the official repository's roughly
 110-hour/8-GPU training claim is not replaced by a one-card partial run.
+
+2026-10-20 — Refer-BDD complete-data audit and manifest preparation. The
+official EchoTrack seqmap and Google Drive archives were downloaded to
+`/data2/user/LocateMOT/data/downloads`, checksum/unzip validated, and the
+complete selected split was extracted under `data/ReferBDD`. The audit found
+8 videos, 673 expressions, 1,619 images, 1,610 label files, 74,924
+expression-frame references, and 216,613 target-object references. A
+label-free runtime manifest and a separate evaluator-only manifest were
+created; no raw data or checkpoint is intended for publication.
+
+2026-10-20 — Refer-KITTI-V2 → Refer-BDD source-free online experiment.
+Hypothesis: frozen-query probes plus external causal residual adaptation could
+recover source referring decisions under BDD domain shift without target
+labels. The full six-method suite (`FROZEN`, `ENTROPY_HEAD`, `PROBE_ST`,
+`PROBE_CACHE`, `QCS_TTA`, `NO_STATE`) ran on physical GPU 6 using the complete
+673-episode/136,188-frame-query manifest. The runner used no GT, future frame,
+expression label map, or evaluator; GT was materialized only after prediction
+completion. The run completed in 32,513 seconds at 4.191 shared-source FPS,
+with 8.44 GB peak allocated memory.
+
+2026-10-20 — Refer-BDD experiment diagnosis and retained result. The first
+smoke exposed an environment ABI mismatch and an evaluator +1 frame-offset
+mistake; both were fixed and replayed before the full run. The full sealed
+result is complete for all 8 videos and 673 expressions. FROZEN obtained
+HOTA/IDF1 2.9788/0.89107. ENTROPY_HEAD made 31,656 real online optimizer
+updates and degraded to 1.5842/0.28707. Probe/QCS/NO_STATE made 17,616 shared
+probe calls but zero supported optimizer updates and remained identical to
+FROZEN. Offline candidate analysis found approximately 26.4% IoU-0.5 recall
+before gates, 19.8% after objectness/area, and 0.7% after the fixed 0.4
+referring gate; source-score p95 was 0.3088. This is retained as a valid
+negative cross-domain result; no BDD supervised training, threshold tuning,
+GT-assisted structure change, or zero-gate result was substituted.
+
+2026-10-20 — Result-accounting repair. The runner was corrected to accumulate
+optimizer/probe counters across episode resets. The existing sealed output was
+repaired transparently from `update_trace.jsonl`; the previous last-episode
+values (50 entropy steps and 36 probe calls) are preserved in the metadata's
+`counter_correction` field, while the published summaries report the complete
+suite totals. The BDD asset audit, diagnostics, metrics CSVs, and final report
+are kept; unrelated GroundJEV worktree changes were not staged or overwritten.

@@ -338,6 +338,9 @@ class OnlineEpisodeRunner:
         trace_path = self.output_dir / "update_trace.jsonl"
         if trace_path.exists():
             trace_path.unlink()
+        candidate_diagnostics_path = self.output_dir / "candidate_diagnostics.jsonl"
+        if candidate_diagnostics_path.exists():
+            candidate_diagnostics_path.unlink()
         started_all = time.perf_counter()
         self.wrapper = self._make_wrapper()
         method_stats = {
@@ -348,9 +351,15 @@ class OnlineEpisodeRunner:
                      "peak_memory_allocated_bytes": 0, "peak_memory_reserved_bytes": 0}
             for method in self.methods
         }
+        # Controllers and the shared frozen-query probe are reset at every
+        # (video, expression) episode.  Keep run-level counters separately so
+        # the final metadata reports the complete suite rather than only the
+        # last episode.
+        probe_calls_total = 0
         expression_count = 0
         frame_count = 0
-        with trace_path.open("a", encoding="utf-8") as trace:
+        with (trace_path.open("a", encoding="utf-8") as trace,
+              candidate_diagnostics_path.open("a", encoding="utf-8") as candidate_diagnostics):
             for (video_id, expression_id), rows in grouped.items():
                 expression_count += 1
                 if expression_count > self.max_expressions > 0:
@@ -385,13 +394,50 @@ class OnlineEpisodeRunner:
                     ring.append(frame_index, image, image_size)
                     ring_peak = ring.bytes_stored
                     packet = None
-                    if episode_uses_probe and probe.due(frame_index):
+                    probe_due = bool(episode_uses_probe and probe.due(frame_index))
+                    if probe_due:
                         is_dynamic = "dynamic" in spec.constraint_types
                         required = int(self.probe_config["dynamic_history_frames"]) if is_dynamic else 1
                         if len(ring.items) >= required:
                             packet = probe.run(ring.as_list(), spec, variants, snapshot)
                         else:
                             packet = None
+                    if packet is not None:
+                        probe_calls_total += int(packet.calls)
+                    valid_candidate_rows = []
+                    for uid, track_id, valid, objectness, source_probability, box in zip(
+                        snapshot.candidate_uid,
+                        snapshot.pred_track_id.detach().cpu().tolist(),
+                        snapshot.valid_mask.detach().cpu().tolist(),
+                        snapshot.objectness.detach().cpu().tolist(),
+                        snapshot.source_probs.detach().cpu().tolist(),
+                        snapshot.boxes_xyxy.detach().cpu().tolist(),
+                    ):
+                        if not valid:
+                            continue
+                        width = max(0.0, float(box[2]) - float(box[0]))
+                        height = max(0.0, float(box[3]) - float(box[1]))
+                        valid_candidate_rows.append({
+                            "candidate_uid": uid,
+                            "track_id": int(track_id),
+                            "objectness": float(objectness),
+                            "source_probability": float(source_probability),
+                            "area_pixels": width * height,
+                            "passes_objectness_area": bool(
+                                float(objectness) > float(self.inference_config["objectness_threshold"])
+                                and width * height > float(self.inference_config["area_threshold"])
+                            ),
+                            "box_xyxy": [float(value) for value in box],
+                        })
+                    candidate_diagnostics.write(json.dumps({
+                        "video_id": video_id, "expression_id": expression_id,
+                        "frame_index": frame_index, "image_size": list(snapshot.image_size),
+                        "candidate_count": snapshot.count,
+                        "valid_candidate_count": int(snapshot.valid_mask.sum()),
+                        "candidates": valid_candidate_rows,
+                    }, ensure_ascii=False) + "\n")
+                    candidate_diagnostics.flush()
+                    evidence_by_method: dict[str, list[dict[str, Any]]] = {}
                     for method in self.methods:
                         controller = controllers.get(method)
                         ema = emas.get(method)
@@ -408,6 +454,21 @@ class OnlineEpisodeRunner:
                             valid = snapshot.valid_mask
                             ema.observe(snapshot.pred_track_id[valid], snapshot.source_probs[valid])
                         evidence = self._method_evidence(method, snapshot, packet)
+                        evidence_by_method[method] = [{
+                            "candidate_uid": record.candidate_uid,
+                            "label": record.label.value,
+                            "soft_target": record.soft_target,
+                            "weight": record.weight,
+                            "evidence_source": record.evidence_source,
+                            "query_type": record.query_type,
+                            "alignment_quality": record.alignment_quality,
+                            "explanation": record.explanation,
+                            "frame_index": record.frame_index,
+                            "pred_track_id": record.pred_track_id,
+                            "probe_q0": record.probe_q0,
+                            "probe_eq": record.probe_eq,
+                            "probe_cf": record.probe_cf,
+                        } for record in evidence]
                         for record in evidence:
                             method_stats[method]["evidence_pos"] += int(record.label == EvidenceLabel.SUPPORTED_POS)
                             method_stats[method]["evidence_neg"] += int(record.label == EvidenceLabel.SUPPORTED_NEG)
@@ -416,16 +477,16 @@ class OnlineEpisodeRunner:
                         if controller is not None:
                             controller.observe(snapshot, evidence)
                             update = controller.maybe_adapt(snapshot, evidence)
-                            method_stats[method]["optimizer_steps"] = controller.update_steps
+                            method_stats[method]["optimizer_steps"] += int(update is not None and update.stepped)
                             method_stats[method]["supported_candidates"] += sum(record.label == EvidenceLabel.SUPPORTED_POS for record in evidence)
-                        method_stats[method]["probe_calls"] = probe.calls if method in PROBE_METHODS else 0
+                        method_stats[method]["probe_calls"] = probe_calls_total if method in PROBE_METHODS else 0
                         method_stats[method]["peak_memory_allocated_bytes"] = max(method_stats[method]["peak_memory_allocated_bytes"], int(torch.cuda.max_memory_allocated(self.device)) if self.device.type == "cuda" else 0)
                         method_stats[method]["peak_memory_reserved_bytes"] = max(method_stats[method]["peak_memory_reserved_bytes"], int(torch.cuda.max_memory_reserved(self.device)) if self.device.type == "cuda" else 0)
                         method_stats[method]["latencies"].append(time.perf_counter() - frame_started)
                     trace.write(json.dumps({
                         "video_id": video_id, "expression_id": expression_id, "frame_index": frame_index,
                         "query_text": sentence, "query_spec": {"constraint_types": spec.constraint_types, "unsupported_reason": spec.unsupported_reason},
-                        "probe_due": bool(episode_uses_probe and probe.due(frame_index)), "probe_calls_total": probe.calls,
+                        "probe_due": probe_due, "probe_calls_total": probe.calls,
                         "probe_history_frames": list(packet.results[0].history_frames) if packet and packet.results else [],
                         "probe_elapsed_sec": packet.elapsed_sec if packet else 0.0,
                         "ring_bytes": ring.bytes_stored, "snapshot_candidates": snapshot.count,
@@ -434,6 +495,7 @@ class OnlineEpisodeRunner:
                             "selected_rows": int(method_stats[method]["selected_rows"]),
                             "optimizer_steps": int(method_stats[method]["optimizer_steps"]),
                             "last_update": controllers[method].last_update.__dict__ if method in controllers else None,
+                            "evidence": evidence_by_method.get(method, []),
                         } for method in self.methods},
                     }, ensure_ascii=False, default=str) + "\n")
                     trace.flush()
@@ -457,6 +519,7 @@ class OnlineEpisodeRunner:
             "wall_seconds": time.perf_counter() - started_all, "shared_source_forward": True,
             "gt_used_by_runner": False, "future_frames_used": False, "evaluation_manifest_opened": False,
             "method_stats": method_stats, "trace": str(trace_path.resolve()),
+            "candidate_diagnostics": str(candidate_diagnostics_path.resolve()),
         }
         _json_dump(self.output_dir / "run_metadata.json", payload)
         return payload
