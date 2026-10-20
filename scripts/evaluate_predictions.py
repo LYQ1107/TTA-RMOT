@@ -26,6 +26,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from rmot_tta.data.shift_loader import load_compact_evaluation_rows  # noqa: E402
+
 
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -41,6 +43,13 @@ def resolve(value: str | Path) -> Path:
 
 
 def _read_rows(path: Path, episodes: set[str] | None = None) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    # ShiftRMOT stores one condition row plus frame_indices.  Expand it only
+    # after prediction, preserving the runtime/evaluator separation.
+    first_nonempty = next((line for line in path.read_text(encoding="utf-8").splitlines() if line.strip()), "")
+    if first_nonempty:
+        first = json.loads(first_nonempty)
+        if "frame_indices" in first and "runtime_expression_id" in first:
+            return load_compact_evaluation_rows(path, episodes=episodes)
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for line in path.read_text(encoding="utf-8").splitlines():
         if line.strip():
@@ -106,7 +115,13 @@ def materialize_ground_truth(rows: dict[tuple[str, str], list[dict[str, Any]]], 
     for (video_id, expression_id), expression_rows in sorted(rows.items()):
         sequence_name = f"{video_id}+{expression_id}"
         sequence_names.append(sequence_name)
-        sequence_info[sequence_name] = len(expression_rows)
+        frame_offset = int(expression_rows[0].get("trackeval_frame_offset", 1))
+        # Refer-KITTI expressions can omit frames.  TrackEval still indexes
+        # the sequence by the original frame number, so sequence length is
+        # the largest emitted frame id, not the number of compact rows.
+        sequence_info[sequence_name] = max(
+            int(row["frame_index"]) + frame_offset for row in expression_rows
+        )
         expression_path = Path(expression_rows[0]["expression_path"])
         labels_by_frame = _expression_ids(expression_path)
         output = trackeval_root / video_id / expression_id / "gt.txt"
@@ -130,7 +145,7 @@ def materialize_ground_truth(rows: dict[tuple[str, str], list[dict[str, Any]]], 
         seqinfo.write_text(
             "[Sequence]\n"
             f"name={sequence_name}\n"
-            f"seqLength={len(expression_rows)}\n"
+            f"seqLength={sequence_info[sequence_name]}\n"
             "imDir=.\n"
             "frameRate=30\n",
             encoding="utf-8",

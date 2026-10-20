@@ -33,6 +33,10 @@ data/
 !locatemot/unified/data/
 !locatemot/unified/data/**
 locatemot/unified/data/**/__pycache__/
+# The ShiftRMOT implementation is source code, not a dataset cache.
+!rmot_tta/data/
+!rmot_tta/data/**
+rmot_tta/data/**/__pycache__/
 runs/
 third_party/
 outputs/stage_l0/*

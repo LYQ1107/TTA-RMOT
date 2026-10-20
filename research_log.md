@@ -1425,3 +1425,42 @@ values (50 entropy steps and 36 probe calls) are preserved in the metadata's
 `counter_correction` field, while the published summaries report the complete
 suite totals. The BDD asset audit, diagnostics, metrics CSVs, and final report
 are kept; unrelated GroundJEV worktree changes were not staged or overwritten.
+
+2026-10-20 — TTA-RMOT task boundary and ShiftRMOT-Bench-v1 implementation. This
+is a separate repository/task from LocateMOT; all changes in this entry are
+under `/data2/user/TTA-RMOT`. Hypothesis: compact paired visual/language
+conditions can test source-free RMOT adaptation without storing duplicate
+transformed images or exposing GT to the online runner. The complete
+Refer-KITTI-V2 official test videos (`0005`, `0011`, `0013`, `0019`) are audited
+before model execution; `0005` is a dev label and the remaining videos carry
+an explicit historical-overlap warning rather than an unseen-split claim.
+Images are symlinked to the external data2 asset store, visual shifts are
+deterministic and geometry-preserving, and language rewrites are restricted to
+audited directional phrasing. The runner/evaluator now expand compact rows at
+their respective boundaries. The protocol labels for TDA/SAR/TPT/TCR are
+explicitly marked adapted/inspired where the open-source method cannot be
+reproduced exactly on TempRMOT's architecture; no result is retained until the
+manifest audit and a paired Frozen/TTA run complete.
+
+2026-10-21 — ShiftRMOT absolute-gate pilot. Four representative expressions,
+45 A0/A1/A2/A3 conditions, and 9,915 frame queries completed on one A800
+(`GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9`). Frozen HOTA/DetA/AssA/IDF1 was
+0.31255/0.090851/1.2371/0. The absolute gate emitted only 702 rows, all from
+the 0019 representative episode; SAR_VISUAL_INSPIRED emitted 84 rows after
+2,333 entropy updates and scored zero. TDA_RMOT, TPT_LANGUAGE_INSPIRED, and
+TCR_FUSION_INSPIRED matched Frozen; probe calls occurred but no supported
+optimizer updates occurred. This result is retained as a negative gate
+calibration observation.
+
+2026-10-21 — ShiftRMOT relative-margin pilot and structure decision. The same
+45 conditions and 9,915 frame queries were rerun with objectness/area
+candidate visibility followed by a fixed 0.75 current-frame referring-logit
+margin and a 16-candidate cap, without top-1 forcing. On GPU UUID
+`GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2`, Frozen emitted 28,064 rows and
+obtained HOTA/DetA/AssA/IDF1 2.9113/2.3094/4.2506/0.012108. The structure
+change is kept because it recovered measurable candidates; it is not claimed
+as a TTA gain. TDA/TPT/TCR remained identical to Frozen with zero updates;
+SAR made 2,333 updates but decreased to HOTA 2.8306 and AssA 4.0007. Both
+sealed evaluator outputs and the condition-level tables are retained under
+`results/shift_rmot_pilot/`; the final report records that this is a
+representative pilot rather than an all-4,540-condition claim.

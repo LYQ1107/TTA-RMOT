@@ -20,6 +20,7 @@ import yaml
 from rmot_tta.adaptation.controller import AdaptationController
 from rmot_tta.adaptation.ema_baseline import EmaReferringBaseline
 from rmot_tta.baseline.temprmot_wrapper import TempRMOTConfig, TempRMOTWrapper
+from rmot_tta.data.shift_loader import load_compact_runtime_rows, load_runtime_image
 from rmot_tta.evidence.records import CandidateEvidence, EvidenceLabel
 from rmot_tta.evidence.selector import select_candidate_evidence
 from rmot_tta.probes.alignment import align_probe_results
@@ -30,6 +31,15 @@ from rmot_tta.runtime.state import RawFrameRing
 
 ROOT = Path(__file__).resolve().parents[2]
 PROBE_METHODS = {"PROBE_CACHE", "PROBE_ST", "QCS_TTA", "NO_STATE"}
+METHOD_IMPLEMENTATIONS = {
+    # These names are protocol labels for the first ShiftRMOT release.  They
+    # map to the repository's already-audited adapters and are reported as
+    # inspired/adapted, not as exact reproductions of a different backbone.
+    "TDA_RMOT": "EMA_ST",
+    "SAR_VISUAL_INSPIRED": "ENTROPY_HEAD",
+    "TPT_LANGUAGE_INSPIRED": "QCS_TTA",
+    "TCR_FUSION_INSPIRED": "QCS_TTA",
+}
 
 
 def _sha256(path: Path) -> str:
@@ -45,11 +55,14 @@ def _json_dump(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True, default=str) + "\n", encoding="utf-8")
 
 
-def _preprocess(path: Path) -> tuple[torch.Tensor, tuple[int, int]]:
-    image = cv2.imread(str(path), cv2.IMREAD_COLOR)
-    if image is None:
-        raise FileNotFoundError(path)
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+def _preprocess(path: Path, row: dict[str, Any] | None = None) -> tuple[torch.Tensor, tuple[int, int]]:
+    if row is not None and "visual_shift" in row:
+        image = load_runtime_image(row)
+    else:
+        image = cv2.imread(str(path), cv2.IMREAD_COLOR)
+        if image is None:
+            raise FileNotFoundError(path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     height, width = image.shape[:2]
     scale = 800.0 / min(height, width)
     if max(height, width) * scale > 1536.0:
@@ -150,7 +163,16 @@ class OnlineEpisodeRunner:
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.wrapper: TempRMOTWrapper | None = None
 
+    @staticmethod
+    def _implementation(method: str) -> str:
+        return METHOD_IMPLEMENTATIONS.get(method, method)
+
     def _load_rows(self) -> dict[tuple[str, str], list[dict[str, Any]]]:
+        if bool(self.config.get("data", {}).get("compact_shift_manifest", False)):
+            grouped = load_compact_runtime_rows(self.runtime_manifest, episodes=self.episodes or None)
+            if not grouped:
+                raise KeyError(f"no compact runtime conditions matched episodes: {sorted(self.episodes)}")
+            return grouped
         grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
         for line in self.runtime_manifest.read_text(encoding="utf-8").splitlines():
             if not line.strip():
@@ -189,19 +211,20 @@ class OnlineEpisodeRunner:
         controllers: dict[str, AdaptationController] = {}
         emas: dict[str, EmaReferringBaseline] = {}
         for method in self.methods:
-            if method == "FROZEN":
+            implementation = self._implementation(method)
+            if implementation == "FROZEN":
                 continue
-            if method == "EMA_ST":
+            if implementation == "EMA_ST":
                 emas[method] = EmaReferringBaseline()
                 continue
             controller = AdaptationController(
-                method, weight, bias, lr=float(self.adaptation_config["lr"]),
+                implementation, weight, bias, lr=float(self.adaptation_config["lr"]),
                 update_every_n_frames=int(self.adaptation_config["update_every_n_frames"]),
                 batch_size=int(self.adaptation_config["batch_size"]),
                 minimum_distinct_track_time_samples=int(self.adaptation_config["minimum_distinct_track_time_samples"]),
                 grad_clip=float(self.adaptation_config["grad_clip"]),
-                use_logic=method in {"QCS_TTA", "NO_STATE", "HEAD257", "PROBE_CACHE"},
-                use_state=method not in {"PROBE_ST", "ENTROPY_HEAD"},
+                use_logic=implementation in {"QCS_TTA", "NO_STATE", "HEAD257", "PROBE_CACHE"},
+                use_state=implementation not in {"PROBE_ST", "ENTROPY_HEAD"},
                 hidden_dim=int(self.adaptation_config["hidden_dim"]),
                 memory_capacity=int(self.config.get("memory", {}).get("capacity", 512)),
                 per_track_capacity=int(self.config.get("memory", {}).get("per_track_capacity", 16)),
@@ -283,11 +306,12 @@ class OnlineEpisodeRunner:
         return records
 
     def _method_evidence(self, method: str, snapshot, packet) -> list[CandidateEvidence]:
-        if method == "FROZEN":
+        implementation = self._implementation(method)
+        if implementation == "FROZEN":
             return []
-        if method in {"ENTROPY_HEAD", "EMA_ST"}:
+        if implementation in {"ENTROPY_HEAD", "EMA_ST"}:
             return self._confidence_evidence(snapshot)
-        if method == "PROBE_ST":
+        if implementation == "PROBE_ST":
             if packet is None or not packet.results:
                 return []
             q0 = next((item for item in packet.results if item.query_type == "q0"), None)
@@ -377,13 +401,15 @@ class OnlineEpisodeRunner:
                     max_queries=int(self.probe_config["max_query_count"]),
                 )
                 ring = RawFrameRing(max_length=int(self.probe_config["dynamic_history_frames"]))
-                episode_uses_probe = bool(self.probe_config["enabled"]) and bool(PROBE_METHODS.intersection(self.methods))
+                episode_uses_probe = bool(self.probe_config["enabled"]) and any(
+                    self._implementation(method) in PROBE_METHODS for method in self.methods
+                )
                 track_instances = None
                 start_episode = time.perf_counter()
                 for local_index, row in enumerate(rows):
                     if self.max_frames > 0 and local_index >= self.max_frames:
                         break
-                    image, image_size = _preprocess(Path(row["image_path"]))
+                    image, image_size = _preprocess(Path(row["image_path"]), row)
                     frame_index = int(row["frame_index"])
                     frame_started = time.perf_counter()
                     result = self.wrapper.infer_frame(image, sentence, image_size, track_instances, frame_index,
@@ -479,7 +505,9 @@ class OnlineEpisodeRunner:
                             update = controller.maybe_adapt(snapshot, evidence)
                             method_stats[method]["optimizer_steps"] += int(update is not None and update.stepped)
                             method_stats[method]["supported_candidates"] += sum(record.label == EvidenceLabel.SUPPORTED_POS for record in evidence)
-                        method_stats[method]["probe_calls"] = probe_calls_total if method in PROBE_METHODS else 0
+                        method_stats[method]["probe_calls"] = (
+                            probe_calls_total if self._implementation(method) in PROBE_METHODS else 0
+                        )
                         method_stats[method]["peak_memory_allocated_bytes"] = max(method_stats[method]["peak_memory_allocated_bytes"], int(torch.cuda.max_memory_allocated(self.device)) if self.device.type == "cuda" else 0)
                         method_stats[method]["peak_memory_reserved_bytes"] = max(method_stats[method]["peak_memory_reserved_bytes"], int(torch.cuda.max_memory_reserved(self.device)) if self.device.type == "cuda" else 0)
                         method_stats[method]["latencies"].append(time.perf_counter() - frame_started)
@@ -514,6 +542,7 @@ class OnlineEpisodeRunner:
             "runtime_manifest": str(self.runtime_manifest), "runtime_manifest_sha256": _sha256(self.runtime_manifest),
             "source": self.wrapper.provenance if self.wrapper else {}, "gpu_uuid": _gpu_uuid(),
             "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"), "methods": self.methods,
+            "method_implementations": {method: self._implementation(method) for method in self.methods},
             "episodes": [f"{video}/{expression}" for video, expression in grouped],
             "video_expression_count": expression_count, "frame_query_count": frame_count,
             "wall_seconds": time.perf_counter() - started_all, "shared_source_forward": True,
