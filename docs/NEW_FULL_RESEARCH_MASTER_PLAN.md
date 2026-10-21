@@ -66,10 +66,9 @@ Run the official TempRMOT Refer-KITTI-V2 source protocol for all 60 epochs,
 with complete source train data, resumable optimizer/scheduler/AMP/RNG state,
 and a training-completion audit. First reproduce the released checkpoint with
 the author's inference/post-processing/evaluator, then evaluate the completed
-single-card source training under the same official protocol. Run FlexHook's
-20-epoch Kitti-2 protocol separately with its own source code/configuration.
-DKGTrack and additional source datasets follow only after these two lines are
-complete or explicitly blocked by missing legal assets/resources.
+single-card source training under the same official protocol. Other RMOT
+baselines are outside this TTA-RMOT execution scope and must not be mixed into
+the primary results.
 
 ### P3 — independent online TTA implementations
 
@@ -104,8 +103,8 @@ scope for final claims.
 ## Completion gates
 
 The overall goal is complete only when the data manifests and leakage audits
-pass, TempRMOT 60 epochs and FlexHook 20 epochs have auditable completion
-receipts and official source metrics, every claimed TTA method has a distinct
+pass, the TempRMOT source protocol has an auditable completion receipt and
+official source metrics, every claimed TTA method has a distinct
 causal implementation with nonzero-update evidence or a documented failure,
 and full official cross-domain tables are sealed. Until then reports must use
 `PILOT`, `DEVELOPMENT`, `BLOCKED`, or `SCIENTIFIC_GAIN_UNPROVEN`; never

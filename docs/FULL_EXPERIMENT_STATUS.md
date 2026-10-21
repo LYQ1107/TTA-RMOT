@@ -36,18 +36,10 @@ In progress / pending evidence:
   validated full-training checkpoint.
 - Full A0/A1/A2/A3 independent-TTA inference and official metrics are pending
   the same checkpoint.
-- FlexHook's external Refer-KITTI-V2 interface has been prepared and audited
-  (`labels.json`, 862 official test GT templates, and symlinked images). The
-  pinned FlexHook split is 16 train videos and differs from TempRMOT's 17-video
-  source split. The audit discloses 181 expression/frame/object references for
-  which the raw per-frame box is absent, matching the pinned evaluator's skip
-  behavior. The official released checkpoint, Swin/RoBERTa assets and
-  Temp-NeuralSORT predictions are now present in external asset storage. A
-  separate GT-free runtime view strips target labels from `labels.json` and
-  expression JSONs and removes tracker `gt.txt`; the official checkpoint
-  loaded with all keys matched and a one-batch single-card smoke passed on
-  video 0013. The complete single-card inference and TrackEval run is still
-  pending. This smoke is not a full reproduction result.
+- The unrelated FlexHook detour was stopped and is not part of this benchmark.
+  No FlexHook metric is accepted as TTA-RMOT evidence. The active research
+  line remains TempRMOT Refer-KITTI-V2 -> Refer-BDD with Frozen, ordinary
+  online TTA, QCS-TTA, and the independent source-training audit.
 
 No `TRAINING_COMPLETE`, `REPRODUCED`, or full benchmark claim is made by this
 file. Pilot numbers in older `results/runs/` directories remain historical
