@@ -1605,3 +1605,15 @@ GPU7. The runner recorded `gt_used_by_runner=false`,
 post-hoc evaluator also completed on the one-expression smoke output. This is
 only a compatibility/evaluator regression, not a full-dataset metric. Receipt:
 `/data3/user/TTA-RMOT-runs/shift_rmot_v2_official_release_smoke_gpu7_compat2`.
+
+2026-10-21 — Full ShiftRMOT-v2 source-free online TTA was launched from the
+checkpoint-compatible released TempRMOT weight. The 22,914-condition runtime
+manifest is partitioned by deterministic condition index across four
+independent shards on physical GPUs 3, 5, 6, and 4; shard outputs are merged
+only after all predictions finish, then evaluated with the post-hoc evaluator.
+Each runner is GT-free (`gt_used_by_runner=false`, no evaluation manifest and
+no future frames). This is an explicitly labeled released-weight comparison
+line: checkpoint provenance is external and cannot by itself certify
+no-leakage, so the separate source-retraining line remains required.
+Launch receipt:
+`results/tta/shift_rmot_v2_release_full_sharded_launch.json`.

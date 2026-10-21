@@ -1,0 +1,39 @@
+{
+  "format": "shift-rmot-v2-tta-sharded-launch-v1",
+  "status": "RUNNING",
+  "project": "TTA-RMOT",
+  "dataset": "ShiftRMOT-v2",
+  "conditions_expected": 22914,
+  "num_shards": 4,
+  "config": "configs/tta/shift_rmot_v2_official_release.yaml",
+  "checkpoint_role": "official_released_checkpoint_compatible_baseline",
+  "checkpoint_sha256": "4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b",
+  "source_free_at_adaptation": true,
+  "gt_used_by_runner": false,
+  "future_frames_used": false,
+  "evaluation_manifest_opened": false,
+  "shards": [
+    {
+      "shard_index": 0,
+      "physical_gpu": 3,
+      "output_dir": "/data3/user/TTA-RMOT-runs/shift_rmot_v2_release_shard0_gpu3"
+    },
+    {
+      "shard_index": 1,
+      "physical_gpu": 5,
+      "output_dir": "/data3/user/TTA-RMOT-runs/shift_rmot_v2_release_shard1_gpu5"
+    },
+    {
+      "shard_index": 2,
+      "physical_gpu": 6,
+      "output_dir": "/data3/user/TTA-RMOT-runs/shift_rmot_v2_release_shard2_gpu6"
+    },
+    {
+      "shard_index": 3,
+      "physical_gpu": 4,
+      "output_dir": "/data3/user/TTA-RMOT-runs/shift_rmot_v2_release_shard3_gpu4"
+    }
+  ],
+  "metric_status": "PENDING_FULL_PREDICTIONS_AND_POSTHOC_EVALUATION",
+  "interpretation_note": "This released-weight line is a comparison baseline. It is not the final no-leakage claim; that claim requires the separately retrained source checkpoint and the same strict target protocol."
+}
