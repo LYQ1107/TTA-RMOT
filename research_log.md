@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 45195)
-Total output lines: 1558
+Warning: truncated output (original token count: 45363)
+Total output lines: 1569
 
 # LocateMOT Research Log
 
@@ -840,7 +840,7 @@ Concise experimental log (latest first).
   KITTI legal development portability passes (V1/V2 Top150 @.50
   `0.986592/0.958739`), while BDD100K, DanceTrack, MOT17, MOT20, TAO, and
   C-TAO are missing locally. Candidate-cache SHA is `not built`.
-- Training command: not launched; …15195 tokens truncated…es construction reduces the same12-frame sample to103.870s (observed1.531x), boxes/scores/classes bit-exact for all12, native full label_names identical on the first full-vocabulary frame; native methods restored. Actual model GPU1 peak allocation1,664,202,752bytes. This comparison includes CUDA binding and changed background load (seven formal audit workers resumed), so it is not an isolated causal label-copy benchmark or a full-run speed guarantee. Keep integer-only optimization provisionally; verify actual two-source native worker rows before resuming formal prefixes with it. Vocabulary1203, chunks32/38, NMS.8, Top300, precision/weights/protocol/GT denominators remain unchanged.
+- Training command: not launched; …15363 tokens truncated…remain unchanged.
 
 Actual bulk native worker63758 exit0: unchanged two-source smoke rows/GT hit counts and resume metadata are exact,300 candidates per frame, one backbone per frame,76 head calls/68,400 integer class labels; native/bulk CLI wall68.842/51.966s includes initialization and two frames, not formal throughput. After verified controlled interruption,95952 returned terminal exit1 (expected interrupted TAO command) and all four gated followers returned HELD without tracking launch. Every existing exact TAO prefix parsed successfully:440 completed frames preserved across initialized shards; shard1 had not yet written metadata or rows. All76,068 ordinary frames and epoch1 original1,250 updates retained. New supervisor57530 launches perception1313649/ordinary1313650/MOT-only1313651/joint1313652/finalization1313653. Full evaluation skips complete ordinary measurements and resumes unchanged eight TAO partitions with explicit GPU binding plus bulk integer metadata; labels alone temporarily use CPU for native name construction and return to the original device before NMS. Both flags preserve full1,203 vocabulary,38 native chunks, FP32, backbone counts, GT scope and all gates.
 
@@ -1359,3 +1359,14 @@ physical GPU1. At the one-time snapshot it had reached epoch 0, iteration
 the logger reported 08:02:08 remaining for that epoch. This is not a final
 metric or completion claim. Receipt:
 `results/source_training/temprmot_refer_kitti_v2_full_retry_gpu1_compat_progress_snapshot.json`.
+
+2026-10-21 — Official TempRMOT Refer-KITTI-V2 checkpoint recovered for a
+separate fast comparison line. The stale README link was corrected by reading
+the official `zyn213/TempRMOT` v1.0 release metadata; `checkpoint_rk2.pth`
+downloaded successfully to external asset storage, has 1,096,316,824 bytes,
+SHA256
+`4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b`, and
+loads as epoch 49 with 969 model keys. It is being used only for an official
+Frozen/source-free-TTA comparison and is not substituted for the independent
+no-leakage source retraining protocol. Receipt:
+`results/source_training/temprmot_refer_kitti_v2_official_checkpoint_provenance.json`.
