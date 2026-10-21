@@ -23,6 +23,8 @@ def main() -> int:
     parser.add_argument("--episodes", nargs="*", default=None)
     parser.add_argument("--max-expressions", type=int, default=0)
     parser.add_argument("--max-frames", type=int, default=0)
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--num-shards", type=int, default=1)
     args = parser.parse_args()
     config = __import__("yaml").safe_load(args.config.read_text(encoding="utf-8"))
     manifest = args.runtime_manifest or Path(config["data"]["runtime_manifest"])
@@ -31,6 +33,7 @@ def main() -> int:
     result = OnlineEpisodeRunner(
         args.config, manifest, args.output_dir, methods=args.methods,
         episodes=args.episodes, max_expressions=args.max_expressions, max_frames=args.max_frames,
+        shard_index=args.shard_index, num_shards=args.num_shards,
     ).run()
     print(json.dumps(result, indent=2, ensure_ascii=False, sort_keys=True, default=str))
     return 0

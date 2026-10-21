@@ -163,7 +163,8 @@ def _gpu_uuid() -> str | None:
 class OnlineEpisodeRunner:
     def __init__(self, config_path: Path, runtime_manifest: Path, output_dir: Path,
                  *, methods: list[str] | None = None, max_expressions: int = 0,
-                 max_frames: int = 0, episodes: list[str] | None = None):
+                 max_frames: int = 0, episodes: list[str] | None = None,
+                 shard_index: int = 0, num_shards: int = 1):
         self.config_path = config_path.resolve()
         self.config = yaml.safe_load(self.config_path.read_text(encoding="utf-8"))
         self.runtime_manifest = runtime_manifest.resolve()
@@ -172,6 +173,10 @@ class OnlineEpisodeRunner:
         self.max_expressions = int(max_expressions)
         self.max_frames = int(max_frames)
         self.episodes = {str(value) for value in (episodes or [])}
+        self.shard_index = int(shard_index)
+        self.num_shards = int(num_shards)
+        if self.num_shards < 1 or not 0 <= self.shard_index < self.num_shards:
+            raise ValueError(f"invalid shard index/count: {self.shard_index}/{self.num_shards}")
         self.model_config = self.config["model"]
         self.inference_config = self.config["inference"]
         self.probe_config = self.config["probe"]
@@ -218,9 +223,15 @@ class OnlineEpisodeRunner:
     def _iter_rows(self):
         """Stream compact conditions so the full benchmark is not row-materialized."""
         if bool(self.config.get("data", {}).get("compact_shift_manifest", False)):
-            yield from iter_compact_runtime_groups(self.runtime_manifest, episodes=self.episodes or None)
+            for condition_index, item in enumerate(iter_compact_runtime_groups(
+                self.runtime_manifest, episodes=self.episodes or None,
+            )):
+                if condition_index % self.num_shards == self.shard_index:
+                    yield item
             return
-        yield from self._load_rows().items()
+        for condition_index, item in enumerate(self._load_rows().items()):
+            if condition_index % self.num_shards == self.shard_index:
+                yield item
 
     def _make_wrapper(self) -> TempRMOTWrapper:
         return TempRMOTWrapper(TempRMOTConfig(
@@ -439,11 +450,11 @@ class OnlineEpisodeRunner:
         frame_count = 0
         episode_names: list[str] = []
         with (trace_path.open("a", encoding="utf-8") as trace,
-              candidate_diagnostics_path.open("a", encoding="utf-8") as candidate_diagnostics):
+            candidate_diagnostics_path.open("a", encoding="utf-8") as candidate_diagnostics):
             for (video_id, expression_id), rows in self._iter_rows():
-                expression_count += 1
-                if expression_count > self.max_expressions > 0:
+                if self.max_expressions > 0 and expression_count >= self.max_expressions:
                     break
+                expression_count += 1
                 episode_names.append(f"{video_id}/{expression_id}")
                 self.wrapper.reset_runtime()
                 sentence = str(rows[0]["query_text"])
@@ -605,6 +616,7 @@ class OnlineEpisodeRunner:
             "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"), "methods": self.methods,
             "method_implementations": {method: self._implementation(method) for method in self.methods},
             "episodes": episode_names,
+            "shard_index": self.shard_index, "num_shards": self.num_shards,
             "video_expression_count": expression_count, "frame_query_count": frame_count,
             "wall_seconds": time.perf_counter() - started_all, "shared_source_forward": True,
             "gt_used_by_runner": False, "future_frames_used": False, "evaluation_manifest_opened": False,
