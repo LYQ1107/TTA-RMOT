@@ -228,6 +228,9 @@ class OnlineEpisodeRunner:
             checkpoint=Path(self.model_config["checkpoint"]),
             text_root=Path(self.model_config["text_root"]),
             device=str(self.device), hist_len=int(self.model_config.get("hist_len", 4)),
+            sampler_steps=tuple(int(value) for value in self.model_config.get("sampler_steps", [60, 80, 90])),
+            sampler_lengths=tuple(int(value) for value in self.model_config.get("sampler_lengths", [])) or None,
+            extra_track_attn=bool(self.model_config.get("extra_track_attn", False)),
         ))
 
     def _controllers(self, wrapper: TempRMOTWrapper) -> tuple[dict[str, Any], dict[str, EmaReferringBaseline]]:

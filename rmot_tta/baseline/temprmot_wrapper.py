@@ -31,6 +31,9 @@ class TempRMOTConfig:
     device: str = "cuda:0"
     dataset_file: str = "e2e_rmot"
     hist_len: int = 4
+    sampler_steps: tuple[int, ...] = (60, 80, 90)
+    sampler_lengths: tuple[int, ...] | None = None
+    extra_track_attn: bool = False
     num_queries: int = 300
     image_height: int = 800
     image_width: int = 1536
@@ -129,9 +132,10 @@ class TempRMOTWrapper:
             "dec_layers": 6, "dec_n_points": 4, "enc_n_points": 4, "dropout": 0.0,
             "aux_loss": True, "query_interaction_layer": "QIM", "update_query_pos": True,
             "merger_dropout": 0.0, "random_drop": 0.1, "fp_ratio": 0.3,
-            "extra_track_attn": False, "sample_mode": "random_interval", "sample_interval": 1,
-            "sampler_steps": [60, 80, 90],
-            "sampler_lengths": [self.config.hist_len] * 4,
+            "extra_track_attn": bool(self.config.extra_track_attn),
+            "sample_mode": "random_interval", "sample_interval": 1,
+            "sampler_steps": list(self.config.sampler_steps),
+            "sampler_lengths": list(self.config.sampler_lengths or (self.config.hist_len,) * 4),
             "hist_len": self.config.hist_len, "tracking": False, "use_checkpoint": False,
             "memory_bank_type": None, "num_workers": 0, "rmot_path": str(self.config.source_root),
         }

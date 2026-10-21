@@ -1,0 +1,14 @@
+{
+  "format": "temprmot-official-inference-failure-v1",
+  "status": "ABORTED_AFTER_CHECKPOINT_ARCHITECTURE_MISMATCH",
+  "run_root": "/data3/user/TTA-RMOT-runs/official_temprmot_v2_release_inference_gpu3_testcfg_compat",
+  "physical_gpu": 3,
+  "checkpoint": "/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth",
+  "observed_exception": "KeyboardInterrupt after manual stop",
+  "first_actionable_cause": "The upstream test shell enables extra_track_attn, but the released checkpoint has zero update_attn/norm4 tensors. Strict loading reports 36 missing decoder tensors; the official permissive loader would leave those layers randomly initialized.",
+  "checkpoint_model_key_count": 969,
+  "missing_parameter_families": ["transformer.decoder.layers.*.update_attn.*", "transformer.decoder.layers.*.norm4.*"],
+  "protocol_reference": "/data2/user/reference_repos/TempRMOT/configs/temp_rmot_test.sh",
+  "protocol_effect": "Partial predictions were discarded from metric claims. No complete prediction or metric is accepted from this run.",
+  "minimal_fix": "Use the checkpoint-compatible source-training architecture (extra_track_attn=false, hist_len=5, sampler_lengths=5 5 5 5) for the released-weight comparison, and keep the full no-leakage retraining line separate."
+}

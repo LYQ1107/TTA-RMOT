@@ -52,6 +52,13 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--gpu", default="7")
     parser.add_argument("--checkpoint-id", type=int, default=60)
+    parser.add_argument("--hist-len", type=int, default=5)
+    parser.add_argument("--sampler-steps", type=int, nargs="+", default=[60, 80, 90])
+    parser.add_argument("--sampler-lengths", type=int, nargs="+", default=[5, 5, 5, 5])
+    parser.add_argument(
+        "--extra-track-attn", action="store_true",
+        help="opt into the upstream test shell's extra decoder attention; the released RK2 checkpoint does not contain its weights",
+    )
     args = parser.parse_args()
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu)
     _add_source_paths(args.source_root.resolve())
@@ -71,15 +78,19 @@ def main() -> int:
         raise AssertionError(f"expected 862 official seqmap entries, found {len(seq_nums)}")
 
     source_args_parser = argparse.ArgumentParser(parents=[get_args_parser()])
-    source_args = source_args_parser.parse_args([
+    source_argv = [
         "--meta_arch", "temp_rmot", "--dataset_file", "e2e_rmot", "--with_box_refine",
         "--rmot_path", str(args.rmot_path.resolve()), "--resume", str(args.checkpoint.resolve()),
         "--output_dir", str(args.output_dir.resolve()), "--exp_name", "official_seqmap",
         "--query_interaction_layer", "QIM", "--update_query_pos", "--merger_dropout", "0",
         "--dropout", "0", "--random_drop", "0.1", "--fp_ratio", "0.3",
-        "--sampler_steps", "50", "90", "150", "--sampler_lengths", "2", "3", "4", "5",
-        "--extra_track_attn", "--hist_len", "8", "--use_checkpoint", "--device", "cuda",
-    ])
+        "--sampler_steps", *[str(value) for value in args.sampler_steps],
+        "--sampler_lengths", *[str(value) for value in args.sampler_lengths],
+        "--hist_len", str(args.hist_len), "--use_checkpoint", "--device", "cuda",
+    ]
+    if args.extra_track_attn:
+        source_argv.append("--extra_track_attn")
+    source_args = source_args_parser.parse_args(source_argv)
     args.output_dir.resolve().mkdir(parents=True, exist_ok=True)
     model, _criterion, _postprocessors = build_model(source_args)
     model = load_model(model, str(args.checkpoint.resolve()))
