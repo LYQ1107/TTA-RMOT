@@ -48,5 +48,10 @@ Authoritative artifacts:
 
 - metrics: `results/bdd_crossdomain/summary.csv`, `per_video.csv`,
   `per_expression.csv`
-- run receipt: `results/runs/refer_bdd_full_qcs_20261020/run_metadata.json`
+- run receipt: `/data3/user/TTA-RMOT-runs/refer_bdd_full_qcs_20261020/run_metadata.json`
 - asset receipt: `results/audits/refer_bdd_assets.json`
+
+The online protocol has no target-label, future-frame, or evaluator access;
+the external released checkpoint remains a provenance caveat rather than an
+absolute no-leakage certificate. See
+`results/audits/refer_bdd_pretrained_leakage_audit.json`.

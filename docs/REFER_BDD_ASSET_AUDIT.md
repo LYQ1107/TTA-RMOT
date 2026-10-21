@@ -8,16 +8,16 @@ EchoTrack Refer-BDD test split selected by `assets/seqmap_bdd.txt`.
 - Official code and split: [EchoTrack](https://github.com/lab206/EchoTrack),
   [official BDD seqmap](https://raw.githubusercontent.com/lab206/EchoTrack/main/assets/seqmap_bdd.txt).
 - Official asset distribution: [EchoTrack Google Drive folder](https://drive.google.com/drive/folders/12jXjL9wJ9keB-vD-kWKI8IzK6mrIfmAN?usp=sharing).
-- The two downloaded archives were stored under
-  `/data2/user/LocateMOT/data/downloads/ReferBDD/` and passed `unzip -tqq`:
+- The two downloaded archives were copied into the TTA-RMOT-owned path
+  `/data2/user/TTA-RMOT/data/downloads/ReferBDD/` and passed `unzip -tqq`:
 
   | archive | bytes | SHA-256 |
   |---|---:|---|
   | `refer-bdd.zip` | 2,863,924,583 | `7af91415c71a8c1eb802e2b9295e86514195f745fb0b4f98af89b69140830759` |
   | `label_with_ids.zip` | 8,119,776 | `288b402c6180a96ac8b1c2653eda5b1c6f6e093651bf32ebb7620a11aa7195f6` |
 
-- The source checkpoint is
-  `/data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth`, SHA-256
+- The source checkpoint is the TTA-RMOT external asset
+  `/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth`, SHA-256
   `4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b`.
 
 ## Split and format
@@ -57,3 +57,8 @@ The online runner metadata records `gt_used_by_runner=false`,
 
 The machine-readable receipt is
 `results/audits/refer_bdd_assets.json`.
+
+The pretrained-checkpoint leakage boundary is recorded separately in
+`results/audits/refer_bdd_pretrained_leakage_audit.json`: the runtime protocol
+is GT-free, but the complete external checkpoint training history is not
+independently auditable.

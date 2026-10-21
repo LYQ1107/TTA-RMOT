@@ -62,3 +62,8 @@ events.log
 
 # Local download clients, browser sessions, and administrator helpers.
 /.tools/
+
+# Refer-BDD manifests contain absolute local data paths and are regenerated
+# from the audited external asset copy; publish only their compact metadata.
+results/manifests/refer_bdd_runtime_manifest.jsonl
+results/manifests/refer_bdd_evaluation_manifest.jsonl

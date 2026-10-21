@@ -1617,3 +1617,17 @@ line: checkpoint provenance is external and cannot by itself certify
 no-leakage, so the separate source-retraining line remains required.
 Launch receipt:
 `results/tta/shift_rmot_v2_release_full_sharded_launch.json`.
+
+2026-10-21 — Revalidated the requested Refer-KITTI-V2 → Refer-BDD line. The
+existing sealed result covers all 8 official videos, 673 expressions and
+136,188 frame-query rows for FROZEN, ENTROPY_HEAD, PROBE_ST, PROBE_CACHE,
+QCS_TTA and NO_STATE. The Refer-BDD assets, archives and manifests were
+copied from the old shared checkout into TTA-RMOT-owned `/data2` paths; the
+asset audit still passes with identical archive/seqmap hashes, and the copied
+prediction/evaluation artifacts are byte-identical. The runtime manifest has
+no GT fields and the historical run metadata records no GT, future-frame or
+evaluation-manifest access. This establishes protocol isolation, but the
+publisher's complete training history for the external RK2 checkpoint cannot
+be independently audited; therefore this remains a released-weight result,
+not an absolute no-leakage certificate. Receipt:
+`results/audits/refer_bdd_pretrained_leakage_audit.json`.

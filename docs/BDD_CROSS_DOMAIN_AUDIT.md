@@ -31,7 +31,7 @@ environment; this was required to avoid the extension ABI mismatch seen with
 the alternate Torch 2.3 environment.
 
 The complete run is
-`results/runs/refer_bdd_full_qcs_20261020/`. It processed 136,188 frame-query
+`/data3/user/TTA-RMOT-runs/refer_bdd_full_qcs_20261020/`. It processed 136,188 frame-query
 rows in 32,513 seconds, emitted one candidate-diagnostics and one update-trace
 row per frame-query, and completed all 673 episodes.
 
@@ -55,3 +55,11 @@ row per frame-query, and completed all 673 episodes.
 The machine-readable asset receipt is
 `results/audits/refer_bdd_assets.json`; the final metrics are in
 `results/bdd_crossdomain/summary.csv`.
+
+The historical run was initially produced under the old shared data checkout.
+Its prediction/evaluation artifacts were copied byte-for-byte into the
+TTA-RMOT run root and matched against the regenerated TTA-RMOT manifest by all
+673 episode keys and 136,188 frame-query rows. This relocation does not claim
+that the external released checkpoint's unpublished training history is fully
+audited; see
+`results/audits/refer_bdd_pretrained_leakage_audit.json`.

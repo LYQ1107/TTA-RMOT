@@ -1,0 +1,54 @@
+{
+  "format": "refer-bdd-pretrained-leakage-audit-v1",
+  "status": "PASS_WITH_EXTERNAL_CHECKPOINT_PROVENANCE_CAVEAT",
+  "project": "TTA-RMOT",
+  "experiment": "Refer-KITTI-V2-to-Refer-BDD-source-free-online-TTA",
+  "source": {
+    "dataset": "Refer-KITTI-V2",
+    "checkpoint_path": "/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth",
+    "checkpoint_sha256": "4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b",
+    "official_release_url": "https://github.com/zyn213/TempRMOT/releases/download/v1.0/checkpoint_rk2.pth",
+    "source_code_commit": "6a65640d849fdee4a32bb055945ee34c3b0edeb1",
+    "external_training_data_independently_audited": false
+  },
+  "target": {
+    "dataset": "Refer-BDD",
+    "asset_root": "/data2/user/TTA-RMOT/data/ReferBDD",
+    "videos": 8,
+    "expressions": 673,
+    "frame_query_rows": 136188,
+    "seqmap_sha256": "9cb1ba2a8dc145bfa84612dbb5a7f04948745b5a71dfa191a449a9ecdb64bdf4",
+    "image_archive_sha256": "7af91415c71a8c1eb802e2b9295e86514195f745fb0b4f98af89b69140830759",
+    "label_archive_sha256": "288b402c6180a96ac8b1c2653eda5b1c6f6e093651bf32ebb7620a11aa7195f6"
+  },
+  "structural_isolation": {
+    "source_target_dataset_overlap": "NONE_BY_DATASET_DEFINITION",
+    "target_supervised_training": false,
+    "runtime_manifest": "/data2/user/TTA-RMOT/results/manifests/refer_bdd_runtime_manifest.jsonl",
+    "runtime_manifest_contains_gt": false,
+    "runtime_forbidden_fields_found": [],
+    "labels_read_by_online_runner": false,
+    "future_frames_used": false,
+    "evaluation_manifest_opened": false,
+    "gt_materialized_only_after_prediction_sealed": true,
+    "episode_reset": "dataset/video/expression"
+  },
+  "sealed_result": {
+    "prediction_status": "PREDICTION_COMPLETE",
+    "evaluation_status": "EVALUATION_COMPLETE",
+    "methods": ["FROZEN", "ENTROPY_HEAD", "PROBE_ST", "PROBE_CACHE", "QCS_TTA", "NO_STATE"],
+    "run_root": "/data3/user/TTA-RMOT-runs/refer_bdd_full_qcs_20261020",
+    "copied_from_historical_root": "/data2/user/LocateMOT/results/runs/refer_bdd_full_qcs_20261020",
+    "run_metadata_byte_identical_after_copy": true,
+    "evaluation_byte_identical_after_copy": true,
+    "episode_set_matches_current_manifest": true,
+    "current_manifest_rows_match_sealed_run": true,
+    "historical_run_metadata_sha256": "163d7a2f1b7ea8979201b06ae2907d61afc651c4f755f9e5b1903dc63348de36",
+    "evaluation_sha256": "81d9af927d0116794a9f4a6a4903a8a47d45ab16b2828c2f9c58b82c1e83dc6f"
+  },
+  "interpretation": {
+    "protocol_leakage": "No GT/future/evaluator leakage was found in the online runner or current runtime manifest.",
+    "checkpoint_caveat": "The released checkpoint is external. Its publisher's complete training-data history cannot be independently audited here, so this result is not an absolute proof that the checkpoint never saw Refer-BDD.",
+    "final_no_leakage_requirement": "For an independently auditable no-leakage claim, use a checkpoint retrained under the registered Refer-KITTI-V2 source split, then run the same sealed Refer-BDD protocol."
+  }
+}

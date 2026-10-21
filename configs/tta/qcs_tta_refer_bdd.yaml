@@ -12,7 +12,7 @@ model:
   target_domain: refer_bdd
   baseline_checkpoint_name: checkpoint_rk2.pth
   source_root: /data2/user/reference_envs/temprmot/source
-  checkpoint: /data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth
+  checkpoint: /data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth
   text_root: /data2/user/reference_envs/temprmot/roberta-base
   freeze_backbone: true
   freeze_text_encoder: true
@@ -22,13 +22,14 @@ model:
 data:
   adapter: refer_bdd
   dataset: refer_bdd
-  data_root: /data2/user/LocateMOT/data
+  data_root: /data2/user/TTA-RMOT/data
   runtime_manifest: results/manifests/refer_bdd_runtime_manifest.jsonl
   evaluation_manifest: results/manifests/refer_bdd_evaluation_manifest.jsonl
   image_root: data/ReferBDD/refer-bdd/images/track/train
   expression_root: data/ReferBDD/refer-bdd/expressions
   label_root: data/ReferBDD/label_with_ids
-  seqmap_file: /data2/user/LocateMOT/data/downloads/EchoTrack/assets/seqmap_bdd.txt
+  archive_root: data/downloads/ReferBDD
+  seqmap_file: data/downloads/EchoTrack/assets/seqmap_bdd.txt
   query_text_source: sentence
   # EchoTrack writes JSON frame keys directly; BDD labels are normalized
   # top-left xywh (see inference_bdd.py::write_gt).
