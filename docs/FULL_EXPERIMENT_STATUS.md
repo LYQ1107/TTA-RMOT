@@ -23,7 +23,12 @@ In progress / pending evidence:
   validated full-training checkpoint.
 - Full A0/A1/A2/A3 independent-TTA inference and official metrics are pending
   the same checkpoint.
-- FlexHook reproduction has not started; it is a later protocol stage.
+- FlexHook's external Refer-KITTI-V2 interface has been prepared and audited
+  (`labels.json`, 862 official test GT templates, and symlinked images). The
+  pinned FlexHook split is 16 train videos and differs from TempRMOT's 17-video
+  source split. The audit discloses 181 expression/frame/object references for
+  which the raw per-frame box is absent, matching the pinned evaluator's skip
+  behavior; FlexHook model training/reproduction has not started.
 
 No `TRAINING_COMPLETE`, `REPRODUCED`, or full benchmark claim is made by this
 file. Pilot numbers in older `results/runs/` directories remain historical

@@ -1509,3 +1509,17 @@ it was corrected to `xywh_topleft`, the full manifest was regenerated, and the
 audit was rerun successfully with the official time-axis, pairing, symlink,
 and no-GT checks. No metric or training result based on the stale metadata is
 retained or reported.
+
+2026-10-21 — FlexHook official data interface preparation. The pinned
+FlexHook `kitti-2` loader was audited separately from TempRMOT: it consumes
+`labels.json` with normalized top-left boxes and frame-level `expression_raw`,
+and evaluates the 16-video train / 4-video test split recorded in its own
+`data/utils.py`. A converter now symlinks all 21 source image videos, joins
+the official expression JSON with the raw `labels_with_ids`, and writes 862
+test GT templates in external `/data3/user/TTA-RMOT-assets` storage. The
+conversion found 181 expression/frame/object references whose raw per-frame
+box is absent; these are counted and skipped exactly as the pinned TempRMOT
+GT writer does, never filled with synthetic boxes. Audit receipt:
+`results/audits/flexhook_refer_kitti_v2_audit.json`. FlexHook model training
+and inference remain pending; this data preparation does not count as a
+reproduction result.
