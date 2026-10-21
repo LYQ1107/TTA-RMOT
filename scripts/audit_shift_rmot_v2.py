@@ -86,6 +86,9 @@ def main() -> int:
         raise AssertionError("image roots contain materialized entries instead of symlinks")
 
     base_by_episode = {(str(row["video_id"]), str(row["expression_id"])): row for row in base_episodes}
+    label_formats = {str(row.get("label_format", "")) for row in base_episodes}
+    if label_formats != {"xywh_topleft"}:
+        raise AssertionError(f"unexpected label coordinate format: {sorted(label_formats)}")
     target_episodes = {
         (str(row["video_id"]), str(row["expression_id"])): row
         for row in base_episodes if row.get("official_test_expression")
@@ -194,6 +197,7 @@ def main() -> int:
         },
         "raw_image_copy_check": {"passed": True, "image_root_count": len(image_roots),
                                   "unique_source_images": len(image_source_paths)},
+        "label_coordinate_format": "normalized_x1_y1_w_h_as_used_by_official_TempRMOT_loader",
         "paired_condition_checks": pair_checks,
         "language_coverage": metadata["language_variant_coverage"],
         "target_set_statistics": {

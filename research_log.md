@@ -1500,3 +1500,12 @@ hard-coded four-frame setting. The full 60-epoch official Refer-KITTI-V2
 TempRMOT source run was launched on the selected free GPU 7; completion is
 pending the independent checkpoint/optimizer/epoch audit. No full metric or
 reproduction claim is made yet.
+
+2026-10-21 — Official label-coordinate audit correction before metrics. A
+cross-check against the pinned TempRMOT `datasets/refer_kitti.py` loader found
+that Refer-KITTI KITTI label files are normalized top-left `x1,y1,w,h`, not
+`cx,cy,w,h`. The first v2 manifest metadata had recorded the wrong convention;
+it was corrected to `xywh_topleft`, the full manifest was regenerated, and the
+audit was rerun successfully with the official time-axis, pairing, symlink,
+and no-GT checks. No metric or training result based on the stale metadata is
+retained or reported.

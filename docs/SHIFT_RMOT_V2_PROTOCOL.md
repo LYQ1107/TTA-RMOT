@@ -50,6 +50,11 @@ A2/A3 share query text. Every condition is reset at the
 `video/expression/condition` boundary, and adaptation is predict-then-observe-
 then-update with no future-frame access.
 
+The manifest label metadata is `xywh_topleft`: normalized top-left `x1, y1,
+w, h`, matching the pinned official TempRMOT KITTI loader. This metadata is
+used only by the post-hoc evaluator; the runtime compact manifest contains no
+label or expression paths.
+
 ## Disclosed limitation
 
 The raw target expression set has two selected same-label natural-language

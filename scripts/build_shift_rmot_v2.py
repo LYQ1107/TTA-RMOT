@@ -307,7 +307,7 @@ def main() -> int:
                 "evaluation_frame_count": len(record["evaluation_indices"]),
                 "image_root": str(record["image_root"]),
                 "image_source_root": str(record["image_source_root"]),
-                "image_suffix": record["image_suffix"], "label_format": "cxcywh",
+                "image_suffix": record["image_suffix"], "label_format": "xywh_topleft",
                 "trackeval_frame_offset": 1, "split": split,
                 "official_source_train_video": video in train_videos,
                 "official_test_expression": is_official_test_expression,
@@ -368,7 +368,7 @@ def main() -> int:
                 "visual_shift": visual_id, "visual_severity": severity,
                 "shift_seed_basis": visual_basis,
                 "expression_path": str(record["expression_path"]), "label_root": str(record["label_root"]),
-                "label_format": "cxcywh", "trackeval_frame_offset": 1,
+                "label_format": "xywh_topleft", "trackeval_frame_offset": 1,
                 "split": "target_test_expression", "history_overlap_status": "official_v2_test_seqmap",
             }
             if visual_id == "identity":
