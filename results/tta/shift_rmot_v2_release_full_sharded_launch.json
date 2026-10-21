@@ -1,6 +1,6 @@
 {
   "format": "shift-rmot-v2-tta-sharded-launch-v1",
-  "status": "RUNNING",
+  "status": "STOPPED_BY_RESOURCE_CAP",
   "project": "TTA-RMOT",
   "dataset": "ShiftRMOT-v2",
   "conditions_expected": 22914,
@@ -35,5 +35,9 @@
     }
   ],
   "metric_status": "PENDING_FULL_PREDICTIONS_AND_POSTHOC_EVALUATION",
+  "completed_shards": 0,
+  "partial_trace_retained": true,
+  "stop_reason": "User-imposed maximum of four physical GPUs; this auxiliary four-shard line was stopped to leave the source-training and official-inference main lines within the cap.",
+  "metric_acceptance": "NO_METRICS_ACCEPTED_FROM_PARTIAL_SHARDS",
   "interpretation_note": "This released-weight line is a comparison baseline. It is not the final no-leakage claim; that claim requires the separately retrained source checkpoint and the same strict target protocol."
 }

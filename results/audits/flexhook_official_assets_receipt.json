@@ -1,0 +1,46 @@
+{
+  "format": "ttarmot-flexhook-official-assets-v2",
+  "status": "OFFICIAL_ASSETS_READY_GT_FREE_SMOKE_PASS",
+  "project": "TTA-RMOT",
+  "official_repository": "/data2/user/reference_repos/FlexHook",
+  "prepared_data_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2",
+  "runtime_data_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2-runtime",
+  "runtime_tracker_root": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2-runtime",
+  "checkpoint": {
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "size_bytes": 995768450,
+    "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "role": "official FlexHook Refer-KITTI-V2 released checkpoint"
+  },
+  "visual_pretrained": {
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/pretrained/swin_rope_mixed_tiny_patch4_window7_224/pytorch_model.bin",
+    "size_bytes": 114039533,
+    "sha256": "bcff3c549ef03926b7a795eca16a5781c6f5102ff6421bb8024f319cae962388"
+  },
+  "text_pretrained": {
+    "path": "/data2/user/reference_envs/temprmot/roberta-base",
+    "role": "shared local RoBERTa base; no target labels"
+  },
+  "tracker_archive": {
+    "source_files": 20,
+    "source_bytes": 1371206,
+    "runtime_predict_files": 8,
+    "runtime_gt_files": 0,
+    "runtime_metadata": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2-runtime/ttarmot_runtime_metadata.json"
+  },
+  "runtime_isolation": {
+    "runtime_labels_json_is_empty": true,
+    "runtime_expression_label_fields_removed": true,
+    "runtime_gt_template_exposed": false,
+    "prediction_sealed_before_evaluator_gt": true
+  },
+  "smoke": {
+    "receipt": "/data3/user/TTA-RMOT-runs/flexhook_official_smoke_0013_gpu3/run_receipt.json",
+    "video": "0013",
+    "processed_batches": 1,
+    "checkpoint_load": "ALL_KEYS_MATCHED",
+    "peak_memory_allocated_bytes": 1913974784,
+    "status": "SMOKE_COMPLETE"
+  },
+  "full_reproduction_status": "PENDING_FULL_SINGLE_CARD_INFERENCE_AND_TRACKEVAL"
+}

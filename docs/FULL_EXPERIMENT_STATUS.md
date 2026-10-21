@@ -41,7 +41,13 @@ In progress / pending evidence:
   pinned FlexHook split is 16 train videos and differs from TempRMOT's 17-video
   source split. The audit discloses 181 expression/frame/object references for
   which the raw per-frame box is absent, matching the pinned evaluator's skip
-  behavior; FlexHook model training/reproduction has not started.
+  behavior. The official released checkpoint, Swin/RoBERTa assets and
+  Temp-NeuralSORT predictions are now present in external asset storage. A
+  separate GT-free runtime view strips target labels from `labels.json` and
+  expression JSONs and removes tracker `gt.txt`; the official checkpoint
+  loaded with all keys matched and a one-batch single-card smoke passed on
+  video 0013. The complete single-card inference and TrackEval run is still
+  pending. This smoke is not a full reproduction result.
 
 No `TRAINING_COMPLETE`, `REPRODUCED`, or full benchmark claim is made by this
 file. Pilot numbers in older `results/runs/` directories remain historical
