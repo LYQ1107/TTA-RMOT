@@ -26,7 +26,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from rmot_tta.data.shift_loader import load_compact_evaluation_rows  # noqa: E402
+from rmot_tta.data.shift_loader import (  # noqa: E402
+    iter_compact_evaluation_groups,
+    load_compact_evaluation_rows,
+)
 
 
 def sha256(path: Path) -> str:
@@ -70,11 +73,19 @@ def _expression_ids(path: Path) -> dict[str, set[int]]:
 
 
 def _label_rows(label_path: Path, image_path: Path, ids: set[int], frame_index: int,
-                label_format: str = "cxcywh", frame_offset: int = 1) -> list[str]:
-    image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
-    if image is None:
-        raise FileNotFoundError(image_path)
-    height, width = image.shape[:2]
+                label_format: str = "cxcywh", frame_offset: int = 1,
+                image_shapes: dict[str, tuple[int, int]] | None = None,
+                label_cache: dict[tuple[str, str], dict[int, tuple[float, float, float, float]]] | None = None) -> list[str]:
+    image_key = str(image_path)
+    if image_shapes is not None and image_key in image_shapes:
+        height, width = image_shapes[image_key]
+    else:
+        image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+        if image is None:
+            raise FileNotFoundError(image_path)
+        height, width = image.shape[:2]
+        if image_shapes is not None:
+            image_shapes[image_key] = (height, width)
     # The official label package omits files for frames with no tracked
     # objects.  The expression JSON is the authoritative target-id set; when
     # it asks for no IDs, an absent file is therefore an empty GT frame.  A
@@ -83,36 +94,49 @@ def _label_rows(label_path: Path, image_path: Path, ids: set[int], frame_index: 
         if ids:
             raise FileNotFoundError(label_path)
         return []
+    cache_key = (str(label_path), label_format)
+    parsed = label_cache.get(cache_key) if label_cache is not None else None
+    if parsed is None:
+        parsed = {}
+        content = label_path.read_text(encoding="utf-8").splitlines()
+        for raw in content:
+            fields = raw.split()
+            if len(fields) < 6:
+                continue
+            track_id = int(float(fields[1]))
+            x, y, box_w, box_h = [float(value) for value in fields[2:6]]
+            if label_format in {"xywh", "xywh_topleft", "x1y1wh"}:
+                pixel_x = x * width
+                pixel_y = y * height
+            elif label_format in {"cxcywh", "center_xywh"}:
+                pixel_x = (x - box_w / 2.0) * width
+                pixel_y = (y - box_h / 2.0) * height
+            else:
+                raise ValueError(f"unsupported label format: {label_format}")
+            parsed.setdefault(track_id, (pixel_x, pixel_y, box_w * width, box_h * height))
+        if label_cache is not None:
+            label_cache[cache_key] = parsed
     lines: list[str] = []
-    content = label_path.read_text(encoding="utf-8").splitlines()
-    for raw in content:
-        fields = raw.split()
-        if len(fields) < 6:
+    for track_id in sorted(ids):
+        if track_id not in parsed:
             continue
-        track_id = int(float(fields[1]))
-        if track_id not in ids:
-            continue
-        x, y, box_w, box_h = [float(value) for value in fields[2:6]]
-        if label_format in {"xywh", "xywh_topleft", "x1y1wh"}:
-            pixel_x = x * width
-            pixel_y = y * height
-        elif label_format in {"cxcywh", "center_xywh"}:
-            pixel_x = (x - box_w / 2.0) * width
-            pixel_y = (y - box_h / 2.0) * height
-        else:
-            raise ValueError(f"unsupported label format: {label_format}")
+        pixel_x, pixel_y, pixel_w, pixel_h = parsed[track_id]
         lines.append(
-            f"{int(frame_index) + int(frame_offset)},{track_id},{pixel_x:.6f},{pixel_y:.6f},"
-            f"{box_w * width:.6f},{box_h * height:.6f},1,1,1\n"
+            f"{int(frame_index) + int(frame_offset)},{track_id},{pixel_x:.6f},{pixel_y:.6f},{pixel_w:.6f},{pixel_h:.6f},1,1,1\n"
         )
     return lines
 
 
-def materialize_ground_truth(rows: dict[tuple[str, str], list[dict[str, Any]]], trackeval_root: Path) -> list[str]:
+def materialize_ground_truth(rows, trackeval_root: Path) -> list[str]:
     """Write official RMOT-format GT files and return the seqmap entries."""
     sequence_names: list[str] = []
     sequence_info: dict[str, int] = {}
-    for (video_id, expression_id), expression_rows in sorted(rows.items()):
+    expression_cache: dict[str, dict[str, set[int]]] = {}
+    image_shapes: dict[str, tuple[int, int]] = {}
+    label_cache: dict[tuple[str, str], dict[int, tuple[float, float, float, float]]] = {}
+    canonical_gt: dict[tuple[str, str], Path] = {}
+    row_groups = rows.items() if isinstance(rows, dict) else rows
+    for (video_id, expression_id), expression_rows in row_groups:
         sequence_name = f"{video_id}+{expression_id}"
         sequence_names.append(sequence_name)
         frame_offset = int(expression_rows[0].get("trackeval_frame_offset", 1))
@@ -123,19 +147,32 @@ def materialize_ground_truth(rows: dict[tuple[str, str], list[dict[str, Any]]], 
             int(row["frame_index"]) + frame_offset for row in expression_rows
         )
         expression_path = Path(expression_rows[0]["expression_path"])
-        labels_by_frame = _expression_ids(expression_path)
+        expression_key = str(expression_path)
+        labels_by_frame = expression_cache.get(expression_key)
+        if labels_by_frame is None:
+            labels_by_frame = _expression_ids(expression_path)
+            expression_cache[expression_key] = labels_by_frame
         output = trackeval_root / video_id / expression_id / "gt.txt"
         output.parent.mkdir(parents=True, exist_ok=True)
-        rendered: list[str] = []
-        for row in expression_rows:
-            ids = labels_by_frame.get(str(int(row["frame_index"])), set())
-            if ids:
-                rendered.extend(_label_rows(
-                    Path(row["label_path"]), Path(row["image_path"]), ids, int(row["frame_index"]),
-                    label_format=str(row.get("label_format", "cxcywh")),
-                    frame_offset=int(row.get("trackeval_frame_offset", 1)),
-                ))
-        output.write_text("".join(rendered), encoding="utf-8")
+        base_key = (str(video_id), str(expression_rows[0].get("base_expression_id", expression_id)))
+        canonical = canonical_gt.get(base_key)
+        if canonical is None:
+            rendered: list[str] = []
+            for row in expression_rows:
+                ids = labels_by_frame.get(str(int(row["frame_index"])), set())
+                if ids:
+                    rendered.extend(_label_rows(
+                        Path(row["label_path"]), Path(row["image_path"]), ids, int(row["frame_index"]),
+                        label_format=str(row.get("label_format", "cxcywh")),
+                        frame_offset=int(row.get("trackeval_frame_offset", 1)),
+                        image_shapes=image_shapes, label_cache=label_cache,
+                    ))
+            output.write_text("".join(rendered), encoding="utf-8")
+            canonical_gt[base_key] = output
+        else:
+            if output.exists() or output.is_symlink():
+                output.unlink()
+            output.symlink_to(canonical.resolve())
         # The pinned TempRMOT TrackEval fork falls back to a hard-coded KITTI
         # image directory unless SEQ_INFO is supplied.  Its sequence length is
         # all we need here because the GT and predictions are already
@@ -225,7 +262,11 @@ def main() -> int:
         recorded_episodes = json.loads(metadata_path.read_text(encoding="utf-8")).get("episodes", [])
     episode_values = args.episodes if args.episodes is not None else recorded_episodes
     episodes = {str(value).replace("+", "/") for value in episode_values}
-    rows = _read_rows(manifest, episodes=episodes or None)
+    compact = bool(config.get("data", {}).get("compact_shift_manifest", False))
+    if compact:
+        rows = iter_compact_evaluation_groups(manifest, episodes=episodes or None)
+    else:
+        rows = _read_rows(manifest, episodes=episodes or None)
     methods = args.methods or list(config.get("methods", []))
     prediction_root = run_dir / "predictions"
     trackeval_root = run_dir / "trackeval_data"

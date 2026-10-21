@@ -25,7 +25,11 @@ from rmot_tta.adaptation.independent import (
     is_independent_method,
 )
 from rmot_tta.baseline.temprmot_wrapper import TempRMOTConfig, TempRMOTWrapper
-from rmot_tta.data.shift_loader import load_compact_runtime_rows, load_runtime_image
+from rmot_tta.data.shift_loader import (
+    iter_compact_runtime_groups,
+    load_compact_runtime_rows,
+    load_runtime_image,
+)
 from rmot_tta.evidence.records import CandidateEvidence, EvidenceLabel
 from rmot_tta.evidence.selector import select_candidate_evidence
 from rmot_tta.probes.alignment import align_probe_results
@@ -211,6 +215,13 @@ class OnlineEpisodeRunner:
             keys = keys[: self.max_expressions]
         return {key: grouped[key] for key in keys}
 
+    def _iter_rows(self):
+        """Stream compact conditions so the full benchmark is not row-materialized."""
+        if bool(self.config.get("data", {}).get("compact_shift_manifest", False)):
+            yield from iter_compact_runtime_groups(self.runtime_manifest, episodes=self.episodes or None)
+            return
+        yield from self._load_rows().items()
+
     def _make_wrapper(self) -> TempRMOTWrapper:
         return TempRMOTWrapper(TempRMOTConfig(
             source_root=Path(self.model_config["source_root"]),
@@ -391,7 +402,6 @@ class OnlineEpisodeRunner:
         }
 
     def run(self) -> dict[str, Any]:
-        grouped = self._load_rows()
         self.output_dir.mkdir(parents=True, exist_ok=True)
         prediction_root = self.output_dir / "predictions"
         if prediction_root.exists() and any(prediction_root.rglob("predict.txt")):
@@ -424,12 +434,14 @@ class OnlineEpisodeRunner:
         probe_calls_total = 0
         expression_count = 0
         frame_count = 0
+        episode_names: list[str] = []
         with (trace_path.open("a", encoding="utf-8") as trace,
               candidate_diagnostics_path.open("a", encoding="utf-8") as candidate_diagnostics):
-            for (video_id, expression_id), rows in grouped.items():
+            for (video_id, expression_id), rows in self._iter_rows():
                 expression_count += 1
                 if expression_count > self.max_expressions > 0:
                     break
+                episode_names.append(f"{video_id}/{expression_id}")
                 self.wrapper.reset_runtime()
                 sentence = str(rows[0]["query_text"])
                 if any(str(row["query_text"]) != sentence for row in rows):
@@ -589,7 +601,7 @@ class OnlineEpisodeRunner:
             "source": self.wrapper.provenance if self.wrapper else {}, "gpu_uuid": _gpu_uuid(),
             "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"), "methods": self.methods,
             "method_implementations": {method: self._implementation(method) for method in self.methods},
-            "episodes": [f"{video}/{expression}" for video, expression in grouped],
+            "episodes": episode_names,
             "video_expression_count": expression_count, "frame_query_count": frame_count,
             "wall_seconds": time.perf_counter() - started_all, "shared_source_forward": True,
             "gt_used_by_runner": False, "future_frames_used": False, "evaluation_manifest_opened": False,

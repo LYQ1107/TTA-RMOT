@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 from collections import defaultdict
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
 import cv2
 
@@ -87,27 +87,45 @@ def _group(rows: list[dict[str, Any]]) -> dict[tuple[str, str], list[dict[str, A
     return dict(grouped)
 
 
-def load_compact_runtime_rows(path: Path, *, episodes: set[str] | None = None) -> dict[tuple[str, str], list[dict[str, Any]]]:
-    """Expand only selected compact conditions and validate image paths."""
-    rows: list[dict[str, Any]] = []
+def iter_compact_runtime_groups(path: Path, *, episodes: set[str] | None = None) -> Iterator[tuple[tuple[str, str], list[dict[str, Any]]]]:
+    """Yield one compact condition at a time for large online runs."""
+    verified_images: set[str] = set()
     for condition in _read_compact(path):
         if not _matches(condition, episodes):
             continue
-        for row in _expand(condition, evaluator=False):
-            if not Path(row["image_path"]).is_file():
+        rows = _expand(condition, evaluator=False)
+        for row in rows:
+            image_path = str(row["image_path"])
+            if image_path in verified_images:
+                continue
+            if not Path(image_path).is_file():
                 raise FileNotFoundError(row["image_path"])
-            rows.append(row)
-    return _group(rows)
+            verified_images.add(image_path)
+        yield (str(condition["video_id"]), str(condition["runtime_expression_id"])), rows
+
+
+def iter_compact_evaluation_groups(path: Path, *, episodes: set[str] | None = None) -> Iterator[tuple[tuple[str, str], list[dict[str, Any]]]]:
+    """Yield evaluator-only rows one compact condition at a time."""
+    for condition in _read_compact(path):
+        if not _matches(condition, episodes):
+            continue
+        yield (str(condition["video_id"]), str(condition["runtime_expression_id"])), _expand(condition, evaluator=True)
+
+
+def load_compact_runtime_rows(path: Path, *, episodes: set[str] | None = None) -> dict[tuple[str, str], list[dict[str, Any]]]:
+    """Expand only selected compact conditions and validate image paths."""
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for key, rows in iter_compact_runtime_groups(path, episodes=episodes):
+        grouped[key] = rows
+    return grouped
 
 
 def load_compact_evaluation_rows(path: Path, *, episodes: set[str] | None = None) -> dict[tuple[str, str], list[dict[str, Any]]]:
     """Expand evaluator-only rows after prediction is complete."""
-    rows: list[dict[str, Any]] = []
-    for condition in _read_compact(path):
-        if not _matches(condition, episodes):
-            continue
-        rows.extend(_expand(condition, evaluator=True))
-    return _group(rows)
+    grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for key, rows in iter_compact_evaluation_groups(path, episodes=episodes):
+        grouped[key] = rows
+    return grouped
 
 
 def load_runtime_image(row: dict[str, Any]):
