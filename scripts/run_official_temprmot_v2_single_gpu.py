@@ -29,6 +29,17 @@ def _add_source_paths(source_root: Path) -> None:
     for path in paths:
         if str(path) not in sys.path:
             sys.path.insert(0, str(path))
+    # This wrapper adds the compatibility path after Python startup, so the
+    # interpreter will not have auto-imported sitecustomize. Import the
+    # project file by absolute path because the shared runtime has its own
+    # unrelated /usr/lib/python*/sitecustomize.py.
+    import importlib.util
+    compat_file = ROOT / "tools" / "temprmot_compat" / "sitecustomize.py"
+    compat_spec = importlib.util.spec_from_file_location("_ttarmot_sitecustomize", compat_file)
+    if compat_spec is None or compat_spec.loader is None:
+        raise ImportError(f"cannot load TempRMOT compatibility shim: {compat_file}")
+    compat_module = importlib.util.module_from_spec(compat_spec)
+    compat_spec.loader.exec_module(compat_module)
 
 
 def main() -> int:
@@ -65,8 +76,9 @@ def main() -> int:
         "--rmot_path", str(args.rmot_path.resolve()), "--resume", str(args.checkpoint.resolve()),
         "--output_dir", str(args.output_dir.resolve()), "--exp_name", "official_seqmap",
         "--query_interaction_layer", "QIM", "--update_query_pos", "--merger_dropout", "0",
-        "--dropout", "0", "--random_drop", "0.1", "--fp_ratio", "0.3", "--hist_len", "5",
-        "--use_checkpoint", "--device", "cuda",
+        "--dropout", "0", "--random_drop", "0.1", "--fp_ratio", "0.3",
+        "--sampler_steps", "50", "90", "150", "--sampler_lengths", "2", "3", "4", "5",
+        "--extra_track_attn", "--hist_len", "8", "--use_checkpoint", "--device", "cuda",
     ])
     args.output_dir.resolve().mkdir(parents=True, exist_ok=True)
     model, _criterion, _postprocessors = build_model(source_args)

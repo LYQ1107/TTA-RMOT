@@ -1,0 +1,12 @@
+{
+  "format": "temprmot-official-inference-failure-v1",
+  "status": "FAILED_DURING_MODEL_BUILD",
+  "run_root": "/data3/user/TTA-RMOT-runs/official_temprmot_v2_release_inference_gpu3",
+  "physical_gpu": 3,
+  "checkpoint": "/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth",
+  "observed_exception": "TypeError: 'NoneType' object is not iterable",
+  "first_actionable_cause": "The wrapper omitted sampler_lengths, but the pinned TempRMOT build computes max(args.sampler_lengths).",
+  "protocol_reference": "/data2/user/reference_repos/TempRMOT/configs/temp_rmot_test.sh",
+  "protocol_effect": "No prediction, metric, or completion claim is accepted from this attempt.",
+  "minimal_fix": "Pass the official test sampler_steps 50 90 150, sampler_lengths 2 3 4 5, hist_len 8, and extra_track_attn before rerunning in a separate output root."
+}

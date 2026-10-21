@@ -1,0 +1,11 @@
+{
+  "format": "temprmot-official-inference-failure-v1",
+  "status": "FAILED_ON_FIRST_SEQUENCE",
+  "run_root": "/data3/user/TTA-RMOT-runs/official_temprmot_v2_release_inference_gpu3_testcfg",
+  "physical_gpu": 3,
+  "checkpoint": "/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth",
+  "observed_exception": "AttributeError: RobertaTokenizerFast has no attribute batch_encode_plus",
+  "first_actionable_cause": "The inference wrapper inserted the project compatibility path after interpreter startup but did not explicitly import its sitecustomize shim, so Transformers 5.2.0 exposed no legacy tokenizer alias.",
+  "protocol_effect": "No complete prediction or metric claim is accepted from this attempt.",
+  "minimal_fix": "Explicitly import sitecustomize after adding the project compatibility path, then rerun in a separate output root."
+}

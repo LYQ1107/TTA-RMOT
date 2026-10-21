@@ -1,5 +1,5 @@
-Warning: truncated output (original token count: 45363)
-Total output lines: 1569
+Warning: truncated output (original token count: 45669)
+Total output lines: 1587
 
 # LocateMOT Research Log
 
@@ -840,11 +840,7 @@ Concise experimental log (latest first).
   KITTI legal development portability passes (V1/V2 Top150 @.50
   `0.986592/0.958739`), while BDD100K, DanceTrack, MOT17, MOT20, TAO, and
   C-TAO are missing locally. Candidate-cache SHA is `not built`.
-- Training command: not launched; …15363 tokens truncated…remain unchanged.
-
-Actual bulk native worker63758 exit0: unchanged two-source smoke rows/GT hit counts and resume metadata are exact,300 candidates per frame, one backbone per frame,76 head calls/68,400 integer class labels; native/bulk CLI wall68.842/51.966s includes initialization and two frames, not formal throughput. After verified controlled interruption,95952 returned terminal exit1 (expected interrupted TAO command) and all four gated followers returned HELD without tracking launch. Every existing exact TAO prefix parsed successfully:440 completed frames preserved across initialized shards; shard1 had not yet written metadata or rows. All76,068 ordinary frames and epoch1 original1,250 updates retained. New supervisor57530 launches perception1313649/ordinary1313650/MOT-only1313651/joint1313652/finalization1313653. Full evaluation skips complete ordinary measurements and resumes unchanged eight TAO partitions with explicit GPU binding plus bulk integer metadata; labels alone temporarily use CPU for native name construction and return to the original device before NMS. Both flags preserve full1,203 vocabulary,38 native chunks, FP32, backbone counts, GT scope and all gates.
-
-Actual epoch1 ordinary summary: BDD Top150.936574, Dance.999036, MOT17.878066, MOT20 Top150.819136/Top300.973281, original legal KITTI.946394. All five full ordinary streams are measured; MOT20 satisfies the registered Top300 crowded threshold but formal registration/selection still waits complete TAO and U1 retention. No selected foundation, candidate cache, tracking benchmark or U3 readiness is claimed.
+- Training command: not launched; …15669 tokens truncated…mary: BDD Top150.936574, Dance.999036, MOT17.878066, MOT20 Top150.819136/Top300.973281, original legal KITTI.946394. All five full ordinary streams are measured; MOT20 satisfies the registered Top300 crowded threshold but formal registration/selection still waits complete TAO and U1 retention. No selected foundation, candidate cache, tracking benchmark or U3 readiness is claimed.
 
 ### 2026-10-13 — U2 perception epoch 1 selected
 
@@ -1370,3 +1366,21 @@ loads as epoch 49 with 969 model keys. It is being used only for an official
 Frozen/source-free-TTA comparison and is not substituted for the independent
 no-leakage source retraining protocol. Receipt:
 `results/source_training/temprmot_refer_kitti_v2_official_checkpoint_provenance.json`.
+
+2026-10-21 — First released-checkpoint inference launch failed during model
+construction because the new single-GPU wrapper omitted the official test
+sampler arguments; the pinned source calls `max(args.sampler_lengths)` and
+therefore raised on `None`. No prediction or metric was produced. The wrapper
+is corrected to match the pinned `configs/temp_rmot_test.sh` settings
+(`sampler_steps=50,90,150`, `sampler_lengths=2,3,4,5`, `hist_len=8`, and
+`extra_track_attn`), and the retry will use a separate output root. Receipt:
+`results/source_training/temprmot_official_inference_gpu3_sampler_args_failure.json`.
+
+2026-10-21 — The corrected official-checkpoint inference reached the first
+ 297-frame sequence but failed on its first text-encoding call because the
+ wrapper's runtime path insertion did not trigger Python's startup
+ `sitecustomize` import. The same Transformers 5.2 compatibility alias works
+ in the training launcher, which sets `PYTHONPATH` before interpreter startup.
+ The wrapper now explicitly imports `sitecustomize` after path setup; no
+ complete prediction or metric is accepted from this run. Receipt:
+`results/source_training/temprmot_official_inference_gpu3_testcfg_transformers5_failure.json`.
