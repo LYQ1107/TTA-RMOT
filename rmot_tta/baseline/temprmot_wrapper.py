@@ -107,6 +107,9 @@ class TempRMOTWrapper:
         for path in (shim, source_site, source_ops):
             if path not in sys.path:
                 sys.path.insert(0, path)
+        project_compat = str(Path(__file__).resolve().parents[2] / "tools" / "temprmot_compat")
+        if project_compat not in sys.path:
+            sys.path.insert(0, project_compat)
         if source not in sys.path:
             sys.path.insert(0, source)
         main_module = importlib.import_module("main")
@@ -127,7 +130,8 @@ class TempRMOTWrapper:
             "aux_loss": True, "query_interaction_layer": "QIM", "update_query_pos": True,
             "merger_dropout": 0.0, "random_drop": 0.1, "fp_ratio": 0.3,
             "extra_track_attn": False, "sample_mode": "random_interval", "sample_interval": 1,
-            "sampler_steps": [60, 80, 90], "sampler_lengths": [4, 4, 4, 4],
+            "sampler_steps": [60, 80, 90],
+            "sampler_lengths": [self.config.hist_len] * 4,
             "hist_len": self.config.hist_len, "tracking": False, "use_checkpoint": False,
             "memory_bank_type": None, "num_workers": 0, "rmot_path": str(self.config.source_root),
         }
@@ -222,6 +226,12 @@ class TempRMOTWrapper:
         track_ids = track_instances.obj_idxes.detach().clone().long()
         disappear = track_instances.disappear_time.detach().clone().long()
         valid = track_ids >= 0
+        with torch.no_grad():
+            text_features, text_padding_mask, _ = self.model.forward_text([query_text], features.device)
+            text_features = text_features.float()
+            valid_text = (~text_padding_mask).float().unsqueeze(-1)
+            query_embedding = (text_features * valid_text).sum(dim=1) / valid_text.sum(dim=1).clamp_min(1.0)
+            query_embedding = query_embedding.reshape(-1).detach().clone()
         uids = tuple(f"{episode_id}:{expression_id}:{frame_index}:{int(track_id)}:{index}"
                      for index, track_id in enumerate(track_ids.detach().cpu().tolist()))
         snapshot = FrameSnapshot(
@@ -230,6 +240,7 @@ class TempRMOTWrapper:
             features=features, source_logits=source_logits, source_probs=source_probs,
             boxes_xyxy=boxes, objectness=objectness, pred_track_id=track_ids,
             disappear_time=disappear, image_size=(int(h), int(w)), valid_mask=valid,
+            query_embedding=query_embedding,
         )
         head = self.model.STReasoner.track_ref
         recomputed = F.linear(features, head.weight.detach().float(), head.bias.detach().float()).reshape(-1)

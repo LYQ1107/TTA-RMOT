@@ -1464,3 +1464,39 @@ SAR made 2,333 updates but decreased to HOTA 2.8306 and AssA 4.0007. Both
 sealed evaluator outputs and the condition-level tables are retained under
 `results/shift_rmot_pilot/`; the final report records that this is a
 representative pilot rather than an all-4,540-condition claim.
+
+2026-10-21 — ShiftRMOT-Bench-v2 complete Refer-KITTI-V2 data/protocol build.
+The v1 audit confirmed that the runtime frame list was derived from expression
+label keys and that visual seeds depended on expression/condition IDs. The
+resulting risk was false negative frames during causal tracking and unequal
+pixels between A1/A3 paired conditions. The v2 builder now inventories all 21
+videos and 9,758 expressions, records the official train-list and seqmap
+SHA256 values, keeps 8,008 source frames as external symlink targets, and
+creates controlled conditions for all 862 official test expressions. Runtime
+rows use every source-video frame in order; evaluator rows use only the
+expression label keys after prediction. Visual seeds are independent of
+expression and language and follow the registered video/frame/shift/severity/
+global-seed protocol. Natural same-label-map language variants cover 825
+expressions twice, 34 once, and 3 not at all; this gap is disclosed rather
+than filled with unsafe rewrites. The complete manifest has A0/A1/A2/A3
+counts 862/6,896/1,684/13,472. Pairing, no-GT runtime, symlink, target-set,
+and time-axis audits passed; the audit status is
+`PASS_WITH_DISCLOSED_LANGUAGE_COVERAGE_GAP`. Receipts:
+`data/ShiftRMOT-v2/`, `results/audits/shift_rmot_v2_audit.json`,
+`scripts/build_shift_rmot_v2.py`, and `scripts/audit_shift_rmot_v2.py`.
+
+2026-10-21 — Independent v2 TTA implementation and source-training launch.
+The previous v1 protocol labels were not reused as aliases. `TDA_RMOT` is now
+a bounded non-parametric feature/reliability cache; visual, language, fusion,
+and all pairwise/full combinations use separate zero-initialized residual
+adapters over frozen TempRMOT snapshots. The language arm consumes the frozen
+256-D RoBERTa-to-TempRMOT query projection, and the fusion arm includes an
+explicit feature-query cross product and set-separation loss. Synthetic CPU
+regression passed for all seven trainable arms with source-equivalent initial
+logits, nonzero gradient, and parameter movement; TDA cache hits/updates also
+passed. A wrapper sampling-length bug was fixed so inference follows the
+official `hist_len=5` source-training configuration instead of the historical
+hard-coded four-frame setting. The full 60-epoch official Refer-KITTI-V2
+TempRMOT source run was launched on the selected free GPU 7; completion is
+pending the independent checkpoint/optimizer/epoch audit. No full metric or
+reproduction claim is made yet.

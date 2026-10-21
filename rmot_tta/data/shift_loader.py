@@ -36,11 +36,21 @@ def _expand(condition: dict[str, Any], *, evaluator: bool) -> list[dict[str, Any
     rows: list[dict[str, Any]] = []
     image_root = Path(condition["image_root"])
     suffix = str(condition.get("image_suffix", ".png"))
-    for frame_index in condition["frame_indices"]:
+    if evaluator:
+        frame_indices = condition.get("evaluation_frame_indices", condition["frame_indices"])
+        frame_role = "evaluation_label_range"
+    else:
+        frame_indices = condition.get("runtime_frame_indices", condition["frame_indices"])
+        frame_role = "runtime_video_axis"
+    for frame_index in frame_indices:
         frame_index = int(frame_index)
         image_path = image_root / f"{frame_index:06d}{suffix}"
+        seed_basis = str(condition.get("shift_seed_basis", ""))
+        # The frame index is appended at the runtime boundary so visual noise
+        # is independent of expression/language condition IDs.
+        row_seed_basis = f"{seed_basis}|frame={frame_index}"
         row = {
-            "dataset": "shift_rmot_v1",
+            "dataset": str(condition.get("dataset", "shift_rmot_v1")),
             "video_id": str(condition["video_id"]),
             "expression_id": str(condition["runtime_expression_id"]),
             "base_expression_id": str(condition["base_expression_id"]),
@@ -49,11 +59,12 @@ def _expand(condition: dict[str, Any], *, evaluator: bool) -> list[dict[str, Any
             "query_text": str(condition["query_text"]),
             "original_query_text": str(condition["original_query_text"]),
             "frame_index": frame_index,
+            "frame_role": frame_role,
             "trackeval_frame_offset": int(condition.get("trackeval_frame_offset", 1)),
             "image_path": str(image_path),
             "visual_shift": str(condition.get("visual_shift", "identity")),
             "visual_severity": str(condition.get("visual_severity", "identity")),
-            "shift_seed_basis": str(condition.get("shift_seed_basis", "")),
+            "shift_seed_basis": row_seed_basis,
         }
         if evaluator:
             row.update({

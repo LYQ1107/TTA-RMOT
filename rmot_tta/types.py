@@ -32,6 +32,9 @@ class FrameSnapshot:
     valid_mask: torch.Tensor
     timestamp_sec: float | None = None
     metadata: dict[str, Any] = field(default_factory=dict)
+    # Mean pooled, frozen RoBERTa->TempRMOT projection for independent
+    # language/fusion adapters.  It is optional for legacy snapshots/tests.
+    query_embedding: torch.Tensor | None = None
 
     def __post_init__(self) -> None:
         n = len(self.candidate_uid)
@@ -53,6 +56,8 @@ class FrameSnapshot:
             raise TypeError("valid_mask must be bool")
         if len(self.image_size) != 2 or min(self.image_size) <= 0:
             raise ValueError(f"invalid image_size: {self.image_size}")
+        if self.query_embedding is not None and tuple(self.query_embedding.shape) != (256,):
+            raise ValueError(f"query_embedding shape {tuple(self.query_embedding.shape)} != (256,)")
 
     @property
     def count(self) -> int:
@@ -75,6 +80,8 @@ class FrameSnapshot:
             image_size=tuple(self.image_size),
             timestamp_sec=self.timestamp_sec,
             metadata=dict(self.metadata),
+            query_embedding=(self.query_embedding.detach().clone()
+                             if self.query_embedding is not None else None),
             **payload,
         )
 

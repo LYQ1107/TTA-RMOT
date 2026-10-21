@@ -19,6 +19,11 @@ import yaml
 
 from rmot_tta.adaptation.controller import AdaptationController
 from rmot_tta.adaptation.ema_baseline import EmaReferringBaseline
+from rmot_tta.adaptation.independent import (
+    CacheTDARetriever,
+    IndependentAdaptationController,
+    is_independent_method,
+)
 from rmot_tta.baseline.temprmot_wrapper import TempRMOTConfig, TempRMOTWrapper
 from rmot_tta.data.shift_loader import load_compact_runtime_rows, load_runtime_image
 from rmot_tta.evidence.records import CandidateEvidence, EvidenceLabel
@@ -30,15 +35,23 @@ from rmot_tta.runtime.state import RawFrameRing
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PROBE_METHODS = {"PROBE_CACHE", "PROBE_ST", "QCS_TTA", "NO_STATE"}
+PROBE_METHODS = {
+    "PROBE_CACHE", "PROBE_ST", "QCS_TTA", "NO_STATE",
+    "LANGUAGE_TTA", "FUSION_TTA", "VISUAL_LANGUAGE_TTA", "VISUAL_FUSION_TTA",
+    "LANGUAGE_FUSION_TTA", "ALL_TTA",
+}
 METHOD_IMPLEMENTATIONS = {
-    # These names are protocol labels for the first ShiftRMOT release.  They
-    # map to the repository's already-audited adapters and are reported as
-    # inspired/adapted, not as exact reproductions of a different backbone.
-    "TDA_RMOT": "EMA_ST",
-    "SAR_VISUAL_INSPIRED": "ENTROPY_HEAD",
-    "TPT_LANGUAGE_INSPIRED": "QCS_TTA",
-    "TCR_FUSION_INSPIRED": "QCS_TTA",
+    # Full v2 methods resolve to their own implementation classes.  The
+    # historical names below remain loadable only for reproducing old sealed
+    # pilots; they are not used by the independent-method configuration.
+    "TDA_RMOT": "TDA_RMOT",
+    "VISUAL_TTA": "VISUAL_TTA",
+    "LANGUAGE_TTA": "LANGUAGE_TTA",
+    "FUSION_TTA": "FUSION_TTA",
+    "VISUAL_LANGUAGE_TTA": "VISUAL_LANGUAGE_TTA",
+    "VISUAL_FUSION_TTA": "VISUAL_FUSION_TTA",
+    "LANGUAGE_FUSION_TTA": "LANGUAGE_FUSION_TTA",
+    "ALL_TTA": "ALL_TTA",
 }
 
 
@@ -203,10 +216,10 @@ class OnlineEpisodeRunner:
             source_root=Path(self.model_config["source_root"]),
             checkpoint=Path(self.model_config["checkpoint"]),
             text_root=Path(self.model_config["text_root"]),
-            device=str(self.device), hist_len=4,
+            device=str(self.device), hist_len=int(self.model_config.get("hist_len", 4)),
         ))
 
-    def _controllers(self, wrapper: TempRMOTWrapper) -> tuple[dict[str, AdaptationController], dict[str, EmaReferringBaseline]]:
+    def _controllers(self, wrapper: TempRMOTWrapper) -> tuple[dict[str, Any], dict[str, EmaReferringBaseline]]:
         weight, bias = wrapper.source_head
         controllers: dict[str, AdaptationController] = {}
         emas: dict[str, EmaReferringBaseline] = {}
@@ -216,6 +229,27 @@ class OnlineEpisodeRunner:
                 continue
             if implementation == "EMA_ST":
                 emas[method] = EmaReferringBaseline()
+                continue
+            if is_independent_method(implementation):
+                if implementation == "TDA_RMOT":
+                    controllers[method] = CacheTDARetriever(
+                        capacity=int(self.config.get("memory", {}).get("capacity", 512)),
+                        similarity_threshold=float(self.adaptation_config.get("cache_similarity_threshold", 0.92)),
+                        momentum=float(self.adaptation_config.get("cache_momentum", 0.8)),
+                    )
+                else:
+                    controllers[method] = IndependentAdaptationController(
+                        implementation,
+                        lr=float(self.adaptation_config["lr"]),
+                        update_every_n_frames=int(self.adaptation_config["update_every_n_frames"]),
+                        batch_size=int(self.adaptation_config["batch_size"]),
+                        minimum_distinct_track_time_samples=int(self.adaptation_config["minimum_distinct_track_time_samples"]),
+                        grad_clip=float(self.adaptation_config["grad_clip"]),
+                        hidden_dim=int(self.adaptation_config["hidden_dim"]),
+                        max_abs_residual=float(self.adaptation_config.get("max_abs_residual", 6.0)),
+                        weight_decay=float(self.adaptation_config.get("weight_decay", 0.0)),
+                        replay_capacity=int(self.config.get("memory", {}).get("capacity", 512)),
+                    ).to(self.device)
                 continue
             controller = AdaptationController(
                 implementation, weight, bias, lr=float(self.adaptation_config["lr"]),
@@ -309,6 +343,12 @@ class OnlineEpisodeRunner:
         implementation = self._implementation(method)
         if implementation == "FROZEN":
             return []
+        if is_independent_method(implementation):
+            # TDA and visual-only updates use only current-frame reliability;
+            # language/fusion arms prefer causal frozen-query relations and
+            # fall back to the same confidence evidence when a probe is not due.
+            if implementation in {"TDA_RMOT", "VISUAL_TTA"} or packet is None or not packet.results:
+                return self._confidence_evidence(snapshot)
         if implementation in {"ENTROPY_HEAD", "EMA_ST"}:
             return self._confidence_evidence(snapshot)
         if implementation == "PROBE_ST":
@@ -371,6 +411,8 @@ class OnlineEpisodeRunner:
             method: {"elapsed_sec": 0.0, "latencies": [], "selected_rows": 0, "probe_calls": 0,
                      "optimizer_steps": 0, "supported_candidates": 0, "candidate_total": 0,
                      "evidence_pos": 0, "evidence_neg": 0, "evidence_unknown": 0,
+                     "nonzero_gradient_steps": 0, "parameter_delta_sum": 0.0,
+                     "cache_updates": 0, "cache_hits": 0,
                      "shared_source_forward": True, "ring_peak_bytes": 0,
                      "peak_memory_allocated_bytes": 0, "peak_memory_reserved_bytes": 0}
             for method in self.methods
@@ -505,6 +547,10 @@ class OnlineEpisodeRunner:
                             update = controller.maybe_adapt(snapshot, evidence)
                             method_stats[method]["optimizer_steps"] += int(update is not None and update.stepped)
                             method_stats[method]["supported_candidates"] += sum(record.label == EvidenceLabel.SUPPORTED_POS for record in evidence)
+                            method_stats[method]["nonzero_gradient_steps"] = int(getattr(controller, "nonzero_gradient_steps", 0))
+                            method_stats[method]["parameter_delta_sum"] = float(getattr(controller, "parameter_delta_sum", 0.0))
+                            method_stats[method]["cache_updates"] = int(getattr(controller, "cache_updates", 0))
+                            method_stats[method]["cache_hits"] = int(getattr(controller, "cache_hits", 0))
                         method_stats[method]["probe_calls"] = (
                             probe_calls_total if self._implementation(method) in PROBE_METHODS else 0
                         )
