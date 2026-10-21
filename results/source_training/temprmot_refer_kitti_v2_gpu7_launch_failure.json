@@ -1,0 +1,26 @@
+{
+  "format": "temprmot-source-launch-failure-v1",
+  "status": "FAILED_TO_START_OR_TERMINATED_BEFORE_TRAINING_LOG",
+  "project": "TTA-RMOT",
+  "requested_physical_gpu": 7,
+  "cuda_visible_devices": "7",
+  "launcher_pid": 1882870,
+  "run_root": "/data3/user/TTA-RMOT-runs/temprmot_refer_kitti_v2_full",
+  "observed_evidence": {
+    "launcher_proc_present_after_wait": false,
+    "train_log_bytes": 0,
+    "launcher_log": "Starting from COCO Deformable-DETR initialization only",
+    "command_file_has_exit_status": false,
+    "command_file_has_end_utc": false,
+    "checkpoint_present": false
+  },
+  "gpu_snapshot_at_diagnosis": {
+    "physical_gpu_7_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+    "physical_gpu_7_used_mib": 28162,
+    "physical_gpu_7_total_mib": 81920,
+    "physical_gpu_7_compute_process_count": 3
+  },
+  "first_actionable_cause_assessment": "GPU7 was not a suitable free-card choice at launch time; the process disappeared before emitting training output and without a terminal status. The exact kill signal is not recoverable from the preserved files.",
+  "protocol_effect": "No epoch, checkpoint, metric, or completion claim is accepted from this attempt.",
+  "next_action": "Retry the unchanged 60-epoch official protocol in a separate run root on physical GPU1, after recording its one-process/available-memory snapshot."
+}

@@ -15,10 +15,23 @@ Completed:
 
 In progress / pending evidence:
 
-- Full 60-epoch source training is running in the external run directory
-  `/data3/user/TTA-RMOT-runs/temprmot_refer_kitti_v2_full` on the selected free
-  GPU. It is not marked complete until the completion audit confirms the final
-  epoch, optimizer state, and clean command exit.
+- The first full 60-epoch source-training launch on physical GPU7 failed before
+  emitting a training log or checkpoint: its launcher disappeared, the run
+  command has no terminal status, and GPU7 was occupied by three unrelated
+  compute processes at diagnosis. This attempt is recorded in
+  `results/source_training/temprmot_refer_kitti_v2_gpu7_launch_failure.json`
+  and is not accepted as training evidence.
+- The unchanged official 60-epoch source protocol is being retried in the
+  separate run directory
+  `/data3/user/TTA-RMOT-runs/temprmot_refer_kitti_v2_full_retry_gpu1` on
+  physical GPU1. It is not marked complete until the completion audit confirms
+  the final epoch, optimizer state, and clean command exit.
+- After the Transformers 5 compatibility shim passed its tokenizer regression,
+  the active retry moved to
+  `/data3/user/TTA-RMOT-runs/temprmot_refer_kitti_v2_full_retry_gpu1_compat`.
+  The latest one-time log snapshot reached epoch 0, iteration 950/5168 with
+  finite loss and approximately 5.3 GiB peak memory. This is progress
+  evidence only; no checkpoint or completion claim is made yet.
 - Official source inference and official TrackEval metrics are pending the
   validated full-training checkpoint.
 - Full A0/A1/A2/A3 independent-TTA inference and official metrics are pending

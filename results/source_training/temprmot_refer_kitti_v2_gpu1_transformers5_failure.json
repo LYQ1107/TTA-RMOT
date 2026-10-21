@@ -1,0 +1,24 @@
+{
+  "format": "temprmot-source-training-failure-v1",
+  "status": "FAILED_ON_FIRST_BATCH",
+  "project": "TTA-RMOT",
+  "requested_physical_gpu": 1,
+  "cuda_visible_devices": "1",
+  "run_root": "/data3/user/TTA-RMOT-runs/temprmot_refer_kitti_v2_full_retry_gpu1",
+  "protocol": {
+    "epochs": 60,
+    "hist_len": 5,
+    "batch_size": 1,
+    "train_list": "/data2/user/reference_repos/TempRMOT/datasets/data_path/refer-kitti-v2.train"
+  },
+  "observed_evidence": {
+    "exit_status": 1,
+    "checkpoint_present": false,
+    "training_epoch_started": 0,
+    "failure_stage": "first training batch after model initialization",
+    "exception": "AttributeError: RobertaTokenizerFast has no attribute batch_encode_plus"
+  },
+  "first_actionable_cause": "The shared runtime has transformers==5.2.0, which removed the legacy fast-tokenizer batch_encode_plus alias used by the pinned TempRMOT source.",
+  "protocol_effect": "No epoch, checkpoint, metric, or completion claim is accepted from this attempt.",
+  "minimal_fix": "Add a project-local sitecustomize compatibility alias to PreTrainedTokenizerBase.__call__, then run a tokenizer regression before resuming the unchanged protocol."
+}
