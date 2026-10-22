@@ -1,0 +1,24 @@
+experiment: flexhook_score_tta_v3
+task: source_free_online_referring_mot_tta
+source_result: /data2/user/FlexHook-TTA/results/runs/official_refer_kitti_v2_2gpu/result.json
+dataset_root: /data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2
+tracker_root: /data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2
+methods:
+  - FROZEN
+  - ONLINE_STABILITY
+adapter:
+  type: causal_affine_score_calibration
+  learning_rate: 0.001
+  confidence_high: 0.8
+  confidence_low: 0.2
+  max_gap: 1
+  scale_range: [0.75, 1.25]
+  max_abs_bias: 0.75
+protocol:
+  target_labels_used: false
+  future_frames_used: false
+  target_gt_opened_during_prediction: false
+  geometry_changed: false
+  tracker_ids_changed: false
+  class_split_id_offset: official_max_car_id_for_pedestrian_rows
+  evaluation: post_hoc_trackeval

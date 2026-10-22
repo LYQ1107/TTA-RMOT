@@ -1,0 +1,64 @@
+{
+  "experiment": "flexhook_score_tta_v3",
+  "accepted": true,
+  "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+  "dataset": "Refer-KITTI-V2",
+  "videos": 4,
+  "expressions": 862,
+  "candidate_rows": 2355528,
+  "protocol": {
+    "source_free": true,
+    "target_labels_used": false,
+    "future_frames_used": false,
+    "target_gt_opened_before_prediction_complete": false,
+    "tracker_geometry_changed": false,
+    "tracker_ids_changed": false
+  },
+  "methods": {
+    "FROZEN": {
+      "HOTA": 42.526,
+      "DetA": 30.629,
+      "AssA": 59.186,
+      "DetRe": 58.55,
+      "DetPr": 38.31,
+      "AssRe": 64.69,
+      "AssPr": 85.048,
+      "LocA": 89.088,
+      "RHOTA": 58.841,
+      "HOTA(0)": 48.332,
+      "LocA(0)": 84.486,
+      "HOTALocA(0)": 40.833,
+      "Dets": 750834,
+      "IDs": 30871,
+      "source": "results/runs/flexhook_score_tta_v3/FROZEN/results/pedestrian_summary.txt"
+    },
+    "ONLINE_STABILITY": {
+      "trackeval_exit_status": 0,
+      "HOTA": 42.525,
+      "DetA": 30.625,
+      "AssA": 59.191,
+      "DetRe": 58.573,
+      "DetPr": 38.294,
+      "AssRe": 64.697,
+      "AssPr": 85.042,
+      "LocA": 89.086,
+      "RHOTA": 58.855,
+      "HOTA(0)": 48.331,
+      "LocA(0)": 84.484,
+      "HOTALocA(0)": 40.832,
+      "Dets": 751448,
+      "IDs": 30869,
+      "pseudo_updates": 2153705,
+      "source": "results/runs/flexhook_score_tta_online_debug/ONLINE_STABILITY/results/pedestrian_summary.txt"
+    }
+  },
+  "delta_online_minus_frozen": {
+    "HOTA": -0.001,
+    "DetA": -0.004,
+    "AssA": 0.005,
+    "RHOTA": 0.014,
+    "Dets": 614,
+    "IDs": -2
+  },
+  "interpretation": "The first causal score-only TTA baseline is essentially HOTA-neutral: association rises slightly while detection accuracy falls slightly. It is retained as a reproducible baseline, not claimed as an improvement."
+}
