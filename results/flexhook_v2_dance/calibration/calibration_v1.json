@@ -1,0 +1,12 @@
+{
+  "format": "flexhook-v2-dance-calibration-v1",
+  "protocol": "425 sequences, official Dance DETR+NeuralSORT rows, target GT opened only by the separate evaluator",
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "methods": {
+    "FROZEN": {"HOTA": 8.206, "DetA": 3.1857, "AssA": 21.138, "IDF1": 4.436, "Dets": 99316, "IDs": 1740, "IDSW": 259},
+    "ONLINE_STABILITY": {"HOTA": 8.1741, "DetA": 3.1183, "AssA": 21.428, "IDF1": 4.3607, "Dets": 98374, "IDs": 1726, "IDSW": 257},
+    "SOURCE_PRIOR_CALIBRATION": {"HOTA": 8.206, "DetA": 3.1857, "AssA": 21.138, "IDF1": 4.436, "Dets": 99316, "IDs": 1740, "IDSW": 259},
+    "QUERY_TRACKLET_CALIBRATION": {"HOTA": 8.2092, "DetA": 3.1468, "AssA": 21.417, "IDF1": 4.4059, "Dets": 97682, "IDs": 1647, "IDSW": 236}
+  },
+  "conclusion": "Unlabeled score calibration is HOTA-neutral at this scale; the best query/tracklet variant changes HOTA by only +0.0032 and does not improve IDF1."
+}

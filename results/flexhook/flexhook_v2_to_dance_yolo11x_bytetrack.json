@@ -1,0 +1,86 @@
+{
+  "experiment": "flexhook_v2_to_dance_yolo11x_bytetrack",
+  "accepted": true,
+  "task": "Released Refer-KITTI-V2 second-stage zero-shot evaluation on Refer-Dance",
+  "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+  "checkpoint": {
+    "name": "refer-kitti-v2-best.pth",
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "bytes": 995768450,
+    "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "second_stage_weight_is_v2": true
+  },
+  "dataset": {
+    "name": "Refer-Dance",
+    "split": "DanceTrack validation",
+    "archive_sha256": "dc13f2274915bccb08a6d52970efc7ca63702bfbddb72eb5986a8a119854fd09",
+    "videos": 25,
+    "expressions": 425,
+    "frames": 25508,
+    "source_root": "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance"
+  },
+  "tracker": {
+    "detector": "YOLO11x",
+    "tracker": "ByteTrack",
+    "detector_weight_sha256": "7bc158aa95c0ebfdd87f70f01653c1131b93e92522dbe15c228bcd742e773a24",
+    "tracker_output_frames": 25508,
+    "tracker_frames_with_tracks": 25493,
+    "tracker_rows": 224807,
+    "ground_truth_read": false,
+    "expressions_read": false,
+    "note": "Image-only tracker; dancetrack0063 has 985/1000 frames with detections, while all 1000 frame IDs are emitted."
+  },
+  "runtime": {
+    "physical_gpus": [3, 5],
+    "distributed_processes": 2,
+    "visual": "rope-swin-tiny",
+    "text": "roberta",
+    "text_len": 25,
+    "result_root": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_yolo11x_bytetrack_compat2",
+    "compatibility": "Transformers 5.x legacy batch_encode_plus alias with fixed-length truncation"
+  },
+  "protocol": {
+    "source_free": true,
+    "target_gt_used_for_candidate_boxes_or_scores": false,
+    "tracker_ground_truth_read": false,
+    "released_loader_labels_file_opened_but_not_used_in_test_branch": true,
+    "gt_template_used_only_for_posthoc_trackeval": true,
+    "future_frames_used_by_tracker": false,
+    "tracker_geometry_changed_by_second_stage": false,
+    "tracker_ids_changed_by_second_stage": false
+  },
+  "metrics": {
+    "HOTA": 5.2445,
+    "DetA": 4.4082,
+    "AssA": 6.2627,
+    "DetRe": 59.591,
+    "DetPr": 4.5369,
+    "AssRe": 10.966,
+    "AssPr": 12.786,
+    "LocA": 89.511,
+    "RHOTA": 19.286,
+    "HOTA_0": 5.8337,
+    "LocA_0": 85.406,
+    "HOTALocA_0": 4.9823,
+    "MOTA": -1224.0,
+    "MOTP": 88.495,
+    "IDF1": 1.7578,
+    "Dets": 2791694,
+    "GT_Dets": 212541,
+    "IDs": 5607,
+    "GT_IDs": 252
+  },
+  "trackeval": {
+    "exit_status": 0,
+    "evaluated_sequences": 425,
+    "prediction_files": 425,
+    "ground_truth_files": 425,
+    "summary": "results/runs/flexhook_v2_to_dance_yolo11x_bytetrack_compat2/results/pedestrian_summary.txt"
+  },
+  "reference_only": {
+    "official_dance_line": "refer-dance-best + DETR/NeuralSORT",
+    "official_hota": 32.165,
+    "warning": "Not an apples-to-apples baseline: both the second-stage checkpoint and tracker differ."
+  },
+  "interpretation": "With V2 weights frozen and an independent image-only YOLO11x+ByteTrack tracker, the cross-domain Dance result is very poor: high localization quality on matched boxes but too many candidates surviving the score gate and weak association. This is a valid zero-shot baseline for a later source-free TTA method, not evidence that the tracker-only line solves Dance. The released test loader opens labels.json unconditionally but does not consume labels in its test branch; boxes and scores come from tracker output and images, while GT templates are used only by post-hoc evaluation."
+}

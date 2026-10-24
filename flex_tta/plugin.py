@@ -4,7 +4,12 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Mapping, Protocol
 
-from flex_tta.adaptation.score import CausalStabilityTTA, FrozenScoreAdapter
+from flex_tta.adaptation.score import (
+    CausalStabilityTTA,
+    FrozenScoreAdapter,
+    QueryTrackletCalibration,
+    SourcePriorCalibration,
+)
 from flex_tta.types import OnlineStep, TrackerCandidate
 
 
@@ -31,6 +36,10 @@ class FlexHookReferringPlugin:
             self.adapter: ScoreAdapter = FrozenScoreAdapter()
         elif config.adapter == "causal_stability":
             self.adapter = CausalStabilityTTA()
+        elif config.adapter == "source_prior":
+            self.adapter = SourcePriorCalibration(source_mean=-8.394860413379647, source_std=10.33014307587037)
+        elif config.adapter == "query_tracklet":
+            self.adapter = QueryTrackletCalibration()
         else:
             raise ValueError(f"unknown adapter: {config.adapter}")
 

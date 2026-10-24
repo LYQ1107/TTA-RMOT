@@ -1,0 +1,114 @@
+{
+  "experiment": "FlexHook V2 checkpoint on Refer-Dance with the official Dance DETR+NeuralSORT tracker bank",
+  "accepted": false,
+  "superseded": true,
+  "superseded_by": "results/flexhook/flexhook_dance_ceiling_vs_v2_corrected.json",
+  "superseded_reason": "Transformers 5.4 loaded the local RoBERTa tokenizer with an empty BPE merge table; the resulting character-level tokenization invalidated this historical run.",
+  "task": "V2_to_Dance_zero_shot_second_stage",
+  "vendor": {
+    "repository": "https://github.com/buptLwz/FlexHook",
+    "commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+    "official_inference_script": "vendor/FlexHook/infer.sh"
+  },
+  "official_assets": {
+    "source": "https://pan.baidu.com/s/1L-43y9SFDKmgl3dJNRlvNA?pwd=d3qj",
+    "checkpoint": {
+      "name": "refer-kitti-v2-best.pth",
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+      "bytes": 995768450,
+      "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+      "used_as_fixed_second_stage": true
+    },
+    "tracker_bank": {
+      "detector": "DETR (official released Dance tracker outputs)",
+      "tracker": "NeuralSORT",
+      "official_share_path": "/FlexHook/tracker_outputs/DETR-NeuralSORT-Dance",
+      "local_root": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+      "receipt": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/official_detr_neuralsort_receipt.json",
+      "receipt_sha256": "b8f3133539d885c4174b6c0f7116dcdc9bcb6961a361e501c71fc6d808a269f8",
+      "files": 25,
+      "frames": 25508,
+      "rows": 211085,
+      "ground_truth_read": false,
+      "expressions_read": false,
+      "note": "The released Dance detector/tracker bank is precomputed MOT output; no YOLO detector is used in this accepted run."
+    }
+  },
+  "dataset": {
+    "name": "Refer-Dance validation",
+    "videos": 25,
+    "expressions": 17,
+    "sequences_evaluated": 425,
+    "frames": 25508,
+    "archive_sha256": "dc13c1d04b64f0336606b01e4c0a1fd6b5de8dd70b7e58dbbf6f5d9ca2e7fd09",
+    "source_root": "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance"
+  },
+  "runtime": {
+    "cuda_visible_devices": [7, 5],
+    "processes": 2,
+    "visual_backbone": "rope-swin-tiny",
+    "text_backbone": "roberta",
+    "text_len": 25,
+    "result_root": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_v2_compat",
+    "result_json_sha256": "4ad3342ab7c6c0f2b61bae05ba29235b0712f4ee88f8dbf397e9bfcfae75d5ca",
+    "trackeval_exit_code": 0,
+    "trackeval_summary": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_v2_compat/results/pedestrian_summary.txt",
+    "trackeval_summary_sha256": "032c9efbc768dadf6cf125a465a49e0524a8244468255f68135dcf23bd60f888"
+  },
+  "protocol": {
+    "source_free": true,
+    "target_ground_truth_used_for_inference": false,
+    "target_candidate_boxes_or_scores_from_ground_truth": false,
+    "tracker_bank_ground_truth_or_expressions_read": false,
+    "released_loader_labels_file_opened_but_unused_in_test_branch": true,
+    "ground_truth_templates_materialized_only_for_posthoc_trackeval": true,
+    "future_frames_used": false,
+    "geometry_or_identity_modified": false
+  },
+  "metrics": {
+    "HOTA": 12.254,
+    "DetA": 4.7043,
+    "AssA": 31.95,
+    "DetRe": 57.811,
+    "DetPr": 4.8663,
+    "AssRe": 36.485,
+    "AssPr": 65.379,
+    "LocA": 91.376,
+    "RHOTA": 42.962,
+    "HOTA_0": 13.338,
+    "LocA_0": 88.064,
+    "MOTA": -1063.1,
+    "MOTP": 90.667,
+    "IDF1": 5.6069,
+    "Dets": 2524962,
+    "GT_Dets": 212541,
+    "IDs": 10652,
+    "GT_IDs": 252
+  },
+  "comparison": {
+    "previous_generic_yolo11x_bytetrack": {
+      "HOTA": 5.2445,
+      "DetA": 4.4082,
+      "AssA": 6.2627,
+      "LocA": 89.511,
+      "IDF1": 1.7578,
+      "Dets": 2791694,
+      "IDs": 5607
+    },
+    "official_tracker_delta_over_generic": {
+      "HOTA": 7.0095,
+      "AssA": 25.6873,
+      "LocA": 1.865,
+      "IDF1": 3.8491,
+      "DetPr": 0.3294,
+      "Dets": -266732
+    },
+    "same_domain_reference_only": {
+      "checkpoint": "refer-dance-best.pth",
+      "tracker": "official DETR+NeuralSORT",
+      "HOTA": 32.165,
+      "comparable_to_this_run": false
+    }
+  },
+  "interpretation": "The official Dance-specific detector/tracker raises V2-to-Dance HOTA from 5.2445 to 12.254 and AssA from 6.2627 to 31.95. The remaining gap is a real cross-domain mismatch between the fixed Refer-KITTI-V2 second-stage checkpoint and Dance candidates; 32.165 HOTA is a same-domain released-weight reference, not a cross-domain comparison."
+}

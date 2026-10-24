@@ -1,0 +1,13 @@
+{
+  "format": "flexhook-v2-dance-semantic-summary-v1",
+  "classification": "auditable keyword multi-label categories; unknown retained",
+  "category_aggregate": {
+    "appearance": {"expressions": 425, "precision": 0.043999883888022666, "recall": 0.005332083295383177, "top1": 0.01581601742064172},
+    "clothing": {"expressions": 300, "precision": 0.00953306316755825, "recall": 0.0004768230536828464, "top1": 0.007650899565774729},
+    "compositional": {"expressions": 425, "precision": 0.043999883888022666, "recall": 0.005332083295383177, "top1": 0.01581601742064172},
+    "motion": {"expressions": 400, "precision": 0.046590302162938975, "recall": 0.005658126962883086, "top1": 0.01598993925307175},
+    "relational": {"expressions": 300, "precision": 0.00953306316755825, "recall": 0.0004768230536828464, "top1": 0.007650899565774729}
+  },
+  "gt_used_only_in_offline_diagnostic": true,
+  "interpretation": "The official expressions are predominantly clothing/compositional queries; the low source-selected recall is not confined to one semantic keyword family."
+}

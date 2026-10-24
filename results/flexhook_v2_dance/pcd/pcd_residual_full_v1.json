@@ -1,0 +1,17 @@
+{
+  "format": "flexhook-v2-dance-pcd-residual-v1",
+  "protocol": "source-free causal episodic PCD residual adaptation; prediction sealed before update",
+  "videos": 25,
+  "expressions": 425,
+  "frames": 433211,
+  "target_gt_opened": false,
+  "target_labels_opened": false,
+  "future_frames_used": false,
+  "tracker_geometry_changed": false,
+  "tracker_ids_changed": false,
+  "hyperparameters": {"update_interval": 4, "batch_size": 32, "lr": 0.0005, "entropy_weight": 0.05, "anchor_weight": 0.01, "temporal_weight": 0.1, "pseudo_weight": 0.1, "bottleneck": 64, "trainable_parameters": 198274},
+  "aggregate_runtime": {"optimizer_steps": 108511, "nonzero_gradient_steps": 108511, "elapsed_seconds_sum_across_shards": 172721.23951649666, "parameter_update_l2": 1642.3120851207664, "parameter_update_max_abs": 26.18571485299617, "selected_rows": 80880, "candidate_rows": 3576681, "pseudo_positive": 14710, "pseudo_negative": 850435, "temporal_rows": 3505553},
+  "metrics": {"HOTA": 8.014, "DetA": 2.4762, "AssA": 25.938, "DetRe": 3.3344, "DetPr": 8.7624, "AssRe": 30.53, "AssPr": 72.491, "LocA": 92.064, "IDF1": 3.6957, "Dets": 80880, "IDs": 1303, "IDSW": 139},
+  "delta_vs_frozen": {"HOTA": -0.192, "DetA": -0.7095, "AssA": 4.8, "IDF1": -0.7403, "Dets": -18436, "IDs": -437},
+  "conclusion": "Association improves, but detection recall and IDF1 fall enough that residual TTA is not a positive result under the fixed protocol."
+}

@@ -127,3 +127,95 @@ class CausalStabilityTTA:
             "positive_updates": int(self.positive_updates),
             "negative_updates": int(self.negative_updates),
         }
+class SourcePriorCalibration:
+    """Apply a source-fixed temperature to the frozen margin.
+
+    The source statistics are computed once on the source-domain score stream
+    and are never estimated from Dance.  Since the released FlexHook decision
+    is the sign of the two-class margin, a positive temperature is deliberately
+    prediction-equivalent to FROZEN; this is a calibration control, not a
+    hidden target-threshold search.
+    """
+
+    def __init__(self, *, source_mean: float, source_std: float):
+        if source_std <= 0:
+            raise ValueError("source_std must be positive")
+        self.source_mean = float(source_mean)
+        self.source_std = float(source_std)
+        self.reset_episode()
+
+    def reset_episode(self) -> None:
+        self.steps = 0
+
+    def step(self, frame_id: int, margins: dict[int, float]) -> OnlineStep:
+        self.steps += 1
+        # Keep the source decision boundary at margin=0.  The mean is retained
+        # as provenance for the source score population, while temperature is
+        # the only applied transform so this control is exactly FROZEN at the
+        # binary prediction level.
+        adapted = {
+            int(track_id): float(margin) / self.source_std
+            for track_id, margin in margins.items()
+        }
+        # The returned scale/bias describe the fixed transform; no target
+        # state is updated.
+        return OnlineStep(int(frame_id), adapted, 0, 1.0 / self.source_std, 0.0)
+
+    def state_dict(self) -> dict[str, float | int]:
+        return {
+            "source_mean": self.source_mean,
+            "source_std": self.source_std,
+            "steps": int(self.steps),
+        }
+
+
+class QueryTrackletCalibration:
+    """Conservative causal score smoothing using only each track's history.
+
+    The source margin remains the anchor and the previous adapted margin is a
+    bounded temporal cue.  No frame-level top-k or positive-rate assumption is
+    introduced, so empty-target frames are allowed.  This is intentionally
+    separate from ``CausalStabilityTTA``: it does not manufacture BCE
+    pseudo-labels or update a global affine parameter.
+    """
+
+    def __init__(self, *, history_weight: float = 0.2, max_gap: int = 1):
+        if not 0.0 <= history_weight < 1.0:
+            raise ValueError("history_weight must be in [0, 1)")
+        self.history_weight = float(history_weight)
+        self.max_gap = int(max_gap)
+        self.reset_episode()
+
+    def reset_episode(self) -> None:
+        self.previous: dict[int, _Previous] = {}
+        self.history_updates = 0
+
+    def step(self, frame_id: int, margins: dict[int, float]) -> OnlineStep:
+        frame_id = int(frame_id)
+        adapted: dict[int, float] = {}
+        updates = 0
+        for track_id, source_margin in sorted(margins.items()):
+            track_id = int(track_id)
+            source_margin = float(source_margin)
+            previous = self.previous.get(track_id)
+            if previous is not None and frame_id - previous.frame_id <= self.max_gap:
+                value = (1.0 - self.history_weight) * source_margin + self.history_weight * previous.margin
+                updates += 1
+            else:
+                value = source_margin
+            adapted[track_id] = value
+            self.previous[track_id] = _Previous(value, frame_id)
+
+        self.previous = {
+            track_id: item for track_id, item in self.previous.items()
+            if frame_id - item.frame_id <= self.max_gap
+        }
+        self.history_updates += updates
+        return OnlineStep(frame_id, adapted, updates, 1.0, 0.0)
+
+    def state_dict(self) -> dict[str, float | int]:
+        return {
+            "history_weight": self.history_weight,
+            "max_gap": self.max_gap,
+            "history_updates": int(self.history_updates),
+        }
