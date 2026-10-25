@@ -7,7 +7,14 @@
 ## 当前研究：FlexHook V2 → Dance Positive-Free Online TTA
 
 最新用户授权的[快速可恢复性诊断](docs/PF_RECOVERABILITY_DIAGNOSTIC_20261025.md)独立于已完成六组结果：
-优先CPU数量匹配/文本敏感性，仅必要时小样本冻结特征，不启动新的完整TTA训练。
+**已完成并停止**。完整425表达Count-Matched Frozen HOTA8.8206，Identity8.8179：
+输出数量配合原Frozen排序几乎重现全部收益；这是依赖Identity数量的后验诊断，不是新可部署方法。
+原模型presence有有限信号（离线AUROC0.7258/AP0.1994）；固定75帧冻结PCD保留少量可读出信息，
+但GT诊断探针没有超过同样本Frozen head，也未发现独立可靠的无标签语义监督。
+67项测试通过；[诊断分数与日志](results/diagnostics/pf_recoverability_20261025/)、
+[425条表达完整诊断预测](results/diagnostics/pf_recoverability_20261025/archives/countmatched_425_predictions.tar.gz)
+及[科研图](results/diagnostics/pf_recoverability_20261025/figures/recoverability_summary.png)均单独保留。
+没有重跑六方法、源训练或新完整TTA；等待用户下一条明确指令。
 
 固定官方 Refer-KITTI-V2 第二阶段 checkpoint、官方 Dance DETR+NeuralSORT 候选，
 在全部25视频/425表达上检验相对排序与轨迹身份自监督。没有目标GT在线监督、额外语义教师或源端重训。

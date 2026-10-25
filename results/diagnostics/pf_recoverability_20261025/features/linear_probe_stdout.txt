@@ -1,0 +1,824 @@
+{"event": "diagnostic_probe_fold_complete", "feature": "pcd_query", "fold": 0, "iterations": [10], "wall_seconds": 10.041028819046915}
+{"event": "diagnostic_probe_fold_complete", "feature": "pcd_query", "fold": 1, "iterations": [10], "wall_seconds": 16.8576498311013}
+{"event": "diagnostic_probe_fold_complete", "feature": "pcd_query", "fold": 2, "iterations": [10], "wall_seconds": 25.3083064511884}
+{"event": "diagnostic_probe_fold_complete", "feature": "pcd_query", "fold": 3, "iterations": [10], "wall_seconds": 32.73546531912871}
+{"event": "diagnostic_probe_fold_complete", "feature": "pcd_query", "fold": 4, "iterations": [11], "wall_seconds": 40.64790363400243}
+{"event": "diagnostic_probe_fold_complete", "feature": "text_only", "fold": 0, "iterations": [12], "wall_seconds": 43.20871105417609}
+{"event": "diagnostic_probe_fold_complete", "feature": "text_only", "fold": 1, "iterations": [15], "wall_seconds": 46.36522891302593}
+{"event": "diagnostic_probe_fold_complete", "feature": "text_only", "fold": 2, "iterations": [14], "wall_seconds": 49.656939276028425}
+{"event": "diagnostic_probe_fold_complete", "feature": "text_only", "fold": 3, "iterations": [14], "wall_seconds": 53.246227101190016}
+{"event": "diagnostic_probe_fold_complete", "feature": "text_only", "fold": 4, "iterations": [13], "wall_seconds": 57.22548659401946}
+{"event": "diagnostic_probe_fold_complete", "feature": "background_and_text", "fold": 0, "iterations": [13], "wall_seconds": 65.36323392111808}
+{"event": "diagnostic_probe_fold_complete", "feature": "background_and_text", "fold": 1, "iterations": [17], "wall_seconds": 79.84910517605022}
+{"event": "diagnostic_probe_fold_complete", "feature": "background_and_text", "fold": 2, "iterations": [16], "wall_seconds": 91.53099846001714}
+{"event": "diagnostic_probe_fold_complete", "feature": "background_and_text", "fold": 3, "iterations": [16], "wall_seconds": 104.26547294505872}
+{"event": "diagnostic_probe_fold_complete", "feature": "background_and_text", "fold": 4, "iterations": [14], "wall_seconds": 116.13720130221918}
+{"event": "diagnostic_probe_fold_complete", "feature": "geometry_and_text", "fold": 0, "iterations": [12], "wall_seconds": 118.65297371521592}
+{"event": "diagnostic_probe_fold_complete", "feature": "geometry_and_text", "fold": 1, "iterations": [15], "wall_seconds": 122.0768637880683}
+{"event": "diagnostic_probe_fold_complete", "feature": "geometry_and_text", "fold": 2, "iterations": [14], "wall_seconds": 125.69114895816892}
+{"event": "diagnostic_probe_fold_complete", "feature": "geometry_and_text", "fold": 3, "iterations": [14], "wall_seconds": 129.24016175419092}
+{"event": "diagnostic_probe_fold_complete", "feature": "geometry_and_text", "fold": 4, "iterations": [13], "wall_seconds": 132.90507513517514}
+{
+  "protocol": "GT_SUPERVISED_DIAGNOSTIC_LINEAR_PROBE_NOT_TTA",
+  "group_unit": "video",
+  "folds": 5,
+  "C": 1.0,
+  "seed": 0,
+  "selected_hyperparameters_from_target_metrics": false,
+  "probe_weights_saved": false,
+  "probe_weights_used_in_TTA": false,
+  "metrics": {
+    "pcd_query": {
+      "n": 10931,
+      "positives": 608,
+      "prevalence": 0.05562162656664532,
+      "AUROC": 0.8021457896776233,
+      "AUPRC": 0.24178487917021432,
+      "mixed_frame_query_macro_AUROC": 0.5864024998082971,
+      "mixed_frame_query_groups": 69
+    },
+    "text_only": {
+      "n": 10931,
+      "positives": 608,
+      "prevalence": 0.05562162656664532,
+      "AUROC": 0.7449141097804086,
+      "AUPRC": 0.3270540493064775,
+      "mixed_frame_query_macro_AUROC": 0.500805152979066,
+      "mixed_frame_query_groups": 69
+    },
+    "background_and_text": {
+      "n": 10931,
+      "positives": 608,
+      "prevalence": 0.05562162656664532,
+      "AUROC": 0.752287861928142,
+      "AUPRC": 0.4134806372973367,
+      "mixed_frame_query_macro_AUROC": 0.499194847020934,
+      "mixed_frame_query_groups": 69
+    },
+    "geometry_and_text": {
+      "n": 10931,
+      "positives": 608,
+      "prevalence": 0.05562162656664532,
+      "AUROC": 0.7493979017217557,
+      "AUPRC": 0.3497907771817003,
+      "mixed_frame_query_macro_AUROC": 0.4870312859443294,
+      "mixed_frame_query_groups": 69
+    }
+  },
+  "fold_details": [
+    {
+      "feature": "pcd_query",
+      "fold": 0,
+      "train_videos": [
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0004",
+        "dancetrack0030",
+        "dancetrack0043",
+        "dancetrack0063",
+        "dancetrack0094"
+      ],
+      "iterations": [
+        10
+      ]
+    },
+    {
+      "feature": "pcd_query",
+      "fold": 1,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0090",
+        "dancetrack0094"
+      ],
+      "test_videos": [
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0047",
+        "dancetrack0081",
+        "dancetrack0097"
+      ],
+      "iterations": [
+        10
+      ]
+    },
+    {
+      "feature": "pcd_query",
+      "fold": 2,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0007",
+        "dancetrack0019",
+        "dancetrack0041",
+        "dancetrack0065",
+        "dancetrack0090"
+      ],
+      "iterations": [
+        10
+      ]
+    },
+    {
+      "feature": "pcd_query",
+      "fold": 3,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0005",
+        "dancetrack0026",
+        "dancetrack0058",
+        "dancetrack0073",
+        "dancetrack0077"
+      ],
+      "iterations": [
+        10
+      ]
+    },
+    {
+      "feature": "pcd_query",
+      "fold": 4,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0010",
+        "dancetrack0025",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0079"
+      ],
+      "iterations": [
+        11
+      ]
+    },
+    {
+      "feature": "text_only",
+      "fold": 0,
+      "train_videos": [
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0004",
+        "dancetrack0030",
+        "dancetrack0043",
+        "dancetrack0063",
+        "dancetrack0094"
+      ],
+      "iterations": [
+        12
+      ]
+    },
+    {
+      "feature": "text_only",
+      "fold": 1,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0090",
+        "dancetrack0094"
+      ],
+      "test_videos": [
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0047",
+        "dancetrack0081",
+        "dancetrack0097"
+      ],
+      "iterations": [
+        15
+      ]
+    },
+    {
+      "feature": "text_only",
+      "fold": 2,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0007",
+        "dancetrack0019",
+        "dancetrack0041",
+        "dancetrack0065",
+        "dancetrack0090"
+      ],
+      "iterations": [
+        14
+      ]
+    },
+    {
+      "feature": "text_only",
+      "fold": 3,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0005",
+        "dancetrack0026",
+        "dancetrack0058",
+        "dancetrack0073",
+        "dancetrack0077"
+      ],
+      "iterations": [
+        14
+      ]
+    },
+    {
+      "feature": "text_only",
+      "fold": 4,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0010",
+        "dancetrack0025",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0079"
+      ],
+      "iterations": [
+        13
+      ]
+    },
+    {
+      "feature": "background_and_text",
+      "fold": 0,
+      "train_videos": [
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0004",
+        "dancetrack0030",
+        "dancetrack0043",
+        "dancetrack0063",
+        "dancetrack0094"
+      ],
+      "iterations": [
+        13
+      ]
+    },
+    {
+      "feature": "background_and_text",
+      "fold": 1,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0090",
+        "dancetrack0094"
+      ],
+      "test_videos": [
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0047",
+        "dancetrack0081",
+        "dancetrack0097"
+      ],
+      "iterations": [
+        17
+      ]
+    },
+    {
+      "feature": "background_and_text",
+      "fold": 2,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0007",
+        "dancetrack0019",
+        "dancetrack0041",
+        "dancetrack0065",
+        "dancetrack0090"
+      ],
+      "iterations": [
+        16
+      ]
+    },
+    {
+      "feature": "background_and_text",
+      "fold": 3,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0005",
+        "dancetrack0026",
+        "dancetrack0058",
+        "dancetrack0073",
+        "dancetrack0077"
+      ],
+      "iterations": [
+        16
+      ]
+    },
+    {
+      "feature": "background_and_text",
+      "fold": 4,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0010",
+        "dancetrack0025",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0079"
+      ],
+      "iterations": [
+        14
+      ]
+    },
+    {
+      "feature": "geometry_and_text",
+      "fold": 0,
+      "train_videos": [
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0004",
+        "dancetrack0030",
+        "dancetrack0043",
+        "dancetrack0063",
+        "dancetrack0094"
+      ],
+      "iterations": [
+        12
+      ]
+    },
+    {
+      "feature": "geometry_and_text",
+      "fold": 1,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0090",
+        "dancetrack0094"
+      ],
+      "test_videos": [
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0047",
+        "dancetrack0081",
+        "dancetrack0097"
+      ],
+      "iterations": [
+        15
+      ]
+    },
+    {
+      "feature": "geometry_and_text",
+      "fold": 2,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0025",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0007",
+        "dancetrack0019",
+        "dancetrack0041",
+        "dancetrack0065",
+        "dancetrack0090"
+      ],
+      "iterations": [
+        14
+      ]
+    },
+    {
+      "feature": "geometry_and_text",
+      "fold": 3,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0007",
+        "dancetrack0010",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0025",
+        "dancetrack0030",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0079",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0005",
+        "dancetrack0026",
+        "dancetrack0058",
+        "dancetrack0073",
+        "dancetrack0077"
+      ],
+      "iterations": [
+        14
+      ]
+    },
+    {
+      "feature": "geometry_and_text",
+      "fold": 4,
+      "train_videos": [
+        "dancetrack0004",
+        "dancetrack0005",
+        "dancetrack0007",
+        "dancetrack0014",
+        "dancetrack0018",
+        "dancetrack0019",
+        "dancetrack0026",
+        "dancetrack0030",
+        "dancetrack0041",
+        "dancetrack0043",
+        "dancetrack0047",
+        "dancetrack0058",
+        "dancetrack0063",
+        "dancetrack0065",
+        "dancetrack0073",
+        "dancetrack0077",
+        "dancetrack0081",
+        "dancetrack0090",
+        "dancetrack0094",
+        "dancetrack0097"
+      ],
+      "test_videos": [
+        "dancetrack0010",
+        "dancetrack0025",
+        "dancetrack0034",
+        "dancetrack0035",
+        "dancetrack0079"
+      ],
+      "iterations": [
+        13
+      ]
+    }
+  ],
+  "paired_mixed_frame_comparisons": {
+    "pcd_query_vs_text_only": {
+      "mixed_frame_AUROC_delta": 0.0855973468292309,
+      "paired_video_CI95": [
+        0.027922093634201638,
+        0.16100277074268884
+      ]
+    },
+    "pcd_query_vs_background_and_text": {
+      "mixed_frame_AUROC_delta": 0.08720765278736294,
+      "paired_video_CI95": [
+        0.02843193028491131,
+        0.16674746195640403
+      ]
+    },
+    "pcd_query_vs_geometry_and_text": {
+      "mixed_frame_AUROC_delta": 0.09937121386396748,
+      "paired_video_CI95": [
+        0.04190416427615222,
+        0.1881952783528869
+      ]
+    }
+  },
+  "experiment_commit": "3bb8b03450a80d99255e83f7d3aafcd09d159ee7",
+  "wall_seconds": 133.06149284611456,
+  "dependency_versions": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "scikit-learn": "1.5.2",
+    "joblib": "1.4.2",
+    "threadpoolctl": "3.5.0"
+  },
+  "uncertainty": "video bootstrap conditional on fitted OOF readouts, not refitting each bootstrap; descriptive development diagnosis",
+  "interpretation": "supervised diagnostic readout only; high pooled AUROC may reflect query/scene priors, inspect within-frame mixed candidates"
+}

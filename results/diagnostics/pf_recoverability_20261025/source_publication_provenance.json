@@ -1,0 +1,34 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "branch": "research/v2dance-positivefree-four-gpu-full-20261025",
+  "base_public_commit": "29f265cf6b2c8d82948043534e0044b1341d5899",
+  "actual_experiment_sources": [
+    {
+      "stages": ["frozen_feature_smoke", "frozen_feature_extraction_75_frames"],
+      "local_commit": "c6250299e5e8ca2550a6032f05204779aece8d99",
+      "public_commit": "c8b679ed70bdd8ae1380c392bc458847775092a0",
+      "identical_git_tree": "c2ee1a5f4ba5312d972e91d2ef51b5161b8ba93b"
+    },
+    {
+      "stages": ["fixed_C1_5fold_video_GT_diagnostic_probe"],
+      "local_commit": "3bb8b03450a80d99255e83f7d3aafcd09d159ee7",
+      "public_commit": "07098b09266adec88c2a37ef1c8ea83300d79c30",
+      "identical_git_tree": "7a51c321e5bee81c2eaa3eed72fd269abc0b522f"
+    }
+  ],
+  "mapping_verification": "Fetched public objects; git rev-parse local^{tree} public^{tree} exactly equal for each actual source. Git-object publication retains remote parent history, so commit IDs differ while code trees are identical.",
+  "official_vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+  "unchanged_vendor_patch_sha256": "f5eba6bbb08f44c4288a3155af65d3719585b74644189e7ec8bc773df87ca1c2",
+  "vendor_patch_scope": "Historical data/mydataloader.py test path skips labels.json; unchanged by this diagnosis.",
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "fixed_sampling_manifest_sha256": "0e52fa3ca971e7a5f6a7f770188184de962c0d3b53565ed50deb9c80002e51cc",
+  "GT_isolation": {
+    "countmatched_prediction_construction": "Target GT, expression annotation files and labels.json blocked; zero access attempts.",
+    "frozen_feature_extraction": "Target annotation reads blocked; zero attempts; source parameter versions unchanged and zero updates.",
+    "offline_evaluation": "Protocol audit, official TrackEval, score/retrieval relevance and optional supervised diagnostic probe use GT only offline.",
+    "probe_weights": "Never saved, exported or used in TTA; fixed parameters, video-separated folds.",
+    "target_GT_threshold_selection": false
+  },
+  "original_six_published_result_files": "git diff against base_public_commit -- results/positive_free/full is empty",
+  "final_report_and_packaging": "Published in a later same-branch delivery commit. No new model run is required for packaging."
+}

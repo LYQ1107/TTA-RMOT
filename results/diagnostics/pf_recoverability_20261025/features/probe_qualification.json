@@ -1,0 +1,34 @@
+{
+  "protocol": "OFFLINE_SAVED_READOUT_QUALIFICATION_NO_REFITTING",
+  "mixed_frame_query_groups": 69,
+  "eligible_videos": 11,
+  "eligible_video_ids": [
+    "dancetrack0005",
+    "dancetrack0010",
+    "dancetrack0014",
+    "dancetrack0018",
+    "dancetrack0025",
+    "dancetrack0043",
+    "dancetrack0058",
+    "dancetrack0063",
+    "dancetrack0073",
+    "dancetrack0079",
+    "dancetrack0094"
+  ],
+  "same_sample_source_macro_AUROC": 0.6164835902154742,
+  "pcd_probe_macro_AUROC": 0.5864024998082971,
+  "pcd_probe_minus_same_sample_source": {
+    "delta": -0.030081090407177356,
+    "paired_video_CI95": [
+      -0.089035330988456,
+      0.026710082181020535
+    ],
+    "valid_resamples": 2000
+  },
+  "constant_control_max_within_group_score_range": {
+    "text_only": 8.881784197001252e-16,
+    "background_and_text": 1.7763568394002505e-15
+  },
+  "constant_control_interpretation": "mathematically constant within frame/query; raw ~0.5 AUROC can differ at floating-point dot-product roundoff; not real candidate discrimination",
+  "limits": "69 mixed frame-query groups are correlated, not69 independent videos. Pooled OOF AUROC/AP also contain query/scene priors and cross-fold readout calibration differences."
+}

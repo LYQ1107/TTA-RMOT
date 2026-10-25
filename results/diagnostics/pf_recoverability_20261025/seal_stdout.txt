@@ -1,0 +1,81 @@
+{
+  "status": "COMPLETE_DIAGNOSTIC_ONLY_NO_NEW_TTA",
+  "base_public_commit": "29f265cf6b2c8d82948043534e0044b1341d5899",
+  "original_six_published_result_files_unchanged": true,
+  "phases": {
+    "protocol": true,
+    "countmatched425": true,
+    "query_information425": true,
+    "frozen_feature_frames": 75,
+    "frozen_feature_videos": 25,
+    "all17_expression_types": true,
+    "probe_video_folds": 5,
+    "probe_fits": 20
+  },
+  "no_new_full_TTA": true,
+  "no_source_training": true,
+  "no_target_gt_threshold_selection": true,
+  "fixed_feature_manifest_sha256": "0e52fa3ca971e7a5f6a7f770188184de962c0d3b53565ed50deb9c80002e51cc",
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "actual_feature_source_commit": "c6250299e5e8ca2550a6032f05204779aece8d99",
+  "actual_probe_source_commit": "3bb8b03450a80d99255e83f7d3aafcd09d159ee7",
+  "raw_feature_cache": "/data2/user/FlexHook-TTA/results/diagnostics/pf_recoverability_20261025/features/cache",
+  "raw_feature_cache_git_tracked": false,
+  "probe_qualification": {
+    "protocol": "OFFLINE_SAVED_READOUT_QUALIFICATION_NO_REFITTING",
+    "mixed_frame_query_groups": 69,
+    "eligible_videos": 11,
+    "eligible_video_ids": [
+      "dancetrack0005",
+      "dancetrack0010",
+      "dancetrack0014",
+      "dancetrack0018",
+      "dancetrack0025",
+      "dancetrack0043",
+      "dancetrack0058",
+      "dancetrack0063",
+      "dancetrack0073",
+      "dancetrack0079",
+      "dancetrack0094"
+    ],
+    "same_sample_source_macro_AUROC": 0.6164835902154742,
+    "pcd_probe_macro_AUROC": 0.5864024998082971,
+    "pcd_probe_minus_same_sample_source": {
+      "delta": -0.030081090407177356,
+      "paired_video_CI95": [
+        -0.089035330988456,
+        0.026710082181020535
+      ],
+      "valid_resamples": 2000
+    },
+    "constant_control_max_within_group_score_range": {
+      "text_only": 8.881784197001252e-16,
+      "background_and_text": 1.7763568394002505e-15
+    },
+    "constant_control_interpretation": "mathematically constant within frame/query; raw ~0.5 AUROC can differ at floating-point dot-product roundoff; not real candidate discrimination",
+    "limits": "69 mixed frame-query groups are correlated, not69 independent videos. Pooled OOF AUROC/AP also contain query/scene priors and cross-fold readout calibration differences."
+  },
+  "excluded_from_archives": [
+    "target GT",
+    "target images",
+    "checkpoint",
+    "margin streams",
+    "raw feature arrays",
+    "probe weights"
+  ],
+  "stop": "diagnosis completed; do not automatically start another full TTA run"
+}
+{
+  "countmatched_predictions": {
+    "path": "results/diagnostics/pf_recoverability_20261025/archives/countmatched_425_predictions.tar.gz",
+    "bytes": 1397536,
+    "sha256": "3a1fed60131884aa12e7df098819d5593ef92ace9b2776e0adbbbac9e6814764",
+    "verified_entries": 425
+  },
+  "complete_diagnostic_logs": {
+    "path": "results/diagnostics/pf_recoverability_20261025/archives/diagnostic_complete_logs.tar.gz",
+    "bytes": 29556,
+    "sha256": "72f90c8d4e1ae4d17b090965f21fd34264fa5ee9901f401ee2a012231ae39fbc",
+    "verified_entries": 20
+  }
+}
