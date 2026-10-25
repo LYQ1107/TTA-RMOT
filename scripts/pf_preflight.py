@@ -88,11 +88,15 @@ def inventory(dance_root: Path, tracker_root: Path, checkpoint: Path,
 def verify_server_assets(report: dict, dance_root: Path, tracker_root: Path,
                          source_root: Path | None, source_manifest: Path | None,
                          source_result: Path | None, vendor: Path | None,
-                         tracker_receipt: Path | None = None) -> None:
+                         tracker_receipt: Path | None = None,
+                         source_supplement: Path | None = None) -> None:
     """Check actual images/score coverage and source split, without Dance GT."""
+    tracker_keys = {}
     for video, record in report["target_files"].items():
         rows = (tracker_root / f"{video}.txt").read_text().splitlines()
         frames = {int(float(row.split(",")[0])) for row in rows if row.strip()}
+        tracker_keys[video] = {(int(float(row.split(",")[0])), int(float(row.split(",")[1])))
+                               for row in rows if row.strip()}
         images = dance_root / "DanceTrack/training/image_02" / video
         missing = [t for t in sorted(frames) if not (images / f"{t:06d}.png").is_file()]
         record.update(tracker_rows=len(rows), tracker_frames=len(frames), missing_image_frames=missing)
@@ -129,14 +133,25 @@ def verify_server_assets(report: dict, dance_root: Path, tracker_root: Path,
             scores = json.loads(source_result.read_text())
             score_report["bytes"] = source_result.stat().st_size
             score_report["sha256"] = hash_file(source_result)
+            if source_supplement is not None:
+                from flex_tta.dance_io import merge_source_supplement
+                merge_source_supplement(scores, json.loads(source_supplement.read_text()))
+                score_report["supplement"] = {"path": str(source_supplement), "sha256": hash_file(source_supplement)}
             coverage = {}
             for video in report["target_files"]:
                 sentences = [json.loads(p.read_text())["sentence"] for p in (dance_root / "expression" / video).glob("*.json")]
                 observations = [exprs for frames in scores.get(video, {}).values() for exprs in frames.values()]
                 missing = sum(any(s not in exprs or len(exprs[s]) != 2 for s in sentences) for exprs in observations)
                 coverage[video] = {"observation_rows": len(observations), "missing_expression_scores": missing}
+                keys = {(int(t), int(i)) for i, track in scores.get(video, {}).items() for t in track}
+                coverage[video].update(expected_tracker_rows=len(tracker_keys[video]),
+                    missing_tracker_observations=len(tracker_keys[video]-keys),
+                    extra_score_observations=len(keys-tracker_keys[video]))
             score_report["coverage"] = coverage
-            score_report["pass"] = all(x["observation_rows"] and not x["missing_expression_scores"] for x in coverage.values())
+            score_report["all_tracker_candidates_scored"] = all(not x["missing_tracker_observations"] and
+                not x["extra_score_observations"] for x in coverage.values())
+            score_report["pass"] = (score_report["all_tracker_candidates_scored"] and
+                all(x["observation_rows"] and not x["missing_expression_scores"] for x in coverage.values()))
         report["frozen_scores"] = score_report
     if vendor is not None:
         root = str(Path(__file__).resolve().parents[1])
@@ -165,6 +180,7 @@ def main(argv=None):
     p.add_argument("--source-train-manifest", type=Path)
     p.add_argument("--source-root", type=Path)
     p.add_argument("--source-result", type=Path)
+    p.add_argument("--source-supplement", type=Path)
     p.add_argument("--vendor", type=Path)
     p.add_argument("--tracker-receipt", type=Path)
     p.add_argument("--check-checkpoint-hash", action="store_true")
@@ -174,7 +190,7 @@ def main(argv=None):
     report = inventory(args.dance_root, args.tracker_root, args.checkpoint,
                        args.source_train_manifest, args.check_checkpoint_hash)
     verify_server_assets(report, args.dance_root, args.tracker_root, args.source_root,
-                         args.source_train_manifest, args.source_result, args.vendor, args.tracker_receipt)
+                         args.source_train_manifest, args.source_result, args.vendor, args.tracker_receipt, args.source_supplement)
     report["server_assets_pass"] = (
         report["target_inventory_pass"] and report["all_tracker_images_present"] and
         report["checkpoint"]["present"] and report["checkpoint"].get("sha256_valid", True) and
