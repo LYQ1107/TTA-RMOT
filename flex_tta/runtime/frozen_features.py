@@ -62,7 +62,7 @@ class FrozenFeatureCache:
             self.stats["text_encoder_calls"] += 1
         return self.text[sentence]
 
-    def margin(self, candidates, sentence, current_frame):
+    def logits(self, candidates, sentence, current_frame):
         # Only requested past/current frames are retrieved, even when frozen
         # features from a preceding expression still reside in the LRU.
         frame_features = {}
@@ -83,4 +83,8 @@ class FrozenFeatureCache:
             output = output[:, -1]
         if output.ndim != 3 or output.shape[1:] != (1, 2):
             raise RuntimeError(f"unexpected cached decode shape: {output.shape}")
-        return output[:, 0, 1] - output[:, 0, 0], ids
+        return output[:, 0, :], ids
+
+    def margin(self, candidates, sentence, current_frame):
+        logits, ids = self.logits(candidates, sentence, current_frame)
+        return logits[:, 1] - logits[:, 0], ids

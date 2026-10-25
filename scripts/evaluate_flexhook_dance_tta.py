@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -15,7 +16,8 @@ def attach_gt(method_results: Path, dataset_root: Path, videos: list[str]) -> in
             if not expression_dir.is_dir():
                 continue
             target = method_results / video / expression_dir.name / "gt.txt"
-            target.parent.mkdir(parents=True, exist_ok=True)
+            if not (target.parent / "predict.txt").is_file():
+                raise ValueError(f"prediction must already be sealed: {target.parent}")
             if not target.exists():
                 target.symlink_to(expression_dir / "gt.txt")
                 attached += 1
@@ -38,14 +40,17 @@ def main() -> int:
     reports = []
     for method in args.methods:
         method_results = (args.output_root / method / "results").resolve()
+        predictions = list(method_results.glob("*/*/predict.txt"))
+        if len(predictions) != 425:
+            raise ValueError(f"official full evaluation needs 425 sealed predictions, found {len(predictions)}")
         attached = attach_gt(method_results, args.dataset_root, videos)
         log_path = args.output_root / method / "trackeval.log"
         command = [
-            "python3", "./TrackEval/scripts/run_mot_challenge.py",
+            sys.executable, "./TrackEval/scripts/run_mot_challenge.py",
             "--METRICS", "HOTA", "CLEAR", "Identity",
             "--SEQMAP_FILE", "./seqmaps/dance.txt",
             "--SKIP_SPLIT_FOL", "True",
-            "--GT_FOLDER", "./datasets/refer-kitti/KITTI/training/image_02",
+            "--GT_FOLDER", str(args.dataset_root / "DanceTrack/training/image_02"),
             "--TRACKERS_FOLDER", str(method_results),
             "--GT_LOC_FORMAT", "{gt_folder}{video_id}/{expression_id}/gt.txt",
             "--TRACKERS_TO_EVAL", str(method_results),

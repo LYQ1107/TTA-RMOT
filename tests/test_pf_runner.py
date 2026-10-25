@@ -135,6 +135,7 @@ def test_four_gpu_script_stays_dry_by_default(tmp_path):
     data, track, _ = fixture_files(tmp_path, videos=25)
     env = os.environ.copy()
     env["PF_TRACKER_ROOT"] = str(track)
+    env["PF_DATASET_ROOT"] = str(data)
     proc = subprocess.run(["bash", str(ROOT / "scripts/run_pf_4gpu.sh")],
                           capture_output=True, text=True, env=env, check=False)
     assert proc.returncode == 0, proc.stderr

@@ -97,6 +97,7 @@ def main():
     p.add_argument("--video", default="dancetrack0004")
     p.add_argument("--rollback-probe", action="store_true")
     p.add_argument("--no-evidence-probe", action="store_true")
+    p.add_argument("--frozen-cache", action="store_true")
     args = p.parse_args()
     if len(os.environ.get("CUDA_VISIBLE_DEVICES", "").split(",")) != 1 or not os.environ.get("CUDA_VISIBLE_DEVICES"):
         p.error("select exactly one physical GPU with CUDA_VISIBLE_DEVICES")
@@ -115,6 +116,8 @@ def main():
                "--strict-initial-sign", "--output-root", str(run_root)]
         if rollback:
             cmd.extend(["--max-adapter-delta-norm", "1e-12"])
+        if args.frozen_cache:
+            cmd.append("--frozen-cache")
         if no_evidence:
             cmd.extend(["--min-separation", "100000"])
         print(f"START {name} on GPU {os.environ['CUDA_VISIBLE_DEVICES']}", flush=True)

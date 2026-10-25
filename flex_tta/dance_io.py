@@ -68,3 +68,14 @@ def source_score_rows(source: dict[str, Any], video: str, sentence: str):
     for frame_id, rows in score_frames(source, video, sentence).items():
         for track_id, margin in rows.items():
             yield frame_id, track_id, margin
+
+
+def merge_source_supplement(source: dict[str, Any], supplement: dict[str, Any]):
+    """Only append missing observations; never change an existing Frozen logit."""
+    for video, tracks in supplement.items():
+        for tid, frames in tracks.items():
+            destination = source.setdefault(video, {}).setdefault(tid, {})
+            for frame, expressions in frames.items():
+                if frame in destination:
+                    raise ValueError(f"supplement must not replace Frozen observation: {video}/{tid}/{frame}")
+                destination[frame] = expressions

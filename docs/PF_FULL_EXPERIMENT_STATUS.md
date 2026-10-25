@@ -1,0 +1,58 @@
+# Positive-Free full-suite status — 2026-10-25
+
+Project: TTA-RMOT only, `/data2/user/FlexHook-TTA`.
+User authorized all full target-domain experiments, not source training or sharing occupied GPUs.
+Branch: `research/v2dance-positivefree-four-gpu-full-20261025`, from verified `a0cb27e`.
+
+## Completed engineering
+
+- FP32 frozen multi-scale visual/text encoder reuse; original C-Hook/PCD decode retained.
+- Six real frame probes, including 22 candidates: zero selection/sign mismatches; maximum margin error 2.25067e-4.
+- LoRA gradient maximum absolute difference 4.88758e-6 (gradient magnitude 0.339613).
+- Weighted complete-video LPT groups: 52,688 / 53,495 / 52,621 / 52,281 tracker rows; 102 / 119 / 102 / 102 episodes.
+- At most four genuinely idle GPUs; safe 1–3 GPU fallback; no occupied-card override. Initial snapshot: only GPU5 idle.
+- Atomic per-episode prediction/margin sealing and completion receipts; partial attempts preserved, whole episode restarted from seed 0.
+- Same seed 0 reset at each independent episode, so resume/shard scheduling cannot change LoRA initial state.
+- 33 focused CPU tests passed. Final cache-enabled ZERO_UPDATE/PF_RANK/PF_IDENTITY/PF_HYBRID smoke passed (0/3/3/3 updates).
+
+## User-approved correction to the Frozen protocol
+
+Full candidate checking discovered that the old pinned Frozen stream has 210,393 observations,
+not all 211,085 fixed tracker observations. All 692 omissions are final observations of tracks;
+14 one-observation tracks disappear altogether. Vendor `data/mydataloader.py` uses an exclusive
+`range(sample_start, obj_last-frame_num)` and drops every final track observation.
+The former preflight checked expressions on existing observations but did not detect missing observations.
+That gap is fixed; old raw preflight/smoke records are not rewritten.
+
+Four GT-free GPU probes confirmed positive source margins among omitted rows. User explicitly chose:
+**complete all candidates and rebuild the matched Frozen baseline**, retaining old 8.206 as historical only.
+
+The original score JSON and SHA256 `fbf498a24b73d6b2db6d9c757d313f660c0d5b09a7dbfec5c2635b8ca517ee69`
+are unchanged. Same strictly loaded V2 checkpoint generated a separate, append-only supplement:
+
+- `/data2/user/FlexHook-TTA/results/runs/pf_frozen_complete_20261025/source_supplement.json`
+- SHA256 `3693edc6ef153b8ce0ca87aeec1b196d6b360ff775b8fe44755c4b15d7397639`
+- 692 observations × 17 expressions = 11,764 actual two-class logits; 384 source-positive rows.
+- Eight additional original-vs-cached complete-candidate comparisons: zero sign mismatches.
+- Target GT never opened. Source checkpoint and tracker bank unchanged.
+
+Every full method reads the same original stream + supplement. Supplement overlap is rejected.
+The old 8.206 score cannot be used as a directly matched gain reference for the completed bank.
+
+## Formal experiment sequence
+
+| Stage | Status |
+|---|---|
+| Complete-bank ZERO_UPDATE | ready for full launch; metrics pending |
+| RELATIVE_ONLY (CPU) | after ZERO_UPDATE baseline audit/evaluation |
+| PF_RANK | after RELATIVE_ONLY |
+| PF_RANK_GUARD | validate exact CPU derivation of PF_RANK pre-update margins |
+| PF_IDENTITY | after rank/guard |
+| PF_HYBRID | after identity |
+
+For each: all 25 videos / 425 expressions / all 211,085 observations per query bank;
+full ordered frames, exact MOT rows, no target GT in adaptation, original defaults, FP32.
+GT is opened only by independent evaluation after predictions are sealed/audited.
+These are development-target results, not an independent blind test.
+
+No scientific success, HOTA gain or final completion is claimed at this engineering stage.

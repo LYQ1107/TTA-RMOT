@@ -1881,6 +1881,11 @@ Receipt: docs/FLEXHOOK_POSITIVEFREE_SERVER_SMOKE_20261025.md and
 results/positive_free/server_smoke_20261025/validation_summary.json.
 # 2026-10-25 Positive-Free full-suite execution start
 
+- Engineering follow-up: 33 focused tests passed; cache-enabled four-method smoke passed. LPT workload equals the requested 52,688/53,495/52,621/52,281 row groups; dynamic launcher rejects occupied GPUs and writes restartable episode receipts.
+- Scientific input defect found before full launch: old Frozen has 210,393/211,085 observations. Vendor exclusive range omits 692 final track observations (including 14 single-observation tracks). Four source-only GPU probes returned clearly positive margins on omitted rows; this is not numerical cache noise.
+- User explicitly chose complete candidates + rebuilt matched Frozen, not strict historical 8.206 sampling. Original Frozen/hash preserved. Separate same-V2 supplement has 11,764 true logits, 384 positives, SHA256 `3693edc6ef153b8ce0ca87aeec1b196d6b360ff775b8fe44755c4b15d7397639`. Preflight now requires exact score/tracker observation coverage and passes with this supplement.
+- Full runner uses per-episode seed 0 reset for schedule-independent recovery, no changed algorithmic hyperparameters. Frozen LRU limit is 16 GiB/worker to retain the longest video across expressions; GPU admission requires >=24 GiB free and no compute processes. All target labels stayed closed.
+
 - User explicitly authorized full V2→Dance online TTA and sealed-prediction official evaluation, but not source retraining or sharing occupied GPUs.
 - Project is TTA-RMOT at `/data2/user/FlexHook-TTA`, independent of LocateMOT/GroundJEV. Verified remote prep HEAD `a0cb27e`; created the requested separate full-run branch.
 - Initial resource snapshot: only physical GPU5 has no compute process; other GPUs belong to existing jobs and are not interrupted.

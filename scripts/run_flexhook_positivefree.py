@@ -22,6 +22,8 @@ import json
 import os
 import sys
 import random
+import time
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -38,9 +40,11 @@ from flex_tta.adaptation.positive_free import (
     CausalRankMemory, CausalRelativeSelector, RankConfig, RelativeConfig,
     positive_free_rank_loss,
 )
+from flex_tta.runtime.pf_receipts import EpisodeStore, atomic_json, file_sha
 
 METHODS = ("RELATIVE_ONLY", "ZERO_UPDATE", "PF_RANK", "PF_RANK_GUARD", "PF_IDENTITY", "PF_HYBRID")
 SOURCE_SHA256 = "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613"
+FROZEN_SHA256 = "fbf498a24b73d6b2db6d9c757d313f660c0d5b09a7dbfec5c2635b8ca517ee69"
 
 
 def parse_args(argv=None):
@@ -52,6 +56,7 @@ def parse_args(argv=None):
     p.add_argument("--tracker-root", type=Path, default=Path("/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs"))
     p.add_argument("--checkpoint", type=Path, default=Path("/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth"))
     p.add_argument("--source-result", type=Path, default=Path("/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json"))
+    p.add_argument("--source-supplement", type=Path)
     p.add_argument("--output-root", type=Path, required=True)
     p.add_argument("--videos", nargs="*", default=[])
     p.add_argument("--max-expressions", type=int, default=1)
@@ -66,6 +71,9 @@ def parse_args(argv=None):
     p.add_argument("--max-adapter-delta-norm", type=float, default=2.0)
     p.add_argument("--strict-initial-sign", action="store_true")
     p.add_argument("--seed", type=int, default=0)
+    p.add_argument("--frozen-cache", action="store_true", help="reuse equivalent frozen encoders, FP32 only")
+    p.add_argument("--feature-cache-mib", type=int, default=16384)
+    p.add_argument("--resume", action="store_true")
     args = p.parse_args(argv)
     if args.scope == "full":
         if os.environ.get("FLEXHOOK_FULL_RUN_AUTHORIZED") != "YES":
@@ -91,6 +99,7 @@ def plan_receipt(args) -> dict[str, Any]:
         "dataset_root": str(args.dataset_root),
         "tracker_root": str(args.tracker_root),
         "source_result": str(args.source_result),
+        "source_supplement": str(args.source_supplement) if args.source_supplement else None,
         "output_root": str(args.output_root),
         "videos": args.videos or "all_25_if_full_else_first",
         "max_expressions": args.max_expressions,
@@ -100,6 +109,11 @@ def plan_receipt(args) -> dict[str, Any]:
         "lr": args.lr,
         "update_interval": args.update_interval,
         "seed": args.seed,
+        "frozen_cache": args.frozen_cache,
+        "feature_cache_mib": args.feature_cache_mib,
+        "experiment_commit": getattr(args, "experiment_commit", None),
+        "gpu_uuid": os.environ.get("PF_GPU_UUID"),
+        "physical_gpu": os.environ.get("CUDA_VISIBLE_DEVICES"),
         "nce_weight": args.nce_weight,
         "no_target_gt": True,
         "source_free_prediction": True,
@@ -128,6 +142,60 @@ def _assets(args) -> None:
                 h.update(chunk)
         if h.hexdigest() != SOURCE_SHA256:
             raise RuntimeError("source checkpoint SHA256 mismatch")
+    if args.scope == "full" and file_sha(args.source_result) != FROZEN_SHA256:
+        raise RuntimeError("frozen score SHA256 mismatch")
+    if args.source_supplement is not None:
+        recorded = json.loads((args.source_supplement.parent / "completion_receipt.json").read_text())
+        if (recorded["original_sha256"] != FROZEN_SHA256 or recorded["checkpoint_sha256"] != SOURCE_SHA256 or
+                recorded["supplement_sha256"] != file_sha(args.source_supplement)):
+            raise ValueError("Frozen supplement receipt does not match pinned source assets")
+
+
+def episode_config(args):
+    return {key: (str(value) if isinstance(value, Path) else value) for key, value in vars(args).items()
+            if key not in {"output_root", "videos", "resume", "strict_initial_sign", "experiment_commit"}}
+
+
+def validate_frames(args, tracks, scores):
+    if args.scope == "full" and (set(tracks) != set(scores) or
+            any(set(tracks[t]) != set(scores[t]) for t in tracks)):
+        raise ValueError("Frozen score stream does not cover every fixed MOT candidate/frame")
+    frames = sorted(set(tracks) & set(scores))
+    return frames[:args.max_frames] if args.scope == "smoke" else frames
+
+
+def restore_counters(stats, record):
+    for key, value in record.get("counter_delta", {}).items():
+        if key.startswith("max_") or key == "source_max_abs_error":
+            stats[key] = max(stats.get(key, 0), value)
+        elif isinstance(value, (int, float)) and not isinstance(value, bool):
+            stats[key] = stats.get(key, 0) + value
+    stats["episodes"] += 1
+    stats["episode_records"].append(record)
+
+
+def record_delta(stats, before):
+    return {key: (value if key.startswith("max_") or key == "source_max_abs_error" else value-before.get(key, 0))
+            for key, value in stats.items() if isinstance(value, (int, float)) and not isinstance(value, bool)
+            and key != "episodes"}
+
+
+def runtime_metadata(out):
+    out.mkdir(parents=True, exist_ok=True)
+    for name in ("completed_episodes.jsonl", "failed_episodes.jsonl"):
+        (out / name).touch(exist_ok=True)
+
+
+def deny_target_gt(args):
+    """Enforce the separation, including any accidental vendor opens."""
+    root = args.dataset_root.resolve()
+    def audit(event, values):
+        if event != "open" or not values or not isinstance(values[0], (str, bytes, os.PathLike)):
+            return
+        path = Path(os.fsdecode(values[0])).absolute()
+        if path.is_relative_to(root) and ("gt_template" in path.parts or path.name in {"labels.json", "gt.txt"}):
+            raise PermissionError(f"target GT is not an adaptation input: {path}")
+    sys.addaudithook(audit)
 
 
 def _episodic_replay(args, source: dict, videos: list[str]):
@@ -135,9 +203,10 @@ def _episodic_replay(args, source: dict, videos: list[str]):
 
     out = args.output_root / args.method
     root = out / "results"
-    if out.exists():
+    if out.exists() and not args.resume:
         raise FileExistsError(f"run root must be new: {out}")
-    root.mkdir(parents=True)
+    root.mkdir(parents=True, exist_ok=args.resume)
+    runtime_metadata(out)
     selector = CausalRelativeSelector(RelativeConfig())
     stats = {"episodes": 0, "frames": 0, "candidates": 0, "selected": 0, "optimizer_steps": 0}
     stats["episode_records"] = []
@@ -145,27 +214,39 @@ def _episodic_replay(args, source: dict, videos: list[str]):
         tracker = load_tracker_lines(args.tracker_root, video)
         exprs = load_expressions(args.dataset_root, video)
         for expr_id, sentence in (exprs if args.scope == "full" else exprs[:1]):
+            store = EpisodeStore(out, video, expr_id, episode_config(args), resume=args.resume)
+            sealed = store.completed()
+            if sealed is not None:
+                restore_counters(stats, sealed)
+                continue
+            started = time.perf_counter()
+            counters_before = {k: v for k, v in stats.items() if isinstance(v, (int, float))}
             before = {key: stats[key] for key in ("frames", "candidates", "selected")}
             selector.reset()
             scores = score_frames(source, video, sentence)
-            output = root / video / expr_id / "predict.txt"
-            output.parent.mkdir(parents=True, exist_ok=True)
-            frames = sorted(scores) if args.scope == "full" else sorted(scores)[: args.max_frames]
-            with output.open("w", encoding="utf-8") as handle:
+            frames = validate_frames(args, tracker, scores)
+            with store.attempt() as (handle, margin_handle):
                 for t in frames:
                     rows = tracker.get(t, {})
                     margins = {i: value for i, value in scores[t].items() if i in rows}
                     selected = selector.step(t, margins)
+                    margin_handle.write(json.dumps(dict(frame=t, ids=list(margins),
+                        adapted=list(margins.values()), frozen=list(margins.values())))+"\n")
                     for i in sorted(selected):
                         handle.write(rows[i] + "\n")
                     stats["frames"] += 1
                     stats["candidates"] += len(margins)
                     stats["selected"] += len(selected)
             stats["episodes"] += 1
-            stats["episode_records"].append({"video": video, "expression_id": expr_id, "sentence": sentence,
+            record = {"video": video, "expression_id": expr_id, "sentence": sentence,
+                "wall_seconds": time.perf_counter()-started, "full_frame_coverage": len(frames) == len(tracker),
+                "counter_delta": record_delta(stats, counters_before),
                 "stats": {"frames": stats["frames"] - before["frames"],
                           "candidate_rows": stats["candidates"] - before["candidates"],
-                          "selected_rows": stats["selected"] - before["selected"], "optimizer_steps": 0}})
+                          "selected_rows": stats["selected"] - before["selected"], "optimizer_steps": 0}}
+            stats["episode_records"].append(store.finish(record))
+            print(json.dumps(dict(event="episode_complete", method=args.method, video=video,
+                                  expression=expr_id, completed=stats["episodes"], seconds=record["wall_seconds"])), flush=True)
     return stats
 
 
@@ -185,9 +266,10 @@ def _model_run(args, source: dict, videos: list[str]):
 
     device = torch.device("cuda:0")
     out = args.output_root / args.method
-    if out.exists():
+    if out.exists() and not args.resume:
         raise FileExistsError(f"run root must be new: {out}")
-    out.mkdir(parents=True)
+    out.mkdir(parents=True, exist_ok=args.resume)
+    runtime_metadata(out)
     _cfg, model, _logger = _load_model(args.vendor.resolve(), args.checkpoint.resolve(),
                                       args.dataset_root.resolve(), args.tracker_root.resolve(),
                                       out, device, args.batch_size, strict_checkpoint=True)
@@ -221,14 +303,30 @@ def _model_run(args, source: dict, videos: list[str]):
     for video in videos:
         tracks = load_tracker_lines(args.tracker_root, video)
         episode = DanceEpisode(args.dataset_root, args.tracker_root, video)
+        from flex_tta.runtime.frozen_features import FrozenFeatureCache
+        cache = (FrozenFeatureCache(model, episode, tokenizer, device,
+                                    max_bytes=args.feature_cache_mib << 20) if args.frozen_cache else None)
+        if cache is not None:
+            stats.setdefault("frozen_cache", []).append({"video": video, "stats": cache.stats})
         exprs = load_expressions(args.dataset_root, video)
         for expr_id, sentence in (exprs if args.scope == "full" else exprs[:1]):
+            store = EpisodeStore(out, video, expr_id, episode_config(args), resume=args.resume)
+            sealed = store.completed()
+            if sealed is not None:
+                restore_counters(stats, sealed)
+                continue
+            torch.cuda.synchronize(device)
+            started = time.perf_counter()
+            counters_before = {k: v for k, v in stats.items() if isinstance(v, (int, float))}
             before = {key: stats[key] for key in ("frames", "candidates", "selected", "optimizer_steps", "rollback_updates")}
             memory.reset()
             episode_optimizer_steps = 0
             if identity_memory is not None:
                 identity_memory.reset()
             if adapter is not None:
+                # Same registered seed at every independent episode makes
+                # resume/shard assignment unable to change LoRA initialization.
+                torch.manual_seed(args.seed)
                 adapter.reset_episode()
                 trainables = trainable_parameters(adapter)
                 originals = [p.detach().clone() for p in trainables]
@@ -243,12 +341,8 @@ def _model_run(args, source: dict, videos: list[str]):
                 raise RuntimeError("episode memory/adapter reset failed")
             stats["episode_resets"].append({"video": video, "expression_id": expr_id, "passed": reset_ok})
             source_frames = score_frames(source, video, sentence)
-            frames = sorted(set(source_frames) & set(tracks))
-            if args.scope == "smoke":
-                frames = frames[:args.max_frames]
-            prediction = out / "results" / video / expr_id / "predict.txt"
-            prediction.parent.mkdir(parents=True, exist_ok=True)
-            with prediction.open("w", encoding="utf-8") as handle:
+            frames = validate_frames(args, tracks, source_frames)
+            with store.attempt() as (handle, margin_handle):
                 for frame_n, t in enumerate(frames):
                     current = [(i, h) for i, h in episode.current_candidates(t) if i in source_frames[t]]
                     if not current:
@@ -280,7 +374,8 @@ def _model_run(args, source: dict, videos: list[str]):
                         with torch.set_grad_enabled(will_update):
                             if tap is not None:
                                 tap.clear()
-                            output, ids = _model_margin(model, episode, batch, sentence, tokenizer, device)
+                            output, ids = (cache.margin(batch, sentence, t) if cache is not None else
+                                           _model_margin(model, episode, batch, sentence, tokenizer, device))
                             frozen = torch.tensor([source_scores[i] for i in ids], device=device, dtype=output.dtype)
                             if tap is not None:
                                 features = tap.take()
@@ -334,6 +429,13 @@ def _model_run(args, source: dict, videos: list[str]):
                     for i in sorted(selected):
                         handle.write(tracks[t][i] + "\n")
                     handle.flush()
+                    margin_handle.write(json.dumps(dict(frame=t, ids=list(prediction_margins),
+                        adapted=list(prediction_margins.values()),
+                        frozen=[source_scores[i] for i in prediction_margins]))+"\n")
+                    stats["margin_abs_change_sum"] = stats.get("margin_abs_change_sum", 0.) + sum(
+                        abs(v-source_scores[i]) for i, v in prediction_margins.items())
+                    stats["new_selected_from_negative"] = stats.get("new_selected_from_negative", 0) + sum(source_scores[i] <= 0 for i in selected)
+                    stats["lost_frozen_positive"] = stats.get("lost_frozen_positive", 0) + sum(v > 0 and i not in selected for i, v in source_scores.items())
                     if args.method == "ZERO_UPDATE":
                         stats["prediction_source_selection_mismatches"] += len(
                             selected ^ {i for i, val in source_scores.items() if val > 0})
@@ -388,12 +490,20 @@ def _model_run(args, source: dict, videos: list[str]):
                     # evidence bank. No student prediction self-reinforcement.
                     memory.observe(t, source_scores)
             stats["episodes"] += 1
-            stats["episode_records"].append({"video": video, "expression_id": expr_id, "sentence": sentence,
+            torch.cuda.synchronize(device)
+            record = {"video": video, "expression_id": expr_id, "sentence": sentence,
+                "wall_seconds": time.perf_counter()-started, "full_frame_coverage": len(frames) == len(tracks),
+                "experiment_commit": args.experiment_commit,
+                "gpu_uuid": os.environ.get("PF_GPU_UUID"),
+                "counter_delta": record_delta(stats, counters_before),
                 "stats": {"frames": stats["frames"] - before["frames"],
                           "candidate_rows": stats["candidates"] - before["candidates"],
                           "selected_rows": stats["selected"] - before["selected"],
                           "optimizer_steps": stats["optimizer_steps"] - before["optimizer_steps"],
-                          "rollback_updates": stats["rollback_updates"] - before["rollback_updates"]}})
+                          "rollback_updates": stats["rollback_updates"] - before["rollback_updates"]}}
+            stats["episode_records"].append(store.finish(record))
+            print(json.dumps(dict(event="episode_complete", method=args.method, video=video,
+                                  expression=expr_id, completed=stats["episodes"], seconds=record["wall_seconds"])), flush=True)
     stats["source_mae_before_updates"] = stats["source_abs_error_sum"] / max(stats["source_comparison_rows"], 1)
     stats["frozen_parameters_have_grad"] = any(p.grad is not None for p in model.parameters() if not p.requires_grad)
     stats["gpu_peak_allocated_bytes"] = torch.cuda.max_memory_allocated(device)
@@ -417,17 +527,26 @@ def run(args):
     # Resolve all caller paths before that compatibility boundary.
     for name in ("vendor", "dataset_root", "tracker_root", "checkpoint", "source_result", "output_root"):
         setattr(args, name, getattr(args, name).resolve())
+    if args.source_supplement is not None:
+        args.source_supplement = args.source_supplement.resolve()
+    args.experiment_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     receipt = plan_receipt(args)
     if args.scope == "plan":
         return receipt
     random.seed(args.seed)
     torch.manual_seed(args.seed)
     _assets(args)
+    deny_target_gt(args)
     from flex_tta.dance_io import dance_videos
     videos = args.videos or dance_videos(args.tracker_root)
     if args.scope == "smoke":
         videos = videos[:1]
     source = json.loads(args.source_result.read_text(encoding="utf-8"))
+    if args.source_supplement is not None:
+        from flex_tta.dance_io import merge_source_supplement
+        merge_source_supplement(source, json.loads(args.source_supplement.read_text()))
+        args.source_supplement_sha256 = file_sha(args.source_supplement)
+        receipt["source_supplement_sha256"] = args.source_supplement_sha256
     stats = (_episodic_replay(args, source, videos) if args.method == "RELATIVE_ONLY"
              else _model_run(args, source, videos))
     receipt["episodes"] = stats.pop("episode_records")
@@ -437,8 +556,9 @@ def run(args):
         "batch_size", "rank", "lr", "update_interval", "min_history", "nce_weight",
         "min_separation", "max_adapter_delta_norm", "seed")}
     receipt["stats"] = stats
+    receipt["status"] = "complete"
     out = args.output_root / args.method
-    (out / "run_metadata.json").write_text(json.dumps(receipt, indent=2) + "\n", encoding="utf-8")
+    atomic_json(out / "run_metadata.json", receipt)
     return receipt
 
 
