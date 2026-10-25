@@ -6,6 +6,7 @@ import argparse
 import gzip
 import json
 import sys
+import subprocess
 import time
 from pathlib import Path
 
@@ -61,6 +62,7 @@ def derive(rank_root, output_root, tracker_root, *, one_episode=None):
                                          optimizer_steps=0, rank_optimizer_steps_reused=old["stats"]["optimizer_steps"]))
         records.append(store.seal(pp, mp, record))
     result = dict(method="PF_RANK_GUARD", status="complete", scope="equivalence" if one_episode else "full",
+                  derivation_experiment_commit=subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
                   source_free_prediction=True, target_gt_opened=False, target_labels_opened=False,
                   future_frames_used=False, tracker_geometry_changed=False, tracker_ids_changed=False,
                   derived_from=str(rank_root), additional_gpu_forward_calls=0,

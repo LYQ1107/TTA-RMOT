@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from flex_tta.runtime.pf_shards import weighted_manifest, save_manifest, eligible_gpus, gpu_snapshot
+from flex_tta.runtime.pf_shards import weighted_manifest, save_manifest, eligible_gpus, gpu_snapshot, whole_video_queue
 
 
 def measured_rates(status, manifest):
@@ -56,16 +56,20 @@ def main():
     # A new GPU has an explicitly estimated (median), not falsely measured rate.
     median = statistics.median(rates.values())
     capacities = [rates.get(g["uuid"], median) for g in available]
-    plan = weighted_manifest(args.tracker_root, args.dataset_root, num_shards=len(available),
-                             row_weight=0., frame_weight=1., capacities=capacities)
-    plan["protocol"] = "whole-video LPT normalized by source-only measured per-GPU active-frame throughput"
+    # Frozen timings alone do not predict query-dependent backward work.
+    # A card therefore pulls another WHOLE VIDEO after finishing its 17 episodes.
+    video_seconds = {}
+    for path in args.zero_root.glob("shard*/ZERO_UPDATE/run_metadata.json"):
+        for episode in json.loads(path.read_text())["episodes"]:
+            video = episode["video"]
+            video_seconds[video] = video_seconds.get(video, 0.)+episode["wall_seconds"]
+    plan = whole_video_queue(weighted_manifest(args.tracker_root, args.dataset_root), available, video_seconds)
     plan["profile_source"] = str(args.zero_root.resolve())
     plan["metrics_or_gt_used"] = False
     plan["timing_caveat"] = "shared-GPU contention can change; timings are estimates, not reserved throughput"
-    for shard, gpu, rate in zip(plan["shards"], available, capacities):
-        shard.update(preferred_gpu_uuid=gpu["uuid"], preferred_physical_gpu=gpu["index"],
-                     estimated_active_frame_fps=rate, rate_measured=gpu["uuid"] in rates,
-                     estimated_seconds=shard["cost"]/rate)
+    plan["source_only_card_rate_reference"] = [dict(gpu=g["index"], uuid=g["uuid"], rate=rate,
+                                                   rate_measured=g["uuid"] in rates)
+                                               for g, rate in zip(available, capacities)]
     save_manifest(active, plan)
     print(json.dumps(dict(event="profiled_schedule", source_only_rates=rates, shards=plan["shards"])), flush=True)
 

@@ -1,0 +1,26 @@
+diff --git a/data/mydataloader.py b/data/mydataloader.py
+index aeebd74..418aaab 100644
+--- a/data/mydataloader.py
++++ b/data/mydataloader.py
+@@ -168,7 +168,13 @@ class RMOT_Dataset(Dataset):
+ 
+     def _parse_data(self):
+ 
+-        labels = json.load(open(join(self.data_root, 'labels.json')))
++        # The official test path is candidate/tracklet driven and must not
++        # open target annotations.  Training and validation retain the
++        # original label-backed behavior; source-free Dance inference enters
++        # only the branch below that reads expressions and tracker rows.
++        labels = None
++        if self.mode != 'test':
++            labels = json.load(open(join(self.data_root, 'labels.json')))
+ 
+         if self.opt.DATA.DATASET=='kitti-1':
+             newsent = json.load(open(join(self.data_root,'newsent.json'),'r'))
+@@ -632,4 +638,4 @@ class RMOT_Dataset(Dataset):
+ 
+ if __name__ == '__main__':
+     dataset = RMOT_Dataset('train')
+-    print(len(dataset))
+\ No newline at end of file
++    print(len(dataset))

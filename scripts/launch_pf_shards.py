@@ -70,6 +70,8 @@ def main():
     elapsed_before = previous.get("wall_seconds", 0.)
     requested = env.get("PF_GPUS", "auto")
     requested = None if requested == "auto" else [int(v) for v in requested.split(",")]
+    if requested is None and manifest.get("scheduler") == "whole_video_queue":
+        requested = manifest["registered_physical_gpus"]
     if requested is not None and (len(set(requested)) != len(requested) or len(requested) > 4):
         raise ValueError("PF_GPUS must contain at most four distinct physical indices")
     if method != "RELATIVE_ONLY":

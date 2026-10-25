@@ -5,7 +5,7 @@ import json
 import pytest
 
 from test_pf_runner import fixture_files, runner, preflight
-from flex_tta.runtime.pf_shards import weighted_manifest, idle_gpus, eligible_gpus, rebalance_unstarted
+from flex_tta.runtime.pf_shards import weighted_manifest, idle_gpus, eligible_gpus, rebalance_unstarted, whole_video_queue
 from flex_tta.runtime.pf_receipts import EpisodeStore
 from flex_tta.dance_io import merge_source_supplement
 
@@ -30,6 +30,20 @@ def test_measured_capacity_schedule_preserves_coverage_and_loads_faster_gpu(tmp_
     assert sum(s["episodes"] for s in manifest["shards"]) == 425
     status = {"completed": [dict(shard=0, gpu_uuid="fast", exit_status=0, started_at=0., ended_at=20.)]}
     assert measured_rates(status, manifest)["fast"] == manifest["shards"][0]["estimated_forward_calls"]/20.
+
+
+def test_whole_video_queue_keeps_all_episodes_and_four_registered_cards(tmp_path):
+    data, tracks, _ = fixture_files(tmp_path, videos=25)
+    manifest = weighted_manifest(tracks, data)
+    times = {r["video"]: float(i+1) for i, r in enumerate(manifest["videos"])}
+    cards = [dict(index=i, uuid=f"gpu-{i}") for i in (6, 4, 0, 1)]
+    queue = whole_video_queue(manifest, cards, times)
+    assert len(queue["shards"]) == len({s["videos"][0] for s in queue["shards"]}) == 25
+    assert all(s["episodes"] == 17 and len(s["videos"]) == 1 for s in queue["shards"])
+    assert sum(s["episodes"] for s in queue["shards"]) == 425
+    assert queue["registered_physical_gpus"] == [6, 4, 0, 1]
+    assert queue["max_concurrent_workers"] == 4
+    assert [s["cost"] for s in queue["shards"]] == sorted(times.values(), reverse=True)
 
 
 def test_dynamic_gpu_selection_never_shares():

@@ -89,6 +89,23 @@ def eligible_gpus(snapshot, *, shared=False, requested=None, memory_budget_mib=2
                   key=lambda r: (len(r["processes"]), -r["free_mib"], r["utilization"], r["index"]))[:limit]
 
 
+def whole_video_queue(manifest, selected_gpus, video_seconds):
+    """At most four registered cards pull entire videos; model loads once per 17 queries."""
+    if not 1 <= len(selected_gpus) <= 4:
+        raise ValueError("register one to four physical cards")
+    jobs = []
+    for record in sorted(manifest["videos"], key=lambda r: (-video_seconds[r["video"]], r["video"])):
+        jobs.append(dict(shard=len(jobs), videos=[record["video"]], episodes=record["expressions_count"],
+                         tracker_rows=record["tracker_rows"], estimated_forward_calls=record["estimated_forward_calls"],
+                         cost=video_seconds[record["video"]], source_video_seconds=video_seconds[record["video"]]))
+    return dict(manifest, shards=jobs, scheduler="whole_video_queue",
+                protocol="longest source-only measured video first; at most four simultaneous complete-video jobs",
+                registered_physical_gpus=[g["index"] for g in selected_gpus],
+                registered_gpu_uuids=[g["uuid"] for g in selected_gpus],
+                max_concurrent_workers=len(selected_gpus), model_loads=25,
+                queries_per_model_load=17, no_mid_video_or_episode_handoff=True)
+
+
 def rebalance_unstarted(manifest, completed_shards, *, num_shards=4):
     """Retain sealed groups verbatim; LPT only the remaining whole videos."""
     completed = set(completed_shards)

@@ -19,6 +19,7 @@ def generate(publish, output):
     base = reports["ZERO_UPDATE"]["metrics"]
     primary = ("PF_RANK", "PF_IDENTITY", "PF_HYBRID")
     best = max(primary, key=lambda m: reports[m]["metrics"]["HOTA"])
+    best_overall = max(ORDER, key=lambda m: reports[m]["metrics"]["HOTA"])
     delta = reports[best]["metrics"]["HOTA"] - base["HOTA"]
     recovered = attribution[best]["recovered_gt"]-attribution[best]["lost_gt"]
     if delta <= 0:
@@ -29,10 +30,12 @@ def generate(publish, output):
         verdict = "最优主 TTA 同时提升 HOTA 与离线净 GT 恢复；这支持本开发集上的选择改善，但不等同于独立盲测泛化或已证明学到新语义。"
     lines = ["# FlexHook V2→Dance Positive-Free TTA：完整实验报告", "",
              f"全部六种方法均已完成 25 视频 / 425 表达。主 TTA 最优：{best}，HOTA {reports[best]['metrics']['HOTA']:.4f}，相对匹配基线 {delta:+.4f} 个百分点。",
+             f"含冻结基线和无梯度/保留消融在内，全部方法中最高 HOTA 为 {best_overall}: {reports[best_overall]['metrics']['HOTA']:.4f}。",
              "", verdict, "", "## 固定协议与基线", "",
              "- 执行项目仅为 `LYQ1107/TTA-RMOT`，目录 `/data2/user/FlexHook-TTA`，与 LocateMOT/GroundJEV 无关。",
              "- 固定官方 Refer-KITTI-V2 源 checkpoint，SHA256 `71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613`；不使用 Dance 第二阶段权重。",
              "- Dance 专用官方 DETR+NeuralSORT MOT：25 文件、211,085 条固定框/ID；每视频 17 表达，共 3,588,445 个候选-表达分数，完整时序。",
+             "- Source-Free 指第二阶段 FlexHook 适应不读取源数据和目标 GT；候选来自目标域专用官方跟踪器，不能将本实验表述为整套检测跟踪系统完全无目标域监督。",
              "- 默认 rank=4、lr=5e-5、update_interval=4、min_history=3、min_separation=0.6、seed=0、FP32；每 episode 重置可训练状态。没有源端重训或外部教师。",
              "- 用户授权显存足够时共享 GPU，最多同时四张物理卡，优先少进程；24 GiB/worker 的 PyTorch 分配器预算加 8 GiB 入场余量不是跨用户显存预留。",
              "- 原 Frozen 漏掉 692 个轨迹末观测。用户明确批准补齐全候选并重建匹配 Frozen；历史 HOTA 8.2060 不用于本轮增益计算。原文件、补充分数与失败记录均保留。",
