@@ -166,6 +166,7 @@ def generate(publish, output):
         lines.append(f"| {method} | {c['wall_seconds']:.2f} | {c['total_episode_seconds']:.2f} | {c['gpu_hours']:.4f} | " +
                      f"{c['worker_active_frame_fps']:.3f} | {c['scheduler_wall_active_frame_fps']:.3f} | {c['peak_vram_bytes']/2**30:.3f} |")
     lines += ["", "峰值为 PyTorch max_memory_allocated，不包含 CUDA context 或 allocator reserved；不能解释为整卡峰值。",
+              "本表为已有冻结源分数资产条件下的各阶段实测执行成本；完整ZERO分数准备是共同的一次性成本。Rank/Hybrid需要冻结历史分数，独立在线部署时该源模型分支也应计入（冻结backbone可共享，但本轮未实测teacher+student双分支端到端FPS）。不能把缓存源分数解释为从图像免费产生。",
               "RELATIVE_ONLY 的 CPU 成本同样仅指增量选择，前提是已有完整 ZERO_UPDATE 源分数；不能据此宣称从图像到 RMOT 输出不需要 GPU。",
               "若 Guard 为 CPU 派生，其表内成本仅为增量 CPU 重放，不代表独立从图像运行只需零 GPU；必须同时承担完整 Rank 推理/适应和单独的 GPU 等价验证成本。",
               "GPU 小时按实际 worker 起止累计；ZERO_UPDATE 最初 GPU5 完成 102 表达，后续 GPU6/4/0/1 处理剩余表达，因此该方法累计出现五个 UUID，但从未同时用五张卡。后续各方法的真实 GPU 见独立调度记录。",
