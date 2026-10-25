@@ -2,6 +2,14 @@
 
 ## 2026-10-25 — User-authorized GPU sharing and pending-only repartition
 
+### Completed full controls and first live gradient method
+
+- ZERO_UPDATE: all 25 videos / 425 expressions, 3,588,445 candidate-query observations / 433,636 active frames. Official HOTA/DetA/AssA/IDF1 = 8.2180/3.1937/21.1470/4.4414; DetRe/DetPr 4.5441/9.6868, IDSW269, 99,704 rows / 1,769 IDs. This is the new matched baseline, not TTA gain over historical 8.206.
+- Six historical sign differences were all probed: cached vs uncached original selects the same complete candidate IDs at every case; full Frozen CPU replay has zero prediction-row differences. Preserve the historical audit, native traces and the matched-reference receipt separately.
+- RELATIVE_ONLY full: HOTA7.5705 (delta -0.6475), DetA4.1857, AssA13.7120, IDF1 5.5746, DetRe11.1040, DetPr6.2855, IDSW829, 375,483 rows / 8,014 IDs. Recovered14,873 GT, total FP +260,906; source AUROC/TopK unchanged. Do not claim semantic improvement or overall success.
+- Candidate-retrievable GT:203,906/212,541 (95.9373%); Frozen gate matches10,337 (5.0695% of retrievable). Source Top1 61.4788% vs random57.8299% on target-retrievable frames. Weak stage-two referring selection, rather than missing boxes alone, is a key bottleneck.
+- PF_RANK started on GPU6/4/0/1, PIDs4129095/4129171/4129260/4129353, whole-video capacity groups119/119/102/85. All remaining methods will still run; first-control failure is not goal completion.
+
 - This checkout is `/data2/user/FlexHook-TTA`, remote `LYQ1107/TTA-RMOT`; inherited LocateMOT entries below are history, not the current task.
 - ZERO_UPDATE shard0 completed 6 videos / 102 expressions, exit 0. The old idle-only coordinator then waited while GPU5 was occupied by a foreign training job.
 - User explicitly authorized sharing when VRAM fits, preferring four GPUs with fewest processes. Stop only our waiting coordinator PID 3682643; retain all completed predictions, original manifest and resource/status snapshots.

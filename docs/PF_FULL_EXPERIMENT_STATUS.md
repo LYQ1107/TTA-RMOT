@@ -47,9 +47,9 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 
 | Stage | Status |
 |---|---|
-| Complete-bank ZERO_UPDATE | 102/425 sealed on GPU5; resume remaining 19 whole videos across four shared GPUs, preserving completed shard0; metrics pending |
-| RELATIVE_ONLY (CPU) | after ZERO_UPDATE baseline audit/evaluation |
-| PF_RANK | after RELATIVE_ONLY |
+| Complete-bank ZERO_UPDATE | COMPLETE 25/425: HOTA 8.2180, DetA 3.1937, AssA 21.1470, IDF1 4.4414; 99,704 rows / 1,769 IDs |
+| RELATIVE_ONLY (CPU) | COMPLETE 25/425: HOTA 7.5705, DetA 4.1857, AssA 13.7120, IDF1 5.5746; 375,483 rows |
+| PF_RANK | RUNNING on physical GPU6/4/0/1, PIDs 4129095/4129171/4129260/4129353; capacity groups 119/119/102/85 expressions |
 | PF_RANK_GUARD | validate exact CPU derivation of PF_RANK pre-update margins |
 | PF_IDENTITY | after rank/guard |
 | PF_HYBRID | after identity |
@@ -59,7 +59,18 @@ full ordered frames, exact MOT rows, no target GT in adaptation, original defaul
 GT is opened only by independent evaluation after predictions are sealed/audited.
 These are development-target results, not an independent blind test.
 
-No scientific success, HOTA gain or final completion is claimed at this engineering stage.
+Only the first two complete methods have official results. No final TTA success or goal completion is claimed.
+
+Full ZERO validation: all 3,588,445 candidate-query observations / 433,636 active-frame steps;
+six historical near-zero sign differences, each reproduced with original and cached forwards selecting
+the same complete candidate set. Historical maximum margin discrepancy 0.00118494; original/cached
+maximum discrepancy on these cases is 9.72748e-5. Independent CPU Frozen replay exactly reproduces
+all 425 native ZERO predictions. Official HOTA 8.2180 is the matched baseline, not an adaptation gain.
+
+Offline GT attribution (only after full sealing): 203,906 / 212,541 GT observations are candidate-retrievable
+(95.9373%), but Frozen selects only 10,337 of them (conditional gate recall 5.0695%).
+RELATIVE_ONLY raises matched GT to 25,210 but FP from 89,367 to 350,273. Its ranking/AUROC is unchanged.
+These are completed control results, not a verdict on the still-running gradient-based methods.
 
 Resource-policy transition: shard0 completed successfully; the coordinator then waited because
 no card met the old idle-only rule. Only our waiting coordinator PID 3682643 was terminated to
