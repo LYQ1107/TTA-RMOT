@@ -134,7 +134,9 @@ def main():
                         lock.close(); continue
                     if gpu["uuid"] not in {r["uuid"] for r in eligible(gpu_snapshot(), [gpu["index"]])}:
                         lock.close(); continue
-                shard = pending.pop(0)
+                preferred = next((i for i, s in enumerate(pending)
+                                  if s.get("preferred_gpu_uuid") == gpu["uuid"]), 0)
+                shard = pending.pop(preferred)
                 shard_root = run_root / f"shard{shard['shard']}"
                 shard_root.mkdir(parents=True, exist_ok=True)
                 child_env = dict(env, CUDA_VISIBLE_DEVICES=("" if gpu["index"] is None else gpu["uuid"]),

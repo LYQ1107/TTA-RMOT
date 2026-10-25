@@ -42,6 +42,9 @@ for PF_SUITE_METHOD in "${PF_SUITE_METHODS[@]}"; do
       fi
     fi
     if [[ "$PF_SUITE_DERIVE" != YES ]]; then
+      if [[ "$PF_SUITE_METHOD" != ZERO_UPDATE && "$PF_SUITE_METHOD" != RELATIVE_ONLY ]]; then
+        "$PF_PYTHON" "$PF_REPO/scripts/profile_pf_schedule.py" --run-root "$PF_SUITE_RUN"
+      fi
       PF_METHOD="$PF_SUITE_METHOD" PF_RUN_ROOT="$PF_SUITE_RUN" bash "$PF_REPO/scripts/run_pf_4gpu.sh" --launch-full
       "$PF_PYTHON" "$PF_REPO/scripts/merge_flexhook_pcd_shards.py" --shards-root "$PF_SUITE_RUN" \
         --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" --resume

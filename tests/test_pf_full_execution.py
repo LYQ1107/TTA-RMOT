@@ -18,6 +18,18 @@ def test_lpt_whole_video_coverage(tmp_path):
     assert sum(s["episodes"] for s in manifest["shards"]) == 425
     assert [s["episodes"] for s in manifest["shards"]] == [119, 102, 102, 102]
     assert all(s["max_candidates_per_frame"] == 5 for s in manifest["videos"])
+    assert "capacities" not in manifest  # Existing row-LPT manifests remain byte-compatible on resume.
+
+
+def test_measured_capacity_schedule_preserves_coverage_and_loads_faster_gpu(tmp_path):
+    from scripts.profile_pf_schedule import measured_rates
+    data, tracks, _ = fixture_files(tmp_path, videos=25)
+    manifest = weighted_manifest(tracks, data, row_weight=0., frame_weight=1., capacities=[2., 1., 1., 1.])
+    counts = [len(s["videos"]) for s in manifest["shards"]]
+    assert counts == [10, 5, 5, 5]
+    assert sum(s["episodes"] for s in manifest["shards"]) == 425
+    status = {"completed": [dict(shard=0, gpu_uuid="fast", exit_status=0, started_at=0., ended_at=20.)]}
+    assert measured_rates(status, manifest)["fast"] == manifest["shards"][0]["estimated_forward_calls"]/20.
 
 
 def test_dynamic_gpu_selection_never_shares():

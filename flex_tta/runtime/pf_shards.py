@@ -13,9 +13,11 @@ from flex_tta.dance_io import dance_videos, load_expressions
 
 
 def weighted_manifest(tracker_root, dataset_root, *, num_shards=4, batch_size=24,
-                      row_weight=1.0, frame_weight=0.0):
+                      row_weight=1.0, frame_weight=0.0, capacities=None):
     if not 1 <= num_shards <= 4:
         raise ValueError("one to four logical shards are supported")
+    if capacities is not None and (len(capacities) != num_shards or any(c <= 0 for c in capacities)):
+        raise ValueError("one positive measured capacity per logical shard is required")
     records = []
     for video in dance_videos(Path(tracker_root)):
         path = Path(tracker_root) / f"{video}.txt"
@@ -31,7 +33,8 @@ def weighted_manifest(tracker_root, dataset_root, *, num_shards=4, batch_size=24
     shards = [dict(shard=i, videos=[], episodes=0, tracker_rows=0, estimated_forward_calls=0, cost=0.)
               for i in range(num_shards)]
     for record in sorted(records, key=lambda x: (-x["cost"], x["video"])):
-        shard = min(shards, key=lambda x: (x["cost"], x["shard"]))
+        shard = min(shards, key=lambda x: (((x["cost"]+record["cost"])/capacities[x["shard"]]
+                                           if capacities is not None else x["cost"]), x["shard"]))
         shard["videos"].append(record["video"])
         for key, value in (("episodes", record["expressions_count"]), ("tracker_rows", record["tracker_rows"]),
                            ("estimated_forward_calls", record["estimated_forward_calls"]), ("cost", record["cost"])):
@@ -41,11 +44,14 @@ def weighted_manifest(tracker_root, dataset_root, *, num_shards=4, batch_size=24
     assigned = [v for s in shards for v in s["videos"]]
     if len(assigned) != 25 or len(set(assigned)) != 25 or sum(s["episodes"] for s in shards) != 425:
         raise ValueError("manifest must cover 25 distinct videos / 425 complete episodes")
-    return dict(protocol="whole-video LPT; no target GT or metrics used", unique_videos=25, episodes=425,
+    result = dict(protocol="whole-video LPT; no target GT or metrics used", unique_videos=25, episodes=425,
                 no_duplicate_episodes=True, no_missing_episodes=True, complete_tracker_frame_plan=True,
                 row_weight=row_weight, frame_weight=frame_weight, batch_size=batch_size,
                 tracker_root=str(Path(tracker_root).resolve()), dataset_root=str(Path(dataset_root).resolve()),
                 videos=records, shards=shards)
+    if capacities is not None:
+        result["capacities"] = capacities
+    return result
 
 
 def gpu_snapshot():

@@ -78,7 +78,8 @@ def generate(publish, output):
         lines.append(f"| {method} | {c['wall_seconds']:.2f} | {c['total_episode_seconds']:.2f} | {c['gpu_hours']:.4f} | " +
                      f"{c['worker_active_frame_fps']:.3f} | {c['scheduler_wall_active_frame_fps']:.3f} | {c['peak_vram_bytes']/2**30:.3f} |")
     lines += ["", "峰值为 PyTorch max_memory_allocated，不包含 CUDA context 或 allocator reserved；不能解释为整卡峰值。",
-              "GPU 小时按实际 worker 起止累计；最初 GPU5 完成 102 表达，后续 GPU6/4/0/1 同时处理剩余表达，所以不同阶段出现过五个 UUID，但从未同时用五张卡。",
+              "GPU 小时按实际 worker 起止累计；ZERO_UPDATE 最初 GPU5 完成 102 表达，后续 GPU6/4/0/1 处理剩余表达，因此该方法累计出现五个 UUID，但从未同时用五张卡。后续各方法的真实 GPU 见独立调度记录。",
+              "后续新 GPU 分片以 ZERO_UPDATE 的不含 GT 的实测活跃帧速率估计容量，较快卡分配更多完整视频；所有视频/表达和算法默认值不变。共享负载可随时间变化，估计不代表吞吐保证。",
               "平均 worker FPS 的分母是各 episode 计算时间之和，不是四卡并行吞吐；调度 wall FPS 的分母包含等待，但不包含前置预检、评测与归因。两者不能混用。",
               "ZERO wall 包含旧空卡策略等待和用户授权后恢复；共享任务会竞争算力，单卡子集与四卡全量并非相同工作负载，不报告未经控制的“4×加速”。",
               "GPU 等价诊断、Guard 单完整 episode 验证、官方评测/归因是额外开销，保留在独立 receipt/log；表内 method wall 不自动包含这些阶段。",

@@ -17,6 +17,9 @@
    最新授权下先按进程数少排序，再按剩余显存多排序；无足够显存时等待，不停止别人进程。
    已完成 shard0 的 6 视频/102 episode 不重跑；其余 19 视频重新 LPT 为四个完整视频组。
    原 manifest 保留，新 active_manifest 固定后供恢复使用，不能切断 episode 或搬移已开始的分片。
+   ZERO 实测 GPU6/4 约 37 活跃帧/秒、GPU0 约 29，GPU1 更慢；后续全新方法允许按源模型计时
+   使用 active_frames 成本和每卡容量做异构 LPT。卡选择仍优先进程少、显存充足，分片优先匹配测量对应 UUID；
+   新卡容量明确标为中位数估计。只影响计算调度，不读取 GT/HOTA、不改种子或模型；已有分片绝不迁移。
 3. 每 episode 原子封存预测和候选分数，写完成收据；失败重置源状态后重跑该 episode，保留失败日志。
 4. 顺序运行 ZERO_UPDATE、RELATIVE_ONLY、PF_RANK、PF_RANK_GUARD、PF_IDENTITY、PF_HYBRID。
    Guard 先验证从 PF_RANK 分数派生的等价性，再省去重复 GPU 前向。

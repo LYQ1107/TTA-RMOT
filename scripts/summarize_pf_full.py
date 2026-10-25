@@ -77,6 +77,10 @@ def summarize(root, method, publish):
                   development_target=True, target_gt_used_only_for_sealed_offline_evaluation=True)
     destination = Path(publish) / method.lower()
     destination.mkdir(parents=True, exist_ok=True)
+    raw_root = Path(str(root).removesuffix("_merged"))
+    for name in ("manifest.json", "active_manifest.json", "launcher_status.json"):
+        if (raw_root / name).is_file():
+            shutil.copy2(raw_root / name, destination / name)
     for name in ("pedestrian_summary.txt", "pedestrian_detailed.csv"):
         shutil.copy2(folder / "results" / name, destination / name)
     atomic_json(destination / "metrics.json", result)

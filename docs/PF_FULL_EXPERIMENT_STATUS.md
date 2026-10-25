@@ -108,6 +108,14 @@ Offline GT diagnostics now apply official nonzero-mark / pedestrian-class-1 filt
 synthetic rows and evaluator source before full sealing; no real target GT was opened for this change.
 Added/removed FP rows are distinguished from total FP change when assignment status changes.
 
+Source-only profiling showed shared-GPU throughput differs (GPU6/4 approximately 37 active frames/s,
+GPU0 approximately 29; GPU1 slower). Future fresh GPU methods use whole-video LPT normalized by
+these measured capacities and active-frame cost; all 25/425 and numerical defaults stay fixed.
+Original/default manifests remain backward-compatible; active plans are immutable on resume.
+New/unknown cards use an explicitly labeled median estimate. No GT or accuracy metric drives scheduling.
+45 focused regressions pass in 10.06 s; compileall and shell syntax passed. Actual per-method
+original/active manifests and launcher summaries will be copied beside published metrics.
+
 Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
 `analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
 `verify_pf_guard_equivalence.py` selects a source-positive episode without GT and compares a complete direct GPU GUARD episode to CPU-derived results.
