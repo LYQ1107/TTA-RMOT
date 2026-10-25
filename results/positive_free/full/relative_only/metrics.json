@@ -88,7 +88,8 @@
     "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
     "peak_vram_bytes": 0,
     "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
-    "gpu_uuids": []
+    "gpu_uuids": [],
+    "cost_scope": "incremental CPU selection only; requires the full ZERO_UPDATE source inference"
   },
   "aggregate_stats": {
     "frames": 433636,
@@ -102,7 +103,7 @@
   "development_target": true,
   "target_gt_used_only_for_sealed_offline_evaluation": true,
   "structural_stats_definition": "per-replica constants from shard stats, not additive episode deltas",
-  "execution_mode": "direct inference/adaptation",
+  "execution_mode": "CPU selection from sealed ZERO_UPDATE margins",
   "delta": {
     "HOTA": -0.6475,
     "DetA": 0.9919999999999995,

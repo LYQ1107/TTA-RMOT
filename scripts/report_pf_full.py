@@ -97,6 +97,7 @@ def generate(publish, output):
         lines.append(f"| {method} | {c['wall_seconds']:.2f} | {c['total_episode_seconds']:.2f} | {c['gpu_hours']:.4f} | " +
                      f"{c['worker_active_frame_fps']:.3f} | {c['scheduler_wall_active_frame_fps']:.3f} | {c['peak_vram_bytes']/2**30:.3f} |")
     lines += ["", "峰值为 PyTorch max_memory_allocated，不包含 CUDA context 或 allocator reserved；不能解释为整卡峰值。",
+              "RELATIVE_ONLY 的 CPU 成本同样仅指增量选择，前提是已有完整 ZERO_UPDATE 源分数；不能据此宣称从图像到 RMOT 输出不需要 GPU。",
               "若 Guard 为 CPU 派生，其表内成本仅为增量 CPU 重放，不代表独立从图像运行只需零 GPU；必须同时承担完整 Rank 推理/适应和单独的 GPU 等价验证成本。",
               "GPU 小时按实际 worker 起止累计；ZERO_UPDATE 最初 GPU5 完成 102 表达，后续 GPU6/4/0/1 处理剩余表达，因此该方法累计出现五个 UUID，但从未同时用五张卡。后续各方法的真实 GPU 见独立调度记录。",
               "Rank 使用源推理时序估计的静态整视频分组；其耗时不能代表梯度计算的准确负载预测。Identity/Hybrid 的新计划改用最多四卡领取完整视频的队列，每视频 17 个独立 episode，不跨卡切断在线记忆；重载模型开销计入实测 wall。共享负载仍会变化，调度不保证固定加速倍数。",

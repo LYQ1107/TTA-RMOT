@@ -100,6 +100,9 @@ def summarize(root, method, publish):
         result["cost"]["cost_scope"] = "incremental CPU derivation only; requires the full PF_RANK run and separate GPU equivalence check"
     else:
         result["execution_mode"] = "direct inference/adaptation"
+        if method == "RELATIVE_ONLY":
+            result["execution_mode"] = "CPU selection from sealed ZERO_UPDATE margins"
+            result["cost"]["cost_scope"] = "incremental CPU selection only; requires the full ZERO_UPDATE source inference"
     destination = Path(publish) / method.lower()
     destination.mkdir(parents=True, exist_ok=True)
     raw_root = Path(str(root).removesuffix("_merged"))
@@ -108,6 +111,7 @@ def summarize(root, method, publish):
             shutil.copy2(raw_root / name, destination / name)
     for name in ("pedestrian_summary.txt", "pedestrian_detailed.csv"):
         shutil.copy2(folder / "results" / name, destination / name)
+    shutil.copy2(Path(root) / "evaluation_metadata.json", destination / "evaluation_metadata.json")
     atomic_json(destination / "metrics.json", result)
     atomic_json(destination / "per_episode_metrics.json", compact)
     atomic_json(destination / "per_video_metrics.json", per_video)

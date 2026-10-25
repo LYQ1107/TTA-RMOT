@@ -20,6 +20,8 @@
    ZERO 实测 GPU6/4 约 37 活跃帧/秒、GPU0 约 29，GPU1 更慢；后续全新方法允许按源模型计时
    使用 active_frames 成本和每卡容量做异构 LPT。卡选择仍优先进程少、显存充足，分片优先匹配测量对应 UUID；
    新卡容量明确标为中位数估计。只影响计算调度，不读取 GT/HOTA、不改种子或模型；已有分片绝不迁移。
+   Rank 完成后发现源推理时序不能准确预测反向计算尾部；Identity/Hybrid 的全新计划使用25个整视频队列作业，
+   最多四张注册物理卡领取，每视频17个独立episode；保持已有视频/episode归属，不跨卡切断在线记忆。
 3. 每 episode 原子封存预测和候选分数，写完成收据；失败重置源状态后重跑该 episode，保留失败日志。
 4. 顺序运行 ZERO_UPDATE、RELATIVE_ONLY、PF_RANK、PF_RANK_GUARD、PF_IDENTITY、PF_HYBRID。
    Guard 先验证从 PF_RANK 分数派生的等价性，再省去重复 GPU 前向。
@@ -29,6 +31,8 @@
    原 Frozen 文件和 SHA 不变；同一源模型生成缺失观测的补充 logits，所有方法共享相同补充。
    完整 ZERO_UPDATE 对照完整冻结分数的选择结果，六方法以新实测完整 Frozen/ZERO_UPDATE 为基线。
 6. 记录召回恢复/丢失、FP、排序、梯度、回滚、速度显存；开发性目标域结果，无论正负均完整报告并推送。
+   CPU Relative/Guard仅报告增量选择/派生成本，同时注明其对完整Zero/Rank GPU分数的依赖。
+   每方法保留官方summary/detailed CSV及独立评测退出状态；本地实验commit通过相同tree映射到GitHub公开commit。
 
 默认配置：rank=4、lr=5e-5、update_interval=4、min_history=3、min_separation=0.6、seed=0。
 不启用未验证的 BF16，不修改 MOT、表达、阈值或历史研究日志。
