@@ -1,0 +1,40 @@
+{
+  "format": "flexhook-v2-dance-tracklet-language-evidence-pilot-v2",
+  "protocol": "source-free causal PCD LoRA pilot with independent RGB/HSV clothing and causal tracklet evidence",
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "videos": 1,
+  "expressions": 1,
+  "video": "dancetrack0004",
+  "expression_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+  "frames": 1202,
+  "target_gt_opened": false,
+  "target_labels_opened": false,
+  "future_frames_used": false,
+  "tracker_geometry_changed": false,
+  "tracker_ids_changed": false,
+  "hyperparameters": {
+    "method": "PCD_LORA",
+    "rank": 4,
+    "bottleneck": 64,
+    "update_interval": 4,
+    "evidence": "TRACKLET_LANGUAGE",
+    "evidence_weight": 0.25
+  },
+  "stats": {
+    "candidate_rows": 4360,
+    "selected_rows": 0,
+    "optimizer_steps": 301,
+    "nonzero_gradient_steps": 301,
+    "pseudo_positive": 0,
+    "pseudo_negative": 1077,
+    "temporal_rows": 4315,
+    "independent_evidence_positive": 0,
+    "independent_evidence_negative": 1090,
+    "independent_evidence_unknown": 0,
+    "elapsed_seconds": 720.9895384311676,
+    "parameter_update_l2": 2.322036648459038,
+    "parameter_update_max_abs": 0.05923415720462799,
+    "mean_loss": 0.006985404782306178
+  },
+  "evidence_scope": "targeted one-expression pilot only; not a full-suite TrackEval result"
+}

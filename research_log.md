@@ -1814,3 +1814,27 @@ The formal LoRA run was relaunched with the unchanged rank-4, update-interval
 4 protocol as two complete-episode shards on GPUs 4 and 7.  GPU7's unrelated
 process was left running; no other process was stopped and no tracker or
 dataset input was changed.
+
+2026-10-25 — The formal PCD LoRA run completed normally (exit code 0) on both
+complete shards: 221 + 204 = 425 expressions over all 25 Dance videos. The
+merged GT-free audit passed with 425 prediction files and 82,248 checked rows;
+target GT/labels and future frames were not opened, and official tracker
+geometry and IDs were unchanged. TrackEval returned HOTA 7.8654 / DetA
+2.3305 / AssA 26.547 / IDF1 3.492 / IDSW 138 / Dets 82,248 / IDs 1,313.
+Compared with Frozen HOTA 8.206 / DetA 3.1857 / AssA 21.138 / IDF1 4.436 /
+IDSW 259, LoRA improves association and switches but is a negative overall
+result because detection and IDF1 fall. Compact receipt:
+`results/flexhook_v2_dance/pcd/pcd_lora_full_v2.json`.
+
+2026-10-25 — The first independent-evidence pilot command failed before
+inference because a relative `--vendor vendor/FlexHook` path was duplicated by
+the compatibility loader; no data or GT was opened. The smallest fix was to
+use the absolute vendor path, after which a one-expression
+`TRACKLET_LANGUAGE` pilot completed on GPU2. It processed 1,202 frames with
+301 nonzero-gradient updates, emitted 1,090 independent negative evidence
+labels and no positive/unknown labels, and kept target GT closed. The pilot
+passed the corrected one-video/one-sequence fixed-candidate audit. The first
+audit invocation also used its full-suite default (25/425) and failed only on
+the expected coverage assertion; rerunning with explicit 1/1 expectations
+passed. The pilot is evidence-method validation, not a full-suite metric:
+`results/flexhook_v2_dance/evidence/tracklet_language_pilot_v2.json`.

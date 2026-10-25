@@ -35,5 +35,24 @@ steps, all with nonzero gradients, across all 425 sequences; target GT was not
 opened.  The aggregate elapsed time reported in metadata is the sum of the
 four independent episode-shard clocks, not wall-clock time.
 
-The LoRA full-suite result is added here after its TrackEval run completes;
-the rank-4 zero-initialization pilot has already passed.
+## Accepted LoRA result
+
+The complete rank-4 LoRA suite finished on all 25 videos and 425
+video-expression episodes. Official TrackEval reports:
+
+| Method | HOTA | DetA | AssA | IDF1 | IDSW | Dets | IDs |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Frozen V2 → Dance | 8.2060 | 3.1857 | 21.138 | 4.4360 | 259 | 99,316 | 1,740 |
+| PCD LoRA, rank 4 | 7.8654 | 2.3305 | 26.547 | 3.4920 | 138 | 82,248 | 1,313 |
+
+LoRA improves AssA by 5.409 points and reduces IDSW by 121, but loses HOTA,
+DetA, IDF1, and 17,068 detections. It is retained as a reproducible
+negative result. The run used 108,511 optimizer steps, all with nonzero
+gradients; target GT was not opened. The compact receipt is
+`results/flexhook_v2_dance/pcd/pcd_lora_full_v2.json` and the full analysis
+is in `docs/FLEXHOOK_V2_DANCE_FINAL_REPORT.md`.
+
+The independent `TRACKLET_LANGUAGE` evidence path was validated separately
+on one source-free expression (1,202 frames; 1,090 negative evidence labels;
+no target GT). This pilot is not a full-suite metric and is recorded in
+`results/flexhook_v2_dance/evidence/tracklet_language_pilot_v2.json`.
