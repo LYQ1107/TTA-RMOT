@@ -1966,3 +1966,10 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - Completed all-six Query-Present/Empty, candidate Recall@K versus any-hit, video-cluster bootstrap and Hybrid pair comparisons. Static figure rendered/visually checked; final report includes recovery-versus-FP, compute dependencies, A+B primary failure decision and caveats. Guard cost includes Rank and112.43s GPU equivalence, not just7.34s CPU derivation.
 -52 focused tests pass(10.85s); compileall/shell syntax pass. Compact recovery index records all2,550 sealed receipts and actual model checks; missing full-run post-reset smoke flags remain null, not invented passes.
 - Keep all six full results. Next authorized phase is bounded query-presence evidence design/prototype only: no seventh full target run, source retraining, GT tuning, forced positive or external semantic teacher. If no independent semantic signal is found, report UNKNOWN/skip rather than stack losses.
+
+## 2026-10-25 Query-presence prototype preparation (after six full studies)
+
+- Design: frozen four-branch interaction J=S(V,Q)-S(V,Q0)-S(V0,Q)+S(V0,Q0); same original decode, same geometry/IDs, Q0=person and zero FEATURE reference. Algebra removes additive visual/query offsets, unlike source-rank preservation or physical-ID InfoNCE.
+- Feasibility boundary: positive/stable interaction can still be semantically wrong; zero features are not a labelled empty image, generic noun is not a negative query. No independent validated semantic-presence supervision has been found. Keep UNKNOWN, no prediction override, no hard pseudo label, no new loss/optimizer. Preserve empty/multi-target frozen fallback.
+- Implemented causal bounded history and <=1query/12frame source-only frozen GPU probe. Six targeted scientific tests pass(0.03s), compileall passes. Tests include stable interaction still UNKNOWN and zero interaction not proving absence.
+- GPU smoke remains to execute on one memory-fit/few-process card after all full-suite workers ended. Do not confuse prototype code readiness with measured semantic gain or launch a seventh full experiment.
