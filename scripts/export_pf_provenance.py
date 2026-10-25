@@ -43,8 +43,13 @@ def main():
         method_sources[method] = sorted(commits(meta))
     if args.require_six and len(method_sources) != 6:
         raise ValueError("final provenance requires six completed methods")
+    prototype_path = args.publish_root/"manifests/query_presence_prototype_smoke.json"
+    prototype = json.loads(prototype_path.read_text()) if prototype_path.exists() else None
+    sources = {c for values in method_sources.values() for c in values}
+    if prototype is not None:
+        sources.add(prototype["experiment_commit"])
     mappings = []
-    for local in sorted({c for values in method_sources.values() for c in values}):
+    for local in sorted(sources):
         tree = git("rev-parse", local+"^{tree}")
         if tree not in public_trees:
             raise ValueError(f"experiment tree is not published under fetched ref: {local}")
@@ -64,6 +69,12 @@ def main():
                   vendor_tracked_patch=str(patch_path.relative_to(ROOT)),
                   vendor_patch_sha256=hashlib.sha256(patch).hexdigest(),
                   untracked_vendor_weights_images_caches_not_committed=True)
+    if prototype is not None:
+        source = next(m for m in mappings if m["local_experiment_commit"] == prototype["experiment_commit"])
+        result["supplementary_frozen_prototype"] = dict(
+            formal_method_seven=False, receipt=str(prototype_path.relative_to(ROOT)),
+            source=source, frames=prototype["frames"], expressions=prototype["expressions"],
+            optimizer_steps=prototype["optimizer_steps"], no_target_gt_opened=prototype["no_target_gt_opened"])
     atomic_json(args.publish_root/"manifests/experiment_publication_provenance.json", result)
     print(json.dumps(result, indent=2))
 

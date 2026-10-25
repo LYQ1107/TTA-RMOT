@@ -57,7 +57,7 @@ RELATIVE_ONLY raises these to 337,014 and 13,259 respectively. Most of its false
 therefore comes from failure to reject nonmatching video-query combinations, not merely ranking
 the wrong person inside a target-present frame. Track-ID consistency alone does not supply evidence
 that the language query has any matching target. This motivates checking empty-query FP separately
-for all remaining methods, but no online loss, threshold or hyperparameter is changed using this information.
+for all six methods, but no online loss, threshold or hyperparameter is changed using this information.
 
 ## Rank has only a tiny gain, without overall ranking improvement
 
@@ -153,6 +153,10 @@ resets, all25 strict loads, no frozen gradients; restored rollback flags pass.
 Rule eligibility99.9214% is not query-presence evidence.97,007 accepted updates are on
 the385 Empty episodes, versus10,862 on the40 Present episodes; this grouping is offline only.
 
+Rank constraints may limit the score movement introduced by the identity term, but this is a
+hypothesis, not an established mechanism: no controlled loss-weight study or gradient-conflict
+measurement was run. Fewer Hybrid norm rollbacks alone do not demonstrate complementarity.
+
 ## Research decision after all six
 
 The evidence most strongly supports combined referring-ranking and query-presence failure (A+B).
@@ -165,7 +169,8 @@ from the selected subset and evaluation matching, not repaired upstream tracker 
 
 Keep all six results, including negative controls. Do not tune thresholds/losses from these GT
 diagnostics or select Hybrid solely because it combines modules. The authorized next step is a
-bounded query-presence evidence prototype, not another full experiment. If frozen interaction
-evidence is not independent semantic supervision, report that limitation and keep UNKNOWN/skip
-rather than invent hard positives or add another loss. Full tables, costs, per-video uncertainty
+bounded query-presence evidence prototype, not another full experiment. That prototype is now
+implemented and passed real GPU0/one-query/12-frame strict-frozen checks. Four-branch interaction
+cancels additive offsets but does not supply independently validated semantic supervision; it
+keeps UNKNOWN/skip, does not override predictions and adds no loss. Full tables, costs, per-video uncertainty
 and dependency accounting are in `PF_FINAL_SCIENTIFIC_REPORT_20261025.md`.

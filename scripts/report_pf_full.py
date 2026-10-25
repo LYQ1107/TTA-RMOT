@@ -83,12 +83,13 @@ def generate(publish, output):
     lines += ["", "GT 空组只用于封存后的错误解释，未反馈到在线阈值、损失或超参数。候选排序在有目标帧上的改善不能单独证明无匹配拒识已改善。",
               "", "## Query-Present / Query-Empty：单独验收", "",
               "下表召回为离线 IoU≥0.5 最大基数匹配的 GT 观测微平均，包含无候选 GT；不是官方跨阈值 DetRe。空组无 GT，HOTA 不具备有效召回解释，不将它改成正目标子集。",
-              "", "| 方法 | Present / Empty episodes | Present GT recall | Present FP | Empty FP | Empty 非空预测 episode 比例 |",
-              "|---|---:|---:|---:|---:|---:|"]
+              "", "| 方法 | Present / Empty episodes | Present GT recall | Present FP | Empty FP | Present 非空预测比例 | Empty 非空预测比例 |",
+              "|---|---:|---:|---:|---:|---:|---:|"]
     for method in ORDER:
         a = attribution[method]
         lines.append(f"| {method} | {a['query_present_episodes']} / {a['query_empty_episodes']} | {100*a['query_present_GT_recall']:.4f}% | " +
-                     f"{a['query_present_FP']} | {a['query_empty_FP']} | {100*a['query_empty_nonempty_prediction_rate']:.4f}% |")
+                     f"{a['query_present_FP']} | {a['query_empty_FP']} | " +
+                     f"{100*a['query_presence']['query_present']['adapted_nonempty_prediction_rate']:.4f}% | {100*a['query_empty_nonempty_prediction_rate']:.4f}% |")
     lines += ["", "多目标 Recall@K 与旧 TopK any-hit 分开：前者是在可检索目标帧内 topK 覆盖的正候选比例的帧宏平均；后者只要求 topK 至少命中一个正候选。两者均不衡量空查询拒识。",
               "", "| 方法 | Source Recall@1 / 3 / 5 | Adapted Recall@1 / 3 / 5 |",
               "|---|---:|---:|"]
@@ -110,7 +111,7 @@ def generate(publish, output):
                      f"{r['improved_videos']} / {r['declined_videos']} / {r['tied_videos']} | {r['query_present_delta_hota']:+.6f} |")
     if (Path(publish)/"figures/scientific_summary.png").is_file():
         lines += ["", "![主TTA的配对视频区间与逐视频异质性](../results/positive_free/full/figures/scientific_summary.png)",
-                  "图中为三种预先定义的主TTA；六组完整数值均保留在前表。逐视频HOTA差值不能相加成总体HOTA差值。"]
+                  "图中为三种预先定义的主TTA；六组完整数值均保留在前表。逐视频HOTA差值不能相加成总体HOTA差值。", ""]
     rank_pair = uncertainty["comparisons"]["PF_RANK_vs_ZERO_UPDATE"]
     for row in rank_pair["most_influential_videos"][:2]:
         lines.append(f"- Rank影响较大的视频 {row['video']}：单视频ΔHOTA {row['delta_hota']:+.6f}；去掉该视频后总体ΔHOTA {row['delta_hota_without_video']:+.6f}。HOTA非线性，不能把单视频差值当可加贡献。")
@@ -198,7 +199,7 @@ def generate(publish, output):
             judgment = "HOTA 有增益，仍需结合召回/FP/排序权衡解释，不据此声称已学到新语义。"
         lines.append(f"- {method}：ΔHOTA {m['HOTA']-base['HOTA']:+.4f}，ΔIDF1 {m['IDF1']-base['IDF1']:+.4f}，净恢复 GT {a['recovered_gt']-a['lost_gt']:+d}。{judgment}")
     lines += ["", "## 六组闭环后的研究决策", "",
-              "恢复GT和新增FP的单位都是观测行，不是独立的人数；下面是实际数量权衡，不是将这些相关行当独立样本做显著性检验。"]
+              "恢复GT和新增FP的单位都是观测行，不是独立的人数；下面是实际数量权衡，不是将这些相关行当独立样本做显著性检验。", ""]
     for method in primary:
         a = attribution[method]
         lines.append(f"- {method}：恢复 {a['recovered_gt']:,} / 丢失 {a['lost_gt']:,} 个GT观测；"
@@ -221,12 +222,29 @@ def generate(publish, output):
     if prototype.is_file():
         lines += ["", "后续机制、实际原型验证与不能识别的情形见 [Query-Presence原型与可行性](PF_QUERY_PRESENCE_PROTOTYPE_20261025.md)。"
                   "它不是本表的第七种正式方法；若没有独立可靠的语义学习信号，应停在UNKNOWN/诊断而不是堆叠损失。"]
+    smoke_path = Path(publish)/"manifests/query_presence_prototype_smoke.json"
+    if smoke_path.is_file():
+        smoke = json.loads(smoke_path.read_text())
+        lines += ["", f"后续有界原型真实GPU{smoke['physical_gpu']}验证：{smoke['expressions']}条表达/{smoke['frames']}帧，"
+                  f"{smoke['wall_seconds']:.3f}s、峰值 {smoke['peak_allocated_bytes']/2**30:.3f}GiB；严格原V2加载，"
+                  f"person token5970，源分支选择翻号{smoke['source_branch_check']['source_sign_mismatches']}，GT打开尝试{len(smoke['file_access_audit']['target_gt_open_attempts'])}，"
+                  f"更新{smoke['optimizer_steps']}次，参数未改变。它在有交互/历史支持时仍返回UNKNOWN，不覆盖冻结预测。"
+                  "这只证明有界诊断实现有效，没有独立已验证的语义presence学习信号，不报告第七组精度或继续长跑。"]
     lines += ["", "## 可复查材料", "",
               "- GitHub：本分支 `results/positive_free/full/<method>/` 下的官方 summary/detailed CSV、425 条逐表达和 25 个逐视频指标、全量审计摘要与离线归因。逐视频使用官方 combine_sequences 池化，不是宏平均。",
               "- `results/positive_free/full/manifests/`：测试记录、资产预检、原 Frozen 覆盖缺陷、补充 receipt、共享分片、完整边界诊断、匹配 Frozen receipt。",
               "- 服务器原始结果：`/data2/user/FlexHook-TTA/results/runs/pf_*_completebank_full_20261025*`，保留每表达预测、压缩 margin trace、完成/失败收据和运行日志。大体积原始文件不伪装成已上传 GitHub 的模型权重或图像。",
               "- 全量指标由官方 TrackEval 计算，没有缺失表达填空、删视频、改种子或根据目标 GT 选择阈值。",
               "", "研究限制：仅 V2→Dance 单源单目标、固定官方 tracker 和单个预注册 seed；不支持由此泛化到 BDD/AerialMind 或反向迁移。未来扩展需另行明确授权。"]
+    log_index = Path(publish)/"logs/runtime_log_index.json"
+    if log_index.is_file():
+        logs = json.loads(log_index.read_text())
+        lines += ["", f"完整文本日志已归档并逐文件复核：{logs['files']}个文件、原文{logs['uncompressed_bytes']:,}字节，"
+                  f"压缩{logs['archive_bytes']:,}字节。包含完整worker/model、调度与准备日志、六组官方TrackEval及有界原型日志。",
+                  "[下载日志压缩包](../results/positive_free/full/logs/runtime_logs.tar.gz)；"
+                  "[逐文件索引](../results/positive_free/full/logs/runtime_log_index.json)；"
+                  "[2,550条episode恢复索引](../results/positive_free/full/manifests/full_recovery_index.json)。"
+                  "图像、checkpoint及大容量预测/margin流不混入日志包，仍保留服务器原路径。"]
     Path(output).parent.mkdir(parents=True, exist_ok=True)
     Path(output).write_text("\n".join(lines)+"\n")
     print(json.dumps(dict(methods=6, best_primary_tta=best, delta_hota=delta,

@@ -1,0 +1,61 @@
+=> merge config from /data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml
+[Warning] Fused window process have not been installed. Please refer to get_started.md for installation.
+Tutel has not been installed. To use Swin-MoE, please install Tutel; otherwise, just ignore this.
+load success
+[2026-10-25 21:05:32 pcd_tta_model](run_flexhook_dance_pcd_tta.py 132): INFO Strict source checkpoint load: <All keys matched successfully>
+{
+  "status": "PASS_FROZEN_DIAGNOSTIC_ONLY",
+  "formal_method_seven": false,
+  "experiment_commit": "e6d2d744509bf3a89b9e68e8f3ef80351c6c2e74",
+  "physical_gpu": "0",
+  "gpu_uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+  "resource_admission": {
+    "free_mib": "81151",
+    "process_count": "0",
+    "allocator_budget_mib": 12288,
+    "headroom_mib": 4096,
+    "shared_gpu_authorized": true,
+    "not_a_memory_reservation": true
+  },
+  "video": "dancetrack0004",
+  "expression": "dacning-person-with-white-Tshirt-and-purple-pants",
+  "sentence": "dacning person with white Tshirt and purple pants",
+  "reference_sentence": "person",
+  "frames": 12,
+  "expressions": 1,
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "checkpoint_strict_load": true,
+  "person_token_ids": [
+    5970
+  ],
+  "precision": "FP32",
+  "parameter_versions_unchanged": true,
+  "trainable_parameters": 0,
+  "optimizer_steps": 0,
+  "no_target_gt_opened": true,
+  "file_access_audit": {
+    "target_gt_open_attempts": [],
+    "target_file_opens": 30
+  },
+  "source_branch_check": {
+    "frame": 1,
+    "source_sign_mismatches": 0,
+    "max_abs_error": 6.961822509765625e-05,
+    "ids_equal": true
+  },
+  "cache_stats": {
+    "backbone_calls": 12,
+    "backbone_images": 12,
+    "text_encoder_calls": 2,
+    "visual_hits": 30,
+    "visual_misses": 12,
+    "peak_cache_bytes": 81285120
+  },
+  "wall_seconds": 5.8612584609072655,
+  "peak_allocated_bytes": 1695552000,
+  "episode_reset_pass": true,
+  "presence_predictions": "UNKNOWN, including stable interactions; no calibrated semantic absence/presence signal",
+  "prediction_override": null,
+  "no_new_loss": true
+}

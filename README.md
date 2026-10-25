@@ -26,13 +26,16 @@ Source-Free 仅指第二阶段；固定跟踪器是 Dance 专用官方跟踪器�
 - [Query-Present / Empty补充验收](docs/PF_SUPPLEMENTAL_ACCEPTANCE_20261025.md)。
 - [视频聚类与不确定性](docs/PF_VIDEO_GROUP_ANALYSIS_20261025.md)：25个完整视频为单位，不把相关帧当独立样本。
 - [精简机器可读结果](results/positive_free/full/)：官方summary/detailed CSV、逐表达/逐视频指标、审计、来源及离线诊断。
+- [完整文本日志压缩包](results/positive_free/full/logs/runtime_logs.tar.gz)：138个准备/调度/worker/model/官方评测/原型日志，逐文件复核；不含图像、权重及大容量margin流。
 - [执行协议](docs/PF_4GPU_EXECUTION_PLAN.md)与[研究记录](research_log.md)。
 
 六组已全部完成，最优点估计为Identity HOTA8.8179（+0.5999），但视频级95%区间包含0、
 AUROC下降且空查询误检上升，不能宣布稳定语义恢复。Hybrid8.3213未超过Identity。
 最终报告及[静态科研图](results/positive_free/full/figures/scientific_summary.png)已生成并检查；
 恢复索引位于`results/positive_free/full/manifests/full_recovery_index.json`。
-接下来只完成已授权的presence-aware设计与有界原型，不自动启动第七种完整GPU实验。
+已完成[presence-aware交互审计原型](docs/PF_QUERY_PRESENCE_PROTOTYPE_20261025.md)和真实GPU0/1表达/12帧验证。
+它只消除加性偏置并报告UNKNOWN，尚无独立可靠的语义学习信号；0更新，不覆盖冻结预测。
+58项测试通过，全部实验已结束，不自动启动第七种完整GPU实验，等待新指令。
 
 ## 代码、环境与大文件
 

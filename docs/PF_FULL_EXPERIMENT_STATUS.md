@@ -65,8 +65,15 @@ All six methods are complete with official results and offline attribution. The 
 shell command returned exit0 after `STAGE_COMPLETE PF_HYBRID`; formal GPU work is finished.
 The strongest point estimate is Identity8.8179 (+0.5999), not Hybrid. This is not a declaration of
 robust semantic/research success: paired video intervals include0, AUROC declines and Empty FP rises.
-The final scientific report and static figure are generated; only the authorized bounded presence-aware
-design/prototype and final publication remain. No seventh full run or source training is authorized.
+The final scientific report and static figure are generated. The authorized bounded presence-aware
+prototype also passed one-query/12-frame frozen GPU0 validation: strict V2, no GT open, unchanged
+parameters,0 updates, UNKNOWN even with positive interaction/history evidence. No independent validated
+semantic-presence learning signal was found; no new loss/full run is launched.58 focused tests pass
+in11.09s. Final publication/provenance preserves all six method trees and the distinct prototype code.
+All formal experiment processes and the small prototype process have returned normally.
+All138 text logs (10,482,502 uncompressed bytes) are archived in
+`results/positive_free/full/logs/runtime_logs.tar.gz` (673,730 bytes), verified against originals.
+The log index, full recovery index and identical-public-tree provenance accompany the final report.
 
 User's supplemental acceptance is integrated without restarting healthy workers. Four completed
 methods now have separate `offline_query_diagnostics.json` files; original attribution/official
