@@ -1,5 +1,13 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-25 — Identity full result and automatic Hybrid handoff
+
+- Identity completes25 videos/425 expressions,3,588,445 candidate-query rows/433,636 active frames. Official HOTA8.8179 (+0.5999),DetA4.0132,AssA19.3760,DetRe5.9354,DetPr11.0030,IDF1 5.4476,IDSW347;114,648 rows/1,968 IDs. All25 workers exit0, full auditPASS with no source-sign or MOT modifications and no GT opened by adaptation.
+- Net GT recovery+3,223 (3,247 recovered/24 lost), FP net+11,721; newly selected unmatched12,445/removed735 remain distinct. Empty-query FP97,792 (Frozen87,371), nonempty rate42.5974% (Frozen40%); present recall6.3799% (Frozen4.8635%). AUROC0.650204→0.642678 and allTopK/Recall@K decline. This is recall/output expansion, not demonstrated semantic or identity-consistency improvement; AssA falls and IDSW rises.
+- Video-cluster bootstrap:17 up/2 down/6 ties;95% CI[-0.083812,+2.430322] includes0. Removing0007 leaves+0.161939. Retain the larger positive point estimate without a stable-gain claim.
+- Actual cost8940.97s wall/9.8481GPUh,12.4047 workerFPS/48.4999 schedulerFPS, peak18,289,683,968 allocatedbytes.108,069 finite nonzero-gradient attempts,86,678 accepted/21,391 norm-limit rollbacks, maxL2 1.99999856. All425 pre-episode resets pass, all25 frozen-gradient flags false and rollback-restored flags true. Full-scope post-reset smoke flags are absent, not presumed true. No hyperparameter/threshold change.
+- Hybrid starts automatically onGPU0/4/6/1, initialPIDs581747/581814/581900/581985, same strictV2 weights/completeMOT/defaults. Do not interrupt it or start a seventh full run. Six-method closure and later presence-aware mechanism/prototype remain outstanding.
+
 ## 2026-10-25 — Supplemental scientific acceptance, no online changes
 
 - User supplement adds Query-Present/Empty grouping, 25-video paired uncertainty, identity-memory risk and Hybrid-vs-single-module checks. Keep healthy Identity and queued Hybrid unchanged; no seventh full run, source training, GT tuning or teacher.

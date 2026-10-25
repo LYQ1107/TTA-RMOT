@@ -53,15 +53,15 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 | RELATIVE_ONLY (CPU) | COMPLETE 25/425: HOTA 7.5705, DetA 4.1857, AssA 13.7120, IDF1 5.5746; 375,483 rows |
 | PF_RANK | COMPLETE 25/425: HOTA 8.2433 (+0.0253), IDF1 4.4947; 100,582 rows; all four workers exited 0 |
 | PF_RANK_GUARD | COMPLETE 25/425: HOTA 8.2444 (+0.0264), IDF1 4.4956; 100,613 rows; CPU-derived after real complete-episode GPU equivalence passed |
-| PF_IDENTITY | RUNNING on physical GPU0/4/6/1; initial PIDs 220683/220740/220841/220941; 25 complete-video queue jobs, at most four active |
-| PF_HYBRID | after identity |
+| PF_IDENTITY | COMPLETE 25/425: HOTA 8.8179 (+0.5999), DetA 4.0132, AssA 19.3760, IDF1 5.4476; 114,648 rows; all 25 video jobs exited 0 |
+| PF_HYBRID | RUNNING on physical GPU0/4/6/1; initial PIDs 581747/581814/581900/581985; same defaults and 25 whole-video jobs |
 
 For each: all 25 videos / 425 expressions / all 211,085 observations per query bank;
 full ordered frames, exact MOT rows, no target GT in adaptation, original defaults, FP32.
 GT is opened only by independent evaluation after predictions are sealed/audited.
 These are development-target results, not an independent blind test.
 
-Four complete methods have official results. Identity/Hybrid are unfinished; no final TTA success or goal completion is claimed.
+Five complete methods have official results. Hybrid is unfinished; no final TTA success or goal completion is claimed.
 
 User's supplemental acceptance is integrated without restarting healthy workers. Four completed
 methods now have separate `offline_query_diagnostics.json` files; original attribution/official
@@ -70,6 +70,26 @@ candidate Recall@K, temporal negative-output and limited identity-assignment dia
 recorded in `docs/PF_SUPPLEMENTAL_ACCEPTANCE_20261025.md`. Fifty focused tests pass (12.55 s).
 Final reporting requires all six query diagnostics and all-six video uncertainty. Next-stage
 presence-aware design/prototype is deferred until the registered six-method closure; no seventh full run.
+
+Identity full audit: 425 unique episodes, all 3,588,445 candidate-query rows / 433,636 active frames,
+zero initial source mismatches, unchanged MOT geometry/IDs, no target GT opened by adaptation.
+Actual shard logs contain 425/425 passing pre-episode resets, frozen-gradient flags false in all25,
+and rollback restoration true in all25. Full-scope post-episode-reset smoke flags are not emitted;
+do not reinterpret missing flags as passed tests.
+
+Identity improves recall, not measured association: DetRe 5.9354 (+1.3913), IDF1 5.4476 (+1.0062),
+but AssA 19.3760 (-1.7710), IDSW347 (+78). Offline GT recovery3247/loss24, net+3223; FP net+11721.
+AUROC0.650204→0.642678 and all measured TopK/Recall@K decrease. Query-Empty FP97,792,
+nonempty episode rate42.5974%, versus Frozen87,371/40%. This is not the identity-consistency-with-recall-loss
+pattern, nor evidence of better semantic ranking.
+
+Identity video distribution:17 up/2 down/6 ties, paired25-video95% interval[-0.083812,+2.430322]
+around exact ΔHOTA+0.599863. Removing0007 leaves+0.161939; do not claim a stable/blind-test gain.
+Actual cost: wall8940.97s,9.8481GPU-hours, worker12.4047 active-frameFPS,
+scheduler48.4999FPS, peak allocated18,289,683,968bytes. There are108,069 finite nonzero-gradient
+attempts,86,678 accepted updates and21,391 norm-limit rollbacks; max accepted adapter L2=1.99999856.
+Numerical defaults remain unchanged despite these results. Evidence coverage is rule eligibility,
+not semantic correctness. Hybrid must still complete before any all-method conclusion.
 
 Full ZERO validation: all 3,588,445 candidate-query observations / 433,636 active-frame steps;
 six historical near-zero sign differences, each reproduced with original and cached forwards selecting

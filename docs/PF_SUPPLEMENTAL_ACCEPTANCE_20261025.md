@@ -18,8 +18,10 @@
 | RELATIVE_ONLY | 11.8612% | 13,259 | 337,014 | 100.0000% |
 | PF_RANK | 4.9365% | 2,033 | 88,057 | 40.2597% |
 | PF_RANK_GUARD | 4.9379% | 2,033 | 88,085 | 40.2597% |
+| PF_IDENTITY | 6.3799% | 3,296 | 97,792 | 42.5974% |
 
-四组均为40个Query-Present/385个Query-Empty。GT召回是离线IoU≥0.5最大基数匹配微平均，不替代官方跨阈值DetRe。Query-Empty没有GT，HOTA不适合解释其“改善”；以FP及非空预测比例诊断，全部425条仍进入总体HOTA。
+已完成五组均为40个Query-Present/385个Query-Empty。GT召回是离线IoU≥0.5最大基数匹配微平均，不替代官方跨阈值DetRe。Query-Empty没有GT，HOTA不适合解释其“改善”；以FP及非空预测比例诊断，全部425条仍进入总体HOTA。
+四个旧方法以新增sidecar保留原归因；Identity新生成的标准`offline_attribution.json`已包含全部扩展字段，无需复制同一份大JSON。
 
 ## 视频聚类的不确定性与集中性
 
@@ -31,6 +33,7 @@
 - 去掉视频0065后增益为+0.060659，说明组成和权重同样影响汇总结果。
 - Rank在仅Query-Present子组的官方HOTA变化+0.040748；全部425条仍是主结果，不能选择这个子组替代主评测。
 - 区间是开发集视频抽样的描述性不确定性，不是独立盲测显著性或不同训练种子的方差。
+- Identity全量HOTA8.8179，Δ+0.5999，17提升/2下降/6不变，95%区间[-0.083812,+2.430322]包含0。去掉0007仍有+0.161939，但不能据点估计认定稳定语义收益；AUROC与所有TopK/Recall@K均下降，AssA下降、IDSW增加。
 
 Rank净恢复155个GT，却增加723个诊断FP（其中Empty组+686）；AUROC下降，AssA下降。105,971次更新/5.1463 GPU小时只带来极小总体增益，目前不支持可靠语义恢复或突出的计算收益比。
 
@@ -42,8 +45,8 @@ Rank净恢复155个GT，却增加723个诊断FP（其中Empty组+686）；AUROC�
 
 ## 仍须完成
 
-1. 不打断健康Identity；原配置完成425条，随后Hybrid。维持rank4/lr5e-5/interval4/seed0/FP32，不反馈GT诊断。
-2. 对Identity/Hybrid补齐相同诊断、官方评测、25视频bootstrap及Hybrid对两个单模块的配对比较。
+1. Identity已完成425条并通过审计/官方评测；Hybrid已按原配置启动。维持rank4/lr5e-5/interval4/seed0/FP32，不反馈GT诊断。
+2. 对Hybrid补齐相同诊断、官方评测、25视频bootstrap及对两个单模块的配对比较；Identity完整补充已就绪。
 3. 六组统一报告参数量、实际更新、有效证据覆盖、wall/GPU-hours/FPS/显存。CPU对照成本标注完整源推理依赖，Guard还包括Rank和GPU等价验证。
 4. 完成后才作A/B/C/D研究决策；若收益仍微弱，先做Query-Presence-Aware机制设计和代码原型，明确独立无标签信号是否存在。不得因模块更多默认有效，不启动第七组完整GPU实验。
 

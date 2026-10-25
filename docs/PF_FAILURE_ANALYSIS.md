@@ -1,7 +1,7 @@
-# Positive-Free failure analysis — interim, four complete methods
+# Positive-Free failure analysis — interim, five complete methods
 
 Project: TTA-RMOT only. Full 25 videos / 425 expressions; development-target results, not blind testing.
-PF_IDENTITY and PF_HYBRID are still running/pending. No all-method final conclusion is inferred before they finish.
+PF_HYBRID is still running. No all-method final conclusion is inferred before it finishes.
 
 ## Matched baseline and implementation checks
 
@@ -82,9 +82,42 @@ A complete real GPU episode and CPU derivation have byte-identical predictions a
 282-step update traces. The full Guard result reuses sealed Rank margins; its 7.34-second CPU
 derivation excludes the required Rank GPU run and 112.43-second equivalence validation.
 
+## Identity improves point-estimate recall, but neither ranking nor association
+
+PF_IDENTITY full: HOTA **8.8179** (+0.5999), DetA **4.0132**, AssA **19.3760**,
+DetRe **5.9354**, DetPr **11.0030**, IDF1 **5.4476**, IDSW **347**;114,648 rows/1,968 IDs.
+Unlike the anticipated identity-consistency/recall-loss failure pattern, this run increases recall
+while AssA falls1.7710 points and IDSW rises78. Do not call it an observed identity-consistency gain.
+
+It recovers3,247 GT observations and loses24, net+3,223. Diagnostic FP rises11,721 to101,088;
+newly selected unmatched rows12,445 and removed unmatched rows735 are different quantities.
+Query-Present GT recall rises4.8635%→6.3799%, FP1,996→3,296. Query-Empty FP rises
+87,371→97,792 (+10,421), and nonempty prediction episodes154/385→164/385 (40%→42.5974%).
+
+AUROC declines0.650204→0.642678; any-hit Top1/3/5 and multi-target candidate Recall@1/3/5
+all decline. The observed improvement is detection/selection expansion, not demonstrated new semantics.
+Later episode quartiles show more selected rows relative to the same Frozen frames, not a negative-output collapse.
+
+Seventeen videos improve,2 decline,6 tie. The paired25-video95% interval is
+[-0.083812,+2.430322], including0. Removing0007 reduces the pooled gain to+0.161939;
+removing0065 yields+1.262893. These nonlinear leave-one-video-out effects are not additive contributions.
+This is a larger positive point estimate than Rank, but insufficient evidence of a stable generalized gain.
+The 3,223 net recovered observations and simultaneous official DetRe/DetPr increases are genuine
+development-set positives, not merely a nonzero-loss claim. Do not equate an interval including0
+with "no video benefits":17 videos improve. Conversely, Query-Present nonempty episodes remain
+32/40 while Query-Empty nonempty episodes increase154→164; the run has not demonstrated better
+episode-level query-presence discrimination. Selection/calibration improvement is a plausible
+interpretation, not a proven causal mechanism or new clothing-semantic learning.
+
+The run costs9.8481 GPU-hours,8940.97s wall; per-worker12.4047 and scheduler48.4999 active-frameFPS.
+Actual norm control rejects21,391 of108,069 finite/nonzero attempts;86,678 updates are accepted.
+All25 shard rollback-restored flags are true;425/425 pre-episode reset checks pass and frozen gradients
+remain absent. Valid-ID-history coverage99.9214% is registered-rule eligibility, not evidence that the query matches.
+No norm limit, loss weight, LR or threshold is changed after observing the result.
+
 ## Remaining decision
 
-Complete the registered PF_IDENTITY and PF_HYBRID studies without tuning on GT.
+Complete the registered PF_HYBRID study without tuning on GT.
 Distinguish genuine GT recovery and ranking improvement from pruning/retention effects or extra outputs.
 An AssA increase accompanied by DetRe loss cannot be called target-recall recovery. No overall research-success
 or final negative-TTA verdict is issued before the remaining full methods finish.
