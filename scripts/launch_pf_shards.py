@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""At most four idle GPUs, persistent logical shards, resumable episodes."""
+"""At most four GPUs, explicit shared-memory budgets, resumable episodes."""
 from __future__ import annotations
 
 import argparse
@@ -13,7 +13,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from flex_tta.runtime.pf_shards import weighted_manifest, save_manifest, gpu_snapshot, idle_gpus
+from flex_tta.runtime.pf_shards import (weighted_manifest, save_manifest, gpu_snapshot,
+                                       eligible_gpus, rebalance_unstarted, sealed_shards)
 from flex_tta.runtime.pf_receipts import atomic_json
 
 
@@ -40,10 +41,32 @@ def main():
         return 0
     if method not in {"ZERO_UPDATE", "RELATIVE_ONLY", "PF_RANK", "PF_RANK_GUARD", "PF_IDENTITY", "PF_HYBRID"}:
         raise ValueError("unknown positive-free method")
-    if env.get("PF_ALLOW_SHARED_GPU") == "YES":
-        raise ValueError("sharing flag is not authorization or resource isolation; occupied GPUs remain forbidden")
+    shared = env.get("PF_ALLOW_SHARED_GPU") == "YES"
+    budget = int(env.get("PF_GPU_MEMORY_BUDGET_MIB", "24576"))
+    headroom = int(env.get("PF_GPU_HEADROOM_MIB", "8192"))
+    def eligible(snapshot, requested):
+        return eligible_gpus(snapshot, shared=shared, requested=requested,
+                             memory_budget_mib=budget, headroom_mib=headroom)
     run_root.mkdir(parents=True, exist_ok=True)
     save_manifest(run_root / "manifest.json", manifest)
+    active_path = run_root / "active_manifest.json"
+    if active_path.exists():
+        manifest = json.loads(active_path.read_text())
+    elif env.get("PF_REBALANCE_UNSTARTED") == "YES":
+        sealed = sealed_shards(run_root, manifest, method)
+        if sealed and len(sealed) < len(manifest["shards"]):
+            # Never move partially started episodes to a different owner.
+            for shard in manifest["shards"]:
+                if shard["shard"] not in sealed and (run_root / f"shard{shard['shard']}").exists():
+                    raise ValueError("cannot repartition a started shard; resume its existing episode plan")
+            manifest = rebalance_unstarted(manifest, sealed)
+            save_manifest(active_path, manifest)
+    sealed = sealed_shards(run_root, manifest, method)
+    previous_path = run_root / "launcher_status.json"
+    previous = json.loads(previous_path.read_text()) if previous_path.exists() else {}
+    if previous:
+        atomic_json(run_root / f"launcher_attempt_{time.time_ns()}.json", previous)
+    elapsed_before = previous.get("wall_seconds", 0.)
     requested = env.get("PF_GPUS", "auto")
     requested = None if requested == "auto" else [int(v) for v in requested.split(",")]
     if requested is not None and (len(set(requested)) != len(requested) or len(requested) > 4):
@@ -51,10 +74,11 @@ def main():
     if method != "RELATIVE_ONLY":
         snapshot = gpu_snapshot()
         atomic_json(run_root / "initial_gpu_resources.json", snapshot)
-        available = idle_gpus(snapshot, requested=requested)
+        available = eligible(snapshot, requested)
         if not available:
-            raise RuntimeError("no safe idle GPU; do not share or terminate other tasks")
-        print(f"SAFE_GPU_COUNT={len(available)}; full 25/425 workload unchanged", flush=True)
+            raise RuntimeError("no GPU with the required memory budget; do not terminate other tasks")
+        print(json.dumps(dict(event="gpu_policy", shared=shared, memory_budget_mib=budget,
+                              headroom_mib=headroom, selected=available)), flush=True)
     subprocess.run([sys.executable, str(ROOT / "scripts/pf_preflight.py"),
                     "--dance-root", str(dataset), "--tracker-root", str(tracker),
                     "--checkpoint", checkpoint, "--check-checkpoint-hash", "--strict",
@@ -62,8 +86,12 @@ def main():
                     "--source-supplement", supplement,
                     "--tracker-receipt", "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/official_detr_neuralsort_receipt.json",
                     "--output", str(run_root / "preflight.json")], check=True)
-    pending = list(manifest["shards"])
-    running, finished = [], []
+    pending = [s for s in manifest["shards"] if s["shard"] not in sealed]
+    running = []
+    finished = [dict(r, reused=True) for r in previous.get("completed", [])
+                if r["shard"] in sealed and r.get("exit_status") == 0]
+    for shard in manifest["shards"]:
+        print(json.dumps(dict(event="active_plan", **shard, reused=shard["shard"] in sealed)), flush=True)
     failed = False
     started = time.time()
     last_notice = 0.
@@ -85,14 +113,14 @@ def main():
             print(json.dumps(dict(event="shard_finished", **record)), flush=True)
         if failed and not running:
             atomic_json(run_root / "launcher_status.json", dict(method=method, completed=finished,
-                        status="failed", wall_seconds=time.time()-started))
+                        status="failed", wall_seconds=elapsed_before+time.time()-started))
             break
         if pending and not failed:
             if method == "RELATIVE_ONLY":
                 free = [dict(index=None, uuid="CPU") for _ in range(max(0, 4-len(running)))]
             else:
                 used = {r["gpu_uuid"] for r in running}
-                free = [r for r in idle_gpus(gpu_snapshot(), requested=requested) if r["uuid"] not in used]
+                free = [r for r in eligible(gpu_snapshot(), requested) if r["uuid"] not in used]
             for gpu in free:
                 if not pending or len(running) >= 4:
                     break
@@ -103,13 +131,15 @@ def main():
                         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
                     except BlockingIOError:
                         lock.close(); continue
-                    if gpu["uuid"] not in {r["uuid"] for r in idle_gpus(gpu_snapshot(), requested=[gpu["index"]])}:
+                    if gpu["uuid"] not in {r["uuid"] for r in eligible(gpu_snapshot(), [gpu["index"]])}:
                         lock.close(); continue
                 shard = pending.pop(0)
                 shard_root = run_root / f"shard{shard['shard']}"
                 shard_root.mkdir(parents=True, exist_ok=True)
-                child_env = dict(env, CUDA_VISIBLE_DEVICES=("" if gpu["index"] is None else str(gpu["index"])),
-                                 PF_GPU_UUID=gpu["uuid"], OMP_NUM_THREADS="4", MKL_NUM_THREADS="4", OPENBLAS_NUM_THREADS="1")
+                child_env = dict(env, CUDA_VISIBLE_DEVICES=("" if gpu["index"] is None else gpu["uuid"]),
+                                 PF_GPU_UUID=gpu["uuid"], PF_PHYSICAL_GPU=str(gpu["index"]),
+                                 PF_GPU_MEMORY_BUDGET_MIB=str(budget),
+                                 OMP_NUM_THREADS="4", MKL_NUM_THREADS="4", OPENBLAS_NUM_THREADS="1")
                 command = [sys.executable, str(ROOT / "scripts/run_flexhook_positivefree.py"),
                            "--scope", "full", "--method", method, "--vendor", str(ROOT / "vendor/FlexHook"),
                            "--dataset-root", str(dataset), "--tracker-root", str(tracker),
@@ -125,7 +155,9 @@ def main():
                                     started_at=time.time(), process=process, log=log, lock=lock))
                 print(json.dumps({k: v for k, v in running[-1].items() if k not in {"process", "log", "lock"}}), flush=True)
         atomic_json(run_root / "launcher_status.json", dict(method=method, started_at=started,
-            wall_seconds=time.time()-started, completed=finished, pending=[s["shard"] for s in pending],
+            wall_seconds=elapsed_before+time.time()-started, attempt_wall_seconds=time.time()-started,
+            shared_gpu_authorized=shared, memory_budget_mib=budget, headroom_mib=headroom,
+            reused_shards=sealed, completed=finished, pending=[s["shard"] for s in pending],
             running=[{k:v for k,v in r.items() if k not in {"process", "log", "lock"}} for r in running],
             status="failed" if failed else ("running" if pending or running else "complete")))
         if time.time()-last_notice >= 60:

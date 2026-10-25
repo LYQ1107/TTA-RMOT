@@ -1,7 +1,8 @@
 # Positive-Free 正式实验执行计划（2026-10-25）
 
 项目仅为 `LYQ1107/TTA-RMOT`，执行目录 `/data2/user/FlexHook-TTA`。
-用户本轮已授权完整目标 TTA 和官方评测；不授权源端重训、额外教师、终止其他任务或擅自共享 GPU。
+用户本轮已授权完整目标 TTA 和官方评测；最新指令明确允许显存足够时共享 GPU，优先四张进程少的卡。
+不授权源端重训、额外教师或终止其他任务。
 从核实后的 `a0cb27ee338edaaf0362fb89316b22f1775c9aab` 创建
 `research/v2dance-positivefree-four-gpu-full-20261025`，保留原分支、历史输出与权重。
 
@@ -10,9 +11,12 @@
 1. 局部缓存冻结 backbone 多尺度输出和每查询文本编码；原 C-Hook/PCD 解码不变。
    FP32，有界 LRU，只取当前/过去帧；先真实候选集前向和梯度等价验证，单独提交。
    正式 runner 上限 16 GiB/worker（初版等价回归用 4 GiB），以容纳最长 2,402 帧视频的约 15.2 GiB 冻结特征，
-   避免 17 条表达之间的顺序扫描 LRU 抖动；仅选取至少 24 GiB 空闲显存且无计算进程的卡。
-2. 固定 25 视频/425 episode，以 tracker rows 作 LPT 工作量分片；最多四张无计算进程且资源充足的 GPU。
-   不足四张就用 1–3 张运行全部逻辑分片；当前初查仅 GPU5 真正空闲。
+   避免 17 条表达之间的顺序扫描 LRU 抖动；共享时至少 32 GiB 剩余显存，单进程 PyTorch 分配器上限 24 GiB，
+   保留 8 GiB 余量。此上限不是跨用户显存预留，别人后续分配仍可能引发资源竞争。
+2. 固定 25 视频/425 episode，以 tracker rows 作 LPT 工作量分片；最多四张物理 GPU。
+   最新授权下先按进程数少排序，再按剩余显存多排序；无足够显存时等待，不停止别人进程。
+   已完成 shard0 的 6 视频/102 episode 不重跑；其余 19 视频重新 LPT 为四个完整视频组。
+   原 manifest 保留，新 active_manifest 固定后供恢复使用，不能切断 episode 或搬移已开始的分片。
 3. 每 episode 原子封存预测和候选分数，写完成收据；失败重置源状态后重跑该 episode，保留失败日志。
 4. 顺序运行 ZERO_UPDATE、RELATIVE_ONLY、PF_RANK、PF_RANK_GUARD、PF_IDENTITY、PF_HYBRID。
    Guard 先验证从 PF_RANK 分数派生的等价性，再省去重复 GPU 前向。

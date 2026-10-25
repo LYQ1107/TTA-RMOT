@@ -1,4 +1,14 @@
-# LocateMOT Research Log
+# TTA-RMOT Research Log (inherited historical entries preserved below)
+
+## 2026-10-25 — User-authorized GPU sharing and pending-only repartition
+
+- This checkout is `/data2/user/FlexHook-TTA`, remote `LYQ1107/TTA-RMOT`; inherited LocateMOT entries below are history, not the current task.
+- ZERO_UPDATE shard0 completed 6 videos / 102 expressions, exit 0. The old idle-only coordinator then waited while GPU5 was occupied by a foreign training job.
+- User explicitly authorized sharing when VRAM fits, preferring four GPUs with fewest processes. Stop only our waiting coordinator PID 3682643; retain all completed predictions, original manifest and resource/status snapshots.
+- Change: occupied-card eligibility requires 24 GiB worker budget + 8 GiB free headroom; prefer fewer compute processes, then more free memory. Bind UUIDs and record physical indices; no foreign process is stopped. PyTorch allocator cap is not a resource reservation.
+- Repartition only 19 unstarted whole videos into four pending groups; retain completed shard0 verbatim. Episode seed, weights, query bank, online memory and update defaults do not change. No target GT is read during the transition.
+- Numerical results remain pending; resource sharing may affect throughput and does not imply a 4x speedup.
+- Verification: all 39 focused tests passed in 10.71 s, including occupied-card memory/process ordering and completed-shard-preserving repartition; compileall and shell syntax checks passed.
 
 Concise experimental log (latest first).
 

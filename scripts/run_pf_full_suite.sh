@@ -25,8 +25,9 @@ for PF_SUITE_METHOD in "${PF_SUITE_METHODS[@]}"; do
       PF_SUITE_RANK="$PF_REPO/results/runs/pf_rank_completebank_full_20261025_merged"
       PF_SUITE_VERIFY="$PF_REPO/results/runs/pf_guard_equivalence_completebank_20261025"
       if [[ ! -d "$PF_SUITE_VERIFY" ]]; then
-        PF_SUITE_VERIFY_GPU="$($PF_PYTHON -c 'from flex_tta.runtime.pf_shards import gpu_snapshot,idle_gpus; x=idle_gpus(gpu_snapshot()); assert x, "No idle GPU for guard equivalence"; print(x[0]["index"])')"
-        CUDA_VISIBLE_DEVICES="$PF_SUITE_VERIFY_GPU" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
+        read -r PF_SUITE_VERIFY_GPU PF_SUITE_VERIFY_UUID < <("$PF_PYTHON" -c 'import os; from flex_tta.runtime.pf_shards import gpu_snapshot,eligible_gpus; x=eligible_gpus(gpu_snapshot(),shared=os.environ.get("PF_ALLOW_SHARED_GPU")=="YES"); assert x, "No GPU with sufficient memory for guard equivalence"; print(x[0]["index"],x[0]["uuid"])')
+        CUDA_VISIBLE_DEVICES="$PF_SUITE_VERIFY_UUID" PF_PHYSICAL_GPU="$PF_SUITE_VERIFY_GPU" PF_GPU_UUID="$PF_SUITE_VERIFY_UUID" \
+          PF_GPU_MEMORY_BUDGET_MIB="${PF_GPU_MEMORY_BUDGET_MIB:-24576}" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
           "$PF_PYTHON" "$PF_REPO/scripts/verify_pf_guard_equivalence.py" --rank-root "$PF_SUITE_RANK" \
           --output-root "$PF_SUITE_VERIFY" || echo 'Guard equivalence failed; preserve evidence and use direct full GPU fallback'
       fi

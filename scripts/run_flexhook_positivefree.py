@@ -113,7 +113,8 @@ def plan_receipt(args) -> dict[str, Any]:
         "feature_cache_mib": args.feature_cache_mib,
         "experiment_commit": getattr(args, "experiment_commit", None),
         "gpu_uuid": os.environ.get("PF_GPU_UUID"),
-        "physical_gpu": os.environ.get("CUDA_VISIBLE_DEVICES"),
+        "physical_gpu": os.environ.get("PF_PHYSICAL_GPU", os.environ.get("CUDA_VISIBLE_DEVICES")),
+        "gpu_memory_budget_mib": os.environ.get("PF_GPU_MEMORY_BUDGET_MIB"),
         "nce_weight": args.nce_weight,
         "no_target_gt": True,
         "source_free_prediction": True,
@@ -266,6 +267,10 @@ def _model_run(args, source: dict, videos: list[str]):
     from transformers import RobertaTokenizerFast
 
     device = torch.device("cuda:0")
+    if os.environ.get("PF_GPU_MEMORY_BUDGET_MIB"):
+        budget_bytes = int(os.environ["PF_GPU_MEMORY_BUDGET_MIB"]) << 20
+        torch.cuda.set_per_process_memory_fraction(
+            budget_bytes / torch.cuda.get_device_properties(device).total_memory, device)
     out = args.output_root / args.method
     if out.exists() and not args.resume:
         raise FileExistsError(f"run root must be new: {out}")

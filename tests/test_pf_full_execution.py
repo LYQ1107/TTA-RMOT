@@ -5,7 +5,7 @@ import json
 import pytest
 
 from test_pf_runner import fixture_files, runner, preflight
-from flex_tta.runtime.pf_shards import weighted_manifest, idle_gpus
+from flex_tta.runtime.pf_shards import weighted_manifest, idle_gpus, eligible_gpus, rebalance_unstarted
 from flex_tta.runtime.pf_receipts import EpisodeStore
 from flex_tta.dance_io import merge_source_supplement
 
@@ -27,6 +27,27 @@ def test_dynamic_gpu_selection_never_shares():
     assert idle_gpus(snapshot, requested=[0, 1]) == []
     snapshot[2]["utilization"] = 80
     assert idle_gpus(snapshot) == []
+
+
+def test_authorized_sharing_prioritizes_process_count_with_memory_headroom():
+    snapshot = [dict(index=i, free_mib=50000+i*100, processes=[{}]*i, utilization=100)
+                for i in range(8)]
+    snapshot[0]["free_mib"] = 30000
+    assert [g["index"] for g in eligible_gpus(snapshot, shared=True)] == [1, 2, 3, 4]
+    assert eligible_gpus(snapshot, shared=False) == []
+    assert [g["index"] for g in eligible_gpus(snapshot, shared=True, requested=[5, 7])] == [5, 7]
+
+
+def test_rebalance_preserves_completed_shard_and_all_episodes(tmp_path):
+    data, tracks, _ = fixture_files(tmp_path, videos=25)
+    manifest = weighted_manifest(tracks, data)
+    result = rebalance_unstarted(manifest, [0])
+    assert result["shards"][0] == manifest["shards"][0]
+    assert result["reused_shards"] == [0]
+    assert [s["shard"] for s in result["shards"]] == [0, 1, 2, 3, 4]
+    assert len({v for s in result["shards"] for v in s["videos"]}) == 25
+    assert sum(s["episodes"] for s in result["shards"]) == 425
+    assert len(result["shards"][1:]) == 4
 
 
 def test_atomic_receipt_integrity_and_partial_restart(tmp_path):

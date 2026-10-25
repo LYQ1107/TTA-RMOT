@@ -72,6 +72,67 @@ def idle_gpus(snapshot, *, requested=None, minimum_free_mib=24576, limit=4):
                   key=lambda r: (-r["free_mib"], r["index"]))[:limit]
 
 
+def eligible_gpus(snapshot, *, shared=False, requested=None, memory_budget_mib=24576,
+                  headroom_mib=8192, limit=4):
+    """Sharing is opt-in; process count takes priority over available memory."""
+    if not shared:
+        return idle_gpus(snapshot, requested=requested, minimum_free_mib=memory_budget_mib, limit=limit)
+    allowed = set(requested) if requested is not None else None
+    return sorted([r for r in snapshot if (allowed is None or r["index"] in allowed)
+                   and r["free_mib"] >= memory_budget_mib + headroom_mib],
+                  key=lambda r: (len(r["processes"]), -r["free_mib"], r["utilization"], r["index"]))[:limit]
+
+
+def rebalance_unstarted(manifest, completed_shards, *, num_shards=4):
+    """Retain sealed groups verbatim; LPT only the remaining whole videos."""
+    completed = set(completed_shards)
+    retained = [s for s in manifest["shards"] if s["shard"] in completed]
+    done = {v for s in retained for v in s["videos"]}
+    records = [r for r in manifest["videos"] if r["video"] not in done]
+    next_id = max(completed, default=-1) + 1
+    groups = [dict(shard=next_id+i, videos=[], episodes=0, tracker_rows=0,
+                   estimated_forward_calls=0, cost=0.) for i in range(num_shards)]
+    for record in sorted(records, key=lambda r: (-r["cost"], r["video"])):
+        group = min(groups, key=lambda s: (s["cost"], s["shard"]))
+        group["videos"].append(record["video"])
+        for key, source_key in (("episodes", "expressions_count"), ("tracker_rows", "tracker_rows"),
+                                ("estimated_forward_calls", "estimated_forward_calls"), ("cost", "cost")):
+            group[key] += record[source_key]
+    for group in groups:
+        group["videos"].sort()
+    result = dict(manifest, shards=retained+[g for g in groups if g["videos"]],
+                  reused_shards=sorted(completed),
+                  repartition_reason="user-authorized shared GPUs; rebalance only unstarted whole videos")
+    assigned = [v for s in result["shards"] for v in s["videos"]]
+    if len(assigned) != len(set(assigned)) or set(assigned) != {r["video"] for r in manifest["videos"]}:
+        raise ValueError("rebalance lost or duplicated a video")
+    if sum(s["episodes"] for s in result["shards"]) != manifest["episodes"]:
+        raise ValueError("rebalance changed episode coverage")
+    return result
+
+
+def sealed_shards(run_root, manifest, method):
+    from flex_tta.runtime.pf_receipts import EpisodeStore
+    expected_by_video = {r["video"]: r["expression_ids"] for r in manifest["videos"]}
+    result = []
+    for shard in manifest["shards"]:
+        folder = Path(run_root) / f"shard{shard['shard']}" / method
+        metadata = folder / "run_metadata.json"
+        if not metadata.is_file():
+            continue
+        data = json.loads(metadata.read_text())
+        expected = {(v, e) for v in shard["videos"] for e in expected_by_video[v]}
+        records = data.get("episodes", [])
+        if data.get("status") != "complete" or {(r["video"], r["expression_id"]) for r in records} != expected:
+            continue
+        for record in records:
+            if EpisodeStore(folder, record["video"], record["expression_id"],
+                            record["config"], resume=True).completed() is None:
+                raise ValueError("sealed shard has an unsealed episode")
+        result.append(shard["shard"])
+    return result
+
+
 def save_manifest(path, manifest):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)

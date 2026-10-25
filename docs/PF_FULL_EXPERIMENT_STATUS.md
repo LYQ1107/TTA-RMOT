@@ -1,7 +1,8 @@
 # Positive-Free full-suite status — 2026-10-25
 
 Project: TTA-RMOT only, `/data2/user/FlexHook-TTA`.
-User authorized all full target-domain experiments, not source training or sharing occupied GPUs.
+User authorized all full target-domain experiments, not source training. Latest explicit instruction
+also authorizes sharing occupied GPUs when VRAM fits, preferring four cards with fewest processes.
 Branch: `research/v2dance-positivefree-four-gpu-full-20261025`, from verified `a0cb27e`.
 
 ## Completed engineering
@@ -10,7 +11,9 @@ Branch: `research/v2dance-positivefree-four-gpu-full-20261025`, from verified `a
 - Six real frame probes, including 22 candidates: zero selection/sign mismatches; maximum margin error 2.25067e-4.
 - LoRA gradient maximum absolute difference 4.88758e-6 (gradient magnitude 0.339613).
 - Weighted complete-video LPT groups: 52,688 / 53,495 / 52,621 / 52,281 tracker rows; 102 / 119 / 102 / 102 episodes.
-- At most four genuinely idle GPUs; safe 1–3 GPU fallback; no occupied-card override. Initial snapshot: only GPU5 idle.
+- Initial idle-only policy used GPU5. Latest user authorization enables occupied cards with at least
+  32 GiB free: 24 GiB per-process PyTorch allocator budget plus 8 GiB headroom, then fewest processes first.
+  The budget is not a reservation or a guarantee against later allocations by other users.
 - Atomic per-episode prediction/margin sealing and completion receipts; partial attempts preserved, whole episode restarted from seed 0.
 - Same seed 0 reset at each independent episode, so resume/shard scheduling cannot change LoRA initial state.
 - Integration gate: 33 focused CPU tests passed. Cache-enabled ZERO_UPDATE/PF_RANK/PF_IDENTITY/PF_HYBRID smoke passed (0/3/3/3 updates).
@@ -44,7 +47,7 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 
 | Stage | Status |
 |---|---|
-| Complete-bank ZERO_UPDATE | RUNNING on GPU5; initial worker PID 3684057, actual log/receipts under `results/runs/pf_zero_completebank_full_20261025`; metrics pending |
+| Complete-bank ZERO_UPDATE | 102/425 sealed on GPU5; resume remaining 19 whole videos across four shared GPUs, preserving completed shard0; metrics pending |
 | RELATIVE_ONLY (CPU) | after ZERO_UPDATE baseline audit/evaluation |
 | PF_RANK | after RELATIVE_ONLY |
 | PF_RANK_GUARD | validate exact CPU derivation of PF_RANK pre-update margins |
@@ -57,6 +60,14 @@ GT is opened only by independent evaluation after predictions are sealed/audited
 These are development-target results, not an independent blind test.
 
 No scientific success, HOTA gain or final completion is claimed at this engineering stage.
+
+Resource-policy transition: shard0 completed successfully; the coordinator then waited because
+no card met the old idle-only rule. Only our waiting coordinator PID 3682643 was terminated to
+apply the user's new sharing instruction. No GPU worker or foreign process was stopped.
+Original manifest/status/resource snapshots remain intact; `active_manifest.json` retains shard0
+and balances only unstarted videos into four additional logical groups. At most four are active.
+Shared-policy regression gate: 39 focused tests passed in 10.71 s; compileall and both shell
+entry-point syntax checks passed. Numerical hyperparameters and completed episode receipts are unchanged.
 
 Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
 `analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
