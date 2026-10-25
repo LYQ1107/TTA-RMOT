@@ -1956,3 +1956,13 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - Initial resource snapshot: only physical GPU5 has no compute process; other GPUs belong to existing jobs and are not interrupted.
 - Hypothesis: cache only frozen multi-scale backbone/text outputs; retain original language-conditioned C-Hook/PCD, causal history and FP32 decisions. Validate real logits, margin signs, selected IDs and LoRA gradients before formal use.
 - Plan: weighted whole-video shards, atomic episode receipts/resume, full ZERO_UPDATE baseline gate, then all five controls/adaptations, official evaluation and offline attribution. No pilot-only completion claim.
+
+## 2026-10-25 TTA-RMOT six-method full research closure
+
+- The same full-suite shell finished exit0 after PF_HYBRID. Six methods each cover25 videos/425 expressions/3,588,445 candidate-query rows/433,636 active frames. Completed predictions were not rerun; no source training or foreign process kill.
+- Matched ZERO baseline8.2180; Relative7.5705; Rank8.2433; Guard8.2444; Identity8.8179; Hybrid8.3213. Old8.2060 is historical only. Fixed V2/MOT/default rank4/lr5e-5/interval4/seed0/FP32 unchanged.
+- Hybrid recovers986/loss1 GT observations, FP net+3,832 (newFP3,861/removal35 are distinct), EmptyFP90,852, AUROC0.647115.107,869 accepted updates/200 restored norm rollbacks;425 pre-episode resets and25 strict loads pass, no frozen gradients. Actual7.6323 GPU-hours/7,193.22s wall.
+- Identity remains the strongest point estimate(+0.5999), but its video95% interval[-0.083812,+2.430322] includes0; ranking and Empty rejection worsen. Hybrid does not complement the stronger single module(-0.496598 HOTA versus Identity); no success claim based only on extra losses.
+- Completed all-six Query-Present/Empty, candidate Recall@K versus any-hit, video-cluster bootstrap and Hybrid pair comparisons. Static figure rendered/visually checked; final report includes recovery-versus-FP, compute dependencies, A+B primary failure decision and caveats. Guard cost includes Rank and112.43s GPU equivalence, not just7.34s CPU derivation.
+-52 focused tests pass(10.85s); compileall/shell syntax pass. Compact recovery index records all2,550 sealed receipts and actual model checks; missing full-run post-reset smoke flags remain null, not invented passes.
+- Keep all six full results. Next authorized phase is bounded query-presence evidence design/prototype only: no seventh full target run, source retraining, GT tuning, forced positive or external semantic teacher. If no independent semantic signal is found, report UNKNOWN/skip rather than stack losses.

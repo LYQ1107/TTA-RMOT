@@ -98,6 +98,7 @@ def generate(publish, output):
         adapted = " / ".join(f"{a['adapted_Recall_at_1_3_5'][str(k)]:.6f}" for k in (1,3,5))
         lines.append(f"| {method} | {source} | {adapted} |")
     lines += ["", "每方法 JSON 另存四个 episode 活跃帧进度区间的负预测比例，检查是否随时间持续抑制输出；它不是独立帧显著性检验。",
+              "所有方法保持原MOT物理ID不变；AssA/IDSW变化来自被选中观测和评测对应关系的变化，不代表修复或改写了上游跟踪器ID。",
               "身份诊断仅统计 query-GT 可见、间隔≤2帧的物理ID对应GT匹配身份变化及可能更新机会；遮挡/重叠时匹配重分配也可能产生变化，不能当作真实MOT身份错误率。它不覆盖未标注非目标人、GT缺口，也不证明所有正对可靠。在线记忆的 max_gap=2 无法独立识别短间隔 ID 互换；这些 GT 诊断从未参与训练。",
               "", "## 视频级收益分布与不确定性", "",
               "成对 bootstrap 以25个完整视频为聚类单位，每次保留视频内全部表达与帧，2000次重采样、seed0；重新池化官方HOTA充分统计量，不平均视频HOTA。区间只描述本开发集的视频抽样不确定性，不是独立盲测或训练种子显著性。",
@@ -165,6 +166,16 @@ def generate(publish, output):
         c = reports[method]["cost"]
         lines.append(f"| {method} | {c['wall_seconds']:.2f} | {c['total_episode_seconds']:.2f} | {c['gpu_hours']:.4f} | " +
                      f"{c['worker_active_frame_fps']:.3f} | {c['scheduler_wall_active_frame_fps']:.3f} | {c['peak_vram_bytes']/2**30:.3f} |")
+    if "reused_rank_stats" in reports["PF_RANK_GUARD"]:
+        equivalence = json.loads((Path(publish)/"manifests/guard_complete_episode_equivalence.json").read_text())
+        if equivalence["status"] != "PASS" or not equivalence["predictions_byte_identical"]:
+            raise ValueError("derived Guard requires its actual passing GPU equivalence receipt")
+        rank_cost, guard_cost = reports["PF_RANK"]["cost"], reports["PF_RANK_GUARD"]["cost"]
+        dependency_wall = rank_cost["wall_seconds"]+equivalence["wall_seconds"]+guard_cost["wall_seconds"]
+        lines += ["", f"Guard 的已执行依赖链为：Rank {rank_cost['gpu_hours']:.4f} GPU小时 / {rank_cost['wall_seconds']:.2f}s wall，"
+                  f"加独立完整episode GPU等价验证 {equivalence['wall_seconds']:.2f}s wall，"
+                  f"再加CPU派生 {guard_cost['wall_seconds']:.2f}s；这些顺序阶段wall合计 {dependency_wall:.2f}s（仍不含共同Frozen准备和评测）。"
+                  "验证receipt没有单独记录GPU进程起止积分，因此不把验证wall冒充精确GPU-hours，也不把它省略成零GPU。"]
     lines += ["", "峰值为 PyTorch max_memory_allocated，不包含 CUDA context 或 allocator reserved；不能解释为整卡峰值。",
               "本表为已有冻结源分数资产条件下的各阶段实测执行成本；完整ZERO分数准备是共同的一次性成本。Rank/Hybrid需要冻结历史分数，独立在线部署时该源模型分支也应计入（冻结backbone可共享，但本轮未实测teacher+student双分支端到端FPS）。不能把缓存源分数解释为从图像免费产生。",
               "RELATIVE_ONLY 的 CPU 成本同样仅指增量选择，前提是已有完整 ZERO_UPDATE 源分数；不能据此宣称从图像到 RMOT 输出不需要 GPU。",
@@ -186,6 +197,30 @@ def generate(publish, output):
         else:
             judgment = "HOTA 有增益，仍需结合召回/FP/排序权衡解释，不据此声称已学到新语义。"
         lines.append(f"- {method}：ΔHOTA {m['HOTA']-base['HOTA']:+.4f}，ΔIDF1 {m['IDF1']-base['IDF1']:+.4f}，净恢复 GT {a['recovered_gt']-a['lost_gt']:+d}。{judgment}")
+    lines += ["", "## 六组闭环后的研究决策", "",
+              "恢复GT和新增FP的单位都是观测行，不是独立的人数；下面是实际数量权衡，不是将这些相关行当独立样本做显著性检验。"]
+    for method in primary:
+        a = attribution[method]
+        lines.append(f"- {method}：恢复 {a['recovered_gt']:,} / 丢失 {a['lost_gt']:,} 个GT观测；"
+                     f"新增未匹配预测行 {a['new_false_positive_rows']:,} / 移除 {a['removed_false_positive_rows']:,}；"
+                     f"总FP净变化 {a['net_false_positive_change']:+,}。新增行误检与总FP变化严格区分，不能只报召回收益。")
+    empty_fraction = a0['query_empty_FP']/max(a0['adapted_false_positive_rows'],1)
+    lines += ["", f"A（正确候选排序）有失败证据：固定候选逐GT可检索率 {100*a0['conditional_candidate_recall']:.4f}%，"
+              f"但Frozen条件门禁召回仅 {100*a0['baseline_conditional_gate_recall']:.4f}%，AUROC {a0['source_auroc']:.6f}；"
+              "TopK与随机多目标对照、以及候选Recall@K必须一起看，不能把TopK任意命中误解成强语义排序。",
+              f"B（查询存在性/拒识）有直接错误分布证据：Frozen的 {100*empty_fraction:.2f}% 诊断FP来自官方GT空episode。"
+              "同一query内部的排序和同一物理ID一致性都不提供跨query的存在性校准；更高HOTA不能自动证明空查询判断改善。",
+              "C（轨迹身份）不能被排除，但现有实验没有证明它是首要瓶颈。固定候选ID从未修改；"
+              "InfoNCE的正对是物理ID跨帧，不是语言匹配正例。低AssA和GT可见ID冲突需要保留，不能据它们直接认定身份TTA解决了指代。",
+              "综合判断更支持D中的A+B联合失效，而非仅C。六组的实际排序、Empty FP、召回与成对视频区间限定了这个结论；"
+              "单一源/目标、单seed和已查看目标指标仍限制因果解释与泛化。",
+              "", "是否值得继续：本开发集上的正向召回观测值得保留，但只有能产生新的、可证伪的查询相关证据，"
+              "才值得另行验证presence-aware适应。不能把相同错误分数的稳定性或同一物理ID重新包装成独立语义监督。"
+              "新机制先做设计与有界原型，不自动开始第七种完整GPU运行、源端训练或目标GT调参。"]
+    prototype = ROOT/"docs/PF_QUERY_PRESENCE_PROTOTYPE_20261025.md"
+    if prototype.is_file():
+        lines += ["", "后续机制、实际原型验证与不能识别的情形见 [Query-Presence原型与可行性](PF_QUERY_PRESENCE_PROTOTYPE_20261025.md)。"
+                  "它不是本表的第七种正式方法；若没有独立可靠的语义学习信号，应停在UNKNOWN/诊断而不是堆叠损失。"]
     lines += ["", "## 可复查材料", "",
               "- GitHub：本分支 `results/positive_free/full/<method>/` 下的官方 summary/detailed CSV、425 条逐表达和 25 个逐视频指标、全量审计摘要与离线归因。逐视频使用官方 combine_sequences 池化，不是宏平均。",
               "- `results/positive_free/full/manifests/`：测试记录、资产预检、原 Frozen 覆盖缺陷、补充 receipt、共享分片、完整边界诊断、匹配 Frozen receipt。",

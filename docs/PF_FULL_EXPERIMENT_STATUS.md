@@ -54,22 +54,30 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 | PF_RANK | COMPLETE 25/425: HOTA 8.2433 (+0.0253), IDF1 4.4947; 100,582 rows; all four workers exited 0 |
 | PF_RANK_GUARD | COMPLETE 25/425: HOTA 8.2444 (+0.0264), IDF1 4.4956; 100,613 rows; CPU-derived after real complete-episode GPU equivalence passed |
 | PF_IDENTITY | COMPLETE 25/425: HOTA 8.8179 (+0.5999), DetA 4.0132, AssA 19.3760, IDF1 5.4476; 114,648 rows; all 25 video jobs exited 0 |
-| PF_HYBRID | RUNNING on physical GPU0/4/6/1; initial PIDs 581747/581814/581900/581985; same defaults and 25 whole-video jobs |
+| PF_HYBRID | COMPLETE 25/425: HOTA8.3213 (+0.1033), DetA3.4393, AssA20.1330, IDF1 4.7114;104,521 rows; all25 video jobs exited0 |
 
 For each: all 25 videos / 425 expressions / all 211,085 observations per query bank;
 full ordered frames, exact MOT rows, no target GT in adaptation, original defaults, FP32.
 GT is opened only by independent evaluation after predictions are sealed/audited.
 These are development-target results, not an independent blind test.
 
-Five complete methods have official results. Hybrid is unfinished; no final TTA success or goal completion is claimed.
+All six methods are complete with official results and offline attribution. The existing full-suite
+shell command returned exit0 after `STAGE_COMPLETE PF_HYBRID`; formal GPU work is finished.
+The strongest point estimate is Identity8.8179 (+0.5999), not Hybrid. This is not a declaration of
+robust semantic/research success: paired video intervals include0, AUROC declines and Empty FP rises.
+The final scientific report and static figure are generated; only the authorized bounded presence-aware
+design/prototype and final publication remain. No seventh full run or source training is authorized.
 
 User's supplemental acceptance is integrated without restarting healthy workers. Four completed
 methods now have separate `offline_query_diagnostics.json` files; original attribution/official
 outputs remain unchanged. Whole-video paired bootstrap, query-group metrics, multi-target
 candidate Recall@K, temporal negative-output and limited identity-assignment diagnostics are
 recorded in `docs/PF_SUPPLEMENTAL_ACCEPTANCE_20261025.md`. Fifty focused tests pass (12.55 s).
-Final reporting requires all six query diagnostics and all-six video uncertainty. Next-stage
-presence-aware design/prototype is deferred until the registered six-method closure; no seventh full run.
+All-six query diagnostics and all-six video uncertainty are now complete, including Hybrid versus both
+single modules.52 concentrated tests pass in10.85s; compileall and both shell syntax checks pass.
+`manifests/full_recovery_index.json` indexes all2,550 complete episode receipts, actual strict-load,
+pre-episode-reset and frozen-gradient checks. Missing full-scope post-reset smoke flags remain null,
+not falsely reported as passed. The static figure was rendered and visually inspected.
 
 Identity full audit: 425 unique episodes, all 3,588,445 candidate-query rows / 433,636 active frames,
 zero initial source mismatches, unchanged MOT geometry/IDs, no target GT opened by adaptation.
@@ -89,7 +97,7 @@ Actual cost: wall8940.97s,9.8481GPU-hours, worker12.4047 active-frameFPS,
 scheduler48.4999FPS, peak allocated18,289,683,968bytes. There are108,069 finite nonzero-gradient
 attempts,86,678 accepted updates and21,391 norm-limit rollbacks; max accepted adapter L2=1.99999856.
 Numerical defaults remain unchanged despite these results. Evidence coverage is rule eligibility,
-not semantic correctness. Hybrid must still complete before any all-method conclusion.
+not semantic correctness. The completed Hybrid does not exceed this better single module.
 The offline cost grouping now verifies all group sums against full-run counters. Latest focused
 regression:51 tests pass in11.89s; compileall passes. Identity accepts8,630 updates on Present and
 78,048 on Empty episodes; the labels are diagnostic only, never an online gating input.
@@ -103,7 +111,7 @@ all 425 native ZERO predictions. Official HOTA 8.2180 is the matched baseline, n
 Offline GT attribution (only after full sealing): 203,906 / 212,541 GT observations are candidate-retrievable
 (95.9373%), but Frozen selects only 10,337 of them (conditional gate recall 5.0695%).
 RELATIVE_ONLY raises matched GT to 25,210 but FP from 89,367 to 350,273. Its ranking/AUROC is unchanged.
-These are completed control results, not a verdict on the still-running gradient-based methods.
+These controls remain part of the all-six completed comparison, not a changed evaluation subset.
 
 Full Rank makes 105,971 finite nonzero-gradient updates, zero nonfinite/zero-gradient steps and
 zero rollbacks. HOTA gains only 0.0253 points: diagnostic net GT recovery +155 (158 recovered,

@@ -1,7 +1,8 @@
-# Positive-Free failure analysis — interim, five complete methods
+# Positive-Free failure analysis — all six complete methods
 
 Project: TTA-RMOT only. Full 25 videos / 425 expressions; development-target results, not blind testing.
-PF_HYBRID is still running. No all-method final conclusion is inferred before it finishes.
+All six registered methods have completed 25/425, full audits and official TrackEval.
+No seventh full run or extra source training is started.
 
 ## Matched baseline and implementation checks
 
@@ -124,9 +125,47 @@ observed Identity Empty group instead has a net10,421 additional FP. This is a c
 motivation to investigate evidence-aware update decisions, not permission to use GT groups
 as online gates or assume the GT absence prevalence as a target prior.
 
-## Remaining decision
+## Hybrid is not complementary to the better single module
 
-Complete the registered PF_HYBRID study without tuning on GT.
-Distinguish genuine GT recovery and ranking improvement from pruning/retention effects or extra outputs.
-An AssA increase accompanied by DetRe loss cannot be called target-recall recovery. No overall research-success
-or final negative-TTA verdict is issued before the remaining full methods finish.
+PF_HYBRID: HOTA8.3213 (+0.1033), DetA3.4393, AssA20.1330, DetRe4.9570,
+DetPr10.0800, IDF1 4.7114, IDSW300;104,521 selected rows/1,823 IDs.
+It recovers986 GT observations and loses1, net+985; total diagnostic FP rises3,832.
+New unmatched prediction rows3,861 minus35 removed rows does not equal that net FP change,
+because existing-row match assignments can change. Empty FP becomes90,852 (+3,481),
+Present FP2,347; Empty nonempty episodes156/385 (40.5195%). Present nonempty stays32/40.
+
+AUROC falls0.650204→0.647115. Candidate Recall@1/3/5 changes
+0.157999/0.447421/0.697658→0.158359/0.447475/0.697892: very small ranking changes,
+not a large semantic recovery. Negative output fractions decline later in the episode,
+so this is not a collapse caused by removing most candidates.
+
+Hybrid is+0.077997 HOTA versus Rank but-0.496598 versus Identity. Its paired25-video95%
+intervals are[-0.030775,+0.527028] versus Frozen,[-0.026526,+0.397497] versus Rank,
+and[-1.953786,+0.068879] versus Identity. Against Identity it improves3 videos,
+declines15 and ties7; it trades higher AssA for lower DetRe. There is no demonstrated
+overall HOTA/recall complementarity, so two losses do not justify selecting it as the final method.
+
+Actual cost:7.6323 GPU-hours/7,193.22s wall;16.0875 worker and60.2840 scheduler
+active-frameFPS;17.024GiB peak Torch allocated.107,869 accepted updates/108,069 finite
+nonzero attempts/200 norm rollbacks, maximum accepted deltaL2 1.99997981. Both losses
+execute (5,356,449 rank-pair observations/882,742 identity pairs).425/425 pre-episode
+resets, all25 strict loads, no frozen gradients; restored rollback flags pass.
+Rule eligibility99.9214% is not query-presence evidence.97,007 accepted updates are on
+the385 Empty episodes, versus10,862 on the40 Present episodes; this grouping is offline only.
+
+## Research decision after all six
+
+The evidence most strongly supports combined referring-ranking and query-presence failure (A+B).
+Candidate boxes are usually retrievable, but the source gate misses most true targets and
+97.77% of source diagnostic FP comes from officially GT-empty episodes. Physical-ID consistency
+does not supply a language-presence label. Identity has a genuine positive recall/HOTA point
+estimate worth retaining, but worsened AUROC/Empty FP and a video interval crossing0 prevent
+claiming robust semantic recovery. Fixed MOT IDs are never edited; changes in AssA/IDSW arise
+from the selected subset and evaluation matching, not repaired upstream tracker identities.
+
+Keep all six results, including negative controls. Do not tune thresholds/losses from these GT
+diagnostics or select Hybrid solely because it combines modules. The authorized next step is a
+bounded query-presence evidence prototype, not another full experiment. If frozen interaction
+evidence is not independent semantic supervision, report that limitation and keep UNKNOWN/skip
+rather than invent hard positives or add another loss. Full tables, costs, per-video uncertainty
+and dependency accounting are in `PF_FINAL_SCIENTIFIC_REPORT_20261025.md`.
