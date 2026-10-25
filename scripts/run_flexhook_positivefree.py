@@ -501,6 +501,7 @@ def _model_run(args, source: dict, videos: list[str]):
             torch.cuda.synchronize(device)
             record = {"video": video, "expression_id": expr_id, "sentence": sentence,
                 "wall_seconds": time.perf_counter()-started, "full_frame_coverage": len(frames) == len(tracks),
+                "gpu_peak_allocated_bytes": torch.cuda.max_memory_allocated(device),
                 "experiment_commit": args.experiment_commit,
                 "gpu_uuid": os.environ.get("PF_GPU_UUID"),
                 "counter_delta": record_delta(stats, counters_before),
@@ -514,7 +515,8 @@ def _model_run(args, source: dict, videos: list[str]):
                                   expression=expr_id, completed=stats["episodes"], seconds=record["wall_seconds"])), flush=True)
     stats["source_mae_before_updates"] = stats["source_abs_error_sum"] / max(stats["source_comparison_rows"], 1)
     stats["frozen_parameters_have_grad"] = any(p.grad is not None for p in model.parameters() if not p.requires_grad)
-    stats["gpu_peak_allocated_bytes"] = torch.cuda.max_memory_allocated(device)
+    stats["gpu_peak_allocated_bytes"] = max(torch.cuda.max_memory_allocated(device),
+        max((e.get("gpu_peak_allocated_bytes", 0) for e in stats["episode_records"]), default=0))
     if args.scope == "smoke":
         memory.reset()
         if identity_memory is not None:
@@ -555,6 +557,20 @@ def run(args):
         merge_source_supplement(source, json.loads(args.source_supplement.read_text()))
         args.source_supplement_sha256 = file_sha(args.source_supplement)
         receipt["source_supplement_sha256"] = args.source_supplement_sha256
+    previous_metadata = args.output_root / args.method / "run_metadata.json"
+    if args.resume and previous_metadata.is_file():
+        previous = json.loads(previous_metadata.read_text())
+        from flex_tta.dance_io import load_expressions
+        expected = {(v, e) for v in videos for e, _ in
+                    (load_expressions(args.dataset_root, v) if args.scope == "full" else load_expressions(args.dataset_root, v)[:1])}
+        finished = {(e["video"], e["expression_id"]) for e in previous.get("episodes", [])}
+        if previous.get("status") == "complete" and finished == expected:
+            for video, expression in sorted(expected):
+                if EpisodeStore(args.output_root / args.method, video, expression,
+                                episode_config(args), resume=True).completed() is None:
+                    raise ValueError("complete metadata lacks a valid sealed episode")
+            print(json.dumps(dict(event="reuse_complete_shard", method=args.method, episodes=len(expected))), flush=True)
+            return previous
     stats = (_episodic_replay(args, source, videos) if args.method == "RELATIVE_ONLY"
              else _model_run(args, source, videos))
     receipt["episodes"] = stats.pop("episode_records")

@@ -24,7 +24,8 @@ def main():
     started = time.perf_counter()
     root = args.output_root.resolve()
     audit = json.loads((args.rank_root / "PF_RANK/full_audit.json").read_text())
-    chosen = max(audit["episodes"], key=lambda e: e["source_selected_rows"])
+    active = [e for e in audit["episodes"] if e["diagnostics"].get("optimizer_steps", 0) > 0]
+    chosen = max(active or audit["episodes"], key=lambda e: e["source_selected_rows"])
     video, expression = chosen["video"], chosen["expression"]
     from scripts.run_flexhook_positivefree import parse_args, run
     import flex_tta.dance_io as dio

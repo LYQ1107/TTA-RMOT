@@ -6,6 +6,7 @@ import argparse
 import json
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 
@@ -45,6 +46,12 @@ def main() -> int:
             raise ValueError(f"official full evaluation needs 425 sealed predictions, found {len(predictions)}")
         attached = attach_gt(method_results, args.dataset_root, videos)
         log_path = args.output_root / method / "trackeval.log"
+        if log_path.exists():
+            archive = args.output_root / method / "trackeval_attempts" / str(time.time_ns())
+            archive.mkdir(parents=True)
+            for old in (log_path, method_results / "pedestrian_summary.txt", method_results / "pedestrian_detailed.csv"):
+                if old.exists():
+                    old.rename(archive / old.name)
         command = [
             sys.executable, "./TrackEval/scripts/run_mot_challenge.py",
             "--METRICS", "HOTA", "CLEAR", "Identity",

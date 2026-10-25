@@ -68,6 +68,7 @@ def summarize(root, method, publish):
                   cost=dict(total_episode_seconds=seconds, aggregate_active_frame_fps=audit["frames"]/max(seconds,1e-12),
                             wall_seconds=launcher.get("wall_seconds", seconds), gpu_hours=compute_seconds/3600,
                             peak_vram_bytes=max(peaks, default=0),
+                            peak_vram_measurement="PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
                             gpu_uuids=sorted({r["gpu_uuid"] for r in launcher.get("completed", []) if r["gpu_uuid"] != "CPU"})),
                   aggregate_stats=metadata.get("aggregate_stats", {}), raw_output_root=str(Path(root).resolve()),
                   development_target=True, target_gt_used_only_for_sealed_offline_evaluation=True)
