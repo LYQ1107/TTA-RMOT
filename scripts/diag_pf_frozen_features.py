@@ -187,9 +187,10 @@ def evaluate(output=OUT):
     output=Path(output);protocol_pass(output);x,y,groups=load_features(output)
     annotated=y.any(axis=1);g=groups[annotated];ys=y[annotated]
     features=("visual_roi","visual_upper_lower","shallow_roi","pcd_person","background","geometry")
-    results={};rows=[];videos=sorted(set(groups));draws=np.random.default_rng(0).integers(0,25,size=(2000,25))
+    results={};rows=[];hits={};videos=sorted(set(groups));draws=np.random.default_rng(0).integers(0,25,size=(2000,25))
     for name in features:
         hit,random,retrievable=cross_video_nn(x[name][annotated],ys,g)
+        hits[name]=hit
         per=[np.flatnonzero(g==v) for v in videos]
         boot=[]
         for draw in draws:
@@ -202,8 +203,17 @@ def evaluate(output=OUT):
         for video,ix in zip(videos,per):rows.append(dict(video=video,feature=name,observations=len(ix),
             top1=float(hit[ix].mean()) if len(ix) else None,random=float(random[ix].mean()) if len(ix) else None))
     label_support=[dict(expression=e,observations=int(y[:,j].sum()),videos=len(set(groups[y[:,j]]))) for j,(e,_) in enumerate(json.loads((output/"features/sampling_manifest.json").read_text())["videos"][0]["expressions"])]
+    comparisons={}
+    for control in ("background","geometry","visual_roi"):
+        difference=hits["pcd_person"]-hits[control];per=[np.flatnonzero(g==v) for v in videos];boot=[]
+        for draw in draws:
+            ix=np.concatenate([per[j] for j in draw])
+            if len(ix):boot.append(float(difference[ix].mean()))
+        comparisons["pcd_person_vs_"+control]=dict(delta=float(difference.mean()),paired_video_CI95=np.percentile(boot,[2.5,97.5]).tolist())
     result=dict(protocol="OFFLINE_FROZEN_FEATURE_RETRIEVAL_NOT_SOURCE_FREE_TTA",total_frames=75,total_videos=25,
         all_candidate_observations=len(groups),annotated_observations=int(annotated.sum()),features=results,expression_support=label_support,
+        paired_feature_comparisons=comparisons,
+        uncertainty="video-query bootstrap conditional on the fixed observed cross-video gallery; not gallery-resampling or independent frames",
         frozen_source_sample_metrics=None,trained_weights=0,
         gallery_rule="GT-matched clothing-annotated candidates from other videos; GT defines relevance only, no model training; ties averaged",
         clothing_label="at least one shared actual official referring-clothing expression; not an independently annotated exhaustive clothing attribute set",
@@ -216,16 +226,20 @@ def evaluate(output=OUT):
 
 def probe(output=OUT):
     """Optional fixed-C linear readout; only after no-training retrieval review."""
+    import importlib.metadata
     from sklearn.linear_model import LogisticRegression
     from sklearn.model_selection import GroupKFold
     from sklearn.preprocessing import StandardScaler
     from scripts.diag_pf_query_information import binary_summary
+    started=time.perf_counter()
+    experiment_commit=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip()
     output=Path(output);protocol_pass(output);x,y,groups=load_features(output)
     labels=y.ravel();g=np.repeat(groups,17);q=x["language"].reshape(-1,768)
     representations=dict(pcd_query=x["pcd"].reshape(-1,768),text_only=q,
         background_and_text=np.concatenate([np.repeat(x["background"],17,axis=0),q],axis=1),
         geometry_and_text=np.concatenate([np.repeat(x["geometry"],17,axis=0),q],axis=1))
-    outputs={};folds=[]
+    from scripts.analyze_pf_full_offline import auroc
+    outputs={};folds=[];predictions={};mixed_by_feature={}
     for name,features in representations.items():
         scores=np.zeros(len(labels),dtype=np.float64)
         for fold,(train,test) in enumerate(GroupKFold(n_splits=5).split(features,labels,g)):
@@ -233,9 +247,45 @@ def probe(output=OUT):
             scale=StandardScaler().fit(features[train]);model=LogisticRegression(C=1.,class_weight="balanced",solver="liblinear",random_state=0,max_iter=1000)
             model.fit(scale.transform(features[train]),labels[train]);scores[test]=model.decision_function(scale.transform(features[test]))
             folds.append(dict(feature=name,fold=fold,train_videos=sorted(set(g[train])),test_videos=sorted(set(g[test])),iterations=model.n_iter_.tolist()))
+            print(json.dumps(dict(event="diagnostic_probe_fold_complete",feature=name,fold=fold,
+                iterations=model.n_iter_.tolist(),wall_seconds=time.perf_counter()-started)),flush=True)
         outputs[name]=binary_summary(scores,labels)
+        predictions[name]=scores
+        values=[]
+        s=scores.reshape(y.shape)
+        for video in sorted(set(groups)):
+            for frame in sorted(set(x["frame"][groups==video])):
+                ix=(groups==video)&(x["frame"]==frame)
+                for query in range(17):
+                    value=auroc(s[ix,query],y[ix,query])
+                    if value is not None:values.append(dict(video=video,frame=int(frame),query=query,AUROC=value))
+        mixed_by_feature[name]=values
+        outputs[name]["mixed_frame_query_macro_AUROC"]=float(np.mean([r["AUROC"] for r in values]))
+        outputs[name]["mixed_frame_query_groups"]=len(values)
+    comparisons={};videos=sorted(set(groups));draws=np.random.default_rng(0).integers(0,25,size=(2000,25))
+    for control in ("text_only","background_and_text","geometry_and_text"):
+        a,b=mixed_by_feature["pcd_query"],mixed_by_feature[control]
+        if [(r["video"],r["frame"],r["query"]) for r in a]!=[(r["video"],r["frame"],r["query"]) for r in b]:raise ValueError("probe comparison groups differ")
+        diff=np.asarray([r["AUROC"]-t["AUROC"] for r,t in zip(a,b)])
+        group=np.asarray([r["video"] for r in a]);per=[np.flatnonzero(group==v) for v in videos];boot=[]
+        for draw in draws:
+            ix=np.concatenate([per[j] for j in draw])
+            if len(ix):boot.append(float(diff[ix].mean()))
+        comparisons["pcd_query_vs_"+control]=dict(mixed_frame_AUROC_delta=float(diff.mean()),paired_video_CI95=np.percentile(boot,[2.5,97.5]).tolist())
     result=dict(protocol="GT_SUPERVISED_DIAGNOSTIC_LINEAR_PROBE_NOT_TTA",group_unit="video",folds=5,C=1.,seed=0,
-        selected_hyperparameters_from_target_metrics=False,probe_weights_saved=False,probe_weights_used_in_TTA=False,metrics=outputs,fold_details=folds)
+        selected_hyperparameters_from_target_metrics=False,probe_weights_saved=False,probe_weights_used_in_TTA=False,metrics=outputs,fold_details=folds,
+        paired_mixed_frame_comparisons=comparisons,
+        experiment_commit=experiment_commit,wall_seconds=time.perf_counter()-started,
+        dependency_versions={n:importlib.metadata.version(n) for n in ("numpy","scipy","scikit-learn","joblib","threadpoolctl")},
+        uncertainty="video bootstrap conditional on fitted OOF readouts, not refitting each bootstrap; descriptive development diagnosis",
+        interpretation="supervised diagnostic readout only; high pooled AUROC may reflect query/scene priors, inspect within-frame mixed candidates")
+    probe_rows=[]
+    for obs in range(len(groups)):
+        for query in range(17):
+            index=obs*17+query
+            probe_rows.append(dict(video=groups[obs],frame=int(x["frame"][obs]),track_id=int(x["ids"][obs]),query_index=query,
+                gt_candidate_match=int(labels[index]),**{name:float(values[index]) for name,values in predictions.items()}))
+    write_csv(output/"features/probe_oof_scores.csv",probe_rows)
     atomic_json(output/"features/linear_probe_summary.json",result);print(json.dumps(result,indent=2));return result
 
 

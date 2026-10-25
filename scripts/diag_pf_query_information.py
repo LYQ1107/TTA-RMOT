@@ -72,6 +72,8 @@ def frame_metrics(scores,positive):
                  disjoint_frames=int(bool(len(disjoint))),hard_disjoint_frames=int(bool(len(hard))))
         for name,others in (("disjoint",disjoint),("hard_disjoint",hard)):
             row[name+"_top1"]=float(y[order[0,others]].mean()) if len(others) else 0.
+            row[name+"_correct_top1"]=float(own) if len(others) else 0.
+            row[name+"_random_top1"]=p/n if len(others) else 0.
         if p<n:
             def auc_from_ranks(r):return float((r[y].sum()-p*(p+1)/2)/(p*(n-p)))
             row.update(mixed_correct_top1=float(own),mixed_random_top1=p/n,mixed_visual_top1=float(y[vtop]),
@@ -171,13 +173,14 @@ def analyze(output=OUT):
     query_swap=finalize(totals)
     # Paired VIDEO resampling for within-frame correct-vs-other text discrimination.
     effects={}
-    for first,second in (("correct_top1","all_other_top1"),("mixed_source_AUROC","mixed_other_AUROC"),("mixed_source_AUROC","mixed_visual_AUROC")):
+    for first,second in (("correct_top1","all_other_top1"),("mixed_source_AUROC","mixed_other_AUROC"),("mixed_source_AUROC","mixed_visual_AUROC"),
+                         ("hard_disjoint_correct_top1","hard_disjoint_top1")):
         per=[]
         for records in raw_video_records:
             total={}
             for row in records.values():add(total,row)
             per.append(total)
-        den="mixed_frames" if first.startswith("mixed_") else "valid_frames"
+        den="mixed_frames" if first.startswith("mixed_") else "hard_disjoint_frames" if first.startswith("hard_disjoint_") else "valid_frames"
         def delta(ids):
             denominator=sum(per[i].get(den,0) for i in ids)
             return sum(per[i].get(first,0)-per[i].get(second,0) for i in ids)/denominator if denominator else np.nan

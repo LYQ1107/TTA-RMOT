@@ -43,6 +43,7 @@ def test_text_swap_does_not_call_overlapping_real_query_a_negative():
     r=rows[0]
     assert r["all_other_top1"]==.5
     assert r["disjoint_top1"]==r["hard_disjoint_top1"]==0.
+    assert r["hard_disjoint_correct_top1"]==1.  # compared on the SAME eligible subset
     assert r["mixed_source_AUROC"]==1.
 
 

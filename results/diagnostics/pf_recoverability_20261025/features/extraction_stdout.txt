@@ -1,0 +1,81 @@
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/torch/functional.py:554: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4314.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+=> merge config from /data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml
+[Warning] Fused window process have not been installed. Please refer to get_started.md for installation.
+Tutel has not been installed. To use Swin-MoE, please install Tutel; otherwise, just ignore this.
+load success
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 4229.60it/s]
+[1mRobertaModel LOAD REPORT[0m from: pretrained/roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+pooler.dense.bias               | MISSING    | 
+pooler.dense.weight             | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-10-25 23:19:19 pcd_tta_model](run_flexhook_dance_pcd_tta.py 132): INFO Strict source checkpoint load: <All keys matched successfully>
+/data2/user/FlexHook-TTA/vendor/FlexHook/models/swin_transformer_rope.py:44: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+{"event": "feature_video_complete", "video": "dancetrack0004", "samples": 3}
+{"event": "feature_video_complete", "video": "dancetrack0005", "samples": 6}
+{"event": "feature_video_complete", "video": "dancetrack0007", "samples": 9}
+{"event": "feature_video_complete", "video": "dancetrack0010", "samples": 12}
+{"event": "feature_video_complete", "video": "dancetrack0014", "samples": 15}
+{"event": "feature_video_complete", "video": "dancetrack0018", "samples": 18}
+{"event": "feature_video_complete", "video": "dancetrack0019", "samples": 21}
+{"event": "feature_video_complete", "video": "dancetrack0025", "samples": 24}
+{"event": "feature_video_complete", "video": "dancetrack0026", "samples": 27}
+{"event": "feature_video_complete", "video": "dancetrack0030", "samples": 30}
+{"event": "feature_video_complete", "video": "dancetrack0034", "samples": 33}
+{"event": "feature_video_complete", "video": "dancetrack0035", "samples": 36}
+{"event": "feature_video_complete", "video": "dancetrack0041", "samples": 39}
+{"event": "feature_video_complete", "video": "dancetrack0043", "samples": 42}
+{"event": "feature_video_complete", "video": "dancetrack0047", "samples": 45}
+{"event": "feature_video_complete", "video": "dancetrack0058", "samples": 48}
+{"event": "feature_video_complete", "video": "dancetrack0063", "samples": 51}
+{"event": "feature_video_complete", "video": "dancetrack0065", "samples": 54}
+{"event": "feature_video_complete", "video": "dancetrack0073", "samples": 57}
+{"event": "feature_video_complete", "video": "dancetrack0077", "samples": 60}
+{"event": "feature_video_complete", "video": "dancetrack0079", "samples": 63}
+{"event": "feature_video_complete", "video": "dancetrack0081", "samples": 66}
+{"event": "feature_video_complete", "video": "dancetrack0090", "samples": 69}
+{"event": "feature_video_complete", "video": "dancetrack0094", "samples": 72}
+{"event": "feature_video_complete", "video": "dancetrack0097", "samples": 75}
+{
+  "status": "COMPLETE_FIXED_25_VIDEO_75_FRAME_FEATURES",
+  "frames": 75,
+  "videos": 25,
+  "newly_computed_frames": 74,
+  "reused_frames": 1,
+  "observations": 643,
+  "all17_real_expressions": true,
+  "extra_control": "generic person PCD to avoid clothing-text injection",
+  "optimizer_steps": 0,
+  "trainable_parameters": 0,
+  "parameter_versions_unchanged": true,
+  "file_access_audit": {
+    "target_annotation_open_attempts": [],
+    "target_image_opens": 373
+  },
+  "physical_gpu": "4",
+  "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+  "wall_seconds": 57.63018099684268,
+  "peak_allocated_bytes": 2029819904,
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "person_token_id": 5970,
+  "plan_sha256": "0e52fa3ca971e7a5f6a7f770188184de962c0d3b53565ed50deb9c80002e51cc",
+  "experiment_commit": "c6250299e5e8ca2550a6032f05204779aece8d99",
+  "source_max_abs_error": 0.0,
+  "source_sign_mismatches": 0
+}

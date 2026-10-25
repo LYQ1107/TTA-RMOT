@@ -174,7 +174,11 @@
     "all_other_top1": 0.5737847832712099,
     "all_other_positive_rank_percentile": 0.5017833142357544,
     "disjoint_top1": 0.5737630568086297,
+    "disjoint_correct_top1": 0.6147877253440233,
+    "disjoint_random_top1": 0.578298754863325,
     "hard_disjoint_top1": 0.23699624147294515,
+    "hard_disjoint_correct_top1": 0.32136648122392214,
+    "hard_disjoint_random_top1": 0.2670618968072394,
     "mixed_correct_top1": 0.37644201578627806,
     "mixed_random_top1": 0.3173759102233171,
     "mixed_visual_top1": 0.31386612021857924,
@@ -206,6 +210,14 @@
         0.10914927152067631
       ],
       "valid_video_bootstrap_resamples": 2000
+    },
+    "hard_disjoint_correct_top1_minus_hard_disjoint_top1": {
+      "delta": 0.08437023975097696,
+      "video_cluster_CI95": [
+        0.04568558515688106,
+        0.1453391388576715
+      ],
+      "valid_video_bootstrap_resamples": 1998
     }
   },
   "within_video_variance_fractions": {
@@ -222,7 +234,7 @@
   "visual_control_definition": "row mean over17 real queries; query-independent score bias, NOT a separately trained visual model",
   "swap_limit": "other real query may describe same target; separate all-other, disjoint, and nonempty-disjoint GT candidate sets; GT only offline",
   "rank_limit": "within-frame AUROC only mixed positive/negative frames; no claim from dense all-target frames or query-only prior",
-  "wall_seconds": 34.9377890850883,
+  "wall_seconds": 34.53041699901223,
   "per_video": [
     {
       "video": "dancetrack0004",

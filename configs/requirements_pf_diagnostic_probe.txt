@@ -1,0 +1,6 @@
+# Optional CPU-only, GT-supervised OFFLINE diagnostic; never used by online TTA.
+# Install with --no-deps --target /data2/user/TTA-RMOT-assets/flexhook/diagnostic-pydeps
+# Reuse the experiment environment's numpy/scipy; do not mutate its packages.
+scikit-learn==1.5.2
+joblib==1.4.2
+threadpoolctl==3.5.0

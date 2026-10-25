@@ -84,4 +84,4 @@ def official_video_values(csv_path):
 def write_csv(path,rows):
     path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
     with path.open("w") as stream:
-        writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+        writer=csv.DictWriter(stream,fieldnames=list(rows[0]),lineterminator="\n");writer.writeheader();writer.writerows(rows)

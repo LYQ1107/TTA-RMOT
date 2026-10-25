@@ -1,0 +1,94 @@
+{
+  "status": "PASS_FROZEN_SMOKE",
+  "samples": [
+    {
+      "video": "dancetrack0004",
+      "frame": 121,
+      "ids": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "candidates": 4,
+      "real_expressions": 17,
+      "max_image_history_frame": 121,
+      "source_max_abs_error": 0.0,
+      "source_sign_mismatches": 0,
+      "plan_sha256": "0e52fa3ca971e7a5f6a7f770188184de962c0d3b53565ed50deb9c80002e51cc",
+      "data_sha256": "7c7cb8c1450b48717f7aefb291132ee4819fe35d9c453d4a037486a1afd536bd",
+      "path": "/data2/user/FlexHook-TTA/results/diagnostics/pf_recoverability_20261025/features/cache/dancetrack0004_121.npz",
+      "dimensions": {
+        "frame": [
+          4
+        ],
+        "ids": [
+          4
+        ],
+        "pcd": [
+          4,
+          17,
+          768
+        ],
+        "pcd_person": [
+          4,
+          768
+        ],
+        "visual_roi": [
+          4,
+          768
+        ],
+        "visual_upper_lower": [
+          4,
+          1536
+        ],
+        "shallow_roi": [
+          4,
+          96
+        ],
+        "background": [
+          4,
+          768
+        ],
+        "geometry": [
+          4,
+          4
+        ],
+        "language": [
+          17,
+          768
+        ],
+        "margin": [
+          4,
+          17
+        ]
+      },
+      "precision": "FP32",
+      "checkpoint_strict_load": true
+    }
+  ],
+  "frames": 1,
+  "videos": 1,
+  "newly_computed_frames": 1,
+  "reused_frames": 0,
+  "observations": 4,
+  "all17_real_expressions": true,
+  "extra_control": "generic person PCD to avoid clothing-text injection",
+  "optimizer_steps": 0,
+  "trainable_parameters": 0,
+  "parameter_versions_unchanged": true,
+  "file_access_audit": {
+    "target_annotation_open_attempts": [],
+    "target_image_opens": 5
+  },
+  "physical_gpu": "4",
+  "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+  "wall_seconds": 5.926116043934599,
+  "peak_allocated_bytes": 1221351424,
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "person_token_id": 5970,
+  "plan_sha256": "0e52fa3ca971e7a5f6a7f770188184de962c0d3b53565ed50deb9c80002e51cc",
+  "experiment_commit": "c6250299e5e8ca2550a6032f05204779aece8d99",
+  "source_max_abs_error": 0.0,
+  "source_sign_mismatches": 0
+}

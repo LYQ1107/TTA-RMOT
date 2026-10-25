@@ -1,0 +1,197 @@
+{
+  "protocol": "OFFLINE_FROZEN_FEATURE_RETRIEVAL_NOT_SOURCE_FREE_TTA",
+  "total_frames": 75,
+  "total_videos": 25,
+  "all_candidate_observations": 643,
+  "annotated_observations": 603,
+  "features": {
+    "visual_roi": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.42786069651741293,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.1003236679105331,
+      "paired_video_CI95": [
+        0.0284439065072528,
+        0.17104944616409792
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    },
+    "visual_upper_lower": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.417910447761194,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.09037341915431417,
+      "paired_video_CI95": [
+        0.016230527273797837,
+        0.16497652172780297
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    },
+    "shallow_roi": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.4527363184079602,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.12519928980108036,
+      "paired_video_CI95": [
+        0.003168983178445321,
+        0.25563644542064884
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    },
+    "pcd_person": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.5091210613598673,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.18158403275298748,
+      "paired_video_CI95": [
+        0.0840461001962371,
+        0.29158929388396543
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    },
+    "background": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.38542999289267943,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.05789296428579961,
+      "paired_video_CI95": [
+        -0.0441113459417544,
+        0.17208869735727694
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    },
+    "geometry": {
+      "annotated_candidate_observations": 603,
+      "top1_same_clothing_label": 0.3598673300165838,
+      "random_other_video_gallery": 0.3275370286068799,
+      "delta": 0.0323303014097039,
+      "paired_video_CI95": [
+        -0.009458165220377755,
+        0.07218393164552
+      ],
+      "gallery_retrievable_fraction": 0.857379767827529
+    }
+  },
+  "expression_support": [
+    {
+      "expression": "dacning-person-with-white-Tshirt-and-purple-pants",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-dressed-all-in-black",
+      "observations": 335,
+      "videos": 16
+    },
+    {
+      "expression": "dancing-person-dressed-all-in-brown",
+      "observations": 24,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-dressed-all-in-green",
+      "observations": 15,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-dressed-all-in-purple",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-dressed-all-in-white",
+      "observations": 115,
+      "videos": 6
+    },
+    {
+      "expression": "dancing-person-with-black-shirt-and-blue-pants",
+      "observations": 6,
+      "videos": 2
+    },
+    {
+      "expression": "dancing-person-with-black-shirt-and-brown-pants",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-blue-Tshirt-and-white-pants",
+      "observations": 4,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-blue-Tshirt-and-white-skirt",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-gray-shirt-and-black-pants",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "observations": 10,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-white-Tshirt-and-black-pants",
+      "observations": 9,
+      "videos": 2
+    },
+    {
+      "expression": "dancing-person-with-white-Tshirt-and-blue-pants",
+      "observations": 52,
+      "videos": 2
+    },
+    {
+      "expression": "dancing-person-with-white-Tshirt-and-purple-skirt",
+      "observations": 3,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-white-shirt-and-black-pants",
+      "observations": 12,
+      "videos": 1
+    },
+    {
+      "expression": "dancing-person-with-yellow-Tshirt-and-black-pants",
+      "observations": 8,
+      "videos": 1
+    }
+  ],
+  "paired_feature_comparisons": {
+    "pcd_person_vs_background": {
+      "delta": 0.12369106846718787,
+      "paired_video_CI95": [
+        -0.03572327420901246,
+        0.302250459181095
+      ]
+    },
+    "pcd_person_vs_geometry": {
+      "delta": 0.14925373134328357,
+      "paired_video_CI95": [
+        0.041519417475728154,
+        0.26656551823329483
+      ]
+    },
+    "pcd_person_vs_visual_roi": {
+      "delta": 0.0812603648424544,
+      "paired_video_CI95": [
+        -0.023427461526968472,
+        0.18608995502248873
+      ]
+    }
+  },
+  "uncertainty": "video-query bootstrap conditional on the fixed observed cross-video gallery; not gallery-resampling or independent frames",
+  "frozen_source_sample_metrics": {
+    "n": 10931,
+    "positives": 608,
+    "prevalence": 0.05562162656664532,
+    "AUROC": 0.6165822550054298,
+    "AUPRC": 0.08548478540355642
+  },
+  "trained_weights": 0,
+  "gallery_rule": "GT-matched clothing-annotated candidates from other videos; GT defines relevance only, no model training; ties averaged",
+  "clothing_label": "at least one shared actual official referring-clothing expression; not an independently annotated exhaustive clothing attribute set",
+  "limits": "diagnostic GT relevance/gallery, correlated people/frames and possible cross-video scene/dancer similarity; compare background/geometry and random gallery; does not establish unsupervised identifiability"
+}
