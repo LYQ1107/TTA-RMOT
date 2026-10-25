@@ -1,5 +1,7 @@
 """Small assignment checks; no real GT or experiment is opened by these tests."""
 import numpy as np
+import json
+import pytest
 from scripts.analyze_pf_full_offline import matched_gt, overlaps, auroc, load_eval_gt, query_presence_summary, observable_id_switches
 
 
@@ -70,3 +72,10 @@ def test_learning_query_groups_keep_accepted_and_rolled_back_updates_separate():
     assert groups["query_present"]["optimizer_steps"] == groups["query_present"]["rollback_updates"] == 1
     assert groups["query_empty"]["frames"] == 4 and groups["query_empty"]["rollback_updates"] == 0
     assert groups["query_empty"]["rule_evidence_coverage"] == 1.
+
+
+def test_scientific_figure_cannot_claim_six_methods_from_interim_data(tmp_path):
+    from scripts.plot_pf_science import render
+    (tmp_path/"video_uncertainty.json").write_text(json.dumps(dict(status="INTERIM")))
+    with pytest.raises(ValueError,match="all six complete"):
+        render(tmp_path)

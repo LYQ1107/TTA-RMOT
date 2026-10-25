@@ -9,6 +9,7 @@
 - Hybrid starts automatically onGPU0/4/6/1, initialPIDs581747/581814/581900/581985, same strictV2 weights/completeMOT/defaults. Do not interrupt it or start a seventh full run. Six-method closure and later presence-aware mechanism/prototype remain outstanding.
 - Additional offline cost attribution reads only sealed audit/GT-group summaries: Identity Present/Empty accepted updates8,630/78,048, rollbacks2,352/19,039; Rank10,805/95,166 accepted. Validate group sums against full-run counters and label Guard reuse. Rule-eligible history is not semantic correctness; the Empty group is90.04% of accepted Identity updates yet gains10,421 FP. With episode resets, these updates cannot benefit other Present episodes. This motivates investigating unlabeled presence evidence, never GT-gated online adaptation.
 - Group-counter regression and full suite:51 tests passed in11.89s, compileall passed; all five real grouped-counter checks and exact official HOTA pooling pass with unchanged bootstrap comparisons. No online module, hyperparameter or completed prediction is changed by this reporting extension.
+- Prepared a static all-six-only scientific plotting entry point for paired video intervals and25-video heterogeneity. It reads sealed numerical summaries only and refuses interim data; render/visual validation remains pending until Hybrid completes. This is a report artifact, not a new model or GPU experiment; the presence-aware prototype remains deferred.
 
 ## 2026-10-25 — Supplemental scientific acceptance, no online changes
 

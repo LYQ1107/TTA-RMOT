@@ -107,6 +107,9 @@ def generate(publish, output):
         low,high = r["paired_video_cluster_CI95"]
         lines.append(f"| {name} | {r['delta_hota']:+.6f} | [{low:+.6f}, {high:+.6f}] | " +
                      f"{r['improved_videos']} / {r['declined_videos']} / {r['tied_videos']} | {r['query_present_delta_hota']:+.6f} |")
+    if (Path(publish)/"figures/scientific_summary.png").is_file():
+        lines += ["", "![主TTA的配对视频区间与逐视频异质性](../results/positive_free/full/figures/scientific_summary.png)",
+                  "图中为三种预先定义的主TTA；六组完整数值均保留在前表。逐视频HOTA差值不能相加成总体HOTA差值。"]
     rank_pair = uncertainty["comparisons"]["PF_RANK_vs_ZERO_UPDATE"]
     for row in rank_pair["most_influential_videos"][:2]:
         lines.append(f"- Rank影响较大的视频 {row['video']}：单视频ΔHOTA {row['delta_hota']:+.6f}；去掉该视频后总体ΔHOTA {row['delta_hota_without_video']:+.6f}。HOTA非线性，不能把单视频差值当可加贡献。")
