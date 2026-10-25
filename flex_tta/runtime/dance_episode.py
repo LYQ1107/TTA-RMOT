@@ -95,13 +95,11 @@ class DanceEpisode:
         x, y = torch.meshgrid(x, y, indexing="xy")
         return torch.stack([x, y])
 
-    def batch_inputs(self, candidates: list[tuple[int, list[Observation]]], device: torch.device):
-        images = []
+    def geometry_inputs(self, candidates: list[tuple[int, list[Observation]]], device: torch.device):
         positions = []
         boxes = []
         track_ids = []
         for track_id, history in candidates:
-            image_history = torch.stack([self._image(item.frame_id) for item in history])
             image_history_boxes = []
             image_history_positions = []
             for item in history:
@@ -110,13 +108,17 @@ class DanceEpisode:
                 ny1, ny2 = y1 / self.height, y2 / self.height
                 image_history_boxes.append([(nx1 + nx2) / 2, (ny1 + ny2) / 2, nx2 - nx1, ny2 - ny1])
                 image_history_positions.append(self._grid(item.bbox_xyxy))
-            images.append(image_history)
             positions.append(torch.stack(image_history_positions))
             boxes.append(torch.tensor(image_history_boxes, dtype=torch.float32))
             track_ids.append(int(track_id))
         return (
-            torch.stack(images).to(device, non_blocking=True),
             torch.stack(positions).to(device, non_blocking=True),
             torch.stack(boxes).to(device, non_blocking=True),
             track_ids,
         )
+
+    def batch_inputs(self, candidates: list[tuple[int, list[Observation]]], device: torch.device):
+        images = [torch.stack([self._image(item.frame_id) for item in history])
+                  for _, history in candidates]
+        positions, boxes, ids = self.geometry_inputs(candidates, device)
+        return torch.stack(images).to(device, non_blocking=True), positions, boxes, ids

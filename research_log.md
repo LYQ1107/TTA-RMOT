@@ -1879,3 +1879,10 @@ source training, full target inference or TrackEval was started. Code-ready
 does not imply measured accuracy gain or availability of four idle GPUs.
 Receipt: docs/FLEXHOOK_POSITIVEFREE_SERVER_SMOKE_20261025.md and
 results/positive_free/server_smoke_20261025/validation_summary.json.
+# 2026-10-25 Positive-Free full-suite execution start
+
+- User explicitly authorized full V2→Dance online TTA and sealed-prediction official evaluation, but not source retraining or sharing occupied GPUs.
+- Project is TTA-RMOT at `/data2/user/FlexHook-TTA`, independent of LocateMOT/GroundJEV. Verified remote prep HEAD `a0cb27e`; created the requested separate full-run branch.
+- Initial resource snapshot: only physical GPU5 has no compute process; other GPUs belong to existing jobs and are not interrupted.
+- Hypothesis: cache only frozen multi-scale backbone/text outputs; retain original language-conditioned C-Hook/PCD, causal history and FP32 decisions. Validate real logits, margin signs, selected IDs and LoRA gradients before formal use.
+- Plan: weighted whole-video shards, atomic episode receipts/resume, full ZERO_UPDATE baseline gate, then all five controls/adaptations, official evaluation and offline attribution. No pilot-only completion claim.
