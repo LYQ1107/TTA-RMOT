@@ -1,5 +1,15 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-25 — Supplemental scientific acceptance, no online changes
+
+- User supplement adds Query-Present/Empty grouping, 25-video paired uncertainty, identity-memory risk and Hybrid-vs-single-module checks. Keep healthy Identity and queued Hybrid unchanged; no seventh full run, source training, GT tuning or teacher.
+- One requested live check confirmed all four GPU0/4/6/1 worker processes,43 distinct sealed episodes and healthy completion logs. Thereafter use the existing blocking full-suite session, not repeated process/file polling.
+- Added isolated `offline_query_diagnostics.json` beside (not replacing) all four old attribution files; all preexisting global recovery/FP/AUROC/TopK results assert unchanged. Empty episode nonempty rate:Frozen40%, Relative100%, Rank/Guard40.2597%. Present recall:4.8635%→Rank4.9365%; Empty FP87,371→88,057. Keep all425 episodes.
+- Paired bootstrap uses25 whole video clusters/2000 draws/seed0 and exact official HOTA pooling. Rank11 up/8 down/6 ties,95% CI[-0.008807,+0.142421]. Removing0007 leaves only+0.002743 HOTA gain. No robust semantic/significance claim; no GT feedback to running jobs.
+- Separate real multi-target candidate Recall@K from prior any-hit TopK. Added active-frame quartile negative-output diagnostics and explicitly limited query-GT-visible identity-assignment conflict checks; the latter are not true full-MOT ID error rates or proof of accepted bad updates.
+- Final report now requires all six query diagnostics and all-six video-cluster results, reports evidence coverage/parameters, the identity-recall-loss classification and Hybrid comparisons. Next-stage presence-aware design/prototype is deferred until the six-method closure; do not invent independent semantics if only source self-consistency is available.
+- Verification:50 focused tests passed in12.55s; compileall/shell syntax passed. All four diagnostic backfills verified their preexisting global statistics against original published JSON exactly, without touching completed GPU outputs. Rank sensitivity: removing0007 leaves+0.002743, removing0065 gives+0.060659; these are nonadditive leave-one-video-out diagnostics, not contribution percentages.
+
 ## 2026-10-25 — Full Rank/Guard: tiny HOTA gain, not a semantic breakthrough
 
 - Published all four completed methods, official per-expression/per-video outputs and Rank/Guard analysis (GitHub8353006). Exported actual experiment-commit→identical public-tree mappings for all four, including Guard derivation and preserved vendor tracked patch. Added compact official evaluator exit-status receipts to each published method. Relative CPU cost, like derived Guard, is explicitly incremental and depends on prior GPU source scores. No online algorithm, seed, sample or prediction changes.

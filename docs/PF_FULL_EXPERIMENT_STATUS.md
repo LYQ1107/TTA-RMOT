@@ -63,6 +63,14 @@ These are development-target results, not an independent blind test.
 
 Four complete methods have official results. Identity/Hybrid are unfinished; no final TTA success or goal completion is claimed.
 
+User's supplemental acceptance is integrated without restarting healthy workers. Four completed
+methods now have separate `offline_query_diagnostics.json` files; original attribution/official
+outputs remain unchanged. Whole-video paired bootstrap, query-group metrics, multi-target
+candidate Recall@K, temporal negative-output and limited identity-assignment diagnostics are
+recorded in `docs/PF_SUPPLEMENTAL_ACCEPTANCE_20261025.md`. Fifty focused tests pass (12.55 s).
+Final reporting requires all six query diagnostics and all-six video uncertainty. Next-stage
+presence-aware design/prototype is deferred until the registered six-method closure; no seventh full run.
+
 Full ZERO validation: all 3,588,445 candidate-query observations / 433,636 active-frame steps;
 six historical near-zero sign differences, each reproduced with original and cached forwards selecting
 the same complete candidate set. Historical maximum margin discrepancy 0.00118494; original/cached

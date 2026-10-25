@@ -103,6 +103,14 @@ def summarize(root, method, publish):
         if method == "RELATIVE_ONLY":
             result["execution_mode"] = "CPU selection from sealed ZERO_UPDATE margins"
             result["cost"]["cost_scope"] = "incremental CPU selection only; requires the full ZERO_UPDATE source inference"
+    evidence = result.get("reused_rank_stats", result["aggregate_stats"])
+    opportunities = evidence.get("update_opportunities", 0)
+    result["effective_evidence_coverage"] = dict(
+        definition="fraction of registered update opportunities, not all frames; reused Rank for CPU Guard",
+        update_opportunities=opportunities,
+        evidence_eligible_fraction=(opportunities-evidence.get("skipped_no_evidence",0)-evidence.get("skipped_multi_batch",0))/opportunities if opportunities else None,
+        gradient_attempt_fraction=evidence.get("gradient_attempts",0)/opportunities if opportunities else None,
+        accepted_update_fraction=evidence.get("optimizer_steps",0)/opportunities if opportunities else None)
     destination = Path(publish) / method.lower()
     destination.mkdir(parents=True, exist_ok=True)
     raw_root = Path(str(root).removesuffix("_merged"))
@@ -120,6 +128,10 @@ def summarize(root, method, publish):
         baseline = json.loads(baseline_path.read_text())["metrics"]
         result["delta"] = {key: result["metrics"][key]-baseline[key] for key in METRICS}
         if method == "ZERO_UPDATE": result["interpretation"] = "MATCHED_COMPLETE_BANK_BASELINE"
+        elif (method == "PF_IDENTITY" and result["metrics"]["AssA"] > baseline["AssA"]
+              and result["metrics"]["DetRe"] < baseline["DetRe"] and result["metrics"]["HOTA"] <= baseline["HOTA"]
+              and result["metrics"]["IDSW"] < baseline["IDSW"]):
+            result["interpretation"] = "IDENTITY_CONSISTENCY_GAIN_WITH_REFERRING_RECALL_LOSS"
         elif result["metrics"]["AssA"] > baseline["AssA"] and result["metrics"]["DetRe"] < baseline["DetRe"]:
             result["interpretation"] = "ASSOCIATION_ONLY_GAIN_WITH_RECALL_LOSS"
         elif result["delta"]["HOTA"] > 0: result["interpretation"] = "HOTA_GAIN_REQUIRES_TARGET_RECOVERY_ATTRIBUTION"

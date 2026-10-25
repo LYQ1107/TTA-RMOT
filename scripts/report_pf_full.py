@@ -13,9 +13,15 @@ def generate(publish, output):
     for method in ORDER:
         folder = Path(publish) / method.lower()
         reports[method] = json.loads((folder / "metrics.json").read_text())
-        attribution[method] = json.loads((folder / "offline_attribution.json").read_text())
+        diagnostic = folder / "offline_query_diagnostics.json"
+        attribution[method] = json.loads((diagnostic if diagnostic.exists() else folder / "offline_attribution.json").read_text())
         if reports[method]["full_audit"]["valid_episodes"] != 425 or len(attribution[method]["episodes"]) != 425:
             raise ValueError("the final report cannot omit incomplete episodes or methods")
+        if "query_presence" not in attribution[method]:
+            raise ValueError("final report requires query presence/absence diagnostics for all methods")
+    uncertainty = json.loads((Path(publish)/"video_uncertainty.json").read_text())
+    if uncertainty["status"] != "COMPLETE_6_METHODS":
+        raise ValueError("final report requires the all-six paired video-cluster analysis")
     base = reports["ZERO_UPDATE"]["metrics"]
     primary = ("PF_RANK", "PF_IDENTITY", "PF_HYBRID")
     best = max(primary, key=lambda m: reports[m]["metrics"]["HOTA"])
@@ -73,7 +79,57 @@ def generate(publish, output):
         present_fp = sum(e["adapted_false_positive_rows"] for e in episodes if e["gt_observations"])
         lines.append(f"| {method} | {empty_fp} | {present_fp} |")
     lines += ["", "GT 空组只用于封存后的错误解释，未反馈到在线阈值、损失或超参数。候选排序在有目标帧上的改善不能单独证明无匹配拒识已改善。",
-              "", "## 梯度、有效证据与回滚", "",
+              "", "## Query-Present / Query-Empty：单独验收", "",
+              "下表召回为离线 IoU≥0.5 最大基数匹配的 GT 观测微平均，包含无候选 GT；不是官方跨阈值 DetRe。空组无 GT，HOTA 不具备有效召回解释，不将它改成正目标子集。",
+              "", "| 方法 | Present / Empty episodes | Present GT recall | Present FP | Empty FP | Empty 非空预测 episode 比例 |",
+              "|---|---:|---:|---:|---:|---:|"]
+    for method in ORDER:
+        a = attribution[method]
+        lines.append(f"| {method} | {a['query_present_episodes']} / {a['query_empty_episodes']} | {100*a['query_present_GT_recall']:.4f}% | " +
+                     f"{a['query_present_FP']} | {a['query_empty_FP']} | {100*a['query_empty_nonempty_prediction_rate']:.4f}% |")
+    lines += ["", "多目标 Recall@K 与旧 TopK any-hit 分开：前者是在可检索目标帧内 topK 覆盖的正候选比例的帧宏平均；后者只要求 topK 至少命中一个正候选。两者均不衡量空查询拒识。",
+              "", "| 方法 | Source Recall@1 / 3 / 5 | Adapted Recall@1 / 3 / 5 |",
+              "|---|---:|---:|"]
+    for method in ORDER:
+        a = attribution[method]
+        source = " / ".join(f"{a['source_Recall_at_1_3_5'][str(k)]:.6f}" for k in (1,3,5))
+        adapted = " / ".join(f"{a['adapted_Recall_at_1_3_5'][str(k)]:.6f}" for k in (1,3,5))
+        lines.append(f"| {method} | {source} | {adapted} |")
+    lines += ["", "每方法 JSON 另存四个 episode 活跃帧进度区间的负预测比例，检查是否随时间持续抑制输出；它不是独立帧显著性检验。",
+              "身份诊断仅统计 query-GT 可见、间隔≤2帧的物理ID对应GT匹配身份变化及可能更新机会；遮挡/重叠时匹配重分配也可能产生变化，不能当作真实MOT身份错误率。它不覆盖未标注非目标人、GT缺口，也不证明所有正对可靠。在线记忆的 max_gap=2 无法独立识别短间隔 ID 互换；这些 GT 诊断从未参与训练。",
+              "", "## 视频级收益分布与不确定性", "",
+              "成对 bootstrap 以25个完整视频为聚类单位，每次保留视频内全部表达与帧，2000次重采样、seed0；重新池化官方HOTA充分统计量，不平均视频HOTA。区间只描述本开发集的视频抽样不确定性，不是独立盲测或训练种子显著性。",
+              "", "| 比较 | ΔHOTA | 视频聚类95%区间 | 提升 / 下降 / 不变视频 | Query-Present ΔHOTA |",
+              "|---|---:|---:|---:|---:|"]
+    for name, r in uncertainty["comparisons"].items():
+        low,high = r["paired_video_cluster_CI95"]
+        lines.append(f"| {name} | {r['delta_hota']:+.6f} | [{low:+.6f}, {high:+.6f}] | " +
+                     f"{r['improved_videos']} / {r['declined_videos']} / {r['tied_videos']} | {r['query_present_delta_hota']:+.6f} |")
+    rank_pair = uncertainty["comparisons"]["PF_RANK_vs_ZERO_UPDATE"]
+    for row in rank_pair["most_influential_videos"][:2]:
+        lines.append(f"- Rank影响较大的视频 {row['video']}：单视频ΔHOTA {row['delta_hota']:+.6f}；去掉该视频后总体ΔHOTA {row['delta_hota_without_video']:+.6f}。HOTA非线性，不能把单视频差值当可加贡献。")
+    lines += ["", "## 有效证据与计算收益", "",
+              "| 方法 | 每副本可训练参数 | 更新机会 | 有证据机会覆盖 | 接受更新 / 机会 |",
+              "|---|---:|---:|---:|---:|"]
+    for method in ORDER:
+        s = reports[method].get("reused_rank_stats", reports[method]["aggregate_stats"])
+        opportunities = s.get("update_opportunities",0)
+        eligible = (opportunities-s.get("skipped_no_evidence",0)-s.get("skipped_multi_batch",0))/opportunities if opportunities else None
+        coverage = f"{100*eligible:.4f}%" if eligible is not None else "N/A"
+        accepted = f"{100*s.get('optimizer_steps',0)/opportunities:.4f}%" if opportunities else "N/A"
+        lines.append(f"| {method} | {s.get('trainable_parameters',0)} | {opportunities} | {coverage} | {accepted} |")
+    rank = reports["PF_RANK"]
+    lines += ["", f"Rank 的 {rank['aggregate_stats']['optimizer_steps']:,} 次更新消耗 {rank['cost']['gpu_hours']:.4f} GPU小时、wall {rank['cost']['wall_seconds']:.2f}s，仅得到 +0.0253 个HOTA百分点，且AUROC/AssA下降，当前证据不支持它具有突出的收益成本比。",
+              "", "## Hybrid 互补性验收", ""]
+    hybrid = reports["PF_HYBRID"]["metrics"]
+    stronger = max(("PF_RANK","PF_IDENTITY"), key=lambda m:reports[m]["metrics"]["HOTA"])
+    if hybrid["HOTA"] <= reports[stronger]["metrics"]["HOTA"]:
+        lines.append(f"Hybrid 未超过较强单模块 {stronger}，未显示整体HOTA互补收益，不因两个loss而选择它为最终方法。")
+    else:
+        lines.append(f"Hybrid 的HOTA高于较强单模块 {stronger}；仍须结合上表成对视频区间和召回/误检代价，不据小差值认定独立互补或语义恢复。")
+    if hybrid["AssA"] > reports[stronger]["metrics"]["AssA"] and hybrid["DetRe"] < reports[stronger]["metrics"]["DetRe"]:
+        lines.append("Hybrid相对较强单模块以DetRe下降换取AssA上升，不能描述为所需的目标召回互补。")
+    lines += ["", "## 梯度、有效证据与回滚", "",
               "| 方法 | optimizer steps | 非零有限梯度 steps | 无证据跳过 | interval 跳过 | rollback | max adapter Δ L2 |",
               "|---|---:|---:|---:|---:|---:|---:|"]
     for method in ORDER:
@@ -107,7 +163,9 @@ def generate(publish, output):
               "", "## 逐方法判断", ""]
     for method in ORDER[1:]:
         m, a = reports[method]["metrics"], attribution[method]
-        if m["AssA"] > base["AssA"] and m["DetRe"] < base["DetRe"]:
+        if reports[method].get("interpretation") == "IDENTITY_CONSISTENCY_GAIN_WITH_REFERRING_RECALL_LOSS":
+            judgment = "IDENTITY_CONSISTENCY_GAIN_WITH_REFERRING_RECALL_LOSS：仅身份一致性改善而指代表达召回下降，不是跨模态匹配成功。"
+        elif m["AssA"] > base["AssA"] and m["DetRe"] < base["DetRe"]:
             judgment = "AssA 上升但 DetRe 下降，不能描述为召回恢复。"
         elif m["HOTA"] <= base["HOTA"]:
             judgment = "未提高官方总体 HOTA；保留完整负面结果。"

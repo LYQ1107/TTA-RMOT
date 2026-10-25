@@ -1,0 +1,760 @@
+{
+  "status": "INTERIM",
+  "completed_methods": [
+    "ZERO_UPDATE",
+    "RELATIVE_ONLY",
+    "PF_RANK",
+    "PF_RANK_GUARD"
+  ],
+  "cluster_unit": "video; all 17 correlated expressions and frames stay together",
+  "clusters": 25,
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 0,
+  "interval": "paired nonparametric percentile 95%",
+  "pooling": "official TP-weighted HOTA sufficient statistics, checked against unrounded COMBINED CSV",
+  "caveat": "descriptive development-set video uncertainty, not a blind-test significance claim or training-seed uncertainty; no independent-frame sample assumption",
+  "empty_group_hota_definition": "N/A: no scored GT; compare FP and nonempty episode rate, not HOTA gain",
+  "query_group_official_metrics": {
+    "ZERO_UPDATE": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 9.745607762766904,
+        "DetRe": 4.544113965379807,
+        "IDF1": 6.167009080640715,
+        "official_CLEAR_FP": 2005
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 87371
+      }
+    },
+    "RELATIVE_ONLY": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 11.934455555985926,
+        "DetRe": 11.104260007790447,
+        "IDF1": 13.059240667702483,
+        "official_CLEAR_FP": 13277
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 337014
+      }
+    },
+    "PF_RANK": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 9.78635589704327,
+        "DetRe": 4.61203894035058,
+        "IDF1": 6.253276816578249,
+        "official_CLEAR_FP": 2042
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 88057
+      }
+    },
+    "PF_RANK_GUARD": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 9.788093557173488,
+        "DetRe": 4.613351380625262,
+        "IDF1": 6.2549706978748745,
+        "official_CLEAR_FP": 2042
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 88085
+      }
+    }
+  },
+  "compute_summary": {
+    "ZERO_UPDATE": {
+      "total_episode_seconds": 13293.871635621414,
+      "aggregate_active_frame_fps": 32.61924079649276,
+      "worker_active_frame_fps": 32.61924079649276,
+      "scheduler_wall_active_frame_fps": 56.0998057015736,
+      "wall_seconds": 7729.723741054535,
+      "gpu_hours": 3.726946153640747,
+      "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
+      "peak_vram_bytes": 17982620160,
+      "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
+      "gpu_uuids": [
+        "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+        "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+        "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+        "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69"
+      ],
+      "trainable_parameters_per_replica": 0,
+      "optimizer_updates": 0,
+      "update_statistics_reused_from_rank": false,
+      "update_opportunities": 0,
+      "effective_evidence_coverage": null,
+      "accepted_update_fraction": null
+    },
+    "RELATIVE_ONLY": {
+      "total_episode_seconds": 43.293072044616565,
+      "aggregate_active_frame_fps": 10016.29081791903,
+      "worker_active_frame_fps": 10016.29081791903,
+      "scheduler_wall_active_frame_fps": 21655.774681411,
+      "wall_seconds": 20.024035453796387,
+      "gpu_hours": 0.0,
+      "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
+      "peak_vram_bytes": 0,
+      "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
+      "gpu_uuids": [],
+      "cost_scope": "incremental CPU selection only; requires the full ZERO_UPDATE source inference",
+      "trainable_parameters_per_replica": 0,
+      "optimizer_updates": 0,
+      "update_statistics_reused_from_rank": false,
+      "update_opportunities": 0,
+      "effective_evidence_coverage": null,
+      "accepted_update_fraction": null
+    },
+    "PF_RANK": {
+      "total_episode_seconds": 18448.799152117223,
+      "aggregate_active_frame_fps": 23.50483608307021,
+      "worker_active_frame_fps": 23.50483608307021,
+      "scheduler_wall_active_frame_fps": 78.25111990183011,
+      "wall_seconds": 5541.594810962677,
+      "gpu_hours": 5.146287949085235,
+      "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
+      "peak_vram_bytes": 18058989568,
+      "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
+      "gpu_uuids": [
+        "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+        "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+        "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+        "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69"
+      ],
+      "trainable_parameters_per_replica": 24576,
+      "optimizer_updates": 105971,
+      "update_statistics_reused_from_rank": false,
+      "update_opportunities": 108154,
+      "effective_evidence_coverage": 0.9798158181851804,
+      "accepted_update_fraction": 0.9798158181851804
+    },
+    "PF_RANK_GUARD": {
+      "total_episode_seconds": 7.337284222012386,
+      "aggregate_active_frame_fps": 59100.34106339516,
+      "worker_active_frame_fps": 59100.34106339516,
+      "scheduler_wall_active_frame_fps": 59100.34106339516,
+      "wall_seconds": 7.337284222012386,
+      "gpu_hours": 0.0,
+      "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
+      "peak_vram_bytes": 0,
+      "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
+      "gpu_uuids": [],
+      "cost_scope": "incremental CPU derivation only; requires the full PF_RANK run and separate GPU equivalence check",
+      "trainable_parameters_per_replica": 24576,
+      "optimizer_updates": 105971,
+      "update_statistics_reused_from_rank": true,
+      "update_opportunities": 108154,
+      "effective_evidence_coverage": 0.9798158181851804,
+      "accepted_update_fraction": 0.9798158181851804
+    }
+  },
+  "comparisons": {
+    "RELATIVE_ONLY_vs_ZERO_UPDATE": {
+      "delta_hota": -0.6475521143898444,
+      "paired_video_cluster_CI95": [
+        -2.1053090772700362,
+        2.373997871160658
+      ],
+      "CI_excludes_zero": false,
+      "improved_videos": 20,
+      "declined_videos": 5,
+      "tied_videos": 0,
+      "most_influential_videos": [
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.6557883446022288,
+          "delta_hota_without_video": 1.0830125576144516,
+          "leave_one_out_influence": -1.730564672004296
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 6.050739920828542,
+          "delta_hota_without_video": -0.8403035185018464,
+          "leave_one_out_influence": 0.19275140411200198
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_hota": 2.1233509025491366,
+          "delta_hota_without_video": -0.791242085870377,
+          "leave_one_out_influence": 0.14368997148053264
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_hota": 8.345629368817233,
+          "delta_hota_without_video": -0.7742498739762738,
+          "leave_one_out_influence": 0.12669775958642937
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_hota": 6.4874517421940086,
+          "delta_hota_without_video": -0.7647053829225454,
+          "leave_one_out_influence": 0.11715326853270103
+        }
+      ],
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_hota": -3.9613294487730517,
+          "delta_hota_without_video": -0.5733591054701623,
+          "leave_one_out_influence": -0.07419300891968206
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_hota": 3.367234712391384,
+          "delta_hota_without_video": -0.6731649405347202,
+          "leave_one_out_influence": 0.02561282614487581
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_hota": -0.7059448916549549,
+          "delta_hota_without_video": -0.6447605070133493,
+          "leave_one_out_influence": -0.0027916073764950866
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_hota": 5.064931339806464,
+          "delta_hota_without_video": -0.752455540423334,
+          "leave_one_out_influence": 0.10490342603348957
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_hota": 0.6839982026772979,
+          "delta_hota_without_video": -0.7077691834765725,
+          "leave_one_out_influence": 0.06021706908672808
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_hota": 3.030550317546542,
+          "delta_hota_without_video": -0.6894389561477974,
+          "leave_one_out_influence": 0.041886841757952986
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_hota": 1.490677413501996,
+          "delta_hota_without_video": -0.6706844244880079,
+          "leave_one_out_influence": 0.023132310098163522
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_hota": 8.345629368817233,
+          "delta_hota_without_video": -0.7742498739762738,
+          "leave_one_out_influence": 0.12669775958642937
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_hota": 2.1233509025491366,
+          "delta_hota_without_video": -0.791242085870377,
+          "leave_one_out_influence": 0.14368997148053264
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_hota": 7.909786084159894,
+          "delta_hota_without_video": -0.7644025632837579,
+          "leave_one_out_influence": 0.1168504488939135
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_hota": -1.0369459556949945,
+          "delta_hota_without_video": -0.5436061315454364,
+          "leave_one_out_influence": -0.10394598284440804
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_hota": 0.9736333474157157,
+          "delta_hota_without_video": -0.650800552317973,
+          "leave_one_out_influence": 0.003248437928128567
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_hota": 2.829180986154083,
+          "delta_hota_without_video": -0.6829472789574407,
+          "leave_one_out_influence": 0.03539516456759628
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_hota": 0.15359872306305888,
+          "delta_hota_without_video": -0.6535791678683216,
+          "leave_one_out_influence": 0.006027053478477207
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_hota": 4.171344568496048,
+          "delta_hota_without_video": -0.6774472059546115,
+          "leave_one_out_influence": 0.029895091564767107
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 6.050739920828542,
+          "delta_hota_without_video": -0.8403035185018464,
+          "leave_one_out_influence": 0.19275140411200198
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_hota": 3.1250581990102377,
+          "delta_hota_without_video": -0.6677158737636217,
+          "leave_one_out_influence": 0.020163759373777346
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.6557883446022288,
+          "delta_hota_without_video": 1.0830125576144516,
+          "leave_one_out_influence": -1.730564672004296
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_hota": 4.728358632298175,
+          "delta_hota_without_video": -0.6902200600392074,
+          "leave_one_out_influence": 0.04266794564936305
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_hota": 5.267912524067751,
+          "delta_hota_without_video": -0.7033309280158253,
+          "leave_one_out_influence": 0.055778813625980916
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_hota": 3.5847563494601915,
+          "delta_hota_without_video": -0.6453763363105676,
+          "leave_one_out_influence": -0.0021757780792768244
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_hota": 1.0445734634518336,
+          "delta_hota_without_video": -0.66023089243743,
+          "leave_one_out_influence": 0.01267877804758566
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_hota": 3.5573651102111175,
+          "delta_hota_without_video": -0.6831650328282599,
+          "leave_one_out_influence": 0.03561291843841552
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_hota": 6.4874517421940086,
+          "delta_hota_without_video": -0.7647053829225454,
+          "leave_one_out_influence": 0.11715326853270103
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_hota": -0.27571416945616534,
+          "delta_hota_without_video": -0.6745050599459894,
+          "leave_one_out_influence": 0.026952945556145025
+        }
+      ],
+      "query_present_delta_hota": 2.188847793219022
+    },
+    "PF_RANK_vs_ZERO_UPDATE": {
+      "delta_hota": 0.025268334445332385,
+      "paired_video_cluster_CI95": [
+        -0.008806889221880176,
+        0.1424207523209456
+      ],
+      "CI_excludes_zero": false,
+      "improved_videos": 11,
+      "declined_videos": 8,
+      "tied_videos": 6,
+      "most_influential_videos": [
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.002145273936246639,
+          "delta_hota_without_video": 0.06065898667208014,
+          "leave_one_out_influence": -0.035390652226747754
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_hota": 0.6924238459706196,
+          "delta_hota_without_video": 0.0027432002435432423,
+          "leave_one_out_influence": 0.022525134201789143
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 0.019426435359425787,
+          "delta_hota_without_video": 0.029808093173343764,
+          "leave_one_out_influence": -0.004539758728011378
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_hota": 0.11624096401765538,
+          "delta_hota_without_video": 0.021518995685822162,
+          "leave_one_out_influence": 0.0037493387595102234
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_hota": 0.012574182874386608,
+          "delta_hota_without_video": 0.02697190655893067,
+          "leave_one_out_influence": -0.001703572113598284
+        }
+      ],
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_hota": 0.031008593850062383,
+          "delta_hota_without_video": 0.025481698221710758,
+          "leave_one_out_influence": -0.00021336377637837245
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_hota": -0.00033218126620992994,
+          "delta_hota_without_video": 0.02544453978679151,
+          "leave_one_out_influence": -0.0001762053414591236
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_hota": 0.6924238459706196,
+          "delta_hota_without_video": 0.0027432002435432423,
+          "leave_one_out_influence": 0.022525134201789143
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.02569407147005265,
+          "leave_one_out_influence": -0.000425737024720263
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_hota": 0.11624096401765538,
+          "delta_hota_without_video": 0.021518995685822162,
+          "leave_one_out_influence": 0.0037493387595102234
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_hota": -0.002765856177914472,
+          "delta_hota_without_video": 0.02547739744923483,
+          "leave_one_out_influence": -0.00020906300390244326
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_hota": 0.14066119324097404,
+          "delta_hota_without_video": 0.023764317454675776,
+          "leave_one_out_influence": 0.0015040169906566092
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_hota": 0.0772428623164487,
+          "delta_hota_without_video": 0.025325761969936522,
+          "leave_one_out_influence": -5.742752460413669e-05
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.025743201372435465,
+          "leave_one_out_influence": -0.0004748669271030792
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.02533216129407556,
+          "leave_one_out_influence": -6.38268487431759e-05
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_hota": 0.012574182874386608,
+          "delta_hota_without_video": 0.02697190655893067,
+          "leave_one_out_influence": -0.001703572113598284
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_hota": -0.001999358671559426,
+          "delta_hota_without_video": 0.02558371921113256,
+          "leave_one_out_influence": -0.00031538476580017516
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.025398754478269225,
+          "leave_one_out_influence": -0.0001304200329368399
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_hota": 0.110578941415298,
+          "delta_hota_without_video": 0.024736141755278496,
+          "leave_one_out_influence": 0.0005321926900538898
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_hota": -1.4615515188779599e-05,
+          "delta_hota_without_video": 0.0254751702753353,
+          "leave_one_out_influence": -0.00020683583000291605
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 0.019426435359425787,
+          "delta_hota_without_video": 0.029808093173343764,
+          "leave_one_out_influence": -0.004539758728011378
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_hota": -6.01580817769648e-06,
+          "delta_hota_without_video": 0.025392690860213563,
+          "leave_one_out_influence": -0.0001243564148811771
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.002145273936246639,
+          "delta_hota_without_video": 0.06065898667208014,
+          "leave_one_out_influence": -0.035390652226747754
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_hota": -0.0014772739327157947,
+          "delta_hota_without_video": 0.025470552997596485,
+          "leave_one_out_influence": -0.00020221855226409957
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.025357242641625533,
+          "leave_one_out_influence": -8.890819629314706e-05
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_hota": 0.005640456388489923,
+          "delta_hota_without_video": 0.026456669719477688,
+          "leave_one_out_influence": -0.0011883352741453024
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_hota": 0.01502906520050784,
+          "delta_hota_without_video": 0.02584835580771916,
+          "leave_one_out_influence": -0.0005800213623867734
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_hota": 0.0005853070491779744,
+          "delta_hota_without_video": 0.0254231026546492,
+          "leave_one_out_influence": -0.00015476820931681345
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.02536532910911582,
+          "leave_one_out_influence": -9.699466378343402e-05
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_hota": -0.008794960278454056,
+          "delta_hota_without_video": 0.026324252639312817,
+          "leave_one_out_influence": -0.0010559181939804319
+        }
+      ],
+      "query_present_delta_hota": 0.0407481342763667
+    },
+    "PF_RANK_GUARD_vs_ZERO_UPDATE": {
+      "delta_hota": 0.026351829092055468,
+      "paired_video_cluster_CI95": [
+        -0.008557957978566844,
+        0.14453427428963292
+      ],
+      "CI_excludes_zero": false,
+      "improved_videos": 11,
+      "declined_videos": 8,
+      "tied_videos": 6,
+      "most_influential_videos": [
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.0030032158569071044,
+          "delta_hota_without_video": 0.0632115331345311,
+          "leave_one_out_influence": -0.03685970404247563
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_hota": 0.699106490480732,
+          "delta_hota_without_video": 0.0036293697457345786,
+          "leave_one_out_influence": 0.02272245934632089
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 0.01929680091915975,
+          "delta_hota_without_video": 0.03103426310031665,
+          "leave_one_out_influence": -0.004682434008261183
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_hota": 0.11624096401765538,
+          "delta_hota_without_video": 0.022642863018733195,
+          "leave_one_out_influence": 0.003708966073322273
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_hota": 0.14066119324097404,
+          "delta_hota_without_video": 0.024859579431430134,
+          "leave_one_out_influence": 0.0014922496606253333
+        }
+      ],
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_hota": 0.031008593850062383,
+          "delta_hota_without_video": 0.02661016819163109,
+          "leave_one_out_influence": -0.00025833909957562184
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_hota": -0.00033218126620992994,
+          "delta_hota_without_video": 0.02653104570360476,
+          "leave_one_out_influence": -0.00017921661154929325
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_hota": 0.699106490480732,
+          "delta_hota_without_video": 0.0036293697457345786,
+          "leave_one_out_influence": 0.02272245934632089
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.026885911500261983,
+          "leave_one_out_influence": -0.0005340824082065154
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_hota": 0.11624096401765538,
+          "delta_hota_without_video": 0.022642863018733195,
+          "leave_one_out_influence": 0.003708966073322273
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_hota": -0.002765856177914472,
+          "delta_hota_without_video": 0.0265666690880888,
+          "leave_one_out_influence": -0.0002148399960333336
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_hota": 0.14066119324097404,
+          "delta_hota_without_video": 0.024859579431430134,
+          "leave_one_out_influence": 0.0014922496606253333
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_hota": 0.0772428623164487,
+          "delta_hota_without_video": 0.026412893652162595,
+          "leave_one_out_influence": -6.106456010712691e-05
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.026851969075293525,
+          "leave_one_out_influence": -0.0005001399832380571
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.02641953276814668,
+          "leave_one_out_influence": -6.770367609121308e-05
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_hota": 0.02235388469698485,
+          "delta_hota_without_video": 0.026894862211063852,
+          "leave_one_out_influence": -0.0005430331190083848
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_hota": -0.001999358671559426,
+          "delta_hota_without_video": 0.026671496116518867,
+          "leave_one_out_influence": -0.00031966702446339923
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.026490484847453644,
+          "leave_one_out_influence": -0.00013865575539817598
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_hota": 0.110578941415298,
+          "delta_hota_without_video": 0.02582950740957557,
+          "leave_one_out_influence": 0.0005223216824798982
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_hota": -1.4615515188779599e-05,
+          "delta_hota_without_video": 0.02656347246568913,
+          "leave_one_out_influence": -0.00021164337363366315
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_hota": 0.01929680091915975,
+          "delta_hota_without_video": 0.03103426310031665,
+          "leave_one_out_influence": -0.004682434008261183
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_hota": -6.01580817769648e-06,
+          "delta_hota_without_video": 0.026480308481694692,
+          "leave_one_out_influence": -0.00012847938963922445
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_hota": -0.0030032158569071044,
+          "delta_hota_without_video": 0.0632115331345311,
+          "leave_one_out_influence": -0.03685970404247563
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_hota": -0.0014772739327157947,
+          "delta_hota_without_video": 0.026557532948064733,
+          "leave_one_out_influence": -0.000205703856009265
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.02644620726878877,
+          "leave_one_out_influence": -9.437817673330073e-05
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_hota": 0.005640456388489923,
+          "delta_hota_without_video": 0.02754517932372913,
+          "leave_one_out_influence": -0.0011933502316736622
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_hota": 0.014872990371334716,
+          "delta_hota_without_video": 0.02698247725001046,
+          "leave_one_out_influence": -0.0006306481579549938
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_hota": 0.0005853070491779744,
+          "delta_hota_without_video": 0.026513294519414643,
+          "leave_one_out_influence": -0.00016146542735917535
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_hota": 0.0,
+          "delta_hota_without_video": 0.026454818395201585,
+          "leave_one_out_influence": -0.0001029893031461171
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_hota": -0.009362804872692365,
+          "delta_hota_without_video": 0.02746076188305402,
+          "leave_one_out_influence": -0.0011089327909985514
+        }
+      ],
+      "query_present_delta_hota": 0.042485794406584176
+    }
+  }
+}

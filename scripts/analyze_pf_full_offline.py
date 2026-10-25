@@ -49,15 +49,26 @@ def overlaps(a, b):
     return inter/np.maximum(aa[:, None]+bb[None, :]-inter, 1e-12)
 
 
-def matched_gt(iou, selected):
-    if not selected or not iou.shape[1]: return set(), set()
+def matched_pairs(iou, selected):
+    if not selected or not iou.shape[1]: return {}
     scores = iou[selected]
     # Maximize valid-match cardinality first, IoU second, with fixed 0.5 gate.
     valid = scores >= .5
     cost = valid.astype(float)*100 + scores*valid
     rows, cols = linear_sum_assignment(-cost)
-    return ({int(c) for r, c in zip(rows, cols) if valid[r, c]},
-            {selected[r] for r, c in zip(rows, cols) if valid[r, c]})
+    return {selected[r]:int(c) for r,c in zip(rows,cols) if valid[r,c]}
+
+
+def matched_gt(iou, selected):
+    pairs = matched_pairs(iou, selected)
+    return set(pairs.values()), set(pairs)
+
+
+def observable_id_switches(previous, current, frame):
+    """Only query-GT-visible, <=2-frame transitions; not a full MOT ID audit."""
+    valid = [(old_id,current[tid]) for tid,(old_t,old_id) in previous.items()
+             if tid in current and old_id is not None and current[tid] is not None and 0 < frame-old_t <= 2]
+    return len(valid), sum(old != now for old,now in valid)
 
 
 def auroc(scores, labels):
@@ -67,6 +78,27 @@ def auroc(scores, labels):
     if not p or not n: return None
     ranks = rankdata(scores)
     return float((ranks[labels].sum()-p*(p+1)/2)/(p*n))
+
+
+def query_presence_summary(episodes):
+    """GT grouping exists only in this sealed-output evaluator."""
+    groups = {}
+    for name, present in (("query_present", True), ("query_empty", False)):
+        rows = [e for e in episodes if bool(e["gt_observations"]) == present]
+        fields = ("gt_observations", "baseline_matched_gt", "adapted_matched_gt",
+                  "baseline_false_positive_rows", "adapted_false_positive_rows", "recovered_gt", "lost_gt",
+                  "new_false_positive_rows", "removed_false_positive_rows", "baseline_selected_rows", "adapted_selected_rows")
+        group = {k: sum(e[k] for e in rows) for k in fields}
+        group["episodes"] = len(rows)
+        for method in ("baseline", "adapted"):
+            group[method+"_GT_recall"] = (group[method+"_matched_gt"]/group["gt_observations"]
+                                           if group["gt_observations"] else None)
+            count = sum(e[method+"_selected_rows"] > 0 for e in rows)
+            group[method+"_nonempty_prediction_episodes"] = count
+            group[method+"_nonempty_prediction_rate"] = count/len(rows) if rows else None
+        group["net_false_positive_change"] = group["adapted_false_positive_rows"]-group["baseline_false_positive_rows"]
+        groups[name] = group
+    return groups
 
 
 def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
@@ -80,6 +112,10 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
                             "recovered_gt", "lost_gt", "new_false_positive_rows", "removed_false_positive_rows",
                             "baseline_false_positive_rows", "adapted_false_positive_rows", "ranking_valid_frames")}
     stats["ranking"] = {name: {str(k):0 for k in (1,3,5)} for name in ("baseline", "adapted", "random_null")}
+    recall_at_k = {name: {str(k):0. for k in (1,3,5)} for name in ("baseline", "adapted")}
+    temporal = [dict(candidates=0, baseline_selected=0, adapted_selected=0) for _ in range(4)]
+    id_diagnostic = dict(query_gt_visible_transitions=0, query_gt_visible_switches=0,
+                         eligible_update_frames_with_visible_switch=0)
     labels, baseline_scores, adapted_scores = array("b"), array("d"), array("d")
     per_episode = []
     for video in sorted({e["video"] for e in audit["episodes"]}):
@@ -95,9 +131,10 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
                         for r in path.read_text().splitlines() if r.strip()}
             selected = chosen(folder/relative/"predict.txt")
             reference = chosen(baseline/relative/"predict.txt")
+            prior_ids = {}
             baseline_path = baseline/relative/"candidate_margins.jsonl.gz"
             with gzip.open(folder/relative/"candidate_margins.jsonl.gz", "rt") as stream, gzip.open(baseline_path, "rt") as src_stream:
-                for line, src_line in zip(stream, src_stream, strict=True):
+                for frame_index, (line, src_line) in enumerate(zip(stream, src_stream, strict=True)):
                     row, src = json.loads(line), json.loads(src_line)
                     t, ids, values = row["frame"], row["ids"], row["adapted"]
                     if src["frame"] != t or set(src["ids"]) != set(ids):
@@ -105,11 +142,26 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
                     base_values = dict(zip(src["ids"], src["adapted"]))
                     previous = [base_values[i] for i in ids]
                     matrix = overlaps([boxes[t][i] for i in ids], [box for _, box in gt.get(t, [])])
+                    pairs = matched_pairs(matrix,list(range(len(ids))))
+                    current_gt = {tid: None for tid in ids}
+                    current_gt.update({ids[j]:gt[t][k][0] for j,k in pairs.items()})
+                    transitions, switches = observable_id_switches(prior_ids,current_gt,t)
+                    id_diagnostic["query_gt_visible_transitions"] += transitions
+                    id_diagnostic["query_gt_visible_switches"] += switches
+                    reliable = sum(tid in prior_ids and 0 < t-prior_ids[tid][0] <= 2 for tid in ids)
+                    if switches and reliable >= 2 and (frame_index+1)%4 == 0:
+                        id_diagnostic["eligible_update_frames_with_visible_switch"] += 1
+                    prior_ids = {tid:(old_t,old_id) for tid,(old_t,old_id) in prior_ids.items() if t-old_t <= 2}
+                    prior_ids.update({tid:(t,gid) for tid,gid in current_gt.items()})
                     positive = (matrix >= .5).any(axis=1) if matrix.shape[1] else np.zeros(len(ids), dtype=bool)
                     retrievable = int((matrix >= .5).any(axis=0).sum())
                     stats["candidate_retrievable_gt"] += retrievable
                     a = [j for j, i in enumerate(ids) if (t, i) in selected]
                     b = [j for j, i in enumerate(ids) if (t, i) in reference]
+                    bucket = temporal[min(3, 4*frame_index//entry["frames"])]
+                    bucket["candidates"] += len(ids)
+                    bucket["baseline_selected"] += len(b)
+                    bucket["adapted_selected"] += len(a)
                     am, a_matched = matched_gt(matrix, a)
                     bm, b_matched = matched_gt(matrix, b)
                     stats["adapted_matched_gt"] += len(am); stats["baseline_matched_gt"] += len(bm)
@@ -124,14 +176,18 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
                         stats["ranking_valid_frames"] += 1
                         for name, scores in (("baseline", previous), ("adapted", values)):
                             order = sorted(range(n), key=lambda j:(-scores[j], ids[j]))
-                            for k in (1,3,5): stats["ranking"][name][str(k)] += int(any(positive[j] for j in order[:k]))
+                            for k in (1,3,5):
+                                hits = int(positive[order[:k]].sum())
+                                stats["ranking"][name][str(k)] += int(hits > 0)
+                                recall_at_k[name][str(k)] += hits/p
                         for k in (1,3,5):
                             absent = 1.
                             for j in range(min(k,n)):
                                 absent *= max(n-p-j, 0)/(n-j)
                             stats["ranking"]["random_null"][str(k)] += 1-absent
             episode_stats = {k:v-before[k] for k,v in stats.items() if isinstance(v, int)}
-            per_episode.append(dict(video=video, expression=expression, **episode_stats))
+            per_episode.append(dict(video=video, expression=expression, baseline_selected_rows=len(reference),
+                                    adapted_selected_rows=len(selected), **episode_stats))
     result = dict(method=method, development_only_gt_used=True, threshold_selection_from_gt=False,
                   definition="offline framewise max-cardinality IoU>=0.5 assignment; official HOTA remains authoritative",
                   gt_definition="nonzero mark and pedestrian class 1, following official MOT GT filtering",
@@ -145,6 +201,24 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
                   episodes=per_episode)
     for group in result["ranking"].values():
         for key in group: group[key] /= max(stats["ranking_valid_frames"],1)
+    presence = query_presence_summary(per_episode)
+    present, empty = presence["query_present"], presence["query_empty"]
+    for group in recall_at_k.values():
+        for key in group: group[key] /= max(stats["ranking_valid_frames"],1)
+    result.update(query_presence=presence, query_present_episodes=present["episodes"],
+                  query_empty_episodes=empty["episodes"], query_present_GT_recall=present["adapted_GT_recall"],
+                  query_present_FP=present["adapted_false_positive_rows"], query_empty_FP=empty["adapted_false_positive_rows"],
+                  query_empty_nonempty_prediction_rate=empty["adapted_nonempty_prediction_rate"],
+                  source_Recall_at_1_3_5=recall_at_k["baseline"], adapted_Recall_at_1_3_5=recall_at_k["adapted"],
+                  recall_at_k_definition="macro over target-retrievable frames: fraction of IoU>=0.5-positive candidates in top K; distinct from any-hit TopK",
+                  query_group_definition="episode has any official scored GT; offline only, never provided to model",
+                  identity_switch_diagnostic=dict(**id_diagnostic,
+                    limitation="query-GT-observable transitions only; misses unannotated people/gaps, and counts possible evidence conflicts, not proven accepted optimizer steps; the online ID memory cannot independently detect swaps within max_gap=2"),
+                  temporal_selection_quartiles=temporal,
+                  temporal_definition="four equal active-frame-index parts per episode; candidate-weighted negative fractions, not a causal trend test")
+    for bucket in temporal:
+        for name in ("baseline", "adapted"):
+            bucket[name+"_negative_fraction"] = 1-bucket[name+"_selected"]/max(bucket["candidates"],1)
     atomic_json(output, result)
     print(json.dumps({k:v for k,v in result.items() if k != "episodes"}, indent=2))
     return result
