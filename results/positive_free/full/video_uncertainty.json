@@ -992,5 +992,152 @@
       ],
       "query_present_delta_hota": 0.8783503825855092
     }
+  },
+  "learning_by_query_group": {
+    "ZERO_UPDATE": {
+      "counter_source": "ZERO_UPDATE",
+      "groups": {
+        "query_present": {
+          "episodes": 40,
+          "frames": 44046,
+          "episode_compute_seconds": 1412.1841739397496,
+          "optimizer_steps": 0,
+          "gradient_attempts": 0,
+          "rollback_updates": 0,
+          "update_opportunities": 0,
+          "skipped_no_evidence": 0,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": null
+        },
+        "query_empty": {
+          "episodes": 385,
+          "frames": 389590,
+          "episode_compute_seconds": 11881.687461681664,
+          "optimizer_steps": 0,
+          "gradient_attempts": 0,
+          "rollback_updates": 0,
+          "update_opportunities": 0,
+          "skipped_no_evidence": 0,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": null
+        }
+      }
+    },
+    "RELATIVE_ONLY": {
+      "counter_source": "RELATIVE_ONLY",
+      "groups": {
+        "query_present": {
+          "episodes": 40,
+          "frames": 44046,
+          "episode_compute_seconds": 4.42443493870087,
+          "optimizer_steps": 0,
+          "gradient_attempts": 0,
+          "rollback_updates": 0,
+          "update_opportunities": 0,
+          "skipped_no_evidence": 0,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": null
+        },
+        "query_empty": {
+          "episodes": 385,
+          "frames": 389590,
+          "episode_compute_seconds": 38.868637105915695,
+          "optimizer_steps": 0,
+          "gradient_attempts": 0,
+          "rollback_updates": 0,
+          "update_opportunities": 0,
+          "skipped_no_evidence": 0,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": null
+        }
+      }
+    },
+    "PF_RANK": {
+      "counter_source": "PF_RANK",
+      "groups": {
+        "query_present": {
+          "episodes": 40,
+          "frames": 44046,
+          "episode_compute_seconds": 1630.4077553427778,
+          "optimizer_steps": 10805,
+          "gradient_attempts": 10805,
+          "rollback_updates": 0,
+          "update_opportunities": 10987,
+          "skipped_no_evidence": 182,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9834349685992536
+        },
+        "query_empty": {
+          "episodes": 385,
+          "frames": 389590,
+          "episode_compute_seconds": 16818.391396774445,
+          "optimizer_steps": 95166,
+          "gradient_attempts": 95166,
+          "rollback_updates": 0,
+          "update_opportunities": 97167,
+          "skipped_no_evidence": 2001,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9794065886566427
+        }
+      }
+    },
+    "PF_RANK_GUARD": {
+      "counter_source": "PF_RANK",
+      "groups": {
+        "query_present": {
+          "episodes": 40,
+          "frames": 44046,
+          "episode_compute_seconds": 1630.4077553427778,
+          "optimizer_steps": 10805,
+          "gradient_attempts": 10805,
+          "rollback_updates": 0,
+          "update_opportunities": 10987,
+          "skipped_no_evidence": 182,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9834349685992536
+        },
+        "query_empty": {
+          "episodes": 385,
+          "frames": 389590,
+          "episode_compute_seconds": 16818.391396774445,
+          "optimizer_steps": 95166,
+          "gradient_attempts": 95166,
+          "rollback_updates": 0,
+          "update_opportunities": 97167,
+          "skipped_no_evidence": 2001,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9794065886566427
+        }
+      }
+    },
+    "PF_IDENTITY": {
+      "counter_source": "PF_IDENTITY",
+      "groups": {
+        "query_present": {
+          "episodes": 40,
+          "frames": 44046,
+          "episode_compute_seconds": 3437.823423440568,
+          "optimizer_steps": 8630,
+          "gradient_attempts": 10982,
+          "rollback_updates": 2352,
+          "update_opportunities": 10987,
+          "skipped_no_evidence": 5,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9995449167197598
+        },
+        "query_empty": {
+          "episodes": 385,
+          "frames": 389590,
+          "episode_compute_seconds": 31519.597195610404,
+          "optimizer_steps": 78048,
+          "gradient_attempts": 97087,
+          "rollback_updates": 19039,
+          "update_opportunities": 97167,
+          "skipped_no_evidence": 80,
+          "skipped_multi_batch": 0,
+          "rule_evidence_coverage": 0.9991766752086614
+        }
+      }
+    }
   }
 }

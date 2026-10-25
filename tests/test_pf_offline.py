@@ -58,3 +58,15 @@ def test_id_switch_diagnostic_does_not_invent_labels_for_unknown_or_stale_ids():
     previous={1:(2,10),2:(2,None),3:(0,20)}
     assert observable_id_switches(previous,{1:11,2:12,3:21},3) == (1,1)
     assert observable_id_switches(previous,{1:10},3) == (1,0)
+
+
+def test_learning_query_groups_keep_accepted_and_rolled_back_updates_separate():
+    from scripts.analyze_pf_video_uncertainty import learning_by_query_group
+    audit=dict(episodes=[dict(video="v",expression="present",frames=8,wall_seconds=1.,
+                             diagnostics=dict(optimizer_steps=1,gradient_attempts=2,rollback_updates=1,update_opportunities=2)),
+                         dict(video="v",expression="empty",frames=4,wall_seconds=.5,
+                             diagnostics=dict(optimizer_steps=1,gradient_attempts=1,update_opportunities=1))])
+    groups=learning_by_query_group(audit,{"v+present":10,"v+empty":0})
+    assert groups["query_present"]["optimizer_steps"] == groups["query_present"]["rollback_updates"] == 1
+    assert groups["query_empty"]["frames"] == 4 and groups["query_empty"]["rollback_updates"] == 0
+    assert groups["query_empty"]["rule_evidence_coverage"] == 1.

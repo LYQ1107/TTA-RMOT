@@ -121,6 +121,14 @@ def generate(publish, output):
         accepted = f"{100*s.get('optimizer_steps',0)/opportunities:.4f}%" if opportunities else "N/A"
         lines.append(f"| {method} | {s.get('trainable_parameters',0)} | {opportunities} | {coverage} | {accepted} |")
     rank = reports["PF_RANK"]
+    lines += ["", "| 方法 | Present接受更新 | Empty接受更新 | Present回滚 | Empty回滚 |",
+              "|---|---:|---:|---:|---:|"]
+    for method in ORDER:
+        group_record=uncertainty["learning_by_query_group"][method]
+        p,e=group_record["groups"]["query_present"],group_record["groups"]["query_empty"]
+        suffix="（复用Rank）" if group_record["counter_source"] != method else ""
+        lines.append(f"| {method}{suffix} | {p['optimizer_steps']} | {e['optimizer_steps']} | {p['rollback_updates']} | {e['rollback_updates']} |")
+    lines += ["", "证据覆盖仅指注册规则下存在可计算的排序对/物理ID历史，不代表语言匹配正确。GT分组只用于封存后的诊断，绝不充当在线更新门禁。各episode重置，因此空组更新不会向其他有目标episode传递已学状态；空组仍可能通过减少误检获益，必须看实际FP而不是自动认定所有更新无效。"]
     lines += ["", f"Rank 的 {rank['aggregate_stats']['optimizer_steps']:,} 次更新消耗 {rank['cost']['gpu_hours']:.4f} GPU小时、wall {rank['cost']['wall_seconds']:.2f}s，仅得到 +0.0253 个HOTA百分点，且AUROC/AssA下降，当前证据不支持它具有突出的收益成本比。",
               "", "## Hybrid 互补性验收", ""]
     hybrid = reports["PF_HYBRID"]["metrics"]

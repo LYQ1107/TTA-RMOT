@@ -14,3 +14,13 @@ Descriptive development-set uncertainty, not frame-independent significance or t
 Query-Empty HOTA is not meaningful without GT; FP and nonempty prediction rates are reported separately.
 All 425 sequences remain in the primary evaluation. HOTA is pooled, not a mean of per-video HOTA.
 Per-video deltas and leave-one-video-out influence are in `results/positive_free/full/video_uncertainty.json`; HOTA deltas are not additive video contributions.
+
+| Method | Present accepted updates | Empty accepted updates | Present rollbacks | Empty rollbacks |
+|---|---:|---:|---:|---:|
+| ZERO_UPDATE | 0 | 0 | 0 | 0 |
+| RELATIVE_ONLY | 0 | 0 | 0 | 0 |
+| PF_RANK | 10805 | 95166 | 0 | 0 |
+| PF_RANK_GUARD (Rank reused) | 10805 | 95166 | 0 | 0 |
+| PF_IDENTITY | 8630 | 78048 | 2352 | 19039 |
+
+Rule-eligible evidence is not semantic correctness. GT group labels are offline diagnostics, never online gates; Guard rows reuse Rank rather than incur those updates again.

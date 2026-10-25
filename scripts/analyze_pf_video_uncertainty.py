@@ -42,6 +42,26 @@ def paired_clusters(adapted, baseline, counts):
     return pooled_hota(adapted, counts)-pooled_hota(baseline, counts)
 
 
+def learning_by_query_group(audit, gt):
+    """Offline grouping of actual counters; never a training/presence gate."""
+    fields = ("optimizer_steps", "gradient_attempts", "rollback_updates", "update_opportunities", "skipped_no_evidence", "skipped_multi_batch")
+    result = {name:dict(episodes=0, frames=0, episode_compute_seconds=0., **dict.fromkeys(fields,0))
+              for name in ("query_present","query_empty")}
+    for episode in audit["episodes"]:
+        key = episode["video"]+"+"+episode["expression"]
+        group = result["query_present" if gt[key] else "query_empty"]
+        group["episodes"] += 1
+        group["frames"] += episode["frames"]
+        group["episode_compute_seconds"] += episode["wall_seconds"]
+        for field in fields:
+            group[field] += episode["diagnostics"].get(field,0)
+    for group in result.values():
+        opportunities = group["update_opportunities"]
+        group["rule_evidence_coverage"] = ((opportunities-group["skipped_no_evidence"]-group["skipped_multi_batch"])/opportunities
+                                             if opportunities else None)
+    return result
+
+
 def load_method(folder):
     report = json.loads((folder/"metrics.json").read_text())
     if report["full_audit"]["status"] != "PASS" or report["full_audit"]["valid_episodes"] != 425:
@@ -64,6 +84,13 @@ def load_method(folder):
         raise ValueError("cluster sufficient statistics fail exact official HOTA pooling")
     attribution = json.loads((folder/"offline_attribution.json").read_text())
     gt = {r["video"]+"+"+r["expression"]:r["gt_observations"] for r in attribution["episodes"]}
+    learning_method = "PF_RANK" if "reused_rank_stats" in report else report["method"]
+    learning_root = Path(report.get("reused_rank_output_root", report["raw_output_root"]))
+    learning = learning_by_query_group(json.loads((learning_root/learning_method/"full_audit.json").read_text()),gt)
+    expected = report.get("reused_rank_stats", report["aggregate_stats"])
+    for field in ("optimizer_steps","gradient_attempts","rollback_updates","update_opportunities","skipped_no_evidence"):
+        if sum(group[field] for group in learning.values()) != expected.get(field,0):
+            raise ValueError(f"query-group counters do not match the full run: {field}")
     groups = {}
     for name, present in (("query_present",True),("query_empty",False)):
         selected = {k:r for k,r in episodes.items() if bool(gt[k]) == present}
@@ -73,7 +100,7 @@ def load_method(folder):
                             DetRe=100*float(np.mean(h["DetRe"])) if present else None,
                             IDF1=100*float(ident["IDF1"]) if present else None,
                             official_CLEAR_FP=sum(int(float(r["CLR_FP"])) for r in selected.values()))
-    return dict(report=report, videos=videos, values=values, groups=groups)
+    return dict(report=report, videos=videos, values=values, groups=groups, learning=learning, learning_source=learning_method)
 
 
 def analyze(publish, samples=2000, seed=0, require_six=False):
@@ -123,7 +150,8 @@ def analyze(publish, samples=2000, seed=0, require_six=False):
         pooling="official TP-weighted HOTA sufficient statistics, checked against unrounded COMBINED CSV",
         caveat="descriptive development-set video uncertainty, not a blind-test significance claim or training-seed uncertainty; no independent-frame sample assumption",
         empty_group_hota_definition="N/A: no scored GT; compare FP and nonempty episode rate, not HOTA gain",
-        query_group_official_metrics={m:r["groups"] for m,r in methods.items()}, compute_summary=costs, comparisons=comparisons)
+        query_group_official_metrics={m:r["groups"] for m,r in methods.items()}, compute_summary=costs, comparisons=comparisons,
+        learning_by_query_group={m:dict(counter_source=r["learning_source"],groups=r["learning"]) for m,r in methods.items()})
     atomic_json(publish/"video_uncertainty.json",result)
     lines = ["# Video-cluster and query-group analysis", "",
         f"{result['status']}; {len(methods)}/6 methods. Paired bootstrap: 25 whole videos, {samples} resamples, seed {seed}.", "",
@@ -136,6 +164,13 @@ def analyze(publish, samples=2000, seed=0, require_six=False):
     lines += ["", "Query-Empty HOTA is not meaningful without GT; FP and nonempty prediction rates are reported separately.",
         "All 425 sequences remain in the primary evaluation. HOTA is pooled, not a mean of per-video HOTA.",
         "Per-video deltas and leave-one-video-out influence are in `results/positive_free/full/video_uncertainty.json`; HOTA deltas are not additive video contributions."]
+    lines += ["", "| Method | Present accepted updates | Empty accepted updates | Present rollbacks | Empty rollbacks |",
+              "|---|---:|---:|---:|---:|"]
+    for method,item in methods.items():
+        p,e=item["learning"]["query_present"],item["learning"]["query_empty"]
+        label=method+(" (Rank reused)" if item["learning_source"] != method else "")
+        lines.append(f"| {label} | {p['optimizer_steps']} | {e['optimizer_steps']} | {p['rollback_updates']} | {e['rollback_updates']} |")
+    lines += ["", "Rule-eligible evidence is not semantic correctness. GT group labels are offline diagnostics, never online gates; Guard rows reuse Rank rather than incur those updates again."]
     (ROOT/"docs/PF_VIDEO_GROUP_ANALYSIS_20261025.md").write_text("\n".join(lines)+"\n")
     print(json.dumps(dict(status=result["status"],comparisons={k:{f:v for f,v in r.items() if f not in {"per_video","most_influential_videos"}} for k,r in comparisons.items()}),indent=2))
     return result

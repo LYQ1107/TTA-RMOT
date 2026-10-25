@@ -10,6 +10,7 @@
 - 区分新增选择行的FP、被移除选择行的FP与总FP净变化；匹配重分配可使它们不相等。
 - 原TopK是any-hit命中率。另报多目标候选Recall@K：可检索目标帧中，topK包含的正候选占该帧全部正候选的比例，再做帧宏平均。它不等同于全部GT召回。
 - 时间诊断按每episode活跃帧进度四等分，报告候选加权负预测比例；不把相关帧当独立样本。
+- 新增按Query-Present/Empty分组的实际接受更新、尝试、回滚、规则证据覆盖及episode计算耗时，并核对分组之和等于完整运行计数。Guard明确复用Rank，不重复记作新更新或独立零GPU推理。
 - 新增归因与聚类工具后的50项集中测试通过（12.55秒），compileall与两个运行脚本语法检查通过；实际四组重算的原有全局诊断数值逐项保持一致。
 
 | 方法 | Query-Present GT recall | Present FP | Empty FP | Empty非空预测episode比例 |

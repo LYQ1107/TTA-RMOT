@@ -90,6 +90,9 @@ scheduler48.4999FPS, peak allocated18,289,683,968bytes. There are108,069 finite 
 attempts,86,678 accepted updates and21,391 norm-limit rollbacks; max accepted adapter L2=1.99999856.
 Numerical defaults remain unchanged despite these results. Evidence coverage is rule eligibility,
 not semantic correctness. Hybrid must still complete before any all-method conclusion.
+The offline cost grouping now verifies all group sums against full-run counters. Latest focused
+regression:51 tests pass in11.89s; compileall passes. Identity accepts8,630 updates on Present and
+78,048 on Empty episodes; the labels are diagnostic only, never an online gating input.
 
 Full ZERO validation: all 3,588,445 candidate-query observations / 433,636 active-frame steps;
 six historical near-zero sign differences, each reproduced with original and cached forwards selecting

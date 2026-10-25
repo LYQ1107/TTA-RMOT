@@ -115,6 +115,15 @@ All25 shard rollback-restored flags are true;425/425 pre-episode reset checks pa
 remain absent. Valid-ID-history coverage99.9214% is registered-rule eligibility, not evidence that the query matches.
 No norm limit, loss weight, LR or threshold is changed after observing the result.
 
+Offline learning-cost grouping: Identity accepts8,630 updates on40 Query-Present episodes and
+78,048 on385 Query-Empty episodes (90.04% of all accepted updates); norm-limit rollbacks are
+2,352/19,039 respectively. Rank's accepted counts are10,805/95,166. Group sums are checked
+against the complete-run counters. Since each episode resets, Empty updates cannot transfer
+learned state into a different Present episode; they can still help by removing FP, but the
+observed Identity Empty group instead has a net10,421 additional FP. This is a concrete
+motivation to investigate evidence-aware update decisions, not permission to use GT groups
+as online gates or assume the GT absence prevalence as a target prior.
+
 ## Remaining decision
 
 Complete the registered PF_HYBRID study without tuning on GT.
