@@ -9,6 +9,7 @@
 - Separate real multi-target candidate Recall@K from prior any-hit TopK. Added active-frame quartile negative-output diagnostics and explicitly limited query-GT-visible identity-assignment conflict checks; the latter are not true full-MOT ID error rates or proof of accepted bad updates.
 - Final report now requires all six query diagnostics and all-six video-cluster results, reports evidence coverage/parameters, the identity-recall-loss classification and Hybrid comparisons. Next-stage presence-aware design/prototype is deferred until the six-method closure; do not invent independent semantics if only source self-consistency is available.
 - Verification:50 focused tests passed in12.55s; compileall/shell syntax passed. All four diagnostic backfills verified their preexisting global statistics against original published JSON exactly, without touching completed GPU outputs. Rank sensitivity: removing0007 leaves+0.002743, removing0065 gives+0.060659; these are nonadditive leave-one-video-out diagnostics, not contribution percentages.
+- Tightened final scientific wording: a positive HOTA/net-recovery point estimate with a video-cluster interval including0 is explicitly insufficient evidence of a stable gain, not a research-success verdict. This changes reporting only, not any current online process, parameter or prediction.
 
 ## 2026-10-25 — Full Rank/Guard: tiny HOTA gain, not a semantic breakthrough
 

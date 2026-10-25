@@ -32,6 +32,8 @@ def generate(publish, output):
         verdict = "三种主 TTA 方法均未超过匹配 Frozen/ZERO_UPDATE；不宣称方法成功。"
     elif recovered <= 0:
         verdict = "最优主 TTA 的 HOTA 提升，但离线净 GT 恢复不为正；不能将该提升解释为目标召回恢复或新语义学习。"
+    elif not uncertainty["comparisons"][best+"_vs_ZERO_UPDATE"]["CI_excludes_zero"]:
+        verdict = "最优主 TTA 的 HOTA 与净 GT 恢复点估计为正，但配对视频聚类95%区间包含0；现有证据不足以支持稳定的正向收益，不能据此宣布科研成功或跨模态语义恢复。"
     else:
         verdict = "最优主 TTA 同时提升 HOTA 与离线净 GT 恢复；这支持本开发集上的选择改善，但不等同于独立盲测泛化或已证明学到新语义。"
     lines = ["# FlexHook V2→Dance Positive-Free TTA：完整实验报告", "",
