@@ -102,6 +102,12 @@ The final report generator requires all six complete official results and 425 at
 per method. Cost reporting distinguishes summed-worker FPS from scheduler-wall FPS;
 the latter includes launcher waits but excludes preflight/evaluation/attribution.
 
+Final pipeline regression: 44 tests passed in 10.77 s, compileall/shell syntax passed.
+Matched runs avoid parsing the unused 394 MB legacy JSON in each worker while preserving its hash checks.
+Offline GT diagnostics now apply official nonzero-mark / pedestrian-class-1 filtering, verified only on
+synthetic rows and evaluator source before full sealing; no real target GT was opened for this change.
+Added/removed FP rows are distinguished from total FP change when assignment status changes.
+
 Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
 `analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
 `verify_pf_guard_equivalence.py` selects a source-positive episode without GT and compares a complete direct GPU GUARD episode to CPU-derived results.

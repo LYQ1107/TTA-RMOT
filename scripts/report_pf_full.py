@@ -59,6 +59,7 @@ def generate(publish, output):
     a0 = attribution["ZERO_UPDATE"]
     lines += ["", f"固定候选的可检索 GT 召回上界（逐 GT any-IoU）为 {a0['conditional_candidate_recall']:.6f}；所有方法的候选全集相同。",
               f"Top1 随机选择对照 {a0['ranking']['random_null']['1']:.6f}；Top3/Top5、每表达计数和完整 AUROC 见各方法 `offline_attribution.json`。",
+              "GT 仅计官方 nonzero mark 且 pedestrian class=1 的行。新增 FP 指新加入选择集且未匹配的行；完整 FP 净变化另存 JSON，不能假设它恒等于新增减移除 FP（已有行的匹配状态也可能改变）。",
               "", "## 梯度、有效证据与回滚", "",
               "| 方法 | optimizer steps | 非零有限梯度 steps | 无证据跳过 | interval 跳过 | rollback | max adapter Δ L2 |",
               "|---|---:|---:|---:|---:|---:|---:|"]
@@ -67,6 +68,7 @@ def generate(publish, output):
         lines.append(f"| {method} | {s.get('optimizer_steps',0)} | {s.get('finite_nonzero_gradient_steps',0)} | " +
                      f"{s.get('skipped_no_evidence',0)} | {s.get('skipped_interval_frames',0)} | {s.get('rollback_updates',0)} | {s.get('max_adapter_update_l2',0):.8f} |")
     lines += ["", "`skipped_no_pairs` 历史计数包含间隔跳过，不能将其全部解释为无证据。",
+              "RELATIVE_ONLY 不做梯度更新，排序分数与 Frozen 相同；即使门禁选择改善 HOTA，也不是新语义学习。",
               "PF_RANK_GUARD 是 PF_RANK 分数与 Frozen 正分候选取并集的显式保留消融，不是新增语义学习；若采用 CPU 派生，重用的 Rank 更新与额外 GPU 计算分开记录。",
               "", "## 实测计算成本", "",
               "| 方法 | 调度 wall 秒 | episode 计算累计秒 | GPU 小时 | 平均 worker 活跃帧 FPS | 调度 wall 活跃帧 FPS | PyTorch 峰值 GiB |",

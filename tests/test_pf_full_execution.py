@@ -154,3 +154,28 @@ def test_matched_source_uses_real_zero_margins_without_modifying_historical_scor
     path.write_bytes(b"damaged")
     with pytest.raises(ValueError, match="changed after sealing"):
         source_frames(tmp_path, "v", "e")
+
+
+def test_matched_replay_does_not_parse_unused_legacy_score_tree(tmp_path):
+    from flex_tta.dance_io import load_expressions, load_tracker_lines
+    from flex_tta.runtime.pf_receipts import atomic_json, file_sha
+    data, tracks, legacy = fixture_files(tmp_path)
+    legacy.write_text("intentionally not JSON; matched scores are the actual input")
+    video = "dancetrack0000"
+    expression = load_expressions(data, video)[0][0]
+    matched = tmp_path / "matched_fixture"
+    path = matched / "ZERO_UPDATE/results" / video / expression / "candidate_margins.jsonl.gz"
+    path.parent.mkdir(parents=True)
+    with gzip.open(path, "wt") as stream:
+        for frame, rows in load_tracker_lines(tracks, video).items():
+            stream.write(json.dumps(dict(frame=frame, ids=list(rows), adapted=[-3.]*len(rows)))+"\n")
+    atomic_json(matched / "ZERO_UPDATE/frozen_reference_receipt.json",
+                dict(status="PASS", episodes=425, unique_videos=25, checkpoint_sha256=runner.SOURCE_SHA256,
+                     episodes_index={video+"/"+expression: {"margins_sha256":file_sha(path)}}))
+    args = runner.parse_args(["--scope", "smoke", "--method", "RELATIVE_ONLY", "--max-frames", "3",
+                              "--videos", video, "--dataset-root", str(data), "--tracker-root", str(tracks),
+                              "--source-result", str(legacy), "--matched-frozen-root", str(matched),
+                              "--output-root", str(tmp_path / "out")])
+    result = runner.run(args)
+    assert result["stats"]["episodes"] == 1 and result["stats"]["frames"] == 3
+    assert result["stats"]["selected"] == result["stats"]["optimizer_steps"] == 0

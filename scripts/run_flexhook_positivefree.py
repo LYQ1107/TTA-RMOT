@@ -585,10 +585,14 @@ def run(args):
     videos = args.videos or dance_videos(args.tracker_root)
     if args.scope == "smoke":
         videos = videos[:1]
-    source = json.loads(args.source_result.read_text(encoding="utf-8"))
+    # Matched runs read real margins per episode; retain legacy hashes/provenance
+    # without allocating the unused ~394 MB JSON tree in every worker.
+    source = (json.loads(args.source_result.read_text(encoding="utf-8"))
+              if args.matched_frozen_root is None else {})
     if args.source_supplement is not None:
         from flex_tta.dance_io import merge_source_supplement
-        merge_source_supplement(source, json.loads(args.source_supplement.read_text()))
+        if args.matched_frozen_root is None:
+            merge_source_supplement(source, json.loads(args.source_supplement.read_text()))
         args.source_supplement_sha256 = file_sha(args.source_supplement)
         receipt["source_supplement_sha256"] = args.source_supplement_sha256
     previous_metadata = args.output_root / args.method / "run_metadata.json"

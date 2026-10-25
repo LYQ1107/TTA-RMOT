@@ -11,6 +11,7 @@ import gzip
 import json
 import sys
 from array import array
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,7 +21,20 @@ from scipy.optimize import linear_sum_assignment
 from scipy.stats import rankdata
 from flex_tta.dance_io import load_tracker_lines
 from flex_tta.runtime.pf_receipts import atomic_json
-from scripts.diagnose_flexhook_v2_dance import load_gt, load_tracker_boxes
+from scripts.diagnose_flexhook_v2_dance import load_tracker_boxes, box_from_fields
+
+
+def load_eval_gt(dataset_root, video, expression):
+    """Match official MOT ground-truth mark/class filtering, offline only."""
+    result = defaultdict(list)
+    path = Path(dataset_root) / "gt_template" / video / expression / "gt.txt"
+    for row in path.read_text().splitlines():
+        fields = row.strip().split(",")
+        if len(fields) < 8:
+            raise ValueError("official Dance GT requires mark and class columns")
+        if int(float(fields[6])) != 0 and int(float(fields[7])) == 1:
+            result[int(float(fields[0]))].append((int(float(fields[1])), box_from_fields(fields)))
+    return dict(sorted(result.items()))
 
 
 def overlaps(a, b):
@@ -73,7 +87,7 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
         for entry in [e for e in audit["episodes"] if e["video"] == video]:
             expression = entry["expression"]
             before = {k:v for k,v in stats.items() if isinstance(v, int)}
-            gt = load_gt(dataset_root, video, expression)
+            gt = load_eval_gt(dataset_root, video, expression)
             stats["gt_observations"] += sum(len(rows) for rows in gt.values())
             relative = Path("results")/video/expression
             def chosen(path):
@@ -120,6 +134,10 @@ def analyze(root, method, baseline_root, dataset_root, tracker_root, output):
             per_episode.append(dict(video=video, expression=expression, **episode_stats))
     result = dict(method=method, development_only_gt_used=True, threshold_selection_from_gt=False,
                   definition="offline framewise max-cardinality IoU>=0.5 assignment; official HOTA remains authoritative",
+                  gt_definition="nonzero mark and pedestrian class 1, following official MOT GT filtering",
+                  added_fp_definition="newly selected rows unmatched after adaptation; existing-row matching status can also change",
+                  net_gt_recovery=stats["recovered_gt"]-stats["lost_gt"],
+                  net_false_positive_change=stats["adapted_false_positive_rows"]-stats["baseline_false_positive_rows"],
                   **stats, source_auroc=auroc(baseline_scores, labels), adapted_auroc=auroc(adapted_scores, labels),
                   conditional_candidate_recall=stats["candidate_retrievable_gt"]/max(stats["gt_observations"],1),
                   baseline_conditional_gate_recall=stats["baseline_matched_gt"]/max(stats["candidate_retrievable_gt"],1),

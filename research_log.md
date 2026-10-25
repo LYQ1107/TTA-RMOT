@@ -19,6 +19,8 @@
 - All six methods use the same actual-source reference for comparison and downstream historical evidence; no gain is measured against historical 8.206. 41 focused tests passed in 10.34 s, including immutable matched source streams and old receipt compatibility. Full-run diagnosis/reference sealing remain pending.
 - Later review fixed an existing gate bug: initial-source checking used the global optimizer count instead of this episode's count. Enforce it before backward for every matched-reference episode; full audit rejects any initial mismatch. 42 focused tests pass in 10.04 s. This does not modify live ZERO workers or their already sealed outputs.
 - Added an all-six-only final scientific report generator. Explicitly separate average worker FPS, actual scheduler-wall FPS and extra validation/evaluation cost; do not infer 4x speedup from four GPU processes. Report generation and all scientific results remain pending.
+- Matched-source IO now reads only actual per-episode sealed margins instead of parsing the unused 394 MB legacy JSON in every worker; legacy hashes and supplement provenance remain checked. The matched CPU replay regression passed (43 tests, 10.11 s).
+- Official evaluator source filters GT by nonzero mark and pedestrian class 1; align the offline diagnostic loader to those same GT rows instead of importing an unfiltered legacy loader. This was checked on synthetic GT only, without opening actual target annotations before full sealing. Total FP change is reported separately from new/removed selected-row FP because matching assignments can change. Final regression: 44 tests passed in 10.77 s; compileall and shell syntax passed.
 
 Concise experimental log (latest first).
 
