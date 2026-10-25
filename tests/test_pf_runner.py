@@ -101,11 +101,16 @@ def test_smoke_replay_preserves_tracker_and_no_gt(tmp_path):
     data, track, src = fixture_files(tmp_path)
     args = runner.parse_args([
         "--scope", "smoke", "--method", "RELATIVE_ONLY", "--max-frames", "3",
+        "--videos", "dancetrack0000",
         "--dataset-root", str(data), "--tracker-root", str(track),
         "--source-result", str(src), "--output-root", str(tmp_path / "out"),
     ])
     receipt = runner.run(args)
     assert receipt["stats"]["episodes"] == 1
+    assert receipt["sequences"] == 1
+    assert receipt["episodes"][0]["video"] == "dancetrack0000"
+    assert receipt["episodes"][0]["stats"]["frames"] == 3
+    assert receipt["episodes"][0]["stats"]["selected_rows"] == 2
     assert receipt["stats"]["optimizer_steps"] == 0
     predicted = list((tmp_path / "out" / "RELATIVE_ONLY" / "results").rglob("predict.txt"))
     assert len(predicted) == 1
@@ -156,3 +161,44 @@ def test_four_gpu_full_launch_cannot_start_without_consent(tmp_path):
                         capture_output=True,text=True,env=env,check=False)
     assert proc.returncode==3
     assert "BLOCKED" in proc.stderr
+
+
+def test_relative_output_survives_vendor_cwd_change(tmp_path, monkeypatch):
+    data, track, src = fixture_files(tmp_path)
+    monkeypatch.chdir(tmp_path)
+    args = runner.parse_args(["--scope", "smoke", "--method", "RELATIVE_ONLY",
+        "--videos", "dancetrack0000", "--dataset-root", str(data), "--tracker-root", str(track),
+        "--source-result", str(src), "--output-root", "relative-output"])
+    replay = runner._episodic_replay
+    def change_cwd(*values):
+        monkeypatch.chdir(data)
+        return replay(*values)
+    monkeypatch.setattr(runner, "_episodic_replay", change_cwd)
+    receipt = runner.run(args)
+    assert Path(receipt["output_root"]) == tmp_path / "relative-output"
+    assert (tmp_path / "relative-output/RELATIVE_ONLY/run_metadata.json").is_file()
+
+
+def test_pf_metadata_merges_with_existing_shard_tool(tmp_path):
+    # Synthetic empty predictions only; no real data, GPU, GT or evaluation.
+    for shard in range(4):
+        method = tmp_path / "shards" / f"shard{shard}" / "PF_RANK"
+        method.mkdir(parents=True)
+        episodes = []
+        for index in range(shard, 25, 4):
+            video = f"dancetrack{index:04d}"
+            for exp in range(17):
+                expr_id = f"e{exp}"
+                output = method / "results" / video / expr_id / "predict.txt"
+                output.parent.mkdir(parents=True)
+                output.touch()
+                episodes.append({"video": video, "expression_id": expr_id,
+                    "stats": {"frames": 12, "selected_rows": 0}})
+        (method / "run_metadata.json").write_text(json.dumps({"episodes": episodes}))
+    proc = subprocess.run([sys.executable, str(ROOT / "scripts/merge_flexhook_pcd_shards.py"),
+        "--shards-root", str(tmp_path / "shards"), "--output-root", str(tmp_path / "merged"),
+        "--method", "PF_RANK"], text=True, capture_output=True)
+    assert proc.returncode == 0, proc.stderr
+    result = json.loads((tmp_path / "merged/PF_RANK/run_metadata.json").read_text())
+    assert result["sequences"] == 425 and len(result["videos"]) == 25
+    assert result["aggregate_stats"]["frames"] == 425 * 12

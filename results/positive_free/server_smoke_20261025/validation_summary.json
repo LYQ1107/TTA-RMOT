@@ -1,0 +1,373 @@
+{
+  "date": "2026-10-25",
+  "repository": "LYQ1107/TTA-RMOT",
+  "source_commit": "896d67fe92d44e18c33980a7b26c2d3da1f8b7f7",
+  "local_branch": "codex/pf-server-smoke-20261025",
+  "original_research_branch_preserved_at": "0a4377c1363c32605ce8d6305cb49c42300ed2d0",
+  "test_result": {
+    "initial_passed": 21,
+    "initial_failed": 1,
+    "initial_failure": "single-video CPU fixture lacked explicit --videos against the existing full-suite loader",
+    "final_passed": 26,
+    "final_failed": 0,
+    "compileall": "PASS",
+    "shell_syntax": "PASS",
+    "synthetic_shard_merge": "PASS",
+    "tokenizer_regression": "PASS",
+    "full_run_switches_enabled": false,
+    "command": "/home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q tests/test_positive_free.py tests/test_pf_runner.py tests/test_pf_identity.py tests/test_pf_recoverability.py",
+    "stdout": "..........................                                               [100%]\n26 passed in 3.29s"
+  },
+  "asset_status": {
+    "pass": true,
+    "checkpoint_sha256_valid": true,
+    "official_tracker_files_verified": 25,
+    "tracker_rows": 211085,
+    "tracker_frames": 25508,
+    "maximum_candidates_per_frame": 22,
+    "source_videos": 17,
+    "source_manifest_images": 5172,
+    "source_images_in_directories": 5939,
+    "source_expressions": 8896,
+    "source_train_split_warning": {
+      "videos": [
+        "0000",
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0006",
+        "0007",
+        "0008",
+        "0009",
+        "0010",
+        "0012",
+        "0014",
+        "0015",
+        "0016",
+        "0018",
+        "0020"
+      ],
+      "count": 16,
+      "missing_requested_source_ids": [
+        "0017"
+      ]
+    },
+    "tokenizer_person_ids": [
+      5970
+    ],
+    "source_annotation_video_count": 21,
+    "missing_source_label_videos": [],
+    "preflight_result": "results/positive_free/server_smoke_20261025/preflight.json"
+  },
+  "smoke_gpu": 5,
+  "smoke_gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+  "smoke_video": "dancetrack0004",
+  "smoke_expression": "dacning-person-with-white-Tshirt-and-purple-pants",
+  "methods": {
+    "ZERO_UPDATE": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 0,
+      "finite_nonzero_gradient_steps": 0,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 0,
+      "pcd_channels": 768,
+      "feature_channels": null,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1688381440,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/ZERO_UPDATE/ZERO_UPDATE/run_metadata.json",
+      "gradient_norms": [],
+      "update_frames": [],
+      "rollback_frames": []
+    },
+    "PF_RANK": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 3,
+      "finite_nonzero_gradient_steps": 3,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0.011449391012345204,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": null,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1697491968,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/PF_RANK/PF_RANK/run_metadata.json",
+      "gradient_norms": [
+        0.0023430543951690197,
+        0.019000494852662086,
+        0.008102873340249062
+      ],
+      "update_frames": [
+        4,
+        8,
+        12
+      ],
+      "rollback_frames": []
+    },
+    "PF_IDENTITY": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 3,
+      "finite_nonzero_gradient_steps": 3,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0.01362059346896968,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": 768,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1697520128,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/PF_IDENTITY/PF_IDENTITY/run_metadata.json",
+      "gradient_norms": [
+        0.0008664594497531652,
+        0.0004015070735476911,
+        0.000592703465372324
+      ],
+      "update_frames": [
+        4,
+        8,
+        12
+      ],
+      "rollback_frames": []
+    },
+    "PF_HYBRID": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 3,
+      "finite_nonzero_gradient_steps": 3,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0.0115803149792216,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": 768,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1697502208,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/PF_HYBRID/PF_HYBRID/run_metadata.json",
+      "gradient_norms": [
+        0.002639489946886897,
+        0.01890435814857483,
+        0.008196890354156494
+      ],
+      "update_frames": [
+        4,
+        8,
+        12
+      ],
+      "rollback_frames": []
+    },
+    "PF_RANK_ROLLBACK": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 0,
+      "finite_nonzero_gradient_steps": 3,
+      "rollback_updates": 3,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": null,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1697295360,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/PF_RANK_ROLLBACK/PF_RANK/run_metadata.json",
+      "gradient_norms": [
+        0.0023430543951690197,
+        0.018998567014932632,
+        0.008186412043869495
+      ],
+      "update_frames": [],
+      "rollback_frames": [
+        4,
+        8,
+        12
+      ]
+    },
+    "RELATIVE_ONLY": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 0,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/ablation_smoke_v1/RELATIVE_ONLY/RELATIVE_ONLY/run_metadata.json"
+    },
+    "PF_RANK_GUARD": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 3,
+      "finite_nonzero_gradient_steps": 3,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0.011449391012345204,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": null,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1697491968,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/ablation_smoke_v1/PF_RANK_GUARD/PF_RANK_GUARD/run_metadata.json",
+      "gradient_norms": [
+        0.0023430543951690197,
+        0.019000494852662086,
+        0.008102873340249062
+      ],
+      "update_frames": [
+        4,
+        8,
+        12
+      ],
+      "rollback_frames": []
+    },
+    "PF_RANK_NO_EVIDENCE": {
+      "status": "PASS",
+      "episodes": 1,
+      "frames": 12,
+      "candidates": 36,
+      "selected": 0,
+      "optimizer_steps": 0,
+      "finite_nonzero_gradient_steps": 0,
+      "rollback_updates": 0,
+      "rollback_restored": true,
+      "max_adapter_update_l2": 0,
+      "source_max_abs_error": 0.000164031982421875,
+      "sign_mismatches_before_updates": 0,
+      "trainable_parameters": 24576,
+      "pcd_channels": 768,
+      "feature_channels": null,
+      "frozen_parameters_have_grad": false,
+      "post_episode_reset_pass": true,
+      "gpu_peak_allocated_bytes": 1688578048,
+      "gt_open_attempts": [],
+      "trace": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/ablation_smoke_v1/PF_RANK_NO_EVIDENCE/PF_RANK/run_metadata.json",
+      "gradient_norms": [],
+      "update_frames": [],
+      "rollback_frames": []
+    }
+  },
+  "final_gpu_availability": {
+    "idle_gpu_indices": [
+      5
+    ],
+    "four_idle_gpus_available": false,
+    "all_smoke_processes_exited": true,
+    "example_mapping_is_reservation": false
+  },
+  "planned_shards": [
+    {
+      "slot": 0,
+      "example_physical_gpu": 5,
+      "videos": [
+        "dancetrack0004",
+        "dancetrack0014",
+        "dancetrack0026",
+        "dancetrack0041",
+        "dancetrack0063",
+        "dancetrack0079",
+        "dancetrack0097"
+      ],
+      "video_count": 7,
+      "episode_count": 119
+    },
+    {
+      "slot": 1,
+      "example_physical_gpu": 4,
+      "videos": [
+        "dancetrack0005",
+        "dancetrack0018",
+        "dancetrack0030",
+        "dancetrack0043",
+        "dancetrack0065",
+        "dancetrack0081"
+      ],
+      "video_count": 6,
+      "episode_count": 102
+    },
+    {
+      "slot": 2,
+      "example_physical_gpu": 6,
+      "videos": [
+        "dancetrack0007",
+        "dancetrack0019",
+        "dancetrack0034",
+        "dancetrack0047",
+        "dancetrack0073",
+        "dancetrack0090"
+      ],
+      "video_count": 6,
+      "episode_count": 102
+    },
+    {
+      "slot": 3,
+      "example_physical_gpu": 1,
+      "videos": [
+        "dancetrack0010",
+        "dancetrack0025",
+        "dancetrack0035",
+        "dancetrack0058",
+        "dancetrack0077",
+        "dancetrack0094"
+      ],
+      "video_count": 6,
+      "episode_count": 102
+    }
+  ],
+  "planned_method_order": [
+    "ZERO_UPDATE",
+    "RELATIVE_ONLY",
+    "PF_RANK",
+    "PF_RANK_GUARD",
+    "PF_IDENTITY",
+    "PF_HYBRID"
+  ],
+  "full_source_training_started": false,
+  "full_target_inference_started": false,
+  "target_gt_opened": false,
+  "full_trackeval_started": false
+}

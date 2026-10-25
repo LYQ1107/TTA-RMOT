@@ -1838,3 +1838,44 @@ audit invocation also used its full-suite default (25/425) and failed only on
 the expected coverage assertion; rerunning with explicit 1/1 expectations
 passed. The pilot is evidence-method validation, not a full-suite metric:
 `results/flexhook_v2_dance/evidence/tracklet_language_pilot_v2.json`.
+
+2026-10-25 — Integrated Positive-Free preparation commit
+896d67fe92d44e18c33980a7b26c2d3da1f8b7f7 in the isolated TTA-RMOT worktree.
+The original research branch and all checkpoints were preserved. Initial
+server tests were 21 passed / 1 failed because the one-video smoke fixture
+implicitly invoked the formal 25-video loader; explicit fixture video
+selection fixed this without weakening formal coverage. Caller paths are now
+resolved before vendor cwd changes, Positive-Free checkpoint loading is
+strict, and episode metadata is compatible with the existing shard merger.
+Final specified tests: 26 passed / 0 failed; compileall, bash syntax and a
+synthetic-only shard merge passed.
+
+The expanded asset preflight verified the pinned V2 SHA256, all 25 official
+Dance tracker hashes against their download receipt, all tracker-referenced
+images, 425 expressions, Frozen score coverage, the full 17-video source
+manifest (5,172 referenced images), source expressions/labels and the repaired
+tokenizer. Source assets include 0017, but the vendor source-training list has
+only 16 videos and omits 0017; no source training or vendor split change was
+performed. The server-preflight development assertion initially used an
+incorrect token ID; independent tokenizer regression caught it, and the final
+check compares against the released vocabulary (person ID 5970).
+
+Single-GPU sequential smoke on the previously idle physical GPU5 passed for
+ZERO_UPDATE, PF_RANK, PF_IDENTITY, PF_HYBRID, PF_RANK_GUARD and CPU score replay
+RELATIVE_ONLY. Each invocation used exactly one expression and 12 frames.
+Each learning method performed 3 finite nonzero-gradient updates. A separate
+norm-bound probe rolled back all 3 attempted updates; a no-evidence probe
+performed 0 gradient attempts and 0 optimizer steps. Episode reset and causal
+history checks passed, frozen model parameters had no gradients, and dynamic
+file auditing observed 0 Dance GT open attempts. ZERO_UPDATE had 0 source
+selection/sign mismatches (maximum margin error 1.64032e-4). All methods kept
+this all-negative-source clip empty, so no forced positive was introduced;
+nonempty real prediction row coverage was not established by this clip.
+
+The four-GPU launcher was exercised only in dry-run/locked synthetic tests.
+Its whole-video shards cover 7/6/6/6 videos and 119/102/102/102 episodes.
+At completion only GPU5 was truly idle; other jobs were preserved. No full
+source training, full target inference or TrackEval was started. Code-ready
+does not imply measured accuracy gain or availability of four idle GPUs.
+Receipt: docs/FLEXHOOK_POSITIVEFREE_SERVER_SMOKE_20261025.md and
+results/positive_free/server_smoke_20261025/validation_summary.json.

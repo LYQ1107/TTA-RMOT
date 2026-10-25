@@ -2,6 +2,11 @@
 
 **Date:** 2026-10-25. **Status:** CODE_ONLY, **NO** full source training, **NO** full Dance inference or TrackEval executed by this patch's author. Tests were run on a local CPU-only Python environment with synthetic score/tracker fixtures. Real checkpoint compatibility and GPU correctness require a later smoke check on the A100 server.
 
+Server follow-up: [2026-10-25 integration and GPU smoke receipt](FLEXHOOK_POSITIVEFREE_SERVER_SMOKE_20261025.md)
+records 26 passing tests, verified assets and capped GPU5 runs for all methods.
+Full experiments remain unlaunched. The assets contain the requested 17 source
+videos; the vendor training list actually contains only 16 (omits `0017`).
+
 ## Exact scientific claim and legal data split
 
 - Source: official `Refer-KITTI-V2` source train, **all 17 source videos**, if new source supervised training is ever authorized. The published `refer-kitti-v2-best.pth` already supplies a source-trained model; **do not re-train it just to run Source-Free TTA**.

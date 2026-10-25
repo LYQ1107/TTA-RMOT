@@ -41,3 +41,43 @@ def test_tap_shape_and_activation_is_differentiable():
     assert model.output_ca_qkv[0].weight.grad is not None
     with pytest.raises(RuntimeError):tap.take()
     tap.close()
+
+
+def test_identity_current_and_future_features_are_ineligible():
+    memory = CausalIDMemory()
+    memory.observe(5, torch.eye(2), [1, 2])
+    for frame in (4, 5):
+        assert not memory.eligible(frame, [1, 2])
+        _, support = memory.loss(frame, torch.eye(2), [1, 2])
+        assert support == 0
+
+
+def test_lora_episode_reset_restores_source_forward():
+    from flex_tta.adaptation.pcd import PCDLoRATTA, trainable_parameters
+    class Attention(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.wq = nn.Linear(3, 3, bias=False)
+            self.wv = nn.Linear(3, 3, bias=False)
+        def forward(self, x):
+            return self.wq(x) + self.wv(x)
+    model = nn.Module()
+    blocks = [nn.Module() for _ in range(2)]
+    for block in blocks:
+        block.attention = Attention()
+    model.output_ca_qkv = nn.ModuleList(blocks)
+    for parameter in model.parameters():
+        parameter.requires_grad_(False)
+    x = torch.ones(2, 3)
+    def forward():
+        return sum(block.attention(x) for block in model.output_ca_qkv)
+    source = forward().detach().clone()
+    adapter = PCDLoRATTA(model, rank=2)
+    for _ in range(2):
+        adapter.reset_episode()
+        assert torch.equal(forward(), source)
+        optimizer = torch.optim.AdamW(trainable_parameters(adapter), lr=0.01)
+        optimizer.zero_grad()
+        forward().square().sum().backward()
+        optimizer.step()
+        assert not torch.equal(forward(), source)

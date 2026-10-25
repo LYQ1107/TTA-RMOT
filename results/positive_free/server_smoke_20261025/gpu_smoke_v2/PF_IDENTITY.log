@@ -1,0 +1,293 @@
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/torch/functional.py:554: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4314.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+=> merge config from /data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml
+[Warning] Fused window process have not been installed. Please refer to get_started.md for installation.
+Tutel has not been installed. To use Swin-MoE, please install Tutel; otherwise, just ignore this.
+load success
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 5240.62it/s]
+[1mRobertaModel LOAD REPORT[0m from: pretrained/roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.dense.weight            | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+pooler.dense.weight             | MISSING    | 
+pooler.dense.bias               | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-10-25 11:37:08 pcd_tta_model](run_flexhook_dance_pcd_tta.py 132): INFO Strict source checkpoint load: <All keys matched successfully>
+/data2/user/FlexHook-TTA/vendor/FlexHook/models/swin_transformer_rope.py:44: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+{
+  "scope": "smoke",
+  "method": "PF_IDENTITY",
+  "full_run_authorized": false,
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "source_checkpoint_expected_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "dataset_root": "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance",
+  "tracker_root": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+  "source_result": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json",
+  "output_root": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/gpu_smoke_v2/PF_IDENTITY",
+  "videos": [
+    "dancetrack0004"
+  ],
+  "max_expressions": 1,
+  "max_frames": 12,
+  "batch_size": 24,
+  "rank": 4,
+  "lr": 5e-05,
+  "update_interval": 4,
+  "seed": 0,
+  "nce_weight": 0.15,
+  "no_target_gt": true,
+  "source_free_prediction": true,
+  "target_gt_opened": false,
+  "target_labels_opened": false,
+  "future_frames_used": false,
+  "tracker_geometry_changed": false,
+  "tracker_ids_changed": false,
+  "no_external_model": true,
+  "no_hard_class_pseudolabels": true,
+  "fixed_mot": "DETR-NeuralSORT-Dance",
+  "episodes": [
+    {
+      "video": "dancetrack0004",
+      "expression_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+      "sentence": "dacning person with white Tshirt and purple pants",
+      "stats": {
+        "frames": 12,
+        "candidate_rows": 36,
+        "selected_rows": 0,
+        "optimizer_steps": 3,
+        "rollback_updates": 0
+      }
+    }
+  ],
+  "sequences": 1,
+  "hyperparameters": {
+    "batch_size": 24,
+    "rank": 4,
+    "lr": 5e-05,
+    "update_interval": 4,
+    "min_history": 3,
+    "nce_weight": 0.15,
+    "min_separation": 0.6,
+    "max_adapter_delta_norm": 2.0,
+    "seed": 0
+  },
+  "stats": {
+    "episodes": 1,
+    "frames": 12,
+    "candidates": 36,
+    "selected": 0,
+    "source_selected": 0,
+    "optimizer_steps": 3,
+    "skipped_no_pairs": 9,
+    "rank_pair_observations": 0,
+    "identity_pairs": 9,
+    "sign_mismatches_before_updates": 0,
+    "source_comparison_rows": 12,
+    "max_adapter_update_l2": 0.01362059346896968,
+    "rollback_updates": 0,
+    "gradient_attempts": 3,
+    "finite_nonzero_gradient_steps": 3,
+    "nonfinite_gradient_steps": 0,
+    "zero_gradient_steps": 0,
+    "source_abs_error_sum": 0.0009098052978515625,
+    "source_max_abs_error": 0.000164031982421875,
+    "rollback_restored": true,
+    "prediction_source_selection_mismatches": 0,
+    "checkpoint_strict_load": true,
+    "trainable_parameters": 24576,
+    "pcd_channels": 768,
+    "feature_channels": 768,
+    "smoke_frames": [
+      {
+        "frame_id": 1,
+        "max_image_history_frame": 1,
+        "rank_history_last_frame": -1,
+        "identity_history_last_frame": -1,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 2,
+        "max_image_history_frame": 2,
+        "rank_history_last_frame": 1,
+        "identity_history_last_frame": 1,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 3,
+        "max_image_history_frame": 3,
+        "rank_history_last_frame": 2,
+        "identity_history_last_frame": 2,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 4,
+        "max_image_history_frame": 4,
+        "rank_history_last_frame": 3,
+        "identity_history_last_frame": 3,
+        "rank_pairs": 0,
+        "identity_support": 3,
+        "selected": 0,
+        "loss": 0.12493046373128891,
+        "gradient_norm": 0.0008664594497531652,
+        "update_status": "ACCEPT"
+      },
+      {
+        "frame_id": 5,
+        "max_image_history_frame": 5,
+        "rank_history_last_frame": 4,
+        "identity_history_last_frame": 4,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 6,
+        "max_image_history_frame": 6,
+        "rank_history_last_frame": 5,
+        "identity_history_last_frame": 5,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 7,
+        "max_image_history_frame": 7,
+        "rank_history_last_frame": 6,
+        "identity_history_last_frame": 6,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 8,
+        "max_image_history_frame": 8,
+        "rank_history_last_frame": 7,
+        "identity_history_last_frame": 7,
+        "rank_pairs": 0,
+        "identity_support": 3,
+        "selected": 0,
+        "loss": 0.14657972753047943,
+        "gradient_norm": 0.0004015070735476911,
+        "update_status": "ACCEPT"
+      },
+      {
+        "frame_id": 9,
+        "max_image_history_frame": 9,
+        "rank_history_last_frame": 8,
+        "identity_history_last_frame": 8,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 10,
+        "max_image_history_frame": 10,
+        "rank_history_last_frame": 9,
+        "identity_history_last_frame": 9,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 11,
+        "max_image_history_frame": 11,
+        "rank_history_last_frame": 10,
+        "identity_history_last_frame": 10,
+        "rank_pairs": 0,
+        "identity_support": 0,
+        "selected": 0,
+        "loss": null,
+        "gradient_norm": null,
+        "update_status": "SKIP"
+      },
+      {
+        "frame_id": 12,
+        "max_image_history_frame": 12,
+        "rank_history_last_frame": 11,
+        "identity_history_last_frame": 11,
+        "rank_pairs": 0,
+        "identity_support": 3,
+        "selected": 0,
+        "loss": 0.13743335008621216,
+        "gradient_norm": 0.000592703465372324,
+        "update_status": "ACCEPT"
+      }
+    ],
+    "episode_resets": [
+      {
+        "video": "dancetrack0004",
+        "expression_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+        "passed": true
+      }
+    ],
+    "lora_projections": [
+      {
+        "in_features": 768,
+        "out_features": 768,
+        "rank": 4
+      },
+      {
+        "in_features": 768,
+        "out_features": 768,
+        "rank": 4
+      },
+      {
+        "in_features": 768,
+        "out_features": 768,
+        "rank": 4
+      },
+      {
+        "in_features": 768,
+        "out_features": 768,
+        "rank": 4
+      }
+    ],
+    "source_mae_before_updates": 7.581710815429688e-05,
+    "frozen_parameters_have_grad": false,
+    "gpu_peak_allocated_bytes": 1697520128,
+    "post_episode_reset_pass": true
+  }
+}

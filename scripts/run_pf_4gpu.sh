@@ -38,8 +38,10 @@ for gpu in "${GPU_LIST[@]}"; do
     echo "GPU $gpu occupied: do not interrupt other processes; choose idle GPUs" >&2; exit 3
   fi
 done
+PYTHONPATH="$REPO/compat:$REPO:${PYTHONPATH:-}" \
 "$PYTHON" "$REPO/scripts/pf_preflight.py" --dance-root "$DATASET_ROOT" \
-  --tracker-root "$TRACKER_ROOT" --checkpoint "$CHECKPOINT" --check-checkpoint-hash --strict
+  --tracker-root "$TRACKER_ROOT" --checkpoint "$CHECKPOINT" --check-checkpoint-hash --strict \
+  --source-result "$SOURCE_RESULT" --vendor "$REPO/vendor/FlexHook"
 mkdir -p "$RUN_ROOT"
 declare -a PIDS=()
 for i in 0 1 2 3; do

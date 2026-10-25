@@ -115,7 +115,8 @@ def _config_for_model(vendor: Path, checkpoint: Path, data_root: Path, tracker_r
 
 
 def _load_model(vendor: Path, checkpoint: Path, data_root: Path, tracker_root: Path,
-                output_root: Path, device: torch.device, val_batch_size: int):
+                output_root: Path, device: torch.device, val_batch_size: int,
+                *, strict_checkpoint: bool = False):
     config = _config_for_model(vendor, checkpoint, data_root, tracker_root, output_root, val_batch_size)
     from logger import create_logger
     from models import build_model
@@ -125,7 +126,13 @@ def _load_model(vendor: Path, checkpoint: Path, data_root: Path, tracker_root: P
     logger = create_logger(str(output_root), dist_rank=0, name="pcd_tta_model")
     model = build_model(config)
     model = model.to(device)
-    load_ckpt_my(config, model, logger)
+    if strict_checkpoint:
+        state = torch.load(checkpoint, map_location="cpu", weights_only=False)["model"]
+        result = model.load_state_dict(state, strict=True)
+        logger.info("Strict source checkpoint load: %s", result)
+        del state
+    else:
+        load_ckpt_my(config, model, logger)
     model.eval()
     for parameter in model.parameters():
         parameter.requires_grad_(False)
