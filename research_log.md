@@ -9,6 +9,7 @@
 - RELATIVE_ONLY full: HOTA7.5705 (delta -0.6475), DetA4.1857, AssA13.7120, IDF1 5.5746, DetRe11.1040, DetPr6.2855, IDSW829, 375,483 rows / 8,014 IDs. Recovered14,873 GT, total FP +260,906; source AUROC/TopK unchanged. Do not claim semantic improvement or overall success.
 - Candidate-retrievable GT:203,906/212,541 (95.9373%); Frozen gate matches10,337 (5.0695% of retrievable). Source Top1 61.4788% vs random57.8299% on target-retrievable frames. Weak stage-two referring selection, rather than missing boxes alone, is a key bottleneck.
 - PF_RANK started on GPU6/4/0/1, PIDs4129095/4129171/4129260/4129353, whole-video capacity groups119/119/102/85. All remaining methods will still run; first-control failure is not goal completion.
+- Additional sealed-output diagnosis: 385/425 episodes have no scored GT, 40 have GT; all remain in the primary benchmark. Official GT_Dets212,541 matches the diagnostic GT row count. Frozen empty/present-episode FP =87,371/1,996; RELATIVE_ONLY =337,014/13,259. No-match rejection is a major bottleneck; do not mistake conditional target-frame ranking for query-presence detection. Only offline reporting changes; no GT feedback to TTA settings. Framewise diagnostic assignment and CLEAR temporal assignment are explicitly distinct.
 
 - This checkout is `/data2/user/FlexHook-TTA`, remote `LYQ1107/TTA-RMOT`; inherited LocateMOT entries below are history, not the current task.
 - ZERO_UPDATE shard0 completed 6 videos / 102 expressions, exit 0. The old idle-only coordinator then waited while GPU5 was occupied by a foreign training job.

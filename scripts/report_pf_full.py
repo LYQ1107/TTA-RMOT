@@ -57,9 +57,19 @@ def generate(publish, output):
         lines.append(f"| {method} | {q['selected_rows']} | {q['selected_ids']} | {a['recovered_gt']} | {a['lost_gt']} | " +
                      f"{a['new_false_positive_rows']} | {a['removed_false_positive_rows']} | {a['adapted_conditional_gate_recall']:.6f} | {auc} | {a['ranking']['adapted']['1']:.6f} |")
     a0 = attribution["ZERO_UPDATE"]
+    empty_count = sum(e["gt_observations"] == 0 for e in a0["episodes"])
     lines += ["", f"固定候选的可检索 GT 召回上界（逐 GT any-IoU）为 {a0['conditional_candidate_recall']:.6f}；所有方法的候选全集相同。",
               f"Top1 随机选择对照 {a0['ranking']['random_null']['1']:.6f}；Top3/Top5、每表达计数和完整 AUROC 见各方法 `offline_attribution.json`。",
               "GT 仅计官方 nonzero mark 且 pedestrian class=1 的行。新增 FP 指新加入选择集且未匹配的行；完整 FP 净变化另存 JSON，不能假设它恒等于新增减移除 FP（已有行的匹配状态也可能改变）。",
+              "", f"固定 425 个 episode 中 {empty_count} 个 GT 为空（按本协议视为无匹配），其余 {425-empty_count} 个有有效 GT。全部保留，绝不改成仅评正目标的子集。",
+              "", "| 方法 | GT 空 episode 上的 FP | 有 GT episode 上的 FP |",
+              "|---|---:|---:|"]
+    for method in ORDER:
+        episodes = attribution[method]["episodes"]
+        empty_fp = sum(e["adapted_false_positive_rows"] for e in episodes if not e["gt_observations"])
+        present_fp = sum(e["adapted_false_positive_rows"] for e in episodes if e["gt_observations"])
+        lines.append(f"| {method} | {empty_fp} | {present_fp} |")
+    lines += ["", "GT 空组只用于封存后的错误解释，未反馈到在线阈值、损失或超参数。候选排序在有目标帧上的改善不能单独证明无匹配拒识已改善。",
               "", "## 梯度、有效证据与回滚", "",
               "| 方法 | optimizer steps | 非零有限梯度 steps | 无证据跳过 | interval 跳过 | rollback | max adapter Δ L2 |",
               "|---|---:|---:|---:|---:|---:|---:|"]

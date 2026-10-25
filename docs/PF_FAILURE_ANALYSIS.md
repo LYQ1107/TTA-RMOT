@@ -43,6 +43,21 @@ Newly added selected-row FP is 260,897, not the total FP change: matching reassi
 status of existing rows too. Both quantities are preserved in the attribution JSON; they must not be conflated.
 The diagnostic GT loader follows official nonzero-mark and pedestrian-class-1 filtering.
 
+## Query absence dominates many false positives
+
+Under the fixed 425-episode protocol, 385 episodes have no scored GT and 40 have scored GT.
+This is the annotation/evaluation distribution, not a reason to discard the GT-empty cases.
+The diagnostic GT observation count (212,541) agrees with the official evaluator's GT_Dets.
+The independent framewise assignment is not identical to CLEAR's temporal assignment, so its TP/FP
+counts need not equal the official CLEAR TP/FP counts exactly; official metrics remain primary.
+
+Frozen produces 87,371 diagnostic FP rows on GT-empty episodes and 1,996 on GT-present episodes.
+RELATIVE_ONLY raises these to 337,014 and 13,259 respectively. Most of its false-positive expansion
+therefore comes from failure to reject nonmatching video-query combinations, not merely ranking
+the wrong person inside a target-present frame. Track-ID consistency alone does not supply evidence
+that the language query has any matching target. This motivates checking empty-query FP separately
+for all remaining methods, but no online loss, threshold or hyperparameter is changed using this information.
+
 ## Remaining decision
 
 Complete the registered PF_RANK, PF_RANK_GUARD, PF_IDENTITY and PF_HYBRID studies without tuning on GT.
