@@ -7,6 +7,10 @@ if [[ "${PF_LAUNCH_FULL:-NO}" != YES || "${FLEXHOOK_FULL_RUN_AUTHORIZED:-NO}" !=
   echo 'BLOCKED: full-suite launch requires both explicit full-run switches' >&2
   exit 3
 fi
+export PF_MATCHED_FROZEN_ROOT="${PF_MATCHED_FROZEN_ROOT:-$PF_REPO/results/runs/pf_zero_completebank_full_20261025_merged}"
+pf_select_gpu() {
+  "$PF_PYTHON" -c 'import os; from flex_tta.runtime.pf_shards import gpu_snapshot,eligible_gpus; x=eligible_gpus(gpu_snapshot(),shared=os.environ.get("PF_ALLOW_SHARED_GPU")=="YES"); assert x, "No GPU with sufficient memory for source-only equivalence"; print(x[0]["index"],x[0]["uuid"])'
+}
 if (( $# )); then PF_SUITE_METHODS=("$@"); else
   PF_SUITE_METHODS=(ZERO_UPDATE RELATIVE_ONLY PF_RANK PF_RANK_GUARD PF_IDENTITY PF_HYBRID)
 fi
@@ -25,11 +29,11 @@ for PF_SUITE_METHOD in "${PF_SUITE_METHODS[@]}"; do
       PF_SUITE_RANK="$PF_REPO/results/runs/pf_rank_completebank_full_20261025_merged"
       PF_SUITE_VERIFY="$PF_REPO/results/runs/pf_guard_equivalence_completebank_20261025"
       if [[ ! -d "$PF_SUITE_VERIFY" ]]; then
-        read -r PF_SUITE_VERIFY_GPU PF_SUITE_VERIFY_UUID < <("$PF_PYTHON" -c 'import os; from flex_tta.runtime.pf_shards import gpu_snapshot,eligible_gpus; x=eligible_gpus(gpu_snapshot(),shared=os.environ.get("PF_ALLOW_SHARED_GPU")=="YES"); assert x, "No GPU with sufficient memory for guard equivalence"; print(x[0]["index"],x[0]["uuid"])')
+        read -r PF_SUITE_VERIFY_GPU PF_SUITE_VERIFY_UUID < <(pf_select_gpu)
         CUDA_VISIBLE_DEVICES="$PF_SUITE_VERIFY_UUID" PF_PHYSICAL_GPU="$PF_SUITE_VERIFY_GPU" PF_GPU_UUID="$PF_SUITE_VERIFY_UUID" \
           PF_GPU_MEMORY_BUDGET_MIB="${PF_GPU_MEMORY_BUDGET_MIB:-24576}" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
           "$PF_PYTHON" "$PF_REPO/scripts/verify_pf_guard_equivalence.py" --rank-root "$PF_SUITE_RANK" \
-          --output-root "$PF_SUITE_VERIFY" || echo 'Guard equivalence failed; preserve evidence and use direct full GPU fallback'
+          --output-root "$PF_SUITE_VERIFY" --matched-frozen-root "$PF_MATCHED_FROZEN_ROOT" || echo 'Guard equivalence failed; preserve evidence and use direct full GPU fallback'
       fi
       if [[ -f "$PF_SUITE_VERIFY/equivalence.json" ]] && \
         "$PF_PYTHON" -c 'import json,sys; assert json.load(open(sys.argv[1]))["status"] == "PASS"' "$PF_SUITE_VERIFY/equivalence.json"; then
@@ -43,7 +47,18 @@ for PF_SUITE_METHOD in "${PF_SUITE_METHODS[@]}"; do
         --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" --resume
     fi
   fi
-  "$PF_PYTHON" "$PF_REPO/scripts/audit_pf_full.py" --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD"
+  if [[ "$PF_SUITE_METHOD" == ZERO_UPDATE && ! -f "$PF_MATCHED_FROZEN_ROOT/ZERO_UPDATE/frozen_reference_receipt.json" ]]; then
+    "$PF_PYTHON" "$PF_REPO/scripts/audit_pf_full.py" --output-root "$PF_SUITE_MERGED" --method ZERO_UPDATE
+    cp "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit.json" "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit_historical_source.json"
+    read -r PF_SUITE_DIAG_GPU PF_SUITE_DIAG_UUID < <(pf_select_gpu)
+    PF_SUITE_DIAG="$PF_REPO/results/positive_free/full/manifests/zero_full_boundary_diagnosis.json"
+    CUDA_VISIBLE_DEVICES="$PF_SUITE_DIAG_UUID" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
+      "$PF_PYTHON" "$PF_REPO/scripts/diagnose_pf_zero_boundary.py" --shard-root "$PF_SUITE_MERGED" --output "$PF_SUITE_DIAG"
+    "$PF_PYTHON" "$PF_REPO/scripts/seal_pf_frozen_reference.py" --output-root "$PF_SUITE_MERGED" --diagnosis "$PF_SUITE_DIAG"
+    cp "$PF_MATCHED_FROZEN_ROOT/ZERO_UPDATE/frozen_reference_receipt.json" "$PF_REPO/results/positive_free/full/manifests/matched_frozen_reference_receipt.json"
+  fi
+  "$PF_PYTHON" "$PF_REPO/scripts/audit_pf_full.py" --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" \
+    --matched-frozen-root "$PF_MATCHED_FROZEN_ROOT"
   if [[ "$PF_SUITE_METHOD" == ZERO_UPDATE ]]; then
     "$PF_PYTHON" -c 'import json,sys; a=json.load(open(sys.argv[1])); assert a["source_sign_mismatches"] == 0, "Diagnose ZERO_UPDATE/Frozen sign differences before continuing"' \
       "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit.json"

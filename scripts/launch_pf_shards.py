@@ -30,6 +30,7 @@ def main():
     checkpoint = env.get("PF_CHECKPOINT", "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth")
     source = env.get("PF_SOURCE_RESULT", str(ROOT / "results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json"))
     supplement = env.get("PF_SOURCE_SUPPLEMENT", str(ROOT / "results/runs/pf_frozen_complete_20261025/source_supplement.json"))
+    matched_reference = env.get("PF_MATCHED_FROZEN_ROOT")
     if args.launch_full and (env.get("PF_LAUNCH_FULL") != "YES" or env.get("FLEXHOOK_FULL_RUN_AUTHORIZED") != "YES"):
         print("BLOCKED: both explicit full-run authorization switches are required", file=sys.stderr)
         return 3
@@ -147,6 +148,8 @@ def main():
                            "--source-supplement", supplement,
                            "--max-expressions", "0", "--max-frames", "0", "--resume", "--frozen-cache",
                            "--videos", *shard["videos"], "--output-root", str(shard_root)]
+                if matched_reference and method != "ZERO_UPDATE":
+                    command += ["--matched-frozen-root", matched_reference]
                 log = (shard_root / "stdout.log").open("a")
                 log.write(json.dumps(dict(event="launch_attempt", time=time.time(), command=command, gpu=gpu))+"\n")
                 log.flush()

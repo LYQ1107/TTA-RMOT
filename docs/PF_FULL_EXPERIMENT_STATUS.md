@@ -69,6 +69,31 @@ and balances only unstarted videos into four additional logical groups. At most 
 Shared-policy regression gate: 39 focused tests passed in 10.71 s; compileall and both shell
 entry-point syntax checks passed. Numerical hyperparameters and completed episode receipts are unchanged.
 
+Actual shared workers launched on physical 6/4/0/1, PIDs 3948080/3948148/3948216/3948326.
+The four remaining groups contain 85/68/85/85 episodes; completed shard0 retains its 102.
+
+## Matched Frozen numerical reference
+
+An interim check on the 102 sealed ZERO episodes compared 895,696 margins and found two
+historical sign differences close to zero. Maximum absolute margin discrepancy was 8.58307e-4.
+Both cases are in video0081: frame908/ID915 and frame760/ID947. Real source-only GPU diagnosis
+found the **uncached original forward and cached forward select the same IDs in both complete
+candidate sets**. Their queried margins are respectively +1.35899e-5/+5.92172e-5 and
+-3.07113e-5/-1.09524e-5, whereas old-file margins have the opposite signs.
+Thus these two cases are not evidence that caching changes source decisions; legacy batching
+and floating-point execution are not bitwise reproducible. No threshold/epsilon is changed.
+
+Under the user's already approved rebuilt-matched-Frozen protocol, all subsequent methods
+use the real complete ZERO_UPDATE pre-update margins as their common frozen reference.
+Original historical score JSON, supplement, raw ZERO traces and predictions remain unchanged.
+The new reference reuses sealed streams, not synthesized two-class logits or pseudo labels.
+An independent CPU score-to-MOT replay must reproduce all 425 ZERO predictions exactly;
+this is explicitly not a second independent GPU inference measurement.
+All historical sign differences from the full run must first pass original-vs-cached GPU
+diagnosis. Any actual original/cached sign difference still blocks the suite.
+Only after these checks may independent TrackEval open GT. Original historical audit and
+matched-reference audit are retained separately. 41 focused tests now pass (10.34 s).
+
 Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
 `analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
 `verify_pf_guard_equivalence.py` selects a source-positive episode without GT and compares a complete direct GPU GUARD episode to CPU-derived results.

@@ -10,6 +10,14 @@
 - Numerical results remain pending; resource sharing may affect throughput and does not imply a 4x speedup.
 - Verification: all 39 focused tests passed in 10.71 s, including occupied-card memory/process ordering and completed-shard-preserving repartition; compileall and shell syntax checks passed.
 
+## 2026-10-25 — Near-zero legacy score differences and truly matched reference
+
+- Interim ZERO check: 895,696 candidates, two historical sign differences, max margin discrepancy 8.58307e-4. Preserve the failed assertion and underlying raw outputs; do not turn either row into an adaptation gain.
+- Actual diagnosis on complete candidate sets: video0081 frame908/ID915 and frame760/ID947 have the same source selection in uncached original and cached FP32 execution (zero sign/ID differences). Both differ from the old file only around zero. No target GT, optimizer update or threshold adjustment was used.
+- User already approved rebuilding the matched Frozen baseline. Implement a common frozen reference using actual complete ZERO_UPDATE margins, preserving all old logits, supplement, original traces and separate historical comparisons. No invented logits: downstream methods read the real scalar margins at their chronological frame.
+- Before opening GT or continuing TTA: diagnose every full-run historical sign difference using original/cached GPU forwards, require zero original/cached sign differences, then require exact independent CPU score-to-MOT replay on all 425 sealed episodes. This replay is not claimed as an independent second GPU model experiment.
+- All six methods use the same actual-source reference for comparison and downstream historical evidence; no gain is measured against historical 8.206. 41 focused tests passed in 10.34 s, including immutable matched source streams and old receipt compatibility. Full-run diagnosis/reference sealing remain pending.
+
 Concise experimental log (latest first).
 
 ## 2026-10-20 — G2 step3000 full MOT17-02 expansion

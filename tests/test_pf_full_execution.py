@@ -119,3 +119,29 @@ def test_identity_resume_restores_initially_unknown_feature_dimension():
     stats = {"episodes": 0, "episode_records": [], "feature_channels": None}
     runner.restore_counters(stats, {"counter_delta": {"feature_channels": 768, "optimizer_steps": 3}})
     assert stats["feature_channels"] == 768 and stats["optimizer_steps"] == 3
+
+
+def test_optional_matched_reference_does_not_invalidate_original_zero_receipts():
+    args = runner.parse_args(["--method", "ZERO_UPDATE", "--output-root", "/tmp/pf_fixture_only"])
+    new_config = runner.episode_config(args)
+    del args.matched_frozen_root
+    assert new_config == runner.episode_config(args)
+
+
+def test_matched_source_uses_real_zero_margins_without_modifying_historical_scores(tmp_path):
+    from flex_tta.runtime.pf_receipts import atomic_json, file_sha
+    from flex_tta.runtime.pf_source_reference import source_frames
+    folder = tmp_path / "ZERO_UPDATE/results/v/e"
+    folder.mkdir(parents=True)
+    path = folder / "candidate_margins.jsonl.gz"
+    with gzip.open(path, "wt") as stream:
+        stream.write(json.dumps(dict(frame=1, ids=[2, 3], adapted=[1e-5, -2e-5], frozen=[-1e-5, 2e-5]))+"\n")
+    receipt = dict(status="PASS", episodes=425, unique_videos=25,
+                   episodes_index={"v/e": {"margins_sha256": file_sha(path)}})
+    atomic_json(tmp_path / "ZERO_UPDATE/frozen_reference_receipt.json", receipt)
+    assert source_frames(tmp_path, "v", "e") == {1: {2: 1e-5, 3: -2e-5}}
+    with gzip.open(path, "rt") as stream:
+        assert json.loads(next(stream))["frozen"] == [-1e-5, 2e-5]
+    path.write_bytes(b"damaged")
+    with pytest.raises(ValueError, match="changed after sealing"):
+        source_frames(tmp_path, "v", "e")

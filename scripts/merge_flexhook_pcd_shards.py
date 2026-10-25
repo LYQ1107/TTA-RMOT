@@ -101,6 +101,8 @@ def main() -> int:
                 "gpu_uuid": item.get("gpu_uuid"),
                 "source_supplement": item.get("source_supplement"),
                 "source_supplement_sha256": item.get("source_supplement_sha256"),
+                "matched_frozen_root": item.get("matched_frozen_root"),
+                "matched_frozen_receipt_sha256": item.get("matched_frozen_receipt_sha256"),
                 "stats": item.get("stats"),
             }
             for item in shard_metadata

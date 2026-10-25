@@ -16,7 +16,7 @@ from flex_tta.adaptation.positive_free import CausalRelativeSelector
 from flex_tta.runtime.pf_receipts import file_sha, atomic_json
 
 
-def audit(output_root, method, dataset_root, tracker_root):
+def audit(output_root, method, dataset_root, tracker_root, matched_frozen_root=None):
     method_root = Path(output_root) / method
     expected = {(v, e) for v in dance_videos(tracker_root) for e, _ in load_expressions(dataset_root, v)}
     paths = {(p.parts[-3], p.parts[-2]): p for p in (method_root / "results").glob("*/*/predict.txt")}
@@ -27,7 +27,8 @@ def audit(output_root, method, dataset_root, tracker_root):
                   selected_ids=0, source_selected_ids=0, source_sign_mismatches=0,
                   source_margin_max_abs_error=0., new_selected_rows=0, lost_frozen_rows=0,
                   target_gt_opened=False, tracker_geometry_changed=False, tracker_ids_changed=False,
-                  episodes=[], mismatch_examples=[])
+                  episodes=[], mismatch_examples=[], matched_frozen_root=str(matched_frozen_root) if matched_frozen_root else None,
+                  historical_source_sign_mismatches=0, historical_source_margin_max_abs_error=0.)
     for video in sorted({v for v, _ in expected}):
         tracks = load_tracker_lines(tracker_root, video)
         for _, expr in sorted(k for k in expected if k[0] == video):
@@ -41,6 +42,10 @@ def audit(output_root, method, dataset_root, tracker_root):
             selector = CausalRelativeSelector()
             rows, source_ids, selected_ids, frame_ids = [], set(), set(), []
             candidates = source_rows = new_rows = lost_rows = 0
+            matched = None
+            if matched_frozen_root:
+                from flex_tta.runtime.pf_source_reference import source_frames
+                matched = source_frames(matched_frozen_root, video, expr)
             with gzip.open(margins, "rt") as stream:
                 for line in stream:
                     frame = json.loads(line)
@@ -51,6 +56,13 @@ def audit(output_root, method, dataset_root, tracker_root):
                         raise ValueError("non-finite candidate score")
                     frame_ids.append(t)
                     values = dict(zip(ids, adapted)); src = dict(zip(ids, frozen))
+                    legacy_src = src
+                    if matched is not None:
+                        src = matched[t]
+                        if set(src) != set(ids):
+                            raise ValueError("matched Frozen candidate IDs differ")
+                        if method != "ZERO_UPDATE" and src != legacy_src:
+                            raise ValueError("method did not use the common matched Frozen score bank")
                     chosen = (selector.step(t, src) if method == "RELATIVE_ONLY" else
                               {i for i in ids if values[i] > 0 or (method == "PF_RANK_GUARD" and src[i] > 0)})
                     baseline = {i for i in ids if src[i] > 0}
@@ -60,7 +72,9 @@ def audit(output_root, method, dataset_root, tracker_root):
                     new_rows += len(chosen-baseline); lost_rows += len(baseline-chosen)
                     if method == "ZERO_UPDATE":
                         report["source_sign_mismatches"] += len(chosen ^ baseline)
-                        report["source_margin_max_abs_error"] = max(report["source_margin_max_abs_error"], max(abs(a-b) for a,b in zip(adapted, frozen)))
+                        report["source_margin_max_abs_error"] = max(report["source_margin_max_abs_error"], max(abs(values[i]-src[i]) for i in ids))
+                        report["historical_source_sign_mismatches"] += sum((values[i] > 0) != (legacy_src[i] > 0) for i in ids)
+                        report["historical_source_margin_max_abs_error"] = max(report["historical_source_margin_max_abs_error"], max(abs(values[i]-legacy_src[i]) for i in ids))
                         for i in sorted(chosen ^ baseline):
                             if len(report["mismatch_examples"]) < 20:
                                 report["mismatch_examples"].append(dict(video=video, expression=expr, frame=t, track_id=i,
@@ -85,10 +99,11 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--output-root", type=Path, required=True)
     p.add_argument("--method", required=True)
+    p.add_argument("--matched-frozen-root", type=Path)
     p.add_argument("--dataset-root", type=Path, default=Path("/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance"))
     p.add_argument("--tracker-root", type=Path, default=Path("/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs"))
     args = p.parse_args()
-    report = audit(args.output_root, args.method, args.dataset_root, args.tracker_root)
+    report = audit(args.output_root, args.method, args.dataset_root, args.tracker_root, args.matched_frozen_root)
     atomic_json(args.output_root / args.method / "full_audit.json", report)
     print(json.dumps({k:v for k,v in report.items() if k != "episodes"}, indent=2))
 

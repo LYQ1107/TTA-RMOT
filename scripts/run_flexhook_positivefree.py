@@ -57,6 +57,7 @@ def parse_args(argv=None):
     p.add_argument("--checkpoint", type=Path, default=Path("/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth"))
     p.add_argument("--source-result", type=Path, default=Path("/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json"))
     p.add_argument("--source-supplement", type=Path)
+    p.add_argument("--matched-frozen-root", type=Path)
     p.add_argument("--output-root", type=Path, required=True)
     p.add_argument("--videos", nargs="*", default=[])
     p.add_argument("--max-expressions", type=int, default=1)
@@ -100,6 +101,7 @@ def plan_receipt(args) -> dict[str, Any]:
         "tracker_root": str(args.tracker_root),
         "source_result": str(args.source_result),
         "source_supplement": str(args.source_supplement) if args.source_supplement else None,
+        "matched_frozen_root": str(args.matched_frozen_root) if args.matched_frozen_root else None,
         "output_root": str(args.output_root),
         "videos": args.videos or "all_25_if_full_else_first",
         "max_expressions": args.max_expressions,
@@ -150,11 +152,26 @@ def _assets(args) -> None:
         if (recorded["original_sha256"] != FROZEN_SHA256 or recorded["checkpoint_sha256"] != SOURCE_SHA256 or
                 recorded["supplement_sha256"] != file_sha(args.source_supplement)):
             raise ValueError("Frozen supplement receipt does not match pinned source assets")
+    if args.matched_frozen_root is not None:
+        from flex_tta.runtime.pf_source_reference import reference_receipt
+        matched = reference_receipt(str(args.matched_frozen_root))
+        if matched["checkpoint_sha256"] != SOURCE_SHA256 or args.method == "ZERO_UPDATE":
+            raise ValueError("matched source reference must be frozen V2 and cannot self-define ZERO_UPDATE")
+        args.matched_frozen_receipt_sha256 = file_sha(args.matched_frozen_root / "ZERO_UPDATE/frozen_reference_receipt.json")
 
 
 def episode_config(args):
     return {key: (str(value) if isinstance(value, Path) else value) for key, value in vars(args).items()
-            if key not in {"output_root", "videos", "resume", "strict_initial_sign", "experiment_commit"}}
+            if key not in {"output_root", "videos", "resume", "strict_initial_sign", "experiment_commit"}
+            and not (key == "matched_frozen_root" and value is None)}
+
+
+def frozen_frames(args, source, video, expression, sentence):
+    if args.matched_frozen_root is not None:
+        from flex_tta.runtime.pf_source_reference import source_frames
+        return source_frames(args.matched_frozen_root, video, expression)
+    from flex_tta.dance_io import score_frames
+    return score_frames(source, video, sentence)
 
 
 def validate_frames(args, tracks, scores):
@@ -225,7 +242,7 @@ def _episodic_replay(args, source: dict, videos: list[str]):
             counters_before = {k: v for k, v in stats.items() if isinstance(v, (int, float))}
             before = {key: stats[key] for key in ("frames", "candidates", "selected")}
             selector.reset()
-            scores = score_frames(source, video, sentence)
+            scores = frozen_frames(args, source, video, expr_id, sentence)
             frames = validate_frames(args, tracker, scores)
             with store.attempt() as (handle, margin_handle):
                 for t in frames:
@@ -346,7 +363,7 @@ def _model_run(args, source: dict, videos: list[str]):
             if not reset_ok:
                 raise RuntimeError("episode memory/adapter reset failed")
             stats["episode_resets"].append({"video": video, "expression_id": expr_id, "passed": reset_ok})
-            source_frames = score_frames(source, video, sentence)
+            source_frames = frozen_frames(args, source, video, expr_id, sentence)
             frames = validate_frames(args, tracks, source_frames)
             with store.attempt() as (handle, margin_handle):
                 for frame_n, t in enumerate(frames):
@@ -544,6 +561,8 @@ def run(args):
         setattr(args, name, getattr(args, name).resolve())
     if args.source_supplement is not None:
         args.source_supplement = args.source_supplement.resolve()
+    if args.matched_frozen_root is not None:
+        args.matched_frozen_root = args.matched_frozen_root.resolve()
     args.experiment_commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     receipt = plan_receipt(args)
     if args.scope == "plan":
@@ -551,6 +570,8 @@ def run(args):
     random.seed(args.seed)
     torch.manual_seed(args.seed)
     _assets(args)
+    if args.matched_frozen_root is not None:
+        receipt["matched_frozen_receipt_sha256"] = args.matched_frozen_receipt_sha256
     deny_target_gt(args)
     from flex_tta.dance_io import dance_videos
     videos = args.videos or dance_videos(args.tracker_root)

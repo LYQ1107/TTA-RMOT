@@ -20,6 +20,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--rank-root", type=Path, required=True)
     p.add_argument("--output-root", type=Path, required=True)
+    p.add_argument("--matched-frozen-root", type=Path)
     args = p.parse_args()
     started = time.perf_counter()
     root = args.output_root.resolve()
@@ -35,6 +36,7 @@ def main():
     # Reuse the unchanged model loop for one full independent episode. Its
     # public full-study path still requires all expressions; do not weaken it.
     options.scope = "equivalence"
+    options.matched_frozen_root = args.matched_frozen_root
     original = dio.load_expressions
     def single_expression(dataset, v):
         return [(e, s) for e, s in original(dataset, v) if e == expression]
