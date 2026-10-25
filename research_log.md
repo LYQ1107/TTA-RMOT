@@ -11,6 +11,7 @@
 - Group-counter regression and full suite:51 tests passed in11.89s, compileall passed; all five real grouped-counter checks and exact official HOTA pooling pass with unchanged bootstrap comparisons. No online module, hyperparameter or completed prediction is changed by this reporting extension.
 - Prepared a static all-six-only scientific plotting entry point for paired video intervals and25-video heterogeneity. It reads sealed numerical summaries only and refuses interim data; render/visual validation remains pending until Hybrid completes. This is a report artifact, not a new model or GPU experiment; the presence-aware prototype remains deferred.
 - Final cost wording also identifies the shared frozen-score preparation: table stages are measured conditional on that asset. Rank/Hybrid need the frozen-source stream; standalone online deployment must include its computation, even if frozen encoders can be shared. No unmeasured teacher+student end-to-end FPS claim is made.
+- Found inherited LocateMOT project routing in this repository's README/local AGENTS despite verified TTA-RMOT origin/branch and actual FlexHook runs. Archive the old README verbatim with an explicit historical header; route this repository to TTA-RMOT and link its actual research artifacts. Keep generic/long-running rules unchanged. No LocateMOT/GroundJEV worktree, process, model or dataset is modified, and healthy Hybrid continues unchanged.
 
 ## 2026-10-25 — Supplemental scientific acceptance, no online changes
 

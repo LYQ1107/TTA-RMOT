@@ -6,9 +6,10 @@
 2. 禁止为反复出现的基本不可能发生的 case 写防御。
 3. 需要 rubric 的地方不要过度机械化。
 4. 每次任务开始先确认项目身份：当前项目根目录必须是
-   `/data2/user/LocateMOT`（2026-10-01 迁移后的项目根目录；历史记录中的 `/data1/LWR/vranlee/SERVER_ONLY/avis/LocateMOT` 及 R1 sibling 路径仅作来源追踪）。若收到的任务/附件指向
-   其它项目（例如 OCD_OVMOT / TrackOCD），先提醒用户“这是 LocateMOT 任务吗”，
-   避免把复制错的任务执行到本项目。
+   `/data2/user/FlexHook-TTA`，Git remote 必须为 `LYQ1107/TTA-RMOT`。
+   本项目与 `/data2/user/LocateMOT`、`/data2/user/LocateMOT_GroundJEV` 是不同任务；
+   继承的旧文档与代码仅作来源追踪，不从本任务执行其训练命令。若收到的任务/附件指向
+   LocateMOT / GroundJEV 或其它仓库，先提醒用户“这是 TTA-RMOT 任务吗”，避免复制错任务。
 
 ## 研究执行原则
 
