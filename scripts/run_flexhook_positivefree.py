@@ -169,7 +169,8 @@ def restore_counters(stats, record):
         if key.startswith("max_") or key == "source_max_abs_error":
             stats[key] = max(stats.get(key, 0), value)
         elif isinstance(value, (int, float)) and not isinstance(value, bool):
-            stats[key] = stats.get(key, 0) + value
+            prior = stats.get(key)
+            stats[key] = (0 if prior is None else prior) + value
     stats["episodes"] += 1
     stats["episode_records"].append(record)
 
@@ -356,6 +357,12 @@ def _model_run(args, source: dict, videos: list[str]):
                     evidence_pairs = memory.stable_pairs(t, sorted(source_scores)) if uses_rank else []
                     candidate_ids = [i for i, _ in current]
                     has_identity = identity_memory.eligible(t, candidate_ids) if uses_identity else False
+                    if args.method != "ZERO_UPDATE":
+                        opportunity = (frame_n+1) % args.update_interval == 0
+                        key = "update_opportunities" if opportunity else "skipped_interval_frames"
+                        stats[key] = stats.get(key, 0)+1
+                        if opportunity and not evidence_pairs and not has_identity:
+                            stats["skipped_no_evidence"] = stats.get("skipped_no_evidence", 0)+1
                     will_update = (
                         args.method != "ZERO_UPDATE" and
                         (frame_n + 1) % args.update_interval == 0 and
@@ -365,6 +372,7 @@ def _model_run(args, source: dict, videos: list[str]):
                     # For a differentiable candidate SET both losses need the
                     # complete set; long frames are evaluated but not updated.
                     if will_update and len(active_batches) != 1:
+                        stats["skipped_multi_batch"] = stats.get("skipped_multi_batch", 0)+1
                         will_update = False
                     if will_update:
                         optimizer.zero_grad(set_to_none=True)

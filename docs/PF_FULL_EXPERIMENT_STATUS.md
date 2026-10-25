@@ -13,7 +13,8 @@ Branch: `research/v2dance-positivefree-four-gpu-full-20261025`, from verified `a
 - At most four genuinely idle GPUs; safe 1–3 GPU fallback; no occupied-card override. Initial snapshot: only GPU5 idle.
 - Atomic per-episode prediction/margin sealing and completion receipts; partial attempts preserved, whole episode restarted from seed 0.
 - Same seed 0 reset at each independent episode, so resume/shard scheduling cannot change LoRA initial state.
-- 33 focused CPU tests passed. Final cache-enabled ZERO_UPDATE/PF_RANK/PF_IDENTITY/PF_HYBRID smoke passed (0/3/3/3 updates).
+- Integration gate: 33 focused CPU tests passed. Cache-enabled ZERO_UPDATE/PF_RANK/PF_IDENTITY/PF_HYBRID smoke passed (0/3/3/3 updates).
+- Subsequent evaluator/recovery tooling checks: 37 tests passed, including physical-ID feature-dimension recovery and offline matching/duplicate-FP attribution.
 
 ## User-approved correction to the Frozen protocol
 
@@ -43,7 +44,7 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 
 | Stage | Status |
 |---|---|
-| Complete-bank ZERO_UPDATE | ready for full launch; metrics pending |
+| Complete-bank ZERO_UPDATE | RUNNING on GPU5; initial worker PID 3684057, actual log/receipts under `results/runs/pf_zero_completebank_full_20261025`; metrics pending |
 | RELATIVE_ONLY (CPU) | after ZERO_UPDATE baseline audit/evaluation |
 | PF_RANK | after RELATIVE_ONLY |
 | PF_RANK_GUARD | validate exact CPU derivation of PF_RANK pre-update margins |
@@ -56,3 +57,9 @@ GT is opened only by independent evaluation after predictions are sealed/audited
 These are development-target results, not an independent blind test.
 
 No scientific success, HOTA gain or final completion is claimed at this engineering stage.
+
+Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
+`analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
+`verify_pf_guard_equivalence.py` selects a source-positive episode without GT and compares a complete direct GPU GUARD episode to CPU-derived results.
+Only a passing equivalence enables derived full GUARD; otherwise the suite runs direct full GUARD on safe GPUs.
+The legacy `skipped_no_pairs` counter includes interval-skipped frames; new counters separately report interval skips, actual update opportunities, and missing-evidence skips.

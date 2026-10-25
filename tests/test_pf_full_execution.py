@@ -92,3 +92,9 @@ def test_preflight_checks_tracker_observation_not_only_expression_coverage(tmp_p
     preflight.verify_server_assets(report, data, tracks, None, None, path, None)
     assert report["frozen_scores"]["coverage"]["dancetrack0000"]["missing_tracker_observations"] == 1
     assert not report["frozen_scores"]["all_tracker_candidates_scored"]
+
+
+def test_identity_resume_restores_initially_unknown_feature_dimension():
+    stats = {"episodes": 0, "episode_records": [], "feature_channels": None}
+    runner.restore_counters(stats, {"counter_delta": {"feature_channels": 768, "optimizer_steps": 3}})
+    assert stats["feature_channels"] == 768 and stats["optimizer_steps"] == 3
