@@ -10,6 +10,15 @@ from flex_tta.runtime.pf_receipts import EpisodeStore
 from flex_tta.dance_io import merge_source_supplement
 
 
+def test_summary_dimensions_are_per_replica_not_episode_deltas():
+    from scripts.summarize_pf_full import report_stats
+    metadata = dict(aggregate_stats=dict(optimizer_steps=7, trainable_parameters=0, pcd_channels=0),
+                    shards=[dict(stats=dict(trainable_parameters=24576, pcd_channels=768)) for _ in range(4)])
+    stats = report_stats(metadata)
+    assert stats == dict(optimizer_steps=7, trainable_parameters=24576, pcd_channels=768)
+    assert metadata["aggregate_stats"]["trainable_parameters"] == 0
+
+
 def test_lpt_whole_video_coverage(tmp_path):
     data, tracks, _ = fixture_files(tmp_path, videos=25)
     manifest = weighted_manifest(tracks, data)

@@ -17,6 +17,19 @@ METHOD_ORDER = ("ZERO_UPDATE", "RELATIVE_ONLY", "PF_RANK", "PF_RANK_GUARD", "PF_
 METRICS = ("HOTA", "DetA", "AssA", "DetRe", "DetPr", "IDF1", "IDSW", "Dets", "IDs")
 
 
+def report_stats(metadata):
+    """Keep additive counters, but read model dimensions once per replica."""
+    stats = dict(metadata.get("aggregate_stats") or {})
+    for key in ("trainable_parameters", "pcd_channels", "feature_channels"):
+        values = {s.get("stats", {}).get(key) for s in metadata.get("shards", [])}
+        values.discard(None)
+        if len(values) > 1:
+            raise ValueError(f"inconsistent per-replica {key}: {values}")
+        if values:
+            stats[key] = values.pop()
+    return stats
+
+
 def summarize(root, method, publish):
     folder = Path(root) / method
     audit = json.loads((folder / "full_audit.json").read_text())
@@ -73,8 +86,20 @@ def summarize(root, method, publish):
                             peak_vram_bytes=max(peaks, default=0),
                             peak_vram_measurement="PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
                             gpu_uuids=sorted({r["gpu_uuid"] for r in launcher.get("completed", []) if r["gpu_uuid"] != "CPU"})),
-                  aggregate_stats=metadata.get("aggregate_stats", {}), raw_output_root=str(Path(root).resolve()),
+                  aggregate_stats=report_stats(metadata), raw_output_root=str(Path(root).resolve()),
                   development_target=True, target_gt_used_only_for_sealed_offline_evaluation=True)
+    result["structural_stats_definition"] = "per-replica constants from shard stats, not additive episode deltas"
+    if metadata.get("derived_from"):
+        rank_root = Path(metadata["derived_from"])
+        rank_metadata = json.loads((rank_root / "PF_RANK/run_metadata.json").read_text())
+        result["execution_mode"] = "CPU derivation of sealed PF_RANK margins"
+        result["reused_rank_stats"] = report_stats(rank_metadata)
+        result["reused_rank_output_root"] = str(rank_root)
+        result["aggregate_stats"]["rank_optimizer_steps_reused"] = result["reused_rank_stats"]["optimizer_steps"]
+        result["aggregate_stats"]["additional_optimizer_steps"] = 0
+        result["cost"]["cost_scope"] = "incremental CPU derivation only; requires the full PF_RANK run and separate GPU equivalence check"
+    else:
+        result["execution_mode"] = "direct inference/adaptation"
     destination = Path(publish) / method.lower()
     destination.mkdir(parents=True, exist_ok=True)
     raw_root = Path(str(root).removesuffix("_merged"))

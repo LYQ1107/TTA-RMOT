@@ -78,6 +78,12 @@ def generate(publish, output):
               "|---|---:|---:|---:|---:|---:|---:|"]
     for method in ORDER:
         s = reports[method]["aggregate_stats"]
+        if "reused_rank_stats" in reports[method]:
+            reused = reports[method]["reused_rank_stats"]
+            lines.append(f"| {method} | 复用 Rank {reused['optimizer_steps']}；新增 0 | " +
+                         f"复用 Rank {reused.get('finite_nonzero_gradient_steps',0)} | 复用 Rank | 复用 Rank | " +
+                         f"复用 Rank {reused.get('rollback_updates',0)} | {reused.get('max_adapter_update_l2',0):.8f}（复用） |")
+            continue
         lines.append(f"| {method} | {s.get('optimizer_steps',0)} | {s.get('finite_nonzero_gradient_steps',0)} | " +
                      f"{s.get('skipped_no_evidence',0)} | {s.get('skipped_interval_frames',0)} | {s.get('rollback_updates',0)} | {s.get('max_adapter_update_l2',0):.8f} |")
     lines += ["", "`skipped_no_pairs` 历史计数包含间隔跳过，不能将其全部解释为无证据。",
@@ -91,8 +97,9 @@ def generate(publish, output):
         lines.append(f"| {method} | {c['wall_seconds']:.2f} | {c['total_episode_seconds']:.2f} | {c['gpu_hours']:.4f} | " +
                      f"{c['worker_active_frame_fps']:.3f} | {c['scheduler_wall_active_frame_fps']:.3f} | {c['peak_vram_bytes']/2**30:.3f} |")
     lines += ["", "峰值为 PyTorch max_memory_allocated，不包含 CUDA context 或 allocator reserved；不能解释为整卡峰值。",
+              "若 Guard 为 CPU 派生，其表内成本仅为增量 CPU 重放，不代表独立从图像运行只需零 GPU；必须同时承担完整 Rank 推理/适应和单独的 GPU 等价验证成本。",
               "GPU 小时按实际 worker 起止累计；ZERO_UPDATE 最初 GPU5 完成 102 表达，后续 GPU6/4/0/1 处理剩余表达，因此该方法累计出现五个 UUID，但从未同时用五张卡。后续各方法的真实 GPU 见独立调度记录。",
-              "后续新 GPU 分片以 ZERO_UPDATE 的不含 GT 的实测活跃帧速率估计容量，较快卡分配更多完整视频；所有视频/表达和算法默认值不变。共享负载可随时间变化，估计不代表吞吐保证。",
+              "Rank 使用源推理时序估计的静态整视频分组；其耗时不能代表梯度计算的准确负载预测。Identity/Hybrid 的新计划改用最多四卡领取完整视频的队列，每视频 17 个独立 episode，不跨卡切断在线记忆；重载模型开销计入实测 wall。共享负载仍会变化，调度不保证固定加速倍数。",
               "平均 worker FPS 的分母是各 episode 计算时间之和，不是四卡并行吞吐；调度 wall FPS 的分母包含等待，但不包含前置预检、评测与归因。两者不能混用。",
               "ZERO wall 包含旧空卡策略等待和用户授权后恢复；共享任务会竞争算力，单卡子集与四卡全量并非相同工作负载，不报告未经控制的“4×加速”。",
               "GPU 等价诊断、Guard 单完整 episode 验证、官方评测/归因是额外开销，保留在独立 receipt/log；表内 method wall 不自动包含这些阶段。",

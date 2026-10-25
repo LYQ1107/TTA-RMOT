@@ -117,7 +117,7 @@
     "source_max_abs_error": 0.0011844635009765625,
     "prediction_source_selection_mismatches": 6,
     "trainable_parameters": 0,
-    "pcd_channels": 0,
+    "pcd_channels": 768,
     "margin_abs_change_sum": 230.69749161304208,
     "new_selected_from_negative": 5,
     "lost_frozen_positive": 1,
@@ -127,6 +127,8 @@
   "raw_output_root": "/data2/user/FlexHook-TTA/results/runs/pf_zero_completebank_full_20261025_merged",
   "development_target": true,
   "target_gt_used_only_for_sealed_offline_evaluation": true,
+  "structural_stats_definition": "per-replica constants from shard stats, not additive episode deltas",
+  "execution_mode": "direct inference/adaptation",
   "delta": {
     "HOTA": 0.0,
     "DetA": 0.0,

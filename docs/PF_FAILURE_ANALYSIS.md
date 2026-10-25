@@ -1,7 +1,7 @@
-# Positive-Free failure analysis — interim, first two complete controls
+# Positive-Free failure analysis — interim, four complete methods
 
 Project: TTA-RMOT only. Full 25 videos / 425 expressions; development-target results, not blind testing.
-PF_RANK, PF_IDENTITY and PF_HYBRID are still running/pending. Their final conclusion is not inferred from these controls.
+PF_IDENTITY and PF_HYBRID are still running/pending. No all-method final conclusion is inferred before they finish.
 
 ## Matched baseline and implementation checks
 
@@ -58,9 +58,33 @@ the wrong person inside a target-present frame. Track-ID consistency alone does 
 that the language query has any matching target. This motivates checking empty-query FP separately
 for all remaining methods, but no online loss, threshold or hyperparameter is changed using this information.
 
+## Rank has only a tiny gain, without overall ranking improvement
+
+PF_RANK: HOTA **8.2433** (delta **+0.0253 points**, about 0.31% relative), DetA **3.2336**,
+AssA **21.0150**, DetRe **4.6120**, DetPr **9.7458**, IDF1 **4.4947**, IDSW **269**.
+It selects 100,582 rows, recovers 158 GT observations and loses 3; diagnostic net recovery is +155.
+Total diagnostic FP increases from 89,367 to 90,090 (+723). GT-empty-episode FP rises to 88,057.
+AUROC declines **0.650204 → 0.648328**. Conditional Top1 changes **0.614788 → 0.615468**;
+Top3 slightly declines and Top5 slightly increases. These results do not establish improved
+semantic ranking, and a single-seed 0.0253-point HOTA change is not evidence of a robust gain.
+
+This is genuine executed adaptation: 105,971 finite, nonzero-gradient steps, no nonfinite steps
+or rollback. The maximum adapter delta L2 is 1.968823 (fixed limit 2). The actual per-replica
+adapter has 24,576 trainable parameters and 768-wide PCD features. An initial parameter-count
+summary of zero came from subtracting constant fields as episode deltas; only that reporting
+field is corrected using shard statistics, with raw metadata/predictions retained unchanged.
+
+PF_RANK_GUARD: HOTA **8.2444** (+0.0264 versus Frozen, only +0.0011 versus Rank), IDF1 **4.4956**.
+It restores the 31 Frozen-positive rows that Rank removed; 100,613 rows, 158 recovered GT,
+zero lost GT, diagnostic FP 90,118 (+751 versus Frozen), including 88,085 on GT-empty episodes.
+Its underlying scores and AUROC are the same as Rank; this is explicit retention, not new learning.
+A complete real GPU episode and CPU derivation have byte-identical predictions and matching
+282-step update traces. The full Guard result reuses sealed Rank margins; its 7.34-second CPU
+derivation excludes the required Rank GPU run and 112.43-second equivalence validation.
+
 ## Remaining decision
 
-Complete the registered PF_RANK, PF_RANK_GUARD, PF_IDENTITY and PF_HYBRID studies without tuning on GT.
+Complete the registered PF_IDENTITY and PF_HYBRID studies without tuning on GT.
 Distinguish genuine GT recovery and ranking improvement from pruning/retention effects or extra outputs.
 An AssA increase accompanied by DetRe loss cannot be called target-recall recovery. No overall research-success
 or final negative-TTA verdict is issued before the remaining full methods finish.

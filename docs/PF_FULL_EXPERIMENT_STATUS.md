@@ -40,7 +40,9 @@ are unchanged. Same strictly loaded V2 checkpoint generated a separate, append-o
 - Eight additional original-vs-cached complete-candidate comparisons: zero sign mismatches.
 - Target GT never opened. Source checkpoint and tracker bank unchanged.
 
-Every full method reads the same original stream + supplement. Supplement overlap is rejected.
+The historical complete-bank comparison reads the original stream + supplement; subsequent
+methods use the sealed native ZERO_UPDATE margins as the common matched reference described below.
+Supplement overlap is rejected.
 The old 8.206 score cannot be used as a directly matched gain reference for the completed bank.
 
 ## Formal experiment sequence
@@ -49,9 +51,9 @@ The old 8.206 score cannot be used as a directly matched gain reference for the 
 |---|---|
 | Complete-bank ZERO_UPDATE | COMPLETE 25/425: HOTA 8.2180, DetA 3.1937, AssA 21.1470, IDF1 4.4414; 99,704 rows / 1,769 IDs |
 | RELATIVE_ONLY (CPU) | COMPLETE 25/425: HOTA 7.5705, DetA 4.1857, AssA 13.7120, IDF1 5.5746; 375,483 rows |
-| PF_RANK | RUNNING on physical GPU6/4/0/1, PIDs 4129095/4129171/4129260/4129353; capacity groups 119/119/102/85 expressions |
-| PF_RANK_GUARD | validate exact CPU derivation of PF_RANK pre-update margins |
-| PF_IDENTITY | after rank/guard |
+| PF_RANK | COMPLETE 25/425: HOTA 8.2433 (+0.0253), IDF1 4.4947; 100,582 rows; all four workers exited 0 |
+| PF_RANK_GUARD | COMPLETE 25/425: HOTA 8.2444 (+0.0264), IDF1 4.4956; 100,613 rows; CPU-derived after real complete-episode GPU equivalence passed |
+| PF_IDENTITY | RUNNING on physical GPU0/4/6/1; initial PIDs 220683/220740/220841/220941; 25 complete-video queue jobs, at most four active |
 | PF_HYBRID | after identity |
 
 For each: all 25 videos / 425 expressions / all 211,085 observations per query bank;
@@ -59,7 +61,7 @@ full ordered frames, exact MOT rows, no target GT in adaptation, original defaul
 GT is opened only by independent evaluation after predictions are sealed/audited.
 These are development-target results, not an independent blind test.
 
-Only the first two complete methods have official results. No final TTA success or goal completion is claimed.
+Four complete methods have official results. Identity/Hybrid are unfinished; no final TTA success or goal completion is claimed.
 
 Full ZERO validation: all 3,588,445 candidate-query observations / 433,636 active-frame steps;
 six historical near-zero sign differences, each reproduced with original and cached forwards selecting
@@ -71,6 +73,31 @@ Offline GT attribution (only after full sealing): 203,906 / 212,541 GT observati
 (95.9373%), but Frozen selects only 10,337 of them (conditional gate recall 5.0695%).
 RELATIVE_ONLY raises matched GT to 25,210 but FP from 89,367 to 350,273. Its ranking/AUROC is unchanged.
 These are completed control results, not a verdict on the still-running gradient-based methods.
+
+Full Rank makes 105,971 finite nonzero-gradient updates, zero nonfinite/zero-gradient steps and
+zero rollbacks. HOTA gains only 0.0253 points: diagnostic net GT recovery +155 (158 recovered,
+3 lost), net FP +723; AUROC declines from 0.650204 to 0.648328. This is a small selection tradeoff,
+not demonstrated new semantics. Guard retains 31 additional Frozen-positive rows, loses no
+baseline GT observation, and adds only 0.0011 HOTA over Rank.
+
+Guard equivalence: dancetrack0010 / dancing-person-dressed-all-in-white, full 1,203 active frames,
+5,911 selected rows, direct GPU versus CPU-derived predictions byte-identical; 282 optimizer
+steps in both traces, no target GT opened. Validation wall 112.43 s, peak allocated 8.905 GiB.
+The full CPU derivation takes 7.34 s **in addition to** the complete Rank run (5.1463 GPU hours)
+and that GPU validation; it is not a standalone zero-GPU RMOT inference method.
+
+Rank used static groups of 119/119/102/85 expressions, wall 5,541.59 s. Source-only timings did
+not predict backward/query cost accurately and left a slow tail. Fresh Identity/Hybrid methods
+use 25 whole-video queue jobs, 17 independent episodes each, on at most four registered GPUs.
+Model reload overhead is counted; no episode memory is split, and no GT/accuracy guides the queue.
+Rank's finished plan/predictions are not rewritten.
+
+Reporting correction only: structural trainable-parameter/PCD fields cannot be summed as
+episode counter deltas. Read actual per-shard constants once per replica: Rank has 24,576
+trainable parameters and PCD width 768. Raw sealed metadata and all predictions remain unchanged.
+The earlier summary's parameter count 0 was a report aggregation error, not absent adaptation.
+Reporting-fix regression: all 47 focused tests passed in 11.97 s; compileall and both shell
+syntax checks passed. Re-summarization changed no official score or sealed prediction.
 
 Resource-policy transition: shard0 completed successfully; the coordinator then waited because
 no card met the old idle-only rule. Only our waiting coordinator PID 3682643 was terminated to

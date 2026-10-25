@@ -1,5 +1,13 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-25 — Full Rank/Guard: tiny HOTA gain, not a semantic breakthrough
+
+- Full 25-video/425-expression Rank: HOTA8.2433 (+0.0253 points versus matched8.2180), IDF1 4.4947, AssA21.0150, DetRe4.6120; net GT +155, diagnostic FP +723, AUROC0.650204→0.648328. Genuine 105,971 finite/nonzero gradient updates, zero rollbacks. Keep the small positive result and its negative ranking evidence; do not claim robust semantic improvement.
+- Full Guard: HOTA8.2444 (+0.0264), IDF1 4.4956; retains31 Frozen-positive rows over Rank, +158 GT/no lost baseline GT, FP +751. Direct real GPU full-episode equivalence passed:1,203 frames/5,911 selected rows, byte-identical predictions,282 updates, no GT,112.43s. Full CPU derivation7.34s reuses Rank's5.1463 GPU hours; incremental CPU cost is not standalone RMOT cost.
+- Reporting bug: additive episode deltas zeroed structural constants. Correct only published summary fields from actual shard stats (24,576 trainable parameters, PCD768 per replica); preserve raw sealed metadata, predictions, numerical defaults and counters. Label Guard's reused updates/cost dependency explicitly rather than implying no adaptation happened.
+- Rank wall5,541.59s; source-only static group estimates left a backward-compute tail. Identity is now running a queue of25 complete-video jobs (17 independent episodes each), max4 registered GPUs0/4/6/1; Hybrid follows. No episode memory cuts, no GT-driven scheduling, no re-run of finished Rank. All six remain required before goal completion.
+- Verification after the reporting-only correction:47 focused tests passed in11.97s; compileall and shell syntax passed. All four published methods retain425 valid episodes/25 videos/3,588,445 candidates with no changed official scores. Guard's complete real-episode equivalence receipt is published alongside the metrics.
+
 ## 2026-10-25 — User-authorized GPU sharing and pending-only repartition
 
 ### Completed full controls and first live gradient method
