@@ -6,6 +6,9 @@
 
 ## 当前研究：FlexHook V2 → Dance Positive-Free Online TTA
 
+最新用户授权的[快速可恢复性诊断](docs/PF_RECOVERABILITY_DIAGNOSTIC_20261025.md)独立于已完成六组结果：
+优先CPU数量匹配/文本敏感性，仅必要时小样本冻结特征，不启动新的完整TTA训练。
+
 固定官方 Refer-KITTI-V2 第二阶段 checkpoint、官方 Dance DETR+NeuralSORT 候选，
 在全部25视频/425表达上检验相对排序与轨迹身份自监督。没有目标GT在线监督、额外语义教师或源端重训。
 Source-Free 仅指第二阶段；固定跟踪器是 Dance 专用官方跟踪器，不能宣称整个系统无目标域监督。
@@ -35,7 +38,7 @@ AUROC下降且空查询误检上升，不能宣布稳定语义恢复。Hybrid8.3
 恢复索引位于`results/positive_free/full/manifests/full_recovery_index.json`。
 已完成[presence-aware交互审计原型](docs/PF_QUERY_PRESENCE_PROTOTYPE_20261025.md)和真实GPU0/1表达/12帧验证。
 它只消除加性偏置并报告UNKNOWN，尚无独立可靠的语义学习信号；0更新，不覆盖冻结预测。
-58项测试通过，全部实验已结束，不自动启动第七种完整GPU实验，等待新指令。
+58项测试通过，上轮六组及presence原型已结束；新诊断单独记录，不自动启动新的完整TTA训练。
 
 ## 代码、环境与大文件
 

@@ -1,0 +1,1103 @@
+{
+  "status": "COMPLETE_25_VIDEOS_425_EXPRESSIONS",
+  "gpu_calls": 0,
+  "optimizer_steps": 0,
+  "protocol": "OFFLINE_POST_HOC_NO_THRESHOLD_SELECTION",
+  "episodes": 425,
+  "videos": 25,
+  "observations": 3588445,
+  "query_present": 40,
+  "query_empty": 385,
+  "presence": {
+    "mean_margin": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.6602597402597402,
+      "AUPRC": 0.1628013326262346,
+      "video_cluster_AUROC_CI95": [
+        0.5757841907289818,
+        0.7533440373363053
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.11125517212751664,
+        0.25662732299971747
+      ]
+    },
+    "p90_margin": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.6716883116883117,
+      "AUPRC": 0.1681480802648479,
+      "video_cluster_AUROC_CI95": [
+        0.5829769843374178,
+        0.7663436692262274
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.11563315631519645,
+        0.2652726837369536
+      ]
+    },
+    "max_margin": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.7257792207792207,
+      "AUPRC": 0.19937330504283773,
+      "video_cluster_AUROC_CI95": [
+        0.6265052891815587,
+        0.8212026076218373
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.14375301964814838,
+        0.36254809025686546
+      ]
+    },
+    "mean_frame_max_margin": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.6745454545454546,
+      "AUPRC": 0.16724061067328158,
+      "video_cluster_AUROC_CI95": [
+        0.5793050639836355,
+        0.7728753055040196
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.11193155301801493,
+        0.26970662802737355
+      ]
+    },
+    "positive_fraction": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.695064935064935,
+      "AUPRC": 0.17064189745286457,
+      "video_cluster_AUROC_CI95": [
+        0.6032553462638319,
+        0.789938465991264
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.1135132274419107,
+        0.28202003949680793
+      ]
+    },
+    "visual_mean_margin": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.5298051948051948,
+      "AUPRC": 0.09988410132673868,
+      "video_cluster_AUROC_CI95": [
+        0.44768169887854925,
+        0.6188251581605504
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.06572887778517476,
+        0.1857219227719946
+      ]
+    },
+    "interaction_mean_frame_max": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.6861688311688312,
+      "AUPRC": 0.18923941353892548,
+      "video_cluster_AUROC_CI95": [
+        0.589675247371676,
+        0.7718046167668808
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.1163026356265971,
+        0.33650431610871767
+      ]
+    },
+    "leave_video_out_query_score_bias": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.556038961038961,
+      "AUPRC": 0.12590536374027197,
+      "video_cluster_AUROC_CI95": [
+        0.46218059101591863,
+        0.6548940673369994
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.08556574026657363,
+        0.22079598658191082
+      ]
+    }
+  },
+  "presence_random_AUPRC": 0.09411764705882353,
+  "candidate": {
+    "source": {
+      "n": 3588445,
+      "positives": 200619,
+      "prevalence": 0.05590694576620235,
+      "AUROC": 0.650203661381795,
+      "AUPRC": 0.09344576809145812
+    },
+    "query_independent_visual_bias": {
+      "n": 3588445,
+      "positives": 200619,
+      "prevalence": 0.05590694576620235,
+      "AUROC": 0.49515515424720474,
+      "AUPRC": 0.055620462305473635
+    },
+    "query_marginal_bias": {
+      "n": 3588445,
+      "positives": 200619,
+      "prevalence": 0.05590694576620235,
+      "AUROC": 0.6689175301254304,
+      "AUPRC": 0.1174725422799647
+    },
+    "double_centered_interaction": {
+      "n": 3588445,
+      "positives": 200619,
+      "prevalence": 0.05590694576620235,
+      "AUROC": 0.5163579415094477,
+      "AUPRC": 0.06875851687537889
+    }
+  },
+  "query_swap": {
+    "valid_frames": 42657,
+    "mixed_frames": 26352,
+    "disjoint_frames": 42657,
+    "hard_disjoint_frames": 23008,
+    "correct_top1": 0.6147877253440233,
+    "random_top1": 0.578298754863325,
+    "visual_top1": 0.5761305295731064,
+    "correct_recall_at1": 0.15799892839199428,
+    "correct_positive_rank_percentile": 0.5202005269595381,
+    "all_other_top1": 0.5737847832712099,
+    "all_other_positive_rank_percentile": 0.5017833142357544,
+    "disjoint_top1": 0.5737630568086297,
+    "hard_disjoint_top1": 0.23699624147294515,
+    "mixed_correct_top1": 0.37644201578627806,
+    "mixed_random_top1": 0.3173759102233171,
+    "mixed_visual_top1": 0.31386612021857924,
+    "mixed_source_AUROC": 0.5597045760372316,
+    "mixed_visual_AUROC": 0.504818843001206,
+    "mixed_other_AUROC": 0.5002836687830724
+  },
+  "query_swap_effects": {
+    "correct_top1_minus_all_other_top1": {
+      "delta": 0.041002942072813374,
+      "video_cluster_CI95": [
+        0.014186044075310216,
+        0.06554397570333807
+      ],
+      "valid_video_bootstrap_resamples": 2000
+    },
+    "mixed_source_AUROC_minus_mixed_other_AUROC": {
+      "delta": 0.05942090725415894,
+      "video_cluster_CI95": [
+        -0.00032208075957175763,
+        0.1208277010182121
+      ],
+      "valid_video_bootstrap_resamples": 2000
+    },
+    "mixed_source_AUROC_minus_mixed_visual_AUROC": {
+      "delta": 0.0548857330360253,
+      "video_cluster_CI95": [
+        0.001207491345530928,
+        0.10914927152067631
+      ],
+      "valid_video_bootstrap_resamples": 2000
+    }
+  },
+  "within_video_variance_fractions": {
+    "candidate_visual": 0.14412066228913856,
+    "query_marginal": 0.6531350588718039,
+    "interaction": 0.2027442788390577
+  },
+  "candidate_cross_query_margin_std_quantiles": {
+    "0.1": 1.7181612559440278,
+    "0.5": 3.598759190175191,
+    "0.9": 5.7984633510081265
+  },
+  "score_aggregate_limit": "whole sealed episode aggregates/centering are offline; not causal online presence rules; fixed statistics, no GT-fitted threshold",
+  "visual_control_definition": "row mean over17 real queries; query-independent score bias, NOT a separately trained visual model",
+  "swap_limit": "other real query may describe same target; separate all-other, disjoint, and nonempty-disjoint GT candidate sets; GT only offline",
+  "rank_limit": "within-frame AUROC only mixed positive/negative frames; no claim from dense all-target frames or query-only prior",
+  "wall_seconds": 34.9377890850883,
+  "per_video": [
+    {
+      "video": "dancetrack0004",
+      "observations": 4371,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 1456066.99176426,
+        "candidate_visual": 354020.78276865307,
+        "query_marginal": 821502.4481505216,
+        "interaction": 280543.7608450854
+      },
+      "query_pair_mean_spearman": 0.4059917202174992,
+      "mean_top1_cross_query_disagreement": 0.4688890518801033,
+      "valid_query_pairs": 161840,
+      "source_candidate": {
+        "n": 74307,
+        "positives": 4347,
+        "prevalence": 0.058500545036133875,
+        "AUROC": 0.9258434261886546,
+        "AUPRC": 0.5944628084660254
+      },
+      "visual_bias_candidate": {
+        "n": 74307,
+        "positives": 4347,
+        "prevalence": 0.058500545036133875,
+        "AUROC": 0.5009200531691644,
+        "AUPRC": 0.05865166955731605
+      },
+      "query_bias_candidate": {
+        "n": 74307,
+        "positives": 4347,
+        "prevalence": 0.058500545036133875,
+        "AUROC": 0.9998284734133791,
+        "AUPRC": 0.9945092656142759
+      }
+    },
+    {
+      "video": "dancetrack0005",
+      "observations": 4576,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 1481726.6684233588,
+        "candidate_visual": 241377.30452219676,
+        "query_marginal": 897805.3350891116,
+        "interaction": 342544.02881205047
+      },
+      "query_pair_mean_spearman": 0.2460179208840642,
+      "mean_top1_cross_query_disagreement": 0.5841951493814487,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 77792,
+        "positives": 4685,
+        "prevalence": 0.060224701768819416,
+        "AUROC": 0.7374574006004766,
+        "AUPRC": 0.10076924657761073
+      },
+      "visual_bias_candidate": {
+        "n": 77792,
+        "positives": 4685,
+        "prevalence": 0.060224701768819416,
+        "AUROC": 0.4989162140800945,
+        "AUPRC": 0.060051348077995836
+      },
+      "query_bias_candidate": {
+        "n": 77792,
+        "positives": 4685,
+        "prevalence": 0.060224701768819416,
+        "AUROC": 0.7814889694217153,
+        "AUPRC": 0.16622535515445067
+      }
+    },
+    {
+      "video": "dancetrack0007",
+      "observations": 9111,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 2574249.498003057,
+        "candidate_visual": 163185.0857740939,
+        "query_marginal": 2177516.608659944,
+        "interaction": 233547.8035690187
+      },
+      "query_pair_mean_spearman": 0.30076962954145187,
+      "mean_top1_cross_query_disagreement": 0.7051244437924796,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 154887,
+        "positives": 9110,
+        "prevalence": 0.0588170730919961,
+        "AUROC": 0.989882413816023,
+        "AUPRC": 0.8367109126507722
+      },
+      "visual_bias_candidate": {
+        "n": 154887,
+        "positives": 9110,
+        "prevalence": 0.0588170730919961,
+        "AUROC": 0.5000298005659473,
+        "AUPRC": 0.05882171973368847
+      },
+      "query_bias_candidate": {
+        "n": 154887,
+        "positives": 9110,
+        "prevalence": 0.0588170730919961,
+        "AUROC": 0.9999965701036515,
+        "AUPRC": 0.9998902425639337
+      }
+    },
+    {
+      "video": "dancetrack0010",
+      "observations": 6740,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 3472682.181071332,
+        "candidate_visual": 231075.30156446825,
+        "query_marginal": 2973958.61934569,
+        "interaction": 267648.2601611742
+      },
+      "query_pair_mean_spearman": 0.3579254769239365,
+      "mean_top1_cross_query_disagreement": 0.5878869003960687,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 114580,
+        "positives": 6999,
+        "prevalence": 0.06108395880607436,
+        "AUROC": 0.6133249566269122,
+        "AUPRC": 0.0721565308348672
+      },
+      "visual_bias_candidate": {
+        "n": 114580,
+        "positives": 6999,
+        "prevalence": 0.06108395880607436,
+        "AUROC": 0.5089895900485442,
+        "AUPRC": 0.06345786782822962
+      },
+      "query_bias_candidate": {
+        "n": 114580,
+        "positives": 6999,
+        "prevalence": 0.06108395880607436,
+        "AUROC": 0.6466498953511332,
+        "AUPRC": 0.13286311726177077
+      }
+    },
+    {
+      "video": "dancetrack0014",
+      "observations": 12289,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 4367352.4910596665,
+        "candidate_visual": 762690.8551643877,
+        "query_marginal": 2244776.3152150116,
+        "interaction": 1359885.3206802655
+      },
+      "query_pair_mean_spearman": 0.2819995912641135,
+      "mean_top1_cross_query_disagreement": 0.721285022737275,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 208913,
+        "positives": 12721,
+        "prevalence": 0.06089137583587426,
+        "AUROC": 0.7518437581702618,
+        "AUPRC": 0.14346983999904478
+      },
+      "visual_bias_candidate": {
+        "n": 208913,
+        "positives": 12721,
+        "prevalence": 0.06089137583587426,
+        "AUROC": 0.4976731518060639,
+        "AUPRC": 0.060679030204696054
+      },
+      "query_bias_candidate": {
+        "n": 208913,
+        "positives": 12721,
+        "prevalence": 0.06089137583587426,
+        "AUROC": 0.7601374198222082,
+        "AUPRC": 0.13293545897183467
+      }
+    },
+    {
+      "video": "dancetrack0018",
+      "observations": 2507,
+      "frames": 503,
+      "score_decomposition": {
+        "total_ss": 932421.8508820042,
+        "candidate_visual": 138726.20308838083,
+        "query_marginal": 109118.61372375081,
+        "interaction": 684577.0340698727
+      },
+      "query_pair_mean_spearman": 0.31187120971649096,
+      "mean_top1_cross_query_disagreement": 0.6190942579815233,
+      "valid_query_pairs": 68408,
+      "source_candidate": {
+        "n": 42619,
+        "positives": 2505,
+        "prevalence": 0.05877660198503015,
+        "AUROC": 0.4818643612212181,
+        "AUPRC": 0.059353549176965954
+      },
+      "visual_bias_candidate": {
+        "n": 42619,
+        "positives": 2505,
+        "prevalence": 0.05877660198503015,
+        "AUROC": 0.5010896788464254,
+        "AUPRC": 0.058883430286480305
+      },
+      "query_bias_candidate": {
+        "n": 42619,
+        "positives": 2505,
+        "prevalence": 0.05877660198503015,
+        "AUROC": 0.4124045671433222,
+        "AUPRC": 0.08054121513653985
+      }
+    },
+    {
+      "video": "dancetrack0019",
+      "observations": 15880,
+      "frames": 2402,
+      "score_decomposition": {
+        "total_ss": 2842154.959920794,
+        "candidate_visual": 363703.54214974184,
+        "query_marginal": 1915496.487753535,
+        "interaction": 562954.9300175174
+      },
+      "query_pair_mean_spearman": 0.37586395090925595,
+      "mean_top1_cross_query_disagreement": 0.6284989224665711,
+      "valid_query_pairs": 326672,
+      "source_candidate": {
+        "n": 269960,
+        "positives": 15800,
+        "prevalence": 0.05852718921321677,
+        "AUROC": 0.9302322954891367,
+        "AUPRC": 0.6085571257237974
+      },
+      "visual_bias_candidate": {
+        "n": 269960,
+        "positives": 15800,
+        "prevalence": 0.05852718921321677,
+        "AUROC": 0.5003833006119937,
+        "AUPRC": 0.058612821215262206
+      },
+      "query_bias_candidate": {
+        "n": 269960,
+        "positives": 15800,
+        "prevalence": 0.05852718921321677,
+        "AUROC": 0.9998426188227888,
+        "AUPRC": 0.9949622166246851
+      }
+    },
+    {
+      "video": "dancetrack0025",
+      "observations": 6731,
+      "frames": 803,
+      "score_decomposition": {
+        "total_ss": 624251.5419027603,
+        "candidate_visual": 123689.07182275415,
+        "query_marginal": 356648.53141265386,
+        "interaction": 143913.93866735214
+      },
+      "query_pair_mean_spearman": 0.4708328754914171,
+      "mean_top1_cross_query_disagreement": 0.5717621419676219,
+      "valid_query_pairs": 109208,
+      "source_candidate": {
+        "n": 114427,
+        "positives": 6580,
+        "prevalence": 0.05750391079028551,
+        "AUROC": 0.7370659705268042,
+        "AUPRC": 0.1487441940433154
+      },
+      "visual_bias_candidate": {
+        "n": 114427,
+        "positives": 6580,
+        "prevalence": 0.05750391079028551,
+        "AUROC": 0.5035912972850229,
+        "AUPRC": 0.058164778362918994
+      },
+      "query_bias_candidate": {
+        "n": 114427,
+        "positives": 6580,
+        "prevalence": 0.05750391079028551,
+        "AUROC": 0.8744749506244958,
+        "AUPRC": 0.32585549447828455
+      }
+    },
+    {
+      "video": "dancetrack0026",
+      "observations": 3691,
+      "frames": 302,
+      "score_decomposition": {
+        "total_ss": 3069702.4383927505,
+        "candidate_visual": 94768.75566510488,
+        "query_marginal": 2742355.066904662,
+        "interaction": 232578.6158229837
+      },
+      "query_pair_mean_spearman": 0.2562312446942592,
+      "mean_top1_cross_query_disagreement": 0.7480035060381766,
+      "valid_query_pairs": 41072,
+      "source_candidate": {
+        "n": 62747,
+        "positives": 3600,
+        "prevalence": 0.05737326087302979,
+        "AUROC": 0.3165507055866457,
+        "AUPRC": 0.039320379233652676
+      },
+      "visual_bias_candidate": {
+        "n": 62747,
+        "positives": 3600,
+        "prevalence": 0.05737326087302979,
+        "AUROC": 0.49769377802574755,
+        "AUPRC": 0.05666857816186016
+      },
+      "query_bias_candidate": {
+        "n": 62747,
+        "positives": 3600,
+        "prevalence": 0.05737326087302979,
+        "AUROC": 0.43759615872318125,
+        "AUPRC": 0.09753454348415064
+      }
+    },
+    {
+      "video": "dancetrack0030",
+      "observations": 7533,
+      "frames": 1263,
+      "score_decomposition": {
+        "total_ss": 1507245.1845312635,
+        "candidate_visual": 168228.54214317666,
+        "query_marginal": 1206288.924324786,
+        "interaction": 132727.71806330068
+      },
+      "query_pair_mean_spearman": 0.5101578873829811,
+      "mean_top1_cross_query_disagreement": 0.4769689348423451,
+      "valid_query_pairs": 171768,
+      "source_candidate": {
+        "n": 128061,
+        "positives": 7517,
+        "prevalence": 0.05869858895370175,
+        "AUROC": 0.3047220295663605,
+        "AUPRC": 0.040205086255788856
+      },
+      "visual_bias_candidate": {
+        "n": 128061,
+        "positives": 7517,
+        "prevalence": 0.05869858895370175,
+        "AUROC": 0.4997193148763696,
+        "AUPRC": 0.05863646678287441
+      },
+      "query_bias_candidate": {
+        "n": 128061,
+        "positives": 7517,
+        "prevalence": 0.05869858895370175,
+        "AUROC": 0.3750165914520839,
+        "AUPRC": 0.09071600111026634
+      }
+    },
+    {
+      "video": "dancetrack0034",
+      "observations": 10195,
+      "frames": 923,
+      "score_decomposition": {
+        "total_ss": 5199091.998367698,
+        "candidate_visual": 1531559.3273951432,
+        "query_marginal": 2011798.8318225641,
+        "interaction": 1655733.8391499913
+      },
+      "query_pair_mean_spearman": 0.39489230576955997,
+      "mean_top1_cross_query_disagreement": 0.6631827162067422,
+      "valid_query_pairs": 125528,
+      "source_candidate": {
+        "n": 173315,
+        "positives": 10148,
+        "prevalence": 0.05855234688284338,
+        "AUROC": 0.7214114796851951,
+        "AUPRC": 0.11501690211821615
+      },
+      "visual_bias_candidate": {
+        "n": 173315,
+        "positives": 10148,
+        "prevalence": 0.05855234688284338,
+        "AUROC": 0.5004407445047867,
+        "AUPRC": 0.058618161421103245
+      },
+      "query_bias_candidate": {
+        "n": 173315,
+        "positives": 10148,
+        "prevalence": 0.05855234688284338,
+        "AUROC": 0.8748919818345622,
+        "AUPRC": 0.33179663233611245
+      }
+    },
+    {
+      "video": "dancetrack0035",
+      "observations": 4927,
+      "frames": 703,
+      "score_decomposition": {
+        "total_ss": 2170537.6820733477,
+        "candidate_visual": 311531.3890706729,
+        "query_marginal": 1149337.4944433086,
+        "interaction": 709668.7985593663
+      },
+      "query_pair_mean_spearman": 0.23155235066999758,
+      "mean_top1_cross_query_disagreement": 0.6587419462806459,
+      "valid_query_pairs": 95608,
+      "source_candidate": {
+        "n": 83759,
+        "positives": 4916,
+        "prevalence": 0.05869220024116811,
+        "AUROC": 0.5768465075462254,
+        "AUPRC": 0.06574228384255908
+      },
+      "visual_bias_candidate": {
+        "n": 83759,
+        "positives": 4916,
+        "prevalence": 0.05869220024116811,
+        "AUROC": 0.499682362019123,
+        "AUPRC": 0.05864110883141037
+      },
+      "query_bias_candidate": {
+        "n": 83759,
+        "positives": 4916,
+        "prevalence": 0.05869220024116811,
+        "AUROC": 0.6874738404170313,
+        "AUPRC": 0.16629456734997633
+      }
+    },
+    {
+      "video": "dancetrack0041",
+      "observations": 14320,
+      "frames": 1003,
+      "score_decomposition": {
+        "total_ss": 1340246.002660235,
+        "candidate_visual": 364029.14398695633,
+        "query_marginal": 712524.7366983586,
+        "interaction": 263692.1219749199
+      },
+      "query_pair_mean_spearman": 0.4923925227672367,
+      "mean_top1_cross_query_disagreement": 0.6647410709049312,
+      "valid_query_pairs": 136408,
+      "source_candidate": {
+        "n": 243440,
+        "positives": 13974,
+        "prevalence": 0.05740223463687151,
+        "AUROC": 0.4265570970431919,
+        "AUPRC": 0.04490086590547917
+      },
+      "visual_bias_candidate": {
+        "n": 243440,
+        "positives": 13974,
+        "prevalence": 0.05740223463687151,
+        "AUROC": 0.504794104318748,
+        "AUPRC": 0.05810982967832635
+      },
+      "query_bias_candidate": {
+        "n": 243440,
+        "positives": 13974,
+        "prevalence": 0.05740223463687151,
+        "AUROC": 0.312782721623247,
+        "AUPRC": 0.08131983240223464
+      }
+    },
+    {
+      "video": "dancetrack0043",
+      "observations": 1363,
+      "frames": 183,
+      "score_decomposition": {
+        "total_ss": 387046.4493748869,
+        "candidate_visual": 38496.18677461443,
+        "query_marginal": 300466.62924233684,
+        "interaction": 48083.633357935716
+      },
+      "query_pair_mean_spearman": 0.3282381867302311,
+      "mean_top1_cross_query_disagreement": 0.6701221472195433,
+      "valid_query_pairs": 24888,
+      "source_candidate": {
+        "n": 23171,
+        "positives": 1327,
+        "prevalence": 0.057269863191057785,
+        "AUROC": 0.9818335385518495,
+        "AUPRC": 0.7694269201338769
+      },
+      "visual_bias_candidate": {
+        "n": 23171,
+        "positives": 1327,
+        "prevalence": 0.057269863191057785,
+        "AUROC": 0.5014427162973952,
+        "AUPRC": 0.0577563029324075
+      },
+      "query_bias_candidate": {
+        "n": 23171,
+        "positives": 1327,
+        "prevalence": 0.057269863191057785,
+        "AUROC": 0.9991759750961362,
+        "AUPRC": 0.9735876742479824
+      }
+    },
+    {
+      "video": "dancetrack0047",
+      "observations": 9064,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 1490685.6435037006,
+        "candidate_visual": 139721.98707108735,
+        "query_marginal": 884400.8573150486,
+        "interaction": 466562.7991175648
+      },
+      "query_pair_mean_spearman": 0.21147867085321254,
+      "mean_top1_cross_query_disagreement": 0.7007297931641483,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 154088,
+        "positives": 8918,
+        "prevalence": 0.05787601889829189,
+        "AUROC": 0.7337335458085866,
+        "AUPRC": 0.10012735283220757
+      },
+      "visual_bias_candidate": {
+        "n": 154088,
+        "positives": 8918,
+        "prevalence": 0.05787601889829189,
+        "AUROC": 0.49940501197697196,
+        "AUPRC": 0.057747851838052006
+      },
+      "query_bias_candidate": {
+        "n": 154088,
+        "positives": 8918,
+        "prevalence": 0.05787601889829189,
+        "AUROC": 0.7497485706413171,
+        "AUPRC": 0.1967784642541924
+      }
+    },
+    {
+      "video": "dancetrack0058",
+      "observations": 10798,
+      "frames": 1601,
+      "score_decomposition": {
+        "total_ss": 5945792.137386894,
+        "candidate_visual": 488074.15425673855,
+        "query_marginal": 4823622.678745414,
+        "interaction": 634095.3043847401
+      },
+      "query_pair_mean_spearman": 0.37198649915931453,
+      "mean_top1_cross_query_disagreement": 0.6299325789028917,
+      "valid_query_pairs": 217736,
+      "source_candidate": {
+        "n": 183566,
+        "positives": 11319,
+        "prevalence": 0.06166174563917065,
+        "AUROC": 0.6001645238533698,
+        "AUPRC": 0.07190816359059847
+      },
+      "visual_bias_candidate": {
+        "n": 183566,
+        "positives": 11319,
+        "prevalence": 0.06166174563917065,
+        "AUROC": 0.5032695460226972,
+        "AUPRC": 0.0621734805301696
+      },
+      "query_bias_candidate": {
+        "n": 183566,
+        "positives": 11319,
+        "prevalence": 0.06166174563917065,
+        "AUROC": 0.6407249716515611,
+        "AUPRC": 0.11302604798239181
+      }
+    },
+    {
+      "video": "dancetrack0063",
+      "observations": 7930,
+      "frames": 1000,
+      "score_decomposition": {
+        "total_ss": 2042473.1773680397,
+        "candidate_visual": 232499.90571995586,
+        "query_marginal": 1226769.7802783898,
+        "interaction": 583203.4913696941
+      },
+      "query_pair_mean_spearman": 0.28137557344616143,
+      "mean_top1_cross_query_disagreement": 0.6845441176470581,
+      "valid_query_pairs": 136000,
+      "source_candidate": {
+        "n": 134810,
+        "positives": 6646,
+        "prevalence": 0.04929901342630369,
+        "AUROC": 0.5173104899039274,
+        "AUPRC": 0.04662868271087298
+      },
+      "visual_bias_candidate": {
+        "n": 134810,
+        "positives": 6646,
+        "prevalence": 0.04929901342630369,
+        "AUROC": 0.5283898569695765,
+        "AUPRC": 0.052887621094722934
+      },
+      "query_bias_candidate": {
+        "n": 134810,
+        "positives": 6646,
+        "prevalence": 0.04929901342630369,
+        "AUROC": 0.6237476982616024,
+        "AUPRC": 0.11972617546388038
+      }
+    },
+    {
+      "video": "dancetrack0065",
+      "observations": 3486,
+      "frames": 702,
+      "score_decomposition": {
+        "total_ss": 3543159.8292151066,
+        "candidate_visual": 178348.69598472785,
+        "query_marginal": 3112306.98152954,
+        "interaction": 252504.15170083888
+      },
+      "query_pair_mean_spearman": 0.32380458593693884,
+      "mean_top1_cross_query_disagreement": 0.5875230434053966,
+      "valid_query_pairs": 95472,
+      "source_candidate": {
+        "n": 59262,
+        "positives": 3468,
+        "prevalence": 0.058519793459552494,
+        "AUROC": 0.8460106885606837,
+        "AUPRC": 0.2265467482686475
+      },
+      "visual_bias_candidate": {
+        "n": 59262,
+        "positives": 3468,
+        "prevalence": 0.058519793459552494,
+        "AUROC": 0.4998829728686829,
+        "AUPRC": 0.05849922230993093
+      },
+      "query_bias_candidate": {
+        "n": 59262,
+        "positives": 3468,
+        "prevalence": 0.058519793459552494,
+        "AUROC": 0.9998386923325089,
+        "AUPRC": 0.9948364888123924
+      }
+    },
+    {
+      "video": "dancetrack0073",
+      "observations": 6881,
+      "frames": 703,
+      "score_decomposition": {
+        "total_ss": 2309980.343607657,
+        "candidate_visual": 233527.1312443301,
+        "query_marginal": 1277973.7948752944,
+        "interaction": 798479.4174880323
+      },
+      "query_pair_mean_spearman": 0.22000057354159533,
+      "mean_top1_cross_query_disagreement": 0.7194795414609659,
+      "valid_query_pairs": 95608,
+      "source_candidate": {
+        "n": 116977,
+        "positives": 4336,
+        "prevalence": 0.037067115757798544,
+        "AUROC": 0.7288916198381096,
+        "AUPRC": 0.07435866028563769
+      },
+      "visual_bias_candidate": {
+        "n": 116977,
+        "positives": 4336,
+        "prevalence": 0.037067115757798544,
+        "AUROC": 0.4914345524990393,
+        "AUPRC": 0.03507142602325122
+      },
+      "query_bias_candidate": {
+        "n": 116977,
+        "positives": 4336,
+        "prevalence": 0.037067115757798544,
+        "AUROC": 0.8054394048348292,
+        "AUPRC": 0.1575352419706438
+      }
+    },
+    {
+      "video": "dancetrack0077",
+      "observations": 10780,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 644466.3002768876,
+        "candidate_visual": 203355.7302908799,
+        "query_marginal": 226196.70506779692,
+        "interaction": 214913.86491821086
+      },
+      "query_pair_mean_spearman": 0.4279496924969635,
+      "mean_top1_cross_query_disagreement": 0.6434587550731009,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 183260,
+        "positives": 10765,
+        "prevalence": 0.05874167848957765,
+        "AUROC": 0.6751246008369259,
+        "AUPRC": 0.11028150211325176
+      },
+      "visual_bias_candidate": {
+        "n": 183260,
+        "positives": 10765,
+        "prevalence": 0.05874167848957765,
+        "AUROC": 0.5002179119013486,
+        "AUPRC": 0.058782074722035296
+      },
+      "query_bias_candidate": {
+        "n": 183260,
+        "positives": 10765,
+        "prevalence": 0.05874167848957765,
+        "AUROC": 0.9999565204788544,
+        "AUPRC": 0.99860853432282
+      }
+    },
+    {
+      "video": "dancetrack0079",
+      "observations": 13997,
+      "frames": 1202,
+      "score_decomposition": {
+        "total_ss": 5259532.0876138555,
+        "candidate_visual": 740376.1974424538,
+        "query_marginal": 3303201.6268202257,
+        "interaction": 1215954.263351176
+      },
+      "query_pair_mean_spearman": 0.30501381849252657,
+      "mean_top1_cross_query_disagreement": 0.6917820788881262,
+      "valid_query_pairs": 163472,
+      "source_candidate": {
+        "n": 237949,
+        "positives": 7243,
+        "prevalence": 0.030439295815489875,
+        "AUROC": 0.6628863814783093,
+        "AUPRC": 0.04056988017050711
+      },
+      "visual_bias_candidate": {
+        "n": 237949,
+        "positives": 7243,
+        "prevalence": 0.030439295815489875,
+        "AUROC": 0.4594632861936731,
+        "AUPRC": 0.025992959104881676
+      },
+      "query_bias_candidate": {
+        "n": 237949,
+        "positives": 7243,
+        "prevalence": 0.030439295815489875,
+        "AUROC": 0.6533216890972053,
+        "AUPRC": 0.0585745849900125
+      }
+    },
+    {
+      "video": "dancetrack0081",
+      "observations": 17148,
+      "frames": 984,
+      "score_decomposition": {
+        "total_ss": 7424133.356302623,
+        "candidate_visual": 1373342.9305869625,
+        "query_marginal": 4554266.112430885,
+        "interaction": 1496524.3132847755
+      },
+      "query_pair_mean_spearman": 0.46637929965558184,
+      "mean_top1_cross_query_disagreement": 0.6762090506934465,
+      "valid_query_pairs": 133824,
+      "source_candidate": {
+        "n": 291516,
+        "positives": 17103,
+        "prevalence": 0.058669163956695344,
+        "AUROC": 0.7637277668734658,
+        "AUPRC": 0.12799983820397107
+      },
+      "visual_bias_candidate": {
+        "n": 291516,
+        "positives": 17103,
+        "prevalence": 0.058669163956695344,
+        "AUROC": 0.49970251447767283,
+        "AUPRC": 0.05863149915018731
+      },
+      "query_bias_candidate": {
+        "n": 291516,
+        "positives": 17103,
+        "prevalence": 0.058669163956695344,
+        "AUROC": 0.8749385050999771,
+        "AUPRC": 0.33245859575460696
+      }
+    },
+    {
+      "video": "dancetrack0090",
+      "observations": 11660,
+      "frames": 1004,
+      "score_decomposition": {
+        "total_ss": 2173145.190431092,
+        "candidate_visual": 798616.8194022912,
+        "query_marginal": 706383.0610428021,
+        "interaction": 668145.3099859979
+      },
+      "query_pair_mean_spearman": 0.48842239950893607,
+      "mean_top1_cross_query_disagreement": 0.6036515701898301,
+      "valid_query_pairs": 136544,
+      "source_candidate": {
+        "n": 198220,
+        "positives": 11617,
+        "prevalence": 0.0586065987286853,
+        "AUROC": 0.5975245411643634,
+        "AUPRC": 0.07204217794848071
+      },
+      "visual_bias_candidate": {
+        "n": 198220,
+        "positives": 11617,
+        "prevalence": 0.0586065987286853,
+        "AUROC": 0.4995384843129069,
+        "AUPRC": 0.05855345331287585
+      },
+      "query_bias_candidate": {
+        "n": 198220,
+        "positives": 11617,
+        "prevalence": 0.0586065987286853,
+        "AUROC": 0.624971195532762,
+        "AUPRC": 0.14233031119823572
+      }
+    },
+    {
+      "video": "dancetrack0094",
+      "observations": 10522,
+      "frames": 603,
+      "score_decomposition": {
+        "total_ss": 2936886.1606591227,
+        "candidate_visual": 458061.64208660746,
+        "query_marginal": 2087288.505299275,
+        "interaction": 391536.0132732399
+      },
+      "query_pair_mean_spearman": 0.4148239111998897,
+      "mean_top1_cross_query_disagreement": 0.6930909179592241,
+      "valid_query_pairs": 82008,
+      "source_candidate": {
+        "n": 178874,
+        "positives": 10392,
+        "prevalence": 0.05809676084841844,
+        "AUROC": 0.2773207526165422,
+        "AUPRC": 0.03724098115558322
+      },
+      "visual_bias_candidate": {
+        "n": 178874,
+        "positives": 10392,
+        "prevalence": 0.05809676084841844,
+        "AUROC": 0.5002169973196974,
+        "AUPRC": 0.05816546139978599
+      },
+      "query_bias_candidate": {
+        "n": 178874,
+        "positives": 10392,
+        "prevalence": 0.05809676084841844,
+        "AUROC": 0.2501928989446944,
+        "AUPRC": 0.07597268726331642
+      }
+    },
+    {
+      "video": "dancetrack0097",
+      "observations": 4585,
+      "frames": 1203,
+      "score_decomposition": {
+        "total_ss": 3469120.01308951,
+        "candidate_visual": 162916.11318083064,
+        "query_marginal": 3024959.0226223636,
+        "interaction": 281244.87728631665
+      },
+      "query_pair_mean_spearman": 0.26763300083125524,
+      "mean_top1_cross_query_disagreement": 0.5617818199599043,
+      "valid_query_pairs": 163608,
+      "source_candidate": {
+        "n": 77945,
+        "positives": 4583,
+        "prevalence": 0.05879787029315543,
+        "AUROC": 0.7622885551479293,
+        "AUPRC": 0.10971292304121738
+      },
+      "visual_bias_candidate": {
+        "n": 77945,
+        "positives": 4583,
+        "prevalence": 0.05879787029315543,
+        "AUROC": 0.5000987484175671,
+        "AUPRC": 0.05881337195475662
+      },
+      "query_bias_candidate": {
+        "n": 77945,
+        "positives": 4583,
+        "prevalence": 0.05879787029315543,
+        "AUROC": 0.7499931844824296,
+        "AUPRC": 0.19991275899672847
+      }
+    }
+  ]
+}
