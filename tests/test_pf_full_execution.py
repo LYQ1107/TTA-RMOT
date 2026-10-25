@@ -128,6 +128,15 @@ def test_optional_matched_reference_does_not_invalidate_original_zero_receipts()
     assert new_config == runner.episode_config(args)
 
 
+def test_initial_sign_gate_is_per_episode_not_global_update_count():
+    runner.validate_initial_sign(True, 0, 0)
+    runner.validate_initial_sign(True, 1, 1)
+    runner.validate_initial_sign(False, 0, 1)
+    # A later episode also starts at zero, regardless of earlier optimizer steps.
+    with pytest.raises(RuntimeError, match="this episode"):
+        runner.validate_initial_sign(True, 0, 1)
+
+
 def test_matched_source_uses_real_zero_margins_without_modifying_historical_scores(tmp_path):
     from flex_tta.runtime.pf_receipts import atomic_json, file_sha
     from flex_tta.runtime.pf_source_reference import source_frames

@@ -17,6 +17,8 @@
 - User already approved rebuilding the matched Frozen baseline. Implement a common frozen reference using actual complete ZERO_UPDATE margins, preserving all old logits, supplement, original traces and separate historical comparisons. No invented logits: downstream methods read the real scalar margins at their chronological frame.
 - Before opening GT or continuing TTA: diagnose every full-run historical sign difference using original/cached GPU forwards, require zero original/cached sign differences, then require exact independent CPU score-to-MOT replay on all 425 sealed episodes. This replay is not claimed as an independent second GPU model experiment.
 - All six methods use the same actual-source reference for comparison and downstream historical evidence; no gain is measured against historical 8.206. 41 focused tests passed in 10.34 s, including immutable matched source streams and old receipt compatibility. Full-run diagnosis/reference sealing remain pending.
+- Later review fixed an existing gate bug: initial-source checking used the global optimizer count instead of this episode's count. Enforce it before backward for every matched-reference episode; full audit rejects any initial mismatch. 42 focused tests pass in 10.04 s. This does not modify live ZERO workers or their already sealed outputs.
+- Added an all-six-only final scientific report generator. Explicitly separate average worker FPS, actual scheduler-wall FPS and extra validation/evaluation cost; do not infer 4x speedup from four GPU processes. Report generation and all scientific results remain pending.
 
 Concise experimental log (latest first).
 

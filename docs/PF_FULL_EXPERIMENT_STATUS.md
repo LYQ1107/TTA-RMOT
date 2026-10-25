@@ -94,6 +94,14 @@ diagnosis. Any actual original/cached sign difference still blocks the suite.
 Only after these checks may independent TrackEval open GT. Original historical audit and
 matched-reference audit are retained separately. 41 focused tests now pass (10.34 s).
 
+Subsequent code review found the optional initial-sign gate checked the global optimizer count,
+which could miss a later episode after an earlier episode had updated. It now uses this episode's
+step count and frame-local sign differences, before backward; all matched-reference GPU methods
+enable it. Full audit also rejects such mismatches. 42 focused tests pass in 10.04 s.
+The final report generator requires all six complete official results and 425 attribution records
+per method. Cost reporting distinguishes summed-worker FPS from scheduler-wall FPS;
+the latter includes launcher waits but excludes preflight/evaluation/attribution.
+
 Official summary/detail outputs are published by `summarize_pf_full.py`; per-video pooling uses the official metric classes.
 `analyze_pf_full_offline.py` reads GT only after full sealing/audit, reports IoU-0.5 target recovery/loss and duplicate-aware FP plus candidate ranking.
 `verify_pf_guard_equivalence.py` selects a source-positive episode without GT and compares a complete direct GPU GUARD episode to CPU-derived results.

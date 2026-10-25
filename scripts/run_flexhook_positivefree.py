@@ -174,6 +174,11 @@ def frozen_frames(args, source, video, expression, sentence):
     return score_frames(source, video, sentence)
 
 
+def validate_initial_sign(strict, episode_optimizer_steps, frame_sign_mismatches):
+    if strict and episode_optimizer_steps == 0 and frame_sign_mismatches:
+        raise RuntimeError("initial source sign mismatch in this episode; stop before adapting")
+
+
 def validate_frames(args, tracks, scores):
     if args.scope == "full" and (set(tracks) != set(scores) or
             any(set(tracks[t]) != set(scores[t]) for t in tracks)):
@@ -399,6 +404,7 @@ def _model_run(args, source: dict, videos: list[str]):
                     if will_update:
                         optimizer.zero_grad(set_to_none=True)
                     prediction_margins = {}
+                    initial_frame_sign_mismatches = 0
                     graph_logits, graph_source, feature_chunks, graph_ids = [], [], [], []
                     for batch in active_batches:
                         with torch.set_grad_enabled(will_update):
@@ -420,10 +426,14 @@ def _model_run(args, source: dict, videos: list[str]):
                             for i, val, src in zip(ids, output.detach().tolist(), frozen.detach().tolist()):
                                 prediction_margins[int(i)] = float(val)
                                 if args.method == "ZERO_UPDATE" or episode_optimizer_steps == 0:
-                                    stats["sign_mismatches_before_updates"] += int((val > 0) != (src > 0))
+                                    mismatch = int((val > 0) != (src > 0))
+                                    stats["sign_mismatches_before_updates"] += mismatch
+                                    initial_frame_sign_mismatches += mismatch
                                     stats["source_comparison_rows"] += 1
                                     stats["source_abs_error_sum"] += abs(val - src)
                                     stats["source_max_abs_error"] = max(stats["source_max_abs_error"], abs(val - src))
+                    validate_initial_sign(args.strict_initial_sign, episode_optimizer_steps,
+                                          initial_frame_sign_mismatches)
                     allowed_update = False
                     support = 0
                     loss_value = None
@@ -454,8 +464,6 @@ def _model_run(args, source: dict, videos: list[str]):
                         i for i, val in prediction_margins.items()
                         if val > 0 or (args.method == "PF_RANK_GUARD" and source_scores[i] > 0)
                     }
-                    if args.strict_initial_sign and stats["optimizer_steps"] == 0 and stats["sign_mismatches_before_updates"]:
-                        raise RuntimeError("zero-update source sign mismatch detected; stop before adapting")
                     for i in sorted(selected):
                         handle.write(tracks[t][i] + "\n")
                     handle.flush()

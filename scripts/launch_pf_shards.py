@@ -150,6 +150,8 @@ def main():
                            "--videos", *shard["videos"], "--output-root", str(shard_root)]
                 if matched_reference and method != "ZERO_UPDATE":
                     command += ["--matched-frozen-root", matched_reference]
+                    if method != "RELATIVE_ONLY":
+                        command += ["--strict-initial-sign"]
                 log = (shard_root / "stdout.log").open("a")
                 log.write(json.dumps(dict(event="launch_attempt", time=time.time(), command=command, gpu=gpu))+"\n")
                 log.flush()

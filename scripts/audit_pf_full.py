@@ -37,6 +37,9 @@ def audit(output_root, method, dataset_root, tracker_root, matched_frozen_root=N
             margins = path.parent / "candidate_margins.jsonl.gz"
             if receipt["status"] != "complete" or not receipt["full_frame_coverage"]:
                 raise ValueError(f"episode is not full/sealed: {path}")
+            if matched_frozen_root and method not in {"ZERO_UPDATE", "RELATIVE_ONLY"} and \
+                    receipt.get("counter_delta", {}).get("sign_mismatches_before_updates", 0):
+                raise ValueError(f"initial adapted model does not match Frozen in this episode: {path}")
             if file_sha(path) != receipt["prediction_sha256"] or file_sha(margins) != receipt["margins_sha256"]:
                 raise ValueError(f"episode hash mismatch: {path}")
             selector = CausalRelativeSelector()
