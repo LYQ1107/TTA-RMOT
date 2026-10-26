@@ -24,6 +24,7 @@ from flex_uda.data.target_dance import TargetDanceDataset
 from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda,frozen_copy,ema_update
 from flex_uda.losses.objectives import supervised_ce,presence_loss,select_pseudo,pseudo_bce,consistency,equivalent_query,exclusive_query_partner,exclusive_relation_loss
 from flex_uda.adaptation.tracklet_memory import TrackletMemory
+from flex_uda.numerics import reconcile_resume
 
 CHECKPOINT=Path('/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth')
 SOURCE_SHA='71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613'
@@ -171,7 +172,7 @@ def train(config,output,*,smoke=False,resume=False):
         counters.update(tracking.get('counters',{}));src_seen={tuple(r) for r in tracking.get('source_seen',[])}
         tgt_seen={tuple(r) for r in tracking.get('target_seen',[])};grad_nonzero=tracking.get('grad_nonzero',0)
         target_grad_checks=tracking.get('target_grad_checks',[]);memory.rows=tracking.get('memory',{})
-        prior_wall=tracking.get('wall_seconds',0.)
+        prior_wall=tracking.get('wall_seconds',0.)+reconcile_resume(output,state)
     atomic_json(output/'config.json',config)
     if resume and (output/'provenance.json').exists():
         folder=output/'provenance_attempts';folder.mkdir(exist_ok=True)
@@ -188,8 +189,12 @@ def train(config,output,*,smoke=False,resume=False):
     inputs=Inputs(model,tokenizer,device,source);all_texts=sorted({r['query_text'] for r in targets.rows})
     if not resume:atomic_json(output/'frozen_equivalence.json',frozen_equivalence(model,inputs,targets.rows[0]))
     evidence_path=output/'pseudo_evidence.jsonl'
-    for step in range(start_step,total_steps):
+    step=start_step;retry_for_step=0
+    while step<total_steps:
         src=source_plan[step%len(source_plan)];tgt=target_plan[step%len(target_plan)]
+        rng_before=dict(python=random.getstate(),numpy=np.random.get_state(),torch=torch.get_rng_state(),cuda=torch.cuda.get_rng_state())
+        counters_before=counters.copy();memory_before=copy.deepcopy(memory.rows);target_checks_before=len(target_grad_checks)
+        evidence_bytes=evidence_path.stat().st_size if evidence_path.exists() else 0
         optimizer.zero_grad(set_to_none=True);parts=Counter();source_rows=0;target_rows=0
         source_batches=list(inputs.batches('source',src));source_n=sum(len(x[2]) for x in source_batches)
         for prepared,labels,candidates,cache in source_batches:
@@ -205,7 +210,6 @@ def train(config,output,*,smoke=False,resume=False):
                 weighted=loss*(len(candidates)/source_n)
             if not torch.isfinite(weighted):raise RuntimeError('nonfinite actual supervised source objective')
             scaler.scale(weighted).backward();parts['source_loss']+=float(weighted.detach());source_rows+=len(candidates)
-        src_seen.add((src['video_id'],src['expression_id']))
         if method!='SOURCE_REHEARSAL':
             batches=list(inputs.batches('target',tgt));target_n=sum(len(x[2]) for x in batches)
             for prepared,_,candidates,cache in batches:
@@ -253,14 +257,32 @@ def train(config,output,*,smoke=False,resume=False):
                 scaler.scale(weighted).backward();parts['target_loss']+=float(weighted.detach());target_rows+=len(candidates)
                 if uses_teacher:
                     for j,(track,history) in enumerate(candidates):
-                        append_json(evidence_path,dict(video_id=tgt['video_id'],track_id=track,query_id=tgt['expression_id'],frame_id=tgt['frame'],
+                        append_json(evidence_path,dict(optimizer_step=step+1,video_id=tgt['video_id'],track_id=track,query_id=tgt['expression_id'],frame_id=tgt['frame'],
                             teacher_probability=float(teacher[j].sigmoid()),student_probability=float(margins[j].detach().float().sigmoid()),
                             objectness=float(history[-1].raw_line.split(',')[6]),temporal_consistency=None,
                             augmentation_consistency=1-abs(float(teacher[j].sigmoid())-float(margins[j].detach().float().sigmoid())),
                             semantic_teacher_score=None,pseudo_state={-1:'UNKNOWN',0:'NEG',1:'POS'}[int(state[j])],weight=int(state[j]>=0)))
-            tgt_seen.add((tgt['video_id'],tgt['expression_id']))
         scaler.unscale_(optimizer);norm=torch.nn.utils.clip_grad_norm_(trainable,config['optimizer']['grad_clip'])
-        if not torch.isfinite(norm):raise RuntimeError('nonfinite real UDA gradient')
+        if not torch.isfinite(norm):
+            if not scaler.is_enabled() or retry_for_step>=8:raise RuntimeError('nonfinite real UDA gradient after same-sample AMP backoff')
+            old_scale=scaler.get_scale();scaler.update(new_scale=old_scale/2)
+            counters=counters_before;memory.rows=memory_before;del target_grad_checks[target_checks_before:]
+            if evidence_path.exists():
+                with evidence_path.open('r+b') as stream:
+                    stream.seek(evidence_bytes);rejected=stream.read();stream.truncate(evidence_bytes)
+                if rejected:
+                    rejected_dir=output/'rejected_numeric_evidence';rejected_dir.mkdir(exist_ok=True)
+                    (rejected_dir/f'step{step+1}_retry{retry_for_step+1}.jsonl').write_bytes(rejected)
+            random.setstate(rng_before['python']);np.random.set_state(rng_before['numpy'])
+            torch.set_rng_state(rng_before['torch']);torch.cuda.set_rng_state(rng_before['cuda'])
+            retry_for_step+=1;counters['amp_same_sample_retries']+=1
+            append_json(output/'numerical_retries.jsonl',dict(step=step+1,source_video=src['video_id'],source_frame=src['frame'],
+                source_expression=src['expression_id'],retry=retry_for_step,previous_scale=old_scale,new_scale=scaler.get_scale(),
+                optimizer_updated=False,EMA_updated=False,sample_advanced=False,RNG_restored=True,
+                rejected_evidence_preserved=True,reason='FP16 scaled-gradient overflow; actual finite loss'))
+            continue
+        src_seen.add((src['video_id'],src['expression_id']))
+        if method!='SOURCE_REHEARSAL':tgt_seen.add((tgt['video_id'],tgt['expression_id']))
         grad_nonzero+=int(float(norm)>0);scale_before=scaler.get_scale();scaler.step(optimizer);scaler.update()
         if scaler.get_scale()<scale_before:counters['amp_skipped_updates']+=1
         else:
@@ -279,11 +301,12 @@ def train(config,output,*,smoke=False,resume=False):
             selected=measured<best_source
             tracking=dict(counters=dict(counters),source_seen=list(src_seen),target_seen=list(tgt_seen),
                 grad_nonzero=grad_nonzero,target_grad_checks=target_grad_checks,memory=memory.rows,
-                wall_seconds=prior_wall+time.perf_counter()-started)
+                wall_seconds=prior_wall+time.perf_counter()-started,attempt_wall_seconds=time.perf_counter()-started)
             if selected:
                 best_source=measured;save_training(output/'checkpoint_best_source_selected.pt',model,ema,optimizer,scaler,step+1,(step+1)/steps_per_epoch,config,plan_sha,best_source,tracking=tracking)
             append_json(output/'source_validation.jsonl',dict(step=step+1,source_val_CE=measured,selected=selected))
             save_training(output/'checkpoint_latest.pt',model,ema,optimizer,scaler,step+1,(step+1)/steps_per_epoch,config,plan_sha,best_source,tracking=tracking)
+        step+=1;retry_for_step=0
     torch.cuda.synchronize();frozen_unchanged=all(p._version==frozen_versions[n] for n,p in model.named_parameters() if not p.requires_grad)
     if not frozen_unchanged or attempts:raise RuntimeError('frozen source or target annotation isolation violation')
     delta=sum(float((p.detach()-old).float().square().sum()) for p,old in zip(trainable,initial))**.5

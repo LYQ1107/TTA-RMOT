@@ -40,8 +40,9 @@ def audit_gpus(required=4):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scope',choices=('plan','smoke','full'),default='plan')
     p.add_argument('--output-root',type=Path,required=True);p.add_argument('--resume',action='store_true')
+    p.add_argument('--launcher-record-dir',type=Path,help='separate admission/wait receipts when repairing a finished worker alongside healthy peers')
     p.add_argument('--methods',nargs='+',choices=METHODS,default=list(METHODS))
-    a=p.parse_args();root=a.output_root.resolve()
+    a=p.parse_args();root=a.output_root.resolve();record_root=(a.launcher_record_dir or root).resolve()
     selected,all_gpus,apps=audit_gpus(len(a.methods))
     configurations=dict(zip(METHODS,CONFIGS))
     plan=[dict(method=m,config=configurations[m],**g) for m,g in zip(a.methods,selected)]
@@ -51,15 +52,16 @@ if __name__=='__main__':
     for method in METHODS:
         if (root/method).exists() and not a.resume:raise FileExistsError('preserve existing run: '+str(root/method))
     root.mkdir(parents=True,exist_ok=True)
+    record_root.mkdir(parents=True,exist_ok=True)
     if a.resume:
-        history=root/'launcher_attempts'/str(time.time_ns());history.mkdir(parents=True)
+        history=record_root/'launcher_attempts'/str(time.time_ns());history.mkdir(parents=True)
         for name in ('gpu_admission.json','launcher_status.json'):
-            if (root/name).exists():shutil.copy2(root/name,history/name)
-    atomic_json(root/'gpu_admission.json',dict(selected_workers=plan,all_gpus=all_gpus,existing_processes=apps,
+            if (record_root/name).exists():shutil.copy2(record_root/name,history/name)
+    atomic_json(record_root/'gpu_admission.json',dict(selected_workers=plan,all_gpus=all_gpus,existing_processes=apps,
         sharing_authorized=True,no_foreign_process_killed=True,per_worker_allocator_budget_mib=24576,
         admission_headroom_mib=8192,resource_snapshot_is_not_reservation=True))
     children=[];started=time.perf_counter()
-    atomic_json(root/'launcher_status.json',dict(status='RUNNING',workers=plan,scope=a.scope))
+    atomic_json(record_root/'launcher_status.json',dict(status='RUNNING',workers=plan,scope=a.scope))
     for worker in plan:
         env=os.environ.copy();env.update(CUDA_VISIBLE_DEVICES=worker['uuid'],UDA_PHYSICAL_GPU=str(worker['physical_gpu']),
             OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2',TOKENIZERS_PARALLELISM='false')
@@ -75,5 +77,5 @@ if __name__=='__main__':
         code=process.wait();handle.close();result=dict(worker,exit_code=code)
         results.append(result);print(json.dumps(dict(event='worker_finished',**result)),flush=True)
     status='COMPLETE' if all(r['exit_code']==0 for r in results) else 'FAILED_WORKERS_RETAINED_FOR_TARGETED_RESUME'
-    atomic_json(root/'launcher_status.json',dict(status=status,workers=results,wall_seconds=time.perf_counter()-started,scope=a.scope))
+    atomic_json(record_root/'launcher_status.json',dict(status=status,workers=results,wall_seconds=time.perf_counter()-started,scope=a.scope))
     raise SystemExit(0 if status=='COMPLETE' else 1)
