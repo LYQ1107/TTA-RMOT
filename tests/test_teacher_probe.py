@@ -77,6 +77,16 @@ def test_sparse_teacher_coverage_counts_distinct_GT_not_duplicate_boxes():
     assert metric['one_to_one_POS_precision']==.5 and metric['GT_positive_coverage']==1.
 
 
+def test_four_shards_keep_complete_videos_and_all_fixed_pairs():
+    from scripts.launch_teacher_probe_sharded import whole_video_shards
+    rows=[dict(video_id=f'v{v}',sample_id=f'{v}/{t}') for v in range(25) for t in range(5+v)]
+    shards=whole_video_shards(rows)
+    assert shards==whole_video_shards(rows)
+    assert len({r['sample_id'] for shard in shards for r in shard})==len(rows)
+    for video in {r['video_id'] for r in rows}:
+        assert sum(any(r['video_id']==video for r in shard) for shard in shards)==1
+
+
 def test_landlock_denies_unstaged_payload_and_stage_write(tmp_path):
     good=tmp_path/'stage';bad=tmp_path/'not_staged';good.mkdir();bad.mkdir()
     (good/'image.txt').write_text('legal');(bad/'labels.json').write_text('not legal teacher input')

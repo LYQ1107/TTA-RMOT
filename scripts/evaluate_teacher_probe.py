@@ -215,8 +215,10 @@ def evaluate(output=OUTPUT,run=RUN):
     rules=json.loads((output/'source_calibration_rules_T0.json').read_text())
     scores['SOFTMATCH_WEIGHTED']=scores['YES_FULL'].copy();states['SOFTMATCH_WEIGHTED']=states['YES_FULL'].copy()
     soft=softmatch_weights(scores['YES_FULL'],rules['softmatch_source_confidence_mean'],rules['softmatch_source_confidence_variance'])
-    grouped=defaultdict(list)
-    for i,s in enumerate(samples):grouped[s['video_id'],s['query_id'],s['frame_id']].append(i)
+    grouped=defaultdict(list);episode_indices=defaultdict(list)
+    for i,s in enumerate(samples):
+        grouped[s['video_id'],s['query_id'],s['frame_id']].append(i)
+        episode_indices[s['video_id'],s['query_id']].append(i)
     episode_keys=sorted({(s['video_id'],s['query_id']) for s in samples})
     truth={key:load_eval_gt(DATA,*key) for key in episode_keys}
     labels=np.zeros(n,dtype=bool);primary=np.zeros(n,dtype=bool);groups=[]
@@ -249,7 +251,7 @@ def evaluate(output=OUTPUT,run=RUN):
                 metric=aggregate(method,np.flatnonzero(mask),score,states[method],labels,groups)
                 per_video.append(dict(video=video,scope=name,**metric))
         for video,query in episode_keys:
-            ix=np.asarray([i for i,s in enumerate(samples) if s['video_id']==video and s['query_id']==query])
+            ix=np.asarray(episode_indices[video,query])
             per_query.append(dict(video=video,query_id=query,scope='all425_official_scored',
                 **aggregate(method,ix,score,states[method],labels,groups)))
         type_masks={'MIXED':np.ones(n,dtype=bool),
@@ -261,16 +263,16 @@ def evaluate(output=OUTPUT,run=RUN):
             by_type.append(dict(expression_type=kind,scope='GT_present_frame_queries_overlapping_subgroups_not_clause_accuracy',**metric))
         for label,present in [('Query-Present',True),('Query-Empty',False)]:
             keys=[key for key in episode_keys if bool(truth[key])==present]
-            ix=np.asarray([i for i,s in enumerate(samples) if (s['video_id'],s['query_id']) in set(keys)],dtype=int)
+            ix=np.asarray([i for key in keys for i in episode_indices[key]],dtype=int)
             accepted=states[method][ix]=='SUPPORT_POS'
-            positive_episodes=sum(any(states[method][i]=='SUPPORT_POS' for i,s in enumerate(samples) if (s['video_id'],s['query_id'])==key) for key in keys)
+            positive_episodes=sum(any(states[method][i]=='SUPPORT_POS' for i in episode_indices[key]) for key in keys)
             presence.append(dict(method=method,group=label,episodes=len(keys),sampled_pairs=len(ix),
                 accepted_POS=int(accepted.sum()),official_unmatched_POS=int((accepted&~labels[ix]).sum()),
                 episodes_with_any_POS=positive_episodes,nonempty_prediction_rate=divide(positive_episodes,len(keys)),
                 note='Query-Empty official-unmatched is not proven semantic false'))
         ep_scores=[];ep_labels=[]
         for key in episode_keys:
-            ix=[i for i,s in enumerate(samples) if (s['video_id'],s['query_id'])==key]
+            ix=episode_indices[key]
             ep_scores.append(float(score[ix].max()));ep_labels.append(bool(truth[key]))
         presence.append(dict(method=method,group='episode_max_sampled_score_presence',episodes=len(episode_keys),
             presence_AUROC=auroc(ep_scores,ep_labels),presence_AUPRC=average_precision(ep_scores,ep_labels),
@@ -362,7 +364,7 @@ def make_verdict(metrics,boot,comparisons,audit,rules,seal,config,output):
 
 
 def build_budget(seal,output,run):
-    cache=json.loads((output/'teacher_cache_index.json').read_text())['by_method'];rows=[]
+    cache=json.loads((output/'teacher_cache_index.json').read_text())['by_method'];rows=[];worker_rows=[]
     attempts=[];overhead=[]
     for path in sorted(Path(run).glob('*/T0/launcher_attempts/*/launcher_status.json')):
         attempt=json.loads(path.read_text());attempts.append(attempt)
@@ -372,10 +374,19 @@ def build_budget(seal,output,run):
             workers=attempt['workers']))
     for method in METHODS:
         receipt=seal['receipts'][method];budget=receipt['budget']
-        allocation_seconds=sum(r.get('elapsed_seconds',0) for a in attempts if a['phase']=='full'
-            for r in a['workers'] if r['method']==method)
+        method_attempts=[r for a in attempts if a['phase']=='full' for r in a['workers'] if r['method']==method and 'elapsed_seconds' in r]
+        allocation_seconds=sum(r['elapsed_seconds'] for r in method_attempts)
+        span=[(r['start_epoch_seconds'],r['start_epoch_seconds']+r['elapsed_seconds']) for r in method_attempts if 'start_epoch_seconds' in r]
+        actual_wall=max(t[1] for t in span)-min(t[0] for t in span) if span else allocation_seconds
+        for shard in receipt.get('source_worker_receipts',[]):
+            worker=json.loads(Path(shard['receipt']).read_text())
+            worker_rows.append(dict(method=method,physical_gpu=worker['physical_gpu'],samples=worker['samples'],
+                worker_wall_seconds=worker['worker_elapsed_seconds'],candidate_pairs_per_second=worker['samples']/worker['worker_elapsed_seconds'],
+                peak_forward_allocated_bytes=worker['budget']['peak_allocated_bytes'],actual_new_forwards=worker['budget']['actual_candidate_prompt_forwards'],
+                receipt=shard['receipt']))
         rows.append(dict(method=method,scope='full_fixed_probe_incremental_worker_plus_required_raw_equivalents',
             candidate_query_pairs=receipt['samples'],worker_wall_seconds=receipt['worker_elapsed_seconds'],
+            actual_method_wall_span_seconds=actual_wall,worker_seconds_interpretation='sum across whole-video shard workers',
             GPU_hours_allocated_worker=allocation_seconds/3600,
             actual_including_failed_resumed_worker_seconds=allocation_seconds,
             candidate_pairs_per_worker_second=receipt['samples']/receipt['worker_elapsed_seconds'],
@@ -390,6 +401,7 @@ def build_budget(seal,output,run):
     a=dict(next(r for r in rows if r['method']=='YES_FULL'));a.update(method='SOFTMATCH_WEIGHTED',
         scope='inherits_complete_A_teacher_cost_plus_CPU_weights_not_free_independent_MLLM')
     rows.append(a);write_csv(output/'budget.csv',rows)
+    write_csv(output/'budget_by_worker.csv',worker_rows)
     atomic_json(output/'stage_costs_and_attempts.json',dict(attempts=overhead,
         all_pipeline_allocated_GPU_hours=sum(a['allocated_worker_GPU_hours'] for a in overhead),
         standalone_first2pair_functionality_worker_seconds=16.6985,

@@ -56,6 +56,11 @@ def main():
         stage=ASSETS/('staging_full' if full else 'staging_smoke')
     phase_root=a.run_root.resolve()/a.phase/a.condition
     print(json.dumps(dict(phase=a.phase,groups=groups,condition=a.condition,manifest=str(manifest),execute=a.execute)),flush=True)
+    if a.phase=='full' and not a.execute:
+        from scripts.launch_teacher_probe_sharded import whole_video_shards
+        rows=[json.loads(s) for s in manifest.read_text().splitlines()]
+        print(json.dumps(dict(mode='WHOLE_VIDEO_FOUR_SHARDS',shards=[dict(index=i,pairs=len(shard),
+            videos=sorted({s['video_id'] for s in shard})) for i,shard in enumerate(whole_video_shards(rows))])),flush=True)
     if not a.execute:return
     if a.phase=='full':
         for group in GROUPS:
@@ -63,6 +68,8 @@ def main():
                 prior=json.loads((a.run_root/'smoke'/a.condition/method/'receipt.json').read_text())
                 if prior['status']!='SEALED_FIXED_PROBE' or prior['samples']!=1649 or prior['GT_access_audit']['target_GT_open_attempts']:
                     raise ValueError('all six complete GT-free smoke methods must pass before full probe')
+        from scripts.launch_teacher_probe_sharded import run_sharded
+        run_sharded(a,config,manifest,stage,resources,PYTHON,ROOT);return
     admission=resources(len(groups));phase_root.mkdir(parents=True,exist_ok=True)
     attempt=phase_root/'launcher_attempts'/str(time.time_ns());attempt.mkdir(parents=True)
     atomic_json(attempt/'gpu_admission.json',admission)

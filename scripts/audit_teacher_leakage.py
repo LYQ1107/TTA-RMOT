@@ -89,6 +89,12 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         if seen!=set(expected):raise ValueError('incomplete fixed probe')
         result_files[str(predictions)]=file_sha(predictions)
         result_files[str(folder/'receipt.json')]=file_sha(folder/'receipt.json')
+        for shard in receipt.get('source_worker_receipts',[]):
+            shard_receipt=json.loads(Path(shard['receipt']).read_text())
+            validate_receipt(shard_receipt,method,shard_receipt['manifest_sha256'],shard['samples'])
+            for field,sha_field in [('receipt','receipt_sha256'),('predictions','predictions_sha256'),('manifest','manifest_sha256')]:
+                if file_sha(Path(shard[field]))!=shard[sha_field]:raise ValueError('sealed source shard changed')
+                result_files[shard[field]]=shard[sha_field]
         receipts[method]=receipt;requests[method]=sorted(refs)
     # Raw cache is GT-free. Read it only after all prediction coverage checks pass.
     cache=Path('/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite')
@@ -125,6 +131,8 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         cost=cache_totals[row['method']]
         for ref in row['request_ids']:
             if ref is None:continue
+            if any(t>expected[row['sample_id']]['frame_id'] for t in raw_summary[ref]['frames']):
+                raise ValueError('future frame in teacher request')
             cost['logical_request_slots']+=1
             for field,raw_field in [('logical_images','images'),('logical_visual_tokens','visual_tokens'),('logical_language_tokens','language_tokens')]:
                 cost[field]+=raw_summary[ref][raw_field]
@@ -141,7 +149,14 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         if mismatches:raise ValueError('matched-budget methods did not receive identical paired visual inputs')
     public_predictions=output/'teacher_outputs.jsonl'
     with public_predictions.open('w') as handle:
-        for row in records:handle.write(json.dumps(row,sort_keys=True)+'\n')
+        for row in records:
+            # sample_id joins the complete fixed manifest; do not repeat long
+            # video/query strings and 15 raw SHA keys in every public row.
+            public={k:row[k] for k in ('sample_id','method','condition','probability','state','reasons')}
+            public['raw_request_slots']=len(row['request_ids'])
+            if row['unverified_ensemble_probability'] is not None:
+                public['unverified_ensemble_probability']=row['unverified_ensemble_probability']
+            handle.write(json.dumps(public,sort_keys=True)+'\n')
     cache_index=output/'teacher_cache_index.json'
     raw_index=cache.parent/'full_p1_T0_response_index.jsonl.gz'
     with gzip.open(raw_index,'wt') as handle:
@@ -150,6 +165,7 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
     atomic_json(cache_index,dict(protocol='GT_FREE_RAW_RESPONSE_INDEX_NOT_TARGET_LABELS',cache_path=str(cache),
         unique_raw_responses=len(index),by_method=cache_totals,raw_response_index=raw_index_record,
         first8_raw_response_examples=index[:8],
+        recovery='join public rows to manifest by sample_id; complete per-pair request_ids/raw logits remain in original sealed method files and this server raw index',
         source_calibration_GT_and_images_not_published=True))
     seal_record=dict(status='SEALED_BEFORE_TARGET_GT_EVALUATION',condition=condition,
         fixed_pairs=len(samples),videos=25,video_queries=425,methods=list(METHODS),
@@ -157,6 +173,7 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         public_predictions_sha256=file_sha(public_predictions),public_cache_index_sha256=file_sha(cache_index),
         raw_predictions_contain_target_GT=False,teacher_target_GT_open_attempts=0,
         teacher_parameter_sha256=WEIGHT_SHA,receipts=receipts,fairness=fairness,raw_response_index=raw_index_record,
+        future_frame_requests=0,
         warning='sparse development teacher probe; NOT full-video RMOT HOTA; read-only permission plus hash seal')
     atomic_json(output/'config_hashes.json',seal_record)
     for path in [public_predictions,cache_index,raw_index,*map(Path,result_files)]:path.chmod(0o444)

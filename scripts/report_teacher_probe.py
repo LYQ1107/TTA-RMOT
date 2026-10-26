@@ -48,12 +48,13 @@ def figures(output,metrics):
 
 def archive_logs(run,output):
     files=sorted(set(run.rglob('*_stdout.txt'))|set(run.rglob('receipt.json'))|
-        set(run.rglob('launcher_status.json'))|set(run.rglob('gpu_admission.json'))|set(run.rglob('phase_completion.json')))
+        set(run.rglob('launcher_status.json'))|set(run.rglob('gpu_admission.json'))|set(run.rglob('phase_completion.json'))|
+        set(run.rglob('whole_video_shard_plan.json')))
     folder=output/'logs';folder.mkdir(exist_ok=True);archive=folder/'teacher_p1_complete_text_logs.tar.gz'
     members=[]
     with tarfile.open(archive,'w:gz') as tar:
         for path in files:
-            if path.name not in ('receipt.json','launcher_status.json','gpu_admission.json','phase_completion.json') and not path.name.endswith('_stdout.txt'):
+            if path.name not in ('receipt.json','launcher_status.json','gpu_admission.json','phase_completion.json','whole_video_shard_plan.json') and not path.name.endswith('_stdout.txt'):
                 raise ValueError('unexpected experiment payload in text archive')
             relative=path.relative_to(run);tar.add(path,arcname=str(relative),recursive=False)
             members.append(dict(member=str(relative),bytes=path.stat().st_size,sha256=file_sha(path)))
@@ -87,11 +88,11 @@ def report(output=OUTPUT,run=RUN):
     for method,r in all_metrics.items():
         all_table.append(f'| {SHORT[method]} | {pct(r["AUPRC"])} | {r["POS_true_candidates"]}/{r["POS_count"]} | '
             f'{r["NEG_true_candidates_killed"]}/{r["NEG_count"]} | {pct(r["UNKNOWN_rate"])} |')
-    costs=['| 方法 | 实际worker秒 | 分配GPU小时 | 新前向 | 所需独立raw调用 | 逻辑调用槽 | 逻辑视觉/语言token | 前向峰值GiB |',
-        '|---|---:|---:|---:|---:|---:|---:|---:|']
+    costs=['| 方法 | 累计worker秒 | 实际方法wall秒 | 分配GPU小时 | 新前向 | 所需独立raw调用 | 逻辑调用槽 | 逻辑视觉/语言token | 前向峰值GiB |',
+        '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for method in cost:
         r=cost[method]
-        costs.append(f'| {SHORT[method]} | {r["worker_wall_seconds"]:.2f} | {r["GPU_hours_allocated_worker"]:.4f} | '
+        costs.append(f'| {SHORT[method]} | {r["worker_wall_seconds"]:.2f} | {r["actual_method_wall_span_seconds"]:.2f} | {r["GPU_hours_allocated_worker"]:.4f} | '
             f'{r["actual_new_prompt_forwards"]} | {r["unique_required_forwards"]} | {r["logical_request_slots"]} | '
             f'{r["logical_visual_tokens"]}/{r["logical_language_tokens"]} | {r["peak_allocated_bytes"]/(1<<30):.3f} |')
     a,b,c,d=(metrics[m] for m in ['YES_FULL','YES_ENSEMBLE_BUDGET_MATCHED','STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED'])
