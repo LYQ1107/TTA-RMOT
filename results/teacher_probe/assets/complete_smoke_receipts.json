@@ -1,0 +1,1194 @@
+{
+  "status": "ALL_SIX_COMPLETE_GT_FREE_SMOKE_PASS",
+  "samples_per_method": 1649,
+  "videos_per_method": 25,
+  "queries_per_method": 425,
+  "source_calibration_repair": {
+    "status": "SOURCE_CAUSAL_HISTORY_COMPLETE",
+    "candidate_queries": 203,
+    "required_unique_images": 214,
+    "added_source_images": 38,
+    "manifest_sha256": "b888b33f287582c255614e91d471ea61f3b0962316d29bd68acd27188dab8fc8",
+    "truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+    "sample_selection_unchanged": true,
+    "target_GT_used": false
+  },
+  "source_rule_status": "SOURCE_RULES_FROZEN",
+  "receipts": {
+    "YES_FULL": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "YES_FULL",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "8f153c767dde8c04630c5784b845f77ce8cecac0bddbd2d32706c889bb5b6bba",
+      "budget": {
+        "actual_model_forward_batches": 207,
+        "actual_candidate_prompt_forwards": 1645,
+        "actual_images": 1645,
+        "actual_visual_tokens": 164500,
+        "actual_language_tokens": 95216,
+        "actual_forward_seconds": 120.76806859928183,
+        "cache_hits": 1653,
+        "peak_allocated_bytes": 4678529024
+      },
+      "worker_elapsed_seconds": 147.9797917820979,
+      "inference_and_final_hash_seconds": 135.8898660140112,
+      "experiment_commit": "1a00e37ec0336587805439825d697392683a3eb3",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35908\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 61660\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 54835\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 37737\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 34621\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22914\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 20590\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 43400\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 46516\n",
+        "selected_physical_gpu": "7",
+        "selected_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "free_mib": 34621.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "7",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 10.453080509090796,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 207,
+        "model_load_and_initial_hash_seconds": 10.453080509090796
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_FULL",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 7587,
+        "pending_leases": 24,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    },
+    "YES_ENSEMBLE_BUDGET_MATCHED": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "1604f1afaa1647fea357277e97a1afd9e5ba8bb0c5ef259ed325c7315aba2378",
+      "budget": {
+        "actual_model_forward_batches": 581,
+        "actual_candidate_prompt_forwards": 4452,
+        "actual_images": 9387,
+        "actual_visual_tokens": 938700,
+        "actual_language_tokens": 225793,
+        "actual_forward_seconds": 532.6666783879045,
+        "cache_hits": 4472,
+        "peak_allocated_bytes": 5434862592
+      },
+      "worker_elapsed_seconds": 573.1455693279859,
+      "inference_and_final_hash_seconds": 562.8768969818484,
+      "experiment_commit": "1a00e37ec0336587805439825d697392683a3eb3",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35908\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 61660\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 54835\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 37737\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 34623\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22914\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 20590\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 43400\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 46516\n",
+        "selected_physical_gpu": "5",
+        "selected_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "free_mib": 37737.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "5",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 9.119482158916071,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 581,
+        "model_load_and_initial_hash_seconds": 9.119482158916071
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_BUDGET_MATCHED",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 18753,
+        "pending_leases": 7,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    },
+    "STRUCTURED_EVIDENCE": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "STRUCTURED_EVIDENCE",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "fc3da1b502f4c90e58d51251d5ca3ed8fc49b27e7d922e495e376156e88b3341",
+      "budget": {
+        "actual_model_forward_batches": 350,
+        "actual_candidate_prompt_forwards": 2247,
+        "actual_images": 2865,
+        "actual_visual_tokens": 286500,
+        "actual_language_tokens": 107283,
+        "actual_forward_seconds": 123.40643764100969,
+        "cache_hits": 6677,
+        "peak_allocated_bytes": 5425447936
+      },
+      "worker_elapsed_seconds": 161.6608778850641,
+      "inference_and_final_hash_seconds": 151.84285133099183,
+      "experiment_commit": "1a00e37ec0336587805439825d697392683a3eb3",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35908\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 61660\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 54835\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 37710\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 34621\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22914\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 20590\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 43400\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 4156029, 414\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 46516\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 4156027, 24\n",
+        "selected_physical_gpu": "2",
+        "selected_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+        "free_mib": 21807.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "2",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 7.888102414086461,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 350,
+        "model_load_and_initial_hash_seconds": 7.888102414086461
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/STRUCTURED_EVIDENCE",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 8050,
+        "pending_leases": 16,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    },
+    "EVIDENCE_VERIFIED": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "EVIDENCE_VERIFIED",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "e9c531f892f70967142d672ac6ee013867e66986e0a855c06a9319cefddbe4e2",
+      "budget": {
+        "actual_model_forward_batches": 1145,
+        "actual_candidate_prompt_forwards": 8988,
+        "actual_images": 8595,
+        "actual_visual_tokens": 859500,
+        "actual_language_tokens": 423402,
+        "actual_forward_seconds": 371.43758289306425,
+        "cache_hits": 35632,
+        "peak_allocated_bytes": 5413159936
+      },
+      "worker_elapsed_seconds": 683.8538088479545,
+      "inference_and_final_hash_seconds": 673.7295732458588,
+      "experiment_commit": "1a00e37ec0336587805439825d697392683a3eb3",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35908\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 61660\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 54835\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 37721\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 34621\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22914\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 20590\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 43400\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 4156029, 76\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 46516\n",
+        "selected_physical_gpu": "3",
+        "selected_uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+        "free_mib": 61660.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "3",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 8.26124834199436,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 1145,
+        "model_load_and_initial_hash_seconds": 8.26124834199436
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/EVIDENCE_VERIFIED",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 21756,
+        "pending_leases": 9,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    },
+    "YES_ENSEMBLE_B_PLUS": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "YES_ENSEMBLE_B_PLUS",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "cd7b14ab4adc31bbdf5e31661edca46f70c41ee516d7928b9533b8db6fe91db0",
+      "budget": {
+        "actual_model_forward_batches": 2227,
+        "actual_candidate_prompt_forwards": 17808,
+        "actual_images": 28161,
+        "actual_visual_tokens": 2816100,
+        "actual_language_tokens": 884398,
+        "actual_forward_seconds": 1792.325162641704,
+        "cache_hits": 26812,
+        "peak_allocated_bytes": 5423459328
+      },
+      "worker_elapsed_seconds": 2111.5072431780864,
+      "inference_and_final_hash_seconds": 2102.4203488600906,
+      "experiment_commit": "1486c9d720bcb920d062e4cf9590c91d7e862553",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35906\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 1536\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 53189\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 30157\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 28216\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22916\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4156030, 6166\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 34862, 67720\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 22236\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 50982\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 48056\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 4165193, 4858\n",
+        "selected_physical_gpu": "5",
+        "selected_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "free_mib": 30157.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "5",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 8.048811317188665,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 2227,
+        "model_load_and_initial_hash_seconds": 8.048811317188665
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_B_PLUS",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 41366,
+        "pending_leases": 0,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    },
+    "YESTRACK_TCP_TRP": {
+      "status": "SEALED_FIXED_PROBE",
+      "protocol": "DEVELOPMENT_TEACHER_PROBE",
+      "method": "YESTRACK_TCP_TRP",
+      "condition": "T0",
+      "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+      "samples": 1649,
+      "planned_manifest_samples": 1649,
+      "videos": 25,
+      "video_queries": 425,
+      "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+      "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+      "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+      "predictions_sha256": "52727423dea3b0c5110e2388bf2947d2924832a3f7dc32a2b2a611766386fbf6",
+      "budget": {
+        "actual_model_forward_batches": 5110,
+        "actual_candidate_prompt_forwards": 5110,
+        "actual_images": 5947,
+        "actual_visual_tokens": 594700,
+        "actual_language_tokens": 301678,
+        "actual_forward_seconds": 1058.3826924671885,
+        "cache_hits": 1657,
+        "peak_allocated_bytes": 4423385088
+      },
+      "worker_elapsed_seconds": 1113.5108614028431,
+      "inference_and_final_hash_seconds": 1104.1987821620423,
+      "experiment_commit": "1a00e37ec0336587805439825d697392683a3eb3",
+      "implementation_sha256": {
+        "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+        "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+        "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+        "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+        "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+        "flex_uda/teacher/visual_input_builder.py": "7ab12d01ebb2123557b48528fbf358b3f5f88389cf5290134a4504210c171aae",
+        "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+        "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+        "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+        "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+        "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+        "scripts/run_teacher_probe.py": "dc4222e464648a94bf87aaa5d542e0b2b4eb990bd660d2ddd11d03c55c489998"
+      },
+      "gpu_uuid": "0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "gpu_admission": {
+        "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 35906\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 15570\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 55488\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 53189\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 26282\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 28343\n",
+        "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22916\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 4156028, 6232\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4156030, 6166\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 22236\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 46516\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 4156029, 8336\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 52792\n",
+        "selected_physical_gpu": "7",
+        "selected_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "free_mib": 28343.0,
+        "minimum_required_mib": 20480
+      },
+      "physical_gpu": "7",
+      "numeric_dtype": "bfloat16",
+      "quantization": null,
+      "student_updates": 0,
+      "model_load_seconds": 8.250681552104652,
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 5110,
+        "model_load_and_initial_hash_seconds": 8.250681552104652
+      },
+      "GT_access_audit": {
+        "target_GT_open_attempts": [],
+        "target_GT_reads": 0
+      },
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/staging_smoke",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YESTRACK_TCP_TRP",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "reliability_rules": {
+        "positive_threshold": 0.95,
+        "negative_threshold": 0.05,
+        "visual_dependence_min": 0.03,
+        "probability_spread_max": 0.2,
+        "status": "SOURCE_RULES_FROZEN",
+        "positive_calibrated": true,
+        "negative_calibrated": true,
+        "target_GT_used": false,
+        "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+        "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+        "source_windows": 64,
+        "source_videos": 4,
+        "source_candidate_queries": 203,
+        "source_positives": 82,
+        "positive_grid": [
+          {
+            "threshold": 0.7,
+            "count": 79,
+            "precision": 0.6075949367088608,
+            "eligible": false
+          },
+          {
+            "threshold": 0.8,
+            "count": 50,
+            "precision": 0.68,
+            "eligible": false
+          },
+          {
+            "threshold": 0.9,
+            "count": 24,
+            "precision": 0.7916666666666666,
+            "eligible": false
+          },
+          {
+            "threshold": 0.95,
+            "count": 12,
+            "precision": 0.8333333333333334,
+            "eligible": true
+          }
+        ],
+        "negative_grid": [
+          {
+            "threshold": 0.3,
+            "count": 68,
+            "false_negative_fraction": 0.17647058823529413,
+            "eligible": false
+          },
+          {
+            "threshold": 0.2,
+            "count": 45,
+            "false_negative_fraction": 0.15555555555555556,
+            "eligible": false
+          },
+          {
+            "threshold": 0.1,
+            "count": 30,
+            "false_negative_fraction": 0.06666666666666667,
+            "eligible": false
+          },
+          {
+            "threshold": 0.05,
+            "count": 22,
+            "false_negative_fraction": 0.0,
+            "eligible": true
+          }
+        ],
+        "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+        "source_verified_POS_count": 5,
+        "source_verified_POS_precision": 1.0,
+        "source_verified_GT_coverage": 0.06097560975609756,
+        "source_verifier_validated": true,
+        "softmatch_source_confidence_mean": 0.7852057095231681,
+        "softmatch_source_confidence_variance": 0.01989918769118447
+      },
+      "persistent_cache_reopen_check": true,
+      "cache": {
+        "complete_raw_responses": 29590,
+        "pending_leases": 8,
+        "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite"
+      }
+    }
+  },
+  "phase": {
+    "status": "COMPLETE_FIXED_PHASE",
+    "phase": "smoke",
+    "protocol": "DEVELOPMENT_TEACHER_PROBE",
+    "condition": "T0",
+    "workers": [
+      {
+        "method": "YES_FULL",
+        "physical_gpu": 7,
+        "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "pid": 4156027,
+        "exit_code": 0,
+        "elapsed_seconds": 153.2188354630489,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_FULL_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_FULL/receipt.json"
+      },
+      {
+        "method": "YESTRACK_TCP_TRP",
+        "physical_gpu": 7,
+        "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "pid": 4165193,
+        "exit_code": 0,
+        "elapsed_seconds": 1118.7465295640286,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YESTRACK_TCP_TRP_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YESTRACK_TCP_TRP/receipt.json"
+      },
+      {
+        "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+        "physical_gpu": 5,
+        "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "pid": 4156029,
+        "exit_code": 0,
+        "elapsed_seconds": 578.2601822230499,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+      },
+      {
+        "method": "YES_ENSEMBLE_B_PLUS",
+        "physical_gpu": 5,
+        "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "pid": 35045,
+        "exit_code": 0,
+        "elapsed_seconds": 2116.83802338806,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_B_PLUS_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_B_PLUS/receipt.json"
+      },
+      {
+        "method": "STRUCTURED_EVIDENCE",
+        "physical_gpu": 2,
+        "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+        "pid": 4156028,
+        "exit_code": 0,
+        "elapsed_seconds": 167.27893072389998,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/STRUCTURED_EVIDENCE_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/STRUCTURED_EVIDENCE/receipt.json"
+      },
+      {
+        "method": "EVIDENCE_VERIFIED",
+        "physical_gpu": 3,
+        "gpu_uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+        "pid": 4156030,
+        "exit_code": 0,
+        "elapsed_seconds": 689.2957176000345,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/EVIDENCE_VERIFIED_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/EVIDENCE_VERIFIED/receipt.json"
+      }
+    ],
+    "actual_wall_seconds": 2695.1017301988322,
+    "manifest_sha256": "d7c5abef2c2c8b88e3a509c1362fcf3bdd3f9676dc2bd13b995fddcb08b24cdd",
+    "gpu_admission": {
+      "selected": [
+        {
+          "index": 7,
+          "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "total_mib": 81920.0,
+          "free_mib": 60855.0,
+          "processes": 1
+        },
+        {
+          "index": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "total_mib": 81920.0,
+          "free_mib": 60473.0,
+          "processes": 1
+        },
+        {
+          "index": 2,
+          "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "total_mib": 81920.0,
+          "free_mib": 21807.0,
+          "processes": 1
+        },
+        {
+          "index": 3,
+          "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "total_mib": 81920.0,
+          "free_mib": 61660.0,
+          "processes": 2
+        }
+      ],
+      "all_gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, NVIDIA A800-SXM4-80GB, 81920, 27828\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, NVIDIA A800-SXM4-80GB, 81920, 35908\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, NVIDIA A800-SXM4-80GB, 81920, 21807\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, NVIDIA A800-SXM4-80GB, 81920, 61660\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, NVIDIA A800-SXM4-80GB, 81920, 54835\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, NVIDIA A800-SXM4-80GB, 81920, 60473\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, NVIDIA A800-SXM4-80GB, 81920, 53289\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, NVIDIA A800-SXM4-80GB, 81920, 60855\n",
+      "all_compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 4122879, 16020\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 4081676, 22914\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 59326\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 4152527, 13768\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 4105537, 20590\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 3862715, 20664\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3960094, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 3862716, 20308\n",
+      "policy": ">=16GiB allocation+4GiB free margin; fewest processes, then most free; shared allowed; no other task stopped"
+    },
+    "no_other_process_stopped": true,
+    "max_physical_GPUs": 4
+  },
+  "target_quality_not_evaluated": true,
+  "student_updates": 0
+}
