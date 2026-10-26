@@ -1,0 +1,135 @@
+{
+  "protocol": "DEVELOPMENT_TEACHER_PROBE",
+  "base_model": "Qwen/Qwen3-VL-2B-Instruct",
+  "pinned_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "base_license": "Apache-2.0",
+  "conditions": {
+    "T0": "frozen base, no adapter",
+    "T1": "same base, verified official Refer-KITTI-V2 LoRA only"
+  },
+  "target_GT_used": false,
+  "pretraining_overlap": "UNKNOWN: complete Qwen pretraining corpus is not publicly auditable; no non-overlap claim",
+  "model_files": {
+    "chat_template.json": {
+      "bytes": 5502,
+      "sha256": "6f8a6a55027e3da5160105556cda5dd69f6423f1c32645f6730d32de7773d0c4"
+    },
+    "config.json": {
+      "bytes": 1505,
+      "sha256": "bec4b3d446efa05807365c9e1cec03ac590836879d02f3a6da879971154bdd3b"
+    },
+    "generation_config.json": {
+      "bytes": 269,
+      "sha256": "1e241830b48b397cb0900101421df5450baddc7adf01e5fc86b5615865f3bae4"
+    },
+    "merges.txt": {
+      "bytes": 1671839,
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "model.safetensors": {
+      "bytes": 4255140312,
+      "sha256": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0"
+    },
+    "preprocessor_config.json": {
+      "bytes": 390,
+      "sha256": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516"
+    },
+    "tokenizer.json": {
+      "bytes": 7032403,
+      "sha256": "a5d85b6dcc535e6b93115a9ef287e6132fdbf30270da6218194ba742261173c7"
+    },
+    "tokenizer_config.json": {
+      "bytes": 10868,
+      "sha256": "c2da771801886ad9ae98181793ffd3dfb7f1af30f6f7c6a4e15d7dbba52e2399"
+    },
+    "video_preprocessor_config.json": {
+      "bytes": 385,
+      "sha256": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13"
+    },
+    "vocab.json": {
+      "bytes": 2776833,
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "references": {
+    "YesTrack": {
+      "path": "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+      "commit_and_date": "ed42b8315b28c94dc595d83b0d49bf57002bb281 2026-07-22T16:30:19+08:00",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    "DINO_Teacher": {
+      "path": "/data2/user/TTA-RMOT-assets/teacher-p1/references/DINO_Teacher",
+      "commit_and_date": "44ae126c5d9844752afbd8bdfdd65c92cf713fb1 2025-05-18T16:31:24+00:00",
+      "license_files": [
+        "LICENSE"
+      ]
+    },
+    "DKGTrack": {
+      "path": "/data2/user/TTA-RMOT-assets/teacher-p1/references/DKGTrack",
+      "commit_and_date": "197f354443bd1e7b490d204456a7654b7d1e4ccd 2025-12-02T10:30:52+08:00",
+      "license_files": []
+    },
+    "WSRVOS": {
+      "path": "/data2/user/TTA-RMOT-assets/uda-references/WSRVOS",
+      "commit_and_date": "c00a87750a1e6ad61be51ef739ecd773fef39bc3 2026-04-21T16:28:07+08:00",
+      "license_files": []
+    },
+    "SoftMatch": {
+      "path": "/data2/user/TTA-RMOT-assets/teacher-p1/references/SoftMatch",
+      "commit_and_date": "a7e9da26e3e96962d159b5d8157cbd99b2cb0fdd 2023-01-30T21:45:28-05:00",
+      "license_files": []
+    }
+  },
+  "T0_ready": true,
+  "official_weight_SHA256": "7de1838c87a5349b016c26a1c3f7d2bc400a3d485f95ef39a7059ffd734977a0",
+  "local_v2_adapters": [],
+  "T1_ready": false,
+  "public_lora": {
+    "official_share": "https://pan.baidu.com/s/1nwhcEIQshWk9TnNjhiYMrQ",
+    "verify_errno": 0,
+    "listings": [
+      {
+        "path": "<root>",
+        "errno": 0,
+        "items": [
+          {
+            "server_filename": "Yestrack",
+            "path": "/Yestrack",
+            "isdir": "1",
+            "size": "0",
+            "md5": ""
+          }
+        ]
+      },
+      {
+        "path": "/Yestrack",
+        "errno": 0,
+        "items": [
+          {
+            "server_filename": "yestrack.zip",
+            "path": "/Yestrack/yestrack.zip",
+            "isdir": 0,
+            "size": 178142422,
+            "md5": "161b5ffd0mcb394f25aec64873f99360"
+          }
+        ]
+      }
+    ],
+    "target_GT_payload_read": false,
+    "cookies_signed_urls_or_tokens_saved": false,
+    "official_v2_adapter_files": [],
+    "released_archive": [
+      {
+        "server_filename": "yestrack.zip",
+        "path": "/Yestrack/yestrack.zip",
+        "isdir": 0,
+        "size": 178142422,
+        "md5": "161b5ffd0mcb394f25aec64873f99360"
+      }
+    ],
+    "status": "PUBLIC_ZIP_LISTED_BUT_ANONYMOUS_BINARY_DOWNLOAD_UNAVAILABLE",
+    "normal_public_download_status": "NO_ANONYMOUS_DOWNLOAD_SIGNATURE"
+  }
+}

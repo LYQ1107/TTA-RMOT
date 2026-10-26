@@ -4,7 +4,15 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：FlexHook V2 → Dance Offline UDA
+## 当前研究：P1 冻结视觉语义教师可靠性
+
+新分支`research/v2dance-evidence-teacher-p1-20261026`。执行[预注册P1协议](docs/TEACHER_EXPERIMENT_PROTOCOL.md)：
+冻结Qwen3-VL/安全复用YesTrack，比较整句、等预算多问法、分属性和证据验证，**不训练学生**。
+[机制审计](docs/TEACHER_METHOD_AUDIT.md)、[数据/权重来源](docs/TEACHER_DATA_PROVENANCE.md)、
+[预算公平性](docs/TEACHER_MODEL_AND_BUDGET_FAIRNESS.md)与[固定采样清单](results/teacher_probe/)分开保存。
+目前是资产/隔离/接口准备阶段，不将单元测试或采样完成当作GPU实验完成；实际教师指标尚未评测。
+
+## 上一阶段：FlexHook V2 → Dance Offline UDA 诊断
 
 按2026-10-26最新指令先做[25Val同集无标签适应诊断](docs/UDA_METHOD_IMPLEMENTATION.md)，
 不将其称作40Train→Val UDA或未见视频泛化。目标GT不进入训练，四组单卡独立对照。
