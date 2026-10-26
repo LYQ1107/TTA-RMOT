@@ -73,6 +73,7 @@ def analyze(root,training,public):
             effective_relation_candidates=dict(equivalent=train['counters'].get('equivalent_query_candidates',0),
                 exclusive=train['counters'].get('exclusive_query_candidates',0)),
             exposure_warning='repeated training exposures, not unique verified semantic labels',
+            peak_scope='allocator peak in the successful/resumed process; initial failed-process peak was not recorded separately',
             timing_warning='shared-GPU process elapsed; not exclusive-device utilization or standalone source-asset preparation')
         summary=dict(method=method,protocol='TRANSDUCTIVE_VAL_DIAGNOSTIC',episodes=425,videos=25,
             metrics=metrics[method],delta_HOTA_vs_Frozen=metrics[method]['HOTA']-metrics['FROZEN']['HOTA'],
