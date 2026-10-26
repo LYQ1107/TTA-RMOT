@@ -4,6 +4,7 @@ import argparse
 from datetime import datetime,timezone
 import gzip
 import json
+import math
 from pathlib import Path
 import sqlite3
 import subprocess
@@ -35,6 +36,8 @@ def validate_receipt(receipt,method,manifest_sha,expected):
 
 def compact_record(row):
     d=row['decision']
+    if not math.isfinite(d['probability']) or not 0<=d['probability']<=1:
+        raise ValueError('teacher produced a nonfinite/out-of-range probability; do not score it')
     return dict(sample_id=row['sample_id'],video_id=row['video_id'],query_id=row['query_id'],
         frame_id=row['frame_id'],track_id=row['track_id'],method=row['method'],condition=row['condition'],
         probability=d['probability'],state=d['state'],reasons=d.get('reasons',[]),
@@ -156,7 +159,9 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
             # sample_id joins the complete fixed manifest; do not repeat long
             # video/query strings and 15 raw SHA keys in every public row.
             public={k:row[k] for k in ('sample_id','method','condition','probability','state','reasons')}
-            public['raw_request_slots']=len(row['request_ids'])
+            public['planned_request_slots']=len(row['request_ids'])
+            public['valid_request_slots']=sum(ref is not None for ref in row['request_ids'])
+            public['missing_evidence_slots']=sum(ref is None for ref in row['request_ids'])
             if row['unverified_ensemble_probability'] is not None:
                 public['unverified_ensemble_probability']=row['unverified_ensemble_probability']
             handle.write(json.dumps(public,sort_keys=True)+'\n')

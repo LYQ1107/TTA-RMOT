@@ -1,0 +1,147 @@
+{
+  "status": "COMPLETE_FAILED_SHARD_RECOVERY",
+  "scope": "ONE_SEVEN_VIDEO_SHARD_NOT_GLOBAL_P1_COMPLETION",
+  "total_fixed_pairs_per_method": 2295,
+  "previously_completed_A_B_C_D_preserved": true,
+  "only_failed_Bplus_and_unstarted_TCP_recovered": true,
+  "other_tasks_not_stopped": true,
+  "records": [
+    {
+      "method": "YES_FULL",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "7",
+      "worker_elapsed_seconds": 178.33654620102607,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": null,
+      "predictions_sha256": "b6f2be1df92f12185d32cd38a9229c900e870adafaecf6fe9be6f5950611fb11"
+    },
+    {
+      "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "7",
+      "worker_elapsed_seconds": 752.1410839590244,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": null,
+      "predictions_sha256": "9db2387fcfe3a6ae47bafdef53145b2b8edbe1c91d45102a5b5469cdd08a6938"
+    },
+    {
+      "method": "STRUCTURED_EVIDENCE",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "7",
+      "worker_elapsed_seconds": 286.23560544499196,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": null,
+      "predictions_sha256": "77f767274b2162160a35a57f482bcef7878de6d24328f8853c39c8dbbcc5203f"
+    },
+    {
+      "method": "EVIDENCE_VERIFIED",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "7",
+      "worker_elapsed_seconds": 3330.43113051611,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": null,
+      "predictions_sha256": "86090609bc2ee76fa8217c22e19a20d412c73c15ed9b72e9705d50cb12258aed"
+    },
+    {
+      "method": "YES_ENSEMBLE_B_PLUS",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "2",
+      "worker_elapsed_seconds": 2066.6575349587947,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": {
+        "mode": "READONLY_RGB_PATCH_SHA_LRU_V2",
+        "frame_decodes": 222,
+        "frame_hits": 4075,
+        "patch_hits": 100393,
+        "patch_builds": 4297,
+        "full_frame_mean_computes": 175,
+        "decoded_frame_limit": 128,
+        "resized_patch_limit": 1024,
+        "live_decoded_RGB_bytes": 729907200,
+        "live_patch_RGB_bytes": 314572800
+      },
+      "predictions_sha256": "f1c42aec12829a9a310c35d167b2c7e708918a58fdbe8fcbd815d4c6b76c5954"
+    },
+    {
+      "method": "YESTRACK_TCP_TRP",
+      "samples": 2295,
+      "videos": 7,
+      "queries": 119,
+      "physical_gpu": "2",
+      "worker_elapsed_seconds": 1153.5824294791091,
+      "parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "GT_open_attempts": [],
+      "preprocessing_cache": {
+        "mode": "READONLY_RGB_PATCH_SHA_LRU_V2",
+        "frame_decodes": 450,
+        "frame_hits": 1227,
+        "patch_hits": 8559,
+        "patch_builds": 1677,
+        "full_frame_mean_computes": 0,
+        "decoded_frame_limit": 128,
+        "resized_patch_limit": 1024,
+        "live_decoded_RGB_bytes": 796262400,
+        "live_patch_RGB_bytes": 314572800
+      },
+      "predictions_sha256": "bb744d467c93c2ba952955b62171997dd7abd2927d765b2845cbc5d2a663db58"
+    }
+  ],
+  "recovery_attempt": {
+    "status": "COMPLETE_FAILED_SHARD_RECOVERY",
+    "phase": "full",
+    "condition": "T0",
+    "workers": [
+      {
+        "method": "YES_ENSEMBLE_B_PLUS",
+        "shard": 2,
+        "physical_gpu": 2,
+        "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+        "pid": 1778442,
+        "start_epoch_seconds": 1793035540.5519922,
+        "samples": 2295,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/repair_shard02_YES_ENSEMBLE_B_PLUS_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YES_ENSEMBLE_B_PLUS/receipt.json",
+        "exit_code": 0,
+        "elapsed_seconds": 2071.886611924041
+      },
+      {
+        "method": "YESTRACK_TCP_TRP",
+        "shard": 2,
+        "physical_gpu": 2,
+        "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+        "pid": 2266153,
+        "start_epoch_seconds": 1793037612.7575223,
+        "samples": 2295,
+        "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/repair_shard02_YESTRACK_TCP_TRP_stdout.txt",
+        "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YESTRACK_TCP_TRP/receipt.json",
+        "exit_code": 0,
+        "elapsed_seconds": 1158.9983455038164
+      }
+    ],
+    "actual_wall_seconds": 3231.4334610498045,
+    "failed_shard": 2,
+    "healthy_GPUs_not_stopped": [
+      4,
+      5,
+      6
+    ],
+    "allocation_budget_gib": 8,
+    "physical_free_margin_gib": 4,
+    "teacher_model_dtype_batch_prompts_unchanged": true
+  }
+}
