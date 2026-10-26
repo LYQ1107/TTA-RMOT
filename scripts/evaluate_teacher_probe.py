@@ -7,6 +7,8 @@ No teacher rule, prompt, model, online threshold, or student is modified here.
 from collections import Counter,defaultdict
 import argparse
 import csv
+from datetime import datetime,timezone
+import gzip
 import json
 from pathlib import Path
 import sys
@@ -220,6 +222,7 @@ def evaluate(output=OUTPUT,run=RUN):
         grouped[s['video_id'],s['query_id'],s['frame_id']].append(i)
         episode_indices[s['video_id'],s['query_id']].append(i)
     episode_keys=sorted({(s['video_id'],s['query_id']) for s in samples})
+    first_GT_read_utc=datetime.now(timezone.utc).isoformat()
     truth={key:load_eval_gt(DATA,*key) for key in episode_keys}
     labels=np.zeros(n,dtype=bool);primary=np.zeros(n,dtype=bool);groups=[]
     for (video,query,frame),ix in sorted(grouped.items()):
@@ -230,6 +233,7 @@ def evaluate(output=OUTPUT,run=RUN):
     positive_videos=sorted({s['video_id'] for s,y in zip(samples,labels) if y})
     audit=dict(protocol='OFFICIAL_REFER_DANCE_MARK_NONZERO_CLASS1_FRAME_OFFSET0_IOU05',
         sealed_before_GT=True,seal_sha256=file_sha(output/'config_hashes.json'),videos=25,video_queries=425,
+        sealed_at_utc=seal['sealed_at_utc'],independent_GT_read_started_utc=first_GT_read_utc,
         query_present_episodes=sum(bool(v) for v in truth.values()),query_empty_episodes=sum(not v for v in truth.values()),
         sampled_frame_queries=len(groups),GT_present_frame_queries=sum(bool(g['gt']) for g in groups),
         positive_candidate_opportunities=int(labels.sum()),positive_videos=positive_videos,
@@ -281,13 +285,40 @@ def evaluate(output=OUTPUT,run=RUN):
             note='five anchors and sampled candidates only; GT grouping offline'))
         swaps.extend(query_swap_metrics(method,score,labels,samples,primary))
         recoveries[method]=comparison_counts(states['FROZEN_FLEXHOOK'],states[method],labels,groups)
+    cache_meta=json.loads((output/'teacher_cache_index.json').read_text())
+    with gzip.open(cache_meta['raw_response_index']['path'],'rt') as handle:
+        raw_flags={r['request_id']:dict(variant=r['variant'],binary=r['top1_is_yes_no']) for r in map(json.loads,handle)}
+    visual_groups=defaultdict(list);control_validity=defaultdict(Counter)
     for method in ['EVIDENCE_VERIFIED','YES_ENSEMBLE_B_PLUS']:
         with (Path(run)/'full/T0'/method/'teacher_outputs.jsonl').open() as handle:
             for line in handle:
                 row=json.loads(line)
+                i=by_id[row['sample_id']];state=row['decision']['state']
+                validity=control_validity[method+'/'+state]
+                validity['candidate_pairs']+=1
+                invalid=[raw_flags[ref]['variant'] for ref in row['request_ids'] if ref and not raw_flags[ref]['binary']]
+                validity['pairs_with_nonbinary_original']+=int('original' in invalid)
+                validity['pairs_with_nonbinary_control']+=int(any(v!='original' for v in invalid))
+                for variant in set(invalid):validity['pairs_nonbinary_'+variant]+=1
                 for attr in row['decision']['features'].get('attributes',[]):
                     visual.append(dict(method=method,sample_id=row['sample_id'],video=row['video_id'],
                         query_id=row['query_id'],state=row['decision']['state'],**attr))
+                    label='official_complete_query_MATCHED' if labels[i] else 'official_complete_query_UNMATCHED'
+                    scope='GT_present_frame_queries' if primary[i] else 'no_official_GT_at_anchor'
+                    visual_groups[method,state,label,scope].append((row['sample_id'],attr))
+    visual_summary=[]
+    fields=('visual_delta','target_probability_change','background_probability_change',
+        'target_sensitivity_excess','entropy_delta','cross_observation_spread')
+    for (method,state,label,scope),items in sorted(visual_groups.items()):
+        record=dict(method=method,state=state,complete_query_IoU_group=label,scope=scope,
+            candidate_pairs=len({sid for sid,_ in items}),attribute_evaluations=len(items),
+            attribute_GT_available=False)
+        for field in fields:record['mean_'+field]=float(np.mean([a[field] for _,a in items]))
+        record['zero_target_sensitivity_excess_fraction']=float(np.mean([a['target_sensitivity_excess']==0 for _,a in items]))
+        visual_summary.append(record)
+    atomic_json(output/'visual_evidence_summary.json',dict(feature_groups=visual_summary,
+        per_pair_nonbinary_controls={key:dict(value) for key,value in control_validity.items()},
+        caution='no-image/occlusion conditional Yes-No ratios may be poorly calibrated or OOD even when original answer is valid; no control non-answer is relabelled as No; complete-query IoU groups are NOT per-attribute truth'))
     write_csv(output/'quality_by_method.csv',quality);write_csv(output/'quality_by_video.csv',per_video)
     write_csv(output/'quality_by_query.csv',per_query)
     write_csv(output/'quality_by_expression_type.csv',by_type);write_csv(output/'precision_coverage.csv',curves)
@@ -312,6 +343,7 @@ def evaluate(output=OUTPUT,run=RUN):
     atomic_json(output/'final_scientific_verdict.json',gates)
     costs=build_budget(seal,output,run)
     summary=dict(protocol=audit,quality=quality,gates=gates,source_rules=rules,
+        evaluator_script_sha256=file_sha(Path(__file__)),
         target_teacher_training=False,student_training_started=False,
         computation_wall_seconds=time.perf_counter()-started,
         query_swap_common_candidate_rows=len(swaps),per_method_costs=costs,

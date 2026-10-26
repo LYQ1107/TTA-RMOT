@@ -76,6 +76,7 @@ def report(output=OUTPUT,run=RUN):
     all_metrics={r['method']:r for r in data['quality'] if r['scope']=='all425_official_scored'}
     cost={r['method']:r for r in data['per_method_costs']};boot=json.loads((output/'bootstrap.json').read_text())
     recovery=json.loads((output/'GT_recovery_and_FP.json').read_text())
+    visual_summary=json.loads((output/'visual_evidence_summary.json').read_text())
     stage=json.loads((output/'stage_costs_and_attempts.json').read_text());log_archive=archive_logs(run,output)
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     table=['| 方法 | AP | AUROC | R@1 | POS(真/总) | POS精度 | GT覆盖 | UNKNOWN |',
@@ -144,6 +145,7 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 ## 归因、覆盖与不确定性
 
 - B−A AP：{delta(b,a,'AUPRC')}，R@1：{delta(b,a,'Recall_at1')}。
+- B同时获取匹配C动作判断的四观测，故B−A不是只改变提示词次数的纯因果效应；B/C与D/B-plus才是视图匹配比较。
 - C−B AP：{delta(c,b,'AUPRC')}，R@1：{delta(c,b,'Recall_at1')}。
 - D−C AP：{delta(d,c,'AUPRC')}；D和C同原始分属性分数，验证器只改变三值接受状态，不凭筛选增加原始排序信息。
 - D对B-plus同视觉、同调用槽、同验证器比较：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_YES_ENSEMBLE_B_PLUS'],ensure_ascii=False)}`。
@@ -153,6 +155,8 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 - 全425 D恢复/丢失及FP：`{json.dumps(recovery['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
 - 新增/删除FP预测行按新增行是否IoU匹配计；一对一匹配重分配导致的FP变化单列，不相互冒充。
 - SoftMatch-inspired仅用源冻结置信度半高斯权重，无额外硬门限；若接受POS权重均1则与A接受集合相同，不能宣称独立监督信号。
+- D接受POS中的非Yes/No控制输出统计：`{json.dumps(visual_summary['per_pair_nonbinary_controls'].get('EVIDENCE_VERIFIED/SUPPORT_POS',{}),ensure_ascii=False)}`。
+  无图/遮挡的条件Yes-No比值可能未校准，绝不将控制非回答解释成No；详细特征分组按完整表达IoU匹配分，不冒充逐属性真值。
 
 ## 计算与输入公平性
 
@@ -161,6 +165,7 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 A只做原整句当前ROI，成本低；B与C逐候选对应相同视图/调用槽；B-plus逐一匹配D的5类干预视图、调用槽，并使用同验证器。
 语言token受问法影响，实际报告，不宣称完全相同token。D/B-plus公平性以逐输入图像SHA和视图类型核验，而非只比参数量。
 缓存可以共享，但表中所需raw调用和逻辑槽不抹去缓存前置成本；SoftMatch继承A全部MLLM成本。
+SoftMatch行是A的依赖成本，不能再加一次得到总GPU小时。逐worker吞吐见budget_by_worker.csv，不是完整视频FPS。
 分配GPU小时是共享GPU worker存活时间，不是独占利用率或能耗；等价raw秒是原批次均摊观察值，不能冒充另跑的独立实测时长。
 全部pipeline阶段含失败/恢复的GPU分配时间{stage['all_pipeline_allocated_GPU_hours']:.4f}小时；
 另有首个2对功能检查16.70秒。各阶段wall time、吞吐、峰值、原始请求/图像/token和所有失败记录另列。
@@ -170,6 +175,7 @@ TCP/TRP按用户授权固定13个因果活动帧原策略重置，保留6帧TCP�
 
 固定源4视频64窗口、203对，源POS/NEG门限{data['source_rules']['positive_threshold']}/{data['source_rules']['negative_threshold']}，
 仅源开发选择。源验证器接受5个POS、精度1.0，但覆盖仅5/82，样本小且是源整句校准，不能证明Dance服饰教师可靠。
+分属性min是预登记逻辑评分，不是经独立校准的联合概率；跨问题形式共用源门限存在校准迁移风险，不能据此推论所有教师/门限普遍无效。
 所有六组完整预测、prompt/config/raw缓存索引先SHA封存，独立进程随后才读取目标GT。
 所有教师receipt记录0目标GT打开尝试、0参数更新，原始模型完整参数SHA前后相同；Linux Landlock内核限制只读输入。
 官方教师MLLM大规模预训练语料无法逐条核验，Refer-Dance潜在重叠**未知**；本轮未加载Dance LoRA或用Dance GT调prompt/阈值。

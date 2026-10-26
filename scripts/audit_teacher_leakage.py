@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Seal complete GT-free P1 predictions; this module never opens target GT."""
 import argparse
+from datetime import datetime,timezone
 import gzip
 import json
 from pathlib import Path
 import sqlite3
+import subprocess
 import sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from flex_tta.runtime.pf_receipts import atomic_json,file_sha
@@ -63,7 +65,8 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         raise ValueError('the pre-registered 25video fixed manifest is required')
     config=ROOT/'configs/teacher/base_qwen2b.yaml'
     hashes={str(p.relative_to(ROOT)):file_sha(p) for p in [config,ROOT/'configs/teacher/prompts_v1.yaml',
-        ROOT/'configs/teacher/probe_protocol.yaml',output/'source_calibration_rules_T0.json',manifest]}
+        ROOT/'configs/teacher/probe_protocol.yaml',output/'source_calibration_rules_T0.json',
+        output/'assets/runtime_versions.json',manifest]}
     result_files={};receipts={};requests={};records=[]
     for method in METHODS:
         folder=run/'full'/condition/method
@@ -168,6 +171,8 @@ def seal(run=RUN,output=OUTPUT,condition='T0'):
         recovery='join public rows to manifest by sample_id; complete per-pair request_ids/raw logits remain in original sealed method files and this server raw index',
         source_calibration_GT_and_images_not_published=True))
     seal_record=dict(status='SEALED_BEFORE_TARGET_GT_EVALUATION',condition=condition,
+        sealed_at_utc=datetime.now(timezone.utc).isoformat(),
+        sealing_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         fixed_pairs=len(samples),videos=25,video_queries=425,methods=list(METHODS),
         config_hashes=hashes,original_files=result_files,
         public_predictions_sha256=file_sha(public_predictions),public_cache_index_sha256=file_sha(cache_index),
