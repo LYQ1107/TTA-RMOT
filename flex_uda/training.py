@@ -290,7 +290,7 @@ def train(config,output,*,smoke=False,resume=False):
     if not delta or not grad_nonzero:raise RuntimeError('no actual adapter learning')
     if smoke and method!='SOURCE_REHEARSAL' and not any(x>0 and math.isfinite(x) for x in target_grad_checks):
         raise RuntimeError('no finite nonzero actual target unlabeled-loss gradient in smoke')
-        result=dict(status='SMOKE_PASS' if smoke else 'COMPLETE_FIXED_COVERAGE_DIAGNOSTIC',method=method,protocol=config['protocol'],
+    result=dict(status='SMOKE_PASS' if smoke else 'COMPLETE_FIXED_COVERAGE_DIAGNOSTIC',method=method,protocol=config['protocol'],
         steps=total_steps,steps_per_coverage_cycle=steps_per_epoch,coverage_cycles=total_steps/steps_per_epoch,
         source_videos_seen=len({v for v,_ in src_seen}),source_query_pairs_seen=len(src_seen),
         target_videos_seen=len({v for v,_ in tgt_seen}),target_query_pairs_seen=len(tgt_seen),
