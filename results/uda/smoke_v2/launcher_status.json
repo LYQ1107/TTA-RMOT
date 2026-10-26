@@ -1,0 +1,55 @@
+{
+  "status": "COMPLETE",
+  "workers": [
+    {
+      "method": "SOURCE_REHEARSAL",
+      "config": "source_rehearsal",
+      "physical_gpu": 5,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 81154,
+      "total_mib": 81920,
+      "processes": 0,
+      "pid": 3228109,
+      "exit_code": 0
+    },
+    {
+      "method": "MEAN_TEACHER_UDA",
+      "config": "mean_teacher",
+      "physical_gpu": 4,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 57231,
+      "total_mib": 81920,
+      "processes": 2,
+      "pid": 3228110,
+      "exit_code": 0
+    },
+    {
+      "method": "WEAK_MIL_UDA",
+      "config": "weak_mil",
+      "physical_gpu": 6,
+      "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53289,
+      "total_mib": 81920,
+      "processes": 2,
+      "pid": 3228111,
+      "exit_code": 0
+    },
+    {
+      "method": "COMBINED_UDA",
+      "config": "combined",
+      "physical_gpu": 3,
+      "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53193,
+      "total_mib": 81920,
+      "processes": 2,
+      "pid": 3228112,
+      "exit_code": 0
+    }
+  ],
+  "wall_seconds": 20.913794497959316,
+  "scope": "smoke"
+}

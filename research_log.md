@@ -1,5 +1,21 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-26 — User-authorized25Val transductive pilot: real smoke and Frozen gate
+
+- User explicitly chooses25Val first, not Train. Keep original40Train asset limitation separate; label all new results
+  TRANSDUCTIVE_VAL_DIAGNOSTIC, never independent target generalization or source-free onlineTTA.
+- Initial AMP BCE failure fixed by FP32 presence loss; independent complete loss review then found NaN source totals
+  from frozen C-Hook cross-query dispersion denominator N(N-1) at N=1. Revoke ALLv1 smoke approvals despite finite
+  gradients; retain old runs. Exclude only this inapplicable frozen constant, keep original decode and CE unchanged.
+- Freshv2 four real20-step runs have finite actual source/target losses, nonzero adapter updates and target gradients,
+  no frozen source changes, no targetGT access. Final receipt indentation failure repaired and resumed20/20 without
+  replaying optimizer steps. UDA focused tests23 passed. Independent audit rather than exit0 is the acceptance gate.
+- Frozen CPU replay425/425 exact prediction hashes, complete211085MOT bank: official HOTA8.2180 unchanged;
+  DetA3.1937/AssA21.1470/IDF14.4414. Historical8.206 remains separate. Replay cost not standalone GPU inference.
+- Proceed with pre-registered one8973-step coverage cycle for A/B/C/D, source-val CE-only checkpoint selection,
+  then full25/425 sealed official evaluation. No target-presence truth is available: UNKNOWN coverage is explicit,
+  no fabricated MIL positives, no40/385 prior, no test-time optimizer. No target score-based hyperparameter changes.
+
 ## 2026-10-25 — Identity full result and automatic Hybrid handoff
 
 - Identity completes25 videos/425 expressions,3,588,445 candidate-query rows/433,636 active frames. Official HOTA8.8179 (+0.5999),DetA4.0132,AssA19.3760,DetRe5.9354,DetPr11.0030,IDF1 5.4476,IDSW347;114,648 rows/1,968 IDs. All25 workers exit0, full auditPASS with no source-sign or MOT modifications and no GT opened by adaptation.

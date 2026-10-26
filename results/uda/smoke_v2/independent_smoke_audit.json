@@ -1,0 +1,61 @@
+{
+  "status": "PASS_ALL_FOUR_REAL_SMOKES",
+  "methods": [
+    {
+      "method": "SOURCE_REHEARSAL",
+      "status": "PASS",
+      "nonfinite_loss_steps": [],
+      "source_loss_range": [
+        0.00029556333902291954,
+        0.10289222002029419
+      ],
+      "actual_updates": 20,
+      "target_gradients_valid": true,
+      "adapter_delta_L2": 0.05433026705711192,
+      "frozen_source_unchanged": true,
+      "target_GT_open_attempts": []
+    },
+    {
+      "method": "MEAN_TEACHER_UDA",
+      "status": "PASS",
+      "nonfinite_loss_steps": [],
+      "source_loss_range": [
+        0.0002955718373414129,
+        0.10289222002029419
+      ],
+      "actual_updates": 20,
+      "target_gradients_valid": true,
+      "adapter_delta_L2": 0.06535955396034268,
+      "frozen_source_unchanged": true,
+      "target_GT_open_attempts": []
+    },
+    {
+      "method": "WEAK_MIL_UDA",
+      "status": "PASS",
+      "nonfinite_loss_steps": [],
+      "source_loss_range": [
+        0.00029577448731288314,
+        0.10292622447013855
+      ],
+      "actual_updates": 20,
+      "target_gradients_valid": true,
+      "adapter_delta_L2": 0.040336506249802465,
+      "frozen_source_unchanged": true,
+      "target_GT_open_attempts": []
+    },
+    {
+      "method": "COMBINED_UDA",
+      "status": "PASS",
+      "nonfinite_loss_steps": [],
+      "source_loss_range": [
+        0.00029577448731288314,
+        0.10292622447013855
+      ],
+      "actual_updates": 20,
+      "target_gradients_valid": true,
+      "adapter_delta_L2": 0.06496816322333816,
+      "frozen_source_unchanged": true,
+      "target_GT_open_attempts": []
+    }
+  ]
+}

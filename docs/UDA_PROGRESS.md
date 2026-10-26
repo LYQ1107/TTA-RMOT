@@ -31,3 +31,16 @@
 训练进程不能打开目标标注，不能用Val GT选参数；不借40/385比例产生presence先验。
 四组源监督/EMA/合法关系与弱MIL/组合对照采用同一预注册短预算、rank4、seed17；先真实20step smoke。
 该中间阶段不将缺失Train候选替换成GT或其它前端，也不据诊断结果无限调参。
+
+## 真机smoke与基线门禁已完成
+
+- UDA必要测试23通过。v1烟雾实验虽产生有限梯度，但原冻结C-Hook跨表达regular在N=1是NaN常量，
+  独立完整loss审计撤销四组v1通过状态，旧日志/权重完整保留在`results/runs/uda_val_smoke_20261026_v1`。
+- 修复为仅训练授权LoRA的有效源CE，不使用不适用、无梯度的NaN常量；逐步显式检查源/目标实际目标有限。
+  v2四组各20步完成，所有source/target loss有限，adapter非零更新，三个目标方法实际无标签loss梯度非零，
+  冻结源参数未变、目标GT读取0；独立审计`results/uda/smoke_v2/independent_smoke_audit.json`。
+- v2在最后写receipt时出现缩进错误，20步checkpoint与日志有效；修复后从20/20恢复仅完成收尾，未重跑任何更新。
+- 从既有完整Frozen候选分数CPU重放全部425表达，425个预测SHA256逐一完全一致；独立官方TrackEval
+  HOTA8.2180/DetA3.1937/AssA21.1470/IDF1 4.4414。不是重新测量GPU基线速度。
+- 下一步四个独立worker各一个8973步完整覆盖周期，源17视频/8896表达，目标25视频/425表达/1275固定位置窗口。
+  这不是只适应25帧，也不是40Train→25Val实验。原40Train官方同配置MOT仍缺失，暂不扩大任务。
