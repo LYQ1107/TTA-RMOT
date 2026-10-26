@@ -138,6 +138,7 @@ AP比较均对同样8381采样库做相同筛选，不混用历史全量Frozen 0
 
 逐episode、逐视频、表达子组、presence及query-swap见同名CSV；不存在独立属性GT，所有17表达均含动作与服饰，
 APPEARANCE/ACTION子组重叠，SPATIAL样本为0，不能声称完成空间关系或逐属性准确率验证。
+解析器仅C/D使用预登记的dacning→dancing别名，整句保留原文；另列含/不含别名子组，不能把可能的文字规范化收益全算成结构化贡献。
 Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺失分数，不把其它可真表达一律当负例。
 
 ## 归因、覆盖与不确定性
@@ -146,6 +147,7 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 - C−B AP：{delta(c,b,'AUPRC')}，R@1：{delta(c,b,'Recall_at1')}。
 - D−C AP：{delta(d,c,'AUPRC')}；D和C同原始分属性分数，验证器只改变三值接受状态，不凭筛选增加原始排序信息。
 - D对B-plus同视觉、同调用槽、同验证器比较：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_YES_ENSEMBLE_B_PLUS'],ensure_ascii=False)}`。
+- D对C同接受数量次要归因：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_STRUCTURED_EVIDENCE'],ensure_ascii=False)}`；不改原Gates。
 - D的UNKNOWN原因：`{json.dumps(data['unknown_reasons']['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
 - 完整25视频配对bootstrap，2000次、seed0，相关帧/表达不作为独立样本；有效重采样数和CI保留在bootstrap.json。
 - 全425 D恢复/丢失及FP：`{json.dumps(recovery['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
@@ -186,7 +188,8 @@ TCP/TRP按用户授权固定13个因果活动帧原策略重置，保留6帧TCP�
 9. D Gate B为{gates['Gate_B']['EVIDENCE_VERIFIED']['passed']}；必须超过强B-plus，不能用双loss或更多调用宣称贡献。
 10. POS P–C完整曲线见precision_coverage.csv，部署门限与离线扫分数诊断分列，不回写目标阈值。
 11. D候选正机会正确监督{d['POS_true_candidates']}/{d['positive_candidate_opportunities']}；一对一GT监督{d['accepted_matched_GT']}/{d['GT_observations']}，
-    未被POS覆盖的GT观测{d['GT_observations']-d['accepted_matched_GT']}；NEG误杀候选{d['NEG_true_candidates_killed']}，不重复计算同一人。
+    其中采样候选可恢复GT为{d['recoverable_sampled_GT']}，可恢复但未被POS监督为{d['recoverable_sampled_GT']-d['accepted_matched_GT']}；
+    根本不在抽样候选可恢复范围的GT为{d['GT_observations']-d['recoverable_sampled_GT']}，不能全归咎于教师；NEG误杀候选{d['NEG_true_candidates_killed']}，不重复计算同一人。
 12. D主口径UNKNOWN {pct(d['UNKNOWN_rate'])}，全425为{pct(all_metrics['EVIDENCE_VERIFIED']['UNKNOWN_rate'])}；必须同时看GT覆盖，不能靠拒绝大多数样本报成功。
 13. 没有已加载的目标适配权重；通用预训练潜在Refer-Dance重叠无法排除，状态UNKNOWN。
 14. 40Train图像/表达已有，匹配官方DETR+NeuralSORT预测MOT仍缺失，不用GT补齐。

@@ -62,6 +62,21 @@ def main():
         print(json.dumps(dict(mode='WHOLE_VIDEO_FOUR_SHARDS',shards=[dict(index=i,pairs=len(shard),
             videos=sorted({s['video_id'] for s in shard})) for i,shard in enumerate(whole_video_shards(rows))])),flush=True)
     if not a.execute:return
+    completed=phase_root/'phase_completion.json'
+    requested=[m for group in groups for m in group]
+    if completed.exists() and all((phase_root/m/'receipt.json').exists() for m in requested):
+        old_phase=json.loads(completed.read_text())
+        if old_phase['status']!='COMPLETE_FIXED_PHASE' or old_phase['manifest_sha256']!=file_sha(manifest):
+            raise ValueError('existing phase belongs to a different fixed protocol')
+        for method in requested:
+            old=json.loads((phase_root/method/'receipt.json').read_text())
+            if old['manifest_sha256']!=file_sha(manifest) or old['config_sha256']!=file_sha(config):
+                raise ValueError('existing method configuration changed')
+            if old['predictions_sha256']!=file_sha(phase_root/method/'teacher_outputs.jsonl'):
+                raise ValueError('sealed method predictions changed')
+        print(json.dumps(dict(status='PRESERVED_COMPLETE_PHASE',phase=a.phase,
+            original_wall_seconds=old_phase['actual_wall_seconds'],no_GPU_worker_started=True)),flush=True)
+        return
     if a.phase=='full':
         for group in GROUPS:
             for method in group:
