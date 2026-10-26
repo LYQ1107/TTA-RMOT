@@ -1,0 +1,1011 @@
+{
+  "status": "SEALED",
+  "method": "WEAK_MIL_UDA",
+  "checkpoint": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/checkpoint_best_source_selected.pt",
+  "checkpoint_sha256": "f4ba909616e54d07343b0c81dcae56c45f2a3b39e719e9609069965c7a340c2d",
+  "selected_step": 8973,
+  "source_val_CE": 0.9725043532735071,
+  "selection": "SOURCE_VAL_CE_ONLY",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "experiment_commit": "ebf8dff51eef74118e9add7f2949874f5abdf5dd",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007",
+    "dancetrack0010",
+    "dancetrack0014",
+    "dancetrack0018",
+    "dancetrack0019",
+    "dancetrack0025",
+    "dancetrack0026",
+    "dancetrack0030",
+    "dancetrack0034",
+    "dancetrack0035",
+    "dancetrack0041",
+    "dancetrack0043",
+    "dancetrack0047",
+    "dancetrack0058",
+    "dancetrack0063",
+    "dancetrack0065",
+    "dancetrack0073",
+    "dancetrack0077",
+    "dancetrack0079",
+    "dancetrack0081",
+    "dancetrack0090",
+    "dancetrack0094",
+    "dancetrack0097"
+  ],
+  "valid_episodes": 425,
+  "parities": [
+    {
+      "status": "PASS",
+      "video": "dancetrack0004",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 3,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 2,
+          "queries": 17,
+          "max_abs_margin_error": 6.67572021484375e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0005",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 3,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 6.198883056640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0007",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0010",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0014",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 12,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 10,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0018",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 3,
+          "queries": 17,
+          "max_abs_margin_error": 4.76837158203125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 252,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 5.7220458984375e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 503,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 6.67572021484375e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0019",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.049041748046875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1202,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.049041748046875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 2402,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0025",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 402,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 803,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.049041748046875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0026",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 13,
+          "queries": 17,
+          "max_abs_margin_error": 1.52587890625e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 152,
+          "candidates": 12,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 302,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0030",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 632,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1263,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0034",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 8.106231689453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 462,
+          "candidates": 10,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 923,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0035",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 7.152557373046875e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 352,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 7.152557373046875e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 703,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0041",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 502,
+          "candidates": 15,
+          "queries": 17,
+          "max_abs_margin_error": 1.049041748046875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1003,
+          "candidates": 13,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0043",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 92,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 183,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0047",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 8,
+          "queries": 17,
+          "max_abs_margin_error": 1.049041748046875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0058",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 801,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1601,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0063",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 6,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 501,
+          "candidates": 11,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1000,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0065",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 352,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 1.33514404296875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 702,
+          "candidates": 5,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0073",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 7,
+          "queries": 17,
+          "max_abs_margin_error": 5.7220458984375e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 352,
+          "candidates": 13,
+          "queries": 17,
+          "max_abs_margin_error": 1.0013580322265625e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 703,
+          "candidates": 14,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0077",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 9,
+          "queries": 17,
+          "max_abs_margin_error": 1.430511474609375e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 9,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 9,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0079",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 9,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 15,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1202,
+          "candidates": 10,
+          "queries": 17,
+          "max_abs_margin_error": 8.58306884765625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0081",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 15,
+          "queries": 17,
+          "max_abs_margin_error": 1.33514404296875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 493,
+          "candidates": 17,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 984,
+          "candidates": 20,
+          "queries": 17,
+          "max_abs_margin_error": 7.62939453125e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0090",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 12,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 503,
+          "candidates": 12,
+          "queries": 17,
+          "max_abs_margin_error": 1.33514404296875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1004,
+          "candidates": 13,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0094",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 13,
+          "queries": 17,
+          "max_abs_margin_error": 1.239776611328125e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 302,
+          "candidates": 19,
+          "queries": 17,
+          "max_abs_margin_error": 5.7220458984375e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 603,
+          "candidates": 19,
+          "queries": 17,
+          "max_abs_margin_error": 6.67572021484375e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    },
+    {
+      "status": "PASS",
+      "video": "dancetrack0097",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 6.9141387939453125e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 3,
+          "queries": 17,
+          "max_abs_margin_error": 5.245208740234375e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 4.76837158203125e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    }
+  ],
+  "target_GT_open_attempts": [],
+  "optimizer_steps": 0,
+  "test_time_updates": 0,
+  "precision": "FP32",
+  "threshold": 0,
+  "query_batch_near_zero_fallbacks": 35,
+  "cache_stats": [
+    {
+      "video": "dancetrack0004",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3754,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0005",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3753,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0007",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3914,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0010",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3766,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0014",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 4275,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0018",
+      "backbone_calls": 511,
+      "backbone_images": 511,
+      "text_encoder_calls": 17,
+      "visual_hits": 1527,
+      "visual_misses": 511,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0019",
+      "backbone_calls": 2411,
+      "backbone_images": 2411,
+      "text_encoder_calls": 17,
+      "visual_hits": 7835,
+      "visual_misses": 2411,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0025",
+      "backbone_calls": 811,
+      "backbone_images": 811,
+      "text_encoder_calls": 17,
+      "visual_hits": 2861,
+      "visual_misses": 811,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0026",
+      "backbone_calls": 310,
+      "backbone_images": 310,
+      "text_encoder_calls": 17,
+      "visual_hits": 1564,
+      "visual_misses": 310,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0030",
+      "backbone_calls": 1271,
+      "backbone_images": 1271,
+      "text_encoder_calls": 17,
+      "visual_hits": 3852,
+      "visual_misses": 1271,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0034",
+      "backbone_calls": 931,
+      "backbone_images": 931,
+      "text_encoder_calls": 17,
+      "visual_hits": 3721,
+      "visual_misses": 931,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0035",
+      "backbone_calls": 717,
+      "backbone_images": 717,
+      "text_encoder_calls": 17,
+      "visual_hits": 2489,
+      "visual_misses": 717,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0041",
+      "backbone_calls": 1013,
+      "backbone_images": 1013,
+      "text_encoder_calls": 17,
+      "visual_hits": 5052,
+      "visual_misses": 1013,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0043",
+      "backbone_calls": 193,
+      "backbone_images": 193,
+      "text_encoder_calls": 17,
+      "visual_hits": 806,
+      "visual_misses": 193,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0047",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 4227,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0058",
+      "backbone_calls": 1609,
+      "backbone_images": 1609,
+      "text_encoder_calls": 17,
+      "visual_hits": 5079,
+      "visual_misses": 1609,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0063",
+      "backbone_calls": 1016,
+      "backbone_images": 1016,
+      "text_encoder_calls": 17,
+      "visual_hits": 4375,
+      "visual_misses": 1016,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0065",
+      "backbone_calls": 710,
+      "backbone_images": 710,
+      "text_encoder_calls": 17,
+      "visual_hits": 2165,
+      "visual_misses": 710,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0073",
+      "backbone_calls": 712,
+      "backbone_images": 712,
+      "text_encoder_calls": 17,
+      "visual_hits": 2394,
+      "visual_misses": 712,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0077",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3774,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0079",
+      "backbone_calls": 1210,
+      "backbone_images": 1210,
+      "text_encoder_calls": 17,
+      "visual_hits": 3899,
+      "visual_misses": 1210,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0081",
+      "backbone_calls": 992,
+      "backbone_images": 992,
+      "text_encoder_calls": 17,
+      "visual_hits": 3847,
+      "visual_misses": 992,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0090",
+      "backbone_calls": 1014,
+      "backbone_images": 1014,
+      "text_encoder_calls": 17,
+      "visual_hits": 4099,
+      "visual_misses": 1014,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0094",
+      "backbone_calls": 612,
+      "backbone_images": 612,
+      "text_encoder_calls": 17,
+      "visual_hits": 2774,
+      "visual_misses": 612,
+      "peak_cache_bytes": 535127040
+    },
+    {
+      "video": "dancetrack0097",
+      "backbone_calls": 1211,
+      "backbone_images": 1211,
+      "text_encoder_calls": 17,
+      "visual_hits": 3716,
+      "visual_misses": 1211,
+      "peak_cache_bytes": 535127040
+    }
+  ],
+  "wall_seconds": 3735.9723140320275,
+  "physical_gpu": "6",
+  "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+  "peak_allocated_bytes": 5278034432
+}

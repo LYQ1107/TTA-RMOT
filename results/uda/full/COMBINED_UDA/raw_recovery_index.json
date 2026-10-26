@@ -36,5 +36,15 @@
     },
     "all_frame_optimization": false,
     "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+  },
+  "prediction_archive": {
+    "path": "/data2/user/FlexHook-TTA/results/uda/full/archives/COMBINED_UDA_425_predictions.tar.gz",
+    "sha256": "0e2752fd088d689c8f9d36ac0b3359e9600917e1e293126bf1b33232a618b8fc",
+    "episodes": 425
+  },
+  "score_streams": "per-episode candidate_margins.jsonl.gz on server; hashes in episode_receipts.json",
+  "pseudo_evidence": {
+    "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA/pseudo_evidence.jsonl",
+    "sha256": "3c4f39b8fe2ae4b91a3588d5508bbfab6f654d8b8da93b908213faf5999ea876"
   }
 }

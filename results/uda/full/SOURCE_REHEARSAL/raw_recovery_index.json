@@ -36,5 +36,11 @@
     },
     "all_frame_optimization": false,
     "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
-  }
+  },
+  "prediction_archive": {
+    "path": "/data2/user/FlexHook-TTA/results/uda/full/archives/SOURCE_REHEARSAL_425_predictions.tar.gz",
+    "sha256": "5ab4369d94f2b585ff335ead369c42537ad4f133712b226ddc17412304875c08",
+    "episodes": 425
+  },
+  "score_streams": "per-episode candidate_margins.jsonl.gz on server; hashes in episode_receipts.json"
 }

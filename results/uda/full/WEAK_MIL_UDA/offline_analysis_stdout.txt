@@ -1,0 +1,142 @@
+{
+  "method": "WEAK_MIL_UDA",
+  "development_only_gt_used": true,
+  "threshold_selection_from_gt": false,
+  "definition": "offline framewise max-cardinality IoU>=0.5 assignment; official HOTA remains authoritative",
+  "gt_definition": "nonzero mark and pedestrian class 1, following official MOT GT filtering",
+  "added_fp_definition": "newly selected rows unmatched after adaptation; existing-row matching status can also change",
+  "net_gt_recovery": -6618,
+  "net_false_positive_change": -67697,
+  "gt_observations": 212541,
+  "candidate_retrievable_gt": 203906,
+  "baseline_matched_gt": 10337,
+  "adapted_matched_gt": 3719,
+  "recovered_gt": 0,
+  "lost_gt": 6618,
+  "new_false_positive_rows": 212,
+  "removed_false_positive_rows": 67909,
+  "baseline_false_positive_rows": 89367,
+  "adapted_false_positive_rows": 21670,
+  "ranking_valid_frames": 42657,
+  "ranking": {
+    "baseline": {
+      "1": 0.6147877253440233,
+      "3": 0.7719248892327167,
+      "5": 0.8803947769416508
+    },
+    "adapted": {
+      "1": 0.5947441217150761,
+      "3": 0.7324003094451087,
+      "5": 0.8526384884075299
+    },
+    "random_null": {
+      "1": 0.578298754863467,
+      "3": 0.7684882828959461,
+      "5": 0.8750817538347491
+    }
+  },
+  "source_auroc": 0.650203661381795,
+  "adapted_auroc": 0.4927723142771465,
+  "conditional_candidate_recall": 0.9593725445913965,
+  "baseline_conditional_gate_recall": 0.05069492805508421,
+  "adapted_conditional_gate_recall": 0.018238796308102753,
+  "query_presence": {
+    "query_present": {
+      "gt_observations": 212541,
+      "baseline_matched_gt": 10337,
+      "adapted_matched_gt": 3719,
+      "baseline_false_positive_rows": 1996,
+      "adapted_false_positive_rows": 162,
+      "recovered_gt": 0,
+      "lost_gt": 6618,
+      "new_false_positive_rows": 1,
+      "removed_false_positive_rows": 1835,
+      "baseline_selected_rows": 12333,
+      "adapted_selected_rows": 3881,
+      "episodes": 40,
+      "baseline_GT_recall": 0.04863532212608391,
+      "baseline_nonempty_prediction_episodes": 32,
+      "baseline_nonempty_prediction_rate": 0.8,
+      "adapted_GT_recall": 0.017497800424388706,
+      "adapted_nonempty_prediction_episodes": 20,
+      "adapted_nonempty_prediction_rate": 0.5,
+      "net_false_positive_change": -1834
+    },
+    "query_empty": {
+      "gt_observations": 0,
+      "baseline_matched_gt": 0,
+      "adapted_matched_gt": 0,
+      "baseline_false_positive_rows": 87371,
+      "adapted_false_positive_rows": 21508,
+      "recovered_gt": 0,
+      "lost_gt": 0,
+      "new_false_positive_rows": 211,
+      "removed_false_positive_rows": 66074,
+      "baseline_selected_rows": 87371,
+      "adapted_selected_rows": 21508,
+      "episodes": 385,
+      "baseline_GT_recall": null,
+      "baseline_nonempty_prediction_episodes": 154,
+      "baseline_nonempty_prediction_rate": 0.4,
+      "adapted_GT_recall": null,
+      "adapted_nonempty_prediction_episodes": 85,
+      "adapted_nonempty_prediction_rate": 0.22077922077922077,
+      "net_false_positive_change": -65863
+    }
+  },
+  "query_present_episodes": 40,
+  "query_empty_episodes": 385,
+  "query_present_GT_recall": 0.017497800424388706,
+  "query_present_FP": 162,
+  "query_empty_FP": 21508,
+  "query_empty_nonempty_prediction_rate": 0.22077922077922077,
+  "source_Recall_at_1_3_5": {
+    "1": 0.15799892839200189,
+    "3": 0.4474210017458549,
+    "5": 0.697658203365092
+  },
+  "adapted_Recall_at_1_3_5": {
+    "1": 0.13806678982359574,
+    "3": 0.40845801666833614,
+    "5": 0.6687681050831604
+  },
+  "recall_at_k_definition": "macro over target-retrievable frames: fraction of IoU>=0.5-positive candidates in top K; distinct from any-hit TopK",
+  "query_group_definition": "episode has any official scored GT; offline only, never provided to model",
+  "identity_switch_diagnostic": {
+    "query_gt_visible_transitions": 193842,
+    "query_gt_visible_switches": 1575,
+    "eligible_update_frames_with_visible_switch": 335,
+    "limitation": "query-GT-observable transitions only; misses unannotated people/gaps, and counts possible evidence conflicts, not proven accepted optimizer steps; the online ID memory cannot independently detect swaps within max_gap=2"
+  },
+  "temporal_selection_quartiles": [
+    {
+      "candidates": 846651,
+      "baseline_selected": 27365,
+      "adapted_selected": 6306,
+      "baseline_negative_fraction": 0.9676785357839298,
+      "adapted_negative_fraction": 0.9925518306834812
+    },
+    {
+      "candidates": 927333,
+      "baseline_selected": 25599,
+      "adapted_selected": 6720,
+      "baseline_negative_fraction": 0.9723950296171925,
+      "adapted_negative_fraction": 0.9927534122046773
+    },
+    {
+      "candidates": 921757,
+      "baseline_selected": 26154,
+      "adapted_selected": 6638,
+      "baseline_negative_fraction": 0.9716259274407463,
+      "adapted_negative_fraction": 0.9927985358397061
+    },
+    {
+      "candidates": 892704,
+      "baseline_selected": 20586,
+      "adapted_selected": 5725,
+      "baseline_negative_fraction": 0.9769397247015809,
+      "adapted_negative_fraction": 0.9935869000250923
+    }
+  ],
+  "temporal_definition": "four equal active-frame-index parts per episode; candidate-weighted negative fractions, not a causal trend test"
+}

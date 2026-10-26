@@ -1,0 +1,101 @@
+{
+  "status": "COMPLETE_ALL_FOUR_25VIDEO_425QUERY_EVALUATIONS",
+  "methods": {
+    "SOURCE_REHEARSAL": {
+      "valid_episodes": 425,
+      "frames": 433636,
+      "candidate_query_rows": 3588445,
+      "selected_rows": 41211
+    },
+    "MEAN_TEACHER_UDA": {
+      "valid_episodes": 425,
+      "frames": 433636,
+      "candidate_query_rows": 3588445,
+      "selected_rows": 100268
+    },
+    "WEAK_MIL_UDA": {
+      "valid_episodes": 425,
+      "frames": 433636,
+      "candidate_query_rows": 3588445,
+      "selected_rows": 25389
+    },
+    "COMBINED_UDA": {
+      "valid_episodes": 425,
+      "frames": 433636,
+      "candidate_query_rows": 3588445,
+      "selected_rows": 66694
+    }
+  },
+  "wall_seconds": 5533.445156335831,
+  "union_evaluator_active_wall_seconds": 5533.445156335831,
+  "launchers": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/evaluation_launchers/combined_first/evaluation_launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "COMBINED_UDA",
+          "pid": 3381510,
+          "physical_gpu": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 81154,
+          "total_mib": 81920,
+          "processes": 0,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 1776.345719205914
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/evaluation_launchers/source_first/evaluation_launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "SOURCE_REHEARSAL",
+          "pid": 3279974,
+          "physical_gpu": 3,
+          "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 53193,
+          "total_mib": 81920,
+          "processes": 2,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 2981.9766663277987
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/evaluation_launchers/teacher_weak_first/evaluation_launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "MEAN_TEACHER_UDA",
+          "pid": 3324158,
+          "physical_gpu": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 81154,
+          "total_mib": 81920,
+          "processes": 0,
+          "exit_code": 0
+        },
+        {
+          "method": "WEAK_MIL_UDA",
+          "pid": 3324160,
+          "physical_gpu": 6,
+          "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 71472,
+          "total_mib": 81920,
+          "processes": 2,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 3740.484408163
+    }
+  ],
+  "first_evaluator_admission_unix": 1793010240.0075843,
+  "last_evaluator_return_unix": 1793015773.4527407,
+  "wall_definition": "first inference launch to last return; may overlap training of slower methods; never add blindly to training wall"
+}
