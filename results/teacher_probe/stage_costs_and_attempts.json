@@ -1,0 +1,526 @@
+{
+  "attempts": [
+    {
+      "phase": "calibrate",
+      "status": "FAILED_ATTEMPTS_RETAINED",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/launcher_attempts/1793026509584413695/launcher_status.json",
+      "actual_scheduler_wall_seconds": 17.37799988896586,
+      "allocated_worker_GPU_hours": 0.00482672586694308,
+      "workers": [
+        {
+          "method": "SOURCE_RELIABILITY",
+          "physical_gpu": 0,
+          "gpu_uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+          "pid": 4090697,
+          "exit_code": 1,
+          "elapsed_seconds": 17.37621312099509,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY/receipt.json"
+        }
+      ]
+    },
+    {
+      "phase": "calibrate",
+      "status": "COMPLETE_FIXED_PHASE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/launcher_attempts/1793027317223390822/launcher_status.json",
+      "actual_scheduler_wall_seconds": 299.6531347250566,
+      "allocated_worker_GPU_hours": 0.08323652034580138,
+      "workers": [
+        {
+          "method": "SOURCE_RELIABILITY",
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 4138192,
+          "exit_code": 0,
+          "elapsed_seconds": 299.651473244885,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY/receipt.json"
+        }
+      ]
+    },
+    {
+      "phase": "full",
+      "status": "FAILED_ATTEMPTS_RETAINED",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/launcher_attempts/1793030313700049419/launcher_status.json",
+      "actual_scheduler_wall_seconds": 11964.11564895208,
+      "allocated_worker_GPU_hours": 10.279351183182767,
+      "workers": [
+        {
+          "method": "YES_FULL",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 535667,
+          "exit_code": 0,
+          "elapsed_seconds": 79.56782241212204,
+          "start_epoch_seconds": 1793030313.7354078,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 555922,
+          "exit_code": 0,
+          "elapsed_seconds": 456.47388955391943,
+          "start_epoch_seconds": 1793030393.304015,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 676088,
+          "exit_code": 0,
+          "elapsed_seconds": 234.21725560212508,
+          "start_epoch_seconds": 1793030849.7783477,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 743798,
+          "exit_code": 0,
+          "elapsed_seconds": 3342.5921999509446,
+          "start_epoch_seconds": 1793031083.9963837,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/EVIDENCE_VERIFIED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 1528287,
+          "exit_code": 0,
+          "elapsed_seconds": 5750.0990336088,
+          "start_epoch_seconds": 1793034426.589357,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "shard": 0,
+          "physical_gpu": 6,
+          "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "pid": 2854901,
+          "exit_code": 0,
+          "elapsed_seconds": 2101.1598464278504,
+          "start_epoch_seconds": 1793040176.6889822,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard00_YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard00/YESTRACK_TCP_TRP/receipt.json"
+        },
+        {
+          "method": "YES_FULL",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 535670,
+          "exit_code": 0,
+          "elapsed_seconds": 75.95265863696113,
+          "start_epoch_seconds": 1793030313.736029,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 554224,
+          "exit_code": 0,
+          "elapsed_seconds": 381.9237943261396,
+          "start_epoch_seconds": 1793030389.6894498,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 657590,
+          "exit_code": 0,
+          "elapsed_seconds": 208.5753328599967,
+          "start_epoch_seconds": 1793030771.6140165,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 704098,
+          "exit_code": 0,
+          "elapsed_seconds": 3397.3290603701025,
+          "start_epoch_seconds": 1793030980.1901238,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/EVIDENCE_VERIFIED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 1516083,
+          "exit_code": 0,
+          "elapsed_seconds": 5540.839546062052,
+          "start_epoch_seconds": 1793034377.5197902,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "shard": 1,
+          "physical_gpu": 4,
+          "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "pid": 2793179,
+          "exit_code": 0,
+          "elapsed_seconds": 1744.5546167800203,
+          "start_epoch_seconds": 1793039918.3597069,
+          "samples": 2040,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard01_YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard01/YESTRACK_TCP_TRP/receipt.json"
+        },
+        {
+          "method": "YES_FULL",
+          "shard": 2,
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 535668,
+          "exit_code": 0,
+          "elapsed_seconds": 183.92563123512082,
+          "start_epoch_seconds": 1793030313.7370772,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard02_YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "shard": 2,
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 586475,
+          "exit_code": 0,
+          "elapsed_seconds": 757.3888527951203,
+          "start_epoch_seconds": 1793030497.66352,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard02_YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "shard": 2,
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 788393,
+          "exit_code": 0,
+          "elapsed_seconds": 291.5694285710342,
+          "start_epoch_seconds": 1793031255.0531385,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard02_STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "shard": 2,
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 847943,
+          "exit_code": 0,
+          "elapsed_seconds": 3335.9950019500684,
+          "start_epoch_seconds": 1793031546.6233613,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard02_EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/EVIDENCE_VERIFIED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "shard": 2,
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 1628918,
+          "exit_code": 1,
+          "elapsed_seconds": 5.066941889934242,
+          "start_epoch_seconds": 1793034882.6191416,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard02_YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "YES_FULL",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 535669,
+          "exit_code": 0,
+          "elapsed_seconds": 146.8275993699208,
+          "start_epoch_seconds": 1793030313.737595,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 576512,
+          "exit_code": 0,
+          "elapsed_seconds": 589.5688078990206,
+          "start_epoch_seconds": 1793030460.5659676,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 732460,
+          "exit_code": 0,
+          "elapsed_seconds": 244.97937417495996,
+          "start_epoch_seconds": 1793031050.1352205,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 797221,
+          "exit_code": 0,
+          "elapsed_seconds": 2937.0023789198603,
+          "start_epoch_seconds": 1793031295.115367,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/EVIDENCE_VERIFIED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 1481839,
+          "exit_code": 0,
+          "elapsed_seconds": 4087.8678657128476,
+          "start_epoch_seconds": 1793034232.1185114,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "shard": 3,
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 2414361,
+          "exit_code": 0,
+          "elapsed_seconds": 1112.1873203490395,
+          "start_epoch_seconds": 1793038319.9871433,
+          "samples": 2006,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shard03_YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard03/YESTRACK_TCP_TRP/receipt.json"
+        }
+      ]
+    },
+    {
+      "phase": "full",
+      "status": "COMPLETE_FAILED_SHARD_RECOVERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/launcher_attempts/repair_1793035540323120251/launcher_status.json",
+      "actual_scheduler_wall_seconds": 3231.4334610498045,
+      "allocated_worker_GPU_hours": 0.8974680437299604,
+      "workers": [
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "shard": 2,
+          "physical_gpu": 2,
+          "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+          "pid": 1778442,
+          "start_epoch_seconds": 1793035540.5519922,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/repair_shard02_YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YES_ENSEMBLE_B_PLUS/receipt.json",
+          "exit_code": 0,
+          "elapsed_seconds": 2071.886611924041
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "shard": 2,
+          "physical_gpu": 2,
+          "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+          "pid": 2266153,
+          "start_epoch_seconds": 1793037612.7575223,
+          "samples": 2295,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/repair_shard02_YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/full/T0/shards/shard02/YESTRACK_TCP_TRP/receipt.json",
+          "exit_code": 0,
+          "elapsed_seconds": 1158.9983455038164
+        }
+      ]
+    },
+    {
+      "phase": "functionality",
+      "status": "COMPLETE_FIXED_PHASE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/launcher_attempts/1793026281648067405/launcher_status.json",
+      "actual_scheduler_wall_seconds": 55.30839157104492,
+      "allocated_worker_GPU_hours": 0.04373407626666853,
+      "workers": [
+        {
+          "method": "YES_FULL",
+          "physical_gpu": 0,
+          "gpu_uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+          "pid": 4076954,
+          "exit_code": 0,
+          "elapsed_seconds": 26.874052603030577,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "physical_gpu": 0,
+          "gpu_uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+          "pid": 4079173,
+          "exit_code": 0,
+          "elapsed_seconds": 24.28055794397369,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YESTRACK_TCP_TRP/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 4076956,
+          "exit_code": 0,
+          "elapsed_seconds": 24.284310243092477,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 4079017,
+          "exit_code": 0,
+          "elapsed_seconds": 31.02007086481899,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 4076957,
+          "exit_code": 0,
+          "elapsed_seconds": 22.448433621088043,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "physical_gpu": 2,
+          "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+          "pid": 4076958,
+          "exit_code": 0,
+          "elapsed_seconds": 28.53524928400293,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/functionality/T0/EVIDENCE_VERIFIED/receipt.json"
+        }
+      ]
+    },
+    {
+      "phase": "smoke",
+      "status": "COMPLETE_FIXED_PHASE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/launcher_attempts/1793027617821066168/launcher_status.json",
+      "actual_scheduler_wall_seconds": 2695.1017301988322,
+      "allocated_worker_GPU_hours": 1.339899505267256,
+      "workers": [
+        {
+          "method": "YES_FULL",
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 4156027,
+          "exit_code": 0,
+          "elapsed_seconds": 153.2188354630489,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_FULL_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_FULL/receipt.json"
+        },
+        {
+          "method": "YESTRACK_TCP_TRP",
+          "physical_gpu": 7,
+          "gpu_uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+          "pid": 4165193,
+          "exit_code": 0,
+          "elapsed_seconds": 1118.7465295640286,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YESTRACK_TCP_TRP_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YESTRACK_TCP_TRP/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_BUDGET_MATCHED",
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 4156029,
+          "exit_code": 0,
+          "elapsed_seconds": 578.2601822230499,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_BUDGET_MATCHED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_BUDGET_MATCHED/receipt.json"
+        },
+        {
+          "method": "YES_ENSEMBLE_B_PLUS",
+          "physical_gpu": 5,
+          "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "pid": 35045,
+          "exit_code": 0,
+          "elapsed_seconds": 2116.83802338806,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_B_PLUS_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/YES_ENSEMBLE_B_PLUS/receipt.json"
+        },
+        {
+          "method": "STRUCTURED_EVIDENCE",
+          "physical_gpu": 2,
+          "gpu_uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+          "pid": 4156028,
+          "exit_code": 0,
+          "elapsed_seconds": 167.27893072389998,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/STRUCTURED_EVIDENCE_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/STRUCTURED_EVIDENCE/receipt.json"
+        },
+        {
+          "method": "EVIDENCE_VERIFIED",
+          "physical_gpu": 3,
+          "gpu_uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+          "pid": 4156030,
+          "exit_code": 0,
+          "elapsed_seconds": 689.2957176000345,
+          "log": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/EVIDENCE_VERIFIED_stdout.txt",
+          "receipt": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1/smoke/T0/EVIDENCE_VERIFIED/receipt.json"
+        }
+      ]
+    }
+  ],
+  "all_pipeline_allocated_GPU_hours": 12.648516054659396,
+  "standalone_first2pair_functionality_worker_seconds": 16.6985,
+  "cost_warning": "shared GPUs; allocated worker time is not exclusive utilization/energy; raw equivalent seconds are amortized observed batches, not a new standalone timing run; SoftMatch inherits A; phase wall times are not summed as concurrent method times"
+}

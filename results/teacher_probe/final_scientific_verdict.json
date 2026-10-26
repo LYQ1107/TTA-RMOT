@@ -1,0 +1,128 @@
+{
+  "status": "SIMPLE_TEACHER_ONLY_NO_EVIDENCE_CONTRIBUTION",
+  "Gate_A": {
+    "YES_FULL": {
+      "passed": true,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": true,
+        "POS_precision": true,
+        "GT_coverage": true,
+        "accepted_distinct_GT_observations": true
+      }
+    },
+    "YES_ENSEMBLE_BUDGET_MATCHED": {
+      "passed": true,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": true,
+        "POS_precision": true,
+        "GT_coverage": true,
+        "accepted_distinct_GT_observations": true
+      }
+    },
+    "STRUCTURED_EVIDENCE": {
+      "passed": true,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": true,
+        "POS_precision": true,
+        "GT_coverage": true,
+        "accepted_distinct_GT_observations": true
+      }
+    },
+    "EVIDENCE_VERIFIED": {
+      "passed": true,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": true,
+        "POS_precision": true,
+        "GT_coverage": true,
+        "accepted_distinct_GT_observations": true
+      }
+    },
+    "YES_ENSEMBLE_B_PLUS": {
+      "passed": false,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": true,
+        "POS_precision": true,
+        "GT_coverage": false,
+        "accepted_distinct_GT_observations": true
+      }
+    },
+    "YESTRACK_TCP_TRP": {
+      "passed": false,
+      "checks": {
+        "enough_positive_support": true,
+        "AP_gain": true,
+        "Recall1_gain": true,
+        "AP_video_CI_lower_positive": false,
+        "POS_precision": true,
+        "GT_coverage": true,
+        "accepted_distinct_GT_observations": true
+      }
+    }
+  },
+  "Gate_B": {
+    "STRUCTURED_EVIDENCE": {
+      "passed": false,
+      "checks": {
+        "YES_ENSEMBLE_BUDGET_MATCHED": false,
+        "YES_ENSEMBLE_B_PLUS": false,
+        "SOFTMATCH_WEIGHTED": false
+      },
+      "warning": "C has fewer views than B-plus; D/B-plus is exact visual/call matched decomposition test; no positive claim from an unmatched comparison"
+    },
+    "EVIDENCE_VERIFIED": {
+      "passed": false,
+      "checks": {
+        "YES_ENSEMBLE_BUDGET_MATCHED": false,
+        "YES_ENSEMBLE_B_PLUS": false,
+        "SOFTMATCH_WEIGHTED": false
+      },
+      "warning": "C has fewer views than B-plus; D/B-plus is exact visual/call matched decomposition test; no positive claim from an unmatched comparison"
+    }
+  },
+  "Gate_C": {
+    "passed": false,
+    "source_rules_and_verifier_validated": true,
+    "exact_input_fairness": {
+      "STRUCTURED_EVIDENCE_vs_YES_ENSEMBLE_BUDGET_MATCHED": {
+        "pairwise_visual_or_call_slot_mismatches": 0,
+        "exact_visual_and_call_slots_matched": true,
+        "language_tokens_measured_not_assumed_equal": true
+      },
+      "EVIDENCE_VERIFIED_vs_YES_ENSEMBLE_B_PLUS": {
+        "pairwise_visual_or_call_slot_mismatches": 0,
+        "exact_visual_and_call_slots_matched": true,
+        "language_tokens_measured_not_assumed_equal": true
+      }
+    },
+    "D_to_Bplus_logical_call_ratio": 1.0,
+    "T1_missing_user_waived": true,
+    "provenance_legal_inputs": true,
+    "pretraining_overlap_unknown": true
+  },
+  "any_teacher_Gate_A_passed": true,
+  "evidence_P2_ready": false,
+  "formal_P2_executable": false,
+  "formal_P2_blockers": [
+    "matching40Train predicted MOT missing",
+    "independent10video legal referringGT not yet verified",
+    "source-only reliability or teacher/evidence quality gates may be insufficient"
+  ],
+  "target_GT_threshold_tuning": false,
+  "student_training_started": false,
+  "decision": "STOP_AFTER_P1; no automatic new long GPU training; retain all negative/inconclusive results"
+}

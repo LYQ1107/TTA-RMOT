@@ -1,0 +1,293 @@
+{
+  "protocol": "GT_FREE_RAW_RESPONSE_INDEX_NOT_TARGET_LABELS",
+  "cache_path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite",
+  "unique_raw_responses": 204327,
+  "by_method": {
+    "YES_FULL": {
+      "unique_required_forwards": 8381,
+      "equivalent_images": 8381,
+      "equivalent_visual_tokens": 838100,
+      "equivalent_language_tokens": 485112,
+      "equivalent_amortized_forward_seconds": 483.7811034475443,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 8381,
+      "logical_images": 8381,
+      "logical_visual_tokens": 838100,
+      "logical_language_tokens": 485112
+    },
+    "YES_ENSEMBLE_BUDGET_MATCHED": {
+      "unique_required_forwards": 22678,
+      "equivalent_images": 47821,
+      "equivalent_visual_tokens": 4782100,
+      "equivalent_language_tokens": 1150169,
+      "equivalent_amortized_forward_seconds": 2476.0009281537486,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 22678,
+      "logical_images": 47821,
+      "logical_visual_tokens": 4782100,
+      "logical_language_tokens": 1150169
+    },
+    "STRUCTURED_EVIDENCE": {
+      "unique_required_forwards": 11282,
+      "equivalent_images": 14279,
+      "equivalent_visual_tokens": 1427900,
+      "equivalent_language_tokens": 538537,
+      "equivalent_amortized_forward_seconds": 872.077944963939,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 22678,
+      "logical_images": 47821,
+      "logical_visual_tokens": 4782100,
+      "logical_language_tokens": 1105306
+    },
+    "EVIDENCE_VERIFIED": {
+      "unique_required_forwards": 56372,
+      "equivalent_images": 57087,
+      "equivalent_visual_tokens": 5708700,
+      "equivalent_language_tokens": 2662359,
+      "equivalent_amortized_forward_seconds": 5057.853744441189,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 113359,
+      "logical_images": 191220,
+      "logical_visual_tokens": 19122000,
+      "logical_language_tokens": 5429380
+    },
+    "YES_ENSEMBLE_B_PLUS": {
+      "unique_required_forwards": 113327,
+      "equivalent_images": 191220,
+      "equivalent_visual_tokens": 19122000,
+      "equivalent_language_tokens": 5652134,
+      "equivalent_amortized_forward_seconds": 14928.679834389599,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 113359,
+      "logical_images": 191220,
+      "logical_visual_tokens": 19122000,
+      "logical_language_tokens": 5653629
+    },
+    "YESTRACK_TCP_TRP": {
+      "unique_required_forwards": 34628,
+      "equivalent_images": 39701,
+      "equivalent_visual_tokens": 3970100,
+      "equivalent_language_tokens": 2040139,
+      "equivalent_amortized_forward_seconds": 7445.832253587183,
+      "raw_non_yes_no": 0,
+      "logical_request_slots": 34628,
+      "logical_images": 39701,
+      "logical_visual_tokens": 3970100,
+      "logical_language_tokens": 2040139
+    }
+  },
+  "raw_response_index": {
+    "path": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/full_p1_T0_response_index.jsonl.gz",
+    "sha256": "3d505fdf034b58dcd2b311ad64684f4bd5fa06d417aed35bdb3fb90373d8cd18",
+    "records": 204327
+  },
+  "first8_raw_response_examples": [
+    {
+      "request_id": "00001592b14cfe41346bbf60b18c0ffdf5bd3bebf0ea013822fcb8700878f808",
+      "owner_pid": 1516083,
+      "methods": [
+        "YES_ENSEMBLE_B_PLUS"
+      ],
+      "variant": "candidate_occluded",
+      "frames": [
+        720,
+        721,
+        722,
+        723
+      ],
+      "images": 4,
+      "visual_tokens": 400,
+      "image_sha256": [
+        "12c065b2d0bc9cba539540912af228c2888ef76b79edc33c11521ea940088fee",
+        "322b203fde6becc3c99136c723c7eaa4d7669a77a1ed9e680fef36b39e02cb9d",
+        "3f7b709893a5fcbfd6ef55480d4d3ee77aa1ee5651d421c6dab26d6144fcef38",
+        "133fb2c4af5ae109f420154f9e649932c6f3a1e9930f794c3a9b3b1244464d89"
+      ],
+      "language_tokens": 55,
+      "yes_logit": 29.875,
+      "no_logit": 37.0,
+      "yes_probability": 0.000804901123046875,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "44246af32933eed4bad9134e06c536545cef36403d67cac411cc79af7832a0d6"
+    },
+    {
+      "request_id": "000028762a03fa275ff9076774ebad700967cfb1e7d9ae19098002a5e90adc55",
+      "owner_pid": 847943,
+      "methods": [
+        "EVIDENCE_VERIFIED"
+      ],
+      "variant": "previous_observation",
+      "frames": [
+        27,
+        28,
+        29,
+        30
+      ],
+      "images": 4,
+      "visual_tokens": 400,
+      "image_sha256": [
+        "2f2bc28ed410e2bc46738ab5103e4ffaf9e6984889a05d0a577b425ecf7eab3d",
+        "ddb751cbeb94047070e8caa4ba172fe06e0e054e308e10523a27813f61507134",
+        "487a28ae971d763c5dfe560850a2713ca3444d2168e243df870e08e33fa8ba94",
+        "9096ac3a896614d586049d1e8e2883a437a13c0f21e694d58a8a9047e75654b4"
+      ],
+      "language_tokens": 51,
+      "yes_logit": 33.25,
+      "no_logit": 28.875,
+      "yes_probability": 0.98828125,
+      "top_token": "Yes",
+      "top1_is_yes_no": true,
+      "payload_sha256": "8fcdbdf3a37ee99550d3253b816a681f5b0de1ba0b8a10621f8691aebb8d32f0"
+    },
+    {
+      "request_id": "0000890d73f51dbe947017d15c3c39baf6e6ac0288e7b3efdfb1538f803793c1",
+      "owner_pid": 1516083,
+      "methods": [
+        "YES_ENSEMBLE_B_PLUS"
+      ],
+      "variant": "candidate_occluded",
+      "frames": [
+        58,
+        59,
+        60,
+        61
+      ],
+      "images": 4,
+      "visual_tokens": 400,
+      "image_sha256": [
+        "99b56d71f48806748c59d02839a0ab018fac04ee64d9b6880e054e520bfa1f44",
+        "fae1440a11808f037fde100d2212947695dacbf7f99706d28331da448610edfd",
+        "b89d30f2c3c2f2731c7e6577c3783e490ad4a7c3b8e94018675ff4f37c574d49",
+        "f055f36ea4e4654cedc23c6b6d7d57b953fcb897f74e2f45f0dea3fffb32bba6"
+      ],
+      "language_tokens": 55,
+      "yes_logit": 28.0,
+      "no_logit": 32.75,
+      "yes_probability": 0.00860595703125,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "56df34d9b098630437e07c630cdcad0b4918e293723a6243bb2244e4eae2e2ec"
+    },
+    {
+      "request_id": "0000b1af093df5c492561618a12b4449a87829380cb6b270ed4ab64a919cba0c",
+      "owner_pid": 1778442,
+      "methods": [
+        "YES_ENSEMBLE_B_PLUS"
+      ],
+      "variant": "background_occluded",
+      "frames": [
+        101
+      ],
+      "images": 1,
+      "visual_tokens": 100,
+      "image_sha256": [
+        "838cfb7b0b92552e07a03a6dfe52512ee8b9740bc12f80dc28b2413cd9357bc0"
+      ],
+      "language_tokens": 47,
+      "yes_logit": 27.0,
+      "no_logit": 31.5,
+      "yes_probability": 0.010986328125,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "3ba5238cf82d58a95a043d2639c7561676e3d6679d2940b74e71d7ff7dbbd9d4"
+    },
+    {
+      "request_id": "0000daeeca27eddd7f883b9d1c0df989d4c51e271e90962c4262bc61137c2282",
+      "owner_pid": 788393,
+      "methods": [
+        "STRUCTURED_EVIDENCE",
+        "EVIDENCE_VERIFIED"
+      ],
+      "variant": "original",
+      "frames": [
+        212
+      ],
+      "images": 1,
+      "visual_tokens": 100,
+      "image_sha256": [
+        "738ff8a9d277ab670b85c8774ab03eba4243fb9a8b8f8fbef7b486f34c821e96"
+      ],
+      "language_tokens": 48,
+      "yes_logit": 32.75,
+      "no_logit": 38.25,
+      "yes_probability": 0.004058837890625,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "c9d83b69fc0017914a340eff94a781b33b1a85c07dc240cb68085e5ea8a51c49"
+    },
+    {
+      "request_id": "0000f5ef5d1b44bd19a865e26a0612547528e06fd8f1fdab91fd202887509988",
+      "owner_pid": 2793179,
+      "methods": [
+        "YESTRACK_TCP_TRP"
+      ],
+      "variant": "original",
+      "frames": [
+        230
+      ],
+      "images": 1,
+      "visual_tokens": 100,
+      "image_sha256": [
+        "89159cc385f3267210b7caed1f45acdf9f4956cba00abc5a0ea808f50ff49c01"
+      ],
+      "language_tokens": 59,
+      "yes_logit": 37.75,
+      "no_logit": 46.5,
+      "yes_probability": 0.0001583099365234375,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "5a0c5c051addf03a3e7c9a12d00968591368f003c677ff81842a0fbc66bd127a"
+    },
+    {
+      "request_id": "000143b47cd3b9834f26ad4c0ec3b2e7469d0684dedf94efedcbe6f77142d36f",
+      "owner_pid": 555922,
+      "methods": [
+        "YES_ENSEMBLE_BUDGET_MATCHED",
+        "YES_ENSEMBLE_B_PLUS"
+      ],
+      "variant": "original",
+      "frames": [
+        121
+      ],
+      "images": 1,
+      "visual_tokens": 100,
+      "image_sha256": [
+        "0b06d24aba7d9a8baef3894f187964b5325e2f67f8441a81b005af8352e552e2"
+      ],
+      "language_tokens": 50,
+      "yes_logit": 28.75,
+      "no_logit": 32.5,
+      "yes_probability": 0.02294921875,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "a1b32aa5a22fc909e729f1d957aa3da3dc3508e1697af06022b04dbf00030498"
+    },
+    {
+      "request_id": "0001a692bd869cdeff8a90068ed572e9299a18ae96a65717fffb130e0f110f6d",
+      "owner_pid": 732460,
+      "methods": [
+        "STRUCTURED_EVIDENCE",
+        "EVIDENCE_VERIFIED"
+      ],
+      "variant": "original",
+      "frames": [
+        886
+      ],
+      "images": 1,
+      "visual_tokens": 100,
+      "image_sha256": [
+        "407a8a8e358765d282d35908607221eb57fd41ac3611322903b4e2ed37f63b3e"
+      ],
+      "language_tokens": 48,
+      "yes_logit": 32.75,
+      "no_logit": 38.0,
+      "yes_probability": 0.005218505859375,
+      "top_token": "No",
+      "top1_is_yes_no": true,
+      "payload_sha256": "fd117ac5e806e76b7a23f6cc5625bb345c0cacdb8940ed6ebcc4da280ac846f6"
+    }
+  ],
+  "recovery": "join public rows to manifest by sample_id; complete per-pair request_ids/raw logits remain in original sealed method files and this server raw index",
+  "source_calibration_GT_and_images_not_published": true
+}
