@@ -4,7 +4,13 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：FlexHook V2 → Dance Positive-Free Online TTA
+## 当前研究：FlexHook V2 → Dance Offline UDA
+
+按2026-10-26最新指令先做[25Val同集无标签适应诊断](docs/UDA_METHOD_IMPLEMENTATION.md)，
+不将其称作40Train→Val UDA或未见视频泛化。目标GT不进入训练，四组单卡独立对照。
+[当前进度与资产缺口](docs/UDA_PROGRESS.md)；40Train图像/表达已补齐，原协议同配置Train MOT仍缺失。
+
+## 已完成研究：FlexHook V2 → Dance Positive-Free Online TTA
 
 最新用户授权的[快速可恢复性诊断](docs/PF_RECOVERABILITY_DIAGNOSTIC_20261025.md)独立于已完成六组结果：
 **已完成并停止**。完整425表达Count-Matched Frozen HOTA8.8206，Identity8.8179：
