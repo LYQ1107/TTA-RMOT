@@ -77,6 +77,7 @@ def report(output=OUTPUT,run=RUN):
     cost={r['method']:r for r in data['per_method_costs']};boot=json.loads((output/'bootstrap.json').read_text())
     recovery=json.loads((output/'GT_recovery_and_FP.json').read_text())
     visual_summary=json.loads((output/'visual_evidence_summary.json').read_text())
+    bottlenecks=json.loads((output/'clause_bottleneck_summary.json').read_text())
     stage=json.loads((output/'stage_costs_and_attempts.json').read_text());log_archive=archive_logs(run,output)
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     table=['| 方法 | AP | AUROC | R@1 | POS(真/总) | POS精度 | GT覆盖 | UNKNOWN |',
@@ -151,9 +152,12 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 - D对B-plus同视觉、同调用槽、同验证器比较：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_YES_ENSEMBLE_B_PLUS'],ensure_ascii=False)}`。
 - D对C同接受数量次要归因：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_STRUCTURED_EVIDENCE'],ensure_ascii=False)}`；不改原Gates。
 - D的UNKNOWN原因：`{json.dumps(data['unknown_reasons']['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
+- 完整表达官方匹配候选中的分数瓶颈：`{json.dumps(bottlenecks['groups'].get('official_complete_query_MATCHED',{}),ensure_ascii=False)}`。
+  这只说明哪种问题的分数限制了完整表达，不是用完整表达标签伪造逐属性准确率。
 - 完整25视频配对bootstrap，2000次、seed0，相关帧/表达不作为独立样本；有效重采样数和CI保留在bootstrap.json。
 - 全425 D恢复/丢失及FP：`{json.dumps(recovery['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
-- 新增/删除FP预测行按新增行是否IoU匹配计；一对一匹配重分配导致的FP变化单列，不相互冒充。
+- 新增/删除FP预测行依据各自一对一IoU匹配；原有预测行因重分配变FP/不再FP单列，四项精确还原净FP变化。
+  另报新行是否完全没有任何GT IoU匹配，区分语义候选标签与重复框造成的跟踪FP；这些是稀疏IoU诊断，不是完整TrackEval。
 - SoftMatch-inspired仅用源冻结置信度半高斯权重，无额外硬门限；若接受POS权重均1则与A接受集合相同，不能宣称独立监督信号。
 - D接受POS中的非Yes/No控制输出统计：`{json.dumps(visual_summary['per_pair_nonbinary_controls'].get('EVIDENCE_VERIFIED/SUPPORT_POS',{}),ensure_ascii=False)}`。
   无图/遮挡的条件Yes-No比值可能未校准，绝不将控制非回答解释成No；详细特征分组按完整表达IoU匹配分，不冒充逐属性真值。
@@ -167,6 +171,7 @@ A只做原整句当前ROI，成本低；B与C逐候选对应相同视图/调用�
 缓存可以共享，但表中所需raw调用和逻辑槽不抹去缓存前置成本；SoftMatch继承A全部MLLM成本。
 SoftMatch行是A的依赖成本，不能再加一次得到总GPU小时。逐worker吞吐见budget_by_worker.csv，不是完整视频FPS。
 分配GPU小时是共享GPU worker存活时间，不是独占利用率或能耗；等价raw秒是原批次均摊观察值，不能冒充另跑的独立实测时长。
+方法wall为其最早worker启动至最晚退出的跨度，包含异步流水线滞后；没有独占四卡/单卡重测，不声称实测单卡加速倍数。
 全部pipeline阶段含失败/恢复的GPU分配时间{stage['all_pipeline_allocated_GPU_hours']:.4f}小时；
 另有首个2对功能检查16.70秒。各阶段wall time、吞吐、峰值、原始请求/图像/token和所有失败记录另列。
 TCP/TRP按用户授权固定13个因果活动帧原策略重置，保留6帧TCP、stride4、原TRP，不是从视频开头累积状态，更不是完整视频HOTA。

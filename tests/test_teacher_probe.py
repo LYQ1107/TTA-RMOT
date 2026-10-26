@@ -77,6 +77,17 @@ def test_sparse_teacher_coverage_counts_distinct_GT_not_duplicate_boxes():
     assert metric['one_to_one_POS_precision']==.5 and metric['GT_positive_coverage']==1.
 
 
+def test_FP_new_rows_are_distinct_from_existing_row_rematching():
+    import numpy as np
+    from scripts.evaluate_teacher_probe import comparison_counts
+    group=dict(indices=np.array([0,1]),iou=np.array([[.6],[.9]]))
+    result=comparison_counts(np.array(['SUPPORT_POS','SUPPORT_NEG']),np.array(['SUPPORT_POS']*2),
+        np.array([True,True]),[group])
+    assert result['assignment_FP_change']==1 and result['new_FP_prediction_rows']==0
+    assert result['existing_rows_became_FP_due_to_rematching']==1
+    assert result['new_rows_without_any_GT_IoU_match']==0
+
+
 def test_four_shards_keep_complete_videos_and_all_fixed_pairs():
     from scripts.launch_teacher_probe_sharded import whole_video_shards
     rows=[dict(video_id=f'v{v}',sample_id=f'{v}/{t}') for v in range(25) for t in range(5+v)]

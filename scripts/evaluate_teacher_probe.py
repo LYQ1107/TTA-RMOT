@@ -105,17 +105,25 @@ def aggregate(method,indices,scores,states,labels,groups,weights=None):
 
 
 def comparison_counts(base_states,states,labels,groups):
-    recovered=lost=fp_delta=0
+    recovered=lost=fp_delta=added_fp=removed_fp=became_fp=ceased_fp=0
     for group in groups:
         ix=group['indices'];base=np.flatnonzero(base_states[ix]=='SUPPORT_POS').tolist()
         now=np.flatnonzero(states[ix]=='SUPPORT_POS').tolist()
-        b,_=matched_gt(group['iou'],base);a,_=matched_gt(group['iou'],now)
+        b,bp=matched_gt(group['iou'],base);a,ap=matched_gt(group['iou'],now)
         recovered+=len(a-b);lost+=len(b-a);fp_delta+=(len(now)-len(a))-(len(base)-len(b))
+        base_fp=set(base)-bp;now_fp=set(now)-ap;existing=set(base)&set(now)
+        added_fp+=len((set(now)-set(base))&now_fp)
+        removed_fp+=len((set(base)-set(now))&base_fp)
+        became_fp+=len(existing&now_fp-base_fp);ceased_fp+=len(existing&base_fp-now_fp)
+    if fp_delta!=added_fp-removed_fp+became_fp-ceased_fp:raise ValueError('FP rematching accounting mismatch')
     old=base_states=='SUPPORT_POS';new=states=='SUPPORT_POS'
     return dict(recovered_GT=recovered,lost_GT=lost,new_prediction_rows=int((new&~old).sum()),
-        removed_prediction_rows=int((old&~new).sum()),new_FP_prediction_rows=int((new&~old&~labels).sum()),
-        removed_FP_prediction_rows=int((old&~new&~labels).sum()),assignment_FP_change=fp_delta,
-        interpretation='new/removed FP rows use candidate IoU labels; assignment FP also changes with one-to-one rematching')
+        removed_prediction_rows=int((old&~new).sum()),new_FP_prediction_rows=added_fp,
+        removed_FP_prediction_rows=removed_fp,existing_rows_became_FP_due_to_rematching=became_fp,
+        existing_rows_ceased_FP_due_to_rematching=ceased_fp,
+        new_rows_without_any_GT_IoU_match=int((new&~old&~labels).sum()),
+        removed_rows_without_any_GT_IoU_match=int((old&~new&~labels).sum()),assignment_FP_change=fp_delta,
+        interpretation='new/removed FP rows use their respective one-to-one IoU05 assignment; existing-row rematching is separate; any-IoU semantic unmatched rows also reported; NOT full TrackEval')
 
 
 def bootstrap_metrics(scores,states,labels,primary,video_index,groups,config):
@@ -288,6 +296,24 @@ def evaluate(output=OUTPUT,run=RUN):
     cache_meta=json.loads((output/'teacher_cache_index.json').read_text())
     with gzip.open(cache_meta['raw_response_index']['path'],'rt') as handle:
         raw_flags={r['request_id']:dict(variant=r['variant'],binary=r['top1_is_yes_no']) for r in map(json.loads,handle)}
+    bottlenecks=defaultdict(Counter)
+    with (Path(run)/'full/T0/STRUCTURED_EVIDENCE/teacher_outputs.jsonl').open() as handle:
+        for line in handle:
+            row=json.loads(line);i=by_id[row['sample_id']];sample=samples[i]
+            group=('official_complete_query_MATCHED' if labels[i] else
+                'official_complete_query_UNMATCHED_at_GT_present_anchor' if primary[i] else 'no_official_GT_at_anchor')
+            count=bottlenecks[group];count['candidate_pairs']+=1
+            probs=row.get('attribute_probabilities',[]);attrs=sample['attributes']
+            if len(probs)!=len(attrs) or not attrs or any(p is None for p in probs):
+                count['attribute_evidence_missing']+=1;continue
+            minimum=min(probs);kinds=sorted({a['kind'] for a,p in zip(attrs,probs) if p==minimum})
+            count['min_score_kind_'+'_AND_'.join(kinds)]+=1
+            below=sorted({a['kind'] for a,p in zip(attrs,probs) if p<rules['positive_threshold']})
+            count['below_source_POS_gate_'+'_AND_'.join(below or ['NONE'])]+=1
+            count['C_state_'+row['decision']['state']]+=1
+            count['nonbinary_original_answer_pairs']+=int(any(ref and not raw_flags[ref]['binary'] for ref in row['request_ids']))
+    atomic_json(output/'clause_bottleneck_summary.json',dict(groups={k:dict(v) for k,v in bottlenecks.items()},
+        interpretation='score bottleneck of the complete expression on matched/unmatched candidate pairs; NOT independent clause accuracy or per-attribute GT; no threshold/rule change'))
     visual_groups=defaultdict(list);control_validity=defaultdict(Counter)
     for method in ['EVIDENCE_VERIFIED','YES_ENSEMBLE_B_PLUS']:
         with (Path(run)/'full/T0'/method/'teacher_outputs.jsonl').open() as handle:

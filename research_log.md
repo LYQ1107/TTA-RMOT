@@ -2096,3 +2096,4 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 
 - Existingfour-shardprobe continueswithoutinterruptinghealthyworkers. BeforeanynewP1targetGTscore, addofflinevisualfeature summaries andnon-Yes/Nocontrolcounts groupedbycomplete-queryofficialIoU, explicitlyNOTattributeGT. No teacher/rule/prompt/threshold change.
 - Capturedactualteacher runtime packageversions andpinnedYesTracksourcefileSHAs inassets/runtime_versions.json; readonlybaseenvironmentunchanged. Historicalresults/positive_free,results/diagnostics,results/uda arebyte-identical ingit versusUDAstart5c727332. Source/frozen/oldTTAresultspreserved.
+- BeforeGT evaluation, addcomplete-queryscore-bottleneck counts (ACTION/APPEARANCE minima, notattributeaccuracy). Separateadded/removedone-to-oneFProws fromexisting-rowFPrematching; a duplicate-boxregression checks a newlyaddedMATCHEDrow can turnanoldrow intoFP. No prediction/rulechange; sparseIoUdiagnostic only, notTrackEval.
