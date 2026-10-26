@@ -10,6 +10,15 @@
 不将其称作40Train→Val UDA或未见视频泛化。目标GT不进入训练，四组单卡独立对照。
 [当前进度与资产缺口](docs/UDA_PROGRESS.md)；40Train图像/表达已补齐，原协议同配置Train MOT仍缺失。
 
+**25Val阶段四组已全部完成并停止**：各8973次LoRA更新，随后冻结checkpoint完整25视频/425表达官方评测。
+HOTA：Frozen **8.2180**；Source Rehearsal **7.4352**；Mean Teacher **8.2494**；Weak MIL **6.9281**；Combined **7.7293**。
+Teacher的数量匹配Frozen已达8.2479，其微小残差和视频区间不能支持可靠语义提升；Combined不优于较好单模块。
+没有有效目标MIL/presence正负证据，不能把代码具备该loss称为有效目标弱监督已验证。
+[完整科学报告](docs/UDA_FINAL_SCIENTIFIC_REPORT.md)、[官方指标及逐视频/表达明细](results/uda/)、
+[完整预测压缩包](results/uda/full/archives/)、[checkpoint与分数恢复索引](results/uda/full/full_recovery_index.json)
+及[完整运行/失败恢复日志](results/uda/full/logs/runtime_logs.tar.gz)已公开。
+原40Train→25Val正式目标仍未完成，不自动扩展训练或按Val结果调参。
+
 ## 已完成研究：FlexHook V2 → Dance Positive-Free Online TTA
 
 最新用户授权的[快速可恢复性诊断](docs/PF_RECOVERABILITY_DIAGNOSTIC_20261025.md)独立于已完成六组结果：

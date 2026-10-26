@@ -78,3 +78,43 @@ Source Rehearsal虽AssA28.1110更高，却DetRe2.3022、HOTA更低；源CE改善
 这些官方评测只读各自已封存的425条预测，并在四组训练全部结束、checkpoint选择固定后执行。
 Weak/Combined还在推理，不据首两组目标指标改任何模型、门限、参数或剩余推理。
 独立首批原始官方表在`results/uda/interim_2_methods`，最终四组结果另行生成。
+
+## 最终状态：25Val四组、全部评测与离线归因完成
+
+前述“执行中/两组完成”是原始阶段记录，不再代表当前状态。
+四组均完成8973更新、0跳样本、3次同样本AMP重试；全部冻结源参数未变，模型目标GT打开记录为空。
+四组完整推理和四组Count-Matched均为25视频/425表达，主推理每组3588445候选-query观测、433636活动帧-query。
+425个独立episode全部封存，MOT几何和ID不变；FP32推理0optimizer/EMA更新，官方HOTA/CLEAR/Identity完整汇总。
+
+| 方法 | HOTA | ΔFrozen | Count-Matched HOTA | 适应−Count-Matched |
+|---|---:|---:|---:|---:|
+| SOURCE_REHEARSAL | 7.4352 | -0.7828 | 7.4207 | +0.0145 |
+| MEAN_TEACHER_UDA | 8.2494 | +0.0314 | 8.2479 | +0.0015 |
+| WEAK_MIL_UDA | 6.9281 | -1.2899 | 6.9005 | +0.0276 |
+| COMBINED_UDA | 7.7293 | -0.4887 | 7.7218 | +0.0075 |
+
+25视频聚类bootstrap、真实目标恢复/新增误检、40Present/385Empty、正确候选排序、文本互换/视觉偏置和伪标签质量均已离线完成。
+Teacher正伪标签仅84/958暴露对应GT，其中862个伪正暴露来自Query-Empty；Repeated exposure不是独立样本。
+当前没有可信的语义恢复结论，不根据这些GT结果改模型或启动第五组。
+
+## 原始goal与当前授权阶段的逐项验收
+
+| 原始要求 | 当前证据 | 判定 |
+|---|---|---|
+| 项目/独立分支、保留旧结果 | 本库origin、当前research分支、原六组目录与旧报告保留 | 已完成 |
+| 完整源17Train监督与独立源开发、V2权重 | assets审计、固定训练plan、严格加载SHA、64窗口source-val CE | 资产与本轮覆盖已完成；不是官方骨干全训复现 |
+| 40Train与25Val不交叉、完整40Train图像/表达 | `assets/dance_manifest_audit.json`、`train_image_preparation.json` | 资产划分已完成 |
+| 40Train同算法同配置预测MOT及Train→Val四组UDA | `assets/official_tracker_release.json`只有25Val公开候选；本轮target plan明确25Val | **未完成**；用户最新授权先不考虑Train，不可用本轮替代 |
+| GT隔离、LoRA/EMA/合法关系/UNKNOWN语义 | 训练/推理receipts、finite audit、模型实现与真实smoke | 本轮实现和执行完成；目标presence及静态时间证据覆盖0，不宣称有效目标MIL |
+| 四组真实GPU、源域选模型、完整目标官方评测 | `full/full_training_finite_audit.json`、每组425 receipts、官方summary/detailed | 25Val同集诊断完成，不是独立未见视频泛化 |
+| Frozen匹配、Count-Matched、presence/排序/成本/视频不确定性 | `summary.csv`、`full/summary.json`、text/pseudo诊断JSON与逐表达/视频CSV | 已完成 |
+| GitHub代码、实际指标、完整日志和可恢复路径 | `results/uda/full/`与四个425预测压缩包、恢复索引、训练源码版本 | 已提交；源码本地/公开commit可能不同但逐次树一致 |
+
+原始正式40Train→25Val目标没有被缩小后宣布成功。当前阶段按用户要求完成后停止，
+后续是否补同配置Train MOT并执行正式UDA需要用户明确恢复Train阶段；不自行重训MOT、加入教师或延长训练。
+完整报告：`UDA_FINAL_SCIENTIFIC_REPORT.md`。原始完成状态分别为
+`results/runs/uda_val_full_20261026_v1/full_suite_completion.json`和
+`results/runs/uda_val_evaluation_20261026_v1/evaluation_suite_completion.json`；首次失败launcher不是最终状态。
+收尾复核52项核心测试通过；94份完整文本日志已归档并逐文件复核，位于
+`results/uda/full/logs/runtime_logs.tar.gz`，没有GT、图像、权重或大容量margin流。
+实际训练/推理使用的六个本地源码版本均包含在`full/source_publication_map.json`的同树公开提交映射中。

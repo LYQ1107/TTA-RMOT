@@ -40,6 +40,9 @@ def render(public):
     public=Path(public).resolve();summary=json.loads((public/'summary.json').read_text())
     if summary['status']!='COMPLETE_TRANSDUCTIVE_VAL_DIAGNOSTIC':raise ValueError('no report from partial results')
     reports={m:json.loads((public/m/'metrics.json').read_text()) for m in METHODS};metrics=summary['metrics']
+    text_signal=json.loads((public/'text_signal_offline.json').read_text())
+    pseudo=json.loads((public/'pseudo_label_quality_offline.json').read_text())
+    frozen_presence=json.loads((ROOT/'results/diagnostics/pf_recoverability_20261025/query_information/summary.json').read_text())['presence']
     lines=['# FlexHook V2→Refer-Dance：25Val同集适应完整诊断','',
         '日期：2026-10-26。全部25视频、425表达；目标适应和评测是同一25Val。',
         '**TRANSDUCTIVE_VAL_DIAGNOSTIC，不是40Train→25Val UDA、不是独立测试泛化、不是Source-Free Online TTA。**','',
@@ -72,6 +75,8 @@ def render(public):
         a=r['attribution'];p=a['query_presence']['query_present'];e=a['query_presence']['query_empty'];presence=r['presence']['mean_frame_max_margin']
         lines.append(f"| {m} | {100*p['adapted_GT_recall']:.4f}% | {p['adapted_false_positive_rows']} | {e['adapted_false_positive_rows']} | {100*e['adapted_nonempty_prediction_rate']:.4f}% | {presence['AUROC']:.6f} / {presence['AUPRC']:.6f} |")
     lines+=['','存在性统计固定使用完整episode的平均逐帧max margin，属于离线诊断，不能冒充因果在线presence规则；没有拟合GT阈值。',
+        f"同一统计量的Frozen AUROC/AP为{frozen_presence['mean_frame_max_margin']['AUROC']:.6f}/{frozen_presence['mean_frame_max_margin']['AUPRC']:.6f}。",
+        f"历史Frozen {frozen_presence['max_margin']['AUROC']:.6f}/{frozen_presence['max_margin']['AUPRC']:.6f}使用整段max margin，不与平均逐帧max混比。",
         'Query-Empty无GT，单独HOTA不用于声称改善；重点检查FP与非空率。','',
         '## 视频级不确定性','',
         '成对bootstrap以25个完整视频为聚类，2000次、bootstrap seed0，使用官方TP加权HOTA充分统计；',
@@ -101,10 +106,36 @@ def render(public):
         '没有外部人物语义教师，也没有原版QCA复现。源码参考固定版本见`UDA_REFERENCE_IMPLEMENTATION_MAP.md`。',
         '原C-Hook的N=1跨表达NaN常量不进入LoRA目标；原v1错误smoke已撤销。AMP溢出采用同样本RNG恢复和scale回退，未跳样本。',
         '全部完成前不以目标GT审查伪标签；完成后的独立结果见`results/uda/full/pseudo_label_quality_offline.json`。','',
-        '## 当前结论与停止边界','',
-        '以上为实际完整数据页。科研判断必须同时检查Combined是否超过Frozen、Source Rehearsal和较好单模块，',
-        '以及数量匹配、正确候选排序、真实恢复与空查询误检，而不是只找最大的HOTA点估计。',
+        '## 伪标签的独立离线质量','',
+        '| 方法 | POS对应GT / POS总暴露 | POS精度 | Query-Empty中的POS | NEG误删GT暴露 | UNKNOWN中的GT暴露 |',
+        '|---|---:|---:|---:|---:|---:|']
+    for m,p in pseudo['methods'].items():
+        e=p['exposures'];positive=e['POS_GT_MATCH']+e['POS_NO_GT_MATCH']
+        lines.append(f"| {m} | {e['POS_GT_MATCH']} / {positive} | {100*p['pseudo_POS_precision']:.4f}% | {p['groups']['Query-Empty']['POS_NO_GT_MATCH']} | {e['NEG_GT_MATCH']} | {e['UNKNOWN_GT_MATCH']} |")
+    lines+=['','这是全部历史训练证据的重复暴露，不是独立人物数或独立样本；候选按IoU≥0.5对应当前表达GT，非一对一跟踪precision。',
+        'Source/EMA一致和同一物理ID稳定并没有保证语言正确；本次POS主要落在空查询，不能把这种共识当作独立语义教师。',
+        'UNKNOWN中确有正确候选，但没有足够无标签依据把它们转为正例；继续保持UNKNOWN，不根据这份GT审计补标签。','',
+        '## 冻结与适应模型的文本敏感性','',
+        '| 方法 | 正确查询Top1命中 | 随机候选Top1 | 视觉偏置Top1 | 互换文本Top1 | 混合候选帧AUROC | 混合帧视觉AUROC |',
+        '|---|---:|---:|---:|---:|---:|---:|']
+    for m,r in text_signal['methods'].items():
+        lines.append(f"| {m} | {r['correct_top1']:.6f} | {r['random_top1']:.6f} | {r['visual_top1']:.6f} | {r['all_other_top1']:.6f} | {r['mixed_source_AUROC']:.6f} | {r['mixed_visual_AUROC']:.6f} |")
+    tc=text_signal['comparisons']['MEAN_TEACHER_UDA_vs_FROZEN']['mixed_source_AUROC_minus_mixed_visual_AUROC']
+    lines+=['','Top1是至少命中一个正确候选的any-hit，不等于全部正确目标Recall@1；纯视觉控制为同一候选跨17真实查询的均值，互换文本在相同候选库中比较。',
+        '完整分析含42657个有GT帧-查询、其中26352个正负候选混合组，以及GT不重叠文本互换控制；不把这些相关组作为独立统计样本。',
+        f"Teacher相对Frozen的混合帧(查询AUROC−视觉AUROC)变化为{tc['delta']:+.6f}，25视频描述性95%区间[{tc['video_cluster_CI95'][0]:+.6f}, {tc['video_cluster_CI95'][1]:+.6f}]。",
+        '所有适应模型的正确查询Top1和候选Recall@1/3/5点估计均低于Frozen；没有观察到一致的语言排序恢复。',
+        '本轮没有重做内部特征探针。此前冻结PCD诊断只证明有限可读出信息，不能把带GT探针当作无标签可恢复性或本轮TTA收益。','',
+        '## 科研判断与停止边界','',
+        '工程方面：四组各8973次真实有限更新、完整25/425只读推理、四组数量匹配和官方评测均完成；旧六组结果和失败现场保留。',
+        f"科研方面：Mean Teacher相对Frozen仅{metrics['MEAN_TEACHER_UDA']['HOTA']-metrics['FROZEN']['HOTA']:+.4f} HOTA，相对数量匹配仅{reports['MEAN_TEACHER_UDA']['count_conditioned_delta']:+.4f}；视频区间包含0，尚无可靠正向语义结论。",
+        'Source Rehearsal和Weak的AssA提高伴随大幅召回损失；Combined没有超过Frozen或较好单模块，不能作为成功最终方法。',
+        '主因证据更支持查询存在性/校准与查询条件排序联合失效，而非单纯身份不稳定；目标伪正例不可靠，合法presence监督与静态语义时间监督覆盖为0。',
+        '这不证明所有UDA或所有服饰语义不可恢复：本轮只是一轮固定查询/轨迹覆盖、稀疏anchor预算，C/D还有source-presence混杂，且没有有效目标MIL正负监督。',
+        '目前没有足够证据支持直接加长同一EMA/MIL训练；如未来继续，需要先明确独立于源模型错误共识的语义依据，并另获授权，而不是依据Val GT调阈值或叠加loss。',
         '不根据此Val结果再改阈值、轮数或挑checkpoint。本轮结束后不自动开始第五个完整方法、外部教师或40Train训练。',
+        '原始40Train→25Val正式UDA仍未完成：缺少同算法/同配置40Train预测MOT，且当前用户要求先不考虑Train。本阶段完成不等于原始完整goal完成。',
+        '完整准备/smoke/失败与恢复/资源调度/推理/官方评测文本日志归档于`results/uda/full/logs/runtime_logs.tar.gz`，逐文件SHA索引同目录。',
         '原始checkpoint/分数/全部恢复路径见`results/uda/full/full_recovery_index.json`；完整425预测小压缩包不含GT/图像/模型权重。']
     (ROOT/'docs/UDA_FINAL_SCIENTIFIC_REPORT.md').write_text('\n'.join(lines)+'\n')
     target=['# 完整目标评测与复现','',

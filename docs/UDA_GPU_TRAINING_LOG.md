@@ -49,3 +49,21 @@ Teacher也已完整封存；Weak继续原GPU6，Combined使用已释放的空GPU
 
 已封存的Source/Teacher在独立CPU官方评测获得HOTA7.4352/8.2494，匹配Frozen8.2180。
 对应数量匹配Frozen7.4207/8.2479；Teacher残差仅+0.0015。其余两组未提前报告指标。
+
+## 最终封存：全部四组评测结束
+
+前述“继续推理”为历史阶段记录。四组25视频/425表达均已封存、官方评测及CPU离线归因结束，无待续GPU训练。
+
+| 方法 | 推理物理GPU | 推理worker elapsed秒 | query-frame FPS | 活动video-frame FPS | 推理GPU-process-hours |
+|---|---:|---:|---:|---:|---:|
+| SOURCE_REHEARSAL | 3 | 2977.629690 | 145.631 | 8.567 | 0.827119 |
+| MEAN_TEACHER_UDA | 5 | 1788.523097 | 242.455 | 14.262 | 0.496812 |
+| WEAK_MIL_UDA | 6 | 3735.972314 | 116.070 | 6.828 | 1.037770 |
+| COMBINED_UDA | 5 | 1771.851628 | 244.736 | 14.396 | 0.492181 |
+
+每组FP32、0测试时optimizer/EMA更新；checkpoint仅源CE选择；margin>0门限固定，无目标GT模型访问。
+主推理peak allocated约4.916GiB（Source/Teacher/Weak5278034432bytes，Combined5276297216bytes）。
+训练与推理合计约5.7178 GPU-process-hours；训练scheduler wall4736.92s、推理跨度5533.45s、
+重叠pipeline wall7319.48s，不累加重叠wall。共享卡负载导致FPS差异，不宣称方法本身固定有三倍速度差。
+每个完成receipt、完整25视频parity、GPU UUID/入场资源快照和失败/恢复历史均保留；没有重跑已完成episode。
+最终科研结论为未验证可靠语义提升，不以完成训练或非零梯度代替效果证据。正式40Train→25Val尚未执行。

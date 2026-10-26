@@ -2,6 +2,8 @@
 """Compact immutable experiment evidence, no images/weights/GT in publication."""
 import argparse
 import gzip
+import hashlib
+import io
 import json
 from pathlib import Path
 import shutil
@@ -16,6 +18,44 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 def compressed_copy(source,dest):
     with Path(source).open('rb') as src,Path(dest).open('wb') as out:
         with gzip.GzipFile(filename='',fileobj=out,mode='wb',mtime=0) as zipped:shutil.copyfileobj(src,zipped)
+
+
+def pack_logs(training,evaluation,public):
+    training,evaluation,public=map(lambda p:Path(p).resolve(),(training,evaluation,public))
+    for method in METHODS:
+        audit=json.loads((evaluation/method/'full_audit.json').read_text())
+        if audit['status']!='PASS' or audit['valid_episodes']!=425:
+            raise ValueError('publish runtime archive only after all four425 audits')
+    roots=[training,evaluation,ROOT/'results/runs/uda_val_smoke_20261026_v1',ROOT/'results/runs/uda_val_smoke_20261026_v2']
+    record_names={'gpu_admission.json','launcher_status.json','evaluation_launcher_status.json',
+        'parity_gpu_admission.json','evaluation_gpu_admission.json','parity_launcher_status.json',
+        'full_suite_completion.json','evaluation_suite_completion.json'}
+    paths=set((ROOT/'results/uda/assets').glob('*.txt'))
+    for root in roots:
+        paths.update(p for p in root.rglob('*') if p.is_file() and
+            (p.suffix=='.log' or p.name.endswith('_stdout.txt') or
+             (p.name.startswith('log_rank') and p.suffix=='.txt') or p.name in record_names))
+    dest=public/'logs';dest.mkdir(parents=True,exist_ok=True);archive=dest/'runtime_logs.tar.gz';records=[]
+    with archive.open('wb') as out,gzip.GzipFile(filename='',fileobj=out,mode='wb',mtime=0) as zipped:
+        with tarfile.open(fileobj=zipped,mode='w') as tar:
+            for path in sorted(paths):
+                data=path.read_bytes();name=path.relative_to(ROOT).as_posix()
+                member=tarfile.TarInfo(name);member.size=len(data);member.mtime=0;member.mode=0o644
+                tar.addfile(member,io.BytesIO(data))
+                records.append(dict(path=name,bytes=len(data),sha256=hashlib.sha256(data).hexdigest()))
+    with tarfile.open(archive,'r:gz') as tar:
+        members=tar.getmembers()
+        if len(members)!=len(records):raise ValueError('runtime archive count changed')
+        for member,record in zip(members,records):
+            if member.name!=record['path'] or hashlib.sha256(tar.extractfile(member).read()).hexdigest()!=record['sha256']:
+                raise ValueError('runtime archive differs from original log')
+    result=dict(status='VERIFIED_COMPLETE_UDA_TEXT_LOG_ARCHIVE',files=len(records),
+        uncompressed_bytes=sum(r['bytes'] for r in records),archive_bytes=archive.stat().st_size,
+        archive_sha256=file_sha(archive),archive=str(archive.relative_to(ROOT)),records=records,
+        scope='preparation tests; revoked v1 and valid v2 smoke; full training and failures/recovery; GPU admission/launcher status; parity/inference; all official evaluations',
+        protocol='TRANSDUCTIVE_VAL_DIAGNOSTIC',raw_images_checkpoints_predictions_GT_margin_streams_excluded=True)
+    atomic_json(dest/'runtime_log_index.json',result)
+    print(json.dumps({k:v for k,v in result.items() if k!='records'},indent=2))
 
 
 def export(training,evaluation,public,methods,training_only=False):
@@ -75,4 +115,7 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--training-root',type=Path,required=True)
     p.add_argument('--evaluation-root',type=Path,required=True);p.add_argument('--public-root',type=Path,default=ROOT/'results/uda/full')
     p.add_argument('--methods',nargs='+',choices=METHODS,default=list(METHODS));p.add_argument('--training-only',action='store_true')
-    a=p.parse_args();export(a.training_root,a.evaluation_root,a.public_root,a.methods,a.training_only)
+    p.add_argument('--logs-only',action='store_true')
+    a=p.parse_args()
+    if a.logs_only:pack_logs(a.training_root,a.evaluation_root,a.public_root)
+    else:export(a.training_root,a.evaluation_root,a.public_root,a.methods,a.training_only)
