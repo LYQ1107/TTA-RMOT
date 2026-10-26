@@ -148,12 +148,17 @@ def bootstrap_metrics(scores,states,labels,primary,video_index,groups,config):
             valid=[v for v in values if v is not None]
             result[method][name]=dict(valid_resamples=len(valid),CI95=np.percentile(valid,[2.5,97.5]).tolist() if valid else None)
     comparisons={}
-    for method in scores:
-        if method=='FROZEN_FLEXHOOK':continue
-        values=[]
-        for a,b in zip(samples[method]['AUPRC'],samples['FROZEN_FLEXHOOK']['AUPRC']):
-            if a is not None and b is not None:values.append(a-b)
-        comparisons[method+'_minus_FROZEN_FLEXHOOK_AUPRC']=dict(point_delta=None,valid_resamples=len(values),
+    contrasts=[(method,'FROZEN_FLEXHOOK','AUPRC') for method in scores if method!='FROZEN_FLEXHOOK']
+    # Attribution-only paired contrasts use the SAME pre-registered video draws.
+    # They do not change any acceptance rule, prediction, or scientific gate.
+    for left,right in [('YES_ENSEMBLE_BUDGET_MATCHED','YES_FULL'),
+        ('STRUCTURED_EVIDENCE','YES_ENSEMBLE_BUDGET_MATCHED'),
+        ('EVIDENCE_VERIFIED','YES_ENSEMBLE_B_PLUS'),('EVIDENCE_VERIFIED','STRUCTURED_EVIDENCE')]:
+        contrasts.extend((left,right,metric) for metric in ('AUPRC','Recall_at1','POS_precision'))
+    for left,right,metric in contrasts:
+        values=[a-b for a,b in zip(samples[left][metric],samples[right][metric]) if a is not None and b is not None]
+        comparisons[left+'_minus_'+right+'_'+metric]=dict(left_method=left,right_method=right,metric=metric,
+            point_delta=None,valid_resamples=len(values),
             CI95=np.percentile(values,[2.5,97.5]).tolist() if values else None)
     return dict(unit='complete_video',videos=len(videos),resamples=config['resamples'],seed=config['seed'],
         scope='official_GT_present_sampled_frame_queries',descriptive_development_probe=True,by_method=result,
@@ -354,9 +359,9 @@ def evaluate(output=OUTPUT,run=RUN):
     config=yaml.safe_load((ROOT/'configs/teacher/probe_protocol.yaml').read_text())
     boot,draws,vi=bootstrap_metrics(scores,states,labels,primary,video_index,groups,config['bootstrap'])
     main_metrics={r['method']:r for r in quality if r['scope']=='GT_present_frame_queries'}
-    for method in scores:
-        if method=='FROZEN_FLEXHOOK':continue
-        boot['paired_comparisons'][method+'_minus_FROZEN_FLEXHOOK_AUPRC']['point_delta']=main_metrics[method]['AUPRC']-main_metrics['FROZEN_FLEXHOOK']['AUPRC'] if main_metrics[method]['AUPRC'] is not None else None
+    for row in boot['paired_comparisons'].values():
+        left=main_metrics[row['left_method']][row['metric']];right=main_metrics[row['right_method']][row['metric']]
+        row['point_delta']=left-right if left is not None and right is not None else None
     comparisons={}
     for left in ['STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED']:
         controls=list(config['gates']['gate_B']['required_comparators'])

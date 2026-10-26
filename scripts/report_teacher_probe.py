@@ -71,7 +71,7 @@ def archive_logs(run,output):
 
 
 def report(output=OUTPUT,run=RUN):
-    output,run=Path(output),Path(run);validate_seal(output)
+    output,run=Path(output),Path(run);seal=validate_seal(output)
     data=json.loads((output/'evaluation_summary.json').read_text());audit=data['protocol'];gates=data['gates']
     metrics={r['method']:r for r in data['quality'] if r['scope']=='GT_present_frame_queries'}
     all_metrics={r['method']:r for r in data['quality'] if r['scope']=='all425_official_scored'}
@@ -101,6 +101,10 @@ def report(output=OUTPUT,run=RUN):
     a,b,c,d=(metrics[m] for m in ['YES_FULL','YES_ENSEMBLE_BUDGET_MATCHED','STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED'])
     def delta(x,y,key):return fnum(x[key]-y[key]) if x[key] is not None and y[key] is not None else 'N/A'
     comparisons=boot['matched_coverage_POST_HOC_comparisons']
+    paired=boot['paired_comparisons']
+    def paired_pp(left,right,metric='AUPRC'):
+        item=paired[left+'_minus_'+right+'_'+metric];ci=item['CI95']
+        return f"{100*item['point_delta']:+.3f}个百分点，25视频配对95%区间[{100*ci[0]:+.3f}, {100*ci[1]:+.3f}]个百分点"
     report_text=f'''# P1：V2→Refer-Dance 冻结视觉语义教师可靠性与公平性报告
 
 ## 结论与边界
@@ -108,6 +112,9 @@ def report(output=OUTPUT,run=RUN):
 科学验收：`{gates['status']}`。Gate A至少一组通过：**{gates['any_teacher_Gate_A_passed']}**；
 Evidence进入P2的Gate：**{gates['evidence_P2_ready']}**。本轮学生更新为0；完成P1后停止，未启动蒸馏长训。
 工程完成不等于科研成功，不能用更高置信度、loss下降或少量接受样本代替语义证据。
+T0整句教师在本固定候选的条件语义指标上有真实正向证据，但分属性/证据验证没有通过独立贡献验收。
+这不等于证明所有证据机制无效：B/B-plus接受数量不足时，同覆盖检验记为证据不足，而非显著劣于。
+同数量D与C的精度差为0；对A/SoftMatch同数量对照也未显示增益，且D覆盖明显下降。
 
 这是已多次诊断的官方25Val开发性稀疏实验，不是新盲测，不是完整视频RMOT HOTA。
 T0为`Qwen/Qwen3-VL-2B-Instruct`，HF revision`89644892e4d85e24eaac8bacfd4f463576704203`。
@@ -134,6 +141,8 @@ BF16、无量化、冻结、无adapter；YesTrack官方KITTI-V2 LoRA未能正常
 AP/AUROC是candidate级；R@k为每个GT-present frame-query一对一恢复GT比例的宏平均；
 GT覆盖是所有锚点官方有效GT中接受POS的一对一匹配比例。最多4个采样候选，R@5不会超出采样库。
 AP比较均对同样8381采样库做相同筛选，不混用历史全量Frozen 0.650204 AUROC或HOTA 8.2180。
+主口径实际含761对，其中485为官方正候选，类别先验与全425辅助口径不同；不能把主口径90.37%精度宣传为全425精度。
+例如A全425候选POS精度为{pct(all_metrics['YES_FULL']['POS_precision'])}，一对一精度为{pct(all_metrics['YES_FULL']['one_to_one_POS_precision'])}。
 
 ## 全425官方辅助口径（不能解释为穷尽语义真值）
 
@@ -146,11 +155,15 @@ Query-swap只用同一实际候选跨真实表达的采样交集，不补造缺�
 
 ## 归因、覆盖与不确定性
 
+- A相对匹配Frozen AP：{paired_pp('YES_FULL','FROZEN_FLEXHOOK')}。
 - B−A AP：{delta(b,a,'AUPRC')}，R@1：{delta(b,a,'Recall_at1')}。
+- B−A配对AP：{paired_pp('YES_ENSEMBLE_BUDGET_MATCHED','YES_FULL')}。
 - B同时获取匹配C动作判断的四观测，故B−A不是只改变提示词次数的纯因果效应；B/C与D/B-plus才是视图匹配比较。
 - C−B AP：{delta(c,b,'AUPRC')}，R@1：{delta(c,b,'Recall_at1')}。
+- C−B配对AP：{paired_pp('STRUCTURED_EVIDENCE','YES_ENSEMBLE_BUDGET_MATCHED')}。
 - D−C AP：{delta(d,c,'AUPRC')}；D和C同原始分属性分数，验证器只改变三值接受状态，不凭筛选增加原始排序信息。
 - D对B-plus同视觉、同调用槽、同验证器比较：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_YES_ENSEMBLE_B_PLUS'],ensure_ascii=False)}`。
+- D−B-plus配对原始AP：{paired_pp('EVIDENCE_VERIFIED','YES_ENSEMBLE_B_PLUS')}；不能代替同接受覆盖的验证器检验。
 - D对C同接受数量次要归因：`{json.dumps(comparisons['EVIDENCE_VERIFIED_vs_STRUCTURED_EVIDENCE'],ensure_ascii=False)}`；不改原Gates。
 - D的UNKNOWN原因：`{json.dumps(data['unknown_reasons']['EVIDENCE_VERIFIED'],ensure_ascii=False)}`。
 - 完整表达官方匹配候选中的分数瓶颈：`{json.dumps(bottlenecks['groups'].get('official_complete_query_MATCHED',{}),ensure_ascii=False)}`。
@@ -209,7 +222,8 @@ TCP/TRP按用户授权固定13个因果活动帧原策略重置，保留6帧TCP�
 13. 没有已加载的目标适配权重；通用预训练潜在Refer-Dance重叠无法排除，状态UNKNOWN。
 14. 40Train图像/表达已有，匹配官方DETR+NeuralSORT预测MOT仍缺失，不用GT补齐。
 15. Evidence P2 Gate为{gates['evidence_P2_ready']}，formal_P2_executable=False；停止P1，不自动蒸馏。若只有简单教师通过，可仅作为以后需授权的基线设计。
-16. 分支research/v2dance-evidence-teacher-p1-20261026；评测/报告源提交{commit}。公开映射见publication.json，完整复现命令见下一节。
+16. 分支research/v2dance-evidence-teacher-p1-20261026；预测封存源提交{seal['sealing_commit']}，离线报告源提交{commit}。
+    评测/报告脚本SHA另存evaluation_summary.json与report_generation.json，最终公开树映射见publication.json，完整复现命令见下一节。
 
 ## 复现与恢复
 
@@ -258,7 +272,7 @@ Evidence Gate C通过={gates['evidence_P2_ready']}。正式P2当前不可执行�
 '''
     (ROOT/'docs/TEACHER_P2_READINESS.md').write_text(readiness)
     figures(output,metrics)
-    atomic_json(output/'report_generation.json',dict(source_commit=commit,log_archive=log_archive,
+    atomic_json(output/'report_generation.json',dict(source_commit=commit,report_script_sha256=file_sha(Path(__file__)),log_archive=log_archive,
         reports=['docs/TEACHER_P1_FINAL_REPORT.md','docs/TEACHER_P2_READINESS.md'],student_training_started=False))
     print(json.dumps(dict(report='docs/TEACHER_P1_FINAL_REPORT.md',verdict=gates['status'],logs=log_archive),indent=2))
 
