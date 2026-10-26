@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+import threading
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from flex_uda.training import METHODS
@@ -34,12 +35,17 @@ if __name__=='__main__':
         command=[sys.executable,str(ROOT/'scripts/evaluate_uda_full.py'),'--checkpoint',str(training/method/'checkpoint_best_source_selected.pt'),
             '--method',method,'--output-root',str(root)]
         if a.parity_only:command.append('--parity-only')
-        proc=subprocess.Popen(command,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT)
-        workers.append((proc,log,dict(method=method,pid=proc.pid,**gpu)))
-    print(json.dumps(dict(event='evaluation_started',workers=[w[2] for w in workers],parity_only=a.parity_only)),flush=True)
+        proc=subprocess.Popen(command,cwd=ROOT,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,bufsize=1)
+        def relay(process=proc,handle=log):
+            for line in process.stdout:
+                handle.write(line);handle.flush()
+                if line.startswith('{"event": "video_sealed"'):print(line.strip(),flush=True)
+        thread=threading.Thread(target=relay);thread.start()
+        workers.append((proc,log,thread,dict(method=method,pid=proc.pid,**gpu)))
+    print(json.dumps(dict(event='evaluation_started',workers=[w[3] for w in workers],parity_only=a.parity_only)),flush=True)
     results=[]
-    for proc,log,worker in workers:
-        code=proc.wait();log.close();row=dict(worker,exit_code=code);results.append(row)
+    for proc,log,thread,worker in workers:
+        code=proc.wait();thread.join();log.close();row=dict(worker,exit_code=code);results.append(row)
         print(json.dumps(dict(event='evaluation_finished',**row)),flush=True)
     atomic_json(record_root/f'{mode}_launcher_status.json',dict(status='COMPLETE' if all(r['exit_code']==0 for r in results) else 'FAILED',
         workers=results,wall_seconds=time.perf_counter()-start))

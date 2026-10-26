@@ -103,6 +103,7 @@ def analyze(root,training,public):
         with (training/(method+'_stdout.txt')).open('rb') as source,(destination/'training_stdout.txt.gz').open('wb') as dest:
             with gzip.GzipFile(filename='',fileobj=dest,mode='wb',mtime=0) as compressed:shutil.copyfileobj(source,compressed)
         atomic_json(destination/'inference_receipt.json',{k:v for k,v in run.items() if k!='episodes'})
+        if (folder/'inference_start_provenance.json').exists():shutil.copy2(folder/'inference_start_provenance.json',destination/'inference_start_provenance.json')
         shutil.copytree(folder/'parity',destination/'parity',dirs_exist_ok=True)
         if (training/method/'numerical_retries.jsonl').exists():shutil.copy2(training/method/'numerical_retries.jsonl',destination/'numerical_retries.jsonl')
         if (training/method/'resume_trace_recovery.json').exists():shutil.copy2(training/method/'resume_trace_recovery.json',destination/'resume_trace_recovery.json')
@@ -145,6 +146,9 @@ def analyze(root,training,public):
         ranking.append(dict(method=method,source_AUROC=a['source_auroc'],adapted_AUROC=a['adapted_auroc'],
             **{'source_Recall@'+k:v for k,v in a['source_Recall_at_1_3_5'].items()},
             **{'adapted_Recall@'+k:v for k,v in a['adapted_Recall_at_1_3_5'].items()},
+            **{'source_TopK_anyhit@'+k:v for k,v in a['ranking']['baseline'].items()},
+            **{'adapted_TopK_anyhit@'+k:v for k,v in a['ranking']['adapted'].items()},
+            **{'random_null_TopK_anyhit@'+k:v for k,v in a['ranking']['random_null'].items()},
             recovered_GT=a['recovered_gt'],lost_GT=a['lost_gt'],new_FP_rows=a['new_false_positive_rows'],
             removed_FP_rows=a['removed_false_positive_rows'],net_FP_change=a['net_false_positive_change']))
         for group,stats in a['query_presence'].items():

@@ -92,9 +92,16 @@ def evaluate(checkpoint,method,output,*,videos=None,batch_size=24,parity_only=Fa
     all_videos=sorted({r['video_id'] for r in rows});videos=videos or all_videos
     if not set(videos)<=set(all_videos):raise ValueError('unknown target video')
     attempts=protect_target_annotations();started=time.perf_counter();device=torch.device('cuda:0')
+    start_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     torch.cuda.set_per_process_memory_fraction((24576<<20)/torch.cuda.get_device_properties(device).total_memory,device)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
     model,tokenizer,info=load_selected(checkpoint,folder,Path(rows[0]['predicted_tracks']).parent,device)
+    start_provenance=folder/('parity_start_provenance.json' if parity_only else 'inference_start_provenance.json')
+    if start_provenance.exists():
+        archive=folder/'inference_provenance_attempts';archive.mkdir(exist_ok=True)
+        start_provenance.rename(archive/(str(time.time_ns())+'_'+start_provenance.name))
+    atomic_json(start_provenance,dict(experiment_commit=start_commit,recording_mode='worker-entry snapshot',
+        checkpoint_sha256=info['checkpoint_sha256'],method=method,optimizer_steps=0,target_GT_used=False))
     versions={n:p._version for n,p in model.named_parameters()};receipts=[];parities=[];cache_stats=[];fallback_queries=0
     manifest_sha=file_sha(ROOT/'manifests/dance_val_runtime.jsonl')
     for video in videos:
@@ -160,7 +167,7 @@ def evaluate(checkpoint,method,output,*,videos=None,batch_size=24,parity_only=Fa
     torch.cuda.synchronize()
     if attempts or any(p._version!=versions[n] for n,p in model.named_parameters()):raise RuntimeError('evaluation mutated model or opened targetGT')
     result=dict(status='PARITY_ONLY' if parity_only else 'SEALED',method=method,**info,
-        experiment_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+        experiment_commit=start_commit,
         videos=videos,valid_episodes=len(receipts),episodes=receipts,parities=parities,
         target_GT_open_attempts=attempts,optimizer_steps=0,test_time_updates=0,precision='FP32',threshold=0,
         query_batch_near_zero_fallbacks=fallback_queries,cache_stats=cache_stats,wall_seconds=time.perf_counter()-started,

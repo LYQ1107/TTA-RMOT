@@ -7,7 +7,8 @@ Frozen全25/425重放与官方TrackEval确认HOTA8.2180/DetA3.1937/AssA21.1470/I
 Source Rehearsal仅训练与其余三组完全相同的24576个LoRA参数；源域CE贯穿全部8973窗口，
 四组只用64个固定source-val窗口CE选checkpoint，包括未更新的step0。
 如果最终选中step0，必须明确“源域选择没有接受任何更新”，不能改选目标HOTA更高的checkpoint。
-SOURCE_REHEARSAL没有目标loss；其余三组与它比较才能隔离目标无监督约束收益。
+SOURCE_REHEARSAL没有目标loss；B与A源CE相同，可作为基本目标一致性对照。
+C/D额外包含source-presence项，因此相对A变化不能全部归因于目标约束；本轮没有新增source-presence-only长实验。
 
 完整17Train与官方FlexHook默认16Train的0017差别明确记录，不声称精确复现原论文完整训练。
 源监督框、ID、表达成员只来自源GT；不能把source框规范化坐标错当目标预测MOT。
