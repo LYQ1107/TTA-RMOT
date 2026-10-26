@@ -23,7 +23,10 @@ class TeacherProbe:
             backend_sha256=hashlib.sha256(Path(__file__).with_name('yestrack_backend.py').read_bytes()).hexdigest())
 
     def calls(self,sample,requests):
-        outputs=[None]*len(requests);pending=[];self.last_refs=[]
+        return self.calls_many([(sample,request) for request in requests])
+
+    def calls_many(self,pairs):
+        outputs=[None]*len(pairs);pending=[];self.last_refs=[]
         def flush():
             if not pending:return
             raw=self.backend.forward([p[2] for p in pending],[p[3] for p in pending]);self.budget.add(raw)
@@ -31,7 +34,7 @@ class TeacherProbe:
                 record=dict(record,request_id=key,prompt=prompt,input_view=meta,teacher_version=self.version)
                 self.cache.put(key,record);outputs[index]=record
             pending.clear()
-        for index,request in enumerate(requests):
+        for index,(sample,request) in enumerate(pairs):
             view,variant,template,fields,frame=request
             images,frames,coord,meta=self.views.build(sample,view,variant,frame)
             if meta.get('missing'):
@@ -48,6 +51,24 @@ class TeacherProbe:
             else:pending.append((index,key,images,prompt,meta))
             if len(pending)>=self.batch_size:flush()
         flush();return outputs
+
+    def prefetch(self,samples,method):
+        """Batch only independent frozen calls across candidates; never labels."""
+        pairs=[]
+        for sample in samples:
+            attrs=sample['attributes'];fields=dict(sentence=sample['query_text'])
+            if method=='YES_FULL' or not attrs and method in ('STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED'):
+                jobs=[('current','original',self.prompts['official_single'],fields,None)]
+            elif method in ('YES_ENSEMBLE_BUDGET_MATCHED','YES_ENSEMBLE_B_PLUS'):
+                jobs=self._full_requests(sample,attrs or [dict(view='current')],VARIANTS if method=='YES_ENSEMBLE_B_PLUS' else ('original',))
+            elif method in ('STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED'):
+                variants=VARIANTS if method=='EVIDENCE_VERIFIED' else ('original',)
+                jobs=[(a['view'],variant,self.prompts['attribute'],dict(attribute=a['text']),None) for a in attrs for variant in variants]
+            elif method=='SOURCE_RELIABILITY':
+                jobs=[('history',variant,self.prompts['official_video'],fields,None) for variant in VARIANTS]
+            else:return
+            pairs.extend((sample,request) for request in jobs)
+        self.calls_many(pairs)
 
     def _full_requests(self,sample,attributes,variants=('original',)):
         result=[]

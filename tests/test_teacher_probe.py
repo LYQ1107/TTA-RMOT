@@ -37,6 +37,15 @@ def test_cache_raw_logits_survive_reopen(tmp_path):
     assert TeacherCache(path).get_or_claim('id')['yes_logit']==2.
 
 
+def test_source_stage_includes_shifted_previous_history():
+    from types import SimpleNamespace
+    from scripts.prepare_teacher_source_calibration import required_history_frames
+    class Episode:
+        def history(self,track,frame):
+            return [SimpleNamespace(frame_id=t) for t in range(frame-3,frame+1)]
+    assert required_history_frames(Episode(),7,76)=={72,73,74,75,76}
+
+
 def test_landlock_denies_unstaged_payload_and_stage_write(tmp_path):
     good=tmp_path/'stage';bad=tmp_path/'not_staged';good.mkdir();bad.mkdir()
     (good/'image.txt').write_text('legal');(bad/'labels.json').write_text('not legal teacher input')

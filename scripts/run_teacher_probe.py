@@ -32,6 +32,15 @@ def main():
     a=p.parse_args();out=a.output_root.resolve();out.mkdir(parents=True,exist_ok=True)
     access=install_access_audit()
     experiment_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
+    gpu_csv=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,memory.total,memory.free','--format=csv,noheader,nounits'],text=True)
+    process_csv=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_gpu_memory','--format=csv,noheader,nounits'],text=True)
+    visible=os.environ.get('CUDA_VISIBLE_DEVICES','').split(',')
+    if len(visible)!=1 or not visible[0].isdigit():raise ValueError('register exactly one physical GPU for this worker')
+    selected=next(line for line in gpu_csv.splitlines() if line.split(',')[0].strip()==visible[0])
+    gpu_fields=[s.strip() for s in selected.split(',')]
+    if float(gpu_fields[-1])<a.memory_budget_gib*1024+4096:raise RuntimeError('registered GPU no longer has model budget plus4GiB free margin')
+    gpu_admission=dict(gpus_csv=gpu_csv,compute_processes_csv=process_csv,selected_physical_gpu=visible[0],
+        selected_uuid=gpu_fields[1],free_mib=float(gpu_fields[-1]),minimum_required_mib=a.memory_budget_gib*1024+4096)
     implementation_hashes={str(path.relative_to(ROOT)):file_sha(path) for path in (ROOT/'flex_uda/teacher').glob('*.py')}
     implementation_hashes['scripts/run_teacher_probe.py']=file_sha(Path(__file__))
     config=yaml.safe_load(a.config.read_text());prompts=yaml.safe_load((ROOT/'configs/teacher/prompts_v1.yaml').read_text())
@@ -45,27 +54,31 @@ def main():
     if config['condition']=='T1':
         if not config.get('lora_path'):raise FileNotFoundError('official T1 missing; do not silently run T0')
     a.cache.parent.mkdir(parents=True,exist_ok=True)
-    for name in ('cuda_cache','hf_cache','tmp'): (out/name).mkdir(exist_ok=True)
+    for name in ('cuda_cache','hf_cache','tmp','torch_kernel_cache'): (out/name).mkdir(exist_ok=True)
     os.environ.update(HF_HOME=str(out/'hf_cache'),HF_HUB_OFFLINE='1',TRANSFORMERS_OFFLINE='1',
-        CUDA_CACHE_PATH=str(out/'cuda_cache'),TMPDIR=str(out/'tmp'))
+        CUDA_CACHE_PATH=str(out/'cuda_cache'),PYTORCH_KERNEL_CACHE_PATH=str(out/'torch_kernel_cache'),TMPDIR=str(out/'tmp'))
     isolation=restrict_filesystem([a.staging_root,config['model_path'],config['yestrack_source'],
-        ROOT/'flex_uda',ROOT/'flex_tta',ROOT/'scripts',ROOT/'configs',ROOT/'vendor',
+        ROOT/'flex_uda',ROOT/'flex_tta',ROOT/'scripts',ROOT/'configs',
         Path(sys.prefix),Path(sys.base_prefix),'/home/szgx/anaconda3/envs/vllmedit','/usr','/lib','/lib64','/bin','/etc','/proc','/sys'],
         [out,a.cache.parent,'/dev','/tmp'])
     torch.cuda.set_device(0);torch.manual_seed(protocol['seed'])
     props=torch.cuda.get_device_properties(0)
+    if str(props.uuid).removeprefix('GPU-')!=gpu_fields[1].removeprefix('GPU-'):
+        raise RuntimeError('CUDA-visible GPU UUID differs from registered physical GPU')
     torch.cuda.set_per_process_memory_fraction(a.memory_budget_gib*(1<<30)/props.total_memory,0)
     backend=FrozenYesTrack(config);probe=TeacherProbe(backend,a.staging_root,a.cache,prompts,rules,a.batch_size or config['batch_size'])
     db=sqlite3.connect(out/'progress.sqlite');db.execute('CREATE TABLE IF NOT EXISTS samples (key TEXT PRIMARY KEY,payload TEXT)')
     done={r[0] for r in db.execute('SELECT key FROM samples')};started=time.perf_counter()
     for index,sample in enumerate(rows):
         if sample['sample_id'] in done:continue
+        if index%16==0 or rows[index-1]['sample_id'] in done:
+            probe.prefetch([r for r in rows[index:index+16] if r['sample_id'] not in done],a.method)
         result=probe.evaluate(sample,a.method)
         result.update(sample_id=sample['sample_id'],video_id=sample['video_id'],query_id=sample['query_id'],
             frame_id=sample['frame_id'],track_id=sample['track_id'],method=a.method,condition=config['condition'],
             expression_type=sample['expression_type'],frozen_margin=sample['frozen_margin'])
         db.execute('INSERT INTO samples VALUES (?,?)',(sample['sample_id'],json.dumps(result,sort_keys=True)));db.commit()
-        if index%25==0:print(json.dumps(dict(method=a.method,completed=index+1,planned=len(rows),budget=probe.budget.record())),flush=True)
+        if index%100==0:print(json.dumps(dict(method=a.method,completed=index+1,planned=len(rows),budget=probe.budget.record())),flush=True)
     outputs=out/'teacher_outputs.jsonl'
     with outputs.open('w') as handle:
         for sample in rows:
@@ -82,7 +95,7 @@ def main():
         predictions_sha256=file_sha(outputs),budget=probe.budget.record(),worker_elapsed_seconds=time.perf_counter()-worker_started,
         inference_and_final_hash_seconds=time.perf_counter()-started,experiment_commit=experiment_commit,
         implementation_sha256=implementation_hashes,
-        gpu_uuid=str(props.uuid),physical_gpu=os.environ.get('CUDA_VISIBLE_DEVICES'),numeric_dtype='bfloat16',
+        gpu_uuid=str(props.uuid),gpu_admission=gpu_admission,physical_gpu=os.environ.get('CUDA_VISIBLE_DEVICES'),numeric_dtype='bfloat16',
         quantization=None,student_updates=0,model_load_seconds=backend.load_seconds,frozen=frozen,
         GT_access_audit=access,isolation=isolation,reliability_rules=rules,
         persistent_cache_reopen_check=bool(cached) if probe.last_refs else None,cache=probe.cache.stats())
