@@ -16,15 +16,17 @@ from scripts.launch_uda_workers import audit_gpus
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--training-root',type=Path,required=True)
     p.add_argument('--output-root',type=Path,required=True);p.add_argument('--methods',nargs='+',choices=METHODS,default=list(METHODS))
+    p.add_argument('--launcher-record-dir',type=Path)
     p.add_argument('--parity-only',action='store_true');a=p.parse_args()
     root=a.output_root.resolve();training=a.training_root.resolve();root.mkdir(parents=True,exist_ok=True)
+    record_root=(a.launcher_record_dir or root).resolve();record_root.mkdir(parents=True,exist_ok=True)
     for method in a.methods:
         receipt=json.loads((training/method/'training_receipt.json').read_text())
         if receipt['status']!='COMPLETE_FIXED_COVERAGE_DIAGNOSTIC' or receipt['steps']!=8973:
             raise ValueError('do not evaluate incomplete/relabelled coverage runs')
     selected,all_gpus,apps=audit_gpus(len(a.methods));workers=[];start=time.perf_counter()
     mode='parity' if a.parity_only else 'evaluation'
-    atomic_json(root/f'{mode}_gpu_admission.json',dict(selected=selected,all_gpus=all_gpus,existing_processes=apps,no_foreign_process_killed=True))
+    atomic_json(record_root/f'{mode}_gpu_admission.json',dict(selected=selected,all_gpus=all_gpus,existing_processes=apps,no_foreign_process_killed=True))
     for method,gpu in zip(a.methods,selected):
         env=os.environ.copy();env.update(CUDA_VISIBLE_DEVICES=gpu['uuid'],UDA_PHYSICAL_GPU=str(gpu['physical_gpu']),
             OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2',TOKENIZERS_PARALLELISM='false')
@@ -39,6 +41,6 @@ if __name__=='__main__':
     for proc,log,worker in workers:
         code=proc.wait();log.close();row=dict(worker,exit_code=code);results.append(row)
         print(json.dumps(dict(event='evaluation_finished',**row)),flush=True)
-    atomic_json(root/f'{mode}_launcher_status.json',dict(status='COMPLETE' if all(r['exit_code']==0 for r in results) else 'FAILED',
+    atomic_json(record_root/f'{mode}_launcher_status.json',dict(status='COMPLETE' if all(r['exit_code']==0 for r in results) else 'FAILED',
         workers=results,wall_seconds=time.perf_counter()-start))
     raise SystemExit(0 if all(r['exit_code']==0 for r in results) else 1)

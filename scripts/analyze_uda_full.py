@@ -122,11 +122,13 @@ def analyze(root,training,public):
             improved_videos=int((individual>1e-9).sum()),declined_videos=int((individual< -1e-9).sum()),
             tied_videos=int((np.abs(individual)<=1e-9).sum()),
             per_video=[dict(video=v,delta_HOTA=float(d),delta_without_video=float(l)) for v,d,l in zip(values[a][0],individual,leave)])
-    scheduler=json.loads((training/'full_suite_completion.json').read_text());inference_scheduler=json.loads((root/'evaluation_launcher_status.json').read_text())
+    scheduler=json.loads((training/'full_suite_completion.json').read_text());inference_scheduler=json.loads((root/'evaluation_suite_completion.json').read_text())
     result=dict(status='COMPLETE_TRANSDUCTIVE_VAL_DIAGNOSTIC',videos=25,episodes=425,metrics=metrics,
         comparisons=comparisons,cluster_unit='25 whole videos; expressions/frames not independent',
         uncertainty='descriptive same-Val paired bootstrap2000/seed0, not independent test or training-seed uncertainty',
         actual_scheduler_training_wall_seconds=scheduler['wall_seconds'],actual_scheduler_inference_wall_seconds=inference_scheduler['wall_seconds'],
+        evaluator_active_union_wall_seconds=inference_scheduler['union_evaluator_active_wall_seconds'],
+        pipeline_wall_overlap=True,actual_pipeline_wall_seconds=inference_scheduler['last_evaluator_return_unix']-(training/'gpu_admission.json').stat().st_mtime,
         scheduler_query_frame_FPS=4*433636/inference_scheduler['wall_seconds'],
         checkpoint_selection='fixed64 source-val windows CE only, including step0',target_GT_used_by_training=False,
         target_GT_used_for_thresholds=False,threshold=0,raw_training_root=str(training),raw_evaluation_root=str(root))
