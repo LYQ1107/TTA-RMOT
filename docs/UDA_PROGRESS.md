@@ -55,3 +55,12 @@ checkpoint之后的已运行但未保存后缀日志/伪证据归档保存，从
 每个恢复launcher使用独立记录目录，避免覆盖仍在等待健康worker的原launcher状态。
 这是正常AMP溢出的可恢复处理，不改lr、rank、seed、源/目标loss权重、目标阈值或源CE模型选择。
 恢复回归测试26通过；诊断记录见`results/uda/assets/amp_real_source_diagnostic.json`。
+
+## A完成，先评测而不空等
+
+SOURCE_REHEARSAL已完成全部8973更新，17源视频/全部8896原表达及77补充窗口，3次同样本AMP重试且0跳过。
+source-val-only选择7750步CE0.9631536889；最终步没有因目标指标而被替换。
+完整训练记录与checkpoint索引已归档`results/uda/full/SOURCE_REHEARSAL`。
+实际GPU3三帧×17表达批推理parity：最大margin误差约1.15e-5、0选框差异，开始完整25/425评测。
+B/C/D仍各自恢复原覆盖周期，未增加方法、轮数或目标GT监督。
+新旧PF+UDA核心集成回归52通过，原六组结果不修改。

@@ -1,0 +1,22 @@
+{
+  "training_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL",
+  "evaluation_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/SOURCE_REHEARSAL",
+  "checkpoints": {
+    "checkpoint_latest.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/checkpoint_latest.pt",
+      "sha256": "cf4267df8fec8c1bf109645efca8add5596e7ed0bd5f8d001ba592f195d42945"
+    },
+    "checkpoint_best_source_selected.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/checkpoint_best_source_selected.pt",
+      "sha256": "5bc677c2b945f45b08ad961a4e8a3da724826d95619396d77988806d0a00d6c4"
+    }
+  },
+  "plan_sha256": {
+    "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+    "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+  },
+  "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/metrics_train.jsonl",
+  "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
+  "raw_data_and_weights_not_in_Git": true,
+  "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/resume_discarded_traces"
+}
