@@ -1,0 +1,75 @@
+{
+  "positive_threshold": 0.95,
+  "negative_threshold": 0.05,
+  "visual_dependence_min": 0.03,
+  "probability_spread_max": 0.2,
+  "status": "SOURCE_RULES_FROZEN",
+  "positive_calibrated": true,
+  "negative_calibrated": true,
+  "target_GT_used": false,
+  "source_predictions_sha256": "c4774e00360ae9b0e2bcccc616e1220130aa3b13894329d5b8d175b0b8d6f982",
+  "source_truth_sha256": "89d6106712879b45f7c438b871f3fd13e0ccd828838cba53b1cb545e14791c48",
+  "source_windows": 64,
+  "source_videos": 4,
+  "source_candidate_queries": 203,
+  "source_positives": 82,
+  "positive_grid": [
+    {
+      "threshold": 0.7,
+      "count": 79,
+      "precision": 0.6075949367088608,
+      "eligible": false
+    },
+    {
+      "threshold": 0.8,
+      "count": 50,
+      "precision": 0.68,
+      "eligible": false
+    },
+    {
+      "threshold": 0.9,
+      "count": 24,
+      "precision": 0.7916666666666666,
+      "eligible": false
+    },
+    {
+      "threshold": 0.95,
+      "count": 12,
+      "precision": 0.8333333333333334,
+      "eligible": true
+    }
+  ],
+  "negative_grid": [
+    {
+      "threshold": 0.3,
+      "count": 68,
+      "false_negative_fraction": 0.17647058823529413,
+      "eligible": false
+    },
+    {
+      "threshold": 0.2,
+      "count": 45,
+      "false_negative_fraction": 0.15555555555555556,
+      "eligible": false
+    },
+    {
+      "threshold": 0.1,
+      "count": 30,
+      "false_negative_fraction": 0.06666666666666667,
+      "eligible": false
+    },
+    {
+      "threshold": 0.05,
+      "count": 22,
+      "false_negative_fraction": 0.0,
+      "eligible": true
+    }
+  ],
+  "generic_source_context_warning": "source full-expression calibration does not itself validate fine-grained Dance clothing semantics",
+  "source_verified_POS_count": 5,
+  "source_verified_POS_precision": 1.0,
+  "source_verified_GT_coverage": 0.06097560975609756,
+  "source_verifier_validated": true,
+  "softmatch_source_confidence_mean": 0.7852057095231681,
+  "softmatch_source_confidence_variance": 0.01989918769118447
+}

@@ -46,6 +46,37 @@ def test_source_stage_includes_shifted_previous_history():
     assert required_history_frames(Episode(),7,76)=={72,73,74,75,76}
 
 
+def test_offline_weighted_metrics_ties_and_zero_acceptance():
+    import numpy as np
+    from scripts.evaluate_teacher_probe import weighted_binary,aggregate,softmatch_weights
+    from scripts.diag_pf_query_information import average_precision
+    from scripts.analyze_pf_full_offline import auroc
+    score=np.array([.1,.5,.5,.9]);labels=np.array([False,True,False,True])
+    ap,auc=weighted_binary(score,labels,np.ones(4))
+    assert abs(ap-average_precision(score,labels))<1e-12
+    assert abs(auc-auroc(score,labels))<1e-12
+    assert np.array_equal(softmatch_weights(np.array([.95,.99]),.78,.02),np.ones(2))
+    metric=aggregate('test',[],score,np.array(['UNKNOWN']*4),labels,[])
+    assert metric['POS_precision'] is None and metric['accepted_matched_GT']==0
+
+
+def test_seal_rejects_incomplete_or_GT_touched_receipt():
+    import pytest
+    from scripts.audit_teacher_leakage import validate_receipt
+    with pytest.raises(ValueError,match='complete'):
+        validate_receipt(dict(status='FUNCTIONALITY_SMOKE_ONLY'), 'YES_FULL','sha',8381)
+
+
+def test_sparse_teacher_coverage_counts_distinct_GT_not_duplicate_boxes():
+    import numpy as np
+    from scripts.evaluate_teacher_probe import aggregate
+    group=dict(indices=np.array([0,1]),iou=np.ones((2,1)),gt=[(7,(0,0,10,10))],track_ids=[1,2])
+    metric=aggregate('synthetic',[0,1],np.array([.99,.98]),np.array(['SUPPORT_POS']*2),
+        np.array([True,True]),[group])
+    assert metric['POS_true_candidates']==2 and metric['accepted_matched_GT']==1
+    assert metric['one_to_one_POS_precision']==.5 and metric['GT_positive_coverage']==1.
+
+
 def test_landlock_denies_unstaged_payload_and_stage_write(tmp_path):
     good=tmp_path/'stage';bad=tmp_path/'not_staged';good.mkdir();bad.mkdir()
     (good/'image.txt').write_text('legal');(bad/'labels.json').write_text('not legal teacher input')
