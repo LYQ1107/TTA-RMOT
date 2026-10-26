@@ -23,7 +23,7 @@
 
 | 方法 | 源监督 | 目标约束 | 需要说明的限制 |
 |---|---|---|---|
-| SOURCE_REHEARSAL | 原多层CE+官方regular | 无 | 不接收目标无监督loss |
+| SOURCE_REHEARSAL | 原多层CE | 无 | 不接收目标无监督loss |
 | MEAN_TEACHER_UDA | 同上 | EMA弱/强视图logit一致性、筛选后的平衡伪BCE | 来源相近的模型一致并非独立真值 |
 | WEAK_MIL_UDA | 同上+可确认源presence | 合法等价表达一致性、整套纯色穿着的候选内互斥；MIL按证据跳过 | 目标presence当前全UNKNOWN，不能宣称有效MIL正例 |
 | COMBINED_UDA | 同上 | MeanTeacher+上述关系+冻结源锚点+语义/时间合法的短时一致性 | 全句同时含动作与服饰时是MIXED，不能强迫全ID时间恒定 |
@@ -36,4 +36,8 @@
 
 源码：`flex_uda/data`、`model/flexhook_uda.py`、`losses/objectives.py`、`adaptation/tracklet_memory.py`、`training.py`。
 公开框架仅作思想参考，不将本实现冒充QCA/DSCA/WSRVOS原版复现；完整固定版本参考映射后续单列。
+原始C-Hook跨表达point-dispersion regular在单表达N=1时分母N(N-1)=0；C-Hook冻结，
+该项对授权LoRA参数没有梯度，因此本轮不将不适用的跨表达regular加入源训练目标。
+初次smoke曾把其NaN常量加入有限CE，梯度仍有限但总loss无效；独立loss审计撤销该批smoke通过状态，
+保留旧日志/checkpoint，修复后在新目录重做20step。严禁nan_to_num掩盖错误或带NaN开长训。
 旧六方法和冻结诊断不改。目标评测完整425封存后由独立进程运行官方TrackEval及Count-Matched/排序/presence归因。

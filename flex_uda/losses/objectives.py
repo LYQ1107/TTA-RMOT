@@ -3,10 +3,13 @@ import torch
 import torch.nn.functional as F
 
 
-def supervised_ce(all_logits,labels,regular=0.):
+def supervised_ce(all_logits,labels):
+    """Original multi-layer CE; frozen cross-query regularizer is inapplicable
+    for expression-isolated N=1 (its original pair denominator is zero).
+    """
     n,l,q,c=all_logits.shape
     targets=labels[:,None,None].expand(n,l,q).reshape(-1)
-    return F.cross_entropy(all_logits.float().reshape(-1,c),targets)+regular
+    return F.cross_entropy(all_logits.float().reshape(-1,c),targets)
 
 
 def presence_probability(margin):

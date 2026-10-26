@@ -195,12 +195,15 @@ def train(config,output,*,smoke=False,resume=False):
         for prepared,labels,candidates,cache in source_batches:
             with torch.autocast('cuda',dtype=torch.float16,enabled=config['train']['amp']):
                 value=forward_uda(model,prepared,return_features=False)
-                loss=weights['source_ce']*supervised_ce(value['all_logits'],labels,value['regular'])
+                if value['regular'].requires_grad:raise RuntimeError('frozen C-Hook regularizer unexpectedly receives trainable gradients')
+                if not torch.isfinite(value['regular']):counters['inapplicable_single_query_frozen_regularizer']+=1
+                loss=weights['source_ce']*supervised_ce(value['all_logits'],labels)
                 if uses_weak:
                     state='SUPPORTED_PRESENT' if labels.any() else 'SUPPORTED_ABSENT' if src['confirmed_video_absent'] else 'UNKNOWN'
                     pl=presence_loss(value['margin'],state);loss=loss+weights['source_presence']*pl
                     counters['source_presence_'+state]+=1
                 weighted=loss*(len(candidates)/source_n)
+            if not torch.isfinite(weighted):raise RuntimeError('nonfinite actual supervised source objective')
             scaler.scale(weighted).backward();parts['source_loss']+=float(weighted.detach());source_rows+=len(candidates)
         src_seen.add((src['video_id'],src['expression_id']))
         if method!='SOURCE_REHEARSAL':
@@ -242,6 +245,7 @@ def train(config,output,*,smoke=False,resume=False):
                             target_loss=target_loss+weights['source_anchor']*F.smooth_l1_loss(margins.float(),anchor.float())+weights['temporal']*temporal
                             counters['temporal_valid_candidates']+=number
                     weighted=target_loss*(len(candidates)/target_n)
+                if not torch.isfinite(weighted):raise RuntimeError('nonfinite actual unlabeled target objective')
                 if smoke and len(target_grad_checks)<4 and float(weighted.detach())!=0:
                     gradients=torch.autograd.grad(weighted,trainable,retain_graph=True,allow_unused=True)
                     norm=sum(float(g.detach().float().square().sum()) for g in gradients if g is not None)**.5
@@ -286,7 +290,7 @@ def train(config,output,*,smoke=False,resume=False):
     if not delta or not grad_nonzero:raise RuntimeError('no actual adapter learning')
     if smoke and method!='SOURCE_REHEARSAL' and not any(x>0 and math.isfinite(x) for x in target_grad_checks):
         raise RuntimeError('no finite nonzero actual target unlabeled-loss gradient in smoke')
-    result=dict(status='SMOKE_PASS' if smoke else 'COMPLETE_FIXED_COVERAGE_DIAGNOSTIC',method=method,protocol=config['protocol'],
+        result=dict(status='SMOKE_PASS' if smoke else 'COMPLETE_FIXED_COVERAGE_DIAGNOSTIC',method=method,protocol=config['protocol'],
         steps=total_steps,steps_per_coverage_cycle=steps_per_epoch,coverage_cycles=total_steps/steps_per_epoch,
         source_videos_seen=len({v for v,_ in src_seen}),source_query_pairs_seen=len(src_seen),
         target_videos_seen=len({v for v,_ in tgt_seen}),target_query_pairs_seen=len(tgt_seen),
