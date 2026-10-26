@@ -1,0 +1,22 @@
+{
+  "training_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA",
+  "evaluation_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/WEAK_MIL_UDA",
+  "checkpoints": {
+    "checkpoint_latest.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/checkpoint_latest.pt",
+      "sha256": "6c0f4ee608026d58f2ef61b364079fca960260e7aefb340c9651c215833b67ba"
+    },
+    "checkpoint_best_source_selected.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/checkpoint_best_source_selected.pt",
+      "sha256": "f4ba909616e54d07343b0c81dcae56c45f2a3b39e719e9609069965c7a340c2d"
+    }
+  },
+  "plan_sha256": {
+    "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+    "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+  },
+  "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/metrics_train.jsonl",
+  "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
+  "raw_data_and_weights_not_in_Git": true,
+  "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/resume_discarded_traces"
+}

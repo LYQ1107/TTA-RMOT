@@ -40,6 +40,14 @@ def export(training,evaluation,public,methods,training_only=False):
             plan_sha256=provenance[-1]['plan_sha256'],training_trace=str(folder/'metrics_train.jsonl'),
             checkpoint_state='student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory',
             raw_data_and_weights_not_in_Git=True,original_failed_suffixes=str(folder/'resume_discarded_traces'))
+        sampling={}
+        for domain,name in (('source','source_train_plan.jsonl'),('target','target_plan.jsonl')):
+            plan=[json.loads(s) for s in (folder/'plans'/name).read_text().splitlines()]
+            sampling[domain]=dict(windows=len(plan),videos=len({r['video_id'] for r in plan}),
+                unique_anchor_frames=len({(r['video_id'],r['frame']) for r in plan}),
+                query_pairs=len({(r['video_id'],r['expression_id']) for r in plan}))
+        index['sampling']=dict(domains=sampling,all_frame_optimization=False,
+            note='coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows')
         if not training_only:
             out=evaluation/method;audit=json.loads((out/'full_audit.json').read_text())
             if audit['valid_episodes']!=425 or audit['status']!='PASS':raise ValueError('archive all425 predictions only')

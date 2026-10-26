@@ -1,0 +1,52 @@
+[
+  {
+    "protocol": {
+      "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+      "source_domain": "refer_kitti_v2",
+      "target_domain": "refer_dance",
+      "target_split": "val",
+      "evaluation_split": "same_val_development_only",
+      "seed": 17,
+      "test_time_update": false
+    },
+    "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "experiment_commit": "d3ac85051d26f52d03470d8417067f7fcf7726b6",
+    "physical_gpu": "6",
+    "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+    "plan_sha256": {
+      "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+      "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+    },
+    "total_steps": 8973,
+    "steps_per_epoch": 8973,
+    "target_manifest": "/data2/user/FlexHook-TTA/manifests/dance_val_runtime.jsonl",
+    "target_GT_used": false,
+    "external_semantic_teacher": false,
+    "trainable_parameters": 24576
+  },
+  {
+    "protocol": {
+      "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+      "source_domain": "refer_kitti_v2",
+      "target_domain": "refer_dance",
+      "target_split": "val",
+      "evaluation_split": "same_val_development_only",
+      "seed": 17,
+      "test_time_update": false
+    },
+    "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "experiment_commit": "09453ee661f860a1b17fdcae62fdb765d5b3f5c9",
+    "physical_gpu": "5",
+    "gpu_uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+    "plan_sha256": {
+      "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+      "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+    },
+    "total_steps": 8973,
+    "steps_per_epoch": 8973,
+    "target_manifest": "/data2/user/FlexHook-TTA/manifests/dance_val_runtime.jsonl",
+    "target_GT_used": false,
+    "external_semantic_teacher": false,
+    "trainable_parameters": 24576
+  }
+]

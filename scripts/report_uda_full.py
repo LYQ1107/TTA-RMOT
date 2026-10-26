@@ -60,6 +60,7 @@ def render(public):
         c=r['cost'];k=r['checkpoint']
         lines.append(f"| {m} | {k['selected_step']} | {k['source_val_CE']:.8f} | {c['optimizer_updates']} | {c['training_GPU_hours']:.4f} / {c['inference_GPU_hours']:.4f} | {c['peak_training_allocated_bytes']/(1<<30):.3f} | {c['per_worker_query_frame_FPS']:.3f} |")
     lines+=['','每组8973更新、24576个LoRA参数，rank4/最后两层PCD Q/V/lr5e-5/seed17，完整源17视频与目标25视频查询覆盖。',
+        '覆盖指视频/表达/源轨迹，不是逐帧优化：目标每视频3个预定anchor，共75个不同anchor、1275个query窗口，重复配对源周期；每个anchor还使用过去4次轨迹观测。完整评测覆盖全部活动帧。',
         f"实际训练scheduler wall {summary['actual_scheduler_training_wall_seconds']:.2f}s；推理scheduler跨度 {summary['actual_scheduler_inference_wall_seconds']:.2f}s；",
         f"重叠流水线实际wall {summary['actual_pipeline_wall_seconds']:.2f}s。训练与先行评测交错，不能将二者wall简单相加。",
         'GPU-process-hours是共享卡worker elapsed的和，不是显卡利用率仪表测量；恢复期曾短暂同卡，不冒充独占四卡。',
