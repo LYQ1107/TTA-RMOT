@@ -1,0 +1,196 @@
+{
+  "status": "COMPLETE_ALL_FOUR_FIXED_COVERAGE_RUNS",
+  "protocol": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+  "methods": {
+    "SOURCE_REHEARSAL": {
+      "status": "PASS",
+      "accepted_steps": 8973,
+      "optimizer_updates": 8973,
+      "losses_and_gradients_finite": true,
+      "source_videos": 17,
+      "target_videos": 0,
+      "target_queries": 0,
+      "target_GT_open_attempts": [],
+      "frozen_source_unchanged": true,
+      "amp_same_sample_retries": 3,
+      "raw_path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL",
+      "target_control_note": "SOURCE_REHEARSAL has no target losses or adaptation"
+    },
+    "MEAN_TEACHER_UDA": {
+      "status": "PASS",
+      "accepted_steps": 8973,
+      "optimizer_updates": 8973,
+      "losses_and_gradients_finite": true,
+      "source_videos": 17,
+      "target_videos": 25,
+      "target_queries": 425,
+      "target_GT_open_attempts": [],
+      "frozen_source_unchanged": true,
+      "amp_same_sample_retries": 3,
+      "raw_path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA",
+      "target_control_note": null
+    },
+    "WEAK_MIL_UDA": {
+      "status": "PASS",
+      "accepted_steps": 8973,
+      "optimizer_updates": 8973,
+      "losses_and_gradients_finite": true,
+      "source_videos": 17,
+      "target_videos": 25,
+      "target_queries": 425,
+      "target_GT_open_attempts": [],
+      "frozen_source_unchanged": true,
+      "amp_same_sample_retries": 3,
+      "raw_path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA",
+      "target_control_note": null
+    },
+    "COMBINED_UDA": {
+      "status": "PASS",
+      "accepted_steps": 8973,
+      "optimizer_updates": 8973,
+      "losses_and_gradients_finite": true,
+      "source_videos": 17,
+      "target_videos": 25,
+      "target_queries": 425,
+      "target_GT_open_attempts": [],
+      "frozen_source_unchanged": true,
+      "amp_same_sample_retries": 3,
+      "raw_path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA",
+      "target_control_note": null
+    }
+  },
+  "wall_seconds": 4736.92126083374,
+  "wall_definition": "first admission to latest launcher return, including diagnosis/recovery delay",
+  "launchers": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/launcher_status.json",
+      "status": "FAILED_WORKERS_RETAINED_FOR_TARGETED_RESUME",
+      "workers": [
+        {
+          "method": "SOURCE_REHEARSAL",
+          "config": "source_rehearsal",
+          "physical_gpu": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 81154,
+          "total_mib": 81920,
+          "processes": 0,
+          "pid": 3232723,
+          "exit_code": 1
+        },
+        {
+          "method": "MEAN_TEACHER_UDA",
+          "config": "mean_teacher",
+          "physical_gpu": 4,
+          "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 57231,
+          "total_mib": 81920,
+          "processes": 2,
+          "pid": 3232724,
+          "exit_code": 1
+        },
+        {
+          "method": "WEAK_MIL_UDA",
+          "config": "weak_mil",
+          "physical_gpu": 6,
+          "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 53289,
+          "total_mib": 81920,
+          "processes": 2,
+          "pid": 3232725,
+          "exit_code": 1
+        },
+        {
+          "method": "COMBINED_UDA",
+          "config": "combined",
+          "physical_gpu": 3,
+          "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 53193,
+          "total_mib": 81920,
+          "processes": 2,
+          "pid": 3232726,
+          "exit_code": 1
+        }
+      ],
+      "wall_seconds": 971.1401682039723,
+      "scope": "full"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/launcher_recoveries/combined_amp_v1/launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "COMBINED_UDA",
+          "config": "combined",
+          "physical_gpu": 4,
+          "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 60856,
+          "total_mib": 81920,
+          "processes": 2,
+          "pid": 3269529,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 3364.249645553995,
+      "scope": "full"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/launcher_recoveries/source_amp_v1/launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "SOURCE_REHEARSAL",
+          "config": "source_rehearsal",
+          "physical_gpu": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 81154,
+          "total_mib": 81920,
+          "processes": 0,
+          "pid": 3257879,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 669.6383520429954,
+      "scope": "full"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/launcher_recoveries/teacher_weak_amp_v1/launcher_status.json",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "method": "MEAN_TEACHER_UDA",
+          "config": "mean_teacher",
+          "physical_gpu": 6,
+          "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 75531,
+          "total_mib": 81920,
+          "processes": 1,
+          "pid": 3259404,
+          "exit_code": 0
+        },
+        {
+          "method": "WEAK_MIL_UDA",
+          "config": "weak_mil",
+          "physical_gpu": 5,
+          "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+          "name": "NVIDIA A800-SXM4-80GB",
+          "free_mib": 60661,
+          "total_mib": 81920,
+          "processes": 1,
+          "pid": 3259405,
+          "exit_code": 0
+        }
+      ],
+      "wall_seconds": 2117.2222863601055,
+      "scope": "full"
+    }
+  ],
+  "failed_attempts_preserved": true,
+  "checkpoints_selected_without_targetGT": true
+}

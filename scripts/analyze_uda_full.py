@@ -64,6 +64,7 @@ def analyze(root,training,public):
             total_GPU_hours=(train_seconds+eval_seconds)/3600,actual_worker_training_wall_seconds=train_seconds,
             actual_worker_inference_wall_seconds=eval_seconds,
             per_worker_query_frame_FPS=full_audit['frames']/eval_seconds,
+            per_worker_MOT_active_video_frame_FPS=full_audit['frames']/17/eval_seconds,
             peak_training_allocated_bytes=train['peak_allocated_bytes'],peak_inference_allocated_bytes=run['peak_allocated_bytes'],
             inference_allocator_budget_bytes=run.get('allocator_budget_bytes',24576<<20),
             trainable_parameters=24576,optimizer_updates=train['counters']['optimizer_updates'],
@@ -184,7 +185,7 @@ def analyze(root,training,public):
         independent_target_generalization=False,source_free=False,online_TTA=False,target_GT_in_training=False,
         target_GT_threshold_selection=False,source_val_selection_windows=64,coverage_cycles=1,steps_per_method=8973,
         MOT_candidate_rows=211085,candidate_query_observations=3588445,threshold=0,rank=4,seed=17,lr=5e-5,
-        target_unique_frame_anchors=75,target_query_windows=1275,all_frame_optimization=False,
+        source_unique_frame_anchors=393,target_unique_frame_anchors=75,target_query_windows=1275,all_frame_optimization=False,
         original40Train_to25Val_task_complete=False,GT_group_labels_offline_only=True,raw_roots=dict(training=str(training),evaluation=str(root))))
     print(json.dumps({k:v for k,v in result.items() if k!='comparisons'},indent=2))
     return result

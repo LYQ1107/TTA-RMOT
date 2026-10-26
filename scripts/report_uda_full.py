@@ -2,11 +2,38 @@
 """Render factual Chinese delivery pages from complete, independently evaluated data."""
 import argparse
 import json
+import shutil
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from flex_uda.training import METHODS
+from scripts.pf_diag_common import official_metrics,write_csv
+from flex_tta.runtime.pf_receipts import atomic_json
+
+
+def render_interim(root,output):
+    root,output=Path(root).resolve(),Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
+    names=[]
+    for method in ('FROZEN',)+METHODS:
+        if not(root/method/'results/pedestrian_summary.txt').exists():continue
+        audit=json.loads((root/method/'full_audit.json').read_text())
+        if audit['status']!='PASS' or audit['valid_episodes']!=425:raise ValueError('no partial-benchmark official table')
+        names.append(method)
+        cm=method+'_COUNT_MATCHED_FROZEN'
+        if (root/cm/'results/pedestrian_summary.txt').exists():names.append(cm)
+    result={method:official_metrics(root/method/'results') for method in names}
+    for method in names:
+        dest=output/method;dest.mkdir(exist_ok=True)
+        for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):shutil.copy2(root/method/'results'/name,dest/name)
+        shutil.copy2(root/method/'trackeval.log',dest/'trackeval_stdout.txt')
+    atomic_json(output/'summary.json',dict(status='INTERIM_NOT_ALL_FOUR_METHODS',protocol='TRANSDUCTIVE_VAL_DIAGNOSTIC',
+        videos_per_method=25,episodes_per_method=425,checkpoint_selection='SOURCE_VAL_ONLY_BEFORE_TARGET_EVALUATION',
+        complete_methods=[m for m in METHODS if m in result],metrics=result,
+        countmatched_protocol='POST_HOC_DIAGNOSTIC_NOT_DEPLOYABLE; dependent on parent model counts'))
+    write_csv(output/'summary.csv',[dict(method=m,HOTA=r['HOTA'],delta_HOTA_vs_Frozen=r['HOTA']-result['FROZEN']['HOTA'],
+        **{k:r[k] for k in ('DetA','AssA','DetRe','IDF1','IDSW','CLR_TP','CLR_FP','Dets')}) for m,r in result.items()])
+    print(json.dumps(result,indent=2))
 
 
 def render(public):
@@ -60,7 +87,7 @@ def render(public):
         c=r['cost'];k=r['checkpoint']
         lines.append(f"| {m} | {k['selected_step']} | {k['source_val_CE']:.8f} | {c['optimizer_updates']} | {c['training_GPU_hours']:.4f} / {c['inference_GPU_hours']:.4f} | {c['peak_training_allocated_bytes']/(1<<30):.3f} | {c['per_worker_query_frame_FPS']:.3f} |")
     lines+=['','每组8973更新、24576个LoRA参数，rank4/最后两层PCD Q/V/lr5e-5/seed17，完整源17视频与目标25视频查询覆盖。',
-        '覆盖指视频/表达/源轨迹，不是逐帧优化：目标每视频3个预定anchor，共75个不同anchor、1275个query窗口，重复配对源周期；每个anchor还使用过去4次轨迹观测。完整评测覆盖全部活动帧。',
+        '覆盖指视频/表达/源轨迹，不是逐帧优化：源393个不同anchor；目标每视频3个预定anchor，共75个不同anchor、1275个query窗口，重复配对源周期；每个anchor还使用过去4次轨迹观测。完整评测覆盖全部活动帧。',
         f"实际训练scheduler wall {summary['actual_scheduler_training_wall_seconds']:.2f}s；推理scheduler跨度 {summary['actual_scheduler_inference_wall_seconds']:.2f}s；",
         f"重叠流水线实际wall {summary['actual_pipeline_wall_seconds']:.2f}s。训练与先行评测交错，不能将二者wall简单相加。",
         'GPU-process-hours是共享卡worker elapsed的和，不是显卡利用率仪表测量；恢复期曾短暂同卡，不冒充独占四卡。',
@@ -96,4 +123,7 @@ def render(public):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--public-root',type=Path,default=ROOT/'results/uda/full');a=p.parse_args();render(a.public_root)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--public-root',type=Path,default=ROOT/'results/uda/full')
+    p.add_argument('--interim-evaluation-root',type=Path);a=p.parse_args()
+    if a.interim_evaluation_root:render_interim(a.interim_evaluation_root,a.public_root)
+    else:render(a.public_root)

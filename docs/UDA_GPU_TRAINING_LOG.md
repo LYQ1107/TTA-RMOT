@@ -30,3 +30,22 @@ peak allocated8658199040bytes（约8.06GiB）、24576可训练参数、参数del
 最终状态由各方法receipt和全部完成后生成的`full_suite_completion.json`确定。
 原始预测位于`results/runs/uda_val_evaluation_20261026_v1`，各独立评测launcher放`evaluation_launchers/`。
 GitHub精简记录：`results/uda/full/SOURCE_REHEARSAL/`；其余方法完成后同样归档，不提前填入指标。
+
+## 全四组训练完成，首两组官方结果封存
+
+| 方法 | 累计训练worker elapsed秒 | 完成进程peak allocated bytes | optimizer更新 | 同样本AMP重试 | 目标GT模型访问 |
+|---|---:|---:|---:|---:|---:|
+| SOURCE_REHEARSAL | 919.070289 | 8658199040 | 8973 | 3 | 0 |
+| MEAN_TEACHER_UDA | 2907.185327 | 8521772032 | 8973 | 3 | 0 |
+| WEAK_MIL_UDA | 2163.689403 | 7819057664 | 8973 | 3 | 0 |
+| COMBINED_UDA | 4320.254259 | 8836841984 | 8973 | 3 | 0 |
+
+四组总计2.863944 GPU-process-hours（训练），不是GPU利用率计量；同卡/外国任务共享与失败尾段下界同上。
+Source完整推理2977.629690秒，peak allocated5278034432bytes，25视频/425表达，模型GT访问0。
+Teacher也已完整封存；Weak继续原GPU6，Combined使用已释放的空GPU5做全25/425推理。
+所有训练均结束，没有新增第五种训练。今后入场推理用16GiB分配预算+4GiB余量，
+不再用24GiB训练预算排除显存能容纳推理而进程更少的卡；不改batch/FP32/门限或数值超参，不重启健康进程。
+本轮Combined仍选中空GPU5，没有为改变卡号而做额外实验。
+
+已封存的Source/Teacher在独立CPU官方评测获得HOTA7.4352/8.2494，匹配Frozen8.2180。
+对应数量匹配Frozen7.4207/8.2479；Teacher残差仅+0.0015。其余两组未提前报告指标。

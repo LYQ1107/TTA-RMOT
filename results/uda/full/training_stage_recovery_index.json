@@ -19,7 +19,25 @@
     "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/metrics_train.jsonl",
     "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
     "raw_data_and_weights_not_in_Git": true,
-    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/resume_discarded_traces"
+    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/resume_discarded_traces",
+    "sampling": {
+      "domains": {
+        "source": {
+          "windows": 8973,
+          "videos": 17,
+          "unique_anchor_frames": 393,
+          "query_pairs": 8973
+        },
+        "target": {
+          "windows": 1275,
+          "videos": 25,
+          "unique_anchor_frames": 75,
+          "query_pairs": 425
+        }
+      },
+      "all_frame_optimization": false,
+      "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+    }
   },
   "MEAN_TEACHER_UDA": {
     "training_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA",
@@ -41,7 +59,25 @@
     "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/metrics_train.jsonl",
     "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
     "raw_data_and_weights_not_in_Git": true,
-    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/resume_discarded_traces"
+    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/resume_discarded_traces",
+    "sampling": {
+      "domains": {
+        "source": {
+          "windows": 8973,
+          "videos": 17,
+          "unique_anchor_frames": 393,
+          "query_pairs": 8973
+        },
+        "target": {
+          "windows": 1275,
+          "videos": 25,
+          "unique_anchor_frames": 75,
+          "query_pairs": 425
+        }
+      },
+      "all_frame_optimization": false,
+      "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+    }
   },
   "WEAK_MIL_UDA": {
     "training_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA",
@@ -63,6 +99,64 @@
     "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/metrics_train.jsonl",
     "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
     "raw_data_and_weights_not_in_Git": true,
-    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/resume_discarded_traces"
+    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/WEAK_MIL_UDA/resume_discarded_traces",
+    "sampling": {
+      "domains": {
+        "source": {
+          "windows": 8973,
+          "videos": 17,
+          "unique_anchor_frames": 393,
+          "query_pairs": 8973
+        },
+        "target": {
+          "windows": 1275,
+          "videos": 25,
+          "unique_anchor_frames": 75,
+          "query_pairs": 425
+        }
+      },
+      "all_frame_optimization": false,
+      "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+    }
+  },
+  "COMBINED_UDA": {
+    "training_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA",
+    "evaluation_root": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1/COMBINED_UDA",
+    "checkpoints": {
+      "checkpoint_latest.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA/checkpoint_latest.pt",
+        "sha256": "2f8aad2f3196336eb888da02dcb7a08f91777b769f0273adc546798ff27c8c47"
+      },
+      "checkpoint_best_source_selected.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA/checkpoint_best_source_selected.pt",
+        "sha256": "c88f76363001c2d6190e4da4788a8ce25b07a8e7f040dde00ada6cd14bb069d2"
+      }
+    },
+    "plan_sha256": {
+      "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+      "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+    },
+    "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA/metrics_train.jsonl",
+    "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
+    "raw_data_and_weights_not_in_Git": true,
+    "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/COMBINED_UDA/resume_discarded_traces",
+    "sampling": {
+      "domains": {
+        "source": {
+          "windows": 8973,
+          "videos": 17,
+          "unique_anchor_frames": 393,
+          "query_pairs": 8973
+        },
+        "target": {
+          "windows": 1275,
+          "videos": 25,
+          "unique_anchor_frames": 75,
+          "query_pairs": 425
+        }
+      },
+      "all_frame_optimization": false,
+      "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+    }
   }
 }

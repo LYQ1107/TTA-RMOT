@@ -27,6 +27,21 @@
 - Separate repair admission/status files avoid clobbering the still-active original four-worker launcher.
   Loss weights/seed/lr/threshold and source-val-only model selection remain fixed;26 focused tests pass.
 
+### All four training runs complete; first complete official controls
+
+- All4 accept8973 updates each,35892 total, no skipped samples,3 same-sample AMP retries each, fixed source17/8896
+  query coverage and target25/425 for B/C/D. Every accepted objective/gradient finite; frozen base unchanged; targetGT model opens0.
+  These are sampled-window cycles: source393 unique anchors, target75 unique anchors/1275query windows, not all-frame optimization.
+- Source and Teacher each seal all425 predictions before any GT evaluation. All four models are already trained and
+  source-selected before these early official evaluations; remaining inference is read-only and no hyperparameter changes follow.
+- Official Source Rehearsal HOTA7.4352 (−0.7828),AssA28.1110 but DetRe2.3022 vs Frozen4.5441. Source CE improves
+  while cross-domain referring recall falls: do not call pruning-driven association averages an identity or semantic solution.
+- Mean Teacher HOTA8.2494 (+0.0314),CLRTP10780/FP89488/100268 outputs; its Count-Matched Frozen8.2479 has the
+  same CLEAR TP/FP/output totals. Only+0.0015 remains relative to that dependent diagnostic. Source Count-Matched7.4207.
+  This is not a causal percentage or evidence of a robust semantic gain. Continue Weak/Combined full inference unchanged.
+- C/D also add source-presence loss, so their difference from A is not a pure target-constraint ablation. Target MIL/presence
+  positive/negative coverage0, allUNKNOWN; D temporal coverage0 for mixed dancing+clothing queries. State these limitations explicitly.
+
 ## 2026-10-25 — Identity full result and automatic Hybrid handoff
 
 - Identity completes25 videos/425 expressions,3,588,445 candidate-query rows/433,636 active frames. Official HOTA8.8179 (+0.5999),DetA4.0132,AssA19.3760,DetRe5.9354,DetPr11.0030,IDF1 5.4476,IDSW347;114,648 rows/1,968 IDs. All25 workers exit0, full auditPASS with no source-sign or MOT modifications and no GT opened by adaptation.

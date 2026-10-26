@@ -18,5 +18,23 @@
   "training_trace": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/metrics_train.jsonl",
   "checkpoint_state": "student/EMA/optimizer/constant-LR/scaler/RNG/step/coverage/memory",
   "raw_data_and_weights_not_in_Git": true,
-  "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/resume_discarded_traces"
+  "original_failed_suffixes": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/MEAN_TEACHER_UDA/resume_discarded_traces",
+  "sampling": {
+    "domains": {
+      "source": {
+        "windows": 8973,
+        "videos": 17,
+        "unique_anchor_frames": 393,
+        "query_pairs": 8973
+      },
+      "target": {
+        "windows": 1275,
+        "videos": 25,
+        "unique_anchor_frames": 75,
+        "query_pairs": 425
+      }
+    },
+    "all_frame_optimization": false,
+    "note": "coverage means all videos/queries/eligible source tracks; each anchor also reads causal track histories; SOURCE_REHEARSAL does not optimize target windows"
+  }
 }
