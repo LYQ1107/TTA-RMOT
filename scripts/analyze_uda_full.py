@@ -18,7 +18,8 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 sys.path.insert(0,str(ROOT/'vendor/FlexHook/TrackEval'))
 from flex_uda.training import METHODS
-from flex_tta.runtime.pf_receipts import atomic_json
+from flex_tta.runtime.pf_receipts import atomic_json,file_sha
+from flex_uda.training import SOURCE_SHA
 from scripts.pf_diag_common import DATA,TRACKS,FROZEN,official_metrics,official_video_values,write_csv
 from scripts.analyze_pf_full_offline import analyze as attribution
 from scripts.analyze_pf_video_uncertainty import paired_clusters,pooled_hota
@@ -80,6 +81,17 @@ def analyze(root,training,public):
             checkpoint={k:run[k] for k in ('checkpoint','checkpoint_sha256','selected_step','source_val_CE','selection')},
             presence=presence,cost=cost,training=train,attribution={k:v for k,v in report.items() if k!='episodes'})
         atomic_json(destination/'metrics.json',summary);reports[method]=summary
+        atomic_json(destination/'timing.json',cost)
+        atomic_json(destination/'checkpoint_metadata.json',summary['checkpoint'])
+        atomic_json(destination/'model_sha256.json',dict(source_checkpoint_sha256=SOURCE_SHA,
+            adapted_checkpoint_sha256=run['checkpoint_sha256'],checkpoint_path=run['checkpoint']))
+        prov=json.loads((training/method/'provenance.json').read_text())
+        atomic_json(destination/'data_manifest_sha256.json',dict(plan_sha256=prov['plan_sha256'],
+            target_runtime_manifest_sha256=file_sha(ROOT/'manifests/dance_val_runtime.jsonl'),
+            source_train_manifest_sha256=file_sha(ROOT/'manifests/source_kitti_v2_train.jsonl')))
+        (destination/'git_commit.txt').write_text(prov['experiment_commit']+'\n')
+        atomic_json(destination/'episode_receipts.json',dict(valid_episodes=425,
+            episodes=[{k:e[k] for k in ('video','expression_id','prediction_path','prediction_sha256','margins_path','margins_sha256','stats')} for e in run['episodes']]))
         for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):shutil.copy2(folder/'results'/name,destination/name)
         shutil.copy2(folder/'trackeval.log',destination/'trackeval_stdout.txt')
         shutil.copy2(folder/'full_audit.json',destination/'full_audit.json')
@@ -91,6 +103,8 @@ def analyze(root,training,public):
             with gzip.GzipFile(filename='',fileobj=dest,mode='wb',mtime=0) as compressed:shutil.copyfileobj(source,compressed)
         atomic_json(destination/'inference_receipt.json',{k:v for k,v in run.items() if k!='episodes'})
         shutil.copytree(folder/'parity',destination/'parity',dirs_exist_ok=True)
+        if (training/method/'numerical_retries.jsonl').exists():shutil.copy2(training/method/'numerical_retries.jsonl',destination/'numerical_retries.jsonl')
+        if (training/method/'resume_trace_recovery.json').exists():shutil.copy2(training/method/'resume_trace_recovery.json',destination/'resume_trace_recovery.json')
         cmdest=destination/'countmatched';cmdest.mkdir(exist_ok=True)
         for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):shutil.copy2(root/cm/'results'/name,cmdest/name)
         shutil.copy2(root/cm/'full_audit.json',cmdest/'full_audit.json')
@@ -118,6 +132,51 @@ def analyze(root,training,public):
     atomic_json(public/'summary.json',result)
     write_csv(public/'official_comparison.csv',[dict(method=m,**{k:r[k] for k in ('HOTA','DetA','AssA','IDF1','DetRe','DetPr','IDSW','CLR_TP','CLR_FP','Dets')}) for m,r in metrics.items()])
     write_csv(public/'cost_comparison.csv',[dict(method=m,**{k:v for k,v in r['cost'].items() if not isinstance(v,(dict,list))}) for m,r in reports.items()])
+    # Requested compact scientific tables live one level above the full logs.
+    tables=public.parent
+    shutil.copy2(public/'official_comparison.csv',tables/'summary.csv');shutil.copy2(public/'cost_comparison.csv',tables/'training_cost.csv')
+    ranking=[];presence_table=[];pseudo=[];cm_rows=[];video_rows=[];expression_rows=[]
+    gt={e['video']+'+'+e['expression']:e['gt_observations'] for e in json.loads((public/METHODS[0]/'offline_attribution.json').read_text())['episodes']}
+    for method,report in reports.items():
+        a=report['attribution'];c=report['cost'];cm=report['countmatched_metrics']
+        ranking.append(dict(method=method,source_AUROC=a['source_auroc'],adapted_AUROC=a['adapted_auroc'],
+            **{'source_Recall@'+k:v for k,v in a['source_Recall_at_1_3_5'].items()},
+            **{'adapted_Recall@'+k:v for k,v in a['adapted_Recall_at_1_3_5'].items()},
+            recovered_GT=a['recovered_gt'],lost_GT=a['lost_gt'],new_FP_rows=a['new_false_positive_rows'],
+            removed_FP_rows=a['removed_false_positive_rows'],net_FP_change=a['net_false_positive_change']))
+        for group,stats in a['query_presence'].items():
+            presence_table.append(dict(method=method,group=group,**stats))
+        pseudo.append(dict(method=method,pseudo_POS_exposures=c['pseudo_POS_exposures'],pseudo_NEG_exposures=c['pseudo_NEG_exposures'],
+            pseudo_UNKNOWN_exposures=report['training']['counters'].get('pseudo_unknown',0),
+            target_presence_positive=0,target_presence_negative=0,target_presence_UNKNOWN=True,
+            effective_temporal_candidates=c['temporal_valid_candidates'],
+            evidence_note='confidence proxies are not verified semantic labels; no GT-filtered training'))
+        cm_rows.append(dict(method=method,Frozen_HOTA=metrics['FROZEN']['HOTA'],adapted_HOTA=metrics[method]['HOTA'],
+            CountMatched_Frozen_HOTA=cm['HOTA'],count_conditioned_delta=report['count_conditioned_delta'],
+            protocol='POST_HOC_DIAGNOSTIC_NOT_DEPLOYABLE',total_cost_includes_parent_UDA=True))
+    for method in metrics:
+        with (root/method/'results/pedestrian_detailed.csv').open() as stream:
+            detailed=[r for r in csv.DictReader(stream) if r['seq']!='COMBINED']
+        for row in detailed:
+            video,expression=row['seq'].split('+',1)
+            expression_rows.append(dict(method=method,video=video,expression=expression,query_present=bool(gt[row['seq']]),
+                HOTA=100*float(row['HOTA___AUC']),IDF1=100*float(row['IDF1']),CLR_FP=int(float(row['CLR_FP'])),CLR_TP=int(float(row['CLR_TP']))))
+        for i,video in enumerate(values[method][0]):
+            seqs=[r for r in detailed if r['seq'].startswith(video+'+')]
+            video_rows.append(dict(method=method,video=video,HOTA=float(pooled_hota(values[method][1],np.eye(25))[i]),
+                CLR_FP=sum(int(float(r['CLR_FP'])) for r in seqs),CLR_TP=sum(int(float(r['CLR_TP'])) for r in seqs),episodes=len(seqs)))
+    write_csv(tables/'candidate_ranking.csv',ranking);write_csv(tables/'pseudo_label_statistics.csv',pseudo)
+    write_csv(tables/'count_matched_diagnostics.csv',cm_rows);write_csv(tables/'per_video.csv',video_rows)
+    write_csv(tables/'per_expression.csv',expression_rows)
+    # Present/Empty groups have the same schema in the reused evaluator.
+    columns=list(dict.fromkeys(k for r in presence_table for k in r))
+    write_csv(tables/'query_presence.csv',[{k:r.get(k) for k in columns} for r in presence_table])
+    atomic_json(tables/'benchmark_protocol.json',dict(name='TRANSDUCTIVE_VAL_DIAGNOSTIC',source_train_videos=17,
+        target_adaptation_videos=25,target_evaluation_videos=25,target_queries=425,target_adaptation_split='same25Val',
+        independent_target_generalization=False,source_free=False,online_TTA=False,target_GT_in_training=False,
+        target_GT_threshold_selection=False,source_val_selection_windows=64,coverage_cycles=1,steps_per_method=8973,
+        MOT_candidate_rows=211085,candidate_query_observations=3588445,threshold=0,rank=4,seed=17,lr=5e-5,
+        original40Train_to25Val_task_complete=False,GT_group_labels_offline_only=True,raw_roots=dict(training=str(training),evaluation=str(root))))
     print(json.dumps({k:v for k,v in result.items() if k!='comparisons'},indent=2))
     return result
 

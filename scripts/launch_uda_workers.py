@@ -24,6 +24,13 @@ def audit_gpus(required=4):
     text=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,name,memory.free,memory.total','--format=csv,noheader,nounits'],text=True)
     apps=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_memory','--format=csv,noheader,nounits'],text=True)
     counts=Counter(line.split(',')[0].strip() for line in apps.splitlines() if line.strip())
+    own_busy=set()
+    for fields in csv.reader(io.StringIO(apps)):
+        uuid,pid,_=[x.strip() for x in fields]
+        try:command=Path('/proc',pid,'cmdline').read_bytes().replace(b'\0',b' ').decode(errors='replace')
+        except FileNotFoundError:continue
+        if any(str(ROOT/'scripts'/name) in command for name in ('train_flexhook_uda.py','evaluate_uda_full.py','diag_uda_amp_gradient.py')):
+            own_busy.add(uuid)
     rows=[]
     for fields in csv.reader(io.StringIO(text)):
         index,uuid,name,free,total=[x.strip() for x in fields]
@@ -31,9 +38,10 @@ def audit_gpus(required=4):
     explicit=[x.strip() for x in os.environ.get('UDA_GPU_IDS','').split(',') if x.strip()]
     if explicit:
         selected=[next(g for g in rows if x in (str(g['physical_gpu']),g['uuid'])) for x in explicit]
-    else:selected=sorted([g for g in rows if g['free_mib']>=32768],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:required]
+    else:selected=sorted([g for g in rows if g['free_mib']>=32768 and g['uuid'] not in own_busy],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:required]
     if len(selected)!=required or len({g['uuid'] for g in selected})!=required:raise RuntimeError(f'{required} distinct memory-fit physical GPUs required')
     if any(g['free_mib']<32768 for g in selected):raise RuntimeError('selected GPU lacks24GiB budget plus8GiB admission headroom')
+    if any(g['uuid'] in own_busy for g in selected):raise RuntimeError('selected GPU already has a healthy UDA worker; preserve it and choose another')
     return selected,rows,apps
 
 
