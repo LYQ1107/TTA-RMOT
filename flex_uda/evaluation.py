@@ -93,7 +93,9 @@ def evaluate(checkpoint,method,output,*,videos=None,batch_size=24,parity_only=Fa
     if not set(videos)<=set(all_videos):raise ValueError('unknown target video')
     attempts=protect_target_annotations();started=time.perf_counter();device=torch.device('cuda:0')
     start_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
-    torch.cuda.set_per_process_memory_fraction((24576<<20)/torch.cuda.get_device_properties(device).total_memory,device)
+    # Inference has no student/EMA/optimizer or backward graphs. Its own
+    # memory budget should not unnecessarily inherit the larger train budget.
+    torch.cuda.set_per_process_memory_fraction((16384<<20)/torch.cuda.get_device_properties(device).total_memory,device)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
     model,tokenizer,info=load_selected(checkpoint,folder,Path(rows[0]['predicted_tracks']).parent,device)
     start_provenance=folder/('parity_start_provenance.json' if parity_only else 'inference_start_provenance.json')
@@ -173,6 +175,7 @@ def evaluate(checkpoint,method,output,*,videos=None,batch_size=24,parity_only=Fa
         query_batch_near_zero_fallbacks=fallback_queries,cache_stats=cache_stats,wall_seconds=time.perf_counter()-started,
         physical_gpu=__import__('os').environ.get('UDA_PHYSICAL_GPU'),gpu_uuid=__import__('os').environ.get('CUDA_VISIBLE_DEVICES'),
         peak_allocated_bytes=torch.cuda.max_memory_allocated())
+    result['allocator_budget_bytes']=16384<<20
     name='parity_receipt.json' if parity_only else 'run_metadata.json'
     atomic_json(folder/name,result)
     if not parity_only and set(videos)==set(all_videos):

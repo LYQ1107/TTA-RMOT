@@ -20,7 +20,7 @@ CONFIGS=('source_rehearsal','mean_teacher','weak_mil','combined')
 METHODS=('SOURCE_REHEARSAL','MEAN_TEACHER_UDA','WEAK_MIL_UDA','COMBINED_UDA')
 
 
-def audit_gpus(required=4):
+def audit_gpus(required=4,minimum_free_mib=32768):
     text=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,name,memory.free,memory.total','--format=csv,noheader,nounits'],text=True)
     apps=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_memory','--format=csv,noheader,nounits'],text=True)
     counts=Counter(line.split(',')[0].strip() for line in apps.splitlines() if line.strip())
@@ -38,9 +38,9 @@ def audit_gpus(required=4):
     explicit=[x.strip() for x in os.environ.get('UDA_GPU_IDS','').split(',') if x.strip()]
     if explicit:
         selected=[next(g for g in rows if x in (str(g['physical_gpu']),g['uuid'])) for x in explicit]
-    else:selected=sorted([g for g in rows if g['free_mib']>=32768 and g['uuid'] not in own_busy],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:required]
+    else:selected=sorted([g for g in rows if g['free_mib']>=minimum_free_mib and g['uuid'] not in own_busy],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:required]
     if len(selected)!=required or len({g['uuid'] for g in selected})!=required:raise RuntimeError(f'{required} distinct memory-fit physical GPUs required')
-    if any(g['free_mib']<32768 for g in selected):raise RuntimeError('selected GPU lacks24GiB budget plus8GiB admission headroom')
+    if any(g['free_mib']<minimum_free_mib for g in selected):raise RuntimeError(f'selected GPU lacks the actual job admission budget {minimum_free_mib}MiB')
     if any(g['uuid'] in own_busy for g in selected):raise RuntimeError('selected GPU already has a healthy UDA worker; preserve it and choose another')
     return selected,rows,apps
 

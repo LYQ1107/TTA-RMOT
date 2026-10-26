@@ -65,6 +65,7 @@ def analyze(root,training,public):
             actual_worker_inference_wall_seconds=eval_seconds,
             per_worker_query_frame_FPS=full_audit['frames']/eval_seconds,
             peak_training_allocated_bytes=train['peak_allocated_bytes'],peak_inference_allocated_bytes=run['peak_allocated_bytes'],
+            inference_allocator_budget_bytes=run.get('allocator_budget_bytes',24576<<20),
             trainable_parameters=24576,optimizer_updates=train['counters']['optimizer_updates'],
             target_candidate_exposures=train['counters'].get('target_candidate_rows',0),
             pseudo_POS_exposures=train['counters'].get('pseudo_positive',0),pseudo_NEG_exposures=train['counters'].get('pseudo_negative',0),

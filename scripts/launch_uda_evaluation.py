@@ -25,9 +25,10 @@ if __name__=='__main__':
         receipt=json.loads((training/method/'training_receipt.json').read_text())
         if receipt['status']!='COMPLETE_FIXED_COVERAGE_DIAGNOSTIC' or receipt['steps']!=8973:
             raise ValueError('do not evaluate incomplete/relabelled coverage runs')
-    selected,all_gpus,apps=audit_gpus(len(a.methods));workers=[];start=time.perf_counter()
+    selected,all_gpus,apps=audit_gpus(len(a.methods),minimum_free_mib=20480);workers=[];start=time.perf_counter()
     mode='parity' if a.parity_only else 'evaluation'
-    atomic_json(record_root/f'{mode}_gpu_admission.json',dict(selected=selected,all_gpus=all_gpus,existing_processes=apps,no_foreign_process_killed=True))
+    atomic_json(record_root/f'{mode}_gpu_admission.json',dict(selected=selected,all_gpus=all_gpus,existing_processes=apps,
+        per_process_allocator_budget_mib=16384,admission_headroom_mib=4096,no_foreign_process_killed=True))
     for method,gpu in zip(a.methods,selected):
         env=os.environ.copy();env.update(CUDA_VISIBLE_DEVICES=gpu['uuid'],UDA_PHYSICAL_GPU=str(gpu['physical_gpu']),
             OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2',TOKENIZERS_PARALLELISM='false')
