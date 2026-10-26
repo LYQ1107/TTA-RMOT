@@ -16,6 +16,17 @@
   then full25/425 sealed official evaluation. No target-presence truth is available: UNKNOWN coverage is explicit,
   no fabricated MIL positives, no40/385 prior, no test-time optimizer. No target score-based hyperparameter changes.
 
+### Full-cycle AMP numerical recovery
+
+- Source first fails at step2666 after2500 checkpoint. A real offending source window at the latest valid state has
+  finite loss~2.47, Inf gradients at AMPscale131072, finite at65536/32768 and FP32. This is scaled FP16 overflow,
+  not targetGT-driven diagnosis or a reason to skip a difficult sample. Teacher/Weak also hit the same numerical guard.
+- Resume only failed workers; healthy Combined keeps its already loaded configuration. Exact-sample backoff restores
+  RNG, memory, evidence and counters, halves loss scale, and retries without optimizer/EMA/sample advancement.
+  Preserve and archive all suffix traces past the last checkpoint before replaying that unsaved suffix.
+- Separate repair admission/status files avoid clobbering the still-active original four-worker launcher.
+  Loss weights/seed/lr/threshold and source-val-only model selection remain fixed;26 focused tests pass.
+
 ## 2026-10-25 — Identity full result and automatic Hybrid handoff
 
 - Identity completes25 videos/425 expressions,3,588,445 candidate-query rows/433,636 active frames. Official HOTA8.8179 (+0.5999),DetA4.0132,AssA19.3760,DetRe5.9354,DetPr11.0030,IDF1 5.4476,IDSW347;114,648 rows/1,968 IDs. All25 workers exit0, full auditPASS with no source-sign or MOT modifications and no GT opened by adaptation.

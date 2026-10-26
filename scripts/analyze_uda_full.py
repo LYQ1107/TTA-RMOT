@@ -107,7 +107,7 @@ def analyze(root,training,public):
             improved_videos=int((individual>1e-9).sum()),declined_videos=int((individual< -1e-9).sum()),
             tied_videos=int((np.abs(individual)<=1e-9).sum()),
             per_video=[dict(video=v,delta_HOTA=float(d),delta_without_video=float(l)) for v,d,l in zip(values[a][0],individual,leave)])
-    scheduler=json.loads((training/'launcher_status.json').read_text());inference_scheduler=json.loads((root/'evaluation_launcher_status.json').read_text())
+    scheduler=json.loads((training/'full_suite_completion.json').read_text());inference_scheduler=json.loads((root/'evaluation_launcher_status.json').read_text())
     result=dict(status='COMPLETE_TRANSDUCTIVE_VAL_DIAGNOSTIC',videos=25,episodes=425,metrics=metrics,
         comparisons=comparisons,cluster_unit='25 whole videos; expressions/frames not independent',
         uncertainty='descriptive same-Val paired bootstrap2000/seed0, not independent test or training-seed uncertainty',

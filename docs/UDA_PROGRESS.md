@@ -44,3 +44,14 @@
   HOTA8.2180/DetA3.1937/AssA21.1470/IDF1 4.4414。不是重新测量GPU基线速度。
 - 下一步四个独立worker各一个8973步完整覆盖周期，源17视频/8896表达，目标25视频/425表达/1275固定位置窗口。
   这不是只适应25帧，也不是40Train→25Val实验。原40Train官方同配置MOT仍缺失，暂不扩大任务。
+
+## 完整覆盖执行中的AMP修复（保留原始失败）
+
+四组首次覆盖运行在GPU5/4/6/3。SOURCE_REHEARSAL于2666步触发非有限缩放梯度；
+真实出错源窗口诊断确认scale131072溢出、scale65536/32768及FP32梯度有限，source loss约2.47并未发散。
+Teacher/Weak随后也在不同实际窗口触发同类错误；不打断仍健康的Combined。
+恢复只修改数值执行：降低scale，恢复该步RNG/记忆/计数，重试**同一**窗口，不执行optimizer/EMA、不推进样本。
+checkpoint之后的已运行但未保存后缀日志/伪证据归档保存，从最近有效checkpoint恢复该段。
+每个恢复launcher使用独立记录目录，避免覆盖仍在等待健康worker的原launcher状态。
+这是正常AMP溢出的可恢复处理，不改lr、rank、seed、源/目标loss权重、目标阈值或源CE模型选择。
+恢复回归测试26通过；诊断记录见`results/uda/assets/amp_real_source_diagnostic.json`。
