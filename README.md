@@ -10,7 +10,10 @@
 冻结Qwen3-VL/安全复用YesTrack，比较整句、等预算多问法、分属性和证据验证，**不训练学生**。
 [机制审计](docs/TEACHER_METHOD_AUDIT.md)、[数据/权重来源](docs/TEACHER_DATA_PROVENANCE.md)、
 [预算公平性](docs/TEACHER_MODEL_AND_BUDGET_FAIRNESS.md)与[固定采样清单](results/teacher_probe/)分开保存。
-目前是资产/隔离/接口准备阶段，不将单元测试或采样完成当作GPU实验完成；实际教师指标尚未评测。
+T0权重已核验并实际运行；官方V2 LoRA未取得，按用户授权如实保留T1缺失，不以其它权重替代。
+六组四对功能检查及源域203对校准已完成，POS/NEG门限仅由源开发集冻结为0.95/0.05。
+完整25视频/425表达smoke每组1649对，目前五组完成、B-plus仍运行；之后按四个整视频分片完成每组8381对固定probe。
+教师无参数更新、无目标GT读取；全部预测封存后再独立评测，目前尚无新P1目标质量指标，不把工程通过当科研成功。
 
 ## 上一阶段：FlexHook V2 → Dance Offline UDA 诊断
 

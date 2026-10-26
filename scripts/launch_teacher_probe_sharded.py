@@ -57,7 +57,8 @@ def merge_method(method,manifest,phase_root,shard_manifests):
     frozen=dict(receipts[0]['frozen'])
     for key in ['forward_batches','model_load_and_initial_hash_seconds']:
         frozen[key]=sum(r['frozen'][key] for r in receipts)
-    merged.update(manifest_sha256=file_sha(manifest),samples=len(ids),planned_manifest_samples=len(ids),videos=25,video_queries=425,
+    merged.update(manifest_sha256=file_sha(manifest),samples=len(ids),planned_manifest_samples=len(ids),
+        videos=len({r['video_id'] for r in expected}),video_queries=len({(r['video_id'],r['query_id']) for r in expected}),
         predictions_sha256=file_sha(output),budget=budget,frozen=frozen,
         worker_elapsed_seconds=sum(r['worker_elapsed_seconds'] for r in receipts),
         inference_and_final_hash_seconds=sum(r['inference_and_final_hash_seconds'] for r in receipts),

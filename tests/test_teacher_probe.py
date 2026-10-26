@@ -87,6 +87,33 @@ def test_four_shards_keep_complete_videos_and_all_fixed_pairs():
         assert sum(any(r['video_id']==video for r in shard) for shard in shards)==1
 
 
+def test_teacher_shard_merge_preserves_global_order_and_receipts(tmp_path):
+    from scripts.launch_teacher_probe_sharded import merge_method
+    from scripts.audit_teacher_leakage import WEIGHT_SHA
+    from flex_tta.runtime.pf_receipts import file_sha
+    samples=[dict(sample_id=f'pair{i}',video_id=f'v{i}',query_id='query') for i in range(4)]
+    manifest=tmp_path/'manifest.jsonl';manifest.write_text(''.join(json.dumps(s)+'\n' for s in samples))
+    manifests=[]
+    for i,sample in enumerate(samples):
+        folder=tmp_path/'shards'/f'shard{i:02d}'/'YES_FULL';folder.mkdir(parents=True)
+        shard=folder.parent/'manifest.jsonl';shard.write_text(json.dumps(sample)+'\n');manifests.append(shard)
+        predictions=folder/'teacher_outputs.jsonl';predictions.write_text(json.dumps(sample)+'\n')
+        receipt=dict(status='SEALED_FIXED_PROBE',method='YES_FULL',manifest_sha256=file_sha(shard),samples=1,
+            student_updates=0,GT_access_audit=dict(target_GT_open_attempts=[]),
+            isolation=dict(kernel_read_whitelist=True,kernel_stage_write_denied=True,landlock_abi=1),
+            frozen=dict(frozen_parameters_unchanged=True,optimizer_updates=0,initial_parameter_sha256=WEIGHT_SHA,
+                final_parameter_sha256=WEIGHT_SHA,forward_batches=1,model_load_and_initial_hash_seconds=1.),
+            budget=dict(actual_candidate_prompt_forwards=1,peak_allocated_bytes=100+i),
+            predictions_sha256=file_sha(predictions),physical_gpu=str(i),gpu_uuid=f'fixture{i}',
+            worker_elapsed_seconds=3.,inference_and_final_hash_seconds=2.,model_load_seconds=1.,
+            persistent_cache_reopen_check=True,experiment_commit='synthetic_no_model_or_GT')
+        (folder/'receipt.json').write_text(json.dumps(receipt))
+    merged=merge_method('YES_FULL',manifest,tmp_path,manifests)
+    assert merged['samples']==4 and merged['videos']==4 and merged['budget']['actual_candidate_prompt_forwards']==4
+    assert merged['budget']['peak_allocated_bytes']==103 and len(merged['source_worker_receipts'])==4
+    assert [json.loads(s)['sample_id'] for s in (tmp_path/'YES_FULL/teacher_outputs.jsonl').read_text().splitlines()]==['pair0','pair1','pair2','pair3']
+
+
 def test_landlock_denies_unstaged_payload_and_stage_write(tmp_path):
     good=tmp_path/'stage';bad=tmp_path/'not_staged';good.mkdir();bad.mkdir()
     (good/'image.txt').write_text('legal');(bad/'labels.json').write_text('not legal teacher input')

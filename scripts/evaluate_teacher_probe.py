@@ -255,6 +255,8 @@ def evaluate(output=OUTPUT,run=RUN):
             per_query.append(dict(video=video,query_id=query,scope='all425_official_scored',
                 **aggregate(method,ix,score,states[method],labels,groups)))
         type_masks={'MIXED':np.ones(n,dtype=bool),
+            'parser_typo_alias':np.array([s['query_text'].startswith('dacning ') for s in samples]),
+            'without_parser_typo_alias':np.array([not s['query_text'].startswith('dacning ') for s in samples]),
             'contains_APPEARANCE':np.array([any(a['kind']=='APPEARANCE' for a in s['attributes']) for s in samples]),
             'contains_ACTION':np.array([any(a['kind']=='ACTION' for a in s['attributes']) for s in samples]),
             'contains_SPATIAL':np.array([any(a['kind']=='SPATIAL' for a in s['attributes']) for s in samples])}
@@ -300,7 +302,9 @@ def evaluate(output=OUTPUT,run=RUN):
         boot['paired_comparisons'][method+'_minus_FROZEN_FLEXHOOK_AUPRC']['point_delta']=main_metrics[method]['AUPRC']-main_metrics['FROZEN_FLEXHOOK']['AUPRC'] if main_metrics[method]['AUPRC'] is not None else None
     comparisons={}
     for left in ['STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED']:
-        for right in config['gates']['gate_B']['required_comparators']:
+        controls=list(config['gates']['gate_B']['required_comparators'])
+        if left=='EVIDENCE_VERIFIED':controls.append('STRUCTURED_EVIDENCE')
+        for right in controls:
             comparisons[left+'_vs_'+right]=matched_coverage_comparison(left,right,scores,states,labels,primary,draws,vi,groups)
     boot['matched_coverage_POST_HOC_comparisons']=comparisons
     atomic_json(output/'bootstrap.json',boot)
