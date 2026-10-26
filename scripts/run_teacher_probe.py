@@ -69,6 +69,7 @@ def main():
     backend=FrozenYesTrack(config);probe=TeacherProbe(backend,a.staging_root,a.cache,prompts,rules,a.batch_size or config['batch_size'])
     db=sqlite3.connect(out/'progress.sqlite');db.execute('CREATE TABLE IF NOT EXISTS samples (key TEXT PRIMARY KEY,payload TEXT)')
     done={r[0] for r in db.execute('SELECT key FROM samples')};started=time.perf_counter()
+    resumed_pairs=sum(s['sample_id'] in done for s in rows)
     for index,sample in enumerate(rows):
         if sample['sample_id'] in done:continue
         if index%16==0 or rows[index-1]['sample_id'] in done:
@@ -90,6 +91,7 @@ def main():
     receipt=dict(status='SEALED_FIXED_PROBE' if len(rows)==expected_rows else 'FUNCTIONALITY_SMOKE_ONLY',
         protocol='DEVELOPMENT_TEACHER_PROBE',method=a.method,condition=config['condition'],manifest_sha256=manifest_sha,
         samples=len(rows),planned_manifest_samples=expected_rows,videos=len({s['video_id'] for s in rows}),
+        resumed_completed_pairs=resumed_pairs,newly_completed_pairs=len(rows)-resumed_pairs,
         video_queries=len({(s['video_id'],s['query_id']) for s in rows}),config_sha256=file_sha(a.config),
         prompts_sha256=file_sha(ROOT/'configs/teacher/prompts_v1.yaml'),protocol_sha256=file_sha(ROOT/'configs/teacher/probe_protocol.yaml'),
         predictions_sha256=file_sha(outputs),budget=probe.budget.record(),worker_elapsed_seconds=time.perf_counter()-worker_started,
@@ -98,6 +100,7 @@ def main():
         gpu_uuid=str(props.uuid),gpu_admission=gpu_admission,physical_gpu=os.environ.get('CUDA_VISIBLE_DEVICES'),numeric_dtype='bfloat16',
         quantization=None,student_updates=0,model_load_seconds=backend.load_seconds,frozen=frozen,
         GT_access_audit=access,isolation=isolation,reliability_rules=rules,
+        preprocessing_cache=probe.views.cache_stats(),
         persistent_cache_reopen_check=bool(cached) if probe.last_refs else None,cache=probe.cache.stats())
     atomic_json(out/'receipt.json',receipt);print(json.dumps(receipt,indent=2),flush=True)
 

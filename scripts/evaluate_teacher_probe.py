@@ -442,16 +442,24 @@ def build_budget(seal,output,run):
         actual_wall=max(t[1] for t in span)-min(t[0] for t in span) if span else allocation_seconds
         for shard in receipt.get('source_worker_receipts',[]):
             worker=json.loads(Path(shard['receipt']).read_text())
+            shard_number=int(Path(shard['receipt']).parent.parent.name.removeprefix('shard'))
+            cumulative=sum(r['elapsed_seconds'] for r in method_attempts if r.get('shard')==shard_number)
             worker_rows.append(dict(method=method,physical_gpu=worker['physical_gpu'],samples=worker['samples'],
-                worker_wall_seconds=worker['worker_elapsed_seconds'],candidate_pairs_per_second=worker['samples']/worker['worker_elapsed_seconds'],
+                worker_wall_seconds=worker['worker_elapsed_seconds'],cumulative_allocated_seconds=cumulative,
+                resumed_completed_pairs=worker.get('resumed_completed_pairs',0),
+                newly_completed_pairs=worker.get('newly_completed_pairs',worker['samples']),
+                candidate_pairs_per_second=divide(worker['samples'],cumulative),
+                successful_attempt_new_pair_rate=worker.get('newly_completed_pairs',worker['samples'])/worker['worker_elapsed_seconds'],
+                preprocessing_cache_mode=worker.get('preprocessing_cache',{}).get('mode','V1_PATCH_FIFO128_REDECODE'),
                 peak_forward_allocated_bytes=worker['budget']['peak_allocated_bytes'],actual_new_forwards=worker['budget']['actual_candidate_prompt_forwards'],
                 receipt=shard['receipt']))
         rows.append(dict(method=method,scope='full_fixed_probe_incremental_worker_plus_required_raw_equivalents',
             candidate_query_pairs=receipt['samples'],worker_wall_seconds=receipt['worker_elapsed_seconds'],
+            cumulative_allocated_worker_seconds=allocation_seconds,
             actual_method_wall_span_seconds=actual_wall,worker_seconds_interpretation='sum across whole-video shard workers',
             GPU_hours_allocated_worker=allocation_seconds/3600,
             actual_including_failed_resumed_worker_seconds=allocation_seconds,
-            candidate_pairs_per_worker_second=receipt['samples']/receipt['worker_elapsed_seconds'],
+            candidate_pairs_per_worker_second=divide(receipt['samples'],allocation_seconds),
             actual_forward_seconds=budget['actual_forward_seconds'],actual_new_prompt_forwards=budget['actual_candidate_prompt_forwards'],
             actual_new_forward_batches=budget['actual_model_forward_batches'],cache_hits=budget['cache_hits'],
             peak_allocated_bytes=budget['peak_allocated_bytes'],trainable_teacher_parameters=0,optimizer_updates=0,

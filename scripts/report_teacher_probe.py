@@ -48,13 +48,14 @@ def figures(output,metrics):
 
 def archive_logs(run,output):
     files=sorted(set(run.rglob('*_stdout.txt'))|set(run.rglob('receipt.json'))|
-        set(run.rglob('launcher_status.json'))|set(run.rglob('gpu_admission.json'))|set(run.rglob('phase_completion.json'))|
-        set(run.rglob('whole_video_shard_plan.json')))
+        set(run.rglob('launcher_status.json'))|set(run.rglob('*gpu_admission.json'))|set(run.rglob('phase_completion.json'))|
+        set(run.rglob('whole_video_shard_plan.json'))|set(run.rglob('repair_*_launch.json')))
     folder=output/'logs';folder.mkdir(exist_ok=True);archive=folder/'teacher_p1_complete_text_logs.tar.gz'
     members=[]
     with tarfile.open(archive,'w:gz') as tar:
         for path in files:
-            if path.name not in ('receipt.json','launcher_status.json','gpu_admission.json','phase_completion.json','whole_video_shard_plan.json') and not path.name.endswith('_stdout.txt'):
+            if (path.name not in ('receipt.json','launcher_status.json','gpu_admission.json','phase_completion.json','whole_video_shard_plan.json')
+                and not path.name.endswith(('_stdout.txt','_gpu_admission.json')) and not (path.name.startswith('repair_') and path.name.endswith('_launch.json'))):
                 raise ValueError('unexpected experiment payload in text archive')
             relative=path.relative_to(run);tar.add(path,arcname=str(relative),recursive=False)
             members.append(dict(member=str(relative),bytes=path.stat().st_size,sha256=file_sha(path)))
@@ -94,7 +95,7 @@ def report(output=OUTPUT,run=RUN):
         '|---|---:|---:|---:|---:|---:|---:|---:|---:|']
     for method in cost:
         r=cost[method]
-        costs.append(f'| {SHORT[method]} | {r["worker_wall_seconds"]:.2f} | {r["actual_method_wall_span_seconds"]:.2f} | {r["GPU_hours_allocated_worker"]:.4f} | '
+        costs.append(f'| {SHORT[method]} | {r["cumulative_allocated_worker_seconds"]:.2f} | {r["actual_method_wall_span_seconds"]:.2f} | {r["GPU_hours_allocated_worker"]:.4f} | '
             f'{r["actual_new_prompt_forwards"]} | {r["unique_required_forwards"]} | {r["logical_request_slots"]} | '
             f'{r["logical_visual_tokens"]}/{r["logical_language_tokens"]} | {r["peak_allocated_bytes"]/(1<<30):.3f} |')
     a,b,c,d=(metrics[m] for m in ['YES_FULL','YES_ENSEMBLE_BUDGET_MATCHED','STRUCTURED_EVIDENCE','EVIDENCE_VERIFIED'])
@@ -172,6 +173,9 @@ A只做原整句当前ROI，成本低；B与C逐候选对应相同视图/调用�
 SoftMatch行是A的依赖成本，不能再加一次得到总GPU小时。逐worker吞吐见budget_by_worker.csv，不是完整视频FPS。
 分配GPU小时是共享GPU worker存活时间，不是独占利用率或能耗；等价raw秒是原批次均摊观察值，不能冒充另跑的独立实测时长。
 方法wall为其最早worker启动至最晚退出的跨度，包含异步流水线滞后；没有独占四卡/单卡重测，不声称实测单卡加速倍数。
+完整实验中发现V1反复解码/均值/哈希的CPU开销；V2只读LRU缓存经40项真实RGB/元数据一致性检查后用于后续worker。
+旧健康进程未因代码更新而自动重启，逐worker缓存版本单列；因此实际wall不是统一缓存/硬件条件下的纯算法速度比较。
+失败/恢复尝试的累计worker秒和GPU小时全部计入，成功恢复worker的总样本数不除以其仅剩余工作耗时来虚增FPS。
 全部pipeline阶段含失败/恢复的GPU分配时间{stage['all_pipeline_allocated_GPU_hours']:.4f}小时；
 另有首个2对功能检查16.70秒。各阶段wall time、吞吐、峰值、原始请求/图像/token和所有失败记录另列。
 TCP/TRP按用户授权固定13个因果活动帧原策略重置，保留6帧TCP、stride4、原TRP，不是从视频开头累积状态，更不是完整视频HOTA。
@@ -216,6 +220,7 @@ bash scripts/run_teacher_probe_4gpu.sh --phase calibrate --execute
 /data2/user/TTA-RMOT-assets/teacher-p1/env/bin/python scripts/calibrate_teacher_reliability.py --predictions results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY/teacher_outputs.jsonl --output results/teacher_probe/source_calibration_rules_T0.json
 bash scripts/run_teacher_probe_4gpu.sh --phase smoke --rules results/teacher_probe/source_calibration_rules_T0.json --execute
 bash scripts/run_teacher_probe_4gpu.sh --phase full --rules results/teacher_probe/source_calibration_rules_T0.json --execute
+/home/szgx/anaconda3/envs/dfot/bin/python scripts/merge_teacher_probe_shards.py
 /home/szgx/anaconda3/envs/dfot/bin/python scripts/audit_teacher_leakage.py
 /home/szgx/anaconda3/envs/dfot/bin/python scripts/evaluate_teacher_probe.py
 /home/szgx/anaconda3/envs/dfot/bin/python scripts/report_teacher_probe.py
@@ -223,6 +228,8 @@ bash scripts/run_teacher_probe_4gpu.sh --phase full --rules results/teacher_prob
 
 恢复根目录`{run}`；原始输出/receipt、共享SQLite cache及teacher_cache_index指定的完整raw索引保留服务器。
 首个source暂存缺帧失败已修复，38张合法源图补齐，源样本/真值hash不变；失败日志未隐藏。
+完整probe中GPU7的D正常完成后，下一方法在模型加载前因显存入场余量不足被拦截；仅恢复失败单元，未用改batch/分辨率绕过。
+依据实测约5.15GiB峰值，恢复worker采用8GiB分配上限加4GiB物理空闲余量，仍保留相同dtype/batch/像素/模型；所有入场与失败记录保留。
 完整文本日志归档{log_archive['files']}成员，SHA`{log_archive['sha256']}`；不含图像、权重或GT。
 历史六TTA/UDA结果未覆盖；本轮不产生新的完整RMOT HOTA，不把开发诊断当独立确认。
 

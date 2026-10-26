@@ -19,7 +19,7 @@ GROUPS=[['YES_FULL','YESTRACK_TCP_TRP'],['YES_ENSEMBLE_BUDGET_MATCHED','YES_ENSE
     ['STRUCTURED_EVIDENCE'],['EVIDENCE_VERIFIED']]
 
 
-def resources(count):
+def resources(count,exclude=(),memory_budget_gib=16):
     gpu_csv=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,name,memory.total,memory.free',
         '--format=csv,noheader,nounits'],text=True)
     apps=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_gpu_memory',
@@ -28,12 +28,14 @@ def resources(count):
     gpus=[]
     for line in gpu_csv.splitlines():
         index,uuid,name,total,free=map(str.strip,line.split(','))
-        if float(free)>=20480:gpus.append(dict(index=int(index),uuid=uuid,name=name,total_mib=float(total),
+        if int(index) in exclude:continue
+        if float(free)>=memory_budget_gib*1024+4096:gpus.append(dict(index=int(index),uuid=uuid,name=name,total_mib=float(total),
             free_mib=float(free),processes=processes[uuid]))
     gpus.sort(key=lambda g:(g['processes'],-g['free_mib'],g['index']))
     if len(gpus)<count:raise RuntimeError(f'only{len(gpus)} memory-fit GPUs for{count} workers; do not stop other jobs')
     return dict(selected=gpus[:count],all_gpus_csv=gpu_csv,all_compute_processes_csv=apps,
-        policy='>=16GiB allocation+4GiB free margin; fewest processes, then most free; shared allowed; no other task stopped')
+        policy=f'>={memory_budget_gib}GiB allocation+4GiB free margin; fewest processes, then most free; shared allowed; no other task stopped',
+        excluded_healthy_task_gpus=list(exclude))
 
 
 def main():
