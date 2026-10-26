@@ -10,6 +10,7 @@ from pathlib import Path
 import subprocess
 import sys
 import time
+import shutil
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
@@ -19,7 +20,7 @@ CONFIGS=('source_rehearsal','mean_teacher','weak_mil','combined')
 METHODS=('SOURCE_REHEARSAL','MEAN_TEACHER_UDA','WEAK_MIL_UDA','COMBINED_UDA')
 
 
-def audit_gpus():
+def audit_gpus(required=4):
     text=subprocess.check_output(['nvidia-smi','--query-gpu=index,uuid,name,memory.free,memory.total','--format=csv,noheader,nounits'],text=True)
     apps=subprocess.check_output(['nvidia-smi','--query-compute-apps=gpu_uuid,pid,used_memory','--format=csv,noheader,nounits'],text=True)
     counts=Counter(line.split(',')[0].strip() for line in apps.splitlines() if line.strip())
@@ -30,8 +31,8 @@ def audit_gpus():
     explicit=[x.strip() for x in os.environ.get('UDA_GPU_IDS','').split(',') if x.strip()]
     if explicit:
         selected=[next(g for g in rows if x in (str(g['physical_gpu']),g['uuid'])) for x in explicit]
-    else:selected=sorted([g for g in rows if g['free_mib']>=32768],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:4]
-    if len(selected)!=4 or len({g['uuid'] for g in selected})!=4:raise RuntimeError('four distinct memory-fit physical GPUs required')
+    else:selected=sorted([g for g in rows if g['free_mib']>=32768],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:required]
+    if len(selected)!=required or len({g['uuid'] for g in selected})!=required:raise RuntimeError(f'{required} distinct memory-fit physical GPUs required')
     if any(g['free_mib']<32768 for g in selected):raise RuntimeError('selected GPU lacks24GiB budget plus8GiB admission headroom')
     return selected,rows,apps
 
@@ -39,15 +40,21 @@ def audit_gpus():
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--scope',choices=('plan','smoke','full'),default='plan')
     p.add_argument('--output-root',type=Path,required=True);p.add_argument('--resume',action='store_true')
+    p.add_argument('--methods',nargs='+',choices=METHODS,default=list(METHODS))
     a=p.parse_args();root=a.output_root.resolve()
-    selected,all_gpus,apps=audit_gpus()
-    plan=[dict(method=m,config=c,**g) for m,c,g in zip(METHODS,CONFIGS,selected)]
+    selected,all_gpus,apps=audit_gpus(len(a.methods))
+    configurations=dict(zip(METHODS,CONFIGS))
+    plan=[dict(method=m,config=configurations[m],**g) for m,g in zip(a.methods,selected)]
     print(json.dumps(dict(scope=a.scope,workers=plan),indent=2),flush=True)
     if a.scope=='plan':raise SystemExit(0)
     if os.environ.get('UDA_VAL_DIAGNOSTIC_AUTHORIZED')!='YES':raise PermissionError('explicit Val diagnostic authorization required')
     for method in METHODS:
         if (root/method).exists() and not a.resume:raise FileExistsError('preserve existing run: '+str(root/method))
     root.mkdir(parents=True,exist_ok=True)
+    if a.resume:
+        history=root/'launcher_attempts'/str(time.time_ns());history.mkdir(parents=True)
+        for name in ('gpu_admission.json','launcher_status.json'):
+            if (root/name).exists():shutil.copy2(root/name,history/name)
     atomic_json(root/'gpu_admission.json',dict(selected_workers=plan,all_gpus=all_gpus,existing_processes=apps,
         sharing_authorized=True,no_foreign_process_killed=True,per_worker_allocator_budget_mib=24576,
         admission_headroom_mib=8192,resource_snapshot_is_not_reservation=True))

@@ -156,7 +156,11 @@ def train(config,output,*,smoke=False,resume=False):
     start_step=0;best_source=float('inf');counters=Counter();memory=TrackletMemory()
     src_seen=set();tgt_seen=set();grad_nonzero=0;target_grad_checks=[];prior_wall=0.
     if resume:
-        state=torch.load(output/'checkpoint_latest.pt',map_location=device,weights_only=False)
+        resume_path=output/'checkpoint_latest.pt'
+        if not resume_path.exists():
+            resume_path=output/'checkpoint_best_source_selected.pt'
+        state=torch.load(resume_path,map_location=device,weights_only=False)
+        if resume_path.name!='checkpoint_latest.pt' and state['step']!=0:raise ValueError('only the saved untrained initial state may substitute for missing latest checkpoint')
         if state['config']!=config or state['plan_sha256']!=plan_sha:raise ValueError('resume protocol/data mismatch')
         model.load_state_dict(state['student'],strict=True)
         if ema is not None:ema.load_state_dict(state['ema'],strict=True)
@@ -169,6 +173,9 @@ def train(config,output,*,smoke=False,resume=False):
         target_grad_checks=tracking.get('target_grad_checks',[]);memory.rows=tracking.get('memory',{})
         prior_wall=tracking.get('wall_seconds',0.)
     atomic_json(output/'config.json',config)
+    if resume and (output/'provenance.json').exists():
+        folder=output/'provenance_attempts';folder.mkdir(exist_ok=True)
+        (output/'provenance.json').rename(folder/(str(time.time_ns())+'.json'))
     atomic_json(output/'provenance.json',dict(protocol=config['protocol'],source_checkpoint_sha256=SOURCE_SHA,
         experiment_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         physical_gpu=os.environ.get('UDA_PHYSICAL_GPU'),gpu_uuid=os.environ.get('CUDA_VISIBLE_DEVICES'),plan_sha256=plan_sha,

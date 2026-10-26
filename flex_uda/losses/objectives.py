@@ -17,8 +17,9 @@ def presence_probability(margin):
 def presence_loss(margin,state):
     if state=='UNKNOWN':return margin.sum()*0
     if state not in ('SUPPORTED_PRESENT','SUPPORTED_ABSENT'):raise ValueError('unknown presence state')
-    p=presence_probability(margin).clamp(1e-6,1-1e-6)
-    return F.binary_cross_entropy(p,p.new_tensor(float(state=='SUPPORTED_PRESENT')))
+    with torch.autocast(margin.device.type,enabled=False):
+        p=presence_probability(margin).clamp(1e-6,1-1e-6)
+        return F.binary_cross_entropy(p,p.new_tensor(float(state=='SUPPORTED_PRESENT')))
 
 
 def select_pseudo(teacher,source,student,*,threshold=.9,tolerance=.1):

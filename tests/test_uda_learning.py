@@ -101,3 +101,9 @@ def test_static_consistency_requires_real_past_and_short_gap():
 def test_all_absent_presence_target_does_not_create_top1_positive():
     margin=torch.tensor([-2.,-3.],requires_grad=True);loss=presence_loss(margin,'SUPPORTED_ABSENT');loss.backward()
     assert (margin.grad>0).all()
+
+
+def test_presence_is_explicit_fp32_under_autocast():
+    margin=torch.tensor([-2.,1.],requires_grad=True)
+    with torch.autocast('cpu',dtype=torch.bfloat16):loss=presence_loss(margin,'SUPPORTED_PRESENT')
+    loss.backward();assert loss.dtype==torch.float32 and torch.isfinite(margin.grad).all()
