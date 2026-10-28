@@ -1,0 +1,43 @@
+{
+  "status": "COMPLETE_TRAINING_AWAITING_FULL_EVALUATION",
+  "updated_at_utc": "2026-10-28T16:20:23.461079+00:00",
+  "formal_training_complete": true,
+  "target_protocol": "25Val same-set transductive development diagnosis, NOT Train-to-Val",
+  "stage_receipts": {
+    "interface_v6": {
+      "status": "INTERFACE_PASS_NO_OPTIMIZER_STEP",
+      "wall_seconds": 13.376679309876636,
+      "target_GT_open_attempts": []
+    },
+    "smoke_v2": {
+      "status": "STUDENT_SMOKE_PASS",
+      "wall_seconds": 20.066084692953154,
+      "target_GT_open_attempts": []
+    }
+  },
+  "compressed_cache_copies": [
+    {
+      "path": "results/mllm_distillation/assets/manifest.jsonl.gz",
+      "compressed_sha256": "1a95a9678161dc8679bb8082a1532f1759c5fd191fda369d5a4a1a30e9b03ea9",
+      "uncompressed_sha256": "ab3c8fbc01ddc433996b27257c4491cfe35d6689c80af9003ceb7c1952d31d59"
+    },
+    {
+      "path": "results/mllm_distillation/assets/soft_labels.jsonl.gz",
+      "compressed_sha256": "c5e1f701e447070f4cd550b09996c4898b4b10c1c51c66827c4a5bfc28eb6583",
+      "uncompressed_sha256": "cb5034e936faa67a46eae54ff73c20c8d75752ad221cbc7a221627d73809c191"
+    },
+    {
+      "path": "results/mllm_distillation/assets/runtime.jsonl.gz",
+      "compressed_sha256": "034467a6f1aa71614c5695f967ece06b7b9caabc2ad0c31c2122e1b31264afa7",
+      "uncompressed_sha256": "82479554c8c770f299db6ed82e766a07d568e2fe7006d515fe88fc5ced676d6f"
+    },
+    {
+      "path": "results/mllm_distillation/assets/windows.jsonl.gz",
+      "compressed_sha256": "7418f7689305b2499a0d48d3f2f7892d5b67756e1d855eb7db5ca66383f45934",
+      "uncompressed_sha256": "2389531bfa59a046183bdf583d62dc1d6de75a097192f3263562bb395dc5e266"
+    }
+  ],
+  "log_archive_members": 64,
+  "run_root": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1",
+  "large_checkpoints_retained_on_server": true
+}

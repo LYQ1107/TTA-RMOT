@@ -1,7 +1,72 @@
 {
   "path": "results/mllm_distillation/logs/complete_training_and_smoke_text_logs.tar.gz",
-  "sha256": "5350bbbf60dbbca1a3ad884bd9198aa8d0552193f54ba42c8c949181028a4d14",
+  "sha256": "c222a7f0111566a7004e99d01ceb968c6e5b57cd6b182725fb255e4e3aa70f45",
   "members": [
+    {
+      "member": "MLLM_DISTILL/attempt_runtimes/1793202408304034514.json",
+      "sha256": "a18cd6ed212347b96cc3e9b2420a5238800c84b32fbdc80890206857628bb4bd",
+      "bytes": 227
+    },
+    {
+      "member": "MLLM_DISTILL/config.json",
+      "sha256": "e55f02fb3066e13cede8057f4840eb3174d764d64911bf760f797e14d8ad74cb",
+      "bytes": 1223
+    },
+    {
+      "member": "MLLM_DISTILL/initial_frozen_equivalence.json",
+      "sha256": "cab2749b19002c5f89eba7d50455dd0cf9553bc0a68b5c9cbfdece3307e7b3a0",
+      "bytes": 169
+    },
+    {
+      "member": "MLLM_DISTILL/metrics_train.jsonl",
+      "sha256": "10997ddf4be5ef98487a7a4a3b274edef4c6100924ab4677c126ddec5e81fff6",
+      "bytes": 5021795
+    },
+    {
+      "member": "MLLM_DISTILL/model_log/log_rank0.txt",
+      "sha256": "207aebe2be0af3d233a254d3d5e3b250230d6c99dacbfb1fa2b6971efa619281",
+      "bytes": 141
+    },
+    {
+      "member": "MLLM_DISTILL/numerical_retries.jsonl",
+      "sha256": "278ff0cfaf96d3124a75f348cd74af94fff380af1c3c047b044a9aef92ccb1ab",
+      "bytes": 582
+    },
+    {
+      "member": "MLLM_DISTILL/progress.json",
+      "sha256": "a533a980f0863cd63e73b1dd76b341524e59d61c67b0233b075732fc73e10917",
+      "bytes": 5570
+    },
+    {
+      "member": "MLLM_DISTILL/provenance.json",
+      "sha256": "9ae3acc29e544cc3cf2d43d212abb0e6e32c5d8668d7957827a0f297bbf03629",
+      "bytes": 3752
+    },
+    {
+      "member": "MLLM_DISTILL/source_only_lambda_validation.json",
+      "sha256": "92f2b8de02db2c1cdffaaac2ae751e0767d5d5fb9807d8b6758bb20a0164ab65",
+      "bytes": 1887
+    },
+    {
+      "member": "MLLM_DISTILL/source_validation.jsonl",
+      "sha256": "ceffa8878459be507679ad1842a2ba4aba9ea8c19501f1a93d5fd22ead29428c",
+      "bytes": 2592
+    },
+    {
+      "member": "MLLM_DISTILL/training_receipt.json",
+      "sha256": "a533a980f0863cd63e73b1dd76b341524e59d61c67b0233b075732fc73e10917",
+      "bytes": 5570
+    },
+    {
+      "member": "MLLM_DISTILL_admission_1793202408304034514.json",
+      "sha256": "bf7302f12667895519bf278a6b58a93b3fc450504873205710bcb2440b61d373",
+      "bytes": 2963
+    },
+    {
+      "member": "full_training_stdout.txt",
+      "sha256": "418060cc93b05104614073999b93aec2367f6a37add69b690e4f779c3ffe4678",
+      "bytes": 511396
+    },
     {
       "member": "interface_admission.json",
       "sha256": "e3303b6824d1ac2e1e19f7a43114f977529b7dbbd4586393c0b4fa2b7cd89982",
@@ -133,6 +198,11 @@
       "bytes": 169
     },
     {
+      "member": "smoke/metrics_train.jsonl",
+      "sha256": "f10f9dcaefb947728ced129300fbdb1e3e1e29bab98d7027ae1aabcad3093e7c",
+      "bytes": 3278
+    },
+    {
       "member": "smoke/model_log/log_rank0.txt",
       "sha256": "ecc2504f2e76d27bdb4a33c3df82284d8017df83722188ebcec9dbf69a9cbca1",
       "bytes": 141
@@ -173,6 +243,11 @@
       "bytes": 8634
     },
     {
+      "member": "smoke_v2/attempt_runtimes/1793202383050993438.json",
+      "sha256": "88be0e2f29b848d2ded5568d37261003d813d7c68169e2bc2ac5426bda81eb67",
+      "bytes": 227
+    },
+    {
       "member": "smoke_v2/config.json",
       "sha256": "e55f02fb3066e13cede8057f4840eb3174d764d64911bf760f797e14d8ad74cb",
       "bytes": 1223
@@ -183,24 +258,29 @@
       "bytes": 169
     },
     {
+      "member": "smoke_v2/metrics_train.jsonl",
+      "sha256": "405a1634d8ca076b82cfd9bef58d5e7ecd44e3e780473c20168758d3d3a3decb",
+      "bytes": 3381
+    },
+    {
       "member": "smoke_v2/model_log/log_rank0.txt",
-      "sha256": "dad12ea37582be59fb043426e4d461ffdaa85d30e28c850cd77fa96f8eb33dc9",
-      "bytes": 282
+      "sha256": "c35540a02ed76ebb9c9d0ed277eced73e86c3b6484546c49023aa95e1112fe30",
+      "bytes": 423
     },
     {
       "member": "smoke_v2/progress.json",
-      "sha256": "6241f3fe434278ab52cac7c02c075b8d174de77122e412b4ea18cff81256ddfc",
-      "bytes": 5108
+      "sha256": "4679f0fdb3db05e7b19b8832508972dd52eb04cffb3f84feba6022f1c1a1b55d",
+      "bytes": 5109
     },
     {
       "member": "smoke_v2/provenance.json",
-      "sha256": "f08e441a30f6994e1d03a5e58550d762251681fe71a88ac395498d1759eef26b",
+      "sha256": "b2da257009c5f40811af5d060ec9f8308e997acf5f614da6c6ef82cb380b89b0",
       "bytes": 3749
     },
     {
       "member": "smoke_v2/source_only_lambda_validation.json",
-      "sha256": "92f2b8de02db2c1cdffaaac2ae751e0767d5d5fb9807d8b6758bb20a0164ab65",
-      "bytes": 1887
+      "sha256": "609b058466d891048738163a824adfcc70c489ab141fed0382e221c511bb73b4",
+      "bytes": 1886
     },
     {
       "member": "smoke_v2/source_validation.jsonl",
@@ -209,8 +289,8 @@
     },
     {
       "member": "smoke_v2/training_receipt.json",
-      "sha256": "6241f3fe434278ab52cac7c02c075b8d174de77122e412b4ea18cff81256ddfc",
-      "bytes": 5108
+      "sha256": "4679f0fdb3db05e7b19b8832508972dd52eb04cffb3f84feba6022f1c1a1b55d",
+      "bytes": 5109
     },
     {
       "member": "smoke_v2_admission.json",
@@ -223,9 +303,19 @@
       "bytes": 3021
     },
     {
+      "member": "smoke_v2_admission_1793202383050993438.json",
+      "sha256": "bf7302f12667895519bf278a6b58a93b3fc450504873205710bcb2440b61d373",
+      "bytes": 2963
+    },
+    {
       "member": "smoke_v2_resume_stdout.txt",
       "sha256": "caa3f35229837f4734b6e1d6a2fd17a051595096752a2e22c8f4ae8b81aaac9b",
       "bytes": 9468
+    },
+    {
+      "member": "smoke_v2_resume_v2_stdout.txt",
+      "sha256": "07bea1986d633f4853fb0c291e24cf26cfe8aa75755821231e081e7362b7a31a",
+      "bytes": 7791
     },
     {
       "member": "smoke_v2_stdout.txt",

@@ -11,7 +11,8 @@
 复用冻结P1 A的8381条原始软概率/Yes-No logits，不重复调用MLLM，不用P1阈值筛选或把未采样候选当NEG。
 [预注册协议](docs/MLLM_DISTILLATION_PROTOCOL.md)、[软标签审计](docs/MLLM_PSEUDO_LABEL_AUDIT.md)、
 [结果状态](docs/MLLM_DISTILLATION_RESULTS.md)、[真实失败记录](docs/MLLM_DISTILLATION_FAILURE_ANALYSIS.md)。
-0step真实接口与修正后的6step训练smoke已通过，正式学生完整指标尚未完成；不把工程通过写成精度提升。
+0step接口、修正后的6step训练smoke、真实恢复及完整8973步学生训练已完成，目标GT打开0。
+全部8381教师配对和17源视频/8973源窗口均已覆盖；完整学生RMOT指标尚待推理和独立评测，不把拟合损失降低写成精度提升。
 
 ## 已完成：P1 冻结视觉语义教师可靠性
 

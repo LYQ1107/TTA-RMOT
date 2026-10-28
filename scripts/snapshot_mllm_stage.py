@@ -26,7 +26,16 @@ def snapshot():
         records[stage]=json.loads((folder/'training_receipt.json').read_text())
     if records['interface_v6']['optimizer_updates'] or records['smoke_v2']['steps_per_cycle']!=8973:
         raise ValueError('invalid interface/source-complete smoke')
-    shutil.copy2(PSEUDO/'seal.json',assets/'pseudo_seal.json')
+    sealed_copy=assets/'pseudo_seal.json'
+    if not sealed_copy.exists():shutil.copy2(PSEUDO/'seal.json',sealed_copy)
+    elif file_sha(sealed_copy)!=file_sha(PSEUDO/'seal.json'):raise ValueError('preserve the previously published immutable pseudo seal')
+    full=RUN/'MLLM_DISTILL';training=PUBLIC/'training'
+    if (full/'training_receipt.json').exists():
+        training.mkdir(exist_ok=True)
+        for name in ('training_receipt.json','provenance.json','config.json','source_validation.jsonl','source_only_lambda_validation.json','initial_frozen_equivalence.json','teacher_fit_summary.json','teacher_fit_after_training.jsonl.gz'):
+            if (full/name).exists():shutil.copy2(full/name,training/name)
+        with (full/'metrics_train.jsonl').open('rb') as src,(training/'metrics_train.jsonl.gz').open('wb') as dst:
+            with gzip.GzipFile(filename='',fileobj=dst,mode='wb',mtime=0) as compressed:shutil.copyfileobj(src,compressed)
     archives=[]
     for name in ('manifest.jsonl','soft_labels.jsonl','runtime.jsonl','windows.jsonl'):
         target=assets/(name+'.gz')
@@ -35,8 +44,8 @@ def snapshot():
         with gzip.open(target,'rb') as stream:
             if hashlib.sha256(stream.read()).hexdigest()!=file_sha(PSEUDO/name):raise ValueError('compressed cache copy changed')
         archives.append(dict(path=str(target.relative_to(ROOT)),compressed_sha256=file_sha(target),uncompressed_sha256=file_sha(PSEUDO/name)))
-    files=sorted(p for p in RUN.rglob('*') if p.is_file() and (p.suffix=='.txt' or p.name in
-        ('training_receipt.json','provenance.json','config.json','source_only_lambda_validation.json','initial_frozen_equivalence.json','progress.json','source_validation.jsonl') or
+    files=sorted(p for p in RUN.rglob('*') if p.is_file() and p.name not in ('gt.txt','predict.txt','full_evaluation_launcher_stdout.txt') and (p.suffix=='.txt' or p.name in
+        ('training_receipt.json','provenance.json','config.json','source_only_lambda_validation.json','initial_frozen_equivalence.json','progress.json','source_validation.jsonl','metrics_train.jsonl','numerical_retries.jsonl') or
         'attempt_runtimes' in p.parts or 'admission' in p.name and p.suffix=='.json'))
     logs=PUBLIC/'logs';logs.mkdir(exist_ok=True);archive=logs/'complete_training_and_smoke_text_logs.tar.gz';members=[]
     with tarfile.open(archive,'w:gz') as tar:
@@ -49,7 +58,7 @@ def snapshot():
             if hashlib.sha256(tar.extractfile(r['member']).read()).hexdigest()!=r['sha256']:raise ValueError('log archive mismatch')
     atomic_json(logs/'archive_index.json',dict(path=str(archive.relative_to(ROOT)),sha256=file_sha(archive),members=members,
         includes_failed_and_revoked_attempts=True,excludes=['images','weights','GT','raw SQLite','source label plans']))
-    result=dict(status='INTERFACE_AND_VALID_STUDENT_SMOKE_COMPLETE',updated_at_utc=datetime.now(timezone.utc).isoformat(),
+    result=dict(status='COMPLETE_TRAINING_AWAITING_FULL_EVALUATION' if (full/'training_receipt.json').exists() else 'INTERFACE_AND_VALID_STUDENT_SMOKE_COMPLETE',updated_at_utc=datetime.now(timezone.utc).isoformat(),
         formal_training_complete=(RUN/'MLLM_DISTILL/training_receipt.json').exists(),
         target_protocol='25Val same-set transductive development diagnosis, NOT Train-to-Val',
         stage_receipts={k:dict(status=v['status'],wall_seconds=v['wall_seconds'],target_GT_open_attempts=v['target_GT_open_attempts']) for k,v in records.items()},

@@ -132,6 +132,8 @@ def run(config,output,*,scope='smoke',resume=False):
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     attempts=protect_target_annotations()
     pseudo=MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
+    if config['protocol']['name']!='TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC' or config['protocol']['target_split']!=pseudo.split:
+        raise ValueError('this validated Val route cannot be relabelled as formal Train-to-Val')
     if file_sha(CHECKPOINT)!=SOURCE_SHA:raise ValueError('official V2 checkpoint changed')
     seed=config['protocol']['seed'];random.seed(seed);np.random.seed(seed);torch.manual_seed(seed)
     device=torch.device('cuda:0');props=torch.cuda.get_device_properties(device)
