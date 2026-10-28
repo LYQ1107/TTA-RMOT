@@ -12,7 +12,9 @@
 [预注册协议](docs/MLLM_DISTILLATION_PROTOCOL.md)、[软标签审计](docs/MLLM_PSEUDO_LABEL_AUDIT.md)、
 [结果状态](docs/MLLM_DISTILLATION_RESULTS.md)、[真实失败记录](docs/MLLM_DISTILLATION_FAILURE_ANALYSIS.md)。
 0step接口、修正后的6step训练smoke、真实恢复及完整8973步学生训练已完成，目标GT打开0。
-全部8381教师配对和17源视频/8973源窗口均已覆盖；完整学生RMOT指标尚待推理和独立评测，不把拟合损失降低写成精度提升。
+全部8381教师配对和17源视频/8973源窗口均已覆盖；完整25视频/425表达官方评测已完成。
+HOTA：Frozen **8.2180**、Source-only **7.4352**、Naive MLLM **8.0327**。
+全量候选AUROC0.6502→0.7549，但HOTA未超过Frozen、双向数量对照不支持稳定排序收益；不把loss或AP改善写成RMOT成功。
 
 ## 已完成：P1 冻结视觉语义教师可靠性
 

@@ -37,3 +37,11 @@ def test_cache_identity_includes_video_query_frame_and_track():
     for key,value in [('video_id','v2'),('query_id','q2'),('frame_id',4),('track_id',8),('bbox_hash','b2')]:
         assert digest(item)!=digest(dict(item,**{key:value}))
     assert identity(item)==('v1','q',3,7)
+
+
+def test_offline_calibration_uses_fixed_bins_without_fitting():
+    from scripts.analyze_mllm_distillation import calibration
+    result=calibration([0.,1.,.5],[False,True,True])
+    assert result['Brier']==pytest.approx(1/12)
+    assert result['ECE10']==pytest.approx(1/6)
+    assert sum(r['n'] for r in result['bins'])==3

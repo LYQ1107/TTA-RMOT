@@ -1,0 +1,66 @@
+{
+  "status": "TRAINING_OBJECTIVE_AND_NO_GT_TEACHER_FIT_DIAGNOSIS",
+  "optimizer_steps": 8973,
+  "finite_nonzero_KD_gradient_steps": 8973,
+  "source_KD_gradient_conflict_fraction": 0.5200044578178982,
+  "source_KD_gradient_cosine_quantiles": [
+    -0.0780721540897704,
+    -0.0021232499052753653,
+    0.0679786295957314
+  ],
+  "KD_to_source_gradient_ratio_quantiles": [
+    0.5741276536731258,
+    60.210835283851345,
+    4246.998428192894
+  ],
+  "fit_to_actual_teacher_training_anchors": {
+    "all_valid": {
+      "samples": 8381,
+      "frozen": {
+        "MSE": 0.1290643991517847,
+        "BCE": 1.3409221054565301,
+        "agreement_with_teacher_above_half": 0.839875909795967,
+        "student_POS_rate": 0.05393151175277413
+      },
+      "latest_student": {
+        "MSE": 0.0781070493904299,
+        "BCE": 0.34580035965296696,
+        "agreement_with_teacher_above_half": 0.8837847512230044,
+        "student_POS_rate": 0.01049994034124806
+      }
+    },
+    "teacher_p_above_half": {
+      "samples": 980,
+      "frozen": {
+        "MSE": 0.772774241341168,
+        "BCE": 8.584606254535293,
+        "agreement_with_teacher_above_half": 0.04591836734693878,
+        "student_POS_rate": 0.04591836734693878
+      },
+      "latest_student": {
+        "MSE": 0.5416229561849847,
+        "BCE": 1.8059079186943776,
+        "agreement_with_teacher_above_half": 0.04795918367346939,
+        "student_POS_rate": 0.04795918367346939
+      }
+    },
+    "teacher_p_below_or_equal_half": {
+      "samples": 7401,
+      "frozen": {
+        "MSE": 0.04382785742153262,
+        "BCE": 0.3817530112669356,
+        "agreement_with_teacher_above_half": 0.9450074314281853,
+        "student_POS_rate": 0.05499256857181462
+      },
+      "latest_student": {
+        "MSE": 0.01673080446965383,
+        "BCE": 0.1524608909513615,
+        "agreement_with_teacher_above_half": 0.9944602080799891,
+        "student_POS_rate": 0.005539791920010809
+      }
+    }
+  },
+  "fit_checkpoint": "fixed latest8973, not GT-selected; primary evaluated checkpoint remains source-val CE selected",
+  "no_target_GT_used": true,
+  "source_validation": "a4f447e7cb7bdfc2800358b9d90b863efaf627344a8430566945f1dd75cc9a54"
+}

@@ -1,5 +1,15 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-29 — Complete first naive frozen-MLLM distillation,25Val diagnosis
+
+- User explicitly authorizes25Val first because40Train official MOT is absent; not Train→Val, unseen-video generalization or onlineTTA. P1/oldUDA/sixTTA bytes preserved.
+- Actual seed17 student8973steps complete; all17source videos/8973windows and25target videos/425queries/8381valid soft teacherpairs covered,35348related KD exposures. Source-val-only selectedstep8973, frozenparametersunchanged, targetGTopens0, no MLLM/testupdates during inference.
+- Four whole-video workers on GPUs1/0/3/4 completed25/425, officialTrackEval five methods exit0. Frozen8.2180, Source7.4352, MLLM8.0327; dualcount Frozen@MLLM7.9355 andMLLM@Frozen8.0166. No HOTA improvement overFrozen; do not start Ours or extendtraining.
+- CandidateAUROC.650204→.754863/AP.093446→.160565, conditionalGT-presentAUROC.539649→.660466, and nonanchor gains exist. One-to-oneGTRecall@1/.3/.5 is not improved consistently. Loss decrease is not semantic success; teacher-positive fit and count/ranking/association are key failure modes.
+- OfflineIoU05 recovered7797/lost7696GTobservations; newFProws16147, removed85655,7existingrows becomeFP byrematching. Counts differ from officialtemporalCLEAR, not hidden changes to metrics.
+- Train1544.73s/.42909GPUh, fourworker inference3357.92s/.93276GPUh with1073.20s schedulerwall. Teacher cache reuse0newcalls but inherits8381real P1 calls/483.78amortizedforwardseconds, not a zero-cost teacher system.
+- Complete failure attribution, all predictions/receipts/logs and actual cost provenance before proposing one-variable nextdiagnostic. NoDanceGT threshold/prompt/checkpoint tuning, no automatic E4–E7 or second-domain expansion.
+
 ## 2026-10-26 — User-authorized25Val transductive pilot: real smoke and Frozen gate
 
 - User explicitly chooses25Val first, not Train. Keep original40Train asset limitation separate; label all new results

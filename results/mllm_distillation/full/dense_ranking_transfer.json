@@ -1,0 +1,211 @@
+{
+  "FROZEN": {
+    "all425_official": {
+      "candidate_pairs": 3588445,
+      "positive_candidates": 200619,
+      "AUROC": 0.650203661381795,
+      "AP": 0.09344576809145812,
+      "selected_count": 99704
+    },
+    "GT_present_frame_queries": {
+      "candidate_pairs": 353398,
+      "positive_candidates": 200619,
+      "AUROC": 0.5396490056410591,
+      "AP": 0.6402285647459579,
+      "selected_count": 12259
+    },
+    "direct_teacher_pairs": {
+      "candidate_pairs": 8381,
+      "positive_candidates": 485,
+      "AUROC": 0.6441215178767273,
+      "AP": 0.10055662393069761,
+      "selected_count": 452
+    },
+    "direct_teacher_pairs_GT_present": {
+      "candidate_pairs": 761,
+      "positive_candidates": 485,
+      "AUROC": 0.5833930972658001,
+      "AP": 0.7292941115546322,
+      "selected_count": 46
+    },
+    "same_anchor_unasked_candidates": {
+      "candidate_pairs": 9877,
+      "positive_candidates": 534,
+      "AUROC": 0.5974476274773198,
+      "AP": 0.07311015180605297,
+      "selected_count": 227
+    },
+    "non_teacher_anchor_frames": {
+      "candidate_pairs": 3570187,
+      "positive_candidates": 199600,
+      "AUROC": 0.6503639615571966,
+      "AP": 0.09350838727877017,
+      "selected_count": 99025
+    },
+    "non_teacher_anchor_frames_GT_present": {
+      "candidate_pairs": 351788,
+      "positive_candidates": 199600,
+      "AUROC": 0.5397061705776786,
+      "AP": 0.6399981284500245,
+      "selected_count": 12205
+    },
+    "GT_recall_at_K_macro_all_GT_frames": {
+      "1": 0.1568034900739009,
+      "3": 0.43712094657689626,
+      "5": 0.6781478499372867
+    }
+  },
+  "SOURCE_REHEARSAL": {
+    "all425_official": {
+      "candidate_pairs": 3588445,
+      "positive_candidates": 200619,
+      "AUROC": 0.6413111532634016,
+      "AP": 0.09406632890286575,
+      "selected_count": 41211
+    },
+    "GT_present_frame_queries": {
+      "candidate_pairs": 353398,
+      "positive_candidates": 200619,
+      "AUROC": 0.5232266235393389,
+      "AP": 0.6340376635914193,
+      "selected_count": 5563
+    },
+    "direct_teacher_pairs": {
+      "candidate_pairs": 8381,
+      "positive_candidates": 485,
+      "AUROC": 0.6362770135472482,
+      "AP": 0.10221168015842193,
+      "selected_count": 203
+    },
+    "direct_teacher_pairs_GT_present": {
+      "candidate_pairs": 761,
+      "positive_candidates": 485,
+      "AUROC": 0.5697968026296131,
+      "AP": 0.7241192640612808,
+      "selected_count": 23
+    },
+    "same_anchor_unasked_candidates": {
+      "candidate_pairs": 9877,
+      "positive_candidates": 534,
+      "AUROC": 0.5845078792791254,
+      "AP": 0.07264807913319025,
+      "selected_count": 70
+    },
+    "non_teacher_anchor_frames": {
+      "candidate_pairs": 3570187,
+      "positive_candidates": 199600,
+      "AUROC": 0.641482925588903,
+      "AP": 0.09411807873620236,
+      "selected_count": 40938
+    },
+    "non_teacher_anchor_frames_GT_present": {
+      "candidate_pairs": 351788,
+      "positive_candidates": 199600,
+      "AUROC": 0.5232851775876772,
+      "AP": 0.6337968487889475,
+      "selected_count": 5536
+    },
+    "GT_recall_at_K_macro_all_GT_frames": {
+      "1": 0.15127873614002751,
+      "3": 0.42974673332831564,
+      "5": 0.670901552527375
+    }
+  },
+  "MLLM_DISTILL": {
+    "all425_official": {
+      "candidate_pairs": 3588445,
+      "positive_candidates": 200619,
+      "AUROC": 0.754862801733495,
+      "AP": 0.16056468068245833,
+      "selected_count": 30304
+    },
+    "GT_present_frame_queries": {
+      "candidate_pairs": 353398,
+      "positive_candidates": 200619,
+      "AUROC": 0.6604660075635737,
+      "AP": 0.6994094050527343,
+      "selected_count": 12064
+    },
+    "direct_teacher_pairs": {
+      "candidate_pairs": 8381,
+      "positive_candidates": 485,
+      "AUROC": 0.7438323201621074,
+      "AP": 0.19274278422561902,
+      "selected_count": 88
+    },
+    "direct_teacher_pairs_GT_present": {
+      "candidate_pairs": 761,
+      "positive_candidates": 485,
+      "AUROC": 0.6052554908112954,
+      "AP": 0.7271427821429498,
+      "selected_count": 46
+    },
+    "same_anchor_unasked_candidates": {
+      "candidate_pairs": 9877,
+      "positive_candidates": 534,
+      "AUROC": 0.7180398231205962,
+      "AP": 0.1327217023693361,
+      "selected_count": 50
+    },
+    "non_teacher_anchor_frames": {
+      "candidate_pairs": 3570187,
+      "positive_candidates": 199600,
+      "AUROC": 0.754986559066664,
+      "AP": 0.16056121564010364,
+      "selected_count": 30166
+    },
+    "non_teacher_anchor_frames_GT_present": {
+      "candidate_pairs": 351788,
+      "positive_candidates": 199600,
+      "AUROC": 0.6606265687998069,
+      "AP": 0.699259167890934,
+      "selected_count": 12001
+    },
+    "GT_recall_at_K_macro_all_GT_frames": {
+      "1": 0.15153391595892046,
+      "3": 0.43823680752249694,
+      "5": 0.6714452958135163
+    }
+  },
+  "teacher": {
+    "candidate_pairs": 8381,
+    "positive_candidates": 485,
+    "AUROC": 0.9624242732846593,
+    "AP": 0.6041476558702003,
+    "selected_count": 8381,
+    "diagnostic_POS_threshold": 0.5,
+    "threshold_used_in_training": false,
+    "Accepted_POS_Precision": 0.42653061224489797,
+    "Positive_Discovery_Recall": 0.8618556701030928,
+    "diagnostic_below_half_GT_match_fraction": 0.009052830698554249,
+    "valid_supervised_pairs": 8381,
+    "explicit_hard_POS_labels_created": 0,
+    "explicit_hard_NEG_labels_created": 0,
+    "unasked_candidate_query_rows": 3580064,
+    "unasked_are_NOT_NEG": true,
+    "teacher_GT_coverage_all_video": 0.0019572694209587797,
+    "teacher_GT_coverage_at_fixed_anchors": 0.37749546279491836,
+    "GT_counts": {
+      "full_video_GT_observations": 212541,
+      "anchor_GT_observations": 1102,
+      "MOT_active_frame_GT_observations": 212541,
+      "MOT_recoverable_GT": 197385,
+      "sampled_recoverable_GT": 482,
+      "teacher_POS_GT_observations": 416
+    },
+    "warning": "official unmatched is not exhaustive semantic absence; p>.5 is offline diagnosis only, all valid soft probabilities trained"
+  },
+  "FP_row_and_rematching": {
+    "new_FP_prediction_rows": 16147,
+    "removed_FP_prediction_rows": 85655,
+    "assignment_FP_change": -69501,
+    "existing_rows_became_FP_due_to_rematching": 7,
+    "existing_rows_ceased_FP_due_to_rematching": 0,
+    "recovered_GT": 7797,
+    "lost_GT": 7696
+  },
+  "GT_recall_denominator_frame_queries": 42782,
+  "recall_definition": "macro one-to-one IoU05 GT recall including GT frames without MOT candidates",
+  "scopes_warning": "all425 official scoring vs GT-present conditional semantic scoring have different class prevalence; sparse teacher compared only on its actual8381pairs",
+  "GT_read_only_after_complete_student_seal": true
+}
