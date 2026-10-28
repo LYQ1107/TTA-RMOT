@@ -4,7 +4,16 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：P1 冻结视觉语义教师可靠性
+## 当前研究：普通 MLLM 软概率蒸馏
+
+独立分支`research/v2dance-mllm-naive-distill-20261028`，起点为封存P1公开提交`7026d82c`。
+按用户最新“40Train没有的话先用val”，当前仅做**25Val同集无标签蒸馏开发诊断**，不是Train→Val泛化。
+复用冻结P1 A的8381条原始软概率/Yes-No logits，不重复调用MLLM，不用P1阈值筛选或把未采样候选当NEG。
+[预注册协议](docs/MLLM_DISTILLATION_PROTOCOL.md)、[软标签审计](docs/MLLM_PSEUDO_LABEL_AUDIT.md)、
+[结果状态](docs/MLLM_DISTILLATION_RESULTS.md)、[真实失败记录](docs/MLLM_DISTILLATION_FAILURE_ANALYSIS.md)。
+0step真实接口与修正后的6step训练smoke已通过，正式学生完整指标尚未完成；不把工程通过写成精度提升。
+
+## 已完成：P1 冻结视觉语义教师可靠性
 
 新分支`research/v2dance-evidence-teacher-p1-20261026`。执行[预注册P1协议](docs/TEACHER_EXPERIMENT_PROTOCOL.md)：
 冻结Qwen3-VL/安全复用YesTrack，比较整句、等预算多问法、分属性和证据验证，**不训练学生**。

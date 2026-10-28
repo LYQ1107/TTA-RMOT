@@ -1,0 +1,12 @@
+# MLLM Distillation：阶段状态
+
+2026-10-28，25Val同集无标签蒸馏开发诊断，非Train→Val泛化。
+
+- E0：匹配Frozen完整211085候选库、25视频/425表达，历史官方HOTA8.2180；资产协议复核通过。
+- E1：历史Source-only HOTA7.4352。12项源域训练协议核对全部通过，可复用既有8973步、源val CE选择的checkpoint，成本不记为免费。
+- E2：独立MLLM_DISTILL已完成0step接口和修正后的6step真实smoke。正式训练和完整学生指标**尚未完成**。
+- E3：历史Mean Teacher HOTA8.2494，只作历史参考；3个target锚点/全MOT候选/EMA损失不同于当前5锚点/≤4候选/MLLM软监督，不能冒充同预算对照。
+
+不因工程通过或loss下降宣称科研成功。下一步只按预注册8973步正式E2和源域选择规则执行，
+随后完整425表达TrackEval、双向Count-Matched、排序/presence/标注与未标注位置归因。
+原40Train固定MOT仍缺，当前阶段完成也不等于正式Train→Val目标完成。

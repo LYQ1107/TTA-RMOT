@@ -1,0 +1,159 @@
+{
+  "source_only_reuse_eligible": true,
+  "checks": {
+    "source_init_SHA_matches": true,
+    "source_plan_SHA_matches": true,
+    "optimizer": true,
+    "adapter": true,
+    "seed": true,
+    "train_budget": true,
+    "selection": true,
+    "source_loss": true,
+    "no_target_optimization": true,
+    "all_optimizer_updates": true,
+    "frozen_and_GT_audit": true,
+    "checkpoint_SHA": true
+  },
+  "source_train_windows": 8973,
+  "source_videos": 17,
+  "source_coverage": [
+    {
+      "video_id": "0000",
+      "provided_expressions": 596,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0001",
+      "provided_expressions": 614,
+      "eligible_GT_tracks": 93,
+      "sampled_GT_tracks": 93,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0002",
+      "provided_expressions": 449,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0003",
+      "provided_expressions": 442,
+      "eligible_GT_tracks": 8,
+      "sampled_GT_tracks": 8,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0004",
+      "provided_expressions": 541,
+      "eligible_GT_tracks": 31,
+      "sampled_GT_tracks": 31,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0006",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0007",
+      "provided_expressions": 711,
+      "eligible_GT_tracks": 55,
+      "sampled_GT_tracks": 55,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0008",
+      "provided_expressions": 620,
+      "eligible_GT_tracks": 21,
+      "sampled_GT_tracks": 21,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0009",
+      "provided_expressions": 605,
+      "eligible_GT_tracks": 80,
+      "sampled_GT_tracks": 80,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0010",
+      "provided_expressions": 572,
+      "eligible_GT_tracks": 15,
+      "sampled_GT_tracks": 15,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0012",
+      "provided_expressions": 339,
+      "eligible_GT_tracks": 3,
+      "sampled_GT_tracks": 3,
+      "queries_without_retrievable_source_positive": 9
+    },
+    {
+      "video_id": "0014",
+      "provided_expressions": 361,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0015",
+      "provided_expressions": 478,
+      "eligible_GT_tracks": 19,
+      "sampled_GT_tracks": 19,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0016",
+      "provided_expressions": 505,
+      "eligible_GT_tracks": 22,
+      "sampled_GT_tracks": 22,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0017",
+      "provided_expressions": 353,
+      "eligible_GT_tracks": 9,
+      "sampled_GT_tracks": 9,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0018",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 18,
+      "sampled_GT_tracks": 18,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0020",
+      "provided_expressions": 474,
+      "eligible_GT_tracks": 113,
+      "sampled_GT_tracks": 113,
+      "queries_without_retrievable_source_positive": 0
+    }
+  ],
+  "source_only_checkpoint": {
+    "checkpoint": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/checkpoint_best_source_selected.pt",
+    "checkpoint_sha256": "5bc677c2b945f45b08ad961a4e8a3da724826d95619396d77988806d0a00d6c4",
+    "selected_step": 7750,
+    "source_val_CE": 0.9631536888555274,
+    "selection": "SOURCE_VAL_CE_ONLY"
+  },
+  "source_only_existing_results": "/data2/user/FlexHook-TTA/results/uda/full/SOURCE_REHEARSAL",
+  "note": "SOURCE_REHEARSAL performs no target optimization. Same source code/plan/seed/initialization/optimizer/capacity/selection/steps; retain original result and cost, no relabelled retraining.",
+  "mean_teacher_use": "HISTORICAL_REFERENCE_NOT_MATCHED_MLLM_OR_TARGET_SAMPLING_BUDGET",
+  "mean_teacher_differences": [
+    "EMA teacher, not external MLLM",
+    "3 target anchors per query vs current5",
+    "all MOT candidates vs current<=4 sampled candidates",
+    "different target losses and supervision/call budget"
+  ],
+  "Frozen_complete_bank_baseline_HOTA": 8.218,
+  "Frozen_protocol": "complete211085officialMOT observations, sourceV2, FP32 last-layer margin>0,425expressions",
+  "target_GT_open_attempts": []
+}

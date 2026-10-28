@@ -1,0 +1,19 @@
+method: MLLM_DISTILL
+protocol:
+  name: TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC
+  source_domain: refer_kitti_v2
+  target_domain: refer_dance
+  target_split: val
+  evaluation_split: same_val_development_only_not_Train_to_Val
+  seed: 17
+  test_time_update: false
+data:
+  source_train_manifest: manifests/source_kitti_v2_train.jsonl
+  source_val_manifest: manifests/source_kitti_v2_val.jsonl
+  pseudo_directory: /data2/user/TTA-RMOT-assets/mllm-distill/val_pseudo_v1
+adapter: {type: lora, rank: 4, layers: [-2, -1]}
+optimizer: {name: adamw, lr: 0.00005, weight_decay: 0.0001, grad_clip: 1.0}
+train: {coverage_cycles: 1, amp: true, save_every_steps: 250, source_target_batch_ratio: [1, 1]}
+selection: source_val_CE_only
+loss: {source_ce: 1.0, target_kd: 1.0}
+teacher: {model: Qwen/Qwen3-VL-2B-Instruct, revision: 89644892e4d85e24eaac8bacfd4f463576704203, condition: T0, raw_soft_probability: true, confidence_screening: false}
