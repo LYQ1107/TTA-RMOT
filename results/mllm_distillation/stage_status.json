@@ -1,7 +1,7 @@
 {
-  "status": "COMPLETE_TRAINING_AWAITING_FULL_EVALUATION",
-  "updated_at_utc": "2026-10-28T16:20:23.461079+00:00",
-  "formal_training_complete": true,
+  "status": "COMPLETE_25VAL_FIRST_ROUND_AND_FAILURE_ATTRIBUTION",
+  "updated_at_utc": "2026-10-28T16:53:38.903922+00:00",
+  "student_fixed_coverage_training_complete": true,
   "target_protocol": "25Val same-set transductive development diagnosis, NOT Train-to-Val",
   "stage_receipts": {
     "interface_v6": {
@@ -37,7 +37,12 @@
       "uncompressed_sha256": "2389531bfa59a046183bdf583d62dc1d6de75a097192f3263562bb395dc5e266"
     }
   ],
-  "log_archive_members": 64,
+  "log_archive_members": 68,
   "run_root": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1",
-  "large_checkpoints_retained_on_server": true
+  "large_checkpoints_retained_on_server": true,
+  "full425_evaluation_complete": true,
+  "original_formal40Train_to25Val_complete": false,
+  "new_full_experiment_started": false,
+  "scientific_verdict": "NO_GO_FIRST_NAIVE_BASELINE_COMPLETE_FAILURE_DIAGNOSIS",
+  "delivery_index": "logs/full_evaluation_archive_index.json"
 }

@@ -1,0 +1,28 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "root": "/data2/user/FlexHook-TTA",
+  "branch": "research/v2dance-mllm-naive-distill-20261028",
+  "protocol": "25Val same-set unlabeled offline diagnosis, NOT40Train-to25Val",
+  "checkpoints": {
+    "checkpoint_best_source_selected.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/MLLM_DISTILL/checkpoint_best_source_selected.pt",
+      "sha256": "eaa6b8477cc314efe813fd56a4bd1f70e64615e152b184ba67774548a5f47954",
+      "bytes": 996925669
+    },
+    "checkpoint_latest.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/MLLM_DISTILL/checkpoint_latest.pt",
+      "sha256": "03a8cbaf57698177f72439e74ea0e2243f62aeabfe50ca46f62e29b1b6d12bfd",
+      "bytes": 996916347
+    }
+  },
+  "pseudo_root": "/data2/user/TTA-RMOT-assets/mllm-distill/val_pseudo_v1",
+  "immutable_pseudo_seal_sha256": "73494a2d79ea4560c9f9d6ddb2d48e25027766b9f5e562516af11966d42eeb93",
+  "training_root": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/MLLM_DISTILL",
+  "evaluation_root": "/data2/user/FlexHook-TTA/results/runs/mllm_val_evaluation_20261028_v1",
+  "python": "/home/szgx/anaconda3/envs/dfot/bin/python",
+  "resume_training_command": "python scripts/train_mllm_distill.py --scope full --resume --diagnostic-val-authorized --output /data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/MLLM_DISTILL",
+  "resume_evaluation_command": "python scripts/launch_mllm_evaluation.py --checkpoint /data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/MLLM_DISTILL/checkpoint_best_source_selected.pt --output-root /data2/user/FlexHook-TTA/results/runs/mllm_val_evaluation_20261028_v1",
+  "warning": "Both runs are already complete. Resume preserves completed work; do not rerun or extend the fixed8973 budget.",
+  "incomplete_original_formal_assets": "40Train matched official DETR+NeuralSORT prediction files are absent; no GT/alternate detector substitute",
+  "current_gpu_jobs": "all current-stage training and four evaluation workers exited0; no new GPU job started"
+}

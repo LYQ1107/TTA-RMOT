@@ -59,7 +59,7 @@ def snapshot():
     atomic_json(logs/'archive_index.json',dict(path=str(archive.relative_to(ROOT)),sha256=file_sha(archive),members=members,
         includes_failed_and_revoked_attempts=True,excludes=['images','weights','GT','raw SQLite','source label plans']))
     result=dict(status='COMPLETE_TRAINING_AWAITING_FULL_EVALUATION' if (full/'training_receipt.json').exists() else 'INTERFACE_AND_VALID_STUDENT_SMOKE_COMPLETE',updated_at_utc=datetime.now(timezone.utc).isoformat(),
-        formal_training_complete=(RUN/'MLLM_DISTILL/training_receipt.json').exists(),
+        student_fixed_coverage_training_complete=(RUN/'MLLM_DISTILL/training_receipt.json').exists(),
         target_protocol='25Val same-set transductive development diagnosis, NOT Train-to-Val',
         stage_receipts={k:dict(status=v['status'],wall_seconds=v['wall_seconds'],target_GT_open_attempts=v['target_GT_open_attempts']) for k,v in records.items()},
         compressed_cache_copies=archives,log_archive_members=len(members),run_root=str(RUN),large_checkpoints_retained_on_server=True)

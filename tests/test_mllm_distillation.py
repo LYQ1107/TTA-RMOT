@@ -45,3 +45,18 @@ def test_offline_calibration_uses_fixed_bins_without_fitting():
     assert result['Brier']==pytest.approx(1/12)
     assert result['ECE10']==pytest.approx(1/6)
     assert sum(r['n'] for r in result['bins'])==3
+
+
+def test_delivery_uses_original_reference_receipt_without_fabricating_one(tmp_path,monkeypatch):
+    import json
+    import scripts.package_mllm_delivery as delivery
+    from scripts.package_mllm_delivery import original_receipt,archive
+    from flex_tta.runtime.pf_receipts import file_sha
+    parent=tmp_path/'parent.json';parent.write_text('{"status":"complete"}\n')
+    pair=tmp_path/'reference';pair.mkdir()
+    (pair/'reference_receipt.json').write_text(json.dumps(dict(parent_receipt=str(parent),parent_receipt_sha256=file_sha(parent))))
+    source=original_receipt(pair)
+    assert source==parent and not (pair/'completion.json').exists()
+    monkeypatch.setattr(delivery,'ROOT',tmp_path)
+    result=archive(tmp_path/'receipts.tar.gz',[(source,'completion.json')])
+    assert result['members'][0]['sha256']==file_sha(parent)

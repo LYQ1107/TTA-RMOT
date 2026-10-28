@@ -15,6 +15,9 @@
 全部8381教师配对和17源视频/8973源窗口均已覆盖；完整25视频/425表达官方评测已完成。
 HOTA：Frozen **8.2180**、Source-only **7.4352**、Naive MLLM **8.0327**。
 全量候选AUROC0.6502→0.7549，但HOTA未超过Frozen、双向数量对照不支持稳定排序收益；不把loss或AP改善写成RMOT成功。
+完整[科研判决](docs/FINAL_SCIENTIFIC_VERDICT.md)、[结果与成本](docs/MLLM_DISTILLATION_RESULTS.md)、
+[5组425预测/收据及日志索引](results/mllm_distillation/logs/full_evaluation_archive_index.json)、
+[服务器恢复路径](results/mllm_distillation/recovery_index.json)。当前阶段已停止，不启动E4–E7或追加长训。
 
 ## 已完成：P1 冻结视觉语义教师可靠性
 

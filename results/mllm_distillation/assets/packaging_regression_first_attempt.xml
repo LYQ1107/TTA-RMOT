@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="23" time="4.777" timestamp="2026-10-29T00:53:48.261791+08:00" hostname="szgx-c10u14-r5500g5-a800-23"><testcase classname="tests.test_mllm_distillation" name="test_soft_BCE_matches_independent_binary_probability_and_gradient" time="0.329" /><testcase classname="tests.test_mllm_distillation" name="test_unlabeled_candidates_have_zero_loss_and_no_default_NEG" time="0.002" /><testcase classname="tests.test_mllm_distillation" name="test_multiple_positive_people_do_not_compete_in_softmax" time="0.008" /><testcase classname="tests.test_mllm_distillation" name="test_invalid_probability_is_not_repaired_into_negative[nan]" time="0.002" /><testcase classname="tests.test_mllm_distillation" name="test_invalid_probability_is_not_repaired_into_negative[-0.1]" time="0.002" /><testcase classname="tests.test_mllm_distillation" name="test_invalid_probability_is_not_repaired_into_negative[1.01]" time="0.001" /><testcase classname="tests.test_mllm_distillation" name="test_cache_identity_includes_video_query_frame_and_track" time="0.001" /><testcase classname="tests.test_mllm_distillation" name="test_offline_calibration_uses_fixed_bins_without_fitting" time="0.373" /><testcase classname="tests.test_mllm_distillation" name="test_delivery_uses_original_reference_receipt_without_fabricating_one" time="0.010"><failure message="ValueError: '/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0/receipts.tar.gz' is not in the subpath of '/data2/user/FlexHook-TTA' OR one path is relative and the other is absolute.">tmp_path = PosixPath('/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0')
+
+    def test_delivery_uses_original_reference_receipt_without_fabricating_one(tmp_path):
+        import json
+        from scripts.package_mllm_delivery import original_receipt,archive
+        from flex_tta.runtime.pf_receipts import file_sha
+        parent=tmp_path/'parent.json';parent.write_text('{"status":"complete"}\n')
+        pair=tmp_path/'reference';pair.mkdir()
+        (pair/'reference_receipt.json').write_text(json.dumps(dict(parent_receipt=str(parent),parent_receipt_sha256=file_sha(parent))))
+        source=original_receipt(pair)
+        assert source==parent and not (pair/'completion.json').exists()
+&gt;       result=archive(tmp_path/'receipts.tar.gz',[(source,'completion.json')])
+
+tests/test_mllm_distillation.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/package_mllm_delivery.py:42: in archive
+    return dict(path=str(path.relative_to(ROOT)),sha256=file_sha(path),bytes=path.stat().st_size,members=members)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0/receipts.tar.gz')
+other = (PosixPath('/data2/user/FlexHook-TTA'),)
+
+    def relative_to(self, *other):
+        """Return the relative path to another path identified by the passed
+        arguments.  If the operation is not possible (because this is not
+        a subpath of the other path), raise ValueError.
+        """
+        # For the purpose of this method, drive and root are considered
+        # separate parts, i.e.:
+        #   Path('c:/').relative_to('c:')  gives Path('/')
+        #   Path('c:/').relative_to('/')   raise ValueError
+        if not other:
+            raise TypeError("need at least one argument")
+        parts = self._parts
+        drv = self._drv
+        root = self._root
+        if root:
+            abs_parts = [drv, root] + parts[1:]
+        else:
+            abs_parts = parts
+        to_drv, to_root, to_parts = self._parse_args(other)
+        if to_root:
+            to_abs_parts = [to_drv, to_root] + to_parts[1:]
+        else:
+            to_abs_parts = to_parts
+        n = len(to_abs_parts)
+        cf = self._flavour.casefold_parts
+        if (root or drv) if n == 0 else cf(abs_parts[:n]) != cf(to_abs_parts):
+            formatted = self._format_parsed_parts(to_drv, to_root, to_parts)
+&gt;           raise ValueError("{!r} is not in the subpath of {!r}"
+                    " OR one path is relative and the other is absolute."
+                             .format(str(self), str(formatted)))
+E           ValueError: '/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0/receipts.tar.gz' is not in the subpath of '/data2/user/FlexHook-TTA' OR one path is relative and the other is absolute.
+
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/pathlib.py:818: ValueError</failure></testcase><testcase classname="tests.test_teacher_probe" name="test_parse_three_required_conditions_and_unknown" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_sampler_deduplicates_and_fills_causal_candidates" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_no_probability_alone_can_make_verified_positive" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_cache_raw_logits_survive_reopen" time="0.005" /><testcase classname="tests.test_teacher_probe" name="test_source_stage_includes_shifted_previous_history" time="0.002" /><testcase classname="tests.test_teacher_probe" name="test_offline_weighted_metrics_ties_and_zero_acceptance" time="0.002" /><testcase classname="tests.test_teacher_probe" name="test_seal_rejects_incomplete_or_GT_touched_receipt" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_sparse_teacher_coverage_counts_distinct_GT_not_duplicate_boxes" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_FP_new_rows_are_distinct_from_existing_row_rematching" time="0.001" /><testcase classname="tests.test_teacher_probe" name="test_four_shards_keep_complete_videos_and_all_fixed_pairs" time="0.005" /><testcase classname="tests.test_teacher_probe" name="test_teacher_shard_merge_preserves_global_order_and_receipts" time="0.005" /><testcase classname="tests.test_teacher_probe" name="test_landlock_denies_unstaged_payload_and_stage_write" time="0.051" /><testcase classname="tests.test_uda_evaluation" name="test_batched_distinct_queries_match_isolated_and_restore_state" time="0.006" /><testcase classname="tests.test_uda_evaluation" name="test_countmatched_can_select_zero_or_multiple_without_gt" time="0.003" /></testsuite></testsuites>

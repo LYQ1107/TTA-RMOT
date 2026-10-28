@@ -53,6 +53,18 @@
       "1": 0.1568034900739009,
       "3": 0.43712094657689626,
       "5": 0.6781478499372867
+    },
+    "GT_recall_at_K_by_direct_anchor_frame": {
+      "non_teacher_anchor": {
+        "1": 0.1567156996218704,
+        "3": 0.43706876694357993,
+        "5": 0.6781620565843441
+      },
+      "teacher_anchor": {
+        "1": 0.17617606811289752,
+        "3": 0.4486353424510116,
+        "5": 0.6750128919509242
+      }
     }
   },
   "SOURCE_REHEARSAL": {
@@ -109,6 +121,18 @@
       "1": 0.15127873614002751,
       "3": 0.42974673332831564,
       "5": 0.670901552527375
+    },
+    "GT_recall_at_K_by_direct_anchor_frame": {
+      "non_teacher_anchor": {
+        "1": 0.1512598302002116,
+        "3": 0.42967889676713616,
+        "5": 0.6709337484941995
+      },
+      "teacher_anchor": {
+        "1": 0.1554506795118611,
+        "3": 0.4447161183245335,
+        "5": 0.6637969202427243
+      }
     }
   },
   "MLLM_DISTILL": {
@@ -165,6 +189,18 @@
       "1": 0.15153391595892046,
       "3": 0.43823680752249694,
       "5": 0.6714452958135163
+    },
+    "GT_recall_at_K_by_direct_anchor_frame": {
+      "non_teacher_anchor": {
+        "1": 0.15142671787548798,
+        "3": 0.4382061874465864,
+        "5": 0.6714240971056656
+      },
+      "teacher_anchor": {
+        "1": 0.17518914484618145,
+        "3": 0.44499369049329734,
+        "5": 0.6761231806259796
+      }
     }
   },
   "teacher": {
@@ -172,7 +208,7 @@
     "positive_candidates": 485,
     "AUROC": 0.9624242732846593,
     "AP": 0.6041476558702003,
-    "selected_count": 8381,
+    "selected_count": 980,
     "diagnostic_POS_threshold": 0.5,
     "threshold_used_in_training": false,
     "Accepted_POS_Precision": 0.42653061224489797,
@@ -191,9 +227,95 @@
       "MOT_active_frame_GT_observations": 212541,
       "MOT_recoverable_GT": 197385,
       "sampled_recoverable_GT": 482,
-      "teacher_POS_GT_observations": 416
+      "teacher_POS_GT_observations": 416,
+      "anchor_MOT_recoverable_GT": 1005
     },
-    "warning": "official unmatched is not exhaustive semantic absence; p>.5 is offline diagnosis only, all valid soft probabilities trained"
+    "warning": "official unmatched is not exhaustive semantic absence; p>.5 is offline diagnosis only, all valid soft probabilities trained",
+    "selected_count_definition": "offline p_yes>0.5 only; no hard selection/masking in training",
+    "calibration_against_official_labels": {
+      "Brier": 0.06374950631630594,
+      "log_loss": 0.38282905310367776,
+      "ECE10": 0.0701095933007278,
+      "bins": [
+        {
+          "bin": 0,
+          "n": 6910,
+          "mean_probability": 0.007908831387973901,
+          "official_positive_fraction": 0.004486251808972504
+        },
+        {
+          "bin": 1,
+          "n": 219,
+          "mean_probability": 0.14055365296803654,
+          "official_positive_fraction": 0.0776255707762557
+        },
+        {
+          "bin": 2,
+          "n": 139,
+          "mean_probability": 0.24646610836330934,
+          "official_positive_fraction": 0.07194244604316546
+        },
+        {
+          "bin": 3,
+          "n": 69,
+          "mean_probability": 0.3502038043478261,
+          "official_positive_fraction": 0.08695652173913043
+        },
+        {
+          "bin": 4,
+          "n": 47,
+          "mean_probability": 0.4457280585106383,
+          "official_positive_fraction": 0.0425531914893617
+        },
+        {
+          "bin": 5,
+          "n": 60,
+          "mean_probability": 0.5395833333333333,
+          "official_positive_fraction": 0.08333333333333333
+        },
+        {
+          "bin": 6,
+          "n": 53,
+          "mean_probability": 0.6493219339622641,
+          "official_positive_fraction": 0.1509433962264151
+        },
+        {
+          "bin": 7,
+          "n": 73,
+          "mean_probability": 0.752568493150685,
+          "official_positive_fraction": 0.1506849315068493
+        },
+        {
+          "bin": 8,
+          "n": 80,
+          "mean_probability": 0.858984375,
+          "official_positive_fraction": 0.1875
+        },
+        {
+          "bin": 9,
+          "n": 731,
+          "mean_probability": 0.981313055745554,
+          "official_positive_fraction": 0.5198358413132695
+        }
+      ],
+      "warning": "official referring labels may be incomplete; this is protocol calibration, not exhaustive human semantic correctness; no recalibration trained"
+    },
+    "explicit_NEG_false_negative_rate": null,
+    "explicit_NEG_false_negative_rate_reason": "no explicit hard NEG labels were created",
+    "unasked_fraction": 0.9976644479711965,
+    "invalid_input_or_response_pairs": 0,
+    "prior_P1_threshold_states_not_used": {
+      "SUPPORT_NEG": 6636,
+      "SUPPORT_POS": 632,
+      "UNKNOWN": 1113
+    },
+    "soft_below_half_GT_candidates": 67,
+    "anchor_GT_failure_accounting": {
+      "GT_without_MOT": 97,
+      "MOT_recoverable_but_not_sampled": 523,
+      "sampled_recoverable_but_teacher_below_half": 66,
+      "teacher_above_half_recovered": 416
+    }
   },
   "FP_row_and_rematching": {
     "new_FP_prediction_rows": 16147,
@@ -206,6 +328,11 @@
   },
   "GT_recall_denominator_frame_queries": 42782,
   "recall_definition": "macro one-to-one IoU05 GT recall including GT frames without MOT candidates",
+  "recall_scope_frame_denominators": {
+    "non_teacher_anchor": 42589,
+    "teacher_anchor": 193
+  },
+  "text_information": "text_signal_offline.json",
   "scopes_warning": "all425 official scoring vs GT-present conditional semantic scoring have different class prevalence; sparse teacher compared only on its actual8381pairs",
   "GT_read_only_after_complete_student_seal": true
 }
