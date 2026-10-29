@@ -370,6 +370,13 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 0,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
@@ -807,6 +814,13 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 254,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
@@ -1182,6 +1196,13 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 0,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
@@ -1557,6 +1578,13 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 0,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
@@ -1932,6 +1960,13 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 0,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
@@ -2369,7 +2404,840 @@
       "unique_direct_teacher_labels": 8500,
       "unique_weak_labels": 263,
       "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
       "target_objective": "raw frozen MLLM soft probability BCE",
+      "target_GT_reads": 0,
+      "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
+      "gradient_weight_note": "expanded_gradient_norm already includes fixed0.25 weak coefficient; expanded_KD_loss is raw and expanded_weighted_loss is weighted",
+      "POS_definition": "frozen MLLM confidence qualification, or internal EMA pseudo state for matchedMT; not GT correctness",
+      "scientific_scope": "fitting/optimization evidence only, NOT RMOT generalization or independent semantic recovery"
+    },
+    "NAIVE_TEMPORAL": {
+      "method": "NAIVE_TEMPORAL",
+      "optimizer_updates": 8973,
+      "groups": {
+        "all_steps": {
+          "steps": 8973,
+          "fraction_of_8973": 1.0,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 8973,
+              "mean": 0.2254285502214909,
+              "p10_p50_p90": [
+                0.00047451636055484414,
+                0.006215289700776339,
+                0.652925431728363
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 8973,
+              "mean": 0.5924595034877739,
+              "p10_p50_p90": [
+                0.008052396774291993,
+                0.09303039312362671,
+                1.6423505306243897
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 8973,
+              "mean": 0.30876940187487356,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 8973,
+              "mean": 0.07719235046871839,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.06202590152265894,
+              "p10_p50_p90": [
+                6.0595321156837525e-05,
+                0.001589840834234291,
+                0.18182403611832829
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.6216996469105213,
+              "p10_p50_p90": [
+                0.004483798556294967,
+                0.16506161815353268,
+                1.8798340922520524
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.07868656674591734,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.7331986622605249,
+              "p10_p50_p90": [
+                0.007321114093065262,
+                0.22291655838489532,
+                2.045024108886719
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 8973,
+              "mean": -0.004612872355985011,
+              "p10_p50_p90": [
+                -0.07800186929702224,
+                -0.002587081128051312,
+                0.0663320080877959
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": -0.005394803012924827,
+              "p10_p50_p90": [
+                -0.07893123486333037,
+                -0.004873073910820584,
+                0.06790733518499736
+              ]
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": 0.9145581310047276,
+              "p10_p50_p90": [
+                0.8500836142361017,
+                0.9771210099128274,
+                0.9946956401728486
+              ]
+            }
+          }
+        },
+        "with_qualified_direct_POS": {
+          "steps": 1128,
+          "fraction_of_8973": 0.12571046472751587,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 1128,
+              "mean": 0.2496371524406744,
+              "p10_p50_p90": [
+                0.00046998126490507277,
+                0.006851490819826722,
+                0.6475241720676422
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 1128,
+              "mean": 2.7060288896533193,
+              "p10_p50_p90": [
+                0.6566641509532929,
+                1.8906162977218628,
+                6.029883193969727
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 1128,
+              "mean": 2.456194896297199,
+              "p10_p50_p90": [
+                0.0,
+                1.4020878076553345,
+                6.418226099014284
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 1128,
+              "mean": 0.6140487240742998,
+              "p10_p50_p90": [
+                0.0,
+                0.3505219519138336,
+                1.604556524753571
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 1128,
+              "mean": 0.06418370167990883,
+              "p10_p50_p90": [
+                6.100580191704193e-05,
+                0.0016095102664364144,
+                0.18640800089061785
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 1128,
+              "mean": 2.552397398275713,
+              "p10_p50_p90": [
+                0.6500874375595832,
+                2.240145235524921,
+                4.89201374293951
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 1128,
+              "mean": 0.6259348966410605,
+              "p10_p50_p90": [
+                0.0,
+                0.572725492541524,
+                1.4021935397833343
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 1128,
+              "mean": 3.1622456571364657,
+              "p10_p50_p90": [
+                0.7479370474815369,
+                2.806059956550598,
+                6.095486021041871
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 1128,
+              "mean": -0.007686559467045457,
+              "p10_p50_p90": [
+                -0.07628594764882965,
+                -0.005546156636005347,
+                0.05956479635613033
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": -0.005394803012924827,
+              "p10_p50_p90": [
+                -0.07893123486333037,
+                -0.004873073910820584,
+                0.06790733518499736
+              ]
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": 0.9145581310047276,
+              "p10_p50_p90": [
+                0.8500836142361017,
+                0.9771210099128274,
+                0.9946956401728486
+              ]
+            }
+          }
+        },
+        "without_qualified_direct_POS": {
+          "steps": 7845,
+          "fraction_of_8973": 0.8742895352724841,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 7845,
+              "mean": 0.22194769575326412,
+              "p10_p50_p90": [
+                0.0004746337188407779,
+                0.0061584278009831905,
+                0.6532562613487245
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 7845,
+              "mean": 0.2885581309454239,
+              "p10_p50_p90": [
+                0.007358741760253907,
+                0.0620570182800293,
+                0.7702582001686097
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 7845,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 7845,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 7845,
+              "mean": 0.061715640391062004,
+              "p10_p50_p90": [
+                6.049909803896771e-05,
+                0.0015891629668816187,
+                0.17929118228249313
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 7845,
+              "mean": 0.34409262797617635,
+              "p10_p50_p90": [
+                0.0034785503946981387,
+                0.11034228608162569,
+                1.016963769215385
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 7845,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 7845,
+              "mean": 0.38393607332233987,
+              "p10_p50_p90": [
+                0.005509034730494022,
+                0.16167519986629486,
+                1.0643659830093384
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 7845,
+              "mean": -0.004170919639442477,
+              "p10_p50_p90": [
+                -0.07801923101475355,
+                -0.0020621405118515213,
+                0.06704684379900162
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            }
+          }
+        },
+        "with_expanded_weak": {
+          "steps": 806,
+          "fraction_of_8973": 0.08982503064749806,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 806,
+              "mean": 0.2573375827516393,
+              "p10_p50_p90": [
+                0.00047544550034217536,
+                0.006945372326299548,
+                0.6466020047664642
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 806,
+              "mean": 3.019739987647563,
+              "p10_p50_p90": [
+                0.6991093754768372,
+                2.1515655517578125,
+                6.821255683898926
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 806,
+              "mean": 3.4374538995325565,
+              "p10_p50_p90": [
+                0.6126945614814758,
+                2.3633490800857544,
+                7.856322288513184
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 806,
+              "mean": 0.8593634748831391,
+              "p10_p50_p90": [
+                0.15317364037036896,
+                0.5908372700214386,
+                1.964080572128296
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 806,
+              "mean": 0.07063237845607738,
+              "p10_p50_p90": [
+                5.826173851724794e-05,
+                0.0016351307432962495,
+                0.2111198828907641
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 806,
+              "mean": 2.855815376011314,
+              "p10_p50_p90": [
+                0.7510896312723642,
+                2.5770277792993417,
+                5.173715894171399
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 806,
+              "mean": 0.875998217631658,
+              "p10_p50_p90": [
+                0.2721962743201165,
+                0.8527360848502352,
+                1.5082627576826855
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 806,
+              "mean": 3.707015231667692,
+              "p10_p50_p90": [
+                1.0603877305984497,
+                3.4187607765197754,
+                6.631966590881348
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": -0.00689480354268476,
+              "p10_p50_p90": [
+                -0.07834564944725067,
+                -0.006453794786386951,
+                0.0654748216105883
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": -0.005394803012924827,
+              "p10_p50_p90": [
+                -0.07893123486333037,
+                -0.004873073910820584,
+                0.06790733518499736
+              ]
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 806,
+              "mean": 0.9145581310047276,
+              "p10_p50_p90": [
+                0.8500836142361017,
+                0.9771210099128274,
+                0.9946956401728486
+              ]
+            }
+          }
+        }
+      },
+      "repeated_exposure_states": {
+        "direct": {
+          "NEG": 28209,
+          "POS": 2782,
+          "UNKNOWN": 4901
+        },
+        "expanded": {
+          "POS": 1146
+        }
+      },
+      "unique_direct_teacher_labels": 8500,
+      "unique_weak_labels": 270,
+      "external_target_semantic_teacher": true,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
+      "target_objective": "raw frozen MLLM soft probability BCE",
+      "target_GT_reads": 0,
+      "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
+      "gradient_weight_note": "expanded_gradient_norm already includes fixed0.25 weak coefficient; expanded_KD_loss is raw and expanded_weighted_loss is weighted",
+      "POS_definition": "frozen MLLM confidence qualification, or internal EMA pseudo state for matchedMT; not GT correctness",
+      "scientific_scope": "fitting/optimization evidence only, NOT RMOT generalization or independent semantic recovery"
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "method": "MEAN_TEACHER_MATCHED",
+      "optimizer_updates": 8973,
+      "groups": {
+        "all_steps": {
+          "steps": 8973,
+          "fraction_of_8973": 1.0,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 8973,
+              "mean": 0.22659949649790584,
+              "p10_p50_p90": [
+                0.0003939175978302956,
+                0.0059920409694314,
+                0.6466786980628968
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 8973,
+              "mean": 0.006838951002508039,
+              "p10_p50_p90": [
+                0.000992719829082489,
+                0.0041869767010211945,
+                0.015484980121254922
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 8973,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 8973,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.06258087234439445,
+              "p10_p50_p90": [
+                4.42835460993591e-05,
+                0.00099065989072744,
+                0.17167634234470844
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.07637496779670298,
+              "p10_p50_p90": [
+                0.014343427831530444,
+                0.055454142755975294,
+                0.16529389294534982
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 8973,
+              "mean": 0.12588577979776822,
+              "p10_p50_p90": [
+                0.016237526014447213,
+                0.06878184527158737,
+                0.270768976211548
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 8973,
+              "mean": -0.00039370605509309584,
+              "p10_p50_p90": [
+                -0.06686178956671757,
+                0.0004583655793363226,
+                0.0674752391318308
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            }
+          }
+        },
+        "with_qualified_direct_POS": {
+          "steps": 448,
+          "fraction_of_8973": 0.049927560459155244,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 448,
+              "mean": 0.25170134480227296,
+              "p10_p50_p90": [
+                0.0004059843864524737,
+                0.0049092634581029415,
+                0.778492403030396
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 448,
+              "mean": 0.010524767927823373,
+              "p10_p50_p90": [
+                0.004043316794559359,
+                0.009069789666682482,
+                0.018971120938658718
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 448,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 448,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 448,
+              "mean": 0.0625066941123242,
+              "p10_p50_p90": [
+                3.9665894909448806e-05,
+                0.0012296908753311239,
+                0.22556378072038616
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 448,
+              "mean": 0.04557838523046657,
+              "p10_p50_p90": [
+                0.009281012587585171,
+                0.0311443009511081,
+                0.0993691648766736
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 448,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 448,
+              "mean": 0.09623347695638326,
+              "p10_p50_p90": [
+                0.010092987306416034,
+                0.04150126501917839,
+                0.24596059471368792
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 448,
+              "mean": 0.006519928994556379,
+              "p10_p50_p90": [
+                -0.07078649082656717,
+                0.004428067366047119,
+                0.0845658963908647
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            }
+          }
+        },
+        "without_qualified_direct_POS": {
+          "steps": 8525,
+          "fraction_of_8973": 0.9500724395408447,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 8525,
+              "mean": 0.22528036124390508,
+              "p10_p50_p90": [
+                0.00039349157596006994,
+                0.0060843536630272865,
+                0.6453165054321289
+              ]
+            },
+            "target_KD_loss": {
+              "defined_steps": 8525,
+              "mean": 0.006645256459101439,
+              "p10_p50_p90": [
+                0.0009511362644843759,
+                0.00396224670112133,
+                0.015243785083293914
+              ]
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 8525,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 8525,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "source_gradient_norm": {
+              "defined_steps": 8525,
+              "mean": 0.0625847705083789,
+              "p10_p50_p90": [
+                4.460269369879035e-05,
+                0.0009769795934201555,
+                0.17003143444858618
+              ]
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 8525,
+              "mean": 0.07799336885121019,
+              "p10_p50_p90": [
+                0.01484459458546241,
+                0.05734602483303922,
+                0.16766833257854438
+              ]
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 8525,
+              "mean": 0.0,
+              "p10_p50_p90": [
+                0.0,
+                0.0,
+                0.0
+              ]
+            },
+            "gradient_norm": {
+              "defined_steps": 8525,
+              "mean": 0.12744404744268792,
+              "p10_p50_p90": [
+                0.017002397403120997,
+                0.07079494744539261,
+                0.2717461049556733
+              ]
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 8525,
+              "mean": -0.0007570267005174902,
+              "p10_p50_p90": [
+                -0.06647594394709706,
+                0.00022352151296378738,
+                0.0664179197767009
+              ]
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            }
+          }
+        },
+        "with_expanded_weak": {
+          "steps": 0,
+          "fraction_of_8973": 0.0,
+          "statistics": {
+            "source_loss": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "target_KD_loss": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "expanded_KD_loss": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "expanded_weighted_loss": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "source_gradient_norm": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_gradient_norm": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "expanded_gradient_norm": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "gradient_norm": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "source_direct_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "source_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            },
+            "direct_expanded_gradient_cosine": {
+              "defined_steps": 0,
+              "mean": null,
+              "p10_p50_p90": null
+            }
+          }
+        }
+      },
+      "repeated_exposure_states": {
+        "direct": {
+          "UNKNOWN": 34763,
+          "POS": 963,
+          "NEG": 166
+        },
+        "expanded": {}
+      },
+      "unique_direct_teacher_labels": 0,
+      "unique_weak_labels": 0,
+      "external_target_semantic_teacher": false,
+      "actual_training_acceptance": {
+        "source_videos": 17,
+        "target_query_pairs": 425,
+        "trainable_parameters": 24576,
+        "frozen_unchanged": true,
+        "checkpoint_roundtrip": true
+      },
+      "target_objective": "0.2EMA consistency +0.2confidence pseudo BCE, not external MLLM KD",
       "target_GT_reads": 0,
       "gradient_norm_note": "per-step preclip module/combined norms; not norm of the average gradient or causal contribution",
       "gradient_weight_note": "expanded_gradient_norm already includes fixed0.25 weak coefficient; expanded_KD_loss is raw and expanded_weighted_loss is weighted",

@@ -13,6 +13,13 @@ from flex_tta.runtime.pf_receipts import atomic_json
 
 def summarize(folder):
     folder=Path(folder);receipt=json.loads((folder/'training_receipt.json').read_text())
+    if (receipt['status']!='COMPLETE_FIXED_COVERAGE_PSR_STUDY' or receipt['trainable_parameters']!=24576 or
+        receipt['counters']['optimizer_updates']!=8973 or receipt['source_videos_seen']!=17 or receipt['target_query_pairs_seen']!=425 or
+        receipt['target_GT_open_attempts'] or not receipt['frozen_parameters_unchanged'] or not receipt['checkpoint_roundtrip']):
+        raise ValueError('completed student numerical/data/coverage acceptance failed: '+str(folder))
+    if receipt['method']=='MEAN_TEACHER_MATCHED':
+        if receipt['counters']['EMA_updates']!=8973 or receipt['external_MLLM_labels_used'] or receipt['unique_unlabelled_target_inputs_seen']!=8500:raise ValueError('matchedEMA coverage/state invalid')
+    elif receipt['unique_teacher_samples_seen']!=8500:raise ValueError('incomplete direct8500 actual coverage')
     rows=[json.loads(s) for s in (folder/'metrics_train.jsonl').read_text().splitlines()]
     if receipt['steps']!=8973 or [r['step'] for r in rows]!=list(range(1,8974)):raise ValueError('full8973 chronological trace required')
     fields=('source_loss','target_KD_loss','expanded_KD_loss','expanded_weighted_loss','source_gradient_norm',
@@ -36,6 +43,7 @@ def summarize(folder):
         groups=groups,repeated_exposure_states={k:dict(v) for k,v in states.items()},
         unique_direct_teacher_labels=receipt['unique_teacher_samples_seen'],unique_weak_labels=receipt['unique_expanded_samples_seen'],
         external_target_semantic_teacher=receipt['method']!='MEAN_TEACHER_MATCHED',
+        actual_training_acceptance=dict(source_videos=17,target_query_pairs=425,trainable_parameters=24576,frozen_unchanged=True,checkpoint_roundtrip=True),
         target_objective='0.2EMA consistency +0.2confidence pseudo BCE, not external MLLM KD' if receipt['method']=='MEAN_TEACHER_MATCHED' else 'raw frozen MLLM soft probability BCE',
         target_GT_reads=0,gradient_norm_note='per-step preclip module/combined norms; not norm of the average gradient or causal contribution',
         gradient_weight_note='expanded_gradient_norm already includes fixed0.25 weak coefficient; expanded_KD_loss is raw and expanded_weighted_loss is weighted',
