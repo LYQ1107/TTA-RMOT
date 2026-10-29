@@ -39,7 +39,7 @@ def summarize(folder):
     states={kind:Counter() for kind in ('direct','expanded')}
     for r in rows:
         for kind in states:states[kind].update(r[kind+'_states'])
-    return dict(method=receipt['method'],optimizer_updates=receipt['counters']['optimizer_updates'],
+    result=dict(method=receipt['method'],optimizer_updates=receipt['counters']['optimizer_updates'],
         groups=groups,repeated_exposure_states={k:dict(v) for k,v in states.items()},
         unique_direct_teacher_labels=receipt['unique_teacher_samples_seen'],unique_weak_labels=receipt['unique_expanded_samples_seen'],
         external_target_semantic_teacher=receipt['method']!='MEAN_TEACHER_MATCHED',
@@ -49,6 +49,14 @@ def summarize(folder):
         gradient_weight_note='expanded_gradient_norm already includes fixed0.25 weak coefficient; expanded_KD_loss is raw and expanded_weighted_loss is weighted',
         POS_definition='frozen MLLM confidence qualification, or internal EMA pseudo state for matchedMT; not GT correctness',
         scientific_scope='fitting/optimization evidence only, NOT RMOT generalization or independent semantic recovery')
+    if receipt['method']=='PSR_PARENT_WEIGHT_CONTROL':
+        result['groups']['with_parent_replay']=result['groups'].pop('with_expanded_weak')
+        result['repeated_exposure_states']['parent_replay']=result['repeated_exposure_states'].pop('expanded')
+        result.update(unique_parent_replay_terms=receipt['unique_parent_replay_terms_seen'],
+            expanded_branch_semantics='actual judged parent endpoints replayed; no independent new weak labels',
+            gradient_weight_note='generic expanded_* trace fields mean the parent replay branch, weighted by fixed0.25; they are not new weak evidence',
+            parent_weight_control=receipt['parent_weight_control'])
+    return result
 
 
 if __name__=='__main__':

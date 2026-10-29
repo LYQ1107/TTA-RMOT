@@ -6,6 +6,7 @@ Fixed MOT为官方Dance DETR+NeuralSORT；目标GT只在预测封存后由独立
 ## 官方完整 RMOT
 
 DetRe/DetPr是HOTA的多IoU阈值检测召回/精度；不是下表离线IoU≥0.5的匹配计数。
+主表差值由官方已舍入汇总相减；视频CI由未舍入CSV充分统计池化，末位可能相差0.0001，不是候选覆盖协议改变。
 
 | 方法 | HOTA | ΔFrozen | DetA | AssA | IDF1 | IDSW | DetRe | DetPr | 预测行 |
 |---|---|---|---|---|---|---|---|---|---|

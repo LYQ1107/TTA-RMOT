@@ -5,6 +5,10 @@
 - CPU-only openedall26publishedpredictiontarballs andofficialCSVseach:425predictions/25videos/425officialepisodes; all8finalstudentreceipts8973/24576/17source/425target/GTattempts0. Actualvendor trackedpatch matchesalreadypublicvendor_tracked_source.patch; no livevendor/code/modelprocess modified.
 - Captured two actualenvironmentversionmanifests viaimportlib metadata, noGPUallocation orpipinstall. AddedPSR_REPRODUCIBILITY commands/assetpaths/sourceonlydataaliases/patchapplication/recoveryprotocol; oldLocateMOTcode/weights remainoutofscope. Addedaudit_psr_delivery.py forrealartifactchecks, notscientificsuccess.
 - Originalnative waitorchestrator248 still owns84940confirmationpairs/56047parentqueue/25053CPUclosure; no duplicatejobs. seed0bothtrainedexit0;425inferencecontinues; seed42Naive>=8000/PSR>=6000 lateststream. Continuefixedbudget/params, noGTthresholdchanges.
+- Deliveryregression exactselected10CPUtestfiles:75passed5.16s; compileallflex_uda pass. This is the current relevant scope, not a sum with earlier79or16overlappingtests.
+- Freshformalassetdeliveryaudit:40Train41796images/1560queriesstillcomplete,0/40samefrontendMOT/nofrontendprovenance; noGTpayloadread orfrontend substitution. Savednewformal_train_audit_delivery.json, originalauditpreserved.
+- Weakoriginbreakdown fromsealedofflineJSON:PSR167bothendpoint+middlecorrect,3oneendpoint+middlecorrect,84zeroendpoint+middlewrong. No two-correct-endpoints/middlewrong cases; observedweak errors inherit teacherunmatchedpositives, not proven newtemporalidentityfailure. Query-visibleGTlimitretained.
+- Report-onlybranchrename distinguishesparentreplayfromnewweaklabels; primaryPSRtrainingdynamicsexactJSON equalityPASS. RunningCPUclosure importedprevioussummaryfunction, so refreshparent dynamics afteritscompletionbeforefinalpublication. No training/evaluationnumericschanged.
 
 ## 2026-10-30 — First complete PSR matrix, registered confirmation and weight confound
 

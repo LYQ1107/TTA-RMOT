@@ -25,7 +25,8 @@ def render(public):
         '用户授权25Val同集无标签开发研究，非40Train→Val、非盲测、非Source-Free Online TTA。每组完整25视频/425表达。',
         'Fixed MOT为官方Dance DETR+NeuralSORT；目标GT只在预测封存后由独立离线评测读取。','',
         '## 官方完整 RMOT','',
-        'DetRe/DetPr是HOTA的多IoU阈值检测召回/精度；不是下表离线IoU≥0.5的匹配计数。','']
+        'DetRe/DetPr是HOTA的多IoU阈值检测召回/精度；不是下表离线IoU≥0.5的匹配计数。',
+        '主表差值由官方已舍入汇总相减；视频CI由未舍入CSV充分统计池化，末位可能相差0.0001，不是候选覆盖协议改变。','']
     lines+=table(['方法','HOTA','ΔFrozen','DetA','AssA','IDF1','IDSW','DetRe','DetPr','预测行'],[
         [m,metrics[m]['HOTA'],metrics[m]['HOTA']-metrics['FROZEN']['HOTA'],*[metrics[m][k] for k in ('DetA','AssA','IDF1','IDSW','DetRe','DetPr','Dets')]] for m in methods])
     lines+=['## 数量归因（不是可部署方法）','',
