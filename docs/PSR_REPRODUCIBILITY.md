@@ -88,3 +88,12 @@ CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/audit_
 
 该命令实际打开全部预测压缩包、核对425预测/25视频/官方425行、8学生最终收据和补丁，读取版本而不加载GPU模型/目标GT。
 它验证交付完整性，不把工程通过判为PSR科研成功。最终结论必须看完整RMOT、普通对照、数量残差和不确定性。
+
+## 执行版本与公开历史
+
+服务器CLI缺少push凭据，阶段通过连接的GitHub接口发布；其commit元数据与本地不同，但公开tree与本地发布快照完全相同。
+[publication_map.json](../results/psr/assets/publication_map.json)记录阶段映射；
+[source_revision_audit_primary.json](../results/psr/assets/source_revision_audit_primary.json)针对真实执行版本核验已fetch的公开git对象。
+8组学生所记录的实现SHA256全部一致，且flex_uda/flex_tta/compat及源模型loader整套运行包与对应公开快照无差异。
+这证明实际运行代码在公开历史中可得，不将不同的本地/公开commit ID说成相同。
+确认阶段已完成的训练先行保存在[confirmations](../results/psr/confirmations/)，仅训练快照不授权提前打开新模型的目标GT或冒充完整指标。

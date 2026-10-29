@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Actual execution source and completed confirmation training published
+
+- Fetchedonlycurrentresearchbranchpublichistory, noHEADswitch orhealthyprocessinterruption. All8primaryrecordedcodeSHA256 matchactualexecutioncommitsANDfetchedpublicsnapshots; entireflex_uda/flex_tta/compat/source-loader packages havezerodiff. Naive/PSRcorepublic733f00d; remainingcore0b5bd8. Addedpublication_map/source_revisionaudit, notfalseGitcommitidentityequivalence.
+- All3newcompletedtrainings(seed0Naive/PSR,seed42Naive) also audited againstpublic0b5bd8 core; completion8973/24576/17source/425target/GT0. Snapshotfulltrainingtraces/receipts/sourceval/stdout/checkpointSHAintoindependentconfirmationpaths, noGPUreruns/targetGT/earlyevaluationseal.
+- Originalblockingorchestrator248continues; lateststreamseed0Naive15/25,seed0PSR10/25,seed42Naiveinferactive,seed42PSR>=8000/8973. ParentweightcontrolCPUqueueunmodified. CurrentgoalturnclassificationPROGRESSwithactualsource+artifactauditsandpublictrainingrecords, notunexecutedplan.
+
 ## 2026-10-30 — Delivery/reproducibility audit while confirmations run
 
 - CPU-only openedall26publishedpredictiontarballs andofficialCSVseach:425predictions/25videos/425officialepisodes; all8finalstudentreceipts8973/24576/17source/425target/GTattempts0. Actualvendor trackedpatch matchesalreadypublicvendor_tracked_source.patch; no livevendor/code/modelprocess modified.

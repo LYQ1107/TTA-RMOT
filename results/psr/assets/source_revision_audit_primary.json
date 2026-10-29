@@ -1,0 +1,194 @@
+{
+  "status": "PASS_EXECUTION_IMPLEMENTATIONS_AVAILABLE_IN_PUBLIC_HISTORY",
+  "methods": {
+    "CONFIDENCE_PAIRED": {
+      "execution_commit": "1001832755389d604a7c0f5ea7fb336153ba9a16",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "execution_commit": "9534ef5d8b814bd2332bb48c7e478c3ff54b1cdb",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "NAIVE_PAIRED": {
+      "execution_commit": "9a885596de1fecbf7dc50358ec5333141520019f",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "f1e3b759ef4263a7ad7a653bce94c4bcdda6d765eefe7e3eaff1b623cb3fc591",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "4e7213382b9548aadce57f06684b7b59e6d90b442d2acb4f1234627b9150a4e5",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "733f00da30ee4b72951ffac7ee206dba5c075e8b",
+      "matching_public_tree": "7fd6ac47eae217c51552572162ade9ba59602327",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "NAIVE_TEMPORAL": {
+      "execution_commit": "1fbf38fd267150cdcd630b5810081993f73a5f01",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "PSR": {
+      "execution_commit": "9a885596de1fecbf7dc50358ec5333141520019f",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "f1e3b759ef4263a7ad7a653bce94c4bcdda6d765eefe7e3eaff1b623cb3fc591",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "4e7213382b9548aadce57f06684b7b59e6d90b442d2acb4f1234627b9150a4e5",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "733f00da30ee4b72951ffac7ee206dba5c075e8b",
+      "matching_public_tree": "7fd6ac47eae217c51552572162ade9ba59602327",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "PSR_DISCOVERY": {
+      "execution_commit": "df72c7c7180e17999fa069bba5c33da071271c86",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "PSR_GEOMETRY": {
+      "execution_commit": "df72c7c7180e17999fa069bba5c33da071271c86",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    },
+    "UNIFORM_PAIRED": {
+      "execution_commit": "1001832755389d604a7c0f5ea7fb336153ba9a16",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "079fb8ce197a70cee39d00db485f43d55b4c2dc41774dba253a76fae1ecbb6e3",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "247a43b3a2be5d7c9f1e897839e5c45a464a7866bf23293528ed51afeaf51783",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "0b5bd8b5d08a6fc1f19cb5d0590f558f49ec1edd",
+      "matching_public_tree": "046d84e4bdba18fea0733fa91e3460dcddcf292e",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    }
+  },
+  "repository": "LYQ1107/TTA-RMOT",
+  "verification": "actual fetched public git objects, SHA256 of recorded files, exact publication tree equality",
+  "target_GT_reads": 0,
+  "GPU_calls": 0,
+  "does_not_imply_scientific_success": true
+}
