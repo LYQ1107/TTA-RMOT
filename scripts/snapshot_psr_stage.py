@@ -48,7 +48,7 @@ def snapshot():
     result=dict(project='LYQ1107/TTA-RMOT',protocol='USER_AUTHORIZED25VAL_SAME_SET_PSR_NOT_FORMAL_TRAIN_TO_VAL',
         formal40Train_asset_missing=True,teacher_policies=4,teacher_direct_judgments_each=8500,
         source_videos=17,target_videos=25,target_queries=425,trainable_parameters=24576,fixed_updates=8973,
-        methods=states,predictions=predictions,GT_metrics='PENDING_UNTIL_ALL_PREDICTIONS_SEALED',old_Naive8_0327='HISTORICAL_ONLY_DIFFERENT_SAMPLING',
+        methods=states,predictions=predictions,GT_metrics='COMPLETE_OFFLINE' if (PUBLIC/'full/summary.json').exists() else 'PENDING_UNTIL_ALL_PREDICTIONS_SEALED',old_Naive8_0327='HISTORICAL_ONLY_DIFFERENT_SAMPLING',
         current_GPU_limit=4,raw_cache_root='/data2/user/TTA-RMOT-assets/psr',private_run_root=str(RUN),
         source_and_target_GT_permissions='sourceGT legal; targetGT only independent evaluation after seal')
     atomic_json(PUBLIC/'stage_status.json',result);atomic_json(PUBLIC/'recovery_index.json',dict(methods=recovery,teacher_raw_root=str(RUN/'teacher_full'),

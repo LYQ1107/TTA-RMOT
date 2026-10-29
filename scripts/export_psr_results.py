@@ -51,7 +51,7 @@ def export(run,public):
         for source in (root/'trackeval_jobs'/method).glob('*.txt'):logs.append((source,str(Path('official_TrackEval')/method/source.name)))
         for source in (folder/'parity').rglob('*.json'):
             target=dest/'parity'/source.relative_to(folder/'parity');target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
-    for pattern in ('teacher_full/*/*.txt','teacher_smoke/*/*.txt','matrix_launchers/*/*.json','*stdout.txt'):
+    for pattern in ('teacher_full/*/*.txt','teacher_smoke/*/*.txt','matrix_launchers/*/*.json','cpu_pipeline/*/*.txt','cpu_pipeline/*/*.json','*stdout.txt'):
         logs.extend((p,str(p.relative_to(run))) for p in run.glob(pattern) if p.is_file())
     stdout=ROOT/'results/runs/psr_matrix_20261029_stdout.txt'
     if stdout.exists():logs.append((stdout,'psr_matrix_stdout.txt'))
