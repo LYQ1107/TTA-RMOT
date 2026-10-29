@@ -4,6 +4,10 @@
 本轮用户明确授权25Val/425表达同集无标签开发研究，不是40Train→Val、盲测或Source-Free Online TTA。
 以下是恢复/复现说明，不是让健康队列重复启动的指令。
 
+**最终状态：全部完成并停止。** 13学生、47套官方425预测归档均通过实际开包/官方CSV/训练收据核验。
+47套含跨目录复用基线和数量控制，不是47独立模型。三seed主结果及端点重加权归因见[最终清单](../results/psr/final_delivery.json)。
+现有目录没有待恢复作业；以下命令仅供新环境复现或明确批准的故障恢复，不要重新发起全量训练。
+
 ## 外部代码与环境
 
 FlexHook官方源代码固定 `bd1acc38634b28525d54dc6e0fcb38335f0029f9`：
@@ -64,7 +68,7 @@ Source图像/表达的旧LocateMOT目录别名只是只读数据来源，不使�
 ```
 
 Parent控制是POST_HOC机会匹配正例权重对照，不是预注册新算法；263机会/526原端点项，新增弱标签0。
-这三条属于同一实验队列，当前已运行，不能在未退出前重复启动。最多4物理卡，16GiB allocator+4GiB准入余量，授权共享时优先进程少的卡。
+这三条属于同一实验队列，已全部正常退出，不再启动。最多4物理卡，16GiB allocator+4GiB准入余量，授权共享时优先进程少的卡。
 首次复现到不同机器需显式调整配置/manifest资产路径并重新审计；不要假装本机绝对路径可直接跨机器使用。
 
 ## 从头生成监督（仅新独立目录）
@@ -81,6 +85,7 @@ Parent控制是POST_HOC机会匹配正例权重对照，不是预注册新算法
 官方结果、双向数量控制和排序/覆盖/Query-Present/Empty归因均已在首轮完成。
 数量控制不是独立可部署模型，不能把其CPU时间当整系统成本。
 主表由官方四位汇总相减，视频CI由未舍入CSV充分统计池化；差值末位可因四舍五入相差0.0001，不是协议改变。
+官方原始CSV/TXT保持其CRLF行尾，不为通过格式检查改写评价输出；提交检查临时采用`core.whitespace=cr-at-eol`，不修改仓库全局配置或数值。
 
 ```bash
 CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/audit_psr_delivery.py
@@ -97,7 +102,8 @@ CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/audit_
 8组学生所记录的实现SHA256全部一致，且flex_uda/flex_tta/compat及源模型loader整套运行包与对应公开快照无差异。
 这证明实际运行代码在公开历史中可得，不将不同的本地/公开commit ID说成相同。
 完整执行历史验证需要本机保留的原提交；新clone可直接按审计JSON的matching_public_snapshot和文件SHA256复核公开实现，不必取得私有本地commit ID。
-确认阶段已完成的训练先行保存在[confirmations](../results/psr/confirmations/)，仅训练快照不授权提前打开新模型的目标GT或冒充完整指标。
+确认阶段全部训练、推理、官方结果与归档保存在[confirmations](../results/psr/confirmations/)。
+最初仅训练快照的历史阶段仍保留；最终评价均在对应完整预测封存后执行，没有提前打开目标GT。
 
 原CPU闭环全部完成后，再运行报告补齐命令：
 
@@ -108,3 +114,9 @@ CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/finali
 它只从已有最终记录补成本、父端点重放的正确计数、接口/smoke收据与调度器/CPU日志，不加载GPU模型或重算预测/阈值。
 完整训练/推理成本、额外验证成本、继承教师/Frozen准备成本分列，不能把缓存复用写成免费，也不能把父端点重放计为新增弱标签。
 教师恢复位置由每个训练配置对应的seal.teacher_receipt解析，确认seed和parent控制仍指向原首轮缓存，而不是不存在的seed专属teacher_full目录。
+
+该补齐和`scripts/close_psr_delivery.py`均已实际执行，只更新解释、成本与恢复入口，所有数值预测/官方指标保持不变。
+`delivery_audit_{primary,seed0,seed42,parent_weight}.json`分别核验26/8/8/5套归档；全部425预测和425官方行覆盖25视频。
+对应artifact_index含选定checkpoint SHA、episode分数恢复路径、教师共享缓存路径与完整日志索引。
+此前75项相关CPU回归通过；最终十文件回归58项/5.15秒通过，compileall和diff检查通过，两次覆盖重叠不相加。
+记录见`assets/delivery_final_regression.json`；不把测试数量或收据当科学成功，真实GPU接口、6步smoke和8973步完整接受记录另列。

@@ -1,5 +1,12 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
+
+- Seed42all8officialTrackEvalexit0; full425Naive7.8064/PSR8.8763,Frozen8.2180. Together17/0/42,Naive7.6174±.17921984,PSR8.7222667±.26144258(samplesd). AllthreePSRpointvaluesaboveFrozen,meanDelta+.5042667; meanvsNaive+1.1048667. No fakeFrozenindependentreplicates.
+- Countdiagnosisconsistent:PSR@Frozencount8.0336/8.0312/8.0207allbelow8.2180. Frozen-onlycountPSR−Naive.9330/1.2341/1.0167; pointbenefitnotautomaticindependentsemanticgain. U/MTcontrolsremainseed17only,notthree-seedsuperiorityproof.
+- Seed0fullanalysis/tables/exportcomplete, seed42analysisrunningoriginal25053. Parentofficialandfinalfullsummarypending. Addedcorrect-positive-fitforseed0fromitssealedofflineCSV; correctPOSselectedNaive39/363,PSR41/374. No training/threshold/model/sourcecheckpoint changes.
+- ImmediateGitHubrefverificationoncewasstaleafterAPIwrite; freshref+commit+exacttreeconfirmed9d484bae. No experimentalrerunsorforcewrites; publishernowre-readsrefbrieflyaftercheckingwriteerrors.
+
 ## 2026-10-30 — GPU closure and seed0 complete official result
 
 - Finalparentfull425inferenceexit0:2975.33475s, original56047closed0; allownGPUtraining/inferenceendednormally, no newGPUwork. OriginalCPU25053beganseed0controls+8officialTrackEvalall0, nowdenseofflineanalysis; remainingseed42+parentCPUphasesqueued.
@@ -2241,3 +2248,16 @@ Naive/PSR主训练各完成8973步、17源视频完整覆盖；8500直接标签�
 其真实interface及6步smoke通过（6次EMA更新），相关回归29项通过；旧Mean Teacher只保留历史参考。
 提交1001832的四条方法队列已启动：每卡串行训练与独立完整推理，最多4物理卡；复用健康完成主训练，不启动重复训练。
 GT-free数量诊断与离线归因分别执行，全部登记预测封存前不读取目标GT。弱缓存中的源margin是端点元数据，离线分析改用实际中间帧Frozen分数。
+
+## 2026-10-30 PSR 最终闭环：三seed有整体收益，独立机制未建立，停止
+
+- 本轮按用户明确“没有40直接用val”完成25Val同集无标签offline适应；不是40Train→Val、盲测、source-free online TTA。正式40Train匹配MOT仍0/40，不用GT轨迹或替换前端补造。
+- 完整13学生（首轮8、seed0/42配对4、后验权重控制1）各8973步/24576参数，并各完成25视频425表达推理；47套官方评价及完整预测归档实际开包、425官方行和最终训练收据核验通过。包含复用基线/后验数量控制，不是47独立模型。
+- 三seed Naive HOTA7.4499/7.5959/7.8064，PSR8.4204/8.8701/8.8763；均值样本标准差Naive7.6174±0.1792、PSR8.7223±0.2614，固定Frozen8.2180。真实点值提升存在，不能说“完全没有提升”；也不挑较好seed替代全表。
+- 三seed PSR@Frozen数量8.0336/8.0312/8.0207均低于Frozen；Present HOTA8.8043/9.3266/9.3328仍低于9.7456，Empty FP显著下降。恢复GT净+748/+1925/+1917，但新增FP行18327/21261/21486，不能把删除输出/全局AUROC等同语言语义恢复。
+- 已确认主代码soft BCE为最后decoder层Yes-No logit差，独立候选BCEWithLogits；未发现双sigmoid或错误时间轴等实现缺陷，不以此重跑。正确教师POS转移仅PSR38/41/41个（374），Naive37/39/37个（363）；BCE确降但固定正决策仍不足，未按GT改阈值/容量/步数。
+- 必要POST_HOC端点重加权控制完成：263几何机会、526已有端点、0新标签、0新教师，HOTA8.4255；对Discovery+0.6128、对Full+0.0051且视频CI[−0.0118,+0.0251]。普通正例权重已重现扩展首轮表现，新中间帧与Full门均无独立收益证据；不是精确梯度干预或多seed等价性证明。
+- 13完整学生训练+推理共24.4178 GPUh；继承教师/Frozen/source-only/前端、独立interface/smoke另列。共享GPU耗时不是独占利用率；无新GPU工作，未停止外部进程，已完成单元不重跑，失败入场/CPU锁等待均保留。
+- 仅将首轮自动“需三seed确认”报告标签更新为最终归因结论，保留initial_automatic_verdict；未修改预测、官方指标或历史P1/旧UDA结果。最终科研判决POINT_GAIN_REPLICATED_BUT_INDEPENDENT_PSR_CONTRIBUTION_NOT_ESTABLISHED。
+- 代码、全部正式预测/官方明细/成本/归因/日志与恢复索引逐阶段发布；原始图像、权重、raw教师库留服务器。所有队列正常退出；停止本轮，不自动训练第二域、重跑六TTA或堆新loss。
+- 最终十文件相关CPU回归58项/5.15秒、compileall、diff检查通过；此前75项是不同重叠选择，不累加为133。真实GPU接口/smoke与13完整训练/推理另有实测收据，不用测试数字代替科研验收。

@@ -45,10 +45,18 @@
   "pseudo_root": "/data2/user/TTA-RMOT-assets/psr/val_v1",
   "large_weights_and_raw_cache_stay_on_server": true,
   "inference_resume": "python scripts/run_psr_matrix.py --root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
-  "healthy_queue_warning": "Do not launch the all-method command while any original worker is healthy. Resume only failed methods, explicitly counting other active physical GPUs.",
+  "healthy_queue_warning": "All registered GPU/CPU stages completed. Do not launch new training without a new user instruction.",
   "mean_teacher_prefetch": "python scripts/prefetch_psr_mean_teacher.py --run-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
   "CPU_evaluation_resume": "python scripts/finish_psr_study.py --run-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
-  "dispatcher_warning": "Both dispatchers may already be running; resume their original wait handles instead of starting duplicates.",
+  "dispatcher_warning": "Historical recovery commands only; no dispatcher remains to restart.",
   "after_all_inference": "python scripts/prepare_psr_controls.py --training-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students --evaluation-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/evaluation/merged",
-  "checkpoint_SHA_source": "each completed training_receipt.json; no targetGT checkpoint selection"
+  "checkpoint_SHA_source": "each completed training_receipt.json; no targetGT checkpoint selection",
+  "status": "COMPLETE_STOP_NO_JOBS_TO_RESUME",
+  "actual_scope": "25VAL_SAME_SET_UNLABELLED_OFFLINE_ADAPTATION_NOT_TRAIN_TO_VAL_OR_BLIND_TEST",
+  "final_delivery": "final_delivery.json",
+  "confirmation_recovery": {
+    "seed0": "confirmations/seed0/artifact_index.json",
+    "seed42": "confirmations/seed42/artifact_index.json",
+    "parent_weight": "confirmations/parent_weight/artifact_index.json"
+  }
 }

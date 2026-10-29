@@ -1,0 +1,91 @@
+{
+  "status": "COMPLETE_PREDICTIONS_LOGS_AND_RECOVERY",
+  "methods": {
+    "FROZEN": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/FROZEN_425_predictions.tar.gz",
+      "sha256": "25b923f489998952c22daa681f4b9f9fc9e6e224239a6f8678d5e6eeab1c27b0",
+      "bytes": 1302805,
+      "files": 850
+    },
+    "SOURCE_REHEARSAL": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/SOURCE_REHEARSAL_425_predictions.tar.gz",
+      "sha256": "17d90a9f055e607cd0a02e4364bad8069fe6f0e5d271c7901ca62db223873a42",
+      "bytes": 576979,
+      "files": 850
+    },
+    "NAIVE_PAIRED": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/NAIVE_PAIRED_425_predictions.tar.gz",
+      "sha256": "3a9f24439d1afc656a0f3431845400cfaaab496bb2858efbeb2cea7f0b16a361",
+      "bytes": 336655,
+      "files": 850
+    },
+    "PSR": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/PSR_425_predictions.tar.gz",
+      "sha256": "e572f37ede00ab8660be7429c84cbfea696d3682e58657dff0bf14991a63c9c5",
+      "bytes": 546402,
+      "files": 850
+    },
+    "FROZEN_AT_NAIVE_PAIRED_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/FROZEN_AT_NAIVE_PAIRED_COUNT_425_predictions.tar.gz",
+      "sha256": "d4db158145549e3a163180ae37c7b5a793461a600e73c34c5084df83a5233c47",
+      "bytes": 328213,
+      "files": 850
+    },
+    "NAIVE_PAIRED_AT_FROZEN_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/NAIVE_PAIRED_AT_FROZEN_COUNT_425_predictions.tar.gz",
+      "sha256": "382cdcfe72e0a33d89b4a9c6cf76bc371e8f9bfead7ad989673559b1c4e6afec",
+      "bytes": 1335005,
+      "files": 850
+    },
+    "FROZEN_AT_PSR_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/FROZEN_AT_PSR_COUNT_425_predictions.tar.gz",
+      "sha256": "a40d412deadbc7c556869fefdf2528c37e575da8614ef2679bba3056feb0a758",
+      "bytes": 534419,
+      "files": 850
+    },
+    "PSR_AT_FROZEN_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/archives/PSR_AT_FROZEN_COUNT_425_predictions.tar.gz",
+      "sha256": "c1ff12d671157c2fc3952d638d9b29b2bbdf0e915ed22a34d6de357c4791d7f7",
+      "bytes": 1334474,
+      "files": 850
+    },
+    "runtime_logs": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/seed0/logs/runtime_logs.tar.gz",
+      "sha256": "78f86fbc805c4ff9433f4c02a7733d2f9b6b88123fd5ad4c220c25ad710f9228",
+      "bytes": 112119,
+      "files": 22
+    }
+  },
+  "private_run_root": "/data2/user/FlexHook-TTA/results/runs/psr_confirm_20261030_v1/seed0",
+  "large_score_streams": "per-method episode_recovery.json: exact paths and SHA256",
+  "checkpoints": {
+    "NAIVE_PAIRED": {
+      "checkpoint_best_source_selected.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_confirm_20261030_v1/seed0/students/NAIVE_PAIRED/checkpoint_best_source_selected.pt",
+        "sha256": "fb042af5b39a2fb32e29fbe8264f30fe5482871b3e5ca4d3b01e8aec5d2cc6bc"
+      },
+      "checkpoint_latest.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_confirm_20261030_v1/seed0/students/NAIVE_PAIRED/checkpoint_latest.pt",
+        "sha256": "aea81f6099f07eb69c317375c72fe811ac1ab46bc960a54e1ae7b6343e52edf0"
+      }
+    },
+    "PSR": {
+      "checkpoint_best_source_selected.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_confirm_20261030_v1/seed0/students/PSR/checkpoint_best_source_selected.pt",
+        "sha256": "67e6917cd6fdb635bcfc03ccc978066aec440a99108442a8d554fc5d25ec544a"
+      },
+      "checkpoint_latest.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_confirm_20261030_v1/seed0/students/PSR/checkpoint_latest.pt",
+        "sha256": "b6bbb49f902dd92493de34a27c2d4f4f747030e458ab765c58b495bfa0663931"
+      }
+    }
+  },
+  "raw_teacher_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full",
+  "raw_teacher_directories": {
+    "NAIVE": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full/NAIVE",
+    "PSR": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full/PSR"
+  },
+  "pseudo_root": "/data2/user/TTA-RMOT-assets/psr/val_v1",
+  "raw_teacher_cache": "/data2/user/TTA-RMOT-assets/psr/cache/raw.sqlite",
+  "no_images_weights_or_complete_raw_MLLM_cache_uploaded": true
+}

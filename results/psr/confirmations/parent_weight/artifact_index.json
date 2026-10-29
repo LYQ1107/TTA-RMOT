@@ -1,0 +1,62 @@
+{
+  "status": "COMPLETE_PREDICTIONS_LOGS_AND_RECOVERY",
+  "methods": {
+    "FROZEN": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/archives/FROZEN_425_predictions.tar.gz",
+      "sha256": "25b923f489998952c22daa681f4b9f9fc9e6e224239a6f8678d5e6eeab1c27b0",
+      "bytes": 1302805,
+      "files": 850
+    },
+    "SOURCE_REHEARSAL": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/archives/SOURCE_REHEARSAL_425_predictions.tar.gz",
+      "sha256": "17d90a9f055e607cd0a02e4364bad8069fe6f0e5d271c7901ca62db223873a42",
+      "bytes": 576979,
+      "files": 850
+    },
+    "PSR_PARENT_WEIGHT_CONTROL": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/archives/PSR_PARENT_WEIGHT_CONTROL_425_predictions.tar.gz",
+      "sha256": "fe207af254c4bff3b255c33c299c626ad0131fe727c4ed0959a2e2027c5421b7",
+      "bytes": 496926,
+      "files": 850
+    },
+    "FROZEN_AT_PSR_PARENT_WEIGHT_CONTROL_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/archives/FROZEN_AT_PSR_PARENT_WEIGHT_CONTROL_COUNT_425_predictions.tar.gz",
+      "sha256": "973c34a9e489abffc86f0608d92ecd52debb7f23e84b9a849fab81c76e51886e",
+      "bytes": 482027,
+      "files": 850
+    },
+    "PSR_PARENT_WEIGHT_CONTROL_AT_FROZEN_COUNT": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/archives/PSR_PARENT_WEIGHT_CONTROL_AT_FROZEN_COUNT_425_predictions.tar.gz",
+      "sha256": "3422ffa7b4219cb63f2f508f1c1d69fd1de3033c04d87ca854e2d72360a6e636",
+      "bytes": 1335395,
+      "files": 850
+    },
+    "runtime_logs": {
+      "path": "/data2/user/FlexHook-TTA/results/psr/confirmations/parent_weight/logs/runtime_logs.tar.gz",
+      "sha256": "530e05b3a7b25474ea65655cdb2cf52ec2d992f9602e4db1995f8b31078663cc",
+      "bytes": 78493,
+      "files": 16
+    }
+  },
+  "private_run_root": "/data2/user/FlexHook-TTA/results/runs/psr_parent_weight_20261030_v1",
+  "large_score_streams": "per-method episode_recovery.json: exact paths and SHA256",
+  "checkpoints": {
+    "PSR_PARENT_WEIGHT_CONTROL": {
+      "checkpoint_best_source_selected.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_parent_weight_20261030_v1/students/PSR_PARENT_WEIGHT_CONTROL/checkpoint_best_source_selected.pt",
+        "sha256": "5881f6ef01302e1a5f7d1daafd0ef8a5740e30bce3fbf235d134395397892e32"
+      },
+      "checkpoint_latest.pt": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/psr_parent_weight_20261030_v1/students/PSR_PARENT_WEIGHT_CONTROL/checkpoint_latest.pt",
+        "sha256": "38cd5a7c3259021cbf9d191863d494108e4db85e916f15f4a4b4eadd446e6b72"
+      }
+    }
+  },
+  "raw_teacher_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full",
+  "raw_teacher_directories": {
+    "PSR": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full/PSR"
+  },
+  "pseudo_root": "/data2/user/TTA-RMOT-assets/psr/val_v1",
+  "raw_teacher_cache": "/data2/user/TTA-RMOT-assets/psr/cache/raw.sqlite",
+  "no_images_weights_or_complete_raw_MLLM_cache_uploaded": true
+}

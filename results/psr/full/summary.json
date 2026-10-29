@@ -4938,7 +4938,7 @@
       "required_teacher_amortized_forward_seconds": 0
     }
   ],
-  "scientific_verdict": "PROMISING_REQUIRES_BUDGET_AND_COUNT_CONTROLLED_3SEED_CONFIRMATION",
+  "scientific_verdict": "POINT_GAIN_REPLICATED_BUT_INDEPENDENT_PSR_CONTRIBUTION_NOT_ESTABLISHED",
   "formal_40Train_to_Val_complete": false,
   "source_and_target_training_GT_permissions": "sourceGT only; targetGT after prediction seal",
   "counts_and_intervals_are_not_blind_test_proof": true,
@@ -5006,5 +5006,8 @@
     "fixed_DETR_NeuralSORT": "official precomputed MOT; detector/tracker generation cost unknown and excluded equally",
     "test_FPS": "second-stage referring filter with cached fixed MOT, not detector+tracker end-to-end FPS",
     "teacher_time": "required amortized forward component plus actual cached worker costs in supervision audits; model loading is not free"
-  }
+  },
+  "initial_automatic_verdict": "PROMISING_REQUIRES_BUDGET_AND_COUNT_CONTROLLED_3SEED_CONFIRMATION",
+  "final_verdict_reference": "docs/PSR_FINAL_SCIENTIFIC_VERDICT.md",
+  "completed_3seed_and_parent_control": true
 }

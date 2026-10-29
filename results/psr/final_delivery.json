@@ -1,0 +1,185 @@
+{
+  "status": "COMPLETE_USER_AUTHORIZED_VAL_STUDY_STOP",
+  "protocol": "25VAL_SAME_SET_UNLABELLED_OFFLINE_ADAPTATION_NOT_TRAIN_TO_VAL_OR_BLIND_TEST",
+  "project": "LYQ1107/TTA-RMOT",
+  "branch": "research/v2dance-psr-trainval-20261029",
+  "user_override": "\u6211\u8fd8\u662f\u6ca1\u670940\uff0c\u4f60\u76f4\u63a5\u7528val\u90a3\u4e2a\u8fdb\u884c",
+  "scientific_verdict": "POINT_GAIN_REPLICATED_BUT_INDEPENDENT_PSR_CONTRIBUTION_NOT_ESTABLISHED",
+  "formal_40Train_to_Val_complete": false,
+  "new_students": 13,
+  "official_evaluation_datasets": 47,
+  "episodes_per_evaluation": 425,
+  "videos_per_evaluation": 25,
+  "evaluations_include_reused_baselines_and_posthoc_count_controls": true,
+  "training_steps_each": 8973,
+  "trainable_parameters_each": 24576,
+  "training_target_GT_open_attempts": 0,
+  "teacher_target_GT_open_attempts": 0,
+  "teacher_sampling_seed": 17,
+  "student_seeds": [
+    17,
+    0,
+    42
+  ],
+  "aggregate": {
+    "NAIVE_PAIRED": {
+      "HOTA": {
+        "mean": 7.6174,
+        "sample_std": 0.17921983707168113
+      },
+      "DetA": {
+        "mean": 3.8745666666666665,
+        "sample_std": 0.13676378662984354
+      },
+      "AssA": {
+        "mean": 15.000333333333332,
+        "sample_std": 0.17855064640973276
+      },
+      "IDF1": {
+        "mean": 4.805833333333333,
+        "sample_std": 0.12773419015022308
+      },
+      "DetRe": {
+        "mean": 4.112166666666667,
+        "sample_std": 0.1515168087485127
+      },
+      "IDSW": {
+        "mean": 295.3333333333333,
+        "sample_std": 14.977761292440647
+      }
+    },
+    "PSR": {
+      "HOTA": {
+        "mean": 8.722266666666668,
+        "sample_std": 0.26144258133160575
+      },
+      "DetA": {
+        "mean": 4.632866666666667,
+        "sample_std": 0.22541886197329014
+      },
+      "AssA": {
+        "mean": 16.458333333333336,
+        "sample_std": 0.1861782300198747
+      },
+      "IDF1": {
+        "mean": 5.579833333333333,
+        "sample_std": 0.2137856948753429
+      },
+      "DetRe": {
+        "mean": 5.170366666666666,
+        "sample_std": 0.289067575721203
+      },
+      "IDSW": {
+        "mean": 362.0,
+        "sample_std": 20.8806130178211
+      }
+    }
+  },
+  "per_seed_attribution": [
+    {
+      "seed": 17,
+      "Naive_HOTA": 7.4499,
+      "PSR_HOTA": 8.4204,
+      "Frozen_HOTA": 8.218,
+      "Frozen_at_Naive_count": 7.2621,
+      "Frozen_at_PSR_count": 8.1951,
+      "PSR_at_Frozen_count": 8.0336,
+      "PSR_present_HOTA": 8.804252061579596,
+      "PSR_empty_FP": 20059,
+      "PSR_empty_nonempty_rate": 0.22857142857142856,
+      "recovered_gt": 8773,
+      "lost_gt": 8025,
+      "net_gt_recovery": 748,
+      "new_false_positive_rows": 18327,
+      "removed_false_positive_rows": 85724,
+      "net_false_positive_change": -67389
+    },
+    {
+      "seed": 0,
+      "Naive_HOTA": 7.5959,
+      "PSR_HOTA": 8.8701,
+      "Frozen_HOTA": 8.218,
+      "Frozen_at_Naive_count": 7.4002,
+      "Frozen_at_PSR_count": 8.6343,
+      "PSR_at_Frozen_count": 8.0312,
+      "PSR_present_HOTA": 9.32659143660602,
+      "PSR_empty_FP": 22749,
+      "PSR_empty_nonempty_rate": 0.23636363636363636,
+      "recovered_gt": 9934,
+      "lost_gt": 8009,
+      "net_gt_recovery": 1925,
+      "new_false_positive_rows": 21261,
+      "removed_false_positive_rows": 85680,
+      "net_false_positive_change": -64411
+    },
+    {
+      "seed": 42,
+      "Naive_HOTA": 7.8064,
+      "PSR_HOTA": 8.8763,
+      "Frozen_HOTA": 8.218,
+      "Frozen_at_Naive_count": 7.6161,
+      "Frozen_at_PSR_count": 8.6328,
+      "PSR_at_Frozen_count": 8.0207,
+      "PSR_present_HOTA": 9.332786914796968,
+      "PSR_empty_FP": 22735,
+      "PSR_empty_nonempty_rate": 0.23636363636363636,
+      "recovered_gt": 9962,
+      "lost_gt": 8045,
+      "net_gt_recovery": 1917,
+      "new_false_positive_rows": 21486,
+      "removed_false_positive_rows": 85876,
+      "net_false_positive_change": -64382
+    }
+  ],
+  "deterministic_Frozen_HOTA": 8.218,
+  "Frozen_is_one_reused_reference_not_three_independent_runs": true,
+  "parent_control": {
+    "HOTA": 8.4255,
+    "unique_new_weak_labels": 0,
+    "unique_parent_replay_terms": 526,
+    "parent_minus_PSR_HOTA": 0.00509708012002541,
+    "parent_minus_PSR_video_CI95": [
+      -0.011766321599884711,
+      0.025123895097890588
+    ],
+    "post_hoc_not_exact_gradient_intervention": true
+  },
+  "primary_ordinary_controls_seed17_only": true,
+  "new_full_student_GPU_hours": 24.41775206033632,
+  "cost_scope": "13 full student training+inference allocations; excludes inherited teacher/Frozen/source-only/front-end and separately reported interface/smoke costs",
+  "shared_GPU_elapsed_is_not_exclusive_device_utilization": true,
+  "delivery_audits": {
+    "primary": {
+      "methods": 26,
+      "students": 8,
+      "path": "assets/delivery_audit_primary.json"
+    },
+    "seed0": {
+      "methods": 8,
+      "students": 2,
+      "path": "assets/delivery_audit_seed0.json"
+    },
+    "seed42": {
+      "methods": 8,
+      "students": 2,
+      "path": "assets/delivery_audit_seed42.json"
+    },
+    "parent_weight": {
+      "methods": 5,
+      "students": 1,
+      "path": "assets/delivery_audit_parent_weight.json"
+    }
+  },
+  "final_report": "docs/PSR_FINAL_SCIENTIFIC_VERDICT.md",
+  "GPU_calls_in_this_finalization": 0,
+  "raw_target_GT_files_opened_in_this_finalization": false,
+  "remaining_authorized_experiments": [],
+  "automatic_followup_training": false,
+  "actual_execution_source_audits": [
+    "assets/source_revision_audit_parent_weight.json",
+    "assets/source_revision_audit_primary.json",
+    "assets/source_revision_audit_seed0.json",
+    "assets/source_revision_audit_seed42.json",
+    "assets/source_revision_audit_seed42_partial.json"
+  ]
+}

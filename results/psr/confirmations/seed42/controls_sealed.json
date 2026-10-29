@@ -1,0 +1,40 @@
+{
+  "status": "ALL_REGISTERED_FULL_PREDICTIONS_AND_GT_FREE_CONTROLS_SEALED",
+  "methods": [
+    "FROZEN",
+    "SOURCE_REHEARSAL",
+    "NAIVE_PAIRED",
+    "PSR",
+    "FROZEN_AT_NAIVE_PAIRED_COUNT",
+    "NAIVE_PAIRED_AT_FROZEN_COUNT",
+    "FROZEN_AT_PSR_COUNT",
+    "PSR_AT_FROZEN_COUNT"
+  ],
+  "student_methods": [
+    "NAIVE_PAIRED",
+    "PSR"
+  ],
+  "registered_student_seals": {
+    "NAIVE_PAIRED": {
+      "checkpoint_sha256": "4a6d54228e48e604f66071b48c207d31c93e937c0cf1ed200309b9c07deadc7d",
+      "training_receipt_sha256": "230f995230d350fd850169a12b09869929bc3c572101c701d7d622f288fdac4b",
+      "full_audit_sha256": "f06afffcc7d9d89838d38843fc13989c846622cd2646e6e3965e3da7594f7d09",
+      "run_metadata_sha256": "b8e1b88646491611ba301eb1eca32d782b4bd88f7e90d5d2617b694892f3bbdf"
+    },
+    "PSR": {
+      "checkpoint_sha256": "a232eecf6c2d39134fc83a1ebdfbca202fe2e5df1c99b057687a15caa8caf720",
+      "training_receipt_sha256": "f66e347fa3b4d26d96e2315bd2a4059b992f0c50de32543d7e2f283d4a5e78c9",
+      "full_audit_sha256": "199108e7e30e73435c4805060c2ba1d69b3107b7a3cd48ccfef992bfbc1d8888",
+      "run_metadata_sha256": "91bbcc814ad181bc36c2ea2285fadad20b1ccf47ad5f480de50342ff0f4a45d6"
+    }
+  },
+  "episodes_each": 425,
+  "video_count": 25,
+  "target_GT_open_attempts": [],
+  "immutable_geometry_and_predicted_IDs": true,
+  "protocol": "USER_AUTHORIZED_25VAL_SAME_SET_NOT_TRAIN_TO_VAL",
+  "count_matched": "POST_HOC_DIAGNOSTIC_NOT_INDEPENDENT_DEPLOYABLE_METHOD",
+  "no_teacher_at_test_time": true,
+  "test_time_optimizer_steps": 0,
+  "inference_rerun": false
+}

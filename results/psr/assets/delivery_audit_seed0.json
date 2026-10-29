@@ -1,0 +1,123 @@
+{
+  "status": "PASS_COMPLETE_DELIVERED_PREDICTIONS_OFFICIAL_RESULTS_AND_STUDENTS",
+  "methods": {
+    "FROZEN": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "25b923f489998952c22daa681f4b9f9fc9e6e224239a6f8678d5e6eeab1c27b0"
+    },
+    "SOURCE_REHEARSAL": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "17d90a9f055e607cd0a02e4364bad8069fe6f0e5d271c7901ca62db223873a42"
+    },
+    "NAIVE_PAIRED": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "3a9f24439d1afc656a0f3431845400cfaaab496bb2858efbeb2cea7f0b16a361"
+    },
+    "PSR": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "e572f37ede00ab8660be7429c84cbfea696d3682e58657dff0bf14991a63c9c5"
+    },
+    "FROZEN_AT_NAIVE_PAIRED_COUNT": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "d4db158145549e3a163180ae37c7b5a793461a600e73c34c5084df83a5233c47"
+    },
+    "NAIVE_PAIRED_AT_FROZEN_COUNT": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "382cdcfe72e0a33d89b4a9c6cf76bc371e8f9bfead7ad989673559b1c4e6afec"
+    },
+    "FROZEN_AT_PSR_COUNT": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "a40d412deadbc7c556869fefdf2528c37e575da8614ef2679bba3056feb0a758"
+    },
+    "PSR_AT_FROZEN_COUNT": {
+      "predictions": 425,
+      "videos": 25,
+      "official_sequences": 425,
+      "archive_sha256": "c1ff12d671157c2fc3952d638d9b29b2bbdf0e915ed22a34d6de357c4791d7f7"
+    }
+  },
+  "students": {
+    "NAIVE_PAIRED": {
+      "steps": 8973,
+      "parameters": 24576,
+      "source_videos": 17,
+      "target_queries": 425,
+      "target_GT_open_attempts": 0,
+      "checkpoint_SHA256": "fb042af5b39a2fb32e29fbe8264f30fe5482871b3e5ca4d3b01e8aec5d2cc6bc"
+    },
+    "PSR": {
+      "steps": 8973,
+      "parameters": 24576,
+      "source_videos": 17,
+      "target_queries": 425,
+      "target_GT_open_attempts": 0,
+      "checkpoint_SHA256": "67e6917cd6fdb635bcfc03ccc978066aec440a99108442a8d554fc5d25ec544a"
+    }
+  },
+  "target_GT_reads": 0,
+  "GPU_calls": 0,
+  "does_not_imply_scientific_success": true,
+  "vendor": {
+    "commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+    "patch": "results/positive_free/full/manifests/vendor_tracked_source.patch",
+    "patch_sha256": "f5eba6bbb08f44c4288a3155af65d3719585b74644189e7ec8bc773df87ca1c2"
+  },
+  "environments": {
+    "student_CPU_evaluation": {
+      "python": "3.10.20 | packaged by conda-forge | (main, Mar  5 2026, 16:42:22) [GCC 14.3.0]",
+      "executable": "/home/szgx/anaconda3/envs/dfot/bin/python",
+      "packages": {
+        "torch": "2.7.0+cu128",
+        "torchvision": "0.22.0+cu128",
+        "transformers": "5.4.0",
+        "tokenizers": "0.22.2",
+        "numpy": "1.26.4",
+        "scipy": "1.15.3",
+        "Pillow": "11.3.0",
+        "timm": "1.0.26",
+        "yacs": "0.1.8",
+        "opencv-python": "4.11.0.86",
+        "huggingface-hub": "1.8.0",
+        "safetensors": "0.7.0",
+        "qwen-vl-utils": null,
+        "einops": "0.8.2",
+        "scikit-learn": null
+      }
+    },
+    "frozen_MLLM": {
+      "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+      "executable": "/data2/user/TTA-RMOT-assets/teacher-p1/env/bin/python",
+      "packages": {
+        "torch": "2.8.0+cu128",
+        "torchvision": "0.23.0+cu128",
+        "transformers": "4.57.6",
+        "tokenizers": "0.22.2",
+        "numpy": "2.2.6",
+        "scipy": "1.15.3",
+        "Pillow": "12.2.0",
+        "timm": "1.0.25",
+        "yacs": null,
+        "opencv-python": null,
+        "huggingface-hub": "0.36.2",
+        "safetensors": "0.8.0",
+        "qwen-vl-utils": "0.0.14",
+        "einops": "0.8.2",
+        "scikit-learn": null
+      }
+    }
+  }
+}

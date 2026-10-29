@@ -10,14 +10,18 @@
 用户明确允许缺少40Train同配置MOT时使用现有25Val，所有新结果均不称Train→Val泛化或盲测。
 四种GT-free采样策略各425表达/8500真实冻结Qwen判断；同容量Naive与PSR主训练已各完成8973步。
 PSR新增254条有双端点证据、限定中间一帧的弱监督，不宣称它们都正确。
-完整8学生训练、425表达推理、26组官方及双向数量控制评测已完成。
+本轮已全部完成并停止：13学生完整训练/425表达推理，47套官方评测数据集及预测归档（含复用基线、双向数量诊断）。
 首轮HOTA：Frozen **8.2180**、Naive **7.4499**、PSR **8.4204**、Uniform **8.4347**、匹配MeanTeacher **8.6095**。
-PSR未超过简单Uniform/MT，Present子集HOTA下降；当前不支持独立方法贡献。条件触发的seed0/42确认及端点权重控制在执行。
+seed17的PSR未超过简单Uniform/MT，Present子集HOTA下降；当前不支持独立方法贡献。
+三seed主指标：PSR **8.7223±0.2614**、Naive **7.6174±0.1792**，固定Frozen **8.2180**。
+不新增弱标签的端点正例重加权控制 **8.4255**，与同seed PSR **8.4204**接近；没有建立PSR扩展模块的独立贡献。
+普通Uniform/MT等仅seed17，不将它们与三seed均值直接作统计优越声明。
 最多四张显存入场审计后的共享GPU，每卡串行，不停止别的项目；目标GT仅在完整预测封存后独立评测。
 [机制](docs/PSR_METHOD.md)、[预注册训练协议](docs/PSR_TRAINING_PROTOCOL.md)、
 [监督审计](docs/PSR_PSEUDO_LABEL_AUDIT.md)、[真实进度](docs/PSR_EXPERIMENT_RESULTS.md)、
 [当前科研判决](docs/PSR_FINAL_SCIENTIFIC_VERDICT.md)、[完整主训练日志](results/psr/training/)、[恢复索引](results/psr/recovery_index.json)。
 [首轮完整指标与成本](results/psr/full/TABLES.md)、[26组完整预测与日志](results/psr/full/artifact_index.json)。
+[三seed与权重控制](results/psr/confirmations/TABLES.md)、[最终交付清单](results/psr/final_delivery.json)。
 [PSR复现/环境/恢复入口](docs/PSR_REPRODUCIBILITY.md)、[实际归档完整性审计](results/psr/assets/delivery_audit_primary.json)。
 不把单seed微增或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
 

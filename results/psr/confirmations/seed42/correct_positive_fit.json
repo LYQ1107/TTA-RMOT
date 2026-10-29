@@ -1,0 +1,172 @@
+{
+  "status": "COMPLETE_FROM_SEALED_OFFLINE_CANDIDATE_CSV",
+  "policies": {
+    "NAIVE": {
+      "qualified_POS_official_match": {
+        "candidate_rows": 363,
+        "source_selected": 38,
+        "source_fit": {
+          "samples": 363,
+          "soft_teacher_BCE": 8.189089747771378,
+          "soft_teacher_MSE": 0.8342599734375642,
+          "mean_student_probability": 0.11242889805316579,
+          "positive_selection_fraction": 0.1046831955922865
+        },
+        "students": {
+          "NAIVE_PAIRED": {
+            "selected": 37,
+            "newly_selected": 26,
+            "lost_source_selected": 27,
+            "source_selected_retained": 11,
+            "fit": {
+              "samples": 363,
+              "soft_teacher_BCE": 2.0139054937253866,
+              "soft_teacher_MSE": 0.637385823753874,
+              "mean_student_probability": 0.21876085317096472,
+              "positive_selection_fraction": 0.10192837465564739
+            }
+          }
+        }
+      },
+      "qualified_POS_official_unmatched": {
+        "candidate_rows": 293,
+        "source_selected": 17,
+        "source_fit": {
+          "samples": 293,
+          "soft_teacher_BCE": 8.776838942407046,
+          "soft_teacher_MSE": 0.8795551376935128,
+          "mean_student_probability": 0.06356190525058028,
+          "positive_selection_fraction": 0.05802047781569966
+        },
+        "students": {
+          "NAIVE_PAIRED": {
+            "selected": 3,
+            "newly_selected": 2,
+            "lost_source_selected": 16,
+            "source_selected_retained": 1,
+            "fit": {
+              "samples": 293,
+              "soft_teacher_BCE": 1.938144428201795,
+              "soft_teacher_MSE": 0.6376355855337779,
+              "mean_student_probability": 0.19862039036544255,
+              "positive_selection_fraction": 0.010238907849829351
+            }
+          }
+        }
+      }
+    },
+    "PSR": {
+      "qualified_POS_official_match": {
+        "candidate_rows": 374,
+        "source_selected": 30,
+        "source_fit": {
+          "samples": 374,
+          "soft_teacher_BCE": 8.527912586805172,
+          "soft_teacher_MSE": 0.8555295423074935,
+          "mean_student_probability": 0.09217338858407235,
+          "positive_selection_fraction": 0.08021390374331551
+        },
+        "students": {
+          "PSR": {
+            "selected": 41,
+            "newly_selected": 33,
+            "lost_source_selected": 22,
+            "source_selected_retained": 8,
+            "fit": {
+              "samples": 374,
+              "soft_teacher_BCE": 1.9873617181151415,
+              "soft_teacher_MSE": 0.6243668355663279,
+              "mean_student_probability": 0.2259114104072739,
+              "positive_selection_fraction": 0.10962566844919786
+            }
+          }
+        }
+      },
+      "qualified_POS_official_unmatched": {
+        "candidate_rows": 283,
+        "source_selected": 15,
+        "source_fit": {
+          "samples": 283,
+          "soft_teacher_BCE": 8.785152152502349,
+          "soft_teacher_MSE": 0.8816484674562519,
+          "mean_student_probability": 0.06147154966396443,
+          "positive_selection_fraction": 0.053003533568904596
+        },
+        "students": {
+          "PSR": {
+            "selected": 9,
+            "newly_selected": 3,
+            "lost_source_selected": 9,
+            "source_selected_retained": 6,
+            "fit": {
+              "samples": 283,
+              "soft_teacher_BCE": 1.9257561536580148,
+              "soft_teacher_MSE": 0.6395545830450491,
+              "mean_student_probability": 0.19891590581949983,
+              "positive_selection_fraction": 0.03180212014134275
+            }
+          }
+        }
+      }
+    },
+    "UNIFORM": {
+      "qualified_POS_official_match": {
+        "candidate_rows": 371,
+        "source_selected": 19,
+        "source_fit": {
+          "samples": 371,
+          "soft_teacher_BCE": 9.558796073149862,
+          "soft_teacher_MSE": 0.9071632699315302,
+          "mean_student_probability": 0.05596979800544951,
+          "positive_selection_fraction": 0.05121293800539083
+        },
+        "students": {}
+      },
+      "qualified_POS_official_unmatched": {
+        "candidate_rows": 268,
+        "source_selected": 8,
+        "source_fit": {
+          "samples": 268,
+          "soft_teacher_BCE": 9.53532316398416,
+          "soft_teacher_MSE": 0.9068926335396373,
+          "mean_student_probability": 0.04251529970217757,
+          "positive_selection_fraction": 0.029850746268656716
+        },
+        "students": {}
+      }
+    },
+    "CONFIDENCE": {
+      "qualified_POS_official_match": {
+        "candidate_rows": 370,
+        "source_selected": 39,
+        "source_fit": {
+          "samples": 370,
+          "soft_teacher_BCE": 7.095962133709569,
+          "soft_teacher_MSE": 0.8133840975160093,
+          "mean_student_probability": 0.12432580806001797,
+          "positive_selection_fraction": 0.10540540540540541
+        },
+        "students": {}
+      },
+      "qualified_POS_official_unmatched": {
+        "candidate_rows": 316,
+        "source_selected": 18,
+        "source_fit": {
+          "samples": 316,
+          "soft_teacher_BCE": 7.912605124445823,
+          "soft_teacher_MSE": 0.8733471646433209,
+          "mean_student_probability": 0.06784352627175132,
+          "positive_selection_fraction": 0.056962025316455694
+        },
+        "students": {}
+      }
+    }
+  },
+  "GPU_calls": 0,
+  "raw_target_GT_files_opened": false,
+  "checkpoint_scope": "source-val-selected checkpoint on its own teacher training anchors",
+  "not_independent_validation": true,
+  "not_used_for_checkpoint_threshold_or_loss_selection": true,
+  "identity_scope": "candidate observations, not distinct people or one-to-one GT coverage; see teacher_positive_support.json for unique GT coverage",
+  "GT_scope": "official IoU>=.5 annotation match, not exhaustive real-world semantic truth"
+}
