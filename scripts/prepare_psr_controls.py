@@ -58,7 +58,7 @@ def prepare(root,training,methods,precompute_only=False):
         no_teacher_at_test_time=True,test_time_optimizer_steps=0,inference_rerun=False)
     if precompute_only:
         result.update(status='PARTIAL_REGISTERED_CONTROLS_PRECOMPUTED_NOT_GT_EVALUATION_READY',GT_evaluation_authorized=False,
-            remaining_registered_students=[m for m in DEFAULT if m not in methods])
+            remaining_registered_students=[m for m in DEFAULT if not (root/m/'full_audit.json').exists()])
         atomic_json(root/'control_prefills'/f'{time.time_ns()}.json',result)
     else:atomic_json(root/'controls_sealed.json',result)
     print(json.dumps(result,indent=2));return result

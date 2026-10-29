@@ -18,7 +18,7 @@ Geometry全部263条独立弱扩展均实际访问。剩余普通Temporal与匹�
 Uniform、Discovery的完整425预测现也已封存，合计4/8学生完整预测。
 普通Temporal已在原GPU1开始固定8973步；Discovery进程退出后，自动Mean Teacher接力已在GPU6入场。
 Geometry在GPU4继续完整推理；Confidence退出后，GPU5上的同名MeanTeacher排队项只在CPU锁等待，实际训练仍在GPU6，不重复分配CUDA。
-Confidence完整425预测现也已封存（5/8完整学生预测）。前五组的10个双向数量对照已在CPU预生成，各425表达、目标GT0；
+Confidence、Geometry完整425预测现也已封存（6/8完整学生预测）。前六组的12个双向数量对照已在CPU预生成，各425表达、目标GT0；
 这只是GT-free部分预计算，不写最终GT评测授权seal，不把派生对照当作无需父模型的独立系统。
 Discovery/Geometry首次因原GPU2/0显存被外部新进程占用而入场失败；失败时尚未开始优化。
 保留失败日志与原16+4GiB标准，修复子队列排除健康GPU1/5后，在新审计GPU6/4只恢复两项失败任务；最多同时四卡。

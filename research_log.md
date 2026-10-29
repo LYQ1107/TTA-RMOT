@@ -2147,6 +2147,10 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - FormalE2 and full425evaluation are next, not already complete. Only actual fullRMOT/ranking/quantity-adjusted evidence can authorize subsequent conventional controls or innovation; do not call sparse AP a HOTA gain.
 # 2026-10-29 PSR 主训练完成与匹配对照队列
 
+6/8学生完整425预测已封存，Geometry修复父进程87918正常exit0。两组剩余学生各到6000步，仍原预算。
+在等待其余GPU工作时，CPU已完成前六组12个完整双向数量对照；无新GPU调用/无重跑预测/无目标GT打开。
+部分预计算只保存control_prefills收据，不创建最终controls_sealed；GT评测仍待全8组完成。
+
 实际接力成功：Uniform425推理退出后，原GPU1启动NaiveTemporal PID3256288；Discovery425推理退出后，等待器29327在GPU6启动MeanTeacher PID3264581。
 另两卡4/5仍为Geometry/Confidence推理，合计4物理卡；没有停止其他任务，也没有重复已完成episode。
 
