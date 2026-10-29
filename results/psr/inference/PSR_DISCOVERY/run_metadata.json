@@ -19711,7 +19711,7 @@
   "gpu_uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
   "peak_allocated_bytes": 5276297216,
   "allocator_budget_bytes": 17179869184,
-  "worker_seconds": 2883.4855971210636,
+  "worker_seconds": 2879.3156297679525,
   "actual_scheduler_wall_seconds": 2884.74875330925,
   "all_attempt_worker_costs_included": true,
   "execution_mode": "independent single_GPU full425 checkpoint, four method lanes",
@@ -19728,5 +19728,19 @@
       "elapsed_seconds": 2883.4855971210636,
       "end_epoch": 1793285357.7504983
     }
-  ]
+  ],
+  "scheduler_worker_slot_seconds": 2883.4855971210636,
+  "CPU_lock_wait_seconds": 0.00010633980855345726,
+  "CLI_attempts": [
+    {
+      "pid": 3154824,
+      "actual_GPU_calls": 1,
+      "GPU_worker_seconds": 2879.3156297679525,
+      "CPU_lock_wait_seconds": 0.00010633980855345726,
+      "completed_full425_reused": false,
+      "physical_gpu": "6",
+      "successful": true
+    }
+  ],
+  "zero_GPU_reuse_attempts": 0
 }

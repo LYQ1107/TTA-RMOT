@@ -14,6 +14,18 @@ RUN=ROOT/'results/runs/psr_val_20261029_v1';PUBLIC=ROOT/'results/psr'
 def snapshot():
     PUBLIC.mkdir(exist_ok=True);assets=PUBLIC/'assets';assets.mkdir(exist_ok=True)
     if (RUN/'regression_stdout.txt').exists():shutil.copy2(RUN/'regression_stdout.txt',assets/'regression_stdout.txt')
+    prefills=list((RUN/'evaluation/merged/control_prefills').glob('*.json'));control_summary={}
+    for receipt in prefills:
+        dest=assets/'control_prefills';dest.mkdir(exist_ok=True);shutil.copy2(receipt,dest/receipt.name)
+        for name in json.loads(receipt.read_text())['methods']:
+            if not (name.startswith('FROZEN_AT_') or name.endswith('_AT_FROZEN_COUNT')):continue
+            folder=RUN/'evaluation/merged'/name;audit=json.loads((folder/'full_audit.json').read_text());meta=json.loads((folder/'run_metadata.json').read_text())
+            control_summary[name]=dict(status=audit['status'],videos=audit['unique_videos'],episodes=audit['valid_episodes'],
+                candidates=audit['candidates'],selected_rows=audit['selected_rows'],score_source=meta['score_source'],count_source=meta['count_source'],
+                incremental_CPU_seconds=meta['incremental_CPU_wall_seconds'],GPU_calls=0,total_cost_includes_parent_models=True,
+                full_audit_sha256=file_sha(folder/'full_audit.json'),run_directory=str(folder))
+    if control_summary:atomic_json(assets/'control_prefill_summary.json',dict(methods=control_summary,
+        GT_reads_in_partial_precompute=0,GT_evaluation_authorized_by_partial_precompute=False))
     for phase in ('interface','smoke'):
         for method in ('NAIVE_PAIRED','PSR','MEAN_TEACHER_MATCHED'):
             source=RUN/phase/method;dest=assets/phase/method;dest.mkdir(parents=True,exist_ok=True)
