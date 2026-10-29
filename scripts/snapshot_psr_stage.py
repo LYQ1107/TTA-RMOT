@@ -13,6 +13,7 @@ RUN=ROOT/'results/runs/psr_val_20261029_v1';PUBLIC=ROOT/'results/psr'
 
 def snapshot():
     PUBLIC.mkdir(exist_ok=True);assets=PUBLIC/'assets';assets.mkdir(exist_ok=True)
+    if (RUN/'regression_stdout.txt').exists():shutil.copy2(RUN/'regression_stdout.txt',assets/'regression_stdout.txt')
     for phase in ('interface','smoke'):
         for method in ('NAIVE_PAIRED','PSR','MEAN_TEACHER_MATCHED'):
             source=RUN/phase/method;dest=assets/phase/method;dest.mkdir(parents=True,exist_ok=True)
