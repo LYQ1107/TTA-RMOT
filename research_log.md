@@ -15,6 +15,7 @@
 - PSR374correctdirectPOS (344source-rejected), vsNaive363 (net11); weak170/254correct,84errors. DirectGTcoverage0.176%,newweak0.080%; Uniform371directcorrect andbetterHOTA.
 - FullcandidateAUROC.650204→.756113/AP≈.1618, butGTone-to-oneR@1/5notbetter andqueryswapadvantagedeltaCIcrosses0. AssA21.147→16.245/IDSW269→338. PSR−FrozenvideoCI[-6.3931,5.9808],14improve/8decline/3unchanged. ScientificindependentcontributionNOTestablished.
 - Regression16PSR+MLLM tests pass after adding dedicatedparentcontroldispatch. Registeredseedconfirmation remainsrunning, no thresholds/lr/capacity/teacherbudget changed.
+- Added officialCSV-onlyleave-one-video sensitivity: PSR−Frozenremaining24range[-1.38465,3.76537],4negative; PSR−Naiveall25positive[.79595,1.01488]; PSR−Uniform21negative. No models/GTthresholdsrerun. APIlarge537entrytreewrite timedout afterallblobs uploaded; recovered64entrytreebatches, exacttreeverified, remote c396caf5. No result edits or experimentreruns.
 
 ## 2026-10-29 — New PSR implementation goal; user explicitly reauthorizes25Val
 
