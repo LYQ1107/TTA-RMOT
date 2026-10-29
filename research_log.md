@@ -1,5 +1,13 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Final report augmentation prepared without experiment changes
+
+- Originalwait248confirmedlive. seed0NaiveandPSRfull425inferexit0; seed42bothtrained8973exit0andstillinfer. ParentweightcontrolGPU6progress4000/8973, sameconfig/sourceGTonly; no newGPUjob orGTmetricpeeking.
+- Addedreport-onlyfinalize_psr_confirmation_delivery.py, gatedonoriginalfullCPUcompletion. It refreshesold-importparentreplaydisplay, addsfullstudentcost/separatevalidationcost, copiesactualinterface/smoke receipts andouterCPU/schedulerlogs. No model/seed/threshold/checkpoint changes.
+- Realregression: all8primarytraining/inferencecostfields exactlyequalpreexistingofficialsummary, matchedMTexternalteacherbudget0. No parentreplaytermscountedasnewweaklabels; inheritedteacher/Frozen/frontcostsseparate.
+- Fixedactualgenericexportrecoverypath bug: seedroot/teacher_full doesnotcontainthe sharedteacher. Resolvefromimmutabletrainingconfig+pseudoseal.teacher_receipt; existingseed0NAIVE/PSRpaths matchprimaryandexist. FutureCPUexportswillusethecorrectpaths; primaryhistoricalmetricsunchanged.
+- Clarifiedpubliccodehistoryreproduction: serverhasprivateexecutioncommitlineage; freshclonecanverifypublicmatching_snapshot+SHA. Sourcecodeauditsalreadyprovefullruntimepackageequality, notjustfilenamesorintent.
+
 ## 2026-10-30 — Actual execution source and completed confirmation training published
 
 - Fetchedonlycurrentresearchbranchpublichistory, noHEADswitch orhealthyprocessinterruption. All8primaryrecordedcodeSHA256 matchactualexecutioncommitsANDfetchedpublicsnapshots; entireflex_uda/flex_tta/compat/source-loader packages havezerodiff. Naive/PSRcorepublic733f00d; remainingcore0b5bd8. Addedpublication_map/source_revisionaudit, notfalseGitcommitidentityequivalence.

@@ -22,6 +22,17 @@ def archive(path,files):
     return dict(path=str(path),sha256=file_sha(path),bytes=path.stat().st_size,files=len(files))
 
 
+def teacher_directories(training,methods):
+    result={}
+    for method in methods:
+        if method=='MEAN_TEACHER_MATCHED':continue
+        config=json.loads((Path(training)/method/'config.json').read_text())
+        directory=Path(config['data']['pseudo_directory'])
+        seal=json.loads((directory/'seal.json').read_text())
+        result[directory.name]=str(Path(seal['teacher_receipt']).parent)
+    return result
+
+
 def export(run,public):
     run,public=Path(run).resolve(),Path(public).resolve();root=run/'evaluation/merged'
     seal=json.loads((root/'controls_sealed.json').read_text());complete=json.loads((root/'official_evaluation_completion.json').read_text())
@@ -77,10 +88,13 @@ def export(run,public):
     for name in ('controls_sealed.json','official_evaluation_completion.json'):
         shutil.copy2(root/name,public/name)
     if (run/'mean_teacher_prefetch_completion.json').exists():shutil.copy2(run/'mean_teacher_prefetch_completion.json',public/'mean_teacher_prefetch_completion.json')
+    teacher_dirs=teacher_directories(run/'students',seal['student_methods'])
+    teacher_roots={str(Path(p).parent) for p in teacher_dirs.values()}
     atomic_json(public/'artifact_index.json',dict(status='COMPLETE_PREDICTIONS_LOGS_AND_RECOVERY',methods=index,
         private_run_root=str(run),large_score_streams='per-method episode_recovery.json: exact paths and SHA256',
         checkpoints=checkpoints,
-        raw_teacher_root=str(run/'teacher_full'),pseudo_root='/data2/user/TTA-RMOT-assets/psr/val_v1',
+        raw_teacher_root=next(iter(teacher_roots)) if len(teacher_roots)==1 else None,
+        raw_teacher_directories=teacher_dirs,pseudo_root='/data2/user/TTA-RMOT-assets/psr/val_v1',
         raw_teacher_cache='/data2/user/TTA-RMOT-assets/psr/cache/raw.sqlite',
         no_images_weights_or_complete_raw_MLLM_cache_uploaded=True))
     print(json.dumps(dict(status='PSR_ARTIFACT_EXPORT_COMPLETE',methods=len(seal['methods']),runtime_log_files=len(logs))))

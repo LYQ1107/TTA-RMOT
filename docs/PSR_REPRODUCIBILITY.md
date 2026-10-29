@@ -96,4 +96,15 @@ CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/audit_
 [source_revision_audit_primary.json](../results/psr/assets/source_revision_audit_primary.json)针对真实执行版本核验已fetch的公开git对象。
 8组学生所记录的实现SHA256全部一致，且flex_uda/flex_tta/compat及源模型loader整套运行包与对应公开快照无差异。
 这证明实际运行代码在公开历史中可得，不将不同的本地/公开commit ID说成相同。
+完整执行历史验证需要本机保留的原提交；新clone可直接按审计JSON的matching_public_snapshot和文件SHA256复核公开实现，不必取得私有本地commit ID。
 确认阶段已完成的训练先行保存在[confirmations](../results/psr/confirmations/)，仅训练快照不授权提前打开新模型的目标GT或冒充完整指标。
+
+原CPU闭环全部完成后，再运行报告补齐命令：
+
+```bash
+CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python scripts/finalize_psr_confirmation_delivery.py
+```
+
+它只从已有最终记录补成本、父端点重放的正确计数、接口/smoke收据与调度器/CPU日志，不加载GPU模型或重算预测/阈值。
+完整训练/推理成本、额外验证成本、继承教师/Frozen准备成本分列，不能把缓存复用写成免费，也不能把父端点重放计为新增弱标签。
+教师恢复位置由每个训练配置对应的seal.teacher_receipt解析，确认seed和parent控制仍指向原首轮缓存，而不是不存在的seed专属teacher_full目录。
