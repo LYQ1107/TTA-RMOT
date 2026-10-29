@@ -23,6 +23,7 @@ from trackeval.metrics import HOTA,Identity
 from scripts.diag_pf_query_information import average_precision,frame_metrics,add,finalize
 from flex_uda.teacher.psr_dataset import PSRPseudoDataset
 from scripts.train_psr import METHODS
+from scripts.analyze_psr_training_dynamics import summarize as training_dynamics
 
 
 def binary(score,y):
@@ -261,6 +262,7 @@ def analyze(root,training,public):
         atomic_json(dest/'official_query_groups.json',official_groups[method])
         for group,record in report['query_presence'].items():presence.append(dict(method=method,group=group,**record))
     ranking,teaching=dense(root,methods,public);costs=[];checkpoints={}
+    atomic_json(public/'training_dynamics.json',dict(target_GT_reads=0,methods={m:training_dynamics(training/m) for m in methods}))
     for method in methods:
         train=json.loads((training/method/'training_receipt.json').read_text());run=json.loads((root/method/'run_metadata.json').read_text())
         if train['steps']!=8973 or train['target_GT_open_attempts'] or run['target_GT_open_attempts']:raise ValueError('invalid training/data permission')

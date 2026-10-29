@@ -78,7 +78,14 @@ def render(public):
     lines+=['Frozen与Source-only复用封存历史完整结果，当前GPU调用0不等于继承成本为0；历史成本和执行器差异在summary.json的baseline_costs_reused。',
         'FPS仅为固定MOT后的第二阶段指代筛选，非包含检测/跟踪前端的端到端速度；采样复用已有Frozen分数，继承成本另列。',
         'Mean Teacher外部MLLM判断0，不能冒充等MLLM预算语义消融；其容量/源计划/8973步/未标注输入/源val选择匹配。','',
-        '## 源域选择的 checkpoint','']
+        '## 实际优化与弱监督覆盖','',
+        '下表只描述已完成的优化，不是GT正确性。梯度为每步clip之前、已乘固定损失系数的向量统计；余弦不等于因果贡献。','']
+    dynamics=json.loads((public/'training_dynamics.json').read_text())['methods']
+    lines+=table(['方法','直接POS重复exposure','弱POS重复exposure','弱标签独立数','有弱监督的更新步','弱有效步比例','直接-弱平均余弦'],[
+        [m,dynamics[m]['repeated_exposure_states']['direct'].get('POS',0),dynamics[m]['repeated_exposure_states']['expanded'].get('POS',0),
+        dynamics[m]['unique_weak_labels'],dynamics[m]['groups']['with_expanded_weak']['steps'],dynamics[m]['groups']['with_expanded_weak']['fraction_of_8973'],
+        dynamics[m]['groups']['with_expanded_weak']['statistics']['direct_expanded_gradient_cosine']['mean']] for m in students])
+    lines+=['## 源域选择的 checkpoint','']
     lines+=table(['方法','选中步','源val CE','SHA256'],[
         [m,r['selected_step'],r['source_val_CE'],r['checkpoint_sha256']] for m,r in summary['selected_checkpoints'].items()])
     lines+=['最新步teacher-fit报告只衡量训练锚点拟合，不能作为GT准确率或改变源val checkpoint选择。',
