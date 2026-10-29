@@ -46,3 +46,20 @@ class PSRPseudoDataset:
             if file_sha(Path(path))!=sha:raise ValueError('fixed MOT changed')
 
     def __len__(self):return len(self.rows)
+
+
+class PairedUnlabeledDataset:
+    """Matched EMA baseline reads sampling inputs, NEVER Qwen pseudo labels."""
+    def __init__(self,directory,*,allow_val_diagnostic=False):
+        self.directory=Path(directory).resolve();self.runtime=read_jsonl(self.directory/'runtime.jsonl')
+        self.samples=read_jsonl(self.directory/'manifest.jsonl');self.windows=read_jsonl(self.directory/'windows.jsonl')
+        split_videos={r['video_id'] for r in self.runtime};splits=official_splits()['dance']
+        self.split='val' if split_videos==set(splits['val']) else 'train' if split_videos==set(splits['train']) else None
+        if self.split is None or self.split=='val' and not allow_val_diagnostic:raise ValueError('explicit complete runtime split required')
+        self.rows=[dict(r,valid=True,state='UNKNOWN',teacher_prob=.5,supervision_source='UNLABELED_VISUAL_INPUT_NO_MLLM') for r in self.samples]
+        by=defaultdict(list)
+        for row in self.rows:by[row['window_id']].append(row)
+        runtime={(r['video_id'],r['expression_id']):r for r in self.runtime}
+        self.expanded=[];self.groups=[dict(runtime[w['video_id'],w['query_id']],frame=w['frame_id'],window_id=w['window_id'],samples=by[w['window_id']],expanded_samples=[]) for w in self.windows]
+        self.seal=dict(files_sha256={'manifest.jsonl':file_sha(self.directory/'manifest.jsonl'),'soft_labels.jsonl':None},valid_soft_samples=len(self.rows),
+            note='valid means observed visual inputs, not external teacher labels; placeholder probability is unused by EMA loss')

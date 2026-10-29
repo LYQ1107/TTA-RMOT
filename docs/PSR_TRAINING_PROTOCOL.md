@@ -15,6 +15,12 @@ source/direct/expanded损失权重1/1/0.25，按各自有效候选数归一化�
 
 先真实4候选教师smoke→封存完整4策略教师输出→Naive与PSR各6步及真实恢复→主实验E2/E3。
 主实验健康完成后再做Uniform/Confidence/Discovery-only/Geometry/NaiveTemporal。原Frozen8.218和Source-only7.4352可在匹配协议审计通过后复用，旧Naive8.0327不是本轮对照。
+另补做 `MEAN_TEACHER_MATCHED`，不把旧Mean Teacher同集结果冒充匹配对照。
+它仅读取Naive的相同未标注输入清单（2125双帧窗口），不打开Qwen软标签；相同源计划、8973步、24576参数、优化器及源val选择。
+沿用既有Mean Teacher常规设置：EMA衰减0.99，0.05特征dropout强视图，0.2 SmoothL1一致性与0.2置信伪标签BCE，
+source/EMA/student一致性阈值0.9、容差0.1、无正例时不造硬负例。
+这项常规对照的外部语义教师调用/标签预算为0，不属于8500次MLLM预算的采样消融；不能将未标注输入数写成教师标签数。
+首次真实interface与6步训练已通过，六次EMA更新、非零有限梯度；当前尚未读取本轮目标评测指标。
 完整推理25视频/425表达，固定官方MOT、框和ID不动，FP32 margin>0；query-batch真实逐表达等价性检查保持。
 封存后独立GT评测TrackEval HOTA/DetA/AssA/IDF1/IDSW与presence/empty/候选AP/AUROC/R@K/恢复FP/新增覆盖。
 所有新方法做双向Count-Matched，仅离线诊断。25完整视频配对bootstrap2000次seed0。

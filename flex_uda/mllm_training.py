@@ -19,10 +19,10 @@ from flex_uda.training import (ROOT,SOURCE,DANCE,CHECKPOINT,SOURCE_SHA,Inputs,
 from flex_uda.data.source_kitti_v2 import SourceSupervision
 from flex_uda.data.manifests import write_jsonl,read_jsonl
 from flex_uda.teacher.mllm_pseudo_dataset import MLLMPseudoDataset
-from flex_uda.teacher.psr_dataset import PSRPseudoDataset
+from flex_uda.teacher.psr_dataset import PSRPseudoDataset,PairedUnlabeledDataset
 from flex_uda.teacher.isolation import restrict_filesystem
-from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda
-from flex_uda.losses.objectives import supervised_ce
+from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda,frozen_copy,ema_update
+from flex_uda.losses.objectives import supervised_ce,select_pseudo,pseudo_bce,consistency
 from flex_uda.losses.distillation import soft_distillation
 from flex_uda.numerics import reconcile_resume
 from flex_tta.runtime.pf_receipts import atomic_json,append_json,file_sha
@@ -70,6 +70,22 @@ def study_loss(model,inputs,group,field,amp):
 def cosine_between(a,b):
     na,nb=norm(a),norm(b)
     return sum(float((x*y).sum()) for x,y in zip(a,b) if x is not None and y is not None)/(na*nb) if na and nb else None
+
+
+def matched_ema_loss(model,ema,source_teacher,inputs,group,amp):
+    total=None;records=[];n=sum(len(g['samples']) for g in study_frame_groups(group))
+    for part in study_frame_groups(group):
+        prepared,_,_,rows=target_batch(inputs,part)
+        with torch.no_grad():
+            anchor=forward_uda(source_teacher,prepared,return_features=False)['margin']
+            teacher=forward_uda(ema,prepared,return_features=False)['margin']
+        with torch.autocast('cuda',dtype=torch.float16,enabled=amp):
+            student=forward_uda(model,prepared,strong_view=True,return_features=False)['margin']
+            state,stats=select_pseudo(teacher,anchor,student)
+            loss=(.2*consistency(student,teacher)+.2*pseudo_bce(student,state))*len(rows)/max(n,1)
+        total=loss if total is None else total+loss
+        records.extend(dict(r,state={-1:'UNKNOWN',0:'NEG',1:'POS'}[int(s)],teacher_prob=float(p),supervision_source='INTERNAL_EMA_NO_EXTERNAL_TARGET_TEACHER') for r,s,p in zip(rows,state,teacher.sigmoid()))
+    return total,records,n
 
 
 def enforce_inputs(output,pseudo):
@@ -152,14 +168,15 @@ def run(config,output,*,scope='smoke',resume=False):
     if config['protocol']['target_split']=='val' and os.environ.get('MLLM_VAL_DIAGNOSTIC_AUTHORIZED')!='YES':
         raise PermissionError('explicit Val transductive authorization required')
     study=config['protocol']['name'] in ('TRANSDUCTIVE_VAL_PSR_STUDY','FORMAL_TRAIN_TO_VAL_PSR_STUDY')
-    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL')
+    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED')
+    matched_ema=config['method']=='MEAN_TEACHER_MATCHED'
     if config['method'] not in (study_methods if study else ('MLLM_DISTILL','SOURCE_REHEARSAL')):raise ValueError('independent distillation method required')
     if output.exists() and not resume:raise FileExistsError('preserve existing run: '+str(output))
     output.mkdir(parents=True,exist_ok=resume);started=time.perf_counter()
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     attempts=protect_target_annotations()
-    pseudo=(PSRPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True,expanded_kind=config['data'].get('expanded_kind','full')) if study
-        else MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True))
+    pseudo=(PairedUnlabeledDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True) if matched_ema else PSRPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True,expanded_kind=config['data'].get('expanded_kind','full')) if study else None)
+    if not study:pseudo=MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
     if (not study and config['protocol']['name']!='TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC') or config['protocol']['target_split']!=pseudo.split:
         raise ValueError('this validated Val route cannot be relabelled as formal Train-to-Val')
     if study and (config['protocol']['name']=='FORMAL_TRAIN_TO_VAL_PSR_STUDY')!=(pseudo.split=='train'):
@@ -178,6 +195,7 @@ def run(config,output,*,scope='smoke',resume=False):
     _,model,_=_load_model(ROOT/'vendor/FlexHook',CHECKPOINT,DANCE,Path(pseudo.runtime[0]['predicted_tracks']).parent,
         output/'model_log',device,24,strict_checkpoint=True)
     adapter=attach_adapter(model,device,rank=4);model.eval()
+    ema=frozen_copy(model) if matched_ema else None;source_teacher=frozen_copy(model) if matched_ema else None
     tokenizer=RobertaTokenizerFast.from_pretrained(str(ROOT/'vendor/FlexHook/pretrained/roberta-base'))
     if tokenizer.encode('person',add_special_tokens=False)!=[5970]:raise ValueError('tokenizer regression')
     source=SourceSupervision(ROOT/config['data']['source_train_manifest'])
@@ -190,7 +208,7 @@ def run(config,output,*,scope='smoke',resume=False):
     optimizer=torch.optim.AdamW(params,lr=config['optimizer']['lr'],weight_decay=config['optimizer']['weight_decay'])
     scaler=torch.amp.GradScaler('cuda',enabled=config['train']['amp'] and scope!='interface')
     provenance=dict(experiment_commit=commit,method=config['method'],scope=scope,protocol=config['protocol'],
-        source_checkpoint_sha256=SOURCE_SHA,pseudo_seal_sha256=file_sha(pseudo.directory/'seal.json'),
+        source_checkpoint_sha256=SOURCE_SHA,pseudo_seal_sha256=file_sha(pseudo.directory/('manifest.jsonl' if matched_ema else 'seal.json')),
         pseudo_manifest_sha256=pseudo.seal['files_sha256']['manifest.jsonl'],teacher_labels_sha256=pseudo.seal['files_sha256']['soft_labels.jsonl'],
         source_train_manifest_sha256=file_sha(ROOT/config['data']['source_train_manifest']),
         source_val_manifest_sha256=file_sha(ROOT/config['data']['source_val_manifest']),
@@ -199,6 +217,7 @@ def run(config,output,*,scope='smoke',resume=False):
         implementation_sha256={str(p.relative_to(ROOT)):file_sha(p) for p in [Path(__file__),ROOT/'flex_uda/losses/distillation.py',ROOT/'flex_uda/teacher/mllm_pseudo_dataset.py',ROOT/'compat/sitecustomize.py',ROOT/'vendor/FlexHook/models/mymodel.py']})
     if study:
         provenance['implementation_sha256'].update({name:file_sha(ROOT/name) for name in ('flex_uda/teacher/psr_dataset.py','flex_uda/teacher/psr_supervision.py','flex_uda/teacher/psr_sampler.py','flex_uda/losses/psr_objectives.py')})
+        provenance['external_target_semantic_teacher']=not matched_ema
     atomic_json(output/'provenance.json',provenance);atomic_json(output/'config.json',config)
     atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0]))
     calibration=source_scale_check(model,Inputs(model,tokenizer,device,source_val),params)
@@ -212,7 +231,8 @@ def run(config,output,*,scope='smoke',resume=False):
             batch=target_batch(inputs,study_frame_groups(group)[0]) if study and group['samples'] else target_batch(inputs,group)
             if batch is None:continue
             prepared,p,valid,rows=batch;optimizer.zero_grad(set_to_none=True)
-            value=forward_uda(model,prepared,return_features=False);loss=soft_distillation(value['margin'],p,valid)
+            value=forward_uda(model,prepared,return_features=False)
+            loss=matched_ema_loss(model,ema,source_teacher,inputs,group,False)[0] if matched_ema else soft_distillation(value['margin'],p,valid)
             loss.backward();gn=norm([x.grad for x in params])
             checks.append(dict(video=rows[0]['video_id'],frame=rows[0]['frame_id'],candidates=len(rows),valid=int(valid.sum()),
                 logits_shape=list(value['all_logits'].shape),loss=float(loss),KD_gradient_norm=gn,optimizer_step_called=False))
@@ -251,6 +271,7 @@ def run(config,output,*,scope='smoke',resume=False):
             state=torch.load(state_path,map_location=device,weights_only=False)
             if state['config']!=config or state['plan_sha256']!=plan_sha or state['source_checkpoint_sha256']!=SOURCE_SHA:raise ValueError('resume config/teacher/data/initialization mismatch')
             model.load_state_dict(state['student'],strict=True);optimizer.load_state_dict(state['optimizer']);scaler.load_state_dict(state['scaler'])
+            if matched_ema:ema.load_state_dict(state['ema'],strict=True)
             step=state['step'];best=state['best_source_loss'];tracking=state['tracking']
             random.setstate(state['rng']['python']);np.random.set_state(state['rng']['numpy']);torch.set_rng_state(state['rng']['torch'].cpu());torch.cuda.set_rng_state(state['rng']['cuda'].cpu())
             counters.update(tracking['counters']);seen_source=set(map(tuple,tracking['source_seen']));seen_target=set(map(tuple,tracking['target_seen']));seen_samples=set(tracking['teacher_samples_seen'])
@@ -260,7 +281,7 @@ def run(config,output,*,scope='smoke',resume=False):
         else:
             best=source_validate(model,tokenizer,device,source_val,val_plan)
             if not math.isfinite(best):raise FloatingPointError('nonfinite legal source validation CE')
-            save_training(output/'checkpoint_best_source_selected.pt',model,None,optimizer,scaler,0,0,config,plan_sha,best)
+            save_training(output/'checkpoint_best_source_selected.pt',model,ema,optimizer,scaler,0,0,config,plan_sha,best)
             append_json(output/'source_validation.jsonl',dict(step=0,source_val_CE=best,selected=True))
         retry=0
         while step<total:
@@ -276,7 +297,7 @@ def run(config,output,*,scope='smoke',resume=False):
             source_grads=[None if p.grad is None else p.grad.detach().float().clone()/scaler.get_scale() for p in params]
             kd_value=0.;teacher_rows=[];valid_n=0;expanded_rows=[];expanded_n=0;expanded_value=0.;direct_grads=None
             if study:
-                kd,teacher_rows,valid_n=study_loss(model,inputs,target,'samples',scaler.is_enabled())
+                kd,teacher_rows,valid_n=(matched_ema_loss(model,ema,source_teacher,inputs,target,scaler.is_enabled()) if matched_ema else study_loss(model,inputs,target,'samples',scaler.is_enabled()))
                 if kd is not None:
                     if not torch.isfinite(kd):raise FloatingPointError('nonfinite direct teacher objective')
                     scaler.scale(kd*config['loss']['target_kd']).backward();kd_value=float(kd.detach())
@@ -308,6 +329,7 @@ def run(config,output,*,scope='smoke',resume=False):
             cosine=dot/(source_norm*target_norm) if source_norm and target_norm else None
             scale_before=scaler.get_scale();scaler.step(optimizer);scaler.update()
             if scaler.get_scale()<scale_before:raise RuntimeError('unexpected skipped update after explicit finite gradient validation')
+            if matched_ema:counters['EMA_updates']+=int(ema_update(ema,model,decay=.99)>0)
             counters['optimizer_updates']+=1;counters['source_candidate_rows']+=source_rows;counters['target_valid_exposures']+=valid_n
             counters['target_nonzero_gradient_steps']+=int(target_norm>1e-12)
             if study:
@@ -331,6 +353,7 @@ def run(config,output,*,scope='smoke',resume=False):
                     direct_expanded_gradient_cosine=cosine_between(direct_grads,expanded_grads),
                     direct_states=dict(Counter(r['state'] for r in teacher_rows)),expanded_states=dict(Counter(r['state'] for r in expanded_rows)),
                     UNKNOWN_not_default_negative=True)
+                if matched_ema:record.update(target_teacher_kind='INTERNAL_EMA',external_MLLM_labels_used=0)
             append_json(output/'metrics_train.jsonl',record);step+=1;retry=0
             if step%10==0 or step==total:
                 atomic_json(output/'progress.json',dict(status='RUNNING',step=step,total_steps=total,unique_teacher_samples_seen=len(seen_samples),**dict(counters)))
@@ -341,9 +364,9 @@ def run(config,output,*,scope='smoke',resume=False):
                 tracking=dict(counters=dict(counters),source_seen=sorted(seen_source),target_seen=sorted(seen_target),teacher_samples_seen=sorted(seen_samples),
                     expanded_samples_seen=sorted(seen_expanded),wall_seconds=prior_wall+time.perf_counter()-started,attempt_wall_seconds=time.perf_counter()-started)
                 if selected:
-                    best=measured;save_training(output/'checkpoint_best_source_selected.pt',model,None,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
+                    best=measured;save_training(output/'checkpoint_best_source_selected.pt',model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
                 append_json(output/'source_validation.jsonl',dict(step=step,source_val_CE=measured,selected=selected))
-                save_training(state_path,model,None,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
+                save_training(state_path,model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
         restored=torch.load(state_path,map_location='cpu',weights_only=False)
         if restored['step']!=total or restored['plan_sha256']!=plan_sha:raise RuntimeError('checkpoint recovery roundtrip failed')
         del restored
@@ -354,7 +377,7 @@ def run(config,output,*,scope='smoke',resume=False):
             (config['method']=='MLLM_DISTILL' or study) and (len(seen_target)!=len(pseudo.runtime) or len(seen_samples)!=pseudo.seal['valid_soft_samples'])):
             raise RuntimeError('incomplete actual source/target teacher coverage')
         if scope=='full' and study and len(seen_expanded)!=len(pseudo.expanded):raise RuntimeError('incomplete unique weak supervision coverage')
-        if scope=='full' and study:
+        if scope=='full' and study and not matched_ema:
             from types import SimpleNamespace
             fit=teacher_fit(model,inputs,SimpleNamespace(groups=[part for group in pseudo.groups for part in study_frame_groups(group)]),output)
         else:fit=teacher_fit(model,inputs,pseudo,output) if scope=='full' and config['method']=='MLLM_DISTILL' else None
@@ -373,5 +396,6 @@ def run(config,output,*,scope='smoke',resume=False):
         frozen_parameters_unchanged=True,target_GT_open_attempts=attempts,wall_seconds=time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(),source_checkpoint_sha256=SOURCE_SHA,
         pseudo_seal_sha256=provenance['pseudo_seal_sha256'],optimizer_at_test_time=False,student_calls_MLLM=False)
+    if matched_ema:result.update(external_MLLM_labels_used=0,unique_unlabelled_target_inputs_seen=result.get('unique_teacher_samples_seen',0),unique_teacher_samples_seen=0,external_target_semantic_teacher=False)
     atomic_json(output/'training_receipt.json',result);atomic_json(output/'progress.json',result)
     print(json.dumps(result,indent=2),flush=True);return result
