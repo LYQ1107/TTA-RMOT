@@ -21,7 +21,7 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 DEFAULT=['NAIVE_PAIRED','PSR','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED']
 
 
-def run(root,methods,workers=4):
+def run(root,methods,workers=4,other_active_gpus=()):
     root=Path(root).resolve();training=root/'students';evaluation=root/'evaluation/merged'
     evaluation.mkdir(parents=True,exist_ok=True);training.mkdir(exist_ok=True)
     pending=[];preserved=[]
@@ -36,10 +36,14 @@ def run(root,methods,workers=4):
         pending.append(method)
     if not pending:print(json.dumps(dict(status='PRESERVED_ALL_COMPLETE_MATRIX',methods=preserved)));return
     _,gpus,processes=audit_gpus(1,minimum_free_mib=20480)
-    chosen=sorted([g for g in gpus if g['free_mib']>=20480],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:min(4,workers,len(pending))]
+    other_active_gpus=set(map(int,other_active_gpus))
+    chosen=sorted([g for g in gpus if g['free_mib']>=20480 and g['physical_gpu'] not in other_active_gpus],
+        key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:min(4-len(other_active_gpus),workers,len(pending))]
+    if not chosen:raise RuntimeError('no memory-fit GPU slots after preserving healthy peer lanes')
     attempt=root/'matrix_launchers'/str(time.time_ns());attempt.mkdir(parents=True)
     atomic_json(attempt/'gpu_admission.json',dict(chosen=chosen,all_gpus=gpus,processes=processes,sharing_authorized=True,
-        maximum_physical_GPUs=4,each_lane_serializes_its_own_training_and_inference=True,allocator_GiB=16,headroom_GiB=4))
+        maximum_physical_GPUs=4,other_healthy_task_GPUs=sorted(other_active_gpus),
+        each_lane_serializes_its_own_training_and_inference=True,allocator_GiB=16,headroom_GiB=4))
     queue=list(pending);lock=threading.Lock();start=time.perf_counter()
     def command_run(command,env,log_path,record):
         phase=record['phase'];begin=time.perf_counter();video_count=0
@@ -109,4 +113,6 @@ def run(root,methods,workers=4):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--root',type=Path,default=ROOT/'results/runs/psr_val_20261029_v1');p.add_argument('--methods',nargs='+',choices=METHODS,default=DEFAULT);p.add_argument('--workers',type=int,default=4);a=p.parse_args();run(a.root,a.methods,a.workers)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--root',type=Path,default=ROOT/'results/runs/psr_val_20261029_v1');p.add_argument('--methods',nargs='+',choices=METHODS,default=DEFAULT);p.add_argument('--workers',type=int,default=4)
+    p.add_argument('--other-active-gpus',nargs='*',type=int,default=[],help='preserved healthy peer lanes count toward the four-card total')
+    a=p.parse_args();run(a.root,a.methods,a.workers,a.other_active_gpus)

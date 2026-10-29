@@ -21,10 +21,16 @@ def snapshot():
     for policy in ('NAIVE','PSR','UNIFORM','CONFIDENCE'):
         folder=RUN/'teacher_full'/policy;dest=assets/'teachers'/policy;dest.mkdir(parents=True,exist_ok=True)
         if (folder/'receipt.json').exists():shutil.copy2(folder/'receipt.json',dest/'receipt.json')
-    states={};recovery={}
+    states={};recovery={};predictions={}
     for method in DEFAULT:
         folder=RUN/'students'/method;receipt=folder/'training_receipt.json'
         states[method]='COMPLETE' if receipt.exists() else 'NOT_YET_COMPLETED'
+        inference=RUN/'evaluation/merged'/method
+        predictions[method]='SEALED_425' if (inference/'full_audit.json').exists() else 'NOT_YET_SEALED'
+        if predictions[method]=='SEALED_425':
+            dest=PUBLIC/'inference'/method;dest.mkdir(parents=True,exist_ok=True)
+            for name in ('run_metadata.json','full_audit.json','inference_start_provenance.json','fresh_gpu_admission.json'):
+                if (inference/name).exists():shutil.copy2(inference/name,dest/name)
         recovery[method]=dict(run_directory=str(folder),checkpoint=str(folder/'checkpoint_latest.pt'),
             resume_command=f'python scripts/train_psr.py --method {method} --scope full --resume --val-authorized --output {folder}')
         if not receipt.exists():continue
@@ -42,7 +48,7 @@ def snapshot():
     result=dict(project='LYQ1107/TTA-RMOT',protocol='USER_AUTHORIZED25VAL_SAME_SET_PSR_NOT_FORMAL_TRAIN_TO_VAL',
         formal40Train_asset_missing=True,teacher_policies=4,teacher_direct_judgments_each=8500,
         source_videos=17,target_videos=25,target_queries=425,trainable_parameters=24576,fixed_updates=8973,
-        methods=states,GT_metrics='PENDING_UNTIL_ALL_PREDICTIONS_SEALED',old_Naive8_0327='HISTORICAL_ONLY_DIFFERENT_SAMPLING',
+        methods=states,predictions=predictions,GT_metrics='PENDING_UNTIL_ALL_PREDICTIONS_SEALED',old_Naive8_0327='HISTORICAL_ONLY_DIFFERENT_SAMPLING',
         current_GPU_limit=4,raw_cache_root='/data2/user/TTA-RMOT-assets/psr',private_run_root=str(RUN),
         source_and_target_GT_permissions='sourceGT legal; targetGT only independent evaluation after seal')
     atomic_json(PUBLIC/'stage_status.json',result);atomic_json(PUBLIC/'recovery_index.json',dict(methods=recovery,teacher_raw_root=str(RUN/'teacher_full'),

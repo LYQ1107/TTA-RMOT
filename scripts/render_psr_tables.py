@@ -35,7 +35,8 @@ def render(public):
         [m,metrics[m]['HOTA'],metrics['FROZEN_AT_'+m+'_COUNT']['HOTA'],metrics[m]['HOTA']-metrics['FROZEN_AT_'+m+'_COUNT']['HOTA'],
         metrics[m+'_AT_FROZEN_COUNT']['HOTA'],metrics[m+'_AT_FROZEN_COUNT']['HOTA']-metrics['FROZEN']['HOTA']] for m in students])
     lines+=['## 语义排序','',
-        '全候选AP/AUROC是分类诊断，不是轨迹关联；R@K为所有GT帧查询的one-to-one GT召回，包含没有可检索MOT候选的GT。','']
+        '全候选AP/AUROC是分类诊断，不是轨迹关联；R@K为所有GT帧查询的one-to-one GT召回，包含没有可检索MOT候选的GT。',
+        '窗口外指没有显式教师/弱标签的时间位置；仍为同视频且可能在轨迹历史上下文出现，不是未见视频/图像盲测。','']
     lines+=table(['方法','全候选AP','AUROC','教师与弱扩展窗口外AP','窗口外AUROC','GT R@1','GT R@3','GT R@5'],[
         [m,dense[m]['all425_official']['AP'],dense[m]['all425_official']['AUROC'],dense[m]['not_direct_or_middle_frames']['AP'],
         dense[m]['not_direct_or_middle_frames']['AUROC'],*[dense[m]['GT_recall_at_K']['all'][str(k)] for k in (1,3,5)]] for m in methods])
@@ -67,6 +68,7 @@ def render(public):
         r['required_teacher_judgments'],r['required_teacher_amortized_forward_seconds'],r['trainable_parameters'],r['optimizer_updates'],
         r['per_worker_active_video_frame_FPS'],r['per_worker_query_frame_FPS'],r['peak_training_allocated_bytes']/2**30,r['peak_inference_allocated_bytes']/2**30] for r in summary['cost']])
     lines+=['Frozen与Source-only复用封存历史完整结果，当前GPU调用0不等于继承成本为0；历史成本和执行器差异在summary.json的baseline_costs_reused。',
+        'FPS仅为固定MOT后的第二阶段指代筛选，非包含检测/跟踪前端的端到端速度；采样复用已有Frozen分数，继承成本另列。',
         'Mean Teacher外部MLLM判断0，不能冒充等MLLM预算语义消融；其容量/源计划/8973步/未标注输入/源val选择匹配。','',
         '## 源域选择的 checkpoint','']
     lines+=table(['方法','选中步','源val CE','SHA256'],[

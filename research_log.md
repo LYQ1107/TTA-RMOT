@@ -2147,6 +2147,11 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - FormalE2 and full425evaluation are next, not already complete. Only actual fullRMOT/ranking/quantity-adjusted evidence can authorize subsequent conventional controls or innovation; do not call sparse AP a HOTA gain.
 # 2026-10-29 PSR 主训练完成与匹配对照队列
 
+后续实测：Naive/PSR各425完整推理已封存，耗时1851.47/2021.72秒，均source-val选8973步，GT0。
+Discovery和Geometry首次入场失败，根因不是模型：原GPU2/0被新外部进程占用，实际剩余18692/18690MiB，低于原20GiB入场预算。
+保留16GiB allocator+4GiB headroom，不降低标准、不停止他人或健康Uniform/Confidence。
+增加修复子队列显式排除健康GPU1/5并计入四卡总上限；重新审计后仅在其它显存足够、进程较少的两卡恢复这两项。
+
 项目仍为TTA-RMOT；按用户明确授权使用25Val无标签同集适应，不是40Train→Val。
 Naive/PSR主训练各完成8973步、17源视频完整覆盖；8500直接标签均实际访问，PSR254条独立弱插值均访问，目标GT打开数0。
 训练主体耗时2554.08/2391.76秒；不把loss/梯度当成科研成功，尚无本轮新HOTA。

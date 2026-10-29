@@ -10,6 +10,7 @@ import shutil
 import sys
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
+from scipy.special import expit
 from flex_tta.runtime.pf_receipts import atomic_json
 from flex_uda.data.manifests import read_jsonl
 from scripts.pf_diag_common import DATA,TRACKS,FROZEN,load_source_video,candidate_labels,official_metrics,official_video_values,write_csv
@@ -17,6 +18,8 @@ from scripts.analyze_pf_full_offline import analyze as attribution,load_eval_gt,
 from scripts.analyze_uda_full import presence_from_stream
 from scripts.analyze_uda_text_signal_offline import scores_for
 from scripts.analyze_pf_video_uncertainty import paired_clusters
+from scripts.analyze_pf_video_uncertainty import unpack
+from trackeval.metrics import HOTA,Identity
 from scripts.diag_pf_query_information import average_precision,frame_metrics,add,finalize
 from flex_uda.teacher.psr_dataset import PSRPseudoDataset
 from scripts.train_psr import METHODS
@@ -24,6 +27,41 @@ from scripts.train_psr import METHODS
 
 def binary(score,y):
     return dict(candidate_pairs=len(y),positive_candidates=int(y.sum()),AUROC=auroc(score,y),AP=average_precision(score,y),selected_rows=int((score>0).sum()))
+
+
+def soft_fit_by_state(records,methods):
+    """Selected checkpoints on training anchors: fit diagnosis, NOT validation."""
+    p=np.asarray([r['p'] for r in records]);answer={}
+    for method,key in [('FROZEN','source_margin'),*[(m,'student_margin_'+m) for m in methods]]:
+        score=np.asarray([r[key] for r in records]);prob=expit(score);states={}
+        for state in ('ALL','POS','NEG','UNKNOWN','OFFICIAL_GT_MATCH'):
+            mask=np.asarray([True if state=='ALL' else r['official_match'] if state=='OFFICIAL_GT_MATCH' else r['state']==state for r in records])
+            states[state]=dict(samples=int(mask.sum()),
+                soft_teacher_BCE=float((np.logaddexp(0,score[mask])-p[mask]*score[mask]).mean()) if mask.any() else None,
+                soft_teacher_MSE=float(np.square(prob[mask]-p[mask]).mean()) if mask.any() else None,
+                mean_student_probability=float(prob[mask].mean()) if mask.any() else None,
+                positive_selection_fraction=float((score[mask]>0).mean()) if mask.any() else None)
+        answer[method]=states
+    return dict(methods=answer,scope='SOURCE_SELECTED_CHECKPOINT_ON_TRAINING_ANCHORS_NOT_INDEPENDENT_VALIDATION',
+        official_GT_group_used_only_offline=True,not_used_for_checkpoint_or_threshold_selection=True)
+
+
+def official_query_groups(folder,report):
+    """Pool the official sufficient statistics, NEVER average episode HOTA."""
+    with (folder/'results/pedestrian_detailed.csv').open() as stream:
+        rows={r['seq']:r for r in csv.DictReader(stream) if r['seq']!='COMBINED'}
+    h,id_metric=HOTA({'PRINT_CONFIG':False}),Identity({'PRINT_CONFIG':False})
+    present={r['video']+'+'+r['expression']:bool(r['gt_observations']) for r in report['episodes']}
+    result={}
+    for name,value in [('query_present',True),('query_empty',False)]:
+        selected={k:r for k,r in rows.items() if present[k]==value}
+        hota=h.combine_sequences({k:unpack(r,h) for k,r in selected.items()})
+        ident=id_metric.combine_sequences({k:unpack(r,id_metric) for k,r in selected.items()})
+        result[name]=dict(episodes=len(selected),HOTA=100*float(np.mean(hota['HOTA'])) if value else None,
+            DetRe=100*float(np.mean(hota['DetRe'])) if value else None,
+            IDF1=100*float(ident['IDF1']) if value else None,
+            official_CLEAR_FP=sum(int(float(r['CLR_FP'])) for r in selected.values()))
+    return result
 
 
 def dense(root,methods,public):
@@ -87,8 +125,9 @@ def dense(root,methods,public):
         for policy,data in policies.items():
             for row in (r for r in data.rows if r['video_id']==video):
                 i=positions[row['frame_id'],row['track_id']];j=qcol[row['query_id']]
+                student_scores={'student_margin_'+m:float(scores[m][i,j]) for m in names[2:] if METHODS[m][0]==policy and m!='MEAN_TEACHER_MATCHED'}
                 policy_records[policy].append(dict(video=video,query=row['query_id'],frame=row['frame_id'],track=row['track_id'],state=row['state'],
-                    p=row['teacher_prob'],official_match=bool(y[i,j]),source_margin=float(bank['scores'][i,j]),sample_id=row['sample_id']))
+                    p=row['teacher_prob'],official_match=bool(y[i,j]),source_margin=float(bank['scores'][i,j]),sample_id=row['sample_id'],**student_scores))
             for row in (r for r in data.expanded if r['video_id']==video):
                 i=positions[row['frame_id'],row['track_id']];j=qcol[row['query_id']]
                 parent_y=[bool(y[positions[t,row['track_id']],j]) for t in row['observed_teacher_frames']]
@@ -99,6 +138,7 @@ def dense(root,methods,public):
                 visible=[visible_query_ids(t) for t in [*row['observed_teacher_frames'],row['frame_id']]]
                 weak_records[policy].append(dict(video=video,query=row['query_id'],frame=row['frame_id'],track=row['track_id'],
                     official_match=bool(y[i,j]),actual_middle_frame_source_margin=float(bank['scores'][i,j]),
+                    selected_PSR_margin=float(scores['PSR'][i,j]),weak_soft_target=row['teacher_prob'],
                     endpoint_official_matches=parent_y,possible_action_boundary_or_identity_problem=all(parent_y) and not bool(y[i,j]),
                     query_visible_GT_IDs_endpoints_then_middle=visible,
                     observable_endpoint_identity_change=bool(visible[0] and visible[1] and not set(visible[0])&set(visible[1])),
@@ -140,6 +180,7 @@ def dense(root,methods,public):
             query_visible_middle_identity_change=sum(r['observable_middle_identity_change'] for r in weak),
             identity_audit_limit='only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded',
             one_to_one_GT_coverage_counts=dict(coverage_records[policy]),
+            selected_checkpoint_teacher_fit=soft_fit_by_state(records,[m for m in names[2:] if METHODS[m][0]==policy and m!='MEAN_TEACHER_MATCHED']),
             one_to_one_GT_coverage_fraction_of_all=coverage_records[policy]['direct_GT_observations']/gt_observations['all'],
             new_weak_GT_coverage_fraction_of_all=coverage_records[policy]['expanded_GT_observations']/gt_observations['all'],
             total_GT_observation_denominators=dict(gt_observations),
@@ -176,7 +217,7 @@ def dense(root,methods,public):
 def analyze(root,training,public):
     root,training,public=map(lambda p:Path(p).resolve(),(root,training,public));public.mkdir(parents=True,exist_ok=True)
     seal=json.loads((root/'controls_sealed.json').read_text());methods=seal['student_methods'];all_methods=seal['methods']
-    metrics={};values={};official=[];presence=[]
+    metrics={};values={};official=[];presence=[];official_groups={}
     for method in all_methods:
         audit=json.loads((root/method/'full_audit.json').read_text())
         if audit['status']!='PASS' or audit['valid_episodes']!=425 or audit['unique_videos']!=25:raise ValueError('complete25/425 required')
@@ -196,6 +237,8 @@ def analyze(root,training,public):
         dest=public/method
         with (dest/'offline_analysis_stdout.txt').open('w') as log,redirect_stdout(log):report=attribution(root,method,FROZEN,DATA,TRACKS,dest/'offline_attribution.json')
         episodes,quality=presence_from_stream(root/method,report);write_csv(dest/'episode_presence.csv',episodes);atomic_json(dest/'presence_quality.json',quality)
+        official_groups[method]=official_query_groups(root/method,report)
+        atomic_json(dest/'official_query_groups.json',official_groups[method])
         for group,record in report['query_presence'].items():presence.append(dict(method=method,group=group,**record))
     ranking,teaching=dense(root,methods,public);costs=[];checkpoints={}
     for method in methods:
@@ -218,7 +261,7 @@ def analyze(root,training,public):
             required_teacher_amortized_forward_seconds=0 if ema else teacher['equivalent_amortized_forward_seconds']))
     verdict='PROMISING_REQUIRES_BUDGET_AND_COUNT_CONTROLLED_3SEED_CONFIRMATION' if metrics['PSR']['HOTA']>max(metrics['FROZEN']['HOTA'],metrics['NAIVE_PAIRED']['HOTA']) else 'PSR_NOT_ABOVE_FROZEN_AND_MATCHED_NAIVE'
     summary=dict(status='COMPLETE_FOR_LISTED_METHODS',protocol='USER_AUTHORIZED_25VAL_SAME_SET_NOT_TRAIN_TO_VAL',videos=25,expressions=425,student_methods=methods,
-        official_metrics=metrics,comparisons=comparisons,selected_checkpoints=checkpoints,cost=costs,scientific_verdict=verdict,
+        official_metrics=metrics,official_query_groups=official_groups,comparisons=comparisons,selected_checkpoints=checkpoints,cost=costs,scientific_verdict=verdict,
         formal_40Train_to_Val_complete=False,source_and_target_training_GT_permissions='sourceGT only; targetGT after prediction seal',
         counts_and_intervals_are_not_blind_test_proof=True,unrounded_video_cluster_bootstrap='25videos,2000draws,seed0',
         Qwen_pretraining_overlap='UNKNOWN',historical_Naive8_0327='not same paired sampling; historical reference only')
@@ -229,6 +272,11 @@ def analyze(root,training,public):
             timing_comparison_limit='older episode-isolated evaluator, not the current query-batched execution; reuse is not zero inherited cost'),
         'SOURCE_REHEARSAL':dict(json.loads((ROOT/'results/uda/full/SOURCE_REHEARSAL/metrics.json').read_text())['cost'],
             new_GPU_calls=0,source='historical same-budget full425 source-only rehearsal')}
+    summary['shared_cost_components']=dict(
+        frozen_source_scores='existing complete425 Frozen bank used in sampling/fit audit; no new GPU calls, inherited historical cost above',
+        fixed_DETR_NeuralSORT='official precomputed MOT; detector/tracker generation cost unknown and excluded equally',
+        test_FPS='second-stage referring filter with cached fixed MOT, not detector+tracker end-to-end FPS',
+        teacher_time='required amortized forward component plus actual cached worker costs in supervision audits; model loading is not free')
     write_csv(public/'official_comparison.csv',official);write_csv(public/'query_presence.csv',presence);write_csv(public/'compute_cost.csv',costs)
     atomic_json(public/'summary.json',summary);print(json.dumps(dict(status=summary['status'],metrics={m:metrics[m]['HOTA'] for m in ('FROZEN','SOURCE_REHEARSAL',*methods)},verdict=verdict),indent=2));return summary
 
