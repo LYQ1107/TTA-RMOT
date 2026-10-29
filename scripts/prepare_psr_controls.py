@@ -25,6 +25,17 @@ def prepare(root,training,methods):
             raise ValueError('wrong training/evaluation protocol: '+method)
         if file_sha(training/method/'checkpoint_best_source_selected.pt')!=run['checkpoint_sha256']:
             raise ValueError('selected checkpoint changed after inference: '+method)
+        cli=[json.loads(p.read_text()) for p in (root/method/'cli_inference_attempts').glob('*.json')]
+        if cli:
+            # A queued duplicate can wait for a different lane without loading
+            # CUDA. Do not falsely charge that CPU wait as GPU inference time.
+            pids={r['pid'] for r in cli}
+            legacy=[json.loads(p.read_text()) for p in (root/method/'inference_attempts').glob('*.json')]
+            legacy_seconds=sum(r['elapsed_seconds'] for r in legacy if r['pid'] not in pids)
+            run.update(scheduler_worker_slot_seconds=run['worker_seconds'],worker_seconds=legacy_seconds+sum(r['GPU_worker_seconds'] for r in cli),
+                CPU_lock_wait_seconds=sum(r['CPU_lock_wait_seconds'] for r in cli),CLI_attempts=cli,
+                zero_GPU_reuse_attempts=sum(r['actual_GPU_calls']==0 for r in cli))
+            atomic_json(root/method/'run_metadata.json',run)
         registered[method]=dict(checkpoint_sha256=run['checkpoint_sha256'],
             training_receipt_sha256=file_sha(training/method/'training_receipt.json'),
             full_audit_sha256=file_sha(root/method/'full_audit.json'),

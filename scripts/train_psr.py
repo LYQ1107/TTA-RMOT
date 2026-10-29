@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Registered, memory-admitted PSR/paired-Naive student; preserves old outputs."""
 import argparse
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -24,6 +25,15 @@ if __name__=='__main__':
     config['data']['expanded_kind']=expanded
     if config['protocol']['target_split']=='val' and not a.val_authorized:raise PermissionError('explicit Val fallback required')
     out=a.output.resolve();registered=os.environ.get('PSR_PHYSICAL_GPU')
+    # A queued peer may reach this method after another idle lane has claimed
+    # it. Serialize that real overlap before CUDA admission/model allocation.
+    out.parent.mkdir(parents=True,exist_ok=True)
+    claim=(out.parent/(out.name+'.training.lock')).open('a');fcntl.flock(claim,fcntl.LOCK_EX)
+    if a.scope=='full' and (out/'training_receipt.json').exists():
+        previous=json.loads((out/'training_receipt.json').read_text())
+        if previous['status']=='COMPLETE_FIXED_COVERAGE_PSR_STUDY' and previous['steps']==8973 and json.loads((out/'config.json').read_text())==config:
+            print(json.dumps(dict(event='PRESERVED_COMPLETE_TRAINING_NO_GPU',method=a.method,optimizer_updates_this_attempt=0)),flush=True)
+            raise SystemExit(0)
     from scripts.launch_uda_workers import audit_gpus
     from flex_tta.runtime.pf_receipts import atomic_json
     selected,gpus,processes=audit_gpus(1,minimum_free_mib=20480)
