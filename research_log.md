@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Delivery/reproducibility audit while confirmations run
+
+- CPU-only openedall26publishedpredictiontarballs andofficialCSVseach:425predictions/25videos/425officialepisodes; all8finalstudentreceipts8973/24576/17source/425target/GTattempts0. Actualvendor trackedpatch matchesalreadypublicvendor_tracked_source.patch; no livevendor/code/modelprocess modified.
+- Captured two actualenvironmentversionmanifests viaimportlib metadata, noGPUallocation orpipinstall. AddedPSR_REPRODUCIBILITY commands/assetpaths/sourceonlydataaliases/patchapplication/recoveryprotocol; oldLocateMOTcode/weights remainoutofscope. Addedaudit_psr_delivery.py forrealartifactchecks, notscientificsuccess.
+- Originalnative waitorchestrator248 still owns84940confirmationpairs/56047parentqueue/25053CPUclosure; no duplicatejobs. seed0bothtrainedexit0;425inferencecontinues; seed42Naive>=8000/PSR>=6000 lateststream. Continuefixedbudget/params, noGTthresholdchanges.
+
 ## 2026-10-30 — First complete PSR matrix, registered confirmation and weight confound
 
 - All8 students8973updates and25/425 predictions sealed, original/repair GPU parents exited; official26methods exit0. PrimaryHOTA Frozen8.2180, pairedNaive7.4499, PSR8.4204, Uniform8.4347, Confidence6.7173, Discovery7.8127, Geometry8.4218, Temporal7.9524, matchedMT8.6095, Source7.4352. No independent PSR novelty/success claim: Uniform and MT higher; Full belowGeometry.

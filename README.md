@@ -18,6 +18,7 @@ PSR未超过简单Uniform/MT，Present子集HOTA下降；当前不支持独立�
 [监督审计](docs/PSR_PSEUDO_LABEL_AUDIT.md)、[真实进度](docs/PSR_EXPERIMENT_RESULTS.md)、
 [当前科研判决](docs/PSR_FINAL_SCIENTIFIC_VERDICT.md)、[完整主训练日志](results/psr/training/)、[恢复索引](results/psr/recovery_index.json)。
 [首轮完整指标与成本](results/psr/full/TABLES.md)、[26组完整预测与日志](results/psr/full/artifact_index.json)。
+[PSR复现/环境/恢复入口](docs/PSR_REPRODUCIBILITY.md)、[实际归档完整性审计](results/psr/assets/delivery_audit_primary.json)。
 不把单seed微增或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
 
 ## 已完成：普通 MLLM 软概率蒸馏
