@@ -1,0 +1,44 @@
+{
+  "methods": {
+    "NAIVE_PAIRED": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_PAIRED",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_PAIRED/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method NAIVE_PAIRED --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_PAIRED"
+    },
+    "PSR": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method PSR --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR"
+    },
+    "UNIFORM_PAIRED": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/UNIFORM_PAIRED",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/UNIFORM_PAIRED/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method UNIFORM_PAIRED --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/UNIFORM_PAIRED"
+    },
+    "CONFIDENCE_PAIRED": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/CONFIDENCE_PAIRED",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/CONFIDENCE_PAIRED/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method CONFIDENCE_PAIRED --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/CONFIDENCE_PAIRED"
+    },
+    "PSR_DISCOVERY": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_DISCOVERY",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_DISCOVERY/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method PSR_DISCOVERY --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_DISCOVERY"
+    },
+    "PSR_GEOMETRY": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_GEOMETRY",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_GEOMETRY/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method PSR_GEOMETRY --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_GEOMETRY"
+    },
+    "NAIVE_TEMPORAL": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method NAIVE_TEMPORAL --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL"
+    }
+  },
+  "teacher_raw_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full",
+  "pseudo_root": "/data2/user/TTA-RMOT-assets/psr/val_v1",
+  "large_weights_and_raw_cache_stay_on_server": true,
+  "inference_resume": "python scripts/evaluate_psr_matrix.py --training-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/evaluation --methods NAIVE_PAIRED PSR",
+  "checkpoint_SHA_source": "each completed training_receipt.json; no targetGT checkpoint selection"
+}

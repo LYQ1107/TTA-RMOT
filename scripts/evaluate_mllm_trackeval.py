@@ -15,10 +15,11 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--output-root',type=Path,required=True);a=p.parse_args()
     root=a.output_root.resolve();children=[];started=time.perf_counter()
     if not (root/'controls_sealed.json').exists():raise ValueError('all GT-free predictions/controls must be sealed before official GT access')
-    for method in METHODS:
+    registered=json.loads((root/'controls_sealed.json').read_text());methods=registered.get('methods',METHODS)
+    for method in methods:
         audit=json.loads((root/method/'full_audit.json').read_text())
         if audit['status']!='PASS' or audit['valid_episodes']!=425:raise ValueError('all425 predictions required')
-    for method in METHODS:
+    for method in methods:
         job=root/'trackeval_jobs'/method;job.mkdir(parents=True,exist_ok=True);link=job/method
         if not link.exists():link.symlink_to(root/method,target_is_directory=True)
         log=(job/'driver_stdout.txt').open('w')

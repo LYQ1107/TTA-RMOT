@@ -197,13 +197,17 @@ def run(config,output,*,scope='smoke',resume=False):
         trainable_parameters=24576,physical_gpu=os.environ.get('MLLM_PHYSICAL_GPU'),gpu_uuid=str(props.uuid),isolation=isolation,
         target_GT_read=False,no_online_MLLM=True,test_time_updates=0,
         implementation_sha256={str(p.relative_to(ROOT)):file_sha(p) for p in [Path(__file__),ROOT/'flex_uda/losses/distillation.py',ROOT/'flex_uda/teacher/mllm_pseudo_dataset.py',ROOT/'compat/sitecustomize.py',ROOT/'vendor/FlexHook/models/mymodel.py']})
+    if study:
+        provenance['implementation_sha256'].update({name:file_sha(ROOT/name) for name in ('flex_uda/teacher/psr_dataset.py','flex_uda/teacher/psr_supervision.py','flex_uda/teacher/psr_sampler.py','flex_uda/losses/psr_objectives.py')})
     atomic_json(output/'provenance.json',provenance);atomic_json(output/'config.json',config)
     atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0]))
     calibration=source_scale_check(model,Inputs(model,tokenizer,device,source_val),params)
     atomic_json(output/'source_only_lambda_validation.json',calibration)
     if scope=='interface':
         checks=[]
-        for index in sorted(set(np.linspace(0,len(pseudo.groups)-1,8,dtype=int).tolist())):
+        indices=set(np.linspace(0,len(pseudo.groups)-1,8,dtype=int).tolist())
+        if study and pseudo.expanded:indices.add(next(i for i,g in enumerate(pseudo.groups) if g['expanded_samples']))
+        for index in sorted(indices):
             group=pseudo.groups[index]
             batch=target_batch(inputs,study_frame_groups(group)[0]) if study and group['samples'] else target_batch(inputs,group)
             if batch is None:continue
@@ -212,6 +216,13 @@ def run(config,output,*,scope='smoke',resume=False):
             loss.backward();gn=norm([x.grad for x in params])
             checks.append(dict(video=rows[0]['video_id'],frame=rows[0]['frame_id'],candidates=len(rows),valid=int(valid.sum()),
                 logits_shape=list(value['all_logits'].shape),loss=float(loss),KD_gradient_norm=gn,optimizer_step_called=False))
+            if study:
+                optimizer.zero_grad(set_to_none=True)
+                weak,weak_rows,weak_n=study_loss(model,inputs,group,'expanded_samples',False)
+                if weak is not None:
+                    weak.backward();weak_gn=norm([p.grad for p in params])
+                    if weak_n and (not math.isfinite(weak_gn) or weak_gn<=0):raise RuntimeError('actual weak supervision cannot reach adapter')
+                    checks[-1].update(expanded_candidates=weak_n,expanded_gradient_norm=weak_gn,expanded_loss=float(weak))
         if not checks or not any(r['KD_gradient_norm']>0 for r in checks):raise RuntimeError('KD cannot reach adapter')
         path=output/'temporary_interface_checkpoint.pt'
         saved={n:p.detach().clone() for n,p in model.named_parameters() if p.requires_grad}
@@ -234,7 +245,7 @@ def run(config,output,*,scope='smoke',resume=False):
         steps_per_cycle=max(len(source_plan),len(pseudo.groups))
         if study and steps_per_cycle!=8973:raise ValueError('PSR/Naive must share the registered8973 update budget')
         total=6 if scope=='smoke' else config['train']['coverage_cycles']*steps_per_cycle
-        state_path=output/'checkpoint_latest.pt';step=0;best=float('inf');counters=Counter();seen_source=set();seen_target=set();seen_samples=set()
+        state_path=output/'checkpoint_latest.pt';step=0;best=float('inf');counters=Counter();seen_source=set();seen_target=set();seen_samples=set();seen_expanded=set()
         prior_wall=0.
         if resume:
             state=torch.load(state_path,map_location=device,weights_only=False)
@@ -243,6 +254,7 @@ def run(config,output,*,scope='smoke',resume=False):
             step=state['step'];best=state['best_source_loss'];tracking=state['tracking']
             random.setstate(state['rng']['python']);np.random.set_state(state['rng']['numpy']);torch.set_rng_state(state['rng']['torch'].cpu());torch.cuda.set_rng_state(state['rng']['cuda'].cpu())
             counters.update(tracking['counters']);seen_source=set(map(tuple,tracking['source_seen']));seen_target=set(map(tuple,tracking['target_seen']));seen_samples=set(tracking['teacher_samples_seen'])
+            seen_expanded=set(tracking.get('expanded_samples_seen',[]))
             prior_wall=tracking['wall_seconds']+reconcile_resume(output,state)
             versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}
         else:
@@ -302,6 +314,7 @@ def run(config,output,*,scope='smoke',resume=False):
                 counters['direct_valid_exposures']+=valid_n;counters['expanded_weak_exposures']+=expanded_n
                 counters['direct_nonzero_gradient_steps']+=int(norm(direct_grads)>1e-12)
                 counters['expanded_nonzero_gradient_steps']+=int(norm(expanded_grads)>1e-12)
+                seen_expanded.update(r['sample_id'] for r in expanded_rows if r['valid'])
             seen_source.add((src['video_id'],src['expression_id']))
             if config['method']=='MLLM_DISTILL' or study:
                 seen_target.add((target['video_id'],target['expression_id']))
@@ -326,7 +339,7 @@ def run(config,output,*,scope='smoke',resume=False):
                 measured=source_validate(model,tokenizer,device,source_val,val_plan);selected=measured<best
                 if not math.isfinite(measured):raise FloatingPointError('nonfinite source validation CE; no checkpoint selection')
                 tracking=dict(counters=dict(counters),source_seen=sorted(seen_source),target_seen=sorted(seen_target),teacher_samples_seen=sorted(seen_samples),
-                    wall_seconds=prior_wall+time.perf_counter()-started,attempt_wall_seconds=time.perf_counter()-started)
+                    expanded_samples_seen=sorted(seen_expanded),wall_seconds=prior_wall+time.perf_counter()-started,attempt_wall_seconds=time.perf_counter()-started)
                 if selected:
                     best=measured;save_training(output/'checkpoint_best_source_selected.pt',model,None,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
                 append_json(output/'source_validation.jsonl',dict(step=step,source_val_CE=measured,selected=selected))
@@ -340,6 +353,7 @@ def run(config,output,*,scope='smoke',resume=False):
         if scope=='full' and (len(seen_source)!=len(source_plan) or
             (config['method']=='MLLM_DISTILL' or study) and (len(seen_target)!=len(pseudo.runtime) or len(seen_samples)!=pseudo.seal['valid_soft_samples'])):
             raise RuntimeError('incomplete actual source/target teacher coverage')
+        if scope=='full' and study and len(seen_expanded)!=len(pseudo.expanded):raise RuntimeError('incomplete unique weak supervision coverage')
         if scope=='full' and study:
             from types import SimpleNamespace
             fit=teacher_fit(model,inputs,SimpleNamespace(groups=[part for group in pseudo.groups for part in study_frame_groups(group)]),output)
@@ -349,6 +363,7 @@ def run(config,output,*,scope='smoke',resume=False):
             source_query_pairs_seen=len(seen_source),source_videos_seen=len({x[0] for x in seen_source}),
             target_query_pairs_seen=len(seen_target),target_videos_seen=len({x[0] for x in seen_target}),
             unique_teacher_samples_seen=len(seen_samples),target_registered_windows=len(pseudo.groups),
+            unique_expanded_samples_seen=len(seen_expanded),
             source_coverage=source_coverage,checkpoint_roundtrip=True,teacher_fit=fit,
             checkpoints={p.name:dict(path=str(p),sha256=file_sha(p)) for p in output.glob('checkpoint_*.pt')})
     torch.cuda.synchronize()

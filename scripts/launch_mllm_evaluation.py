@@ -62,7 +62,7 @@ def launch(checkpoint,root,method='MLLM_DISTILL',workers=4):
             print(json.dumps(dict(status='PRESERVED_COMPLETE_EVALUATION',GPU_calls=0,original_wall_seconds=saved['actual_scheduler_wall_seconds'])),flush=True)
             return saved
     train=json.loads((checkpoint.parent/'training_receipt.json').read_text())
-    if train['status']!='COMPLETE_FIXED_COVERAGE_TRANSDUCTIVE_DIAGNOSTIC' or train['steps']!=8973 or train['target_GT_open_attempts']:
+    if train['status'] not in ('COMPLETE_FIXED_COVERAGE_TRANSDUCTIVE_DIAGNOSTIC','COMPLETE_FIXED_COVERAGE_PSR_STUDY') or train['steps']!=8973 or train['target_GT_open_attempts']:
         raise ValueError('complete original8973 training and access audit required')
     _,gpus,apps=audit_gpus(1,minimum_free_mib=20480)
     chosen=sorted([g for g in gpus if g['free_mib']>=20480],key=lambda g:(g['processes'],-g['free_mib'],g['physical_gpu']))[:min(workers,4)]

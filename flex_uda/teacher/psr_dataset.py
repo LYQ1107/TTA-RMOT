@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from flex_uda.data.manifests import read_jsonl,official_splits
 from flex_tta.runtime.pf_receipts import file_sha
-from .mllm_pseudo_dataset import REVISION,identity
+from .mllm_pseudo_dataset import REVISION,identity,digest
 
 
 class PSRPseudoDataset:
@@ -27,6 +27,8 @@ class PSRPseudoDataset:
             sample=sample_by[row['sample_id']]
             if identity(sample)!=identity(row) or sample['bbox_xyxy']!=row['bbox_xyxy'] or row['teacher_revision']!=REVISION:
                 raise ValueError('teacher identity/model mismatch')
+            if row['manifest_sha256']!=self.seal['files_sha256']['manifest.jsonl'] or row['cache_key']!=digest(row['cache_identity']):
+                raise ValueError('teacher manifest or identity-qualified cache mismatch')
             if not 0<=row['teacher_prob']<=1:raise ValueError('invalid raw soft probability')
             by[row['window_id']].append(row)
         direct_ids=set(sample_by);seen=set()

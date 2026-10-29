@@ -1,0 +1,176 @@
+{
+  "status": "STUDENT_SMOKE_PASS",
+  "steps": 6,
+  "steps_per_cycle": 8973,
+  "counters": {
+    "optimizer_updates": 6,
+    "source_candidate_rows": 41,
+    "target_valid_exposures": 24,
+    "target_nonzero_gradient_steps": 6,
+    "direct_valid_exposures": 24,
+    "expanded_weak_exposures": 0,
+    "direct_nonzero_gradient_steps": 6,
+    "expanded_nonzero_gradient_steps": 0
+  },
+  "adapter_delta_L2": 0.026819989490900923,
+  "source_query_pairs_seen": 6,
+  "source_videos_seen": 1,
+  "target_query_pairs_seen": 2,
+  "target_videos_seen": 1,
+  "unique_teacher_samples_seen": 24,
+  "target_registered_windows": 2125,
+  "unique_expanded_samples_seen": 0,
+  "source_coverage": [
+    {
+      "video_id": "0000",
+      "provided_expressions": 596,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0001",
+      "provided_expressions": 614,
+      "eligible_GT_tracks": 93,
+      "sampled_GT_tracks": 93,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0002",
+      "provided_expressions": 449,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0003",
+      "provided_expressions": 442,
+      "eligible_GT_tracks": 8,
+      "sampled_GT_tracks": 8,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0004",
+      "provided_expressions": 541,
+      "eligible_GT_tracks": 31,
+      "sampled_GT_tracks": 31,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0006",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0007",
+      "provided_expressions": 711,
+      "eligible_GT_tracks": 55,
+      "sampled_GT_tracks": 55,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0008",
+      "provided_expressions": 620,
+      "eligible_GT_tracks": 21,
+      "sampled_GT_tracks": 21,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0009",
+      "provided_expressions": 605,
+      "eligible_GT_tracks": 80,
+      "sampled_GT_tracks": 80,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0010",
+      "provided_expressions": 572,
+      "eligible_GT_tracks": 15,
+      "sampled_GT_tracks": 15,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0012",
+      "provided_expressions": 339,
+      "eligible_GT_tracks": 3,
+      "sampled_GT_tracks": 3,
+      "queries_without_retrievable_source_positive": 9
+    },
+    {
+      "video_id": "0014",
+      "provided_expressions": 361,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0015",
+      "provided_expressions": 478,
+      "eligible_GT_tracks": 19,
+      "sampled_GT_tracks": 19,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0016",
+      "provided_expressions": 505,
+      "eligible_GT_tracks": 22,
+      "sampled_GT_tracks": 22,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0017",
+      "provided_expressions": 353,
+      "eligible_GT_tracks": 9,
+      "sampled_GT_tracks": 9,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0018",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 18,
+      "sampled_GT_tracks": 18,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0020",
+      "provided_expressions": 474,
+      "eligible_GT_tracks": 113,
+      "sampled_GT_tracks": 113,
+      "queries_without_retrievable_source_positive": 0
+    }
+  ],
+  "checkpoint_roundtrip": true,
+  "teacher_fit": null,
+  "checkpoints": {
+    "checkpoint_best_source_selected.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/smoke/NAIVE_PAIRED/checkpoint_best_source_selected.pt",
+      "sha256": "3796c2f2814c33363dceb4de4d0be22777e116b31dae435415f9e16a626667c4"
+    },
+    "checkpoint_latest.pt": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/smoke/NAIVE_PAIRED/checkpoint_latest.pt",
+      "sha256": "07f2e3f8a1572686bb5f409ed3ec1e4af6ca124ac710796720f986ff39417224"
+    }
+  },
+  "method": "NAIVE_PAIRED",
+  "scope": "smoke",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_PSR_STUDY",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only_not_Train_to_Val",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "trainable_parameters": 24576,
+  "frozen_parameters_unchanged": true,
+  "target_GT_open_attempts": [],
+  "wall_seconds": 18.81872414215468,
+  "peak_allocated_bytes": 2028936192,
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "pseudo_seal_sha256": "4afd3ebd77819102d24784ba241464ef17759b93b4473e654192bb6393c230e0",
+  "optimizer_at_test_time": false,
+  "student_calls_MLLM": false
+}

@@ -1,0 +1,43 @@
+{
+  "policy": "UNIFORM",
+  "videos": 25,
+  "queries": 425,
+  "registered_windows": 2125,
+  "actual_direct": 8500,
+  "valid_soft": 8500,
+  "direct_states": {
+    "NEG": 6781,
+    "UNKNOWN": 1080,
+    "POS": 639
+  },
+  "expanded_weak_POS": 258,
+  "expanded_NEG": 0,
+  "original_manifest_sha256": "bac4874483c872e8a3cf06f0bc288225c69aaca0e83ea06632968d6a6f1755f0",
+  "sealed_cache_sha256": "55d7e037f159f7f4104da41a21f5ddcfd238334a330dcf7c1a5c01a02035106a",
+  "teacher_budget": {
+    "required_unique_raw_requests": 8500,
+    "logical_candidate_judgments": 8500,
+    "logical_images": 8500,
+    "required_visual_tokens": 850000,
+    "required_language_tokens": 492000,
+    "equivalent_amortized_forward_seconds": 146.14049247702738,
+    "actual_this_worker": {
+      "actual_model_forward_batches": 1058,
+      "actual_candidate_prompt_forwards": 8208,
+      "actual_images": 8208,
+      "actual_visual_tokens": 820800,
+      "actual_language_tokens": 475102,
+      "actual_forward_seconds": 135.3221515940968,
+      "cache_hits": 8792,
+      "peak_allocated_bytes": 4678529024
+    },
+    "cache_sharing_note": "Each method requires its own8500logical judgments; across-policy identical inputs may share raw forwards. Cache hits do not remove inherited model cost."
+  },
+  "new_unique_weak": 258,
+  "teacher_annotated_GT_correctness": "NOT_COMPUTED_BEFORE_ALL_STUDENT_PREDICTIONS_SEALED",
+  "target_GT_open_attempts": [],
+  "original_cache": "/data2/user/TTA-RMOT-assets/psr/val_v1/UNIFORM",
+  "source_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "expanded_source_margin_note": "Weak cached rows inherit endpoint metadata; any frozen-score comparisons must join the actual middle frame from the Frozen bank, not use parent frozen_margin.",
+  "expanded_raw_request_note": "Raw request provenance is from the explicitly named endpoint parents, not a new teacher call on the middle frame."
+}

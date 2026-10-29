@@ -1,0 +1,27 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "protocol": "USER_AUTHORIZED25VAL_SAME_SET_PSR_NOT_FORMAL_TRAIN_TO_VAL",
+  "formal40Train_asset_missing": true,
+  "teacher_policies": 4,
+  "teacher_direct_judgments_each": 8500,
+  "source_videos": 17,
+  "target_videos": 25,
+  "target_queries": 425,
+  "trainable_parameters": 24576,
+  "fixed_updates": 8973,
+  "methods": {
+    "NAIVE_PAIRED": "NOT_YET_COMPLETED",
+    "PSR": "NOT_YET_COMPLETED",
+    "UNIFORM_PAIRED": "NOT_YET_COMPLETED",
+    "CONFIDENCE_PAIRED": "NOT_YET_COMPLETED",
+    "PSR_DISCOVERY": "NOT_YET_COMPLETED",
+    "PSR_GEOMETRY": "NOT_YET_COMPLETED",
+    "NAIVE_TEMPORAL": "NOT_YET_COMPLETED"
+  },
+  "GT_metrics": "PENDING_UNTIL_ALL_PREDICTIONS_SEALED",
+  "old_Naive8_0327": "HISTORICAL_ONLY_DIFFERENT_SAMPLING",
+  "current_GPU_limit": 4,
+  "raw_cache_root": "/data2/user/TTA-RMOT-assets/psr",
+  "private_run_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
+  "source_and_target_GT_permissions": "sourceGT legal; targetGT only independent evaluation after seal"
+}

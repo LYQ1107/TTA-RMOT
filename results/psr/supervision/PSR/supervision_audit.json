@@ -1,0 +1,43 @@
+{
+  "policy": "PSR",
+  "videos": 25,
+  "queries": 425,
+  "registered_windows": 2125,
+  "actual_direct": 8500,
+  "valid_soft": 8500,
+  "direct_states": {
+    "NEG": 6681,
+    "POS": 657,
+    "UNKNOWN": 1162
+  },
+  "expanded_weak_POS": 254,
+  "expanded_NEG": 0,
+  "original_manifest_sha256": "775381953aea746512f960e0a5ecec5700186237350e028a9f92903506947df3",
+  "sealed_cache_sha256": "2178d3b4bfc4fed8ed22ce7fea44f9f5badf02d816b071133fdecefadd970587",
+  "teacher_budget": {
+    "required_unique_raw_requests": 8500,
+    "logical_candidate_judgments": 8500,
+    "logical_images": 8500,
+    "required_visual_tokens": 850000,
+    "required_language_tokens": 492000,
+    "equivalent_amortized_forward_seconds": 201.92653203712993,
+    "actual_this_worker": {
+      "actual_model_forward_batches": 834,
+      "actual_candidate_prompt_forwards": 3836,
+      "actual_images": 3836,
+      "actual_visual_tokens": 383600,
+      "actual_language_tokens": 221958,
+      "actual_forward_seconds": 107.9877364768181,
+      "cache_hits": 13164,
+      "peak_allocated_bytes": 4678529024
+    },
+    "cache_sharing_note": "Each method requires its own8500logical judgments; across-policy identical inputs may share raw forwards. Cache hits do not remove inherited model cost."
+  },
+  "new_unique_weak": 254,
+  "teacher_annotated_GT_correctness": "NOT_COMPUTED_BEFORE_ALL_STUDENT_PREDICTIONS_SEALED",
+  "target_GT_open_attempts": [],
+  "original_cache": "/data2/user/TTA-RMOT-assets/psr/val_v1/PSR",
+  "source_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "expanded_source_margin_note": "Weak cached rows inherit endpoint metadata; any frozen-score comparisons must join the actual middle frame from the Frozen bank, not use parent frozen_margin.",
+  "expanded_raw_request_note": "Raw request provenance is from the explicitly named endpoint parents, not a new teacher call on the middle frame."
+}
