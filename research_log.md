@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — GPU closure and seed0 complete official result
+
+- Finalparentfull425inferenceexit0:2975.33475s, original56047closed0; allownGPUtraining/inferenceendednormally, no newGPUwork. OriginalCPU25053beganseed0controls+8officialTrackEvalall0, nowdenseofflineanalysis; remainingseed42+parentCPUphasesqueued.
+- Actualall13receipt/fullpredictionauditPASS:each8973updates/24576params/17source/25target/425queries/3588445candidate-queryrows/433636activequeryframes,source-selectedcheckpointSHAequalsinferenceSHA,FP32threshold0/testupdates0/GTattempts0/boxes+IDsunchanged. Savedall13_students_and_full_predictions.json; do not confuse this with officialall47completion.
+- Seed0full425official:Frozen8.2180,Naive7.5959,PSR8.8701. Froz@Naivecount7.4002,Froz@PSRcount8.6343;PSR@Frozen8.0312. PSR−Naive1.2742,butFrozen-onlycountdifference1.2341; no semantic/noveltysuccessclaimorbest-seedselection. Seed42/parentmetricsstillpendingoriginalqueue.
+
 ## 2026-10-30 — Four confirmations sealed; GT-free count controls prefetched
 
 - Original84940registeredseedpairsparentexited0; all4newseed0/42studentsfull25/425predictionssealed. Onlyparentcontrolinferenceleft, latest20/25 onoriginal56047; originalCPU25053stillwaitsparentbeforeanynewGT.
