@@ -61,6 +61,7 @@ def export(run,public):
     index['runtime_logs']=archive(public/'logs/runtime_logs.tar.gz',logs)
     for name in ('controls_sealed.json','official_evaluation_completion.json'):
         shutil.copy2(root/name,public/name)
+    if (run/'mean_teacher_prefetch_completion.json').exists():shutil.copy2(run/'mean_teacher_prefetch_completion.json',public/'mean_teacher_prefetch_completion.json')
     atomic_json(public/'artifact_index.json',dict(status='COMPLETE_PREDICTIONS_LOGS_AND_RECOVERY',methods=index,
         private_run_root=str(run),large_score_streams='per-method episode_recovery.json: exact paths and SHA256',
         checkpoints='results/psr/training/*/training_receipt.json: exact paths and SHA256',

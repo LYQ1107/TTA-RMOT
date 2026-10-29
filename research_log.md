@@ -2147,6 +2147,9 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - FormalE2 and full425evaluation are next, not already complete. Only actual fullRMOT/ranking/quantity-adjusted evidence can authorize subsequent conventional controls or innovation; do not call sparse AP a HOTA gain.
 # 2026-10-29 PSR 主训练完成与匹配对照队列
 
+已将剩余匹配Mean Teacher接力写成单个CPU等待父命令：仅在Discovery完整425预测封存且其GPU进程已由父进程wait返回后入场。
+保留原1/5/4卡队列，最多新选1卡，重新检查显存/进程数；目录锁在CUDA分配前去重原队列稍后到达的同项，不迁移健康训练。
+
 训练锚点GT-free分组检查（无新GPU、未读GT）：Naive教师POS656中学生选40（6.10%，源55），PSR657中学生选47（7.15%，源45）。
 POS BCE虽从8.45/8.64降到1.99/1.97，逾92%教师POS仍被固定decoder拒绝；总体BCE下降不能直接证明正支持恢复。
 仅作已登记可学习性证据，所有后续对照仍原配置，最终结论等待封存后完整RMOT/覆盖/排序/数量归因。

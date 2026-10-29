@@ -55,6 +55,10 @@ def snapshot():
     atomic_json(PUBLIC/'stage_status.json',result);atomic_json(PUBLIC/'recovery_index.json',dict(methods=recovery,teacher_raw_root=str(RUN/'teacher_full'),
         pseudo_root='/data2/user/TTA-RMOT-assets/psr/val_v1',large_weights_and_raw_cache_stay_on_server=True,
         inference_resume='python scripts/run_psr_matrix.py --root '+str(RUN),
+        healthy_queue_warning='Do not launch the all-method command while any original worker is healthy. Resume only failed methods, explicitly counting other active physical GPUs.',
+        mean_teacher_prefetch='python scripts/prefetch_psr_mean_teacher.py --run-root '+str(RUN),
+        CPU_evaluation_resume='python scripts/finish_psr_study.py --run-root '+str(RUN),
+        dispatcher_warning='Both dispatchers may already be running; resume their original wait handles instead of starting duplicates.',
         after_all_inference='python scripts/prepare_psr_controls.py --training-root '+str(RUN/'students')+' --evaluation-root '+str(RUN/'evaluation/merged'),
         checkpoint_SHA_source='each completed training_receipt.json; no targetGT checkpoint selection'))
     print(json.dumps(result,indent=2));return result
