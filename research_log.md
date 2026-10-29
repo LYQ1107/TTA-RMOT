@@ -1,5 +1,13 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-29 — New PSR implementation goal; user explicitly reauthorizes25Val
+
+- Start861840e, clean repository, independent research/v2dance-psr-trainval-20261029. Rechecked40Train1560queries/41796images:0/40matchingMOT, officialZIP has no prediction payload. OfficialiKUN issue35/44 author confirms NeuralSORT/NKF code not released. No detector replacement orGT substitution.
+- User explicitly says still no40 and useVal, and reauthorizes memory-fit/few-process GPUsharing,max4. This stage is sameVal adaptation, NOT formalTrain→Val or blindtest; old8.0327 preserved, not reused as new paired-samplingNaive.
+- Implemented actual five-role budget discovery, bounded positive-only bridge expansion and separate normalized losses. All17DanceVal querytypes include action/mixed semantics; only one weak middle frame between two full-expression teacherPOS endpoints, no unbounded action/ID propagation. Extra appearance/overlap checks onlyFull; source-calibrated0.95/0.05 kept.
+- Preregistered paired5anchors×2tracks×2singleframes=20calls/query, same425queries and8500calls in each ofNaive/Uniform/Confidence/PSR. All four real immutableMOT/Frozen-score sampling manifests builtGT-free;6targeted tests pass. Source commit recorded861840e during uncommitted new sampler construction; the new code is saved in the immediately following PSR stage commit, not falsely attributed to oldP1 source.
+- Main students retain24576params/seed17/8973updates/lr5e-5/source-val-onlyselection. Naive/PSR first, then required ordinary sampling/propagation controls. No claim of success before real training and full425official evaluation.
+
 ## 2026-10-29 — Complete first naive frozen-MLLM distillation,25Val diagnosis
 
 - User explicitly authorizes25Val first because40Train official MOT is absent; not Train→Val, unseen-video generalization or onlineTTA. P1/oldUDA/sixTTA bytes preserved.

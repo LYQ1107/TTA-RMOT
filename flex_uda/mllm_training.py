@@ -19,6 +19,7 @@ from flex_uda.training import (ROOT,SOURCE,DANCE,CHECKPOINT,SOURCE_SHA,Inputs,
 from flex_uda.data.source_kitti_v2 import SourceSupervision
 from flex_uda.data.manifests import write_jsonl,read_jsonl
 from flex_uda.teacher.mllm_pseudo_dataset import MLLMPseudoDataset
+from flex_uda.teacher.psr_dataset import PSRPseudoDataset
 from flex_uda.teacher.isolation import restrict_filesystem
 from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda
 from flex_uda.losses.objectives import supervised_ce
@@ -45,6 +46,30 @@ def target_batch(inputs,group):
     probability=torch.tensor([rows[i]['teacher_prob'] for i,_ in candidates],device=inputs.device)
     valid=torch.tensor([rows[i]['valid'] for i,_ in candidates],device=inputs.device,dtype=torch.bool)
     return prepared,probability,valid,[rows[i] for i,_ in candidates]
+
+
+def study_frame_groups(group,field='samples'):
+    by={}
+    for row in group.get(field,[]):by.setdefault(row['frame_id'],[]).append(row)
+    return [dict(group,frame=t,samples=rows) for t,rows in sorted(by.items())]
+
+
+def study_loss(model,inputs,group,field,amp):
+    rows=group.get(field,[]);valid_n=sum(r['valid'] for r in rows);total=None
+    for part in study_frame_groups(group,field):
+        batch=target_batch(inputs,part)
+        if batch is None:continue
+        prepared,p,valid,_=batch
+        with torch.autocast('cuda',dtype=torch.float16,enabled=amp):
+            value=forward_uda(model,prepared,return_features=False)
+            loss=soft_distillation(value['margin'],p,valid)*(int(valid.sum())/max(valid_n,1))
+        total=loss if total is None else total+loss
+    return total,rows,valid_n
+
+
+def cosine_between(a,b):
+    na,nb=norm(a),norm(b)
+    return sum(float((x*y).sum()) for x,y in zip(a,b) if x is not None and y is not None)/(na*nb) if na and nb else None
 
 
 def enforce_inputs(output,pseudo):
@@ -126,18 +151,23 @@ def run(config,output,*,scope='smoke',resume=False):
     output=Path(output).resolve()
     if config['protocol']['target_split']=='val' and os.environ.get('MLLM_VAL_DIAGNOSTIC_AUTHORIZED')!='YES':
         raise PermissionError('explicit Val transductive authorization required')
-    if config['method'] not in ('MLLM_DISTILL','SOURCE_REHEARSAL'):raise ValueError('independent distillation method required')
+    study=config['protocol']['name'] in ('TRANSDUCTIVE_VAL_PSR_STUDY','FORMAL_TRAIN_TO_VAL_PSR_STUDY')
+    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL')
+    if config['method'] not in (study_methods if study else ('MLLM_DISTILL','SOURCE_REHEARSAL')):raise ValueError('independent distillation method required')
     if output.exists() and not resume:raise FileExistsError('preserve existing run: '+str(output))
     output.mkdir(parents=True,exist_ok=resume);started=time.perf_counter()
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     attempts=protect_target_annotations()
-    pseudo=MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
-    if config['protocol']['name']!='TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC' or config['protocol']['target_split']!=pseudo.split:
+    pseudo=(PSRPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True,expanded_kind=config['data'].get('expanded_kind','full')) if study
+        else MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True))
+    if (not study and config['protocol']['name']!='TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC') or config['protocol']['target_split']!=pseudo.split:
         raise ValueError('this validated Val route cannot be relabelled as formal Train-to-Val')
+    if study and (config['protocol']['name']=='FORMAL_TRAIN_TO_VAL_PSR_STUDY')!=(pseudo.split=='train'):
+        raise ValueError('formal training cannot consume Val teacher labels')
     if file_sha(CHECKPOINT)!=SOURCE_SHA:raise ValueError('official V2 checkpoint changed')
     seed=config['protocol']['seed'];random.seed(seed);np.random.seed(seed);torch.manual_seed(seed)
     device=torch.device('cuda:0');props=torch.cuda.get_device_properties(device)
-    torch.cuda.set_per_process_memory_fraction((24576<<20)/props.total_memory,device)
+    torch.cuda.set_per_process_memory_fraction(((16384 if study else 24576)<<20)/props.total_memory,device)
     # Initialize only the empty CUDA context before the input whitelist. The
     # dfot driver needs host initialization paths; no model/target image or GT
     # is opened here. All actual model/data work remains kernel-isolated.
@@ -174,7 +204,8 @@ def run(config,output,*,scope='smoke',resume=False):
     if scope=='interface':
         checks=[]
         for index in sorted(set(np.linspace(0,len(pseudo.groups)-1,8,dtype=int).tolist())):
-            batch=target_batch(inputs,pseudo.groups[index])
+            group=pseudo.groups[index]
+            batch=target_batch(inputs,study_frame_groups(group)[0]) if study and group['samples'] else target_batch(inputs,group)
             if batch is None:continue
             prepared,p,valid,rows=batch;optimizer.zero_grad(set_to_none=True)
             value=forward_uda(model,prepared,return_features=False);loss=soft_distillation(value['margin'],p,valid)
@@ -201,6 +232,7 @@ def run(config,output,*,scope='smoke',resume=False):
         plan_sha={n:file_sha(plans/n) for n in ('source_train_plan.jsonl','target_plan.jsonl')}
         plan_sha.update(teacher_manifest=provenance['pseudo_manifest_sha256'],teacher_labels=provenance['teacher_labels_sha256'],pseudo_seal=provenance['pseudo_seal_sha256'])
         steps_per_cycle=max(len(source_plan),len(pseudo.groups))
+        if study and steps_per_cycle!=8973:raise ValueError('PSR/Naive must share the registered8973 update budget')
         total=6 if scope=='smoke' else config['train']['coverage_cycles']*steps_per_cycle
         state_path=output/'checkpoint_latest.pt';step=0;best=float('inf');counters=Counter();seen_source=set();seen_target=set();seen_samples=set()
         prior_wall=0.
@@ -230,8 +262,18 @@ def run(config,output,*,scope='smoke',resume=False):
                 if not torch.isfinite(loss):raise FloatingPointError('nonfinite source supervised objective')
                 scaler.scale(loss).backward();source_loss_total+=float(loss.detach());source_rows+=len(candidates)
             source_grads=[None if p.grad is None else p.grad.detach().float().clone()/scaler.get_scale() for p in params]
-            kd_value=0.;teacher_rows=[];valid_n=0
-            if config['method']=='MLLM_DISTILL':
+            kd_value=0.;teacher_rows=[];valid_n=0;expanded_rows=[];expanded_n=0;expanded_value=0.;direct_grads=None
+            if study:
+                kd,teacher_rows,valid_n=study_loss(model,inputs,target,'samples',scaler.is_enabled())
+                if kd is not None:
+                    if not torch.isfinite(kd):raise FloatingPointError('nonfinite direct teacher objective')
+                    scaler.scale(kd*config['loss']['target_kd']).backward();kd_value=float(kd.detach())
+                direct_grads=[p.grad.detach().float().clone()/scaler.get_scale()-(s if s is not None else 0) if p.grad is not None else None for p,s in zip(params,source_grads)]
+                weak,expanded_rows,expanded_n=study_loss(model,inputs,target,'expanded_samples',scaler.is_enabled())
+                if weak is not None:
+                    if not torch.isfinite(weak):raise FloatingPointError('nonfinite expanded weak objective')
+                    scaler.scale(weak*config['loss']['expanded']).backward();expanded_value=float(weak.detach())
+            elif config['method']=='MLLM_DISTILL':
                 batch=target_batch(inputs,target)
                 if batch is not None:
                     prepared,p,valid,teacher_rows=batch;valid_n=int(valid.sum())
@@ -243,6 +285,7 @@ def run(config,output,*,scope='smoke',resume=False):
             scaler.unscale_(optimizer)
             target_grads=[p.grad.detach().float()-(s if s is not None else 0) if p.grad is not None else None for p,s in zip(params,source_grads)]
             source_norm=norm(source_grads);target_norm=norm(target_grads)
+            expanded_grads=([None if t is None else t-(d if d is not None else 0) for t,d in zip(target_grads,direct_grads)] if study else [])
             total_norm=torch.nn.utils.clip_grad_norm_(params,config['optimizer']['grad_clip'])
             if not torch.isfinite(total_norm):
                 if not scaler.is_enabled() or retry>=8:raise FloatingPointError('nonfinite gradient after same-sample AMP backoff')
@@ -255,8 +298,12 @@ def run(config,output,*,scope='smoke',resume=False):
             if scaler.get_scale()<scale_before:raise RuntimeError('unexpected skipped update after explicit finite gradient validation')
             counters['optimizer_updates']+=1;counters['source_candidate_rows']+=source_rows;counters['target_valid_exposures']+=valid_n
             counters['target_nonzero_gradient_steps']+=int(target_norm>1e-12)
+            if study:
+                counters['direct_valid_exposures']+=valid_n;counters['expanded_weak_exposures']+=expanded_n
+                counters['direct_nonzero_gradient_steps']+=int(norm(direct_grads)>1e-12)
+                counters['expanded_nonzero_gradient_steps']+=int(norm(expanded_grads)>1e-12)
             seen_source.add((src['video_id'],src['expression_id']))
-            if config['method']=='MLLM_DISTILL':
+            if config['method']=='MLLM_DISTILL' or study:
                 seen_target.add((target['video_id'],target['expression_id']))
                 seen_samples.update(r['sample_id'] for r in teacher_rows if r['valid'])
             record=dict(step=step+1,source_video=src['video_id'],source_expression=src['expression_id'],
@@ -264,6 +311,13 @@ def run(config,output,*,scope='smoke',resume=False):
                 source_rows=source_rows,target_valid_rows=valid_n,source_loss=source_loss_total,target_KD_loss=kd_value,
                 source_gradient_norm=source_norm,target_gradient_norm=target_norm,source_target_gradient_cosine=cosine,
                 gradient_norm=float(total_norm),wall_seconds=time.perf_counter()-started)
+            if study:
+                record.update(expanded_KD_loss=expanded_value,expanded_weighted_loss=expanded_value*config['loss']['expanded'],
+                    expanded_valid_rows=expanded_n,direct_gradient_norm=norm(direct_grads),expanded_gradient_norm=norm(expanded_grads),
+                    source_direct_gradient_cosine=cosine_between(source_grads,direct_grads),source_expanded_gradient_cosine=cosine_between(source_grads,expanded_grads),
+                    direct_expanded_gradient_cosine=cosine_between(direct_grads,expanded_grads),
+                    direct_states=dict(Counter(r['state'] for r in teacher_rows)),expanded_states=dict(Counter(r['state'] for r in expanded_rows)),
+                    UNKNOWN_not_default_negative=True)
             append_json(output/'metrics_train.jsonl',record);step+=1;retry=0
             if step%10==0 or step==total:
                 atomic_json(output/'progress.json',dict(status='RUNNING',step=step,total_steps=total,unique_teacher_samples_seen=len(seen_samples),**dict(counters)))
@@ -282,12 +336,15 @@ def run(config,output,*,scope='smoke',resume=False):
         del restored
         delta=norm([p.detach()-old for p,old in zip(params,initial)])
         if not delta or not counters['optimizer_updates']:raise RuntimeError('student parameters did not change')
-        if config['method']=='MLLM_DISTILL' and not counters['target_nonzero_gradient_steps']:raise RuntimeError('no nonzero target KD gradients')
+        if (config['method']=='MLLM_DISTILL' or study) and not counters['target_nonzero_gradient_steps']:raise RuntimeError('no nonzero target KD gradients')
         if scope=='full' and (len(seen_source)!=len(source_plan) or
-            config['method']=='MLLM_DISTILL' and (len(seen_target)!=len(pseudo.runtime) or len(seen_samples)!=pseudo.seal['valid_soft_samples'])):
+            (config['method']=='MLLM_DISTILL' or study) and (len(seen_target)!=len(pseudo.runtime) or len(seen_samples)!=pseudo.seal['valid_soft_samples'])):
             raise RuntimeError('incomplete actual source/target teacher coverage')
-        fit=teacher_fit(model,inputs,pseudo,output) if scope=='full' and config['method']=='MLLM_DISTILL' else None
-        result=dict(status='STUDENT_SMOKE_PASS' if scope=='smoke' else 'COMPLETE_FIXED_COVERAGE_TRANSDUCTIVE_DIAGNOSTIC',
+        if scope=='full' and study:
+            from types import SimpleNamespace
+            fit=teacher_fit(model,inputs,SimpleNamespace(groups=[part for group in pseudo.groups for part in study_frame_groups(group)]),output)
+        else:fit=teacher_fit(model,inputs,pseudo,output) if scope=='full' and config['method']=='MLLM_DISTILL' else None
+        result=dict(status='STUDENT_SMOKE_PASS' if scope=='smoke' else ('COMPLETE_FIXED_COVERAGE_PSR_STUDY' if study else 'COMPLETE_FIXED_COVERAGE_TRANSDUCTIVE_DIAGNOSTIC'),
             steps=total,steps_per_cycle=steps_per_cycle,counters=dict(counters),adapter_delta_L2=delta,
             source_query_pairs_seen=len(seen_source),source_videos_seen=len({x[0] for x in seen_source}),
             target_query_pairs_seen=len(seen_target),target_videos_seen=len({x[0] for x in seen_target}),
