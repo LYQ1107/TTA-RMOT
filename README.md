@@ -10,12 +10,15 @@
 用户明确允许缺少40Train同配置MOT时使用现有25Val，所有新结果均不称Train→Val泛化或盲测。
 四种GT-free采样策略各425表达/8500真实冻结Qwen判断；同容量Naive与PSR主训练已各完成8973步。
 PSR新增254条有双端点证据、限定中间一帧的弱监督，不宣称它们都正确。
-完整推理及Uniform/Confidence/Discovery/Geometry/普通Temporal/匹配Mean Teacher对照正在执行。
+完整8学生训练、425表达推理、26组官方及双向数量控制评测已完成。
+首轮HOTA：Frozen **8.2180**、Naive **7.4499**、PSR **8.4204**、Uniform **8.4347**、匹配MeanTeacher **8.6095**。
+PSR未超过简单Uniform/MT，Present子集HOTA下降；当前不支持独立方法贡献。条件触发的seed0/42确认及端点权重控制在执行。
 最多四张显存入场审计后的共享GPU，每卡串行，不停止别的项目；目标GT仅在完整预测封存后独立评测。
 [机制](docs/PSR_METHOD.md)、[预注册训练协议](docs/PSR_TRAINING_PROTOCOL.md)、
 [监督审计](docs/PSR_PSEUDO_LABEL_AUDIT.md)、[真实进度](docs/PSR_EXPERIMENT_RESULTS.md)、
 [当前科研判决](docs/PSR_FINAL_SCIENTIFIC_VERDICT.md)、[完整主训练日志](results/psr/training/)、[恢复索引](results/psr/recovery_index.json)。
-目前未产生本轮新HOTA，不把模块通过或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
+[首轮完整指标与成本](results/psr/full/TABLES.md)、[26组完整预测与日志](results/psr/full/artifact_index.json)。
+不把单seed微增或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
 
 ## 已完成：普通 MLLM 软概率蒸馏
 

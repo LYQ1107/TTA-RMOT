@@ -26,7 +26,22 @@ def export(run,public):
     run,public=Path(run).resolve(),Path(public).resolve();root=run/'evaluation/merged'
     seal=json.loads((root/'controls_sealed.json').read_text());complete=json.loads((root/'official_evaluation_completion.json').read_text())
     if complete['status']!='COMPLETE':raise ValueError('complete official results required')
-    snapshot();index={};logs=[]
+    if run==ROOT/'results/runs/psr_val_20261029_v1':snapshot()
+    index={};logs=[];checkpoints={}
+    for method in seal['student_methods']:
+        folder=run/'students'/method;dest=public/'training'/method;dest.mkdir(parents=True,exist_ok=True)
+        for name in ('training_receipt.json','provenance.json','config.json','source_validation.jsonl','teacher_fit_summary.json','teacher_fit_after_training.jsonl.gz'):
+            if (folder/name).exists():shutil.copy2(folder/name,dest/name)
+        with (folder/'metrics_train.jsonl').open('rb') as src,(dest/'metrics_train.jsonl.gz').open('wb') as dst:
+            with gzip.GzipFile(filename='',fileobj=dst,mode='wb',mtime=0) as gz:shutil.copyfileobj(src,gz)
+        checkpoints[method]=json.loads((folder/'training_receipt.json').read_text())['checkpoints']
+        for source in (folder/'attempt_runtimes').glob('*.json'):
+            target=dest/'attempt_runtimes'/source.name;target.parent.mkdir(exist_ok=True);shutil.copy2(source,target)
+        for name,source in [('training_stdout.txt.gz',run/'students'/(method+'_stdout.txt')),
+                            ('inference_stdout.txt.gz',root/(method+'_stdout.txt'))]:
+            if source.exists():
+                with source.open('rb') as src,(dest/name).open('wb') as dst:
+                    with gzip.GzipFile(filename='',fileobj=dst,mode='wb',mtime=0) as gz:shutil.copyfileobj(src,gz)
     for method in seal['methods']:
         folder=root/method;dest=public/method;dest.mkdir(parents=True,exist_ok=True)
         for name in ('full_audit.json','run_metadata.json','reference_metadata.json','inference_start_provenance.json'):
@@ -64,7 +79,7 @@ def export(run,public):
     if (run/'mean_teacher_prefetch_completion.json').exists():shutil.copy2(run/'mean_teacher_prefetch_completion.json',public/'mean_teacher_prefetch_completion.json')
     atomic_json(public/'artifact_index.json',dict(status='COMPLETE_PREDICTIONS_LOGS_AND_RECOVERY',methods=index,
         private_run_root=str(run),large_score_streams='per-method episode_recovery.json: exact paths and SHA256',
-        checkpoints='results/psr/training/*/training_receipt.json: exact paths and SHA256',
+        checkpoints=checkpoints,
         raw_teacher_root=str(run/'teacher_full'),pseudo_root='/data2/user/TTA-RMOT-assets/psr/val_v1',
         raw_teacher_cache='/data2/user/TTA-RMOT-assets/psr/cache/raw.sqlite',
         no_images_weights_or_complete_raw_MLLM_cache_uploaded=True))

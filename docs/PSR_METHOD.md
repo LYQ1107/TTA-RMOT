@@ -1,4 +1,4 @@
-# Positive-Support Recovery（PSR），v1待验证实现
+# Positive-Support Recovery（PSR），v1已完成首轮实测
 
 2026-10-29，起点861840e；新分支`research/v2dance-psr-trainval-20261029`。
 本轮受用户新授权实现PSR，不把上一轮未达到的Ours门槛改写为已通过。
@@ -62,3 +62,10 @@ PSR并非旧分属性Evidence改名：不分解表达、不额外多问教师验
 
 以上区别只说明机制和预算，不构成PSR优于参考方法的证据。
 全部学生仅改变第二阶段语言筛选，固定Dance专用DETR+NeuralSORT前端本来就不是全系统source-free。
+
+## 2026-10-30 实测边界
+
+首轮完整PSR HOTA8.4204，Frozen8.2180、Naive7.4499、Uniform8.4347、匹配MT8.6095。
+发现净增11正确直接GT观测，Full弱错误33.07%；不支持PSR独立贡献或Full门优于普通几何。
+预注册seed0/42确认保持缓存/预算不变；另外POST_HOC端点权重控制只重放263几何机会的两端526实际教师项，新增标签0。
+该控制的额外0.25均值损失检验正例重加权混杂，不是第九种预注册新方法，也不是精确匹配全部梯度的干预。

@@ -7,6 +7,15 @@
 - User5.2 requires geometry benefit not merelypositive-weight/sample-count gain. Added explicitlyPOST_HOC PSR_PARENT_WEIGHT_CONTROL: exactlysame263geometry opportunities, but extra0.25normalizedmeanBCE uses526 actual endpoint-parent terms at their original frames/probabilities, no new weak labels/frames/teacher calls. Same8500direct cache andfixedstudentbudget. Queue after a confirmation lane really exits; first actualinterface+6step smoke, thenfull. Not part of preregistered headline, no GT enters prediction/training, nooriginalthresholdchanged.
 - Dedicated newmethod dispatch only; existing8method loss paths unchanged. Parent replay counters explicitly distinct from uniqueweak evidence; control is opportunity/weight matched, not an exact matched-gradient intervention.
 
+## 2026-10-30 — Complete primary official/count/ranking/coverage closure
+
+- Original blockingCPU pipeline completed controls40.13s, official26methods186.61s, offlineanalysis836.36s, tables0.08s, export30.98s; GPUreruns0.26complete425prediction archives+officialdetailCSVs+logs+all8trainingtraces exported.
+- PSR−Naive+0.9705, butFrozen@PSRcount−Frozen@Naivecount+0.9330; reversePSR@Frozen8.0336<8.2180. Do not claim count-independent semantic recovery.
+- OfficialPresent40/Empty385 unchanged; PresentHOTA9.7456→8.8043, EmptyFP87371→20059. FrameIoU05 recovery8773/lost8025/net748, newFP18327/removal85724; matchingreassignment kept distinct.
+- PSR374correctdirectPOS (344source-rejected), vsNaive363 (net11); weak170/254correct,84errors. DirectGTcoverage0.176%,newweak0.080%; Uniform371directcorrect andbetterHOTA.
+- FullcandidateAUROC.650204→.756113/AP≈.1618, butGTone-to-oneR@1/5notbetter andqueryswapadvantagedeltaCIcrosses0. AssA21.147→16.245/IDSW269→338. PSR−FrozenvideoCI[-6.3931,5.9808],14improve/8decline/3unchanged. ScientificindependentcontributionNOTestablished.
+- Regression16PSR+MLLM tests pass after adding dedicatedparentcontroldispatch. Registeredseedconfirmation remainsrunning, no thresholds/lr/capacity/teacherbudget changed.
+
 ## 2026-10-29 — New PSR implementation goal; user explicitly reauthorizes25Val
 
 - Start861840e, clean repository, independent research/v2dance-psr-trainval-20261029. Rechecked40Train1560queries/41796images:0/40matchingMOT, officialZIP has no prediction payload. OfficialiKUN issue35/44 author confirms NeuralSORT/NKF code not released. No detector replacement orGT substitution.

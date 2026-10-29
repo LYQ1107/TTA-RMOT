@@ -1,0 +1,5010 @@
+{
+  "status": "COMPLETE_FOR_LISTED_METHODS",
+  "protocol": "USER_AUTHORIZED_25VAL_SAME_SET_NOT_TRAIN_TO_VAL",
+  "videos": 25,
+  "expressions": 425,
+  "student_methods": [
+    "NAIVE_PAIRED",
+    "PSR",
+    "UNIFORM_PAIRED",
+    "CONFIDENCE_PAIRED",
+    "PSR_DISCOVERY",
+    "PSR_GEOMETRY",
+    "NAIVE_TEMPORAL",
+    "MEAN_TEACHER_MATCHED"
+  ],
+  "official_metrics": {
+    "FROZEN": {
+      "HOTA": 8.218,
+      "DetA": 3.1937,
+      "AssA": 21.147,
+      "DetRe": 4.5441,
+      "DetPr": 9.6868,
+      "AssRe": 24.584,
+      "AssPr": 72.203,
+      "LocA": 92.076,
+      "RHOTA": 9.8026,
+      "HOTA(0)": 9.002,
+      "LocA(0)": 89.013,
+      "HOTALocA(0)": 8.013,
+      "MOTA": -37.318,
+      "MOTP": 91.72,
+      "MODA": -37.192,
+      "CLR_Re": 4.8593,
+      "CLR_Pr": 10.359,
+      "MTR": 1.9841,
+      "PTR": 5.9524,
+      "MLR": 92.063,
+      "CLR_TP": 10328.0,
+      "CLR_FN": 202213.0,
+      "CLR_FP": 89376.0,
+      "IDSW": 269.0,
+      "MT": 5.0,
+      "PT": 15.0,
+      "ML": 232.0,
+      "Frag": 1234.0,
+      "sMOTA": -37.721,
+      "IDF1": 4.4414,
+      "IDR": 3.2624,
+      "IDP": 6.9546,
+      "IDTP": 6934.0,
+      "IDFN": 205607.0,
+      "IDFP": 92770.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1769.0,
+      "GT_IDs": 252.0
+    },
+    "SOURCE_REHEARSAL": {
+      "HOTA": 7.4352,
+      "DetA": 1.9669,
+      "AssA": 28.111,
+      "DetRe": 2.3022,
+      "DetPr": 11.874,
+      "AssRe": 33.356,
+      "AssPr": 69.088,
+      "LocA": 92.332,
+      "RHOTA": 8.0439,
+      "HOTA(0)": 8.1464,
+      "LocA(0)": 89.948,
+      "HOTALocA(0)": 7.3276,
+      "MOTA": -14.514,
+      "MOTP": 91.774,
+      "MODA": -14.458,
+      "CLR_Re": 2.4659,
+      "CLR_Pr": 12.717,
+      "MTR": 1.5873,
+      "PTR": 1.9841,
+      "MLR": 96.429,
+      "CLR_TP": 5241.0,
+      "CLR_FN": 207300.0,
+      "CLR_FP": 35970.0,
+      "IDSW": 119.0,
+      "MT": 4.0,
+      "PT": 5.0,
+      "ML": 243.0,
+      "Frag": 542.0,
+      "sMOTA": -14.717,
+      "IDF1": 2.8658,
+      "IDR": 1.7107,
+      "IDP": 8.8229,
+      "IDTP": 3636.0,
+      "IDFN": 208905.0,
+      "IDFP": 37575.0,
+      "Dets": 41211.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1094.0,
+      "GT_IDs": 252.0
+    },
+    "NAIVE_PAIRED": {
+      "HOTA": 7.4499,
+      "DetA": 3.7469,
+      "AssA": 14.834,
+      "DetRe": 3.9671,
+      "DetPr": 39.96,
+      "AssRe": 15.792,
+      "AssPr": 71.346,
+      "LocA": 91.446,
+      "RHOTA": 7.6662,
+      "HOTA(0)": 8.0403,
+      "LocA(0)": 87.542,
+      "HOTALocA(0)": 7.0387,
+      "MOTA": -1.5221,
+      "MOTP": 91.176,
+      "MODA": -1.3889,
+      "CLR_Re": 4.2693,
+      "CLR_Pr": 43.005,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 9074.0,
+      "CLR_FN": 203467.0,
+      "CLR_FP": 12026.0,
+      "IDSW": 283.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1491.0,
+      "sMOTA": -1.8988,
+      "IDF1": 4.6833,
+      "IDR": 2.5741,
+      "IDP": 25.929,
+      "IDTP": 5471.0,
+      "IDFN": 207070.0,
+      "IDFP": 15629.0,
+      "Dets": 21100.0,
+      "GT_Dets": 212541.0,
+      "IDs": 814.0,
+      "GT_IDs": 252.0
+    },
+    "PSR": {
+      "HOTA": 8.4204,
+      "DetA": 4.3726,
+      "AssA": 16.245,
+      "DetRe": 4.8366,
+      "DetPr": 31.092,
+      "AssRe": 17.583,
+      "AssPr": 70.083,
+      "LocA": 91.288,
+      "RHOTA": 8.8569,
+      "HOTA(0)": 9.0962,
+      "LocA(0)": 86.978,
+      "HOTALocA(0)": 7.9117,
+      "MOTA": -5.2936,
+      "MOTP": 91.048,
+      "MODA": -5.1345,
+      "CLR_Re": 5.2108,
+      "CLR_Pr": 33.497,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 11075.0,
+      "CLR_FN": 201466.0,
+      "CLR_FP": 21988.0,
+      "IDSW": 338.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1724.0,
+      "sMOTA": -5.76,
+      "IDF1": 5.333,
+      "IDR": 3.0813,
+      "IDP": 19.808,
+      "IDTP": 6549.0,
+      "IDFN": 205992.0,
+      "IDFP": 26514.0,
+      "Dets": 33063.0,
+      "GT_Dets": 212541.0,
+      "IDs": 971.0,
+      "GT_IDs": 252.0
+    },
+    "UNIFORM_PAIRED": {
+      "HOTA": 8.4347,
+      "DetA": 4.4324,
+      "AssA": 16.075,
+      "DetRe": 4.9243,
+      "DetPr": 30.518,
+      "AssRe": 17.223,
+      "AssPr": 70.788,
+      "LocA": 91.14,
+      "RHOTA": 8.8914,
+      "HOTA(0)": 9.1647,
+      "LocA(0)": 86.844,
+      "HOTALocA(0)": 7.959,
+      "MOTA": -5.6573,
+      "MOTP": 90.883,
+      "MODA": -5.4931,
+      "CLR_Re": 5.3213,
+      "CLR_Pr": 32.979,
+      "MTR": 0.0,
+      "PTR": 7.5397,
+      "MLR": 92.46,
+      "CLR_TP": 11310.0,
+      "CLR_FN": 201231.0,
+      "CLR_FP": 22985.0,
+      "IDSW": 349.0,
+      "MT": 0.0,
+      "PT": 19.0,
+      "ML": 233.0,
+      "Frag": 1791.0,
+      "sMOTA": -6.1424,
+      "IDF1": 5.402,
+      "IDR": 3.1368,
+      "IDP": 19.44,
+      "IDTP": 6667.0,
+      "IDFN": 205874.0,
+      "IDFP": 27628.0,
+      "Dets": 34295.0,
+      "GT_Dets": 212541.0,
+      "IDs": 972.0,
+      "GT_IDs": 252.0
+    },
+    "CONFIDENCE_PAIRED": {
+      "HOTA": 6.7173,
+      "DetA": 3.5247,
+      "AssA": 12.837,
+      "DetRe": 3.8904,
+      "DetPr": 27.087,
+      "AssRe": 13.547,
+      "AssPr": 71.164,
+      "LocA": 90.895,
+      "RHOTA": 7.0581,
+      "HOTA(0)": 7.254,
+      "LocA(0)": 86.222,
+      "HOTALocA(0)": 6.2546,
+      "MOTA": -6.1104,
+      "MOTP": 90.546,
+      "MODA": -5.9532,
+      "CLR_Re": 4.2048,
+      "CLR_Pr": 29.276,
+      "MTR": 0.0,
+      "PTR": 6.746,
+      "MLR": 93.254,
+      "CLR_TP": 8937.0,
+      "CLR_FN": 203604.0,
+      "CLR_FP": 21590.0,
+      "IDSW": 334.0,
+      "MT": 0.0,
+      "PT": 17.0,
+      "ML": 235.0,
+      "Frag": 1570.0,
+      "sMOTA": -6.5079,
+      "IDF1": 4.4218,
+      "IDR": 2.5285,
+      "IDP": 17.604,
+      "IDTP": 5374.0,
+      "IDFN": 207167.0,
+      "IDFP": 25153.0,
+      "Dets": 30527.0,
+      "GT_Dets": 212541.0,
+      "IDs": 949.0,
+      "GT_IDs": 252.0
+    },
+    "PSR_DISCOVERY": {
+      "HOTA": 7.8127,
+      "DetA": 3.9812,
+      "AssA": 15.359,
+      "DetRe": 4.304,
+      "DetPr": 34.412,
+      "AssRe": 16.471,
+      "AssPr": 70.699,
+      "LocA": 91.298,
+      "RHOTA": 8.1241,
+      "HOTA(0)": 8.4327,
+      "LocA(0)": 87.14,
+      "HOTALocA(0)": 7.3483,
+      "MOTA": -3.3838,
+      "MOTP": 91.01,
+      "MODA": -3.2375,
+      "CLR_Re": 4.6349,
+      "CLR_Pr": 37.058,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 9851.0,
+      "CLR_FN": 202690.0,
+      "CLR_FP": 16732.0,
+      "IDSW": 311.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1624.0,
+      "sMOTA": -3.8005,
+      "IDF1": 4.9255,
+      "IDR": 2.7708,
+      "IDP": 22.153,
+      "IDTP": 5889.0,
+      "IDFN": 206652.0,
+      "IDFP": 20694.0,
+      "Dets": 26583.0,
+      "GT_Dets": 212541.0,
+      "IDs": 881.0,
+      "GT_IDs": 252.0
+    },
+    "PSR_GEOMETRY": {
+      "HOTA": 8.4218,
+      "DetA": 4.3769,
+      "AssA": 16.235,
+      "DetRe": 4.8426,
+      "DetPr": 31.061,
+      "AssRe": 17.571,
+      "AssPr": 70.086,
+      "LocA": 91.288,
+      "RHOTA": 8.8596,
+      "HOTA(0)": 9.0972,
+      "LocA(0)": 86.974,
+      "HOTALocA(0)": 7.9122,
+      "MOTA": -5.3171,
+      "MOTP": 91.05,
+      "MODA": -5.1571,
+      "CLR_Re": 5.2169,
+      "CLR_Pr": 33.461,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 11088.0,
+      "CLR_FN": 201453.0,
+      "CLR_FP": 22049.0,
+      "IDSW": 340.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1724.0,
+      "sMOTA": -5.784,
+      "IDF1": 5.3363,
+      "IDR": 3.0841,
+      "IDP": 19.782,
+      "IDTP": 6555.0,
+      "IDFN": 205986.0,
+      "IDFP": 26582.0,
+      "Dets": 33137.0,
+      "GT_Dets": 212541.0,
+      "IDs": 971.0,
+      "GT_IDs": 252.0
+    },
+    "NAIVE_TEMPORAL": {
+      "HOTA": 7.9524,
+      "DetA": 4.0769,
+      "AssA": 15.536,
+      "DetRe": 4.3905,
+      "DetPr": 36.058,
+      "AssRe": 16.644,
+      "AssPr": 70.813,
+      "LocA": 91.413,
+      "RHOTA": 8.2534,
+      "HOTA(0)": 8.5847,
+      "LocA(0)": 87.309,
+      "HOTALocA(0)": 7.4952,
+      "MOTA": -2.8762,
+      "MOTP": 91.084,
+      "MODA": -2.7284,
+      "CLR_Re": 4.7238,
+      "CLR_Pr": 38.796,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 10040.0,
+      "CLR_FN": 202501.0,
+      "CLR_FP": 15839.0,
+      "IDSW": 314.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1620.0,
+      "sMOTA": -3.2973,
+      "IDF1": 5.0264,
+      "IDR": 2.8192,
+      "IDP": 23.154,
+      "IDTP": 5992.0,
+      "IDFN": 206549.0,
+      "IDFP": 19887.0,
+      "Dets": 25879.0,
+      "GT_Dets": 212541.0,
+      "IDs": 882.0,
+      "GT_IDs": 252.0
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "HOTA": 8.6095,
+      "DetA": 3.8136,
+      "AssA": 19.438,
+      "DetRe": 5.8252,
+      "DetPr": 9.9256,
+      "AssRe": 22.34,
+      "AssPr": 70.721,
+      "LocA": 91.642,
+      "RHOTA": 10.641,
+      "HOTA(0)": 9.4394,
+      "LocA(0)": 87.765,
+      "HOTALocA(0)": 8.2845,
+      "MOTA": -46.368,
+      "MOTP": 91.45,
+      "MODA": -46.198,
+      "CLR_Re": 6.2454,
+      "CLR_Pr": 10.642,
+      "MTR": 1.9841,
+      "PTR": 6.746,
+      "MLR": 91.27,
+      "CLR_TP": 13274.0,
+      "CLR_FN": 199267.0,
+      "CLR_FP": 111464.0,
+      "IDSW": 361.0,
+      "MT": 5.0,
+      "PT": 17.0,
+      "ML": 230.0,
+      "Frag": 1711.0,
+      "sMOTA": -46.902,
+      "IDF1": 5.137,
+      "IDR": 4.0759,
+      "IDP": 6.945,
+      "IDTP": 8663.0,
+      "IDFN": 203878.0,
+      "IDFP": 116075.0,
+      "Dets": 124738.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2144.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_NAIVE_PAIRED_COUNT": {
+      "HOTA": 7.2621,
+      "DetA": 3.7553,
+      "AssA": 14.062,
+      "DetRe": 3.9755,
+      "DetPr": 40.045,
+      "AssRe": 14.81,
+      "AssPr": 72.027,
+      "LocA": 91.304,
+      "RHOTA": 7.4725,
+      "HOTA(0)": 7.8356,
+      "LocA(0)": 87.538,
+      "HOTALocA(0)": 6.8591,
+      "MOTA": -1.5221,
+      "MOTP": 90.956,
+      "MODA": -1.3776,
+      "CLR_Re": 4.2749,
+      "CLR_Pr": 43.062,
+      "MTR": 0.0,
+      "PTR": 8.3333,
+      "MLR": 91.667,
+      "CLR_TP": 9086.0,
+      "CLR_FN": 203455.0,
+      "CLR_FP": 12014.0,
+      "IDSW": 307.0,
+      "MT": 0.0,
+      "PT": 21.0,
+      "ML": 231.0,
+      "Frag": 1786.0,
+      "sMOTA": -1.9087,
+      "IDF1": 4.6755,
+      "IDR": 2.5699,
+      "IDP": 25.886,
+      "IDTP": 5462.0,
+      "IDFN": 207079.0,
+      "IDFP": 15638.0,
+      "Dets": 21100.0,
+      "GT_Dets": 212541.0,
+      "IDs": 891.0,
+      "GT_IDs": 252.0
+    },
+    "NAIVE_PAIRED_AT_FROZEN_COUNT": {
+      "HOTA": 8.0274,
+      "DetA": 3.0883,
+      "AssA": 20.867,
+      "DetRe": 4.3988,
+      "DetPr": 9.377,
+      "AssRe": 24.48,
+      "AssPr": 70.032,
+      "LocA": 91.949,
+      "RHOTA": 9.5803,
+      "HOTA(0)": 8.8052,
+      "LocA(0)": 88.091,
+      "HOTALocA(0)": 7.7566,
+      "MOTA": -37.647,
+      "MOTP": 91.751,
+      "MODA": -37.503,
+      "CLR_Re": 4.7036,
+      "CLR_Pr": 10.027,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 9997.0,
+      "CLR_FN": 202544.0,
+      "CLR_FP": 89707.0,
+      "IDSW": 305.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1752.0,
+      "sMOTA": -38.035,
+      "IDF1": 4.1801,
+      "IDR": 3.0705,
+      "IDP": 6.5454,
+      "IDTP": 6526.0,
+      "IDFN": 206015.0,
+      "IDFP": 93178.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2047.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_PSR_COUNT": {
+      "HOTA": 8.1951,
+      "DetA": 4.3722,
+      "AssA": 15.387,
+      "DetRe": 4.8359,
+      "DetPr": 31.087,
+      "AssRe": 16.415,
+      "AssPr": 70.986,
+      "LocA": 91.103,
+      "RHOTA": 8.6197,
+      "HOTA(0)": 8.8613,
+      "LocA(0)": 86.809,
+      "HOTALocA(0)": 7.6924,
+      "MOTA": -5.3241,
+      "MOTP": 90.807,
+      "MODA": -5.1496,
+      "CLR_Re": 5.2032,
+      "CLR_Pr": 33.448,
+      "MTR": 0.0,
+      "PTR": 8.3333,
+      "MLR": 91.667,
+      "CLR_TP": 11059.0,
+      "CLR_FN": 201482.0,
+      "CLR_FP": 22004.0,
+      "IDSW": 371.0,
+      "MT": 0.0,
+      "PT": 21.0,
+      "ML": 231.0,
+      "Frag": 2102.0,
+      "sMOTA": -5.8025,
+      "IDF1": 5.3199,
+      "IDR": 3.0738,
+      "IDP": 19.759,
+      "IDTP": 6533.0,
+      "IDFN": 206008.0,
+      "IDFP": 26530.0,
+      "Dets": 33063.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1055.0,
+      "GT_IDs": 252.0
+    },
+    "PSR_AT_FROZEN_COUNT": {
+      "HOTA": 8.0336,
+      "DetA": 3.0806,
+      "AssA": 20.951,
+      "DetRe": 4.3881,
+      "DetPr": 9.3543,
+      "AssRe": 24.587,
+      "AssPr": 69.936,
+      "LocA": 91.995,
+      "RHOTA": 9.588,
+      "HOTA(0)": 8.8173,
+      "LocA(0)": 88.101,
+      "HOTALocA(0)": 7.7682,
+      "MOTA": -37.668,
+      "MOTP": 91.822,
+      "MODA": -37.531,
+      "CLR_Re": 4.6899,
+      "CLR_Pr": 9.9976,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 9968.0,
+      "CLR_FN": 202573.0,
+      "CLR_FP": 89736.0,
+      "IDSW": 293.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1740.0,
+      "sMOTA": -38.052,
+      "IDF1": 4.1794,
+      "IDR": 3.07,
+      "IDP": 6.5444,
+      "IDTP": 6525.0,
+      "IDFN": 206016.0,
+      "IDFP": 93179.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2018.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_UNIFORM_PAIRED_COUNT": {
+      "HOTA": 8.2439,
+      "DetA": 4.4338,
+      "AssA": 15.35,
+      "DetRe": 4.9256,
+      "DetPr": 30.526,
+      "AssRe": 16.266,
+      "AssPr": 71.423,
+      "LocA": 90.989,
+      "RHOTA": 8.6899,
+      "HOTA(0)": 8.9524,
+      "LocA(0)": 86.75,
+      "HOTALocA(0)": 7.7663,
+      "MOTA": -5.6808,
+      "MOTP": 90.677,
+      "MODA": -5.5043,
+      "CLR_Re": 5.3157,
+      "CLR_Pr": 32.944,
+      "MTR": 0.0,
+      "PTR": 8.7302,
+      "MLR": 91.27,
+      "CLR_TP": 11298.0,
+      "CLR_FN": 201243.0,
+      "CLR_FP": 22997.0,
+      "IDSW": 375.0,
+      "MT": 0.0,
+      "PT": 22.0,
+      "ML": 230.0,
+      "Frag": 2155.0,
+      "sMOTA": -6.1763,
+      "IDF1": 5.3841,
+      "IDR": 3.1265,
+      "IDP": 19.376,
+      "IDTP": 6645.0,
+      "IDFN": 205896.0,
+      "IDFP": 27650.0,
+      "Dets": 34295.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1054.0,
+      "GT_IDs": 252.0
+    },
+    "UNIFORM_PAIRED_AT_FROZEN_COUNT": {
+      "HOTA": 7.9947,
+      "DetA": 3.0812,
+      "AssA": 20.745,
+      "DetRe": 4.3889,
+      "DetPr": 9.3559,
+      "AssRe": 24.353,
+      "AssPr": 69.767,
+      "LocA": 91.912,
+      "RHOTA": 9.5416,
+      "HOTA(0)": 8.7723,
+      "LocA(0)": 88.077,
+      "HOTALocA(0)": 7.7264,
+      "MOTA": -37.676,
+      "MOTP": 91.737,
+      "MODA": -37.533,
+      "CLR_Re": 4.6885,
+      "CLR_Pr": 9.9946,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 9965.0,
+      "CLR_FN": 202576.0,
+      "CLR_FP": 89739.0,
+      "IDSW": 302.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1746.0,
+      "sMOTA": -38.063,
+      "IDF1": 4.1531,
+      "IDR": 3.0507,
+      "IDP": 6.5032,
+      "IDTP": 6484.0,
+      "IDFN": 206057.0,
+      "IDFP": 93220.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2055.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_CONFIDENCE_PAIRED_COUNT": {
+      "HOTA": 6.6285,
+      "DetA": 3.5291,
+      "AssA": 12.48,
+      "DetRe": 3.8951,
+      "DetPr": 27.119,
+      "AssRe": 13.081,
+      "AssPr": 72.283,
+      "LocA": 90.818,
+      "RHOTA": 6.9645,
+      "HOTA(0)": 7.1584,
+      "LocA(0)": 86.122,
+      "HOTALocA(0)": 6.165,
+      "MOTA": -6.1263,
+      "MOTP": 90.535,
+      "MODA": -5.9551,
+      "CLR_Re": 4.2039,
+      "CLR_Pr": 29.269,
+      "MTR": 0.0,
+      "PTR": 7.1429,
+      "MLR": 92.857,
+      "CLR_TP": 8935.0,
+      "CLR_FN": 203606.0,
+      "CLR_FP": 21592.0,
+      "IDSW": 364.0,
+      "MT": 0.0,
+      "PT": 18.0,
+      "ML": 234.0,
+      "Frag": 1892.0,
+      "sMOTA": -6.5242,
+      "IDF1": 4.472,
+      "IDR": 2.5572,
+      "IDP": 17.804,
+      "IDTP": 5435.0,
+      "IDFN": 207106.0,
+      "IDFP": 25092.0,
+      "Dets": 30527.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1033.0,
+      "GT_IDs": 252.0
+    },
+    "CONFIDENCE_PAIRED_AT_FROZEN_COUNT": {
+      "HOTA": 8.0363,
+      "DetA": 3.0929,
+      "AssA": 20.882,
+      "DetRe": 4.4051,
+      "DetPr": 9.3905,
+      "AssRe": 24.494,
+      "AssPr": 69.977,
+      "LocA": 91.995,
+      "RHOTA": 9.5907,
+      "HOTA(0)": 8.8167,
+      "LocA(0)": 88.054,
+      "HOTALocA(0)": 7.7635,
+      "MOTA": -37.64,
+      "MOTP": 91.873,
+      "MODA": -37.499,
+      "CLR_Re": 4.7059,
+      "CLR_Pr": 10.032,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 10002.0,
+      "CLR_FN": 202539.0,
+      "CLR_FP": 89702.0,
+      "IDSW": 300.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1723.0,
+      "sMOTA": -38.022,
+      "IDF1": 4.166,
+      "IDR": 3.0601,
+      "IDP": 6.5233,
+      "IDTP": 6504.0,
+      "IDFN": 206037.0,
+      "IDFP": 93200.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2013.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_PSR_DISCOVERY_COUNT": {
+      "HOTA": 7.6192,
+      "DetA": 3.9844,
+      "AssA": 14.594,
+      "DetRe": 4.3071,
+      "DetPr": 34.437,
+      "AssRe": 15.438,
+      "AssPr": 71.806,
+      "LocA": 91.124,
+      "RHOTA": 7.9225,
+      "HOTA(0)": 8.2302,
+      "LocA(0)": 87.05,
+      "HOTALocA(0)": 7.1644,
+      "MOTA": -3.3871,
+      "MOTP": 90.77,
+      "MODA": -3.2262,
+      "CLR_Re": 4.6405,
+      "CLR_Pr": 37.103,
+      "MTR": 0.0,
+      "PTR": 8.3333,
+      "MLR": 91.667,
+      "CLR_TP": 9863.0,
+      "CLR_FN": 202678.0,
+      "CLR_FP": 16720.0,
+      "IDSW": 342.0,
+      "MT": 0.0,
+      "PT": 21.0,
+      "ML": 231.0,
+      "Frag": 1908.0,
+      "sMOTA": -3.8154,
+      "IDF1": 4.9054,
+      "IDR": 2.7595,
+      "IDP": 22.063,
+      "IDTP": 5865.0,
+      "IDFN": 206676.0,
+      "IDFP": 20718.0,
+      "Dets": 26583.0,
+      "GT_Dets": 212541.0,
+      "IDs": 962.0,
+      "GT_IDs": 252.0
+    },
+    "PSR_DISCOVERY_AT_FROZEN_COUNT": {
+      "HOTA": 8.0283,
+      "DetA": 3.0788,
+      "AssA": 20.936,
+      "DetRe": 4.3857,
+      "DetPr": 9.349,
+      "AssRe": 24.577,
+      "AssPr": 69.807,
+      "LocA": 91.996,
+      "RHOTA": 9.5818,
+      "HOTA(0)": 8.8137,
+      "LocA(0)": 88.117,
+      "HOTALocA(0)": 7.7664,
+      "MOTA": -37.671,
+      "MOTP": 91.83,
+      "MODA": -37.536,
+      "CLR_Re": 4.6871,
+      "CLR_Pr": 9.9916,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 9962.0,
+      "CLR_FN": 202579.0,
+      "CLR_FP": 89742.0,
+      "IDSW": 287.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1736.0,
+      "sMOTA": -38.054,
+      "IDF1": 4.1698,
+      "IDR": 3.0629,
+      "IDP": 6.5293,
+      "IDTP": 6510.0,
+      "IDFN": 206031.0,
+      "IDFP": 93194.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2019.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_PSR_GEOMETRY_COUNT": {
+      "HOTA": 8.1952,
+      "DetA": 4.3773,
+      "AssA": 15.369,
+      "DetRe": 4.8428,
+      "DetPr": 31.062,
+      "AssRe": 16.396,
+      "AssPr": 70.971,
+      "LocA": 91.105,
+      "RHOTA": 8.6209,
+      "HOTA(0)": 8.861,
+      "LocA(0)": 86.805,
+      "HOTALocA(0)": 7.6918,
+      "MOTA": -5.3463,
+      "MOTP": 90.809,
+      "MODA": -5.1712,
+      "CLR_Re": 5.2098,
+      "CLR_Pr": 33.416,
+      "MTR": 0.0,
+      "PTR": 8.3333,
+      "MLR": 91.667,
+      "CLR_TP": 11073.0,
+      "CLR_FN": 201468.0,
+      "CLR_FP": 22064.0,
+      "IDSW": 372.0,
+      "MT": 0.0,
+      "PT": 21.0,
+      "ML": 231.0,
+      "Frag": 2104.0,
+      "sMOTA": -5.8251,
+      "IDF1": 5.3265,
+      "IDR": 3.0785,
+      "IDP": 19.745,
+      "IDTP": 6543.0,
+      "IDFN": 205998.0,
+      "IDFP": 26594.0,
+      "Dets": 33137.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1055.0,
+      "GT_IDs": 252.0
+    },
+    "PSR_GEOMETRY_AT_FROZEN_COUNT": {
+      "HOTA": 8.0334,
+      "DetA": 3.0807,
+      "AssA": 20.95,
+      "DetRe": 4.3883,
+      "DetPr": 9.3545,
+      "AssRe": 24.586,
+      "AssPr": 69.903,
+      "LocA": 91.996,
+      "RHOTA": 9.5879,
+      "HOTA(0)": 8.817,
+      "LocA(0)": 88.103,
+      "HOTALocA(0)": 7.7681,
+      "MOTA": -37.668,
+      "MOTP": 91.824,
+      "MODA": -37.531,
+      "CLR_Re": 4.6899,
+      "CLR_Pr": 9.9976,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 9968.0,
+      "CLR_FN": 202573.0,
+      "CLR_FP": 89736.0,
+      "IDSW": 293.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1743.0,
+      "sMOTA": -38.052,
+      "IDF1": 4.1788,
+      "IDR": 3.0695,
+      "IDP": 6.5434,
+      "IDTP": 6524.0,
+      "IDFN": 206017.0,
+      "IDFP": 93180.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2016.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_NAIVE_TEMPORAL_COUNT": {
+      "HOTA": 7.7374,
+      "DetA": 4.0843,
+      "AssA": 14.68,
+      "DetRe": 4.3979,
+      "DetPr": 36.12,
+      "AssRe": 15.571,
+      "AssPr": 71.464,
+      "LocA": 91.239,
+      "RHOTA": 8.0297,
+      "HOTA(0)": 8.3538,
+      "LocA(0)": 87.185,
+      "HOTALocA(0)": 7.2833,
+      "MOTA": -2.8818,
+      "MOTP": 90.85,
+      "MODA": -2.7218,
+      "CLR_Re": 4.7271,
+      "CLR_Pr": 38.823,
+      "MTR": 0.0,
+      "PTR": 8.3333,
+      "MLR": 91.667,
+      "CLR_TP": 10047.0,
+      "CLR_FN": 202494.0,
+      "CLR_FP": 15832.0,
+      "IDSW": 340.0,
+      "MT": 0.0,
+      "PT": 21.0,
+      "ML": 231.0,
+      "Frag": 1933.0,
+      "sMOTA": -3.3143,
+      "IDF1": 5.0105,
+      "IDR": 2.8103,
+      "IDP": 23.08,
+      "IDTP": 5973.0,
+      "IDFN": 206568.0,
+      "IDFP": 19906.0,
+      "Dets": 25879.0,
+      "GT_Dets": 212541.0,
+      "IDs": 972.0,
+      "GT_IDs": 252.0
+    },
+    "NAIVE_TEMPORAL_AT_FROZEN_COUNT": {
+      "HOTA": 8.0309,
+      "DetA": 3.0909,
+      "AssA": 20.868,
+      "DetRe": 4.4023,
+      "DetPr": 9.3845,
+      "AssRe": 24.484,
+      "AssPr": 69.967,
+      "LocA": 91.958,
+      "RHOTA": 9.5844,
+      "HOTA(0)": 8.8079,
+      "LocA(0)": 88.111,
+      "HOTALocA(0)": 7.7607,
+      "MOTA": -37.64,
+      "MOTP": 91.75,
+      "MODA": -37.497,
+      "CLR_Re": 4.7069,
+      "CLR_Pr": 10.034,
+      "MTR": 1.9841,
+      "PTR": 3.9683,
+      "MLR": 94.048,
+      "CLR_TP": 10004.0,
+      "CLR_FN": 202537.0,
+      "CLR_FP": 89700.0,
+      "IDSW": 305.0,
+      "MT": 5.0,
+      "PT": 10.0,
+      "ML": 237.0,
+      "Frag": 1754.0,
+      "sMOTA": -38.029,
+      "IDF1": 4.1865,
+      "IDR": 3.0752,
+      "IDP": 6.5554,
+      "IDTP": 6536.0,
+      "IDFN": 206005.0,
+      "IDFP": 93168.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2043.0,
+      "GT_IDs": 252.0
+    },
+    "FROZEN_AT_MEAN_TEACHER_MATCHED_COUNT": {
+      "HOTA": 8.5999,
+      "DetA": 3.8181,
+      "AssA": 19.372,
+      "DetRe": 5.8319,
+      "DetPr": 9.937,
+      "AssRe": 22.267,
+      "AssPr": 70.712,
+      "LocA": 91.669,
+      "RHOTA": 10.629,
+      "HOTA(0)": 9.4267,
+      "LocA(0)": 87.803,
+      "HOTALocA(0)": 8.2768,
+      "MOTA": -46.358,
+      "MOTP": 91.488,
+      "MODA": -46.187,
+      "CLR_Re": 6.251,
+      "CLR_Pr": 10.651,
+      "MTR": 1.9841,
+      "PTR": 6.3492,
+      "MLR": 91.667,
+      "CLR_TP": 13286.0,
+      "CLR_FN": 199255.0,
+      "CLR_FP": 111452.0,
+      "IDSW": 363.0,
+      "MT": 5.0,
+      "PT": 16.0,
+      "ML": 231.0,
+      "Frag": 1785.0,
+      "sMOTA": -46.89,
+      "IDF1": 5.1411,
+      "IDR": 4.0792,
+      "IDP": 6.9506,
+      "IDTP": 8670.0,
+      "IDFN": 203871.0,
+      "IDFP": 116068.0,
+      "Dets": 124738.0,
+      "GT_Dets": 212541.0,
+      "IDs": 2145.0,
+      "GT_IDs": 252.0
+    },
+    "MEAN_TEACHER_MATCHED_AT_FROZEN_COUNT": {
+      "HOTA": 8.2115,
+      "DetA": 3.1858,
+      "AssA": 21.166,
+      "DetRe": 4.5333,
+      "DetPr": 9.6637,
+      "AssRe": 24.609,
+      "AssPr": 72.18,
+      "LocA": 92.07,
+      "RHOTA": 9.7952,
+      "HOTA(0)": 8.9955,
+      "LocA(0)": 88.965,
+      "HOTALocA(0)": 8.0029,
+      "MOTA": -37.341,
+      "MOTP": 91.684,
+      "MODA": -37.218,
+      "CLR_Re": 4.8461,
+      "CLR_Pr": 10.331,
+      "MTR": 1.9841,
+      "PTR": 5.9524,
+      "MLR": 92.063,
+      "CLR_TP": 10300.0,
+      "CLR_FN": 202241.0,
+      "CLR_FP": 89404.0,
+      "IDSW": 261.0,
+      "MT": 5.0,
+      "PT": 15.0,
+      "ML": 232.0,
+      "Frag": 1278.0,
+      "sMOTA": -37.744,
+      "IDF1": 4.4241,
+      "IDR": 3.2497,
+      "IDP": 6.9275,
+      "IDTP": 6907.0,
+      "IDFN": 205634.0,
+      "IDFP": 92797.0,
+      "Dets": 99704.0,
+      "GT_Dets": 212541.0,
+      "IDs": 1771.0,
+      "GT_IDs": 252.0
+    }
+  },
+  "official_query_groups": {
+    "FROZEN": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 9.745607762766904,
+        "DetRe": 4.544113965379807,
+        "IDF1": 6.167009080640715,
+        "official_CLEAR_FP": 2005
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 87371
+      }
+    },
+    "SOURCE_REHEARSAL": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.032494030768294,
+        "DetRe": 2.302243109007575,
+        "IDF1": 3.3338223428445684,
+        "official_CLEAR_FP": 346
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 35624
+      }
+    },
+    "NAIVE_PAIRED": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 7.635012644005067,
+        "DetRe": 3.9670612159288647,
+        "IDF1": 4.909852910822138,
+        "official_CLEAR_FP": 1243
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 10783
+      }
+    },
+    "PSR": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.804252061579596,
+        "DetRe": 4.836639568489448,
+        "IDF1": 5.807266842536966,
+        "official_CLEAR_FP": 1929
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 20059
+      }
+    },
+    "UNIFORM_PAIRED": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.841906982618351,
+        "DetRe": 4.924251147580442,
+        "IDF1": 5.910854001817497,
+        "official_CLEAR_FP": 1734
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 21251
+      }
+    },
+    "CONFIDENCE_PAIRED": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 7.022839481731847,
+        "DetRe": 3.8904196564922833,
+        "IDF1": 4.817613784076952,
+        "official_CLEAR_FP": 1620
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 19970
+      }
+    },
+    "PSR_DISCOVERY": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.084067403798926,
+        "DetRe": 4.303962158137167,
+        "IDF1": 5.259139194384535,
+        "official_CLEAR_FP": 1561
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 15171
+      }
+    },
+    "PSR_GEOMETRY": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.806677158341214,
+        "DetRe": 4.842632220309691,
+        "IDF1": 5.811943077536907,
+        "official_CLEAR_FP": 1941
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 20108
+      }
+    },
+    "NAIVE_TEMPORAL": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 8.213016140630607,
+        "DetRe": 4.3904594011458835,
+        "IDF1": 5.347040031411183,
+        "official_CLEAR_FP": 1543
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 14296
+      }
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "query_present": {
+        "episodes": 40,
+        "HOTA": 10.543060196996175,
+        "DetRe": 5.825229014637177,
+        "IDF1": 7.5620092615627685,
+        "official_CLEAR_FP": 3304
+      },
+      "query_empty": {
+        "episodes": 385,
+        "HOTA": null,
+        "DetRe": null,
+        "IDF1": null,
+        "official_CLEAR_FP": 108160
+      }
+    }
+  },
+  "comparisons": {
+    "NAIVE_PAIRED_vs_FROZEN": {
+      "delta_HOTA": -0.7681561160372752,
+      "CI95": [
+        -7.082717346965208,
+        4.741581593022881
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 3.670868745298123
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.24491690191863666
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.610687356894162
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 7.985338005307907
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 9.548309188481628
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 3.9055966739461128
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.05238236839097701
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 1.6085803008874269
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.166103122038063
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 1.5890389519622996
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 16.08847622643258
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 2.566300633907954
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.567606671078491
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.10918000020115534
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 19.965533239600312
+        }
+      ]
+    },
+    "PSR_vs_FROZEN": {
+      "delta_HOTA": 0.2023348048447584,
+      "CI95": [
+        -6.393068179522272,
+        5.980819287773202
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 5.313326235688525
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.2613962925289244
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.430382608150518
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 10.805679942136386
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 10.841890104036846
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.6400011761242705
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.062470965566463886
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.4445654178690326
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.672984821948932
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 2.055046491358443
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 17.887944729879987
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.7602006951103584
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.7446164734560754
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.17033767205892048
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 21.06425385124321
+        }
+      ]
+    },
+    "UNIFORM_PAIRED_vs_FROZEN": {
+      "delta_HOTA": 0.21670341366413481,
+      "CI95": [
+        -6.510381179965078,
+        5.943994743525995
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 5.578266060577903
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.404832685565394
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.617803467711139
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 10.185249598431419
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 11.926604776771743
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.591553797031645
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.08155719029543221
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.7474948439135813
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 6.002173599133222
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 2.7299021319487835
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 19.382295710277628
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.5463999335643863
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.7913071982546362
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.20643118054818457
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 20.957702431147524
+        }
+      ]
+    },
+    "CONFIDENCE_PAIRED_vs_FROZEN": {
+      "delta_HOTA": -1.500674514729285,
+      "CI95": [
+        -7.207306996071161,
+        3.9663105251453463
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 4.260063051934958
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.2169365053072397
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.590487599543343
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 8.68241245304139
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 6.227593634092358
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.770290267443622
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.08740582906125705
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.6108850021461203
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 4.745937242342146
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 1.4654439036046512
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 14.499239342141738
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.915839953946891
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.6928296446224274
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.38831588796927835
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 18.200092496520057
+        }
+      ]
+    },
+    "PSR_DISCOVERY_vs_FROZEN": {
+      "delta_HOTA": -0.4053409443316429,
+      "CI95": [
+        -6.847611901218132,
+        5.207325882079529
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 4.392887677442517
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.22858375383076535
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.434444745601699
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 9.093596839162434
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 9.924254859025798
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.172202275462091
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.05220588888987548
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.143071107520579
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.180191471423946
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 1.8844487983403637
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 16.78851467640149
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.3073424147976405
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.6566572134138653
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.09373009431541617
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 20.212968819172048
+        }
+      ]
+    },
+    "PSR_GEOMETRY_vs_FROZEN": {
+      "delta_HOTA": 0.20379686680497677,
+      "CI95": [
+        -6.388275987175022,
+        5.979450802589837
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 5.311629531704421
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.2614138914866723
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.4235200661081
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 10.79996704985873
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 10.8306939782061
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.663381382751666
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.06247832662495595
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.4628778613677587
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.672224980063017
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 2.0545949191907824
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 17.92138060097747
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.795076975186175
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.7446164734560754
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.1703304399430669
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 21.046684936037963
+        }
+      ]
+    },
+    "NAIVE_TEMPORAL_vs_FROZEN": {
+      "delta_HOTA": -0.26558465796489195,
+      "CI95": [
+        -6.739093615307977,
+        5.394659854988653
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 4.5454985094010665
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.33233385925049314
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.589699878772153
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 9.18517642366227
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 10.2157843742688
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.464165892455
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.05234351355518374
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.0660420602174874
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.695762443055536
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 1.761470730126207
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 17.287789125633847
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 2.8541174414350543
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.6661345261648275
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.17032267684861432
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 21.182962940698182
+        }
+      ]
+    },
+    "MEAN_TEACHER_MATCHED_vs_FROZEN": {
+      "delta_HOTA": 0.39147133159186964,
+      "CI95": [
+        -0.00391406550880129,
+        1.354870214283111
+      ],
+      "improved_videos": 16,
+      "declined_videos": 3,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 3.747855254549288
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.25239116824678615
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 4.164909839305269
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.729405138693676
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 1.7460217138355834
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 1.901733697366201
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.9053626785025504
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.005421059963612862
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.2450806302282662
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 1.9576335948238857
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.00014682528983113105
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.10852602792592703
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.027909892687347334
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.07611638639244944
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.7581944541161021
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.11330590687007824
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 1.2877789965963706
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.003159334533820557
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.5691526782264109
+        }
+      ]
+    },
+    "NAIVE_PAIRED_vs_FROZEN_AT_NAIVE_PAIRED_COUNT": {
+      "delta_HOTA": 0.18779057464344895,
+      "CI95": [
+        -0.08032237622310238,
+        0.41890860904369265
+      ],
+      "improved_videos": 5,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.039361730067629885
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.00014486260956719788
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0012378227181162882
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.4838524733085894
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.8928972008288021
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.2853231092303714
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.026019776373562564
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.06107424476609591
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.009101434478864467
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.336534068501134
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.03919508452267806
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.030843765329075956
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.250129590265459
+        }
+      ]
+    },
+    "PSR_vs_FROZEN_AT_PSR_COUNT": {
+      "delta_HOTA": 0.22523161142791892,
+      "CI95": [
+        -0.0503598364462289,
+        0.46448670848820217
+      ],
+      "improved_videos": 6,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.006078860881578052
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -0.004949041708393609
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0009051331891157255
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.37513659135982635
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9965584996599262
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.31779498403643025
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.010949838564821679
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.12379118052098104
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.03354448556379275
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.3425271216668015
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.080106509697627
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.008591503417339386
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.002462186763980301
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.06252945571772273
+        }
+      ]
+    },
+    "UNIFORM_PAIRED_vs_FROZEN_AT_UNIFORM_PAIRED_COUNT": {
+      "delta_HOTA": 0.1908018637497726,
+      "CI95": [
+        -0.10144882646615383,
+        0.4421342718328626
+      ],
+      "improved_videos": 7,
+      "declined_videos": 7,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.0476656128458357
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.09051279472865853
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0016687603130816353
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.5238001499360863
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.7570026503247611
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.2737754452908554
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.020276562007195853
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.11346998457876545
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.010138614154058256
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.8386412844034403
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.03146070348032026
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.011474558568075999
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.011974158415163166
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.4015064356161311
+        }
+      ]
+    },
+    "CONFIDENCE_PAIRED_vs_FROZEN_AT_CONFIDENCE_PAIRED_COUNT": {
+      "delta_HOTA": 0.08884423751104809,
+      "CI95": [
+        -0.0942919637719456,
+        0.24604887744972928
+      ],
+      "improved_videos": 8,
+      "declined_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.07243075456559289
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.008130329007040915
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0015260108310451437
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.9291123733146325
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.5073872718469108
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.2292516897041592
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.11785171451554488
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.08689383728944744
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.012868834850239486
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.9901458612074219
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.2160815092657824
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.012450300880070486
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.03741292501373733
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.1295062777916236
+        }
+      ]
+    },
+    "PSR_DISCOVERY_vs_FROZEN_AT_PSR_DISCOVERY_COUNT": {
+      "delta_HOTA": 0.19346775074379075,
+      "CI95": [
+        -0.10585037679536106,
+        0.45502165159342767
+      ],
+      "improved_videos": 6,
+      "declined_videos": 7,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.04215372356630098
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 2.409957554666553e-05
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0018839086812545425
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.8080627984744329
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 1.0428728835249892
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.2629141912895365
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0057432898653990705
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.06755878700927198
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.011228774993957469
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.1911520306571362
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.04828106218419137
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.020375779762099144
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.27691654899491525
+        }
+      ]
+    },
+    "PSR_GEOMETRY_vs_FROZEN_AT_PSR_GEOMETRY_COUNT": {
+      "delta_HOTA": 0.22657545938039192,
+      "CI95": [
+        -0.05356917837520969,
+        0.46904164375277474
+      ],
+      "improved_videos": 6,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.006074949550884945
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -0.004916716459785475
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0008929831677675915
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.38746066313358796
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9997322624617055
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.3117966807961743
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.008987780412831547
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.12377594261110758
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.0337705090970859
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.3748002685582321
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.11187838337578793
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.008591503417339386
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0024620823972995587
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.06243663406526068
+        }
+      ]
+    },
+    "NAIVE_TEMPORAL_vs_FROZEN_AT_NAIVE_TEMPORAL_COUNT": {
+      "delta_HOTA": 0.21501170379914303,
+      "CI95": [
+        -0.08839291841089877,
+        0.4844113504559568
+      ],
+      "improved_videos": 6,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.047510557413126264
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.014458922074146285
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.0026524500039075694
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.5615471663718026
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9915326145998549
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.23130791383306537
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.027474220765581592
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.12406136208108354
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024421537971386575
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.62667619577147
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.016590350457352354
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.011477818159442155
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.00280717581991069
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.29959820383021807
+        }
+      ]
+    },
+    "MEAN_TEACHER_MATCHED_vs_FROZEN_AT_MEAN_TEACHER_MATCHED_COUNT": {
+      "delta_HOTA": 0.009614403540110672,
+      "CI95": [
+        -0.00472650852632055,
+        0.027451013159559178
+      ],
+      "improved_videos": 9,
+      "declined_videos": 3,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.053441071303257814
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.016739147627941264
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.07879565331209282
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.03398373700580404
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.024738786504146404
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.052318482385441456
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.028374951011196803
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.1422924927130289
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.0021642963480306143
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -6.20335884549128e-07
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.040998753391335185
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.014058459385265287
+        }
+      ]
+    },
+    "NAIVE_PAIRED_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.19058755639778902,
+      "CI95": [
+        -0.8226137631736866,
+        -0.0044026830300612635
+      ],
+      "improved_videos": 2,
+      "declined_videos": 12,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.9298352408309949
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.4313098675501843
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -3.9826122560017865
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.23815280828233432
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.18093586840251819
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.22223615130518581
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.09392286565915753
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.830644378056247
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.05887654646792484
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.028901341320237306
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.7395237132648931
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.04876134236472662
+        }
+      ]
+    },
+    "PSR_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.1844549231397128,
+      "CI95": [
+        -0.8464433466463692,
+        -0.003092249775167153
+      ],
+      "improved_videos": 2,
+      "declined_videos": 13,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.8860643535938433
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.3934447007604218
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -4.2102125318695
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.31254318594160413
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.17369176483672644
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.12787069948507224
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.17579531089735534
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.790218083192686
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.06244752674085774
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.05410311179641103
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.7285137932500705
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.024806404198466192
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.0410520024586809
+        }
+      ]
+    },
+    "UNIFORM_PAIRED_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.22329308127979441,
+      "CI95": [
+        -0.8911380731613064,
+        -0.01961833123250264
+      ],
+      "improved_videos": 2,
+      "declined_videos": 12,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.9608916492517228
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.42130471877238396
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -4.423365143469695
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.016515611519284157
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.31166415315020135
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.40285334573574616
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.07444592314367426
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.7702571745808475
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.07457713138803257
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.1340168952122116
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.869397480724436
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.04214224547715073
+        }
+      ]
+    },
+    "CONFIDENCE_PAIRED_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.18172720313683044,
+      "CI95": [
+        -0.8143349457110811,
+        -0.02003371071689605
+      ],
+      "improved_videos": 1,
+      "declined_videos": 14,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.5875842167879188
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.3547547815581007
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -3.942518215728764
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.34945116210348504
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.19740927974755418
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.16849670338909029
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.21006316702724614
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.0562601744226896
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.047288905597905995
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.056247499524694766
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.5625429285046089
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.024806404198466192
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.044099239275886326
+        }
+      ]
+    },
+    "PSR_DISCOVERY_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.18976201245592783,
+      "CI95": [
+        -0.8522415164442143,
+        -0.008244120902397484
+      ],
+      "improved_videos": 2,
+      "declined_videos": 13,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.8720133567878001
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.4127501948456409
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -4.232907669725992
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.33174051866550913
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.19397044185706513
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.12669422037036426
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.14819514266522682
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.861807775138068
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.0764694190649493
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.05922999411079277
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.7077235362159273
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.024806404198466192
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.053982814198302975
+        }
+      ]
+    },
+    "PSR_GEOMETRY_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.18461489044813284,
+      "CI95": [
+        -0.8445279679931919,
+        -0.002515087102463528
+      ],
+      "improved_videos": 2,
+      "declined_videos": 13,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.8890640326300403
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.3850625787572346
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -4.199149813161417
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.31254318594160413
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.17720339078553615
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.13293070155557096
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.17579531089735534
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.790218083192686
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.06244752674085774
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.05410311179641103
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.7300897773382644
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.024806404198466192
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.0410520024586809
+        }
+      ]
+    },
+    "NAIVE_TEMPORAL_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.1870735582343741,
+      "CI95": [
+        -0.8209680607056106,
+        -0.004312264946566223
+      ],
+      "improved_videos": 2,
+      "declined_videos": 12,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.9001973765006319
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.4343478032334902
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -3.946145651503225
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.20727115014337505
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.18030014594198351
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.18324236889196754
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.10242954766787116
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -3.8181115898354516
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.0042128275360265866
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.05887654646792484
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.026921792487592855
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.03268084747522382
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.7731409541401688
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.05844526137337347
+        }
+      ]
+    },
+    "MEAN_TEACHER_MATCHED_AT_FROZEN_COUNT_vs_FROZEN": {
+      "delta_HOTA": -0.006507195142532396,
+      "CI95": [
+        -0.04965238071045954,
+        0.01379580283304769
+      ],
+      "improved_videos": 3,
+      "declined_videos": 7,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.10179998526699663
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.005557428575944101
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.25833965453457797
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -0.07560713225053828
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -8.882917610364416e-05
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.01896130565327958
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -0.03214197556572529
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -0.0040069402904236995
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.029428383346505882
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.004145715378678361
+        }
+      ]
+    },
+    "PSR_vs_NAIVE_PAIRED": {
+      "delta_HOTA": 0.9704909208820336,
+      "CI95": [
+        0.5259360548982565,
+        1.305573571584994
+      ],
+      "improved_videos": 15,
+      "declined_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 1.6424574903904015
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.01647939061028772
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.18030474874364366
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 2.8203419368284806
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 1.2935809155552178
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.7344045021781582
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.010088597175486873
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.8359851169816057
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.5068816999108696
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.4660075393961436
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.7994685034474074
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 1.1939000612024042
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.17700980237758446
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.061157671857765133
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 1.0987206116428965
+        }
+      ]
+    },
+    "PSR_vs_UNIFORM_PAIRED": {
+      "delta_HOTA": -0.014368608819376405,
+      "CI95": [
+        -0.43057079700984674,
+        0.5003648075059213
+      ],
+      "improved_videos": 5,
+      "declined_videos": 10,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.2649398248893782
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -0.1434363930364696
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.18742085956062024
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.6204303437049692
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -1.084714672734897
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.0484473790926252
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.019086224728968322
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.30292942604454876
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.3291887771842905
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.6748556405903403
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.4943509803976411
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.21380076154597205
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.046690724798560845
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -0.0360935084892641
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.10655142009568408
+        }
+      ]
+    },
+    "PSR_vs_CONFIDENCE_PAIRED": {
+      "delta_HOTA": 1.7030093195740434,
+      "CI95": [
+        0.36561371873192483,
+        2.5980303600692825
+      ],
+      "improved_videos": 10,
+      "declined_videos": 5,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 1.0532631837535664
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.04445978722168467
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.1601049913928249
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 2.1232674890949976
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 4.614296469944488
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.13028909131935063
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.02493486349479316
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.1663195842770877
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.9270475796067856
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.589602587753792
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 3.3887053877382485
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.1556392588365325
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.051786828833648046
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -0.21797821591035788
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 2.864161354723148
+        }
+      ]
+    },
+    "PSR_vs_PSR_DISCOVERY": {
+      "delta_HOTA": 0.6076757491764013,
+      "CI95": [
+        0.32983660867092857,
+        0.8079939304852003
+      ],
+      "improved_videos": 15,
+      "declined_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.9204385582460075
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.03281253869815903
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.004062137451180614
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 1.7120831029739545
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9176352450110485
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.46779890066217966
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.010265076676588408
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.30149431034845353
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.49279335052498574
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.17059769301807948
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.0994300534784962
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.4528582803127179
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.08795926004221011
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.07660757774350431
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.8512850320711571
+        }
+      ]
+    },
+    "PSR_vs_PSR_GEOMETRY": {
+      "delta_HOTA": -0.0014620619602183638,
+      "CI95": [
+        -0.01033173360023112,
+        0.0034439649123709326
+      ],
+      "improved_videos": 7,
+      "declined_videos": 7,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.00169670398410382
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -1.7598957747944066e-05
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.00686254204241854
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.00571289227765881
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.011196125830746695
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.023380206627394706
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -7.361058492062755e-06
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.018312443498726072
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.0007598418859151579
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.00045157216766078534
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.03343587109748469
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.034876280075816446
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 7.23211585357264e-06
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.017568915205242064
+        }
+      ]
+    },
+    "PSR_vs_NAIVE_TEMPORAL": {
+      "delta_HOTA": 0.46791946280965035,
+      "CI95": [
+        0.19502418733315688,
+        0.6195212381407708
+      ],
+      "improved_videos": 12,
+      "declined_videos": 3,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.7678277262874582
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -0.07093756672156876
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.15931727062163448
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 1.6205035184741163
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.6261057297680459
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.17583528366927137
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.010127452011280146
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.3785233576515452
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.022777621106603085
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.2935757612322363
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.6001556042461402
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.9060832536753041
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.07848194729124791
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 1.4995210306151252e-05
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.1187090894549776
+        }
+      ]
+    },
+    "PSR_vs_MEAN_TEACHER_MATCHED": {
+      "delta_HOTA": -0.18913652674711123,
+      "CI95": [
+        -6.6509551129629205,
+        5.230964421703532
+      ],
+      "improved_videos": 14,
+      "declined_videos": 8,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -17.455243489250837
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 5.060935067441738
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -12.180787015704455
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.2613962925289244
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -7.159787746844194
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 9.059658228300805
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -3.9143848078187298
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.9473024054396145
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 10.847311164000459
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.394920545896005
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.062470965566463886
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -12.553292656178735
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.4447122431588637
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 5.564458794023005
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 2.027136598671096
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -22.98278672771346
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 17.129750275763882
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.64689478824028
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -4.524970486749559
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.7414571389222548
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.17033767205892048
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 20.495101173016796
+        }
+      ]
+    }
+  },
+  "selected_checkpoints": {
+    "NAIVE_PAIRED": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_PAIRED/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "b247853b8e97242f3d75b0ecbfb914b69ac3c65b48c94222b74b25b63c0a906b",
+      "selected_step": 8973,
+      "source_val_CE": 0.8835112821425355,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "PSR": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "3e55c508186c4b10c447deb5023b82801f359cf2abc577bb57a07b8b4cf3e876",
+      "selected_step": 8973,
+      "source_val_CE": 0.8829470340751868,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "UNIFORM_PAIRED": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/UNIFORM_PAIRED/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "97802ac774ad1a4a3f4f8be1b2291d40f55f8645722500dcd7b95639ea3b8034",
+      "selected_step": 8500,
+      "source_val_CE": 0.8805324266404568,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "CONFIDENCE_PAIRED": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/CONFIDENCE_PAIRED/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "e9dc960220605ec2cc00192ced5ac56e2a39b1aab957387ba485de7d61bfc47a",
+      "selected_step": 8973,
+      "source_val_CE": 0.8915009241027292,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "PSR_DISCOVERY": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_DISCOVERY/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "b9dd393ebc95c2f58f74f4664b79e2f1ab4dcadc193f5b17ac0e92545c984e94",
+      "selected_step": 8973,
+      "source_val_CE": 0.8812489156489391,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "PSR_GEOMETRY": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/PSR_GEOMETRY/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "0f9455c7f56a0bc61885b062e633f7d83f67ba7001b4338aabca220963a2d38a",
+      "selected_step": 8973,
+      "source_val_CE": 0.8830245041626767,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "NAIVE_TEMPORAL": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "de415c20181f862ab298865df0bb4e0c95450df763e523727c2eb05ec18c0c52",
+      "selected_step": 8973,
+      "source_val_CE": 0.8849180922270534,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/MEAN_TEACHER_MATCHED/checkpoint_best_source_selected.pt",
+      "checkpoint_sha256": "b94c620ac9d7ccce4a275d7dd687ad89340d9ca46cc3c61b47cb998e968dd7da",
+      "selected_step": 8973,
+      "source_val_CE": 0.9364567915181397,
+      "selection": "SOURCE_VAL_CE_ONLY"
+    }
+  },
+  "cost": [
+    {
+      "method": "NAIVE_PAIRED",
+      "training_GPU_hours": 0.7095839004566531,
+      "inference_GPU_hours": 0.5142963062627759,
+      "actual_training_wall_seconds": 2554.502041643951,
+      "successful_training_body_seconds": 2554.078897700878,
+      "actual_inference_scheduler_wall_seconds": 1852.8404393196106,
+      "allocated_inference_worker_seconds": 1851.466702545993,
+      "peak_training_allocated_bytes": 6419422720,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 234.03850153402163,
+      "scheduler_active_video_frame_FPS": 13.76697067847186,
+      "per_worker_query_frame_FPS": 234.21215158970858,
+      "per_worker_active_video_frame_FPS": 13.777185387629917,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 0,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 0.0,
+      "required_teacher_amortized_forward_seconds": 216.14406343225485
+    },
+    {
+      "method": "PSR",
+      "training_GPU_hours": 0.664486727330562,
+      "inference_GPU_hours": 0.5615898990510808,
+      "actual_training_wall_seconds": 2392.1522183900233,
+      "successful_training_body_seconds": 2391.7575564780273,
+      "actual_inference_scheduler_wall_seconds": 2023.0603597164154,
+      "allocated_inference_worker_seconds": 2021.7236365838908,
+      "peak_training_allocated_bytes": 6429079040,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 214.3465457752261,
+      "scheduler_active_video_frame_FPS": 12.608620339719183,
+      "per_worker_query_frame_FPS": 214.4882674135993,
+      "per_worker_active_video_frame_FPS": 12.616956906682312,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 254,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 7.078274851641868e-05,
+      "required_teacher_amortized_forward_seconds": 201.92653203712993
+    },
+    {
+      "method": "UNIFORM_PAIRED",
+      "training_GPU_hours": 1.1653518359711033,
+      "inference_GPU_hours": 0.9089258590808216,
+      "actual_training_wall_seconds": 4195.266609495971,
+      "successful_training_body_seconds": 4194.747993325116,
+      "actual_inference_scheduler_wall_seconds": 3277.016766309738,
+      "allocated_inference_worker_seconds": 3272.1330926909577,
+      "peak_training_allocated_bytes": 6423946240,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 132.32645144147958,
+      "scheduler_active_video_frame_FPS": 7.783908908322328,
+      "per_worker_query_frame_FPS": 132.5239492759702,
+      "per_worker_active_video_frame_FPS": 7.795526427998247,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 0,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 0.0,
+      "required_teacher_amortized_forward_seconds": 146.14049247702738
+    },
+    {
+      "method": "CONFIDENCE_PAIRED",
+      "training_GPU_hours": 1.8123180313564242,
+      "inference_GPU_hours": 0.8036248253883483,
+      "actual_training_wall_seconds": 6524.344912883127,
+      "successful_training_body_seconds": 6523.921863936819,
+      "actual_inference_scheduler_wall_seconds": 2898.0519976615906,
+      "allocated_inference_worker_seconds": 2893.049371398054,
+      "peak_training_allocated_bytes": 6420657152,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 149.630165486988,
+      "scheduler_active_video_frame_FPS": 8.80177444041106,
+      "per_worker_query_frame_FPS": 149.88890417395373,
+      "per_worker_active_video_frame_FPS": 8.816994363173748,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 0,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 0.0,
+      "required_teacher_amortized_forward_seconds": 187.28603181945357
+    },
+    {
+      "method": "PSR_DISCOVERY",
+      "training_GPU_hours": 0.7243391703047221,
+      "inference_GPU_hours": 0.7998098971577646,
+      "actual_training_wall_seconds": 2607.6210130969994,
+      "successful_training_body_seconds": 2607.211455967976,
+      "actual_inference_scheduler_wall_seconds": 2884.74875330925,
+      "allocated_inference_worker_seconds": 2879.3156297679525,
+      "peak_training_allocated_bytes": 6425104384,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 150.32019669045803,
+      "scheduler_active_video_frame_FPS": 8.842364511203414,
+      "per_worker_query_frame_FPS": 150.60384332889106,
+      "per_worker_active_video_frame_FPS": 8.859049607581827,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 0,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 0.0,
+      "required_teacher_amortized_forward_seconds": 201.92653203712993
+    },
+    {
+      "method": "PSR_GEOMETRY",
+      "training_GPU_hours": 1.3164597197532808,
+      "inference_GPU_hours": 0.9732091266752427,
+      "actual_training_wall_seconds": 4739.254991111811,
+      "successful_training_body_seconds": 4738.798006956,
+      "actual_inference_scheduler_wall_seconds": 3508.5960624217987,
+      "allocated_inference_worker_seconds": 3503.552856030874,
+      "peak_training_allocated_bytes": 6429079040,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 123.59245472694396,
+      "scheduler_active_video_frame_FPS": 7.2701443957025855,
+      "per_worker_query_frame_FPS": 123.77036049379319,
+      "per_worker_active_video_frame_FPS": 7.280609440811364,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 263,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 7.329079866070122e-05,
+      "required_teacher_amortized_forward_seconds": 201.92653203712993
+    },
+    {
+      "method": "NAIVE_TEMPORAL",
+      "training_GPU_hours": 1.0612569678671813,
+      "inference_GPU_hours": 0.9135776908863853,
+      "actual_training_wall_seconds": 3820.525084321853,
+      "successful_training_body_seconds": 3820.0464307048824,
+      "actual_inference_scheduler_wall_seconds": 3294.3465344905853,
+      "allocated_inference_worker_seconds": 3288.879687190987,
+      "peak_training_allocated_bytes": 6419422720,
+      "peak_inference_allocated_bytes": 5277010944,
+      "scheduler_query_frame_FPS": 131.6303538380046,
+      "scheduler_active_video_frame_FPS": 7.742961990470859,
+      "per_worker_query_frame_FPS": 131.84915267312985,
+      "per_worker_active_video_frame_FPS": 7.755832510184109,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 8500,
+      "unique_expanded_weak": 270,
+      "required_teacher_judgments": 8500,
+      "unique_unlabelled_target_inputs": 0,
+      "direct_teacher_evidence_fraction": 0.002368714025155743,
+      "expanded_weak_evidence_fraction": 7.524150432847654e-05,
+      "required_teacher_amortized_forward_seconds": 216.14406343225485
+    },
+    {
+      "method": "MEAN_TEACHER_MATCHED",
+      "training_GPU_hours": 0.9627943697419767,
+      "inference_GPU_hours": 0.6406893478819661,
+      "actual_training_wall_seconds": 3466.0597310711164,
+      "successful_training_body_seconds": 3465.782730181003,
+      "actual_inference_scheduler_wall_seconds": 2313.121534347534,
+      "allocated_inference_worker_seconds": 2306.481652375078,
+      "peak_training_allocated_bytes": 8437639168,
+      "peak_inference_allocated_bytes": 5276297216,
+      "scheduler_query_frame_FPS": 187.46788422525165,
+      "scheduler_active_video_frame_FPS": 11.02752260148539,
+      "per_worker_query_frame_FPS": 188.0075653554267,
+      "per_worker_active_video_frame_FPS": 11.059268550319217,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "unique_direct_labels": 0,
+      "unique_expanded_weak": 0,
+      "required_teacher_judgments": 0,
+      "unique_unlabelled_target_inputs": 8500,
+      "direct_teacher_evidence_fraction": 0,
+      "expanded_weak_evidence_fraction": 0.0,
+      "required_teacher_amortized_forward_seconds": 0
+    }
+  ],
+  "scientific_verdict": "PROMISING_REQUIRES_BUDGET_AND_COUNT_CONTROLLED_3SEED_CONFIRMATION",
+  "formal_40Train_to_Val_complete": false,
+  "source_and_target_training_GT_permissions": "sourceGT only; targetGT after prediction seal",
+  "counts_and_intervals_are_not_blind_test_proof": true,
+  "unrounded_video_cluster_bootstrap": "25videos,2000draws,seed0",
+  "Qwen_pretraining_overlap": "UNKNOWN",
+  "historical_Naive8_0327": "not same paired sampling; historical reference only",
+  "automatic_verdict_limit": "numerical screening only; final scientific judgement must also inspect count residuals, matched controls, semantic ranking, identity and positive coverage",
+  "baseline_costs_reused": {
+    "FROZEN": {
+      "total_episode_seconds": 13293.871635621414,
+      "aggregate_active_frame_fps": 32.61924079649276,
+      "worker_active_frame_fps": 32.61924079649276,
+      "scheduler_wall_active_frame_fps": 56.0998057015736,
+      "wall_seconds": 7729.723741054535,
+      "gpu_hours": 3.726946153640747,
+      "wall_definition": "launcher loop, including its waits; excludes preflight, evaluation and attribution",
+      "peak_vram_bytes": 17982620160,
+      "peak_vram_measurement": "PyTorch max_memory_allocated; excludes CUDA context/reserved memory",
+      "gpu_uuids": [
+        "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+        "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+        "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+        "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69"
+      ],
+      "new_GPU_calls": 0,
+      "trainable_parameters": 0,
+      "optimizer_updates": 0,
+      "source": "historical sealed full425 ZERO_UPDATE",
+      "timing_comparison_limit": "older episode-isolated evaluator, not the current query-batched execution; reuse is not zero inherited cost"
+    },
+    "SOURCE_REHEARSAL": {
+      "training_GPU_hours": 0.255297302527793,
+      "inference_GPU_hours": 0.8271193584636138,
+      "total_GPU_hours": 1.0824166609914068,
+      "actual_worker_training_wall_seconds": 919.0702891000547,
+      "actual_worker_inference_wall_seconds": 2977.62969046901,
+      "per_worker_query_frame_FPS": 145.63127221226006,
+      "per_worker_MOT_active_video_frame_FPS": 8.566545424250592,
+      "peak_training_allocated_bytes": 8658199040,
+      "peak_inference_allocated_bytes": 5278034432,
+      "inference_allocator_budget_bytes": 25769803776,
+      "trainable_parameters": 24576,
+      "optimizer_updates": 8973,
+      "target_candidate_exposures": 0,
+      "pseudo_POS_exposures": 0,
+      "pseudo_NEG_exposures": 0,
+      "target_presence_supported_positive": 0,
+      "target_presence_supported_negative": 0,
+      "target_presence_UNKNOWN": true,
+      "temporal_valid_candidates": 0,
+      "effective_relation_candidates": {
+        "equivalent": 0,
+        "exclusive": 0
+      },
+      "exposure_warning": "repeated training exposures, not unique verified semantic labels",
+      "peak_scope": "allocator peak in the successful/resumed process; initial failed-process peak was not recorded separately",
+      "timing_warning": "shared-GPU process elapsed; not exclusive-device utilization or standalone source-asset preparation",
+      "new_GPU_calls": 0,
+      "source": "historical same-budget full425 source-only rehearsal"
+    }
+  },
+  "shared_cost_components": {
+    "frozen_source_scores": "existing complete425 Frozen bank used in sampling/fit audit; no new GPU calls, inherited historical cost above",
+    "fixed_DETR_NeuralSORT": "official precomputed MOT; detector/tracker generation cost unknown and excluded equally",
+    "test_FPS": "second-stage referring filter with cached fixed MOT, not detector+tracker end-to-end FPS",
+    "teacher_time": "required amortized forward component plus actual cached worker costs in supervision audits; model loading is not free"
+  }
+}
