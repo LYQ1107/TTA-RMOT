@@ -127,6 +127,7 @@ def dense(root,methods,public):
                 i=positions[row['frame_id'],row['track_id']];j=qcol[row['query_id']]
                 student_scores={'student_margin_'+m:float(scores[m][i,j]) for m in names[2:] if METHODS[m][0]==policy and m!='MEAN_TEACHER_MATCHED'}
                 policy_records[policy].append(dict(video=video,query=row['query_id'],frame=row['frame_id'],track=row['track_id'],state=row['state'],
+                    official_episode_present=bool(truth[row['query_id']]),official_frame_present=bool(truth[row['query_id']].get(row['frame_id'])),
                     p=row['teacher_prob'],official_match=bool(y[i,j]),source_margin=float(bank['scores'][i,j]),sample_id=row['sample_id'],**student_scores))
             for row in (r for r in data.expanded if r['video_id']==video):
                 i=positions[row['frame_id'],row['track_id']];j=qcol[row['query_id']]
@@ -187,6 +188,12 @@ def dense(root,methods,public):
             ordinary_geometry_expansion=dict(samples=len(geometry_records[policy]),official_correct=sum(r['official_match'] for r in geometry_records[policy]),
                 official_error_fraction=1-sum(r['official_match'] for r in geometry_records[policy])/len(geometry_records[policy]) if geometry_records[policy] else None),
             warning='official unmatched is not exhaustive semantic absence; sampled/weak counts are not unique people; soft NEG-like probability is not a hard negative label')
+        teaching[policy]['teacher_POS_by_query_presence']={}
+        for group,present_value in [('Query-Present',True),('Query-Empty',False)]:
+            mask=positive&np.asarray([r['official_episode_present']==present_value for r in records])
+            teaching[policy]['teacher_POS_by_query_presence'][group]=dict(accepted_POS=int(mask.sum()),official_correct=int((mask&target).sum()),
+                official_precision=float(target[mask].mean()) if mask.any() else None,
+                definition='offline official episode grouping, not supplied to teacher/student')
         write_csv(public/(policy+'_direct_teacher_offline.csv'),records)
         atomic_json(public/(policy+'_expanded_weak_offline.json'),weak)
         atomic_json(public/(policy+'_geometry_weak_offline.json'),geometry_records[policy])
