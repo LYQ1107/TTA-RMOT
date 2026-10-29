@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Four confirmations sealed; GT-free count controls prefetched
+
+- Original84940registeredseedpairsparentexited0; all4newseed0/42studentsfull25/425predictionssealed. Onlyparentcontrolinferenceleft, latest20/25 onoriginal56047; originalCPU25053stillwaitsparentbeforeanynewGT.
+- Existingprepare_psr_controls --precompute-only ranonceforeachcompletedseedroot, CPU0newinference/teacher/GTOpens;8directionalcontrols×425episodes×25videosPASS. Bothcontrols_sealed.json remainabsent,GTauthorizationfalse. No newmethods/training queued.
+- SavedinitialCPUcompute times/score-and-countparentsinconfirmations/control_prefill_stage.json before finalprepare reuse; totalderivedcoststillincludesparents. Thehelperlegacyremaining-list namesprimary8, notextra confirmationjobs; actualregisteredmethodsareonlyNaive/PSRin eachseedroot.
+
 ## 2026-10-30 — All required students trained; parent reweighting actual acceptance
 
 - All13newstudents(8primary+4registeredconfirmation+1parentcontrol)completed8973updates. Parenttrainexit0 elapsed2629.20s/body2623.41s,17source/25target/425queries/8500teacherlabels/24576params,checkpoint roundtrip/frozenunchanged/GTattempts0,adapterDeltaL2=7.2102811.
