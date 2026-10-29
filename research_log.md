@@ -1,5 +1,12 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — Correct-positive transfer, not only aggregate loss
+
+- Reusedsealedprimary4policyCSVandexistingsoft_fit_by_state, rawGTfiles/GPUcalls0; addedanalyze_psr_correct_positive_fit.py. No model/config/budgetchanges.
+- CorrectteacherPOSofficialmatch:Naive363/source38/student37(new26/lost27);PSR374/source30/student38(new30/lost22);Uniform371/source19/student25;Confidence370/source39/student44. PSRGeometry38/Discovery36, NaiveTemporal39. Countsarecandidateanchors, notuniquepersonsorindependentvalidation.
+- PSRcorrectPOSsoftBCE8.5279126→2.0038101/meanprob.0921734→.2209508, yet89.84%stillnotselected. Partialsupervisiontransferexists butdecisiongatecoveragepoor; no source-only/targetGTthresholdorcapacityretuning. Linkreport inhumanfailure/verdict/results.
+- RecheckedlatestuserPSR5.1–6.4requirements:allmain+Uniform/Confidence/Discovery/Geometry/Temporal/matchedMTimplemented; paired3seedconfirmationrequiredandactive. DeterministicFrozenreference reusedexplicitly, notthreefakeindependentFrozenruns. ParentPOSreweightingaddressesrequiredexpansionconfoundwithoutnewlabels.
+
 ## 2026-10-30 — Final report augmentation prepared without experiment changes
 
 - Originalwait248confirmedlive. seed0NaiveandPSRfull425inferexit0; seed42bothtrained8973exit0andstillinfer. ParentweightcontrolGPU6progress4000/8973, sameconfig/sourceGTonly; no newGPUjob orGTmetricpeeking.
