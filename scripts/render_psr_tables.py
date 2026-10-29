@@ -40,6 +40,9 @@ def render(public):
     lines+=table(['方法','全候选AP','AUROC','教师与弱扩展窗口外AP','窗口外AUROC','GT R@1','GT R@3','GT R@5'],[
         [m,dense[m]['all425_official']['AP'],dense[m]['all425_official']['AUROC'],dense[m]['not_direct_or_middle_frames']['AP'],
         dense[m]['not_direct_or_middle_frames']['AUROC'],*[dense[m]['GT_recall_at_K']['all'][str(k)] for k in (1,3,5)]] for m in methods])
+    lines+=['没有显式教师或弱扩展标签的时间位置，单独按同帧GT一对一匹配计算：','']
+    lines+=table(['方法','窗口外GT R@1','窗口外GT R@3','窗口外GT R@5'],[
+        [m,*[dense[m]['GT_recall_at_K']['outside_explicit_window'][str(k)] for k in (1,3,5)]] for m in methods])
     lines+=['## Presence / Empty 与真实恢复','',
         'Query-Present/Empty是官方评测GT的离线episode分组，不是全部现实语义的穷尽存在性标签。',
         'FP与恢复为固定IoU≥0.5逐帧最大匹配诊断；新增FP指新增预测行中的未匹配行，净FP还受旧行匹配重分配影响。','']
@@ -54,6 +57,11 @@ def render(public):
         [p,*[r[k] for k in ('accepted_POS','accepted_POS_correct','accepted_POS_precision','new_correct_candidate_POS_vs_Naive',
         'lost_correct_candidate_POS_vs_Naive','correct_POS_not_source_selected','expanded_weak','expanded_weak_official_error_fraction')],
         r['ordinary_geometry_expansion']['samples'],r['ordinary_geometry_expansion']['official_error_fraction']] for p,r in support.items()])
+    lines+=['下表按真实GT ID去重并作一对一分配，不把多个重叠MOT候选重复计为多个被恢复的人物观测。仍是帧观测，不是不同人物数量。','']
+    lines+=table(['策略','直接GT观测','比Naive新增GT观测','比Naive丢失GT观测','Full弱GT观测','几何弱GT观测','直接覆盖全部GT比例','弱新增全部GT比例'],[
+        [p,r['unique_direct_GT_observations'],r['unique_new_direct_GT_observations_vs_Naive'],r['unique_lost_direct_GT_observations_vs_Naive'],
+        r['one_to_one_GT_coverage_counts'].get('expanded_GT_observations',0),r['one_to_one_GT_coverage_counts'].get('geometry_GT_observations',0),
+        r['one_to_one_GT_coverage_fraction_of_all'],r['new_weak_GT_coverage_fraction_of_all']] for p,r in support.items()])
     lines+=['## 视频级不确定性','',
         '25完整视频为聚类单位，2000次成对重采样、seed0、官方充分统计量池化。区间不是独立帧显著性，也不是训练随机种子不确定性。','']
     comparisons=summary['comparisons']

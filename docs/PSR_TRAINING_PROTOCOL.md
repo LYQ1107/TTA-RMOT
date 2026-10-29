@@ -24,7 +24,10 @@ source/EMA/student一致性阈值0.9、容差0.1、无正例时不造硬负例�
 完整推理25视频/425表达，固定官方MOT、框和ID不动，FP32 margin>0；query-batch真实逐表达等价性检查保持。
 封存后独立GT评测TrackEval HOTA/DetA/AssA/IDF1/IDSW与presence/empty/候选AP/AUROC/R@K/恢复FP/新增覆盖。
 所有新方法做双向Count-Matched，仅离线诊断。25完整视频配对bootstrap2000次seed0。
-若PSR同时超过Frozen与Naive且有正向HOTA/语义覆盖证据，再用预先固定的训练seed0/42确认，不根据指标改数值超参。
+若PSR同时超过Frozen与匹配Naive的HOTA点值，按用户6.4要求用预先固定的训练seed0/42确认，加上17共三seed，
+不因区间跨0或语义归因不支持就免除该确认，也不根据指标改数值超参。
+确认时教师样本/软标签/调用预算不变，仅训练随机seed不同；每个seed独立run根目录，Naive/PSR同seed配对。
+Frozen无可训练参数且固定确定性输出，复用同一425结果，不将复制三份冒充三次独立观测。
 
 若PSR只超过Naive或无独立收益，保留负结果，按原提示分解采样/教师/拟合/扩展/最终选择，仅允许有证据的单变量下一步。
 不能以测试通过/梯度非零结束研究，也不延长训练到出现更好数字。完整日志/恢复checkpoint留data2，小型记录逐阶段GitHub。

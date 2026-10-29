@@ -66,16 +66,18 @@ def official_query_groups(folder,report):
 
 def dense(root,methods,public):
     names=['FROZEN','SOURCE_REHEARSAL',*methods];parts={m:[] for m in names};labels_all=[];present_all=[];endpoint_all=[];middle_all=[]
-    recall={m:Counter() for m in names};denominator=Counter();text={m:{} for m in names};text_by_video={m:[] for m in names}
+    recall={m:Counter() for m in names};denominator=Counter();text={m:{} for m in names};text_by_video={m:[] for m in names};outside_text={m:{} for m in names}
     policies={policy:PSRPseudoDataset('/data2/user/TTA-RMOT-assets/psr/val_v1/'+policy,allow_val_diagnostic=True) for policy in ('NAIVE','PSR','UNIFORM','CONFIDENCE')}
     policy_records={p:[] for p in policies};coverage_records={p:Counter() for p in policies}
+    coverage_sets={p:{tag:set() for tag in ('direct','expanded','geometry')} for p in policies}
     weak_records={p:[] for p in policies};geometry_records={p:[] for p in policies};per_video=[];gt_observations=Counter()
     geometry={p:read_jsonl(d.directory/'expanded_geometry.jsonl') for p,d in policies.items()}
-    direct_at={p:defaultdict(list) for p in policies};weak_at={p:defaultdict(list) for p in policies}
+    direct_at={p:defaultdict(list) for p in policies};weak_at={p:defaultdict(list) for p in policies};geometry_at={p:defaultdict(list) for p in policies}
     for policy,data in policies.items():
         for row in data.rows:
             if row['valid'] and row['state']=='POS':direct_at[policy][row['video_id'],row['query_id'],row['frame_id']].append(row)
         for row in data.expanded:weak_at[policy][row['video_id'],row['query_id'],row['frame_id']].append(row)
+        for row in geometry[policy]:geometry_at[policy][row['video_id'],row['query_id'],row['frame_id']].append(row)
     from scripts.diagnose_flexhook_v2_dance import load_tracker_boxes
     for video in sorted({r['video_id'] for r in policies['PSR'].runtime}):
         bank=load_source_video(video);y,_=candidate_labels(bank);qcol={q:j for j,(q,_) in enumerate(bank['expressions'])}
@@ -88,6 +90,7 @@ def dense(root,methods,public):
             for t,targets in gt.items():
                 scope='teacher_endpoint' if any((q,t+d) in anchors for d in (-1,1)) else 'non_teacher_endpoint'
                 denominator['all']+=1;denominator[scope]+=1
+                if scope=='non_teacher_endpoint' and (q,t) not in anchors:denominator['outside_explicit_window']+=1
                 gt_observations['all']+=len(targets);gt_observations[scope]+=len(targets)
                 if (q,t) in anchors:gt_observations['potential_middle']+=len(targets)
         for t,a,b in bank['slices']:
@@ -103,6 +106,7 @@ def dense(root,methods,public):
                     for k in (1,3,5):
                         found,_=matched_gt(matrix,order[:k]);value=len(found)/len(gt)
                         recall[method]['all_'+str(k)]+=value;recall[method][scope+'_'+str(k)]+=value
+                        if not endpoint[a,j] and not middle[a,j]:recall[method]['outside_explicit_window_'+str(k)]+=value
             for policy,data in policies.items():
                 for q,j in qcol.items():
                     gt=truth[q].get(t,[])
@@ -111,15 +115,19 @@ def dense(root,methods,public):
                     direct=direct_at[policy].get((video,q,t),[])
                     weak=weak_at[policy].get((video,q,t),[])
                     # Count only distinct one-to-one GT observations, never duplicated people.
-                    for tag,rows in [('direct',direct),('expanded',weak)]:
+                    for tag,rows in [('direct',direct),('expanded',weak),('geometry',geometry_at[policy].get((video,q,t),[]))]:
                         if rows:
                             chosen=[ids.index(r['track_id']) for r in rows]
                             found,_=matched_gt(matrix,chosen);coverage_records[policy][tag+'_GT_observations']+=len(found)
+                            coverage_sets[policy][tag].update((video,q,t,gt[g][0]) for g in found)
         for method in names:
             parts[method].append(scores[method].ravel());local={}
-            for _,a,b in bank['slices']:
+            for t,a,b in bank['slices']:
                 rows,_=frame_metrics(scores[method][a:b],y[a:b])
-                for row in rows:add(local,row);add(text[method],row)
+                for j,row in enumerate(rows):
+                    add(local,row);add(text[method],row)
+                    q=bank['expressions'][j][0]
+                    if (q,t) not in anchors and not any((q,t+d) in anchors for d in (-1,1)):add(outside_text[method],row)
             text_by_video[method].append(local)
             per_video.append(dict(video=video,method=method,**binary(scores[method].ravel(),y.ravel())))
         for policy,data in policies.items():
@@ -181,6 +189,10 @@ def dense(root,methods,public):
             query_visible_middle_identity_change=sum(r['observable_middle_identity_change'] for r in weak),
             identity_audit_limit='only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded',
             one_to_one_GT_coverage_counts=dict(coverage_records[policy]),
+            unique_direct_GT_observations=len(coverage_sets[policy]['direct']),
+            unique_new_direct_GT_observations_vs_Naive=len(coverage_sets[policy]['direct']-coverage_sets['NAIVE']['direct']),
+            unique_lost_direct_GT_observations_vs_Naive=len(coverage_sets['NAIVE']['direct']-coverage_sets[policy]['direct']),
+            coverage_definition='video/query/frame/official_GT_ID after one-to-one assignment; distinct from possibly duplicated matching candidate rows',
             selected_checkpoint_teacher_fit=soft_fit_by_state(records,[m for m in names[2:] if METHODS[m][0]==policy and m!='MEAN_TEACHER_MATCHED']),
             one_to_one_GT_coverage_fraction_of_all=coverage_records[policy]['direct_GT_observations']/gt_observations['all'],
             new_weak_GT_coverage_fraction_of_all=coverage_records[policy]['expanded_GT_observations']/gt_observations['all'],
@@ -213,6 +225,7 @@ def dense(root,methods,public):
                 video_cluster_CI95=np.percentile(boot,[2.5,97.5]).tolist() if len(boot) else None)
         comparisons[method+'_vs_FROZEN']=fields
     atomic_json(public/'text_signal_offline.json',dict(methods={m:finalize(v) for m,v in text.items()},comparisons=comparisons,
+        outside_explicit_window_methods={m:finalize(v) for m,v in outside_text.items()},
         visual_control='candidate mean across17 real queries, not separate visual network',other_queries_not_assumed_negative=True,
         uncertainty='paired25-video bootstrap2000/seed0, descriptive development-set only'))
     atomic_json(public/'dense_ranking_transfer.json',dict(methods=result,GT_frame_query_denominators=dict(denominator),

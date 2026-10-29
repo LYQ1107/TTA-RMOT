@@ -21,11 +21,14 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 DEFAULT=['NAIVE_PAIRED','PSR','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED']
 
 
-def run(root,methods,workers=4,other_active_gpus=()):
+def run(root,methods,workers=4,other_active_gpus=(),seed=None):
     root=Path(root).resolve();training=root/'students';evaluation=root/'evaluation/merged'
     evaluation.mkdir(parents=True,exist_ok=True);training.mkdir(exist_ok=True)
     pending=[];preserved=[]
     for method in methods:
+        training_receipt=training/method/'training_receipt.json'
+        if seed is not None and training_receipt.exists() and json.loads(training_receipt.read_text())['protocol']['seed']!=seed:
+            raise ValueError('use a separate run root for each registered seed; preserve existing results')
         receipt=evaluation/method/'run_metadata.json';checkpoint=training/method/'checkpoint_best_source_selected.pt'
         if receipt.exists() and checkpoint.exists():
             old=json.loads(receipt.read_text())
@@ -75,6 +78,7 @@ def run(root,methods,workers=4,other_active_gpus=()):
                 OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2',TOKENIZERS_PARALLELISM='false',HF_HUB_OFFLINE='1')
             if not ready:
                 command=[sys.executable,str(ROOT/'scripts/train_psr.py'),'--method',method,'--scope','full','--val-authorized','--output',str(folder)]
+                if seed is not None:command+=['--seed',str(seed)]
                 if (folder/'checkpoint_latest.pt').exists():command.append('--resume')
                 record=dict(method=method,phase='training',physical_gpu=gpu['physical_gpu'],uuid=gpu['uuid'])
                 code=command_run(command,env,training/(method+'_stdout.txt'),record);records.append(record)
@@ -115,4 +119,5 @@ def run(root,methods,workers=4,other_active_gpus=()):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--root',type=Path,default=ROOT/'results/runs/psr_val_20261029_v1');p.add_argument('--methods',nargs='+',choices=METHODS,default=DEFAULT);p.add_argument('--workers',type=int,default=4)
     p.add_argument('--other-active-gpus',nargs='*',type=int,default=[],help='preserved healthy peer lanes count toward the four-card total')
-    a=p.parse_args();run(a.root,a.methods,a.workers,a.other_active_gpus)
+    p.add_argument('--seed',type=int,help='registered confirmation seed, with a new independent run root')
+    a=p.parse_args();run(a.root,a.methods,a.workers,a.other_active_gpus,a.seed)
