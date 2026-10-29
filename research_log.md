@@ -1,5 +1,13 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — All required students trained; parent reweighting actual acceptance
+
+- All13newstudents(8primary+4registeredconfirmation+1parentcontrol)completed8973updates. Parenttrainexit0 elapsed2629.20s/body2623.41s,17source/25target/425queries/8500teacherlabels/24576params,checkpoint roundtrip/frozenunchanged/GTattempts0,adapterDeltaL2=7.2102811.
+- Parentcontrolactualnewweaklabels0,originalendpointreplayterms526,POSrepeatedexposures2240over815/8973updates. Weightedreplay/directgradcosmean.9378790; atstep8000all4directPOSrawBCEandparentBCEexactly2.0473876, extraweightedgrad=.25directgrad, demonstratingreweightingnotnewlabels. No HOTA inferredfromthis.
+- Threeof4confirmationfull425inferencesexited0, seed42PSRlatest15/25; parentfullinferPID3860174onGPU6since1793301285.951654,latest5/25. No furthertrainingqueued; originalCPU25053waitsremainingcompletepredictionsbeforeGT.
+- Snapshottedall5additionalcompletedtrainingsandvalidatedremainingexecution/publicruntimepackages:seed42both0b5bd8,parent035a153. Fullcorepackageshashesmatch; no livecode/modelprocesschanges.
+- Read-onlyreviewforward_uda+soft_distillation confirmsrawlastdecoder-layerlogitdifference,independentcandidateBCE,nodouble-sigmoidorhistory-axiserror. InitialFP32equivalenceselectionmismatches0. Observedpoorcorrect-positivefitispartialtransfer, notproofthatabackbone/optimizerbugexists; no protocolretuning.
+
 ## 2026-10-30 — Correct-positive transfer, not only aggregate loss
 
 - Reusedsealedprimary4policyCSVandexistingsoft_fit_by_state, rawGTfiles/GPUcalls0; addedanalyze_psr_correct_positive_fit.py. No model/config/budgetchanges.

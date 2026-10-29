@@ -1,0 +1,33 @@
+{
+  "status": "PASS_EXECUTION_IMPLEMENTATIONS_AVAILABLE_IN_PUBLIC_HISTORY",
+  "methods": {
+    "PSR_PARENT_WEIGHT_CONTROL": {
+      "execution_commit": "de4a6d60eabc026a9cb25f188e0ba7ff8bad6b04",
+      "recorded_implementation_sha256": {
+        "flex_uda/mllm_training.py": "0019e12b943af7a0b9c30c7001ce2657dd609bdeba5ebcd9b92becad639fb0d5",
+        "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+        "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+        "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+        "flex_uda/teacher/psr_dataset.py": "3adafd4603413d5c7e62667bbf314d7db716cbd3c4bdd448914b06541c710d20",
+        "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+        "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+        "flex_uda/losses/psr_objectives.py": "d67f73fb42fcb67f35eb83000555399a195a6c41dfec4de100e504c7abbaf9be"
+      },
+      "matching_public_snapshot": "035a15382835a0ab3044a3823798360da797eb37",
+      "matching_public_tree": "5de779b059dd256965883af2d9fb8cb19179acad",
+      "external_source": {
+        "vendor/FlexHook/models/mymodel.py": {
+          "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+          "sha256": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+        }
+      },
+      "runtime_package_differences": [],
+      "claim": "all recorded implementation files match; not a claim that local/public commit identities are identical"
+    }
+  },
+  "repository": "LYQ1107/TTA-RMOT",
+  "verification": "actual fetched public git objects, SHA256 of recorded files, exact publication tree equality",
+  "target_GT_reads": 0,
+  "GPU_calls": 0,
+  "does_not_imply_scientific_success": true
+}
