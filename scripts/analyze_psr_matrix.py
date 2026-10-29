@@ -192,7 +192,7 @@ def analyze(root,training,public):
         x,y=values[a][1],values[b][1];per=paired_clusters(x,y,np.eye(25));boot=paired_clusters(x,y,draws)
         comparisons[a+'_vs_'+b]=dict(delta_HOTA=float(paired_clusters(x,y,np.ones(25))),CI95=np.percentile(boot,[2.5,97.5]).tolist(),
             improved_videos=int((per>1e-9).sum()),declined_videos=int((per< -1e-9).sum()),per_video=[dict(video=v,delta_HOTA=float(d)) for v,d in zip(values[a][0],per)])
-    for method in methods:
+    for method in ('FROZEN','SOURCE_REHEARSAL',*methods):
         dest=public/method
         with (dest/'offline_analysis_stdout.txt').open('w') as log,redirect_stdout(log):report=attribution(root,method,FROZEN,DATA,TRACKS,dest/'offline_attribution.json')
         episodes,quality=presence_from_stream(root/method,report);write_csv(dest/'episode_presence.csv',episodes);atomic_json(dest/'presence_quality.json',quality)
@@ -223,6 +223,12 @@ def analyze(root,training,public):
         counts_and_intervals_are_not_blind_test_proof=True,unrounded_video_cluster_bootstrap='25videos,2000draws,seed0',
         Qwen_pretraining_overlap='UNKNOWN',historical_Naive8_0327='not same paired sampling; historical reference only')
     summary['automatic_verdict_limit']='numerical screening only; final scientific judgement must also inspect count residuals, matched controls, semantic ranking, identity and positive coverage'
+    summary['baseline_costs_reused']={
+        'FROZEN':dict(json.loads((ROOT/'results/positive_free/full/zero_update/metrics.json').read_text())['cost'],
+            new_GPU_calls=0,trainable_parameters=0,optimizer_updates=0,source='historical sealed full425 ZERO_UPDATE',
+            timing_comparison_limit='older episode-isolated evaluator, not the current query-batched execution; reuse is not zero inherited cost'),
+        'SOURCE_REHEARSAL':dict(json.loads((ROOT/'results/uda/full/SOURCE_REHEARSAL/metrics.json').read_text())['cost'],
+            new_GPU_calls=0,source='historical same-budget full425 source-only rehearsal')}
     write_csv(public/'official_comparison.csv',official);write_csv(public/'query_presence.csv',presence);write_csv(public/'compute_cost.csv',costs)
     atomic_json(public/'summary.json',summary);print(json.dumps(dict(status=summary['status'],metrics={m:metrics[m]['HOTA'] for m in ('FROZEN','SOURCE_REHEARSAL',*methods)},verdict=verdict),indent=2));return summary
 

@@ -4,7 +4,20 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：普通 MLLM 软概率蒸馏
+## 当前研究：Positive-Support Recovery，25Val同集开发研究
+
+独立分支 `research/v2dance-psr-trainval-20261029`，起点861840e。
+用户明确允许缺少40Train同配置MOT时使用现有25Val，所有新结果均不称Train→Val泛化或盲测。
+四种GT-free采样策略各425表达/8500真实冻结Qwen判断；同容量Naive与PSR主训练已各完成8973步。
+PSR新增254条有双端点证据、限定中间一帧的弱监督，不宣称它们都正确。
+完整推理及Uniform/Confidence/Discovery/Geometry/普通Temporal/匹配Mean Teacher对照正在执行。
+最多四张显存入场审计后的共享GPU，每卡串行，不停止别的项目；目标GT仅在完整预测封存后独立评测。
+[机制](docs/PSR_METHOD.md)、[预注册训练协议](docs/PSR_TRAINING_PROTOCOL.md)、
+[监督审计](docs/PSR_PSEUDO_LABEL_AUDIT.md)、[真实进度](docs/PSR_EXPERIMENT_RESULTS.md)、
+[当前科研判决](docs/PSR_FINAL_SCIENTIFIC_VERDICT.md)、[完整主训练日志](results/psr/training/)、[恢复索引](results/psr/recovery_index.json)。
+目前未产生本轮新HOTA，不把模块通过或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
+
+## 已完成：普通 MLLM 软概率蒸馏
 
 独立分支`research/v2dance-mllm-naive-distill-20261028`，起点为封存P1公开提交`7026d82c`。
 按用户最新“40Train没有的话先用val”，当前仅做**25Val同集无标签蒸馏开发诊断**，不是Train→Val泛化。

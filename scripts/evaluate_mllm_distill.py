@@ -18,6 +18,6 @@ if __name__=='__main__':
     if len(selected)!=1 or float(selected[0].split(',')[-1])<20480:raise RuntimeError('fresh evaluation GPU admission failed before model load')
     from flex_tta.runtime.pf_receipts import atomic_json
     a.output_root=a.output_root.resolve()
-    atomic_json(a.output_root/'fresh_gpu_admission.json',dict(selected=selected[0],snapshot=snapshot,pid=os.getpid(),required_free_mib=20480))
+    atomic_json(a.output_root/a.method/'fresh_gpu_admission.json',dict(selected=selected[0],snapshot=snapshot,pid=os.getpid(),required_free_mib=20480))
     from flex_uda.evaluation import evaluate
     evaluate(a.checkpoint,a.method,a.output_root,videos=a.videos,parity_only=a.parity_only)
