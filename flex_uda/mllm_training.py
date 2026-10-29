@@ -19,7 +19,7 @@ from flex_uda.training import (ROOT,SOURCE,DANCE,CHECKPOINT,SOURCE_SHA,Inputs,
 from flex_uda.data.source_kitti_v2 import SourceSupervision
 from flex_uda.data.manifests import write_jsonl,read_jsonl
 from flex_uda.teacher.mllm_pseudo_dataset import MLLMPseudoDataset
-from flex_uda.teacher.psr_dataset import PSRPseudoDataset,PairedUnlabeledDataset
+from flex_uda.teacher.psr_dataset import PSRPseudoDataset,PairedUnlabeledDataset,PSRParentWeightDataset
 from flex_uda.teacher.isolation import restrict_filesystem
 from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda,frozen_copy,ema_update
 from flex_uda.losses.objectives import supervised_ce,select_pseudo,pseudo_bce,consistency
@@ -168,7 +168,7 @@ def run(config,output,*,scope='smoke',resume=False):
     if config['protocol']['target_split']=='val' and os.environ.get('MLLM_VAL_DIAGNOSTIC_AUTHORIZED')!='YES':
         raise PermissionError('explicit Val transductive authorization required')
     study=config['protocol']['name'] in ('TRANSDUCTIVE_VAL_PSR_STUDY','FORMAL_TRAIN_TO_VAL_PSR_STUDY')
-    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED')
+    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED','PSR_PARENT_WEIGHT_CONTROL')
     matched_ema=config['method']=='MEAN_TEACHER_MATCHED'
     if config['method'] not in (study_methods if study else ('MLLM_DISTILL','SOURCE_REHEARSAL')):raise ValueError('independent distillation method required')
     if output.exists() and not resume:raise FileExistsError('preserve existing run: '+str(output))
@@ -176,6 +176,8 @@ def run(config,output,*,scope='smoke',resume=False):
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     attempts=protect_target_annotations()
     pseudo=(PairedUnlabeledDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True) if matched_ema else PSRPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True,expanded_kind=config['data'].get('expanded_kind','full')) if study else None)
+    parent_control=config['method']=='PSR_PARENT_WEIGHT_CONTROL'
+    if parent_control:pseudo=PSRParentWeightDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
     if not study:pseudo=MLLMPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
     if (not study and config['protocol']['name']!='TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC') or config['protocol']['target_split']!=pseudo.split:
         raise ValueError('this validated Val route cannot be relabelled as formal Train-to-Val')
@@ -218,6 +220,7 @@ def run(config,output,*,scope='smoke',resume=False):
     if study:
         provenance['implementation_sha256'].update({name:file_sha(ROOT/name) for name in ('flex_uda/teacher/psr_dataset.py','flex_uda/teacher/psr_supervision.py','flex_uda/teacher/psr_sampler.py','flex_uda/losses/psr_objectives.py')})
         provenance['external_target_semantic_teacher']=not matched_ema
+        if parent_control:provenance['parent_weight_control']=pseudo.parent_weight_control
     atomic_json(output/'provenance.json',provenance);atomic_json(output/'config.json',config)
     atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0]))
     calibration=source_scale_check(model,Inputs(model,tokenizer,device,source_val),params)
@@ -354,6 +357,7 @@ def run(config,output,*,scope='smoke',resume=False):
                     direct_states=dict(Counter(r['state'] for r in teacher_rows)),expanded_states=dict(Counter(r['state'] for r in expanded_rows)),
                     UNKNOWN_not_default_negative=True)
                 if matched_ema:record.update(target_teacher_kind='INTERNAL_EMA',external_MLLM_labels_used=0)
+                if parent_control:record['expanded_supervision_kind']='DIRECT_PARENT_REPLAY_NOT_NEW_WEAK_LABEL'
             append_json(output/'metrics_train.jsonl',record);step+=1;retry=0
             if step%10==0 or step==total:
                 atomic_json(output/'progress.json',dict(status='RUNNING',step=step,total_steps=total,unique_teacher_samples_seen=len(seen_samples),**dict(counters)))
@@ -397,5 +401,11 @@ def run(config,output,*,scope='smoke',resume=False):
         peak_allocated_bytes=torch.cuda.max_memory_allocated(),source_checkpoint_sha256=SOURCE_SHA,
         pseudo_seal_sha256=provenance['pseudo_seal_sha256'],optimizer_at_test_time=False,student_calls_MLLM=False)
     if matched_ema:result.update(external_MLLM_labels_used=0,unique_unlabelled_target_inputs_seen=result.get('unique_teacher_samples_seen',0),unique_teacher_samples_seen=0,external_target_semantic_teacher=False)
+    if parent_control:
+        result.update(parent_weight_control=pseudo.parent_weight_control,
+            unique_parent_replay_terms_seen=result.get('unique_expanded_samples_seen',0),unique_expanded_samples_seen=0)
+        if 'counters' in result:
+            result['counters']['parent_replay_exposures']=result['counters'].pop('expanded_weak_exposures',0)
+            result['counters']['parent_replay_nonzero_gradient_steps']=result['counters'].pop('expanded_nonzero_gradient_steps',0)
     atomic_json(output/'training_receipt.json',result);atomic_json(output/'progress.json',result)
     print(json.dumps(result,indent=2),flush=True);return result

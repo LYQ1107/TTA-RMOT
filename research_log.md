@@ -1,5 +1,12 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 — First complete PSR matrix, registered confirmation and weight confound
+
+- All8 students8973updates and25/425 predictions sealed, original/repair GPU parents exited; official26methods exit0. PrimaryHOTA Frozen8.2180, pairedNaive7.4499, PSR8.4204, Uniform8.4347, Confidence6.7173, Discovery7.8127, Geometry8.4218, Temporal7.9524, matchedMT8.6095, Source7.4352. No independent PSR novelty/success claim: Uniform and MT higher; Full belowGeometry.
+- Registered conditionPSR>Frozen+Naive triggers pairedstudentseeds0/42 with immutable sampling17/caches,8973updates/24576params/lr/selection unchanged. Four lanesGPU6/5/4/7; no foreign tasks stopped. Independent CPU count/ranking/coverage analysis remains in original blocking parent.
+- User5.2 requires geometry benefit not merelypositive-weight/sample-count gain. Added explicitlyPOST_HOC PSR_PARENT_WEIGHT_CONTROL: exactlysame263geometry opportunities, but extra0.25normalizedmeanBCE uses526 actual endpoint-parent terms at their original frames/probabilities, no new weak labels/frames/teacher calls. Same8500direct cache andfixedstudentbudget. Queue after a confirmation lane really exits; first actualinterface+6step smoke, thenfull. Not part of preregistered headline, no GT enters prediction/training, nooriginalthresholdchanged.
+- Dedicated newmethod dispatch only; existing8method loss paths unchanged. Parent replay counters explicitly distinct from uniqueweak evidence; control is opportunity/weight matched, not an exact matched-gradient intervention.
+
 ## 2026-10-29 — New PSR implementation goal; user explicitly reauthorizes25Val
 
 - Start861840e, clean repository, independent research/v2dance-psr-trainval-20261029. Rechecked40Train1560queries/41796images:0/40matchingMOT, officialZIP has no prediction payload. OfficialiKUN issue35/44 author confirms NeuralSORT/NKF code not released. No detector replacement orGT substitution.

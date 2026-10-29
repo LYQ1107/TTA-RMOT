@@ -52,3 +52,13 @@ def test_direct_and_expanded_means_do_not_scale_with_duplicate_batch_rows():
     a=psr_losses(x,p,valid,x,p,valid)
     b=psr_losses(x.repeat(3),p.repeat(3),valid.repeat(3),x.repeat(5),p.repeat(5),valid.repeat(5))
     torch.testing.assert_close(a['total'],b['total']);a['total'].backward();assert torch.isfinite(x.grad).all() and x.grad.abs().sum()>0
+
+
+def test_parent_weight_control_reuses_actual_probabilities_and_frames_only():
+    from flex_uda.teacher.psr_dataset import parent_weight_rows
+    rows,obs,appearance=fixture();weak=expand_local(rows,obs,appearance)[0]
+    replay=parent_weight_rows(rows,weak)
+    assert len(replay)==2 and {r['frame_id'] for r in replay}=={1,3}
+    assert {r['original_direct_sample_id'] for r in replay}=={'1','3'}
+    assert all(r['teacher_prob']==.99 and r['supervision_source']=='DIRECT_PARENT_WEIGHT_CONTROL_NOT_NEW_LABEL' for r in replay)
+    assert len({r['sample_id'] for r in replay})==2

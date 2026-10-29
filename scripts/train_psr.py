@@ -13,7 +13,7 @@ METHODS={
     'NAIVE_PAIRED':('NAIVE','none'), 'UNIFORM_PAIRED':('UNIFORM','none'),
     'CONFIDENCE_PAIRED':('CONFIDENCE','none'), 'PSR_DISCOVERY':('PSR','none'),
     'PSR_GEOMETRY':('PSR','geometry'), 'PSR':('PSR','full'), 'NAIVE_TEMPORAL':('NAIVE','geometry'),
-    'MEAN_TEACHER_MATCHED':('NAIVE','none')}
+    'MEAN_TEACHER_MATCHED':('NAIVE','none'), 'PSR_PARENT_WEIGHT_CONTROL':('PSR','geometry')}
 
 
 if __name__=='__main__':

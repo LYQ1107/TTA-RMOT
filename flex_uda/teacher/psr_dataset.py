@@ -48,6 +48,35 @@ class PSRPseudoDataset:
     def __len__(self):return len(self.rows)
 
 
+def parent_weight_rows(direct,opportunities):
+    """Replay actual judged endpoints; never fabricate a middle-frame label."""
+    by_id={r['sample_id']:r for r in direct};rows=[]
+    for weak in opportunities:
+        for parent_id in weak['parent_sample_ids']:
+            parent=by_id[parent_id]
+            rows.append(dict(parent,sample_id='PARENT_REPLAY:'+weak['sample_id']+':'+parent_id,
+                supervision_source='DIRECT_PARENT_WEIGHT_CONTROL_NOT_NEW_LABEL',
+                original_direct_sample_id=parent_id,control_opportunity_id=weak['sample_id']))
+    return rows
+
+
+class PSRParentWeightDataset(PSRPseudoDataset):
+    """Post-hoc geometry mechanism control: .25 extra mean on its two parents."""
+    def __init__(self,directory,*,allow_val_diagnostic=False):
+        super().__init__(directory,allow_val_diagnostic=allow_val_diagnostic,expanded_kind='geometry')
+        opportunities=self.expanded
+        self.expanded=parent_weight_rows(self.rows,opportunities)
+        by=defaultdict(list)
+        for row in self.expanded:by[row['window_id']].append(row)
+        for group in self.groups:group['expanded_samples']=by[group['window_id']]
+        self.parent_weight_control=dict(kind='POST_HOC_MECHANISM_CONTROL_NOT_PREREGISTERED_HEADLINE',
+            geometry_opportunities=len(opportunities),parent_replay_terms=len(self.expanded),
+            unique_added_weak_labels=0,extra_teacher_judgments=0,extra_loss_coefficient=.25,
+            normalization='mean over both actual judged endpoints for each available geometry opportunity',
+            new_target_frames_or_labels=False,target_GT_used=False,
+            limitation='tests opportunity-matched positive weighting; not a universal matched-gradient control')
+
+
 class PairedUnlabeledDataset:
     """Matched EMA baseline reads sampling inputs, NEVER Qwen pseudo labels."""
     def __init__(self,directory,*,allow_val_diagnostic=False):
