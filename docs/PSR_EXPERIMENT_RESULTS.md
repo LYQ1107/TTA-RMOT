@@ -13,8 +13,8 @@
 匹配Mean Teacher已通过6步真实smoke，目标外部MLLM监督为0。
 Naive/PSR主实验独立完整推理已分别封存425表达，实际进程1851.47/2021.72秒，参数更新0、目标GT0。
 两组都由源val选中8973步，源CE分别0.88351128/0.88294703；不是按Dance指标选择。
-Uniform/Discovery现已各完成8973步，8500直接标签均实际使用，目标GT0，正在完整推理；4/8学生训练已完成。
-Confidence/Geometry保持健康训练。Discovery/Geometry首次因原GPU2/0显存被外部新进程占用而入场失败；失败时尚未开始优化。
+Uniform/Discovery/Confidence现已各完成8973步，8500直接标签均实际使用，目标GT0，正在完整推理；5/8学生训练已完成。
+Geometry保持健康训练。Discovery/Geometry首次因原GPU2/0显存被外部新进程占用而入场失败；失败时尚未开始优化。
 保留失败日志与原16+4GiB标准，修复子队列排除健康GPU1/5后，在新审计GPU6/4只恢复两项失败任务；最多同时四卡。
 后续普通Temporal/匹配Mean Teacher仍由原健康队列执行，不重复已完成训练或主实验完整推理。
 全部预测封存后，再生成双向数量对照并独立执行官方TrackEval与GT归因。
