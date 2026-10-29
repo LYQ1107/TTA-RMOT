@@ -34,11 +34,17 @@
       "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL",
       "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL/checkpoint_latest.pt",
       "resume_command": "python scripts/train_psr.py --method NAIVE_TEMPORAL --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/NAIVE_TEMPORAL"
+    },
+    "MEAN_TEACHER_MATCHED": {
+      "run_directory": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/MEAN_TEACHER_MATCHED",
+      "checkpoint": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/MEAN_TEACHER_MATCHED/checkpoint_latest.pt",
+      "resume_command": "python scripts/train_psr.py --method MEAN_TEACHER_MATCHED --scope full --resume --val-authorized --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students/MEAN_TEACHER_MATCHED"
     }
   },
   "teacher_raw_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/teacher_full",
   "pseudo_root": "/data2/user/TTA-RMOT-assets/psr/val_v1",
   "large_weights_and_raw_cache_stay_on_server": true,
-  "inference_resume": "python scripts/evaluate_psr_matrix.py --training-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students --output /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/evaluation --methods NAIVE_PAIRED PSR",
+  "inference_resume": "python scripts/run_psr_matrix.py --root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
+  "after_all_inference": "python scripts/prepare_psr_controls.py --training-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/students --evaluation-root /data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/evaluation/merged",
   "checkpoint_SHA_source": "each completed training_receipt.json; no targetGT checkpoint selection"
 }

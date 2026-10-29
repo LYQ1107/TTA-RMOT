@@ -2145,3 +2145,12 @@ results/positive_free/server_smoke_20261025/validation_summary.json.
 - smoke_v1 had6realsteps but a source glob authorization omission silently omitted expressions; sourceval becameempty/NaN. Explicitly REVOKED, checkpoints never used as formalinitialization. Fix source-expression resolved whitelist and assert8896expressions/8973sourcewindows/64sourcevalwindows plusfiniteCE BEFOREsteps. No skipped data, altered coverage or NaN masking.
 - smoke_v2 passes6actualupdates/6nonzeroKDgradientsteps,41sourcecandidate exposures/22validtargetexposures,deltaL2.027242,sourceplan8973,peak5.247GiB,GT0/frozenunchanged.12baselineauditchecks pass: E0completeofficial25MOT211085rows; historicalE1 has exact sourceplanSHA/seed/adapter/optimizer/steps/source-onlyselection and targetoptimization0, so reuse its real7.4352 and cost rather than retrain. MeanTeacher8.2494 is historicalreference withdifferenttargetsampling/supervision, not a matched-budgetMLLMcontrol.
 - FormalE2 and full425evaluation are next, not already complete. Only actual fullRMOT/ranking/quantity-adjusted evidence can authorize subsequent conventional controls or innovation; do not call sparse AP a HOTA gain.
+# 2026-10-29 PSR 主训练完成与匹配对照队列
+
+项目仍为TTA-RMOT；按用户明确授权使用25Val无标签同集适应，不是40Train→Val。
+Naive/PSR主训练各完成8973步、17源视频完整覆盖；8500直接标签均实际访问，PSR254条独立弱插值均访问，目标GT打开数0。
+训练主体耗时2554.08/2391.76秒；不把loss/梯度当成科研成功，尚无本轮新HOTA。
+修正公平性缺口：另做24576参数/8973步/相同未标注窗口/源val选择的Mean Teacher，仅读取视觉输入清单、不读Qwen标签。
+其真实interface及6步smoke通过（6次EMA更新），相关回归29项通过；旧Mean Teacher只保留历史参考。
+提交1001832的四条方法队列已启动：每卡串行训练与独立完整推理，最多4物理卡；复用健康完成主训练，不启动重复训练。
+GT-free数量诊断与离线归因分别执行，全部登记预测封存前不读取目标GT。弱缓存中的源margin是端点元数据，离线分析改用实际中间帧Frozen分数。
