@@ -131,6 +131,21 @@ def test_DFIT_keeps_original_AMP_same_batch_backoff_before_numeric_failure():
     with pytest.raises(FloatingPointError):inherited_amp_backoff(scaler,retry)
 
 
+def test_registered_verdict_does_not_invent_rule_for_mixed_transfer():
+    from scripts.analyze_diag_fit import classify
+    fit=dict(methods={t:dict(fit_qualified=False) for t in ('D1_OPT','D2_OPT_POS','D3_CAP')})
+    result={'FROZEN':dict(Present_HOTA=10.,R1_outside_explicit_window=.2)}
+    fit['methods']['D1_OPT']['fit_qualified']=True
+    result['D1_OPT']=dict(Present_HOTA=11.,R1_outside_explicit_window=.19)
+    assert classify(fit,result)[0]=='预注册规则未覆盖的混合结果'
+    result['D1_OPT']['R1_outside_explicit_window']=.21
+    assert classify(fit,result)[0]=='知识迁移通路成立，之前是训练太弱'
+    result['D1_OPT']=dict(Present_HOTA=9.,R1_outside_explicit_window=.19)
+    assert classify(fit,result)[0]=='学得进去，但稀疏标签本身不够'
+    fit['methods']['D1_OPT']['fit_qualified']=False;fit['methods']['D3_CAP']['fit_qualified']=True
+    assert classify(fit,result)[0]=='浅层adapter容量不足'
+
+
 def test_capacity_only_LoRA_and_head_mutate():
     model=Model();attach_adapter(model,'cpu',rank=16,layers='all',projections=('wq','wk','wv','wo'),alpha=32,unfreeze=('head',))
     before={n:p.detach().clone() for n,p in model.named_parameters()};versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}

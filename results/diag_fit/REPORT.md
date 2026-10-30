@@ -1,6 +1,6 @@
 # D-FIT：学生能否拟合冻结 MLLM 标签
 
-状态：SMOKE_COMPLETE_BASELINE_AND_FULL_TRAINING_NEXT；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
+状态：FULL_TRAINING_RUNNING；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
 用户允许显存足够时共享、优先进程少的最多4卡，不停止其他任务。25Val同集诊断，不是论文主结果或Train→Val。
 
 ## 1. 修改前只读核对
@@ -55,3 +55,6 @@ OPT_POS及CAP的早期尝试曾因FP16梯度Inf提前退出，并执行过一次
 此修复没有跳样本、没有关闭AMP、没有新增数值超参；D1已通过的200步不重复运行。不能把无效提前退出当学生容量/教师矛盾的证据。
 恢复原AMP后，三臂有效200步smoke全部通过，lr均保持0.0002，无正式LR回退；D3为2,758,656参数且head实际变化，已填回expected_trainable。
 三臂fit_subset SHA相同：369cabeb214b2d296bc1a4effc5ebd1d4f22cc8f7f68f2740861a3a9649c30b6；GT打开均0，冻结参数版本均未变。相关CPU32项通过。
+D3真实smoke final-step checkpoint经load_selected严格重建后，保存前/重载后完整logits逐位相同，GT打开0。
+已有Frozen/Naive/PSR在共同Naive8500上的完整教师拟合基线已完成；三新臂8973步已在GPU1/5/4开始，不复用smoke权重、不重跑D1已完成smoke。
+这只是训练运行状态，不是完整拟合或Val改善结论。原命令一次阻塞等待全部训练；没有agent级ps/tail轮询或干预其它任务。

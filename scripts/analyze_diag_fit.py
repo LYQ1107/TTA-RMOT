@@ -39,7 +39,7 @@ def classify(fit,results):
         return '学得进去，但稀疏标签本身不够','下一步做Dance Train GT轨迹上的密集标注与帧内列表式蒸馏；本轮不自行执行。'
     if not shallow and qualified.get('D3_CAP'):
         return '浅层adapter容量不足','正式方法放开全部PCD层和head；本轮不自行开展正式训练。'
-    if not qualified.get('D3_CAP'):
+    if not any(qualified.values()):
         return '教师和学生的输入不一致，或者教师标签自相矛盾','按用户预注册分支原样归类；同时报告端点一致率。若D3数值不可训练，须明确它没有最终拟合指标，不能把分支标签当已证实的因果结论。'
     return '预注册规则未覆盖的混合结果','至少一个拟合合格，但Present/R@1只改善其中一项；不添加阈值或事后新判定，停止并交由用户决定。'
 
@@ -88,6 +88,9 @@ def analyze():
         with (dest/'offline_stdout.txt').open('w') as log,redirect_stdout(log):
             reports[method]=attribution(root,method,FROZEN,DATA,TRACKS,dest/'offline_attribution.json')
         groups[method]=official_query_groups(root/method,reports[method])
+    if abs(metrics['FROZEN']['HOTA']-8.218)>1e-4 or reports['FROZEN']['query_present_FP']!=1996 or reports['FROZEN']['query_empty_FP']!=87371:
+        raise ValueError('historical full-candidate baseline/GT protocol mismatch; do not retune it')
+    (PUBLIC/'dense').mkdir(exist_ok=True)
     ranking,teaching=dense(root,['NAIVE_PAIRED','PSR',*methods],PUBLIC/'dense')
     # Fixed historical PSR correct-POS374 is held constant across ALL arms;
     # it is not their Naive363 training-positive subset and is never a label.
@@ -155,7 +158,9 @@ def analyze():
     body=prefix+'## 2. 表A：拟合教师\n\n'+(PUBLIC/'FIT_TABLE.md').read_text()+'\n## 3. 表B：封存后Val结果\n\n'+(PUBLIC/'VAL_TABLE.md').read_text()
     body+='\n## 4. 按预注册规则判定\n\n'+verdict+'。\n\n'+next_step+'\n\n教师相邻端点一致率：\n\n```json\n'+json.dumps(fit['teacher_endpoint_consistency'],indent=2,ensure_ascii=False)+'\n```\n'
     body+='\n## 5. 成本、checkpoint与GT隔离\n\n实际运行、所有尝试/失败耗时与checkpoint路径SHA见server_artifacts.json、costs.json和各provenance。\n三新臂训练与拟合进程目标GT打开必须全部为0，任何不可训练结果仍如实呈现；不拿工程测试、loss下降或分支标签当因果证明。\n完整预测/大checkpoint不进入git，已封存路径和SHA在prediction_manifest.json。\n'
-    (PUBLIC/'REPORT.md').write_text(body.replace('状态：IMPLEMENTATION；','状态：COMPLETE_STOP；'))
+    body=body.replace('状态：IMPLEMENTATION；','状态：COMPLETE_STOP；').replace('状态：SMOKE_COMPLETE_BASELINE_AND_FULL_TRAINING_NEXT；','状态：COMPLETE_STOP；')
+    body=body.replace('状态：FULL_TRAINING_RUNNING；','状态：COMPLETE_STOP；')
+    (PUBLIC/'REPORT.md').write_text(body)
     shutil.copy2(RUN/'predictions_seal.json',PUBLIC/'prediction_manifest.json');package()
     print(json.dumps(dict(event='D_FIT_OFFLINE_REPORT_COMPLETE',verdict=verdict),ensure_ascii=False),flush=True)
 

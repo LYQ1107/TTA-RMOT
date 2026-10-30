@@ -4,7 +4,15 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：Positive-Support Recovery，25Val同集开发研究
+## 当前研究：D-FIT 教师标签可拟合性诊断（运行中）
+
+分支`research/v2dance-diag-fit-20261030`，从965e71fe开始。三臂各200步真实smoke及实际CAP严格重载/逐位输出验证通过；
+三组8973步训练使用相同Naive8500教师判断、相同300窗口子集，不读目标GT，最后一步checkpoint为唯一新模型评测对象。
+原实现的POS是p≥0.95，不是0.5；按新任务核对要求沿用。所有实现错误和无效尝试保留，不伪装成方法负结果。
+这是25Val同集诊断，不是论文主结果或Train→Val。拟合表A必须实际推送核验后，才允许完整425表达推理；预测封存后独立GT评测。
+[D-FIT报告与真实执行记录](results/diag_fit/REPORT.md)、[当前配置](configs/uda/diag_fit_cap.yaml)、[保留的实现失败](results/diag_fit/revoked_attempts.json)。
+
+## 已完成：Positive-Support Recovery，25Val同集开发研究
 
 独立分支 `research/v2dance-psr-trainval-20261029`，起点861840e。
 用户明确允许缺少40Train同配置MOT时使用现有25Val，所有新结果均不称Train→Val泛化或盲测。
