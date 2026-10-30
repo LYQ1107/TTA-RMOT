@@ -65,3 +65,11 @@ D3真实smoke final-step checkpoint经load_selected严格重建后，保存前/�
 Frozen选中55/656（0.083841）、旧Naive(s17)选中40/656（0.060976）、旧PSR(s17)选中54/656（0.082317）。对应teacher NEG selected rate分别0.063870、0.004335、0.008287。
 PSR原先自身8500标签有657个POS，在该不同采样集合上选中47/657（0.071537），单独存于own_PSR_labels，不能混入共同标签主比较。
 此阶段复用Frozen分数和已有学生，不重新训练，也不重跑完整RMOT；三新臂全部结束后才生成并发布完整FIT_TABLE.md。
+
+### D2已完成：仅教师拟合的阶段记录，不是完整表A或Val结果
+
+DIAG_FIT_OPT_POS完成8973个更新、17源视频/425目标表达/8500教师判断；原lr=0.0002、pos_weight=10，无数值回退，冻结参数版本未变，目标GT打开0。
+共同Naive8500上的POS selected=617/656（0.940549），NEG selected=1774/7844（0.226160），pair agreement=0.716418；POS/NEG平均学生概率分别0.901210/0.271442。
+按预注册双条件，NEG selected>0.10，故D2尚不具备“拟合合格”资格；不降低阈值，也不以POS单项改善或loss下降替代完整判定。
+唯一待评checkpoint为final8973，SHA256=9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15；source-selected7750只记录、不做目标评测。
+D1/D3继续原配置，表A发布门仍未打开。students/DIAG_FIT_OPT_POS保留完整小型训练记录；运行中其它attempt记录只是阶段快照，不是最终成本或完整结果。
