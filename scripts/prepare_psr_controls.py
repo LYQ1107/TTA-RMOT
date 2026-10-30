@@ -12,6 +12,7 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 from scripts.prepare_mllm_evaluation_controls import stage_reference,count_matched
 from scripts.pf_diag_common import FROZEN
 from scripts.run_psr_matrix import DEFAULT
+from scripts.train_psr import selected_checkpoint
 
 
 def prepare(root,training,methods,precompute_only=False):
@@ -26,7 +27,7 @@ def prepare(root,training,methods,precompute_only=False):
             raise ValueError('all registered full predictions must be complete: '+method)
         if train['steps']!=8973 or train['target_GT_open_attempts'] or run['target_GT_open_attempts'] or run['test_time_updates']:
             raise ValueError('wrong training/evaluation protocol: '+method)
-        if file_sha(training/method/'checkpoint_best_source_selected.pt')!=run['checkpoint_sha256']:
+        if file_sha(selected_checkpoint(training/method))!=run['checkpoint_sha256']:
             raise ValueError('selected checkpoint changed after inference: '+method)
         cli=[json.loads(p.read_text()) for p in (root/method/'cli_inference_attempts').glob('*.json')]
         if cli:

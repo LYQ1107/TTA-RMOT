@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-10-30 D-FIT 独立诊断开始
+
+- 从965e71fe新建research/v2dance-diag-fit-20261030，保护全部PSR成果。先完成只读核对：4个768维PCD块、head2,365,440参数，原LoRA scaling1/rank/最后两层Q,V，原每步1目标window/clip1。
+- 提示预期POS0.5与实际不符：657/374用p≥0.95。按提示以代码为准沿用0.95，auto NEG为有效p<0.95，低置信soft不丢弃。
+- 用户重新明确共享授权：显存足够、进程少优先，最多4卡，不终止别人。先必要兼容/梯度/前5步回归、三臂200步smoke；表A先推送再允许全425推理，最终只评last-step。
+
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 
 - Seed42all8officialTrackEvalexit0; full425Naive7.8064/PSR8.8763,Frozen8.2180. Together17/0/42,Naive7.6174±.17921984,PSR8.7222667±.26144258(samplesd). AllthreePSRpointvaluesaboveFrozen,meanDelta+.5042667; meanvsNaive+1.1048667. No fakeFrozenindependentreplicates.

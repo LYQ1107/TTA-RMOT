@@ -21,7 +21,8 @@ from flex_uda.data.manifests import write_jsonl,read_jsonl
 from flex_uda.teacher.mllm_pseudo_dataset import MLLMPseudoDataset
 from flex_uda.teacher.psr_dataset import PSRPseudoDataset,PairedUnlabeledDataset,PSRParentWeightDataset
 from flex_uda.teacher.isolation import restrict_filesystem
-from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs,forward_uda,frozen_copy,ema_update
+from flex_uda.model.flexhook_uda import attach_adapter,adapter_kwargs,prepared_inputs,forward_uda,frozen_copy,ema_update
+from flex_uda.diag_fit import METHODS as FIT_METHODS,teacher_weight,fit_subset,metrics as fit_metrics,target_windows,optimizer_groups
 from flex_uda.losses.objectives import supervised_ce,select_pseudo,pseudo_bce,consistency
 from flex_uda.losses.distillation import soft_distillation
 from flex_uda.numerics import reconcile_resume
@@ -54,7 +55,7 @@ def study_frame_groups(group,field='samples'):
     return [dict(group,frame=t,samples=rows) for t,rows in sorted(by.items())]
 
 
-def study_loss(model,inputs,group,field,amp):
+def study_loss(model,inputs,group,field,amp,pos_weight=None):
     rows=group.get(field,[]);valid_n=sum(r['valid'] for r in rows);total=None
     for part in study_frame_groups(group,field):
         batch=target_batch(inputs,part)
@@ -62,7 +63,7 @@ def study_loss(model,inputs,group,field,amp):
         prepared,p,valid,_=batch
         with torch.autocast('cuda',dtype=torch.float16,enabled=amp):
             value=forward_uda(model,prepared,return_features=False)
-            loss=soft_distillation(value['margin'],p,valid)*(int(valid.sum())/max(valid_n,1))
+            loss=soft_distillation(value['margin'],p,valid,pos_weight=pos_weight)*(int(valid.sum())/max(valid_n,1))
         total=loss if total is None else total+loss
     return total,rows,valid_n
 
@@ -88,7 +89,7 @@ def matched_ema_loss(model,ema,source_teacher,inputs,group,amp):
     return total,records,n
 
 
-def enforce_inputs(output,pseudo):
+def enforce_inputs(output,pseudo,extra_read=()):
     vendor=ROOT/'vendor/FlexHook'
     pretrained=[p.resolve() for p in (vendor/'pretrained').iterdir()]
     first=pseudo.runtime[0]
@@ -101,7 +102,7 @@ def enforce_inputs(output,pseudo):
         ROOT/'results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY/teacher_outputs.jsonl',
         Path('/data2/user/TTA-RMOT-assets/teacher-p1/calibration/input/source_manifest.jsonl'),
         frozen_reference,
-        Path(sys.prefix),Path(sys.base_prefix),Path(site.getusersitepackages()),
+        *extra_read,Path(sys.prefix),Path(sys.base_prefix),Path(site.getusersitepackages()),
         '/usr','/lib','/lib64','/bin','/etc','/proc','/sys'],
         [output,'/dev','/tmp'])
 
@@ -151,7 +152,7 @@ def teacher_fit(model,inputs,pseudo,output):
                 record=dict(sample_id=row['sample_id'],video_id=row['video_id'],query_id=row['query_id'],
                     frame_id=row['frame_id'],track_id=row['track_id'],valid=row['valid'],
                     teacher_probability=row['teacher_prob'],source_margin=row['frozen_margin'],student_margin=float(margins[j]))
-                handle.write(json.dumps(record)+'\n')
+                handle.write(json.dumps(record)+'\n');records.append(record)
                 if row['valid']:
                     before.append((float(original[j].sigmoid())-row['teacher_prob'])**2)
                     after.append((float(margins[j].sigmoid())-row['teacher_prob'])**2)
@@ -160,7 +161,20 @@ def teacher_fit(model,inputs,pseudo,output):
         source_teacher_MSE=float(np.mean(before)),trained_teacher_MSE=float(np.mean(after)),
         source_teacher_BCE=sum(r[0] for r in before_bce)/n,trained_teacher_BCE=sum(r[0] for r in after_bce)/n,
         training_anchor_labels_not_independent_validation=True,checkpoint_selection_feedback=False)
+    result.update(fit_metrics(records))
     atomic_json(output/'teacher_fit_summary.json',result);return result
+
+
+@torch.no_grad()
+def measure_fit_subset(model,inputs,groups,step,source_ce,subset_sha):
+    records=[]
+    for group in groups:
+        for part in study_frame_groups(group):
+            prepared,p,valid,rows=target_batch(inputs,part)
+            margin=forward_uda(model,prepared,return_features=False)['margin'].float()
+            records.extend(dict(valid=r['valid'],video_id=r['video_id'],query_id=r['query_id'],frame_id=r['frame_id'],
+                teacher_probability=r['teacher_prob'],student_margin=float(m)) for r,m in zip(rows,margin))
+    return dict(step=step,source_val_CE=source_ce,fit_subset_sha256=subset_sha,**fit_metrics(records))
 
 
 def run(config,output,*,scope='smoke',resume=False):
@@ -168,7 +182,8 @@ def run(config,output,*,scope='smoke',resume=False):
     if config['protocol']['target_split']=='val' and os.environ.get('MLLM_VAL_DIAGNOSTIC_AUTHORIZED')!='YES':
         raise PermissionError('explicit Val transductive authorization required')
     study=config['protocol']['name'] in ('TRANSDUCTIVE_VAL_PSR_STUDY','FORMAL_TRAIN_TO_VAL_PSR_STUDY')
-    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED','PSR_PARENT_WEIGHT_CONTROL')
+    study_methods=('NAIVE_PAIRED','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','PSR','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED','PSR_PARENT_WEIGHT_CONTROL',*FIT_METHODS)
+    diagnostic=config['method'] in FIT_METHODS
     matched_ema=config['method']=='MEAN_TEACHER_MATCHED'
     if config['method'] not in (study_methods if study else ('MLLM_DISTILL','SOURCE_REHEARSAL')):raise ValueError('independent distillation method required')
     if output.exists() and not resume:raise FileExistsError('preserve existing run: '+str(output))
@@ -196,7 +211,7 @@ def run(config,output,*,scope='smoke',resume=False):
     from scripts.run_flexhook_dance_pcd_tta import _load_model
     _,model,_=_load_model(ROOT/'vendor/FlexHook',CHECKPOINT,DANCE,Path(pseudo.runtime[0]['predicted_tracks']).parent,
         output/'model_log',device,24,strict_checkpoint=True)
-    adapter=attach_adapter(model,device,rank=4);model.eval()
+    adapter=attach_adapter(model,device,**adapter_kwargs(config));model.eval()
     ema=frozen_copy(model) if matched_ema else None;source_teacher=frozen_copy(model) if matched_ema else None
     tokenizer=RobertaTokenizerFast.from_pretrained(str(ROOT/'vendor/FlexHook/pretrained/roberta-base'))
     if tokenizer.encode('person',add_special_tokens=False)!=[5970]:raise ValueError('tokenizer regression')
@@ -204,18 +219,23 @@ def run(config,output,*,scope='smoke',resume=False):
     source_val=SourceSupervision(ROOT/config['data']['source_val_manifest'])
     inputs=Inputs(model,tokenizer,device,source)
     params=[p for p in model.parameters() if p.requires_grad]
-    if sum(p.numel() for p in params)!=24576:raise ValueError('adapter capacity changed')
+    n_trainable=sum(p.numel() for p in params)
+    expected=config['adapter'].get('expected_trainable')
+    if expected is not None and n_trainable!=expected:raise ValueError(f'expected {expected} trainable parameters, got {n_trainable}')
     initial=[p.detach().clone() for p in params]
     versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}
-    optimizer=torch.optim.AdamW(params,lr=config['optimizer']['lr'],weight_decay=config['optimizer']['weight_decay'])
+    weight_info=teacher_weight(pseudo.rows,config['loss']) if diagnostic else None
+    pos_weight=weight_info['pos_weight'] if weight_info else None
+    if diagnostic:atomic_json(output/'pos_weight.json',weight_info)
+    optimizer=torch.optim.AdamW(optimizer_groups(model,params,config['optimizer']),lr=config['optimizer']['lr'],weight_decay=config['optimizer']['weight_decay'])
     scaler=torch.amp.GradScaler('cuda',enabled=config['train']['amp'] and scope!='interface')
     provenance=dict(experiment_commit=commit,method=config['method'],scope=scope,protocol=config['protocol'],
         source_checkpoint_sha256=SOURCE_SHA,pseudo_seal_sha256=file_sha(pseudo.directory/('manifest.jsonl' if matched_ema else 'seal.json')),
         pseudo_manifest_sha256=pseudo.seal['files_sha256']['manifest.jsonl'],teacher_labels_sha256=pseudo.seal['files_sha256']['soft_labels.jsonl'],
         source_train_manifest_sha256=file_sha(ROOT/config['data']['source_train_manifest']),
         source_val_manifest_sha256=file_sha(ROOT/config['data']['source_val_manifest']),
-        trainable_parameters=24576,physical_gpu=os.environ.get('MLLM_PHYSICAL_GPU'),gpu_uuid=str(props.uuid),isolation=isolation,
-        target_GT_read=False,no_online_MLLM=True,test_time_updates=0,
+        trainable_parameters=n_trainable,physical_gpu=os.environ.get('MLLM_PHYSICAL_GPU'),gpu_uuid=str(props.uuid),isolation=isolation,
+        target_GT_read=False,target_GT_open_attempts=0,no_online_MLLM=True,test_time_updates=0,
         implementation_sha256={str(p.relative_to(ROOT)):file_sha(p) for p in [Path(__file__),ROOT/'flex_uda/losses/distillation.py',ROOT/'flex_uda/teacher/mllm_pseudo_dataset.py',ROOT/'compat/sitecustomize.py',ROOT/'vendor/FlexHook/models/mymodel.py']})
     if study:
         provenance['implementation_sha256'].update({name:file_sha(ROOT/name) for name in ('flex_uda/teacher/psr_dataset.py','flex_uda/teacher/psr_supervision.py','flex_uda/teacher/psr_sampler.py','flex_uda/losses/psr_objectives.py')})
@@ -267,7 +287,10 @@ def run(config,output,*,scope='smoke',resume=False):
         plan_sha.update(teacher_manifest=provenance['pseudo_manifest_sha256'],teacher_labels=provenance['teacher_labels_sha256'],pseudo_seal=provenance['pseudo_seal_sha256'])
         steps_per_cycle=max(len(source_plan),len(pseudo.groups))
         if study and steps_per_cycle!=8973:raise ValueError('PSR/Naive must share the registered8973 update budget')
-        total=6 if scope=='smoke' else config['train']['coverage_cycles']*steps_per_cycle
+        total=(200 if diagnostic else 6) if scope=='smoke' else config['train']['coverage_cycles']*steps_per_cycle
+        K=config['train'].get('target_windows_per_step',1)
+        fit_every=config['train'].get('fit_every_steps')
+        fixed_fit,fit_sha=fit_subset(pseudo,output) if diagnostic else (None,None)
         state_path=output/'checkpoint_latest.pt';step=0;best=float('inf');counters=Counter();seen_source=set();seen_target=set();seen_samples=set();seen_expanded=set()
         prior_wall=0.
         if resume:
@@ -286,9 +309,13 @@ def run(config,output,*,scope='smoke',resume=False):
             if not math.isfinite(best):raise FloatingPointError('nonfinite legal source validation CE')
             save_training(output/'checkpoint_best_source_selected.pt',model,ema,optimizer,scaler,0,0,config,plan_sha,best)
             append_json(output/'source_validation.jsonl',dict(step=0,source_val_CE=best,selected=True))
+        if diagnostic:
+            initial_ce=json.loads((output/'source_validation.jsonl').read_text().splitlines()[0])['source_val_CE']
+            excessive_ce=0
+            if not resume:append_json(output/'teacher_fit_curve.jsonl',measure_fit_subset(model,inputs,fixed_fit,0,initial_ce,fit_sha))
         retry=0
         while step<total:
-            src=source_plan[step%len(source_plan)];target=pseudo.groups[step%len(pseudo.groups)]
+            src=source_plan[step%len(source_plan)];targets=target_windows(pseudo,step,K);target=targets[0]
             optimizer.zero_grad(set_to_none=True);source_loss_total=0.;source_rows=0
             batches=list(inputs.batches('source',src));source_n=sum(len(r[2]) for r in batches)
             for prepared,labels,candidates,_ in batches:
@@ -300,10 +327,12 @@ def run(config,output,*,scope='smoke',resume=False):
             source_grads=[None if p.grad is None else p.grad.detach().float().clone()/scaler.get_scale() for p in params]
             kd_value=0.;teacher_rows=[];valid_n=0;expanded_rows=[];expanded_n=0;expanded_value=0.;direct_grads=None
             if study:
-                kd,teacher_rows,valid_n=(matched_ema_loss(model,ema,source_teacher,inputs,target,scaler.is_enabled()) if matched_ema else study_loss(model,inputs,target,'samples',scaler.is_enabled()))
-                if kd is not None:
-                    if not torch.isfinite(kd):raise FloatingPointError('nonfinite direct teacher objective')
-                    scaler.scale(kd*config['loss']['target_kd']).backward();kd_value=float(kd.detach())
+                for target_part in targets:
+                    kd,rows,n=(matched_ema_loss(model,ema,source_teacher,inputs,target_part,scaler.is_enabled()) if matched_ema else study_loss(model,inputs,target_part,'samples',scaler.is_enabled(),pos_weight=pos_weight))
+                    teacher_rows.extend(rows);valid_n+=n
+                    if kd is not None:
+                        if not torch.isfinite(kd):raise FloatingPointError('nonfinite direct teacher objective')
+                        scaler.scale(kd*config['loss']['target_kd']/K).backward();kd_value+=float(kd.detach())/K
                 direct_grads=[p.grad.detach().float().clone()/scaler.get_scale()-(s if s is not None else 0) if p.grad is not None else None for p,s in zip(params,source_grads)]
                 weak,expanded_rows,expanded_n=study_loss(model,inputs,target,'expanded_samples',scaler.is_enabled())
                 if weak is not None:
@@ -324,7 +353,7 @@ def run(config,output,*,scope='smoke',resume=False):
             expanded_grads=([None if t is None else t-(d if d is not None else 0) for t,d in zip(target_grads,direct_grads)] if study else [])
             total_norm=torch.nn.utils.clip_grad_norm_(params,config['optimizer']['grad_clip'])
             if not torch.isfinite(total_norm):
-                if not scaler.is_enabled() or retry>=8:raise FloatingPointError('nonfinite gradient after same-sample AMP backoff')
+                if diagnostic or not scaler.is_enabled() or retry>=8:raise FloatingPointError('nonfinite gradient; D-FIT only allows registered LR fallback' if diagnostic else 'nonfinite gradient after same-sample AMP backoff')
                 scale=scaler.get_scale();scaler.update(new_scale=scale/2);retry+=1
                 append_json(output/'numerical_retries.jsonl',dict(step=step+1,retry=retry,previous_scale=scale,new_scale=scaler.get_scale(),same_source_and_target_replayed=True,optimizer_updated=False))
                 continue
@@ -342,13 +371,15 @@ def run(config,output,*,scope='smoke',resume=False):
                 seen_expanded.update(r['sample_id'] for r in expanded_rows if r['valid'])
             seen_source.add((src['video_id'],src['expression_id']))
             if config['method']=='MLLM_DISTILL' or study:
-                seen_target.add((target['video_id'],target['expression_id']))
+                seen_target.update((g['video_id'],g['expression_id']) for g in targets)
                 seen_samples.update(r['sample_id'] for r in teacher_rows if r['valid'])
             record=dict(step=step+1,source_video=src['video_id'],source_expression=src['expression_id'],
                 target_video=target['video_id'],target_expression=target['expression_id'],target_frame=target['frame'],
                 source_rows=source_rows,target_valid_rows=valid_n,source_loss=source_loss_total,target_KD_loss=kd_value,
                 source_gradient_norm=source_norm,target_gradient_norm=target_norm,source_target_gradient_cosine=cosine,
-                gradient_norm=float(total_norm),wall_seconds=time.perf_counter()-started)
+                gradient_norm=float(total_norm),gradient_norm_preclip=float(total_norm),gradient_clipped=bool(total_norm>config['optimizer']['grad_clip']),
+                wall_seconds=time.perf_counter()-started)
+            if diagnostic:record.update(target_windows=K,target_window_ids=[g['window_id'] for g in targets])
             if study:
                 record.update(expanded_KD_loss=expanded_value,expanded_weighted_loss=expanded_value*config['loss']['expanded'],
                     expanded_valid_rows=expanded_n,direct_gradient_norm=norm(direct_grads),expanded_gradient_norm=norm(expanded_grads),
@@ -365,15 +396,24 @@ def run(config,output,*,scope='smoke',resume=False):
             if step%config['train']['save_every_steps']==0 or step==total:
                 measured=source_validate(model,tokenizer,device,source_val,val_plan);selected=measured<best
                 if not math.isfinite(measured):raise FloatingPointError('nonfinite source validation CE; no checkpoint selection')
+                if diagnostic:
+                    excessive_ce=excessive_ce+1 if measured>3*initial_ce else 0
+                    if excessive_ce>=2:raise FloatingPointError('D-FIT source_val_CE above3x step0 for two checks; registered LR fallback required')
                 tracking=dict(counters=dict(counters),source_seen=sorted(seen_source),target_seen=sorted(seen_target),teacher_samples_seen=sorted(seen_samples),
                     expanded_samples_seen=sorted(seen_expanded),wall_seconds=prior_wall+time.perf_counter()-started,attempt_wall_seconds=time.perf_counter()-started)
                 if selected:
                     best=measured;save_training(output/'checkpoint_best_source_selected.pt',model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
                 append_json(output/'source_validation.jsonl',dict(step=step,source_val_CE=measured,selected=selected))
                 save_training(state_path,model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
+                if diagnostic and (step%fit_every==0 or step==total):
+                    append_json(output/'teacher_fit_curve.jsonl',measure_fit_subset(model,inputs,fixed_fit,step,measured,fit_sha))
         restored=torch.load(state_path,map_location='cpu',weights_only=False)
         if restored['step']!=total or restored['plan_sha256']!=plan_sha:raise RuntimeError('checkpoint recovery roundtrip failed')
         del restored
+        if config.get('selection')=='final_step':
+            save_training(output/'checkpoint_final_step.pt',model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
+            atomic_json(output/'final_step_selection.json',dict(step=step,sha256=file_sha(output/'checkpoint_final_step.pt'),
+                selection='FINAL_STEP_ONLY_NO_TARGET_GT',source_selected_step=torch.load(output/'checkpoint_best_source_selected.pt',map_location='cpu',weights_only=False)['step']))
         delta=norm([p.detach()-old for p,old in zip(params,initial)])
         if not delta or not counters['optimizer_updates']:raise RuntimeError('student parameters did not change')
         if (config['method']=='MLLM_DISTILL' or study) and not counters['target_nonzero_gradient_steps']:raise RuntimeError('no nonzero target KD gradients')
@@ -396,7 +436,7 @@ def run(config,output,*,scope='smoke',resume=False):
     torch.cuda.synchronize()
     frozen_unchanged=all(p._version==versions[n] for n,p in model.named_parameters() if not p.requires_grad)
     if not frozen_unchanged or attempts:raise RuntimeError('frozen-parameter or target-GT isolation violation')
-    result.update(method=config['method'],scope=scope,protocol=config['protocol'],trainable_parameters=24576,
+    result.update(method=config['method'],scope=scope,protocol=config['protocol'],trainable_parameters=n_trainable,
         frozen_parameters_unchanged=True,target_GT_open_attempts=attempts,wall_seconds=time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(),source_checkpoint_sha256=SOURCE_SHA,
         pseudo_seal_sha256=provenance['pseudo_seal_sha256'],optimizer_at_test_time=False,student_calls_MLLM=False)
@@ -407,5 +447,7 @@ def run(config,output,*,scope='smoke',resume=False):
         if 'counters' in result:
             result['counters']['parent_replay_exposures']=result['counters'].pop('expanded_weak_exposures',0)
             result['counters']['parent_replay_nonzero_gradient_steps']=result['counters'].pop('expanded_nonzero_gradient_steps',0)
+    provenance['target_GT_open_attempts']=attempts
+    atomic_json(output/'provenance.json',provenance)
     atomic_json(output/'training_receipt.json',result);atomic_json(output/'progress.json',result)
     print(json.dumps(result,indent=2),flush=True);return result

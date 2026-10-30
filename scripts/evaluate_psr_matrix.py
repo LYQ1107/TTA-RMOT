@@ -11,13 +11,14 @@ from scripts.prepare_mllm_evaluation_controls import stage_reference,count_match
 from scripts.pf_diag_common import FROZEN
 from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 from flex_uda.training import protect_target_annotations
+from scripts.train_psr import selected_checkpoint
 
 
 def evaluate_matrix(training,output,methods,workers=4):
     training,output=Path(training).resolve(),Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
     attempts=protect_target_annotations();merged=output/'merged';merged.mkdir(exist_ok=True)
     for method in methods:
-        checkpoint=training/method/'checkpoint_best_source_selected.pt'
+        checkpoint=selected_checkpoint(training/method)
         receipt=json.loads((checkpoint.parent/'training_receipt.json').read_text())
         if receipt['status']!='COMPLETE_FIXED_COVERAGE_PSR_STUDY' or receipt['steps']!=8973 or receipt['target_GT_open_attempts']:
             raise ValueError('complete registered study training before inference: '+method)

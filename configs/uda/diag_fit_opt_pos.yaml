@@ -1,0 +1,21 @@
+method: DIAG_FIT_OPT_POS
+protocol:
+  name: TRANSDUCTIVE_VAL_PSR_STUDY
+  source_domain: refer_kitti_v2
+  target_domain: refer_dance
+  target_split: val
+  evaluation_split: same_val_development_only_not_Train_to_Val
+  seed: 17
+  test_time_update: false
+data:
+  source_train_manifest: manifests/source_kitti_v2_train.jsonl
+  source_val_manifest: manifests/source_kitti_v2_val.jsonl
+  pseudo_directory: /data2/user/TTA-RMOT-assets/psr/val_v1/PSR
+adapter: {type: lora, rank: 4, layers: [-2, -1], projections: [wq, wv], alpha: 8.0, unfreeze: [], expected_trainable: 24576}
+optimizer: {name: adamw, lr: 0.0002, weight_decay: 0.0001, grad_clip: 5.0}
+train: {coverage_cycles: 1, amp: true, save_every_steps: 250, source_target_batch_ratio: [1, 1], target_windows_per_step: 4, fit_every_steps: 1000}
+selection: final_step
+loss: {source_ce: 1.0, target_kd: 1.0, expanded: 0.0, pos_weight: auto, pos_weight_cap: 10.0}
+teacher: {model: Qwen/Qwen3-VL-2B-Instruct, revision: 89644892e4d85e24eaac8bacfd4f463576704203, condition: T0, raw_soft_probability: true}
+sampling: {anchor_quantiles: [0.1, 0.3, 0.5, 0.7, 0.9], tracks_per_anchor: 2, endpoint_offset: 1, calls_per_query_cap: 20}
+expansion: {maximum_interval_frames: 2, minimum_iou: 0.5, maximum_area_ratio: 2.0, maximum_competitor_iou: 0.7, appearance_cosine: 0.95, positive_threshold: 0.95, negative_threshold: 0.05}

@@ -7,8 +7,18 @@ from flex_tta.adaptation.pcd import PCDLoRATTA
 from flex_tta.runtime.frozen_features import FrozenFeatureCache
 
 
-def attach_adapter(model,device,rank=4):
-    adapter=PCDLoRATTA(model,rank=rank,layer_indices=(-2,-1)).to(device)
+def adapter_kwargs(config):
+    value=config.get('adapter',{})
+    return dict(rank=value.get('rank',4),layers=value.get('layers',(-2,-1)),
+        projections=value.get('projections',('wq','wv')),alpha=value.get('alpha',1.0),
+        unfreeze=value.get('unfreeze',()))
+
+
+def attach_adapter(model,device,rank=4,layers=(-2,-1),projections=('wq','wv'),alpha=1.0,unfreeze=()):
+    adapter=PCDLoRATTA(model,rank=rank,layer_indices=layers,projections=projections,alpha=alpha).to(device)
+    for name in unfreeze:
+        if name!='head':raise ValueError('D-FIT only permits unfreezing head')
+        for p in getattr(model,name).parameters():p.requires_grad_(True)
     return adapter
 
 

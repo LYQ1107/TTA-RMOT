@@ -38,7 +38,7 @@ class ResidualAdapter(nn.Module):
 class LoRALinear(nn.Module):
     """Frozen linear projection plus a zero-output low-rank residual."""
 
-    def __init__(self, base: nn.Linear, rank: int):
+    def __init__(self, base: nn.Linear, rank: int, alpha: float = 1.0):
         super().__init__()
         if base.bias is not None:
             raise ValueError("FlexHook PCD projections are expected to be bias-free")
@@ -47,7 +47,7 @@ class LoRALinear(nn.Module):
             parameter.requires_grad_(False)
         self.lora_a = nn.Linear(base.in_features, rank, bias=False)
         self.lora_b = nn.Linear(rank, base.out_features, bias=False)
-        self.scaling = 1.0 / float(rank)
+        self.scaling = float(alpha) / float(rank)
         self.reset_lora()
 
     def reset_lora(self) -> None:
@@ -84,15 +84,20 @@ class PCDResidualTTA(nn.Module):
 class PCDLoRATTA(nn.Module):
     """LoRA on Q/V projections of the last one or two output PCD blocks."""
 
-    def __init__(self, model: nn.Module, rank: int = 4, layer_indices: Iterable[int] = (-2, -1)):
+    def __init__(self, model: nn.Module, rank: int = 4, layer_indices: Iterable[int] = (-2, -1),
+                 projections=("wq", "wv"), alpha: float = 1.0):
         super().__init__()
         blocks = list(model.output_ca_qkv)
+        if layer_indices == "all":
+            layer_indices = tuple(range(len(blocks)))
         self.layer_indices = tuple(index if index >= 0 else len(blocks) + index for index in layer_indices)
+        if any(name not in ("wq", "wk", "wv", "wo") for name in projections):
+            raise ValueError("only PCD wq/wk/wv/wo projections can receive LoRA")
         self.projections = nn.ModuleList()
         for index in self.layer_indices:
             block = blocks[index]
-            for name in ("wq", "wv"):
-                replacement = LoRALinear(getattr(block.attention, name), rank)
+            for name in projections:
+                replacement = LoRALinear(getattr(block.attention, name), rank, alpha)
                 setattr(block.attention, name, replacement)
                 self.projections.append(replacement)
 

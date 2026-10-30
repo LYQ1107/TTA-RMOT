@@ -15,7 +15,7 @@ import threading
 import time
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.launch_uda_workers import audit_gpus
-from scripts.train_psr import METHODS
+from scripts.train_psr import METHODS,selected_checkpoint
 from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 
 DEFAULT=['NAIVE_PAIRED','PSR','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVERY','PSR_GEOMETRY','NAIVE_TEMPORAL','MEAN_TEACHER_MATCHED']
@@ -29,7 +29,8 @@ def run(root,methods,workers=4,other_active_gpus=(),seed=None,gpu_ids=None):
         training_receipt=training/method/'training_receipt.json'
         if seed is not None and training_receipt.exists() and json.loads(training_receipt.read_text())['protocol']['seed']!=seed:
             raise ValueError('use a separate run root for each registered seed; preserve existing results')
-        receipt=evaluation/method/'run_metadata.json';checkpoint=training/method/'checkpoint_best_source_selected.pt'
+        receipt=evaluation/method/'run_metadata.json'
+        checkpoint=selected_checkpoint(training/method) if (training/method/'config.json').exists() else training/method/'checkpoint_best_source_selected.pt'
         if receipt.exists() and checkpoint.exists():
             old=json.loads(receipt.read_text())
             if old['status']=='SEALED' and old['valid_episodes']==425 and old['checkpoint_sha256']==file_sha(checkpoint):
@@ -86,7 +87,7 @@ def run(root,methods,workers=4,other_active_gpus=(),seed=None,gpu_ids=None):
                 code=command_run(command,env,training/(method+'_stdout.txt'),record);records.append(record)
                 if code:
                     results.append(dict(method=method,status='FAILED_TRAINING_RETAINED',phases=records));break
-            checkpoint=folder/'checkpoint_best_source_selected.pt'
+            checkpoint=selected_checkpoint(folder)
             train=json.loads(train_receipt.read_text())
             if train['steps']!=8973 or train['target_GT_open_attempts'] or not train['frozen_parameters_unchanged']:raise ValueError('invalid actual training receipt: '+method)
             method_out=evaluation/method;method_out.mkdir(exist_ok=True)

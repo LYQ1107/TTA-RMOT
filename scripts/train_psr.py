@@ -13,7 +13,13 @@ METHODS={
     'NAIVE_PAIRED':('NAIVE','none'), 'UNIFORM_PAIRED':('UNIFORM','none'),
     'CONFIDENCE_PAIRED':('CONFIDENCE','none'), 'PSR_DISCOVERY':('PSR','none'),
     'PSR_GEOMETRY':('PSR','geometry'), 'PSR':('PSR','full'), 'NAIVE_TEMPORAL':('NAIVE','geometry'),
-    'MEAN_TEACHER_MATCHED':('NAIVE','none'), 'PSR_PARENT_WEIGHT_CONTROL':('PSR','geometry')}
+    'MEAN_TEACHER_MATCHED':('NAIVE','none'), 'PSR_PARENT_WEIGHT_CONTROL':('PSR','geometry'),
+    'DIAG_FIT_OPT':('NAIVE','none'),'DIAG_FIT_OPT_POS':('NAIVE','none'),'DIAG_FIT_CAP':('NAIVE','none')}
+
+
+def selected_checkpoint(folder,config=None):
+    config=config or json.loads((Path(folder)/'config.json').read_text())
+    return Path(folder)/('checkpoint_final_step.pt' if config.get('selection')=='final_step' else 'checkpoint_best_source_selected.pt')
 
 
 if __name__=='__main__':

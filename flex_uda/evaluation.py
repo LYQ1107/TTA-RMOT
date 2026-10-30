@@ -17,7 +17,7 @@ from transformers import RobertaTokenizerFast
 
 from flex_uda.data.manifests import ROOT,DANCE
 from flex_uda.data.target_dance import TargetDanceDataset
-from flex_uda.model.flexhook_uda import attach_adapter,prepared_inputs
+from flex_uda.model.flexhook_uda import attach_adapter,adapter_kwargs,prepared_inputs
 from flex_uda.training import CHECKPOINT,SOURCE_SHA,protect_target_annotations
 from flex_tta.runtime.dance_episode import DanceEpisode
 from flex_tta.runtime.frozen_features import FrozenFeatureCache
@@ -72,12 +72,12 @@ def load_selected(checkpoint,output,tracker_root,device):
     from scripts.run_flexhook_dance_pcd_tta import _load_model
     if file_sha(CHECKPOINT)!=SOURCE_SHA:raise ValueError('source initialization changed')
     _,model,_=_load_model(ROOT/'vendor/FlexHook',CHECKPOINT,DANCE,tracker_root,output/'model_log',device,24,strict_checkpoint=True)
-    adapter=attach_adapter(model,device,rank=4)
     state=torch.load(checkpoint,map_location='cpu',weights_only=False)
+    adapter=attach_adapter(model,device,**adapter_kwargs(state['config']))
     if state['source_checkpoint_sha256']!=SOURCE_SHA or state['test_time_update']:raise ValueError('wrong checkpoint protocol')
     model.load_state_dict(state['student'],strict=True)
     info=dict(checkpoint=str(checkpoint),checkpoint_sha256=file_sha(checkpoint),selected_step=state['step'],
-        source_val_CE=state['best_source_loss'],selection='SOURCE_VAL_CE_ONLY',protocol=state['config']['protocol'])
+        source_val_CE=state['best_source_loss'],selection=('FINAL_STEP' if state['config'].get('selection')=='final_step' else 'SOURCE_VAL_CE_ONLY'),protocol=state['config']['protocol'])
     del state
     for p in model.parameters():p.requires_grad_(False)
     model.eval()

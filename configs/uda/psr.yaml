@@ -11,7 +11,7 @@ data:
   source_train_manifest: manifests/source_kitti_v2_train.jsonl
   source_val_manifest: manifests/source_kitti_v2_val.jsonl
   pseudo_directory: /data2/user/TTA-RMOT-assets/psr/val_v1/PSR
-adapter: {type: lora, rank: 4, layers: [-2, -1]}
+adapter: {type: lora, rank: 4, layers: [-2, -1], expected_trainable: 24576}
 optimizer: {name: adamw, lr: 0.00005, weight_decay: 0.0001, grad_clip: 1.0}
 train: {coverage_cycles: 1, amp: true, save_every_steps: 250, source_target_batch_ratio: [1, 1]}
 selection: source_val_CE_only
