@@ -19,6 +19,7 @@
 - Frozen/旧Naive17/旧PSR17的共同Naive8500教师拟合完成，POS门仍为0.95、656个POS；分别选中55/40/54个，NEG selected rate为0.063870/0.004335/0.008287。GT打开0，不是GT精度或新RMOT结果。
 - PSR自身8500的657个POS拟合单列（47/657），不与共同标签656的分母混用；公共baselines/completion.json保存源checkpoint SHA、源验证CE、300窗口子集SHA与独立调用成本。
 - 三个8973步训练继续原命令，未更改代码、超参、checkpoint选择或启动Val；本次只同步已完成的baseline小型记录。完整表A仍必须等待全部新臂结束后先发布。
+- 修正最终报告构建的实际遗漏：替换占位表时原本会截掉后面的兼容/AMP撤销历史。现保留这些原始说明并标明是历史阶段状态，补一个定向回归；tests/test_diag_fit.py共16项通过（5.35s）。仅报告代码变化，训练/预测数值完全不变。
 
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 

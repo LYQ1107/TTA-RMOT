@@ -28,6 +28,11 @@ from scripts.report_diag_fit import RUN,PUBLIC,TAGS,package
 OLD=ROOT/'results/runs/psr_val_20261029_v1/evaluation/merged'
 
 
+def execution_history(report):
+    """Retain the real compatibility failures when replacing placeholder tables."""
+    return report.split('### 兼容性执行记录',1)[1].split('### 已完成的共同教师标签基线',1)[0].strip()
+
+
 def classify(fit,results):
     qualified={tag:r.get('fit_qualified',False) for tag,r in fit['methods'].items() if tag in TAGS.values()}
     frozen=results['FROZEN']
@@ -154,10 +159,11 @@ def analyze():
         untrainable=sealed['untrainable_methods'],rule_verdict=verdict,next_step_recommendation_only=next_step,
         complete_predictions_manifest=str(RUN/'predictions_seal.json'),GT_evaluation_independent_and_after_seal=True,
         not_Train_to_Val_or_blind_test=True))
-    report=(PUBLIC/'REPORT.md').read_text();prefix=report.split('## 2. 表A：')[0]
+    report=(PUBLIC/'REPORT.md').read_text();history=execution_history(report);prefix=report.split('## 2. 表A：')[0]
     body=prefix+'## 2. 表A：拟合教师\n\n'+(PUBLIC/'FIT_TABLE.md').read_text()+'\n## 3. 表B：封存后Val结果\n\n'+(PUBLIC/'VAL_TABLE.md').read_text()
     body+='\n## 4. 按预注册规则判定\n\n'+verdict+'。\n\n'+next_step+'\n\n教师相邻端点一致率：\n\n```json\n'+json.dumps(fit['teacher_endpoint_consistency'],indent=2,ensure_ascii=False)+'\n```\n'
     body+='\n## 5. 成本、checkpoint与GT隔离\n\n实际运行、所有尝试/失败耗时与checkpoint路径SHA见server_artifacts.json、costs.json和各provenance。\n三新臂训练与拟合进程目标GT打开必须全部为0，任何不可训练结果仍如实呈现；不拿工程测试、loss下降或分支标签当因果证明。\n完整预测/大checkpoint不进入git，已封存路径和SHA在prediction_manifest.json。\n'
+    body+='\n以下保留历史阶段记录，其中的运行状态指当时，不代表最终状态；最终结果以表A/B为准。\n\n### 兼容性执行记录\n\n'+history+'\n'
     body=body.replace('状态：IMPLEMENTATION；','状态：COMPLETE_STOP；').replace('状态：SMOKE_COMPLETE_BASELINE_AND_FULL_TRAINING_NEXT；','状态：COMPLETE_STOP；')
     body=body.replace('状态：FULL_TRAINING_RUNNING；','状态：COMPLETE_STOP；')
     (PUBLIC/'REPORT.md').write_text(body)

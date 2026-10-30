@@ -146,6 +146,14 @@ def test_registered_verdict_does_not_invent_rule_for_mixed_transfer():
     assert classify(fit,result)[0]=='浅层adapter容量不足'
 
 
+def test_final_report_keeps_revoked_AMP_execution_history():
+    from scripts.analyze_diag_fit import execution_history
+    history='旧AMP提前退出已撤销；恢复原有8次缩放重放，失败记录保留。'
+    report='旧占位表\n### 兼容性执行记录\n\n'+history+'\n\n### 已完成的共同教师标签基线\n共同8500基线另报。'
+    assert execution_history(report)==history
+    assert execution_history('最终表A/B\n### 兼容性执行记录\n\n'+history+'\n')==history
+
+
 def test_capacity_only_LoRA_and_head_mutate():
     model=Model();attach_adapter(model,'cpu',rank=16,layers='all',projections=('wq','wk','wv','wo'),alpha=32,unfreeze=('head',))
     before={n:p.detach().clone() for n,p in model.named_parameters()};versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}
