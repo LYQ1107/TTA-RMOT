@@ -107,7 +107,7 @@ def run(root,methods,workers=4,other_active_gpus=(),seed=None,gpu_ids=None):
             if metadata['valid_episodes']!=425 or metadata['test_time_updates'] or metadata['target_GT_open_attempts']:raise ValueError('incomplete/invalid425 inference')
             history=[json.loads(p.read_text()) for p in (method_out/'inference_attempts').glob('*.json')]
             metadata.update(worker_seconds=sum(r['elapsed_seconds'] for r in history),actual_scheduler_wall_seconds=time.time()-json.loads(clock.read_text())['epoch'],
-                all_attempt_worker_costs_included=True,execution_mode='independent single_GPU full425 checkpoint, four method lanes',
+                all_attempt_worker_costs_included=True,execution_mode=f'independent single_GPU full425 checkpoint, {len(chosen)} method lanes',
                 shared_backbone_across_methods=False,inference_worker_attempts=history)
             atomic_json(path,metadata);results.append(dict(method=method,status='COMPLETE',phases=records))
         return results
