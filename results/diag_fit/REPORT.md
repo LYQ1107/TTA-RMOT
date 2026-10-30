@@ -1,6 +1,6 @@
 # D-FIT：学生能否拟合冻结 MLLM 标签
 
-状态：FULL_TRAINING_RUNNING；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
+状态：FIT_COMPLETE_VAL_PENDING；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
 用户允许显存足够时共享、优先进程少的最多4卡，不停止其他任务。25Val同集诊断，不是论文主结果或Train→Val。
 
 ## 1. 修改前只读核对
@@ -14,6 +14,7 @@
 - **与提示预期不同：657/374的POS门是p≥0.95，不是0.5**，见psr_supervision.direct_evidence与封存state。按“以代码为准”沿用0.95；D-FIT NEG按指定auto公式为有效p<0.95，含历史低置信UNKNOWN，与旧审计NEG≤0.05区分。
 - 原load_selected固定rank4；两matrix脚本固定checkpoint_best_source_selected.pt。
 - D3理论LoRA393,216+head2,365,440=2,758,656；最终以真实smoke核验填回配置。
+- 执行源码与公开快照映射见[source_publication_map.json](source_publication_map.json)：准备执行快照a67f4ada对应可检出的2259228b，同Git tree为98831e0d223e34e0f520cc3f32006ad153ebc904。训练核心/compat/三配置/训练入口与当前6dc3d52的tracked diff为空；后续改变只涉及报告、测试与记录，不把不同Git对象冒充同一提交。
 
 ## 执行计划与隔离
 
@@ -25,11 +26,37 @@
 
 ## 2. 表A：拟合教师
 
-待真实实验，不填写占位指标。
+# 表 A — D-FIT 教师拟合（不使用目标 GT）
+
+全部主拟合列使用相同Naive8500判断、POS≥0.95，NEG为有效p<0.95；300窗口子集的SHA相同。
+旧PSR在自身8500标签的历史拟合另列summary，不混入这个共同标签主表。
+这是训练锚点拟合，不是GT精度或完整RMOT；新臂固定最后8973步，不选择source-best作目标评价。
+
+| 指标 | Frozen | Naive(s17) | PSR(s17) | D1_OPT | D2_OPT_POS | D3_CAP |
+|---|---:|---:|---:|---:|---:|---:|
+| 可训练参数量 | 0 | 24576 | 24576 | 24576 | 24576 | 2758656 |
+| 实际 pos_weight（未加权=1） | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 10.000000 | 10.000000 |
+| teacher_POS_selected_rate | 0.083841 | 0.060976 | 0.082317 | 0.795732 | 0.940549 | 0.977134 |
+| teacher_NEG_selected_rate | 0.063870 | 0.004335 | 0.008287 | 0.055584 | 0.226160 | 0.126849 |
+| mean_student_prob_on_POS | 0.090603 | 0.207832 | 0.222300 | 0.719190 | 0.901210 | 0.944540 |
+| mean_student_prob_on_NEG | 0.068301 | 0.085495 | 0.092968 | 0.102303 | 0.271442 | 0.158571 |
+| pair_agreement | 0.570896 | 0.611940 | 0.593284 | 0.761194 | 0.716418 | 0.865672 |
+| 结束 source_val_CE | 1.022258 | 0.883511 | 0.882947 | 0.919990 | 0.872234 | 0.725210 |
+| step0 source_val_CE | 1.022258 | 1.022258 | 1.022258 | 1.022258 | 1.022258 | 1.022258 |
+| 裁剪前总梯度范数中位数 | N/A | 0.224535 | 0.220825 | 0.988961 | 3.055050 | 4.102582 |
+| 裁剪前总梯度范数 p90 | N/A | 1.911308 | 2.036309 | 3.426016 | 17.861844 | 26.604391 |
+| 被裁剪步数比例 | N/A | 0.197816 | 0.202942 | 0.038560 | 0.316728 | 0.447565 |
+
+新臂状态与source-selected记录（只记录，不对其source-best做Val评测）：
+- D1_OPT: COMPLETE; fallback=False; selection={'step': 8973, 'sha256': 'b58568b37e4074369d11d672ac0d0bc1aa2814fe52451bba7000af79a4b96d49', 'selection': 'FINAL_STEP_ONLY_NO_TARGET_GT', 'source_selected_step': 2750}
+- D2_OPT_POS: COMPLETE; fallback=False; selection={'step': 8973, 'sha256': '9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15', 'selection': 'FINAL_STEP_ONLY_NO_TARGET_GT', 'source_selected_step': 7750}
+- D3_CAP: COMPLETE; fallback=False; selection={'step': 8973, 'sha256': 'a95b57fc6fe231a358d5259ba8d9b569807d3b41b15a1fc87124caab27020214', 'selection': 'FINAL_STEP_ONLY_NO_TARGET_GT', 'source_selected_step': 8250}
+
+完整8500判断上的拟合合格判定：D1/D2/D3均False。D1 POS差3个；D2和D3的NEG选中率分别22.62%/12.68%，均未达到≤10%。不放宽标准，也不以300窗口曲线子集替代全8500判定。
 
 ## 3. 表B：封存后Val结果
 
-表A发布前不执行。
+完整表A先推送并核验GitHub，再启动三个final8973模型的25视频/425表达推理；预测全部封存后才执行独立GT评测。当前尚无新Val结果。
 
 ## 4. 预注册判定
 

@@ -166,6 +166,7 @@ def analyze():
     body+='\n以下保留历史阶段记录，其中的运行状态指当时，不代表最终状态；最终结果以表A/B为准。\n\n### 兼容性执行记录\n\n'+history+'\n'
     body=body.replace('状态：IMPLEMENTATION；','状态：COMPLETE_STOP；').replace('状态：SMOKE_COMPLETE_BASELINE_AND_FULL_TRAINING_NEXT；','状态：COMPLETE_STOP；')
     body=body.replace('状态：FULL_TRAINING_RUNNING；','状态：COMPLETE_STOP；')
+    body=body.replace('状态：FIT_COMPLETE_VAL_PENDING；','状态：COMPLETE_STOP；')
     (PUBLIC/'REPORT.md').write_text(body)
     shutil.copy2(RUN/'predictions_seal.json',PUBLIC/'prediction_manifest.json');package()
     print(json.dumps(dict(event='D_FIT_OFFLINE_REPORT_COMPLETE',verdict=verdict),ensure_ascii=False),flush=True)
