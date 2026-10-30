@@ -58,3 +58,10 @@ OPT_POS及CAP的早期尝试曾因FP16梯度Inf提前退出，并执行过一次
 D3真实smoke final-step checkpoint经load_selected严格重建后，保存前/重载后完整logits逐位相同，GT打开0。
 已有Frozen/Naive/PSR在共同Naive8500上的完整教师拟合基线已完成；三新臂8973步已在GPU1/5/4开始，不复用smoke权重、不重跑D1已完成smoke。
 这只是训练运行状态，不是完整拟合或Val改善结论。原命令一次阻塞等待全部训练；没有agent级ps/tail轮询或干预其它任务。
+
+### 已完成的共同教师标签基线（不是完整表A）
+
+完整记录见[baselines/completion.json](baselines/completion.json)。三模型均在相同Naive8500判断上统计：656个teacher POS、7844个有效非POS；目标GT打开0。
+Frozen选中55/656（0.083841）、旧Naive(s17)选中40/656（0.060976）、旧PSR(s17)选中54/656（0.082317）。对应teacher NEG selected rate分别0.063870、0.004335、0.008287。
+PSR原先自身8500标签有657个POS，在该不同采样集合上选中47/657（0.071537），单独存于own_PSR_labels，不能混入共同标签主比较。
+此阶段复用Frozen分数和已有学生，不重新训练，也不重跑完整RMOT；三新臂全部结束后才生成并发布完整FIT_TABLE.md。

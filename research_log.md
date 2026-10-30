@@ -14,6 +14,12 @@
 - 三臂有效200步均通过：D1保留原完成，D2/D3均原lr2e-4、无正式LR回退；D3实际2758656参数、head更新，base版本不变，GT打开0，子集SHA369cabeb…c30b6相同。
 - 下一步严格CAP重载、已有模型同8500拟合、三个8973步；表A核验GitHub之前不启动完整Val推理。此前无效尝试不隐藏，也不作为教师矛盾或容量证据。
 
+## 2026-10-31 D-FIT：共同标签基线封存发布
+
+- Frozen/旧Naive17/旧PSR17的共同Naive8500教师拟合完成，POS门仍为0.95、656个POS；分别选中55/40/54个，NEG selected rate为0.063870/0.004335/0.008287。GT打开0，不是GT精度或新RMOT结果。
+- PSR自身8500的657个POS拟合单列（47/657），不与共同标签656的分母混用；公共baselines/completion.json保存源checkpoint SHA、源验证CE、300窗口子集SHA与独立调用成本。
+- 三个8973步训练继续原命令，未更改代码、超参、checkpoint选择或启动Val；本次只同步已完成的baseline小型记录。完整表A仍必须等待全部新臂结束后先发布。
+
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 
 - Seed42all8officialTrackEvalexit0; full425Naive7.8064/PSR8.8763,Frozen8.2180. Together17/0/42,Naive7.6174±.17921984,PSR8.7222667±.26144258(samplesd). AllthreePSRpointvaluesaboveFrozen,meanDelta+.5042667; meanvsNaive+1.1048667. No fakeFrozenindependentreplicates.
