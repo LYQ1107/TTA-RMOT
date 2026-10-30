@@ -154,6 +154,24 @@ def test_final_report_keeps_revoked_AMP_execution_history():
     assert execution_history('最终表A/B\n### 兼容性执行记录\n\n'+history+'\n')==history
 
 
+def test_CLI_cost_accounting_preserves_prediction_seal(tmp_path):
+    import json
+    from flex_tta.runtime.pf_receipts import atomic_json,file_sha
+    from scripts.prepare_psr_controls import reconcile_cli_costs
+    run=dict(checkpoint_sha256='fixed-model',worker_seconds=15.)
+    atomic_json(tmp_path/'run_metadata.json',run);before=file_sha(tmp_path/'run_metadata.json')
+    atomic_json(tmp_path/'cli_inference_attempts/one.json',dict(pid=7,GPU_worker_seconds=10.,CPU_lock_wait_seconds=2.,actual_GPU_calls=1))
+    atomic_json(tmp_path/'inference_attempts/one.json',dict(pid=7,elapsed_seconds=12.))
+    atomic_json(tmp_path/'inference_attempts/old.json',dict(pid=9,elapsed_seconds=3.))
+    adjusted=reconcile_cli_costs(tmp_path,dict(run),preserve_run_metadata=True)
+    assert file_sha(tmp_path/'run_metadata.json')==before
+    cost=json.loads((tmp_path/'inference_costs.json').read_text())
+    assert adjusted['worker_seconds']==cost['worker_seconds']==13.
+    assert cost['CPU_lock_wait_seconds']==2. and cost['run_metadata_sha256']==before
+    reconcile_cli_costs(tmp_path,dict(run))
+    assert json.loads((tmp_path/'run_metadata.json').read_text())['worker_seconds']==13.
+
+
 def test_capacity_only_LoRA_and_head_mutate():
     model=Model();attach_adapter(model,'cpu',rank=16,layers='all',projections=('wq','wk','wv','wo'),alpha=32,unfreeze=('head',))
     before={n:p.detach().clone() for n,p in model.named_parameters()};versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}

@@ -48,7 +48,9 @@ def package():
     PUBLIC.mkdir(parents=True,exist_ok=True);files=[];weights=[]
     for pattern in ('validation/*_stdout.txt','validation/*process*.json','validation/*/receipt.json',
                     'validation/*/training_receipt.json','validation/*/provenance.json','validation/*/metrics_train.jsonl',
-                    'logs/*/*.txt','launchers/*/*/*.json',
+                    'logs/*/*.txt','launchers/*/*/*.json','matrix_launchers/*/*.json',
+                    'evaluation/merged/*_stdout.txt','evaluation/merged/DIAG_FIT_*/parity/*.json',
+                    'official_jobs/*/stdout.txt','official_jobs/*/completion.json',
                     'validation/completion.json','smoke_completion.json','full_completion.json'):
         files.extend(p for p in RUN.glob(pattern) if p.is_file())
     for phase in ('smoke','students'):
@@ -94,11 +96,22 @@ def package():
             r=json.loads(p.read_text());runtimes.append(dict(r,path=str(p),revoked_implementation_attempt=base=='retained_code_failures'))
     inference=[]
     for p in (RUN/'evaluation/merged').glob('DIAG_FIT_*/run_metadata.json'):
-        r=json.loads(p.read_text());inference.append(dict(method=r['method'],GPU_hours=r['worker_seconds']/3600,
-            actual_wall_seconds=r['actual_scheduler_wall_seconds'],peak_allocated_bytes=r['peak_allocated_bytes']))
+        r=json.loads(p.read_text());cost_path=p.parent/'inference_costs.json'
+        cost=json.loads(cost_path.read_text()) if cost_path.exists() else r
+        inference.append(dict(method=r['method'],GPU_hours=cost['worker_seconds']/3600,
+            actual_wall_seconds=r['actual_scheduler_wall_seconds'],peak_allocated_bytes=r['peak_allocated_bytes'],
+            CPU_lock_wait_seconds=cost.get('CPU_lock_wait_seconds'),cost_source=str(cost_path if cost_path.exists() else p)))
+        dest=PUBLIC/'Val'/r['method'];dest.mkdir(parents=True,exist_ok=True)
+        atomic_json(dest/'inference_receipt.json',{k:v for k,v in r.items() if k not in ('episodes','parities','cache_stats')})
+        for name in ('full_audit.json','inference_start_provenance.json'):
+            if (p.parent/name).exists():shutil.copy2(p.parent/name,dest/name)
+        if cost_path.exists():
+            shutil.copy2(cost_path,dest/cost_path.name)
     atomic_json(PUBLIC/'costs.json',dict(training_attempts=runtimes,
         training_GPU_process_hours_including_retained_attempts=sum(r['elapsed_seconds'] for r in runtimes)/3600,
-        inference=inference,teacher_new_calls=0,required_teacher_labels_per_arm=8500,
+        inference=inference,inference_matrix_attempts=[dict(launcher_status_path=str(p),**json.loads(p.read_text()))
+            for p in (RUN/'matrix_launchers').glob('*/launcher_status.json')],
+        teacher_new_calls=0,required_teacher_labels_per_arm=8500,
         reused_Frozen_and_D0_are_not_free=True,
         validation_process_times={p.stem:json.loads(p.read_text()) for p in (RUN/'validation').glob('*process*.json')},
         limits='training entries are actual worker-body elapsed, not exclusive GPU utilization; baseline probe and extra standalone parity calls without an elapsed receipt are not silently counted as zero',

@@ -61,7 +61,10 @@ def analyze():
     # This separate child exits before any GT reader is called. Its existing
     # target-annotation audit hook remains enabled for the entire preparation.
     subprocess.run([sys.executable,str(ROOT/'scripts/prepare_psr_controls.py'),'--evaluation-root',str(root),
-        '--training-root',str(RUN/'students'),'--methods',*methods],cwd=ROOT,check=True)
+        '--training-root',str(RUN/'students'),'--methods',*methods,'--preserve-run-metadata'],cwd=ROOT,check=True)
+    for record in sealed['methods'].values():
+        if file_sha(Path(record['run_metadata']))!=record['run_metadata_sha256']:
+            raise ValueError('cost reconciliation changed sealed prediction metadata before GT evaluation')
     for method,original in [('FROZEN',FROZEN/'ZERO_UPDATE'),('SOURCE_REHEARSAL',ROOT/'results/runs/uda_val_evaluation_20261026_v1/SOURCE_REHEARSAL'),
                             ('NAIVE_PAIRED',OLD/'NAIVE_PAIRED'),('PSR',OLD/'PSR')]:
         stage_reference(original,root,method)

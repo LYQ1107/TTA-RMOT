@@ -15,7 +15,27 @@ from scripts.run_psr_matrix import DEFAULT
 from scripts.train_psr import selected_checkpoint
 
 
-def prepare(root,training,methods,precompute_only=False):
+def reconcile_cli_costs(folder,run,preserve_run_metadata=False):
+    """Keep a published prediction seal immutable while accounting for CLI waits."""
+    folder=Path(folder)
+    cli=[json.loads(p.read_text()) for p in (folder/'cli_inference_attempts').glob('*.json')]
+    if not cli:return run
+    pids={r['pid'] for r in cli}
+    legacy=[json.loads(p.read_text()) for p in (folder/'inference_attempts').glob('*.json')]
+    legacy_seconds=sum(r['elapsed_seconds'] for r in legacy if r['pid'] not in pids)
+    run.update(scheduler_worker_slot_seconds=run.get('scheduler_worker_slot_seconds',run['worker_seconds']),
+        worker_seconds=legacy_seconds+sum(r['GPU_worker_seconds'] for r in cli),
+        CPU_lock_wait_seconds=sum(r['CPU_lock_wait_seconds'] for r in cli),CLI_attempts=cli,
+        zero_GPU_reuse_attempts=sum(r['actual_GPU_calls']==0 for r in cli))
+    if preserve_run_metadata:
+        keys=('worker_seconds','scheduler_worker_slot_seconds','CPU_lock_wait_seconds','CLI_attempts','zero_GPU_reuse_attempts')
+        atomic_json(folder/'inference_costs.json',dict(run_metadata_sha256=file_sha(folder/'run_metadata.json'),
+            sealed_prediction_metadata_unchanged=True,**{k:run[k] for k in keys}))
+    else:atomic_json(folder/'run_metadata.json',run)
+    return run
+
+
+def prepare(root,training,methods,precompute_only=False,preserve_run_metadata=False):
     root,training=Path(root).resolve(),Path(training).resolve()
     claim=(root/'controls_build.lock').open('a');fcntl.flock(claim,fcntl.LOCK_EX)
     attempts=protect_target_annotations();registered={}
@@ -29,17 +49,7 @@ def prepare(root,training,methods,precompute_only=False):
             raise ValueError('wrong training/evaluation protocol: '+method)
         if file_sha(selected_checkpoint(training/method))!=run['checkpoint_sha256']:
             raise ValueError('selected checkpoint changed after inference: '+method)
-        cli=[json.loads(p.read_text()) for p in (root/method/'cli_inference_attempts').glob('*.json')]
-        if cli:
-            # A queued duplicate can wait for a different lane without loading
-            # CUDA. Do not falsely charge that CPU wait as GPU inference time.
-            pids={r['pid'] for r in cli}
-            legacy=[json.loads(p.read_text()) for p in (root/method/'inference_attempts').glob('*.json')]
-            legacy_seconds=sum(r['elapsed_seconds'] for r in legacy if r['pid'] not in pids)
-            run.update(scheduler_worker_slot_seconds=run.get('scheduler_worker_slot_seconds',run['worker_seconds']),worker_seconds=legacy_seconds+sum(r['GPU_worker_seconds'] for r in cli),
-                CPU_lock_wait_seconds=sum(r['CPU_lock_wait_seconds'] for r in cli),CLI_attempts=cli,
-                zero_GPU_reuse_attempts=sum(r['actual_GPU_calls']==0 for r in cli))
-            atomic_json(root/method/'run_metadata.json',run)
+        run=reconcile_cli_costs(root/method,run,preserve_run_metadata)
         registered[method]=dict(checkpoint_sha256=run['checkpoint_sha256'],
             training_receipt_sha256=file_sha(training/method/'training_receipt.json'),
             full_audit_sha256=file_sha(root/method/'full_audit.json'),
@@ -69,4 +79,5 @@ if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--evaluation-root',type=Path,required=True)
     p.add_argument('--training-root',type=Path,required=True);p.add_argument('--methods',nargs='+',default=DEFAULT)
     p.add_argument('--precompute-only',action='store_true',help='prepare completed subset without publishing the final GT evaluation seal')
-    a=p.parse_args();prepare(a.evaluation_root,a.training_root,a.methods,a.precompute_only)
+    p.add_argument('--preserve-run-metadata',action='store_true',help='write CLI cost reconciliation beside, never over, sealed run metadata')
+    a=p.parse_args();prepare(a.evaluation_root,a.training_root,a.methods,a.precompute_only,a.preserve_run_metadata)
