@@ -23,6 +23,9 @@ DEFAULT=['NAIVE_PAIRED','PSR','UNIFORM_PAIRED','CONFIDENCE_PAIRED','PSR_DISCOVER
 
 def run(root,methods,workers=4,other_active_gpus=(),seed=None,gpu_ids=None):
     root=Path(root).resolve();training=root/'students';evaluation=root/'evaluation/merged'
+    if any(m.startswith('DIAG_FIT_') for m in methods):
+        from flex_uda.diag_fit import require_published_fit_table
+        require_published_fit_table(root)
     evaluation.mkdir(parents=True,exist_ok=True);training.mkdir(exist_ok=True)
     pending=[];preserved=[]
     for method in methods:
@@ -80,6 +83,7 @@ def run(root,methods,workers=4,other_active_gpus=(),seed=None,gpu_ids=None):
             env=os.environ.copy();env.update(PSR_PHYSICAL_GPU=str(gpu['physical_gpu']),CUDA_VISIBLE_DEVICES=gpu['uuid'],UDA_PHYSICAL_GPU=str(gpu['physical_gpu']),
                 OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2',TOKENIZERS_PARALLELISM='false',HF_HUB_OFFLINE='1')
             if not ready:
+                if method.startswith('DIAG_FIT_'):raise RuntimeError('D-FIT must finish its training-only queue and publish Table A before inference')
                 command=[sys.executable,str(ROOT/'scripts/train_psr.py'),'--method',method,'--scope','full','--val-authorized','--output',str(folder)]
                 if seed is not None:command+=['--seed',str(seed)]
                 if (folder/'checkpoint_latest.pt').exists():command.append('--resume')

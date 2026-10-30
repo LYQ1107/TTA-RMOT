@@ -16,6 +16,9 @@ from scripts.train_psr import selected_checkpoint
 
 def evaluate_matrix(training,output,methods,workers=4):
     training,output=Path(training).resolve(),Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
+    if any(m.startswith('DIAG_FIT_') for m in methods):
+        from flex_uda.diag_fit import require_published_fit_table
+        require_published_fit_table(training.parent)
     attempts=protect_target_annotations();merged=output/'merged';merged.mkdir(exist_ok=True)
     for method in methods:
         checkpoint=selected_checkpoint(training/method)

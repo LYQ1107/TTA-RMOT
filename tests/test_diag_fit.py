@@ -32,10 +32,10 @@ def prepared(dim=8):
     return dict(outputs=[torch.randn(3,1,dim)],text=None,mask=None,positions=None,boxes=None,track_ids=[1,2,3])
 
 
-@pytest.mark.parametrize('alpha',[1.,8.,32.])
-def test_zero_B_keeps_forward_bitwise(alpha):
+@pytest.mark.parametrize('alpha,capacity',[(1.,False),(8.,False),(32.,False),(32.,True)])
+def test_zero_B_keeps_forward_bitwise(alpha,capacity):
     model=Model();p=prepared();before=forward_uda(model,p,return_features=False)['all_logits'].clone()
-    attach_adapter(model,'cpu',alpha=alpha)
+    attach_adapter(model,'cpu',alpha=alpha,**(dict(rank=16,layers='all',projections=('wq','wk','wv','wo'),unfreeze=('head',)) if capacity else {}))
     assert torch.equal(before,forward_uda(model,p,return_features=False)['all_logits'])
 
 
@@ -108,6 +108,27 @@ def test_pair_agreement_is_within_same_video_query_frame_only():
     rows.append(dict(rows[0],video_id='other',student_margin=-100))
     r=metrics(rows)
     assert r['pair_agreement_pairs']==2 and r['pair_agreement']==.5
+
+
+def test_generated_JSON_launch_config_keeps_small_head_LR_numeric(tmp_path):
+    import json
+    from scripts.train_psr import load_config
+    path=tmp_path/'launch.yaml';path.write_text(json.dumps(dict(optimizer=dict(lr=.0002,head_lr=.00005))))
+    value=load_config(path)
+    assert value['optimizer']['head_lr']==.00005 and isinstance(value['optimizer']['head_lr'],float)
+
+
+def test_DFIT_keeps_original_AMP_same_batch_backoff_before_numeric_failure():
+    from flex_uda.diag_fit import inherited_amp_backoff
+    class Scaler:
+        scale=65536.
+        def is_enabled(self):return True
+        def get_scale(self):return self.scale
+        def update(self,new_scale):self.scale=new_scale
+    scaler=Scaler();retry=0
+    for _ in range(8):retry,old=inherited_amp_backoff(scaler,retry)
+    assert retry==8 and scaler.get_scale()==256.
+    with pytest.raises(FloatingPointError):inherited_amp_backoff(scaler,retry)
 
 
 def test_capacity_only_LoRA_and_head_mutate():

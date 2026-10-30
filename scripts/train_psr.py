@@ -22,12 +22,19 @@ def selected_checkpoint(folder,config=None):
     return Path(folder)/('checkpoint_final_step.pt' if config.get('selection')=='final_step' else 'checkpoint_best_source_selected.pt')
 
 
+def load_config(path):
+    raw=Path(path).read_text()
+    # Generated launch configs are JSON. PyYAML's YAML1.1 parser otherwise
+    # reads JSON's 5e-05 as a string rather than the intended head LR.
+    return json.loads(raw) if raw.lstrip().startswith('{') else yaml.safe_load(raw)
+
+
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--method',choices=METHODS,required=True)
     p.add_argument('--config',type=Path,default=ROOT/'configs/uda/psr.yaml');p.add_argument('--output',type=Path,required=True)
     p.add_argument('--scope',choices=('interface','smoke','full'),default='smoke');p.add_argument('--resume',action='store_true');p.add_argument('--val-authorized',action='store_true')
     p.add_argument('--seed',type=int,help='registered student confirmation seed; immutable teacher samples are unchanged');a=p.parse_args()
-    config=yaml.safe_load(a.config.read_text());policy,expanded=METHODS[a.method]
+    config=load_config(a.config);policy,expanded=METHODS[a.method]
     if a.seed is not None:config['protocol']['seed']=a.seed
     config['method']=a.method;config['data']['pseudo_directory']=str(Path(config['data']['pseudo_directory']).parent/policy)
     config['data']['expanded_kind']=expanded

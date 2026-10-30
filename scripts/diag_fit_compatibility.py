@@ -16,6 +16,8 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 
 
 def main(mode,output,legacy):
+    output=Path(output).resolve()
+    legacy=Path(legacy).resolve() if legacy is not None else None
     from scripts.launch_uda_workers import audit_gpus
     selected,_,_=audit_gpus(1,minimum_free_mib=20480)
     registered=os.environ.get('PSR_PHYSICAL_GPU')
@@ -25,6 +27,10 @@ def main(mode,output,legacy):
     if mode=='legacy':
         spec=importlib.util.spec_from_file_location('prechange_training',legacy/'mllm_training.py')
         module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        from flex_uda.mllm_training import enforce_inputs
+        # The untouched legacy trainer hashes its own source after isolation.
+        # Permit that exact archived code file, not target annotation paths.
+        module.enforce_inputs=lambda out,pseudo:enforce_inputs(out,pseudo,extra_read=[legacy/'mllm_training.py'])
         config=yaml.safe_load((legacy/'psr.yaml').read_text());config['method']='NAIVE_PAIRED'
         config['data'].update(pseudo_directory='/data2/user/TTA-RMOT-assets/psr/val_v1/NAIVE',expanded_kind='none')
         module.run(config,output,scope='smoke');return
@@ -45,15 +51,20 @@ def main(mode,output,legacy):
     prepared,_,_,_=target_batch(inputs,study_frame_groups(pseudo.groups[0])[0])
     with torch.no_grad():reference=forward_uda(model,prepared,return_features=False)['all_logits'].clone()
     results=[]
-    for alpha in (1.,8.,32.):
+    variants=[dict(alpha=a) for a in (1.,8.,32.)]
+    variants.append(dict(alpha=32.,rank=16,layers='all',projections=('wq','wk','wv','wo'),unfreeze=('head',)))
+    for options in variants:
         torch.manual_seed(17)
-        adapter=attach_adapter(model,device,alpha=alpha)
+        adapter=attach_adapter(model,device,**options)
         with torch.no_grad():actual=forward_uda(model,prepared,return_features=False)['all_logits']
         if not torch.equal(reference,actual):raise RuntimeError('actual zero-B initial prediction differs')
-        results.append(dict(alpha=alpha,bitwise_equal=True))
+        results.append(dict(options=options,bitwise_equal=True,trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad)))
         for index in adapter.layer_indices:
             attention=model.output_ca_qkv[index].attention
-            for name in ('wq','wv'):setattr(attention,name,getattr(attention,name).base)
+            for name in ('wq','wk','wv','wo'):
+                projection=getattr(attention,name)
+                if hasattr(projection,'lora_a'):setattr(attention,name,projection.base)
+        for p in model.parameters():p.requires_grad_(False)
         del adapter
     if attempts:raise RuntimeError('GT opened during GPU compatibility')
     atomic_json(output/'receipt.json',dict(status='PASS_REAL_GPU_ZERO_B_FORWARD_BITWISE',checks=results,

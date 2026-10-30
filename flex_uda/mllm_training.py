@@ -22,7 +22,7 @@ from flex_uda.teacher.mllm_pseudo_dataset import MLLMPseudoDataset
 from flex_uda.teacher.psr_dataset import PSRPseudoDataset,PairedUnlabeledDataset,PSRParentWeightDataset
 from flex_uda.teacher.isolation import restrict_filesystem
 from flex_uda.model.flexhook_uda import attach_adapter,adapter_kwargs,prepared_inputs,forward_uda,frozen_copy,ema_update
-from flex_uda.diag_fit import METHODS as FIT_METHODS,teacher_weight,fit_subset,metrics as fit_metrics,target_windows,optimizer_groups
+from flex_uda.diag_fit import METHODS as FIT_METHODS,teacher_weight,fit_subset,metrics as fit_metrics,target_windows,optimizer_groups,inherited_amp_backoff
 from flex_uda.losses.objectives import supervised_ce,select_pseudo,pseudo_bce,consistency
 from flex_uda.losses.distillation import soft_distillation
 from flex_uda.numerics import reconcile_resume
@@ -245,6 +245,7 @@ def run(config,output,*,scope='smoke',resume=False):
     atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0]))
     calibration=source_scale_check(model,Inputs(model,tokenizer,device,source_val),params)
     atomic_json(output/'source_only_lambda_validation.json',calibration)
+    fit_sha=None
     if scope=='interface':
         checks=[]
         indices=set(np.linspace(0,len(pseudo.groups)-1,8,dtype=int).tolist())
@@ -353,8 +354,7 @@ def run(config,output,*,scope='smoke',resume=False):
             expanded_grads=([None if t is None else t-(d if d is not None else 0) for t,d in zip(target_grads,direct_grads)] if study else [])
             total_norm=torch.nn.utils.clip_grad_norm_(params,config['optimizer']['grad_clip'])
             if not torch.isfinite(total_norm):
-                if diagnostic or not scaler.is_enabled() or retry>=8:raise FloatingPointError('nonfinite gradient; D-FIT only allows registered LR fallback' if diagnostic else 'nonfinite gradient after same-sample AMP backoff')
-                scale=scaler.get_scale();scaler.update(new_scale=scale/2);retry+=1
+                retry,scale=inherited_amp_backoff(scaler,retry)
                 append_json(output/'numerical_retries.jsonl',dict(step=step+1,retry=retry,previous_scale=scale,new_scale=scaler.get_scale(),same_source_and_target_replayed=True,optimizer_updated=False))
                 continue
             dot=sum(float((a*b).sum()) for a,b in zip(source_grads,target_grads) if a is not None and b is not None)
@@ -414,6 +414,13 @@ def run(config,output,*,scope='smoke',resume=False):
             save_training(output/'checkpoint_final_step.pt',model,ema,optimizer,scaler,step,step/steps_per_cycle,config,plan_sha,best,tracking=tracking)
             atomic_json(output/'final_step_selection.json',dict(step=step,sha256=file_sha(output/'checkpoint_final_step.pt'),
                 selection='FINAL_STEP_ONLY_NO_TARGET_GT',source_selected_step=torch.load(output/'checkpoint_best_source_selected.pt',map_location='cpu',weights_only=False)['step']))
+        if config['method']=='DIAG_FIT_CAP' and scope=='smoke':
+            from torch.utils._pytree import tree_map
+            prepared,_,_,_=target_batch(inputs,study_frame_groups(pseudo.groups[0])[0])
+            with torch.no_grad():probe=forward_uda(model,prepared,return_features=False)['all_logits'].detach().cpu()
+            torch.save(dict(prepared=tree_map(lambda x:x.detach().cpu() if torch.is_tensor(x) else x,prepared),
+                expected_logits=probe,checkpoint_sha256=file_sha(output/'checkpoint_final_step.pt')),
+                output/'roundtrip_probe.pt')
         delta=norm([p.detach()-old for p,old in zip(params,initial)])
         if not delta or not counters['optimizer_updates']:raise RuntimeError('student parameters did not change')
         if (config['method']=='MLLM_DISTILL' or study) and not counters['target_nonzero_gradient_steps']:raise RuntimeError('no nonzero target KD gradients')
@@ -447,7 +454,12 @@ def run(config,output,*,scope='smoke',resume=False):
         if 'counters' in result:
             result['counters']['parent_replay_exposures']=result['counters'].pop('expanded_weak_exposures',0)
             result['counters']['parent_replay_nonzero_gradient_steps']=result['counters'].pop('expanded_nonzero_gradient_steps',0)
-    provenance['target_GT_open_attempts']=attempts
+    if diagnostic:
+        changed=[n for (n,p),old in zip([(n,p) for n,p in model.named_parameters() if p.requires_grad],initial) if not torch.equal(p.detach(),old)]
+        if any('lora_' not in n and not n.startswith('head.') for n in changed):raise RuntimeError('unexpected D-FIT trainable module')
+        result.update(changed_trainable_names=changed,head_changed=any(n.startswith('head.') for n in changed),
+            fit_subset_sha256=fit_sha,target_GT_open_attempts=len(attempts))
+    provenance['target_GT_open_attempts']=len(attempts)
     atomic_json(output/'provenance.json',provenance)
     atomic_json(output/'training_receipt.json',result);atomic_json(output/'progress.json',result)
     print(json.dumps(result,indent=2),flush=True);return result

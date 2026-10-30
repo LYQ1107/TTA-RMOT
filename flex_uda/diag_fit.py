@@ -8,6 +8,14 @@ POS_THRESHOLD = 0.95  # Actual frozen PSR direct_evidence qualification.
 METHODS = ('DIAG_FIT_OPT','DIAG_FIT_OPT_POS','DIAG_FIT_CAP')
 
 
+def inherited_amp_backoff(scaler,retry):
+    """Unchanged legacy scaler recovery, not an optimizer/LR update."""
+    if not scaler.is_enabled() or retry>=8:
+        raise FloatingPointError('nonfinite gradient after same-sample AMP backoff')
+    old=scaler.get_scale();scaler.update(new_scale=old/2)
+    return retry+1,old
+
+
 def teacher_weight(rows,loss):
     probabilities=[r['teacher_prob'] for r in rows if r['valid']]
     pos=sum(p>=POS_THRESHOLD for p in probabilities);neg=len(probabilities)-pos
@@ -60,3 +68,12 @@ def optimizer_groups(model,params,config):
     heads={id(p) for p in model.head.parameters()}
     return [dict(params=[p for p in params if id(p) not in heads],lr=config['lr']),
             dict(params=[p for p in params if id(p) in heads],lr=config['head_lr'])]
+
+
+def require_published_fit_table(root):
+    import json
+    from pathlib import Path
+    gate=json.loads((Path(root)/'fit_table_publication_gate.json').read_text())
+    if not gate['remote_HEAD_verified'] or file_sha(Path(gate['FIT_TABLE_path']))!=gate['FIT_TABLE_sha256']:
+        raise PermissionError('publish and verify immutable teacher-fit Table A before D-FIT Val inference')
+    return gate
