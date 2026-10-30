@@ -46,7 +46,9 @@ def endpoint_consistency():
 def package():
     import tarfile
     PUBLIC.mkdir(parents=True,exist_ok=True);files=[];weights=[]
-    for pattern in ('validation/*_stdout.txt','validation/*process*.json','logs/*/*.txt','launchers/*/*/*.json',
+    for pattern in ('validation/*_stdout.txt','validation/*process*.json','validation/*/receipt.json',
+                    'validation/*/training_receipt.json','validation/*/provenance.json','validation/*/metrics_train.jsonl',
+                    'logs/*/*.txt','launchers/*/*/*.json',
                     'validation/completion.json','smoke_completion.json','full_completion.json'):
         files.extend(p for p in RUN.glob(pattern) if p.is_file())
     for phase in ('smoke','students'):
@@ -65,6 +67,15 @@ def package():
         target=PUBLIC/'attempts'/p.relative_to(RUN/'attempts');target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
     for p in RUN.glob('attempts/**/attempt_runtimes/*.json'):
         target=PUBLIC/'attempts'/p.relative_to(RUN/'attempts');target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
+    for base in ('attempts','retained_code_failures'):
+        for p in (RUN/base).glob('**/*'):
+            if not p.is_file() or p.name not in ('config.json','provenance.json','pos_weight.json',
+                'teacher_fit_curve.jsonl','source_validation.jsonl','numerical_retries.jsonl','metrics_train.jsonl'):continue
+            if base=='attempts' and (p.parent/'training_receipt.json').exists() and p.name!='numerical_retries.jsonl':continue
+            target=PUBLIC/base/p.relative_to(RUN/base);target.parent.mkdir(parents=True,exist_ok=True)
+            if p.name=='metrics_train.jsonl':
+                with p.open('rb') as src,gzip.open(str(target)+'.gz','wb') as dst:shutil.copyfileobj(src,dst)
+            else:shutil.copy2(p,target)
     for p in RUN.glob('baselines/**/*.json'):
         target=PUBLIC/p.relative_to(RUN);target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(p,target)
     for method in METHODS:
@@ -77,6 +88,22 @@ def package():
     atomic_json(PUBLIC/'server_artifacts.json',dict(checkpoints=weights,run_root=str(RUN),
         complete_predictions_stay_on_server=True,raw_teacher_cache_stays_on_server=True,
         target_GT_never_read_by_packager=True))
+    runtimes=[]
+    for base in ('attempts','retained_code_failures'):
+        for p in (RUN/base).glob('**/attempt_runtimes/*.json'):
+            r=json.loads(p.read_text());runtimes.append(dict(r,path=str(p),revoked_implementation_attempt=base=='retained_code_failures'))
+    inference=[]
+    for p in (RUN/'evaluation/merged').glob('DIAG_FIT_*/run_metadata.json'):
+        r=json.loads(p.read_text());inference.append(dict(method=r['method'],GPU_hours=r['worker_seconds']/3600,
+            actual_wall_seconds=r['actual_scheduler_wall_seconds'],peak_allocated_bytes=r['peak_allocated_bytes']))
+    atomic_json(PUBLIC/'costs.json',dict(training_attempts=runtimes,
+        training_GPU_process_hours_including_retained_attempts=sum(r['elapsed_seconds'] for r in runtimes)/3600,
+        inference=inference,teacher_new_calls=0,required_teacher_labels_per_arm=8500,
+        reused_Frozen_and_D0_are_not_free=True,
+        validation_process_times={p.stem:json.loads(p.read_text()) for p in (RUN/'validation').glob('*process*.json')},
+        limits='training entries are actual worker-body elapsed, not exclusive GPU utilization; baseline probe and extra standalone parity calls without an elapsed receipt are not silently counted as zero',
+        baseline_fit_cost=json.loads((RUN/'baselines/completion.json').read_text()).get('GPU_process_seconds') if (RUN/'baselines/completion.json').exists() else None,
+        unmeasured_validation_costs=['standalone full-capacity zero-output parity with no separate elapsed receipt']))
 
 
 def report():

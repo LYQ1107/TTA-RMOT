@@ -6,6 +6,14 @@
 - 提示预期POS0.5与实际不符：657/374用p≥0.95。按提示以代码为准沿用0.95，auto NEG为有效p<0.95，低置信soft不丢弃。
 - 用户重新明确共享授权：显存足够、进程少优先，最多4卡，不终止别人。先必要兼容/梯度/前5步回归、三臂200步smoke；表A先推送再允许全425推理，最终只评last-step。
 
+## 2026-10-30 D-FIT smoke通过与实现错误保留
+
+- 真实alpha1/8/32以及全4层Q/K/V/O rank16+head的零初始化输出均逐位一致；旧/新默认真实前5步source/KD loss最大差0。32相关CPU回归通过。
+- 遇到并保留：legacy源码自哈希白名单路径遗漏；JSON5e-05被YAML1.1当字符串的head_lr；相对输出在vendor chdir后失效。只修实际问题，未改数值超参，未开放GT。
+- 早期集成错误让D2/D3遇FP16梯度溢出即退出，删除了原有AMP自适应缩放。撤销这些尝试的“不可训练”分类，保留全部原目录和日志；恢复原有最多8次缩放减半/原批次重放，无优化/无跳样，按代码bug从头重跑受影响臂。
+- 三臂有效200步均通过：D1保留原完成，D2/D3均原lr2e-4、无正式LR回退；D3实际2758656参数、head更新，base版本不变，GT打开0，子集SHA369cabeb…c30b6相同。
+- 下一步严格CAP重载、已有模型同8500拟合、三个8973步；表A核验GitHub之前不启动完整Val推理。此前无效尝试不隐藏，也不作为教师矛盾或容量证据。
+
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 
 - Seed42all8officialTrackEvalexit0; full425Naive7.8064/PSR8.8763,Frozen8.2180. Together17/0/42,Naive7.6174±.17921984,PSR8.7222667±.26144258(samplesd). AllthreePSRpointvaluesaboveFrozen,meanDelta+.5042667; meanvsNaive+1.1048667. No fakeFrozenindependentreplicates.

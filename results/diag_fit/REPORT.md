@@ -1,6 +1,6 @@
 # D-FIT：学生能否拟合冻结 MLLM 标签
 
-状态：IMPLEMENTATION；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
+状态：SMOKE_COMPLETE_BASELINE_AND_FULL_TRAINING_NEXT；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
 用户允许显存足够时共享、优先进程少的最多4卡，不停止其他任务。25Val同集诊断，不是论文主结果或Train→Val。
 
 ## 1. 修改前只读核对
@@ -10,6 +10,7 @@
 - head有4个MLP，各Linear(768,768,bias=False)→GELU→Linear(768,2,bias=False)，dropout0；共2,365,440参数。
 - 原mllm_training.run在attach、容量检查、provenance、最终receipt处固定rank4/24576；每步1目标window，unscale后clip1，在step前。
 - 旧含POS步裁剪前direct梯度：Naive中位2.246040/p90 4.884213，PSR中位2.227479/p90 4.746833。PSR含weak的target总范数与direct分开。
+- PSR含weak的实际target_gradient_norm在原逐步trace中为中位2.739018/p90 5.960116；原training_dynamics.json没有单独汇总该combined字段，未将direct误称combined。
 - **与提示预期不同：657/374的POS门是p≥0.95，不是0.5**，见psr_supervision.direct_evidence与封存state。按“以代码为准”沿用0.95；D-FIT NEG按指定auto公式为有效p<0.95，含历史低置信UNKNOWN，与旧审计NEG≤0.05区分。
 - 原load_selected固定rank4；两matrix脚本固定checkpoint_best_source_selected.pt。
 - D3理论LoRA393,216+head2,365,440=2,758,656；最终以真实smoke核验填回配置。
@@ -52,3 +53,5 @@ OPT_POS及CAP的早期尝试曾因FP16梯度Inf提前退出，并执行过一次
 随后代码审查发现集成时错误删除了旧trainer的AMP动态loss-scale恢复（最多8次、每次减半、原样重放同一批次、无优化步）。
 恢复原有机制，不更改lr/AMP/rank/层数/clip；按6.3代码bug处理，从头重跑受影响两臂。只有旧机制仍不能恢复的非有限信号才触发6.2唯一LR回退。
 此修复没有跳样本、没有关闭AMP、没有新增数值超参；D1已通过的200步不重复运行。不能把无效提前退出当学生容量/教师矛盾的证据。
+恢复原AMP后，三臂有效200步smoke全部通过，lr均保持0.0002，无正式LR回退；D3为2,758,656参数且head实际变化，已填回expected_trainable。
+三臂fit_subset SHA相同：369cabeb214b2d296bc1a4effc5ebd1d4f22cc8f7f68f2740861a3a9649c30b6；GT打开均0，冻结参数版本均未变。相关CPU32项通过。

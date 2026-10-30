@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sys
+import time
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import compat.sitecustomize
 import torch
@@ -23,6 +24,7 @@ PREVIOUS=ROOT/'results/runs/psr_val_20261029_v1/students'
 
 
 def run():
+    started=time.perf_counter()
     selected,_,_=audit_gpus(1,minimum_free_mib=20480);gpu=selected[0]
     os.environ.update(CUDA_VISIBLE_DEVICES=gpu['uuid'],UDA_PHYSICAL_GPU=str(gpu['physical_gpu']),HF_HUB_OFFLINE='1',
         OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1')
@@ -78,7 +80,9 @@ def run():
     if attempts:raise RuntimeError('baseline teacher-fit opened targetGT')
     atomic_json(out/'completion.json',dict(status='COMPLETE_EXISTING_CHECKPOINT_FIT_BASELINES',methods=answer,
         fit_subset_sha256=sha,common_teacher_labels='NAIVE8500',own_PSR_fit_separately_disclosed=True,
-        target_GT_open_attempts=0,isolation=isolation,new_training_steps=0,full_RMOT_inference_started=False))
+        target_GT_open_attempts=0,isolation=isolation,new_training_steps=0,full_RMOT_inference_started=False,
+        GPU_process_seconds=time.perf_counter()-started,peak_allocated_bytes=torch.cuda.max_memory_allocated(),
+        cost_scope='one admitted GPU-process body; cached Frozen/Naive fit reuse and old training/teacher costs remain inherited'))
     print(json.dumps(dict(event='D_FIT_BASELINES_COMPLETE',methods={m:r['all']['teacher_POS_selected_rate'] for m,r in answer.items()})),flush=True)
 
 

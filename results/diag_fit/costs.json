@@ -1,0 +1,132 @@
+{
+  "training_attempts": [
+    {
+      "method": "DIAG_FIT_CAP",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 5,
+      "pid": 2434976,
+      "elapsed_seconds": 790.4696784180123,
+      "successful": true,
+      "exception_type": null,
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/attempts/smoke/DIAG_FIT_CAP/initial/attempt_runtimes/1793373362169361030.json",
+      "revoked_implementation_attempt": false
+    },
+    {
+      "method": "DIAG_FIT_OPT_POS",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 2,
+      "pid": 2434977,
+      "elapsed_seconds": 580.4828033861704,
+      "successful": true,
+      "exception_type": null,
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/attempts/smoke/DIAG_FIT_OPT_POS/initial/attempt_runtimes/1793373362172845159.json",
+      "revoked_implementation_attempt": false
+    },
+    {
+      "method": "DIAG_FIT_OPT",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 1,
+      "pid": 2382201,
+      "elapsed_seconds": 614.9708956759423,
+      "successful": true,
+      "exception_type": null,
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/attempts/smoke/DIAG_FIT_OPT/initial/attempt_runtimes/1793371888543438131.json",
+      "revoked_implementation_attempt": false
+    },
+    {
+      "method": "DIAG_FIT_CAP",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 5,
+      "pid": 2382203,
+      "elapsed_seconds": 157.53269300004467,
+      "successful": false,
+      "exception_type": "TypeError",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/smoke/DIAG_FIT_CAP_json_lr_v1/attempt_runtimes/1793371888590102477.json",
+      "revoked_implementation_attempt": true
+    },
+    {
+      "method": "DIAG_FIT_CAP",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 5,
+      "pid": 2416635,
+      "elapsed_seconds": 174.91042299894616,
+      "successful": false,
+      "exception_type": "FloatingPointError",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/premature_amp_abort/DIAG_FIT_CAP/fallback_lr1e4/attempt_runtimes/1793372849907033271.json",
+      "revoked_implementation_attempt": true
+    },
+    {
+      "method": "DIAG_FIT_CAP",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 5,
+      "pid": 2409941,
+      "elapsed_seconds": 173.2903146368917,
+      "successful": false,
+      "exception_type": "FloatingPointError",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/premature_amp_abort/DIAG_FIT_CAP/initial/attempt_runtimes/1793372670379485649.json",
+      "revoked_implementation_attempt": true
+    },
+    {
+      "method": "DIAG_FIT_OPT_POS",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 2,
+      "pid": 2388377,
+      "elapsed_seconds": 166.90051965788007,
+      "successful": false,
+      "exception_type": "FloatingPointError",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/premature_amp_abort/DIAG_FIT_OPT_POS/fallback_lr1e4/attempt_runtimes/1793372063773471873.json",
+      "revoked_implementation_attempt": true
+    },
+    {
+      "method": "DIAG_FIT_OPT_POS",
+      "scope": "smoke",
+      "resume": false,
+      "physical_gpu": 2,
+      "pid": 2382202,
+      "elapsed_seconds": 169.46702627581544,
+      "successful": false,
+      "exception_type": "FloatingPointError",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/premature_amp_abort/DIAG_FIT_OPT_POS/initial/attempt_runtimes/1793371888533870885.json",
+      "revoked_implementation_attempt": true
+    }
+  ],
+  "training_GPU_process_hours_including_retained_attempts": 0.7855623205693619,
+  "inference": [],
+  "teacher_new_calls": 0,
+  "required_teacher_labels_per_arm": 8500,
+  "reused_Frozen_and_D0_are_not_free": true,
+  "validation_process_times": {
+    "real_zero_alpha_process": {
+      "name": "real_zero_alpha",
+      "exit_code": 0,
+      "seconds": 16.854808611096814
+    },
+    "legacy_K1_process": {
+      "name": "legacy_K1",
+      "exit_code": 0,
+      "seconds": 64.15664345794357
+    },
+    "legacy_K1_process_failed_v1": {
+      "name": "legacy_K1",
+      "exit_code": 1,
+      "seconds": 19.55272897402756
+    },
+    "current_K1_process": {
+      "name": "current_K1",
+      "exit_code": 0,
+      "seconds": 65.1555727859959
+    }
+  },
+  "limits": "training entries are actual worker-body elapsed, not exclusive GPU utilization; baseline probe and extra standalone parity calls without an elapsed receipt are not silently counted as zero",
+  "baseline_fit_cost": null,
+  "unmeasured_validation_costs": [
+    "standalone full-capacity zero-output parity with no separate elapsed receipt"
+  ]
+}
