@@ -73,3 +73,11 @@ DIAG_FIT_OPT_POS完成8973个更新、17源视频/425目标表达/8500教师判�
 按预注册双条件，NEG selected>0.10，故D2尚不具备“拟合合格”资格；不降低阈值，也不以POS单项改善或loss下降替代完整判定。
 唯一待评checkpoint为final8973，SHA256=9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15；source-selected7750只记录、不做目标评测。
 D1/D3继续原配置，表A发布门仍未打开。students/DIAG_FIT_OPT_POS保留完整小型训练记录；运行中其它attempt记录只是阶段快照，不是最终成本或完整结果。
+
+### D1随后完成：严格保留80%边界，不事后放宽
+
+DIAG_FIT_OPT原lr=0.0002完成8973更新，同8500判断、17源视频/425目标表达，GT打开0/冻结版本不变。
+POS selected=522/656（0.795732），NEG selected=436/7844（0.055584），pair agreement=0.761194；POS/NEG平均学生概率0.719190/0.102303。
+80%至少需525/656，D1尚差3个POS，因此严格记为拟合不合格，不将79.57%四舍五入为80%，不挑选中途checkpoint。
+final8973 SHA256=b58568b37e4074369d11d672ac0d0bc1aa2814fe52451bba7000af79a4b96d49；source-best2750只记录，不做目标评测。
+D1/D2已完成，但D3尚未结束，FIT_TABLE.md及其发布门仍未生成，三新模型的完整Val推理均未开始。

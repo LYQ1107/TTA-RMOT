@@ -1,5 +1,5 @@
 {
-  "snapshot_scope": "PARTIAL_D2_COMPLETE: subtotal includes closed attempts only; ongoing full-worker time is not yet included; not final total cost",
+  "snapshot_scope": "PARTIAL_D1_D2_COMPLETE: subtotal includes closed attempts only; ongoing CAP full-worker time is not yet included; not final total cost",
   "training_attempts": [
     {
       "method": "DIAG_FIT_OPT_POS",
@@ -11,6 +11,18 @@
       "successful": true,
       "exception_type": null,
       "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/attempts/full/DIAG_FIT_OPT_POS/initial/attempt_runtimes/1793375185157695605.json",
+      "revoked_implementation_attempt": false
+    },
+    {
+      "method": "DIAG_FIT_OPT",
+      "scope": "full",
+      "resume": false,
+      "physical_gpu": 1,
+      "pid": 2503719,
+      "elapsed_seconds": 15840.26779517997,
+      "successful": true,
+      "exception_type": null,
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/attempts/full/DIAG_FIT_OPT/initial/attempt_runtimes/1793375185220315242.json",
       "revoked_implementation_attempt": false
     },
     {
@@ -110,7 +122,7 @@
       "revoked_implementation_attempt": true
     }
   ],
-  "training_GPU_process_hours_including_retained_attempts": 5.017643740057376,
+  "training_GPU_process_hours_including_retained_attempts": 9.417718127607367,
   "inference": [],
   "teacher_new_calls": 0,
   "required_teacher_labels_per_arm": 8500,
