@@ -95,7 +95,9 @@ def package():
         for p in (RUN/base).glob('**/attempt_runtimes/*.json'):
             r=json.loads(p.read_text());runtimes.append(dict(r,path=str(p),revoked_implementation_attempt=base=='retained_code_failures'))
     inference=[]
-    for p in (RUN/'evaluation/merged').glob('DIAG_FIT_*/run_metadata.json'):
+    for method in METHODS:
+        p=RUN/'evaluation/merged'/method/'run_metadata.json'
+        if not p.exists():continue
         r=json.loads(p.read_text());cost_path=p.parent/'inference_costs.json'
         cost=json.loads(cost_path.read_text()) if cost_path.exists() else r
         inference.append(dict(method=r['method'],GPU_hours=cost['worker_seconds']/3600,

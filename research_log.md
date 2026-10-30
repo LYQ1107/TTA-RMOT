@@ -28,6 +28,7 @@
 - 表A已实际推送并核验GitHub4a812e3359307c975f5c5a889d789c0a734e161d/tree2829d697，创建含表A SHA的发布门。启动推理前把原通用driver“four method lanes”的固定描述改为实际lane数量，只有元数据修正、没有任何数值或候选改动。三模型仍需全部425预测封存后独立GT评测，不因拟合未过而省略臂。
 - 推理运行中定位离线集成问题：prepare_psr_controls原会为CLI成本更正覆写run_metadata，破坏D-FIT整体封存SHA。新增显式保留模式，把修正成本写入inference_costs旁文件、默认旧行为不变；D-FIT离线入口传此模式并在GT前复核原封存，成本报告读取旁文件。只改离线成本/记录，不改变健康推理的模型、候选或数值。
 - 交付打包补齐原本未覆盖的推理stdout/矩阵资源准入与总wall time/官方TrackEval stdout、完成回执和小型推理provenance；完整预测仍只提供路径SHA。CLI成本保留封存回归通过，最新定向文件17项通过（4.55s），不把CPU锁等待算GPU推理，也不把单方法wall time当包含排队的整个矩阵wall time。
+- 三模型25视频/425表达完整预测全部0退出并封存；官方9个新评测全部0退出，离线归因/排序/视频CI/表B和REPORT均已生成。最后package步骤因DIAG_FIT_*通配符也匹配派生count-controls、缺method字段而KeyError；仅修为明确注册三方法枚举并补回归，18项通过（4.33s）；仅恢复失败打包，不重跑任何GPU/官方评测/密集归因，保留原失败stdout。
 
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 

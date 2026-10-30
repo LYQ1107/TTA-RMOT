@@ -172,6 +172,22 @@ def test_CLI_cost_accounting_preserves_prediction_seal(tmp_path):
     assert json.loads((tmp_path/'run_metadata.json').read_text())['worker_seconds']==13.
 
 
+def test_packager_does_not_charge_count_controls_as_GPU_methods(tmp_path,monkeypatch):
+    import json
+    import scripts.report_diag_fit as report
+    from flex_tta.runtime.pf_receipts import atomic_json
+    monkeypatch.setattr(report,'RUN',tmp_path/'run');monkeypatch.setattr(report,'PUBLIC',tmp_path/'public')
+    for method in report.METHODS:
+        atomic_json(report.RUN/'evaluation/merged'/method/'run_metadata.json',dict(method=method,
+            worker_seconds=3600.,actual_scheduler_wall_seconds=3700.,peak_allocated_bytes=1000))
+    atomic_json(report.RUN/'evaluation/merged'/(report.METHODS[0]+'_AT_FROZEN_COUNT')/'run_metadata.json',
+        dict(score_source=report.METHODS[0],count_source='FROZEN',post_hoc_only=True))
+    report.package()
+    costs=json.loads((report.PUBLIC/'costs.json').read_text())
+    assert len(costs['inference'])==3 and {r['method'] for r in costs['inference']}==set(report.METHODS)
+    assert all(r['GPU_hours']==1. for r in costs['inference'])
+
+
 def test_capacity_only_LoRA_and_head_mutate():
     model=Model();attach_adapter(model,'cpu',rank=16,layers='all',projections=('wq','wk','wv','wo'),alpha=32,unfreeze=('head',))
     before={n:p.detach().clone() for n,p in model.named_parameters()};versions={n:p._version for n,p in model.named_parameters() if not p.requires_grad}
