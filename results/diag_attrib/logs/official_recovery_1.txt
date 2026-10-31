@@ -1,0 +1,160 @@
+=> merge config from /data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+[Warning] Fused window process have not been installed. Please refer to get_started.md for installation.
+Tutel has not been installed. To use Swin-MoE, please install Tutel; otherwise, just ignore this.
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/torch/functional.py:554: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4314.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+load success
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 4996.72it/s]
+[1mRobertaModel LOAD REPORT[0m from: pretrained/roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+pooler.dense.weight             | MISSING    | 
+pooler.dense.bias               | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-10-31 16:00:24 pcd_tta_model](run_flexhook_dance_pcd_tta.py 132): INFO Strict source checkpoint load: <All keys matched successfully>
+/data2/user/FlexHook-TTA/vendor/FlexHook/models/swin_transformer_rope.py:44: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0004", "entries": 187, "positive_entries": 12}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0005", "entries": 153, "positive_entries": 9}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0007", "entries": 221, "positive_entries": 13}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0010", "entries": 221, "positive_entries": 13}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0014", "entries": 629, "positive_entries": 37}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0018", "entries": 119, "positive_entries": 10}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0019", "entries": 374, "positive_entries": 22}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0025", "entries": 374, "positive_entries": 16}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0026", "entries": 527, "positive_entries": 31}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0030", "entries": 119, "positive_entries": 8}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0034", "entries": 629, "positive_entries": 111}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0035", "entries": 289, "positive_entries": 65}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0041", "entries": 1224, "positive_entries": 51}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0043", "entries": 255, "positive_entries": 3}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0047", "entries": 391, "positive_entries": 27}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0058", "entries": 204, "positive_entries": 13}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0063", "entries": 1802, "positive_entries": 87}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0065", "entries": 119, "positive_entries": 0}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0073", "entries": 527, "positive_entries": 66}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0077", "entries": 255, "positive_entries": 16}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0079", "entries": 442, "positive_entries": 31}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0081", "entries": 884, "positive_entries": 52}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0090", "entries": 663, "positive_entries": 43}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0094", "entries": 1037, "positive_entries": 49}
+{"event": "OFFICIAL_MISSING_MARGIN_RECOVERED", "video": "dancetrack0097", "entries": 119, "positive_entries": 7}
+{
+  "status": "STOP_OFFICIAL_COMPLETEBANK_CANNOT_REPRODUCE_HISTORICAL_NATIVE",
+  "prereg": {
+    "branch": "research/v2dance-diag-attrib-20261031",
+    "base_commit": "958e1d7c6165bdc257d420562d94d66916f67ddb",
+    "published_commit": "0daa63a5b47d4450366fa5b0cdb6c7b1673aac71",
+    "published_tree": "d7096d2f1e67f52008d09d69e1bfe31159ef9b28",
+    "local_snapshot_commit": "3d09fdfaf12a6a5364ee3de719b2d0ffef4ddea9",
+    "prereg_sha256": "d064ca9e7762fa5ff5701fc4c66f033d64ce680a617bac1980b6153ec9a589b6",
+    "remote_verified": true,
+    "verification": "GitHub branch read-back and exact local/remote Git tree equality before any new score computation or evaluation",
+    "new_evaluation_started_before_publication": false,
+    "new_training_authorized": false
+  },
+  "original_score_sha256": "de8ff46428818cbd1ee0dd2b6ea1a7692eae2b7e0133c521c1470b67b58da110",
+  "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+  "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+  "missing_MOT_observations": 692,
+  "recovered_candidate_query_scores": 11764,
+  "added_positive_rows": 792,
+  "changed_episodes": 56,
+  "historical_prediction_rows": 254118,
+  "completebank_native_prediction_rows": 254910,
+  "official_historical_HOTA": 32.134,
+  "completebank_HOTA": null,
+  "completebank_HOTA_not_evaluated": "stop immediately on row reproduction failure; no GT opened",
+  "parity": [
+    {
+      "video": "dancetrack0004",
+      "frame": 1,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 7.62939453125e-06,
+      "cache_vs_historical_max_error": 2.86102294921875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 2,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.049041748046875e-05,
+      "cache_vs_historical_max_error": 2.574920654296875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 3,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.049041748046875e-05,
+      "cache_vs_historical_max_error": 5.435943603515625e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 4,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 9.5367431640625e-06,
+      "cache_vs_historical_max_error": 3.528594970703125e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 5,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 8.58306884765625e-06,
+      "cache_vs_historical_max_error": 7.2479248046875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 6,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 4.76837158203125e-06,
+      "cache_vs_historical_max_error": 0.000118255615234375,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 7,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 4.76837158203125e-06,
+      "cache_vs_historical_max_error": 0.00013256072998046875,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 8,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.9073486328125e-06,
+      "cache_vs_historical_max_error": 8.20159912109375e-05,
+      "historical_selection_mismatches": 0
+    }
+  ],
+  "physical_GPU": 4,
+  "precision": "FP32",
+  "tokenizer_person": [
+    5970
+  ],
+  "optimizer_steps": 0,
+  "trainable_parameters": 0,
+  "target_GT_open_attempts": [],
+  "original_files_written": 0,
+  "GPU_worker_seconds": 186.15458437497728,
+  "GPU_worker_hours": 0.05170960677082702,
+  "peak_allocated_bytes": 4269847040,
+  "total_wall_seconds": 196.4307841078844
+}

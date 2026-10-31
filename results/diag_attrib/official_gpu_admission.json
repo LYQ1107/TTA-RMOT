@@ -1,0 +1,74 @@
+{
+  "devices": [
+    {
+      "index": 0,
+      "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+      "free_MiB": 62165,
+      "total_MiB": 81920,
+      "process_count": 1
+    },
+    {
+      "index": 1,
+      "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+      "free_MiB": 65119,
+      "total_MiB": 81920,
+      "process_count": 1
+    },
+    {
+      "index": 2,
+      "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+      "free_MiB": 62157,
+      "total_MiB": 81920,
+      "process_count": 1
+    },
+    {
+      "index": 3,
+      "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "free_MiB": 65003,
+      "total_MiB": 81920,
+      "process_count": 1
+    },
+    {
+      "index": 4,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "free_MiB": 81154,
+      "total_MiB": 81920,
+      "process_count": 0
+    },
+    {
+      "index": 5,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "free_MiB": 81154,
+      "total_MiB": 81920,
+      "process_count": 0
+    },
+    {
+      "index": 6,
+      "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+      "free_MiB": 64971,
+      "total_MiB": 81920,
+      "process_count": 1
+    },
+    {
+      "index": 7,
+      "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "free_MiB": 81154,
+      "total_MiB": 81920,
+      "process_count": 0
+    }
+  ],
+  "chosen": {
+    "index": 4,
+    "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+    "free_MiB": 81154,
+    "total_MiB": 81920,
+    "process_count": 0
+  },
+  "maximum_physical_GPUs": 1,
+  "admission_MiB": 12288,
+  "allocator_limit_MiB": 8192,
+  "selection": "fewest processes, then most free memory, then numeric index",
+  "raw_GPU_query": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 62165, 81920\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 65119, 81920\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 62157, 81920\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 65003, 81920\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81154, 81920\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81154, 81920\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 64971, 81920\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81154, 81920\n",
+  "raw_process_query": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 3170763, 18940\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3924761, 16026\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 3170764, 18948\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 1896420, 16142\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 2676408, 16174\n",
+  "other_processes_stopped": 0
+}
