@@ -19,6 +19,11 @@ def report():
     complete=json.loads((RUN/'official_completion.json').read_text());source=json.loads((PUBLIC/'source_boundary.json').read_text())
     if complete['status']!='ALL39_OFFICIAL_TARGET_SETS_COMPLETE' or source['status']!='ALL8_SOURCE_BOUNDARY_OFFICIAL_COMPLETE':raise ValueError('finish all registered evaluations')
     probe=json.loads((PUBLIC/'teacher_combo.json').read_text());thresholds=json.loads((PUBLIC/'thresholds.json').read_text())
+    # Historical soft-threshold controls are copied unchanged, not new probes
+    # or extra decoder variants. All current combinations remain hard outputs.
+    with (cs.PUBLIC/'teacher_probe.csv').open() as f:
+        historical_teacher=[r for r in csv.DictReader(f) if r['model']=='2B' and r['method'] in ('T1_CROP_YESNO','T2_CROP_CHOICE')]
+    v2.write_csv(PUBLIC/'teacher_historical_controls.csv',historical_teacher)
     ps=json.loads((RUN/'predictions_seal.json').read_text());plan={r['method']:r for r in ps['methods']}
     structure=json.loads((cs.PUBLIC/'structure_stats.json').read_text());presence={(r['video'],r['expression']):bool(r['GT_observations']) for r in structure['episodes']}
     meta,_,_=inputs(verify=False);train={' '.join(r['query_text'].lower().split()) for r in read_jsonl('/data2/user/TTA-RMOT-assets/train2val/20261031/runtime_train.jsonl')}
@@ -89,6 +94,9 @@ def report():
     atomic_json(PUBLIC/'official_metrics_index.json',dict(files=metric_index,archive_sha256=file_sha(PUBLIC/'official_metrics.tar.gz')))
     with tarfile.open(PUBLIC/'stage_logs.tar.gz','w:gz') as archive:
         for p in sorted(RUN.rglob('*')):
+            # The current report stdout is still being written by the parent;
+            # archive completed experiment/evaluation logs, not this live file.
+            if 'CPU_launchers' in p.parts and p.name=='report.txt':continue
             if p.is_file() and (p.name=='trackeval.log' or (any(x in ('launchers','CPU_launchers') for x in p.parts) and p.suffix in ('.txt','.json')) or ('official_jobs' in p.parts and p.suffix in ('.txt','.json'))):
                 archive.add(p,arcname=str(p.relative_to(RUN)));logs.append(dict(path=str(p),sha256=file_sha(p)))
     with gzip.open(PUBLIC/'prediction_files.csv.gz','wt') as f:
@@ -150,6 +158,7 @@ def report():
         '## 失败与修复记录、恢复路径',
         '本轮真实失败及修复见EXECUTION.md和stage_logs.tar.gz；不跳样本、不改种子、不改固定判定。23项CPU回归已通过(6新解码/teacher tests、8原count_structure、9原v2)；测试通过不代替科研结论。',
         '服务器运行根目录：'+str(RUN)+'。源域分数/模型/掩码等大文件仅记录路径与SHA于server_artifacts.json、source_inputs.json、source_scores_seal.json；所有预测SHA在prediction_files.csv.gz；完整官方CSV在official_metrics.tar.gz、完整TrackEval和源域GPU stdout在stage_logs.tar.gz。',
+        '补充归因、历史教师参照及适用边界解释见 [INTERPRETATION.md](INTERPRETATION.md)；不改变任何预测、官方指标或预注册判定。',
         '完成后停止：不训练，不调用Dance教师，不自行启动新方法或默认解码器的新实验。']
     v2.write_new(PUBLIC/'REPORT.md','\n\n'.join(sections)+'\n')
     result=dict(status='COMPLETE_STOP_NO_TRAINING_NO_NEW_DANCE_TEACHER',verdict=verdict,decoder_sets=36,target_reference_sets=3,source_boundary_sets=8,

@@ -1,0 +1,39 @@
+{
+  "source_GPU": {
+    "jobs": [
+      {
+        "phase": "smoke",
+        "pid": 1077836,
+        "exit_code": 0,
+        "wall_seconds": 27.63882195786573,
+        "stdout": "/data2/user/FlexHook-TTA/results/runs/xquery_decode_20261101/source/launchers/1793464272052622862/smoke.txt"
+      },
+      {
+        "phase": "full",
+        "pid": 1078246,
+        "exit_code": 0,
+        "wall_seconds": 6935.261560861953,
+        "stdout": "/data2/user/FlexHook-TTA/results/runs/xquery_decode_20261101/source/launchers/1793464272052622862/full.txt"
+      }
+    ],
+    "physical_gpu": 2,
+    "actual_parent_wall_seconds": 6963.140266044997,
+    "GPU_process_hours": 1.9341389952277273,
+    "student_updates": 0,
+    "teacher_calls": 0
+  },
+  "target_new_GPU_calls": 0,
+  "new_Dance_teacher_calls": 0,
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "target_decoding_CPU_seconds": 23.873169976985082,
+  "source_threshold_CPU_seconds": 2.1502589338924736,
+  "official_target_actual_wall_seconds": 227.97549932287075,
+  "official_source_actual_wall_seconds": 173.53802868910134,
+  "new_target_TrackEval_jobs": 32,
+  "exact_reused_target_results": 7,
+  "new_source_TrackEval_jobs": 8,
+  "source_smoke_and_full_cost_both_included": true,
+  "cost_semantics": "GPU-process hours include model loading/CPU segments, not utilization integral; prior checkpoint training excluded and explicitly inherited",
+  "feature_cache": "512MiB bounded RAM per current video, no persistent new visual feature cache"
+}
