@@ -1,5 +1,4 @@
 {
-  "snapshot_scope": "ALL_THREE_REGISTERED_TRAINING_ARMS_COMPLETE: includes closed original-LR runs and retained implementation attempts; new full Val inference not yet started",
   "training_attempts": [
     {
       "method": "DIAG_FIT_CAP",
@@ -135,7 +134,105 @@
     }
   ],
   "training_GPU_process_hours_including_retained_attempts": 15.386198322569577,
-  "inference": [],
+  "inference": [
+    {
+      "method": "DIAG_FIT_OPT",
+      "GPU_hours": 0.8463993849649948,
+      "actual_wall_seconds": 3051.884528160095,
+      "peak_allocated_bytes": 5277010944,
+      "CPU_lock_wait_seconds": 7.141218520700932e-05,
+      "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT/inference_costs.json"
+    },
+    {
+      "method": "DIAG_FIT_OPT_POS",
+      "GPU_hours": 0.8487740185343945,
+      "actual_wall_seconds": 3060.250515460968,
+      "peak_allocated_bytes": 5277010944,
+      "CPU_lock_wait_seconds": 7.60890543460846e-05,
+      "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT_POS/inference_costs.json"
+    },
+    {
+      "method": "DIAG_FIT_CAP",
+      "GPU_hours": 0.8728855750750517,
+      "actual_wall_seconds": 3147.20827460289,
+      "peak_allocated_bytes": 5278630912,
+      "CPU_lock_wait_seconds": 7.908791303634644e-05,
+      "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_CAP/inference_costs.json"
+    }
+  ],
+  "inference_matrix_attempts": [
+    {
+      "launcher_status_path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/matrix_launchers/1793397075345897921/launcher_status.json",
+      "status": "COMPLETE",
+      "methods": [
+        "DIAG_FIT_OPT_POS",
+        "DIAG_FIT_OPT",
+        "DIAG_FIT_CAP"
+      ],
+      "results": [
+        {
+          "method": "DIAG_FIT_OPT_POS",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "DIAG_FIT_OPT_POS",
+              "phase": "inference",
+              "physical_gpu": 1,
+              "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+              "pid": 3177917,
+              "start_epoch": 1793397076.5137572,
+              "exit_code": 0,
+              "elapsed_seconds": 3059.0683912171517,
+              "end_epoch": 1793400135.5813951
+            }
+          ]
+        },
+        {
+          "method": "DIAG_FIT_OPT",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "DIAG_FIT_OPT",
+              "phase": "inference",
+              "physical_gpu": 4,
+              "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+              "pid": 3177918,
+              "start_epoch": 1793397076.5264146,
+              "exit_code": 0,
+              "elapsed_seconds": 3050.6898735810537,
+              "end_epoch": 1793400127.2156909
+            }
+          ]
+        },
+        {
+          "method": "DIAG_FIT_CAP",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "DIAG_FIT_CAP",
+              "phase": "inference",
+              "physical_gpu": 4,
+              "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+              "pid": 3256379,
+              "start_epoch": 1793400128.4430656,
+              "exit_code": 0,
+              "elapsed_seconds": 3146.017533472972,
+              "end_epoch": 1793403274.4597924
+            }
+          ]
+        }
+      ],
+      "preserved": [],
+      "pending": [],
+      "actual_matrix_wall_seconds": 6199.165565205971,
+      "registered_physical_GPUs": [
+        1,
+        4
+      ],
+      "target_GT_opened": false,
+      "scientific_metrics": "NOT_COMPUTED_BEFORE_ALL_PREDICTIONS_SEALED"
+    }
+  ],
   "teacher_new_calls": 0,
   "required_teacher_labels_per_arm": 8500,
   "reused_Frozen_and_D0_are_not_free": true,

@@ -1,0 +1,75 @@
+{
+  "status": "PASS_POST_GT_FULL_PREDICTION_SEALS_AND_OFFICIAL_COMPLETENESS",
+  "models": {
+    "DIAG_FIT_OPT_POS": {
+      "videos": 25,
+      "episodes": 425,
+      "selected_step": 8973,
+      "target_GT_open_attempts": 0,
+      "original_metadata_and_all_predictions_hashes_unchanged": true,
+      "checkpoint_sha256": "9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15"
+    },
+    "DIAG_FIT_OPT": {
+      "videos": 25,
+      "episodes": 425,
+      "selected_step": 8973,
+      "target_GT_open_attempts": 0,
+      "original_metadata_and_all_predictions_hashes_unchanged": true,
+      "checkpoint_sha256": "b58568b37e4074369d11d672ac0d0bc1aa2814fe52451bba7000af79a4b96d49"
+    },
+    "DIAG_FIT_CAP": {
+      "videos": 25,
+      "episodes": 425,
+      "selected_step": 8973,
+      "target_GT_open_attempts": 0,
+      "original_metadata_and_all_predictions_hashes_unchanged": true,
+      "checkpoint_sha256": "a95b57fc6fe231a358d5259ba8d9b569807d3b41b15a1fc87124caab27020214"
+    }
+  },
+  "official_new_evaluations": 9,
+  "all_original_predictions_preserved": true,
+  "table_A_published_before_inference": "4a812e3359307c975f5c5a889d789c0a734e161d",
+  "table_A_sha256": "d6cb3b5b0092f9579bb8743209676b9a2655d062cf3f188512022809c4f7c61f",
+  "table_B_sha256": "30846aa052d8e62cd563f2c97ced578d856abfa67bd7da8bcec2d7630bbfc7e4",
+  "prediction_manifest_sha256": "3b4a91d0481c0b67e88574c5c492724369457edf7b7d91f0e6ed8e1de784fcb9",
+  "packaging_only_recovery": true,
+  "costs": {
+    "training_GPU_process_hours_including_retained_attempts": 15.386198322569577,
+    "inference": [
+      {
+        "method": "DIAG_FIT_OPT",
+        "GPU_hours": 0.8463993849649948,
+        "actual_wall_seconds": 3051.884528160095,
+        "peak_allocated_bytes": 5277010944,
+        "CPU_lock_wait_seconds": 0.00007141218520700932,
+        "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT/inference_costs.json"
+      },
+      {
+        "method": "DIAG_FIT_OPT_POS",
+        "GPU_hours": 0.8487740185343945,
+        "actual_wall_seconds": 3060.250515460968,
+        "peak_allocated_bytes": 5277010944,
+        "CPU_lock_wait_seconds": 0.0000760890543460846,
+        "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT_POS/inference_costs.json"
+      },
+      {
+        "method": "DIAG_FIT_CAP",
+        "GPU_hours": 0.8728855750750517,
+        "actual_wall_seconds": 3147.20827460289,
+        "peak_allocated_bytes": 5278630912,
+        "CPU_lock_wait_seconds": 0.00007908791303634644,
+        "cost_source": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_CAP/inference_costs.json"
+      }
+    ],
+    "matrix": [
+      {
+        "status": "COMPLETE",
+        "actual_matrix_wall_seconds": 6199.165565205971,
+        "registered_physical_GPUs": [
+          1,
+          4
+        ]
+      }
+    ]
+  }
+}

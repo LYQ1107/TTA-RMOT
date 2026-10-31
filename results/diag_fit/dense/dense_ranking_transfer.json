@@ -1,0 +1,523 @@
+{
+  "methods": {
+    "FROZEN": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.650203661381795,
+        "AP": 0.09344576809145812,
+        "selected_rows": 99704
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.5396490056410591,
+        "AP": 0.6402285647459579,
+        "selected_rows": 12259
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.6178890085940457,
+        "AP": 0.08449448251485789,
+        "selected_rows": 1343
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.6190864211685158,
+        "AP": 0.08590272734400892,
+        "selected_rows": 679
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.6505351807859888,
+        "AP": 0.09356800072993769,
+        "selected_rows": 98361
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.6506988580941698,
+        "AP": 0.09363223206751393,
+        "selected_rows": 97682
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.5398404959893762,
+        "AP": 0.6395236298403169,
+        "selected_rows": 12082
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.1568034900739009,
+          "3": 0.43712094657689626,
+          "5": 0.6781478499372867
+        },
+        "non_teacher_endpoint": {
+          "1": 0.15670437103093376,
+          "3": 0.437101981264443,
+          "5": 0.6782979120565223
+        },
+        "outside_explicit_window": {
+          "1": 0.1566153264489789,
+          "3": 0.437049238900956,
+          "5": 0.6783129345397121
+        },
+        "teacher_endpoint": {
+          "1": 0.16771868504710027,
+          "3": 0.4392094461946898,
+          "5": 0.6616226975504852
+        }
+      }
+    },
+    "SOURCE_REHEARSAL": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.6413111532634016,
+        "AP": 0.09406632890286575,
+        "selected_rows": 41211
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.5232266235393389,
+        "AP": 0.6340376635914193,
+        "selected_rows": 5563
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.6066072782609803,
+        "AP": 0.08681823500510241,
+        "selected_rows": 535
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.6081499197821586,
+        "AP": 0.08701719951267518,
+        "selected_rows": 273
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.6416707001361414,
+        "AP": 0.09416669881968506,
+        "selected_rows": 40676
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.6418461407104399,
+        "AP": 0.09421977495873037,
+        "selected_rows": 40403
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.52342872619795,
+        "AP": 0.6333063986691705,
+        "selected_rows": 5479
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.15127873614002751,
+          "3": 0.42974673332831564,
+          "5": 0.670901552527375
+        },
+        "non_teacher_endpoint": {
+          "1": 0.15120217301065514,
+          "3": 0.429872381219484,
+          "5": 0.6710678317480462
+        },
+        "outside_explicit_window": {
+          "1": 0.15118274447888594,
+          "3": 0.429804500420004,
+          "5": 0.67110108181725
+        },
+        "teacher_endpoint": {
+          "1": 0.15971002703844228,
+          "3": 0.4159101264667988,
+          "5": 0.6525905392326125
+        }
+      }
+    },
+    "NAIVE_PAIRED": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.7554052061104438,
+        "AP": 0.16232002378417995,
+        "selected_rows": 21100
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.6761573421329783,
+        "AP": 0.7083695439811346,
+        "selected_rows": 10253
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.7327991907394181,
+        "AP": 0.16249350611898095,
+        "selected_rows": 201
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.729935961780979,
+        "AP": 0.16386178839233423,
+        "selected_rows": 104
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.7556311096913004,
+        "AP": 0.16232528461204251,
+        "selected_rows": 20899
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.7557612528114325,
+        "AP": 0.1623238281683176,
+        "selected_rows": 20795
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.6766734173971661,
+        "AP": 0.7079784422001235,
+        "selected_rows": 10098
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.1538852080085703,
+          "3": 0.44269525700165985,
+          "5": 0.6753412651544033
+        },
+        "non_teacher_endpoint": {
+          "1": 0.15371087103070788,
+          "3": 0.4427444231567817,
+          "5": 0.6753889227107567
+        },
+        "outside_explicit_window": {
+          "1": 0.15362393338569172,
+          "3": 0.4427315985085804,
+          "5": 0.675363450122594
+        },
+        "teacher_endpoint": {
+          "1": 0.1730835582691163,
+          "3": 0.4372809778376501,
+          "5": 0.6700931160209036
+        }
+      }
+    },
+    "PSR": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.7561129711884413,
+        "AP": 0.16184929475189624,
+        "selected_rows": 33063
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.6930729943942708,
+        "AP": 0.719942740712336,
+        "selected_rows": 12883
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.7346654302705674,
+        "AP": 0.16296830052918662,
+        "selected_rows": 312
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.7320329027780711,
+        "AP": 0.16424403390592068,
+        "selected_rows": 158
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.7563277821235536,
+        "AP": 0.161846320860358,
+        "selected_rows": 32751
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.7564512745863796,
+        "AP": 0.1618415953083325,
+        "selected_rows": 32593
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.6935911776149534,
+        "AP": 0.7195856642770755,
+        "selected_rows": 12681
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.1551506110696747,
+          "3": 0.44287917115055836,
+          "5": 0.6749851969892354
+        },
+        "non_teacher_endpoint": {
+          "1": 0.15502904150881186,
+          "3": 0.44299863309917686,
+          "5": 0.6750640182385326
+        },
+        "outside_explicit_window": {
+          "1": 0.15494474697249205,
+          "3": 0.44294748023213903,
+          "5": 0.6750528561447192
+        },
+        "teacher_endpoint": {
+          "1": 0.16853810372366185,
+          "3": 0.42972377313758825,
+          "5": 0.6663052372330247
+        }
+      }
+    },
+    "DIAG_FIT_OPT_POS": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.9139272129566184,
+        "AP": 0.5302680254893357,
+        "selected_rows": 996330
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.6849668570011279,
+        "AP": 0.747856825114678,
+        "selected_rows": 301195
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.9234491778563064,
+        "AP": 0.5474333456078591,
+        "selected_rows": 10003
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.9238127187361473,
+        "AP": 0.5489393389033519,
+        "selected_rows": 5031
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.9138289628447782,
+        "AP": 0.53009512870899,
+        "selected_rows": 986327
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.9137768838736511,
+        "AP": 0.5300057240777065,
+        "selected_rows": 981296
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.6849413694057745,
+        "AP": 0.7472840183172621,
+        "selected_rows": 296993
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.161958688914921,
+          "3": 0.4432217812269749,
+          "5": 0.6642475840298608
+        },
+        "non_teacher_endpoint": {
+          "1": 0.16183031665955167,
+          "3": 0.4431142261424821,
+          "5": 0.6641587662082847
+        },
+        "outside_explicit_window": {
+          "1": 0.16181012749824397,
+          "3": 0.4430129582820789,
+          "5": 0.6640505144835149
+        },
+        "teacher_endpoint": {
+          "1": 0.17609530842372356,
+          "3": 0.4550659706226429,
+          "5": 0.6740283870990317
+        }
+      }
+    },
+    "DIAG_FIT_OPT": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.9378479976501575,
+        "AP": 0.5818598422696735,
+        "selected_rows": 345302
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.7521329368559426,
+        "AP": 0.7924881667062806,
+        "selected_rows": 184722
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.9476287885790787,
+        "AP": 0.6202078947328363,
+        "selected_rows": 3821
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.9478925873909951,
+        "AP": 0.6215925550423259,
+        "selected_rows": 1926
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.9377488371309826,
+        "AP": 0.5814717552532422,
+        "selected_rows": 341481
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.9376965965737106,
+        "AP": 0.5812668041321669,
+        "selected_rows": 339555
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.7519110146894928,
+        "AP": 0.7917707264972846,
+        "selected_rows": 181827
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.16122858081422017,
+          "3": 0.45968273615864946,
+          "5": 0.6901031100027956
+        },
+        "non_teacher_endpoint": {
+          "1": 0.16081368455277953,
+          "3": 0.4594236786886893,
+          "5": 0.6900139742426105
+        },
+        "outside_explicit_window": {
+          "1": 0.16075508173407876,
+          "3": 0.4592825070750135,
+          "5": 0.6900009275064983
+        },
+        "teacher_endpoint": {
+          "1": 0.20691781924623429,
+          "3": 0.4882106830530694,
+          "5": 0.6999189251324266
+        }
+      }
+    },
+    "DIAG_FIT_CAP": {
+      "all425_official": {
+        "candidate_pairs": 3588445,
+        "positive_candidates": 200619,
+        "AUROC": 0.9406408381236119,
+        "AP": 0.5814071209907626,
+        "selected_rows": 695148
+      },
+      "GT_present_frame_queries": {
+        "candidate_pairs": 353398,
+        "positive_candidates": 200619,
+        "AUROC": 0.838754740070358,
+        "AP": 0.8731976324174143,
+        "selected_rows": 243547
+      },
+      "direct_teacher_endpoint_frames": {
+        "candidate_pairs": 36193,
+        "positive_candidates": 2019,
+        "AUROC": 0.9503499962737676,
+        "AP": 0.5585110217686378,
+        "selected_rows": 7652
+      },
+      "potential_expansion_middle_frames": {
+        "candidate_pairs": 18258,
+        "positive_candidates": 1019,
+        "AUROC": 0.9506740968526474,
+        "AP": 0.5524821657983154,
+        "selected_rows": 3873
+      },
+      "non_teacher_endpoint_frames": {
+        "candidate_pairs": 3552252,
+        "positive_candidates": 198600,
+        "AUROC": 0.9405508823992531,
+        "AP": 0.5818254651669685,
+        "selected_rows": 687496
+      },
+      "not_direct_or_middle_frames": {
+        "candidate_pairs": 3533994,
+        "positive_candidates": 197581,
+        "AUROC": 0.9405037000234837,
+        "AP": 0.5820860185808764,
+        "selected_rows": 683623
+      },
+      "not_direct_or_middle_GT_present": {
+        "candidate_pairs": 348591,
+        "positive_candidates": 197581,
+        "AUROC": 0.8383096417033834,
+        "AP": 0.8726878776605601,
+        "selected_rows": 239840
+      },
+      "GT_recall_at_K": {
+        "all": {
+          "1": 0.23757238194969946,
+          "3": 0.5313197255509398,
+          "5": 0.7271963498186335
+        },
+        "non_teacher_endpoint": {
+          "1": 0.23743139653944537,
+          "3": 0.5314425666121645,
+          "5": 0.7275265577196058
+        },
+        "outside_explicit_window": {
+          "1": 0.23741181234985426,
+          "3": 0.5315045522852608,
+          "5": 0.7276095338891702
+        },
+        "teacher_endpoint": {
+          "1": 0.2530979882835461,
+          "3": 0.5177922126345991,
+          "5": 0.6908331696180998
+        }
+      }
+    }
+  },
+  "GT_frame_query_denominators": {
+    "all": 42782,
+    "non_teacher_endpoint": 42397,
+    "outside_explicit_window": 42204,
+    "teacher_endpoint": 385
+  },
+  "scope_note": "pooled AUROC/AP are not same-frame semantic ranking; one-to-oneGTRecall includes allGTframes, not candidate hit-rate",
+  "GT_read_only_after_all_registered_predictions_sealed": true
+}

@@ -30,6 +30,15 @@
 - 交付打包补齐原本未覆盖的推理stdout/矩阵资源准入与总wall time/官方TrackEval stdout、完成回执和小型推理provenance；完整预测仍只提供路径SHA。CLI成本保留封存回归通过，最新定向文件17项通过（4.55s），不把CPU锁等待算GPU推理，也不把单方法wall time当包含排队的整个矩阵wall time。
 - 三模型25视频/425表达完整预测全部0退出并封存；官方9个新评测全部0退出，离线归因/排序/视频CI/表B和REPORT均已生成。最后package步骤因DIAG_FIT_*通配符也匹配派生count-controls、缺method字段而KeyError；仅修为明确注册三方法枚举并补回归，18项通过（4.33s）；仅恢复失败打包，不重跑任何GPU/官方评测/密集归因，保留原失败stdout。
 
+## 2026-10-31 — D-FIT完整验收与停止
+
+- 三臂8973更新、25Val/425表达完整预测和官方评测已完成。HOTA Frozen8.2180，D1 29.7020（+21.4840），D2 22.8440（+14.6260），CAP27.7680（+19.5500）；25视频聚类CI均正，但不是盲测/Train→Val。
+- Frozen取各模型逐帧k后29.4000/22.8540/27.1030，反向新模型取Frozen计数7.8978/7.8380/8.1589。主要整体收益可由数量/存在性解释；该反事实依赖适应模型k，不能描述为免费独立系统，没有GT调阈值。
+- CAP无教师标签帧R@1=.237412相对Frozen.156615有额外排序信号，D1/D2 .160755/.161810提升较小。Empty FP156758/686166/446071均高于87371，原始IDSW也增加，不宣称身份或空查询问题解决。
+- 严格80%/10%拟合标准三臂均False，保留用户规则类别而不把它冒充已证实的输入/标签矛盾原因。所有目标GT仅封存后离线使用；评测后再验原预测、margin、run_metadata与final checkpoint全部SHA匹配。
+- 最后打包KeyError已在1b24a579/publicf17ec79修复，18项回归通过，只恢复package且exit0；9官方/密集归因/GPU实验未重跑，原失败stdout保留。训练尝试15.3862GPU-process-h、完整推理2.5681GPU-worker-h，推理矩阵6199.17s/实际GPU1和4，继承/验证成本另列不冒充免费。
+- 本轮全部实验已停止，只做最终GitHub记录交付。未启动任何新增密集GT标注、列表蒸馏、源端长训或第七种TTA；后续研究等待用户下一条指令。
+
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 
 - Seed42all8officialTrackEvalexit0; full425Naive7.8064/PSR8.8763,Frozen8.2180. Together17/0/42,Naive7.6174±.17921984,PSR8.7222667±.26144258(samplesd). AllthreePSRpointvaluesaboveFrozen,meanDelta+.5042667; meanvsNaive+1.1048667. No fakeFrozenindependentreplicates.

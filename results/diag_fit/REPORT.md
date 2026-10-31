@@ -1,6 +1,6 @@
 # D-FIT：学生能否拟合冻结 MLLM 标签
 
-状态：FIT_COMPLETE_VAL_PENDING；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
+状态：COMPLETE_STOP；从公开965e71fe5055a4299ae6f46f89dbe4e993cfad11开始，独立分支research/v2dance-diag-fit-20261030。
 用户允许显存足够时共享、优先进程少的最多4卡，不停止其他任务。25Val同集诊断，不是论文主结果或Train→Val。
 
 ## 1. 修改前只读核对
@@ -52,20 +52,89 @@
 - D2_OPT_POS: COMPLETE; fallback=False; selection={'step': 8973, 'sha256': '9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15', 'selection': 'FINAL_STEP_ONLY_NO_TARGET_GT', 'source_selected_step': 7750}
 - D3_CAP: COMPLETE; fallback=False; selection={'step': 8973, 'sha256': 'a95b57fc6fe231a358d5259ba8d9b569807d3b41b15a1fc87124caab27020214', 'selection': 'FINAL_STEP_ONLY_NO_TARGET_GT', 'source_selected_step': 8250}
 
-完整8500判断上的拟合合格判定：D1/D2/D3均False。D1 POS差3个；D2和D3的NEG选中率分别22.62%/12.68%，均未达到≤10%。不放宽标准，也不以300窗口曲线子集替代全8500判定。
-
 ## 3. 表B：封存后Val结果
 
-完整表A先推送并核验GitHub，再启动三个final8973模型的25视频/425表达推理；预测全部封存后才执行独立GT评测。当前尚无新Val结果。
+# 表 B — 固定final-step完整25Val/425表达
 
-## 4. 预注册判定
+Frozen与D0旧Naive直接复用完整预测和官方CSV，未重跑；不可训练臂记N/A，不用smoke或source-best冒充final8973。
 
-拟合合格：POS selected≥0.80且NEG selected≤0.10。原样应用用户四项分支判定，不另调规则。
-规则中的下一阶段只写建议，本轮不自动做密集GT标注、列表蒸馏或正式Train→Val训练。
+| 指标 | Frozen | D0 Naive(s17) | D1_OPT | D2_OPT_POS | D3_CAP |
+|---|---:|---:|---:|---:|---:|
+| HOTA | 8.218000 | 7.449900 | 29.702000 | 22.844000 | 27.768000 |
+| DetA | 3.193700 | 3.746900 | 28.983000 | 15.155000 | 21.355000 |
+| AssA | 21.147000 | 14.834000 | 30.515000 | 34.476000 | 36.157000 |
+| IDF1 | 4.441400 | 4.683300 | 27.621000 | 16.194000 | 22.109000 |
+| IDSW | 269.000000 | 283.000000 | 2119.000000 | 2160.000000 | 2101.000000 |
+| 预测行数 | 99704.000000 | 21100.000000 | 345302.000000 | 996330.000000 | 695148.000000 |
+| Present HOTA | 9.745608 | 7.635013 | 37.271181 | 38.947697 | 43.876648 |
+| Present FP（离线行匹配） | 1996 | 1234 | 52186 | 136371 | 74879 |
+| Empty FP | 87371 | 10783 | 156758 | 686166 | 446071 |
+| 同帧 GT R@1 全部GT帧 | 0.156803 | 0.153885 | 0.161229 | 0.161959 | 0.237572 |
+| R@1 无教师标签帧（旧outside-window口径） | 0.156615 | 0.153624 | 0.160755 | 0.161810 | 0.237412 |
+| R@1 只排除实际教师端点 | 0.156704 | 0.153711 | 0.160814 | 0.161830 | 0.237431 |
+| 全候选 AUROC | 0.650204 | 0.755405 | 0.937848 | 0.913927 | 0.940641 |
+| Frozen@方法计数 HOTA | 8.218000 | 7.262100 | 29.400000 | 22.854000 | 27.103000 |
+| 方法@Frozen计数 HOTA | 8.218000 | 8.027400 | 7.897800 | 7.838000 | 8.158900 |
+| 固定 PSR correct-POS374 选中数 | 30 | 32 | 322 | 349 | 366 |
+| 视频95% CI: 方法−Frozen | [+0.0000, +0.0000] | [-7.0827, +4.7416] | [+14.1088, +30.5131] | [+9.1929, +21.6902] | [+13.2182, +28.1607] |
+| 视频95% CI: 方法−D0 | [-4.7416, +7.0827] | [+0.0000, +0.0000] | [+16.8499, +29.7091] | [+11.2199, +21.4259] | [+15.0536, +28.0418] |
 
-## 5. 成本与provenance
+outside-window沿旧口径排除anchor±1三帧；本轮仅端点有直接标签，因此另报只排除实际端点的R@1，不混淆分母。
+Present FP沿旧IoU≥0.5离线匹配（Frozen1996），不同于官方CLEAR的2005；官方CLEAR随完整CSV保留。
+374是历史PSR教师正确POS固定集合，并非三新臂实际使用的Naive363正确POS；全部GT只由此封存后独立进程读取。
+Count-matched是继承父模型成本的后验诊断，不是独立部署系统；25视频聚类2000次/seed0，不以帧作为独立样本。
 
-checkpoint/完整预测保留data2，不进git；保存路径/SHA与每run的目标GT打开次数，必须为0。
+## 4. 按预注册规则判定
+
+预注册规则标签：`教师和学生的输入不一致，或者教师标签自相矛盾`。
+
+按用户预注册分支原样归类，三臂拟合资格均为False。本轮三臂实际均可正常训练且有完整最终指标；这个标签不能当作输入差异或标签矛盾已经被因果证实。端点一致率与真实RMOT结果一并呈现，不改验收门槛。
+
+教师相邻端点一致率：
+
+```json
+{
+  "pairs": 4250,
+  "endpoint_offset": 1,
+  "binary_POS_agreement": 0.9745882352941176,
+  "YesNo_half_agreement": 0.9534117647058824,
+  "original_three_state_agreement": 0.9049411764705882,
+  "abs_probability_difference": 0.044810425253475415,
+  "primary_POS_threshold": 0.95,
+  "target_GT_used": false,
+  "used_for_training_or_tuning": false
+}
+```
+
+### 实证结果与归因（不改变上述预注册判定）
+
+同Val诊断中确有大幅整体改善：D1/D2/D3 HOTA为29.7020/22.8440/27.7680，相对匹配Frozen8.2180分别+21.4840/+14.6260/+19.5500；25视频聚类bootstrap的差值95%区间均为正。这是开发集同集适应结果，不是盲测或Train→Val泛化结论。
+
+数量对照解释了大部分HOTA变化：Frozen采用各模型逐帧k后分别为29.4000/22.8540/27.1030，与模型本身仅差+0.3020/−0.0100/+0.6650。反向固定Frozen输出数量时，新模型HOTA为7.8978/7.8380/8.1589，均未超过8.2180。因此不能把整体增益全部归为候选语义排序恢复。此对照本身不读GT，但需要适应模型提供每帧、每表达的k，包含学到的数量/存在性信息，并继承其计算成本；不是免费、独立可部署的Frozen系统，也没有做GT选阈值。
+
+CAP仍有独立可见的排序信号：无教师标签帧R@1从0.156615到0.237412（约+8.08百分点），D1/D2为0.160755/0.161810，提升较小。全候选AUROC分别0.937848/0.913927/0.940641；全局跨帧/跨表达AUROC与同帧R@1不是同一个问题，不能混用。
+
+误检和身份问题尚未解决。Empty FP从87,371增加到156,758/686,166/446,071；更多参数或更高POS选中率没有自动得到最佳整体方法。原始IDSW也从269增加到2119/2160/2101，不能只凭AssA上升宣称身份稳定性问题已解决。计数增加与覆盖率变化会影响这些原始计数，完整CSV同时保留。
+
+预注册门槛仍逐字执行：D1差3个POS，D2/D3的NEG选中率超过10%，三臂都未合格，不重新挑checkpoint或放宽阈值。上面的规则归类不是已经证明“输入不一致/教师自相矛盾”的因果结论；真实RMOT改善、正确POS恢复与排序数据也不支持写成“学生完全学不进去”。本轮到此停止，不自行启动密集GT、列表式蒸馏或正式Train→Val训练。
+
+## 5. 成本、checkpoint与GT隔离
+
+三新臂训练、教师拟合与完整推理的目标GT打开数实际均为0；全部425条预测封存后，才由独立CPU评价进程读取目标GT。评测后对1275个episode的预测/margin文件、三份原始run_metadata和最终checkpoint再次核验通过，见[post_eval_seal_audit.json](post_eval_seal_audit.json)。
+
+| 方法 | 训练GPU / 推理GPU | 成功full训练worker-body小时 | 完整推理GPU-worker小时 | 单方法实际wall秒 | 推理峰值allocated GiB |
+|---|---|---:|---:|---:|---:|
+| D1_OPT | 1 / 4 | 4.4000 | 0.8464 | 3051.88 | 4.9146 |
+| D2_OPT_POS | 5 / 1 | 4.2320 | 0.8488 | 3060.25 | 4.9146 |
+| D3_CAP | 4 / 4 | 5.9683 | 0.8729 | 3147.21 | 4.9161 |
+
+训练尝试总计15.3862 GPU-process小时，包含有效smoke与保留的实现失败尝试；另有单列的基线拟合/兼容验证和继承的教师/Frozen成本，不能当作免费。三模型完整推理合计2.5681 GPU-worker小时；推理矩阵实际wall为6199.17秒，真实使用GPU1/4两条lane（不是宣称四卡加速），排队计入矩阵wall，CPU文件锁等待不计GPU推理。GPU-worker/process小时不是独占GPU利用率积分；未单独测量的验证开销在costs.json中明确标记。
+
+运行清单、各checkpoint路径/SHA、全部成本和源版本分别见[server_artifacts.json](server_artifacts.json)、[costs.json](costs.json)、[execution_roles.json](execution_roles.json)及各provenance。完整预测/大checkpoint不进入git，封存路径和SHA在[prediction_manifest.json](prediction_manifest.json)。
+
+离线父命令曾在最后打包阶段因派生count-control元数据被误认成GPU方法而退出1；正式9个评测、密集归因、bootstrap和表格均已完成。保留原stdout，补18项回归后只恢复package并成功退出0，没有重跑GPU、TrackEval或密集归因，见[packaging_recovery.json](packaging_recovery.json)和runtime_logs.tar.gz。未隐藏该失败，不把工程修复当作科研成功。
+
+以下保留历史阶段记录，其中的运行状态指当时，不代表最终状态；最终结果以表A/B为准。
 
 ### 兼容性执行记录
 
@@ -85,26 +154,3 @@ OPT_POS及CAP的早期尝试曾因FP16梯度Inf提前退出，并执行过一次
 D3真实smoke final-step checkpoint经load_selected严格重建后，保存前/重载后完整logits逐位相同，GT打开0。
 已有Frozen/Naive/PSR在共同Naive8500上的完整教师拟合基线已完成；三新臂8973步已在GPU1/5/4开始，不复用smoke权重、不重跑D1已完成smoke。
 这只是训练运行状态，不是完整拟合或Val改善结论。原命令一次阻塞等待全部训练；没有agent级ps/tail轮询或干预其它任务。
-
-### 已完成的共同教师标签基线（不是完整表A）
-
-完整记录见[baselines/completion.json](baselines/completion.json)。三模型均在相同Naive8500判断上统计：656个teacher POS、7844个有效非POS；目标GT打开0。
-Frozen选中55/656（0.083841）、旧Naive(s17)选中40/656（0.060976）、旧PSR(s17)选中54/656（0.082317）。对应teacher NEG selected rate分别0.063870、0.004335、0.008287。
-PSR原先自身8500标签有657个POS，在该不同采样集合上选中47/657（0.071537），单独存于own_PSR_labels，不能混入共同标签主比较。
-此阶段复用Frozen分数和已有学生，不重新训练，也不重跑完整RMOT；三新臂全部结束后才生成并发布完整FIT_TABLE.md。
-
-### D2已完成：仅教师拟合的阶段记录，不是完整表A或Val结果
-
-DIAG_FIT_OPT_POS完成8973个更新、17源视频/425目标表达/8500教师判断；原lr=0.0002、pos_weight=10，无数值回退，冻结参数版本未变，目标GT打开0。
-共同Naive8500上的POS selected=617/656（0.940549），NEG selected=1774/7844（0.226160），pair agreement=0.716418；POS/NEG平均学生概率分别0.901210/0.271442。
-按预注册双条件，NEG selected>0.10，故D2尚不具备“拟合合格”资格；不降低阈值，也不以POS单项改善或loss下降替代完整判定。
-唯一待评checkpoint为final8973，SHA256=9e149179814fd9a3b669b9d2e858ccdff41ff3edfedd64f24beb639ef4cfab15；source-selected7750只记录、不做目标评测。
-D1/D3继续原配置，表A发布门仍未打开。students/DIAG_FIT_OPT_POS保留完整小型训练记录；运行中其它attempt记录只是阶段快照，不是最终成本或完整结果。
-
-### D1随后完成：严格保留80%边界，不事后放宽
-
-DIAG_FIT_OPT原lr=0.0002完成8973更新，同8500判断、17源视频/425目标表达，GT打开0/冻结版本不变。
-POS selected=522/656（0.795732），NEG selected=436/7844（0.055584），pair agreement=0.761194；POS/NEG平均学生概率0.719190/0.102303。
-80%至少需525/656，D1尚差3个POS，因此严格记为拟合不合格，不将79.57%四舍五入为80%，不挑选中途checkpoint。
-final8973 SHA256=b58568b37e4074369d11d672ac0d0bc1aa2814fe52451bba7000af79a4b96d49；source-best2750只记录，不做目标评测。
-D1/D2已完成，但D3尚未结束，FIT_TABLE.md及其发布门仍未生成，三新模型的完整Val推理均未开始。
