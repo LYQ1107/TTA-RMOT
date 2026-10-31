@@ -52,7 +52,9 @@ def evaluate():
             if file_sha(e['prediction_path'])!=e['prediction_sha256']:raise ValueError('source prediction changed')
         if done.exists():
             old=json.loads(done.read_text())
-            if old['status']=='PASS':return old
+            if old['status']=='PASS':
+                if file_sha(folder/'results/pedestrian_summary.txt')!=old['summary_sha256'] or file_sha(folder/'results/pedestrian_detailed.csv')!=old['detailed_sha256']:raise ValueError('completed source metric changed')
+                return old
         for e in r['episodes']:
             p=folder/'results'/e['video']/e['expression']/'gt.txt'
             if not p.exists():p.symlink_to(SOURCE/'gt_template'/e['video']/e['expression']/'gt.txt')

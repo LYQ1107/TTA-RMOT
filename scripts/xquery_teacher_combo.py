@@ -47,6 +47,8 @@ def generate():
 
 def evaluate():
     setup();require_plan()
+    from scripts.evaluate_xquery_decode import before_GT
+    before_GT()
     seal=json.loads((RUN/'teacher_combo_seal.json').read_text())
     if file_sha(seal['outputs_path'])!=seal['outputs_sha256']:raise ValueError('changed post-seal predictions')
     from scripts.analyze_pf_full_offline import load_eval_gt,overlaps,matched_gt,auroc
