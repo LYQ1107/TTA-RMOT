@@ -2,7 +2,7 @@
 
 分支：`research/v2dance-train2val-20261031`；起点：`619390d44a09f362eac5cce0f4b1df62c20ec07a`。
 
-状态：P0 只读盘点通过；P1 候选转换完成，P2–P5 尚未运行。不得将历史同集诊断数值当作本轮结果。
+状态：P0/P1 完成；P2 的 Train 采样清单与真实教师 smoke 完成，全量教师待执行，P3–P5 未运行。不得将历史同集诊断数值当作本轮结果。
 
 ## 1. P0：数据与配对盘点
 
@@ -45,6 +45,11 @@ NOT_RUN。完成并推送本表前，不开始 Val 学生推理。
 P1 转换保留全部 348,930 行的 frame、id、box 原始文本和行序，419 条轨迹；候选–表达组合共 13,608,270。
 新候选与 runtime 位于 `/data2/user/TTA-RMOT-assets/train2val/20261031`，逐文件 SHA 见 `candidate_receipt.json`；没有修改任何原数据。
 
+Train 的 7,800 个 Naive 窗口、31,200 个判断已冻结，manifest SHA256：`c09a161246ce2635f1307ec0e13d6605f026b2f0a3280cb5a68efc2775961ed9`。
+原 sampler 在独立测试进程重放 Val，425 个 query 的全部 8,500 位置、ID、框、selection reason 和 frozen margin 逐条一致（`naive_sampling_replay.json`）；这些旧缓存绝不进入训练进程。
+本轮源模型只计算 Train 锚点±1和首帧，40视频全部完成，wall 344.61s；各进程与路径/SHA见 `sparse_source_scores.json`。
+教师4样本真实smoke通过，冻结Qwen/单帧YesNo/输入ID/缓存恢复/GT0，见 `teacher_smoke_check.json` 和原始receipt；P1 backend与visual builder均未改。
+
 ## 4. 表 B / C、归因与 bootstrap
 
 NOT_RUN。历史参照仅用于后续相同口径比较：Frozen 8.218、同集 D1 29.702、同集 D3 27.768、B1_GLOBAL 13.848、完整官方 32.139。
@@ -58,7 +63,8 @@ NOT_RUN。历史参照仅用于后续相同口径比较：Frozen 8.218、同集 
 
 ## 6. GT 隔离、成本、失败与恢复
 
-P0 未运行模型、教师、优化或 GT 评测，新 GPU 成本0。
-训练白名单、故意违规访问测试、采样复现、split=train 加载测试尚待后续集成，不提前标为通过。
+P0/P1 新 GPU 成本0；P2 准备的真实源打分与教师 smoke 单列，尚无学生优化或新 GT 评测。
+24项不同的相关CPU测试通过，包括全部40文件六列逐行转换、split=train缓存加载、Python审计和kernel-only白名单实际阻止Val图片/MOT/表达manifest/旧标签/旧D-FIT checkpoint（各5类）。故意违规仅发生在独立测试子进程，不能计入真实训练GT0。
+一次隔离测试发现Val MOT文件名的video ID是stem而非目录组件：kernel已阻止读取，但Python audit漏记该次尝试；补充stem识别后两层均5/5拦截，未发生真实训练或GT读取。尝试计数现即时落盘，避免失败退出丢失记录。
 一次基础 `python` 命令不存在，已使用系统 `python3` 完成盘点；不影响任何实验数值。
 原始数据、旧教师缓存、旧 checkpoint 和历史报告不覆盖。

@@ -2339,3 +2339,6 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - Refer-Dance Train每视频39文本、共1,560组合。官方Val425均枚举本视频17表达，不跨视频取文本；Train/Val视频互斥，但8表达文件名重合，不能声称全表达未见。混合JSON仅独立进程解码sentence，label对象词法跳过。
 - 按用户新授权把原始MOT六列原样转10列，逐行frame/id/box文本一致；共13,608,270候选–表达，数据在/data2/user/TTA-RMOT-assets/train2val/20261031，源数据不改。Train oracle几何/ID与Val预测前端差异明确披露。
 - 准备训练分支的逐Train视频kernel白名单与早期输入审计，禁止Val图像/MOT/表达、旧Val教师库与D-FIT文件；尚未把未执行测试或实验记为成功。P0/P1新GPU成本0，后续按原D1三seed+D3一seed8973/K4/final_step完成，不调参。
+- 24项相关测试通过；旧Naive8500全部425query/8500样本位置、ID、框、原因和分数由独立进程原样重放。隔离测试中kernel拦截全部5种输入，但audit漏记MOT文件stem，已定向修复并即时保存尝试计数；真实训练尚未开始，不能把故意测试次数当真实污染。
+- GPU4/5/7/1共享准入完成40Train稀疏源分数，FP32原单query、strict V2权重、目标GT0；parent wall344.614秒，worker185.107/211.327/225.369/344.293秒。未重跑完整Frozen或训练跟踪器。
+- 冻结Naive Train31200判断/7800窗口，manifest c09a1612；真实Qwen4端点smoke通过，26.128秒，BF16单帧、原P1后端和裁剪代码不改、原始logits有限、缓存可重开、冻结参数SHA相同、GT0。全Train教师下一步；8973×K4平均每窗口4.6015次曝光，不能为追平旧Val约16.89次而增加预算。

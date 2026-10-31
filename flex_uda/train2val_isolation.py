@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 
 from flex_uda.data.manifests import DANCE, ROOT, SOURCE, official_splits
+from flex_tta.runtime.pf_receipts import atomic_json
 
 
 def install_train_only_audit(pseudo_directory, output, extra_read=()):
@@ -14,6 +15,10 @@ def install_train_only_audit(pseudo_directory, output, extra_read=()):
     val = set(official_splits()['dance']['val'])
     allowed = [pseudo, output, *(Path(p).resolve() for p in extra_read)]
     attempts = []
+    def save_audit():
+        atomic_json(output / 'input_access_audit.json', dict(
+            policy='TRAIN_ONLY_NO_VAL', forbidden_input_open_attempts=len(attempts), events=attempts))
+    save_audit()
 
     def audit(event, args):
         if event != 'open' or not isinstance(args[0], (str, bytes, os.PathLike)):
@@ -39,6 +44,7 @@ def install_train_only_audit(pseudo_directory, output, extra_read=()):
             reason = 'NON_TRAIN_TARGET_IMAGE'
         if reason:
             attempts.append(dict(path=str(path), reason=reason))
+            save_audit()
             raise PermissionError('TRAIN_ONLY input policy: ' + reason + ': ' + str(path))
     sys.addaudithook(audit)
     return attempts
