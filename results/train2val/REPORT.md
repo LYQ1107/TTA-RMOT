@@ -66,6 +66,10 @@ Train 的 7,800 个 Naive 窗口、31,200 个判断已冻结，manifest SHA256�
 封存SHA：`c3939408e541157937088c489b293a3dbddc10caf5de24bae6d243689a4e62cf`；实际PSRPseudoDataset在split=train加载40视频、1560组合、7800组、31200判断通过。
 原封存器同时导出兼容用weak文件，但新训练明确expanded_kind=none、expanded loss=0，不读取其标签用于学习。
 
+CPU缓存参照：同一批31200判断中，冻结V2仅选中教师POS的180/1765（10.1983%），非POS统计桶选中率6.9407%，同帧教师pair agreement0.521338。
+见`frozen_train_fit.json`与逐视频/逐表达的`teacher_by_*.csv`。这不是GT准确率；统计的“NEG”桶沿D-FIT定义含所有有效p<.95，UNKNOWN仍用原始软概率，不转成硬负例。
+固定总更新数意味着每个新窗口曝光少于旧同集实验；若泛化下降，不能仅凭此实验将全部原因归为记忆，还须结合Train拟合与候选来源差异解释。协议不因此增加步数或改参。
+
 ## 4. 表 B / C、归因与 bootstrap
 
 NOT_RUN。历史参照仅用于后续相同口径比较：Frozen 8.218、同集 D1 29.702、同集 D3 27.768、B1_GLOBAL 13.848、完整官方 32.139。

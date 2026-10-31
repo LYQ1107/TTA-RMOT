@@ -59,7 +59,10 @@ def package():
             if receipt.is_file():
                 t=json.loads(receipt.read_text());rows[arm].update(peak_allocated_bytes=t['peak_allocated_bytes'],
                     trainable_parameters=t['trainable_parameters'],optimizer_updates=t['steps'],
-                    mean_window_exposures=t['mean_target_window_exposures'])
+                    mean_window_exposures=t['mean_target_window_exposures'],
+                    optimizer_updates_per_body_second=t['steps']/t['wall_seconds'],
+                    target_valid_exposures=t['counters']['target_valid_exposures'],
+                    nonzero_target_gradient_update_fraction=t['counters']['target_nonzero_gradient_steps']/t['steps'])
             total_process_seconds+=seconds
         costs['training_'+scope]=dict(actual_wall_seconds=record['actual_wall_seconds'],methods=rows)
     inf=RUN/'predictions_seal.json'
@@ -70,7 +73,11 @@ def package():
             seconds=t['seconds'];total_process_seconds+=seconds
             metadata=json.loads((RUN/'evaluation'/name/'run_metadata.json').read_text())
             rows[name]=dict(GPU_process_seconds=seconds,GPU_process_hours=seconds/3600,**t,
-                peak_allocated_bytes=metadata.get('peak_allocated_bytes'),optimizer_updates=0,episodes=425)
+                peak_allocated_bytes=metadata.get('peak_allocated_bytes'),optimizer_updates=0,episodes=425,
+                physical_video_frames=sum(e['stats']['frames'] for e in metadata['episodes'])//17,
+                query_frames=sum(e['stats']['frames'] for e in metadata['episodes']),
+                physical_video_FPS=(sum(e['stats']['frames'] for e in metadata['episodes'])/17)/seconds,
+                query_frame_FPS=sum(e['stats']['frames'] for e in metadata['episodes'])/seconds)
         costs['inference']=dict(actual_wall_seconds=sealed['wall_seconds'],methods=rows)
     official=RUN/'official_evaluation_completion.json'
     if official.exists():

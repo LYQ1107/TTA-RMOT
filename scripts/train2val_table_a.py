@@ -40,6 +40,10 @@ def build():
                      'teacher_fit_curve.jsonl','source_validation.jsonl','pos_weight.json','final_step_selection.json',
                      'initial_frozen_equivalence.json','source_only_lambda_validation.json','fit_subset.json','input_access_audit.json'):
             shutil.copy2(folder/name,dest/name)
+        # Keep compact per-judgment fit outputs when small; model weights and
+        # large raw teacher/metrics files remain path+SHA-only server assets.
+        fitted=folder/'teacher_fit_after_training.jsonl.gz'
+        if fitted.stat().st_size<=4<<20:shutil.copy2(fitted,dest/fitted.name)
     table=['# 表 A：Train 标签拟合，尚未进行学生 Val 推理','',
         f'Train教师判断 {len(labels):,}；POS(p≥0.95) {pos:,} ({pos/len(labels):.6%})。',
         '历史Naive为656/8500；用户给出的657/8500来自PSR自身缓存，分母与manifest不可混用。','',
@@ -51,10 +55,15 @@ def build():
             'source_val_CE_final','mean_window_exposures','GPU_worker_hours')
         table.append('| '+arm+' | '+' | '.join('N/A' if r[k] is None else f'{r[k]:.6f}' for k in fields)+' |')
     table+=['','固定final-step，source-best仅日志、不用于Val模型选择。各seed目标标签完全相同。',
+        'POS按p≥.95；NEG统计桶沿D-FIT原定义为所有有效p<.95（含不确定soft标签），并不把UNKNOWN变成硬负例；优化始终用原始soft概率。',
         '所有值仅Train教师拟合/源dev诊断，不是目标GT准确率或Val HOTA；不因表A好坏更换方法、阈值或checkpoint。',
         '8973×4/7800≈4.60次窗口曝光（实际窗口数与平均值见JSON）；原Val2125窗口约16.89次，训练预算不随窗口数增加。']
     path=PUBLIC/'TABLE_A.md';path.write_text('\n'.join(table)+'\n')
-    result=dict(status='ALL_REGISTERED_TRAIN_ARMS_REPORTED_VAL_INFERENCE_NOT_STARTED',methods=rows,
+    initial=json.loads((PUBLIC/'frozen_train_fit.json').read_text())
+    table+=['','同一批Train判断的冻结源模型初始拟合（CPU缓存复用，不是新增GPU实验）：',
+        '```json',json.dumps(initial['all'],ensure_ascii=False,indent=2),'```']
+    path.write_text('\n'.join(table)+'\n')
+    result=dict(status='ALL_REGISTERED_TRAIN_ARMS_REPORTED_VAL_INFERENCE_NOT_STARTED',methods=rows,frozen_train_teacher_fit=initial,
         teacher_samples=len(labels),teacher_POS=pos,teacher_POS_fraction=pos/len(labels),TABLE_A_sha256=file_sha(path),
         target_GT_open_attempts=0,Val_data_read_by_training=False)
     atomic_json(PUBLIC/'table_a.json',result);atomic_json(RUN/'table_a.json',result)

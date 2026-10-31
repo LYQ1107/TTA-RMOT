@@ -50,7 +50,7 @@ def report():
     started=time.perf_counter();verify_native_predictions();common.EVAL=RUN/'evaluation'
     planned=json.loads((RUN/'controls_seal.json').read_text());completion=json.loads((RUN/'official_evaluation_completion.json').read_text())
     if completion['status']!='COMPLETE_ALL_PREDICTION_SETS':raise ValueError('finish official evaluation first')
-    meta,old_scores,groups,_=common.load_bank();methods=planned['methods'];native=list(planned['new_native_methods'])
+    meta,old_scores,groups,_=common.load_bank();methods=planned['methods'];native=[a for a in ARMS if a in planned['new_native_methods']]
     main=['FROZEN','SAME_SET_D1','SAME_SET_D3','B1_SRC_RATE_GLOBAL','OFFICIAL_DANCE_COMPLETE',*native]
     manifests={m:common.verify_seal(m) for m in methods}
     metrics={m:official_metrics(common.EVAL/m/'results') for m in methods};values={};videos=None
@@ -125,6 +125,8 @@ def report():
     alignment={};gt_report=dict(official_GT_detections=int(gt_counts.sum()),query_present_episodes=40,query_empty_episodes=385,
         query_frames=g,GT_present_frames=int((gt_counts>0).sum()),GT_empty_frames=int((gt_counts==0).sum()),
         R1_denominator_GT_frames=denom,GT_only_opened_in_independent_post_seal_evaluator=True)
+    gt_report.update(filter='official mark!=0 and pedestrian class==1; no frame/ID shift',
+        QueryEmpty_means_official_scored_GT_empty_not_a_model_input_label=True)
     for m in main:
         x=k[m];nonempty=x[x>0]
         present=sum(e['selected_rows'] for e in manifests[m]['episodes'] if query_truth[e['video'],e['expression']])
