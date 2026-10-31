@@ -214,9 +214,9 @@ def report():
         '\n## 6. GT隔离、成本、失败、恢复与停止\n\n训练/教师输入审计与kernel白名单见各provenance/input_access_audit；真实禁止输入/目标GT尝试均须0。\n'+\
         '原候选、Teacher原始logits、四final-step checkpoint、完整预测与长metrics日志保留服务器，路径/SHA见server_artifacts.json与prediction_files.csv.gz。\n'+\
         'Train使用原始GT几何/ID、Val使用预测NeuralSORT；每窗口曝光约4.60对旧约16.89，均为固定协议差异，不改超参补偿。\n'+\
-        '完整官方summary/detailed和阶段stdout/失败/恢复记录已归档；所有成本见costs.json，count-controls不作为免费独立系统。\n'+\
+        '完整官方summary/detailed和阶段stdout/失败/恢复记录已归档；本轮准备问题见EXECUTION_NOTES.md，所有成本见costs.json，count-controls不作为免费独立系统。\n'+\
         '完成本轮后停止，不开展新方法、密集教师标注、超参或新seed搜索。\n'
-    report=report.replace('全量教师待执行，P3–P5 未运行','P2–P5 完成，全部结果上报，停止')
+    report='\n'.join('状态：COMPLETE_STOP；P0–P5 全部完成，所有注册臂上报，不启动新方法或新训练。' if line.startswith('状态：') else line for line in report.splitlines())+'\n'
     (PUBLIC/'REPORT.md').write_text(report)
     atomic_json(PUBLIC/'completion.json',dict(status='COMPLETE_TRAIN_TO_VAL_STOP_NO_NEW_METHOD',
         methods=main,official_prediction_sets=len(methods),GT=gt_report,verdict=verdict,

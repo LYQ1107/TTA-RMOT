@@ -92,7 +92,58 @@
       }
     ]
   },
-  "total_new_GPU_process_hours": 0.4945836506727695,
+  "training_smoke": {
+    "actual_wall_seconds": 315.132238084916,
+    "methods": {
+      "T2V_D1_s17": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 282.4551709978841,
+        "GPU_process_hours_including_attempts": 0.07845976972163447,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 282.4551709978841,
+            "scope": "smoke",
+            "arm": "T2V_D1_s17",
+            "method": "DIAG_FIT_OPT",
+            "seed": 17,
+            "retry": 0,
+            "physical_gpu": 3,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "f93c6ea687afe25b0b771fc1a66072419140d41085694de1ad9619d968818081",
+        "peak_allocated_bytes": 6165864448,
+        "trainable_parameters": 24576,
+        "optimizer_updates": 200,
+        "mean_window_exposures": 0.10256410256410256
+      },
+      "T2V_D3_s17": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 314.805771518033,
+        "GPU_process_hours_including_attempts": 0.08744604764389806,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 314.805771518033,
+            "scope": "smoke",
+            "arm": "T2V_D3_s17",
+            "method": "DIAG_FIT_CAP",
+            "seed": 17,
+            "retry": 0,
+            "physical_gpu": 4,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "3067109c26136d115d31f0efea812e19380ee40537e8daa3d173d176e8d59ee0",
+        "peak_allocated_bytes": 6284080640,
+        "trainable_parameters": 2758656,
+        "optimizer_updates": 200,
+        "mean_window_exposures": 0.10256410256410256
+      }
+    }
+  },
+  "total_new_GPU_process_hours": 0.660489468038302,
   "interpretation": "sum actual admitted child-process elapsed times, including startup and CPU portions; not utilization-integrated GPU energy/time",
   "count_controls_inherit_parent_training_and_inference": true,
   "historical_references_reused_no_new_GPU": true,

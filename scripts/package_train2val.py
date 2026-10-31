@@ -10,6 +10,14 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 from scripts.run_train2val_training import RUN,PUBLIC
 
 
+def copy_immutable_metadata(source,destination):
+    """Sealed inputs may be0444; reuse the identical published copy on rerun."""
+    if destination.exists():
+        if file_sha(source)!=file_sha(destination):raise ValueError('immutable metadata changed: '+str(destination))
+        return
+    shutil.copy2(source,destination)
+
+
 def package():
     public=PUBLIC/'stages';public.mkdir(parents=True,exist_ok=True)
     records=[]
@@ -18,7 +26,7 @@ def package():
     for path in [ASSETS/'candidate_receipt.json',ASSETS/'pseudo/manifest_receipt.json',ASSETS/'pseudo/NAIVE/seal.json']:
         if path.exists():
             # The input image/score hash manifest is a small metadata artifact.
-            shutil.copy2(path,public/(path.parent.name+'_'+path.name))
+            copy_immutable_metadata(path,public/(path.parent.name+'_'+path.name))
     for path in sorted(RUN.rglob('*')):
         if not path.is_file() or any(part in ('evaluation','score_bank','shards') for part in path.parts):continue
         if path.suffix=='.pt' or path.name in ('metrics_train.jsonl','teacher_outputs.jsonl','teacher_fit_after_training.jsonl.gz'):

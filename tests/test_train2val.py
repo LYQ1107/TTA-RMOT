@@ -73,6 +73,15 @@ def test_user_verdict_rules_not_extended():
     assert '未覆盖' in literal_verdict([20,21,22],[-5,-1])['literal_user_rule_verdict']
 
 
+def test_packaging_reuses_identical_readonly_seal(tmp_path):
+    from scripts.package_train2val import copy_immutable_metadata
+    source=tmp_path/'source.json';source.write_text('{"sealed":true}\n');source.chmod(0o444)
+    target=tmp_path/'published.json'
+    copy_immutable_metadata(source,target)
+    copy_immutable_metadata(source,target)
+    assert target.read_bytes()==source.read_bytes()
+
+
 @pytest.mark.parametrize('kernel_only',[False,True])
 def test_real_train_only_whitelist_blocks_val_and_old_cache(tmp_path,kernel_only):
     # Separate child: never contaminate a real training audit with deliberate

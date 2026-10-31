@@ -2,7 +2,7 @@
 
 分支：`research/v2dance-train2val-20261031`；起点：`619390d44a09f362eac5cce0f4b1df62c20ec07a`。
 
-状态：P0–P2 完成；P3 Train-only 学生 smoke 待执行，尚无完整学生训练或 Val 推理/评测。不得将历史同集诊断数值当作本轮结果。
+状态：P0–P2 与 D1/D3 Train-only 学生 smoke 完成，准备四臂固定8973步训练；尚无本轮 Val 推理/评测。不得将历史同集诊断数值当作本轮结果。
 
 ## 1. P0：数据与配对盘点
 
@@ -41,6 +41,10 @@ Val 则固定完整预测 DETR+NeuralSORT 211,085 观测。该候选来源差异
 ## 3. 表 A：Train 教师拟合
 
 NOT_RUN。完成并推送本表前，不开始 Val 学生推理。
+
+D1/D3 真实smoke各完成200优化步（原LR2e-4、无回退），目标非零梯度均200/200，源模型初始预测max error=0/selection flips=0。
+真实训练目标GT与禁止输入打开尝试均0，冻结参数版本不变，D3 head实际更新；仅为接口/数值检查，不是正式8973步结果。
+小型记录见 `smoke_summary.json` 与 `smoke/`；重复打包只读seal的问题及修复见 `EXECUTION_NOTES.md`，未重跑已完成smoke。
 
 P1 转换保留全部 348,930 行的 frame、id、box 原始文本和行序，419 条轨迹；候选–表达组合共 13,608,270。
 新候选与 runtime 位于 `/data2/user/TTA-RMOT-assets/train2val/20261031`，逐文件 SHA 见 `candidate_receipt.json`；没有修改任何原数据。

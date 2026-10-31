@@ -1,0 +1,46 @@
+{
+  "status": "PASS_BOTH_REAL_TRAIN_ONLY_SMOKES",
+  "methods": {
+    "T2V_D1_s17": {
+      "steps": 200,
+      "trainable_parameters": 24576,
+      "target_GT_open_attempts": 0,
+      "forbidden_input_open_attempts": 0,
+      "head_changed": false,
+      "frozen_equivalence": {
+        "video_id": "dancetrack0001",
+        "frame": 1,
+        "candidates": 7,
+        "max_abs_margin_error": 0.0,
+        "selection_mismatches": 0,
+        "precision": "FP32"
+      },
+      "optimizer_updates": 200,
+      "nonzero_target_gradient_steps": 200,
+      "wall_seconds": 277.02520636911504,
+      "peak_allocated_bytes": 6165864448,
+      "fallback": false
+    },
+    "T2V_D3_s17": {
+      "steps": 200,
+      "trainable_parameters": 2758656,
+      "target_GT_open_attempts": 0,
+      "forbidden_input_open_attempts": 0,
+      "head_changed": true,
+      "frozen_equivalence": {
+        "video_id": "dancetrack0001",
+        "frame": 1,
+        "candidates": 7,
+        "max_abs_margin_error": 0.0,
+        "selection_mismatches": 0,
+        "precision": "FP32"
+      },
+      "optimizer_updates": 200,
+      "nonzero_target_gradient_steps": 200,
+      "wall_seconds": 309.4212669727858,
+      "peak_allocated_bytes": 6284080640,
+      "fallback": false
+    }
+  },
+  "not_full_training_or_Val_evaluation": true
+}

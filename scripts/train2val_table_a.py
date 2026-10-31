@@ -60,7 +60,7 @@ def build():
     atomic_json(PUBLIC/'table_a.json',result);atomic_json(RUN/'table_a.json',result)
     report=(PUBLIC/'REPORT.md').read_text();a=report.index('## 3. 表 A：');b=report.index('## 4. 表 B / C、')
     report=report[:a]+'## 3. 表 A：Train 教师拟合\n\n'+path.read_text()+'\n'+report[b:]
-    report=report.replace('P2–P5 尚未运行','P2/P3 完成，P4/P5 等待表A推送门')
+    report='\n'.join('状态：P0–P3 完成，P4/P5 等待表A推送门；尚无本轮 Val 结果。' if line.startswith('状态：') else line for line in report.splitlines())+'\n'
     (PUBLIC/'REPORT.md').write_text(report)
     print(json.dumps(result,indent=2))
 

@@ -1,0 +1,48 @@
+{
+  "status": "ALL_REGISTERED_ARMS_REPORTED",
+  "scope": "smoke",
+  "arms": {
+    "T2V_D1_s17": {
+      "status": "COMPLETE",
+      "arm": "T2V_D1_s17",
+      "path": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/attempts/smoke/T2V_D1_s17/initial",
+      "attempts": [
+        {
+          "exit_code": 0,
+          "seconds": 282.4551709978841,
+          "scope": "smoke",
+          "arm": "T2V_D1_s17",
+          "method": "DIAG_FIT_OPT",
+          "seed": 17,
+          "retry": 0,
+          "physical_gpu": 3,
+          "lr": 0.0002
+        }
+      ],
+      "fallback_lr": false,
+      "checkpoint_sha256": "1032ff92fa407f42bfefd72bb9b4190dd8755ae3d581e8256cb3a1cebeaa7454"
+    },
+    "T2V_D3_s17": {
+      "status": "COMPLETE",
+      "arm": "T2V_D3_s17",
+      "path": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/attempts/smoke/T2V_D3_s17/initial",
+      "attempts": [
+        {
+          "exit_code": 0,
+          "seconds": 314.805771518033,
+          "scope": "smoke",
+          "arm": "T2V_D3_s17",
+          "method": "DIAG_FIT_CAP",
+          "seed": 17,
+          "retry": 0,
+          "physical_gpu": 4,
+          "lr": 0.0002
+        }
+      ],
+      "fallback_lr": false,
+      "checkpoint_sha256": "0af4185aac5fdb1654c63114257795ea5675e992487dee72bbfe9f25b73b956a"
+    }
+  },
+  "actual_wall_seconds": 315.132238084916,
+  "Val_inference_started": false
+}
