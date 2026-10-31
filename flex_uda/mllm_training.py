@@ -89,19 +89,23 @@ def matched_ema_loss(model,ema,source_teacher,inputs,group,amp):
     return total,records,n
 
 
-def enforce_inputs(output,pseudo,extra_read=()):
+def enforce_inputs(output,pseudo,extra_read=(),config=None):
     vendor=ROOT/'vendor/FlexHook'
     pretrained=[p.resolve() for p in (vendor/'pretrained').iterdir()]
     first=pseudo.runtime[0]
     frozen_reference=(ROOT/'results/runs/pf_zero_completebank_full_20261025_merged/ZERO_UPDATE/results'/
         first['video_id']/first['expression_id']/'candidate_margins.jsonl.gz').resolve()
+    strict_train=config is not None and config.get('input_policy')=='TRAIN_ONLY_NO_VAL'
+    if strict_train:
+        from flex_uda.train2val_isolation import train_read_roots
+        target_roots=train_read_roots(config,pseudo)
+    else:
+        target_roots=[ROOT/'manifests',DANCE/'DanceTrack/training/image_02',
+            Path(pseudo.runtime[0]['predicted_tracks']).parent,frozen_reference]
     return restrict_filesystem([vendor,*pretrained,ROOT/'compat',ROOT/'flex_tta',ROOT/'flex_uda',ROOT/'scripts',ROOT/'configs',
-        ROOT/'manifests',SOURCE,SOURCE/'expression',SOURCE/'KITTI/training/image_02',CHECKPOINT,pseudo.directory,
-        DANCE/'DanceTrack/training/image_02',
-        Path(pseudo.runtime[0]['predicted_tracks']).parent,
+        *target_roots,SOURCE,SOURCE/'expression',SOURCE/'KITTI/training/image_02',CHECKPOINT,pseudo.directory,
         ROOT/'results/runs/teacher_probe_p1_20261026_v1/calibrate/T0/SOURCE_RELIABILITY/teacher_outputs.jsonl',
         Path('/data2/user/TTA-RMOT-assets/teacher-p1/calibration/input/source_manifest.jsonl'),
-        frozen_reference,
         *extra_read,Path(sys.prefix),Path(sys.base_prefix),Path(site.getusersitepackages()),
         '/usr','/lib','/lib64','/bin','/etc','/proc','/sys'],
         [output,'/dev','/tmp'])
@@ -190,6 +194,11 @@ def run(config,output,*,scope='smoke',resume=False):
     output.mkdir(parents=True,exist_ok=resume);started=time.perf_counter()
     commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     attempts=protect_target_annotations()
+    input_attempts=[]
+    if config.get('input_policy')=='TRAIN_ONLY_NO_VAL':
+        from flex_uda.train2val_isolation import install_train_only_audit
+        input_attempts=install_train_only_audit(config['data']['pseudo_directory'],output,
+            [config['data']['frozen_reference_root']])
     pseudo=(PairedUnlabeledDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True) if matched_ema else PSRPseudoDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True,expanded_kind=config['data'].get('expanded_kind','full')) if study else None)
     parent_control=config['method']=='PSR_PARENT_WEIGHT_CONTROL'
     if parent_control:pseudo=PSRParentWeightDataset(config['data']['pseudo_directory'],allow_val_diagnostic=True)
@@ -206,7 +215,7 @@ def run(config,output,*,scope='smoke',resume=False):
     # dfot driver needs host initialization paths; no model/target image or GT
     # is opened here. All actual model/data work remains kernel-isolated.
     torch.empty(1,device=device).zero_();torch.cuda.synchronize()
-    isolation=enforce_inputs(output,pseudo)
+    isolation=enforce_inputs(output,pseudo,config=config)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
     from scripts.run_flexhook_dance_pcd_tta import _load_model
     _,model,_=_load_model(ROOT/'vendor/FlexHook',CHECKPOINT,DANCE,Path(pseudo.runtime[0]['predicted_tracks']).parent,
@@ -242,7 +251,8 @@ def run(config,output,*,scope='smoke',resume=False):
         provenance['external_target_semantic_teacher']=not matched_ema
         if parent_control:provenance['parent_weight_control']=pseudo.parent_weight_control
     atomic_json(output/'provenance.json',provenance);atomic_json(output/'config.json',config)
-    atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0]))
+    atomic_json(output/'initial_frozen_equivalence.json',frozen_equivalence(model,inputs,pseudo.runtime[0],
+        reference_root=config['data'].get('frozen_reference_root')))
     calibration=source_scale_check(model,Inputs(model,tokenizer,device,source_val),params)
     atomic_json(output/'source_only_lambda_validation.json',calibration)
     fit_sha=None
@@ -287,6 +297,10 @@ def run(config,output,*,scope='smoke',resume=False):
         plan_sha={n:file_sha(plans/n) for n in ('source_train_plan.jsonl','target_plan.jsonl')}
         plan_sha.update(teacher_manifest=provenance['pseudo_manifest_sha256'],teacher_labels=provenance['teacher_labels_sha256'],pseudo_seal=provenance['pseudo_seal_sha256'])
         steps_per_cycle=max(len(source_plan),len(pseudo.groups))
+        if config.get('input_policy')=='TRAIN_ONLY_NO_VAL':
+            # The registered budget is fixed, never tied to the new target
+            # window count (source schedule remains exactly8973).
+            steps_per_cycle=8973
         if study and steps_per_cycle!=8973:raise ValueError('PSR/Naive must share the registered8973 update budget')
         total=(200 if diagnostic else 6) if scope=='smoke' else config['train']['coverage_cycles']*steps_per_cycle
         K=config['train'].get('target_windows_per_step',1)
@@ -442,7 +456,7 @@ def run(config,output,*,scope='smoke',resume=False):
             checkpoints={p.name:dict(path=str(p),sha256=file_sha(p)) for p in output.glob('checkpoint_*.pt')})
     torch.cuda.synchronize()
     frozen_unchanged=all(p._version==versions[n] for n,p in model.named_parameters() if not p.requires_grad)
-    if not frozen_unchanged or attempts:raise RuntimeError('frozen-parameter or target-GT isolation violation')
+    if not frozen_unchanged or attempts or input_attempts:raise RuntimeError('frozen-parameter or target-GT/input isolation violation')
     result.update(method=config['method'],scope=scope,protocol=config['protocol'],trainable_parameters=n_trainable,
         frozen_parameters_unchanged=True,target_GT_open_attempts=attempts,wall_seconds=time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(),source_checkpoint_sha256=SOURCE_SHA,
@@ -460,6 +474,11 @@ def run(config,output,*,scope='smoke',resume=False):
         result.update(changed_trainable_names=changed,head_changed=any(n.startswith('head.') for n in changed),
             fit_subset_sha256=fit_sha,target_GT_open_attempts=len(attempts))
     provenance['target_GT_open_attempts']=len(attempts)
+    if config.get('input_policy')=='TRAIN_ONLY_NO_VAL':
+        result.update(forbidden_input_open_attempts=len(input_attempts),forbidden_input_events=input_attempts,
+            mean_target_window_exposures=(result.get('steps',0)*config['train']['target_windows_per_step']/len(pseudo.groups)),
+            target_split='train',Val_images_MOT_expressions_or_old_teacher_cache_read=False)
+        provenance.update(forbidden_input_open_attempts=len(input_attempts),forbidden_input_events=input_attempts)
     atomic_json(output/'provenance.json',provenance)
     atomic_json(output/'training_receipt.json',result);atomic_json(output/'progress.json',result)
     print(json.dumps(result,indent=2),flush=True);return result

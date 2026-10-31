@@ -12,6 +12,7 @@ class PSRPseudoDataset:
         self.directory=Path(directory).resolve();self.seal=json.loads((self.directory/'seal.json').read_text())
         if self.seal['status']!='SEALED_PSR_DIRECT_AND_WEAK_CACHE':raise ValueError('seal teacher and expansion before training')
         self.split=self.seal['target_split']
+        if self.split not in ('train','val'):raise ValueError('unknown target split')
         if self.split=='val' and not allow_val_diagnostic:raise PermissionError('explicit Val same-set authorization required')
         for name,sha in self.seal['files_sha256'].items():
             if file_sha(self.directory/name)!=sha:raise ValueError('sealed PSR cache changed: '+name)

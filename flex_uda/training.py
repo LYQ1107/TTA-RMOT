@@ -100,9 +100,10 @@ def save_training(path,model,ema,optimizer,scaler,step,epoch,config,plan_sha,bes
 
 
 @torch.no_grad()
-def frozen_equivalence(model,inputs,row):
+def frozen_equivalence(model,inputs,row,reference_root=None):
     cache=inputs.episode('target',row);frame=cache.episode.frames[0];test=dict(row,frame=frame)
-    source=ROOT/'results/runs/pf_zero_completebank_full_20261025_merged/ZERO_UPDATE/results'/row['video_id']/row['expression_id']/'candidate_margins.jsonl.gz'
+    reference_root=Path(reference_root) if reference_root is not None else ROOT/'results/runs/pf_zero_completebank_full_20261025_merged/ZERO_UPDATE'
+    source=reference_root/'results'/row['video_id']/row['expression_id']/'candidate_margins.jsonl.gz'
     reference=None
     with gzip.open(source,'rt') as stream:
         for line in stream:

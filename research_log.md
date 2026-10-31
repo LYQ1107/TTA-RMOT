@@ -2332,3 +2332,10 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - 统一历史Frozen为当前封存margin子集8.2072/99,320，不偷换早期batch8.2060/99,316；重叠3,576,681分数审计仅6个近零符号差，净+4，逐候选差已披露，旧文件不改，主Frozen仍8.2180。
 - 最终12项不同针对性测试通过，B0曲线已实际查看；旧1,700预测/margin对、3个final checkpoint、v1报告与预注册均复核未变。完整表、区间、GT审计、成本、原始官方CSV/日志、失败与恢复路径见results/diag_attrib/v2/REPORT.md及归档。
 - 仅同集开发Val事后诊断，不是盲测、Train→Val、新方法或新的source-free online TTA；这些冻结学生历史上用过源监督与MLLM。所有本轮计算完成后停止，未启动额外训练、容量/pos_weight修改或下一阶段研究。
+
+### 2026-10-31 D1 Train→Val：P0盘点与原始几何候选
+
+- 从公开619390d新建research/v2dance-train2val-20261031，旧归因v1/v2与全部checkpoint不改。只读找到40Train原始DanceTrack数据入口，41,796图像/348,930六列几何行/419轨迹完整；不是之前缺失的Train预测NeuralSORT。
+- Refer-Dance Train每视频39文本、共1,560组合。官方Val425均枚举本视频17表达，不跨视频取文本；Train/Val视频互斥，但8表达文件名重合，不能声称全表达未见。混合JSON仅独立进程解码sentence，label对象词法跳过。
+- 按用户新授权把原始MOT六列原样转10列，逐行frame/id/box文本一致；共13,608,270候选–表达，数据在/data2/user/TTA-RMOT-assets/train2val/20261031，源数据不改。Train oracle几何/ID与Val预测前端差异明确披露。
+- 准备训练分支的逐Train视频kernel白名单与早期输入审计，禁止Val图像/MOT/表达、旧Val教师库与D-FIT文件；尚未把未执行测试或实验记为成功。P0/P1新GPU成本0，后续按原D1三seed+D3一seed8973/K4/final_step完成，不调参。
