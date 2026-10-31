@@ -55,6 +55,24 @@ def test_psr_dataset_accepts_complete_train_split(tmp_path):
     assert dataset.split=='train' and len(dataset)==40 and len(dataset.groups)==40
 
 
+def test_four_arms_preserve_registered_numeric_recipe():
+    import yaml
+    from scripts.run_train2val_training import configuration,ARMS,ROOT
+    for method,seed in ARMS.values():
+        path=ROOT/'configs/uda'/('diag_fit_opt.yaml' if method=='DIAG_FIT_OPT' else 'diag_fit_cap.yaml')
+        original=yaml.safe_load(path.read_text());actual=configuration(method,seed)
+        for key in ('adapter','optimizer','train','selection','loss','teacher','sampling','expansion'):
+            assert actual[key]==original[key]
+
+
+def test_user_verdict_rules_not_extended():
+    from scripts.report_train2val import literal_verdict
+    assert literal_verdict([20,21,22],[1,5])['literal_user_rule_verdict']=='MLLM 存在性知识可跨视频、跨表达泛化'
+    assert literal_verdict([20,21,22],[-1,5])['literal_user_rule_verdict']=='同集增益未能泛化到未见视频和表达'
+    assert literal_verdict([20,13.848,22],[1,5])['literal_user_rule_verdict']=='同集增益未能泛化到未见视频和表达'
+    assert '未覆盖' in literal_verdict([20,21,22],[-5,-1])['literal_user_rule_verdict']
+
+
 @pytest.mark.parametrize('kernel_only',[False,True])
 def test_real_train_only_whitelist_blocks_val_and_old_cache(tmp_path,kernel_only):
     # Separate child: never contaminate a real training audit with deliberate

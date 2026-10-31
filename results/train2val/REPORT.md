@@ -2,7 +2,7 @@
 
 分支：`research/v2dance-train2val-20261031`；起点：`619390d44a09f362eac5cce0f4b1df62c20ec07a`。
 
-状态：P0/P1 完成；P2 的 Train 采样清单与真实教师 smoke 完成，全量教师待执行，P3–P5 未运行。不得将历史同集诊断数值当作本轮结果。
+状态：P0–P2 完成；P3 Train-only 学生 smoke 待执行，尚无完整学生训练或 Val 推理/评测。不得将历史同集诊断数值当作本轮结果。
 
 ## 1. P0：数据与配对盘点
 
@@ -49,6 +49,12 @@ Train 的 7,800 个 Naive 窗口、31,200 个判断已冻结，manifest SHA256�
 原 sampler 在独立测试进程重放 Val，425 个 query 的全部 8,500 位置、ID、框、selection reason 和 frozen margin 逐条一致（`naive_sampling_replay.json`）；这些旧缓存绝不进入训练进程。
 本轮源模型只计算 Train 锚点±1和首帧，40视频全部完成，wall 344.61s；各进程与路径/SHA见 `sparse_source_scores.json`。
 教师4样本真实smoke通过，冻结Qwen/单帧YesNo/输入ID/缓存恢复/GT0，见 `teacher_smoke_check.json` 和原始receipt；P1 backend与visual builder均未改。
+
+全Train教师完成：31,200/31,200有效软标签，POS(p≥.95)=1,765（5.657051%）；历史Naive实际656/8500=7.717647%，用户给出的657/8500属于PSR自身缓存。
+4个全视频分片GPU进程wall合计788.278秒（0.218966 GPU-process h），总wall310.098秒；Teacher内部body计763.876秒，forward621.275秒，含smoke4个缓存命中后全量新增31,196 prompt forwards。
+这些是已判断软概率，不是GT精度，比例不用于选阈值。完整raw logits与框/图片/输入哈希留服务器，公开 `teacher_receipt.json` / `teacher_summary.json`。
+封存SHA：`c3939408e541157937088c489b293a3dbddc10caf5de24bae6d243689a4e62cf`；实际PSRPseudoDataset在split=train加载40视频、1560组合、7800组、31200判断通过。
+原封存器同时导出兼容用weak文件，但新训练明确expanded_kind=none、expanded loss=0，不读取其标签用于学习。
 
 ## 4. 表 B / C、归因与 bootstrap
 

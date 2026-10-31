@@ -1,0 +1,100 @@
+{
+  "scores": {
+    "actual_wall_seconds": 344.6138830240816,
+    "GPU_process_seconds": 966.0955990809016,
+    "GPU_process_hours": 0.2683598886335838,
+    "workers": [
+      {
+        "tag": "scores_0",
+        "physical_gpu": 4,
+        "pid": 635620,
+        "exit_code": 0,
+        "worker_seconds": 185.1070171839092,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/scores/1793442463471869045/scores_0.log"
+      },
+      {
+        "tag": "scores_1",
+        "physical_gpu": 5,
+        "pid": 635619,
+        "exit_code": 0,
+        "worker_seconds": 211.3265830639284,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/scores/1793442463471869045/scores_1.log"
+      },
+      {
+        "tag": "scores_2",
+        "physical_gpu": 7,
+        "pid": 635621,
+        "exit_code": 0,
+        "worker_seconds": 225.36926082801074,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/scores/1793442463471869045/scores_2.log"
+      },
+      {
+        "tag": "scores_3",
+        "physical_gpu": 1,
+        "pid": 635622,
+        "exit_code": 0,
+        "worker_seconds": 344.29273800505325,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/scores/1793442463471869045/scores_3.log"
+      }
+    ]
+  },
+  "teacher-smoke": {
+    "actual_wall_seconds": 27.052569065010175,
+    "GPU_process_seconds": 26.12773233396001,
+    "GPU_process_hours": 0.007257703426100003,
+    "workers": [
+      {
+        "tag": "teacher-smoke_0",
+        "physical_gpu": 4,
+        "pid": 648885,
+        "exit_code": 0,
+        "worker_seconds": 26.12773233396001,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/teacher-smoke/1793442881225123583/teacher_0.log"
+      }
+    ]
+  },
+  "teacher": {
+    "actual_wall_seconds": 310.09803725616075,
+    "GPU_process_seconds": 788.2778110071085,
+    "GPU_process_hours": 0.2189660586130857,
+    "workers": [
+      {
+        "tag": "teacher_1",
+        "physical_gpu": 5,
+        "pid": 652509,
+        "exit_code": 0,
+        "worker_seconds": 149.46181051502936,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/teacher/1793443001939403895/teacher_1.log"
+      },
+      {
+        "tag": "teacher_2",
+        "physical_gpu": 7,
+        "pid": 652510,
+        "exit_code": 0,
+        "worker_seconds": 162.0068561132066,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/teacher/1793443001939403895/teacher_2.log"
+      },
+      {
+        "tag": "teacher_0",
+        "physical_gpu": 4,
+        "pid": 652507,
+        "exit_code": 0,
+        "worker_seconds": 167.92727967281826,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/teacher/1793443001939403895/teacher_0.log"
+      },
+      {
+        "tag": "teacher_3",
+        "physical_gpu": 1,
+        "pid": 652511,
+        "exit_code": 0,
+        "worker_seconds": 308.88186470605433,
+        "log": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/prep_launchers/teacher/1793443001939403895/teacher_3.log"
+      }
+    ]
+  },
+  "total_new_GPU_process_hours": 0.4945836506727695,
+  "interpretation": "sum actual admitted child-process elapsed times, including startup and CPU portions; not utilization-integrated GPU energy/time",
+  "count_controls_inherit_parent_training_and_inference": true,
+  "historical_references_reused_no_new_GPU": true,
+  "maximum_simultaneous_physical_GPUs": 4
+}
