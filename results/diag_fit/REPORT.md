@@ -130,7 +130,7 @@ CAP仍有独立可见的排序信号：无教师标签帧R@1从0.156615到0.2374
 
 训练尝试总计15.3862 GPU-process小时，包含有效smoke与保留的实现失败尝试；另有单列的基线拟合/兼容验证和继承的教师/Frozen成本，不能当作免费。三模型完整推理合计2.5681 GPU-worker小时；推理矩阵实际wall为6199.17秒，真实使用GPU1/4两条lane（不是宣称四卡加速），排队计入矩阵wall，CPU文件锁等待不计GPU推理。GPU-worker/process小时不是独占GPU利用率积分；未单独测量的验证开销在costs.json中明确标记。
 
-运行清单、各checkpoint路径/SHA、全部成本和源版本分别见[server_artifacts.json](server_artifacts.json)、[costs.json](costs.json)、[execution_roles.json](execution_roles.json)及各provenance。完整预测/大checkpoint不进入git，封存路径和SHA在[prediction_manifest.json](prediction_manifest.json)。
+运行清单、各checkpoint路径/SHA、全部成本和源版本分别见[server_artifacts.json](server_artifacts.json)、[costs.json](costs.json)、[execution_roles.json](execution_roles.json)及各provenance。六组数量匹配的完整官方CSV另见[count_controls](count_controls/)，不是新增GPU模型。完整预测/大checkpoint不进入git，封存路径和SHA在[prediction_manifest.json](prediction_manifest.json)。
 
 离线父命令曾在最后打包阶段因派生count-control元数据被误认成GPU方法而退出1；正式9个评测、密集归因、bootstrap和表格均已完成。保留原stdout，补18项回归后只恢复package并成功退出0，没有重跑GPU、TrackEval或密集归因，见[packaging_recovery.json](packaging_recovery.json)和runtime_logs.tar.gz。未隐藏该失败，不把工程修复当作科研成功。
 

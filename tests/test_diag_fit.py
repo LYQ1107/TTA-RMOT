@@ -182,10 +182,14 @@ def test_packager_does_not_charge_count_controls_as_GPU_methods(tmp_path,monkeyp
             worker_seconds=3600.,actual_scheduler_wall_seconds=3700.,peak_allocated_bytes=1000))
     atomic_json(report.RUN/'evaluation/merged'/(report.METHODS[0]+'_AT_FROZEN_COUNT')/'run_metadata.json',
         dict(score_source=report.METHODS[0],count_source='FROZEN',post_hoc_only=True))
+    control=report.METHODS[0]+'_AT_FROZEN_COUNT'
+    source=report.RUN/'evaluation/merged'/control/'results';source.mkdir()
+    (source/'pedestrian_detailed.csv').write_text('seq,HOTA\nCOMBINED,1\n')
     report.package()
     costs=json.loads((report.PUBLIC/'costs.json').read_text())
     assert len(costs['inference'])==3 and {r['method'] for r in costs['inference']}==set(report.METHODS)
     assert all(r['GPU_hours']==1. for r in costs['inference'])
+    assert (report.PUBLIC/'count_controls'/control/'pedestrian_detailed.csv').read_bytes()==(source/'pedestrian_detailed.csv').read_bytes()
 
 
 def test_capacity_only_LoRA_and_head_mutate():

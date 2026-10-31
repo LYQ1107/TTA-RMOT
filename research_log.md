@@ -38,6 +38,7 @@
 - 严格80%/10%拟合标准三臂均False，保留用户规则类别而不把它冒充已证实的输入/标签矛盾原因。所有目标GT仅封存后离线使用；评测后再验原预测、margin、run_metadata与final checkpoint全部SHA匹配。
 - 最后打包KeyError已在1b24a579/publicf17ec79修复，18项回归通过，只恢复package且exit0；9官方/密集归因/GPU实验未重跑，原失败stdout保留。训练尝试15.3862GPU-process-h、完整推理2.5681GPU-worker-h，推理矩阵6199.17s/实际GPU1和4，继承/验证成本另列不冒充免费。
 - 本轮全部实验已停止，只做最终GitHub记录交付。未启动任何新增密集GT标注、列表蒸馏、源端长训或第七种TTA；后续研究等待用户下一条指令。
+- 最终交付补齐六个count-matched对照的完整官方summary/detailed CSV，明确其父模型成本；只复制已有结果、不重算指标，打包回归同时检查其不被记为独立GPU方法。最新同一18项回归通过（4.66s），不与历史选择相加。
 
 ## 2026-10-30 — Three-seed main official confirmation, not best-seed selection
 

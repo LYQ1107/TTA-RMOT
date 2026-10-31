@@ -109,6 +109,13 @@ def package():
             if (p.parent/name).exists():shutil.copy2(p.parent/name,dest/name)
         if cost_path.exists():
             shutil.copy2(cost_path,dest/cost_path.name)
+    for method in METHODS:
+        for control in ('FROZEN_AT_'+method+'_COUNT',method+'_AT_FROZEN_COUNT'):
+            source=RUN/'evaluation/merged'/control/'results'
+            for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):
+                if not (source/name).exists():continue
+                dest=PUBLIC/'count_controls'/control;dest.mkdir(parents=True,exist_ok=True)
+                shutil.copy2(source/name,dest/name)
     atomic_json(PUBLIC/'costs.json',dict(training_attempts=runtimes,
         training_GPU_process_hours_including_retained_attempts=sum(r['elapsed_seconds'] for r in runtimes)/3600,
         inference=inference,inference_matrix_attempts=[dict(launcher_status_path=str(p),**json.loads(p.read_text()))
