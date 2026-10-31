@@ -8,14 +8,30 @@ import time
 import numpy as np
 from scipy.optimize import minimize
 from scipy.special import expit
+from PIL import Image
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.count_structure_common import RUN,PUBLIC,v2,setup,require_plan
 from scripts.analyze_pf_full_offline import overlaps,matched_gt
 from flex_tta.runtime.pf_receipts import atomic_json,file_sha
+from flex_tta.mot_interface.trackers import merge_kitti_class_splits
 SOURCE=Path('/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2')
+SOURCE_TRACKS=ROOT/'vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2'
 
 def xyxy(box):
     x,y,w,h=box;return [x,y,x+w,y+h]
+
+def source_geometry(video,root=SOURCE,tracker_root=SOURCE_TRACKS):
+    files=[tracker_root/video/c/'predict.txt' for c in ('car','pedestrian')]
+    rows=merge_kitti_class_splits(*files)
+    image=next(iter(sorted((root/'KITTI/training/image_02'/video).glob('*.png'))))
+    with Image.open(image) as im:width,height=im.size
+    geom=defaultdict(dict)
+    for r in rows:
+        x,y,w,h=r.values[2:6]
+        # Exact official test path: Temp rows are one frame ahead; pedestrian
+        # IDs are offset by max(car ID), and are NOT source GT identities.
+        geom[r.frame_id-1][r.track_id]=[x/width,y/height,(x+w)/width,(y+h)/height]
+    return geom,files
 
 def calibrate():
     setup();require_plan();access=v2.deny_gt();started=time.perf_counter()
@@ -28,10 +44,8 @@ def calibrate():
     scores=json.loads(path.read_text());labels=json.loads((SOURCE/'labels.json').read_text())
     all_x=[];all_y=[];inputs=[dict(path=str(path),sha256=file_sha(path))];queries=0
     for video,by_id in sorted(scores.items()):
-        geom=defaultdict(dict)
-        for track,frames in labels[video].items():
-            for t,row in frames.items():
-                if row.get('expression_raw'):geom[int(t)][int(track)]=xyxy(row['bbox'])
+        geom,tracker_files=source_geometry(video)
+        inputs.extend(dict(path=str(p),sha256=file_sha(p)) for p in tracker_files)
         truths={}
         for p in sorted((SOURCE/'expression'/video).glob('*.json')):
             item=json.loads(p.read_text());text=item['sentence'];truth=item.get('label',{})
@@ -65,6 +79,7 @@ def calibrate():
         optimizer='L-BFGS-B two scalar source calibration only; no student or teacher updates',iterations=int(fit.nit),
         source_model='official frozen KITTI-V2; same calibration reused for all four margin libraries',
         labels='IoU>=.5 one-to-one max-cardinality; source query GT boxes; normalized-coordinate IoU is pixel-coordinate invariant',
+        source_candidates='official Temp-NeuralSORT car/pedestrian; pedestrian offset=max(car ID), frame=raw_frame-1; never equate predicted ID with GT ID',
         source_GT=str(SOURCE/'labels.json'),source_GT_sha256=file_sha(SOURCE/'labels.json'),inputs=inputs,
         target_GT_open_attempts=len(access),student_updates=0,teacher_updates=0,CPU_wall_seconds=time.perf_counter()-started)
     if access:raise RuntimeError('source calibration touched target GT')

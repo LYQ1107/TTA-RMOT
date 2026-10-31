@@ -2369,3 +2369,6 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - 从公开61a388e8创建research/v2dance-count-structure-20261031，旧Train→Val/P1/v1/v2不改。先读代码与附件，固定6个ORACLE、4 margin×7结构选择器、5视频50帧教师探针的所有变体，PREREG.md先发布；不按Val选择变体。
 - GT-free源校准/选择器/教师分别独立进程安装v2 target-GT audit，源GT仅用于用户明确要求的两参数Platt拟合；学生与教师不更新。四margin共用已有源Frozen校准，不新增源域学生推理；C4按各margin自己的目标均值平移。
 - 教师新choice/SOM函数独立于旧YesNo路径，T1仍用原backend/prompt/crop；只用单张审计准入卡、缓存断点恢复。探针不外推完整HOTA，解析失败保留UNKNOWN；不存在的8B不下载，不冒用其它项目微调权重。所有GT评测均待预测封存，后续真实状态由receipt记录。
+- 预注册已先公开2ae9789a，SHA4f0cdfea...；6个初始CPU测试通过。源校准首尝试拟合前KeyError，原因是预测ID不能当GT ID；按旧正式config/vendor测试实现，复用源Temp-NeuralSORT car/ped合并、ped offset=max(car ID)、raw_frame-1和真实预测框修复，针对性回归后7项通过，不丢行。源2355528候选全部匹配，正例354658/pi_s .15056412，Platt a .24036048/b−1.43660983，源NLL .884557→.264372，14次两参数迭代、Dance GT0/学生与教师更新0。
+- 全28 GT-free选择器封存，CPU17.589秒，四种margin的1700条原margin SHA与缓存SHA核验，全部425表达，GT0/教师调用0。三种学生margin的C4均全空，保留不改；C2/C3每种margin均211085行，未因空输出强制造正例。
+- 固定probe=0004/0018/0034/0058/0079各10帧、378个MOT候选；T1/T2/T3计划6426/378/850逻辑调用。仅GPU0，共smoke27.992秒+full445.786秒，合计.131605 GPU-process h；smoke调用复用缓存，冻结权重不变、目标GT0、更新0。T3出现9/850解析失败，保留UNKNOWN不转NEG；未找到可核验原版8B，按要求跳过且未下载。两类GT-free预测均封存之后才允许独立oracle与GT评测。

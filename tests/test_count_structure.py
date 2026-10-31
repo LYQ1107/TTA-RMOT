@@ -41,3 +41,15 @@ def test_som_unknown_not_negative():
 def test_choice_order_and_none_option():
     prompt=choice_prompt([dict(query_text='query'+str(j)) for j in range(17)],'.2 .3')
     assert 'A. query0' in prompt and 'Q. query16' in prompt and 'R. none of these' in prompt
+
+def test_source_tracker_geometry_not_gt_id(tmp_path):
+    from PIL import Image
+    from scripts.count_structure_source import source_geometry
+    root=tmp_path/'source';images=root/'KITTI/training/image_02/0005';images.mkdir(parents=True)
+    Image.new('RGB',(100,100)).save(images/'000000.png')
+    tracks=tmp_path/'tracks'
+    for cls,text in [('car','2,7,10,20,30,40,1,-1,-1,-1\n'),('pedestrian','2,1,50,10,10,20,1,-1,-1,-1\n')]:
+        path=tracks/'0005'/cls/'predict.txt';path.parent.mkdir(parents=True);path.write_text(text)
+    geom,files=source_geometry('0005',root,tracks)
+    assert set(geom)=={1} and set(geom[1])=={7,8}
+    assert np.allclose(geom[1][7],[.1,.2,.4,.6]) and len(files)==2
