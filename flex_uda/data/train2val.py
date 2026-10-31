@@ -159,6 +159,28 @@ def convert_geometry(source, destination):
     return dict(path=str(destination), sha256=file_sha(destination), rows=len(actual), first_six_columns_exact=True)
 
 
+def rgb_alignment(p0):
+    """Cross-archive Train image alignment at fixed first/middle/last frames."""
+    import numpy as np
+    from PIL import Image
+    rows=[]
+    for video in p0['videos']:
+        n=video['expected_frames']
+        jpgs={int(p.stem):p for p in Path(video['original_image_root']).glob('*.jpg')}
+        for frame in sorted({1,(n+1)//2,n}):
+            png=Path(video['image_root'])/f'{frame:06d}.png'
+            with Image.open(jpgs[frame]) as opened:a=np.asarray(opened.convert('RGB')).astype(np.int16)
+            with Image.open(png) as opened:b=np.asarray(opened.convert('RGB')).astype(np.int16)
+            same=a.shape==b.shape
+            rows.append(dict(video=video['video_id'],frame=frame,original_shape=list(a.shape),runtime_shape=list(b.shape),same_shape=same,
+                decoded_RGB_exact=bool(np.array_equal(a,b)),mean_absolute_error=float(np.abs(a-b).mean()) if same else None,
+                max_absolute_error=int(np.abs(a-b).max()) if same else None))
+    return dict(status='PASS_EXACT_RGB_ALIGNMENT' if all(r['decoded_RGB_exact'] for r in rows) else 'REVIEW_RGB_ALIGNMENT',
+        fixed_sampling='first/middle/last frame per40Train videos; noGT selection',frames=len(rows),
+        all_shapes_equal=all(r['same_shape'] for r in rows),all_RGB_exact=all(r['decoded_RGB_exact'] for r in rows),
+        max_mean_absolute_error=max((r['mean_absolute_error'] or 0) for r in rows),referring_GT_opened=False,Val_inputs_opened=False,rows=rows)
+
+
 def prepare(p0, output=ASSETS):
     if p0['status'] != 'PASS_P0':
         raise RuntimeError('P0 missing-asset stop condition')

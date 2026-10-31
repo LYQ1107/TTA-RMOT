@@ -2,13 +2,14 @@
 
 分支：`research/v2dance-train2val-20261031`；起点：`619390d44a09f362eac5cce0f4b1df62c20ec07a`。
 
-状态：P0–P2 与 D1/D3 Train-only 学生 smoke 完成，准备四臂固定8973步训练；尚无本轮 Val 推理/评测。不得将历史同集诊断数值当作本轮结果。
+状态：P3四臂固定8973步训练进行中；P0–P2与D1/D3 smoke已完成，P4/P5未启动。不得将历史同集诊断数值当作本轮结果。
 
 ## 1. P0：数据与配对盘点
 
 40 个 Train 视频的图像与原始 DanceTrack `gt.txt` 均齐全：41,796 帧、348,930 行框、419 个视频内物理轨迹 ID。
 逐视频帧号从 1 连续到 `seqinfo.ini` 的 `seqLength`，无缺帧；GT 六列的框宽高有效，帧号与图像对齐。
 逐视频路径、帧数、轨迹数、框行数见 `p0_videos.csv`，机器可读盘点见 `p0_inventory.json`。
+补充跨归档图像检查：每视频固定首/中/尾，共120帧，原始DanceTrack JPG与运行时Refer-Dance PNG的解码RGB、尺寸全部逐点相等；详见`train_image_alignment.json`，可用`prepare_train2val.py rgb-check`复现，无Val/指代GT输入。
 
 - 运行时 PNG：`/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/<Train video>`。
 - 原始 JPG 与 GT 的已有只读数据入口：`/data2/user/LocateMOT/data/DanceTrack/train/<video>/{img1,gt/gt.txt}`。
@@ -47,6 +48,9 @@ NOT_RUN。完成并推送本表前，不开始 Val 学生推理。
 D1/D3 真实smoke各完成200优化步（原LR2e-4、无回退），目标非零梯度均200/200，源模型初始预测max error=0/selection flips=0。
 真实训练目标GT与禁止输入打开尝试均0，冻结参数版本不变，D3 head实际更新；仅为接口/数值检查，不是正式8973步结果。
 小型记录见 `smoke_summary.json` 与 `smoke/`；重复打包只读seal的问题及修复见 `EXECUTION_NOTES.md`，未重跑已完成smoke。
+
+正式训练从官方V2重新初始化，D1 seed17/23/42分别GPU3/4/5（启动PID680048/680050/680052），D3 seed17在GPU7（PID680054）。
+启动数值源码private `a159741`对应公开`5c9fc345`同一Git tree；未使用smoke或旧D-FIT权重。最新stdout报告点为D1三seed4000/D3 3000，不是实时轮询进度；完整结果仍待8973步与全量Train拟合完成。
 
 P1 转换保留全部 348,930 行的 frame、id、box 原始文本和行序，419 条轨迹；候选–表达组合共 13,608,270。
 新候选与 runtime 位于 `/data2/user/TTA-RMOT-assets/train2val/20261031`，逐文件 SHA 见 `candidate_receipt.json`；没有修改任何原数据。
