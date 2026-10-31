@@ -105,11 +105,14 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--references', action='store_true')
     parser.add_argument('--prepared', action='store_true')
+    parser.add_argument('--oracle', action='store_true')
     parser.add_argument('--methods', nargs='*')
     args = parser.parse_args()
     if args.references:
         references()
     elif args.prepared:
         prepared()
+    elif args.oracle:
+        batch(json.loads((RUN / 'ORACLE_predictions.json').read_text())['methods'])
     else:
         batch(args.methods or [])

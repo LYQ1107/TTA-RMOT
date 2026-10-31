@@ -44,3 +44,34 @@ def test_round_half_up_not_bankers_and_clamped():
     assert round_budget(.25, 2) == 1
     assert round_budget(2, 5) == 5
     assert round_budget(-1, 5) == 0
+
+
+def verdict_fixture():
+    from scripts.diag_attrib_v2_common import BASELINES
+    comparisons = {'D1_minus_'+m: {'CI95':[1.,2.]} for m in BASELINES}
+    for k in ('OFFICIAL_DANCE_COMPLETE','D1','ORACLE_GT'):
+        comparisons['D3_sort_minus_FROZEN_K_'+k] = {'CI95':[-1.,1.]}
+    return comparisons
+
+
+def test_rule_A_contains_zero_is_registered_label_not_equivalence_claim():
+    from scripts.report_diag_attrib_v2 import classify
+    record = verdict_fixture()
+    record['D1_minus_B3_MEAN_GLOBAL']['CI95'] = [-.1,.2]
+    assert classify(record, {'D1':345302})['A'] == 'D1 的增益可被无学习校准解释'
+
+
+def test_rule_B_requires_both_registered_nonoracle_columns():
+    from scripts.report_diag_attrib_v2 import classify
+    record = verdict_fixture()
+    for k in ('OFFICIAL_DANCE_COMPLETE','D1'):
+        record['D3_sort_minus_FROZEN_K_'+k]['CI95'] = [.1,1.]
+    assert classify(record, {'D1':345302})['B'] == 'D3 的排序增益在合理数量下成立'
+
+
+def test_rule_B_mixed_case_is_not_silently_called_oracle_only():
+    from scripts.report_diag_attrib_v2 import classify
+    record = verdict_fixture()
+    for k in ('OFFICIAL_DANCE_COMPLETE','ORACLE_GT'):
+        record['D3_sort_minus_FROZEN_K_'+k]['CI95'] = [.1,1.]
+    assert classify(record, {'D1':345302})['B'].startswith('预注册规则未覆盖')

@@ -1,0 +1,78 @@
+{
+  "status": "PASS",
+  "all425_row_equivalences": [
+    {
+      "method": "M_FROZEN__FROZEN",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/pf_zero_completebank_full_20261025_merged/ZERO_UPDATE",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_FROZEN__D1",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/FROZEN_AT_DIAG_FIT_OPT_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_FROZEN__D2",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/FROZEN_AT_DIAG_FIT_OPT_POS_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_FROZEN__D3",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/FROZEN_AT_DIAG_FIT_CAP_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D1__FROZEN",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT_AT_FROZEN_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D1__D1",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D2__FROZEN",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT_POS_AT_FROZEN_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D2__D2",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_OPT_POS",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D3__FROZEN",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_CAP_AT_FROZEN_COUNT",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_D3__D3",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/DIAG_FIT_CAP",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "M_OFFICIAL_DANCE_COMPLETE__OFFICIAL_DANCE_COMPLETE",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/evaluation/OFFICIAL_DANCE_COMPLETE",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    },
+    {
+      "method": "D0_NAIVE",
+      "reference": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/evaluation/merged/NAIVE_PAIRED",
+      "status": "ALL425_ROWS_EXACTLY_EQUAL"
+    }
+  ],
+  "expected_HOTA": {
+    "M_FROZEN__FROZEN": 8.218,
+    "M_D1__D1": 29.702,
+    "M_D2__D2": 22.844,
+    "M_D3__D3": 27.768,
+    "M_FROZEN__D1": 29.4,
+    "M_D1__FROZEN": 7.8978,
+    "M_FROZEN__D2": 22.854,
+    "M_D2__FROZEN": 7.838,
+    "M_FROZEN__D3": 27.103,
+    "M_D3__FROZEN": 8.1589,
+    "M_OFFICIAL_DANCE_COMPLETE__OFFICIAL_DANCE_COMPLETE": 32.139
+  }
+}
