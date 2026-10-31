@@ -2355,3 +2355,4 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - D3已收到8000步，继续原队列；先发布完成D1的Train记录，不开完整表A门、不提前Val，也不取消健康D3。G/std与判定使用已验证官方CSV全精度HOTA，只展示时舍入，主阈值仍固定13.848、公式仍8.218/29.702。
 - D3随后原lr2e-4完成8973步/0退出，child5677.683秒、全队列5678.015秒；GT/禁止输入0/frozen不变/head更新/源计划SHA与旧D1相同，final SHA72c9eb38…。教师POS选中率.240793、非POS .038424、pair .649366、source-dev CE .675946；仍仅拟合部分教师正例，不能把BCE1.3118降至.3096当GT成功。
 - 四臂完整表A生成，SHA412996980d43fd2a2dd37a339d4f240b6b8907a336454a1d68cccc925e8d9a78；step-final唯一checkpoint、未用目标GT选参或seed。source计划逐字节相同、目标40/1560/31200覆盖完整；最终27项不同CPU回归15.57秒通过。先推送并核验本表，再打开Val推理门；本阶段没有Val模型结果。
+- 完整表A已公开be48a3b3a3c044d5a4f0679ca8a3c8d4dd0f9afc并回读核验同一tree；核验时evaluation目录不存在，发布门记录SHA不改。随后四final-step模型分别GPU0/2/3/4共享准入完整425表达推理，单blocking parent正常按视频封存；全部封存前不打开GT，不重启健康episode。
