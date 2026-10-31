@@ -52,6 +52,13 @@ def report():
     if completion['status']!='COMPLETE_ALL_PREDICTION_SETS':raise ValueError('finish official evaluation first')
     meta,old_scores,groups,_=common.load_bank();methods=planned['methods'];native=[a for a in ARMS if a in planned['new_native_methods']]
     main=['FROZEN','SAME_SET_D1','SAME_SET_D3','B1_SRC_RATE_GLOBAL','OFFICIAL_DANCE_COMPLETE',*native]
+    protocols={
+        'FROZEN':'SOURCE_ONLY_KITTI_V2_FROZEN_ON_DANCE_VAL',
+        'SAME_SET_D1':'HISTORICAL_SAME_VAL_TEACHER_TRAIN_EVAL_NOT_TRAIN_TO_VAL',
+        'SAME_SET_D3':'HISTORICAL_SAME_VAL_TEACHER_TRAIN_EVAL_NOT_TRAIN_TO_VAL',
+        'B1_SRC_RATE_GLOBAL':'GT_FREE_SOURCE_RATE_CALIBRATION_NO_STUDENT_TRAINING',
+        'OFFICIAL_DANCE_COMPLETE':'OFFICIAL_DANCE_SUPERVISED_IN_DOMAIN_REFERENCE_NOT_UDA',
+        **{m:'TRAIN40_TO_VAL25_FINAL8973_NO_TARGET_REFERRING_GT_8_SHARED_PHRASES' for m in native}}
     manifests={m:common.verify_seal(m) for m in methods}
     metrics={m:official_metrics(common.EVAL/m/'results') for m in methods};values={};videos=None
     for name,hota in dict(FROZEN=8.218,SAME_SET_D1=29.702,SAME_SET_D3=27.768,
@@ -147,7 +154,7 @@ def report():
             net_offline_FP_change=recovery[m]['offline_FP']-recovery['FROZEN']['offline_FP'],
             existing_row_matching_reassignment_FP_delta=(recovery[m]['offline_FP']-recovery['FROZEN']['offline_FP'])-
                 (recovery[m]['new_FP_rows']-recovery[m]['removed_FP_rows']),
-            information='official25Val; no target training labels/Val checkpoint selection; references inherited same-Val development')
+            information=protocols[m])
         if alignment[m]['prediction_rows']!=metrics[m]['Dets']:raise ValueError('Table C row-count disagreement')
     common.write_csv(PUBLIC/'TABLE_C.csv',list(alignment.values()));atomic_json(PUBLIC/'alignment.json',dict(GT=gt_report,methods=alignment))
     atomic_json(PUBLIC/'retrieval_per_episode.json',retrieval_per_episode)
@@ -265,6 +272,9 @@ def report():
         'Train使用原始GT几何/ID、Val使用预测NeuralSORT；每窗口曝光约4.60对旧约16.89，均为固定协议差异，不改超参补偿。\n'+\
         '完整官方summary/detailed和阶段stdout/失败/恢复记录已归档；本轮准备问题见EXECUTION_NOTES.md，所有成本见costs.json，count-controls不作为免费独立系统。\n'+\
         '完成本轮后停止，不开展新方法、密集教师标注、超参或新seed搜索。\n'
+    interpretation=PUBLIC/'INTERPRETATION.md'
+    if interpretation.exists():
+        report+='\n'+interpretation.read_text().replace('# 科研解释与停止结论','## 7. 科研解释与停止结论',1)
     report='\n'.join('状态：COMPLETE_STOP；P0–P5 全部完成，所有注册臂上报，不启动新方法或新训练。' if line.startswith('状态：') else line for line in report.splitlines())+'\n'
     (PUBLIC/'REPORT.md').write_text(report)
     atomic_json(PUBLIC/'completion.json',dict(status='COMPLETE_TRAIN_TO_VAL_STOP_NO_NEW_METHOD',
