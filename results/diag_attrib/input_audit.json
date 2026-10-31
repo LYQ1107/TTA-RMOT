@@ -1,0 +1,216 @@
+{
+  "status": "OFFICIAL_MARGIN_SUPPLEMENT_REQUIRED",
+  "prereg": {
+    "branch": "research/v2dance-diag-attrib-20261031",
+    "base_commit": "958e1d7c6165bdc257d420562d94d66916f67ddb",
+    "published_commit": "0daa63a5b47d4450366fa5b0cdb6c7b1673aac71",
+    "published_tree": "d7096d2f1e67f52008d09d69e1bfe31159ef9b28",
+    "local_snapshot_commit": "3d09fdfaf12a6a5364ee3de719b2d0ffef4ddea9",
+    "prereg_sha256": "d064ca9e7762fa5ff5701fc4c66f033d64ce680a617bac1980b6153ec9a589b6",
+    "remote_verified": true,
+    "verification": "GitHub branch read-back and exact local/remote Git tree equality before any new score computation or evaluation",
+    "new_evaluation_started_before_publication": false,
+    "new_training_authorized": false
+  },
+  "models": {
+    "FROZEN": {
+      "status": "PASS",
+      "episodes": 425,
+      "candidates": 3588445,
+      "active_query_frames": 433636,
+      "prediction_rows": 99704,
+      "margin_positive_rows_exactly_reproduce_native": true
+    },
+    "D1": {
+      "status": "PASS",
+      "episodes": 425,
+      "candidates": 3588445,
+      "active_query_frames": 433636,
+      "prediction_rows": 345302,
+      "margin_positive_rows_exactly_reproduce_native": true
+    },
+    "D2": {
+      "status": "PASS",
+      "episodes": 425,
+      "candidates": 3588445,
+      "active_query_frames": 433636,
+      "prediction_rows": 996330,
+      "margin_positive_rows_exactly_reproduce_native": true
+    },
+    "D3": {
+      "status": "PASS",
+      "episodes": 425,
+      "candidates": 3588445,
+      "active_query_frames": 433636,
+      "prediction_rows": 695148,
+      "margin_positive_rows_exactly_reproduce_native": true
+    }
+  },
+  "official": {
+    "score_path": "/data2/user/FlexHook-TTA/results/runs/flexhook_dance_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json",
+    "score_sha256": "de8ff46428818cbd1ee0dd2b6ea1a7692eae2b7e0133c521c1470b67b58da110",
+    "observed_candidate_query_rows": 3576681,
+    "required_candidate_query_rows": 3588445,
+    "missing_MOT_observations": 692,
+    "missing_candidate_query_rows": 11764,
+    "historical_rows": 254118,
+    "observed_scores_reproduce_all425_historical_predictions": true,
+    "per_video": [
+      {
+        "video": "dancetrack0004",
+        "MOT_rows": 4371,
+        "observed_rows": 4360,
+        "missing_rows": 11
+      },
+      {
+        "video": "dancetrack0005",
+        "MOT_rows": 4576,
+        "observed_rows": 4567,
+        "missing_rows": 9
+      },
+      {
+        "video": "dancetrack0007",
+        "MOT_rows": 9111,
+        "observed_rows": 9098,
+        "missing_rows": 13
+      },
+      {
+        "video": "dancetrack0010",
+        "MOT_rows": 6740,
+        "observed_rows": 6727,
+        "missing_rows": 13
+      },
+      {
+        "video": "dancetrack0014",
+        "MOT_rows": 12289,
+        "observed_rows": 12252,
+        "missing_rows": 37
+      },
+      {
+        "video": "dancetrack0018",
+        "MOT_rows": 2507,
+        "observed_rows": 2500,
+        "missing_rows": 7
+      },
+      {
+        "video": "dancetrack0019",
+        "MOT_rows": 15880,
+        "observed_rows": 15858,
+        "missing_rows": 22
+      },
+      {
+        "video": "dancetrack0025",
+        "MOT_rows": 6731,
+        "observed_rows": 6709,
+        "missing_rows": 22
+      },
+      {
+        "video": "dancetrack0026",
+        "MOT_rows": 3691,
+        "observed_rows": 3660,
+        "missing_rows": 31
+      },
+      {
+        "video": "dancetrack0030",
+        "MOT_rows": 7533,
+        "observed_rows": 7526,
+        "missing_rows": 7
+      },
+      {
+        "video": "dancetrack0034",
+        "MOT_rows": 10195,
+        "observed_rows": 10158,
+        "missing_rows": 37
+      },
+      {
+        "video": "dancetrack0035",
+        "MOT_rows": 4927,
+        "observed_rows": 4910,
+        "missing_rows": 17
+      },
+      {
+        "video": "dancetrack0041",
+        "MOT_rows": 14320,
+        "observed_rows": 14248,
+        "missing_rows": 72
+      },
+      {
+        "video": "dancetrack0043",
+        "MOT_rows": 1363,
+        "observed_rows": 1348,
+        "missing_rows": 15
+      },
+      {
+        "video": "dancetrack0047",
+        "MOT_rows": 9064,
+        "observed_rows": 9041,
+        "missing_rows": 23
+      },
+      {
+        "video": "dancetrack0058",
+        "MOT_rows": 10798,
+        "observed_rows": 10786,
+        "missing_rows": 12
+      },
+      {
+        "video": "dancetrack0063",
+        "MOT_rows": 7930,
+        "observed_rows": 7824,
+        "missing_rows": 106
+      },
+      {
+        "video": "dancetrack0065",
+        "MOT_rows": 3486,
+        "observed_rows": 3479,
+        "missing_rows": 7
+      },
+      {
+        "video": "dancetrack0073",
+        "MOT_rows": 6881,
+        "observed_rows": 6850,
+        "missing_rows": 31
+      },
+      {
+        "video": "dancetrack0077",
+        "MOT_rows": 10780,
+        "observed_rows": 10765,
+        "missing_rows": 15
+      },
+      {
+        "video": "dancetrack0079",
+        "MOT_rows": 13997,
+        "observed_rows": 13971,
+        "missing_rows": 26
+      },
+      {
+        "video": "dancetrack0081",
+        "MOT_rows": 17148,
+        "observed_rows": 17096,
+        "missing_rows": 52
+      },
+      {
+        "video": "dancetrack0090",
+        "MOT_rows": 11660,
+        "observed_rows": 11621,
+        "missing_rows": 39
+      },
+      {
+        "video": "dancetrack0094",
+        "MOT_rows": 10522,
+        "observed_rows": 10461,
+        "missing_rows": 61
+      },
+      {
+        "video": "dancetrack0097",
+        "MOT_rows": 4585,
+        "observed_rows": 4578,
+        "missing_rows": 7
+      }
+    ]
+  },
+  "target_GT_open_attempts": [],
+  "optimizer_steps": 0,
+  "GPU_calls": 0,
+  "CPU_wall_seconds": 51.532530011143535,
+  "original_files_written": 0
+}
