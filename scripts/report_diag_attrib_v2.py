@@ -84,6 +84,13 @@ def report():
         values[method] = dict(videos=videos, stats=stats, exact_HOTA=exact)
     if any(item['videos'] != videos for item in values.values()):
         raise ValueError('video cluster alignment differs')
+    recovery=json.loads((RUN/'B0_recovery.json').read_text())
+    for row in recovery['affected']:
+        if metrics[row['method']]['Dets']!=row['correct_registered_rows']:
+            raise ValueError('corrected B0 official count still violates preregistration')
+    recovery.update(status='FOUR_B0_POINTS_CORRECTED_AND_OFFICIALLY_REEVALUATED_PASS',
+        corrected_official_metrics={r['method']:metrics[r['method']] for r in recovery['affected']})
+    atomic_json(RUN/'B0_recovery.json',recovery)
     native = {m:matrix_name(m,m) for m in NAMES}
     native['D0_NAIVE'] = 'D0_NAIVE'
     counts = ['FROZEN','D1','D2','D3','OFFICIAL_DANCE_COMPLETE','ORACLE_GT']
@@ -247,18 +254,27 @@ def report():
         all_files_list='all_prediction_files.csv.gz',all_files_list_sha256=file_sha(PUBLIC / 'all_prediction_files.csv.gz'),
         sealed_predictions_on_server=True,models={m:dict(seal_path=str(EVAL / m / 'predictions_seal.json'),
         seal_sha256=file_sha(EVAL / m / 'predictions_seal.json'),rows=manifests[m]['prediction_rows']) for m in methods}))
-    for source in [RUN/'GT_free_predictions.json',RUN/'ORACLE_predictions.json',RUN/'reference_validation.json',RUN/'matrix_self_checks.json',RUN/'prereg_publication.json']:
+    for source in [RUN/'GT_free_predictions.json',RUN/'ORACLE_predictions.json',RUN/'reference_validation.json',RUN/'matrix_self_checks.json',RUN/'prereg_publication.json',RUN/'B0_recovery.json']:
         shutil.copy2(source,PUBLIC / source.name)
+    invalid_jobs=[]
+    for path in (RUN/'retained_failures/b0_scale_clamp_1/evaluation').glob('*/official_completion.json'):
+        invalid_jobs.append(dict(json.loads(path.read_text()),retained_receipt=str(path)))
+    valid_new_jobs=sum(r['new_TrackEval_job'] for r in completion.values())
+    invalid_wall=sum(r['worker_wall_seconds'] for r in invalid_jobs)
     costs=dict(new_GPU_calls=0,new_GPU_hours=0,optimizer_steps=0,new_teacher_calls=0,
         CPU_preparation_wall_seconds=sum(r['CPU_wall_seconds'] for r in [gt_free,oracle,json.loads((RUN/'reference_reproduction.json').read_text())]),
         CPU_preparation_process_seconds=sum(r['CPU_process_seconds'] for r in [gt_free,oracle,json.loads((RUN/'reference_reproduction.json').read_text())]),
-        new_TrackEval_jobs=sum(r['new_TrackEval_job'] for r in completion.values()),
+        new_TrackEval_jobs=valid_new_jobs+len(invalid_jobs),valid_unique_new_TrackEval_jobs=valid_new_jobs,
+        invalid_replaced_TrackEval_jobs=len(invalid_jobs),invalid_jobs=invalid_jobs,
         reused_exactly_equivalent_official_results=sum(not r['new_TrackEval_job'] for r in completion.values()),
-        official_sum_worker_wall_seconds=sum(r['worker_wall_seconds'] for r in completion.values()),
+        official_sum_worker_wall_seconds=sum(r['worker_wall_seconds'] for r in completion.values())+invalid_wall,
+        invalid_official_worker_wall_seconds=invalid_wall,
         official_CPU_core_seconds=None,official_CPU_core_seconds_note='not instrumented; worker wall not mislabeled as CPU core time',
         per_job=completion,
         inherited_official_missing_score_GPU_worker_hours=json.loads((ROOT/'results/diag_attrib/official_reproduction.json').read_text())['GPU_worker_hours'],
         inherited_DFIT_costs=dict(path=str(ROOT/'results/diag_fit/costs.json'),sha256=file_sha(ROOT/'results/diag_fit/costs.json')),
+        additional_Frozen_overlap_audit=json.loads((PUBLIC/'frozen_historical_overlap.json').read_text()),
+        retained_initial_report_costs=json.loads((RUN/'retained_failures/b0_scale_clamp_1/completion_initial_revoked.json').read_text()),
         derived_controls_not_free_independent_models=True)
     atomic_json(PUBLIC/'costs.json',costs)
     atomic_json(PUBLIC/'gt_audit.json',dict(GT_free_generation_open_attempts=gt_free['GT_free_target_open_attempts'],
@@ -280,6 +296,15 @@ def report():
                 tar.add(path,arcname='stage_logs/'+path.name)
         for name in ('reference_reproduction.json','source_statistics.json','GT_free_predictions.json','ORACLE_predictions.json','matrix_self_checks.json'):
             tar.add(RUN/name,arcname='provenance/'+name)
+        retained=RUN/'retained_failures/b0_scale_clamp_1'
+        if retained.exists():
+            for path in (retained/'evaluation').glob('*/results/pedestrian*'):
+                tar.add(path,arcname='retained_invalid_B0/'+path.relative_to(retained).as_posix())
+            for path in (retained/'official_jobs').glob('*/stdout_*.txt'):
+                tar.add(path,arcname='retained_invalid_B0/'+path.relative_to(retained).as_posix())
+            for name in ('REPORT.md','B0_curve.csv','completion.json'):
+                tar.add(retained/'initial_public_report'/name,arcname='retained_invalid_B0/initial_report/'+name)
+            tar.add(RUN/'B0_recovery.json',arcname='provenance/B0_recovery.json')
     atomic_json(PUBLIC/'artifacts.json',dict(server_run_root=str(RUN),score_bank=str(CACHE),
         score_bank_metadata_sha256=file_sha(CACHE/'bank.json'),
         metrics_archive_sha256=file_sha(archive),metrics_archive_bytes=archive.stat().st_size,
@@ -318,6 +343,10 @@ def report():
         body+=['### '+label,'',table(['排序R / 数量K']+[c if c!='ORACLE_GT' else 'ORACLE_GT【GT】' for c in counts],
             [[r]+[next(x[field] for x in matrix if x['ranking']==r and x['count']==c) for c in counts] for r in NAMES]),'']
     body+=['混合格继承排序模型和数量模型的已付训练/推理成本，是后验诊断，不是免费Frozen系统、独立新算法或GT-free oracle。固定列严格保持同样输出行数，变化只能来自选择哪些同帧候选及其关联效果。','',
+        '### 贡献解释：逐帧/逐表达k并非一个全局数量','',
+        'D1、Frozen@D1逐帧k、B0 Frozen全局top345,302，三者总输出同为345,302行，但HOTA分别29.702、29.400、12.930；关键不是单纯把阈值降低到相同总数，而是把数量分配到哪些表达和时刻。Frozen@D1继承了训练后D1提供的查询条件数量信息，不能把它描述成无需学习的Frozen校准。','',
+        'D1相对Frozen的整体改善约21.484点，而固定D1数量后排序差只有约0.3025且区间跨0；HOTA非线性、数量与排序有交互，不能据此计算一个因果贡献百分比。表C也显示D1非空帧81,061多于官方41,979，虽然非空帧平均k反而更低（4.26 vs6.07），剩余差距仍包含存在性误发射，不只是每帧目标过多。','',
+        'D3在两列实际可用数量下区间均跨0，仅GT数量列为正；这支持受理想数量条件约束的内部排序信号，不支持宣称已转化为可部署HOTA收益。D1点值仍低于同域参考32.139；D1−官方区间包含0不等于证明追平或等效。此诊断定位输出机制，不单独证明教师监督是唯一训练因果因素，也不是盲测泛化。','',
         '## 4. 固定校准基线（B1–B4）','',
         table(['版本','HOTA','DetA','AssA','IDF1','行数','/GT','/完整官方','GT空帧平均k','Query-Empty预测行'],
             [[m]+[alignment[m][k] for k in ('HOTA','DetA','AssA','IDF1','prediction_rows','relative_GT','relative_OFFICIAL_COMPLETE','mean_k_GT_empty_frame','query_empty_selected_rows')] for m in BASELINES]),'',
@@ -344,18 +373,35 @@ def report():
         table(['历史覆盖排序R','历史覆盖K','HOTA','行数','完整原生HOTA','完整原生行数'],
             [[r['ranking'],r['count'],r['HOTA'],r['Dets'],r['full_native_HOTA'],r['full_native_rows']] for r in sensitivity]),'',
         '历史覆盖D1−OFFICIAL的CI单列在bootstrap最后一行，不参与主判定；七套敏感性预测均本轮重新官方评价，不拿旧结果冒充重评。完整/历史HOTA可对照，但不根据哪个较好挑选覆盖。','',
+        '这里历史覆盖Frozen是**当前已封存ZERO_UPDATE margin的同一历史候选子集**，因此为8.2072/99,320，而非替换为早期批量推理的8.2060/99,316；两份文件均未改。全3,576,681重叠分数审计查到6个接近零的符号差（5新增、1删除，净+4），所有边界margin绝对值不超过0.000128；全局最大margin差0.00118494，符合不同既有数值路径的小差异。具体逐候选分数在frozen_historical_overlap.json；不声称当前子集逐行复现早期batch文件，不按GT挑选或替换这些margin。官方Dance历史对角仍按硬门槛严格复现254,118/32.134。','',
         '## 8. GT隔离审计','',
         '参考构建与全部40套GT-free预测生成独立进程目标GT打开尝试均0；只用剥离标签runtime文本、固定MOT、封存margin、源分数、Naive8500。最终封存后独立ORACLE进程读425 GT文件，仅生成明确ORACLE/B0；报告进程读425 GT做帧分组。没有GT进入源统计、分位阈值、学生、checkpoint选择或因果窗口。','',
         '所有58预测集各425表达，24,650个预测文件均封存并在官方评测后复核SHA；逐文件清单all_prediction_files.csv.gz，服务器完整文件路径与seal见prediction_manifest.json。旧D-FIT/v1权重、margin、预测不动。','',
         '## 9. 成本与可恢复路径','',
-        f"本轮新GPU调用0、训练/优化0、新教师0；CPU准备wall合计{costs['CPU_preparation_wall_seconds']:.3f}s、进程CPU {costs['CPU_preparation_process_seconds']:.3f}s；新官方jobs={costs['new_TrackEval_jobs']}，逐行等价复用={costs['reused_exactly_equivalent_official_results']}，官方worker-wall累计{costs['official_sum_worker_wall_seconds']:.3f}s（并行求和，不是调度墙钟或CPU-core小时）。报告/打包耗时另见completion。",'',
+        f"本轮新GPU调用0、训练/优化0、新教师0；CPU准备wall合计{costs['CPU_preparation_wall_seconds']:.3f}s、进程CPU {costs['CPU_preparation_process_seconds']:.3f}s；有效新官方jobs={valid_new_jobs}，保留无效B0尝试={len(invalid_jobs)}，新评价实际总次数={costs['new_TrackEval_jobs']}，逐行等价复用={costs['reused_exactly_equivalent_official_results']}，官方worker-wall累计{costs['official_sum_worker_wall_seconds']:.3f}s（含无效尝试、并行求和，不是调度墙钟或CPU-core小时）。报告/打包耗时另见completion。",'',
         '先前官方补分数0.051710 GPU-process小时及D-FIT训练/推理成本仍存在，见costs.json继承路径SHA；不能将本轮低CPU成本说成免费独立RMOT。每job日志/完成收据与完整官方summary+detailed在official_metrics_and_logs.tar.gz。',
         '服务器恢复根：`'+str(RUN)+'`；仅恢复缺失/失败单元，已通过单元不重跑。所有计算完成后停止，不启动新训练。','',
         '## 10. 失败与修复记录','',
-        'v1明确停止记录保留：完整官方与旧254,118条件不相容；用户批准并先推送v2后才改用完整参照，不称为科研收益。v2初始8项针对性CPU测试/compileall通过；任何后续真实失败与最小修复在阶段日志及EXECUTION_NOTES中披露，不隐藏失败、不改指标/seed/阈值。','',
+        'v1明确停止记录保留：完整官方与旧254,118条件不相容；用户批准并先推送v2后才改用完整参照，不称为科研收益。v2初始8项针对性CPU测试通过；补充判定和B0绝对预算回归后共12项通过（不累加重叠运行次数）。','',
+        '汇总发现真实B0实现错误：round_budget(scale,GT_count)误把1.25/1.5/2/3倍GT预算均截为212,541；撤销未推送的初版完整报告，保留全部四套错误预测、官方CSV/日志与初版报告。最小修复改为绝对round-half-up(scale×212,541)，只按实际3,588,445候选上限截断；正确预算265,676/318,812/425,082/637,623，仅重评这四点。其余健康评测不重跑，预注册定义、seed、权重、阈值算法均不改；A/B/C不依赖B0且未因修复改变。详情见EXECUTION_NOTES.md、B0_recovery.json及归档retained_invalid_B0。','',
         '## 建议（只建议，不执行）','',
-        '先根据A/B及完整矩阵判断是否需要学习：若简单校准已解释D1，应将其作为正式强基线；若D3同帧排序在固定合理数量下可靠改善，可研究如何在不读取GT时独立校准数量并保留排序。两模型拼接的后验格子本身不证明可部署新算法；下一阶段需另行明确授权，本轮不训练。']
+        '当前证据支持保留D1作为学到逐表达/逐帧数量分配的基线，而不是把它的收益归为一个全局阈值；不把D3的Oracle排序收益包装成实际方法成功。若后续获授权，优先研究无GT的查询存在性/时间分配与空目标误发射控制，保留简单源统计校准作强制对照，不继续通过更大pos_weight扩大输出。两模型拼接后验格子不是可部署新算法；本轮不开始新训练。']
     (PUBLIC/'REPORT.md').write_text('\n'.join(body)+'\n')
+    protected=json.loads((ROOT/'results/runs/diag_attrib_20261031_v1/protected_inputs.json').read_text())
+    for row in protected:
+        for kind in ('prediction','margins'):
+            if file_sha(row[kind+'_path'])!=row[kind+'_sha256']:
+                raise ValueError('original D-FIT/Frozen sealed input was changed')
+    old_weights=[r for r in json.loads((ROOT/'results/diag_fit/server_artifacts.json').read_text())['checkpoints']
+                 if r['phase']=='students' and r['path'].endswith('/checkpoint_final_step.pt')]
+    for row in old_weights:
+        if file_sha(row['path'])!=row['sha256']:
+            raise ValueError('old D-FIT final checkpoint changed')
+    if file_sha(ROOT/'results/diag_attrib/REPORT.md')!='248270bf103e8ff72ca7c6705586d0d1fb85d079dac7dde80ab251e6c77c454c':
+        raise ValueError('v1 historical stop report changed')
+    atomic_json(PUBLIC/'post_eval_integrity.json',dict(status='PASS',old_prediction_margin_pairs=len(protected),
+        old_final_checkpoints_verified=len(old_weights),v1_report_and_prereg_unchanged=True,
+        all_58_new_prediction_sets_reverified_after_official_evaluation=True,GT_free_generator_target_GT_open_attempts=0))
     result=dict(status='COMPLETE_STOP',methods=58,episodes_each=425,official_jobs=costs['new_TrackEval_jobs'],
         best_GT_free_baseline=best,verdict=verdict,new_GPU_calls=0,optimizer_steps=0,
         report_path=str(PUBLIC/'REPORT.md'),report_sha256=file_sha(PUBLIC/'REPORT.md'),

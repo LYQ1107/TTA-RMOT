@@ -118,6 +118,11 @@ def round_budget(rate, n):
     return min(n, max(0, int(math.floor(rate*n + .5))))
 
 
+def scale_budget(scale, reference_count, available_candidates):
+    """Absolute B0 count, capped by actual candidates, NOT by GT reference."""
+    return min(available_candidates, max(0, int(math.floor(scale*reference_count + .5))))
+
+
 def top_budget(values, count):
     """Global canonical-order tie-break; indices already video/query/frame/ID."""
     values = np.asarray(values)

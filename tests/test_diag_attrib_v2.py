@@ -46,6 +46,12 @@ def test_round_half_up_not_bankers_and_clamped():
     assert round_budget(-1, 5) == 0
 
 
+def test_B0_absolute_scales_are_not_clamped_to_one_GT_count():
+    from scripts.diag_attrib_v2_common import scale_budget
+    assert [scale_budget(a,212541,3588445) for a in (1.25,1.5,2.,3.)] == [265676,318812,425082,637623]
+    assert scale_budget(3,212541,500000) == 500000
+
+
 def verdict_fixture():
     from scripts.diag_attrib_v2_common import BASELINES
     comparisons = {'D1_minus_'+m: {'CI95':[1.,2.]} for m in BASELINES}

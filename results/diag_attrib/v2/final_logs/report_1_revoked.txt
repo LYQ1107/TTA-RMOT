@@ -1,0 +1,50 @@
+{
+  "status": "COMPLETE_STOP",
+  "methods": 58,
+  "episodes_each": 425,
+  "official_jobs": 46,
+  "best_GT_free_baseline": "B1_SRC_RATE_GLOBAL",
+  "verdict": {
+    "A": "学生提供了超出简单校准的存在性信息",
+    "A_explainer_baselines": [],
+    "B": "排序信号只在 oracle 数量下可见",
+    "B_positive_CI_columns": {
+      "OFFICIAL_DANCE_COMPLETE": false,
+      "D1": false,
+      "ORACLE_GT": true
+    },
+    "C": {
+      "OFFICIAL_DANCE_COMPLETE": {
+        "ratio": 1.0,
+        "label": "与同域官方同量级"
+      },
+      "FROZEN": {
+        "ratio": 0.39113412576987955,
+        "label": "过量或不足"
+      },
+      "D0_NAIVE": {
+        "ratio": 0.08277431250245185,
+        "label": "过量或不足"
+      },
+      "D1": {
+        "ratio": 1.354603585579224,
+        "label": "与同域官方同量级"
+      },
+      "D2": {
+        "ratio": 3.9085559609273863,
+        "label": "过量或不足"
+      },
+      "D3": {
+        "ratio": 2.727033070495469,
+        "label": "过量或不足"
+      }
+    }
+  },
+  "new_GPU_calls": 0,
+  "optimizer_steps": 0,
+  "report_path": "/data2/user/FlexHook-TTA/results/diag_attrib/v2/REPORT.md",
+  "report_sha256": "a8e30bb250347ce26848c3d7f66635f5b2b90f7a020664f0153df3b6e0ccdead",
+  "CPU_report_wall_seconds": 17.723434226121753,
+  "CPU_report_process_seconds": 17.70445943,
+  "all_experiment_subprocesses_finished": true
+}

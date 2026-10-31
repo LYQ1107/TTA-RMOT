@@ -48,7 +48,7 @@ def generate():
         mask = ranks < k_gt[groups]
         write_selection(name, mask, metadata, lines, protocol='ORACLE_USING_TARGET_GT_FOR_COUNTS_DIAGNOSTIC_ONLY')
         methods.append(name)
-    budgets = [(f'B0_SCALE_{str(scale).replace(".", "p")}', round_budget(scale, 212541))
+    budgets = [(f'B0_SCALE_{str(scale).replace(".", "p")}', scale_budget(scale, 212541, len(groups)))
                for scale in (.25, .5, .75, 1., 1.25, 1.5, 2., 3.)]
     budgets += [('B0_NATIVE_FROZEN_COUNT', 99704), ('B0_NATIVE_OFFICIAL_COMPLETE_COUNT', 254910), ('B0_NATIVE_D1_COUNT', 345302)]
     boundaries = []
