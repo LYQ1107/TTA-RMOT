@@ -207,9 +207,11 @@ def report():
         compare(m,'FROZEN_AT_'+m+'_COUNT')
         compare(m+'_AT_OFFICIAL_COUNT','FROZEN_AT_OFFICIAL_COUNT')
     if len(seeds)==3:
-        hotas=[metrics[m]['HOTA'] for m in seeds]
+        # Use verified full-precision official COMBINED statistics for G/std;
+        # round only presentation, never a preregistered decision boundary.
+        hotas=[float(pooled_hota(values[m],np.ones(25))) for m in seeds]
         verdict=literal_verdict(hotas,comparisons['T2V_D1_s17_minus_B1_SRC_RATE_GLOBAL']['CI95'])
-        verdict.update(three_seed_HOTA=hotas,HOTA_seed_std=float(np.std(hotas,ddof=1)),
+        verdict.update(three_seed_HOTA=hotas,displayed_official_HOTA=[metrics[m]['HOTA'] for m in seeds],HOTA_seed_std=float(np.std(hotas,ddof=1)),
             unrounded_G=float(np.mean([float(pooled_hota(values[m],np.ones(25))) for m in seeds])))
     else:verdict=dict(literal_user_rule_verdict='INCOMPLETE_REGISTERED_SEEDS_NO_SCIENTIFIC_VERDICT')
     bootstrap=dict(clusters=25,samples=2000,seed=0,pooling='same v2 official TP-weighted HOTA sufficient statistics',

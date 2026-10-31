@@ -68,7 +68,9 @@ def build():
         target_GT_open_attempts=0,Val_data_read_by_training=False)
     atomic_json(PUBLIC/'table_a.json',result);atomic_json(RUN/'table_a.json',result)
     report=(PUBLIC/'REPORT.md').read_text();a=report.index('## 3. 表 A：');b=report.index('## 4. 表 B / C、')
-    report=report[:a]+'## 3. 表 A：Train 教师拟合\n\n'+path.read_text()+'\n'+report[b:]
+    preparation=report[a:b].split('\n\n',1)[1].replace('NOT_RUN。完成并推送本表前，不开始 Val 学生推理。','').strip()
+    report=report[:a]+'## 3. 表 A：Train 教师拟合\n\n'+path.read_text()+\
+        '\n### P1/P2与启动记录（历史阶段，最终状态以本表为准）\n\n'+preparation+'\n\n'+report[b:]
     report='\n'.join('状态：P0–P3 完成，P4/P5 等待表A推送门；尚无本轮 Val 结果。' if line.startswith('状态：') else line for line in report.splitlines())+'\n'
     (PUBLIC/'REPORT.md').write_text(report)
     print(json.dumps(result,indent=2))
