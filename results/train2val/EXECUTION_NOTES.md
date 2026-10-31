@@ -7,7 +7,7 @@
 5. 原PSR封存器产生兼容weak文件，但本轮所有臂expanded_kind=none、expanded=0，weak不作为任何训练项；没有增加教师视图或新方法。
 6. 两个学生200步smoke都正常完成；重复发布元数据时发现copy2会继承seal的0444权限，下一次重复复制同一公开seal报PermissionError。仅修复打包器：已有相同SHA的不可变元数据直接复用，不改原seal、不重跑任何模型/训练；添加真实只读文件复现回归。
 
-26项不同相关CPU测试通过（`test_train2val.py` 8项、`test_diag_fit.py` 18项；合并运行15.38秒），compileall及diff检查通过。
+完整训练完成后再次合并运行，27项不同相关CPU测试通过（`test_train2val.py` 9项、`test_diag_fit.py` 18项；15.57秒），compileall及diff检查通过。此前26项/15.38秒为添加只读seal回归前的阶段记录，不累加重复测试。
 Naive8500采样重放由独立审核进程执行，与训练白名单隔离。
 真实教师4样本smoke和全40Train的31200判断、split=train加载均已完成，GT尝试0，原后端/裁剪代码不变。
 学生smoke/完整训练/预测/GT评价的真实状态以后续独立receipt和最终报告为准，不把上述准备检查当科研结果。

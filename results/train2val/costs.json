@@ -116,7 +116,10 @@
         "peak_allocated_bytes": 6165864448,
         "trainable_parameters": 24576,
         "optimizer_updates": 200,
-        "mean_window_exposures": 0.10256410256410256
+        "mean_window_exposures": 0.10256410256410256,
+        "optimizer_updates_per_body_second": 0.7219559643013683,
+        "target_valid_exposures": 3200,
+        "nonzero_target_gradient_update_fraction": 1.0
       },
       "T2V_D3_s17": {
         "status": "COMPLETE",
@@ -139,11 +142,123 @@
         "peak_allocated_bytes": 6284080640,
         "trainable_parameters": 2758656,
         "optimizer_updates": 200,
-        "mean_window_exposures": 0.10256410256410256
+        "mean_window_exposures": 0.10256410256410256,
+        "optimizer_updates_per_body_second": 0.6463679822550477,
+        "target_valid_exposures": 3200,
+        "nonzero_target_gradient_update_fraction": 1.0
       }
     }
   },
-  "total_new_GPU_process_hours": 0.660489468038302,
+  "training_full": {
+    "actual_wall_seconds": 5678.015293655917,
+    "methods": {
+      "T2V_D1_s17": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 4245.369001697982,
+        "GPU_process_hours_including_attempts": 1.1792691671383282,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 4245.369001697982,
+            "scope": "full",
+            "arm": "T2V_D1_s17",
+            "method": "DIAG_FIT_OPT",
+            "seed": 17,
+            "retry": 0,
+            "physical_gpu": 3,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "f72cc8e9127320382d29d7ca158a7299c3de97f1aacf0f48312c56143d5635e7",
+        "peak_allocated_bytes": 6386520576,
+        "trainable_parameters": 24576,
+        "optimizer_updates": 8973,
+        "mean_window_exposures": 4.601538461538461,
+        "optimizer_updates_per_body_second": 2.116348680456979,
+        "target_valid_exposures": 143568,
+        "nonzero_target_gradient_update_fraction": 1.0
+      },
+      "T2V_D1_s42": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 4245.507012000075,
+        "GPU_process_hours_including_attempts": 1.179307503333354,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 4245.507012000075,
+            "scope": "full",
+            "arm": "T2V_D1_s42",
+            "method": "DIAG_FIT_OPT",
+            "seed": 42,
+            "retry": 0,
+            "physical_gpu": 5,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "d05300ae0e613581b2084fb09649a1615449dca0cd2bfe764217e80f351f11d0",
+        "peak_allocated_bytes": 6396173312,
+        "trainable_parameters": 24576,
+        "optimizer_updates": 8973,
+        "mean_window_exposures": 4.601538461538461,
+        "optimizer_updates_per_body_second": 2.1163359357455653,
+        "target_valid_exposures": 143568,
+        "nonzero_target_gradient_update_fraction": 1.0
+      },
+      "T2V_D1_s23": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 4282.627473302884,
+        "GPU_process_hours_including_attempts": 1.1896187425841345,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 4282.627473302884,
+            "scope": "full",
+            "arm": "T2V_D1_s23",
+            "method": "DIAG_FIT_OPT",
+            "seed": 23,
+            "retry": 0,
+            "physical_gpu": 4,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "01a2e7f9cff8661bceff52312c2ea4772d0303c39625bf87f0a1b319117b644f",
+        "peak_allocated_bytes": 6392385024,
+        "trainable_parameters": 24576,
+        "optimizer_updates": 8973,
+        "mean_window_exposures": 4.601538461538461,
+        "optimizer_updates_per_body_second": 2.0978644193756883,
+        "target_valid_exposures": 143568,
+        "nonzero_target_gradient_update_fraction": 1.0
+      },
+      "T2V_D3_s17": {
+        "status": "COMPLETE",
+        "GPU_process_seconds_including_attempts": 5677.683111454826,
+        "GPU_process_hours_including_attempts": 1.5771341976263404,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "seconds": 5677.683111454826,
+            "scope": "full",
+            "arm": "T2V_D3_s17",
+            "method": "DIAG_FIT_CAP",
+            "seed": 17,
+            "retry": 0,
+            "physical_gpu": 7,
+            "lr": 0.0002
+          }
+        ],
+        "training_receipt_sha256": "bdc552e7b8eac64ffbad8a9ee715398cad1889935b58791abe8b5999b2391f23",
+        "peak_allocated_bytes": 6494778368,
+        "trainable_parameters": 2758656,
+        "optimizer_updates": 8973,
+        "mean_window_exposures": 4.601538461538461,
+        "optimizer_updates_per_body_second": 1.5819032496443046,
+        "target_valid_exposures": 143568,
+        "nonzero_target_gradient_update_fraction": 1.0
+      }
+    }
+  },
+  "total_new_GPU_process_hours": 5.7858190787204595,
   "interpretation": "sum actual admitted child-process elapsed times, including startup and CPU portions; not utilization-integrated GPU energy/time",
   "count_controls_inherit_parent_training_and_inference": true,
   "historical_references_reused_no_new_GPU": true,
