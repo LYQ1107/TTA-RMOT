@@ -1,0 +1,50 @@
+{
+  "new_GPU_process_hours": 0.13160490938087202,
+  "teacher_parent_wall_seconds": 474.0308384699747,
+  "teacher_methods": [
+    {
+      "model": "2B",
+      "method": "T1_CROP_YESNO",
+      "logical_calls": 6426,
+      "actual_new_calls_including_smoke": 6426,
+      "model_forward_calls": 825,
+      "forward_path_seconds": 100.42831114586443,
+      "peak_allocated_GiB": 4.357219696044922,
+      "parse_failures": 0
+    },
+    {
+      "model": "2B",
+      "method": "T2_CROP_CHOICE",
+      "logical_calls": 378,
+      "actual_new_calls_including_smoke": 378,
+      "model_forward_calls": 69,
+      "forward_path_seconds": 8.132671614410356,
+      "peak_allocated_GiB": 4.777926445007324,
+      "parse_failures": 0
+    },
+    {
+      "model": "2B",
+      "method": "T3_FRAME_SOM",
+      "logical_calls": 850,
+      "actual_new_calls_including_smoke": 850,
+      "model_forward_calls": 3725,
+      "forward_path_seconds": 315.31356685515493,
+      "peak_allocated_GiB": 4.375695705413818,
+      "parse_failures": 9
+    }
+  ],
+  "CPU_source_Platt_seconds": 23.718235776992515,
+  "CPU_selectors_seconds": 17.58946136990562,
+  "CPU_oracle_seconds": 21.17695119511336,
+  "official_new_jobs": 33,
+  "official_exact_reference_reuses": 3,
+  "official_sum_job_wall_seconds": 869.0359426415525,
+  "official_actual_batch_wall_seconds_not_recorded": true,
+  "CPU_failed_source_attempt_seconds_not_recorded": true,
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "maximum_physical_GPUs": 1,
+  "interpretation": "GPU-process elapsed includes CPU/startup, not utilization integral; forward path includes original processor/synchronization timing",
+  "source_two_scalar_Platt_fit_is_the_only_authorized_parameter_fit": true,
+  "selectors_inherit_original_margin_model_inference_and_any_historical_training_cost": true
+}

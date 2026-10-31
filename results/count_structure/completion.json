@@ -1,0 +1,41 @@
+{
+  "status": "COMPLETE_STOP_NO_TRAINING_NO_SELECTION",
+  "verdict": {
+    "granularity": "\u89c6\u9891\u7ea7\u5b58\u5728\u4e0e\u6570\u91cf\u5373\u53ef\u8fbe\u5230\u540c\u57df\u5b98\u65b9\u6c34\u5e73",
+    "whole_outfit": "\u6574\u7ec4\u670d\u88c5\u7ed3\u6784\u7684\u9884\u6ce8\u518c\u6761\u4ef6\u672a\u6ee1\u8db3",
+    "mutual_exclusion": "\u53e5\u5b50\u4e92\u65a5\u7ed3\u6784\u6210\u7acb",
+    "structure_beyond_global_calibration": "\u7ed3\u6784\u4fe1\u606f\u5e26\u6765\u8d85\u51fa\u5168\u5c40\u6821\u51c6\u7684\u6536\u76ca",
+    "FROZEN_selectors_satisfying_CI_lower_above0": [],
+    "all28_selectors_satisfying_CI_lower_above0": [
+      "T2V_D1_s17__C2_QUERY_ARGMAX",
+      "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK",
+      "T2V_D1_s17__C5_EM_LABEL_SHIFT",
+      "T2V_D1_s17__C6_EM_TRACK",
+      "T2V_D3_s17__C2_QUERY_ARGMAX",
+      "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK",
+      "T2V_D3_s17__C5_EM_LABEL_SHIFT",
+      "T2V_D3_s17__C6_EM_TRACK",
+      "SAME_SET_D1__C1_TRACK_MEAN",
+      "SAME_SET_D1__C1c_TRACK_CAUSAL",
+      "SAME_SET_D1__C2_QUERY_ARGMAX",
+      "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK",
+      "SAME_SET_D1__C5_EM_LABEL_SHIFT",
+      "SAME_SET_D1__C6_EM_TRACK"
+    ],
+    "literal_any_selector_scope": "all28 preregistered selectors; Frozen-only subset separately disclosed; learned margins are not untrained Frozen",
+    "FROZEN_structure_only_condition_satisfied": false,
+    "no_best_selector_or_teacher_recommended": true,
+    "granularity_threshold_definition": "user fixed31.771=FROZEN ranking with OFFICIAL_COMPLETE k, not native official32.139"
+  },
+  "official_prediction_sets": 36,
+  "registered_selectors": 28,
+  "registered_oracles": 6,
+  "teacher_models": [
+    "2B"
+  ],
+  "target_GT_open_attempts_in_GT_free_generators": 0,
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "report_sha256": "7bc8e872ca8aad9082735f955deb63af2369070981083f4b01302b5f32623842",
+  "CPU_report_seconds": 14.404468469088897
+}

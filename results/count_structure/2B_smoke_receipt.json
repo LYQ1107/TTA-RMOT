@@ -1,0 +1,84 @@
+{
+  "status": "REAL_FIXED_PROBE_SMOKE",
+  "model": "2B",
+  "model_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "manifest_sha256": "c878d0f6f7774f695580457cabda4dce31b6122ec50010314a5a4bf6aefb71fd",
+  "frames": 1,
+  "budgets": {
+    "T1_CROP_YESNO": {
+      "planned_logical_calls": 51,
+      "new_logical_calls": 51,
+      "cached_logical_calls": 0,
+      "forward_batches_or_generations": 7,
+      "model_forward_calls": 7,
+      "forward_path_seconds": 2.050313302082941,
+      "parse_failures": 0,
+      "peak_allocated_bytes": 4678529024
+    },
+    "T2_CROP_CHOICE": {
+      "planned_logical_calls": 3,
+      "new_logical_calls": 3,
+      "cached_logical_calls": 0,
+      "forward_batches_or_generations": 1,
+      "model_forward_calls": 1,
+      "forward_path_seconds": 0.07968014106154442,
+      "parse_failures": 0,
+      "peak_allocated_bytes": 4588938240
+    },
+    "T3_FRAME_SOM": {
+      "planned_logical_calls": 17,
+      "new_logical_calls": 17,
+      "cached_logical_calls": 0,
+      "forward_batches_or_generations": 17,
+      "model_forward_calls": 36,
+      "forward_path_seconds": 5.451636984478682,
+      "parse_failures": 0,
+      "peak_allocated_bytes": 4698367488
+    }
+  },
+  "frozen": {
+    "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "frozen_parameters_unchanged": true,
+    "optimizer_updates": 0,
+    "forward_batches": 44,
+    "model_load_and_initial_hash_seconds": 8.402333561098203
+  },
+  "target_GT_open_attempts": [],
+  "isolation": {
+    "landlock_abi": 1,
+    "kernel_read_whitelist": true,
+    "kernel_stage_write_denied": true,
+    "read_roots": [
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0004",
+      "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/manifest.jsonl",
+      "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+      "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+      "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+      "/data2/user/FlexHook-TTA/flex_uda",
+      "/data2/user/FlexHook-TTA/flex_tta",
+      "/data2/user/FlexHook-TTA/scripts",
+      "/data2/user/FlexHook-TTA/configs",
+      "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+      "/home/szgx/anaconda3/envs/vllmedit",
+      "/usr",
+      "/usr/lib",
+      "/usr/lib64",
+      "/usr/bin",
+      "/etc",
+      "/proc",
+      "/sys",
+      "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B",
+      "/dev",
+      "/tmp"
+    ],
+    "handled_filesystem_access": 8191
+  },
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "worker_seconds": 22.876127438852564,
+  "physical_gpu": "0",
+  "prompt_code_sha256": "7c910b7489e91d122881bb9975ddc9f02f41ab233c87b3bf72d7c9047ed8881c",
+  "original_backend_sha256": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+  "original_visual_builder_sha256": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3"
+}

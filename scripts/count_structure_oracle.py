@@ -87,6 +87,9 @@ def generate():
         methods.append(method)
     original=OLD/'evaluation/M_FROZEN__ORACLE_GT'
     seal=v2.assert_equivalent('ORACLE__F_FRAME',original)
+    for e in seal['episodes']:
+        previous=original/'results'/e['video']/e['expression']/'predict.txt'
+        if file_sha(previous)!=e['prediction_sha256']:raise ValueError('STOP: F_FRAME raw rows/order must reproduce exactly')
     from scripts.pf_diag_common import official_metrics
     metrics=official_metrics(original/'results')
     if seal['prediction_rows']!=201009 or metrics['HOTA']!=45.794:raise ValueError('STOP: F_FRAME must reproduce201009rows/HOTA45.794')
@@ -115,7 +118,7 @@ def generate():
         target_GT_open_count=len(opened),GT_paths=opened,CPU_wall_seconds=time.perf_counter()-started)
     atomic_json(PUBLIC/'structure_stats.json',structure)
     atomic_json(RUN/'oracle_seal.json',dict(status='ALL6_ORACLE_SEALED_F_FRAME_REPRODUCED',methods=methods,role='ORACLE / GT ONLY',
-        F_FRAME_exact_row_equivalence=str(original),F_FRAME_rows=201009,F_FRAME_HOTA=45.794,
+        F_FRAME_exact_row_equivalence=str(original),F_FRAME_byte_identical_episodes=425,F_FRAME_rows=201009,F_FRAME_HOTA=45.794,
         target_GT_open_count=len(opened),GT_feedback_to_selectors_or_teachers=False,CPU_wall_seconds=time.perf_counter()-started))
 
 if __name__=='__main__':generate()

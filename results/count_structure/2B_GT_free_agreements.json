@@ -1,0 +1,38 @@
+{
+  "binary_threshold": "p>0.5; T3 hard scores",
+  "pairwise": {
+    "T1_CROP_YESNO__T2_CROP_CHOICE": {
+      "planned_pairs": 6426,
+      "valid_pairs": 6426,
+      "agreement": 0.909274821039527
+    },
+    "T1_CROP_YESNO__T3_FRAME_SOM": {
+      "planned_pairs": 6426,
+      "valid_pairs": 6278,
+      "agreement": 0.8711373048741637
+    },
+    "T2_CROP_CHOICE__T3_FRAME_SOM": {
+      "planned_pairs": 6426,
+      "valid_pairs": 6278,
+      "agreement": 0.8859509397897419
+    }
+  },
+  "adjacent_probe_frame_same_track": {
+    "T1_CROP_YESNO": {
+      "planned_pairs": 4913,
+      "valid_pairs": 4913,
+      "agreement": 0.9059637695908813
+    },
+    "T2_CROP_CHOICE": {
+      "planned_pairs": 4913,
+      "valid_pairs": 4913,
+      "agreement": 0.9649908406269082
+    },
+    "T3_FRAME_SOM": {
+      "planned_pairs": 4913,
+      "valid_pairs": 4718,
+      "agreement": 0.8679525222551929
+    }
+  },
+  "T2_none_argmax_fraction": 0.0026455026455026454
+}

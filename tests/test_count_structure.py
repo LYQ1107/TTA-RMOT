@@ -53,3 +53,10 @@ def test_source_tracker_geometry_not_gt_id(tmp_path):
     geom,files=source_geometry('0005',root,tracks)
     assert set(geom)=={1} and set(geom[1])=={7,8}
     assert np.allclose(geom[1][7],[.1,.2,.4,.6]) and len(files)==2
+
+def test_literal_granularity_rule():
+    from scripts.count_structure_common import granularity_verdict
+    assert granularity_verdict(31.771,0,0)=='视频级存在与数量即可达到同域官方水平'
+    assert granularity_verdict(31,31.771,0)=='需要轨迹级判断'
+    assert granularity_verdict(31,31,31.771)=='需要帧级存在'
+    assert granularity_verdict(31,31,31)=='需要帧级数量'

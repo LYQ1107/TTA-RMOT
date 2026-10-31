@@ -1,0 +1,6877 @@
+{
+  "role": "ORACLE / GT, only offline evaluation",
+  "clusters": 25,
+  "samples": 2000,
+  "seed": 0,
+  "pooling": "unchanged v2 official TP-weighted sufficient statistics",
+  "comparisons": {
+    "ORACLE__V_MEAN_minus_FROZEN": {
+      "first": "ORACLE__V_MEAN",
+      "second": "FROZEN",
+      "delta_HOTA": 36.98748018146726,
+      "CI95": [
+        29.790041116376628,
+        45.66941198887224
+      ],
+      "positive_videos": 25,
+      "negative_videos": 0,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.511126005475845
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 26.830227112921257
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 42.10468158007019
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 4.333829605490761
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 54.19853490001938
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 35.415588319360786
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 57.36516738338346
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 51.870570538759466
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.6368482311563
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 36.50831725654909
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 43.928877079551384
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 34.12690823419201
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.59427293933235
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 48.842872127712624
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 26.877006577350155
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.512492745275768
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.658344739385775
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 43.18791467997718
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.53778836932185
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 18.322985860692825
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 43.11802422641968
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.187886137869974
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 51.076807940627425
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "ORACLE__F_MEAN_minus_ORACLE__V_MEAN": {
+      "first": "ORACLE__F_MEAN",
+      "second": "ORACLE__V_MEAN",
+      "delta_HOTA": 0.2098312100856674,
+      "CI95": [
+        0.0005701227877331405,
+        0.48339465300538365
+      ],
+      "positive_videos": 4,
+      "negative_videos": 0,
+      "tied_videos": 21,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.1253142131589371
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.23424738621055496
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 0.004029831993317856
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 1.1563168411632212
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.0
+        }
+      ]
+    },
+    "ORACLE__TRACK_ORACLE_minus_ORACLE__V_MEAN": {
+      "first": "ORACLE__TRACK_ORACLE",
+      "second": "ORACLE__V_MEAN",
+      "delta_HOTA": 8.055683383138962,
+      "CI95": [
+        2.9430132642860602,
+        14.062361002741735
+      ],
+      "positive_videos": 22,
+      "negative_videos": 1,
+      "tied_videos": 2,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -0.006798245523953028
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 19.053636870682563
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 29.154621677008507
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 29.250467751068847
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 35.2527452562033
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 0.0037738704001952783
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 0.0693862095977309
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 2.3197189686283437
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.08393448863718334
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.5198774928894281
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.599802466670042
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.5294238433094023
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.13830429932259136
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.05634421767596365
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 31.046584838476345
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.8715023210403103
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.03329136099553409
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 16.63969197252645
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.19541698107741468
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 49.77403275593565
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 1.0269186992542743
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.31736799704253826
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.7534988061813834
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.0
+        }
+      ]
+    },
+    "ORACLE__F_FRAME_minus_ORACLE__F_MEAN": {
+      "first": "ORACLE__F_FRAME",
+      "second": "ORACLE__F_MEAN",
+      "delta_HOTA": 0.3785508310018315,
+      "CI95": [
+        0.11328813559405368,
+        0.7029362108411812
+      ],
+      "positive_videos": 12,
+      "negative_videos": 9,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 0.00021343979751264897
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.056314282042208674
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -0.015075168824274954
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -0.9509348749367277
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.6015106294565875
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.04449034761336179
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.03968864698755681
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 1.7760584108300677
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.46231426589059055
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 4.237532690195643
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.49476094338755416
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 0.04199582062828
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.02265776416593468
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.3000743029188655
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.027129156118927966
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.9504818093594665
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.2527748112093384
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 1.005871256018871
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.2441974737765733
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.6189210608451106
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -0.004659960442118916
+        }
+      ]
+    },
+    "FROZEN__C1_TRACK_MEAN_minus_FROZEN": {
+      "first": "FROZEN__C1_TRACK_MEAN",
+      "second": "FROZEN",
+      "delta_HOTA": -0.10422930143670861,
+      "CI95": [
+        -3.9934860440581157,
+        0.9495000711552557
+      ],
+      "positive_videos": 1,
+      "negative_videos": 18,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -7.300286175675992
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.631379468786099
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -0.4746806969997728
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 1.1180425917766108
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.142096638072152
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "FROZEN__C1_TRACK_MEAN_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C1_TRACK_MEAN",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -5.734153760537247,
+      "CI95": [
+        -14.23154395402066,
+        -0.45281734856799305
+      ],
+      "positive_videos": 1,
+      "negative_videos": 24,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.109285758112875
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.160303827863636
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -4.482676626445871
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 3.7721313111717585
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.553676227966827
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "FROZEN__C1c_TRACK_CAUSAL_minus_FROZEN": {
+      "first": "FROZEN__C1c_TRACK_CAUSAL",
+      "second": "FROZEN",
+      "delta_HOTA": 0.11024764423316746,
+      "CI95": [
+        -2.8951707437991803,
+        1.001190002493614
+      ],
+      "positive_videos": 3,
+      "negative_videos": 16,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -12.39240213070629
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -6.004081514332199
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -5.0437578003339745
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -1.9010078390149698
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9775071773986923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.20087462041343018
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 1.2202035562826765
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.190629579156113
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 0.1320351383131637
+        }
+      ]
+    },
+    "FROZEN__C1c_TRACK_CAUSAL_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C1c_TRACK_CAUSAL",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -5.5196768148673705,
+      "CI95": [
+        -13.16189197018618,
+        -0.37696599204153974
+      ],
+      "positive_videos": 1,
+      "negative_videos": 24,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -21.397054476522758
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -24.813081096769082
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -12.572682159411512
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -17.90942306259737
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -3.0304887520474058
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -9.821397269978377
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 3.874292275677824
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.602209169050788
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -12.483477027567185
+        }
+      ]
+    },
+    "FROZEN__C2_QUERY_ARGMAX_minus_FROZEN": {
+      "first": "FROZEN__C2_QUERY_ARGMAX",
+      "second": "FROZEN",
+      "delta_HOTA": 7.212519392078812,
+      "CI95": [
+        0.8412289494032231,
+        15.020218097932206
+      ],
+      "positive_videos": 18,
+      "negative_videos": 5,
+      "tied_videos": 2,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 32.42087736190916
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 0.3076725452356533
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 48.36569404620324
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 7.012145704893944
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 3.249257241533976
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 26.74711563295361
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 1.6079088351955237
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.18828123560582094
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -1.244875936693326
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -0.8064677191596847
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 1.307400647391154
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 38.86996197169914
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.9975588953682303
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.32961117937501916
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.25241895484549703
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 18.94601965730058
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -0.2772444869701447
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 12.086072575844524
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 3.668690092186632
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 11.729752783853735
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 7.795884279175455
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.32172267564431906
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -3.330033549011913
+        }
+      ]
+    },
+    "FROZEN__C2_QUERY_ARGMAX_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C2_QUERY_ARGMAX",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 1.5825949329782745,
+      "CI95": [
+        -3.2822536868391783,
+        6.210324841772039
+      ],
+      "positive_videos": 8,
+      "negative_videos": 17,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 23.416225016092692
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.137220007361343
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 29.556694463766355
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.516778654183593
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -9.87960558999012
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 10.738700409371209
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -10.552607555487812
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.154488066650287
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -5.252871866139424
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -10.426990368724631
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.48026790541693465
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 23.04190598501403
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -10.430532495238506
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.206453014010213
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.1115627196635267
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 21.60010837669573
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -12.97121677276797
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 10.215046512701058
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -8.112881796933564
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.6818268060409398
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 2.366382036608365
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.4275793963539347
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -15.945545714892262
+        }
+      ]
+    },
+    "FROZEN__C3_QUERY_ARGMAX_TRACK_minus_FROZEN": {
+      "first": "FROZEN__C3_QUERY_ARGMAX_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 10.812101258988449,
+      "CI95": [
+        4.316429950035454,
+        18.495246622020584
+      ],
+      "positive_videos": 11,
+      "negative_videos": 10,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 8.195359121886895
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 35.41936218976098
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.8095816631057655
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.384238050949772
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.67347131325649
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 36.64677113831479
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 15.83689438048423
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 11.055039917383462
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "FROZEN__C3_QUERY_ARGMAX_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C3_QUERY_ARGMAX_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 5.182176799887911,
+      "CI95": [
+        -0.6435451880862575,
+        10.267945480497005
+      ],
+      "positive_videos": 9,
+      "negative_videos": 16,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.6664347628093577
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 19.410946966178585
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -3.1984142663403325
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.4428946910244473
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 46.32756003265164
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 34.77574507517132
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 3.425314790589555
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 5.625537674816372
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "FROZEN__C4_C3_SHIFT_minus_FROZEN": {
+      "first": "FROZEN__C4_C3_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": 7.609884950392679,
+      "CI95": [
+        1.45052455742575,
+        16.48900047441072
+      ],
+      "positive_videos": 6,
+      "negative_videos": 13,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 25.553205654915224
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 11.487790273060115
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.26773023855532263
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 0.9121465680901135
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 33.36464206442831
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.67347131325649
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "FROZEN__C4_C3_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C4_C3_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 1.9799604912921414,
+      "CI95": [
+        -6.12771364717543,
+        8.650179182391517
+      ],
+      "positive_videos": 5,
+      "negative_videos": 20,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 16.548553309098754
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 3.958865913982578
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -16.27614546213772
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -3.0958493613559845
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 17.5365860777432
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 46.32756003265164
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "FROZEN__C5_EM_LABEL_SHIFT_minus_FROZEN": {
+      "first": "FROZEN__C5_EM_LABEL_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": -0.6665137227553597,
+      "CI95": [
+        -6.092887331440903,
+        0.532724958499651
+      ],
+      "positive_videos": 1,
+      "negative_videos": 18,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.120291995660825
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 0.8698460891659074
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "FROZEN__C5_EM_LABEL_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C5_EM_LABEL_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -6.296438181855898,
+      "CI95": [
+        -15.309810270187127,
+        -1.0142440281276504
+      ],
+      "positive_videos": 1,
+      "negative_videos": 24,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -14.128287925106923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 3.523934808561055
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "FROZEN__C6_EM_TRACK_minus_FROZEN": {
+      "first": "FROZEN__C6_EM_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": -0.667902626835156,
+      "CI95": [
+        -6.092887331440903,
+        0.5678145938765732
+      ],
+      "positive_videos": 1,
+      "negative_videos": 18,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.120291995660825
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 1.1180425917766108
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "FROZEN__C6_EM_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "FROZEN__C6_EM_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -6.297827085935694,
+      "CI95": [
+        -15.309810270187127,
+        -0.9938522518397696
+      ],
+      "positive_videos": 1,
+      "negative_videos": 24,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -14.128287925106923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 3.7721313111717585
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "T2V_D1_s17__C1_TRACK_MEAN_minus_FROZEN": {
+      "first": "T2V_D1_s17__C1_TRACK_MEAN",
+      "second": "FROZEN",
+      "delta_HOTA": -3.7233486616668436,
+      "CI95": [
+        -10.820273480850544,
+        3.1752127754515445
+      ],
+      "positive_videos": 3,
+      "negative_videos": 16,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -12.283406549459512
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -6.291109036886905
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -6.185869051841088
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 25.89509140996631
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -8.723063916369732
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.011407125900469953
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 0.14708929486713684
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "T2V_D1_s17__C1_TRACK_MEAN_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C1_TRACK_MEAN",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -9.353273120767382,
+      "CI95": [
+        -14.696483471128753,
+        -4.718416448811958
+      ],
+      "positive_videos": 1,
+      "negative_videos": 24,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -21.28805889527598
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -25.100108619323787
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.193864981287186
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 16.274568760401362
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -24.551119903054843
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.416684264706266
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -11.63448259425306
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "T2V_D1_s17__C1c_TRACK_CAUSAL_minus_FROZEN": {
+      "first": "T2V_D1_s17__C1c_TRACK_CAUSAL",
+      "second": "FROZEN",
+      "delta_HOTA": -1.397874385376701,
+      "CI95": [
+        -7.678845858235954,
+        5.254029462311492
+      ],
+      "positive_videos": 9,
+      "negative_videos": 12,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -5.168874962018505
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.2967796293777458
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 9.376845016343971
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -3.501033749519089
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -1.9643060045344527
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -2.4581978523110113
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 27.849932376056636
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.29374492666972735
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -6.023305779330402
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.3473269536767224
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.04372207635940875
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.8094473234198989
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 3.105415096880738
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 6.070286423720603
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.23531328981745755
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 5.954631173809332
+        }
+      ]
+    },
+    "T2V_D1_s17__C1c_TRACK_CAUSAL_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C1c_TRACK_CAUSAL",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -7.027798844477239,
+      "CI95": [
+        -10.843684710486214,
+        -3.136436503851811
+      ],
+      "positive_videos": 2,
+      "negative_videos": 23,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -14.173527307834973
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.741672181974742
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -9.432154566092912
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -11.029958108596627
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -17.97272122811685
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -6.466193781757109
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 18.22940972649169
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.533387815304492
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -21.851361766015515
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.080764436930012
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.320259598149615
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -11.884524962377927
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 1.2343890337372723
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -5.711285465399593
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.664815532384547
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.660880992071016
+        }
+      ]
+    },
+    "T2V_D1_s17__C2_QUERY_ARGMAX_minus_FROZEN": {
+      "first": "T2V_D1_s17__C2_QUERY_ARGMAX",
+      "second": "FROZEN",
+      "delta_HOTA": 13.113096882500908,
+      "CI95": [
+        5.461147643418584,
+        21.369886048368674
+      ],
+      "positive_videos": 23,
+      "negative_videos": 2,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 22.353711602721738
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 15.468189468063741
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.968462894916634
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 12.981609068563472
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 4.800704956476929
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 15.959909105492908
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 4.168788114915573
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 3.7647660705121515
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 7.413124436914716
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 2.727208706355887
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 17.901555062668596
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 33.067748794354245
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 19.699025525649617
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 27.50079968771388
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 27.96201872151738
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 9.334749055825402
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 2.9722877127591105
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -14.917140613875056
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 19.787875995009987
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 46.9377606689775
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 19.540409784774653
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -1.3139117961513276
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 39.692026905859514
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 10.206948823090734
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 31.163169394732222
+        }
+      ]
+    },
+    "T2V_D1_s17__C2_QUERY_ARGMAX_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C2_QUERY_ARGMAX",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 7.4831724234003705,
+      "CI95": [
+        1.7205469764259747,
+        13.63016559351151
+      ],
+      "positive_videos": 17,
+      "negative_videos": 8,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 13.349059256905267
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.9767030845332556
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 13.159463312479751
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 4.154794501313409
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -2.728219402600608
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 2.8310462739688127
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -11.839627108666825
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -8.395750320171185
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 2.070355134658608
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 2.5424619442337812
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 13.893559133222498
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 23.447226144789298
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 18.8718927836754
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 11.672743701028768
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 16.533927330910647
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -1.542092778809792
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.3916939617499131
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -12.263051894479908
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 7.09390370921216
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 45.066734605834036
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 7.758837895654455
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -13.725491386046002
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 34.262524663292425
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 8.45764675109248
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 18.54765722885187
+        }
+      ]
+    },
+    "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK_minus_FROZEN": {
+      "first": "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 20.09203493275233,
+      "CI95": [
+        10.398158589917877,
+        30.24907117531279
+      ],
+      "positive_videos": 19,
+      "negative_videos": 5,
+      "tied_videos": 1,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 37.71426023004198
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 26.90006662590618
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 17.354120928776663
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 8.159626919116853
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 28.55357706733365
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -0.76358333854624
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 3.1599659136281213
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 36.64535772570741
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 35.51722917652806
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 32.96963535620054
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 38.34525907572846
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 48.66385813741941
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.8419374758108685
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 28.15240263564615
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.67457990698495
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 26.946076476376703
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.50525413491251
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 8.712802180211145
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 14.462110473651792,
+      "CI95": [
+        6.211224225633231,
+        23.005661479498208
+      ],
+      "positive_videos": 17,
+      "negative_videos": 8,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 28.70960788422551
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 10.455174073309184
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 8.5273063615266
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.6307025600393157
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 15.424714235809553
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -16.771998562128637
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -2.1828033886279865
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 32.63736179626131
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 25.896706526963115
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 32.14250261422632
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 22.517203089043345
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 37.23576674681267
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -2.522044198698155
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 15.458430349848324
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 64.80355384384148
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 15.164504587256506
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 43.07575189234542
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 6.963500108212892
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "T2V_D1_s17__C4_C3_SHIFT_minus_FROZEN": {
+      "first": "T2V_D1_s17__C4_C3_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": -8.218023278370481,
+      "CI95": [
+        -12.64399903442381,
+        -3.035950214724683
+      ],
+      "positive_videos": 0,
+      "negative_videos": 19,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.120291995660825
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "T2V_D1_s17__C4_C3_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C4_C3_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -13.847947737471019,
+      "CI95": [
+        -16.061100042803655,
+        -11.587409227336735
+      ],
+      "positive_videos": 0,
+      "negative_videos": 25,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -14.128287925106923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "T2V_D1_s17__C5_EM_LABEL_SHIFT_minus_FROZEN": {
+      "first": "T2V_D1_s17__C5_EM_LABEL_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": 14.719745885924336,
+      "CI95": [
+        5.82140222904788,
+        21.784847966788774
+      ],
+      "positive_videos": 10,
+      "negative_videos": 11,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 18.64393327820293
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 26.094950666702083
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 16.85911342389374
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 21.91841365701194
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 35.76596146141463
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 26.742448800636797
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "T2V_D1_s17__C5_EM_LABEL_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C5_EM_LABEL_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 9.089821426823798,
+      "CI95": [
+        2.1870416694544867,
+        14.145901240922298
+      ],
+      "positive_videos": 10,
+      "negative_videos": 15,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 2.1990407256059328
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 7.2859510842652
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 8.032298856643676
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 12.297891007446992
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 24.337870070807895
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 24.871422737493333
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "T2V_D1_s17__C6_EM_TRACK_minus_FROZEN": {
+      "first": "T2V_D1_s17__C6_EM_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 14.32060176916649,
+      "CI95": [
+        5.11842620462306,
+        21.41787153575579
+      ],
+      "positive_videos": 10,
+      "negative_videos": 11,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 26.680617576258573
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 26.094950666702083
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 16.85911342389374
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 21.91841365701194
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 35.76596146141463
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 4.299317605674665
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "T2V_D1_s17__C6_EM_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D1_s17__C6_EM_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 8.690677310065952,
+      "CI95": [
+        1.6505110771613456,
+        13.76118451870595
+      ],
+      "positive_videos": 10,
+      "negative_videos": 15,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 10.235725023661576
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 7.2859510842652
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 8.032298856643676
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 12.297891007446992
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 24.337870070807895
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 2.4282915425311997
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "T2V_D3_s17__C1_TRACK_MEAN_minus_FROZEN": {
+      "first": "T2V_D3_s17__C1_TRACK_MEAN",
+      "second": "FROZEN",
+      "delta_HOTA": 5.000506019366988,
+      "CI95": [
+        -2.0761006430550393,
+        11.910759378380343
+      ],
+      "positive_videos": 11,
+      "negative_videos": 10,
+      "tied_videos": 4,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 3.350587256662214
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 2.1070016332875254
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.10930290605810067
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 7.207261638187015
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 10.159026639720476
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 27.692995361207746
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.5366287799080005
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.02644448447492144
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.2132795104017418
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 20.215386089374718
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 27.630115697862443
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 32.10015781289537
+        }
+      ]
+    },
+    "T2V_D3_s17__C1_TRACK_MEAN_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C1_TRACK_MEAN",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -0.6294184397335503,
+      "CI95": [
+        -6.651534838650897,
+        4.1185178862576715
+      ],
+      "positive_videos": 5,
+      "negative_videos": 20,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -5.654065089154255
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -14.337890919309473
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.717511661191962
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.3216627208905223
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 6.151030710274378
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 18.0724727116428
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.29050396206621876
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.401646906131814
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -13.907251796199567
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 8.43381420025452
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 22.200613455295354
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 19.484645647015018
+        }
+      ]
+    },
+    "T2V_D3_s17__C1c_TRACK_CAUSAL_minus_FROZEN": {
+      "first": "T2V_D3_s17__C1c_TRACK_CAUSAL",
+      "second": "FROZEN",
+      "delta_HOTA": 6.439264167811443,
+      "CI95": [
+        -0.5060166664665179,
+        13.336569677582322
+      ],
+      "positive_videos": 15,
+      "negative_videos": 7,
+      "tied_videos": 3,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 16.17950662154673
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 16.333273613780655
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -7.759954811427967
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 1.8786936485031425
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 5.888526239061687
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 0.8530902475683249
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 15.017898251280908
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 20.632431924794446
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 1.1160198835085273
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 0.6795578627672897
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.3698242287181974
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 0.5810168551975886
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 1.8199916165999275
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 18.827544531986167
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 30.593394787064852
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.5869780080338654
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 40.09265243573497
+        }
+      ]
+    },
+    "T2V_D3_s17__C1c_TRACK_CAUSAL_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C1c_TRACK_CAUSAL",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 0.8093397087109047,
+      "CI95": [
+        -5.032773960382457,
+        5.746520888854789
+      ],
+      "positive_videos": 7,
+      "negative_videos": 18,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 7.174854275730258
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.111618938816342
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.56895439386485
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -6.94812091874692
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -1.6403981200158508
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -12.27577258395577
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 11.00990232183481
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 11.011909275229499
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.28888714153430806
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -10.748533527839445
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.246666063353391
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -2.782964819311435
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -10.873980669197898
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 7.045972642865969
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 25.163892544497763
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.1623240639643884
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 27.47714026985462
+        }
+      ]
+    },
+    "T2V_D3_s17__C2_QUERY_ARGMAX_minus_FROZEN": {
+      "first": "T2V_D3_s17__C2_QUERY_ARGMAX",
+      "second": "FROZEN",
+      "delta_HOTA": 13.239485269519953,
+      "CI95": [
+        5.569652783338885,
+        21.49658161046046
+      ],
+      "positive_videos": 22,
+      "negative_videos": 3,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 19.135392804337847
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 13.490297635717946
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 43.614996743209716
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 1.2496861707774243
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -1.294588981731792
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 20.3300315546006
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 10.402758611009345
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 1.1204077012522393
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 14.350402096703984
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 26.961415439597264
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 17.468770359622383
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 19.631101144205495
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 12.598416357495704
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 17.36576068980336
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 15.19765401160557
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 4.19873024698569
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 11.547092725880313
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -13.172143614001516
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 19.250985222405433
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 42.130290936553024
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 19.91353506794305
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -2.393652809197911
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 40.647390868356574
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 23.367053094087307
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 25.00746939688438
+        }
+      ]
+    },
+    "T2V_D3_s17__C2_QUERY_ARGMAX_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C2_QUERY_ARGMAX",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 7.609560810419415,
+      "CI95": [
+        1.7494741659082864,
+        13.664963457093075
+      ],
+      "positive_videos": 17,
+      "negative_videos": 8,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 10.130740458521377
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -2.954594916879051
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 24.805997160772833
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -7.577128396472638
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -8.82351334080933
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 7.201168723076503
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -5.605656612573053
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -11.040108689431097
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 9.007632794447876
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 26.776668677475158
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 13.460774430176285
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 10.010578494640548
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 11.771283615521485
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 1.5377047031182478
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 3.769562620998835
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -6.6781115876495045
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 8.18311105137129
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -10.518054894606369
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 6.557012936607606
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 40.259264873409556
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 8.131963178822854
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -14.805232399092587
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 35.217888625789485
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 21.617751022089053
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 12.391957231004035
+        }
+      ]
+    },
+    "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK_minus_FROZEN": {
+      "first": "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 19.972798255029126,
+      "CI95": [
+        10.917616752495414,
+        30.0611704586785
+      ],
+      "positive_videos": 20,
+      "negative_videos": 5,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 30.150416423678223
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 26.67682288378795
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.6749016126919127
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.138809220440907
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 56.35002911414952
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 9.236520960410806
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 19.58183808800312
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 41.41695659827099
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 31.164759101330592
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 30.05472270266584
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 14.580874859186643
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 32.570014836535975
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 14.272450813473885
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 20.55573396358305
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 16.869891160876183
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.67457990698495
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 26.800267353552034
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.39012172278573
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 38.30354164905205
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 43.561547754715846
+        }
+      ]
+    },
+    "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 14.342873795928588,
+      "CI95": [
+        6.491864028270183,
+        22.9649478323481
+      ],
+      "positive_videos": 18,
+      "negative_videos": 7,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 21.145764077861752
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 10.231930331190952
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.15191295455815
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -13.667733579518444
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 43.221166282625425
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -6.771894263171593
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 14.239068785747012
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 41.23220983614889
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 27.156763171884492
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 20.43420005310089
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 13.753742117212424
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 16.741958849850864
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 2.84435942286715
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 17.191752289074028
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 4.175918875078356
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 64.80355384384148
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 15.018695464431836
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 42.96061948021864
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 36.5542395770538
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 30.946035588835496
+        }
+      ]
+    },
+    "T2V_D3_s17__C4_C3_SHIFT_minus_FROZEN": {
+      "first": "T2V_D3_s17__C4_C3_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": -8.218023278370481,
+      "CI95": [
+        -12.64399903442381,
+        -3.035950214724683
+      ],
+      "positive_videos": 0,
+      "negative_videos": 19,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.120291995660825
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "T2V_D3_s17__C4_C3_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C4_C3_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -13.847947737471019,
+      "CI95": [
+        -16.061100042803655,
+        -11.587409227336735
+      ],
+      "positive_videos": 0,
+      "negative_videos": 25,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -14.128287925106923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "T2V_D3_s17__C5_EM_LABEL_SHIFT_minus_FROZEN": {
+      "first": "T2V_D3_s17__C5_EM_LABEL_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": 12.308316251381878,
+      "CI95": [
+        5.673459893593261,
+        19.485376809799746
+      ],
+      "positive_videos": 12,
+      "negative_videos": 8,
+      "tied_videos": 5,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 17.41009136171163
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 15.432604974619679
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 14.518283084896193
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.748225433738198
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 43.057926983967334
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 20.33650429414564
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 18.394345818478357
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 28.501464903993874
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 29.565522542541018
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 12.87118491108042
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 17.080275796181105
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.50525413491251
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 18.047228140927267
+        }
+      ]
+    },
+    "T2V_D3_s17__C5_EM_LABEL_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C5_EM_LABEL_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 6.6783917922813405,
+      "CI95": [
+        0.9572914665292316,
+        12.348435342360279
+      ],
+      "positive_videos": 11,
+      "negative_videos": 14,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 8.405439015895158
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -1.0122875779773182
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 5.691468517646131
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.277149792815734
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 29.92906415244324
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 4.328089070563244
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 14.386349889032259
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 18.880942254428927
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 18.137431151934283
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 0.17721262528259274
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 5.298703907060908
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 43.07575189234542
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 5.431715975046917
+        }
+      ]
+    },
+    "T2V_D3_s17__C6_EM_TRACK_minus_FROZEN": {
+      "first": "T2V_D3_s17__C6_EM_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 12.245572819108673,
+      "CI95": [
+        5.59039376527606,
+        19.441521730048986
+      ],
+      "positive_videos": 12,
+      "negative_videos": 8,
+      "tied_videos": 5,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 17.41009136171163
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 15.432604974619679
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 14.518283084896193
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 43.057926983967334
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 20.33650429414564
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 18.394345818478357
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 28.501464903993874
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 29.565522542541018
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 10.660277332732402
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 17.080275796181105
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.50525413491251
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 18.047228140927267
+        }
+      ]
+    },
+    "T2V_D3_s17__C6_EM_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "T2V_D3_s17__C6_EM_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 6.6156483600081355,
+      "CI95": [
+        0.8327751141195051,
+        12.256097279036123
+      ],
+      "positive_videos": 10,
+      "negative_videos": 15,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 8.405439015895158
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -1.0122875779773182
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 5.691468517646131
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 29.92906415244324
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 4.328089070563244
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 14.386349889032259
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 18.880942254428927
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 18.137431151934283
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -2.0336949530654245
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 5.298703907060908
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 43.07575189234542
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 5.431715975046917
+        }
+      ]
+    },
+    "SAME_SET_D1__C1_TRACK_MEAN_minus_FROZEN": {
+      "first": "SAME_SET_D1__C1_TRACK_MEAN",
+      "second": "FROZEN",
+      "delta_HOTA": 29.188766128528584,
+      "CI95": [
+        20.801148191178402,
+        39.230999895698595
+      ],
+      "positive_videos": 23,
+      "negative_videos": 2,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.38884077062146
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 31.41583893793814
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 54.267508507744736
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.3385304985394759
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 32.66399463818107
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 31.861693051739117
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 38.02157338416567
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 52.79859778673996
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 78.18700053633613
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.528679546221426
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 32.13694556757471
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 48.71911360019633
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 24.85150199322152
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.66875619304079
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 46.08285635518865
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.67750749092247
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 27.850297319864154
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 12.32154406879733
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 3.383965259031916
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 15.859007975548609
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "SAME_SET_D1__C1_TRACK_MEAN_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C1_TRACK_MEAN",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 23.55884166942805,
+      "CI95": [
+        16.894047575505354,
+        31.516292340753036
+      ],
+      "positive_videos": 21,
+      "negative_videos": 4,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.384188424804986
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 14.970946385341144
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 45.440693940494675
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -7.867454857617013
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 19.535131806656977
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 15.85327782815672
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 25.861056993482336
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 47.45582848448385
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 78.00225377421403
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.90815689665648
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 31.309812825600496
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 37.29102220958959
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 13.974660158586326
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 23.304774518531765
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 33.388884069390826
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 64.806481427779
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 16.068725430743957
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.09003552109734514
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -2.045536983535174
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 14.109705903550356
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "SAME_SET_D1__C1c_TRACK_CAUSAL_minus_FROZEN": {
+      "first": "SAME_SET_D1__C1c_TRACK_CAUSAL",
+      "second": "FROZEN",
+      "delta_HOTA": 27.770121940476066,
+      "CI95": [
+        19.622204840590324,
+        37.40943530961278
+      ],
+      "positive_videos": 23,
+      "negative_videos": 2,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 36.61937005727819
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 31.931299220481147
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.28097241000928
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 53.386075461952686
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -0.034508137489338786
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 33.01727374615957
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 31.181339976517336
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 36.39405926159646
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 51.38901168632546
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 66.89478737892641
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 36.88257990989423
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.5719029752785
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 32.58378421135688
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 40.81520672936647
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 48.51509523495862
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 25.401718272075993
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.139793662892536
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -18.745685919580662
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 43.0955221471337
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 65.22197625366893
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 26.27805944801263
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 10.507912352135168
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 6.1954626252844225
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 17.76205224110475
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "SAME_SET_D1__C1c_TRACK_CAUSAL_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C1c_TRACK_CAUSAL",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 22.14019748137553,
+      "CI95": [
+        15.615853259222764,
+        29.746466766738088
+      ],
+      "positive_videos": 22,
+      "negative_videos": 3,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 27.61471771146172
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 15.48640666788415
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 30.471972827572394
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 44.559260894702625
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -7.563432496566876
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 19.88841091463547
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 15.17292475293494
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 24.233542870913126
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 46.04624238406935
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 66.7100406168043
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 32.874583980448136
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.95138032571355
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 31.75665146938266
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 24.98715074268136
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 37.087003844351884
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 14.524876437440797
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 22.775811988383513
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -16.091597200185515
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 30.401549861335873
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 63.35095019052546
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 14.496487558892433
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -1.9036672377595067
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 0.7659603827173322
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 16.012750169106496
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "SAME_SET_D1__C2_QUERY_ARGMAX_minus_FROZEN": {
+      "first": "SAME_SET_D1__C2_QUERY_ARGMAX",
+      "second": "FROZEN",
+      "delta_HOTA": 27.864602918545224,
+      "CI95": [
+        19.650179257845174,
+        37.754038896397304
+      ],
+      "positive_videos": 25,
+      "negative_videos": 0,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 27.869217181711605
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 26.622072811302278
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 46.89052750171239
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 52.338867252848885
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 0.015832758261319135
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 16.643601578051857
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 20.453689229356087
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 13.351259256950518
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 50.06377734232412
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 70.05001838514274
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 36.97263041011077
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.28648831109837
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 33.723672303575576
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.515538798158175
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 46.6285627132424
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 31.097721203655023
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.3030743615347
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 37.71014267105096
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 47.02647070776296
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.13134914834791
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 28.19162423378081
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 4.829888306582935
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 29.222271006312454
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 10.034086722160442
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.120028299794974
+        }
+      ]
+    },
+    "SAME_SET_D1__C2_QUERY_ARGMAX_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C2_QUERY_ARGMAX",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 22.234678459444687,
+      "CI95": [
+        14.781092451180399,
+        30.682045799545936
+      ],
+      "positive_videos": 23,
+      "negative_videos": 2,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 18.864564835895134
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 10.177180258705281
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 28.08152791927551
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 43.512052685598825
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -7.513091600816218
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 3.5147387465277617
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 4.44527400577369
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 1.1907428662671826
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 44.721008040068014
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 69.86527162302063
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 32.964634480664664
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.66596566153342
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 32.89653956160136
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.687482811473064
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 35.200471322635664
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 20.220879369019826
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 22.939092687025678
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 40.36423139044611
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 34.332498421965134
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 64.26032308520445
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 16.410052344660613
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -7.58169128331174
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 23.792768763745364
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 8.284784650162187
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.50451613391462
+        }
+      ]
+    },
+    "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK_minus_FROZEN": {
+      "first": "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 32.66469826705318,
+      "CI95": [
+        24.724443461216886,
+        42.61141893854456
+      ],
+      "positive_videos": 24,
+      "negative_videos": 1,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 32.540132178530705
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 52.133263211576995
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -1.0990389275041883
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 28.55357706733365
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 35.41756846704611
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 3.6637205334002485
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 53.978540592385485
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.69358513633455
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.528679546221426
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 34.63991752898281
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 48.866046081590035
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 33.85321021293862
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.796380988020715
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.67347131325649
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 47.599552136322586
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 66.67457990698493
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 27.64951533390696
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 20.126606026941054
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 48.15046073291515
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 21.091281486804835
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 47.24813613818948
+        }
+      ]
+    },
+    "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 27.034773807952647,
+      "CI95": [
+        20.087553657731327,
+        35.48878827449012
+      ],
+      "positive_videos": 23,
+      "negative_videos": 2,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 16.095239625933704
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 43.306448644326935
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -8.627963286581725
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 15.424714235809553
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 19.409153243463713
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -8.496795857283088
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 48.63577129012938
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.50883837421244
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.90815689665648
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 33.81278478700859
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 37.4379546909833
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 22.976368378303427
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 23.43239931351169
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 46.32756003265164
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 34.90557985052476
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 64.80355384384147
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 15.867943444786764
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 7.715026437046378
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 42.72095849034806
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 19.34197941480658
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 34.63262397230913
+        }
+      ]
+    },
+    "SAME_SET_D1__C4_C3_SHIFT_minus_FROZEN": {
+      "first": "SAME_SET_D1__C4_C3_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": -8.218023278370481,
+      "CI95": [
+        -12.64399903442381,
+        -3.035950214724683
+      ],
+      "positive_videos": 0,
+      "negative_videos": 19,
+      "tied_videos": 6,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -13.707388234701549
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -0.4243936541858448
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -8.015877176399187
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -6.850189802562648
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -4.142522658124874
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -2.012651110452529
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -0.0419397269370642
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -10.120291995660825
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -1.587161820281373
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -10.59565906135485
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -0.030720999215009405
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -0.48725041624175836
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -0.024264761911805214
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -23.05890311410591
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -1.6102414377467023
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -0.4537945973670695
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -3.237191490153188
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -0.4041773679392286
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 0.0
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -6.189658272067641
+        }
+      ]
+    },
+    "SAME_SET_D1__C4_C3_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C4_C3_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": -13.847947737471019,
+      "CI95": [
+        -16.061100042803655,
+        -11.587409227336735
+      ],
+      "positive_videos": 0,
+      "negative_videos": 25,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": -22.712040580518018
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": -16.869286206782842
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": -26.82487675883607
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": -8.826814567250063
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": -14.379114161640185
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": -17.27138548964897
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": -18.021066334034927
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": -12.2024561176204
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": -5.342769302256108
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": -0.18474676212210586
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": -14.128287925106923
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": -11.20768446984632
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": -0.8271327419742193
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": -26.423715048039963
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": -11.458812389821745
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": -11.364092250876952
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": -3.388246436420829
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": -20.404814394710762
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": -14.304213723544528
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": -1.8710260631434656
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": -12.235366486487266
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -15.648771080047863
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": -5.8336796105063184
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": -1.7493020719982537
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": -18.80517043794799
+        }
+      ]
+    },
+    "SAME_SET_D1__C5_EM_LABEL_SHIFT_minus_FROZEN": {
+      "first": "SAME_SET_D1__C5_EM_LABEL_SHIFT",
+      "second": "FROZEN",
+      "delta_HOTA": 20.280441549775645,
+      "CI95": [
+        13.883690838506263,
+        29.576825478061476
+      ],
+      "positive_videos": 25,
+      "negative_videos": 0,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 25.941906963136933
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 37.75295288697878
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 9.152435972052254
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 24.376049148315804
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 27.326792838330086
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 30.06778356573688
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 54.18402667786467
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.69358513633455
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.528679546221426
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 21.668653610216097
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 35.76596146141463
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 26.132823473922187
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.796495226994647
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.67347131325649
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 24.17297684184801
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 47.812644296514286
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 13.362167431043543
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 12.50997758121879
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 31.739565166406432
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 27.754728340312074
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 26.45761687096111
+        }
+      ]
+    },
+    "SAME_SET_D1__C5_EM_LABEL_SHIFT_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C5_EM_LABEL_SHIFT",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 14.650517090675107,
+      "CI95": [
+        9.19862940420845,
+        22.77774591419353
+      ],
+      "positive_videos": 25,
+      "negative_videos": 0,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 9.497014410539936
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 28.92613831972872
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 1.623511612974717
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 11.247186316791709
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 11.318377614747689
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 17.907267175053544
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 48.84125737560856
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.50883837421244
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.90815689665648
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 20.84152086824188
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 24.337870070807895
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 15.255981639286992
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 23.432513552485624
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 46.32756003265164
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 11.479004556050182
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 45.94161823337082
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 1.5805955419233477
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 0.09839799132411464
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 26.310062923839343
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 26.00542626831382
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 13.84210470508076
+        }
+      ]
+    },
+    "SAME_SET_D1__C6_EM_TRACK_minus_FROZEN": {
+      "first": "SAME_SET_D1__C6_EM_TRACK",
+      "second": "FROZEN",
+      "delta_HOTA": 20.092337271010507,
+      "CI95": [
+        13.70877038617212,
+        29.42998721730244
+      ],
+      "positive_videos": 25,
+      "negative_videos": 0,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 38.50432775995189
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 25.941906963136933
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 49.82538318627259
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 37.75295288697878
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 9.284891710215144
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 24.376049148315804
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 25.319991989446947
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 30.06778356573688
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 54.18402667786467
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.69358513633455
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 37.026185388823905
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 48.528679546221426
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 21.668653610216097
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 41.618104210453325
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 35.76596146141463
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 26.132823473922187
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 26.796495226994647
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 43.67347131325649
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 24.109860352239266
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 47.812644296514286
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 13.362167431043543
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": 12.281016907415792
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 31.764729653130832
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 27.754728340312074
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 25.02391520367633
+        }
+      ]
+    },
+    "SAME_SET_D1__C6_EM_TRACK_minus_B1_SRC_RATE_GLOBAL": {
+      "first": "SAME_SET_D1__C6_EM_TRACK",
+      "second": "B1_SRC_RATE_GLOBAL",
+      "delta_HOTA": 14.462412811909969,
+      "CI95": [
+        8.984700638406132,
+        22.590099751965198
+      ],
+      "positive_videos": 24,
+      "negative_videos": 1,
+      "tied_videos": 0,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "delta_HOTA": 29.49967541413542
+        },
+        {
+          "video": "dancetrack0005",
+          "delta_HOTA": 9.497014410539936
+        },
+        {
+          "video": "dancetrack0007",
+          "delta_HOTA": 31.016383603835706
+        },
+        {
+          "video": "dancetrack0010",
+          "delta_HOTA": 28.92613831972872
+        },
+        {
+          "video": "dancetrack0014",
+          "delta_HOTA": 1.7559673511376062
+        },
+        {
+          "video": "dancetrack0018",
+          "delta_HOTA": 11.247186316791709
+        },
+        {
+          "video": "dancetrack0019",
+          "delta_HOTA": 9.311576765864551
+        },
+        {
+          "video": "dancetrack0025",
+          "delta_HOTA": 17.907267175053544
+        },
+        {
+          "video": "dancetrack0026",
+          "delta_HOTA": 48.84125737560856
+        },
+        {
+          "video": "dancetrack0030",
+          "delta_HOTA": 86.50883837421244
+        },
+        {
+          "video": "dancetrack0034",
+          "delta_HOTA": 33.0181894593778
+        },
+        {
+          "video": "dancetrack0035",
+          "delta_HOTA": 38.90815689665648
+        },
+        {
+          "video": "dancetrack0041",
+          "delta_HOTA": 20.84152086824188
+        },
+        {
+          "video": "dancetrack0043",
+          "delta_HOTA": 25.790048223768213
+        },
+        {
+          "video": "dancetrack0047",
+          "delta_HOTA": 24.337870070807895
+        },
+        {
+          "video": "dancetrack0058",
+          "delta_HOTA": 15.255981639286992
+        },
+        {
+          "video": "dancetrack0063",
+          "delta_HOTA": 23.432513552485624
+        },
+        {
+          "video": "dancetrack0065",
+          "delta_HOTA": 46.32756003265164
+        },
+        {
+          "video": "dancetrack0073",
+          "delta_HOTA": 11.41588806644144
+        },
+        {
+          "video": "dancetrack0077",
+          "delta_HOTA": 45.94161823337082
+        },
+        {
+          "video": "dancetrack0079",
+          "delta_HOTA": 1.5805955419233477
+        },
+        {
+          "video": "dancetrack0081",
+          "delta_HOTA": -0.13056268247888347
+        },
+        {
+          "video": "dancetrack0090",
+          "delta_HOTA": 26.335227410563743
+        },
+        {
+          "video": "dancetrack0094",
+          "delta_HOTA": 26.00542626831382
+        },
+        {
+          "video": "dancetrack0097",
+          "delta_HOTA": 12.408403037795981
+        }
+      ]
+    }
+  },
+  "verdict": {
+    "granularity": "\u89c6\u9891\u7ea7\u5b58\u5728\u4e0e\u6570\u91cf\u5373\u53ef\u8fbe\u5230\u540c\u57df\u5b98\u65b9\u6c34\u5e73",
+    "whole_outfit": "\u6574\u7ec4\u670d\u88c5\u7ed3\u6784\u7684\u9884\u6ce8\u518c\u6761\u4ef6\u672a\u6ee1\u8db3",
+    "mutual_exclusion": "\u53e5\u5b50\u4e92\u65a5\u7ed3\u6784\u6210\u7acb",
+    "structure_beyond_global_calibration": "\u7ed3\u6784\u4fe1\u606f\u5e26\u6765\u8d85\u51fa\u5168\u5c40\u6821\u51c6\u7684\u6536\u76ca",
+    "FROZEN_selectors_satisfying_CI_lower_above0": [],
+    "all28_selectors_satisfying_CI_lower_above0": [
+      "T2V_D1_s17__C2_QUERY_ARGMAX",
+      "T2V_D1_s17__C3_QUERY_ARGMAX_TRACK",
+      "T2V_D1_s17__C5_EM_LABEL_SHIFT",
+      "T2V_D1_s17__C6_EM_TRACK",
+      "T2V_D3_s17__C2_QUERY_ARGMAX",
+      "T2V_D3_s17__C3_QUERY_ARGMAX_TRACK",
+      "T2V_D3_s17__C5_EM_LABEL_SHIFT",
+      "T2V_D3_s17__C6_EM_TRACK",
+      "SAME_SET_D1__C1_TRACK_MEAN",
+      "SAME_SET_D1__C1c_TRACK_CAUSAL",
+      "SAME_SET_D1__C2_QUERY_ARGMAX",
+      "SAME_SET_D1__C3_QUERY_ARGMAX_TRACK",
+      "SAME_SET_D1__C5_EM_LABEL_SHIFT",
+      "SAME_SET_D1__C6_EM_TRACK"
+    ],
+    "literal_any_selector_scope": "all28 preregistered selectors; Frozen-only subset separately disclosed; learned margins are not untrained Frozen",
+    "FROZEN_structure_only_condition_satisfied": false,
+    "no_best_selector_or_teacher_recommended": true,
+    "granularity_threshold_definition": "user fixed31.771=FROZEN ranking with OFFICIAL_COMPLETE k, not native official32.139"
+  },
+  "uncertainty": "paired-video descriptive intervals; correlated queries/frames not independent; Val is prior development data;60 comparisons all disclosed, no multiplicity correction"
+}

@@ -111,3 +111,9 @@ def frame_mask(q,ids,values,counts):
         chosen=topk_ids(ids[a:b].tolist(),scores,k)
         out[a:b]=np.isin(ids[a:b],list(chosen))
     return out
+
+def granularity_verdict(video_mean,track_oracle,frame_mean):
+    if video_mean>=31.771:return '视频级存在与数量即可达到同域官方水平'
+    if video_mean<31.771<=track_oracle:return '需要轨迹级判断'
+    if track_oracle<31.771<=frame_mean:return '需要帧级存在'
+    return '需要帧级数量'
