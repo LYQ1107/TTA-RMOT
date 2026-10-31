@@ -2,7 +2,7 @@
 
 分支：`research/v2dance-train2val-20261031`；起点：`619390d44a09f362eac5cce0f4b1df62c20ec07a`。
 
-状态：P0–P3 完成；完整表A已先行推送并核验，P4四臂Val推理运行中；尚无本轮GT评测结果。
+状态：P0–P4 完成；四臂和数量×排序对照全部封存，P5待独立官方GT评测；尚无本轮HOTA结果。
 
 表A先行发布提交：`be48a3b3a3c044d5a4f0679ca8a3c8d4dd0f9afc`，SHA256 `412996980d43fd2a2dd37a339d4f240b6b8907a336454a1d68cccc925e8d9a78`；核验时本轮Val输出目录尚不存在。核验记录见`table_a_publication.json`，之后才启动四个final-step checkpoint的完整Val推理。
 

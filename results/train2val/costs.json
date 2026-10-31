@@ -258,7 +258,76 @@
       }
     }
   },
-  "total_new_GPU_process_hours": 5.7858190787204595,
+  "inference": {
+    "actual_wall_seconds": 1959.9317255890928,
+    "methods": {
+      "T2V_D1_s23": {
+        "GPU_process_seconds": 1789.5866302379873,
+        "GPU_process_hours": 0.4971073972883298,
+        "exit_code": 0,
+        "seconds": 1789.5866302379873,
+        "arm": "T2V_D1_s23",
+        "phase": "inference",
+        "physical_gpu": 2,
+        "peak_allocated_bytes": 5276297216,
+        "optimizer_updates": 0,
+        "episodes": 425,
+        "physical_video_frames": 25508,
+        "query_frames": 433636,
+        "physical_video_FPS": 14.253570947055987,
+        "query_frame_FPS": 242.31070609995177
+      },
+      "T2V_D1_s42": {
+        "GPU_process_seconds": 1794.1758571108803,
+        "GPU_process_hours": 0.4983821825308001,
+        "exit_code": 0,
+        "seconds": 1794.1758571108803,
+        "arm": "T2V_D1_s42",
+        "phase": "inference",
+        "physical_gpu": 3,
+        "peak_allocated_bytes": 5276297216,
+        "optimizer_updates": 0,
+        "episodes": 425,
+        "physical_video_frames": 25508,
+        "query_frames": 433636,
+        "physical_video_FPS": 14.21711249702966,
+        "query_frame_FPS": 241.69091244950422
+      },
+      "T2V_D3_s17": {
+        "GPU_process_seconds": 1828.2972006679047,
+        "GPU_process_hours": 0.5078603335188624,
+        "exit_code": 0,
+        "seconds": 1828.2972006679047,
+        "arm": "T2V_D3_s17",
+        "phase": "inference",
+        "physical_gpu": 4,
+        "peak_allocated_bytes": 5278630912,
+        "optimizer_updates": 0,
+        "episodes": 425,
+        "physical_video_frames": 25508,
+        "query_frames": 433636,
+        "physical_video_FPS": 13.951779825884731,
+        "query_frame_FPS": 237.18025704004043
+      },
+      "T2V_D1_s17": {
+        "GPU_process_seconds": 1959.592023579171,
+        "GPU_process_hours": 0.5443311176608808,
+        "exit_code": 0,
+        "seconds": 1959.592023579171,
+        "arm": "T2V_D1_s17",
+        "phase": "inference",
+        "physical_gpu": 0,
+        "peak_allocated_bytes": 5276297216,
+        "optimizer_updates": 0,
+        "episodes": 425,
+        "physical_video_frames": 25508,
+        "query_frames": 433636,
+        "physical_video_FPS": 13.016995217917835,
+        "query_frame_FPS": 221.2889187046032
+      }
+    }
+  },
+  "total_new_GPU_process_hours": 7.833500109719332,
   "interpretation": "sum actual admitted child-process elapsed times, including startup and CPU portions; not utilization-integrated GPU energy/time",
   "count_controls_inherit_parent_training_and_inference": true,
   "historical_references_reused_no_new_GPU": true,
