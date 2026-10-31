@@ -38,7 +38,7 @@ def build():
         dest=PUBLIC/'training'/arm;dest.mkdir(parents=True,exist_ok=True)
         for name in ('training_receipt.json','config.json','provenance.json','teacher_fit_summary.json',
                      'teacher_fit_curve.jsonl','source_validation.jsonl','pos_weight.json','final_step_selection.json',
-                     'initial_frozen_equivalence.json','source_only_lambda_validation.json','fit_subset.json'):
+                     'initial_frozen_equivalence.json','source_only_lambda_validation.json','fit_subset.json','input_access_audit.json'):
             shutil.copy2(folder/name,dest/name)
     table=['# 表 A：Train 标签拟合，尚未进行学生 Val 推理','',
         f'Train教师判断 {len(labels):,}；POS(p≥0.95) {pos:,} ({pos/len(labels):.6%})。',

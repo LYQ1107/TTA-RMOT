@@ -16,7 +16,7 @@ from scripts import diag_attrib_v2_common as common
 from scripts.train2val_controls import verify_native_predictions
 from scripts.run_train2val_training import RUN,PUBLIC,ARMS
 from scripts.pf_diag_common import official_metrics,official_video_values
-from scripts.analyze_pf_video_uncertainty import paired_clusters,pooled_hota
+from scripts.analyze_pf_video_uncertainty import paired_clusters,pooled_hota,unpack,HOTA
 from scripts.analyze_pf_full_offline import load_eval_gt,overlaps,matched_gt,auroc
 from scripts.diagnose_flexhook_v2_dance import load_tracker_boxes
 from scripts.analyze_psr_matrix import official_query_groups
@@ -54,6 +54,9 @@ def report():
     main=['FROZEN','SAME_SET_D1','SAME_SET_D3','B1_SRC_RATE_GLOBAL','OFFICIAL_DANCE_COMPLETE',*native]
     manifests={m:common.verify_seal(m) for m in methods}
     metrics={m:official_metrics(common.EVAL/m/'results') for m in methods};values={};videos=None
+    for name,hota in dict(FROZEN=8.218,SAME_SET_D1=29.702,SAME_SET_D3=27.768,
+        B1_SRC_RATE_GLOBAL=13.848,OFFICIAL_DANCE_COMPLETE=32.139).items():
+        if abs(metrics[name]['HOTA']-hota)>1e-7:raise ValueError('fixed complete-bank historical reference changed: '+name)
     for m in methods:
         v,stats=official_video_values(common.EVAL/m/'results/pedestrian_detailed.csv')
         if videos is not None and v!=videos:raise ValueError('25-video cluster alignment differs')
@@ -139,6 +142,9 @@ def report():
             Present_CLEAR_FP=grouped['query_present']['official_CLEAR_FP'],GT_R1_all=recall[m]/denom,
             AUROC=auroc(scores[m],labels),target_GT_open_attempts_in_generator=0,
             **{key:recovery[m][key] for key in ('Recovered_GT','Lost_GT','matched_GT','offline_FP','new_FP_rows','removed_FP_rows')},
+            net_offline_FP_change=recovery[m]['offline_FP']-recovery['FROZEN']['offline_FP'],
+            existing_row_matching_reassignment_FP_delta=(recovery[m]['offline_FP']-recovery['FROZEN']['offline_FP'])-
+                (recovery[m]['new_FP_rows']-recovery[m]['removed_FP_rows']),
             information='official25Val; no target training labels/Val checkpoint selection; references inherited same-Val development')
         if alignment[m]['prediction_rows']!=metrics[m]['Dets']:raise ValueError('Table C row-count disagreement')
     common.write_csv(PUBLIC/'TABLE_C.csv',list(alignment.values()));atomic_json(PUBLIC/'alignment.json',dict(GT=gt_report,methods=alignment))
@@ -146,6 +152,38 @@ def report():
     atomic_json(PUBLIC/'GT_recovery.json',dict(methods={m:dict(r) for m,r in recovery.items()},
         definition='independent IoU>=.5 max-cardinality frame assignment; new/removed rows distinguished from official CLEAR matching reassignment',
         threshold_or_training_feedback=False))
+    # Report-only scope diagnostic motivated by P0's8 shared filenames. This
+    # does NOT change the literal preregistered all425 acceptance rule.
+    from flex_uda.data.manifests import read_jsonl
+    from flex_uda.data.train2val import ASSETS
+    normalize=lambda text:' '.join(text.lower().split())
+    train_texts={normalize(r['query_text']) for r in read_jsonl(ASSETS/'runtime_train.jsonl')}
+    seen={(q['video_id'],q['expression_id']):normalize(q['query_text']) in train_texts for q in meta['episodes']}
+    scope_rows=[];hota_metric=HOTA({'PRINT_CONFIG':False})
+    for m in main:
+        with (common.EVAL/m/'results/pedestrian_detailed.csv').open() as handle:
+            detail={r['seq']:r for r in csv.DictReader(handle) if r['seq']!='COMBINED'}
+        for label,is_seen in [('SEEN_EXACT_PHRASE',True),('UNSEEN_EXACT_PHRASE',False)]:
+            keys={v+'+'+e for (v,e),value in seen.items() if value==is_seen}
+            selected={key:row for key,row in detail.items() if key in keys}
+            gt_n=sum(n for (v,e),n in query_truth.items() if v+'+'+e in keys)
+            combined=hota_metric.combine_sequences({key:unpack(row,hota_metric) for key,row in selected.items()})
+            scoped_retrieval=[r for r in retrieval_per_episode if seen[r['video'],r['expression']]==is_seen]
+            frames=sum(r['GT_frames'] for r in scoped_retrieval)
+            scope_rows.append(dict(method=m,text_scope=label,episodes=len(selected),GT_observations=gt_n,
+                HOTA=100*float(np.mean(combined['HOTA'])) if gt_n else None,
+                CLEAR_FP=sum(int(float(row['CLR_FP'])) for row in selected.values()),
+                GT_R1=sum((r['R1'][m] or 0)*r['GT_frames'] for r in scoped_retrieval)/frames if frames else None,
+                report_only_not_in_preregistered_verdict=True))
+    common.write_csv(PUBLIC/'query_text_overlap.csv',scope_rows)
+    atomic_json(PUBLIC/'query_text_overlap.json',dict(rows=scope_rows,
+        seen_episodes=sum(seen.values()),unseen_episodes=len(seen)-sum(seen.values()),
+        unique_train_phrases=len(train_texts),normalization='lowercase and collapse whitespace, no GT input',
+        evaluation_only_after_prediction_seal=True,used_for_training_or_verdict=False,
+        limitation='exact whole phrases, not unseen attribute vocabulary or a new blind split'))
+    (PUBLIC/'QUERY_TEXT_OVERLAP.md').write_text('报告性补充分组，不参与预注册判定；按Train文本精确匹配（小写、合并空格），不是词汇/属性全未见。\n\n'+
+        markdown(['方法','整句分组','序列数','GT数','HOTA','CLEAR FP','GT R@1'],
+            [[r[k] for k in ('method','text_scope','episodes','GT_observations','HOTA','CLEAR_FP','GT_R1')] for r in scope_rows])+'\n')
     draws=np.random.default_rng(0).multinomial(25,np.ones(25)/25,size=2000);comparisons={}
     def compare(a,b):
         va,vb=values[a],values[b];samples=paired_clusters(va,vb,draws);per=paired_clusters(va,vb,np.eye(25))
@@ -190,10 +228,16 @@ def report():
         [[r['method'],*[r[k] for k in ('HOTA','DetA','AssA','IDF1','Dets')]] for r in controls])+'\n')
     (PUBLIC/'BOOTSTRAP.md').write_text(markdown(['配对比较','ΔHOTA','视频95% CI','上升/下降'],
         [[name,r['delta_HOTA'],str(r['CI95']),f"{r['positive_videos']}/{r['negative_videos']}"] for name,r in comparisons.items()])+'\n')
-    for m in methods:
-        dest=PUBLIC/'official'/m;dest.mkdir(parents=True,exist_ok=True)
-        for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):
-            shutil.copy2(common.EVAL/m/'results'/name,dest/name)
+    official_index={}
+    with tarfile.open(PUBLIC/'official_metrics.tar.gz','w:gz') as archive:
+        for m in methods:
+            official_index[m]={}
+            for name in ('pedestrian_summary.txt','pedestrian_detailed.csv'):
+                path=common.EVAL/m/'results'/name
+                archive.add(path,arcname=m+'/'+name)
+                official_index[m][name]=dict(path=str(path),sha256=file_sha(path))
+    atomic_json(PUBLIC/'official_metrics_index.json',dict(files=official_index,
+        archive='official_metrics.tar.gz',archive_sha256=file_sha(PUBLIC/'official_metrics.tar.gz')))
     with gzip.open(PUBLIC/'prediction_files.csv.gz','wt') as handle:
         writer=csv.DictWriter(handle,fieldnames=['method','video','expression','prediction_path','prediction_sha256','selected_rows','margins_path','margins_sha256'])
         writer.writeheader()
@@ -211,6 +255,7 @@ def report():
         (PUBLIC/'BOOTSTRAP.md').read_text()+'\n```json\n'+json.dumps(verdict,ensure_ascii=False,indent=2)+'\n```\n'+\
         '\n三seed比较的均值/样本标准差与条件视频区间见bootstrap.json。D3仅注册seed17，不杜撰三个seed。\n'+\
         '\n固定划分仍有8个表达文件名重合；字面判定不能证明全部语言未见。Val是历史反复开发过的25视频，不称全项目盲测。\n'+\
+        '\n仅报告的已见/未见整句分组见QUERY_TEXT_OVERLAP.md；不改变原425序列判定、模型或阈值。\n'+\
         '\n## 6. GT隔离、成本、失败、恢复与停止\n\n训练/教师输入审计与kernel白名单见各provenance/input_access_audit；真实禁止输入/目标GT尝试均须0。\n'+\
         '原候选、Teacher原始logits、四final-step checkpoint、完整预测与长metrics日志保留服务器，路径/SHA见server_artifacts.json与prediction_files.csv.gz。\n'+\
         'Train使用原始GT几何/ID、Val使用预测NeuralSORT；每窗口曝光约4.60对旧约16.89，均为固定协议差异，不改超参补偿。\n'+\
