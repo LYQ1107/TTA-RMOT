@@ -42,3 +42,25 @@
 - Final pre-evaluation regression rerun: 32 passed in 1.39 s, compile and
   diff checks passed. Whole-dataset gates sealed before CPU predictions;
   CPU official evaluation runs only after all 60 target/4 source sets seal.
+- All work completed successfully: 60 target decoder sets + 3 references,
+  25 videos/425 episodes each; 4 source sets/862 episodes each. 47 new
+  target TrackEval jobs, 16 exact-equivalent target reuses; source SA and
+  native sets all exactly reproduce old native predictions (zero new source
+  TrackEval jobs, not partial evaluation). 201 video-cluster comparisons,
+  2000 draws, seed0. Existing query-presence labels verified against every
+  new official per-sequence GT_Dets count, not silently assumed.
+- CPU children all exited 0: generate 40.780425 s, official 334.976781 s,
+  report 27.774756 s. Parent total includes teacher waiting. Raw teacher
+  output/cache and prediction masks remain server-side with SHA; full
+  official CSVs and completed logs archived for GitHub. No GT/raw MOT
+  files were placed inside the logs archive.
+- Criteria: stable TG_X0 gain PASS; TG_X0 and global-z unseen restoration
+  FAIL; GMM FAIL; dual-domain SA fixed floor PASS. Detailed qualification,
+  TP/FP changes and non-selection of best-looking variants in INTERPRETATION.md.
+  No protocol repair or threshold change after seeing evaluation results.
+- Post-completion integrity PASS: all 30,223 prediction SHA entries,
+  134 complete official metric files (including archive payload hashes),
+  104 completed archived logs and 56 server artifacts verified. Gates and
+  E files still match their pre-GT seals; report SHA matches completion.
+  Historical result directories, original teacher/crop code and vendor
+  tree have no diff from ecf57122. All parents/children completed; stop.
