@@ -1,5 +1,5 @@
 {
-  "status": "P0_RESUMED_C1_C2_KITTI_AUTHORIZED_SPORTS_LAMOT_ASSET_BLOCKED",
+  "status": "C1_COMPLETE_C2_RUNNING",
   "root": "/data2/user/FlexHook-TTA",
   "base_commit": "321ec54899a25f836b18bb127da2578fbb5e32ec",
   "prereg_publication": {
@@ -704,14 +704,14 @@
         "parser_skips_header": false
       },
       "videos": 45,
-      "requested_expressions": 465,
+      "requested_expressions": 466,
       "actual_seqmap_expressions": 466,
       "full_candidate_observations": null,
       "full_candidate_expression_pairs": null,
       "required_paths": [
         {
           "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences",
-          "exists": false,
+          "exists": true,
           "is_symlink": false,
           "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences"
         },
@@ -1707,5 +1707,53 @@
     "KITTI_complete_tail_scores"
   ],
   "SportsMOT_LaMOT_full_scope_preserved": true,
-  "original_inventory": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/history_p0_stop/inventory.json"
+  "original_inventory": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/history_p0_stop/inventory.json",
+  "completed_combinations": [
+    "C1"
+  ],
+  "new_inference_GT_open_attempts": {
+    "V2-best": 0
+  },
+  "complete_score_banks": [
+    {
+      "target": "Dance",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/FROZEN.npy",
+      "sha256": "fd57998fa49760c65d5a458dc4656514ffdd8dcad8db4c586a98a6d17db9bbaa",
+      "bytes": 28707688
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/OFFICIAL_DANCE_COMPLETE.npy",
+      "sha256": "b82fd2e6e8e0f7fe37fa904cd5a62c19d642969a82e5f0f9fee2b50479e4ef0b",
+      "bytes": 28707688
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/V2-best/complete.npy",
+      "sha256": "ecf1d8469a1f0e648bdc3fe7888350910885e1afa1714f2847b239c554c5c120",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/V2-best/historical.npy",
+      "sha256": "cb0a935ce916c60548e824d9679c8ed5235ad5249fe1c0a753d80969fd051687",
+      "bytes": 18844352,
+      "coverage": "historical"
+    }
+  ],
+  "full_scope_preserved": true,
+  "SportsMOT_required_assets_status": {
+    "LaMOT_strict_load": "NOT_RUN_MISSING_CHECKPOINT",
+    "McByte_45_video_coverage": "OFFICIAL_LIST_45_SEEN_FILES_NOT_DOWNLOADED",
+    "annotations466": "NOT_VERIFIED_OFFICIAL_RAW508_NUMERIC_FILES_NOT_FLEXHOOK_LAYOUT",
+    "LaMOT_Sports_smoke": "NOT_RUN_ASSETS_BLOCKED",
+    "official_subset_number": "NOT_FOUND_MAIN_V5_OR_REPO_SUPPLEMENT_UNAVAILABLE",
+    "C3_C4_C5_C6": "STOPPED_WAITING_OFFICIAL_ASSETS",
+    "tracker_generated": false
+  }
 }

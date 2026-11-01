@@ -113,9 +113,13 @@ def worker(name,smoke):
         for j,(t,i) in enumerate(obs):
             if name!='V2-best' or smoke or bank['historical_positions'][j]<0:byframe[t].append((j,i))
         frames=sorted(byframe);checks={frames[0],frames[len(frames)//2],frames[-1]}
-        compute_begin=time.perf_counter();historical_errors=[]
+        compute_begin=time.perf_counter();historical_errors=[];computed_here=0;resumed_complete_frames=0
         for t in frames:
             idx=byframe[t];allowed={i for j,i in idx};candidates=list(episode.current_candidates(t,allowed));position={i:j for j,i in idx}
+            if name!='V2-best' and not smoke:
+                positions=np.asarray([j for j,i in idx])
+                if all(np.isfinite(scores[q['start']+positions]).all() for q in queries):
+                    resumed_complete_frames+=1;continue
             for a in range(0,len(candidates),8):
                 chosen=candidates[a:a+8];prepared=prepared_inputs(cache,chosen,queries[0]['query_text'],t)
                 if a==0 and t in checks:
@@ -152,9 +156,12 @@ def worker(name,smoke):
                                     historical_errors.append(abs(float(cpu[j,k])-scores[dest]))
                                 else:scores[dest]=float(cpu[j,k])
                         margin_count+=int(value.numel())
+                        computed_here+=int(value.numel())
+            # Frame is the unfinished-unit recovery boundary; preserve completed work on SIGTERM.
+            scores.flush()
         torch.cuda.synchronize();compute=time.perf_counter()-compute_begin;scores.flush()
         record=dict(video=video,model=name,full_candidate_query_rows=len(obs)*len(queries),
-            newly_computed_margin_count=sum(len(v) for v in byframe.values())*len(queries),
+            newly_computed_margin_count=computed_here,resumed_complete_frames_skipped=resumed_complete_frames,
             historical_values_written=0 if name=='V2-best' else None,
             historical_recompute_max_abs_error=max(historical_errors,default=None),
             compute_seconds=compute,wall_seconds=time.perf_counter()-begin,cache=cache.stats,
@@ -198,7 +205,9 @@ def launch():
     from scripts.launch_uda_workers import audit_gpus
     require_plan()
     if not (RUN/'kitti/metadata.json').exists():prepare_kitti()
-    chosen,gpus,processes=audit_gpus(2,minimum_free_mib=20480)
+    pending=[m for m in CHECKPOINTS if not (RUN/'kitti'/m/'scores_seal.json').exists()]
+    if not pending:return
+    chosen,gpus,processes=audit_gpus(len(pending),minimum_free_mib=20480)
     attempt=RUN/'kitti/launchers'/str(time.time_ns());attempt.mkdir(parents=True)
     atomic_json(attempt/'admission.json',dict(selected=chosen,all_gpus=gpus,existing_processes=processes,
         max_GPUs=2,sharing_authorized=True,no_foreign_process_stopped=True))
@@ -206,14 +215,14 @@ def launch():
     # One blocking parent owns both workers through smoke then unfinished videos.
     for phase in ('smoke','full'):
         children=[]
-        for name,gpu in zip(CHECKPOINTS,chosen):
+        for name,gpu in zip(pending,chosen):
             folder=RUN/'kitti'/name
             if (folder/('smoke_receipt.json' if phase=='smoke' else 'scores_seal.json')).exists():continue
             env=dict(os.environ,CUDA_VISIBLE_DEVICES=gpu['uuid'],MULTIDOMAIN_PHYSICAL_GPU=str(gpu['physical_gpu']),
                 OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',TOKENIZERS_PARALLELISM='false',HF_HUB_OFFLINE='1',
                 PYTHONPATH=f'{ROOT}/compat:{ROOT}:/data2/user/TTA-RMOT-assets/flexhook/pydeps')
             log=attempt/(name+'_'+phase+'.txt');handle=log.open('x');begin=time.perf_counter()
-            p=subprocess.Popen([sys.executable,str(Path(__file__).resolve()),'--worker',name,*(['--smoke'] if phase=='smoke' else [])],cwd=ROOT,env=env,stdout=handle,stderr=subprocess.STDOUT)
+            p=subprocess.Popen([sys.executable,str(Path(__file__).resolve()),'--worker',name,*(['--smoke'] if phase=='smoke' else [])],cwd=ROOT,env=env,stdout=handle,stderr=subprocess.STDOUT,start_new_session=True)
             children.append((p,handle,name,begin,log,gpu))
             print(json.dumps(dict(event='OFFICIAL_KITTI_CHILD_STARTED',phase=phase,model=name,pid=p.pid,physical_gpu=gpu['physical_gpu'],stdout=str(log))),flush=True)
         codes=[]

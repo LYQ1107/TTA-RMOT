@@ -29,6 +29,8 @@ def main():
         no_account_credentials_searched_or_requested=True,
         conclusion='Stop Baidu path: public listing works, anonymous download API returned parameter/signature errno2 with no dlink; account-login client not attempted without credentials',
         errno2_not_mislabeled_as_login_error=True)
+    record['Baidu_client_assessment']['signed_download_followups']=[r for r in record['attempts'] if r['source']=='FlexHook_public_signed_download_probe']
+    record['Baidu_client_assessment']['latest_conclusion']='Public template signature works; signed API errno0 returns an opaque string list, not a dlink, even with encrypt=0 query. Supported client docs require login; no credentials available, no JS/proxy executed, manual official-file download required.'
     archive=dest/'lamot_github/LaMOT-main.zip'
     downloaded=[r for r in record['files'] if '/annotations_v1/val/SportsMOT/' in r.get('archive_member','')]
     expected={s.split('+')[0] for s in (VENDOR/'seqmaps/SportsMOT.txt').read_text().splitlines()}

@@ -5227,6 +5227,40 @@
       "anonymous_download_link_errno": 2,
       "download_links_returned": false,
       "status": "STOP_ANONYMOUS_DOWNLOAD_REQUIRES_LOGIN_OR_UNAVAILABLE_SIGNED_LINK"
+    },
+    {
+      "source": "FlexHook_public_signed_download_probe",
+      "account_credentials_used": false,
+      "extraction_errno": 0,
+      "public_signature_errno": 0,
+      "signed_download_errno": 0,
+      "link_container_type": "str",
+      "link_container_chars": 1880,
+      "status": "STOP_OPAQUE_LINK_RESPONSE_NO_USABLE_ANONYMOUS_DLINK",
+      "response_keys": [
+        "errno",
+        "list",
+        "request_id",
+        "server_time"
+      ],
+      "requires_supported_account_client_not_installed": true
+    },
+    {
+      "source": "FlexHook_public_signed_download_probe",
+      "account_credentials_used": false,
+      "extraction_errno": 0,
+      "public_signature_errno": 0,
+      "signed_download_errno": 0,
+      "link_container_type": "str",
+      "link_container_chars": 1868,
+      "status": "STOP_OPAQUE_LINK_RESPONSE_NO_USABLE_ANONYMOUS_DLINK",
+      "response_keys": [
+        "errno",
+        "list",
+        "request_id",
+        "server_time"
+      ],
+      "requires_supported_account_client_not_installed": true
     }
   ],
   "licenses": {
@@ -6522,7 +6556,44 @@
     "credentials_available": false,
     "no_account_credentials_searched_or_requested": true,
     "conclusion": "Stop Baidu path: public listing works, anonymous download API returned parameter/signature errno2 with no dlink; account-login client not attempted without credentials",
-    "errno2_not_mislabeled_as_login_error": true
+    "errno2_not_mislabeled_as_login_error": true,
+    "signed_download_followups": [
+      {
+        "source": "FlexHook_public_signed_download_probe",
+        "account_credentials_used": false,
+        "extraction_errno": 0,
+        "public_signature_errno": 0,
+        "signed_download_errno": 0,
+        "link_container_type": "str",
+        "link_container_chars": 1880,
+        "status": "STOP_OPAQUE_LINK_RESPONSE_NO_USABLE_ANONYMOUS_DLINK",
+        "response_keys": [
+          "errno",
+          "list",
+          "request_id",
+          "server_time"
+        ],
+        "requires_supported_account_client_not_installed": true
+      },
+      {
+        "source": "FlexHook_public_signed_download_probe",
+        "account_credentials_used": false,
+        "extraction_errno": 0,
+        "public_signature_errno": 0,
+        "signed_download_errno": 0,
+        "link_container_type": "str",
+        "link_container_chars": 1868,
+        "status": "STOP_OPAQUE_LINK_RESPONSE_NO_USABLE_ANONYMOUS_DLINK",
+        "response_keys": [
+          "errno",
+          "list",
+          "request_id",
+          "server_time"
+        ],
+        "requires_supported_account_client_not_installed": true
+      }
+    ],
+    "latest_conclusion": "Public template signature works; signed API errno0 returns an opaque string list, not a dlink, even with encrypt=0 query. Supported client docs require login; no credentials available, no JS/proxy executed, manual official-file download required."
   },
   "image_links": [
     {
@@ -6546,5 +6617,5 @@
     "C3_C4_C5_C6": "STOPPED_WAITING_OFFICIAL_ASSETS",
     "tracker_generated": false
   },
-  "updated_UTC": "2026-11-01T09:02:17.924189+00:00"
+  "updated_UTC": "2026-11-01T09:22:39.346230+00:00"
 }

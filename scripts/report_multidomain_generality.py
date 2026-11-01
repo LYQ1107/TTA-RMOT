@@ -45,7 +45,7 @@ def main():
         if not available:
             for configuration in CONFIGS:diagnostics.append(dict(combo=combo,source=source,target=target,configuration=configuration,
                 oracle='ORACLE' in configuration,status='BLOCKED_OFFICIAL_ASSETS' if combo not in ('C1','C2') else 'INFERENCE_RUNNING',
-                **dict.fromkeys(('HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows','source_R_at_1','in_domain_R_at_1','HOTA_unrounded'),None)))
+                **dict.fromkeys(('HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows','source_R_at_1','in_domain_R_at_1','source_candidate_R_at_1','in_domain_candidate_R_at_1','HOTA_unrounded'),None)))
             rho.append(dict(combo=combo,source=source,target=target,gap=None,rho=None,delta_rank=None,label='待官方资产' if combo not in ('C1','C2') else '推理进行中'))
             continue
         completed.append(combo);meta,_,_,_=inputs(target)
@@ -56,7 +56,8 @@ def main():
             diagnostics.append(dict(combo=combo,source=source,target=target,configuration=c,oracle='ORACLE' in c,status='COMPLETE',
                 **{k:m[k] for k in ('HOTA','DetA','AssA','IDF1','IDSW')},prediction_rows=r['seal']['prediction_rows'],
                 query_empty_prediction_rows=sum(e['selected_rows'] for e in r['seal']['episodes'] if not presence[e['video'],e['expression']]),
-                source_R_at_1=truth['retrieval']['source']['R_at_1'],in_domain_R_at_1=truth['retrieval']['in_domain']['R_at_1'],
+                source_R_at_1=truth['retrieval']['source']['GT_R_at_1'],in_domain_R_at_1=truth['retrieval']['in_domain']['GT_R_at_1'],
+                source_candidate_R_at_1=truth['retrieval']['source']['R_at_1'],in_domain_candidate_R_at_1=truth['retrieval']['in_domain']['R_at_1'],
                 HOTA_unrounded=r['HOTA_unrounded']))
             allpred.extend(dict(combo=combo,configuration=c,**e) for e in r['seal']['episodes'])
         h={c:r['HOTA_unrounded'] for c,r in methods.items()};gap=h['IN_DOMAIN']-h['NATIVE']
@@ -70,10 +71,11 @@ def main():
         for c,r in methods.items():references[target+'__'+c]=dict(r['done'],seal_path=str(base(target)/c/'predictions_seal.json'))
         if target=='KITTI-V2':
             hota=HOTA({'PRINT_CONFIG':False})
+            category_map=json.loads((RUN/'source_query_categories.json').read_text())['mapping']
             for c in ('NATIVE','IN_DOMAIN','R_SxK_I'):
                 for category in ('car','pedestrian'):
                     chosen={q['video_id']+'+'+q['expression_id']:methods[c]['rows'][q['video_id']+'+'+q['expression_id']] for q in meta['episodes']
-                        if ('car' if 'car' in q['query_text'].lower() else 'pedestrian')==category}
+                        if category_map[q['video_id']+'+'+q['expression_id']]==category}
                     result=hota.combine_sequences(chosen)
                     categories.append(dict(combo=combo,source=source,target=target,category=category,configuration=c,status='COMPLETE',
                         HOTA=100*float(np.mean(result['HOTA'])),DetA=100*float(np.mean(result['DetA'])),AssA=100*float(np.mean(result['AssA'])),
@@ -104,9 +106,18 @@ def main():
             matrix.append(dict(source=s,target=t,combo=r['combo'] if r else '',gap=r['gap'] if r else None,rho=r['rho'] if r else None,
                 delta_rank=r['delta_rank'] if r else None,label=r['label'] if r else '同域参照'))
     write_csv(PUBLIC/'rho_matrix.csv',matrix)
-    atomic_json(PUBLIC/'bootstrap.json',dict(status='COMPLETE_FOR_C1_OTHER_PAIRS_BLOCKED_OR_RUNNING',comparisons=bootstrap,
+    atomic_json(PUBLIC/'bootstrap.json',dict(status='COMPLETE_DANCE_2000_SPORTS_ASSET_BLOCKED_KITTI_POINT_ONLY',comparisons=bootstrap,
         planned_samples=2000,seed=0,KITTI='4 videos: no bootstrap',SportsMOT='not run; missing official assets'))
+    if (base('KITTI-V2')/'reference_completion.json').exists():
+        for r in json.loads((base('KITTI-V2')/'reference_completion.json').read_text())['methods']:
+            references['KITTI-V2__'+r['method']]=dict(r,seal_path=str(base('KITTI-V2')/r['method']/'predictions_seal.json'))
     atomic_json(PUBLIC/'official_results.json',references)
+    reproduction=json.loads((RUN/'history_p0_stop/reproduction.json').read_text())
+    reproduction.update(status='AUTHORIZED_PARTIAL_SELF_CHECKS_COMPLETE' if 'C2' in completed else 'AUTHORIZED_PARTIAL_SELF_CHECKS_IN_PROGRESS',
+        new_official_references={k:r for k,r in references.items() if k.startswith('KITTI-V2__')},
+        KITTI_historical_scores_bit_exact=(RUN/'kitti/V2-best/scores_seal.json').exists(),
+        LaMOT_best_SportsMOT=dict(status='STOPPED_OFFICIAL_ASSETS_NOT_DOWNLOADED'),global_six_pair_experiment_complete=False)
+    atomic_json(PUBLIC/'reproduction.json',reproduction)
     with gzip.open(PUBLIC/'all_prediction_files.csv.gz','wt') as h:
         w=csv.DictWriter(h,fieldnames=list(allpred[0]));w.writeheader();w.writerows(allpred)
     margins=[]
@@ -114,11 +125,26 @@ def main():
         _,_,_,paths=inputs(target)
         margins.extend(dict(target=target,model=m,path=str(p),sha256=file_sha(p),bytes=p.stat().st_size)
             for m,p in zip(('V2-best','Dance-best') if target=='Dance' else ('Dance-best','V2-best'),paths))
+    for m in CHECKPOINTS:
+        seal=RUN/'kitti'/m/'scores_seal.json'
+        if seal.exists():
+            r=json.loads(seal.read_text())
+            for coverage in ('complete','historical'):
+                p=Path(r[coverage+'_path'])
+                if not any(x['path']==str(p) for x in margins):margins.append(dict(target='KITTI-V2',model=m,path=str(p),sha256=file_sha(p),bytes=p.stat().st_size,coverage=coverage))
     atomic_json(PUBLIC/'margin_paths.json',dict(status='SEALED_COMPLETED_TARGET_BANKS',files=margins))
     costs=[]
     for status in (RUN/'kitti/launchers').glob('*/launcher_status.json'):
         for job in json.loads(status.read_text())['jobs']:costs.append(dict(job,launcher_status=str(status)))
-    cost=dict(GPU_process_hours=sum(r['wall_seconds'] for r in costs)/3600,per_job=costs,max_GPUs=2,
+    interruptions=[dict(json.loads(p.read_text()),receipt_path=str(p)) for p in (RUN/'kitti/launchers').glob('*/external_interruption.json')]
+    for r in interruptions:
+        done=[json.loads(p.read_text()) for p in (RUN/'kitti'/r['model']/'video_receipts').glob('*.json') if p.stem in r['completed_videos_preserved'] and p.stem!='0005']
+        r['known_completed_video_compute_seconds_lower_bound']=sum(x['compute_seconds'] for x in done)
+    known_seconds=sum(r['wall_seconds'] for r in costs)
+    cost=dict(GPU_process_hours=known_seconds/3600,per_job=costs,max_GPUs=2,
+        interrupted_jobs=interruptions,exact_total_available=not bool(interruptions),
+        total_GPU_process_hours_lower_bound=(known_seconds+sum(r['known_completed_video_compute_seconds_lower_bound'] for r in interruptions))/3600,
+        total_GPU_process_hours_upper_bound=(known_seconds+sum(r['interrupted_wall_seconds_upper_bound'] for r in interruptions))/3600,
         includes_failed_environment_attempts_and_smokes=True,teacher_calls=0,optimizer_updates=0,
         actual_full_C2_complete='C2' in completed,partial_completed_job_costs_only_if_launcher_still_running=True)
     atomic_json(PUBLIC/'costs.json',cost)
@@ -127,6 +153,21 @@ def main():
         evaluation_and_oracle_separate_processes=True,no_target_GT_threshold_fitting=True,no_training=True,no_MLLM=True,
         downloaded_annotation_payloads_not_opened_by_model=True)
     atomic_json(PUBLIC/'gt_audit.json',gt)
+    inventory=json.loads((PUBLIC/'inventory.json').read_text())
+    inventory.update(status='PARTIAL_C1_C2_COMPLETE_C3_C6_BLOCKED_OFFICIAL_ASSETS' if 'C2' in completed else 'C1_COMPLETE_C2_RUNNING',
+        completed_combinations=completed,new_inference_GT_open_attempts=gt['inference'],
+        complete_score_banks=margins,full_scope_preserved=True,GT_open_attempts=0,
+        SportsMOT_required_assets_status=json.loads((PUBLIC/'downloads.json').read_text())['asset_gates'])
+    inventory['targets']['SportsMOT']['requested_expressions']=466
+    for item in inventory['targets']['SportsMOT']['required_paths']:item['exists']=Path(item['path']).exists()
+    atomic_json(PUBLIC/'inventory.json',inventory)
+    with tarfile.open(PUBLIC/'official_metrics_logs.tar.gz','w:gz') as archive:
+        for key,r in references.items():
+            folder=Path(r['seal_path']).parent
+            for path in (folder/'results/pedestrian_summary.txt',folder/'results/pedestrian_detailed.csv',folder/'official_completion.json',folder/'trackeval.log'):
+                if path.exists():archive.add(path,arcname=key+'/'+path.name)
+        for path in (RUN/'kitti/launchers').glob('*/*'):
+            if path.is_file():archive.add(path,arcname='GPU_launchers/'+str(path.relative_to(RUN/'kitti/launchers')))
     publication=json.loads((RUN/'prereg_amendment_publication.json').read_text())
     lines=['# 三数据集多域普遍性：授权恢复后的真实结果','',
         '## 1. 判定汇总','',
@@ -137,7 +178,7 @@ def main():
         '## 2. P0、下载、冒烟和自检','',
         '补充预注册先推送'+publication['remote_commit']+'；恢复P0先推送e7bf73cf81a1ed6afc775815581e0564a77cbea3，随后才继续P1。原93行PREREG正文和首次P0封存保留。详见[P0_RESUMED.md](P0_RESUMED.md)、[downloads.json](downloads.json)。','',
         'Sports seqmap实际466条、45视频；原465为文件末行无换行符造成wc -l少计。原图45视频26970有效帧已链接，没有重新下载。官方LaMOT GitHub原始Sports标注508份、45视频已下载，数字ID名不同于FlexHook文本名，未冒充通过466条一一映射。','',
-        '百度提取码验证成功且可列官方LaMOT-best（995768578字节）和45个McByte预测；匿名sharedownload errno2且无dlink，缺签名/参数。未把errno2谎称登录错误；公开BaiduPCS-Go客户端规定账号登录为必做，无账号凭据故停止该路径，不索取密码、不借他人登录、不自跑tracker。','',
+        '百度提取码验证成功且可列官方LaMOT-best（995768578字节）和45个McByte预测；初始匿名sharedownload errno2、无dlink；补齐官网签名接口后errno0，但list是不透明字符串、不是可下载链接，encrypt=0也相同。未把参数错误或不透明响应谎称登录失败；未执行网页JS/外部解析代理。公开BaiduPCS-Go客户端规定账号登录为必做，无账号凭据故停止该路径，不索取密码、不借他人登录、不自跑tracker。','',
         '需要手动下载的精确网盘路径（分享根实际为/FlexHook）：','',
         '- /FlexHook/SOTA_ckpts/LaMOT-best.pth','- /FlexHook/tracker_outputs/McByte-SportsMOT/（45文件逐个列在downloads.json）',
         '- /FlexHook/datasets/LaMOT-main/annotations_v1/val/SportsMOT/','- /FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_labels.json',
@@ -145,9 +186,10 @@ def main():
         '目的目录：/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/；不覆盖已有文件。LaMOT公开仓库无独立数据LICENSE，不能假定MIT；FlexHook代码MIT但单独checkpoint/数据授权未写。','',
         '两套KITTI实机smoke strict全部key匹配，原生getitem/forward与冻结编码缓存数值误差≤2.1e-5、无符号翻转；box/grid完全一致。使用官方kitti2.yaml、infer.sh显式rope-swin-tiny/roberta覆盖、FP32、规范RoBERTa BPE、官方car/ped合并/帧偏移；没有额外类别token，所有候选同等打分。1视频估算V2 0.572601、Dance 0.630457 GPU小时，均未触发6小时停止门槛。','',
         'V2 KITTI历史2355528行原值保留，只新增69854尾观测分数，完整2425382行已封存，历史npy SHA保持cb0a935c…1051687。完整覆盖原生HOTA如实见下表，不假定等于42.526。','']
-    if 'KITTI-V2' in targets:
+    if 'KITTI-V2__V2_COMPLETE_REFERENCE' in references:
         rows=[]
-        for m in ('IN_DOMAIN','HIST_V2-best','NATIVE','HIST_Dance-best'):
+        for m in ('V2_COMPLETE_REFERENCE','HIST_V2-best','NATIVE','HIST_Dance-best'):
+            if 'KITTI-V2__'+m not in references:continue
             r=references['KITTI-V2__'+m];rows.append([m,r['metrics']['HOTA'],r['prediction_rows'],r['reused_after_all_episode_row_equality']])
         lines+=[table(['KITTI覆盖/模型','HOTA','行数','逐行相等后复用旧评测'],rows),'',
             '历史V2分数逐位相同，862份原生预测逐行数值相同，HOTA42.526自检通过。新完整覆盖与历史覆盖均保留，不混用参照。','']
@@ -157,21 +199,22 @@ def main():
         'R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，不是可免费获得的Source-Free TTA门控。ORACLE两臂显式使用目标GT数量，仅诊断，不是可部署结果。B0_GLOBAL保持同域总行数，但不含逐帧逐表达的数量信息。','']
     retrieval_rows=[]
     for t,r in targets.items():
-        for m,x in r['truth']['retrieval'].items():retrieval_rows.append([t,m,x['R_at_1'],x['Hit_at_1'],x['valid_frames'],r['truth'][m+'_AUROC']])
-    lines+=[table(['目标','排序来源','R@1(原候选召回口径)','Hit@1','有效帧','全候选AUROC'],retrieval_rows),'',
-        'R@1复用旧离线脚本的条件候选召回：在存在IoU≥0.5候选的帧，top1命中的正候选数/该帧正候选数，再对帧求均值；正候选按任一GT IoU≥0.5，tie=(-margin,numeric ID)。不是全局AP，也不是top1命中率（Hit@1另列）。GT轨迹结构统计使用一对一最大基数匹配，二者分母不混用。','',
+        for m,x in r['truth']['retrieval'].items():retrieval_rows.append([t,m,x['GT_R_at_1'],x['R_at_1'],x['Hit_at_1'],x['valid_frames'],r['truth'][m+'_AUROC']])
+    lines+=[table(['目标','排序来源','GT R@1','条件候选R@1','Hit@1','可检索帧','全候选AUROC'],retrieval_rows),'',
+        '同帧GT R@1：对官方GT非空帧，top1候选以IoU≥0.5命中的GT数/该帧GT数，按帧均值（无可匹配候选的帧记0）。另外保留旧离线脚本的条件候选召回：在有IoU≥0.5候选的帧，top1命中的正候选数/该帧正候选数再均值。正候选可有重复框，故两个分母不等，不能混称。tie=(-margin,numeric ID)；Hit@1另列，不是AP。GT轨迹结构用一对一最大基数匹配。新增GT分母诊断未改变任何预测、HOTA或预注册判定。','',
         '## 4. KITTI按表达类别','',table(['组合','类别','配置','HOTA','DetA','AssA','表达数','状态'],[[r[k] for k in ('combo','category','configuration','HOTA','DetA','AssA','expressions','status')] for r in categories]),'',
-        '按已导出的句子car/people目标类型分组，保留该类表达的全部候选（不事后按预测类别删框）；官方HOTA.combine_sequences聚合。只有4个验证视频，不做bootstrap。','',
+        '评测分组使用官方表达canonical raw_sentence（缺失时原sentence），匹配car/auto与pedestrian/person/gender词；全部862条唯一分类，映射和原文件SHA见source_query_categories.csv。不能只在改写后的句子里搜索car：automobiles/autos等改写会被错误归成行人。映射只在V2参照预测封存后的离线进程生成，从未进入模型；不读referring label值来调预测。保留该类表达的全部候选（不事后按预测类别删框），官方HOTA.combine_sequences聚合。只有4个验证视频，不做bootstrap。','',
         '## 5. 结构统计（ORACLE，仅描述）','',table(['目标','轨迹0表达','轨迹1表达','轨迹≥2表达','空表达率','Present GT帧率均值','p50','状态'],
             [[s.get(k) for k in ('target','zero','one','two_or_more','empty_query_fraction','GT_frame_fraction_present_mean','GT_frame_fraction_present_p50','status')] for s in structures]),'',
         '轨迹正例：一对一IoU≥0.5匹配观测达到该物理预测轨迹≥50%；不是预测ID=GT ID。逐视频表达数、共享文本见structure_stats.csv；Dance17句跨25视频共享。Sports未知项留空，不能以现成图像替代官方McByte轨迹统计。','',
         '## 6. 不确定性','',table(['比较','ΔHOTA','95%视频聚类CI'],[[k,v['delta_HOTA'],str(v['CI95'])] for k,v in bootstrap.items()]),'',
         '每次2000抽样、seed0，整视频为聚类单位，复用官方TP加权HOTA充分统计且对COMBINED自检；不是对相关表达/帧独立重采样。KITTI仅4视频，点估计。Sports45视频未运行，不伪造CI。','',
-        '## 7. 成本','',f"已记账GPU进程时间共{cost['GPU_process_hours']:.6f}小时（含本轮失败环境尝试和smoke；若C2仍运行，其未完成时长暂不计）。每次job详见costs.json。最多2物理GPU，入场按进程少/显存足够共享，不终止别人。训练、微调、MLLM调用均0。",'',
+        '## 7. 成本','',f"有完整退出记录的GPU进程时间共{cost['GPU_process_hours']:.6f}小时；加上外部中断作业，已发生总成本落在[{cost['total_GPU_process_hours_lower_bound']:.6f}, {cost['total_GPU_process_hours_upper_bound']:.6f}] GPU进程小时。外部SIGTERM未提供精确退出时刻，使用已完成视频计算耗时为下界、发现退出时刻为上界，不能伪造精确成本。若C2仍运行，其未完成时长暂不计。每次job/区间详见costs.json。最多2物理GPU，入场按进程少/显存足够共享，不终止别人。训练、微调、MLLM调用均0。",'',
         'C1七套官方CSV全部在425份预测逐行一致和原SHA核验后复用，未重跑健康推理/评测。新KITTI评测记录在official_results.json；原始日志、margin、预测保留在服务器，Git只存小型表/清单/压缩指标日志。','',
         '## 8. GT审计、失败和恢复','',
         '模型/GT-free解码的GT打开尝试为0；官方评价和oracle在独立进程、预测SHA封存后执行，未向模型写回标签、阈值或参数。纯文本runtime从旧白名单元数据导出，不打开原表达标签。下载的JSON只复制/解压/哈希，未作为模型GT输入。','',
         '首次选错vllmedit环境缺yacs，两子进程6秒退出；切回原dfot（torch2.7.0+cu128/transformers5.4.0），配置回归通过，未修改共享环境。smoke后P1发布锁按要求阻止提前全量运行，远端盘点发布后恢复，0005完成单元未重跑。V2 smoke对旧分数最大重算差0.0010823保留记录，不覆盖旧分数；实际官方forward缓存误差≤2.1e-5且无符号翻转。','',
+        'C2首个full作业发生外部SIGTERM（143），没有模型traceback，来源未确定。原进程确认已退出，保留0005/0011/0013完成回执和0019的72个完整帧/43240个已有分数，仅恢复未完成帧；新增逐帧flush和独立进程会话，未改checkpoint/精度/阈值/采样，未停止他人进程。成本记录保留中断区间，不把失败计算免费抹去。','',
         '所有新代码和run均独立；vendor已有mydataloader旧test补丁原样保留，本轮未改vendor代码；仅新增授权数据软链接。历史结果、源checkpoint和其他项目进程未覆盖。完整范围继续保留，当前仅因缺官方二进制资产停止C3–C6。','',
         '恢复路径：results/runs/multidomain_generality_20261101；大文件SHA见margin_paths.json、all_prediction_files.csv.gz、official_results.json和downloads.json。手动资产到位后先strict/45视频/466序列/smoke门槛，再按同一PREREG继续；不生成替代tracker，不开展方法或训练。','',
         '官方来源：[FlexHook](https://github.com/buptLwz/FlexHook)、[DATASET.md](https://github.com/buptLwz/FlexHook/blob/main/datasets/DATASET.md)、[LaMOT](https://github.com/Nathan-Li123/LaMOT)、[论文v5](https://arxiv.org/html/2503.07516v5)。']

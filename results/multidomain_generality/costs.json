@@ -73,6 +73,34 @@
     }
   ],
   "max_GPUs": 2,
+  "interrupted_jobs": [
+    {
+      "status": "EXTERNALLY_INTERRUPTED_SIGNAL_15",
+      "outer_exit_code": 143,
+      "observed_UTC_epoch": 1793524587.5072277,
+      "started_UTC_epoch": 1793523549.6130452,
+      "exact_exit_timestamp_available": false,
+      "interrupted_wall_seconds_upper_bound": 1037.894183397293,
+      "model": "Dance-best",
+      "physical_gpu": 6,
+      "completed_videos_preserved": [
+        "0005",
+        "0011",
+        "0013"
+      ],
+      "unfinished_video": "0019",
+      "complete_frames_in_unfinished_video": 72,
+      "partial_video_frames": 1056,
+      "finite_scores_retained": 43240,
+      "source_weights_changed": false,
+      "cause": "External SIGTERM; source not identified, no model traceback; process confirmed absent",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/launchers/1793523549613045177/external_interruption.json",
+      "known_completed_video_compute_seconds_lower_bound": 841.3816769968253
+    }
+  ],
+  "exact_total_available": false,
+  "total_GPU_process_hours_lower_bound": 0.3988412278912599,
+  "total_GPU_process_hours_upper_bound": 0.4534280352247232,
   "includes_failed_environment_attempts_and_smokes": true,
   "teacher_calls": 0,
   "optimizer_updates": 0,

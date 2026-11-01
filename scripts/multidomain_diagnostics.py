@@ -113,7 +113,8 @@ def oracle(target):
     from scripts.analyze_pf_full_offline import load_eval_gt,overlaps,matched_gt
     meta,(source,inside),groups,_=inputs(target);root=DANCE if target=='Dance' else SOURCE
     g=meta['group_count'];count=np.zeros(g,dtype=np.int32);labels=np.zeros(len(groups),dtype=bool)
-    all_gt=[];trackrecords=[];fractions=[];retrieval={m:dict(valid_frames=0,recall_at_1_sum=0.,hit_at_1_sum=0) for m in ('source','in_domain')}
+    all_gt=[];trackrecords=[];fractions=[];retrieval={m:dict(valid_frames=0,recall_at_1_sum=0.,hit_at_1_sum=0,
+        GT_valid_frames=0,GT_recall_at_1_sum=0.) for m in ('source','in_domain')}
     for v,bank in meta['videos'].items():
         obs=np.asarray(bank['observations']);ids=obs[:,1];unique,inverse=np.unique(ids,return_inverse=True)
         positives=np.zeros(len(unique),dtype=int);box=[]
@@ -123,6 +124,7 @@ def oracle(target):
         for q in [q for q in meta['episodes'] if q['video_id']==v]:
             truth=load_eval_gt(root,v,q['expression_id']);total=sum(map(len,truth.values()))
             all_gt.append(dict(video=v,expression=q['expression_id'],GT_observations=total,GT_frames=len(truth),video_frames=q['frame_count'],present=total>0))
+            for r in retrieval.values():r['GT_valid_frames']+=len(truth)
             if total:fractions.append(len(truth)/q['frame_count'])
             matched=np.zeros(len(ids),dtype=bool)
             for t,a,b,group in q['groups']:
@@ -137,6 +139,7 @@ def oracle(target):
                         rank=sorted(range(b-a),key=lambda j:(-array[a+j],int(ids[ia+j])))
                         hit=int(y[rank[0]]);retrieval[name]['valid_frames']+=1
                         retrieval[name]['recall_at_1_sum']+=hit/p;retrieval[name]['hit_at_1_sum']+=hit
+                        retrieval[name]['GT_recall_at_1_sum']+=hit/len(truth[t])
             successes=np.bincount(inverse,weights=matched,minlength=len(unique));n=np.bincount(inverse,minlength=len(unique))
             positives+=(2*successes>=n)
         trackrecords.extend(dict(video=v,track_id=int(i),positive_queries=int(n)) for i,n in zip(unique,positives))
@@ -144,7 +147,8 @@ def oracle(target):
     for name,array in [('R_SxK_ORACLE',source),('R_IxK_ORACLE',inside)]:
         rank=rank_within_groups(array,groups,g);seal_prediction(target,name,rank<count[groups],meta,oracle=True)
     for r in retrieval.values():
-        r.update(R_at_1=r['recall_at_1_sum']/max(r['valid_frames'],1),Hit_at_1=r['hit_at_1_sum']/max(r['valid_frames'],1))
+        r.update(R_at_1=r['recall_at_1_sum']/max(r['valid_frames'],1),Hit_at_1=r['hit_at_1_sum']/max(r['valid_frames'],1),
+            GT_R_at_1=r['GT_recall_at_1_sum']/max(r['GT_valid_frames'],1))
     hist=Counter(min(2,r['positive_queries']) for r in trackrecords);n=len(trackrecords)
     from scripts.analyze_pf_full_offline import auroc
     result=dict(status='OFFLINE_ORACLE_COMPLETE',target=target,official_GT_detections=sum(e['GT_observations'] for e in all_gt),
@@ -164,13 +168,17 @@ def reusable(target,name):
             R_IxK_S='M_OFFICIAL_DANCE_COMPLETE__FROZEN',R_SxK_ORACLE='M_FROZEN__ORACLE_GT',R_IxK_ORACLE='M_OFFICIAL_DANCE_COMPLETE__ORACLE_GT',B0_GLOBAL='B0_NATIVE_OFFICIAL_COMPLETE_COUNT')
         return V2/'evaluation'/mapping[name]
     if name=='HIST_V2-best':return OLD_SOURCE.parent/'source_boundary/evaluation/FROZEN__NATIVE'
+    if name=='IN_DOMAIN' and (base(target)/'V2_COMPLETE_REFERENCE/official_completion.json').exists():
+        return base(target)/'V2_COMPLETE_REFERENCE'
     return None
 
 
-def evaluate(target):
+def evaluate(target,names=None):
     from scripts.pf_diag_common import official_metrics
-    oracle_record=json.loads((base(target)/'oracle.json').read_text())
-    prep=json.loads((base(target)/'GT_free_predictions.json').read_text());names=[*CONFIGS,*prep['historical_methods']]
+    reference_only=names is not None
+    if names is None:
+        oracle_record=json.loads((base(target)/'oracle.json').read_text())
+        prep=json.loads((base(target)/'GT_free_predictions.json').read_text());names=[*CONFIGS,*prep['historical_methods']]
     def job(name):
         seal=verify(target,name);folder=base(target)/name;done=folder/'official_completion.json'
         if done.exists():
@@ -208,10 +216,28 @@ def evaluate(target):
         atomic_json(done,r);print(json.dumps(dict(event='MULTIDOMAIN_OFFICIAL_COMPLETE',**r)),flush=True);return r
     with ThreadPoolExecutor(max_workers=2) as pool:
         results=[f.result() for f in as_completed([pool.submit(job,m) for m in names])]
-    atomic_json(base(target)/'completion.json',dict(status='ALL_AUTHORIZED_CONFIGURATIONS_COMPLETE',target=target,methods=results,
+    atomic_json(base(target)/('reference_completion.json' if reference_only else 'completion.json'),dict(status='SOURCE_REFERENCE_COMPLETE' if reference_only else 'ALL_AUTHORIZED_CONFIGURATIONS_COMPLETE',target=target,methods=results,
         target_GT_only_independent_offline=True,GT_feedback=False))
 
 
+def reference_predict(target):
+    if target!='KITTI-V2':raise ValueError('Only KITTI source-tail completion needs a new reference')
+    require_plan();attempts=guard();meta=json.loads((RUN/'kitti/metadata.json').read_text())
+    record=json.loads((RUN/'kitti/V2-best/scores_seal.json').read_text())
+    if file_sha(record['complete_path'])!=record['complete_sha256'] or not record['historical_score_bit_exact']:
+        raise ValueError('Complete source seal/history gate failed')
+    a=np.load(record['complete_path'],mmap_mode='r');h=np.load(RUN/'kitti/historical.npy')
+    seal_prediction(target,'V2_COMPLETE_REFERENCE',a>0,meta)
+    seal_prediction(target,'HIST_V2-best',(a>0)&h,meta)
+    if attempts:raise ValueError('Source reference generator attempted GT')
+    atomic_json(base(target)/'reference_predictions.json',dict(status='SEALED_BEFORE_GT',methods=['V2_COMPLETE_REFERENCE','HIST_V2-best'],GT_open_attempts=0,
+        source_score_seal_sha256=file_sha(RUN/'kitti/V2-best/scores_seal.json')))
+
+
 if __name__=='__main__':
-    p=ArgumentParser();p.add_argument('phase',choices=('predict','oracle','evaluate'));p.add_argument('--target',choices=('Dance','KITTI-V2'),required=True);a=p.parse_args()
-    {'predict':generate,'oracle':oracle,'evaluate':evaluate}[a.phase](a.target)
+    p=ArgumentParser();p.add_argument('phase',choices=('predict','oracle','evaluate','reference_predict','reference_evaluate'));p.add_argument('--target',choices=('Dance','KITTI-V2'),required=True);a=p.parse_args()
+    if a.phase=='reference_evaluate':
+        r=json.loads((base(a.target)/'reference_predictions.json').read_text())
+        if r['GT_open_attempts']:raise ValueError('Source reference GT isolation failed')
+        evaluate(a.target,r['methods'])
+    else:{'predict':generate,'oracle':oracle,'evaluate':evaluate,'reference_predict':reference_predict}[a.phase](a.target)
