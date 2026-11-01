@@ -28,3 +28,20 @@ def test_prediction_process_blocks_gt_reads():
     code="from scripts.multidomain_runtime import guard; a=guard();\ntry: open('/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/labels.json')\nexcept PermissionError: assert len(a)==1\nelse: raise AssertionError('GT was opened')"
     result=subprocess.run([sys.executable,'-c',code],capture_output=True,text=True)
     assert result.returncode==0,result.stderr
+
+
+def test_mix_runtime_only_allows_independent_text_facade(tmp_path):
+    runtime=tmp_path/'runtime';runtime.mkdir()
+    safe=runtime/'SportsMOT_labels.json';safe.write_text('{"v_test":{}}')
+    forbidden=tmp_path/'original'/'SportsMOT_labels.json';forbidden.parent.mkdir()
+    forbidden.write_text('{"never_read":true}')
+    program=f"""from scripts.multidomain_runtime import guard
+from pathlib import Path
+a=guard([Path({str(runtime)!r})])
+assert Path({str(safe)!r}).read_text() == '{{"v_test":{{}}}}'
+try: Path({str(forbidden)!r}).read_text()
+except PermissionError: assert len(a)==1
+else: raise AssertionError('Original Sports GT was opened')
+"""
+    result=subprocess.run([sys.executable,'-c',program],capture_output=True,text=True)
+    assert result.returncode==0,result.stderr

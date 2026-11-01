@@ -1,4 +1,4 @@
-"""Download official public-share small files; no account, transfer, or code execution."""
+"""Download official shared assets, anonymously or using a user-confirmed session."""
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 import argparse
@@ -24,8 +24,27 @@ UK, SHARE_ID = 1714442791, 48200137171
 DEST = Path('/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files')
 
 
-def public_session():
+def load_browser_cookies(session, cookie_file):
+    path = Path(cookie_file).resolve()
+    if path.is_relative_to(ROOT) or path.stat().st_mode & 0o077:
+        raise ValueError('Keep authentication outside git in a private mode-600 file')
+    for row in json.loads(path.read_text()):
+        if not row.get('name') or row.get('domain', '').lstrip('.') not in {
+                'baidu.com', 'pan.baidu.com', 'passport.baidu.com'}:
+            continue
+        cookie = requests.cookies.create_cookie(name=row['name'], value=row['value'],
+            domain=row['domain'], path=row.get('path', '/'), secure=row.get('secure', True),
+            expires=row.get('expiry', row.get('expires')))
+        session.cookies.set_cookie(cookie)
+    if not any(c.name == 'BDUSS' and c.value for c in session.cookies):
+        raise ValueError('No authenticated Baidu session in the provided private file')
+
+
+def public_session(cookie_file=None):
     session = requests.Session()
+    if cookie_file:
+        load_browser_cookies(session, cookie_file)
+        session.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0'
     session.get(BASE + '/share/init', params={'surl': SURL}, timeout=30).raise_for_status()
     result = session.post(BASE + '/share/verify', params={'surl': SURL},
         data={'pwd': 'd3qj'}, headers={'Referer': BASE + '/share/init?surl=' + SURL}, timeout=30).json()
@@ -61,23 +80,31 @@ def download_one(file, cookies, signature):
         return result, None
     session = requests.Session()
     session.cookies.update(cookies)
+    authenticated = any(getattr(c, 'name', None) == 'BDUSS' and c.value for c in cookies)
+    if authenticated:
+        session.headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64; rv:136.0) Gecko/20100101 Firefox/136.0'
     try:
-        response = session.post(BASE + '/api/sharedownload', params={
-            'sign': signature['sign'], 'timestamp': signature['timestamp'], 'clienttype': 0,
-            'web': 1, 'app_id': 250528, 'channel': 'chunlei'}, data={
-            'encrypt': 0, 'product': 'share', 'uk': UK, 'primaryid': SHARE_ID,
-            'fid_list': json.dumps([file['fs_id']]), 'type': 'nolimit',
-            'extra': json.dumps({'sekey': unquote(session.cookies.get('BDCLND', ''))})},
-            headers={'Referer': SHARE}, timeout=30)
-        response.raise_for_status()
-        data = response.json()
-        links = data.get('list')
-        result.update(errno=data.get('errno'), link_container_type=type(links).__name__)
-        if isinstance(links, str):
-            result['link_container_chars'] = len(links)
-            # Never mistake an opaque/encrypted value for a URL or a login error.
-            if links.lstrip().startswith(('[', '{')):
-                links = json.loads(links)
+        result['link_attempts'] = []
+        for clienttype in ([0, 12, 5] if authenticated else [0]):
+            response = session.post(BASE + '/api/sharedownload', params={
+                'sign': signature['sign'], 'timestamp': signature['timestamp'], 'clienttype': clienttype,
+                'web': 1, 'app_id': 250528, 'channel': 'chunlei'}, data={
+                'encrypt': 0, 'product': 'share', 'uk': UK, 'primaryid': SHARE_ID,
+                'fid_list': json.dumps([file['fs_id']]), 'type': 'nolimit',
+                'extra': json.dumps({'sekey': unquote(session.cookies.get('BDCLND', ''))})},
+                headers={'Referer': SHARE}, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            links = data.get('list')
+            result.update(errno=data.get('errno'), clienttype=clienttype, link_container_type=type(links).__name__)
+            result['link_attempts'].append(dict(clienttype=clienttype, errno=data.get('errno'), link_container_type=type(links).__name__))
+            if isinstance(links, str):
+                result['link_container_chars'] = len(links)
+                # Never mistake an opaque/encrypted value for a URL or a login error.
+                if links.lstrip().startswith(('[', '{')):
+                    links = json.loads(links)
+            if isinstance(links, list) and links and links[0].get('dlink'):
+                break
         if not isinstance(links, list) or not links or not links[0].get('dlink'):
             result['status'] = 'NO_USABLE_PUBLIC_DLINK'
             return result, None
@@ -89,8 +116,19 @@ def download_one(file, cookies, signature):
             raise RuntimeError('Insufficient space; retain at least 2 GiB')
         path.parent.mkdir(parents=True, exist_ok=True)
         partial = path.with_name(path.name + '.partial')
+        offset = partial.stat().st_size if partial.exists() else 0
+        result['resumed_bytes'] = offset
+        if offset > file['size']:
+            raise ValueError('Retain oversized partial for explicit recovery')
         md5 = hashlib.md5()
-        with session.get(link, headers={'Referer': SHARE}, stream=True, timeout=(30, 90)) as response:
+        if offset:
+            with partial.open('rb') as handle:
+                for chunk in iter(lambda: handle.read(1 << 20), b''):
+                    md5.update(chunk)
+        headers = {'Referer': SHARE}
+        if offset:
+            headers['Range'] = f'bytes={offset}-'
+        with session.get(link, headers=headers, stream=True, timeout=(30, 90)) as response:
             result['HTTP_status'] = response.status_code
             if not response.ok:
                 try:
@@ -99,7 +137,9 @@ def download_one(file, cookies, signature):
                 except ValueError:
                     pass
             response.raise_for_status()
-            with partial.open('xb') as handle:
+            if offset and (response.status_code != 206 or not response.headers.get('Content-Range', '').startswith(f'bytes {offset}-')):
+                raise ValueError('Server did not acknowledge the exact resume offset; partial preserved')
+            with partial.open('ab' if offset else 'xb') as handle:
                 for chunk in response.iter_content(1 << 20):
                     handle.write(chunk)
                     md5.update(chunk)
@@ -122,7 +162,7 @@ def download_one(file, cookies, signature):
         return result, None
 
 
-def diagnose_transfers(session, signature):
+def diagnose_transfers(session, signature, authenticated=False):
     """Bounded real transfer checks; stop at failure, never retry account authentication."""
     selected = [listing(session, '/FlexHook/tracker_outputs/McByte-SportsMOT')[0],
         next(x for x in listing(session, '/FlexHook/SOTA_ckpts') if x['server_filename'] == 'LaMOT-best.pth')]
@@ -160,7 +200,7 @@ def diagnose_transfers(session, signature):
         outcomes.append(item)
         print(json.dumps(dict(event='BOUNDED_TRANSFER_DIAGNOSIS', **item)), flush=True)
     return dict(source='FlexHook_bounded_fresh_transfer_diagnosis', outcomes=outcomes,
-        account_credentials_used=False, account_credentials_requested=False, signed_URLs_modified=False,
+        account_credentials_used=authenticated, account_credentials_requested=False, signed_URLs_modified=False,
         credentials_or_expiring_links_recorded=False, timestamp=time.time(), gpu_used=False)
 
 
@@ -215,6 +255,8 @@ def main():
     parser.add_argument('--inventory-only', action='store_true', help='Refresh complete paginated listing without download requests')
     parser.add_argument('--diagnose-transfers', action='store_true', help='Only four bounded real HTTP transfer checks')
     parser.add_argument('--summarize', action='store_true', help='Offline provenance/status summary; no network or referring payloads')
+    parser.add_argument('--cookies-file', type=Path, help='Private JSON from the user-confirmed official browser; never logged')
+    parser.add_argument('--smoke', action='store_true', help='Download only one official McByte file before a full campaign')
     args = parser.parse_args()
     require_plan()
     record_path = PUBLIC / 'downloads.json'
@@ -225,9 +267,27 @@ def main():
         atomic_json(record_path, record)
         print(json.dumps(record['continuation_summary']), flush=True)
         return
-    session, signature = public_session()
+    session, signature = public_session(args.cookies_file)
+    authenticated = args.cookies_file is not None
+    if args.smoke:
+        file = listing(session, '/FlexHook/tracker_outputs/McByte-SportsMOT')[0]
+        result, entry = download_one(file, session.cookies, signature)
+        attempt = dict(source='FlexHook_authenticated_smoke' if authenticated else 'FlexHook_public_smoke',
+            completed_at_UTC=datetime.now(timezone.utc).isoformat(),
+            account_credentials_used=authenticated, raw_credential_values_logged=False,
+            code_from_downloads_executed=False, gpu_used=False, outcomes=[result])
+        record['attempts'].append(attempt)
+        if entry:
+            record['files'].append(entry)
+        passed = result['status'] in ('DOWNLOADED_SIZE_VERIFIED_SHA256_RECORDED', 'EXISTING_FILE_PRESERVED')
+        record['status'] = 'AUTHENTICATED_SMOKE_TRANSFER_PASSED' if authenticated and passed else 'SMOKE_TRANSFER_FAILED'
+        atomic_json(record_path, record)
+        print(json.dumps(dict(event='OFFICIAL_ASSET_TRANSFER_SMOKE', **result)), flush=True)
+        if not passed:
+            raise SystemExit(2)
+        return
     if args.diagnose_transfers:
-        attempt = diagnose_transfers(session, signature)
+        attempt = diagnose_transfers(session, signature, authenticated)
         record['attempts'].append(attempt)
         atomic_json(record_path, record)
         return
@@ -257,8 +317,8 @@ def main():
             errors.append(dict(directory=directory, error=str(exc)))
     weights = listing(session, '/FlexHook/SOTA_ckpts')
     files.append(next(x for x in weights if x['server_filename'] == 'LaMOT-best.pth'))
-    attempt = dict(source='FlexHook_public_small_files_continuation', started_at_UTC=datetime.now(timezone.utc).isoformat(),
-        account_credentials_used=False, account_credentials_requested=False, code_from_downloads_executed=False,
+    attempt = dict(source='FlexHook_authenticated_asset_download' if authenticated else 'FlexHook_public_small_files_continuation', started_at_UTC=datetime.now(timezone.utc).isoformat(),
+        account_credentials_used=authenticated, account_credentials_requested=False, code_from_downloads_executed=False,
         gpu_used=False, disk_free_bytes_before=shutil.disk_usage(DEST).free,
         selected_files=len(files), selected_metadata=[dict(path=f['path'], size=f['size'], md5=f.get('md5')) for f in files],
         listings=listings, listing_errors=errors, outcomes=[])

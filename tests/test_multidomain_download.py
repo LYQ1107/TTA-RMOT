@@ -1,5 +1,6 @@
 """Regression checks for actual public-share pagination and rejected transfers."""
 import hashlib
+import zipfile
 
 from scripts import multidomain_baidu_resume as downloader
 
@@ -63,3 +64,19 @@ def test_success_requires_real_bytes_and_records_sha256(tmp_path, monkeypatch):
     assert entry['sha256'] == hashlib.sha256(payload).hexdigest()
     assert entry['share_metadata_hash_not_plaintext_md5']
     assert (tmp_path / 'FlexHook/test.txt').read_bytes() == payload
+
+
+def test_baidu_zip_encoded_share_paths(tmp_path, monkeypatch):
+    from scripts import multidomain_baidu_batch as batch
+    root = tmp_path / 'download'
+    (root / 'batch_extracted').mkdir(parents=True)
+    archive = root / 'SportsMOT.zip'
+    encoded = '123%3A%2FFlexHook%2Fdatasets%2FLaMOT-main%2Fgt_templates%2FSportsMOT%2Fv_test%2Fplayer%2Fgt.txt'
+    with zipfile.ZipFile(archive, 'w') as handle:
+        handle.writestr(encoded, '1,1,1,2,3,4,1,1,1\n')
+    monkeypatch.setattr(batch, 'ASSETS', root)
+    monkeypatch.setattr(batch, 'DEST', root / 'public_files')
+    entries = batch.unpack(archive, {'path':'/FlexHook/datasets/LaMOT-main/gt_templates/SportsMOT','isdir':1})
+    assert len(entries) == 1 and entries[0]['evaluated_only']
+    assert entries[0]['share_file_path'].endswith('/SportsMOT/v_test/player/gt.txt')
+    assert entries[0]['sha256'] == hashlib.sha256(b'1,1,1,2,3,4,1,1,1\n').hexdigest()

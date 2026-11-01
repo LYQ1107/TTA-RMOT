@@ -2,7 +2,7 @@
 
 ## 1. 判定汇总
 
-状态：C1、C2独立授权部分均已完成；C3–C6仍等待官方LaMOT权重和McByte/FlexHook数据包。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**
+状态：C1、C2独立授权部分均已完成；服务器原生网盘扫码登录已成功，已下载45份官方McByte、245份表达标注和418份GT模板，权重及其余标注通过官方打包接口继续下载。发现官方GT模板缺少seqmap中的48条，正在单独核查；不将缺失GT冒充空目标。C3–C6仍未通过全部资产与P0门槛。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**
 
 | 源 / 目标 | KITTI-V2 | Dance | SportsMOT |
 |---|---|---|---|
@@ -25,7 +25,11 @@
 
 ## 2. P0、下载、冒烟和自检
 
-2026-11-01 用户要求继续下载后，已实际续办而非只重复报告阻塞。最新结果：新增有效资产 0；公开目录/签名成功，小文件实际传输 HTTP403/31360（新链接已过期），大权重打包传输 HTTP403/31064。完整分页核实 45 个 McByte、466 个官方表达、3 个辅助 JSON 和 1 个权重；其中 466 个表达文件名/大小与已有 GitHub 下载一致，但字节等价性仍未证明。详见 [DOWNLOAD_FOLLOWUP.md](DOWNLOAD_FOLLOWUP.md) 和 downloads.json 续办记录。以下 C1/C2 科研结果和原有封存不变，C3–C6 未启动。
+2026-11-01 当前下载恢复：用户扫描服务器独立Firefox原生网盘界面的官方二维码后，浏览器实际进入`/disk/`、保存私有BDUSS/STOKEN。真实小文件smoke返回HTTP200/210064字节；515项逐文件任务保留290份有效资产（45McByte+245表达），后段225项API失败原样记录。另用官方batch接口成功下载GT模板ZIP，解出418份/39154648字节；包内URL编码路径的兼容问题已定向修复并测试。至本次阶段快照，708份官方payload共56881467字节，逐文件SHA已核对；完整权重/辅助JSON/表达包继续下载。详见[QR_LOGIN_STATUS.md](QR_LOGIN_STATUS.md)、[authenticated_downloads.json](authenticated_downloads.json)和[downloads.json](downloads.json)。
+
+GT资产差异单列：模板包的418条全部属于466条seqmap，缺48条、无额外条目，覆盖视频数仍为45。网盘抽查`v_0kUtTtmLaJA_c004`只有10个表达目录，缺失长句目录请求errno4，证明至少该例不是本地解压漏文件。完整清单见[sports_template_inventory.json](sports_template_inventory.json)。仅检查路径/包清单，没有打开GT内容、合成空GT、删序列或开展新官方评测。
+
+下述匿名下载错误和手工清单是此前历史，已经不再代表当前服务器未登录；C1/C2科研结果和原有封存保持不变。
 
 补充预注册先推送0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a；恢复P0先推送e7bf73cf81a1ed6afc775815581e0564a77cbea3，随后才继续P1。原93行PREREG正文和首次P0封存保留。详见[P0_RESUMED.md](P0_RESUMED.md)、[downloads.json](downloads.json)。
 

@@ -27,13 +27,14 @@ def require_plan():
     return p
 
 
-def guard():
+def guard(extra_runtime_roots=()):
     attempts=[]
-    runtime=(RUN/'runtime/kitti/expression').resolve()
+    runtime=[(RUN/'runtime/kitti/expression').resolve(),
+             *[Path(p).resolve() for p in extra_runtime_roots]]
     def audit(event,args):
         if event!='open' or not isinstance(args[0],(str,bytes,os.PathLike)):return
         p=Path(os.fsdecode(args[0])).resolve()
-        if p.is_relative_to(runtime):return # independently exported sentence-only files
+        if any(p.is_relative_to(root) for root in runtime):return # independently exported sentence-only files
         if p.name in ('gt.txt','labels.json') or p.name.endswith('_labels.json') or any(k in p.parts for k in ('gt_template','gt_templates','expression','annotations_v1')):
             attempts.append(str(p));raise PermissionError('Generality inference/decoder must not open GT: '+str(p))
     sys.addaudithook(audit);return attempts
