@@ -74,12 +74,14 @@ def evaluate():
         if sig in canonical:aliases.append((m,canonical[sig]))
         else:canonical[sig]=v2.EVAL/m;pending.append(m)
     evaluator.RUN=RUN;evaluator.EVAL=v2.EVAL;evaluator.require_prereg=require_plan
-    with ThreadPoolExecutor(max_workers=6) as pool:
-        # At most four target jobs, at most two source jobs concurrently.
-        def target_batch():
-            with ThreadPoolExecutor(max_workers=4) as targets:
-                for f in as_completed([targets.submit(evaluator.evaluate,m) for m in pending]):f.result()
-        jobs=[pool.submit(target_batch),*[pool.submit(source_job,r) for r in source['methods']]]
+    def target_batch():
+        with ThreadPoolExecutor(max_workers=4) as targets:
+            for f in as_completed([targets.submit(evaluator.evaluate,m) for m in pending]):f.result()
+    def source_batch():
+        with ThreadPoolExecutor(max_workers=2) as sources:
+            for f in as_completed([sources.submit(source_job,r) for r in source['methods']]):f.result()
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        jobs=[pool.submit(target_batch),pool.submit(source_batch)]
         for f in as_completed(jobs):f.result()
     for m,original in aliases:v2.reuse_metrics(m,original);reused.append(m)
     names=[r['method'] for r in p['methods']]+list(refs)

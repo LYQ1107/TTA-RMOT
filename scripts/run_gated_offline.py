@@ -13,7 +13,13 @@ def run():
     env=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',MKL_NUM_THREADS='2')
     try:
         # This is the single blocking waiter, not repeated model shell probes.
-        while not (RUN/'teacher_launch_completion.json').exists():time.sleep(5)
+        while not (RUN/'teacher_launch_completion.json').exists():
+            launches=sorted((RUN/'teacher_launchers').iterdir())
+            if launches:
+                for name in ('smoke.json','full.json'):
+                    p=launches[-1]/name
+                    if p.exists() and json.loads(p.read_text())['exit_code']!=0:raise RuntimeError('teacher failed; preserve cache and inspect '+str(p))
+            time.sleep(5)
         for stage,script in [('generate','gated_decode.py'),('official','evaluate_gated_decode.py'),('report','report_gated_decode.py')]:
             begin=time.perf_counter();log=folder/(stage+'.txt')
             with log.open('w') as h:

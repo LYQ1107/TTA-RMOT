@@ -63,6 +63,7 @@ def report():
         videos=vs;values[m]=stat
         with (v2.EVAL/m/'results/pedestrian_detailed.csv').open() as f:data=list(csv.DictReader(f))
         detail={r['seq']:r for r in data if r['seq']!='COMBINED'};combined=next(r for r in data if r['seq']=='COMBINED')
+        if any(bool(float(detail[v+'+'+q]['GT_Dets']))!=p for (v,q),p in presence.items()):raise ValueError('historical query-presence grouping differs from current official GT')
         full=float(pooled_hota(stat,np.ones(25)))
         if not np.isclose(full,100*float(combined['HOTA___AUC']),atol=1e-8,rtol=0):raise ValueError('official pooling mismatch')
         if metrics['Dets']!=seal['prediction_rows']:raise ValueError('prediction/TrackEval rows differ')
@@ -146,7 +147,7 @@ def report():
                     p=base/m/'results'/filename;key=domain+'/'+m+'/'+filename;archive.add(p,arcname=key);metric_index[key]=dict(path=str(p),sha256=file_sha(p))
     with tarfile.open(PUBLIC/'stage_logs.tar.gz','w:gz') as archive:
         for p in sorted(RUN.rglob('*')):
-            if p.is_file() and ((p.suffix in ('.log','.txt') and any(k in p.parts for k in ('official_jobs','teacher_launchers','source_boundary'))) or (p.suffix=='.json' and 'teacher_launchers' in p.parts)):
+            if p.is_file() and not p.is_symlink() and (p.name=='trackeval.log' or (p.suffix in ('.log','.txt') and any(k in p.parts for k in ('official_jobs','teacher_launchers'))) or (p.suffix=='.json' and 'teacher_launchers' in p.parts) or ('CPU_launchers' in p.parts and p.name in ('generate.txt','official.txt','generate.json','official.json'))):
                 archive.add(p,arcname=str(p.relative_to(RUN)));log_index.append(dict(path=str(p),sha256=file_sha(p)))
     atomic_json(PUBLIC/'official_metrics_index.json',dict(files=metric_index,archive_sha256=file_sha(PUBLIC/'official_metrics.tar.gz')))
     with gzip.open(PUBLIC/'prediction_files.csv.gz','wt') as f:

@@ -13,6 +13,8 @@ def gate_bank():
     receipt=json.loads((RUN/'teacher/receipt.json').read_text());plan=json.loads((RUN/'teacher_plan.json').read_text())
     if receipt['status']!='ALL_T1_OUTPUTS_SEALED' or receipt['GT_open_attempts']:raise ValueError('finish all GT-free teacher calls first')
     if file_sha(receipt['outputs_path'])!=receipt['outputs_sha256']:raise ValueError('teacher output changed')
+    prior=json.loads((cs.RUN/'probe/2B/receipt.json').read_text())['frozen']['initial_parameter_sha256']
+    if receipt['frozen']['initial_parameter_sha256']!=prior or receipt['frozen']['final_parameter_sha256']!=prior:raise ValueError('not the same audited frozen Qwen teacher')
     rows=read_jsonl(receipt['outputs_path']);by=defaultdict(dict)
     for r in rows:
         k=r['dataset'],r['video_id'],r['gate_mode'],r['frame_id']

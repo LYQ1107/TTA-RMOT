@@ -25,3 +25,11 @@
 - Integration regression: 32 passed (new 9 + prior Xquery/count_structure/v2
   tests), 1.38 s. Seven new scripts compile; git diff --check PASS. Frozen
   teacher backend, crop builder, and vendor tree unchanged.
+- Audited teacher parameter SHA matches the prior sealed 2B teacher exactly:
+  9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956.
+  New gate generator checks this before producing any decoder predictions.
+  Version inventory is in environment.json; T1 is the single-frame prompt
+  arm, not a YesTrack/Dance-trained adapter (base config condition T0).
+- Offline evaluation/report runner is queued behind successful complete
+  teacher sealing. It has no GPU, streams child logs, and aborts on a
+  failed teacher launcher. No repeated agent shell process polling.
