@@ -2,22 +2,22 @@
 
 ## 1. 判定汇总
 
-状态：C1、C2已完成并保持不变。官方资产已全部下载核验：933份payload、1144635019字节；LaMOT权重strict通过，剩余5套单视频P0全部通过，估计0.79–2.12 GPU小时/组合、均低于6小时门槛。详见[P0_REMAINING.md](P0_REMAINING.md)。本阶段先发布P0再恢复全量C3–C6；官方GT原418份之外的48项按已发布v3授权，在完整预测封存后独立逐行核对补齐，不把缺失GT当空目标。**完整六组合仍未完成，不计算全局2/3判定，不提前宣布科研结论。**
+状态：C1、C2、C5已正式完成（3/6），C1/C2不重跑；C3/C4/C6继续固定队列。C5完整结果见[C5_REPORT.md](C5_REPORT.md)：原生22.398、同域数量33.801、同域42.752，ρ=0.560254，为“数量与排序共同作用”。官方933份资产和5套P0均通过，恢复门已先推送。GT缺项按v3在全部Sports预测封存后逐行复现418才补48，仍未开始该GT步骤。**完整六组合未齐，不计算全局2/3判定。**
 
 | 源 / 目标 | KITTI-V2 | Dance | SportsMOT |
 |---|---|---|---|
-| V2-best | 同域参照 | 0.984627：数量主导 | 待官方资产 |
-| Dance-best | 0.535040：数量与排序共同作用 | 同域参照 | 待官方资产 |
-| LaMOT-best | 待官方资产 | 待官方资产 | 同域参照 |
+| V2-best | 同域参照 | 0.984627：数量主导 | P1运行中 |
+| Dance-best | 0.535040：数量与排序共同作用 | 同域参照 | P1运行中 |
+| LaMOT-best | 0.560254：数量与排序共同作用 | P1运行中 | 同域参照 |
 
 | 组合 | gap | ρ | Δrank | 固定规则判定 |
 |---|---|---|---|---|
 | C1 | 23.920809 | 0.984627 | 0.367741 | 数量主导 |
 | C2 | 29.250220 | 0.535040 | 13.600183 | 数量与排序共同作用 |
-| C3 | — | — | — | 待官方资产 |
-| C4 | — | — | — | 待官方资产 |
-| C5 | — | — | — | 待官方资产 |
-| C6 | — | — | — | 待官方资产 |
+| C3 | — | — | — | P1运行中 |
+| C4 | — | — | — | P1运行中 |
+| C5 | 20.353418 | 0.560254 | 8.950338 | 数量与排序共同作用 |
+| C6 | — | — | — | P1运行中 |
 
 ρ使用官方detailed CSV未舍入HOTA计算；表内HOTA展示summary数值。缺失单元不是ρ=0，不删组合来做普遍性结论。
 
@@ -41,7 +41,7 @@ Sports seqmap实际466条、45视频；原465为文件末行无换行符造成wc
 
 百度提取码验证成功且可列官方LaMOT-best（995768578字节）和45个McByte预测；初始匿名sharedownload errno2、无dlink；补齐官网签名接口后errno0，但list是不透明字符串、不是可下载链接，encrypt=0也相同。未把参数错误或不透明响应谎称登录失败；未执行网页JS/外部解析代理。公开BaiduPCS-Go客户端规定账号登录为必做，无账号凭据故停止该路径，不索取密码、不借他人登录、不自跑tracker。
 
-需要手动下载的精确网盘路径（分享根实际为/FlexHook）：
+早期手工恢复清单（现已自动下载补齐，保留来源追踪；分享根为/FlexHook）：
 
 - /FlexHook/SOTA_ckpts/LaMOT-best.pth
 - /FlexHook/tracker_outputs/McByte-SportsMOT/（45文件逐个列在downloads.json）
@@ -69,7 +69,7 @@ V2 KITTI历史2355528行原值保留，只新增69854尾观测分数，完整242
 
 源域官方封存GT_Dets=491286，infer.sh注释为491222，差64。沿用已通过42.526自检的原GT模板/过滤规则，没有修改GT来凑注释数字；所有本轮KITTI比较使用同一491286协议。
 
-关键反向组合C2并不支持“排序近乎无损”：补同域数量后仍落后13.600 HOTA，GT R@1为0.197195对0.424417。Oracle同量时32.576对47.593，排序损失也没有消失。C2只有4视频，这些差距为点估计，不作统计显著性声明。C2已不满足汇总中要求的“C2也数量主导”必要条件；其余四组合缺资产，仍不擅自选择“部分成立/不普遍”的最终汇总标签。
+关键反向组合C2并不支持“排序近乎无损”：补同域数量后仍落后13.600 HOTA，GT R@1为0.197195对0.424417。Oracle同量时32.576对47.593，排序损失也没有消失。C2只有4视频，这些差距为点估计，不作统计显著性声明。C2已不满足汇总中要求的“C2也数量主导”必要条件；C5现同样为数量与排序共同作用，其余三组合继续，不提前作六组全局判定。
 
 Dance历史32.134/254118行与完整32.139/254910行已核对SHA，新诊断统一完整范围。论文最新版正文只有LaMOT合并56.77，infer.sh合并56.756；未找到Sports子集官方数字，仓库无补充PDF、CVF补充入口403。只有官方资产核验全过后才允许Sports smoke和后续正式推理。
 
@@ -91,34 +91,34 @@ Dance历史32.134/254118行与完整32.139/254910行已核对SHA，新诊断统�
 | C2 | R_SxK_ORACLE | 32.576000 | 22.072000 | 48.273000 | 35.670000 | 2828.000000 | 480848 | 0 | COMPLETE |
 | C2 | R_IxK_ORACLE | 47.593000 | 38.588000 | 58.934000 | 54.845000 | 3491.000000 | 480848 | 0 | COMPLETE |
 | C2 | B0_GLOBAL | 24.353000 | 11.872000 | 50.103000 | 20.782000 | 1772.000000 | 775877 | 0 | COMPLETE |
-| C3 | NATIVE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | IN_DOMAIN | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | R_SxK_I | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | R_IxK_S | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | R_SxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | R_IxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C3 | B0_GLOBAL | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | NATIVE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | IN_DOMAIN | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | R_SxK_I | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | R_IxK_S | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | R_SxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | R_IxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C4 | B0_GLOBAL | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | NATIVE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | IN_DOMAIN | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | R_SxK_I | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | R_IxK_S | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | R_SxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | R_IxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | B0_GLOBAL | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | NATIVE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | IN_DOMAIN | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | R_SxK_I | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | R_IxK_S | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | R_SxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | R_IxK_ORACLE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C6 | B0_GLOBAL | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
+| C3 | NATIVE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | IN_DOMAIN | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | R_SxK_I | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | R_IxK_S | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | R_SxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | R_IxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C3 | B0_GLOBAL | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | NATIVE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | IN_DOMAIN | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | R_SxK_I | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | R_IxK_S | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | R_SxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | R_IxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C4 | B0_GLOBAL | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C5 | NATIVE | 22.398000 | 11.567000 | 43.483000 | 20.449000 | 1270.000000 | 332822 | 0 | COMPLETE |
+| C5 | IN_DOMAIN | 42.752000 | 30.688000 | 59.696000 | 46.392000 | 3203.000000 | 775877 | 0 | COMPLETE |
+| C5 | R_SxK_I | 33.801000 | 22.264000 | 51.433000 | 35.799000 | 3074.000000 | 775877 | 0 | COMPLETE |
+| C5 | R_IxK_S | 25.534000 | 15.139000 | 43.188000 | 26.085000 | 1645.000000 | 332822 | 0 | COMPLETE |
+| C5 | R_SxK_ORACLE | 37.595000 | 27.691000 | 51.230000 | 42.693000 | 3230.000000 | 480848 | 0 | COMPLETE |
+| C5 | R_IxK_ORACLE | 47.593000 | 38.588000 | 58.934000 | 54.845000 | 3491.000000 | 480848 | 0 | COMPLETE |
+| C5 | B0_GLOBAL | 26.577000 | 15.058000 | 47.052000 | 25.808000 | 2404.000000 | 775877 | 0 | COMPLETE |
+| C6 | NATIVE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | IN_DOMAIN | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | R_SxK_I | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | R_IxK_S | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | R_SxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | R_IxK_ORACLE | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
+| C6 | B0_GLOBAL | — | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
 
 R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，不是可免费获得的Source-Free TTA门控。ORACLE两臂显式使用目标GT数量，仅诊断，不是可部署结果。B0_GLOBAL保持同域总行数，但不含逐帧逐表达的数量信息。
 
@@ -128,6 +128,8 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 | Dance | in_domain | 0.155387 | 0.157938 | 0.619945 | 42657 | 0.828769 |
 | KITTI-V2 | source | 0.197195 | 0.243035 | 0.347478 | 195480 | 0.552911 |
 | KITTI-V2 | in_domain | 0.424417 | 0.525893 | 0.708625 | 195480 | 0.901302 |
+
+上表的source分别指C1(V2)和C2(Dance)；新增C5(LaMOT)的GT R@1=0.277423、AUROC=0.670094，完整字段见C5_RESULTS.json，未混用两个不同源模型。
 
 同帧GT R@1：对官方GT非空帧，top1候选以IoU≥0.5命中的GT数/该帧GT数，按帧均值（无可匹配候选的帧记0）。另外保留旧离线脚本的条件候选召回：在有IoU≥0.5候选的帧，top1命中的正候选数/该帧正候选数再均值。正候选可有重复框，故两个分母不等，不能混称。tie=(-margin,numeric ID)；Hit@1另列，不是AP。GT轨迹结构用一对一最大基数匹配。新增GT分母诊断未改变任何预测、HOTA或预注册判定。
 
@@ -141,12 +143,12 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 | C2 | pedestrian | IN_DOMAIN | 38.811844 | 26.924673 | 56.037477 | 381 | COMPLETE |
 | C2 | car | R_SxK_I | 30.773127 | 18.926806 | 50.063527 | 481 | COMPLETE |
 | C2 | pedestrian | R_SxK_I | 28.408893 | 17.855415 | 45.278945 | 381 | COMPLETE |
-| C5 | car | NATIVE | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | car | IN_DOMAIN | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | car | R_SxK_I | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | pedestrian | NATIVE | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | pedestrian | IN_DOMAIN | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
-| C5 | pedestrian | R_SxK_I | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
+| C5 | car | NATIVE | 21.142895 | 10.464572 | 42.763867 | 481 | COMPLETE |
+| C5 | car | IN_DOMAIN | 52.702969 | 42.228716 | 65.815273 | 481 | COMPLETE |
+| C5 | car | R_SxK_I | 33.782533 | 22.637578 | 50.455240 | 481 | COMPLETE |
+| C5 | pedestrian | NATIVE | 22.948632 | 12.177309 | 43.322060 | 381 | COMPLETE |
+| C5 | pedestrian | IN_DOMAIN | 38.811844 | 26.924673 | 56.037477 | 381 | COMPLETE |
+| C5 | pedestrian | R_SxK_I | 33.716089 | 22.145489 | 51.432362 | 381 | COMPLETE |
 
 评测分组使用官方表达canonical raw_sentence（缺失时原sentence），匹配car/auto与pedestrian/person/gender词；全部862条唯一分类，映射和原文件SHA见source_query_categories.csv。不能只在改写后的句子里搜索car：automobiles/autos等改写会被错误归成行人。映射只在V2参照预测封存后的离线进程生成，从未进入模型；不读referring label值来调预测。保留该类表达的全部候选（不事后按预测类别删框），官方HOTA.combine_sequences聚合。只有4个验证视频，不做bootstrap。
 
@@ -156,7 +158,7 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 |---|---|---|---|---|---|---|---|
 | Dance | 0.166185 | 0.832370 | 0.001445 | 0.905882 | 0.973752 | 1.000000 | COMPLETE_OFFLINE_ORACLE |
 | KITTI-V2 | 0.318471 | 0.000000 | 0.681529 | 0.000000 | 0.464424 | 0.461279 | COMPLETE_OFFLINE_ORACLE |
-| SportsMOT | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
+| SportsMOT | — | — | — | — | — | — | P1_RUNNING_AWAIT_EVALUATION |
 
 轨迹正例：一对一IoU≥0.5匹配观测达到该物理预测轨迹≥50%；不是预测ID=GT ID。逐视频表达数、共享文本见structure_stats.csv；Dance17句跨25视频共享。Sports未知项留空，不能以现成图像替代官方McByte轨迹统计。
 

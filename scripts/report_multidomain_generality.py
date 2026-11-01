@@ -37,6 +37,13 @@ def detail(target,name,meta,source_model=None):
     return dict(seal=seal,done=done,rows=by,stats=stat,videos=videos,HOTA_unrounded=exact)
 
 
+def export_hota_stats(result):
+    numerator,denominator=result['stats']
+    return dict(videos=result['videos'],
+        assA_TP_numerator=numerator.tolist(),TP_FN_FP_denominator=denominator.tolist(),
+        formula='100 * mean(sqrt((weights @ numerator) / maximum(weights @ denominator, 1)))')
+
+
 def main():
     require_plan();diagnostics=[];rho=[];structures=[];categories=[];bootstrap={};targets={};allpred=[];references={}
     completed=[]

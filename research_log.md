@@ -2454,3 +2454,5 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - C5 LaMOT→KITTI先完成4视频/2425382完整margin、2355528历史margin，full child2444.284秒/0退出；4视频共862表达覆盖不变，GT0。独立GT-free CPU生成5主控制+2历史覆盖，6034份预测先封存SHA，见C5_P1_SEALS.json；正式指标尚未计算。先推送封存，再做独立离线GT评测，其他Sports/Dance GPU不受影响。
 - CPU评测复用补缺：同一目标上的IN_DOMAIN、I×K_ORACLE和历史同域输出在全部episode逐行数值相等后复用旧官方CSV；不重复跑已封存同域评测，也不修改预测或评测器。10项回归重跑通过。
 - C5封存清单先公开ce675ea5，然后独立CPU开启oracle→TrackEval。预运行检查发现evaluate的第二位置参数是methods而非source_model，CLI分派已改为显式关键字；新增定向回归后共11项通过。未发生带错误路由的正式评测，不改预测、超参、GT过滤或模型架构；其余GPU队列保持健康运行。
+- C5全7主控制+2历史覆盖正式TrackEval完成：Native22.398、S排序×I数量33.801、I42.752、逆交换25.534、S×GT37.595/I×GT47.593、B0_GLOBAL26.577；ρ=.560253818、Δrank8.950338，按原规则“数量与排序共同作用”。GT R@1 .277423对.424417、AUROC .670094对.901302；仅4视频点估计，不夸大帧级显著性。新source含smoke .754688 GPU-worker小时，旧同域推理不是零成本。C1/C2不重跑，全六组仍未齐。
+- 只在小型报告导出中发现stats是(numerator,denominator)双数组而非dict，原metrics/预测/TrackEval不受影响；修正序列化并新增JSON往返精确HOTA/重采样回归，现12项通过。大detailed CSV保留本机绝对路径/SHA，Git发布summary/完整日志精简归档及逐视频逐阈值充分统计；C5所有7758份主/历史/Oracle预测的SHA公开，旧GT-free6034索引不覆盖。

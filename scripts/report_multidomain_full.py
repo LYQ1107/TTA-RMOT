@@ -9,7 +9,7 @@ import tarfile
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.multidomain_diagnostics import *
-from scripts.report_multidomain_generality import PAIRS,table,detail
+from scripts.report_multidomain_generality import PAIRS,table,detail,export_hota_stats
 from scripts.analyze_pf_video_uncertainty import HOTA,pooled_hota,paired_clusters
 
 
@@ -130,10 +130,14 @@ def main():
     with tarfile.open(archive,'w:gz') as handle:
         for name,r in references.items():
             folder=Path(r['results_folder'])
-            for filename in ('pedestrian_summary.txt','pedestrian_detailed.csv'):
+            for filename in ('pedestrian_summary.txt',):
                 handle.add(folder/filename,arcname=name+'/'+filename)
             log=folder.parent/'trackeval.log'
             if log.is_file():handle.add(log,arcname=name+'/trackeval.log')
+    stats_file=PUBLIC/'bootstrap_sufficient_statistics.json.gz'
+    with gzip.open(stats_file,'wt') as handle:
+        json.dump({combo:{name:export_hota_stats(r) for name,r in methods.items()}
+            for combo,methods in allmethods.items()},handle,separators=(',',':'))
     reproduction=json.loads((history/'reproduction.json').read_text())
     reproduction.update(status='ALL_C1_C6_COMPLETE',global_six_pair_experiment_complete=True,
         LaMOT_best_SportsMOT=dict(status='OFFICIAL_TARGET_CONFIG_MIX_LOADER_COMPLETE',
@@ -193,7 +197,7 @@ def main():
         '推理和GT-free解码GT打开尝试均0；独立导出纯language和空对象视频索引，不读取原targets/labels。所有预测先封存SHA，才独立补建GT、做ORACLE及官方TrackEval。没有源训练、微调、MLLM、外部教师、阈值选择或检测器替换。',
         '下载经历匿名CDN403、原生官网扫码恢复、长传输后签名过期112；每批刷新签名后补齐。Baidu ZIP的编码路径、分页100上限均已修复；旧失败、私有凭据隔离和精确来源见downloads.json/QR_LOGIN_STATUS.md。',
         '历史SIGTERM仅恢复未完帧；此次完成的视频回执只复用不重算。原始checkpoint、历史报告/结果、vendor代码和其它任务进程未覆盖/终止。',
-        '全部预测/数组绝对路径与SHA见margin_paths.json、all_prediction_files.csv.gz，官方CSV和日志精简归档official_metrics_logs.tar.gz，原日志路径见official_results.json。',
+        '全部预测/数组绝对路径与SHA见margin_paths.json、all_prediction_files.csv.gz。summary和完整日志精简归档official_metrics_logs.tar.gz；大detailed CSV不进Git，其绝对目录/SHA见official_results.json。逐视频逐阈值bootstrap充分统计公开为bootstrap_sufficient_statistics.json.gz。',
         '本研究是固定官方模型的跨域归因，不证明数量可以无监督估计，也不把ORACLE/同域数量交换宣称新TTA。完整预注册结果交付后停止，不启动方法实验。']
     (PUBLIC/'REPORT.md').write_text('\n'.join(lines)+'\n')
     print(json.dumps(completion,ensure_ascii=False),flush=True)

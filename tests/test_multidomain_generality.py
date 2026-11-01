@@ -71,3 +71,13 @@ def test_evaluation_dispatch_keeps_source_separate_from_method_list(monkeypatch)
         calls.append((target,names,source_model)))
     diag.run_phase('evaluate','KITTI-V2','LaMOT-best')
     assert calls==[('KITTI-V2',None,'LaMOT-best')]
+
+
+def test_exported_video_statistics_reproduce_pooled_hota_exactly():
+    from scripts.report_multidomain_generality import export_hota_stats
+    from scripts.analyze_pf_video_uncertainty import pooled_hota
+    stats=(np.array([[3.125,2.75],[7.25,5.625]]),np.array([[13.,11.],[23.,21.]]))
+    packed=json.loads(json.dumps(export_hota_stats(dict(videos=['v1','v2'],stats=stats))))
+    restored=tuple(np.asarray(packed[k]) for k in ('assA_TP_numerator','TP_FN_FP_denominator'))
+    weights=np.array([[1,1],[2,0],[0,2]])
+    assert np.array_equal(pooled_hota(stats,weights),pooled_hota(restored,weights))
