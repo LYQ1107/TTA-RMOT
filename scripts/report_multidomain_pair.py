@@ -105,7 +105,7 @@ def main():
         write_csv(PUBLIC/'per_category.csv',[{k:new[r['category'],r['configuration']].get(k,'') for k in r} if r['combo']==combo else r for r in old])
     lines=[f'# {combo} {source} → {target} 完整阶段结果','',
         f"预注册判定：{label}；ρ={ratio}；gap={gap:.6f}；Δrank={result['delta_rank']:.6f}。",'',
-        f"完整{len(meta['videos'])}视频/{len(meta['episodes'])}表达。预测先封存后GT，C1/C2不重跑，其余组合仍继续；此表不是六组合最终汇总结论。",'',
+        f"完整{len(meta['videos'])}视频/{len(meta['episodes'])}表达。预测先封存后GT，已完成组合不重跑；本组单独记录，不替代六组合最终汇总。",'',
         'SportsMOT GT采用用户预注册v4：466条统一按原始LaMOT targets×SportsMOT框重建；旧418模板410一致/8不一致，原文件和v3失败均保留。不冒称原模板协议精确复现。' if target=='SportsMOT' else 'GT协议保持原官方模板/过滤规则不变。','',
         table(['配置','HOTA','DetA','AssA','IDF1','IDSW','预测行','Empty行'],[[r[k] for k in
             ('configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows')] for r in rows]),'',
