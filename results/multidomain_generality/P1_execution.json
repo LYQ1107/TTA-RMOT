@@ -1,5 +1,7 @@
 {
-  "status": "P1_FULL_OFFICIAL_FROZEN_INFERENCE_RUNNING",
+  "status": "ALL_FULL_SCORES_AND_GT_FREE_PREDICTIONS_SEALED_AWAIT_SPORTS_GT_GATE",
+  "all_nine_model_target_banks_complete": true,
+  "active_GPU_jobs": 0,
   "P0_public_commit": "30f753ffc3d7bcbe4c72a762e4742a80be45b56e",
   "GT_completion_prereg_public_commit": "0a7477bf35374e8a20e1f2ada9f24fc8927c797b",
   "launcher_directory": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048",
@@ -33,6 +35,24 @@
     }
   ],
   "completed_score_and_prediction_targets": [
+    {
+      "source": "V2-best",
+      "target": "SportsMOT",
+      "manifest": "/data2/user/FlexHook-TTA/results/multidomain_generality/C3_P1_SEALS.json",
+      "manifest_sha256": "7efe427d0b5d0dcaf3d0aede00752f111f1bbb7ce281ca34895da375c908a882"
+    },
+    {
+      "source": "Dance-best",
+      "target": "SportsMOT",
+      "manifest": "/data2/user/FlexHook-TTA/results/multidomain_generality/C4_P1_SEALS.json",
+      "manifest_sha256": "814ab72e68041dc7ff7d36b916be6739317d697d6e3fbe183f8514c004483bc6"
+    },
+    {
+      "source": "LaMOT-best",
+      "target": "Dance",
+      "manifest": "/data2/user/FlexHook-TTA/results/multidomain_generality/C6_P1_SEALS.json",
+      "manifest_sha256": "55e662a89f655e69bad2d7dcae07f5193e2b8a4196c9e80df89aa24bf11a8f9c"
+    },
     {
       "source": "LaMOT-best",
       "target": "KITTI-V2",

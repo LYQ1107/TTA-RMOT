@@ -1,0 +1,73 @@
+{
+  "status": "C4_ALL_SCORE_AND_GT_FREE_PREDICTION_SEALS_COMPLETE_BEFORE_GT",
+  "source": "Dance-best",
+  "target": "SportsMOT",
+  "videos": 45,
+  "episodes": 466,
+  "complete_rows": 2968201,
+  "historical_rows": 2956145,
+  "score_seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/Dance-best/scores_seal.json",
+  "score_seal_sha256": "8f78efff4171279a231be4fea1dbe853ce60f6e8586bc6ff479a8d7b0d6034b4",
+  "complete_margin_sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54",
+  "historical_margin_sha256": "c8c6195216923db8775879bb7a69d0d533c886a19da98b199f019f931dcf03de",
+  "input_score_paths": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/Dance-best/complete.npy",
+      "sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/LaMOT-best/complete.npy",
+      "sha256": "cc78b7b479eb6c51906275a16a736022b93fcd7cbbe07a120f9a2135cc678e3d"
+    }
+  ],
+  "methods": {
+    "NATIVE": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/NATIVE/predictions_seal.json",
+      "seal_sha256": "71994fee29fe16fe1ade83c4bbc64308cc44a74993b5c84d671fbd1d86eeddc1",
+      "episodes": 466,
+      "prediction_rows": 212575
+    },
+    "IN_DOMAIN": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/IN_DOMAIN/predictions_seal.json",
+      "seal_sha256": "0ebe51c4092f0148bb3b10217fbfa1b2aef69b83cf43f64d0c4012aa6ec26669",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "R_SxK_I": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/R_SxK_I/predictions_seal.json",
+      "seal_sha256": "4085b723603ee862456fb8335c8d67ee47aaf8806ce132ebc3dd9dbafc3eeca9",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "R_IxK_S": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/R_IxK_S/predictions_seal.json",
+      "seal_sha256": "b732541dd5f0547b68dac8c2aa0d0b0b66737bd839eba51a9f225fb875a1a3a0",
+      "episodes": 466,
+      "prediction_rows": 212575
+    },
+    "B0_GLOBAL": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/B0_GLOBAL/predictions_seal.json",
+      "seal_sha256": "ef3cc1da2bd1c87512d2a651253aad7dea6c5d3d1feeab47a7d1ab2d1ebd7665",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "HIST_LaMOT-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/HIST_LaMOT-best/predictions_seal.json",
+      "seal_sha256": "1d6a4cc46d37eb8e46cf9b63023652dc07ca920f0e85452d0e087e714f78c263",
+      "episodes": 466,
+      "prediction_rows": 1554322
+    },
+    "HIST_Dance-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/HIST_Dance-best/predictions_seal.json",
+      "seal_sha256": "23630460f670d0ed75a67efdd246ee0d7f2c6c2927c72dc9a62121a129204c10",
+      "episodes": 466,
+      "prediction_rows": 211811
+    }
+  },
+  "indexed_files": 3262,
+  "prediction_index_sha256": "63eb3b500fe1be6f92ade9246a6208552b88a394b72584db914af425a5d84701",
+  "GT_open_attempts": 0,
+  "training_updates": 0,
+  "teacher_calls": 0,
+  "formal_metrics": "NOT_COMPUTED_YET"
+}

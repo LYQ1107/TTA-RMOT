@@ -130,6 +130,9 @@ def main():
             s=json.loads(p.read_text());inference[key+'__'+s['model']]=s['GT_open_attempts']
     decoder={combo:json.loads((base(t,s)/'GT_free_predictions.json').read_text())['GT_open_attempts'] for combo,s,t in PAIRS}
     if any(inference.values()) or any(decoder.values()):raise ValueError('GT isolation violation')
+    gt_completion=json.loads((PUBLIC/'sports_GT_completion.json').read_text())
+    empty_completed=sum(r['rows']==0 for r in gt_completion['files'] if r['provenance'].endswith('_48'))
+    cost['GT_completion_CPU_wall_seconds']=gt_completion['CPU_wall_seconds']
     gt=dict(inference=inference,decoders=decoder,evaluation_and_oracle_separate_processes=True,
         no_target_GT_threshold_fitting=True,no_training=True,no_MLLM=True,
         downloaded_annotation_payloads_not_opened_by_model=True,GT_completion=str(PUBLIC/'sports_GT_completion.json'))
@@ -148,6 +151,8 @@ def main():
             for filename in ('pedestrian_summary.txt',):
                 handle.add(folder/filename,arcname=name+'/'+filename)
             log=folder.parent/'trackeval.log'
+            if not log.is_file() and r.get('reuse_folder'):
+                log=Path(r['reuse_folder'])/'trackeval.log'
             if log.is_file():handle.add(log,arcname=name+'/trackeval.log')
     stats_file=PUBLIC/'bootstrap_sufficient_statistics.json.gz'
     with gzip.open(stats_file,'wt') as handle:
@@ -209,7 +214,7 @@ def main():
         '历史KITTI V2逐位分数相同、42.526复现；完整42.752。Dance历史32.134/254118行、完整32.139/254910行，当前诊断均用完整范围。',
         'KITTI GT_Dets491286与infer.sh注释491222差64，保留已通过历史门槛的原过滤/GT，不为凑注释改GT。',
         '无官方子集数字可核对：未找到Sports子集官方HOTA，论文正文仅LaMOT合并56.77，infer.sh合并56.756，不将其作Sports门槛。',
-        '官方Sports模板只有418份；独立预测封存后，原始LaMOT targets×原SportsMOT官方框逐行全字段/顺序复现418，才接入48缺项；见sports_GT_completion.json。','',
+        f"官方Sports模板只有418份；独立预测封存后，原始LaMOT targets×原SportsMOT官方框逐行全字段/顺序复现{gt_completion['exact_passed']}份，才接入48缺项。48份共{gt_completion['generated_GT_rows']}行，其中0行{empty_completed}份，均按实际原标注选择，不因文件缺失而补空。CPU耗时{gt_completion['CPU_wall_seconds']:.3f}秒/GPU新增0，逐文件SHA见sports_GT_completion.json。",'',
         '完整/历史覆盖对比（新评分或补尾的分数库，均保留原结果）：','',
         table(['目标','模型','历史分数行','完整分数行','补尾分数行','历史HOTA','完整HOTA'],[
             [r[k] for k in ('target','model','historical_score_rows','complete_score_rows','added_tail_score_rows','historical_HOTA','complete_HOTA')] for r in coverage]),'',

@@ -7,6 +7,7 @@ from collections import defaultdict
 import json
 from pathlib import Path
 import sys
+import time
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.multidomain_runtime import RUN,PUBLIC,require_plan
@@ -34,6 +35,7 @@ def select_original_rows(raw_lines,targets):
 
 
 def main():
+    started=time.perf_counter()
     publication=require_plan()
     if publication.get('revision')!='v3 official 418 exact GT-completion gate':
         raise PermissionError('Publish the user-authorized GT-completion amendment first')
@@ -94,6 +96,7 @@ def main():
         annotation_sources=annotation_records,prediction_feedback=False,GT_used_for_model=False,
         training_updates=0,teacher_calls=0,raw_templates_overwritten=False)
     if failures:
+        result.update(CPU_wall_seconds=time.perf_counter()-started,new_GPU_hours=0)
         atomic_json(PUBLIC/'sports_GT_completion.json',result)
         print(json.dumps({k:v for k,v in result.items() if k not in ('checks','raw_box_sources','annotation_sources','failures')}),flush=True)
         raise SystemExit(2)
@@ -106,7 +109,8 @@ def main():
             provenance='OFFICIAL_ORIGINAL_418' if key in templates else 'AUTHORIZED_OFFICIAL_TARGETS_X_ORIGINAL_BOXES_48'))
     result.update(evaluation_root=str(evaluation),files=files,
         generated_GT_rows=sum(r['rows'] for r in files if r['provenance'].endswith('_48')),
-        official_GT_rows=sum(r['rows'] for r in files if r['provenance']=='OFFICIAL_ORIGINAL_418'))
+        official_GT_rows=sum(r['rows'] for r in files if r['provenance']=='OFFICIAL_ORIGINAL_418'),
+        CPU_wall_seconds=time.perf_counter()-started,new_GPU_hours=0)
     atomic_json(PUBLIC/'sports_GT_completion.json',result)
     print(json.dumps({k:v for k,v in result.items() if k not in ('checks','raw_box_sources','annotation_sources','files','failures')}),flush=True)
 
