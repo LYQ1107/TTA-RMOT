@@ -2450,3 +2450,4 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - 新单视频P0五套均真实通过：LaMOT→Sports/KITTI/Dance，V2/Dance→Sports；strict全部key匹配、原loader/forward与缓存/隔离query对齐、GT0、无优化/MLLM。GPU2/0共享准入，峰值约4.3GiB；全量估计0.790154/0.827651/2.119336/0.792368/0.787743 GPU小时，全部<6。完整回执见remaining_p0.json；10项定向CPU回归与compileall通过。
 - Sports原图有._资源叉，建立只含数字JPG的独立软链接视图并保留旧raw链接备份；原图/框/ID/帧号不改，避免Stock TrackEval目录计帧翻倍。独立文本投影只导出language与空对象视频索引，原labels/targets不进模型；vendor代码保持原状。
 - 本阶段先发布资产/P0与新恢复代码，再开C3–C6全量门；原C1/C2与旧预测不重跑、不覆盖。后续GT补齐、ORACLE和TrackEval仍为封存后的独立进程，任何418精确门失败就停止Sports评测。
+- 完整资产/P0已公开30f753ffc3d7bcbe4c72a762e4742a80be45b56e并回读同tree，随后才恢复P1；GPU2/0两槽动态队列，固定FP32、原模型/候选，视频回执恢复。已完成首视频直接复用，不改数值参数。parent只阻塞等子进程、内部流式转发视频完成事件，不做agent级ps/tail/nvidia轮询。

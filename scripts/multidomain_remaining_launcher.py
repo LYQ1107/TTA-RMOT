@@ -7,6 +7,7 @@ from pathlib import Path
 import subprocess
 import sys
 from threading import Event
+from queue import Queue,Empty
 import time
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.multidomain_runtime import RUN,PUBLIC,require_plan,require_remaining_p0
@@ -53,11 +54,13 @@ def main():
     directory=RUN/'remaining_launchers'/str(time.time_ns());directory.mkdir(parents=True)
     atomic_json(directory/'admission.json',dict(phase=args.phase,selected=selected,all_gpus=all_gpus,
         existing_processes=processes,max_GPUs=2,sharing_authorized=True,no_foreign_process_stopped=True))
-    start=time.perf_counter();failed=Event();results=[]
-    def slot(jobs,gpu):
+    start=time.perf_counter();failed=Event();results=[];queue=Queue()
+    for item in pending:queue.put(item)
+    def slot(gpu):
         records=[]
-        for target,model in jobs:
-            if failed.is_set():break
+        while not failed.is_set():
+            try:target,model=queue.get_nowait()
+            except Empty:break
             env=dict(os.environ,CUDA_VISIBLE_DEVICES=gpu['uuid'],MULTIDOMAIN_PHYSICAL_GPU=str(gpu['physical_gpu']),
                 OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',TOKENIZERS_PARALLELISM='false',
                 HF_HUB_OFFLINE='1',PYTHONPATH=f'{ROOT}/compat:{ROOT}:/data2/user/TTA-RMOT-assets/flexhook/pydeps')
@@ -86,7 +89,7 @@ def main():
                 failed.set();print(log.read_text()[-10000:],flush=True);break
         return records
     with ThreadPoolExecutor(max_workers=n) as pool:
-        futures=[pool.submit(slot,pending[i::n],gpu) for i,gpu in enumerate(selected)]
+        futures=[pool.submit(slot,gpu) for gpu in selected]
         for future in as_completed(futures):
             results.extend(future.result())
             atomic_json(directory/'launcher_status.json',dict(status='FAILED' if failed.is_set() else 'RUNNING',
