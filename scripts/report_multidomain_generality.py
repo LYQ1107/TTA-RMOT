@@ -21,8 +21,8 @@ def table(headers,rows):
         ['| '+' | '.join(fmt(x) for x in r)+' |' for r in rows])
 
 
-def detail(target,name,meta):
-    folder=base(target)/name;seal=verify(target,name)
+def detail(target,name,meta,source_model=None):
+    folder=base(target,source_model)/name;seal=verify(target,name,source_model)
     done=json.loads((folder/'official_completion.json').read_text())
     for f,k in [('pedestrian_summary.txt','summary_sha256'),('pedestrian_detailed.csv','detailed_sha256')]:
         if file_sha(folder/'results'/f)!=done[k]:raise ValueError('Official result changed')

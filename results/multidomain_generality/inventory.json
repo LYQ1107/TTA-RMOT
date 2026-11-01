@@ -1,5 +1,5 @@
 {
-  "status": "PARTIAL_C1_C2_COMPLETE_C3_C6_BLOCKED_OFFICIAL_ASSETS",
+  "status": "OFFICIAL_ASSETS_RECOVERED_ALL_REMAINING_P0_SMOKES_PASS",
   "root": "/data2/user/FlexHook-TTA",
   "base_commit": "321ec54899a25f836b18bb127da2578fbb5e32ec",
   "prereg_publication": {
@@ -28,11 +28,11 @@
       "status": "PRESENT_OFFICIAL_FILE"
     },
     "LaMOT-best": {
-      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/SOTA_ckpts/LaMOT-best.pth",
-      "exists": false,
-      "is_symlink": false,
-      "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/SOTA_ckpts/LaMOT-best.pth",
-      "status": "MISSING_STOP"
+      "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/SOTA_ckpts/LaMOT-best.pth",
+      "sha256": "400980a1c92eacaa10206f1f26f2ffff20055b8a3925499afb6c6e7d9ba4213f",
+      "bytes": 995768578,
+      "exists": true,
+      "status": "OFFICIAL_STRICT_LOAD_PASS"
     }
   },
   "targets": {
@@ -706,8 +706,8 @@
       "videos": 45,
       "requested_expressions": 466,
       "actual_seqmap_expressions": 466,
-      "full_candidate_observations": null,
-      "full_candidate_expression_pairs": null,
+      "full_candidate_observations": 295779,
+      "full_candidate_expression_pairs": 2968201,
       "required_paths": [
         {
           "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences",
@@ -1472,7 +1472,419 @@
         }
       ],
       "other_project_artifacts_used": false,
-      "note": "Only original image filenames and seqinfo metadata inspected; no LocateMOT code, checkpoints, predictions or labels used; no links modified."
+      "note": "Only original image filenames and seqinfo metadata inspected; no LocateMOT code, checkpoints, predictions or labels used; no links modified.",
+      "expressions": 466,
+      "official_tracker_coverage": 45,
+      "official_expression_coverage": 466,
+      "GT_template_originals": 418,
+      "GT_template_missing_authorized_reconstruction": 48,
+      "per_video": [
+        {
+          "video": "v_00HRwkvvjtQ_c001",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c001.txt",
+          "sha256": "f8f59bb3ac7aa1ef147cce4a177f6230bc36f905899ba9a2aa3808a2cf4366f9",
+          "full_observations": 11168,
+          "historical_observations": 11149,
+          "tracks": 19,
+          "images": 1162
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c003",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c003.txt",
+          "sha256": "adc73388133d336377e7f5b95135cdc148062f402938d91edcfcb481c0ef417c",
+          "full_observations": 11176,
+          "historical_observations": 11158,
+          "tracks": 18,
+          "images": 1161
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c005",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c005.txt",
+          "sha256": "cf1e3ef6b06d24ca05268de68118862d3d9684ea71081afc850c708e55b0f618",
+          "full_observations": 5345,
+          "historical_observations": 5328,
+          "tracks": 17,
+          "images": 594
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c007",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c007.txt",
+          "sha256": "2c99e54da2c937dec8c4a2bdf5e5273e1c6fd425dfcbafdd974f4898b1b55dc2",
+          "full_observations": 6301,
+          "historical_observations": 6286,
+          "tracks": 15,
+          "images": 707
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c008",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c008.txt",
+          "sha256": "a4bc0af08c4031951574d1ae21d18d12150198a1eb74d6fa36e6826a133c97e5",
+          "full_observations": 9486,
+          "historical_observations": 9472,
+          "tracks": 14,
+          "images": 972
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c011",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_00HRwkvvjtQ_c011.txt",
+          "sha256": "7bba5f14f34ecb1e4ba2cf23de9187c6563b04f5bc0ba1676391e77d1e2b5b70",
+          "full_observations": 6868,
+          "historical_observations": 6851,
+          "tracks": 17,
+          "images": 734
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c004",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c004.txt",
+          "sha256": "e12fdb113c8967eade5f5b7a5c73723863002d90b589ec5ed1b474587dfeb2cc",
+          "full_observations": 6122,
+          "historical_observations": 6106,
+          "tracks": 16,
+          "images": 542
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c005",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c005.txt",
+          "sha256": "687a5481c5d8a44a05fcf89936f2c08dd113c45bfec9d949afa6c8ed4e15c362",
+          "full_observations": 3719,
+          "historical_observations": 3704,
+          "tracks": 15,
+          "images": 349
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c006",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c006.txt",
+          "sha256": "effbe8548a732aab77cc7334562b16ce6df97a4f11bf8e5e60b6f9965760eb7e",
+          "full_observations": 3592,
+          "historical_observations": 3573,
+          "tracks": 19,
+          "images": 346
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c007",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c007.txt",
+          "sha256": "3720e39d7224b2219ff02927a1bf88102e74ae2e4649c07cd81df24f4096c87c",
+          "full_observations": 2914,
+          "historical_observations": 2901,
+          "tracks": 13,
+          "images": 271
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c008",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c008.txt",
+          "sha256": "4b0321f8ab0560ac8af36653e3f8881a34029a1c956bad858ed2b8ba970df164",
+          "full_observations": 2967,
+          "historical_observations": 2953,
+          "tracks": 14,
+          "images": 266
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c010",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_0kUtTtmLaJA_c010.txt",
+          "sha256": "e578282f9745e12ea42b7cd4d69f568a7e502747e9d738e7dcb4f30fa80917f0",
+          "full_observations": 3011,
+          "historical_observations": 2997,
+          "tracks": 14,
+          "images": 270
+        },
+        {
+          "video": "v_2QhNRucNC7E_c017",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_2QhNRucNC7E_c017.txt",
+          "sha256": "5c4137f4d39cc290f2e3a5fad428278ff29a6e554b7cc775ed650e8b43984263",
+          "full_observations": 6750,
+          "historical_observations": 6717,
+          "tracks": 33,
+          "images": 450
+        },
+        {
+          "video": "v_4-EmEtrturE_c009",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_4-EmEtrturE_c009.txt",
+          "sha256": "2cb8f4a9217564eca6e88b3a4ace804d81284d58e8be4417175f9aa07963e951",
+          "full_observations": 2782,
+          "historical_observations": 2770,
+          "tracks": 12,
+          "images": 250
+        },
+        {
+          "video": "v_4r8QL_wglzQ_c001",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_4r8QL_wglzQ_c001.txt",
+          "sha256": "92cfce7659b7d808f6322eb400fae9de8a403eb72694cc2837ba0de33524319e",
+          "full_observations": 8168,
+          "historical_observations": 8148,
+          "tracks": 20,
+          "images": 886
+        },
+        {
+          "video": "v_5ekaksddqrc_c001",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_5ekaksddqrc_c001.txt",
+          "sha256": "779529f11f85df1a1e0467c40b51deeb6cf4513b5cab6387f514bedfd2781d4b",
+          "full_observations": 5057,
+          "historical_observations": 5042,
+          "tracks": 15,
+          "images": 550
+        },
+        {
+          "video": "v_5ekaksddqrc_c002",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_5ekaksddqrc_c002.txt",
+          "sha256": "ff803f725b2de29d31bf74578a2e8efa8294652f935f175b2ab648a98346a6e9",
+          "full_observations": 5710,
+          "historical_observations": 5695,
+          "tracks": 15,
+          "images": 632
+        },
+        {
+          "video": "v_5ekaksddqrc_c003",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_5ekaksddqrc_c003.txt",
+          "sha256": "140dddd25c86f52e9a8ddd7d99410a4da905ec20fe5f95fd06b4cc91e3f86abc",
+          "full_observations": 11699,
+          "historical_observations": 11683,
+          "tracks": 16,
+          "images": 1215
+        },
+        {
+          "video": "v_5ekaksddqrc_c004",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_5ekaksddqrc_c004.txt",
+          "sha256": "4660edb15714c6519be6ca12f3df9fb1e8dd74c2d474094a3211aa61d4681aae",
+          "full_observations": 7725,
+          "historical_observations": 7709,
+          "tracks": 16,
+          "images": 824
+        },
+        {
+          "video": "v_5ekaksddqrc_c005",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_5ekaksddqrc_c005.txt",
+          "sha256": "0c7cfe439e77a388e2d9bd865740efdb44ae80f351627abdf141d334862f81a1",
+          "full_observations": 9284,
+          "historical_observations": 9265,
+          "tracks": 19,
+          "images": 1000
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c002",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_9MHDmAMxO5I_c002.txt",
+          "sha256": "df380e2858a95b0ce40a90f91f9177347bc3ac36f2dca4572f0e0d262b7b2602",
+          "full_observations": 2579,
+          "historical_observations": 2564,
+          "tracks": 15,
+          "images": 239
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c003",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_9MHDmAMxO5I_c003.txt",
+          "sha256": "909b57c63af5e8da07747eaf3714ab08f483b47c4a046ac03db3ddd250a58cc2",
+          "full_observations": 2407,
+          "historical_observations": 2392,
+          "tracks": 15,
+          "images": 226
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c004",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_9MHDmAMxO5I_c004.txt",
+          "sha256": "408f73643f03e627c786647f63e1a268afa291c06ae9973fe6029d81cdcb9f25",
+          "full_observations": 5081,
+          "historical_observations": 5062,
+          "tracks": 19,
+          "images": 455
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c006",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_9MHDmAMxO5I_c006.txt",
+          "sha256": "f36647c187f14f1608ba3c5fa6a5095a2be132313265347a058ad958a63fe854",
+          "full_observations": 2482,
+          "historical_observations": 2462,
+          "tracks": 20,
+          "images": 269
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c009",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_9MHDmAMxO5I_c009.txt",
+          "sha256": "f9ccc48932e39e5e971794e51a418092a2c77d814e31e57742f101a6c48be98a",
+          "full_observations": 5420,
+          "historical_observations": 5399,
+          "tracks": 21,
+          "images": 507
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c008",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_BgwzTUxJaeU_c008.txt",
+          "sha256": "02de3676f495780c75615d3cce3e5ebd83e8c1bb83546d9a13910f048726ef42",
+          "full_observations": 4425,
+          "historical_observations": 4407,
+          "tracks": 18,
+          "images": 500
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c012",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_BgwzTUxJaeU_c012.txt",
+          "sha256": "a3f808ed1233999c599cbef249fe6acae1d5d0da49166ad42670457b2995da6f",
+          "full_observations": 5722,
+          "historical_observations": 5704,
+          "tracks": 18,
+          "images": 620
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c014",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_BgwzTUxJaeU_c014.txt",
+          "sha256": "5110b2e7d4acd697bef782b0cc35551a1c0243c99dc0fb44dba4764edc21f915",
+          "full_observations": 9724,
+          "historical_observations": 9708,
+          "tracks": 16,
+          "images": 1000
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c004",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_G-vNjfx1GGc_c004.txt",
+          "sha256": "51d377e7b4b04661342f7ba1d977e15a3d3a3d1c602a450c19a22040b5da8951",
+          "full_observations": 8197,
+          "historical_observations": 8146,
+          "tracks": 51,
+          "images": 675
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c008",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_G-vNjfx1GGc_c008.txt",
+          "sha256": "a6b328c466a91a983a7150f66d65918607c27204d9acc306c6e7d004688ca916",
+          "full_observations": 4857,
+          "historical_observations": 4823,
+          "tracks": 34,
+          "images": 480
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c600",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_G-vNjfx1GGc_c600.txt",
+          "sha256": "73eceef177225477cc30f191f8bd605ac829aeea25f5282714eaab012cde2807",
+          "full_observations": 5770,
+          "historical_observations": 5728,
+          "tracks": 42,
+          "images": 500
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c601",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_G-vNjfx1GGc_c601.txt",
+          "sha256": "1ef6e6e2a9842d6ace35f1615e6f89cb3b275ee899bde55ec972342c7b58927c",
+          "full_observations": 5804,
+          "historical_observations": 5765,
+          "tracks": 39,
+          "images": 481
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c007",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_ITo3sCnpw_k_c007.txt",
+          "sha256": "f7ad74ae4cc5c33f559c3534f12e8b9a1857a0e137670c15cf0200740233e3ec",
+          "full_observations": 9896,
+          "historical_observations": 9843,
+          "tracks": 53,
+          "images": 701
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c010",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_ITo3sCnpw_k_c010.txt",
+          "sha256": "fbb558f80d4a83b9af3442629301df508acfb0c17af0fc80848f532361cb7364",
+          "full_observations": 7813,
+          "historical_observations": 7772,
+          "tracks": 41,
+          "images": 560
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c011",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_ITo3sCnpw_k_c011.txt",
+          "sha256": "48dcdd88ea355746de733c9db48705680f61b52bfc4a27deb5b9f4faa88e5d32",
+          "full_observations": 10166,
+          "historical_observations": 10126,
+          "tracks": 40,
+          "images": 776
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c012",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_ITo3sCnpw_k_c012.txt",
+          "sha256": "4ea49c1b0f58ac4f0b9587a326867ac0829ad122a926a01876907be70206dca6",
+          "full_observations": 10753,
+          "historical_observations": 10677,
+          "tracks": 76,
+          "images": 850
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c007",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_cC2mHWqMcjk_c007.txt",
+          "sha256": "8ea36e187681f747e7f674d6f9a6208510a54eebf8085baa868081bf2b895c48",
+          "full_observations": 7851,
+          "historical_observations": 7831,
+          "tracks": 20,
+          "images": 681
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c008",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_cC2mHWqMcjk_c008.txt",
+          "sha256": "a4e713651a7265b24b938ffa8fa3dee23cdc4e9ae86c541078dea9e13f6bb45a",
+          "full_observations": 2761,
+          "historical_observations": 2744,
+          "tracks": 17,
+          "images": 259
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c009",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_cC2mHWqMcjk_c009.txt",
+          "sha256": "2ef78af382bcb8c0b159d0d4cd4e86237859368f3ab6b22ec76eed8ad9795b2b",
+          "full_observations": 4855,
+          "historical_observations": 4841,
+          "tracks": 14,
+          "images": 425
+        },
+        {
+          "video": "v_dw7LOz17Omg_c053",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_dw7LOz17Omg_c053.txt",
+          "sha256": "c04413580f5e12a0aca3e81fe229af305e50212e1797d5c7cffbf2b8e59e75a8",
+          "full_observations": 8840,
+          "historical_observations": 8795,
+          "tracks": 45,
+          "images": 550
+        },
+        {
+          "video": "v_dw7LOz17Omg_c067",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_dw7LOz17Omg_c067.txt",
+          "sha256": "a8e28ea59971b7e00bfee5937fb94c40b5d9e6d57fdbabb88b66a430249b16d4",
+          "full_observations": 7087,
+          "historical_observations": 7054,
+          "tracks": 33,
+          "images": 450
+        },
+        {
+          "video": "v_i2_L4qquVg0_c006",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_i2_L4qquVg0_c006.txt",
+          "sha256": "fead6c9400594271d05da3c2b4ca33a09f0b65feea8bd4fd17f5023fcf607628",
+          "full_observations": 11821,
+          "historical_observations": 11769,
+          "tracks": 52,
+          "images": 888
+        },
+        {
+          "video": "v_i2_L4qquVg0_c007",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_i2_L4qquVg0_c007.txt",
+          "sha256": "c743d0a5a9b925143b337a19f0cc4468e25be8594c4a756c494c4877fa3e8af3",
+          "full_observations": 5172,
+          "historical_observations": 5146,
+          "tracks": 26,
+          "images": 451
+        },
+        {
+          "video": "v_i2_L4qquVg0_c009",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_i2_L4qquVg0_c009.txt",
+          "sha256": "28e2a42fff730868d27e6c7951e246a2f50657a94b37a71a8e28878fc5495ee7",
+          "full_observations": 8065,
+          "historical_observations": 8033,
+          "tracks": 32,
+          "images": 488
+        },
+        {
+          "video": "v_i2_L4qquVg0_c010",
+          "path": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/tracker_outputs/McByte-SportsMOT/v_i2_L4qquVg0_c010.txt",
+          "sha256": "553ec18dc40efc2208694c57d932050e4e5286c2799f286010c5e40af5565dda",
+          "full_observations": 8387,
+          "historical_observations": 8321,
+          "tracks": 66,
+          "images": 758
+        }
+      ]
     }
   },
   "missing_assets": [
@@ -1780,5 +2192,14 @@
   ],
   "GT_open_attempts_scope": "models and GT-free generators only; independent post-seal evaluation/oracle is allowed",
   "initial_asset_name_search": "retained original P0 snapshot; public download attempts are separately logged",
-  "links_modified_scope": "SportsMOT input asset layout only; separate task-local KITTI image link and post-seal evaluation GT links are not counted here"
+  "links_modified_scope": "SportsMOT input asset layout only; separate task-local KITTI image link and post-seal evaluation GT links are not counted here",
+  "remaining_P0": "/data2/user/FlexHook-TTA/results/multidomain_generality/remaining_p0.json",
+  "pending_combinations": [
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "all_official_assets_downloaded": true,
+  "source_self_checks_unchanged": true
 }

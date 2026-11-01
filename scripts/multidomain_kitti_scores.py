@@ -16,12 +16,14 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from scripts.multidomain_runtime import *
 
 
-def config_for(checkpoint,folder):
+def config_for(checkpoint,folder,target='KITTI-V2'):
     os.chdir(VENDOR);sys.path.insert(0,str(VENDOR));os.environ.setdefault('LOCAL_RANK','0')
     from config import get_config
-    cli=Namespace(cfg=str(VENDOR/'configs/infer/kitti2.yaml'),opts=['data_root',str(RUN/'runtime/kitti')],
-        batch_size=8,val_batch_size=8,visual='rope-swin-tiny',text='roberta',dataset='kitti-2',
-        freeze_text=False,freeze_visual=False,track_root=str(TRACKS),data_path=None,zip=False,cache_mode='part',
+    dance=target=='Dance';runtime=RUN/'runtime'/('dance' if dance else 'kitti')
+    tracks=Path('/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs') if dance else TRACKS
+    cli=Namespace(cfg=str(VENDOR/'configs/infer'/('dance.yaml' if dance else 'kitti2.yaml')),opts=['data_root',str(runtime)],
+        batch_size=8,val_batch_size=8,visual='rope-swin-tiny',text='roberta',dataset='dance' if dance else 'kitti-2',
+        freeze_text=False,freeze_visual=False,track_root=str(tracks),data_path=None,zip=False,cache_mode='part',
         pretrained=None,resume=str(checkpoint),accumulation_steps=None,use_checkpoint=False,disable_amp=True,
         amp_opt_level=None,output=str(folder),tag=None,eval=True,throughput=False,
         fused_window_process=False,fused_layernorm=False,optim=None,lre=None)
@@ -30,26 +32,29 @@ def config_for(checkpoint,folder):
     return cfg
 
 
-def worker(name,smoke):
+def worker(name,smoke,target='KITTI-V2'):
     import compat.sitecustomize
     import torch
     from flex_tta.runtime.dance_episode import DanceEpisode,Observation
     from flex_tta.runtime.frozen_features import FrozenFeatureCache
     from flex_uda.model.flexhook_uda import prepared_inputs
     from flex_uda.evaluation import query_margins
-    require_plan();attempts=guard();started=time.perf_counter()
+    target_key='dance' if target=='Dance' else 'kitti'
+    require_plan();attempts=guard([RUN/'runtime'/target_key]);started=time.perf_counter()
     if not smoke:
         gate=RUN/'p0_resume_publication.json'
         if not gate.exists() or not json.loads(gate.read_text())['remote_verified']:
             raise PermissionError('P0_SMOKE_AWAITING_PUBLICATION: preserve completed smoke video; publish inventory/costs before P1')
-    meta=json.loads((RUN/'kitti/metadata.json').read_text());folder=RUN/'kitti'/name
+        if name=='LaMOT-best':require_remaining_p0()
+    meta=json.loads((RUN/target_key/'metadata.json').read_text());folder=RUN/target_key/name
     folder.mkdir(parents=True,exist_ok=True)
-    checkpoint,expected=CHECKPOINTS[name]
+    checkpoint,expected=checkpoint_spec(name)
+    source_tail_only=name=='V2-best' and target=='KITTI-V2'
     if file_sha(checkpoint)!=expected:raise ValueError('Official checkpoint SHA changed')
     device=torch.device('cuda:0')
     torch.cuda.set_per_process_memory_fraction((16384<<20)/torch.cuda.get_device_properties(device).total_memory,device)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
-    cfg=config_for(checkpoint,folder/'model_log')
+    cfg=config_for(checkpoint,folder/'model_log',target)
     from models import build_model
     from data.mydataloader import RMOT_Dataset
     model=build_model(cfg).to(device)
@@ -86,7 +91,7 @@ def worker(name,smoke):
     scores=np.lib.format.open_memmap(path,mode='w+' if fresh else 'r+',dtype='float64',shape=(meta['candidate_query_rows'],))
     if fresh:
         scores[:]=np.nan
-        if name=='V2-best':
+        if source_tail_only:
             old=np.load(OLD_SOURCE/'FROZEN.npy',mmap_mode='r')
             hist=np.load(RUN/'kitti/historical.npy');positions=np.load(RUN/'kitti/historical_indices.npy')
             scores[hist]=old[positions]
@@ -111,12 +116,12 @@ def worker(name,smoke):
         queries=[q for q in meta['episodes'] if q['video_id']==video];texts=[cache._text(q['query_text']) for q in queries]
         obs=bank['observations'];byframe=defaultdict(list)
         for j,(t,i) in enumerate(obs):
-            if name!='V2-best' or smoke or bank['historical_positions'][j]<0:byframe[t].append((j,i))
+            if not source_tail_only or smoke or bank['historical_positions'][j]<0:byframe[t].append((j,i))
         frames=sorted(byframe);checks={frames[0],frames[len(frames)//2],frames[-1]}
         compute_begin=time.perf_counter();historical_errors=[];computed_here=0;resumed_complete_frames=0
         for t in frames:
             idx=byframe[t];allowed={i for j,i in idx};candidates=list(episode.current_candidates(t,allowed));position={i:j for j,i in idx}
-            if name!='V2-best' and not smoke:
+            if not source_tail_only and not smoke:
                 positions=np.asarray([j for j,i in idx])
                 if all(np.isfinite(scores[q['start']+positions]).all() for q in queries):
                     resumed_complete_frames+=1;continue
@@ -152,7 +157,7 @@ def worker(name,smoke):
                         for j,i in enumerate(prepared['track_ids']):
                             for k,q in enumerate(queries[qa:qa+8]):
                                 dest=q['start']+position[i]
-                                if name=='V2-best' and bank['historical_positions'][position[i]]>=0:
+                                if source_tail_only and bank['historical_positions'][position[i]]>=0:
                                     historical_errors.append(abs(float(cpu[j,k])-scores[dest]))
                                 else:scores[dest]=float(cpu[j,k])
                         margin_count+=int(value.numel())
@@ -162,7 +167,7 @@ def worker(name,smoke):
         torch.cuda.synchronize();compute=time.perf_counter()-compute_begin;scores.flush()
         record=dict(video=video,model=name,full_candidate_query_rows=len(obs)*len(queries),
             newly_computed_margin_count=computed_here,resumed_complete_frames_skipped=resumed_complete_frames,
-            historical_values_written=0 if name=='V2-best' else None,
+            historical_values_written=0 if source_tail_only else None,
             historical_recompute_max_abs_error=max(historical_errors,default=None),
             compute_seconds=compute,wall_seconds=time.perf_counter()-begin,cache=cache.stats,
             complete_values_finite=all(np.isfinite(scores[q['start']:q['stop']]).all() for q in queries))
@@ -174,9 +179,12 @@ def worker(name,smoke):
         raise RuntimeError('Weights changed or GT opened')
     result=dict(status='SMOKE_PASS' if smoke else 'COMPLETE_SCORES_SEALED',model=name,
         checkpoint=str(checkpoint),checkpoint_sha256=expected,strict_load=str(loaded),
-        target_config=str(VENDOR/'configs/infer/kitti2.yaml'),target_config_sha256=file_sha(VENDOR/'configs/infer/kitti2.yaml'),
+        target_config=str(VENDOR/'configs/infer'/('dance.yaml' if target=='Dance' else 'kitti2.yaml')),
+        target_config_sha256=file_sha(VENDOR/'configs/infer'/('dance.yaml' if target=='Dance' else 'kitti2.yaml')),
+        target=target,
         official_cli_overrides=dict(visual='rope-swin-tiny',text='roberta'),
-        category_tokens='No added class token; vendor KITTI parser retains car/ped track ID merge; all expressions scored on all candidates',
+        category_tokens=('No added class token; vendor KITTI parser retains car/ped track ID merge; all expressions scored on all candidates'
+            if target=='KITTI-V2' else 'Stock Dance class=0; original 17 sentences; no category token added'),
         precision='FP32',tf32=False,optimizer_updates=0,teacher_calls=0,GT_open_attempts=len(attempts),
         physical_gpu=os.environ.get('MULTIDOMAIN_PHYSICAL_GPU'),GPU_UUID=os.environ.get('CUDA_VISIBLE_DEVICES'),
         wall_seconds=time.perf_counter()-started,peak_allocated_bytes=torch.cuda.max_memory_allocated(),
@@ -184,14 +192,14 @@ def worker(name,smoke):
     if smoke:
         estimate=smoke_seconds/max(smoke_rows,1)*meta['candidate_query_rows']/3600
         result.update(estimated_full_scoring_GPU_hours=estimate,smoke_video_complete=True,
-            cost_gate_pass=estimate<=6,remaining_source_tails=meta['missing_tail_candidate_query_rows'] if name=='V2-best' else None)
+            cost_gate_pass=estimate<=6,remaining_source_tails=meta['missing_tail_candidate_query_rows'] if source_tail_only else None)
         atomic_json(folder/'smoke_receipt.json',result)
         if estimate>6:raise RuntimeError('STOP: >6 GPU-hour estimate; await user decision')
     else:
         if not np.isfinite(scores).all():raise ValueError('Full array incomplete')
-        hist=np.load(RUN/'kitti/historical.npy');history=scores[hist]
+        hist=np.load(RUN/target_key/'historical.npy');history=scores[hist]
         np.save(folder/'historical.npy',history)
-        if name=='V2-best':
+        if source_tail_only:
             old=np.load(OLD_SOURCE/'FROZEN.npy',mmap_mode='r');idx=np.load(RUN/'kitti/historical_indices.npy')
             if not np.array_equal(history,old[idx]):raise ValueError('STOP: historical source scores not bit-exact')
             result['historical_score_bit_exact']=True

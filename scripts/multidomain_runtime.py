@@ -27,6 +27,20 @@ def require_plan():
     return p
 
 
+def checkpoint_spec(name):
+    if name in CHECKPOINTS:return CHECKPOINTS[name]
+    if name!='LaMOT-best':raise KeyError(name)
+    record=json.loads((PUBLIC/'sports_assets.json').read_text())['checkpoint']
+    return Path(record['path']),record['sha256']
+
+
+def require_remaining_p0():
+    p=json.loads((RUN/'remaining_p0_publication.json').read_text())
+    if not p['remote_verified'] or file_sha(PUBLIC/'remaining_p0.json')!=p['p0_sha256']:
+        raise PermissionError('Publish and verify the complete remaining P0 before P1')
+    return p
+
+
 def guard(extra_runtime_roots=()):
     attempts=[]
     runtime=[(RUN/'runtime/kitti/expression').resolve(),

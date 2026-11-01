@@ -2,7 +2,7 @@
 
 ## 1. 判定汇总
 
-状态：C1、C2独立授权部分均已完成；服务器原生网盘扫码登录已成功，已下载45份官方McByte、245份表达标注和418份GT模板，权重及其余标注通过官方打包接口继续下载。发现官方GT模板缺少seqmap中的48条，正在单独核查；不将缺失GT冒充空目标。C3–C6仍未通过全部资产与P0门槛。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**
+状态：C1、C2已完成并保持不变。官方资产已全部下载核验：933份payload、1144635019字节；LaMOT权重strict通过，剩余5套单视频P0全部通过，估计0.79–2.12 GPU小时/组合、均低于6小时门槛。详见[P0_REMAINING.md](P0_REMAINING.md)。本阶段先发布P0再恢复全量C3–C6；官方GT原418份之外的48项按已发布v3授权，在完整预测封存后独立逐行核对补齐，不把缺失GT当空目标。**完整六组合仍未完成，不计算全局2/3判定，不提前宣布科研结论。**
 
 | 源 / 目标 | KITTI-V2 | Dance | SportsMOT |
 |---|---|---|---|
@@ -25,9 +25,13 @@
 
 ## 2. P0、下载、冒烟和自检
 
-2026-11-01 当前下载恢复：用户扫描服务器独立Firefox原生网盘界面的官方二维码后，浏览器实际进入`/disk/`、保存私有BDUSS/STOKEN。真实小文件smoke返回HTTP200/210064字节；515项逐文件任务保留290份有效资产（45McByte+245表达），后段225项API失败原样记录。另用官方batch接口成功下载GT模板ZIP，解出418份/39154648字节；包内URL编码路径的兼容问题已定向修复并测试。至本次阶段快照，708份官方payload共56881467字节，逐文件SHA已核对；完整权重/辅助JSON/表达包继续下载。详见[QR_LOGIN_STATUS.md](QR_LOGIN_STATUS.md)、[authenticated_downloads.json](authenticated_downloads.json)和[downloads.json](downloads.json)。
+2026-11-01 当前下载恢复：用户扫描服务器独立Firefox原生网盘界面的官方二维码后，浏览器实际进入`/disk/`、保存私有BDUSS/STOKEN。真实小文件smoke返回HTTP200/210064字节；515项逐文件任务保留290份有效资产，后段225项API失败原样记录。随后官方batch接口下载权重、GT模板、全部表达和辅助JSON；长权重传输后旧签名过期112，按每批刷新签名补齐，不重下载权重。最终933份官方payload共1144635019字节，全部实际SHA核对通过；不是继续停在匿名403。详见[QR_LOGIN_STATUS.md](QR_LOGIN_STATUS.md)、[authenticated_downloads.json](authenticated_downloads.json)和[downloads.json](downloads.json)。
 
-GT资产差异单列：模板包的418条全部属于466条seqmap，缺48条、无额外条目，覆盖视频数仍为45。网盘抽查`v_0kUtTtmLaJA_c004`只有10个表达目录，缺失长句目录请求errno4，证明至少该例不是本地解压漏文件。完整清单见[sports_template_inventory.json](sports_template_inventory.json)。仅检查路径/包清单，没有打开GT内容、合成空GT、删序列或开展新官方评测。
+LaMOT-best实际SHA256=`400980a1c92eacaa10206f1f26f2ffff20055b8a3925499afb6c6e7d9ba4213f`；45份McByte共295779观测；466表达与GitHub原始文件逐字节相同、seqmap无缺项；2968201个候选–表达对，26970帧有效原图。Sports只建数字JPG链接视图，原始macOS资源分叉不进入官方目录计帧，不改图像或vendor代码。
+
+LaMOT→Sports/KITTI/Dance及V2/Dance→Sports五套P0已通过strict、原native loader/forward及隔离query对齐，GT打开0；实机GPU2/0，峰值约4.3GiB。对应全量估计0.790154/0.827651/2.119336/0.792368/0.787743 GPU小时，见remaining_p0.json。只发布P0，不把其当完整HOTA结果。
+
+GT资产差异单列：模板包的418条全部属于466条seqmap，缺48条、无额外条目，覆盖视频数仍为45。网盘抽查`v_0kUtTtmLaJA_c004`只有10个表达目录，缺失长句目录请求errno4，证明至少该例不是本地解压漏文件。完整清单见[sports_template_inventory.json](sports_template_inventory.json)。用户已授权补建，v3预注册先发布0a7477bf。此时仅检查包/路径，尚未打开GT值；必须等完整预测封存，再从官方原始标注和原始框逐行复现418，全部通过才接入48。任何失败停Sports评测，不删序列、不改门槛。
 
 下述匿名下载错误和手工清单是此前历史，已经不再代表当前服务器未登录；C1/C2科研结果和原有封存保持不变。
 

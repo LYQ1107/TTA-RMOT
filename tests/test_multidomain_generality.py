@@ -3,6 +3,7 @@ import json
 import subprocess
 import sys
 import numpy as np
+import pytest
 from scripts.multidomain_runtime import RUN,OLD_SOURCE
 from scripts.diag_attrib_v2_common import rank_within_groups
 from scripts.diag_pf_countmatched import topk_ids
@@ -45,3 +46,19 @@ else: raise AssertionError('Original Sports GT was opened')
 """
     result=subprocess.run([sys.executable,'-c',program],capture_output=True,text=True)
     assert result.returncode==0,result.stderr
+
+
+def test_cross_source_outputs_cannot_overwrite_completed_pairs():
+    from scripts.multidomain_diagnostics import base
+    assert base('KITTI-V2','Dance-best')==base('KITTI-V2')
+    assert base('Dance','V2-best')==base('Dance')
+    assert base('KITTI-V2','LaMOT-best')!=base('KITTI-V2')
+    assert base('SportsMOT','V2-best')!=base('SportsMOT','Dance-best')
+
+
+def test_official_gt_completion_preserves_source_rows_and_requires_ids():
+    from scripts.multidomain_complete_sports_gt import select_original_rows
+    raw=['1,8,11.25,12,13,14,1,1,0.5','1,2,21,22,23,24,1,1,1','2,8,31,32,33,34,1,1,1']
+    assert select_original_rows(raw,{'1':[8,2],'2':[]})==raw[:2]
+    with pytest.raises(ValueError,match='absent'):
+        select_original_rows(raw,{'1':[999]})

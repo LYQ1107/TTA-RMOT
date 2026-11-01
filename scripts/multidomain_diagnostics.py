@@ -19,10 +19,22 @@ V2=ROOT/'results/runs/diag_attrib_20261031_v2'
 DANCE=Path('/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance')
 DANCE_TRACKS=Path('/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs')
 CONFIGS=('NATIVE','IN_DOMAIN','R_SxK_I','R_IxK_S','R_SxK_ORACLE','R_IxK_ORACLE','B0_GLOBAL')
+DEFAULT_SOURCE={'Dance':'V2-best','KITTI-V2':'Dance-best','SportsMOT':'V2-best'}
+IN_DOMAIN_MODEL={'Dance':'Dance-best','KITTI-V2':'V2-best','SportsMOT':'LaMOT-best'}
 
 
-def inputs(target):
+def target_root(target):
+    if target=='Dance':return DANCE
+    if target=='KITTI-V2':return SOURCE
+    gate=json.loads((PUBLIC/'sports_GT_completion.json').read_text())
+    if gate['status']!='PASS_418_EXACT_48_COMPLETED':
+        raise PermissionError('Sports GT completion has not passed the preregistered gate')
+    return Path(gate['evaluation_root'])
+
+
+def inputs(target,source_model=None):
     require_plan()
+    model=source_model or DEFAULT_SOURCE[target]
     if target=='Dance':
         from flex_tta.dance_io import load_tracker_lines
         meta=json.loads((V2/'score_bank/bank.json').read_text());meta['group_count']=meta['query_frame_groups']
@@ -36,27 +48,36 @@ def inputs(target):
         for p in paths:
             if file_sha(p)!=meta['cache_files_sha256'][p.name]:raise ValueError('Changed sealed Dance scores')
         groups=np.load(V2/'score_bank/groups.npy',mmap_mode='r')
+        if model!='V2-best':
+            seal=json.loads((RUN/'dance'/model/'scores_seal.json').read_text())
+            p=Path(seal['complete_path'])
+            if seal['GT_open_attempts'] or file_sha(p)!=seal['complete_sha256']:raise ValueError('Unsealed Dance source scores')
+            paths[0]=p
     else:
-        meta=json.loads((RUN/'kitti/metadata.json').read_text());paths=[]
-        groups=np.load(RUN/'kitti/groups.npy',mmap_mode='r')
-        for m in ('Dance-best','V2-best'):
-            seal=json.loads((RUN/'kitti'/m/'scores_seal.json').read_text())
+        key='sports' if target=='SportsMOT' else 'kitti'
+        meta=json.loads((RUN/key/'metadata.json').read_text());paths=[]
+        groups=np.load(RUN/key/'groups.npy',mmap_mode='r')
+        for m in (model,IN_DOMAIN_MODEL[target]):
+            seal=json.loads((RUN/key/m/'scores_seal.json').read_text())
             p=Path(seal['complete_path'])
             if seal['GT_open_attempts'] or file_sha(p)!=seal['complete_sha256']:raise ValueError('Unsealed KITTI scores')
             paths.append(p)
         for q in meta['episodes']:
-            obs=np.asarray(meta['videos'][q['video_id']]['observations']);frame=obs[:,0]+1
+            obs=np.asarray(meta['videos'][q['video_id']]['observations']);frame=obs[:,0]+(1 if target=='KITTI-V2' else 0)
             unique,start=np.unique(frame,return_index=True);stop=np.r_[start[1:],len(frame)]
             q['groups']=[[int(t),q['start']+int(a),q['start']+int(b),int(groups[q['start']+a])] for t,a,b in zip(unique,start,stop)]
     arrays=[np.load(p,mmap_mode='r') for p in paths]
     return meta,arrays,groups,paths
 
 
-def base(target):return RUN/'diagnostics'/target
+def base(target,source_model=None):
+    original=RUN/'diagnostics'/target
+    if target!='SportsMOT' and (source_model is None or source_model==DEFAULT_SOURCE[target]):return original
+    return original/(source_model or DEFAULT_SOURCE[target])
 
 
-def seal_prediction(target,name,mask,meta,*,oracle=False):
-    folder=base(target)/name;episodes=[]
+def seal_prediction(target,name,mask,meta,*,oracle=False,source_model=None):
+    folder=base(target,source_model)/name;episodes=[]
     for q in meta['episodes']:
         v,e=q['video_id'],q['expression_id'];bank=meta['videos'][v]
         lines=[bank['lines'][k] for k in np.flatnonzero(mask[q['start']:q['stop']])]
@@ -70,29 +91,32 @@ def seal_prediction(target,name,mask,meta,*,oracle=False):
     return record
 
 
-def verify(target,name):
-    folder=base(target)/name;s=json.loads((folder/'predictions_seal.json').read_text())
-    if s['episode_count']!=(425 if target=='Dance' else 862):raise ValueError('Incomplete episode coverage')
+def verify(target,name,source_model=None):
+    folder=base(target,source_model)/name;s=json.loads((folder/'predictions_seal.json').read_text())
+    if s['episode_count']!={'Dance':425,'KITTI-V2':862,'SportsMOT':466}[target]:raise ValueError('Incomplete episode coverage')
     for e in s['episodes']:
         if file_sha(e['prediction_path'])!=e['prediction_sha256']:raise ValueError('Prediction changed after seal')
     return s
 
 
-def generate(target):
-    attempts=guard();started=time.perf_counter();meta,(source,inside),groups,paths=inputs(target);g=meta['group_count']
+def generate(target,source_model=None):
+    attempts=guard();started=time.perf_counter();meta,(source,inside),groups,paths=inputs(target,source_model);g=meta['group_count']
+    model=source_model or DEFAULT_SOURCE[target]
     rs=rank_within_groups(source,groups,g);ri=rank_within_groups(inside,groups,g)
     ks=np.bincount(groups,weights=source>0,minlength=g).astype(np.int32)
     ki=np.bincount(groups,weights=inside>0,minlength=g).astype(np.int32)
     masks=dict(NATIVE=source>0,IN_DOMAIN=inside>0,R_SxK_I=rs<ki[groups],R_IxK_S=ri<ks[groups],
         B0_GLOBAL=top_budget(source,int(ki.sum()))[0])
-    for name,mask in masks.items():seal_prediction(target,name,mask,meta)
+    for name,mask in masks.items():seal_prediction(target,name,mask,meta,source_model=source_model)
     extra=[]
+    if target in ('KITTI-V2','SportsMOT') or model=='LaMOT-best':
+        key={'KITTI-V2':'kitti','SportsMOT':'sports','Dance':'dance'}[target]
+        hist=np.load(RUN/key/'historical.npy')
+        for m,a in [(IN_DOMAIN_MODEL[target],inside),(model,source)]:
+            name='HIST_'+m;seal_prediction(target,name,(a>0)&hist,meta,source_model=source_model);extra.append(name)
     if target=='KITTI-V2':
-        hist=np.load(RUN/'kitti/historical.npy')
-        for m,a in [('V2-best',inside),('Dance-best',source)]:
-            name='HIST_'+m;seal_prediction(target,name,(a>0)&hist,meta);extra.append(name)
         old=ROOT/'results/runs/xquery_decode_20261101/source_boundary/evaluation/FROZEN__NATIVE'
-        sealed=verify(target,'HIST_V2-best')
+        sealed=verify(target,'HIST_V2-best',source_model)
         for e in sealed['episodes']:
             p=old/'results'/e['video']/e['expression']/'predict.txt'
             if prediction(p)!=prediction(e['prediction_path']):raise ValueError('STOP: historical KITTI native differs')
@@ -101,17 +125,17 @@ def generate(target):
     record=dict(status='ALL_GT_FREE_PREDICTIONS_SEALED',target=target,methods=list(masks),historical_methods=extra,
         score_paths=[dict(path=str(p),sha256=file_sha(p)) for p in paths],GT_open_attempts=0,
         CPU_wall_seconds=time.perf_counter()-started)
-    atomic_json(base(target)/'GT_free_predictions.json',record)
+    atomic_json(base(target,source_model)/'GT_free_predictions.json',record)
     print(json.dumps(dict(event='MULTIDOMAIN_GT_FREE_SEALED',target=target,methods=list(masks),GT_open_attempts=0)),flush=True)
 
 
-def oracle(target):
+def oracle(target,source_model=None):
     # No caller from inference imports this function or its GT readers.
-    record=json.loads((base(target)/'GT_free_predictions.json').read_text())
+    record=json.loads((base(target,source_model)/'GT_free_predictions.json').read_text())
     if record['GT_open_attempts']:raise ValueError('Decoder GT isolation failed')
-    for name in record['methods']:verify(target,name)
+    for name in record['methods']:verify(target,name,source_model)
     from scripts.analyze_pf_full_offline import load_eval_gt,overlaps,matched_gt
-    meta,(source,inside),groups,_=inputs(target);root=DANCE if target=='Dance' else SOURCE
+    meta,(source,inside),groups,_=inputs(target,source_model);root=target_root(target)
     g=meta['group_count'];count=np.zeros(g,dtype=np.int32);labels=np.zeros(len(groups),dtype=bool)
     all_gt=[];trackrecords=[];fractions=[];retrieval={m:dict(valid_frames=0,recall_at_1_sum=0.,hit_at_1_sum=0,
         GT_valid_frames=0,GT_recall_at_1_sum=0.) for m in ('source','in_domain')}
@@ -145,7 +169,7 @@ def oracle(target):
         trackrecords.extend(dict(video=v,track_id=int(i),positive_queries=int(n)) for i,n in zip(unique,positives))
         print(json.dumps(dict(event='MULTIDOMAIN_ORACLE_VIDEO',target=target,video=v)),flush=True)
     for name,array in [('R_SxK_ORACLE',source),('R_IxK_ORACLE',inside)]:
-        rank=rank_within_groups(array,groups,g);seal_prediction(target,name,rank<count[groups],meta,oracle=True)
+        rank=rank_within_groups(array,groups,g);seal_prediction(target,name,rank<count[groups],meta,oracle=True,source_model=source_model)
     for r in retrieval.values():
         r.update(R_at_1=r['recall_at_1_sum']/max(r['valid_frames'],1),Hit_at_1=r['hit_at_1_sum']/max(r['valid_frames'],1),
             GT_R_at_1=r['GT_recall_at_1_sum']/max(r['GT_valid_frames'],1))
@@ -159,33 +183,38 @@ def oracle(target):
         GT_feedback_to_inference=False,teacher_calls=0,optimizer_updates=0)
     if target=='Dance' and (result['official_GT_detections']!=212541 or result['structure']['query_present_episodes']!=40):
         raise ValueError('STOP: Dance official protocol alignment differs')
-    atomic_json(base(target)/'oracle.json',result)
+    atomic_json(base(target,source_model)/'oracle.json',result)
 
 
-def reusable(target,name):
-    if target=='Dance':
+def reusable(target,name,source_model=None):
+    model=source_model or DEFAULT_SOURCE[target]
+    if target=='Dance' and model=='V2-best':
         mapping=dict(NATIVE='M_FROZEN__FROZEN',IN_DOMAIN='OFFICIAL_DANCE_COMPLETE',R_SxK_I='M_FROZEN__OFFICIAL_DANCE_COMPLETE',
             R_IxK_S='M_OFFICIAL_DANCE_COMPLETE__FROZEN',R_SxK_ORACLE='M_FROZEN__ORACLE_GT',R_IxK_ORACLE='M_OFFICIAL_DANCE_COMPLETE__ORACLE_GT',B0_GLOBAL='B0_NATIVE_OFFICIAL_COMPLETE_COUNT')
         return V2/'evaluation'/mapping[name]
-    if name=='HIST_V2-best':return OLD_SOURCE.parent/'source_boundary/evaluation/FROZEN__NATIVE'
-    if name=='IN_DOMAIN' and (base(target)/'V2_COMPLETE_REFERENCE/official_completion.json').exists():
+    if target=='Dance' and name=='IN_DOMAIN':return V2/'evaluation/OFFICIAL_DANCE_COMPLETE'
+    if target=='KITTI-V2' and name=='HIST_V2-best':return OLD_SOURCE.parent/'source_boundary/evaluation/FROZEN__NATIVE'
+    if target=='SportsMOT' and name in ('IN_DOMAIN','R_IxK_ORACLE','HIST_LaMOT-best') and model!='V2-best':
+        previous=base(target,'V2-best')/name
+        if (previous/'official_completion.json').exists():return previous
+    if target=='KITTI-V2' and name=='IN_DOMAIN' and (base(target)/'V2_COMPLETE_REFERENCE/official_completion.json').exists():
         return base(target)/'V2_COMPLETE_REFERENCE'
     return None
 
 
-def evaluate(target,names=None):
+def evaluate(target,names=None,source_model=None):
     from scripts.pf_diag_common import official_metrics
     reference_only=names is not None
     if names is None:
-        oracle_record=json.loads((base(target)/'oracle.json').read_text())
-        prep=json.loads((base(target)/'GT_free_predictions.json').read_text());names=[*CONFIGS,*prep['historical_methods']]
+        oracle_record=json.loads((base(target,source_model)/'oracle.json').read_text())
+        prep=json.loads((base(target,source_model)/'GT_free_predictions.json').read_text());names=[*CONFIGS,*prep['historical_methods']]
     def job(name):
-        seal=verify(target,name);folder=base(target)/name;done=folder/'official_completion.json'
+        seal=verify(target,name,source_model);folder=base(target,source_model)/name;done=folder/'official_completion.json'
         if done.exists():
             r=json.loads(done.read_text())
             if file_sha(folder/'results/pedestrian_detailed.csv')!=r['detailed_sha256']:raise ValueError('Changed evaluated CSV')
             return r
-        old=reusable(target,name);begin=time.perf_counter();reused=False
+        old=reusable(target,name,source_model);begin=time.perf_counter();reused=False
         if old is not None:
             olddone=json.loads((old/'official_completion.json').read_text())
             for f,k in [('pedestrian_summary.txt','summary_sha256'),('pedestrian_detailed.csv','detailed_sha256')]:
@@ -196,7 +225,7 @@ def evaluate(target,names=None):
             for f in ('pedestrian_summary.txt','pedestrian_detailed.csv'):shutil.copy2(old/'results'/f,folder/'results'/f)
             reused=True;code=0
         else:
-            root=DANCE if target=='Dance' else SOURCE;seq='dance' if target=='Dance' else 'kitti-2'
+            root=target_root(target);seq={'Dance':'dance','KITTI-V2':'kitti-2','SportsMOT':'SportsMOT'}[target]
             for e in seal['episodes']:
                 link=folder/'results'/e['video']/e['expression']/'gt.txt'
                 if not link.exists():link.symlink_to(root/'gt_template'/e['video']/e['expression']/'gt.txt')
@@ -216,7 +245,7 @@ def evaluate(target,names=None):
         atomic_json(done,r);print(json.dumps(dict(event='MULTIDOMAIN_OFFICIAL_COMPLETE',**r)),flush=True);return r
     with ThreadPoolExecutor(max_workers=2) as pool:
         results=[f.result() for f in as_completed([pool.submit(job,m) for m in names])]
-    atomic_json(base(target)/('reference_completion.json' if reference_only else 'completion.json'),dict(status='SOURCE_REFERENCE_COMPLETE' if reference_only else 'ALL_AUTHORIZED_CONFIGURATIONS_COMPLETE',target=target,methods=results,
+    atomic_json(base(target,source_model)/('reference_completion.json' if reference_only else 'completion.json'),dict(status='SOURCE_REFERENCE_COMPLETE' if reference_only else 'ALL_AUTHORIZED_CONFIGURATIONS_COMPLETE',target=target,methods=results,
         target_GT_only_independent_offline=True,GT_feedback=False))
 
 
@@ -235,9 +264,11 @@ def reference_predict(target):
 
 
 if __name__=='__main__':
-    p=ArgumentParser();p.add_argument('phase',choices=('predict','oracle','evaluate','reference_predict','reference_evaluate'));p.add_argument('--target',choices=('Dance','KITTI-V2'),required=True);a=p.parse_args()
+    p=ArgumentParser();p.add_argument('phase',choices=('predict','oracle','evaluate','reference_predict','reference_evaluate'));p.add_argument('--target',choices=('Dance','KITTI-V2','SportsMOT'),required=True)
+    p.add_argument('--source-model',choices=('V2-best','Dance-best','LaMOT-best'));a=p.parse_args()
     if a.phase=='reference_evaluate':
         r=json.loads((base(a.target)/'reference_predictions.json').read_text())
         if r['GT_open_attempts']:raise ValueError('Source reference GT isolation failed')
         evaluate(a.target,r['methods'])
-    else:{'predict':generate,'oracle':oracle,'evaluate':evaluate,'reference_predict':reference_predict}[a.phase](a.target)
+    elif a.phase=='reference_predict':reference_predict(a.target)
+    else:{'predict':generate,'oracle':oracle,'evaluate':evaluate}[a.phase](a.target,a.source_model)

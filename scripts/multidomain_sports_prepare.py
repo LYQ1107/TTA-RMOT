@@ -40,6 +40,28 @@ def write_once(path, value):
         atomic_json(path, value)
 
 
+def clean_image_view(videos):
+    """Stock TrackEval counts directory entries; exclude macOS ._ resource forks.
+
+    Only numeric, original JPG names are linked. No images are modified, copied,
+    removed or renumbered. Preserve the task's earlier raw-directory symlink.
+    """
+    view=DEST.parent/'image_view/SportsMOT-sequences'
+    for video in videos:
+        for p in sorted((IMAGES/video/'img1').glob('*.jpg')):
+            if p.stem.isdigit():link_new(view/video/'img1'/p.name,p)
+        link_new(view/video/'seqinfo.ini',IMAGES/video/'seqinfo.ini')
+    for root in (RUN/'runtime/sports',DEST.parent/'layout/LaMOT-main'):
+        alias=root/'sequences/val/SportsMOT-sequences'
+        if alias.is_symlink() and alias.resolve()==IMAGES.resolve():
+            backup=alias.with_name(alias.name+'.original_raw_link')
+            if backup.exists() or backup.is_symlink():
+                raise ValueError('Preserve previous image-link backup; inspect explicit conflict')
+            alias.rename(backup)
+        link_new(alias,view)
+    return view
+
+
 def main():
     require_plan()
     provenance = json.loads((PUBLIC / 'downloads.json').read_text())
@@ -56,13 +78,13 @@ def main():
     if len(seqs) != 466 or len(set(seqs)) != 466 or len(videos) != 45:
         raise ValueError('Official Sports seqmap cardinality mismatch')
     exported = RUN / 'runtime/sports'
+    image_view=clean_image_view(videos)
     resolution = json.loads((LAMOT/'sequences/val/SportsMOT_RESOLUTION.json').read_text())
     originals = LAMOT / 'annotations_v1/val/SportsMOT'
     # The stock mix test parser only uses labels.keys(). Empty objects carry no GT.
     write_once(exported/'sequences/val/SportsMOT_labels.json', {v:{} for v in videos})
     write_once(exported/'sequences/val/SportsMOT_RESOLUTION.json', resolution)
     write_once(exported/'sequences/val/TAO_frame2file.json', {})  # unused for SportsMOT
-    link_new(exported/'sequences/val/SportsMOT-sequences', IMAGES)
     mapping = {}
     source_records = []
     raw_github = DEST.parent.parent / 'lamot_github/extracted/LaMOT-main/annotations_v1/val/SportsMOT'
@@ -122,7 +144,7 @@ def main():
             height=resolution[video][1], frame_count=nframes, full_observations=len(obs),
             historical_observations=int(hist.sum()), physical_tracks=len(tails),
             tracker_path=str(path), tracker_sha256=file_sha(path))
-        for key in (s for s in seqs if s.split('+',1)[0] == video):
+        for key in sorted(s for s in seqs if s.split('+',1)[0] == video):
             query = mapping[key]
             q = dict(video_id=video, expression_id=query['expression_id'], query_text=query['query_text'],
                 frame_count=nframes, start=offset, stop=offset+len(obs),
@@ -159,6 +181,7 @@ def main():
         annotation_mismatches=[],tracker_records=tracker_records,
         full_candidate_observations=meta['full_candidate_observations'],full_candidate_query_rows=offset,
         images=sum(r['images'] for r in tracker_records),runtime_root=str(exported),
+        clean_image_view=str(image_view),original_images_unchanged=True,
         runtime_metadata_sha256=file_sha(folder/'metadata.json'),
         GT_used_by_model=0,projection_process_only=True,vendor_code_changed=False)
     atomic_json(PUBLIC/'sports_assets.json',assets)
