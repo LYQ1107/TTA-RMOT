@@ -33,3 +33,12 @@
 - Offline evaluation/report runner is queued behind successful complete
   teacher sealing. It has no GPU, streams child logs, and aborts on a
   failed teacher launcher. No repeated agent shell process polling.
+- Complete frozen teacher succeeded: 432 frame-contexts, 89,961 requested
+  judgements, 86,663 actual unique cached forward judgements. Final full
+  worker 1,443.454533 seconds; total GPU-process cost including smoke and
+  startup 0.409427706 hours. Peak allocation 4.370987892 GiB. GT open
+  attempts zero; initial/final parameter SHA identical to the prior teacher.
+  No retry, crop failure, dropped request, parameter or protocol change.
+- Final pre-evaluation regression rerun: 32 passed in 1.39 s, compile and
+  diff checks passed. Whole-dataset gates sealed before CPU predictions;
+  CPU official evaluation runs only after all 60 target/4 source sets seal.

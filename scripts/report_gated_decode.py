@@ -45,6 +45,7 @@ def teacher_costs():
         peak_allocated_bytes=max(r['peak_allocated_bytes'] for r in all_counts),maximum_physical_GPUs=1,
         source_candidate_truncation=plan['source_budget'],GT_open_attempts=full['GT_open_attempts']+smoke['GT_open_attempts'],
         semantics='Forward timings include original synchronized upstream preprocessing/forward path, batches amortized; process hours also include model loading/hash/cropping/cache I/O. Teacher generated once, reused across score sources. No training cost incurred; prior student training inherited, not priced as free.',
+        inherited_costs='Fixed MOT frontend and all six FlexHook margin banks were already computed. Their prior GPU inference/training is excluded from this round incremental costs, not zero standalone-system cost. GPU_calls=0 inside file-only prediction seals means CPU decoding stage only; teacher calls are reported separately.',
         extrapolation_caveat='Throughput estimate, not a measured exhaustive run; excludes repeated model loads and full-data cache/image I/O. No full-video teacher RMOT system was run.')
     atomic_json(PUBLIC/'teacher_costs.json',result);v2.write_csv(PUBLIC/'teacher_per_video.csv',by_video);return result
 
@@ -82,6 +83,7 @@ def report():
     v2.write_csv(PUBLIC/'decoders.csv',[rows[m] for m in complete['methods']])
     # GT labels are accessed only here, AFTER the gate/outputs SHA checks.
     with (PUBLIC/'gates.csv').open() as f:gates=list(csv.DictReader(f))
+    with (PUBLIC/'exclusivity.csv').open() as f:exclusivity=list(csv.DictReader(f))
     qualities=[];quality_episodes=[]
     for mode in ('normal','early'):
         gr=[r for r in gates if r['dataset']=='Dance' and r['gate_mode']==mode]
@@ -109,6 +111,7 @@ def report():
     for seed in (17,23,42):
         m=f'T2V_D1_s{seed}';compare(m+'__X0_C3','FROZEN__X0_C3')
         for b in ('FROZEN__TG_ONLY_FROZEN_X0','FROZEN__TG_ONLY_NATIVE'):compare(m+'__TG_X0',b)
+    if len(comparisons)!=201:raise ValueError('all201 fixed decoder/reference comparisons required')
     meanrows=[]
     d1_decoders=('X0_C3','X1_C3_CAUSAL',*GENERAL,'SA_DECODE')
     for d in d1_decoders:
@@ -117,11 +120,15 @@ def report():
             r[k+'_mean']=float(np.mean([x[k] for x in rr]));r[k+'_std_ddof1']=float(np.std([x[k] for x in rr],ddof=1))
         meanrows.append(r)
     v2.write_csv(PUBLIC/'D1_seed_summary.csv',meanrows)
-    source_rows=[]
+    source_rows=[];source_full={}
+    for m in complete['source_methods']:
+        with (RUN/'source_boundary/evaluation'/m/'results/pedestrian_detailed.csv').open() as f:
+            combined=next(r for r in csv.DictReader(f) if r['seq']=='COMBINED')
+        source_full[m]=100*float(combined['HOTA___AUC'])
     for m,r in complete['source_methods'].items():
-        native=complete['source_methods'][r['margin']+'__NATIVE']['metrics']['HOTA']
-        source_rows.append(dict(method=m,margin=r['margin'],decoder=r['decoder'],**r['metrics'],prediction_rows=r['prediction_rows'],
-            delta_HOTA_vs_native=r['metrics']['HOTA']-native,teacher_calls=costs['by_dataset_mode']['KITTI_normal']['requested_calls'] if r['decoder']=='SA_DECODE' else 0))
+        native=source_full[r['margin']+'__NATIVE']
+        source_rows.append(dict(method=m,margin=r['margin'],decoder=r['decoder'],**r['metrics'],HOTA_unrounded=source_full[m],prediction_rows=r['prediction_rows'],
+            delta_HOTA_vs_native=source_full[m]-native,teacher_calls=costs['by_dataset_mode']['KITTI_normal']['requested_calls'] if r['decoder']=='SA_DECODE' else 0))
     v2.write_csv(PUBLIC/'source_boundary.csv',source_rows)
     def stable(decoder):return all(comparisons[f'T2V_D1_s{s}__{decoder}_minus_T2V_D1_s{s}__X0_C3']['CI95'][0]>0 for s in (17,23,42))
     unseen_tg=float(np.mean([rows[f'T2V_D1_s{s}__TG_X0']['Unseen_HOTA'] for s in (17,23,42)]))
@@ -168,7 +175,8 @@ def report():
         f'2. 没见过的句子：{verdict["unseen_teacher_gate"]}（TG_X0均值{unseen_tg:.6f}）；{verdict["unseen_global_z"]}（G0_GZ_X0均值{unseen_gz:.6f}）；固定门槛14.229。',
         '3. 不用教师的拒绝：'+verdict['GT_free_rejection']+'。',
         f'4. 结构自适应：{verdict["structural"]}。源域两模型均在原生−1以内={source_pass}；Dance三个D1的SA均值={sa_mean:.6f}，固定门槛26。',
-        '5. 学生贡献：只报告同一X0解码下三个D1−Frozen的差值和CI，不做新判定。'+json.dumps(verdict['student_contribution'],ensure_ascii=False),
+        '5. 学生贡献：只报告同一X0解码下三个D1−Frozen的差值和CI，不做新判定。',
+        table(['student','reference','delta HOTA','CI low','CI high'],[[r['first'],r['second'],r['delta_HOTA'],*r['CI95']] for r in verdict['student_contribution']]),
         '## 全部目标域组合：25视频、425表达、211085条固定MOT观测',
         '60个解码组合及3个原生参照全部报告。TG_ONLY_FROZEN_X0是Frozen TG_X0的精确别名；教师门控只生成一次，在各分数源之间复用，不能将调用次数乘以学生数。',
         table(['margin','decoder','HOTA','DetA','AssA','IDF1','IDSW','rows','Empty rows','Present HOTA','Seen HOTA','Unseen HOTA','future','all-video stats','T1 logical calls','GT opens'],
@@ -184,7 +192,7 @@ def report():
         table(['gate mode','scope','episodes','GT present','pred present','TP','FP','FN','TN','accuracy','recall','FPR'],[[r[k] for k in ('gate_mode','text_scope','episodes','GT_present','predicted_present','TP','FP','FN','TN','accuracy','recall','FPR')] for r in qualities]),
         '## E(v)与结构分支',
         'E按候选计算多个表达p_yes≥0.5的比例，不是按单一argmax票数计算。分母为零按本轮用户明确答复输出空集，E保持未定义，单列而不伪造E=0。',
-        (PUBLIC/'exclusivity.csv').read_text(),
+        table(['dataset','video','positive candidates','multiple candidates','E(v)','undefined','selected decoder'],[[r[k] for k in ('dataset','video','positive_candidates','multiple_candidates','E','zero_denominator','selected_decoder')] for r in exclusivity]),
         '### KITTI-V2边界：4验证视频、862表达',
         '完全复用上一轮2355528行源域分数与原MOT候选覆盖；图像帧=MOT帧−1，预测保持原MOT帧。源域GT只在本节官方评价用，不计算任何阈值。',
         table(['method','HOTA','DetA','AssA','IDF1','rows','HOTA−native','teacher calls'],[[r[k] for k in ('method','HOTA','DetA','AssA','IDF1','prediction_rows','delta_HOTA_vs_native','teacher_calls')] for r in source_rows]),
@@ -192,7 +200,7 @@ def report():
         f'实际唯一forward判断{costs["actual_unique_forwarded_calls"]}；本轮清单请求{costs["requested_gate_judgements"]}（重叠门控帧缓存复用）。真实forward路径总秒数={costs["forward_seconds"]:.6f}，GPU进程小时（含smoke和加载/哈希/I/O）={costs["GPU_process_hours"]:.6f}，峰值分配显存={costs["peak_allocated_bytes"]}字节。',
         f'Dance实际批次摊销每判断{costs["Dance_amortized_forward_seconds"]:.8f}秒；穷举3588445候选–句子对预计forward路径{costs["exhaustive_Dance_forward_GPU_hours"]:.6f} GPU小时。这是实测吞吐外推，不是已运行的全量教师RMOT结果，不含全量图像I/O/多次加载。源域与目标域提示长度不同，混合域外推另列teacher_costs.json。',
         table(['dataset','video','mode','frames','requested','new','cache hit','forward seconds','peak bytes'],[[r[k] for k in ('dataset','video','gate_mode','frames','requested_calls','new_calls','cache_hits','forward_seconds','peak_allocated_bytes')] for r in costs['by_video']]),
-        'Teacher门控属于新的test-video teacher-assisted设定，并非不使用外部教师的source-free online TTA。这里的额外教师成本不含历史学生训练成本；不能称整个方法零训练成本。',
+        'Teacher门控属于新的test-video teacher-assisted设定，并非不使用外部教师的source-free online TTA。本轮增量成本不含历史学生训练、固定MOT前端和已封存margin的推理；这些不是独立RMOT系统的零成本。文件预测seal中的GPU_calls=0仅指CPU解码阶段，教师调用单独完整计入。',
         '## GT隔离、复现和来源',
         '六套X0/X1共5100预测文件逐字节复现。输入2550个原始margin文件与六数组核SHA；源域两数组和MOT哈希核验。所有教师原始输出、gates.csv、exclusivity.csv及目标60套/源域4套预测在新GT评测前封存。Python打开审计均0；教师另加内核Landlock运行时白名单。Qwen revision、冻结权重前后相等、原始logits/soft概率、输入/框/提示哈希均保留。backend和320/margin.2裁剪代码未改。',
         f'官方评价：目标新作业{complete["new_target_jobs"]}，精确逐行等价复用{complete["reused_target_jobs"]}；源域新作业{sum(r.get("new_TrackEval_job",False) for r in complete["source_methods"].values())}。等价复用保留全部指标，不省略完整数据。',
