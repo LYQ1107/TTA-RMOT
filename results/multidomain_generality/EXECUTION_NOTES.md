@@ -62,3 +62,9 @@ GPU任务由 `scripts/multidomain_kitti_scores.py` 管理，最多两卡、共�
 下载目的地：`/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101`。精确 `/FlexHook/SOTA_ckpts/LaMOT-best.pth`、45个 `/FlexHook/tracker_outputs/McByte-SportsMOT/*.txt` 和数据JSON路径见downloads.json。原始Sports图像只建链接，原图与其它项目代码/模型/标签均未改。
 
 收到官方文件后还必须核验strict、45视频覆盖、466表达一一映射、官方mix loader真实视频smoke及≤6 GPU小时估算，再恢复相关组合。当前不生成替代tracker、不训练、不调用MLLM、不开始新方法。
+
+## 本轮结束状态
+
+C1与C2各7固定配置已完成，另外保留KITTI两模型历史覆盖和独立完整V2参照。C2恢复worker自行封存退出，当前任务没有GPU进程存活。14套主预测与11595个完整/历史/参照文件索引、逐帧同量自检通过，3项回归通过，compileall通过。
+
+C1 ρ=0.984626733（数量主导）；C2 ρ=0.535039998（数量与排序共同作用）。C2原生13.502、源排序同域量29.152、同域完整42.752；不是只报正向Dance结果。完整三域六组合未完成，C3–C6在精确资产清单处停止，最终汇总标签不计算。

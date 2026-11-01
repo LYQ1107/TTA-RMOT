@@ -1,5 +1,5 @@
 {
-  "GPU_process_hours": 0.1651240953921418,
+  "GPU_process_hours": 0.4436116418779905,
   "per_job": [
     {
       "phase": "smoke",
@@ -30,6 +30,17 @@
       "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/launchers/1793523549613045177/V2-best_full.txt",
       "pid": 2887705,
       "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/launchers/1793523549613045177/launcher_status.json"
+    },
+    {
+      "phase": "full",
+      "model": "Dance-best",
+      "physical_gpu": 2,
+      "exit_code": 0,
+      "pid": 2981499,
+      "wall_seconds": 1002.5551673490554,
+      "wall_measurement": "worker-entry to seal; supervising shell lifetime not used",
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/launchers/1793524594921276532/Dance-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/launchers/1793524594921276532/launcher_status.json"
     },
     {
       "phase": "smoke",
@@ -99,11 +110,37 @@
     }
   ],
   "exact_total_available": false,
-  "total_GPU_process_hours_lower_bound": 0.3988412278912599,
-  "total_GPU_process_hours_upper_bound": 0.4534280352247232,
+  "total_GPU_process_hours_lower_bound": 0.6773287743771087,
+  "total_GPU_process_hours_upper_bound": 0.7319155817105719,
   "includes_failed_environment_attempts_and_smokes": true,
   "teacher_calls": 0,
   "optimizer_updates": 0,
-  "actual_full_C2_complete": false,
-  "partial_completed_job_costs_only_if_launcher_still_running": true
+  "actual_full_C2_complete": true,
+  "partial_completed_job_costs_only_if_launcher_still_running": true,
+  "per_new_inference": [
+    {
+      "model": "V2-best",
+      "target": "KITTI-V2",
+      "complete_rows": 2425382,
+      "known_GPU_process_hours": 0.10366349118690575,
+      "total_GPU_process_hours_lower_bound": 0.10366349118690575,
+      "total_GPU_process_hours_upper_bound": 0.10366349118690575,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "Dance-best",
+      "target": "KITTI-V2",
+      "complete_rows": 2425382,
+      "known_GPU_process_hours": 0.33994815069108475,
+      "total_GPU_process_hours_lower_bound": 0.5736652831902029,
+      "total_GPU_process_hours_upper_bound": 0.6282520905236662,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": false
+    }
+  ],
+  "reused_inferences": {
+    "C1_V2_to_Dance": "No new GPU call; inherited frozen full-bank inference cost not remeasured, not a zero-cost independent system",
+    "Dance_to_Dance": "Existing sealed official scores; no new GPU call; inherited inference cost not remeasured"
+  }
 }

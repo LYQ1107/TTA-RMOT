@@ -1,7 +1,8 @@
 {
-  "status": "PARTIAL_C1_COMPLETE_C2_RUNNING",
+  "status": "PARTIAL_C1_C2_COMPLETE_OFFICIAL_ASSETS_BLOCK_C3_TO_C6",
   "completed_combinations": [
-    "C1"
+    "C1",
+    "C2"
   ],
   "full_scope": [
     "C1",
@@ -29,10 +30,12 @@
   },
   "gt_audit": {
     "inference": {
-      "V2-best": 0
+      "V2-best": 0,
+      "Dance-best": 0
     },
     "decoders": {
-      "Dance": 0
+      "Dance": 0,
+      "KITTI-V2": 0
     },
     "evaluation_and_oracle_separate_processes": true,
     "no_target_GT_threshold_fitting": true,
@@ -40,5 +43,5 @@
     "no_MLLM": true,
     "downloaded_annotation_payloads_not_opened_by_model": true
   },
-  "costs": 0.1651240953921418
+  "costs": 0.4436116418779905
 }

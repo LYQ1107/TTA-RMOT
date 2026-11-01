@@ -1,21 +1,78 @@
 {
-  "status": "PASS_P0_DELIVERY_NOT_FULL_EXPERIMENT",
-  "prereg_sha256": "7c6aa50428ad71f5b593e7b4711277c3a507e825edbed5b18b76bef0a23e0cc0",
-  "report_sha256": "535d4ab819b04d8d20e6da6f8b24a1ef828ebcf550f90c155f4cc8ff6bfd46e0",
-  "official_checkpoints_hash_verified": 2,
-  "historical_prediction_files_verified": 2137,
-  "historical_margin_banks_verified": 3,
-  "seqmap_records": 466,
-  "seqmap_newlines": 465,
-  "SportsMOT_val_complete_videos": 45,
-  "SportsMOT_val_valid_frames": 26970,
-  "GT_open_attempts": 0,
-  "new_GPU_jobs": 0,
-  "MLLM_calls": 0,
-  "training_steps": 0,
-  "downloads": 0,
-  "strict_loading_not_attempted": true,
-  "scientific_generalization_verdict": null,
-  "compileall": "PASS",
-  "diff_check": "PASS"
+  "status": "PASS_AUTHORIZED_C1_C2_ONLY",
+  "full_C1_to_C6_complete": false,
+  "blocked_combinations": [
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "original_prereg_prefix_unchanged": true,
+  "prereg_amendment_publication": {
+    "remote_verified": true,
+    "remote_commit": "0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a",
+    "local_commit": "a15bc659192737b7c328dd5ea0ea8881bc8b9880",
+    "prereg_sha256": "da17fe4dcd13df5579887f75da68c424bdc009c506defae820dfe84a338a9ea6",
+    "original_prereg_commit": "98e7f84efbe43493761063e7832de7bfe9d4e18d",
+    "original_prereg_sha256": "7c6aa50428ad71f5b593e7b4711277c3a507e825edbed5b18b76bef0a23e0cc0",
+    "sports_sequences": 466,
+    "authorized_partial_work": [
+      "C1",
+      "C2",
+      "KITTI_complete_tail_scores"
+    ],
+    "maximum_simultaneous_GPUs": 2
+  },
+  "checks": {
+    "Dance": {
+      "sequences": 425,
+      "main_fixed_configurations": 7,
+      "per_frame_count_equivalence": true,
+      "oracle_same_counts": true,
+      "B0_absolute_budget": true,
+      "GT_free_open_attempts": 0
+    },
+    "KITTI-V2": {
+      "sequences": 862,
+      "main_fixed_configurations": 7,
+      "per_frame_count_equivalence": true,
+      "oracle_same_counts": true,
+      "B0_absolute_budget": true,
+      "GT_free_open_attempts": 0
+    }
+  },
+  "complete_main_prediction_sets": 14,
+  "all_indexed_prediction_files": 11595,
+  "targeted_tests_passed": 3,
+  "targeted_test_command": [
+    "/home/szgx/anaconda3/envs/dfot/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_multidomain_generality.py"
+  ],
+  "targeted_test_log": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/validation/pytest.log",
+  "targeted_test_log_sha256": "38b30647b7613281c06c764fde6ec949f55240a4d639e1dcfd45b938896363c6",
+  "compileall_passed": true,
+  "no_training": true,
+  "no_MLLM": true,
+  "max_physical_GPUs": 2,
+  "source_historical_bit_exact": true,
+  "historical_source_HOTA": 42.526,
+  "complete_source_HOTA": 42.752,
+  "gt_audit": {
+    "inference": {
+      "V2-best": 0,
+      "Dance-best": 0
+    },
+    "decoders": {
+      "Dance": 0,
+      "KITTI-V2": 0
+    },
+    "evaluation_and_oracle_separate_processes": true,
+    "no_target_GT_threshold_fitting": true,
+    "no_training": true,
+    "no_MLLM": true,
+    "downloaded_annotation_payloads_not_opened_by_model": true
+  }
 }

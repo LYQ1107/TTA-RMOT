@@ -2,24 +2,26 @@
 
 ## 1. 判定汇总
 
-状态：C1、C2独立授权部分中C1已完成、C2进行中；C3–C6仍等待官方LaMOT权重和McByte/FlexHook数据包。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**
+状态：C1、C2独立授权部分均已完成；C3–C6仍等待官方LaMOT权重和McByte/FlexHook数据包。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**
 
 | 源 / 目标 | KITTI-V2 | Dance | SportsMOT |
 |---|---|---|---|
 | V2-best | 同域参照 | 0.984627：数量主导 | 待官方资产 |
-| Dance-best | 推理进行中 | 同域参照 | 待官方资产 |
+| Dance-best | 0.535040：数量与排序共同作用 | 同域参照 | 待官方资产 |
 | LaMOT-best | 待官方资产 | 待官方资产 | 同域参照 |
 
 | 组合 | gap | ρ | Δrank | 固定规则判定 |
 |---|---|---|---|---|
 | C1 | 23.920809 | 0.984627 | 0.367741 | 数量主导 |
-| C2 | — | — | — | 推理进行中 |
+| C2 | 29.250220 | 0.535040 | 13.600183 | 数量与排序共同作用 |
 | C3 | — | — | — | 待官方资产 |
 | C4 | — | — | — | 待官方资产 |
 | C5 | — | — | — | 待官方资产 |
 | C6 | — | — | — | 待官方资产 |
 
 ρ使用官方detailed CSV未舍入HOTA计算；表内HOTA展示summary数值。缺失单元不是ρ=0，不删组合来做普遍性结论。
+
+研究边界：这里衡量固定候选、原生margin>0协议下的数量/排序损失，不证明目标域数量可以无监督估计。C1虽然ρ=98.46%，同域排序仍比源排序高约0.368 HOTA，25视频CI为正；“数量主导”不等于排序完全无损，也不等于新TTA成功。
 
 ## 2. P0、下载、冒烟和自检
 
@@ -42,14 +44,22 @@ Sports seqmap实际466条、45视频；原465为文件末行无换行符造成wc
 
 两套KITTI实机smoke strict全部key匹配，原生getitem/forward与冻结编码缓存数值误差≤2.1e-5、无符号翻转；box/grid完全一致。使用官方kitti2.yaml、infer.sh显式rope-swin-tiny/roberta覆盖、FP32、规范RoBERTa BPE、官方car/ped合并/帧偏移；没有额外类别token，所有候选同等打分。1视频估算V2 0.572601、Dance 0.630457 GPU小时，均未触发6小时停止门槛。
 
+逐目标文本/类别处理：KITTI保留car=0/pedestrian=1的官方候选解析和合并ID，但模型没有新加类别token；Dance复用已封存的规范BPE分数库，原17句不改写、候选class=0、无新类别前缀；Sports官方mix静态代码class=0/roberta，实际加载/tokenizer/末观测补分尚未运行，不能标为兼容性通过。Sports原图中存在macOS资源分叉._jpg，盘点仅计有效数字文件名；未来官方链接视图/seqLength也须核对，当前不据此制造Sports结果。
+
 V2 KITTI历史2355528行原值保留，只新增69854尾观测分数，完整2425382行已封存，历史npy SHA保持cb0a935c…1051687。完整覆盖原生HOTA如实见下表，不假定等于42.526。
 
 | KITTI覆盖/模型 | HOTA | 行数 | 逐行相等后复用旧评测 |
 |---|---|---|---|
 | V2_COMPLETE_REFERENCE | 42.752000 | 775877 | False |
 | HIST_V2-best | 42.526000 | 750834 | True |
+| NATIVE | 13.502000 | 99889 | False |
+| HIST_Dance-best | 13.343000 | 97276 | False |
 
 历史V2分数逐位相同，862份原生预测逐行数值相同，HOTA42.526自检通过。新完整覆盖与历史覆盖均保留，不混用参照。
+
+源域官方封存GT_Dets=491286，infer.sh注释为491222，差64。沿用已通过42.526自检的原GT模板/过滤规则，没有修改GT来凑注释数字；所有本轮KITTI比较使用同一491286协议。
+
+关键反向组合C2并不支持“排序近乎无损”：补同域数量后仍落后13.600 HOTA，GT R@1为0.197195对0.424417。Oracle同量时32.576对47.593，排序损失也没有消失。C2只有4视频，这些差距为点估计，不作统计显著性声明。C2已不满足汇总中要求的“C2也数量主导”必要条件；其余四组合缺资产，仍不擅自选择“部分成立/不普遍”的最终汇总标签。
 
 Dance历史32.134/254118行与完整32.139/254910行已核对SHA，新诊断统一完整范围。论文最新版正文只有LaMOT合并56.77，infer.sh合并56.756；未找到Sports子集官方数字，仓库无补充PDF、CVF补充入口403。只有官方资产核验全过后才允许Sports smoke和后续正式推理。
 
@@ -64,13 +74,13 @@ Dance历史32.134/254118行与完整32.139/254910行已核对SHA，新诊断统�
 | C1 | R_SxK_ORACLE | 45.794000 | 62.668000 | 33.600000 | 46.020000 | 2226.000000 | 201009 | 0 | COMPLETE |
 | C1 | R_IxK_ORACLE | 46.757000 | 63.503000 | 34.559000 | 46.702000 | 2148.000000 | 201009 | 0 | COMPLETE |
 | C1 | B0_GLOBAL | 11.845000 | 6.403900 | 21.914000 | 7.700100 | 577.000000 | 254910 | 215145 | COMPLETE |
-| C2 | NATIVE | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | IN_DOMAIN | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | R_SxK_I | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | R_IxK_S | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | R_SxK_ORACLE | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | R_IxK_ORACLE | — | — | — | — | — | — | — | INFERENCE_RUNNING |
-| C2 | B0_GLOBAL | — | — | — | — | — | — | — | INFERENCE_RUNNING |
+| C2 | NATIVE | 13.502000 | 4.141000 | 44.145000 | 7.914700 | 382.000000 | 99889 | 0 | COMPLETE |
+| C2 | IN_DOMAIN | 42.752000 | 30.688000 | 59.696000 | 46.392000 | 3203.000000 | 775877 | 0 | COMPLETE |
+| C2 | R_SxK_I | 29.152000 | 18.129000 | 47.001000 | 30.094000 | 3264.000000 | 775877 | 0 | COMPLETE |
+| C2 | R_IxK_S | 16.263000 | 6.173300 | 42.890000 | 11.597000 | 482.000000 | 99889 | 0 | COMPLETE |
+| C2 | R_SxK_ORACLE | 32.576000 | 22.072000 | 48.273000 | 35.670000 | 2828.000000 | 480848 | 0 | COMPLETE |
+| C2 | R_IxK_ORACLE | 47.593000 | 38.588000 | 58.934000 | 54.845000 | 3491.000000 | 480848 | 0 | COMPLETE |
+| C2 | B0_GLOBAL | 24.353000 | 11.872000 | 50.103000 | 20.782000 | 1772.000000 | 775877 | 0 | COMPLETE |
 | C3 | NATIVE | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
 | C3 | IN_DOMAIN | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
 | C3 | R_SxK_I | — | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
@@ -106,6 +116,8 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 |---|---|---|---|---|---|---|
 | Dance | source | 0.156803 | 0.157999 | 0.614788 | 42657 | 0.650204 |
 | Dance | in_domain | 0.155387 | 0.157938 | 0.619945 | 42657 | 0.828769 |
+| KITTI-V2 | source | 0.197195 | 0.243035 | 0.347478 | 195480 | 0.552911 |
+| KITTI-V2 | in_domain | 0.424417 | 0.525893 | 0.708625 | 195480 | 0.901302 |
 
 同帧GT R@1：对官方GT非空帧，top1候选以IoU≥0.5命中的GT数/该帧GT数，按帧均值（无可匹配候选的帧记0）。另外保留旧离线脚本的条件候选召回：在有IoU≥0.5候选的帧，top1命中的正候选数/该帧正候选数再均值。正候选可有重复框，故两个分母不等，不能混称。tie=(-margin,numeric ID)；Hit@1另列，不是AP。GT轨迹结构用一对一最大基数匹配。新增GT分母诊断未改变任何预测、HOTA或预注册判定。
 
@@ -113,12 +125,12 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 
 | 组合 | 类别 | 配置 | HOTA | DetA | AssA | 表达数 | 状态 |
 |---|---|---|---|---|---|---|---|
-| C2 | car | NATIVE | — | — | — | — | INFERENCE_RUNNING |
-| C2 | car | IN_DOMAIN | — | — | — | — | INFERENCE_RUNNING |
-| C2 | car | R_SxK_I | — | — | — | — | INFERENCE_RUNNING |
-| C2 | pedestrian | NATIVE | — | — | — | — | INFERENCE_RUNNING |
-| C2 | pedestrian | IN_DOMAIN | — | — | — | — | INFERENCE_RUNNING |
-| C2 | pedestrian | R_SxK_I | — | — | — | — | INFERENCE_RUNNING |
+| C2 | car | NATIVE | 13.190555 | 3.593490 | 48.448768 | 481 | COMPLETE |
+| C2 | pedestrian | NATIVE | 13.616864 | 4.429253 | 41.976949 | 381 | COMPLETE |
+| C2 | car | IN_DOMAIN | 52.702969 | 42.228716 | 65.815273 | 481 | COMPLETE |
+| C2 | pedestrian | IN_DOMAIN | 38.811844 | 26.924673 | 56.037477 | 381 | COMPLETE |
+| C2 | car | R_SxK_I | 30.773127 | 18.926806 | 50.063527 | 481 | COMPLETE |
+| C2 | pedestrian | R_SxK_I | 28.408893 | 17.855415 | 45.278945 | 381 | COMPLETE |
 | C5 | car | NATIVE | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
 | C5 | car | IN_DOMAIN | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
 | C5 | car | R_SxK_I | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
@@ -133,7 +145,7 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 | 目标 | 轨迹0表达 | 轨迹1表达 | 轨迹≥2表达 | 空表达率 | Present GT帧率均值 | p50 | 状态 |
 |---|---|---|---|---|---|---|---|
 | Dance | 0.166185 | 0.832370 | 0.001445 | 0.905882 | 0.973752 | 1.000000 | COMPLETE_OFFLINE_ORACLE |
-| KITTI-V2 | — | — | — | — | — | — | NOT_YET_EVALUATED |
+| KITTI-V2 | 0.318471 | 0.000000 | 0.681529 | 0.000000 | 0.464424 | 0.461279 | COMPLETE_OFFLINE_ORACLE |
 | SportsMOT | — | — | — | — | — | — | BLOCKED_OFFICIAL_ASSETS |
 
 轨迹正例：一对一IoU≥0.5匹配观测达到该物理预测轨迹≥50%；不是预测ID=GT ID。逐视频表达数、共享文本见structure_stats.csv；Dance17句跨25视频共享。Sports未知项留空，不能以现成图像替代官方McByte轨迹统计。
@@ -149,9 +161,9 @@ R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，�
 
 ## 7. 成本
 
-有完整退出记录的GPU进程时间共0.165124小时；加上外部中断作业，已发生总成本落在[0.398841, 0.453428] GPU进程小时。外部SIGTERM未提供精确退出时刻，使用已完成视频计算耗时为下界、发现退出时刻为上界，不能伪造精确成本。若C2仍运行，其未完成时长暂不计。每次job/区间详见costs.json。最多2物理GPU，入场按进程少/显存足够共享，不终止别人。训练、微调、MLLM调用均0。
+有完整退出记录的GPU进程时间共0.443612小时；加上外部中断作业，已发生总成本落在[0.677329, 0.731916] GPU进程小时。外部SIGTERM未提供精确退出时刻，使用已完成视频计算耗时为下界、发现退出时刻为上界，不能伪造精确成本。若C2仍运行，其未完成时长暂不计。每次job/区间详见costs.json。最多2物理GPU，入场按进程少/显存足够共享，不终止别人。训练、微调、MLLM调用均0。
 
-C1七套官方CSV全部在425份预测逐行一致和原SHA核验后复用，未重跑健康推理/评测。新KITTI评测记录在official_results.json；原始日志、margin、预测保留在服务器，Git只存小型表/清单/压缩指标日志。
+C1七套官方CSV全部在425份预测逐行一致和原SHA核验后复用，未重跑健康推理/评测。新KITTI评测记录在official_results.json；完整detailed CSV、原始日志、margin、预测保留在服务器，Git存summary/清单/压缩日志，detailed CSV不重复装入压缩包，其绝对路径及SHA可由official_results.json定位校验。复用旧推理不是一个“零GPU成本独立系统”，继承成本未重测、不能冒报为0。
 
 ## 8. GT审计、失败和恢复
 
@@ -166,3 +178,5 @@ C2首个full作业发生外部SIGTERM（143），没有模型traceback，来源�
 恢复路径：results/runs/multidomain_generality_20261101；大文件SHA见margin_paths.json、all_prediction_files.csv.gz、official_results.json和downloads.json。手动资产到位后先strict/45视频/466序列/smoke门槛，再按同一PREREG继续；不生成替代tracker，不开展方法或训练。
 
 官方来源：[FlexHook](https://github.com/buptLwz/FlexHook)、[DATASET.md](https://github.com/buptLwz/FlexHook/blob/main/datasets/DATASET.md)、[LaMOT](https://github.com/Nathan-Li123/LaMOT)、[论文v5](https://arxiv.org/html/2503.07516v5)。
+
+针对性回归3项通过，compileall通过；14套主预测、11595份完整/历史/源参照文件索引及逐帧数量等价自检通过。详见validation.json。当前任务GPU进程已全部结束，不再启动新实验。
