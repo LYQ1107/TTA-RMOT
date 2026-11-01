@@ -193,7 +193,13 @@ def reusable(target,name,source_model=None):
             R_IxK_S='M_OFFICIAL_DANCE_COMPLETE__FROZEN',R_SxK_ORACLE='M_FROZEN__ORACLE_GT',R_IxK_ORACLE='M_OFFICIAL_DANCE_COMPLETE__ORACLE_GT',B0_GLOBAL='B0_NATIVE_OFFICIAL_COMPLETE_COUNT')
         return V2/'evaluation'/mapping[name]
     if target=='Dance' and name=='IN_DOMAIN':return V2/'evaluation/OFFICIAL_DANCE_COMPLETE'
+    if target=='Dance' and name=='HIST_Dance-best':
+        return V2/'evaluation/HIST_OFFICIAL_DANCE_COMPLETE__OFFICIAL_DANCE_COMPLETE'
+    if target=='Dance' and name=='R_IxK_ORACLE':
+        return V2/'evaluation/M_OFFICIAL_DANCE_COMPLETE__ORACLE_GT'
     if target=='KITTI-V2' and name=='HIST_V2-best':return OLD_SOURCE.parent/'source_boundary/evaluation/FROZEN__NATIVE'
+    if target=='KITTI-V2' and model!='Dance-best' and name=='R_IxK_ORACLE':
+        return base(target)/name
     if target=='SportsMOT' and name in ('IN_DOMAIN','R_IxK_ORACLE','HIST_LaMOT-best') and model!='V2-best':
         previous=base(target,'V2-best')/name
         if (previous/'official_completion.json').exists():return previous

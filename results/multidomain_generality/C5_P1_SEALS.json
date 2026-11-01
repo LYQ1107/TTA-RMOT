@@ -1,0 +1,63 @@
+{
+  "status": "C5_ALL_SCORE_AND_GT_FREE_PREDICTION_SEALS_COMPLETE_BEFORE_GT",
+  "source": "LaMOT-best",
+  "target": "KITTI-V2",
+  "videos": 4,
+  "episodes": 862,
+  "complete_rows": 2425382,
+  "historical_rows": 2355528,
+  "score_seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/LaMOT-best/scores_seal.json",
+  "score_seal_sha256": "e327f65f68caf30fcea97957504ba2b71f9677ae16626b4ebe5a56d57b1baef3",
+  "complete_margin_sha256": "2e3f28066a74f079888967a7d103d75c71458d3d922c800eb5ee7748f39f286d",
+  "historical_margin_sha256": "45dba5c510f736cd775d2a9d0cd4fc1eb83e36dd2fb287c9882a7e381c9a384e",
+  "methods": {
+    "NATIVE": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/NATIVE/predictions_seal.json",
+      "seal_sha256": "365280acbecac9c530e9406347dc222e1567d3adb11d013c80687730e3d33dbc",
+      "episodes": 862,
+      "prediction_rows": 332822
+    },
+    "IN_DOMAIN": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/IN_DOMAIN/predictions_seal.json",
+      "seal_sha256": "a752ecfec12db5a3f5090c215bec2f59e625f81c497021f08b7dd19124354ca0",
+      "episodes": 862,
+      "prediction_rows": 775877
+    },
+    "R_SxK_I": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/R_SxK_I/predictions_seal.json",
+      "seal_sha256": "304a23ab2d7b9c6b63178c18f042505fc7104cc365546e6c26ebbd6f4c629ff0",
+      "episodes": 862,
+      "prediction_rows": 775877
+    },
+    "R_IxK_S": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/R_IxK_S/predictions_seal.json",
+      "seal_sha256": "0e1c4a97eb65fbe729fca62fd01bfada2a16942561e0eadb7f8f67cfe45cd588",
+      "episodes": 862,
+      "prediction_rows": 332822
+    },
+    "B0_GLOBAL": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/B0_GLOBAL/predictions_seal.json",
+      "seal_sha256": "b0d40532560592ad1708bcb046d04369680774df5d685a9a225e8bd61371fbda",
+      "episodes": 862,
+      "prediction_rows": 775877
+    },
+    "HIST_V2-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/HIST_V2-best/predictions_seal.json",
+      "seal_sha256": "17e060dfb1fa1ffd03f85b93c1bff4892d25dcb93485bd1dd52b4a0f1406aa17",
+      "episodes": 862,
+      "prediction_rows": 750834
+    },
+    "HIST_LaMOT-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/HIST_LaMOT-best/predictions_seal.json",
+      "seal_sha256": "12038db10e09966f6fe30183ce21ad71764c2021bd2fcabbc13a48a0953b80ec",
+      "episodes": 862,
+      "prediction_rows": 322709
+    }
+  },
+  "indexed_files": 6034,
+  "prediction_index_sha256": "a3f111fa747fa9e69d63123d0ef84c07d187a57906e19e4057afbe1c8e80380a",
+  "GT_open_attempts": 0,
+  "training_updates": 0,
+  "teacher_calls": 0,
+  "formal_metrics": "NOT_COMPUTED_YET"
+}

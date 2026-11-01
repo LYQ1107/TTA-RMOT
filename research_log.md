@@ -2451,3 +2451,5 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - Sports原图有._资源叉，建立只含数字JPG的独立软链接视图并保留旧raw链接备份；原图/框/ID/帧号不改，避免Stock TrackEval目录计帧翻倍。独立文本投影只导出language与空对象视频索引，原labels/targets不进模型；vendor代码保持原状。
 - 本阶段先发布资产/P0与新恢复代码，再开C3–C6全量门；原C1/C2与旧预测不重跑、不覆盖。后续GT补齐、ORACLE和TrackEval仍为封存后的独立进程，任何418精确门失败就停止Sports评测。
 - 完整资产/P0已公开30f753ffc3d7bcbe4c72a762e4742a80be45b56e并回读同tree，随后才恢复P1；GPU2/0两槽动态队列，固定FP32、原模型/候选，视频回执恢复。已完成首视频直接复用，不改数值参数。parent只阻塞等子进程、内部流式转发视频完成事件，不做agent级ps/tail/nvidia轮询。
+- C5 LaMOT→KITTI先完成4视频/2425382完整margin、2355528历史margin，full child2444.284秒/0退出；4视频共862表达覆盖不变，GT0。独立GT-free CPU生成5主控制+2历史覆盖，6034份预测先封存SHA，见C5_P1_SEALS.json；正式指标尚未计算。先推送封存，再做独立离线GT评测，其他Sports/Dance GPU不受影响。
+- CPU评测复用补缺：同一目标上的IN_DOMAIN、I×K_ORACLE和历史同域输出在全部episode逐行数值相等后复用旧官方CSV；不重复跑已封存同域评测，也不修改预测或评测器。10项回归重跑通过。
