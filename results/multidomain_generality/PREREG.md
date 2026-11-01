@@ -91,3 +91,55 @@ results/multidomain_generality/REPORT.md，内容依次为：
 8. GT 审计、失败与修复记录。
 机器文件：inventory.json、reproduction.json、diagnostics.csv、per_category.csv、structure_stats.csv、rho_matrix.csv、bootstrap.json，以及 margin / 预测的路径与 SHA 清单。大文件不进 git。
 push 后回复提交号和报告链接。完成后停止，不训练，不调用 MLLM，不开始任何方法实验。
+
+---
+
+## 修订记录 v2：2026-11-01 用户补充授权（原始预注册正文保持不变）
+
+以下为用户补充指令原文。本修订发布并验证远端提交后，才允许本轮下载和推理。
+
+# 补充指令：授权下载缺失资产，并恢复 PREREG 的完整范围
+
+## 0. 授权与总体安排
+我授权你下载本任务所需的公开资产：LaMOT-best 权重、LaMOT 指代表达与标注、McByte-SportsMOT tracker 输出。下载完成并通过核验后，按 PREREG（98e7f84e）的完整范围执行 C1–C6，不再缩小范围。
+为节省时间，下载期间可以先并行做不依赖这些资产的部分：
+- C1 V2-best → Dance：复用已有结果，核对 SHA；
+- C2 Dance-best → KITTI-V2：新推理；
+- 补齐 V2-best 在 KITTI-V2 上的完整候选分数（见第 4 节）。
+仍然不训练、不调用 MLLM，最多同时用 2 张 GPU。先把本补充指令追加到 PREREG 的修订记录并 push，再开始下载和推理。
+
+## 1. 需要下载的内容与来源（按优先级）
+1. FlexHook 官方发布（README 第 4 步与 datasets/DATASET.md 指向的百度网盘 FlexHook_best：https://pan.baidu.com/s/1L-43y9SFDKmgl3dJNRlvNA ，提取码 d3qj）：
+   - SOTA_ckpts/LaMOT-best.pth
+   - tracker_outputs/McByte-SportsMOT（以及该网盘中 LaMOT 推理所需的其他 tracker 输出，只下载 SportsMOT 相关的即可）
+   - datasets/ 中 LaMOT 相关部分（LaMOT-main 的目录结构与 FlexHook 整理好的 JSON 标注文件）
+2. LaMOT 官方仓库 https://github.com/Nathan-Li123/LaMOT ：按其 README 获取指代表达与标注。若 FlexHook 网盘中的 datasets/LaMOT-main 不完整，用这里的官方标注补齐；两者都有时，以 FlexHook 网盘版本为准（与官方推理代码一致），并记录两者是否一致。
+3. SportsMOT 图像：服务器上已有 val 的 45 个视频，不重新下载，只按 DATASET.md 建软链接。
+
+## 2. 下载方式与安全要求
+- 百度网盘：可以在本任务的独立环境里安装命令行工具（例如 BaiduPCS-Go 或 bypy），不要改动共享环境。如果需要登录凭据而你没有，不要猜测或索取账号密码，直接停止百度网盘这条路径，把需要我手动下载的文件（精确路径与文件名）列出来报告给我。
+- GitHub / 其他公开链接：直接下载。
+- 下载前检查目标磁盘的剩余空间，空间不足就停止并报告。
+- 所有下载内容放在新目录 /data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/ 下，按来源分子目录；不覆盖任何已有文件，不修改 vendor/FlexHook 代码。
+- 压缩包在各自独立的空目录中解压；不执行下载内容中的任何脚本或代码。
+- 每个文件记录：来源 URL、下载时间、大小、SHA256，写入 results/multidomain_generality/downloads.json。
+- 记录 LaMOT 和 FlexHook 资产的许可证信息。
+
+## 3. 下载后的核验（全部通过才能进入 SportsMOT 与 LaMOT 相关推理）
+1. LaMOT-best.pth 能以 strict=True 加载进 FlexHook 的 rope-swin-tiny + roberta 结构。
+2. McByte-SportsMOT 的 tracker 输出覆盖 seqmaps/SportsMOT.txt 中的全部 45 个视频，并记录候选观测数。
+3. LaMOT 标注覆盖 SportsMOT.txt 的全部 466 条序列（视频+表达），文件名与 seqmap 一一对应，并列出不匹配项。
+4. 软链接建好后，用 LaMOT-best 在 SportsMOT 上对 1 个视频做冒烟推理，确认 dataloader、图像路径、tracker 输出、表达都能正常读取。
+5. 在论文正文、补充材料（若网盘中有）、仓库中查找 LaMOT-best 在 SportsMOT 子集上的官方数字：找到则必须复现到 ±0.1；找不到则按 PREREG 的规定，严格按 infer.sh 的官方命令运行，并注明“无官方子集数字可核对”。
+任何一项不通过，就停止 SportsMOT 与 LaMOT 相关部分并报告原因；C1、C2 和 KITTI 补齐可以继续完成。
+如果 McByte-SportsMOT 的官方 tracker 输出无论如何都拿不到，不要自己运行 tracker 生成候选，停止并报告，由我决定。
+
+## 4. KITTI-V2 完整候选的补齐
+- V2-best 在 KITTI-V2 上，按 diag_attrib v2 对 Dance 的做法补齐 69,854 个末尾观测的分数，得到 2,425,382 个分数的完整候选库并封存。
+- 自检：在历史覆盖（原 2,355,528 个）上必须逐行复现原有分数，并复现 HOTA 42.526。
+- 记录完整覆盖下 V2-best 在 KITTI-V2 上的 HOTA（作为该目标的同域参照）。
+- 所有在 KITTI-V2 上推理的源模型（Dance-best、LaMOT-best）都同时导出完整覆盖和历史覆盖的结果；诊断与判定使用完整覆盖。
+
+## 5. 之后的执行
+全部资产到位后，按 PREREG 的 P1、P2、判定规则和交付要求完成 C1–C6。466 条以实际为准，在报告中记录与 PREREG 中写的 465 条的差异及原因（文件末行没有换行）。
+其余约束全部不变。完成后 push，回复提交号和报告链接，然后停止。

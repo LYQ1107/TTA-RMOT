@@ -1,5 +1,11 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-11-01 三数据集普遍性：按用户补充授权恢复
+
+- 保持原预注册正文和历史P0记录，追加下载授权与466序列修订；先commit/push并验证远端，之后才下载或推理。
+- 范围仍为C1–C6；资产等待期间允许C1复用、C2新推理与KITTI的69854尾观测补分。Sports/LaMOT部分必须官方资产全通过，不自跑tracker代替。
+- 独立data2目录、最多2GPU、无训练/MLLM；百度路径若需不可用登录凭据即停止该路径并列手动文件，不索取密码。所有KITTI诊断用完整候选，保留历史覆盖逐行/42.526自检。
+
 ## 2026-11-01 三数据集数量/排序普遍性：P0硬停止
 
 - 从321ec548新建research/multidomain-generality-20261101；用户完整任务先推PREREG，远端98e7f84e。只读盘点，禁止训练/MLLM/下载，最多2GPU但本轮实际0GPU。
