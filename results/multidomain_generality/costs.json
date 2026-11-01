@@ -1,5 +1,5 @@
 {
-  "GPU_process_hours": 0.4436116418779905,
+  "GPU_process_hours": 5.614762937404125,
   "per_job": [
     {
       "phase": "smoke",
@@ -110,8 +110,8 @@
     }
   ],
   "exact_total_available": false,
-  "total_GPU_process_hours_lower_bound": 0.6773287743771087,
-  "total_GPU_process_hours_upper_bound": 0.7319155817105719,
+  "total_GPU_process_hours_lower_bound": 5.848480069903243,
+  "total_GPU_process_hours_upper_bound": 5.903066877236706,
   "includes_failed_environment_attempts_and_smokes": true,
   "teacher_calls": 0,
   "optimizer_updates": 0,
@@ -137,10 +137,176 @@
       "total_GPU_process_hours_upper_bound": 0.6282520905236662,
       "includes_smoke_and_failed_attempts": true,
       "exact_total_available": false
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "KITTI-V2",
+      "known_GPU_process_hours": 0.7546878355400016,
+      "total_GPU_process_hours_lower_bound": 0.7546878355400016,
+      "total_GPU_process_hours_upper_bound": 0.7546878355400016,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "Dance",
+      "known_GPU_process_hours": 1.231397202841472,
+      "total_GPU_process_hours_lower_bound": 1.231397202841472,
+      "total_GPU_process_hours_upper_bound": 1.231397202841472,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "V2-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 1.2506753815138816,
+      "total_GPU_process_hours_lower_bound": 1.2506753815138816,
+      "total_GPU_process_hours_upper_bound": 1.2506753815138816,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "Dance-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 0.9549812918733288,
+      "total_GPU_process_hours_lower_bound": 0.9549812918733288,
+      "total_GPU_process_hours_upper_bound": 0.9549812918733288,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 0.9794095837574504,
+      "total_GPU_process_hours_lower_bound": 0.9794095837574504,
+      "total_GPU_process_hours_upper_bound": 0.9794095837574504,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
     }
   ],
   "reused_inferences": {
     "C1_V2_to_Dance": "No new GPU call; inherited frozen full-bank inference cost not remeasured, not a zero-cost independent system",
     "Dance_to_Dance": "Existing sealed official scores; no new GPU call; inherited inference cost not remeasured"
-  }
+  },
+  "remaining_GPU_process_hours": 5.171151295526134,
+  "remaining_jobs": [
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "phase": "smoke",
+      "pid": 3970950,
+      "exit_code": 0,
+      "wall_seconds": 102.18986667785794,
+      "physical_gpu": 2,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/SportsMOT_LaMOT-best_smoke.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/launcher_status.json"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "phase": "smoke",
+      "pid": 3979873,
+      "exit_code": 0,
+      "wall_seconds": 102.1267940949183,
+      "physical_gpu": 2,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/SportsMOT_V2-best_smoke.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/launcher_status.json"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "phase": "smoke",
+      "pid": 3988677,
+      "exit_code": 0,
+      "wall_seconds": 101.49326528306119,
+      "physical_gpu": 2,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/SportsMOT_Dance-best_smoke.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/launcher_status.json"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "phase": "smoke",
+      "pid": 3970951,
+      "exit_code": 0,
+      "wall_seconds": 272.59229897288606,
+      "physical_gpu": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/KITTI-V2_LaMOT-best_smoke.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/launcher_status.json"
+    },
+    {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "phase": "smoke",
+      "pid": 3994998,
+      "exit_code": 0,
+      "wall_seconds": 176.58137915912084,
+      "physical_gpu": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/Dance_LaMOT-best_smoke.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793535890306325693/launcher_status.json"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "phase": "full",
+      "pid": 4045544,
+      "exit_code": 0,
+      "wall_seconds": 3423.6846348489635,
+      "physical_gpu": 2,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/SportsMOT_LaMOT-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/launcher_status.json"
+    },
+    {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "phase": "full",
+      "pid": 136138,
+      "exit_code": 0,
+      "wall_seconds": 4256.448551070178,
+      "physical_gpu": 2,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/Dance_LaMOT-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/launcher_status.json"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "phase": "full",
+      "pid": 4045545,
+      "exit_code": 0,
+      "wall_seconds": 2444.2839089711197,
+      "physical_gpu": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/KITTI-V2_LaMOT-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/launcher_status.json"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "phase": "full",
+      "pid": 56984,
+      "exit_code": 0,
+      "wall_seconds": 4400.3045793550555,
+      "physical_gpu": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/SportsMOT_V2-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/launcher_status.json"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "phase": "full",
+      "pid": 418221,
+      "exit_code": 0,
+      "wall_seconds": 3336.4393854609225,
+      "physical_gpu": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/SportsMOT_Dance-best_full.txt",
+      "launcher_status": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/remaining_launchers/1793536730072316048/launcher_status.json"
+    }
+  ],
+  "prior_C1_C2_cost_snapshot": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/history_before_remaining/costs.json",
+  "full_C1_to_C6_complete": true,
+  "interpretation": "GPU-worker elapsed time incl CPU/IO, not utilization integration; shared GPUs; reused historical inferences are not zero-cost systems",
+  "remaining_full_launcher_wall_seconds": 10181.035054102074,
+  "remaining_full_launcher_GPU_process_hours": 4.961433627696177,
+  "GT_completion_CPU_wall_seconds": 11.316015067044646,
+  "GT_v4_reconstruction_CPU_wall_seconds": 11.316015067044646,
+  "GT_v3_failed_CPU_wall_seconds": 8.756481223041192
 }

@@ -1,78 +1,168 @@
 {
-  "status": "PASS_AUTHORIZED_C1_C2_ONLY",
-  "full_C1_to_C6_complete": false,
-  "blocked_combinations": [
-    "C3",
-    "C4",
-    "C5",
-    "C6"
-  ],
-  "original_prereg_prefix_unchanged": true,
-  "prereg_amendment_publication": {
+  "status": "PASS_ALL_SIX_PREREGISTERED_PAIRS",
+  "full_C1_to_C6_complete": true,
+  "original_PREREG_prefix_unchanged": true,
+  "remaining_p0_publication": {
     "remote_verified": true,
-    "remote_commit": "0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a",
-    "local_commit": "a15bc659192737b7c328dd5ea0ea8881bc8b9880",
-    "prereg_sha256": "da17fe4dcd13df5579887f75da68c424bdc009c506defae820dfe84a338a9ea6",
-    "original_prereg_commit": "98e7f84efbe43493761063e7832de7bfe9d4e18d",
-    "original_prereg_sha256": "7c6aa50428ad71f5b593e7b4711277c3a507e825edbed5b18b76bef0a23e0cc0",
-    "sports_sequences": 466,
-    "authorized_partial_work": [
-      "C1",
-      "C2",
-      "KITTI_complete_tail_scores"
-    ],
-    "maximum_simultaneous_GPUs": 2
+    "remote_commit": "30f753ffc3d7bcbe4c72a762e4742a80be45b56e",
+    "local_commit": "688463c56617c8c09d2870825e6a5cd2517b852c",
+    "p0_sha256": "696c080973c4ae260d5081764d12d086fe866d040b888ad9810999e54a83a802",
+    "P0_report_sha256": "7115f005c18d7bd553679e82e2c2c7477d597fe910c9065f48a278649f862511",
+    "maximum_simultaneous_GPUs": 2,
+    "precision": "FP32",
+    "no_training": true,
+    "no_MLLM": true
   },
   "checks": {
-    "Dance": {
-      "sequences": 425,
-      "main_fixed_configurations": 7,
-      "per_frame_count_equivalence": true,
-      "oracle_same_counts": true,
-      "B0_absolute_budget": true,
-      "GT_free_open_attempts": 0
+    "C1": {
+      "episodes": 425,
+      "videos": 25,
+      "complete_score_rows": 3588445,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
     },
-    "KITTI-V2": {
-      "sequences": 862,
-      "main_fixed_configurations": 7,
-      "per_frame_count_equivalence": true,
-      "oracle_same_counts": true,
-      "B0_absolute_budget": true,
-      "GT_free_open_attempts": 0
+    "C2": {
+      "episodes": 862,
+      "videos": 4,
+      "complete_score_rows": 2425382,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
+    },
+    "C3": {
+      "episodes": 466,
+      "videos": 45,
+      "complete_score_rows": 2968201,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
+    },
+    "C4": {
+      "episodes": 466,
+      "videos": 45,
+      "complete_score_rows": 2968201,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
+    },
+    "C5": {
+      "episodes": 862,
+      "videos": 4,
+      "complete_score_rows": 2425382,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
+    },
+    "C6": {
+      "episodes": 425,
+      "videos": 25,
+      "complete_score_rows": 3588445,
+      "fixed_main_configurations": 7,
+      "per_query_frame_count_equivalence": true,
+      "global_budget": true,
+      "GT_open_attempts": 0
     }
   },
-  "complete_main_prediction_sets": 14,
-  "all_indexed_prediction_files": 11595,
-  "targeted_tests_passed": 3,
+  "score_seals": [
+    {
+      "target": "kitti",
+      "model": "LaMOT-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "kitti",
+      "model": "Dance-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "kitti",
+      "model": "V2-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "dance",
+      "model": "LaMOT-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "sports",
+      "model": "LaMOT-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "sports",
+      "model": "Dance-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    },
+    {
+      "target": "sports",
+      "model": "V2-best",
+      "history_exact_subset": true,
+      "GT_open_attempts": 0
+    }
+  ],
+  "complete_main_prediction_sets": 42,
+  "all_indexed_prediction_files": 31566,
+  "Sports_GT_protocol": "PREREG_V4_ORIGINAL_ANNOTATION_GT",
+  "Sports_GT_original_exact": 410,
+  "Sports_GT_original_different": 8,
+  "Sports_GT_original_418_preserved": true,
+  "Sports_GT_reconstructed_all": 466,
+  "Sports_GT_completed_missing": 48,
   "targeted_test_command": [
     "/home/szgx/anaconda3/envs/dfot/bin/python",
     "-m",
     "pytest",
     "-q",
-    "tests/test_multidomain_generality.py"
+    "tests/test_multidomain_generality.py",
+    "tests/test_multidomain_download.py"
   ],
-  "targeted_test_log": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/validation/pytest.log",
-  "targeted_test_log_sha256": "38b30647b7613281c06c764fde6ec949f55240a4d639e1dcfd45b938896363c6",
+  "targeted_test_output": ".............                                                            [100%]\n=============================== warnings summary ===============================\n../../../home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345\n  /home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio\n    self._mark_plugins_for_rewrite(hook, disable_autoload)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n13 passed, 1 warning in 6.28s",
+  "targeted_test_log": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/validation_full/pytest.log",
+  "targeted_test_log_sha256": "b40415946728f9d11beeaae9d79e1d8778bc6e53d4cb2619d6ffcd76145c04ac",
   "compileall_passed": true,
   "no_training": true,
   "no_MLLM": true,
   "max_physical_GPUs": 2,
-  "source_historical_bit_exact": true,
-  "historical_source_HOTA": 42.526,
-  "complete_source_HOTA": 42.752,
+  "original_source_historical_scores_bit_exact": true,
   "gt_audit": {
     "inference": {
-      "V2-best": 0,
-      "Dance-best": 0
+      "kitti__LaMOT-best": 0,
+      "kitti__Dance-best": 0,
+      "kitti__V2-best": 0,
+      "dance__LaMOT-best": 0,
+      "sports__LaMOT-best": 0,
+      "sports__Dance-best": 0,
+      "sports__V2-best": 0
     },
     "decoders": {
-      "Dance": 0,
-      "KITTI-V2": 0
+      "C1": 0,
+      "C2": 0,
+      "C3": 0,
+      "C4": 0,
+      "C5": 0,
+      "C6": 0
     },
     "evaluation_and_oracle_separate_processes": true,
     "no_target_GT_threshold_fitting": true,
     "no_training": true,
     "no_MLLM": true,
-    "downloaded_annotation_payloads_not_opened_by_model": true
+    "downloaded_annotation_payloads_not_opened_by_model": true,
+    "Sports_GT_protocol": "PREREG_V4_ORIGINAL_ANNOTATION_GT",
+    "GT_reconstruction_v4": "/data2/user/FlexHook-TTA/results/multidomain_generality/sports_GT_reconstruction_v4.json",
+    "GT_v3_failed_record": "/data2/user/FlexHook-TTA/results/multidomain_generality/sports_GT_completion.json",
+    "v3_failure_overwritten": false
   }
 }

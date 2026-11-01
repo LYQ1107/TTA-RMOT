@@ -1,15 +1,28 @@
 {
   "inference": {
-    "V2-best": 0,
-    "Dance-best": 0
+    "kitti__LaMOT-best": 0,
+    "kitti__Dance-best": 0,
+    "kitti__V2-best": 0,
+    "dance__LaMOT-best": 0,
+    "sports__LaMOT-best": 0,
+    "sports__Dance-best": 0,
+    "sports__V2-best": 0
   },
   "decoders": {
-    "Dance": 0,
-    "KITTI-V2": 0
+    "C1": 0,
+    "C2": 0,
+    "C3": 0,
+    "C4": 0,
+    "C5": 0,
+    "C6": 0
   },
   "evaluation_and_oracle_separate_processes": true,
   "no_target_GT_threshold_fitting": true,
   "no_training": true,
   "no_MLLM": true,
-  "downloaded_annotation_payloads_not_opened_by_model": true
+  "downloaded_annotation_payloads_not_opened_by_model": true,
+  "Sports_GT_protocol": "PREREG_V4_ORIGINAL_ANNOTATION_GT",
+  "GT_reconstruction_v4": "/data2/user/FlexHook-TTA/results/multidomain_generality/sports_GT_reconstruction_v4.json",
+  "GT_v3_failed_record": "/data2/user/FlexHook-TTA/results/multidomain_generality/sports_GT_completion.json",
+  "v3_failure_overwritten": false
 }

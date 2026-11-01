@@ -1,5 +1,5 @@
 {
-  "status": "COMPLETE_DANCE_2000_SPORTS_ASSET_BLOCKED_KITTI_POINT_ONLY",
+  "status": "COMPLETE_DANCE25_SPORTS45_2000_KITTI4_POINT_ONLY",
   "comparisons": {
     "C1__R_SxK_I_minus_NATIVE": {
       "combo": "C1",
@@ -14,8 +14,8 @@
         14.685326142991581,
         33.6424827678502
       ],
-      "unit": "video, all queries/frames kept together",
-      "pooling": "official TP-weighted sufficient statistics"
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
     },
     "C1__IN_DOMAIN_minus_R_SxK_I": {
       "combo": "C1",
@@ -30,12 +30,106 @@
         0.09069506709065518,
         0.7193641061779391
       ],
-      "unit": "video, all queries/frames kept together",
-      "pooling": "official TP-weighted sufficient statistics"
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C3__R_SxK_I_minus_NATIVE": {
+      "combo": "C3",
+      "target": "SportsMOT",
+      "first": "R_SxK_I",
+      "second": "NATIVE",
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 11.859670575256452,
+      "CI95": [
+        10.032726313801243,
+        13.87666645725184
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C3__IN_DOMAIN_minus_R_SxK_I": {
+      "combo": "C3",
+      "target": "SportsMOT",
+      "first": "IN_DOMAIN",
+      "second": "R_SxK_I",
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 7.0936134523625896,
+      "CI95": [
+        5.622748116618189,
+        8.537680905858943
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C4__R_SxK_I_minus_NATIVE": {
+      "combo": "C4",
+      "target": "SportsMOT",
+      "first": "R_SxK_I",
+      "second": "NATIVE",
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 40.79112528278431,
+      "CI95": [
+        36.81744010711268,
+        45.26197740947598
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C4__IN_DOMAIN_minus_R_SxK_I": {
+      "combo": "C4",
+      "target": "SportsMOT",
+      "first": "IN_DOMAIN",
+      "second": "R_SxK_I",
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 8.573033907170654,
+      "CI95": [
+        6.734013764621184,
+        10.470926544090863
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C6__R_SxK_I_minus_NATIVE": {
+      "combo": "C6",
+      "target": "Dance",
+      "first": "R_SxK_I",
+      "second": "NATIVE",
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 16.01580564034255,
+      "CI95": [
+        9.16217860143218,
+        24.075176891166638
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
+    },
+    "C6__IN_DOMAIN_minus_R_SxK_I": {
+      "combo": "C6",
+      "target": "Dance",
+      "first": "IN_DOMAIN",
+      "second": "R_SxK_I",
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 0.6472836354274598,
+      "CI95": [
+        0.10093790165277791,
+        1.3310946376487511
+      ],
+      "unit": "video; all expressions and frames kept together",
+      "pooling": "Official TP-weighted HOTA sufficient statistics"
     }
   },
   "planned_samples": 2000,
-  "seed": 0,
-  "KITTI": "4 videos: no bootstrap",
-  "SportsMOT": "not run; missing official assets"
+  "seed": 0
 }
