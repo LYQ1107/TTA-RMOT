@@ -2458,3 +2458,4 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - 只在小型报告导出中发现stats是(numerator,denominator)双数组而非dict，原metrics/预测/TrackEval不受影响；修正序列化并新增JSON往返精确HOTA/重采样回归，现12项通过。大detailed CSV保留本机绝对路径/SHA，Git发布summary/完整日志精简归档及逐视频逐阈值充分统计；C5所有7758份主/历史/Oracle预测的SHA公开，旧GT-free6034索引不覆盖。
 - C3 V2→Sports完成45视频，full worker4400.305秒/0退出，2968201完整/2956145历史分数封存。独立CPU生成5主控制和2历史控制、3262份预测，GT打开0，先发布C3_P1_SEALS.json及SHA索引；GT和正式指标仍未读/未算，等待Dance→Sports也封存后执行418精确门。GPU0原槽自动接续Dance→Sports，GPU2继续LaMOT→Dance，不新增卡。
 - 新增通用pre-GT封存脚本只整理已有不可变分数/预测，不改变解码；完善最终报告的完整/历史覆盖对照、精简执行日志归档和逐类判定列举。P0发布文件及原预注册不修改。
+- C6 LaMOT→Dance完成25视频，full worker4256.449秒/0退出，3588445完整/3576681历史分数封存。独立CPU生成5主控制+2历史控制共2975份预测，GT打开0；C6_P1_SEALS.json先发布再读GT。最后GPU仅剩原GPU0的Dance→Sports，未启动新方法、训练或教师。

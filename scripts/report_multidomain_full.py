@@ -202,6 +202,7 @@ def main():
         '## 2. 资产、P0、复现和协议','',
         '原预注册98e7f84e；下载授权修订0f9c61c6先发布；GT补建v3 0a7477bf先发布。详见PREREG.md、P0_REMAINING.md、remaining_p0.json。',
         '933份官方payload已核SHA；LaMOT checkpoint 400980a1…ba4213f；45个McByte官方文件、466表达（与原GitHub逐字节一致）、26970帧原图仅建链接。',
+        '许可证：FlexHook代码MIT，不推定覆盖独立权重/数据；LaMOT官方仓库未找到独立数据LICENSE，不宣称标注为MIT。逐来源记录见downloads.json；大权重/原始数据不进Git。',
         'Sports实际466条而非465（末行无LF）；295779个观测、2968201个候选–表达对。官方mix末尾观测补分，完整/历史两套保留。',
         '三个checkpoint均strict=True，冻结FP32、TF32禁用、原RoBERTa BPE。目标各用原yaml/dataloader/原框ID；Sports静态class=0且无类别token；KITTI保留car/ped合并ID；Dance原17句不改。',
         '单进程冻结encoder缓存经原getitem/forward和隔离query的真实帧对齐；未冒称运行了会自动读GT的原DDP评测入口。Sports干净图像视图排除._资源叉，未改原图。',
