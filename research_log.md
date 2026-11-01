@@ -2456,3 +2456,5 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - C5封存清单先公开ce675ea5，然后独立CPU开启oracle→TrackEval。预运行检查发现evaluate的第二位置参数是methods而非source_model，CLI分派已改为显式关键字；新增定向回归后共11项通过。未发生带错误路由的正式评测，不改预测、超参、GT过滤或模型架构；其余GPU队列保持健康运行。
 - C5全7主控制+2历史覆盖正式TrackEval完成：Native22.398、S排序×I数量33.801、I42.752、逆交换25.534、S×GT37.595/I×GT47.593、B0_GLOBAL26.577；ρ=.560253818、Δrank8.950338，按原规则“数量与排序共同作用”。GT R@1 .277423对.424417、AUROC .670094对.901302；仅4视频点估计，不夸大帧级显著性。新source含smoke .754688 GPU-worker小时，旧同域推理不是零成本。C1/C2不重跑，全六组仍未齐。
 - 只在小型报告导出中发现stats是(numerator,denominator)双数组而非dict，原metrics/预测/TrackEval不受影响；修正序列化并新增JSON往返精确HOTA/重采样回归，现12项通过。大detailed CSV保留本机绝对路径/SHA，Git发布summary/完整日志精简归档及逐视频逐阈值充分统计；C5所有7758份主/历史/Oracle预测的SHA公开，旧GT-free6034索引不覆盖。
+- C3 V2→Sports完成45视频，full worker4400.305秒/0退出，2968201完整/2956145历史分数封存。独立CPU生成5主控制和2历史控制、3262份预测，GT打开0，先发布C3_P1_SEALS.json及SHA索引；GT和正式指标仍未读/未算，等待Dance→Sports也封存后执行418精确门。GPU0原槽自动接续Dance→Sports，GPU2继续LaMOT→Dance，不新增卡。
+- 新增通用pre-GT封存脚本只整理已有不可变分数/预测，不改变解码；完善最终报告的完整/历史覆盖对照、精简执行日志归档和逐类判定列举。P0发布文件及原预注册不修改。

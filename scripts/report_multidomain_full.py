@@ -92,6 +92,21 @@ def main():
                 if file_sha(path)!=seal[coverage+'_sha256']:raise ValueError('Score changed after seal')
                 margins[str(path)]=dict(target={'kitti':'KITTI-V2','dance':'Dance','sports':'SportsMOT'}[key],
                     model=seal['model'],path=str(path),sha256=file_sha(path),bytes=path.stat().st_size,coverage=coverage)
+    coverage=[]
+    for key in ('kitti','dance','sports'):
+        for p in (RUN/key).glob('*/scores_seal.json'):
+            s=json.loads(p.read_text());model=s['model']
+            if key=='kitti':pair='C5' if model=='LaMOT-best' else 'C2'
+            elif key=='dance':pair='C6'
+            else:pair='C4' if model=='Dance-best' else 'C3'
+            native='IN_DOMAIN' if model==IN_DOMAIN_MODEL[{'kitti':'KITTI-V2','dance':'Dance','sports':'SportsMOT'}[key]] else 'NATIVE'
+            old=references[pair+'__HIST_'+model];complete=references[pair+'__'+native]
+            coverage.append(dict(target={'kitti':'KITTI-V2','dance':'Dance','sports':'SportsMOT'}[key],model=model,
+                historical_score_rows=s['historical_rows'],complete_score_rows=s['complete_rows'],
+                added_tail_score_rows=s['complete_rows']-s['historical_rows'],
+                historical_HOTA=old['metrics']['HOTA'],complete_HOTA=complete['metrics']['HOTA'],
+                historical_prediction_rows=old['prediction_rows'],complete_prediction_rows=complete['prediction_rows']))
+    write_csv(PUBLIC/'coverage_comparison.csv',coverage)
     history=RUN/'history_before_remaining';cost=json.loads((history/'costs.json').read_text())
     newjobs=[]
     for p in sorted((RUN/'remaining_launchers').glob('*/launcher_status.json')):
@@ -148,10 +163,30 @@ def main():
     atomic_json(PUBLIC/'reproduction.json',reproduction)
     inventory=json.loads((PUBLIC/'inventory.json').read_text())
     inventory.update(status='ALL_SIX_COMBINATIONS_COMPLETE',completed_combinations=[r[0] for r in PAIRS],pending_combinations=[],
-        full_scope_preserved=True,complete_score_banks=list(margins.values()),GT_open_attempts=0)
+        full_scope_preserved=True,complete_score_banks=list(margins.values()),GT_open_attempts=0,
+        missing_assets=[],original_P0_missing_assets_snapshot=str(history/'inventory.json'),
+        smoke_status='ALL_AUTHORIZED_OLD_AND_REMAINING_SMOKES_PASSED',
+        GT_completion_status='PASS_418_EXACT_48_COMPLETED')
+    for row in inventory['targets']['SportsMOT'].get('required_paths',[]):
+        p=Path(row['path']);row.update(exists=p.exists(),is_symlink=p.is_symlink(),resolved=str(p.resolve()))
     atomic_json(PUBLIC/'inventory.json',inventory)
     completion=dict(status='ALL_SIX_PAIRS_COMPLETE',conclusion=conclusion,eligible_pairs=len(valid),quantity_dominant_pairs=len(quantity),
         labels=rhos,main_configurations=42,indexed_prediction_files=len(files),new_training=0,new_MLLM=0,max_GPUs=2)
+    atomic_json(PUBLIC/'completion.json',completion)
+    execution=PUBLIC/'P1_execution.json'
+    if execution.exists():
+        record=json.loads(execution.read_text());record.update(status='ALL_NEW_FULL_SCORES_AND_SIX_PAIR_EVALUATIONS_COMPLETE',
+            full_source_banks_complete=True,all_six_evaluations_complete=True,GT_completion_passed=True)
+        atomic_json(execution,record)
+    execution_archive=PUBLIC/'execution_logs.tar.gz'
+    with tarfile.open(execution_archive,'w:gz') as handle:
+        for directory in (RUN/'kitti/launchers',RUN/'remaining_launchers'):
+            for p in directory.rglob('*'):
+                if p.is_file() and p.suffix in ('.txt','.json','.log'):
+                    handle.add(p,arcname=str(p.relative_to(RUN)))
+    completion.update(execution_archive=dict(path=str(execution_archive),sha256=file_sha(execution_archive)),
+        bootstrap_statistics=dict(path=str(stats_file),sha256=file_sha(stats_file)),
+        coverage_comparison_sha256=file_sha(PUBLIC/'coverage_comparison.csv'))
     atomic_json(PUBLIC/'completion.json',completion)
     lines=['# 三数据集多域普遍性：完整六组合结果','',f'## 1. 判定汇总：{conclusion}','',
         f"可判定组合{len(valid)}，数量主导{len(quantity)}；C2判定为“{c2['label']}”。按预注册逐字规则汇总，不按结果删组合。",'',
@@ -159,6 +194,10 @@ def main():
             next((f"{r['rho']:.6f}：{r['label']}" for r in rhos if r['source']==s and r['target']==t),'同域参照')
             for t in ('KITTI-V2','Dance','SportsMOT')]] for s in ('V2-best','Dance-best','LaMOT-best')]),'',
         table(['组合','gap','ρ','Δrank','判定'],[[r[k] for k in ('combo','gap','rho','delta_rank','label')] for r in rhos]),'',
+        '数量主导：'+('、'.join(r['combo'] for r in rhos if r['label']=='数量主导') or '无')+'。',
+        '数量与排序共同作用：'+('、'.join(r['combo'] for r in rhos if r['label']=='数量与排序共同作用') or '无')+'。',
+        '排序主导：'+('、'.join(r['combo'] for r in rhos if r['label']=='排序主导') or '无')+'。',
+        '跨域差距过小、不参与汇总判定：'+('、'.join(r['combo'] for r in rhos if r['gap']<3) or '无')+'。','',
         'ρ用官方detailed CSV未舍入HOTA计算；不截断到[0,1]。数量交换借助目标域同域模型或GT，不是可独立部署的TTA。数量主导不等于排序完全无损。','',
         '## 2. 资产、P0、复现和协议','',
         '原预注册98e7f84e；下载授权修订0f9c61c6先发布；GT补建v3 0a7477bf先发布。详见PREREG.md、P0_REMAINING.md、remaining_p0.json。',
@@ -168,8 +207,11 @@ def main():
         '单进程冻结encoder缓存经原getitem/forward和隔离query的真实帧对齐；未冒称运行了会自动读GT的原DDP评测入口。Sports干净图像视图排除._资源叉，未改原图。',
         '历史KITTI V2逐位分数相同、42.526复现；完整42.752。Dance历史32.134/254118行、完整32.139/254910行，当前诊断均用完整范围。',
         'KITTI GT_Dets491286与infer.sh注释491222差64，保留已通过历史门槛的原过滤/GT，不为凑注释改GT。',
-        '未找到Sports子集官方HOTA数字：论文正文仅LaMOT合并56.77，infer.sh合并56.756，不将其作Sports门槛。',
+        '无官方子集数字可核对：未找到Sports子集官方HOTA，论文正文仅LaMOT合并56.77，infer.sh合并56.756，不将其作Sports门槛。',
         '官方Sports模板只有418份；独立预测封存后，原始LaMOT targets×原SportsMOT官方框逐行全字段/顺序复现418，才接入48缺项；见sports_GT_completion.json。','',
+        '完整/历史覆盖对比（新评分或补尾的分数库，均保留原结果）：','',
+        table(['目标','模型','历史分数行','完整分数行','补尾分数行','历史HOTA','完整HOTA'],[
+            [r[k] for k in ('target','model','historical_score_rows','complete_score_rows','added_tail_score_rows','historical_HOTA','complete_HOTA')] for r in coverage]),'',
         '## 3. 六组合全部固定诊断','',
         table(['组合','配置','HOTA','DetA','AssA','IDF1','IDSW','行数','Empty行'],[
             [r[k] for k in ('combo','configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows')] for r in allrows]),'',
@@ -198,6 +240,7 @@ def main():
         '下载经历匿名CDN403、原生官网扫码恢复、长传输后签名过期112；每批刷新签名后补齐。Baidu ZIP的编码路径、分页100上限均已修复；旧失败、私有凭据隔离和精确来源见downloads.json/QR_LOGIN_STATUS.md。',
         '历史SIGTERM仅恢复未完帧；此次完成的视频回执只复用不重算。原始checkpoint、历史报告/结果、vendor代码和其它任务进程未覆盖/终止。',
         '全部预测/数组绝对路径与SHA见margin_paths.json、all_prediction_files.csv.gz。summary和完整日志精简归档official_metrics_logs.tar.gz；大detailed CSV不进Git，其绝对目录/SHA见official_results.json。逐视频逐阈值bootstrap充分统计公开为bootstrap_sufficient_statistics.json.gz。',
+        '所有GPU尝试、真实资源准入、launcher回执和完整stdout另归档execution_logs.tar.gz（不含任何浏览器会话或凭据），SHA见completion.json。',
         '本研究是固定官方模型的跨域归因，不证明数量可以无监督估计，也不把ORACLE/同域数量交换宣称新TTA。完整预注册结果交付后停止，不启动方法实验。']
     (PUBLIC/'REPORT.md').write_text('\n'.join(lines)+'\n')
     print(json.dumps(completion,ensure_ascii=False),flush=True)
