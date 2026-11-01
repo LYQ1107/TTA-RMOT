@@ -1,0 +1,21 @@
+{
+  "prereg_original_unchanged": true,
+  "C1_B_series": {
+    "current_instruction": "V2 source statistics use complete KITTI validation candidates; reuse prior C1 B-series only after verification",
+    "verification": "Old v2 source statistics use historical coverage and do not equal the required complete-coverage statistics",
+    "execution": "Generate independent current C1 B-series with full-coverage statistics, preserve historical results and explicitly report the difference",
+    "historical_rows": 2355528,
+    "historical_emission_rate": 0.3187540118393838,
+    "complete_rows": 2425382,
+    "complete_emission_rate": 0.3198988860311489,
+    "no_new_decoder_variant": true
+  },
+  "Sports418_sensitivity_interpretation": "Use v4 GT restricted to the 418 sequence IDs covered by the original official templates, to isolate coverage. Do not silently substitute the 8 known incomplete legacy GT files. The scope question remains available to the user; any different choice will be documented separately.",
+  "R_at_1": "Compute and retain both v2 normalized GT-R@1 and binary top1 Hit@1, including their bootstrap intervals. The wording/normalization difference is explicitly disclosed; neither result is discarded.",
+  "CLIP_replacements": "Use the latest observation at or before each requested time; preserve repeated replacement images, count usable crop slots and unique frames separately; fewer than 2 usable crop slots falls back to the exact CROP response.",
+  "precall_budget": "Token-area estimate from archived T1 elapsed time, before any new teacher call. 1.2392642524059447 equivalent GPU hours for all three views, including reused Dance CROP; therefore retain 8 anchors for KITTI/Sports.",
+  "failures_and_repairs": [
+    "Initial kernel-whitelist test incorrectly used a blocked-file fixture inside /tmp, which is intentionally allowed for runtime caches. Corrected the test to use a real out-of-whitelist repository file; 7 tests pass. Production whitelist and predictions unchanged.",
+    "Partial KITTI-only report export attempted to write an empty Sports sensitivity table using a CSV helper requiring at least one row. Skip only nonexistent partial-table exports; full requested tables are still mandatory. Predictions, GT, metrics, and experiment scope unchanged."
+  ]
+}
