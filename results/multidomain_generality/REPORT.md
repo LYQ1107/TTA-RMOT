@@ -1,4 +1,14 @@
-# 三数据集多域普遍性：P0盘点与硬停止报告
+# 三数据集多域普遍性：补充授权后继续执行
+
+## 最新阶段（2026-11-01，优先于下方历史盘点）
+
+补充PREREG已推送0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a。完整C1–C6范围保留，Sports466序列已获授权。最新恢复盘点、strict实机smoke与成本门槛见[P0_RESUMED.md](P0_RESUMED.md)，公开下载逐文件清单见[downloads.json](downloads.json)。
+
+C1复用、C2新推理、KITTI补分在新授权范围内继续；LaMOT权重与McByte官方文件尚未成功下载，其相关组合仍受资产门槛阻塞。以下原始P0停止记录仅为历史，不表示忽略新授权；原始机器盘点另存results/runs/multidomain_generality_20261101/history_p0_stop，旧提交8e16d1bc可完整恢复。最终结果未出前不判三域普遍性。
+
+---
+
+# 首次P0盘点与停止（修订前历史记录）
 
 ## 1. 判定结果汇总
 
