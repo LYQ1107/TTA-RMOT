@@ -27,6 +27,25 @@ def evaluate():
     frames=read_jsonl(plan['manifest_path'])
     expected=sum(len(f['queries'])*len(f['candidates'])*3 for f in frames)
     if len(raw)!=expected:raise ValueError('Incomplete paired teacher results')
+    registry_path=RUN/'probe/resume_registry.json'
+    if registry_path.exists():
+        import sqlite3
+        registry=json.loads(registry_path.read_text());n=registry['cache_rows_verified']
+        db=sqlite3.connect('file:'+str(RUN/'probe/workers/1/calls.sqlite')+'?mode=ro',uri=True)
+        preserved=0
+        # The worker table is INSERT-only, so original committed rowids remain
+        # the first n rows across the restart. Compare exact payloads, not only
+        # counts; no teacher call is repeated for these committed requests.
+        for payload, in db.execute('SELECT payload FROM calls WHERE rowid<=? ORDER BY rowid',(n,)):
+            r=json.loads(payload);key=r['target'],r['method'],r['video_id'],r['frame_id'],r['track_id'],r['query_id']
+            if raw[key]!=r:raise ValueError('Changed original committed teacher response after resource resume')
+            preserved+=1
+        db.close()
+        if preserved!=n:raise ValueError('Original teacher cache prefix missing')
+        check=dict(status='EXACT_ORIGINAL_COMMITTED_PAYLOADS_REUSED',rows=preserved,
+                   checked_before_probe_GT=True,model_and_input_unchanged=True)
+        atomic_json(RUN/'probe/cache_resumption_validation.json',check)
+        atomic_json(PUBLIC/'cache_resumption_validation.json',check)
     # Only after the complete raw-output checks import GT routines.
     from scripts.analyze_pf_full_offline import load_eval_gt,overlaps,matched_gt,auroc
     gt=lru_cache(None)(lambda target,v,q:load_eval_gt(previous.target_root(target),v,q))
@@ -58,6 +77,7 @@ def evaluate():
                 found,_=matched_gt(iou,order[:1]);hit=int(bool(found));n_gt=len(truth)
                 f=dict(target=target,method=method,video=v,frame=t,query=qid,types=tags,
                        GT_count=n_gt,predicted_count=int(selected.sum()),hit_at_1=hit,
+                       candidate_oracle_hit=int(bool((iou>=.5).any())),
                        GT_recall_at_1=hit/n_gt if n_gt else None)
                 frame_rows[target,method].append(f)
                 candidate_rows[target,method].extend(dict(p=float(value),y=bool(y),types=tags,video=v,query=qid) for value,y in zip(p,labels))
@@ -95,6 +115,18 @@ def evaluate():
                             metric=field,delta=float(delta),CI95=np.percentile(samples,[2.5,97.5]).tolist(),
                             clusters=n,samples=2000,seed=0,unit='whole video, all frame/query dependence preserved')
     write_csv(PUBLIC/'teacher_probe.csv',output)
+    ceilings=[]
+    for target in TARGETS:
+        fs=frame_rows[target,previous.IN_DOMAIN_MODEL[target]]
+        for scope in ('ALL',*WORDS,'OTHER'):
+            valid=[r for r in fs if r['GT_count']>0 and (scope=='ALL' or scope in r['types'])]
+            ceilings.append(dict(target=target,expression_type=scope,GT_present_frame_queries=len(valid),
+                arithmetic_GT_R_at_1_upper_bound=float(np.mean([1/r['GT_count'] for r in valid])) if valid else None,
+                fixed_MOT_oracle_GT_R_at_1=float(np.mean([r['candidate_oracle_hit']/r['GT_count'] for r in valid])) if valid else None,
+                fixed_MOT_oracle_Hit_at_1=float(np.mean([r['candidate_oracle_hit'] for r in valid])) if valid else None,
+                GT_count_present_mean=float(np.mean([r['GT_count'] for r in valid])) if valid else None,
+                role='POST_HOC_DESCRIPTIVE_MATH_CEILING_ONLY_NOT_A_DECODER_NOT_USED_IN_VERDICT'))
+    write_csv(PUBLIC/'probe_ceiling.csv',ceilings)
     missing=set(json.loads((OLD_PUBLIC/'sports_template_inventory.json').read_text())['missing_GT'])
     sports418=[]
     for method in ('CROP','CLIP','FRAME_BOX',*MODELS):

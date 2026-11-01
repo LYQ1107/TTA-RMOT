@@ -55,7 +55,7 @@ def report(combos):
     taxonomy=list(csv.DictReader((PUBLIC/'expression_types.csv').open()))
     cats=json.loads((OLD/'source_query_categories.json').read_text())['mapping']
     missing=set(json.loads((OLD_PUBLIC/'sports_template_inventory.json').read_text())['missing_GT'])
-    rows=[];splitrows=[];sensitivity=[];bootstrap={};rhofree=[];granularity=[];manifests=[];stats_export={}
+    rows=[];splitrows=[];sensitivity=[];sensitivity_splits=[];bootstrap={};rhofree=[];granularity=[];manifests=[];stats_export={}
     for combo,model,target in PAIRS:
         if combo not in combos:continue
         meta=load_target(target)[0]
@@ -86,10 +86,18 @@ def report(combos):
                 if len(keys)!=418:raise ValueError('Official coverage sensitivity must have exactly418 sequences')
                 sensitivity.append(dict(combo=combo,source=model,target=target,configuration=name,
                     GT_protocol='V4_GT_RESTRICTED_TO_OFFICIAL_418_COVERAGE',**selected_metrics(result,keys,present)))
+                for label in (*WORDS,'OTHER'):
+                    selected={k for k in keys if label in type_by[k]}
+                    sensitivity_splits.append(dict(combo=combo,source=model,target=target,configuration=name,
+                        expression_type=label,GT_protocol='V4_GT_RESTRICTED_TO_OFFICIAL_418_COVERAGE',
+                        **selected_metrics(result,selected,present)))
             manifest=dict(combo=combo,configuration=name,path=str(result['path']),
                 seal_path=str(result['path']/'predictions_seal.json'),seal_sha256=file_sha(result['path']/'predictions_seal.json'),
                 predictions=len(result['seal']['episodes']),prediction_rows=result['seal']['prediction_rows'],
-                detailed_path=str(result['path']/'results/pedestrian_detailed.csv'),detailed_sha256=result['done']['detailed_sha256'])
+                detailed_path=str(result['path']/'results/pedestrian_detailed.csv'),detailed_sha256=result['done']['detailed_sha256'],
+                official_completion_path=str(result['path']/'official_completion.json'),
+                official_completion_sha256=file_sha(result['path']/'official_completion.json'),
+                official_completion=result['done'])
             manifests.append(manifest)
             num,den=result['stats'];stats_export[combo+'__'+name]=dict(videos=result['videos'],
                 assA_TP_numerator=num.tolist(),TP_FN_FP_denominator=den.tolist())
@@ -111,7 +119,8 @@ def report(combos):
         print(json.dumps(dict(event='DECOMPOSE_B_REPORTED',combo=combo,required_granularity=required)),flush=True)
     for name,values in [('b_all.csv',rows),('granularity.csv',[r for r in rows if r['configuration'] in ORACLES]),
                         ('calibrators.csv',[r for r in rows if r['configuration'] in CALIBRATORS]),('rho_free.csv',rhofree),
-                        ('granularity_verdicts.csv',granularity),('b_splits.csv',splitrows),('sports418_b.csv',sensitivity)]:
+                        ('granularity_verdicts.csv',granularity),('b_splits.csv',splitrows),('sports418_b.csv',sensitivity),
+                        ('sports418_b_splits.csv',sensitivity_splits)]:
         if values:
             write_csv(PUBLIC/name,values)
     atomic_json(PUBLIC/'b_bootstrap.json',bootstrap)

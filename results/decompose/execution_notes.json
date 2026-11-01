@@ -11,11 +11,28 @@
     "no_new_decoder_variant": true
   },
   "Sports418_sensitivity_interpretation": "Use v4 GT restricted to the 418 sequence IDs covered by the original official templates, to isolate coverage. Do not silently substitute the 8 known incomplete legacy GT files. The scope question remains available to the user; any different choice will be documented separately.",
-  "R_at_1": "Compute and retain both v2 normalized GT-R@1 and binary top1 Hit@1, including their bootstrap intervals. The wording/normalization difference is explicitly disclosed; neither result is discarded.",
+  "R_at_1": "Use v2 normalized GT-R@1 in the main table and retain binary Hit@1 and all corresponding intervals. All nine preregistered decisions agree under the two definitions, so the wording ambiguity does not change this round's verdicts.",
+  "post_hoc_descriptions_not_used_for_verdicts": ["arithmetic and fixed-MOT top1 ceilings", "presence class balance and constant-zero arithmetic references; no new MOT predictions"],
+  "resource_resume": {
+    "reason": "GPU7 changed from 0 processes at admission to 3; GPU2 was idle with 81154 MiB free",
+    "signal_target": "Only owned PID1407433, exact decompose_teacher.py --shard 1 command verified before one SIGINT",
+    "resume_GPU": 2,
+    "original_committed_calls_reused_exactly": 14118,
+    "possible_discarded_uncommitted_judgments_upper_bound": 8,
+    "all_unique_paired_outputs": 87438,
+    "successful_new_judgments": 79501,
+    "GPU_process_hours_including_interruption": 1.6695503238591158,
+    "new_forward_GPU_hours_lower_bound": 1.5622598386707898,
+    "new_forward_GPU_hours_upper_bound": 1.5779345120878294,
+    "model_inputs_and_numerical_parameters_unchanged": true,
+    "other_processes_signalled": 0
+  },
   "CLIP_replacements": "Use the latest observation at or before each requested time; preserve repeated replacement images, count usable crop slots and unique frames separately; fewer than 2 usable crop slots falls back to the exact CROP response.",
   "precall_budget": "Token-area estimate from archived T1 elapsed time, before any new teacher call. 1.2392642524059447 equivalent GPU hours for all three views, including reused Dance CROP; therefore retain 8 anchors for KITTI/Sports.",
   "failures_and_repairs": [
     "Initial kernel-whitelist test incorrectly used a blocked-file fixture inside /tmp, which is intentionally allowed for runtime caches. Corrected the test to use a real out-of-whitelist repository file; 7 tests pass. Production whitelist and predictions unchanged.",
-    "Partial KITTI-only report export attempted to write an empty Sports sensitivity table using a CSV helper requiring at least one row. Skip only nonexistent partial-table exports; full requested tables are still mandatory. Predictions, GT, metrics, and experiment scope unchanged."
+    "Partial KITTI-only report export attempted to write an empty Sports sensitivity table using a CSV helper requiring at least one row. Skip only nonexistent partial-table exports; all requested full tables are complete. Predictions, GT, metrics, and experiment scope unchanged.",
+    "Owned GPU7 worker was interrupted solely for resource migration; original failed launcher traceback, committed cache, measured elapsed time and partial forward-time uncertainty are retained. Resume verified all14118 request keys and reused their exact final output payloads before any probe GT evaluation.",
+    "GitHub publication initially recovered after a transport retry (dea98be5). Subsequent GitHub and plugin-management calls both failed at the shared connector transport. HTTPS Git has no configured credentials and SSH normal authentication was denied. No permissions, credentials, other processes, or account settings were changed; final publication must be verified separately."
   ]
 }
