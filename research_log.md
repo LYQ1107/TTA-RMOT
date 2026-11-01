@@ -1,5 +1,12 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-11-01 三数据集数量/排序普遍性：P0硬停止
+
+- 从321ec548新建research/multidomain-generality-20261101；用户完整任务先推PREREG，远端98e7f84e。只读盘点，禁止训练/MLLM/下载，最多2GPU但本轮实际0GPU。
+- 缺官方LaMOT-best、LaMOT版Sports表达/元数据及McByte-SportsMOT预测，按明确停止条件不跑任何smoke/P1/P2（包括C2），不以别的项目模型/GT框代替。Sports原图在共享原始数据目录找到45/45视频26970有效帧，只读文件名/seqinfo，不用LocateMOT代码标签或预测、不改链接。
+- Sports官方seqmap实际466唯一序列，末行无LF所以wc -l仅465；不删样本凑数，需明确恢复口径。KITTI完整10822观测/2425382候选表达对，比旧2355528缺69854分数（314末观测），旧42.526仅作历史覆盖核验。
+- 只读SHA核验旧V2→KITTI42.526、Dance→Dance历史32.134/完整32.139、V2→Dance8.218；GT打开0。不对未完成的六组合计算ρ或宣称普遍性。完整资产盘点和恢复条件见results/multidomain_generality/REPORT.md，缺失项未获新授权前停止。
+
 ## 2026-11-01 Gated cross-query decoding (no training)
 
 - 从ecf57122新建research/v2dance-gated-decode-20261101；先推固定协议dbd701e7。G0改为同句跨全部25视频按观测加权标准化；视频T1门控与结构分支按用户常数执行，不用GT阈值。

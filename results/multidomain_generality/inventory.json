@@ -1,0 +1,1550 @@
+{
+  "status": "STOPPED_P0_MISSING_ASSETS_AND_SEQMAP_MISMATCH",
+  "root": "/data2/user/FlexHook-TTA",
+  "base_commit": "321ec54899a25f836b18bb127da2578fbb5e32ec",
+  "prereg_publication": {
+    "remote_verified": true,
+    "remote_commit": "98e7f84efbe43493761063e7832de7bfe9d4e18d",
+    "local_commit": "6a993ff7b8e69dae839018dcbb447b9fe0a03e74",
+    "prereg_sha256": "7c6aa50428ad71f5b593e7b4711277c3a507e825edbed5b18b76bef0a23e0cc0"
+  },
+  "models": {
+    "V2-best": {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+      "exists": true,
+      "is_symlink": false,
+      "resolved": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+      "bytes": 995768450,
+      "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+      "status": "PRESENT_OFFICIAL_FILE"
+    },
+    "Dance-best": {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+      "exists": true,
+      "is_symlink": false,
+      "resolved": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+      "bytes": 995771714,
+      "sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+      "status": "PRESENT_OFFICIAL_FILE"
+    },
+    "LaMOT-best": {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/SOTA_ckpts/LaMOT-best.pth",
+      "exists": false,
+      "is_symlink": false,
+      "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/SOTA_ckpts/LaMOT-best.pth",
+      "status": "MISSING_STOP"
+    }
+  },
+  "targets": {
+    "KITTI-V2": {
+      "seqmap": {
+        "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/kitti-2.txt",
+        "exists": true,
+        "is_symlink": false,
+        "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/kitti-2.txt",
+        "bytes": 32563,
+        "sha256": "d9fe569b3b4c25e3948b187290866dbd33d41299400fb247ef317d9580d8568b",
+        "rows": 862,
+        "unique_rows": 862,
+        "LF_count": 861,
+        "ends_with_LF": false,
+        "videos": 4,
+        "per_video_expressions": {
+          "0005": 197,
+          "0011": 228,
+          "0013": 207,
+          "0019": 230
+        },
+        "duplicated_rows": {},
+        "first_row": "0005+automobiles-are-located-to-the-left",
+        "parser_skips_header": false
+      },
+      "videos": 4,
+      "expressions": 862,
+      "tracker_root": {
+        "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2",
+        "exists": true,
+        "is_symlink": true,
+        "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2"
+      },
+      "full_candidate_observations": 10822,
+      "full_candidate_expression_pairs": 2425382,
+      "historical_candidate_expression_pairs": 2355528,
+      "per_video": [
+        {
+          "video": "0005",
+          "expressions": 197,
+          "full_observations": 1064,
+          "historical_observations": 1032,
+          "physical_tracks": 32,
+          "images": 297,
+          "missing_candidate_images": 0,
+          "tracker_files": [
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/car/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/car/predict.txt",
+              "bytes": 49277,
+              "sha256": "432eb81faec0b38dd23a0b70a0bb35381ec7a240470510991eda08ead01302ec"
+            },
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/pedestrian/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/pedestrian/predict.txt",
+              "bytes": 0,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        {
+          "video": "0011",
+          "expressions": 228,
+          "full_observations": 2576,
+          "historical_observations": 2519,
+          "physical_tracks": 57,
+          "images": 373,
+          "missing_candidate_images": 0,
+          "tracker_files": [
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/car/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/car/predict.txt",
+              "bytes": 118467,
+              "sha256": "1d0cc7faa4351d522b80c3f2c6bb3e878de325a39b1791eddcb0bd4fb1a4d026"
+            },
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/pedestrian/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/pedestrian/predict.txt",
+              "bytes": 2668,
+              "sha256": "0e79b9348d62bc0af39f0a562489423198b30937c956ed5d2687fcb6da09970c"
+            }
+          ]
+        },
+        {
+          "video": "0013",
+          "expressions": 207,
+          "full_observations": 1018,
+          "historical_observations": 966,
+          "physical_tracks": 52,
+          "images": 340,
+          "missing_candidate_images": 0,
+          "tracker_files": [
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/car/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/car/predict.txt",
+              "bytes": 1874,
+              "sha256": "aa3fd9eef861ed60dc12fdb3b07d12f85f6007cca8958339e27337a8bb28ac3c"
+            },
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/pedestrian/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/pedestrian/predict.txt",
+              "bytes": 46031,
+              "sha256": "944bf08a9a622b4a1b83d2a471f980efbcf6cd86e2889df0f519a68d95664dc3"
+            }
+          ]
+        },
+        {
+          "video": "0019",
+          "expressions": 230,
+          "full_observations": 6164,
+          "historical_observations": 5991,
+          "physical_tracks": 173,
+          "images": 1059,
+          "missing_candidate_images": 0,
+          "tracker_files": [
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/car/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/car/predict.txt",
+              "bytes": 56503,
+              "sha256": "81c20fa7ad62ce4afaec621ba5b5dccb2d5d363ea49ed8c9fe105031c0c31a10"
+            },
+            {
+              "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/pedestrian/predict.txt",
+              "exists": true,
+              "is_symlink": false,
+              "resolved": "/data3/user/TTA-RMOT-assets/flexhook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/pedestrian/predict.txt",
+              "bytes": 240829,
+              "sha256": "6a6eae3beea86cbdeb16d9dd4252d32c9522bd9068b0b5a1ceedaeea37bd6af4"
+            }
+          ]
+        }
+      ]
+    },
+    "Dance": {
+      "seqmap": {
+        "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/dance.txt",
+        "exists": true,
+        "is_symlink": false,
+        "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/dance.txt",
+        "bytes": 25450,
+        "sha256": "65a65b92d37339c797830d02486c96aec4deca338629ab48f3ecbaaa9804f264",
+        "rows": 425,
+        "unique_rows": 425,
+        "LF_count": 425,
+        "ends_with_LF": true,
+        "videos": 25,
+        "per_video_expressions": {
+          "dancetrack0004": 17,
+          "dancetrack0005": 17,
+          "dancetrack0007": 17,
+          "dancetrack0010": 17,
+          "dancetrack0014": 17,
+          "dancetrack0018": 17,
+          "dancetrack0019": 17,
+          "dancetrack0025": 17,
+          "dancetrack0026": 17,
+          "dancetrack0030": 17,
+          "dancetrack0034": 17,
+          "dancetrack0035": 17,
+          "dancetrack0041": 17,
+          "dancetrack0043": 17,
+          "dancetrack0047": 17,
+          "dancetrack0058": 17,
+          "dancetrack0063": 17,
+          "dancetrack0065": 17,
+          "dancetrack0073": 17,
+          "dancetrack0077": 17,
+          "dancetrack0079": 17,
+          "dancetrack0081": 17,
+          "dancetrack0090": 17,
+          "dancetrack0094": 17,
+          "dancetrack0097": 17
+        },
+        "duplicated_rows": {},
+        "first_row": "dancetrack0004+dacning-person-with-white-Tshirt-and-purple-pants",
+        "parser_skips_header": false
+      },
+      "videos": 25,
+      "expressions": 425,
+      "tracker_root": {
+        "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+        "exists": true,
+        "is_symlink": false,
+        "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs"
+      },
+      "full_candidate_observations": 211085,
+      "full_candidate_expression_pairs": 3588445,
+      "historical_candidate_expression_pairs": 3576681,
+      "per_video": [
+        {
+          "video": "dancetrack0004",
+          "expressions": 17,
+          "full_observations": 4371,
+          "physical_tracks": 11,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0004.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0004.txt",
+            "bytes": 194835,
+            "sha256": "18f9a8b1f3b6ef01aabcdd0e5a2bf2955124dfec636146270d25854ac317a0ef"
+          }
+        },
+        {
+          "video": "dancetrack0005",
+          "expressions": 17,
+          "full_observations": 4576,
+          "physical_tracks": 9,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0005.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0005.txt",
+            "bytes": 207054,
+            "sha256": "7f685a8131e146eb3ec5cef0c49b95cd268797e0d56054cdf685dbc501d499e1"
+          }
+        },
+        {
+          "video": "dancetrack0007",
+          "expressions": 17,
+          "full_observations": 9111,
+          "physical_tracks": 13,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0007.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0007.txt",
+            "bytes": 412952,
+            "sha256": "8fbab52ac7e77bdd93ca54443a8e3c6b4857130557e71b8e10609194a5543c43"
+          }
+        },
+        {
+          "video": "dancetrack0010",
+          "expressions": 17,
+          "full_observations": 6740,
+          "physical_tracks": 13,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0010.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0010.txt",
+            "bytes": 306123,
+            "sha256": "f4c9ab2b0da023d47ea2fcfa3368f214da5889582ef46ee0f7bf33eb157163b4"
+          }
+        },
+        {
+          "video": "dancetrack0014",
+          "expressions": 17,
+          "full_observations": 12289,
+          "physical_tracks": 37,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0014.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0014.txt",
+            "bytes": 553478,
+            "sha256": "4b68272ee53db7349faf9b56d98a7c52737500fbc46c9f9f1017ac34084ca6d6"
+          }
+        },
+        {
+          "video": "dancetrack0018",
+          "expressions": 17,
+          "full_observations": 2507,
+          "physical_tracks": 7,
+          "images": 503,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0018.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0018.txt",
+            "bytes": 115515,
+            "sha256": "13d195abf7528e3bb7a34e9fd3314b95f02f41b30207c0dba6663ca80208f07e"
+          }
+        },
+        {
+          "video": "dancetrack0019",
+          "expressions": 17,
+          "full_observations": 15880,
+          "physical_tracks": 22,
+          "images": 2402,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0019.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0019.txt",
+            "bytes": 734348,
+            "sha256": "911b852e8501acda911207b6cb0e034e8cfdd9f226254332eb671e415137e17c"
+          }
+        },
+        {
+          "video": "dancetrack0025",
+          "expressions": 17,
+          "full_observations": 6731,
+          "physical_tracks": 22,
+          "images": 803,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0025.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0025.txt",
+            "bytes": 305033,
+            "sha256": "2a72c1a5249664dbe4c04b69f23da9d9b42b3d1edfcb0a9932241a53341e0c11"
+          }
+        },
+        {
+          "video": "dancetrack0026",
+          "expressions": 17,
+          "full_observations": 3691,
+          "physical_tracks": 31,
+          "images": 302,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0026.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0026.txt",
+            "bytes": 167486,
+            "sha256": "e8497460e0f16f2a98397cd564df9c6623d30a9be249f9d30c696249878a6a94"
+          }
+        },
+        {
+          "video": "dancetrack0030",
+          "expressions": 17,
+          "full_observations": 7533,
+          "physical_tracks": 7,
+          "images": 1263,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0030.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0030.txt",
+            "bytes": 347390,
+            "sha256": "f76063629658c9912c3213e3f6d98dbc5d1594146f6c038636aa2911b05e23c7"
+          }
+        },
+        {
+          "video": "dancetrack0034",
+          "expressions": 17,
+          "full_observations": 10195,
+          "physical_tracks": 37,
+          "images": 923,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0034.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0034.txt",
+            "bytes": 468953,
+            "sha256": "0e691e2488b2fa87a2a3895df6d2a4a20a0e79774c0ce29767f60c6bd3849606"
+          }
+        },
+        {
+          "video": "dancetrack0035",
+          "expressions": 17,
+          "full_observations": 4927,
+          "physical_tracks": 17,
+          "images": 703,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0035.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0035.txt",
+            "bytes": 227199,
+            "sha256": "c081235671e72e2acd0fe1a4ce6a09e59a89d056d7f66bcc5a545d31545aa774"
+          }
+        },
+        {
+          "video": "dancetrack0041",
+          "expressions": 17,
+          "full_observations": 14320,
+          "physical_tracks": 72,
+          "images": 1003,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0041.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0041.txt",
+            "bytes": 649802,
+            "sha256": "3a8099703cf4b961c278add1f6dc834df5e4747146d38d8446b6f5b22632f457"
+          }
+        },
+        {
+          "video": "dancetrack0043",
+          "expressions": 17,
+          "full_observations": 1363,
+          "physical_tracks": 15,
+          "images": 183,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0043.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0043.txt",
+            "bytes": 62271,
+            "sha256": "840cca98a6a44903fa53416003b10d329860f78cb8254e3322fb9b13e05fb18c"
+          }
+        },
+        {
+          "video": "dancetrack0047",
+          "expressions": 17,
+          "full_observations": 9064,
+          "physical_tracks": 23,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0047.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0047.txt",
+            "bytes": 415384,
+            "sha256": "8ae9277f85cd6bca4641aa8328520fa1be4c8d018d6cd96eb55e97c7cf5fc503"
+          }
+        },
+        {
+          "video": "dancetrack0058",
+          "expressions": 17,
+          "full_observations": 10798,
+          "physical_tracks": 12,
+          "images": 1601,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0058.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0058.txt",
+            "bytes": 503632,
+            "sha256": "9710fcbd17f2ea5fdd23affefc1af385a9f0773ba68e5675545d42b725186db5"
+          }
+        },
+        {
+          "video": "dancetrack0063",
+          "expressions": 17,
+          "full_observations": 7930,
+          "physical_tracks": 106,
+          "images": 1000,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0063.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0063.txt",
+            "bytes": 366175,
+            "sha256": "d45beb30fc7cf6a2c395fa6b4c088084cb690893cdfb46cc2cb64359853914db"
+          }
+        },
+        {
+          "video": "dancetrack0065",
+          "expressions": 17,
+          "full_observations": 3486,
+          "physical_tracks": 7,
+          "images": 702,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0065.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0065.txt",
+            "bytes": 160657,
+            "sha256": "6683a9b62777d9dd1379e4d2fd3d5640c1308e5ca9d17da5e852a2c241b34dc0"
+          }
+        },
+        {
+          "video": "dancetrack0073",
+          "expressions": 17,
+          "full_observations": 6881,
+          "physical_tracks": 31,
+          "images": 703,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0073.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0073.txt",
+            "bytes": 317896,
+            "sha256": "ef8a3870ec671f7f1eb84f5354db854c6db43642f078613703df3aea743d034f"
+          }
+        },
+        {
+          "video": "dancetrack0077",
+          "expressions": 17,
+          "full_observations": 10780,
+          "physical_tracks": 15,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0077.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0077.txt",
+            "bytes": 499973,
+            "sha256": "06e5e21a9a9da222a7599e39291e0ed05c04ccd5040d1ba3cdec4aaecc08a26d"
+          }
+        },
+        {
+          "video": "dancetrack0079",
+          "expressions": 17,
+          "full_observations": 13997,
+          "physical_tracks": 26,
+          "images": 1202,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0079.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0079.txt",
+            "bytes": 641596,
+            "sha256": "3693b306bc07e2a5c2a21443be0f87cfe35a85feba9aabc71770ddc55c639d31"
+          }
+        },
+        {
+          "video": "dancetrack0081",
+          "expressions": 17,
+          "full_observations": 17148,
+          "physical_tracks": 52,
+          "images": 984,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0081.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0081.txt",
+            "bytes": 769842,
+            "sha256": "f79281322414ae179e5f8b53cd9fdff376e102966abde18168ea34708a91172e"
+          }
+        },
+        {
+          "video": "dancetrack0090",
+          "expressions": 17,
+          "full_observations": 11660,
+          "physical_tracks": 39,
+          "images": 1004,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0090.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0090.txt",
+            "bytes": 543376,
+            "sha256": "045f1a2010ececc361aa46a430737ae40571fcaca49e387dded8fa9eb2500413"
+          }
+        },
+        {
+          "video": "dancetrack0094",
+          "expressions": 17,
+          "full_observations": 10522,
+          "physical_tracks": 61,
+          "images": 603,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0094.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0094.txt",
+            "bytes": 493106,
+            "sha256": "40e16f61d2f8e7dcdf3886517aa4df870ef16367e43b4b220dd7cfee89f36377"
+          }
+        },
+        {
+          "video": "dancetrack0097",
+          "expressions": 17,
+          "full_observations": 4585,
+          "physical_tracks": 7,
+          "images": 1203,
+          "missing_candidate_images": 0,
+          "tracker": {
+            "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0097.txt",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0097.txt",
+            "bytes": 217203,
+            "sha256": "3afa18f892b82d4f4a9ee1fa130b773218001f06ea2052b3bc5cea05d24a4b91"
+          }
+        }
+      ]
+    },
+    "SportsMOT": {
+      "seqmap": {
+        "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/SportsMOT.txt",
+        "exists": true,
+        "is_symlink": false,
+        "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/seqmaps/SportsMOT.txt",
+        "bytes": 20430,
+        "sha256": "cc59ba459690d7225e2b546f441e46c1ab3c2a9c91b9842b18dc0327de2a2e7a",
+        "rows": 466,
+        "unique_rows": 466,
+        "LF_count": 465,
+        "ends_with_LF": false,
+        "videos": 45,
+        "per_video_expressions": {
+          "v_00HRwkvvjtQ_c001": 8,
+          "v_00HRwkvvjtQ_c003": 8,
+          "v_00HRwkvvjtQ_c005": 8,
+          "v_00HRwkvvjtQ_c007": 8,
+          "v_00HRwkvvjtQ_c008": 8,
+          "v_00HRwkvvjtQ_c011": 8,
+          "v_0kUtTtmLaJA_c004": 14,
+          "v_0kUtTtmLaJA_c005": 14,
+          "v_0kUtTtmLaJA_c006": 14,
+          "v_0kUtTtmLaJA_c007": 14,
+          "v_0kUtTtmLaJA_c008": 14,
+          "v_0kUtTtmLaJA_c010": 14,
+          "v_2QhNRucNC7E_c017": 8,
+          "v_4-EmEtrturE_c009": 14,
+          "v_4r8QL_wglzQ_c001": 8,
+          "v_5ekaksddqrc_c001": 8,
+          "v_5ekaksddqrc_c002": 8,
+          "v_5ekaksddqrc_c003": 8,
+          "v_5ekaksddqrc_c004": 8,
+          "v_5ekaksddqrc_c005": 8,
+          "v_9MHDmAMxO5I_c002": 10,
+          "v_9MHDmAMxO5I_c003": 10,
+          "v_9MHDmAMxO5I_c004": 10,
+          "v_9MHDmAMxO5I_c006": 13,
+          "v_9MHDmAMxO5I_c009": 10,
+          "v_BgwzTUxJaeU_c008": 10,
+          "v_BgwzTUxJaeU_c012": 10,
+          "v_BgwzTUxJaeU_c014": 10,
+          "v_G-vNjfx1GGc_c004": 10,
+          "v_G-vNjfx1GGc_c008": 10,
+          "v_G-vNjfx1GGc_c600": 7,
+          "v_G-vNjfx1GGc_c601": 10,
+          "v_ITo3sCnpw_k_c007": 12,
+          "v_ITo3sCnpw_k_c010": 9,
+          "v_ITo3sCnpw_k_c011": 14,
+          "v_ITo3sCnpw_k_c012": 12,
+          "v_cC2mHWqMcjk_c007": 14,
+          "v_cC2mHWqMcjk_c008": 10,
+          "v_cC2mHWqMcjk_c009": 12,
+          "v_dw7LOz17Omg_c053": 10,
+          "v_dw7LOz17Omg_c067": 11,
+          "v_i2_L4qquVg0_c006": 11,
+          "v_i2_L4qquVg0_c007": 9,
+          "v_i2_L4qquVg0_c009": 9,
+          "v_i2_L4qquVg0_c010": 11
+        },
+        "duplicated_rows": {},
+        "first_row": "v_9MHDmAMxO5I_c009+The-libero-of-the-left-side-team.",
+        "parser_skips_header": false
+      },
+      "videos": 45,
+      "requested_expressions": 465,
+      "actual_seqmap_expressions": 466,
+      "full_candidate_observations": null,
+      "full_candidate_expression_pairs": null,
+      "required_paths": [
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences"
+        },
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/annotations_v1/val/SportsMOT",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/annotations_v1/val/SportsMOT"
+        },
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_labels.json",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_labels.json"
+        },
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_RESOLUTION.json",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_RESOLUTION.json"
+        },
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/TAO_frame2file.json",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/TAO_frame2file.json"
+        },
+        {
+          "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/McByte-SportsMOT",
+          "exists": false,
+          "is_symlink": false,
+          "resolved": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/McByte-SportsMOT"
+        }
+      ],
+      "raw_images_discovered_outside_project": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val",
+      "raw_images_videos_complete": 45,
+      "raw_images_count": 26970,
+      "raw_images_inventory": [
+        {
+          "video": "v_00HRwkvvjtQ_c001",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c001/img1",
+          "images": 1162,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c001/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c001/seqinfo.ini",
+            "bytes": 110,
+            "sha256": "627f87224514088ff4f61585b96b50df76f46a35ce552e60d8414f5ec075e2bd"
+          },
+          "expected_frames": 1162,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c003",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c003/img1",
+          "images": 1161,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c003/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c003/seqinfo.ini",
+            "bytes": 110,
+            "sha256": "6bbac9ace10b52d06c526895f2a097a2ab9e0557aec90dc8120d60ff27e295c9"
+          },
+          "expected_frames": 1161,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c005",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c005/img1",
+          "images": 594,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c005/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c005/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "569961c82b1b8e6034ca91994c81e5bc12d49f404bbbf7263e3f9184362d18e3"
+          },
+          "expected_frames": 594,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c007",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c007/img1",
+          "images": 707,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c007/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c007/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "c10ada73e30c59eddc5fed7102232aa822dd41ce9ed5e1daee5a95d893fa8fbd"
+          },
+          "expected_frames": 707,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c008",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c008/img1",
+          "images": 972,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c008/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c008/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "41d547e792e4baa861119ae39595212743df79a91e7922ce0b3bdf735e7c2ad2"
+          },
+          "expected_frames": 972,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_00HRwkvvjtQ_c011",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c011/img1",
+          "images": 734,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c011/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c011/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "e501d1b955e2ef640d23305c2c5d9c7715525c3a02c1d93065997e87005142cd"
+          },
+          "expected_frames": 734,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c004",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c004/img1",
+          "images": 542,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c004/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c004/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "ddf6cc72f7165d83bf23da8f487480e12b99dd321cd013f4e5a888933ddebdde"
+          },
+          "expected_frames": 542,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c005",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c005/img1",
+          "images": 349,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c005/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c005/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "0997ea63035c330825017230226e6e6f5ed1134744c1949cea588bf135151c3c"
+          },
+          "expected_frames": 349,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c006",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c006/img1",
+          "images": 346,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c006/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c006/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "5d789bed42e88dcbeca45a24e0e0ab72faf546c19d8f24293578c90102f7b325"
+          },
+          "expected_frames": 346,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c007",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c007/img1",
+          "images": 271,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c007/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c007/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "6b0e57f4afd8700f77cb8ac36a48a8d8737aca36fb3b768e3038a177079cb05c"
+          },
+          "expected_frames": 271,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c008",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c008/img1",
+          "images": 266,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c008/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c008/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "639fb625c153a97e551b273ed3f2890422629dca6791f14baee9cbc918000262"
+          },
+          "expected_frames": 266,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_0kUtTtmLaJA_c010",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c010/img1",
+          "images": 270,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c010/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c010/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "39e9e1cbfcd4fca5f2e8a080ca99c7ea4c38c0079256ecbcbed373f7664ebecb"
+          },
+          "expected_frames": 270,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_2QhNRucNC7E_c017",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_2QhNRucNC7E_c017/img1",
+          "images": 450,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_2QhNRucNC7E_c017/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_2QhNRucNC7E_c017/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "9f528bbeac8edf7eb6a69a7664cbb73ba25f797c9a04331c5c94d57e469e6929"
+          },
+          "expected_frames": 450,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_4-EmEtrturE_c009",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4-EmEtrturE_c009/img1",
+          "images": 250,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4-EmEtrturE_c009/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4-EmEtrturE_c009/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "19395baade784bf3eb1a036c103c4892b85f44c2cd4ac4b6e13448c190e838cc"
+          },
+          "expected_frames": 250,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_4r8QL_wglzQ_c001",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4r8QL_wglzQ_c001/img1",
+          "images": 886,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4r8QL_wglzQ_c001/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4r8QL_wglzQ_c001/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "7bdfcd5224831f42e4badfccc0a8adbbd9f6868d525253cefff387e7ee7d14cb"
+          },
+          "expected_frames": 886,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_5ekaksddqrc_c001",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c001/img1",
+          "images": 550,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c001/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c001/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "8346719fba1c7b3eed335bae8c33cb8efe0de397003bf0ea97eebe72d717d021"
+          },
+          "expected_frames": 550,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_5ekaksddqrc_c002",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c002/img1",
+          "images": 632,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c002/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c002/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "6acbbef6f7b9885b7921d9be41aa9bcb245db8c3ba744729117eb13a1d705db0"
+          },
+          "expected_frames": 632,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_5ekaksddqrc_c003",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c003/img1",
+          "images": 1215,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c003/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c003/seqinfo.ini",
+            "bytes": 110,
+            "sha256": "5682c5b726cc37bffd57f1a62faef2e09bb07ec492b2b8397eb2e55b417a717d"
+          },
+          "expected_frames": 1215,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_5ekaksddqrc_c004",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c004/img1",
+          "images": 824,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c004/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c004/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "69adac4c5e2e279d92bf08bdfd371ec7633d0a33c3649175bb6f1b01c968e448"
+          },
+          "expected_frames": 824,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_5ekaksddqrc_c005",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c005/img1",
+          "images": 1000,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c005/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c005/seqinfo.ini",
+            "bytes": 110,
+            "sha256": "e7e4c0f6050fbd749b1d5f921b68a2f4a3b06ca736e5587a83474520546d4114"
+          },
+          "expected_frames": 1000,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c002",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c002/img1",
+          "images": 239,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c002/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c002/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "485c5cc2653bc64be258f3db72da7e27bd6418eab89d8a7bfeec0fb29abeb545"
+          },
+          "expected_frames": 239,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c003",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c003/img1",
+          "images": 226,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c003/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c003/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "b6f23303ba93249faffb396bf45a419ebdc0807325f176ea486c2f7c9d3dc744"
+          },
+          "expected_frames": 226,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c004",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c004/img1",
+          "images": 455,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c004/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c004/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "8fbbd64bb94a23843e513a4a2d7e47a01f118248f821084336391d935bfdcfd0"
+          },
+          "expected_frames": 455,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c006",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c006/img1",
+          "images": 269,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c006/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c006/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "41deaa629e6b0335a5ce6f089e979e4c72a3920db87346391bd77f28bc752bd1"
+          },
+          "expected_frames": 269,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_9MHDmAMxO5I_c009",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c009/img1",
+          "images": 507,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c009/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c009/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "275705820edc5871cb902572a63a49d9909e8991409a868c295b43cde25b1070"
+          },
+          "expected_frames": 507,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c008",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c008/img1",
+          "images": 500,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c008/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c008/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "3f70f12defc0bacfb36559d0b8680291bd25a9ad06da239d2e4fe90a58cec4b9"
+          },
+          "expected_frames": 500,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c012",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c012/img1",
+          "images": 620,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c012/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c012/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "67a55430fd3044a13c2bfe38076a04c663df2d4b15870d28b445f9dade6f4ef1"
+          },
+          "expected_frames": 620,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_BgwzTUxJaeU_c014",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c014/img1",
+          "images": 1000,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c014/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c014/seqinfo.ini",
+            "bytes": 110,
+            "sha256": "90b843949999fb82454f0ffacec3fdc377a88879058823ca1ee891d713d44e84"
+          },
+          "expected_frames": 1000,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c004",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c004/img1",
+          "images": 675,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c004/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c004/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "12cd5143885b23b090822876ed28de7ca22ebd89d9e0d2439323f5da6780cf15"
+          },
+          "expected_frames": 675,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c008",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c008/img1",
+          "images": 480,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c008/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c008/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "5f19abe50762215b61f0922ad5c57f42a4d48c7384e19355fbc9bff4074bee5f"
+          },
+          "expected_frames": 480,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c600",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c600/img1",
+          "images": 500,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c600/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c600/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "53258f219b8b6e193587523ea6a724e4be6ee5bb6e111e3b539154d5a6e52506"
+          },
+          "expected_frames": 500,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_G-vNjfx1GGc_c601",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c601/img1",
+          "images": 481,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c601/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c601/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "d16d4f13ea854d2be6ab7e01ebb5b135df7e959c899e13cacf9c4e00505e27df"
+          },
+          "expected_frames": 481,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c007",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c007/img1",
+          "images": 701,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c007/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c007/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "ca121320b3a76f9b8b41b45b2fe6f59000cee47450b37add004fff03813d5d47"
+          },
+          "expected_frames": 701,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c010",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c010/img1",
+          "images": 560,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c010/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c010/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "625cd87fdc55bb9178156aeb8df7408527063c230ae0863dc12a480cb8ae36d8"
+          },
+          "expected_frames": 560,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c011",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c011/img1",
+          "images": 776,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c011/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c011/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "9b2a4b7bad9eba392452150ddc4e51097ac59e9f74c1f80062cad0deba7395cf"
+          },
+          "expected_frames": 776,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_ITo3sCnpw_k_c012",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c012/img1",
+          "images": 850,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c012/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c012/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "76a73c8558fc49c22cd151d05096d67f8ba9b4b7dc6c04babb865dc02b9724c0"
+          },
+          "expected_frames": 850,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c007",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c007/img1",
+          "images": 681,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c007/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c007/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "db786da993d3428a4518ce1a69476db7006f369ef13ebf01b883738fc149707e"
+          },
+          "expected_frames": 681,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c008",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c008/img1",
+          "images": 259,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c008/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c008/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "92d963634341e1f25766c5c017878dab491dbe5eb7fb906bbc85a6d0fb2e8bc0"
+          },
+          "expected_frames": 259,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_cC2mHWqMcjk_c009",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c009/img1",
+          "images": 425,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c009/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c009/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "9d0c06a0d39541b8d3f078f2758447a592ebbe90d7612e02f974e35672901a99"
+          },
+          "expected_frames": 425,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_dw7LOz17Omg_c053",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1",
+          "images": 550,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "eb65168333c73ff6b3eb55564fce01ad61b88ae42f19e1112248273e23d8fa9b"
+          },
+          "expected_frames": 550,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_dw7LOz17Omg_c067",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c067/img1",
+          "images": 450,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c067/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c067/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "dc52e1fea99a195f7758ceee5d823f16993c88d8e46d413d1a112e37e0918f4a"
+          },
+          "expected_frames": 450,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_i2_L4qquVg0_c006",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c006/img1",
+          "images": 888,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c006/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c006/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "0f83d92f419e9f7b4934e25ca202e6847f001d39faf41820a4b03c91aa743426"
+          },
+          "expected_frames": 888,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_i2_L4qquVg0_c007",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c007/img1",
+          "images": 451,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c007/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c007/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "cdf64a61c0cdf2979026fa3fcc7f620676f38fa1e2dc5fc6cc48c9888493705b"
+          },
+          "expected_frames": 451,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_i2_L4qquVg0_c009",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c009/img1",
+          "images": 488,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c009/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c009/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "6c059ca666087f8968336d87ad2da8e691edf8ef0f0c59bc000258d9bf38becf"
+          },
+          "expected_frames": 488,
+          "contiguous": true,
+          "complete": true
+        },
+        {
+          "video": "v_i2_L4qquVg0_c010",
+          "image_root": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c010/img1",
+          "images": 758,
+          "seqinfo": {
+            "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c010/seqinfo.ini",
+            "exists": true,
+            "is_symlink": false,
+            "resolved": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c010/seqinfo.ini",
+            "bytes": 109,
+            "sha256": "57d415760f1fa94730ac45565e9b226866059387a94e03307c8971933589f595"
+          },
+          "expected_frames": 758,
+          "contiguous": true,
+          "complete": true
+        }
+      ],
+      "other_project_artifacts_used": false,
+      "note": "Only original image filenames and seqinfo metadata inspected; no LocateMOT code, checkpoints, predictions or labels used; no links modified."
+    }
+  },
+  "missing_assets": [
+    {
+      "kind": "CHECKPOINT",
+      "name": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/SOTA_ckpts/LaMOT-best.pth"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT-sequences"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/annotations_v1/val/SportsMOT"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_labels.json"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_RESOLUTION.json"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/datasets/LaMOT-main/sequences/val/TAO_frame2file.json"
+    },
+    {
+      "kind": "SPORTS_REQUIRED_PATH",
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/McByte-SportsMOT"
+    }
+  ],
+  "search_roots": [
+    "/data2/user",
+    "/data3/user",
+    "/home/user"
+  ],
+  "checkpoint_name_matches": [],
+  "search_exit_code": 1,
+  "search_errors": [],
+  "SportsMOT_seqmap_mismatch": {
+    "expected": 465,
+    "observed": 466,
+    "unique": 466,
+    "removed_or_added_rows": 0,
+    "newline_count": 465,
+    "terminal_newline": false,
+    "explanation": "wc -l counts465 newline bytes, but there are466 unique valid sequences; last line has no LF",
+    "parser": "vendor/FlexHook/TrackEval/trackeval/datasets/mot_challenge_2d_box.py:168-177; header-skipping code commented out"
+  },
+  "code_findings": {
+    "mix_last_observation_omission": true,
+    "mix_sampling": "range(-sample_frame_num+1,obj_last-sample_frame_num,1), exclusive end omits last observation",
+    "mix_test_constructor_opens_GT": "data/mydataloader_mix.py:270 unconditionally reads SportsMOT_labels.json; must not execute as-is under current GT ban",
+    "normal_test_loader_preexisting_GT_free_change": "data/mydataloader.py:171-177; preserved",
+    "checkpoint_backbone": "kitti/dance yaml VISUAL=resnet34 but infer.sh official best commands override --visual rope-swin-tiny; do not infer incompatibility from raw YAML alone",
+    "tokenizer_policy": "Use unchanged compat/sitecustomize.py canonical vocab.json+merges.txt ByteLevel BPE with RobertaProcessing; no cross-source category/text remapping",
+    "actual_runtime_token_checks": "NOT_RUN_P0_HARD_STOP",
+    "SportsMOT_official_paper_subset_number": "NOT_SEARCHED_DUE_P0_STOP; infer.sh only establishes mix HOTA56.756, not SportsMOT subset"
+  },
+  "smoke_status": "NOT_RUN_GLOBAL_P0_HARD_STOP",
+  "GPU_hours_estimates": null,
+  "new_GPU_process_hours": 0,
+  "model_loads": 0,
+  "checkpoint_updates": 0,
+  "teacher_calls": 0,
+  "GT_open_attempts": 0,
+  "downloads": 0,
+  "links_modified": 0,
+  "new_official_evaluation_jobs": 0,
+  "P1_started": false,
+  "P2_started": false,
+  "wall_seconds": 7.013871920062229
+}
