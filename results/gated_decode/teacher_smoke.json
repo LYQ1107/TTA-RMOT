@@ -1,0 +1,78 @@
+{
+  "status": "REAL_T1_SMOKE_PASS",
+  "frames": 2,
+  "rows": 6,
+  "outputs_path": "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher/smoke_outputs.jsonl",
+  "outputs_sha256": "99015071d300c03587207439d17f4468c9a2a4532aa9c90e75904c75f80dce1c",
+  "manifest_sha256": "740fc3200bc988420c6e4c8daa1e0816efc1461fb364aa519329af35153e6a99",
+  "GT_open_attempts": 0,
+  "isolation": {
+    "landlock_abi": 1,
+    "kernel_read_whitelist": true,
+    "kernel_stage_write_denied": true,
+    "read_roots": [
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0004/000061.png",
+      "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0005/000015.png",
+      "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher/manifest.jsonl",
+      "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+      "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+      "/data2/user/FlexHook-TTA/flex_uda",
+      "/data2/user/FlexHook-TTA/flex_tta",
+      "/data2/user/FlexHook-TTA/scripts",
+      "/data2/user/FlexHook-TTA/configs",
+      "/home/szgx/anaconda3/envs/vllmedit",
+      "/usr",
+      "/usr/lib",
+      "/usr/lib64",
+      "/usr/bin",
+      "/etc",
+      "/proc",
+      "/sys",
+      "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher",
+      "/dev",
+      "/tmp"
+    ],
+    "handled_filesystem_access": 8191
+  },
+  "frozen": {
+    "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "frozen_parameters_unchanged": true,
+    "optimizer_updates": 0,
+    "forward_batches": 2,
+    "model_load_and_initial_hash_seconds": 9.803636587923393
+  },
+  "counts": [
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0004",
+      "gate_mode": "normal",
+      "frame": 61,
+      "requested_calls": 3,
+      "new_calls": 3,
+      "cache_hits": 0,
+      "forward_batches": 1,
+      "forward_seconds": 1.3495823859702796,
+      "peak_allocated_bytes": 4420796416
+    },
+    {
+      "dataset": "KITTI",
+      "video": "0005",
+      "gate_mode": "normal",
+      "frame": 15,
+      "requested_calls": 3,
+      "new_calls": 3,
+      "cache_hits": 0,
+      "forward_batches": 1,
+      "forward_seconds": 0.08324735122732818,
+      "peak_allocated_bytes": 4420796416
+    }
+  ],
+  "cache_unique_calls": 6,
+  "original_backend_sha256": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+  "original_builder_sha256": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+  "worker_seconds": 19.286316931946203,
+  "physical_gpu": "2",
+  "student_updates": 0,
+  "teacher_updates": 0
+}

@@ -1,5 +1,12 @@
 # TTA-RMOT Research Log (inherited historical entries preserved below)
 
+## 2026-11-01 Gated cross-query decoding (no training)
+
+- 从ecf57122新建research/v2dance-gated-decode-20261101；先推固定协议dbd701e7。G0改为同句跨全部25视频按观测加权标准化；视频T1门控与结构分支按用户常数执行，不用GT阈值。
+- X0/X1六套共5100预测文件逐字节复现；源域分数复用。用户明确E分母零输出空集并单列，不伪造E=0。
+- 初测缺sklearn（7过2失败），依赖隔离装到本轮RUN/deps后9项通过；真实Dance/KITTI T1 smoke通过，GPU2入场0进程，不训练、不干扰别的项目。
+- 冻结清单89961请求（Dance正常29410/早期27693、KITTI32858），完成后先封存再官方评测；全部组合上报，结果待完整研究闭环。
+
 ## 2026-10-30 D-FIT 独立诊断开始
 
 - 从965e71fe新建research/v2dance-diag-fit-20261030，保护全部PSR成果。先完成只读核对：4个768维PCD块、head2,365,440参数，原LoRA scaling1/rank/最后两层Q,V，原每步1目标window/clip1。
