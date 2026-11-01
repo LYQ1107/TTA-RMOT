@@ -62,3 +62,12 @@ def test_official_gt_completion_preserves_source_rows_and_requires_ids():
     assert select_original_rows(raw,{'1':[8,2],'2':[]})==raw[:2]
     with pytest.raises(ValueError,match='absent'):
         select_original_rows(raw,{'1':[999]})
+
+
+def test_evaluation_dispatch_keeps_source_separate_from_method_list(monkeypatch):
+    from scripts import multidomain_diagnostics as diag
+    calls=[]
+    monkeypatch.setattr(diag,'evaluate',lambda target,names=None,source_model=None:
+        calls.append((target,names,source_model)))
+    diag.run_phase('evaluate','KITTI-V2','LaMOT-best')
+    assert calls==[('KITTI-V2',None,'LaMOT-best')]

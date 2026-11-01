@@ -269,6 +269,14 @@ def reference_predict(target):
         source_score_seal_sha256=file_sha(RUN/'kitti/V2-best/scores_seal.json')))
 
 
+def run_phase(phase,target,source_model=None):
+    # evaluate's second positional argument is an optional method list, not a
+    # source model. Keep existing reference-evaluation callers compatible.
+    if phase=='evaluate':return evaluate(target,source_model=source_model)
+    if phase=='reference_predict':return reference_predict(target)
+    return {'predict':generate,'oracle':oracle}[phase](target,source_model)
+
+
 if __name__=='__main__':
     p=ArgumentParser();p.add_argument('phase',choices=('predict','oracle','evaluate','reference_predict','reference_evaluate'));p.add_argument('--target',choices=('Dance','KITTI-V2','SportsMOT'),required=True)
     p.add_argument('--source-model',choices=('V2-best','Dance-best','LaMOT-best'));a=p.parse_args()
@@ -276,5 +284,4 @@ if __name__=='__main__':
         r=json.loads((base(a.target)/'reference_predictions.json').read_text())
         if r['GT_open_attempts']:raise ValueError('Source reference GT isolation failed')
         evaluate(a.target,r['methods'])
-    elif a.phase=='reference_predict':reference_predict(a.target)
-    else:{'predict':generate,'oracle':oracle,'evaluate':evaluate}[a.phase](a.target,a.source_model)
+    else:run_phase(a.phase,a.target,a.source_model)
