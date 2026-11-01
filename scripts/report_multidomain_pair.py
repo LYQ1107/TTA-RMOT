@@ -102,7 +102,8 @@ def main():
         table(['配置','HOTA','DetA','AssA','IDF1','IDSW','预测行','Empty行'],[[r[k] for k in
             ('configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows')] for r in rows]),'',
         'R_S×K_ORACLE、R_I×K_ORACLE是【ORACLE，仅诊断】，不当新TTA结果。数量交换借助目标同域模型的k，不是GT-free可部署方法。','',
-        table(['类别','配置','HOTA','DetA','AssA','表达数'],[[r[k] for k in ('category','configuration','HOTA','DetA','AssA','expressions')] for r in categories]) if categories else str(ci),'',
+        table(['类别','配置','HOTA','DetA','AssA','表达数'],[[r[k] for k in ('category','configuration','HOTA','DetA','AssA','expressions')] for r in categories]) if categories else
+        table(['比较','ΔHOTA','95% CI','视频数'],[[k,r['delta_HOTA'],r['CI95'],r['clusters']] for k,r in ci.items()]),'',
         f"GT R@1：源{truth['retrieval']['source']['GT_R_at_1']:.6f}，同域{truth['retrieval']['in_domain']['GT_R_at_1']:.6f}；AUROC：源{truth['source_AUROC']:.6f}，同域{truth['in_domain_AUROC']:.6f}。",'',
         'KITTI只有4视频，报告点估计，不构造帧级显著性。' if target=='KITTI-V2' else '视频聚类2000次/seed0，不独立重采样表达或帧。','',
         f"本组新增source GPU-worker elapsed（含smoke）{result['new_GPU_worker_elapsed_hours']:.6f}小时；共享GPU含CPU/IO，不是利用率积分。旧同域分数虽复用，不能将其解释为独立系统零成本。",'',
