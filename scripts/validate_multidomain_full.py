@@ -8,7 +8,8 @@ import subprocess
 import sys
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from scripts.multidomain_runtime import RUN,PUBLIC,OLD_SOURCE,require_plan,require_remaining_p0
+from scripts.multidomain_runtime import (RUN,PUBLIC,OLD_SOURCE,require_plan,require_remaining_p0,
+    SPORTS_GT_V4_STATUS,SPORTS_GT_PROTOCOL)
 from scripts.multidomain_diagnostics import CONFIGS,base,verify,inputs
 from scripts.report_multidomain_generality import PAIRS
 from flex_tta.runtime.pf_receipts import atomic_json,file_sha
@@ -39,6 +40,10 @@ def main():
                 raise ValueError('Native threshold/row mismatch')
         record=json.loads((base(target,source)/'GT_free_predictions.json').read_text())
         if record['GT_open_attempts']:raise PermissionError('Decoder target GT open')
+        if target=='SportsMOT':
+            for method in CONFIGS:
+                done=json.loads((base(target,source)/method/'official_completion.json').read_text())
+                if done.get('GT_protocol')!=SPORTS_GT_PROTOCOL:raise ValueError('Mixed SportsMOT GT protocols')
         checks[combo]=dict(episodes=len(meta['episodes']),videos=len(meta['videos']),
             complete_score_rows=meta['candidate_query_rows'],fixed_main_configurations=7,
             per_query_frame_count_equivalence=True,global_budget=True,GT_open_attempts=0)
@@ -56,9 +61,15 @@ def main():
     idx=np.load(RUN/'kitti/historical_indices.npy')
     if not np.array_equal(source[masks['kitti']],np.load(OLD_SOURCE/'FROZEN.npy',mmap_mode='r')[idx]):
         raise ValueError('Original V2 historical scores no longer bit-exact')
-    gt=json.loads((PUBLIC/'sports_GT_completion.json').read_text())
-    if gt['status']!='PASS_418_EXACT_48_COMPLETED' or gt['exact_passed']!=418 or gt['exact_failed']:
-        raise ValueError('GT completion exact gate not passed')
+    gt=json.loads((PUBLIC/'sports_GT_reconstruction_v4.json').read_text())
+    if gt['status']!=SPORTS_GT_V4_STATUS or gt['original_templates_exact']!=410 or gt['original_templates_differ']!=8:
+        raise ValueError('Authorized v4 reconstruction/410+8 audit not passed')
+    previous=gt['prior_v3_failure']
+    if file_sha(previous['path'])!=previous['sha256'] or previous['exact_failed']!=8:
+        raise ValueError('Never rewrite the failed v3 gate as a pass')
+    if len(gt['files'])!=466:raise ValueError('Keep all466 sequences')
+    for row in gt['original_template_comparisons']:
+        if file_sha(row['original_path'])!=row['original_sha256']:raise ValueError('Original418 GT changed')
     for row in gt['files']:
         if file_sha(row['path'])!=row['sha256']:raise ValueError('Evaluation GT changed')
     diag=list(csv.DictReader((PUBLIC/'diagnostics.csv').open()))
@@ -80,7 +91,8 @@ def main():
     result=dict(status='PASS_ALL_SIX_PREREGISTERED_PAIRS',full_C1_to_C6_complete=True,original_PREREG_prefix_unchanged=True,
         remaining_p0_publication=p0,checks=checks,score_seals=source_seals,
         complete_main_prediction_sets=42,all_indexed_prediction_files=len(files),
-        Sports_GT_original_exact=418,Sports_GT_completed_missing=48,
+        Sports_GT_protocol=SPORTS_GT_PROTOCOL,Sports_GT_original_exact=410,Sports_GT_original_different=8,
+        Sports_GT_original_418_preserved=True,Sports_GT_reconstructed_all=466,Sports_GT_completed_missing=48,
         targeted_test_command=command,targeted_test_output=test.stdout.strip(),
         targeted_test_log=str(directory/'pytest.log'),targeted_test_log_sha256=file_sha(directory/'pytest.log'),
         compileall_passed=True,no_training=True,no_MLLM=True,max_physical_GPUs=2,

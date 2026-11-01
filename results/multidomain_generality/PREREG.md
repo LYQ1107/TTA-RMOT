@@ -158,3 +158,22 @@ push 后回复提交号和报告链接。完成后停止，不训练，不调用
 4. 先按相同生成规则逐行数值复现已有418条官方模板（保留全部字段与顺序，另记原文件SHA）；全部通过才将同规则生成的48个缺项加入独立补齐目录。原始418文件不覆盖，466条完整seqmap不变。
 5. 任一已有模板复现失败、原始标注/框缺失或视频/帧/ID对不齐，就停止SportsMOT评测并报告，不放宽门槛、不静默补空GT或删序列。
 6. 报告单列418官方原文件、48补建文件的路径/SHA、逐行核对结果、GT隔离和成本；补建GT不得反馈模型或选择任何超参。
+
+---
+
+## 修订记录 v4：2026-11-01 用户授权统一按官方原始标注重建466条SportsMOT GT
+
+v3已实际执行并按规则停止：418条中410条逐行全字段/顺序一致，8条不一致，涉及5个视频。8个原模板共10148行，原始LaMOT targets与SportsMOT框对应69045行；原模板全部为后者的严格子集，共少58897行，共有(frame,id)的框和字段没有变化。详见sports_GT_completion.json、sports_GT_mismatch_analysis.json/CSV和SPORTS_GT_CONFLICT_REPORT.md。尚未生成缺48条GT，未做任何SportsMOT正式评测。
+
+用户已明确选择：“另行预注册：用官方原始标注统一重建全部 466 条 GT，保留旧模板不覆盖”。本修订先commit并push、回读验证，之后才执行新GT重建和评测。
+
+1. v1–v3正文和v3失败JSON/日志原样保留。不得将410/418改写为418/418，不将v4结果宣称为原官方模板精确复现。
+2. 使用已经核验的LaMOT官方原始逐帧targets与SportsMOT官方原始GT框，对全部466个(video,expression)统一生成GT，不混用410个旧模板与8个修补模板。原始418文件不修改、不覆盖、不删除。
+3. 唯一生成规则：按原始SportsMOT gt.txt的行顺序，保留(frame,id)在相应官方targets中的行；全部数值字段、帧号、ID和框原样保留，不插值、补框、改可见性、设新过滤规则或做帧偏移。targets引用的框若缺失则停止并报告。空GT只能由实际原始targets导出，不能因旧文件缺失而默认置空。
+4. 输出至独立目录results/runs/multidomain_generality_20261101/eval_assets/SportsMOT_v4_original_annotations/gt_template。新记录为sports_GT_reconstruction_v4.json，逐条保留输入/输出路径、SHA和行数，区分410条原模板一致、8条原模板不一致、48条原缺项。v3记录继续使用sports_GT_completion.json，不覆盖。
+5. 复核原418模板的SHA不变、410条仍精确一致、8条差异集合与v3完全相同，单列8条变化及58897行差异。任何额外输入变化或新不一致停止并报告。
+6. 所有模型分数和GT-free预测已在03cf5de30e16b6e396754112fcc3208106e22d55及此前提交封存。直接复用，不重跑GPU、不改预测。GT仅由独立CPU重建/oracle/官方TrackEval进程读取，不反馈模型、排序、数量或采样。
+7. C3/C4的全部7个固定控制、同域LaMOT参照、完整/历史MOT覆盖、结构统计和45视频bootstrap统一使用这套v4 GT。标注为“PREREG_V4_ORIGINAL_ANNOTATION_GT”，不是原418模板协议的官方数值复现；不把两套GT口径的指标混用。
+8. C1/C2/C5/C6已完成结果不改、不重跑。三个checkpoint、固定tracker、FP32/tokenizer、候选库、全部六组合、ρ/gap判定、bootstrap 2000次/seed0及其余约束不变。
+9. 本次授权在任何SportsMOT HOTA产生之前作出，只解决已公开的GT来源冲突；不得根据之后的HOTA决定使用新旧GT、选择序列、删掉8条或调整阈值。
+10. 仍然不训练、不微调、不调用MLLM。最终报告明确v3失败和v4授权，发布全部42个控制、日志、成本及SHA后停止。

@@ -26,9 +26,12 @@ IN_DOMAIN_MODEL={'Dance':'Dance-best','KITTI-V2':'V2-best','SportsMOT':'LaMOT-be
 def target_root(target):
     if target=='Dance':return DANCE
     if target=='KITTI-V2':return SOURCE
-    gate=json.loads((PUBLIC/'sports_GT_completion.json').read_text())
-    if gate['status']!='PASS_418_EXACT_48_COMPLETED':
-        raise PermissionError('Sports GT completion has not passed the preregistered gate')
+    publication=require_plan()
+    if publication['revision']!=SPORTS_GT_V4_REVISION:
+        raise PermissionError('Sports evaluation requires the newly authorized v4 GT protocol')
+    gate=json.loads((PUBLIC/'sports_GT_reconstruction_v4.json').read_text())
+    if gate['status']!=SPORTS_GT_V4_STATUS or gate['prereg_publication']!=publication['remote_commit']:
+        raise PermissionError('Sports GT v4 reconstruction/publication has not passed')
     return Path(gate['evaluation_root'])
 
 
@@ -176,6 +179,7 @@ def oracle(target,source_model=None):
     hist=Counter(min(2,r['positive_queries']) for r in trackrecords);n=len(trackrecords)
     from scripts.analyze_pf_full_offline import auroc
     result=dict(status='OFFLINE_ORACLE_COMPLETE',target=target,official_GT_detections=sum(e['GT_observations'] for e in all_gt),
+        GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
         episodes=all_gt,track_records=trackrecords,structure=dict(physical_tracks=n,zero=hist[0]/n,one=hist[1]/n,two_or_more=hist[2]/n,
             empty_query_fraction=sum(not e['present'] for e in all_gt)/len(all_gt),GT_frame_fraction_present_mean=float(np.mean(fractions)),
             GT_frame_fraction_present_p50=float(np.median(fractions)),query_present_episodes=sum(e['present'] for e in all_gt),query_empty_episodes=sum(not e['present'] for e in all_gt)),
@@ -223,6 +227,8 @@ def evaluate(target,names=None,source_model=None):
         old=reusable(target,name,source_model);begin=time.perf_counter();reused=False
         if old is not None:
             olddone=json.loads((old/'official_completion.json').read_text())
+            if target=='SportsMOT' and olddone.get('GT_protocol')!=SPORTS_GT_PROTOCOL:
+                raise ValueError('Do not mix SportsMOT GT protocols')
             for f,k in [('pedestrian_summary.txt','summary_sha256'),('pedestrian_detailed.csv','detailed_sha256')]:
                 if file_sha(old/'results'/f)!=olddone[k]:raise ValueError('Changed reused evaluation')
             for e in seal['episodes']:
@@ -245,6 +251,7 @@ def evaluate(target,names=None,source_model=None):
         if int(metrics['Dets'])!=seal['prediction_rows']:raise ValueError('Official rows differ from sealed candidates')
         if target=='KITTI-V2' and name=='HIST_V2-best' and metrics['HOTA']!=42.526:raise ValueError('STOP: historical KITTI 42.526 not reproduced')
         r=dict(status='PASS',target=target,method=name,metrics=metrics,prediction_rows=seal['prediction_rows'],exit_code=code,
+            GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
             reused_after_all_episode_row_equality=reused,reuse_folder=str(old) if reused else None,wall_seconds=time.perf_counter()-begin,
             summary_sha256=file_sha(folder/'results/pedestrian_summary.txt'),detailed_sha256=file_sha(folder/'results/pedestrian_detailed.csv'),
             prediction_seal_sha256=file_sha(folder/'predictions_seal.json'))

@@ -15,6 +15,9 @@ VENDOR=ROOT/'vendor/FlexHook'
 OLD_SOURCE=ROOT/'results/runs/xquery_decode_20261101/source'
 SOURCE=Path('/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2')
 TRACKS=VENDOR/'tracker_outputs/Temp-NeuralSORT-kitti2'
+SPORTS_GT_V4_REVISION='v4 unified original-annotation SportsMOT GT'
+SPORTS_GT_V4_STATUS='PASS_AUTHORIZED_V4_ALL_466_ORIGINAL_ANNOTATION_GT'
+SPORTS_GT_PROTOCOL='PREREG_V4_ORIGINAL_ANNOTATION_GT'
 CHECKPOINTS={
  'V2-best':(Path('/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth'),'71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613'),
  'Dance-best':(Path('/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth'),'fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c')}

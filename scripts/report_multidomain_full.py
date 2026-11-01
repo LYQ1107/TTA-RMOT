@@ -26,6 +26,7 @@ def main():
         for name,result in methods.items():
             m=result['done']['metrics'];seal=result['seal']
             allrows.append(dict(combo=combo,source=source,target=target,configuration=name,status='COMPLETE',
+                GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
                 oracle='ORACLE' in name,**{k:m[k] for k in ('HOTA','DetA','AssA','IDF1','IDSW')},
                 HOTA_unrounded=result['HOTA_unrounded'],prediction_rows=seal['prediction_rows'],
                 query_empty_prediction_rows=sum(e['selected_rows'] for e in seal['episodes'] if not present[e['video'],e['expression']]),
@@ -102,6 +103,7 @@ def main():
             native='IN_DOMAIN' if model==IN_DOMAIN_MODEL[{'kitti':'KITTI-V2','dance':'Dance','sports':'SportsMOT'}[key]] else 'NATIVE'
             old=references[pair+'__HIST_'+model];complete=references[pair+'__'+native]
             coverage.append(dict(target={'kitti':'KITTI-V2','dance':'Dance','sports':'SportsMOT'}[key],model=model,
+                GT_protocol=SPORTS_GT_PROTOCOL if key=='sports' else 'OFFICIAL_UNCHANGED',
                 historical_score_rows=s['historical_rows'],complete_score_rows=s['complete_rows'],
                 added_tail_score_rows=s['complete_rows']-s['historical_rows'],
                 historical_HOTA=old['metrics']['HOTA'],complete_HOTA=complete['metrics']['HOTA'],
@@ -130,12 +132,14 @@ def main():
             s=json.loads(p.read_text());inference[key+'__'+s['model']]=s['GT_open_attempts']
     decoder={combo:json.loads((base(t,s)/'GT_free_predictions.json').read_text())['GT_open_attempts'] for combo,s,t in PAIRS}
     if any(inference.values()) or any(decoder.values()):raise ValueError('GT isolation violation')
-    gt_completion=json.loads((PUBLIC/'sports_GT_completion.json').read_text())
+    gt_completion=json.loads((PUBLIC/'sports_GT_reconstruction_v4.json').read_text())
     empty_completed=sum(r['rows']==0 for r in gt_completion['files'] if r['provenance'].endswith('_48'))
     cost['GT_completion_CPU_wall_seconds']=gt_completion['CPU_wall_seconds']
     gt=dict(inference=inference,decoders=decoder,evaluation_and_oracle_separate_processes=True,
         no_target_GT_threshold_fitting=True,no_training=True,no_MLLM=True,
-        downloaded_annotation_payloads_not_opened_by_model=True,GT_completion=str(PUBLIC/'sports_GT_completion.json'))
+        downloaded_annotation_payloads_not_opened_by_model=True,
+        Sports_GT_protocol=SPORTS_GT_PROTOCOL,GT_reconstruction_v4=str(PUBLIC/'sports_GT_reconstruction_v4.json'),
+        GT_v3_failed_record=str(PUBLIC/'sports_GT_completion.json'),v3_failure_overwritten=False)
     for filename,rows in [('diagnostics.csv',allrows),('per_category.csv',categories),('structure_stats.csv',structures),('rho_matrix.csv',matrix)]:
         write_csv(PUBLIC/filename,rows)
     atomic_json(PUBLIC/'bootstrap.json',dict(status='COMPLETE_DANCE25_SPORTS45_2000_KITTI4_POINT_ONLY',comparisons=ci,planned_samples=2000,seed=0))
@@ -171,12 +175,13 @@ def main():
         full_scope_preserved=True,complete_score_banks=list(margins.values()),GT_open_attempts=0,
         missing_assets=[],original_P0_missing_assets_snapshot=str(history/'inventory.json'),
         smoke_status='ALL_AUTHORIZED_OLD_AND_REMAINING_SMOKES_PASSED',
-        GT_completion_status='PASS_418_EXACT_48_COMPLETED')
+        GT_completion_status=SPORTS_GT_V4_STATUS,Sports_GT_protocol=SPORTS_GT_PROTOCOL)
     for row in inventory['targets']['SportsMOT'].get('required_paths',[]):
         p=Path(row['path']);row.update(exists=p.exists(),is_symlink=p.is_symlink(),resolved=str(p.resolve()))
     atomic_json(PUBLIC/'inventory.json',inventory)
     completion=dict(status='ALL_SIX_PAIRS_COMPLETE',conclusion=conclusion,eligible_pairs=len(valid),quantity_dominant_pairs=len(quantity),
-        labels=rhos,main_configurations=42,indexed_prediction_files=len(files),new_training=0,new_MLLM=0,max_GPUs=2)
+        labels=rhos,main_configurations=42,indexed_prediction_files=len(files),new_training=0,new_MLLM=0,max_GPUs=2,
+        Sports_GT_protocol=SPORTS_GT_PROTOCOL,v3_exact_passed=410,v3_exact_failed=8,original_418_preserved=True)
     atomic_json(PUBLIC/'completion.json',completion)
     execution=PUBLIC/'P1_execution.json'
     if execution.exists():
@@ -195,6 +200,7 @@ def main():
     atomic_json(PUBLIC/'completion.json',completion)
     lines=['# 三数据集多域普遍性：完整六组合结果','',f'## 1. 判定汇总：{conclusion}','',
         f"可判定组合{len(valid)}，数量主导{len(quantity)}；C2判定为“{c2['label']}”。按预注册逐字规则汇总，不按结果删组合。",'',
+        '协议限定：C3/C4使用用户另行授权并预注册的PREREG_V4_ORIGINAL_ANNOTATION_GT，不是旧418模板的原样复现。其他四组合GT不变；任何SportsMOT HOTA产生前已固定v4，预测未改。','',
         table(['源 / 目标','KITTI-V2','Dance','SportsMOT'],[[s,*[
             next((f"{r['rho']:.6f}：{r['label']}" for r in rhos if r['source']==s and r['target']==t),'同域参照')
             for t in ('KITTI-V2','Dance','SportsMOT')]] for s in ('V2-best','Dance-best','LaMOT-best')]),'',
@@ -205,7 +211,7 @@ def main():
         '跨域差距过小、不参与汇总判定：'+('、'.join(r['combo'] for r in rhos if r['gap']<3) or '无')+'。','',
         'ρ用官方detailed CSV未舍入HOTA计算；不截断到[0,1]。数量交换借助目标域同域模型或GT，不是可独立部署的TTA。数量主导不等于排序完全无损。','',
         '## 2. 资产、P0、复现和协议','',
-        '原预注册98e7f84e；下载授权修订0f9c61c6先发布；GT补建v3 0a7477bf先发布。详见PREREG.md、P0_REMAINING.md、remaining_p0.json。',
+        f"原预注册98e7f84e；下载授权修订0f9c61c6先发布；v3 0a7477bf实际410/418通过、8失败后停止；用户授权v4先公开{gt_completion['prereg_publication']}才统一重建。详见PREREG.md、SPORTS_GT_CONFLICT_REPORT.md、P0_REMAINING.md。",
         '933份官方payload已核SHA；LaMOT checkpoint 400980a1…ba4213f；45个McByte官方文件、466表达（与原GitHub逐字节一致）、26970帧原图仅建链接。',
         '许可证：FlexHook代码MIT，不推定覆盖独立权重/数据；LaMOT官方仓库未找到独立数据LICENSE，不宣称标注为MIT。逐来源记录见downloads.json；大权重/原始数据不进Git。',
         'Sports实际466条而非465（末行无LF）；295779个观测、2968201个候选–表达对。官方mix末尾观测补分，完整/历史两套保留。',
@@ -214,8 +220,8 @@ def main():
         '历史KITTI V2逐位分数相同、42.526复现；完整42.752。Dance历史32.134/254118行、完整32.139/254910行，当前诊断均用完整范围。',
         'KITTI GT_Dets491286与infer.sh注释491222差64，保留已通过历史门槛的原过滤/GT，不为凑注释改GT。',
         '无官方子集数字可核对：未找到Sports子集官方HOTA，论文正文仅LaMOT合并56.77，infer.sh合并56.756，不将其作Sports门槛。',
-        f"官方Sports模板只有418份；独立预测封存后，原始LaMOT targets×原SportsMOT官方框逐行全字段/顺序复现{gt_completion['exact_passed']}份，才接入48缺项。48份共{gt_completion['generated_GT_rows']}行，其中0行{empty_completed}份，均按实际原标注选择，不因文件缺失而补空。CPU耗时{gt_completion['CPU_wall_seconds']:.3f}秒/GPU新增0，逐文件SHA见sports_GT_completion.json。",'',
-        '完整/历史覆盖对比（新评分或补尾的分数库，均保留原结果）：','',
+        f"官方Sports模板418份全部原样保留。v3的8条旧模板为原始标注结果的严格子集，共少58897行，共有行字段无变化。v4将全部466条按同一原始targets×原框规则另存，410条数值相同、8条不同、48条原缺项。原缺48条共{gt_completion['previously_missing_GT_rows']}行，其中0行{empty_completed}条，按实际标注选择，不按缺文件补空。重建CPU耗时{gt_completion['CPU_wall_seconds']:.3f}秒/GPU新增0；旧失败sports_GT_completion.json不覆盖，新逐文件SHA见sports_GT_reconstruction_v4.json。",'',
+        '完整/历史覆盖对比（指MOT观测覆盖；Sports两套均用v4 GT，不混入旧模板GT指标）：','',
         table(['目标','模型','历史分数行','完整分数行','补尾分数行','历史HOTA','完整HOTA'],[
             [r[k] for k in ('target','model','historical_score_rows','complete_score_rows','added_tail_score_rows','historical_HOTA','complete_HOTA')] for r in coverage]),'',
         '## 3. 六组合全部固定诊断','',
@@ -242,7 +248,7 @@ def main():
         f"全部新GPU-worker elapsed小时范围[{cost['total_GPU_process_hours_lower_bound']:.6f}, {cost['total_GPU_process_hours_upper_bound']:.6f}]，包含smoke/失败尝试；历史C2外部SIGTERM退出时刻未知故保留上下界。共享GPU elapsed含CPU/IO，不是利用率积分。", 
         'C1和两个旧同域分数库只复用哈希核验结果；本轮新增GPU调用为0不等于独立系统零成本。逐尝试日志/显存/实机卡见costs.json和remaining_p0.json。','',
         '## 8. GT隔离、失败、修复与恢复','',
-        '推理和GT-free解码GT打开尝试均0；独立导出纯language和空对象视频索引，不读取原targets/labels。所有预测先封存SHA，才独立补建GT、做ORACLE及官方TrackEval。没有源训练、微调、MLLM、外部教师、阈值选择或检测器替换。',
+        '推理和GT-free解码GT打开尝试均0；独立导出纯language和空对象视频索引，不读取原targets/labels。所有预测先封存SHA，才独立重建GT、做ORACLE及官方TrackEval（Sports GT为v4）。没有源训练、微调、MLLM、外部教师、阈值选择或检测器替换。',
         '下载经历匿名CDN403、原生官网扫码恢复、长传输后签名过期112；每批刷新签名后补齐。Baidu ZIP的编码路径、分页100上限均已修复；旧失败、私有凭据隔离和精确来源见downloads.json/QR_LOGIN_STATUS.md。',
         '历史SIGTERM仅恢复未完帧；此次完成的视频回执只复用不重算。原始checkpoint、历史报告/结果、vendor代码和其它任务进程未覆盖/终止。',
         '全部预测/数组绝对路径与SHA见margin_paths.json、all_prediction_files.csv.gz。summary和完整日志精简归档official_metrics_logs.tar.gz；大detailed CSV不进Git，其绝对目录/SHA见official_results.json。逐视频逐阈值bootstrap充分统计公开为bootstrap_sufficient_statistics.json.gz。',

@@ -81,3 +81,18 @@ def test_exported_video_statistics_reproduce_pooled_hota_exactly():
     restored=tuple(np.asarray(packed[k]) for k in ('assA_TP_numerator','TP_FN_FP_denominator'))
     weights=np.array([[1,1],[2,0],[0,2]])
     assert np.array_equal(pooled_hota(stats,weights),pooled_hota(restored,weights))
+
+
+def test_sports_evaluation_requires_published_v4_and_not_failed_v3(monkeypatch,tmp_path):
+    from scripts import multidomain_diagnostics as diag
+    monkeypatch.setattr(diag,'PUBLIC',tmp_path)
+    monkeypatch.setattr(diag,'require_plan',lambda:dict(revision='v3 official 418 exact GT-completion gate'))
+    with pytest.raises(PermissionError,match='newly authorized v4'):
+        diag.target_root('SportsMOT')
+    monkeypatch.setattr(diag,'require_plan',lambda:dict(revision=diag.SPORTS_GT_V4_REVISION,remote_commit='published_v4'))
+    record=tmp_path/'sports_GT_reconstruction_v4.json'
+    record.write_text(json.dumps(dict(status=diag.SPORTS_GT_V4_STATUS,prereg_publication='not_published',evaluation_root=str(tmp_path/'new_GT'))))
+    with pytest.raises(PermissionError,match='publication'):
+        diag.target_root('SportsMOT')
+    record.write_text(json.dumps(dict(status=diag.SPORTS_GT_V4_STATUS,prereg_publication='published_v4',evaluation_root=str(tmp_path/'new_GT'))))
+    assert diag.target_root('SportsMOT')==tmp_path/'new_GT'

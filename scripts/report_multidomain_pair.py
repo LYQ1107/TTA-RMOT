@@ -25,6 +25,7 @@ def main():
     for name,r in methods.items():
         m=r['done']['metrics']
         rows.append(dict(combo=combo,source=source,target=target,configuration=name,oracle='ORACLE' in name,status='COMPLETE',
+            GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
             **{k:m[k] for k in ('HOTA','DetA','AssA','IDF1','IDSW')},prediction_rows=r['seal']['prediction_rows'],
             query_empty_prediction_rows=sum(e['selected_rows'] for e in r['seal']['episodes'] if not present[e['video'],e['expression']]),
             source_R_at_1=truth['retrieval']['source']['GT_R_at_1'],in_domain_R_at_1=truth['retrieval']['in_domain']['GT_R_at_1'],
@@ -63,12 +64,14 @@ def main():
             for filename in ('pedestrian_summary.txt',):
                 handle.add(Path(r['results_folder'])/filename,arcname=name+'/'+filename)
             log=Path(r['results_folder']).parent/'trackeval.log'
+            if not log.is_file() and r.get('reuse_folder'):log=Path(r['reuse_folder'])/'trackeval.log'
             if log.exists():handle.add(log,arcname=name+'/trackeval.log')
     stats_file=PUBLIC/(combo+'_bootstrap_stats.json.gz')
     with gzip.open(stats_file,'wt') as handle:
         json.dump({name:export_hota_stats(r) for name,r in methods.items()},handle,separators=(',',':'))
     jobs=[json.loads(p.read_text()) for p in (RUN/'remaining_launchers').glob('*/'+target+'_'+source+'.json')]
     result=dict(status='COMPLETE_SINGLE_PAIR_NOT_GLOBAL_CONCLUSION',combo=combo,source=source,target=target,
+        GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
         gap=gap,rho=ratio,delta_rank=h['IN_DOMAIN']-h['R_SxK_I'],label=label,metrics=rows,categories=categories,
         uncertainty=ci or 'KITTI4 videos: point estimates only',structure=truth['structure'],retrieval=truth['retrieval'],
         source_AUROC=truth['source_AUROC'],in_domain_AUROC=truth['in_domain_AUROC'],references=references,
@@ -99,6 +102,7 @@ def main():
     lines=[f'# {combo} {source} → {target} 完整阶段结果','',
         f"预注册判定：{label}；ρ={ratio}；gap={gap:.6f}；Δrank={result['delta_rank']:.6f}。",'',
         f"完整{len(meta['videos'])}视频/{len(meta['episodes'])}表达。预测先封存后GT，C1/C2不重跑，其余组合仍继续；此表不是六组合最终汇总结论。",'',
+        'SportsMOT GT采用用户预注册v4：466条统一按原始LaMOT targets×SportsMOT框重建；旧418模板410一致/8不一致，原文件和v3失败均保留。不冒称原模板协议精确复现。' if target=='SportsMOT' else 'GT协议保持原官方模板/过滤规则不变。','',
         table(['配置','HOTA','DetA','AssA','IDF1','IDSW','预测行','Empty行'],[[r[k] for k in
             ('configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows')] for r in rows]),'',
         'R_S×K_ORACLE、R_I×K_ORACLE是【ORACLE，仅诊断】，不当新TTA结果。数量交换借助目标同域模型的k，不是GT-free可部署方法。','',
