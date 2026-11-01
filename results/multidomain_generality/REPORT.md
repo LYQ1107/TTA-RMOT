@@ -25,6 +25,8 @@
 
 ## 2. P0、下载、冒烟和自检
 
+2026-11-01 用户要求继续下载后，已实际续办而非只重复报告阻塞。最新结果：新增有效资产 0；公开目录/签名成功，小文件实际传输 HTTP403/31360（新链接已过期），大权重打包传输 HTTP403/31064。完整分页核实 45 个 McByte、466 个官方表达、3 个辅助 JSON 和 1 个权重；其中 466 个表达文件名/大小与已有 GitHub 下载一致，但字节等价性仍未证明。详见 [DOWNLOAD_FOLLOWUP.md](DOWNLOAD_FOLLOWUP.md) 和 downloads.json 续办记录。以下 C1/C2 科研结果和原有封存不变，C3–C6 未启动。
+
 补充预注册先推送0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a；恢复P0先推送e7bf73cf81a1ed6afc775815581e0564a77cbea3，随后才继续P1。原93行PREREG正文和首次P0封存保留。详见[P0_RESUMED.md](P0_RESUMED.md)、[downloads.json](downloads.json)。
 
 Sports seqmap实际466条、45视频；原465为文件末行无换行符造成wc -l少计。原图45视频26970有效帧已链接，没有重新下载。官方LaMOT GitHub原始Sports标注508份、45视频已下载，数字ID名不同于FlexHook文本名，未冒充通过466条一一映射。
