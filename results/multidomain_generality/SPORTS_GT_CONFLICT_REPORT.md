@@ -23,3 +23,11 @@ v3实际结果：410/418逐行全字段与顺序一致，8条失败，涉及5个
 用户随后明确授权：“另行预注册：用官方原始标注统一重建全部466条GT，保留旧模板不覆盖”。执行PREREG v4：全部466条采用同一原始targets×原框规则，另存新目录，保留旧418和v3失败记录。新GT在本修订推送后才生成；SportsMOT所有后续指标明确标记PREREG_V4_ORIGINAL_ANNOTATION_GT，不冒称旧模板协议的官方复现。
 
 不修改任何模型、候选、分数、预测、阈值或六组合判定规则。没有SportsMOT HOTA被用于选择GT协议；其他四组合不重跑。
+
+## v4实际执行结果（正式HOTA之前封存）
+
+v4预注册与代码先公开`1e8f568887d75c4b93bf487365fc63edd000d042`并回读验证，才执行重建。独立CPU完成全部466条，共1533675行GT、0条空序列。410条仍与旧模板逐行数值一致，8条仍为已公开的58897行差异，旧418文件SHA全部未变。
+
+原缺48条共15434行、全部非空，证明不能把原缺文件默认视为空GT。新GT全部使用同一原始标注选择规则，未混用旧模板。核心CPU耗时11.316秒，进程墙钟14.45秒，新增GPU0小时。所有输出保留在独立`SportsMOT_v4_original_annotations`目录，不进入Git；逐文件输入/输出SHA见[sports_GT_reconstruction_v4.json](sports_GT_reconstruction_v4.json)，实际stdout见[sports_GT_reconstruction_v4.log](sports_GT_reconstruction_v4.log)。
+
+此封存阶段仍未运行SportsMOT正式TrackEval；后续全部SportsMOT指标统一标明v4协议。
