@@ -1,13 +1,41 @@
 {
-  "status": "NOT_RUN_P0_HARD_STOP",
-  "planned_samples": 2000,
-  "samples_executed": 0,
-  "seed": 0,
-  "planned_video_clusters": {
-    "Dance": 25,
-    "SportsMOT": 45
+  "status": "COMPLETE_FOR_C1_OTHER_PAIRS_BLOCKED_OR_RUNNING",
+  "comparisons": {
+    "C1__R_SxK_I_minus_NATIVE": {
+      "combo": "C1",
+      "target": "Dance",
+      "first": "R_SxK_I",
+      "second": "NATIVE",
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 23.5530675941021,
+      "CI95": [
+        14.685326142991581,
+        33.6424827678502
+      ],
+      "unit": "video, all queries/frames kept together",
+      "pooling": "official TP-weighted sufficient statistics"
+    },
+    "C1__IN_DOMAIN_minus_R_SxK_I": {
+      "combo": "C1",
+      "target": "Dance",
+      "first": "IN_DOMAIN",
+      "second": "R_SxK_I",
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "delta_HOTA": 0.3677409774898557,
+      "CI95": [
+        0.09069506709065518,
+        0.7193641061779391
+      ],
+      "unit": "video, all queries/frames kept together",
+      "pooling": "official TP-weighted sufficient statistics"
+    }
   },
-  "comparisons": {},
-  "generalization_verdict": null,
-  "reason": "Missing LaMOT-best/data package/McByte plus 465-versus-466 seqmap discrepancy; no new diagnostics or oracle executed."
+  "planned_samples": 2000,
+  "seed": 0,
+  "KITTI": "4 videos: no bootstrap",
+  "SportsMOT": "not run; missing official assets"
 }

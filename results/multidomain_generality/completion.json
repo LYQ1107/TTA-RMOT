@@ -1,0 +1,44 @@
+{
+  "status": "PARTIAL_C1_COMPLETE_C2_RUNNING",
+  "completed_combinations": [
+    "C1"
+  ],
+  "full_scope": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "global_verdict": "NOT_COMPUTED_INCOMPLETE_PREREGISTERED_SCOPE",
+  "prereg_amendment": {
+    "remote_verified": true,
+    "remote_commit": "0f9c61c66f26a72ace8f044864b8b0f71a8ecc0a",
+    "local_commit": "a15bc659192737b7c328dd5ea0ea8881bc8b9880",
+    "prereg_sha256": "da17fe4dcd13df5579887f75da68c424bdc009c506defae820dfe84a338a9ea6",
+    "original_prereg_commit": "98e7f84efbe43493761063e7832de7bfe9d4e18d",
+    "original_prereg_sha256": "7c6aa50428ad71f5b593e7b4711277c3a507e825edbed5b18b76bef0a23e0cc0",
+    "sports_sequences": 466,
+    "authorized_partial_work": [
+      "C1",
+      "C2",
+      "KITTI_complete_tail_scores"
+    ],
+    "maximum_simultaneous_GPUs": 2
+  },
+  "gt_audit": {
+    "inference": {
+      "V2-best": 0
+    },
+    "decoders": {
+      "Dance": 0
+    },
+    "evaluation_and_oracle_separate_processes": true,
+    "no_target_GT_threshold_fitting": true,
+    "no_training": true,
+    "no_MLLM": true,
+    "downloaded_annotation_payloads_not_opened_by_model": true
+  },
+  "costs": 0.1651240953921418
+}
