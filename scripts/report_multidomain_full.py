@@ -121,6 +121,9 @@ def main():
         total_GPU_process_hours_lower_bound=cost['total_GPU_process_hours_lower_bound']+added,
         total_GPU_process_hours_upper_bound=cost['total_GPU_process_hours_upper_bound']+added,
         interpretation='GPU-worker elapsed time incl CPU/IO, not utilization integration; shared GPUs; reused historical inferences are not zero-cost systems')
+    full_launcher=json.loads((PUBLIC/'remaining_full_costs.json').read_text())
+    cost.update(remaining_full_launcher_wall_seconds=full_launcher['wall_seconds'],
+        remaining_full_launcher_GPU_process_hours=full_launcher['GPU_process_hours'])
     cost['per_new_inference']+= [dict(model=m,target=t,known_GPU_process_hours=sum(j['wall_seconds'] for j in newjobs if j['model']==m and j['target']==t)/3600,
         total_GPU_process_hours_lower_bound=sum(j['wall_seconds'] for j in newjobs if j['model']==m and j['target']==t)/3600,
         total_GPU_process_hours_upper_bound=sum(j['wall_seconds'] for j in newjobs if j['model']==m and j['target']==t)/3600,
@@ -135,6 +138,8 @@ def main():
     gt_completion=json.loads((PUBLIC/'sports_GT_reconstruction_v4.json').read_text())
     empty_completed=sum(r['rows']==0 for r in gt_completion['files'] if r['provenance'].endswith('_48'))
     cost['GT_completion_CPU_wall_seconds']=gt_completion['CPU_wall_seconds']
+    cost['GT_v4_reconstruction_CPU_wall_seconds']=gt_completion['CPU_wall_seconds']
+    cost['GT_v3_failed_CPU_wall_seconds']=json.loads((PUBLIC/'sports_GT_completion.json').read_text())['CPU_wall_seconds']
     gt=dict(inference=inference,decoders=decoder,evaluation_and_oracle_separate_processes=True,
         no_target_GT_threshold_fitting=True,no_training=True,no_MLLM=True,
         downloaded_annotation_payloads_not_opened_by_model=True,
@@ -165,6 +170,7 @@ def main():
     reproduction=json.loads((history/'reproduction.json').read_text())
     reproduction.update(status='ALL_C1_C6_COMPLETE',global_six_pair_experiment_complete=True,
         LaMOT_best_SportsMOT=dict(status='OFFICIAL_TARGET_CONFIG_MIX_LOADER_COMPLETE',
+            GT_protocol=SPORTS_GT_PROTOCOL,GT_reconstruction=str(PUBLIC/'sports_GT_reconstruction_v4.json'),
             HOTA_full=allmethods['C3']['IN_DOMAIN']['done']['metrics']['HOTA'],
             official_subset_number='No official SportsMOT-only number found; no invented numerical gate',
             history_completion=references['C3__HIST_LaMOT-best']),
@@ -194,6 +200,10 @@ def main():
             for p in directory.rglob('*'):
                 if p.is_file() and p.suffix in ('.txt','.json','.log'):
                     handle.add(p,arcname=str(p.relative_to(RUN)))
+        for p in (RUN/'execution_snapshot_remaining').glob('*.py'):
+            handle.add(p,arcname=str(p.relative_to(RUN)))
+        for p in (RUN/'prereg_amendment_publication.json',RUN/'remaining_p0_publication.json'):
+            handle.add(p,arcname=str(p.relative_to(RUN)))
     completion.update(execution_archive=dict(path=str(execution_archive),sha256=file_sha(execution_archive)),
         bootstrap_statistics=dict(path=str(stats_file),sha256=file_sha(stats_file)),
         coverage_comparison_sha256=file_sha(PUBLIC/'coverage_comparison.csv'))
@@ -228,6 +238,7 @@ def main():
         table(['组合','配置','HOTA','DetA','AssA','IDF1','IDSW','行数','Empty行'],[
             [r[k] for k in ('combo','configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows')] for r in allrows]),'',
         'R_S×K_ORACLE / R_I×K_ORACLE显式为【ORACLE，仅诊断】。B0_GLOBAL只借同域总输出行数，不借逐帧逐句数量。',
+        '数量ORACLE只提供k，不提供正确候选ID；受固定MOT、排序和关联影响，并非完整RMOT的性能上界。',
         '同帧GT R@1在GT非空帧平均(top1命中GT数/GT数)，无可匹配候选记0；CSV另外保留条件候选R@1，不混用分母。','',
         table(['组合','源GT R@1','同域GT R@1','源AUROC','同域AUROC'],[[c,
             json.loads((base(t,s)/'oracle.json').read_text())['retrieval']['source']['GT_R_at_1'],
@@ -246,6 +257,7 @@ def main():
         '## 7. 成本','',
         table(['模型','目标','GPU-process小时下界','上界'],[[r['model'],r['target'],r['total_GPU_process_hours_lower_bound'],r['total_GPU_process_hours_upper_bound']] for r in cost['per_new_inference']]),'',
         f"全部新GPU-worker elapsed小时范围[{cost['total_GPU_process_hours_lower_bound']:.6f}, {cost['total_GPU_process_hours_upper_bound']:.6f}]，包含smoke/失败尝试；历史C2外部SIGTERM退出时刻未知故保留上下界。共享GPU elapsed含CPU/IO，不是利用率积分。", 
+        f"其中恢复的5项full推理墙钟{full_launcher['wall_seconds']:.3f}秒，累计{full_launcher['GPU_process_hours']:.6f} GPU-worker小时，不含P0与下载。",
         'C1和两个旧同域分数库只复用哈希核验结果；本轮新增GPU调用为0不等于独立系统零成本。逐尝试日志/显存/实机卡见costs.json和remaining_p0.json。','',
         '## 8. GT隔离、失败、修复与恢复','',
         '推理和GT-free解码GT打开尝试均0；独立导出纯language和空对象视频索引，不读取原targets/labels。所有预测先封存SHA，才独立重建GT、做ORACLE及官方TrackEval（Sports GT为v4）。没有源训练、微调、MLLM、外部教师、阈值选择或检测器替换。',

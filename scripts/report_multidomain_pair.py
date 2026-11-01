@@ -70,13 +70,17 @@ def main():
     with gzip.open(stats_file,'wt') as handle:
         json.dump({name:export_hota_stats(r) for name,r in methods.items()},handle,separators=(',',':'))
     jobs=[json.loads(p.read_text()) for p in (RUN/'remaining_launchers').glob('*/'+target+'_'+source+'.json')]
+    shared_jobs=[json.loads(p.read_text()) for p in (RUN/'remaining_launchers').glob('*/SportsMOT_LaMOT-best.json')] if target=='SportsMOT' else []
+    shared_hours=sum(r['wall_seconds'] for r in shared_jobs)/3600
     result=dict(status='COMPLETE_SINGLE_PAIR_NOT_GLOBAL_CONCLUSION',combo=combo,source=source,target=target,
         GT_protocol=SPORTS_GT_PROTOCOL if target=='SportsMOT' else 'OFFICIAL_UNCHANGED',
         gap=gap,rho=ratio,delta_rank=h['IN_DOMAIN']-h['R_SxK_I'],label=label,metrics=rows,categories=categories,
         uncertainty=ci or 'KITTI4 videos: point estimates only',structure=truth['structure'],retrieval=truth['retrieval'],
         source_AUROC=truth['source_AUROC'],in_domain_AUROC=truth['in_domain_AUROC'],references=references,
         new_GPU_worker_elapsed_hours=sum(r['wall_seconds'] for r in jobs)/3600,cost_jobs=jobs,
-        cost_scope='Only new source inference including smoke; inherited reference inference not remeasured, not a zero-cost system',
+        shared_reference_new_GPU_worker_elapsed_hours=shared_hours,shared_reference_cost_jobs=shared_jobs,
+        cost_scope=('Source inference only in the source cost field; newly computed shared LaMOT Sports reference cost is separately disclosed, charge once in the global total' if target=='SportsMOT' else
+            'Only new source inference including smoke; inherited reference inference not remeasured, not a zero-cost system'),
         prediction_index=dict(path=str(index),sha256=file_sha(index),files=len(predictions)),
         official_archive=dict(path=str(archive),sha256=file_sha(archive)),
         sufficient_statistics=dict(path=str(stats_file),sha256=file_sha(stats_file)),
@@ -110,7 +114,9 @@ def main():
         table(['比较','ΔHOTA','95% CI','视频数'],[[k,r['delta_HOTA'],r['CI95'],r['clusters']] for k,r in ci.items()]),'',
         f"GT R@1：源{truth['retrieval']['source']['GT_R_at_1']:.6f}，同域{truth['retrieval']['in_domain']['GT_R_at_1']:.6f}；AUROC：源{truth['source_AUROC']:.6f}，同域{truth['in_domain_AUROC']:.6f}。",'',
         'KITTI只有4视频，报告点估计，不构造帧级显著性。' if target=='KITTI-V2' else '视频聚类2000次/seed0，不独立重采样表达或帧。','',
-        f"本组新增source GPU-worker elapsed（含smoke）{result['new_GPU_worker_elapsed_hours']:.6f}小时；共享GPU含CPU/IO，不是利用率积分。旧同域分数虽复用，不能将其解释为独立系统零成本。",'',
+        f"本组新增source GPU-worker elapsed（含smoke）{result['new_GPU_worker_elapsed_hours']:.6f}小时；共享GPU含CPU/IO，不是利用率积分。",
+        f'本轮新算的共享LaMOT→Sports同域参照另需{shared_hours:.6f} GPU-worker小时，在总账只计一次；上行只是source成本，不是独立系统总成本。' if target=='SportsMOT' else
+        '旧同域分数虽复用，不能将其解释为独立系统零成本。','',
         f'机器表、summary/完整日志精简归档、逐预测SHA分别见{combo}_RESULTS.json、{combo}_official_logs.tar.gz、{combo}_all_prediction_files.csv.gz。大detailed CSV保留原绝对路径/SHA，不进Git。',
         f'逐视频、逐HOTA阈值的完整bootstrap充分统计见{combo}_bootstrap_stats.json.gz，可独立重算官方合并HOTA和视频聚类区间。',
         '保持原模型/参数/候选/GT过滤。其它固定组合未齐之前不宣布跨三域普遍性。']
