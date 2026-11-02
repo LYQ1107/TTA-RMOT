@@ -16,11 +16,13 @@ from flex_uda.presence.runtime import RUN,PUBLIC
 
 def main():
     global OUT,RECORD
-    p=ArgumentParser(description=__doc__);p.add_argument('--version',choices=['v3','v4'],default='v3')
+    p=ArgumentParser(description=__doc__);p.add_argument('--version',choices=['v3','v4','v5'],default='v3')
     a=p.parse_args();OUT=RUN / ('redesign_'+a.version);RECORD=PUBLIC / ('redesign_'+a.version)
     choice = json.loads((RECORD / 'selection.json').read_text())['models']
     rows = []
-    for target, name in IN_DOMAIN.items():
+    gate=json.loads((RECORD / 'gate.json').read_text())
+    jobs=list(IN_DOMAIN.items()) if not gate['completed_full_A'] else [(t,m) for t in IN_DOMAIN for m in IN_DOMAIN.values()]
+    for target, name in jobs:
         meta = target_metadata(target)
         expected = {(q['video_id'],q['expression_id']) for q in meta['episodes']}
         allowed = {v:set(bank['lines']) for v,bank in meta['videos'].items()}
@@ -49,10 +51,14 @@ def main():
     changed = subprocess.check_output(['git','diff','--name-only',
         'efce389200aa5b93d47f6ef387f7c54a5e8ef890','--',*protected],cwd=ROOT,text=True).splitlines()
     if changed: raise ValueError('Historical report, official vendor or teacher unexpectedly changed')
-    if a.version=='v4':
+    if a.version in ('v4','v5'):
         old=subprocess.check_output(['git','diff','--name-only','77cd790f1a1a9cb4fe581f31d51b20af965dc436',
             '--','results/presence_active/redesign_v3'],cwd=ROOT,text=True)
         if old.strip():raise ValueError('Do not modify v3 historical results')
+    if a.version=='v5':
+        old=subprocess.check_output(['git','diff','--name-only','f0fc286893fc97821d502f59c5b9d75620776b01',
+            '--','results/presence_active/redesign_v4'],cwd=ROOT,text=True)
+        if old.strip():raise ValueError('Do not modify v4 historical results')
     names = {'presence_train.py','presence_redesign.py','presence_eval_offline.py','active_eval.py',
              'active_run.py','active_teacher_worker.py','presence_bernoulli.py'}
     running = []
