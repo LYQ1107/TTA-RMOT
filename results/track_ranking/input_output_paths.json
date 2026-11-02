@@ -1,0 +1,845 @@
+{
+  "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+  "margin_source_commit": "01add8876fb8bb8cb092a22e98c67f29b48addac",
+  "base_commit": "8e7d6e3791f40938df68a3698081ad446919860b",
+  "inputs": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/multidomain_generality/margin_paths.json",
+      "sha256": "e974c7e37b847e183b5743f154c7f99a7c0bb2327a7d48be9c6c7e4ec012e5e9",
+      "bytes": 5256
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/Dance-best/complete.npy",
+      "sha256": "0afa3a08e3f6e7ba85338a16325bf65a017852a1cd79a195337531e98f3f01c5",
+      "bytes": 19403184,
+      "target": "KITTI-V2",
+      "model": "Dance-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/V2-best/complete.npy",
+      "sha256": "ecf1d8469a1f0e648bdc3fe7888350910885e1afa1714f2847b239c554c5c120",
+      "bytes": 19403184,
+      "target": "KITTI-V2",
+      "model": "V2-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/LaMOT-best/complete.npy",
+      "sha256": "2e3f28066a74f079888967a7d103d75c71458d3d922c800eb5ee7748f39f286d",
+      "bytes": 19403184,
+      "target": "KITTI-V2",
+      "model": "LaMOT-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/V2-best/complete.npy",
+      "sha256": "9b710eafe6e05df47599af0db6b55869b348248972bc6295186ed421b08afddd",
+      "bytes": 23745736,
+      "target": "SportsMOT",
+      "model": "V2-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/LaMOT-best/complete.npy",
+      "sha256": "cc78b7b479eb6c51906275a16a736022b93fcd7cbbe07a120f9a2135cc678e3d",
+      "bytes": 23745736,
+      "target": "SportsMOT",
+      "model": "LaMOT-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/Dance-best/complete.npy",
+      "sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54",
+      "bytes": 23745736,
+      "target": "SportsMOT",
+      "model": "Dance-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/FROZEN.npy",
+      "sha256": "fd57998fa49760c65d5a458dc4656514ffdd8dcad8db4c586a98a6d17db9bbaa",
+      "bytes": 28707688,
+      "target": "Dance",
+      "model": "V2-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/OFFICIAL_DANCE_COMPLETE.npy",
+      "sha256": "b82fd2e6e8e0f7fe37fa904cd5a62c19d642969a82e5f0f9fee2b50479e4ef0b",
+      "bytes": 28707688,
+      "target": "Dance",
+      "model": "Dance-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/dance/LaMOT-best/complete.npy",
+      "sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517",
+      "bytes": 28707688,
+      "target": "Dance",
+      "model": "LaMOT-best"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/plan.json",
+      "sha256": "4f972a23d32e62bc153b6ab5120731c339eeb3398ba6a6a150fe4bc1e78bf2dc",
+      "bytes": 40175
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/seal.json",
+      "sha256": "3688649ee524ddd86701ce86093a95be32d24a8f27a205f131b5bf3f28af0a10",
+      "bytes": 64515
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/manifest.jsonl",
+      "sha256": "035e8e0a5e69675e789140661e231eefe27eed907028c9c94dfff7e9ecd35e0a",
+      "bytes": 751602
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/0/outputs.jsonl",
+      "sha256": "acc506f5a7c2959e8322ee568d5d0e249f401e5a343b662effb24a2eb34a01f7",
+      "bytes": 64898070
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/1/outputs.jsonl",
+      "sha256": "c1448ce28167c0edd325b278794814e877e43528cfc9ec38292ca42eba686a97",
+      "bytes": 64860644
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/multidomain_generality/sports_template_inventory.json",
+      "sha256": "c80f3bf8ab942460bfa5e307f492f3ecb5155128d5e80b8d4cc777c5d59f90bc",
+      "bytes": 4277
+    }
+  ],
+  "GT_and_output_receipts": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0005/receipt.json",
+      "sha256": "ab2ed142a7a1098dd22ec7f67c444dc6e3a83fe1b59906926cfb1aef64dd79a8",
+      "bytes": 60690
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0011/receipt.json",
+      "sha256": "ccf57cb6ec06b56caf0971f19000a4a81028d68227a51a149d5b492a28baeee1",
+      "bytes": 71687
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0013/receipt.json",
+      "sha256": "b2cd3f5f43852515d2b8ac5358ae93bd6fae3fbad0355a3365c8d13930c9835d",
+      "bytes": 61879
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0019/receipt.json",
+      "sha256": "1c30ac2f5835f94f338c612950dc0cd62bedd067c4f08db0dcecf85ccbf0e978",
+      "bytes": 95285
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c001/receipt.json",
+      "sha256": "396acaa27c150f8ed1a203d08014b1a093564c9b86b4408991ac851854c648a1",
+      "bytes": 37313
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c003/receipt.json",
+      "sha256": "316550e38c8464bd0df35c49f483b1ff7bae28e4537f8dd159deba595573236b",
+      "bytes": 37275
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c005/receipt.json",
+      "sha256": "8f564bb2d8eb72abdf31ea6f2c34b3395888e265d9b8f4bcba7f143bb8039099",
+      "bytes": 21827
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c007/receipt.json",
+      "sha256": "eac2286c9e005f5d5f550e39f0d3f0e158c2926acec55007323052a6c42f2432",
+      "bytes": 24524
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c008/receipt.json",
+      "sha256": "ecd551b0655e3ffb26d2e44aa5af85f837f348d6db6890949812fe297a555fe9",
+      "bytes": 32190
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_00HRwkvvjtQ_c011/receipt.json",
+      "sha256": "37da280b65410c2ef553de2077b0f111961189a712fec11aabbd120ae97b096b",
+      "bytes": 25674
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c004/receipt.json",
+      "sha256": "b479b3bca81b5591d49d3c8b0adc7dca218bbe19d3af65964cd34c645feb02ef",
+      "bytes": 23363
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c005/receipt.json",
+      "sha256": "28e6d4d089b27627d58d6c8a16ce9d9725a4b09873ee36280f312c6fb360c55b",
+      "bytes": 17755
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c006/receipt.json",
+      "sha256": "31455bdf8529c0d2b5a9cf18c39ca791f3138706524a097f071577256a9104ab",
+      "bytes": 17704
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c007/receipt.json",
+      "sha256": "d6db3b01f6b7cab5e0e035a1bb036c6ab077daf691e58cad647be782b5cd64d1",
+      "bytes": 15540
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c008/receipt.json",
+      "sha256": "5491dc2e8902e4755bc360893c60f0c5c593fbc4d744d18acfc487a237d1dce6",
+      "bytes": 15588
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_0kUtTtmLaJA_c010/receipt.json",
+      "sha256": "06a3d6e72ac2fea35595d939e30b5e057f8853f3c269bcfb231e3ebcd8467738",
+      "bytes": 15632
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_2QhNRucNC7E_c017/receipt.json",
+      "sha256": "507e7221ae7577720350fc581391f24c678eabc17cbb567f1b86e09dd87e067f",
+      "bytes": 20248
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_4-EmEtrturE_c009/receipt.json",
+      "sha256": "1a3ba26a35c4fb6b57403a48bf4e957b8438a07001770a6b0e8ad436727dcabe",
+      "bytes": 15088
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_4r8QL_wglzQ_c001/receipt.json",
+      "sha256": "53104fd1e2dc33b1f9fdad3e1111b5db019ac32a55ba3b6a0ff72ee96e055870",
+      "bytes": 29552
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_5ekaksddqrc_c001/receipt.json",
+      "sha256": "22ae92421df77128258d556cb7799a434a8ada279ec6a7a86b7ac42f92c67814",
+      "bytes": 20708
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_5ekaksddqrc_c002/receipt.json",
+      "sha256": "068269b50f1ee79824898ce006dca1a5a143d26548456366600a2f237678d038",
+      "bytes": 22723
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_5ekaksddqrc_c003/receipt.json",
+      "sha256": "a63de6d20abbd8b97b181c7da8e423d84b72f7e55d9ffd3c363fa92bd3cee496",
+      "bytes": 38790
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_5ekaksddqrc_c004/receipt.json",
+      "sha256": "6a6343574fd6f55b3f8b6da75db104f590e79c1e35433ffff79f95f9267344b4",
+      "bytes": 27817
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_5ekaksddqrc_c005/receipt.json",
+      "sha256": "e1b7eea1f612e16ee4848b054ecb2aeae7c2496a7427c039212e3d141a4e0bc9",
+      "bytes": 32507
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_9MHDmAMxO5I_c002/receipt.json",
+      "sha256": "eb8df649d86239f8e580bd6863b4a936e9c3f0a0bbf85c25c41b7a770a2c0ae5",
+      "bytes": 13516
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_9MHDmAMxO5I_c003/receipt.json",
+      "sha256": "82d9d4f6c45f60fddb3d7d7e1cc897402695588eef124e07496bbcdeb358496d",
+      "bytes": 13211
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_9MHDmAMxO5I_c004/receipt.json",
+      "sha256": "9f35e4931f8fcd54217e710d105e9cc1ebb912bd1b74374e9be4bbbcb6f5d0b9",
+      "bytes": 19756
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_9MHDmAMxO5I_c006/receipt.json",
+      "sha256": "ca215464cc5c1c35e1d882cbc7105e1d135e7013e2a1004dbc66c09466c3334f",
+      "bytes": 15080
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_9MHDmAMxO5I_c009/receipt.json",
+      "sha256": "9a11f17a6f40149ea0f23afca85b4dda4eba08baf6b89882f75129da34df8a61",
+      "bytes": 20955
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_BgwzTUxJaeU_c008/receipt.json",
+      "sha256": "0cc7aead112946b5ec64bd514ab93e65a9330d765aa728cb391f303beb2e5bd8",
+      "bytes": 19923
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_BgwzTUxJaeU_c012/receipt.json",
+      "sha256": "cb85e4f15fedcfc150201f650d8fe3ff0547acbb59a8a86d2970b643ca664b4e",
+      "bytes": 23212
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_BgwzTUxJaeU_c014/receipt.json",
+      "sha256": "42ca1a6bbe7556c3c1c46d9717fa336675adb83bc9142ba6f6e21f177136eec3",
+      "bytes": 33511
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_G-vNjfx1GGc_c004/receipt.json",
+      "sha256": "5cc975ea5a9ee390ac4ddc6bb6f620356fb8c551e54abd922124bde7d1a59088",
+      "bytes": 26683
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_G-vNjfx1GGc_c008/receipt.json",
+      "sha256": "f22983a9ff1422401fe03f550ffbdd83647c690ee32395dc54e8ecd00fcba9a8",
+      "bytes": 20239
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_G-vNjfx1GGc_c600/receipt.json",
+      "sha256": "d6d9f2846928ed216e5b2d3224532e1cb0e50fddcf21aa1326560ed9611ccc1e",
+      "bytes": 20637
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_G-vNjfx1GGc_c601/receipt.json",
+      "sha256": "cf7fd41faaacc36ef7be6a69b79418623764461f1e388ff3b26b0b539362c41a",
+      "bytes": 20933
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_ITo3sCnpw_k_c007/receipt.json",
+      "sha256": "ca9556a4742c6c1b3e1da0ef1e67231e23810db87e9af2c3867df1e21ca3b191",
+      "bytes": 29169
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_ITo3sCnpw_k_c010/receipt.json",
+      "sha256": "6617bf909ff6b47cde887ac50af98ce0907b8710d0015fba8b5e5d3ed7e05339",
+      "bytes": 23565
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_ITo3sCnpw_k_c011/receipt.json",
+      "sha256": "facb58d6fcb27f3a9d304884ec5ff91caaa6d06cb3e381abc18f6d73ca8c7dd4",
+      "bytes": 31088
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_ITo3sCnpw_k_c012/receipt.json",
+      "sha256": "fac8c03b2ffded14a2291fef907a534ebc50fe637d2ed6bd621ba292d4cbaa5e",
+      "bytes": 33250
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_cC2mHWqMcjk_c007/receipt.json",
+      "sha256": "1c336c7c86da97965a668c85748224908fa017df637512e1c1a58b7073d0f770",
+      "bytes": 27425
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_cC2mHWqMcjk_c008/receipt.json",
+      "sha256": "ea1670c0c68eaee4ceb45dc6ef6d8b3e7237c09846d08d5b801c6d76eccac87e",
+      "bytes": 14088
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_cC2mHWqMcjk_c009/receipt.json",
+      "sha256": "30f2eedb17f0a7ae1f23a1f53f8b504ef7de2dd75616105192ebb5b7a062b1b3",
+      "bytes": 19471
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_dw7LOz17Omg_c053/receipt.json",
+      "sha256": "9e3d40cf23633452c88d15a0f62b93ea4404179ba1eb1f92087b0e6eae551755",
+      "bytes": 24623
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_dw7LOz17Omg_c067/receipt.json",
+      "sha256": "a9414bb3d84a85333f3267f8ee3cf6a869c9c81fa886d204937314b56f42796b",
+      "bytes": 21309
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_i2_L4qquVg0_c006/receipt.json",
+      "sha256": "e0f81fac74a66f977fa0a09641a6345c548b7e6946691fda0ee5c91606cee82c",
+      "bytes": 33647
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_i2_L4qquVg0_c007/receipt.json",
+      "sha256": "b586b8f8c84c827e50e0c4cf5dd4c7f681f24a86df0239cbb7d81f520eb23690",
+      "bytes": 19440
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_i2_L4qquVg0_c009/receipt.json",
+      "sha256": "2c66a9ab7c438d14b3d280f0a9dc4256d3036ec476c570f471869b1b28068585",
+      "bytes": 22143
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/SportsMOT/v_i2_L4qquVg0_c010/receipt.json",
+      "sha256": "af02b33d38077efafbcd22e1538ccf758d4c75ef78d62a78fba75e07c4323e34",
+      "bytes": 29418
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0004/receipt.json",
+      "sha256": "61c5a43c0682a4946bab2be9677759154806b1803504581213aedf534a931535",
+      "bytes": 36034
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0005/receipt.json",
+      "sha256": "f985d3ac014ecd89770b7a3d25d2f166c0e3678450ba4f27ec4e918d6bbaddbb",
+      "bytes": 36171
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0007/receipt.json",
+      "sha256": "19c654aaa59dbdbe1114100888042d4536ea6594a857ab5fd7a2fb35928a7acc",
+      "bytes": 39818
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0010/receipt.json",
+      "sha256": "3b0c94a92188e26f0e999e2fe58dc9cdad004ac93a2041d63afb6f0640bb3dac",
+      "bytes": 37961
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0014/receipt.json",
+      "sha256": "b083cbe6480a18fee08332e351db7c26b160cf5b390a63c1822b2e3ac8262c18",
+      "bytes": 44055
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0018/receipt.json",
+      "sha256": "e0783c2ac8df5db23f1a959b515076488d1e330761ef80ffb5ff9f32ad13a9c6",
+      "bytes": 20387
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0019/receipt.json",
+      "sha256": "c392b49c1f1ba49aa132c4e68049da4a4eded72983aa8a2809568122a48ace19",
+      "bytes": 70840
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0025/receipt.json",
+      "sha256": "cdaae36d52b754dd39f02fc66ca7ea1b35fd1a2ec238af6dc5a0a77e6dfe8fde",
+      "bytes": 30341
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0026/receipt.json",
+      "sha256": "b6cf865277d19383276707960d99544f7bf53b7babeb49215c26f0fb5f32aa0a",
+      "bytes": 18615
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0030/receipt.json",
+      "sha256": "0c2e2f421dfb9ade24e6c039767304c75b0d71e754764d47f80464d540f28d3e",
+      "bytes": 39859
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0034/receipt.json",
+      "sha256": "e62292dfecdac472d54be671dfa82e317de853f4459437f77331d98c19734e5b",
+      "bytes": 37066
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0035/receipt.json",
+      "sha256": "d4181738488499916af0ccde0749901e4759c90cd0729d84b00a6648758b5563",
+      "bytes": 26755
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0041/receipt.json",
+      "sha256": "c696d8f7b645bbe7dc430b95d0ff475977286ec17c16972d662b91b3b1f45065",
+      "bytes": 43823
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0043/receipt.json",
+      "sha256": "64a667073fda45f8bae94892deae8b0ebbab740c495c7f47534bb37ad0f08e9d",
+      "bytes": 13506
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0047/receipt.json",
+      "sha256": "cd0195b0bcb7ca1968e80168ddde0c855d5d8d9ede56d1d68a7b8f64eaf6bf82",
+      "bytes": 40233
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0058/receipt.json",
+      "sha256": "5f8fda61af507fc0fb30115435b6660663cc347c866ada14ebef6bc52bd8a5fe",
+      "bytes": 49718
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0063/receipt.json",
+      "sha256": "9544dcf46786a3f2d25e5208bbae15197ff3ed0ccb62a8b0bf3ad074f63daa4c",
+      "bytes": 38403
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0065/receipt.json",
+      "sha256": "07fb877968a6923f687f05e2deb2f27ae3ce3d521920623b7400ea710e992338",
+      "bytes": 25132
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0073/receipt.json",
+      "sha256": "cb8fec92f0a29c8e24a64a2f625828efc9d8f80abda4c32606f6a9b9b1bf3733",
+      "bytes": 29044
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0077/receipt.json",
+      "sha256": "23afba00b91fe866b707d179531ea29cb6da00a7b8e1c785de17a92ffd8714b6",
+      "bytes": 41327
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0079/receipt.json",
+      "sha256": "be374a6dacf678f4aa1a83d4b56355016f782d5bc691e0e7c732c43b4fb6409a",
+      "bytes": 44802
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0081/receipt.json",
+      "sha256": "c1d529d3ae7852b261315569593f8ea43379249fd7d26c9411fa64c6131f55fb",
+      "bytes": 43972
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0090/receipt.json",
+      "sha256": "76e05faafd79b2abba052ffb572b0e66953c5505933f577c577c58e8b7b68b4d",
+      "bytes": 40183
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0094/receipt.json",
+      "sha256": "7377861a9414314b46b4b58e186a311741cb0f9b2de08eb24a59d022f0c7a146",
+      "bytes": 31747
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/targets/Dance/dancetrack0097/receipt.json",
+      "sha256": "fa48da6c9b566781d615325d2dcc842cff358802ea771c58a67485bd5736f64d",
+      "bytes": 36396
+    }
+  ],
+  "noise_GT_sources": {
+    "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/noise_rates.json",
+    "sha256": "2c7241becfd55ff26b2b3d139706cc3c69e7d9db170cb1456fe5926364a23868",
+    "bytes": 129771
+  },
+  "machine_files": [
+    {
+      "name": "units.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/units.csv",
+        "sha256": "6970cf41ecb3e70458e5dde943da3f0d53260510fc074d8513ee0dbd950ead06",
+        "bytes": 10713972,
+        "rows": 92744
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/units.csv.gz",
+        "sha256": "e7c572c15ed5749f719c33c273205f44b5ce01a488380562af6d231d7a40feff",
+        "bytes": 499735
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/units.csv.gz",
+        "sha256": "e7c572c15ed5749f719c33c273205f44b5ce01a488380562af6d231d7a40feff",
+        "bytes": 499735
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "auroc_frame.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/auroc_frame.csv",
+        "sha256": "07dece2144901be6a461e177381b52b0fb57df4b96374921f8b56dfd9f7cc865",
+        "bytes": 429287346,
+        "rows": 3441897
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/auroc_frame.csv.gz",
+        "sha256": "85f53490407539ab21a9a7ca754fc323166582f1a89ca5b9c8cf3eb3880b644e",
+        "bytes": 12316910
+      },
+      "git_compressed": null,
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "auroc_segment.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/auroc_segment.csv",
+        "sha256": "624278ab716f884888893593d1c23419cc2a1a74cfe5376754a68a7e9b174f1e",
+        "bytes": 640723,
+        "rows": 5259
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/auroc_segment.csv.gz",
+        "sha256": "dcfe55045f6a43db1a57a60bfe0efc8791ce950216e3b3a0aca46964d90e1942",
+        "bytes": 56106
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/auroc_segment.csv.gz",
+        "sha256": "dcfe55045f6a43db1a57a60bfe0efc8791ce950216e3b3a0aca46964d90e1942",
+        "bytes": 56106
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "auroc_track.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/auroc_track.csv",
+        "sha256": "03762d67f3882712c344725f9ade2c24de1055c70b597564301541f6cb10a275",
+        "bytes": 2659983,
+        "rows": 21036
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/auroc_track.csv.gz",
+        "sha256": "7583ee61664ff053e771704e5307ef7403a64599346ad4cfbb15aa7adf7e055c",
+        "bytes": 150983
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/auroc_track.csv.gz",
+        "sha256": "7583ee61664ff053e771704e5307ef7403a64599346ad4cfbb15aa7adf7e055c",
+        "bytes": 150983
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "prefix_ceiling.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/prefix_ceiling.csv",
+        "sha256": "6849ae59b687fa8880c8d649ab6ddfd61ad11c378aa741409ae6def50fb5cab6",
+        "bytes": 1466952,
+        "rows": 10518
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/prefix_ceiling.csv.gz",
+        "sha256": "915eb457867cbb1e35ddca3236785e858b4b99573f02823c2d5ff304cfb536cb",
+        "bytes": 93535
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/prefix_ceiling.csv.gz",
+        "sha256": "915eb457867cbb1e35ddca3236785e858b4b99573f02823c2d5ff304cfb536cb",
+        "bytes": 93535
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "bisect_track.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/bisect_track.csv",
+        "sha256": "3d0a08848a89d88d884fad0a507519bbdcda45262fd2a6704416d034a531d6c4",
+        "bytes": 3820058,
+        "rows": 21036
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/bisect_track.csv.gz",
+        "sha256": "308c7200a20022a33108dad97b75c1f5a06e5b62965656c0f1e7b612ec2dab60",
+        "bytes": 231142
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/bisect_track.csv.gz",
+        "sha256": "308c7200a20022a33108dad97b75c1f5a06e5b62965656c0f1e7b612ec2dab60",
+        "bytes": 231142
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "presence_scores.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/presence_scores.csv",
+        "sha256": "1d1e71832719ec1c6df98be380be1b74309aa18fd4bf64e4cfa7e608b1a74320",
+        "bytes": 2792012,
+        "rows": 21036
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/presence_scores.csv.gz",
+        "sha256": "824d1dfd43af0ed80b39637fc616405e3956318f6023b11724b233ff7145a86e",
+        "bytes": 312688
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_scores.csv.gz",
+        "sha256": "824d1dfd43af0ed80b39637fc616405e3956318f6023b11724b233ff7145a86e",
+        "bytes": 312688
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "sequence_metrics.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/sequence_metrics.csv",
+        "sha256": "b08932e68cfd52064383733848916e1e8d71d1e2f183748ae88db2ccad73cccc",
+        "bytes": 1464502,
+        "rows": 5259
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/sequence_metrics.csv.gz",
+        "sha256": "22092d52056a39217eca6398a42ef422b9668d8d37055714e42369f135e0e10a",
+        "bytes": 228701
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/sequence_metrics.csv.gz",
+        "sha256": "22092d52056a39217eca6398a42ef422b9668d8d37055714e42369f135e0e10a",
+        "bytes": 228701
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    },
+    {
+      "name": "presence_auc.csv",
+      "raw": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/machine/presence_auc.csv",
+        "sha256": "a6cc66445b61cf457f7cb974e3bee344d5eb68e47347666c4c865442c704645e",
+        "bytes": 27840,
+        "rows": 300
+      },
+      "compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/compressed/presence_auc.csv.gz",
+        "sha256": "3ce295b649953fe23179feabab9f0bd4d6801365060fc10cc53a60fd34a5d2dc",
+        "bytes": 1629
+      },
+      "git_compressed": {
+        "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_auc.csv.gz",
+        "sha256": "3ce295b649953fe23179feabab9f0bd4d6801365060fc10cc53a60fd34a5d2dc",
+        "bytes": 1629
+      },
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD"
+    }
+  ],
+  "summary_completion": {
+    "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/summary_completion.json",
+    "sha256": "68f0c5c1b365a8978f78a9f1be9e7b6ee15334c9762907346aa13ba074253810",
+    "bytes": 20668
+  },
+  "code_and_logs": {
+    "path": "/data2/user/FlexHook-TTA/results/track_ranking/code_and_logs.tar.gz",
+    "sha256": "f4ef5c61512b4f8ea185e82fed8460a60dd1eb63a71dd9e23f5704e9f2b3535a",
+    "bytes": 291745
+  },
+  "report": {
+    "path": "/data2/user/FlexHook-TTA/results/track_ranking/REPORT.md",
+    "sha256": "ce59acd6954e1499418936b3bae4dd200cee38b8e71383a99426691607f115f6",
+    "bytes": 66909
+  },
+  "new_teacher_calls": 0,
+  "new_model_calls": 0,
+  "GPU_hours": 0,
+  "completed": true,
+  "failed_stages": [
+    {
+      "stage": "preflight",
+      "exit_code": 1,
+      "wall_seconds": 0.3171679941006005,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793587844660860302/preflight.log"
+    }
+  ],
+  "all_processes_complete": true,
+  "published_files": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/IMPLEMENTATION_NOTES.md",
+      "sha256": "3a767ff80973b408b90e0d04aad40198b5e26905905cb9e1828a33a07760f6a6",
+      "bytes": 3902
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/PREREG.md",
+      "sha256": "06c1559494739f8154825afb97859a42865e79f9ca09e111f691ab670e23321a",
+      "bytes": 7991
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/auroc_segment.csv.gz",
+      "sha256": "dcfe55045f6a43db1a57a60bfe0efc8791ce950216e3b3a0aca46964d90e1942",
+      "bytes": 56106
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/auroc_summary.csv",
+      "sha256": "ecf14e88c053bf7fe3c87122aaa41839604cdef44dbe30171dfaa01040c346f0",
+      "bytes": 21240
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/auroc_track.csv.gz",
+      "sha256": "7583ee61664ff053e771704e5307ef7403a64599346ad4cfbb15aa7adf7e055c",
+      "bytes": 150983
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/bisect_summary.csv",
+      "sha256": "b7a8071739a14f37b1d4d9a66ebea5cb246e3d0973f008f6de0f46a3ba404d24",
+      "bytes": 29372
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/bisect_track.csv.gz",
+      "sha256": "308c7200a20022a33108dad97b75c1f5a06e5b62965656c0f1e7b612ec2dab60",
+      "bytes": 231142
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/bootstrap.json",
+      "sha256": "f5f17c07de27467dfe423f50ae7bc877be6fc565aa84efa2186f352b50a006c2",
+      "bytes": 15356
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/code_and_logs.tar.gz",
+      "sha256": "f4ef5c61512b4f8ea185e82fed8460a60dd1eb63a71dd9e23f5704e9f2b3535a",
+      "bytes": 291745
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/cohort.csv",
+      "sha256": "8fe83d456dc21c92ac5c5fb09da2a151334eb6dac7ee9af40469bc28c624e4f5",
+      "bytes": 180
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/comparison_summary.csv",
+      "sha256": "9d3119b486090a0c420cdb97bf0683e6eaad096b33a8414a5e5f5429b6c83ed9",
+      "bytes": 3529
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/costs.json",
+      "sha256": "7d5223353a3e9a0c1b1b1e392c8fa4b7b00035f618e452a533a3d7c4a3775b36",
+      "bytes": 6321
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/input_inventory.json",
+      "sha256": "d90f9a7ad66bb3eabe91f37ab6c71868a70e750caa19d4cc2f8fee10c2b28cc4",
+      "bytes": 5859
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/noise_rates.csv",
+      "sha256": "386a24da7cb9bedf8ff74c5787b7aa885d2e290a8533694649638a2a8d2d8043",
+      "bytes": 449
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/object_counts.csv",
+      "sha256": "4e2ec58b8b7af58203134cf1de4f8a941c26c8fadf9d8fd318e2fcced1a11d2b",
+      "bytes": 705
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/object_counts_by_video.csv",
+      "sha256": "3c327431e9d7a75308420723ed4527595412e5c7c830f34b4764bb45b64ab558",
+      "bytes": 4784
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/prefix_ceiling.csv.gz",
+      "sha256": "915eb457867cbb1e35ddca3236785e858b4b99573f02823c2d5ff304cfb536cb",
+      "bytes": 93535
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/prefix_summary.csv",
+      "sha256": "fae98be32092b597ab078338e376c1beacf54e5c8ccf7f04db39aba9c7c7409c",
+      "bytes": 16975
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/prereg_publication.json",
+      "sha256": "8d42bab2278e1f8b024a25ac338ffb7da6410b882c70ebe389fc4b520be3b9f0",
+      "bytes": 409
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_auc.csv",
+      "sha256": "a6cc66445b61cf457f7cb974e3bee344d5eb68e47347666c4c865442c704645e",
+      "bytes": 27840
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_auc.csv.gz",
+      "sha256": "3ce295b649953fe23179feabab9f0bd4d6801365060fc10cc53a60fd34a5d2dc",
+      "bytes": 1629
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_scores.csv.gz",
+      "sha256": "824d1dfd43af0ed80b39637fc616405e3956318f6023b11724b233ff7145a86e",
+      "bytes": 312688
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/presence_summary.csv",
+      "sha256": "646c90a89ef0a629499088211d6708272c1e99a1ae5b7d3c88399aae412a0f41",
+      "bytes": 1916
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/sequence_metrics.csv.gz",
+      "sha256": "22092d52056a39217eca6398a42ef422b9668d8d37055714e42369f135e0e10a",
+      "bytes": 228701
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/sports418_verdicts.csv",
+      "sha256": "c0d76789e17ae0694f1a8f51465274fe3985e36f050191e6b80e8e602806fa7d",
+      "bytes": 788
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/units.csv.gz",
+      "sha256": "e7c572c15ed5749f719c33c273205f44b5ce01a488380562af6d231d7a40feff",
+      "bytes": 499735
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/validation.json",
+      "sha256": "555ab645b8a3e10b465d9382372832b9acda8b1efcdf12832b6a14ca839bc08e",
+      "bytes": 1502
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/variability_by_combo.csv",
+      "sha256": "141b9574b46df4b3059c91113a425d706e2f3dd57d9d33079671393e4a91a649",
+      "bytes": 380
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/variability_summary.csv",
+      "sha256": "6e0092b298c23e40106862725956324c198badfc727331f7826a4e13a63582a4",
+      "bytes": 4310
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/verdict_matrix.csv",
+      "sha256": "302c5a71548621b7e55bdaebd5ed95ea877cc093ecad0f54e5cdbd72954c6052",
+      "bytes": 1881
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/track_ranking/verdicts.json",
+      "sha256": "6bf3bd03b91c2dddcceef112614b0a6b1616af1dd37449104f89d04a62d6ef0e",
+      "bytes": 6374
+    }
+  ]
+}

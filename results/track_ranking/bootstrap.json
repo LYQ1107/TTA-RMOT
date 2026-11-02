@@ -1,0 +1,576 @@
+{
+  "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+  "samples": 2000,
+  "seed": 0,
+  "unit": "whole video; paired FRAME/TRACK, q-mean estimands",
+  "KITTI": "4 videos, point estimates only",
+  "Sports418": "same v4 content and original 45-video draw weights",
+  "comparisons": [
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.02546623003337356,
+      "clusters": 25,
+      "CI95": [
+        -0.04424752493758504,
+        0.1072672191301174
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.007673852418886797,
+      "clusters": 25,
+      "CI95": [
+        -0.01755767753809274,
+        -0.0013552620810308724
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.10136986654238755,
+      "clusters": 25,
+      "CI95": [
+        0.030729653118609732,
+        0.19656244430319605
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.005798700756511326,
+      "clusters": 25,
+      "CI95": [
+        -0.015609217706201824,
+        0.00029143094201604966
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.03301203363377969,
+      "clusters": 25,
+      "CI95": [
+        -0.06593246332174321,
+        0.12510759312979636
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "Dance",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 425,
+      "common_sequences": 30,
+      "GT_present_sequences": 40,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.004325899686524337,
+      "clusters": 25,
+      "CI95": [
+        -0.01130647586266896,
+        0.0008169788453368338
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": -0.0006659642856357006,
+      "clusters": 45,
+      "CI95": [
+        -0.01524586055921563,
+        0.012695705321397249
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.04984654287548687,
+      "clusters": 45,
+      "CI95": [
+        -0.06738250306882591,
+        -0.03323920269302036
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.03057003722727558,
+      "clusters": 45,
+      "CI95": [
+        0.019734027953703798,
+        0.04073092789414336
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.005268785960025986,
+      "clusters": 45,
+      "CI95": [
+        -0.02100890919705007,
+        0.00647374887730398
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.051253486405098414,
+      "clusters": 45,
+      "CI95": [
+        0.036069425574549306,
+        0.06674270687049241
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "FULL_MAIN_V4",
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 466,
+      "common_sequences": 431,
+      "GT_present_sequences": 466,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.03312321585183747,
+      "clusters": 45,
+      "CI95": [
+        -0.06091036996685524,
+        -0.007737070978746342
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.00012092738313751461,
+      "clusters": 45,
+      "CI95": [
+        -0.015944646783294932,
+        0.014963006391588004
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.04029061070289672,
+      "clusters": 45,
+      "CI95": [
+        -0.060166801940111,
+        -0.0221189479857832
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.030165303409204314,
+      "clusters": 45,
+      "CI95": [
+        0.01798814516574997,
+        0.04113867375563248
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.007578903850321026,
+      "clusters": 45,
+      "CI95": [
+        -0.024586882914708653,
+        0.004714948007628356
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_MEAN_minus_FRAME_AUROC",
+      "point": 0.050890059848076374,
+      "clusters": 45,
+      "CI95": [
+        0.03376877995513157,
+        0.06888275305557814
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "protocol": "SPORTS418_V4_CONTENT",
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "sequences": 418,
+      "common_sequences": 383,
+      "GT_present_sequences": 418,
+      "metric": "TRACK_minus_FRAME_prefix_F1",
+      "point": -0.037841179888282554,
+      "clusters": 45,
+      "CI95": [
+        -0.06740320886890871,
+        -0.010546230887289341
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    }
+  ],
+  "presence": [
+    {
+      "model": "Dance-best",
+      "aggregation": "LOGIT_MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.885468253968254,
+      "CI95": [
+        0.8037438492063491,
+        0.9502035714285713
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "Dance-best",
+      "aggregation": "MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.8633650793650794,
+      "CI95": [
+        0.7734503968253968,
+        0.9394999999999999
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "Dance-best",
+      "aggregation": "MEDIAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.856420634920635,
+      "CI95": [
+        0.7613301587301589,
+        0.93665873015873
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "Dance-best",
+      "aggregation": "TOP25",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.8722942612942614,
+      "CI95": [
+        0.78665260989011,
+        0.9425670787545787
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "LaMOT-best",
+      "aggregation": "LOGIT_MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7529249084249084,
+      "CI95": [
+        0.6609236263736263,
+        0.8355064560439561
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "LaMOT-best",
+      "aggregation": "MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7666007326007326,
+      "CI95": [
+        0.6767039835164836,
+        0.8471727564102565
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "LaMOT-best",
+      "aggregation": "MEDIAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7698571428571429,
+      "CI95": [
+        0.6778571428571428,
+        0.8545083333333333
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "LaMOT-best",
+      "aggregation": "TOP25",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7819639804639804,
+      "CI95": [
+        0.6872518772893773,
+        0.8707411630036629
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "V2-best",
+      "aggregation": "LOGIT_MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7215671550671552,
+      "CI95": [
+        0.6183289682539683,
+        0.815816758241758
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "V2-best",
+      "aggregation": "MEAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7288382173382173,
+      "CI95": [
+        0.6218687728937728,
+        0.8319574633699633
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "V2-best",
+      "aggregation": "MEDIAN",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7240048840048839,
+      "CI95": [
+        0.6179501221001221,
+        0.8235478174603176
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    },
+    {
+      "model": "V2-best",
+      "aggregation": "TOP25",
+      "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+      "videos": 25,
+      "defined_videos": 25,
+      "undefined_videos": 0,
+      "mean_AUROC": 0.7425525030525031,
+      "CI95": [
+        0.6350892094017094,
+        0.8380780982905982
+      ],
+      "valid_bootstrap_samples": 2000,
+      "samples": 2000,
+      "seed": 0,
+      "unit": "whole video"
+    }
+  ]
+}
