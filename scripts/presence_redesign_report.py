@@ -15,7 +15,11 @@ from scripts.presence_redesign import OUT, RECORD
 
 def table(fields, rows):
     def val(x):
+        if isinstance(x,str):
+            try: x = float(x)
+            except ValueError: pass
         if isinstance(x, float): return f'{x:.6f}'
+        if isinstance(x, list): return '['+', '.join(val(v) for v in x)+']'
         return str(x)
     return '| '+' | '.join(fields)+' |\n| '+' | '.join(['---']*len(fields))+' |\n'+''.join(
         '| '+' | '.join(val(r.get(k, '—')) for k in fields)+' |\n' for r in rows)
@@ -58,7 +62,7 @@ def main():
         '同域门槛通过，九格 A 完成；须发布并显式接入新头，再做真实 pilot/成本关卡' if gate['completed_full_A']
         else '同域门槛通过，继续完整九格 A；尚未授权绕过成本关卡')
     text = '# PresenceHead v3：授权结构/损失改造的真实结果\n\n'+status+'。\n\n'
-    text += '## 1. 验收\n\n原门槛：三个自身源 PRES_TOPK HOTA 均不得低于完整 Native 超过 1。只按自身源验证新目标函数选择 checkpoint，不按 HOTA 回选旧头或 epoch。\n\n'
+    text += '## 1. 验收\n\n这是各官方模型在自身源域的验证，不是V2→Dance跨域TTA成绩。原门槛：三个自身源 PRES_TOPK HOTA 均不得低于完整 Native 超过 1。只按自身源验证新目标函数选择 checkpoint，不按 HOTA 回选旧头或 epoch。\n\n'
     text += table(['target','model','native_HOTA','HOTA','delta_HOTA','passed'], gate['same_domain'])
     text += '\n与完整保留的旧设计对照（仅比较，不按 HOTA 重新选择）：\n\n'+table(
         ['source','native_HOTA','original_default_HOTA','original_source_lr1e5_HOTA','residual_v3_HOTA','v3_delta_vs_native'], comparison)
@@ -90,10 +94,29 @@ def main():
         '若 MAE 下降但 HOTA 不保留，说明该平均误差不足以代表关键真目标的召回与关联；概率阈值准确率同样不能替代实际 MAP 输出。'
         '大于10的输出说明容量上限确已去除，不意味着集合外漏检候选被补回。源GT候选→验证tracker候选的支持偏移仍在，'
         '这里只能作为与结果一致的机制解释，不据此断言唯一失败原因；不再按这些验证结果改本轮阈值或损失。\n')
+    text += '\n### 3.2 同域结果的后验描述性归因（不用于选择）\n\n'
+    for r, b in zip(own, behavior):
+        delta = float(r['delta_HOTA'])
+        text += (f'- {r["target"]}：HOTA相对Native {delta:+.3f}；实际输出存在性召回 '
+            f'{b["native_presence_recall"]:.6f}→{b["MAP_presence_recall"]:.6f}，数量MAE '
+            f'{b["native_count_MAE"]:.6f}→{b["MAP_count_MAE"]:.6f}。\n')
+    from scripts.active_eval import bootstrap
+    from scripts.presence_finish_a import references
+    intervals = {r['target']:bootstrap(r['path'],dict(references(r['target'],r['model']))['NATIVE'],r['target']) for r in own}
+    atomic_json(RECORD / 'bootstrap.json',dict(comparisons=intervals,
+        scope='POST_HOC_DESCRIPTIVE own-source v3 vs Native only; not blind-test confirmation or model selection',
+        source_validation_used_for_early_stopping=True))
+    text += '\n'+table(['target','delta_HOTA','CI95','clusters'],[dict(target=t,**value) for t,value in intervals.items()])
+    text += ('\n这些区间按25/45视频聚类2000次seed0；KITTI四视频仅点估计。所有表达/帧按视频一起重采样，'
+        '且自身源验证参与早停，因此不把区间当成独立盲测的显著性证明。门槛仍只执行预注册点值，不用区间翻案。'
+        'Sports即使同域改善也不是跨域或完整TTA成功，当前没有新头的跨域/教师实验结论。\n')
+    with (RECORD / 'sports418.csv').open() as handle: sports418 = list(csv.DictReader(handle))
+    text += '\n### 3.3 Sports418敏感性\n\n'+table(['target','model','method','HOTA','DetA','AssA','IDF1','IDSW','Dets'],sports418)
     if not gate['completed_full_A']:
         text += '\n本轮只完成三套同域和各自平滑对照；六个跨域新头结果未计算，不把旧头成绩当新头成绩，也不把 NOT_RUN 写为零。\n'
     text += '\n## 4. 成本与 GT 审计\n\n'+table(['source','model','GPU_hours','peak_allocated_GiB','physical_gpu','updates','parameters','first_gradient_norm','target_GT_open_attempts'], costs)
-    text += (f'\n新增源头计时 GPU 进程小时合计 {sum(r["GPU_hours"] for r in costs):.6f}；共享卡 elapsed，不是利用率积分。'
+    text += (f'\n新增源头训练/验证计时合计 {sum(r["GPU_hours"] for r in costs):.6f} GPU进程小时（含epoch0）；共享卡 elapsed，不是利用率积分，'
+        '不含部分进程启动/CPU单元枚举开销；协调器整段 wall time 另存 costs.json。'
         '独立 CPU 解码/官方 TrackEval 时间见 costs.json；backbone 特征导出未重做。新增教师调用=0、目标 LoRA 更新=0（本头阶段）。'
         '训练允许自身源数值标签；预测生成用 runtime_guard 禁止 raw GT/labels.npy/GT_counts.npy，预测先 SHA 封存，再由独立进程读取官方 GT。'
         'Sports 主评测 v4 全466序列，另存相同 v4 内容限制原418ID的敏感性。\n\n')
@@ -106,7 +129,10 @@ def main():
             evaluations.append(dict(method=method, wall_seconds=c['wall_seconds']))
         decode_costs.append(dict(target=parent.parent.name,model=parent.name,
             decode_CPU_wall_seconds=decoded['wall_seconds'],GT_open_attempts=decoded['GT_open_attempts'],evaluations=evaluations))
+    queue_timings = [dict(path=str(p),**json.loads(p.read_text())) for p in sorted((OUT / 'launchers').glob('*/completion.json'))]
     atomic_json(RECORD / 'costs.json', dict(source_training=costs, CPU_decode_evaluate=decode_costs,
+        coordinator_wall_times=queue_timings,
+        GPU_hour_definition='sum of head train/validation elapsed timers including epoch0; not utilization integral; some startup/CPU enumeration excluded',
         new_teacher_calls=0, target_LoRA_updates=0, frozen_feature_exports_reused=True))
     text += ('## 5. 保存、局限与后续条件\n\n新结果物理目录 /data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3，'
         '通过原 results/runs/presence_active_20261102 链接访问。checkpoint/预测路径 SHA 见 artifacts.json、selection.json；大文件不入 Git。'
@@ -117,6 +143,12 @@ def main():
     else:
         text += 'A 通过不等于 B/C 完成。后续仍需 v3 manifest/动态数量接口集成、真实 C1/C3 pilot、40 GPU小时估算；不得直接沿用旧失败 gate 或默认头路径。\n'
     text += '\n完整新阶段日志、源选择曲线、官方详细表在 logs.tar.gz；清单及 SHA 见 logs.json。历史 experiment_logs.tar.gz 不改。模型/缓存与预测均不打包。\n'
+    if (RECORD / 'validation.json').exists():
+        checked = json.loads((RECORD / 'validation.json').read_text())
+        text += ('\n最终完整性检查见 validation.json：22项定向测试通过；六套预测覆盖各自全部视频/表达、'
+            '每一行均与原MOT候选原文一致，checkpoint/预测封存一致，生成进程GT尝试0；'
+            '原主报告/vendor/教师后端未改，本任务训练/推理/教师worker剩余'+str(len(checked['task_scientific_workers_remaining']))+'。'
+            '完整性通过不改变科研门槛失败的结论。\n')
     (RECORD / 'REPORT.md').write_text(text)
     paths = sorted(p for p in OUT.rglob('*') if p.is_file() and (p.suffix in ('.log','.json','.jsonl') or
         p.name in ('pedestrian_detailed.csv','pedestrian_summary.txt')))

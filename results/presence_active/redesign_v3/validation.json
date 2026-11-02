@@ -1,0 +1,79 @@
+{
+  "status": "PASS_COMPLETE_SOURCE_HEAD_TRIAL",
+  "cells": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK",
+      "videos": 4,
+      "episodes": 862,
+      "prediction_rows": 482899,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "52197c10eb4daf690eb71bef10bc98b0033d605dd1709fe3780594bcc2b61b07"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "videos": 4,
+      "episodes": 862,
+      "prediction_rows": 468777,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "d55bc7344ef4f6733c13970dc072dfb1a3d3c27bf09877838f98eacbea7e59af"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK",
+      "videos": 25,
+      "episodes": 425,
+      "prediction_rows": 133810,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "a998cd76042052675a5106a7c442a31267cf65d7261c30c14125cca1f5853dbf"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "videos": 25,
+      "episodes": 425,
+      "prediction_rows": 130119,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "b302c1d79173e85e2ef4a2d389554831f492b1c698af12b298acc4f33d456cd0"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK",
+      "videos": 45,
+      "episodes": 466,
+      "prediction_rows": 1532188,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "86b73d1f60d8ec4af1142f8dae007275f8e7aa21725f3af74a9e589700d851f3"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "videos": 45,
+      "episodes": 466,
+      "prediction_rows": 1525824,
+      "all_lines_original_MOT": true,
+      "GT_open_attempts": 0,
+      "seal_sha256": "427f7bca02caff8f05663f5b432af20cca978b4c4d092d0476c899f480590c02"
+    }
+  ],
+  "protected_historical_report_vendor_and_teacher_unchanged": true,
+  "new_teacher_calls": 0,
+  "target_LoRA_updates": 0,
+  "task_scientific_workers_remaining": [],
+  "tests_passed": 22,
+  "stage_A_scientific_gate": "FAIL_STOP_BEFORE_BC",
+  "integrity_is_not_scientific_success": true,
+  "validation_no_new_model_or_teacher_calls": true
+}

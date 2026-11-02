@@ -1,0 +1,164 @@
+{
+  "predictions": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/KITTI-V2/V2-best/PRES_TOPK",
+      "prediction_seal_sha256": "52197c10eb4daf690eb71bef10bc98b0033d605dd1709fe3780594bcc2b61b07",
+      "detailed_sha256": "268070156d11433dfae6cc2ead19a521ae489ad5e052d65e5af5284728548318"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/KITTI-V2/V2-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "d55bc7344ef4f6733c13970dc072dfb1a3d3c27bf09877838f98eacbea7e59af",
+      "detailed_sha256": "ca3de90ea4d135c4c0014412b141c7249037f88587f73bd519a2417b04e476e1"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/Dance/Dance-best/PRES_TOPK",
+      "prediction_seal_sha256": "a998cd76042052675a5106a7c442a31267cf65d7261c30c14125cca1f5853dbf",
+      "detailed_sha256": "8720a84e8555205182eaf87349035ad747525d225924eff7b9adc65bfd494ed6"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/Dance/Dance-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "b302c1d79173e85e2ef4a2d389554831f492b1c698af12b298acc4f33d456cd0",
+      "detailed_sha256": "bd55c7e42bb98ae7fd57d74fe4e37e3d8b61fe1b1951acfe667cf4fd32e9c1df"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/SportsMOT/LaMOT-best/PRES_TOPK",
+      "prediction_seal_sha256": "86b73d1f60d8ec4af1142f8dae007275f8e7aa21725f3af74a9e589700d851f3",
+      "detailed_sha256": "cbe0c32bfbd88f276ea9431ecc3d838a408a8335ebe6a05e3c290bcd5ecc865e"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/SportsMOT/LaMOT-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "427f7bca02caff8f05663f5b432af20cca978b4c4d092d0476c899f480590c02",
+      "detailed_sha256": "c9e9d59a1fb6535833a192d65bca1ea974be63e7c64703c8b17f52faeac38b76"
+    }
+  ],
+  "source_heads": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "35622b1f21aef00a76aad6b63f391cbe10218ba20d2829682eb3e5b0f91991a3",
+      "best_source_loss": 1.2433399571650998,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/V2-best/training_receipt.json",
+      "receipt_sha256": "7dd23203e5bf522049f77b89ee6caa6fa0c6686a52f0408ae0006eb6ba4a3732",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 4.173163972455134,
+          "count_NLL": 4.173163972455134,
+          "native_KL": 0.0,
+          "units": 457503,
+          "positive_units": 195480,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 1.0146600131583836,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "aac5b19437c48e24316381a3bcf06e4bff0102dd11a9f08ba35eada5734bbc19",
+      "best_source_loss": 2.3242440803091866,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/Dance-best/training_receipt.json",
+      "receipt_sha256": "648a4d029cc031c31509284f9f795af42899f01c27429912d636c7f5ea876059",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 3.2005178883761927,
+          "count_NLL": 3.2005178883761927,
+          "native_KL": 0.0,
+          "units": 433636,
+          "positive_units": 42657,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 0.5225926814194394,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "1d925cc849c803e73e9641b0a5f9c814a001e53ffb3670fd5c788b55a4df6d6e",
+      "best_source_loss": 2.080513968194971,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/LaMOT-best/training_receipt.json",
+      "receipt_sha256": "fb638959d060e900e68d8a753f9531bad497abf7ff4c73adff7a89731bcbff3e",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 4.537000801380502,
+          "count_NLL": 4.537000801380502,
+          "native_KL": 0.0,
+          "units": 266786,
+          "positive_units": 242022,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 1.0349718500970815,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    }
+  },
+  "decoded_arrays": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/KITTI-V2/V2-best",
+      "receipt_sha256": "5c7d7cca0c31982e0fe071459fd6766828fbf82d2411b8405afe29da03824a24",
+      "files": {
+        "count_probs.npy": "dc1360bca6038a86961808eca243d1cf83a1233369d66907f098eb2c973fe654",
+        "smooth_k.npy": "17090c5b3f6a2e3f280aa336415708311ab17d4a01a04ea16d11ea86aa01d557",
+        "presence_logits.npy": "5376626807cfe51207ac9045336c257cf2d499c84d53821c5bda96d535adf154",
+        "raw_k.npy": "a99cee23674bfd1cb2d05448f6a83d81ab479caa2b208f651f20cb84cab92910",
+        "joint_count_probs.npy": "d933757f3b8dffe78a4a431d198dccd0a04ab04471d774c181169a22237b0e67"
+      }
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/Dance/Dance-best",
+      "receipt_sha256": "141e567481af9f09fd694b52a4eb0dfb41b33ee68f53fbe887b0d89ffcb28e58",
+      "files": {
+        "count_probs.npy": "9f1019b0462bf904968f8aba9c55478c1d82f6da7d2e9f794ee5ae4816c6c59f",
+        "smooth_k.npy": "1406564507b26eb05b854296a3446fe39395f422eea58e91cb01026e8aa4945b",
+        "presence_logits.npy": "b8d749ad702cb438983c4ea5cd467d68c23473cb4a54dd697d780cbbf4cd6840",
+        "raw_k.npy": "f5234bf50f5d492ae5c5ac2dbb1132f2c71d79a65cc0dbe65fd036805b047fc2",
+        "joint_count_probs.npy": "723871f5977fe40dea58f3067af91ebe8a9fd9b6de7c12fa17c10e2e96be74d8"
+      }
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/stage_A/SportsMOT/LaMOT-best",
+      "receipt_sha256": "bd22ecfea44945158073d800ba2f21eac44c6897899f9b932ae3a460f6ab942c",
+      "files": {
+        "count_probs.npy": "c4d97e4a4f97268621e432da9025081d8bd76b990f4770ff352484cb78e3d71c",
+        "smooth_k.npy": "dfb7a4cd4b393d57d71bda3c91a24f16d98e16c44c1c484e3d593a7506f03994",
+        "presence_logits.npy": "8db23b5d3b71d73f0a922433397f933a93552feeb848171c2bdf17db866e2b96",
+        "raw_k.npy": "fdd89f018c97cc60da1db625cc0bd462b611bff04f3ab16aa790c8472609c93b",
+        "joint_count_probs.npy": "3fa28ef3666a9be9b36f7c8e8fffe69dcdcf739d8cbb9fa7a3470c58d0d4edfc"
+      }
+    }
+  ]
+}

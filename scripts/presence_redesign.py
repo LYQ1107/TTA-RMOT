@@ -114,12 +114,15 @@ def collect(full=False):
     from flex_uda.presence.predictions import verify_predictions
     from scripts.active_eval import official_stats
     selection = json.loads((RECORD / 'selection.json').read_text())['models']
-    rows, gates, artifacts, costs = [], [], [], []
+    rows, gates, artifacts, costs, sensitivity, decode_artifacts = [], [], [], [], [], []
     jobs = list(IN_DOMAIN.items()) if not full else [(t, m) for t in IN_DOMAIN for m in IN_DOMAIN.values()]
     for target, name in jobs:
         native_folder = dict(references(target, name))['NATIVE']
         native = official_metrics(native_folder / 'results')['HOTA']
         folder = OUT / 'stage_A' / target / name
+        decode_receipt = folder / 'decode_receipt.json'
+        decode_artifacts.append(dict(target=target, model=name, path=str(folder),
+            receipt_sha256=file_sha(decode_receipt), files=json.loads(decode_receipt.read_text())['files_sha256']))
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'):
             path = folder / method
             seal = verify_predictions(path)
@@ -130,6 +133,14 @@ def collect(full=False):
             artifacts.append(dict(target=target, model=name, method=method, path=str(path),
                 prediction_seal_sha256=file_sha(path / 'predictions_seal.json'),
                 detailed_sha256=file_sha(path / 'results/pedestrian_detailed.csv')))
+            if target == 'SportsMOT':
+                part = path / 'sensitivity_418'
+                c = json.loads((part / 'official_completion.json').read_text())
+                sensitivity.append(dict(target=target,model=name,method=method,
+                    **{k:c['metrics'][k] for k in ('HOTA','DetA','AssA','IDF1','IDSW','Dets')},
+                    GT_protocol='same v4 contents, restrict original418 IDs', path=str(part),
+                    prediction_seal_sha256=file_sha(part / 'predictions_seal.json'),
+                    detailed_sha256=c['detailed_sha256']))
             if method == 'PRES_TOPK' and IN_DOMAIN[target] == name:
                 native_exact = official_stats(native_folder)['HOTA_unrounded']
                 head_exact = row['HOTA_unrounded']
@@ -144,6 +155,7 @@ def collect(full=False):
     fields = list(dict.fromkeys(k for row in rows for k in row))
     write_csv(RECORD / ('stage_A.csv' if full else 'same_domain.csv'), [{k: r.get(k) for k in fields} for r in rows])
     write_csv(RECORD / 'training_costs.csv', costs)
+    write_csv(RECORD / 'sports418.csv', sensitivity)
     failures = [g['target'] for g in gates if not g['passed']]
     gate = dict(status='FAIL_STOP_BEFORE_BC' if failures else 'PASS_SAME_DOMAIN', failed_targets=failures,
         criterion='Every own-source PRES_TOPK HOTA >= complete NATIVE HOTA -1', same_domain=gates,
@@ -151,7 +163,7 @@ def collect(full=False):
         completed_full_A=full, new_teacher_calls=0, target_LoRA_updates=0,
         historical_gate_and_results_unchanged=True)
     atomic_json(RECORD / 'gate.json', gate)
-    atomic_json(RECORD / 'artifacts.json', dict(predictions=artifacts, source_heads=selection))
+    atomic_json(RECORD / 'artifacts.json', dict(predictions=artifacts, source_heads=selection, decoded_arrays=decode_artifacts))
     print(json.dumps(dict(event='REDESIGN_GATE', **gate)), flush=True)
     return gate
 
