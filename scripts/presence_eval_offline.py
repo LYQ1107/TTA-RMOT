@@ -4,6 +4,7 @@ from collections import defaultdict
 import json
 from pathlib import Path
 import subprocess
+import shutil
 import sys
 import time
 import numpy as np
@@ -90,10 +91,32 @@ def evaluate_folder(folder, target, *, sports418=False):
     from scripts.multidomain_runtime import VENDOR, SPORTS_GT_PROTOCOL
     from scripts.multidomain_diagnostics import target_root
     from scripts.pf_diag_common import official_metrics
-    receipt = verify_predictions(folder); folder = Path(folder)
+    folder = Path(folder).resolve()
+    receipt = verify_predictions(folder)
     if (folder / 'official_completion.json').exists():
         return json.loads((folder / 'official_completion.json').read_text())
     root = target_root(target)
+    historical = Path(receipt['historical_reference']) if receipt.get('historical_reference') else None
+    if historical is not None:
+        previous = json.loads((historical / 'predictions_seal.json').read_text())
+        index = {(r['video'], r['expression']): r for r in previous['episodes']}
+        for row in receipt['episodes']:
+            old = index[row['video'], row['expression']]
+            if row['prediction_sha256'] != old['prediction_sha256'] or file_sha(old['prediction_path']) != old['prediction_sha256']:
+                raise ValueError('Historical reuse is not byte-identical')
+        old_completion = json.loads((historical / 'official_completion.json').read_text())
+        if file_sha(historical / 'results/pedestrian_detailed.csv') != old_completion['detailed_sha256']:
+            raise ValueError('Historical official sufficient statistics changed')
+        for filename in ('pedestrian_summary.txt', 'pedestrian_detailed.csv'):
+            shutil.copy2(historical / 'results' / filename, folder / 'results' / filename)
+        metrics = official_metrics(folder / 'results')
+        if int(metrics['Dets']) != receipt['prediction_rows']: raise ValueError('Historical reuse row count mismatch')
+        result = dict(status='PASS', target=target, metrics=metrics, GT_protocol='OFFICIAL_UNCHANGED',
+            sports418=False, wall_seconds=0., reused_after_all_rows_equal=True, historical_reference=str(historical),
+            detailed_sha256=file_sha(folder / 'results/pedestrian_detailed.csv'),
+            prediction_seal_sha256=file_sha(folder / 'predictions_seal.json'))
+        atomic_json(folder / 'official_completion.json', result)
+        return result
     seq = {'Dance': 'dance', 'KITTI-V2': 'kitti-2', 'SportsMOT': 'SportsMOT'}[target]
     seqmap = VENDOR / 'seqmaps' / (seq+'.txt')
     if sports418:
@@ -109,6 +132,10 @@ def evaluate_folder(folder, target, *, sports418=False):
         '--TRACKERS_FOLDER', str(folder / 'results'), '--GT_LOC_FORMAT', '{gt_folder}{video_id}/{expression_id}/gt.txt',
         '--TRACKERS_TO_EVAL', str(folder / 'results'), '--USE_PARALLEL', 'True', '--NUM_PARALLEL_CORES', '2', '--PLOT_CURVES', 'False']
     start = time.perf_counter()
+    previous_log = folder / 'trackeval.log'
+    if previous_log.exists():
+        archive = folder / 'trackeval_attempts'; archive.mkdir(exist_ok=True)
+        previous_log.rename(archive / (str(time.time_ns())+'.log'))
     with (folder / 'trackeval.log').open('w') as handle:
         code = subprocess.call(command, cwd=VENDOR, stdout=handle, stderr=subprocess.STDOUT)
     if code: raise RuntimeError('Official TrackEval failed: ' + str(folder / 'trackeval.log'))

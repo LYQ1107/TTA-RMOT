@@ -13,12 +13,7 @@ from scripts.active_run import PAIRS, video_spec
 from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 
 
-def main():
-    p = ArgumentParser(description=__doc__)
-    p.add_argument('--pair', choices=list(PAIRS), required=True)
-    p.add_argument('--method', choices=['YESTRACK_BUDGET_RANDOM', 'YESTRACK_BUDGET_PRIOR', 'YESTRACK_FULL_D10', 'UNIFORM_K'], required=True)
-    p.add_argument('--rho', choices=[.1, .3, 1.], type=float, default=.3)
-    a = p.parse_args()
+def run(a):
     gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
     if gate['status'] != 'PASS_ALL_THREE_SAME_DOMAIN' or not gate.get('published_commit'):
         raise PermissionError('Complete/publish Stage A gate before teacher controls')
@@ -68,6 +63,7 @@ def main():
         costs = teacher.close(); teacher = None
         sessions = [json.loads(path.read_text()) for path in (out / 'teacher_sessions').glob('*.json')]
         costs = dict(costs, logical_calls=sum(row['actual_calls'] for row in receipts),
+            attempted_logical_calls=sum(row['logical_calls'] for row in sessions),
             new_calls=sum(row['new_calls'] for row in sessions), cache_hits=sum(row['cache_hits'] for row in sessions),
             forward_seconds=sum(row['forward_seconds'] for row in sessions),
             equivalent_forward_seconds=sum(row['equivalent_forward_seconds'] for row in sessions),
@@ -78,6 +74,17 @@ def main():
                 native_fallback_for_uncovered=a.method.startswith('YESTRACK'), wall_seconds=time.perf_counter()-begin))
     finally:
         if teacher is not None and teacher.child.poll() is None: teacher.close()
+
+
+def main():
+    p = ArgumentParser(description=__doc__)
+    p.add_argument('--pair', choices=list(PAIRS), required=True)
+    p.add_argument('--method', choices=['YESTRACK_BUDGET_RANDOM', 'YESTRACK_BUDGET_PRIOR', 'YESTRACK_FULL_D10', 'UNIFORM_K'], required=True)
+    p.add_argument('--rho', choices=[.1, .3, 1.], type=float, default=.3)
+    a = p.parse_args()
+    from flex_uda.active.receipts import record_attempt
+    folder = RUN / 'active' / a.pair / a.method / ('original_delta10' if a.method == 'YESTRACK_FULL_D10' else 'rho_'+str(a.rho))
+    with record_attempt(folder, phase='full_baseline'): run(a)
 
 
 if __name__ == '__main__': main()

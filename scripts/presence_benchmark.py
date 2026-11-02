@@ -17,8 +17,32 @@ sys.path.insert(0, str(ROOT))
 
 def main():
     p = ArgumentParser(description=__doc__)
-    p.add_argument('--target', required=True, choices=['KITTI-V2', 'Dance', 'SportsMOT'])
+    p.add_argument('--target', choices=['KITTI-V2', 'Dance', 'SportsMOT'])
+    p.add_argument('--summarize', action='store_true')
     a = p.parse_args()
+    if a.summarize:
+        from flex_uda.presence.runtime import RUN, PUBLIC, IN_DOMAIN
+        from flex_tta.runtime.pf_receipts import atomic_json, file_sha
+        summaries = []
+        for target in IN_DOMAIN:
+            path = sorted((RUN / 'batch_benchmark' / target).glob('*/benchmark.json'))[-1]
+            record = json.loads(path.read_text())
+            if record['GT_open_attempts'] or not all(r['passed'] for r in record['results']):
+                raise ValueError('Batch benchmark did not pass all real-frame checks')
+            baseline = sum(r['seconds'] for r in record['results'] if r['candidate_batch'] == 8 and r['query_batch'] == 8)
+            chosen = sum(r['seconds'] for r in record['results'] if r['candidate_batch'] == 8 and r['query_batch'] == 64)
+            summaries.append(dict(target=target, source=str(path), sha256=file_sha(path),
+                checked_shapes=len(record['results']), fixed_frames=record['frames'],
+                maximum_margin_error=max(r['maximum_margin_error'] for r in record['results']), sign_flips=0,
+                decode_seconds_batch8=baseline, decode_seconds_batch64=chosen, decode_ratio=baseline/chosen,
+                peak_allocated_bytes=record['peak_allocated_bytes']))
+        atomic_json(PUBLIC / 'batch_benchmark.json', dict(status='THREE_REAL_TARGETS_ALL_SHAPES_PASS', records=summaries,
+            selected_candidate_batch=8, selected_query_batch=64,
+            caveat='one pass on shared GPU, includes shape/kernel warmup; decode ratio is not end-to-end speedup',
+            existing_healthy_exports_restarted=False, method_hyperparameters_changed=False))
+        print(json.dumps(summaries, indent=2), flush=True)
+        return
+    if not a.target: p.error('--target is required for a real GPU benchmark')
     import compat.sitecustomize
     import torch
     from flex_uda.presence.runtime import RUN, IN_DOMAIN, target_metadata, sealed_margins, runtime_guard, load_model, episode_from_bank, cache_for

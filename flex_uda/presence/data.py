@@ -9,11 +9,11 @@ from torch.utils.data import Dataset
 
 
 class FeatureUnits(Dataset):
-    def __init__(self, root, *, labels=True, validation=False):
+    def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos'):
         self.root, self.validation, self.labels = Path(root), validation, labels
         self.units, self.shards, self.arrays = [], [], OrderedDict()
         self.positive_units = 0
-        for folder in sorted((self.root / 'videos').iterdir()):
+        for folder in sorted((self.root / shard_subdir).iterdir()):
             if not (folder / 'seal.json').is_file():
                 raise ValueError('Unsealed feature shard: ' + str(folder))
             meta = json.loads((folder / 'metadata.json').read_text())
