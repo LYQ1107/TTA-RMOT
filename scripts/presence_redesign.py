@@ -42,6 +42,24 @@ def environment(gpu=None):
 
 
 def train(logs):
+    if OUT.name=='redesign_v5':
+        previous=PUBLIC / 'redesign_v4/selection.json'
+        selection=json.loads(previous.read_text())
+        for name,choice in selection['models'].items():
+            if file_sha(choice['checkpoint'])!=choice['checkpoint_sha256']:raise ValueError('v4 source checkpoint changed')
+            old=Path(choice['receipt_path']);r=json.loads(old.read_text())
+            destination=OUT / 'heads' / name;destination.mkdir(parents=True,exist_ok=True)
+            receipt=dict(r,reused_source_fit=True,new_fit_CPU_seconds=0.,original_v4_receipt=str(old),
+                original_v4_receipt_sha256=file_sha(old),decision_rule='expected_iou',wall_seconds=0.)
+            atomic_json(destination / 'training_receipt.json',receipt)
+            choice['receipt_path']=str(destination / 'training_receipt.json')
+            choice['receipt_sha256']=file_sha(destination / 'training_receipt.json')
+        selection.update(reused_v4_selection_sha256=file_sha(previous),decision_rule='expected_iou',
+            no_new_parameters_or_fit=True,new_HOTA_not_computed_at_selection=True,
+            prereg_sha256=file_sha(RECORD / 'PREREG.md'))
+        atomic_json(RECORD / 'selection.json',selection)
+        print(json.dumps(dict(event='V4_SOURCE_PARAMETERS_REUSED_UNCHANGED',models=selection['models'])),flush=True)
+        return
     if OUT.name == 'redesign_v4':
         def fit_source(job):
             target,name=job;destination=OUT / 'heads' / name
@@ -110,9 +128,10 @@ def evaluate(logs, full=False):
         choice = selection[name]
         if file_sha(choice['checkpoint']) != choice['checkpoint_sha256']: raise ValueError('Selected head changed')
         folder = OUT / 'stage_A' / target / name
-        decoder = 'scripts/presence_bernoulli.py' if OUT.name == 'redesign_v4' else 'scripts/presence_eval_offline.py'
+        decoder = 'scripts/presence_bernoulli.py' if OUT.name in ('redesign_v4','redesign_v5') else 'scripts/presence_eval_offline.py'
         commands = [[decoder, '--target', target, '--model', name,
                      '--phase', 'decode', '--head-checkpoint', choice['checkpoint'], '--output-dir', str(folder)]]
+        if OUT.name=='redesign_v5':commands[0] += ['--decision','expected_iou']
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'):
             if (folder / method / 'offline_summary.json').exists():
                 from flex_uda.presence.predictions import verify_predictions
@@ -191,7 +210,7 @@ def collect(full=False):
 def main():
     global OUT,RECORD
     p = ArgumentParser(description=__doc__); p.add_argument('--phase', choices=['train', 'evaluate', 'full-A', 'collect'], required=True)
-    p.add_argument('--version',choices=['v3','v4'],default='v3')
+    p.add_argument('--version',choices=['v3','v4','v5'],default='v3')
     a = p.parse_args()
     OUT=RUN / ('redesign_'+a.version);RECORD=PUBLIC / ('redesign_'+a.version)
     logs = OUT / 'launchers' / str(time.time_ns()); logs.mkdir(parents=True, exist_ok=True)

@@ -110,7 +110,7 @@ def fit(target, out, label_root=None):
     print(json.dumps(result),flush=True)
 
 
-def decode(target,name,head_path,out,batch_size=4096):
+def decode(target,name,head_path,out,batch_size=4096,decision='count_mode'):
     from flex_uda.presence.runtime import runtime_guard
     from flex_uda.presence.residual import head_from_checkpoint
     from flex_uda.presence.predictions import seal_mask,verify_predictions
@@ -144,6 +144,7 @@ def decode(target,name,head_path,out,batch_size=4096):
     count=len(units)
     presence=np.empty(count,'float32');joint=np.zeros((count,cap+1),'float32')
     conditional=np.zeros_like(joint);raw_k=np.empty(count,'int64')
+    utility=np.full_like(joint,-1) if decision=='expected_iou' else None
     with torch.no_grad():
         for start in range(0,count,batch_size):
             part=units[start:start+batch_size];n=max(u[4]-u[3] for u in part)
@@ -153,7 +154,12 @@ def decode(target,name,head_path,out,batch_size=4096):
             result=head(margin=torch.from_numpy(matrix),padding_mask=torch.from_numpy(padding))
             width=n+1;stop=start+len(part)
             joint[start:stop,:width]=result['joint'].numpy()
-            presence[start:stop]=result['presence'].numpy();raw_k[start:stop]=result['logits'].argmax(-1).numpy()
+            presence[start:stop]=result['presence'].numpy()
+            if decision=='expected_iou':
+                from flex_uda.presence.cardinality import expected_iou_utilities
+                values=expected_iou_utilities(result['candidate_probabilities'],torch.from_numpy(padding))
+                utility[start:stop,:width]=values.numpy();raw_k[start:stop]=values.argmax(-1).numpy()
+            else:raw_k[start:stop]=result['logits'].argmax(-1).numpy()
             if n:
                 positive=result['logits'][:,1:].softmax(-1).numpy()
                 positive[padding.all(1)]=0
@@ -171,11 +177,13 @@ def decode(target,name,head_path,out,batch_size=4096):
             chosen=topk_ids(ids,scores,int(counts[j]));masks[method][start:stop]=[i in chosen for i in ids]
     for key,value in dict(presence_logits=presence,count_probs=conditional,joint_count_probs=joint,raw_k=raw_k,smooth_k=smoothed).items():
         np.save(out / (key+'.npy'),value)
+    if utility is not None:np.save(out / 'expected_iou_utilities.npy',utility)
     extra=dict(head_checkpoint=str(head_path),head_checkpoint_sha256=file_sha(head_path),head_architecture=ARCHITECTURE,
-        count_decoder='Poisson_binomial_joint_MAP_0_to_n',
+        count_decoder='expected_set_IoU_argmax_0_to_n' if decision=='expected_iou' else 'Poisson_binomial_joint_MAP_0_to_n',
         presence_definition='1-product(1-p_i); MAP count may disagree with presence>=0.5',
         conditional_count_probabilities=True,count_cap=None,source_learning_rate=None,
-        margin_reference=reference,teacher_calls=0,test_time_optimizer_updates=0,native_count_floor=False)
+        margin_reference=reference,teacher_calls=0,test_time_optimizer_updates=0,native_count_floor=False,
+        decision_rule=decision,utility_is_not_probability=True)
     for method,mask in masks.items():
         seal_mask(out / method,meta,mask,target=target,model=name,method=method,GT_open_attempts=len(attempts),extra=extra)
     receipt=dict(status='SEALED_BEFORE_GT',target=target,model=name,units=count,GT_open_attempts=len(attempts),
@@ -189,9 +197,10 @@ def main():
     p.add_argument('--phase',choices=['fit','decode'],required=True);p.add_argument('--target',choices=list(IN_DOMAIN),required=True)
     p.add_argument('--model',choices=list(IN_DOMAIN.values()));p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--head-checkpoint',type=Path);p.add_argument('--source-label-root',type=Path)
+    p.add_argument('--decision',choices=['count_mode','expected_iou'],default='count_mode')
     a=p.parse_args()
     if a.phase=='fit':fit(a.target,a.output_dir,a.source_label_root)
-    else:decode(a.target,a.model,a.head_checkpoint,a.output_dir)
+    else:decode(a.target,a.model,a.head_checkpoint,a.output_dir,decision=a.decision)
 
 
 if __name__=='__main__':main()

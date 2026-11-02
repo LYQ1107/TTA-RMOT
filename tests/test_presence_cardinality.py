@@ -45,3 +45,26 @@ def test_strict_checkpoint_and_finite_probability_gradient():
     assert torch.isfinite(head.slopes.grad).all() and head.slopes.grad.abs().sum()>0
     restored=head_from_checkpoint(dict(architecture=ARCHITECTURE,head=head.state_dict()))
     assert torch.equal(restored(torch.tensor([-.3,.6]))['joint'],out['joint'])
+
+
+def test_expected_iou_exact_enumeration_and_nonprobability_semantics():
+    from flex_uda.presence.cardinality import expected_iou_utilities
+    p=torch.tensor([[.9,.6,.2,.1]],dtype=torch.float64)
+    actual=expected_iou_utilities(p)[0];truth=torch.zeros(5,dtype=torch.float64)
+    for labels in itertools.product([0,1],repeat=4):
+        probability=torch.prod(torch.stack([p[0,i] if y else 1-p[0,i] for i,y in enumerate(labels)]))
+        for k in range(5):
+            denominator=k+sum(labels[k:]);tp=sum(labels[:k])
+            truth[k]+=probability*(tp/denominator if denominator else 1.)
+    assert torch.allclose(actual,truth,atol=1e-12)
+    assert abs(float(actual.sum())-1)>1e-3
+
+
+def test_expected_iou_empty_padding_and_cardinality_mode_difference():
+    from flex_uda.presence.cardinality import expected_iou_utilities
+    assert expected_iou_utilities(torch.empty(1,0)).tolist()==[[1.]]
+    p=torch.tensor([[.525,.525,.99],[.9,.1,.8]],dtype=torch.float64)
+    mask=torch.tensor([[False,False,True],[True,True,True]])
+    u=expected_iou_utilities(p,mask)
+    assert u.argmax(1).tolist()==[2,0]
+    assert torch.all(u[1,1:]==-1)

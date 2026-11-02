@@ -6,6 +6,29 @@ from torch.nn import functional as F
 ARCHITECTURE = 'bernoulli_cardinality_v4'
 
 
+def expected_iou_utilities(probabilities, padding_mask=None):
+    """Exact expected set-IoU for each ranked prefix (RankIoU-style rule).
+
+    Independent labels make TP inside a prefix independent of FN outside it.
+    The return value is a UTILITY, not a cardinality probability distribution.
+    """
+    p=probabilities.double()
+    if padding_mask is None:padding_mask=torch.zeros_like(p,dtype=torch.bool)
+    lengths=(~padding_mask).sum(1)
+    p=p.masked_fill(padding_mask,0).sort(dim=1,descending=True,stable=True).values
+    b,n=p.shape
+    prefix=torch.cat([p.new_zeros((b,1)),p.cumsum(1)],1)
+    outside=p.new_zeros((b,n+1));outside[:,0]=1
+    utility=p.new_zeros((b,n+1));utility[:,0]=(1-p).prod(1)
+    counts=torch.arange(n+1,device=p.device,dtype=p.dtype)
+    for k in range(n,0,-1):
+        utility[:,k]=prefix[:,k]*(outside/(k+counts)).sum(1)
+        yes=p[:,k-1,None]
+        shifted=torch.cat([p.new_zeros((b,1)),outside[:,:-1]],1)
+        outside=outside*(1-yes)+shifted*yes
+    return utility.masked_fill(torch.arange(n+1,device=p.device)[None]>lengths[:,None],-1)
+
+
 class BernoulliCardinalityHead(nn.Module):
     def __init__(self, alpha_neg=1., alpha_pos=1.):
         super().__init__()
