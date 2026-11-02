@@ -115,6 +115,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
             from flex_uda.active.baselines import video_rng
             random = video_rng(video)
             rescore_before, slow_before = rescore_seconds, slow_seconds
+            rescore_work=0
+            rescore_rows=len(texts)*sum(min(8,n) for n in prior['lengths'])
             if model is not None:
                 episode = episode_from_bank(video, bank, target, transform); cache = cache_for(model, tokenizer, episode, device)
                 if slow is None:
@@ -133,6 +135,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                     begin_rescore = time.perf_counter()
                     prior['track_means'] = slow.rescore(prior['tracks'], texts)
                     rescore_seconds += time.perf_counter()-begin_rescore
+                    rescore_work+=rescore_rows
             state = BeliefState(prior['track_means'], prior['expected'], prior['max_presence'], slope=slope,
                                 use_presence=variant != 'MINUS_PRES', track_lengths=prior['lengths'])
             ever_confirmed = state.pseudo_labels() >= 0
@@ -186,6 +189,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                         begin_rescore = time.perf_counter()
                         rescored = slow.rescore(prior['tracks'], texts)
                         rescore_seconds += time.perf_counter()-begin_rescore
+                        rescore_work+=rescore_rows
                         state.replace_prior(scores=rescored)
                         if variant != 'MINUS_FAST':
                             fast_after = fast_step(state, prior['presence_logits'], temperature=temperature, bias=bias)
@@ -234,7 +238,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 initial_confident_pairs=initial_confirmed_pairs,
                 selected_rows=int(mask.sum()), mask_sha256=file_sha(directory / 'mask.npy'), rounds=round_logs,
                 teacher_delta={k: teacher.stats[k]-teacher_before.get(k, 0) for k in ('logical_calls', 'new_calls', 'cache_hits', 'forward_seconds', 'equivalent_forward_seconds')},
-                slow_GPU_seconds=slow_seconds-slow_before, rescore_GPU_seconds=rescore_seconds-rescore_before))
+                slow_GPU_seconds=slow_seconds-slow_before, rescore_GPU_seconds=rescore_seconds-rescore_before,
+                rescore_candidate_query_rows=rescore_work))
             slope = state.slope
             checkpoint = dict(next_video=vi+1, ds=ds, slope=slope, temperature=temperature, bias=bias,
                 torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state(),
@@ -251,7 +256,14 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
             return
         if pilot_videos and len(selected_videos) < len(ordered):
             video_receipts = [json.loads((out / 'videos' / video / 'receipt.json').read_text()) for video in selected_videos]
-            atomic_json(out / 'pilot_receipt.json', dict(status='REAL_PILOT_COMPLETE_RESUMABLE_NOT_FULL_RMOT',
+            sessions=[json.loads(p.read_text()) for p in (out / 'teacher_sessions').glob('*.json')]
+            teacher_receipt=dict(teacher_receipt,logical_calls=sum(v['questions'] for v in video_receipts),
+                attempted_logical_calls=sum(s['logical_calls'] for s in sessions),
+                **{key:sum(s[key] for s in sessions) for key in ('new_calls','cache_hits','forward_seconds','equivalent_forward_seconds')},
+                peak_allocated_bytes=max(s['peak_allocated_bytes'] for s in sessions),
+                all_session_wall_seconds=sum(s['process_wall_seconds'] for s in sessions),
+                prior_session_resume_included=True)
+            receipt=dict(status='REAL_PILOT_COMPLETE_RESUMABLE_NOT_FULL_RMOT',
                 pair=pair, target=target, model=model_name, rho=rho, variant=variant,
                 videos=selected_videos, total_videos=len(ordered), video_receipts=video_receipts,
                 teacher=teacher_receipt, LoRA_GPU_seconds=sum(v['slow_GPU_seconds'] for v in video_receipts),
@@ -259,7 +271,13 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 GT_open_attempts=len(attempts), wall_seconds=time.perf_counter()-started,
                 resume='same output directory and stream_NNN.pt; no healthy video rerun',
                 no_full_predictions_seal=True,stage_A_publication=publication,
-                execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None))
+                execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None)
+            previous=out / 'pilot_receipt.json'
+            if previous.exists():
+                old=json.loads(previous.read_text())
+                atomic_json(out / 'pilot_receipts' / f"first_{len(old['videos']):03d}.json",old)
+            atomic_json(out / 'pilot_receipts' / f'first_{len(selected_videos):03d}.json',receipt)
+            atomic_json(previous,receipt)
             return
         mask = np.zeros(len(margins), dtype=bool)
         video_receipts = [json.loads((out / 'videos' / video / 'receipt.json').read_text()) for video in ordered]

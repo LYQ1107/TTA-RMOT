@@ -20,11 +20,13 @@ def main():
     p = ArgumentParser(description=__doc__)
     p.add_argument('--phase', choices=['pilot', 'registered'], required=True)
     p.add_argument('--jobs-json', type=Path)
+    p.add_argument('--pilot-videos',type=int,default=1)
+    p.add_argument('--pilot-pairs',nargs='+',choices=['C1','C3'],default=['C1','C3'])
     a = p.parse_args()
     from flex_uda.active.execution import authorize_active
     execution,publication=authorize_active()
     if a.phase == 'pilot':
-        selected_jobs = [dict(pair=pair, method='FULL', rho=.3, pilot_videos=1) for pair in ('C1', 'C3')]
+        selected_jobs = [dict(pair=pair, method='FULL', rho=.3, pilot_videos=a.pilot_videos) for pair in a.pilot_pairs]
     else:
         if not a.jobs_json: p.error('Explicit documented job list required after real-pilot cost estimate')
         plan = json.loads(a.jobs_json.read_text()); cost_path = execution.public / 'BC_cost_estimate.json'
@@ -38,8 +40,11 @@ def main():
     def output(job):
         return execution.active / job['pair'] / job['method'] / (
             'original_delta10' if job['method'] == 'YESTRACK_FULL_D10' else 'rho_'+str(job['rho']))
-    selected_jobs = [job for job in selected_jobs if not (output(job) / (
-        'pilot_receipt.json' if a.phase == 'pilot' else 'predictions_seal.json')).exists()]
+    def finished(job):
+        path=output(job) / ('pilot_receipt.json' if a.phase=='pilot' else 'predictions_seal.json')
+        if not path.exists():return False
+        return a.phase!='pilot' or len(json.loads(path.read_text())['videos'])>=job['pilot_videos']
+    selected_jobs = [job for job in selected_jobs if not finished(job)]
     if not selected_jobs:
         print(json.dumps(dict(status='ALREADY_COMPLETE_NO_RERUN', phase=a.phase)), flush=True); return
     for job in selected_jobs:

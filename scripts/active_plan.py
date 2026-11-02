@@ -55,10 +55,13 @@ def estimate():
         dims = dimensions(PAIRS[pair][1]); chosen = [d for d in dims if d['video'] in record['videos']]
         # First video has no warm stream rescore; at most one rescore after each
         # round. Extrapolate four per-video rounds plus one warm stream rescore.
-        rescore_passes = sum(r['slow']['optimizer_updates'] > 0 for v in record['video_receipts'] for r in v['rounds'])
+        by_video={d['video']:d for d in chosen}
+        rescore_work=sum(v.get('rescore_candidate_query_rows',by_video[v['video']]['rescore_rows']*(
+            sum(r['slow']['optimizer_updates']>0 for r in v['rounds'])+int(v['rounds'][0]['video_index']>0)))
+            for v in record['video_receipts'])
         record['seconds_per_call'] = record['teacher']['equivalent_forward_seconds']/calls
         record['seconds_per_update'] = record['LoRA_GPU_seconds']/updates
-        record['seconds_per_rescore_row'] = record['rescore_GPU_seconds']/(rescore_passes*sum(d['rescore_rows'] for d in chosen))
+        record['seconds_per_rescore_row'] = record['rescore_GPU_seconds']/rescore_work
         crop = []
         for video in record['videos']:
             questions = json.loads((path.parent / 'videos' / video / 'questions.json').read_text())
