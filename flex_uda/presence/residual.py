@@ -72,6 +72,9 @@ def residual_loss(output, count):
 def head_from_checkpoint(state):
     if state.get('architecture') == ARCHITECTURE:
         model = ResidualCountHead()
+    elif state.get('architecture') == 'bernoulli_cardinality_v4':
+        from flex_uda.presence.cardinality import BernoulliCardinalityHead
+        model = BernoulliCardinalityHead()
     else:
         from flex_uda.presence.head import PresenceHead
         model = PresenceHead()

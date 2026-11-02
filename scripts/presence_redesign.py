@@ -42,6 +42,25 @@ def environment(gpu=None):
 
 
 def train(logs):
+    if OUT.name == 'redesign_v4':
+        def fit_source(job):
+            target,name=job;destination=OUT / 'heads' / name
+            command=['scripts/presence_bernoulli.py','--phase','fit','--target',target,'--output-dir',str(destination)]
+            if target == 'SportsMOT':
+                command += ['--source-label-root',str(RUN / 'source_labels_by_expression_v2/SportsMOT/LaMOT-best')]
+            run(command,logs / ('fit_'+target+'.log'),environment(),target=target,CPU_only=True)
+        with ThreadPoolExecutor(max_workers=2) as pool:list(pool.map(fit_source,IN_DOMAIN.items()))
+        selection={}
+        for target,name in IN_DOMAIN.items():
+            path=OUT / 'heads' / name / 'training_receipt.json';r=json.loads(path.read_text())
+            selection[name]=dict(source_domain=target,checkpoint=r['checkpoint'],checkpoint_sha256=r['checkpoint_sha256'],
+                best_source_loss=r['best_source_loss'],architecture=r['architecture'],fits=r['fits'],
+                receipt_path=str(path),receipt_sha256=file_sha(path))
+        atomic_json(RECORD / 'selection.json',dict(models=selection,
+            selection='source TRAIN candidate NLL convex minimizers; validation only diagnostic',
+            source_train_only=True,new_HOTA_not_computed_at_selection=True,prereg_sha256=file_sha(RECORD / 'PREREG.md')))
+        print(json.dumps(dict(event='SOURCE_TRAIN_CALIBRATION_SEALED_BEFORE_HOTA',models=selection)),flush=True)
+        return
     from scripts.launch_uda_workers import audit_gpus
     from scripts.select_gpu import query
     # No earlier project workers remain at entry to this phase; never migrate
@@ -91,7 +110,8 @@ def evaluate(logs, full=False):
         choice = selection[name]
         if file_sha(choice['checkpoint']) != choice['checkpoint_sha256']: raise ValueError('Selected head changed')
         folder = OUT / 'stage_A' / target / name
-        commands = [['scripts/presence_eval_offline.py', '--target', target, '--model', name,
+        decoder = 'scripts/presence_bernoulli.py' if OUT.name == 'redesign_v4' else 'scripts/presence_eval_offline.py'
+        commands = [[decoder, '--target', target, '--model', name,
                      '--phase', 'decode', '--head-checkpoint', choice['checkpoint'], '--output-dir', str(folder)]]
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'):
             if (folder / method / 'offline_summary.json').exists():
@@ -129,7 +149,7 @@ def collect(full=False):
             if seal['head_checkpoint_sha256'] != selection[name]['checkpoint_sha256']: raise ValueError('Wrong head in sealed decode')
             row = json.loads((path / 'offline_summary.json').read_text())
             rows.append(dict(row, native_HOTA=native, delta_HOTA=row['HOTA']-native,
-                architecture='residual_prefix_v3', own_domain=IN_DOMAIN[target] == name))
+                architecture=selection[name]['architecture'], own_domain=IN_DOMAIN[target] == name))
             artifacts.append(dict(target=target, model=name, method=method, path=str(path),
                 prediction_seal_sha256=file_sha(path / 'predictions_seal.json'),
                 detailed_sha256=file_sha(path / 'results/pedestrian_detailed.csv')))
@@ -150,7 +170,7 @@ def collect(full=False):
     for target, name in IN_DOMAIN.items():
         r = json.loads((OUT / 'heads' / name / 'training_receipt.json').read_text())
         costs.append(dict(target=target, model=name, epochs=r['epochs'], source_loss=r['best_source_loss'],
-            parameters=r['parameters'], optimizer_updates=r['optimizer_updates'], GPU_hours=r['wall_seconds']/3600,
+            parameters=r['parameters'], optimizer_updates=r['optimizer_updates'], GPU_hours=r.get('GPU_seconds',r['wall_seconds'])/3600,
             wall_seconds=r['wall_seconds'], peak_allocated_bytes=r['peak_allocated_bytes'], physical_gpu=r['physical_gpu']))
     fields = list(dict.fromkeys(k for row in rows for k in row))
     write_csv(RECORD / ('stage_A.csv' if full else 'same_domain.csv'), [{k: r.get(k) for k in fields} for r in rows])
@@ -169,8 +189,11 @@ def collect(full=False):
 
 
 def main():
+    global OUT,RECORD
     p = ArgumentParser(description=__doc__); p.add_argument('--phase', choices=['train', 'evaluate', 'full-A', 'collect'], required=True)
+    p.add_argument('--version',choices=['v3','v4'],default='v3')
     a = p.parse_args()
+    OUT=RUN / ('redesign_'+a.version);RECORD=PUBLIC / ('redesign_'+a.version)
     logs = OUT / 'launchers' / str(time.time_ns()); logs.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
     if a.phase == 'train': train(logs)
