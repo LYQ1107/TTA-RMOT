@@ -67,10 +67,13 @@ def run(a):
             new_calls=sum(row['new_calls'] for row in sessions), cache_hits=sum(row['cache_hits'] for row in sessions),
             forward_seconds=sum(row['forward_seconds'] for row in sessions),
             equivalent_forward_seconds=sum(row['equivalent_forward_seconds'] for row in sessions),
+            peak_allocated_bytes=max(row['peak_allocated_bytes'] for row in sessions),
             prior_session_resume_included=True)
         seal_mask(out, meta, mask, target=target, model=model, method=a.method, GT_open_attempts=len(access),
             extra=dict(pair=a.pair, rho=None if a.method == 'YESTRACK_FULL_D10' else a.rho, teacher=costs,
                 coverage=receipts, margin_input=reference, LoRA_GPU_seconds=0.,
+                video_transductive=a.method != 'YESTRACK_FULL_D10',
+                strict_frame_causal=a.method == 'YESTRACK_FULL_D10',
                 native_fallback_for_uncovered=a.method.startswith('YESTRACK'), wall_seconds=time.perf_counter()-begin))
     finally:
         if teacher is not None and teacher.child.poll() is None: teacher.close()

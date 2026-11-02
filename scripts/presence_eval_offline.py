@@ -1,6 +1,7 @@
 """Separate GT-free presence decode and post-seal official RMOT evaluation."""
 from argparse import ArgumentParser
 from collections import defaultdict
+import fcntl
 import json
 from pathlib import Path
 import subprocess
@@ -26,6 +27,8 @@ def decode(target, model_name, batch_size=256):
     from scripts.diag_pf_countmatched import topk_ids
     attempts = runtime_guard(); start = time.perf_counter()
     folder = RUN / 'stage_A' / target / model_name
+    folder.mkdir(parents=True, exist_ok=True)
+    lock = (folder / '.decode.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
     saved = folder / 'decode_receipt.json'
     if saved.exists():
         receipt = json.loads(saved.read_text())
@@ -92,6 +95,7 @@ def evaluate_folder(folder, target, *, sports418=False):
     from scripts.multidomain_diagnostics import target_root
     from scripts.pf_diag_common import official_metrics
     folder = Path(folder).resolve()
+    lock = (folder / '.evaluate.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
     receipt = verify_predictions(folder)
     if (folder / 'official_completion.json').exists():
         return json.loads((folder / 'official_completion.json').read_text())

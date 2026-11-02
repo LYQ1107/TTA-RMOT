@@ -1,6 +1,7 @@
 """Train only the new source presence head on sealed frozen feature sets."""
 from argparse import ArgumentParser
 from functools import partial
+import fcntl
 import json
 import os
 from pathlib import Path
@@ -20,7 +21,7 @@ from flex_tta.runtime.pf_receipts import atomic_json, append_json, file_sha
 
 def epoch(model, loader, device, weight, optimizer=None):
     model.train(optimizer is not None)
-    totals = np.zeros(4)
+    totals = np.zeros(4)  # BCE sum, positive-count CE sum, units, positive units
     with torch.set_grad_enabled(optimizer is not None):
         for batch in loader:
             batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
@@ -30,8 +31,10 @@ def epoch(model, loader, device, weight, optimizer=None):
             if optimizer is not None:
                 optimizer.zero_grad(set_to_none=True); loss.backward(); optimizer.step()
             n = len(batch['count'])
-            totals += np.array([float(loss.detach()), float(bce.detach()), float(ce.detach()), 1])*n
-    return dict(loss=totals[0]/totals[3], BCE=totals[1]/totals[3], count_CE=totals[2]/totals[3], units=int(totals[3]))
+            positive = int((batch['count'] > 0).sum())
+            totals += [float(bce.detach())*n, float(ce.detach())*positive, n, positive]
+    bce = float(totals[0]/totals[2]); ce = float(totals[1]/totals[3]) if totals[3] else 0.
+    return dict(loss=bce+.5*ce, BCE=bce, count_CE=ce, units=int(totals[2]), positive_units=int(totals[3]))
 
 
 def main():
@@ -39,16 +42,22 @@ def main():
     p.add_argument('--target', choices=list(IN_DOMAIN), required=True)
     p.add_argument('--resume', action='store_true')
     a = p.parse_args()
+    from flex_uda.presence.resources import admitted_device
+    admitted_device()
     random.seed(0); np.random.seed(0); torch.manual_seed(0)
     from scripts.multidomain_runtime import guard
     access = guard()  # only the already-exported own-source numerical labels are needed
     name = IN_DOMAIN[a.target]
+    out = RUN / 'heads' / name; out.mkdir(parents=True, exist_ok=True)
+    lock = (out / '.train.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
+    if (out / 'training_receipt.json').exists():
+        print(json.dumps(dict(status='SOURCE_HEAD_ALREADY_COMPLETE_NO_RERUN', model=name)), flush=True); return
+    admitted_device(8192)
     train_root = RUN / 'features/source_train' / a.target / name
     val_root = RUN / 'features' / a.target / name
     train, val = FeatureUnits(train_root), FeatureUnits(val_root, validation=True)
     for root in (train_root, val_root):
         if not (root / 'export_receipt.json').exists(): raise ValueError('Incomplete source feature export')
-    out = RUN / 'heads' / name; out.mkdir(parents=True, exist_ok=True)
     device = torch.device('cuda:0')
     torch.cuda.set_per_process_memory_fraction(min(.9, (4096 << 20)/torch.cuda.get_device_properties(0).total_memory))
     model = PresenceHead().to(device)
@@ -61,7 +70,7 @@ def main():
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=20)
     latest = out / 'checkpoint_latest.pt'; start_epoch = 0; best = float('inf'); stale = 0
     prior_wall = 0.
-    if a.resume:
+    if a.resume or latest.exists():
         saved = torch.load(latest, map_location=device, weights_only=False)
         model.load_state_dict(saved['head']); optimizer.load_state_dict(saved['optimizer']); scheduler.load_state_dict(saved['scheduler'])
         start_epoch, best, stale = saved['epoch'], saved['best'], saved['stale']
@@ -78,19 +87,23 @@ def main():
         else: stale += 1
         row = dict(epoch=e+1, train=training, validation=validation, best=best, stale=stale,
             lr_used=lr_used, lr_next=optimizer.param_groups[0]['lr'], selected=improved, wall_seconds=prior_wall+time.perf_counter()-started)
-        append_json(out / 'curve.jsonl', row); print(json.dumps(row), flush=True)
         state = dict(head=model.state_dict(), optimizer=optimizer.state_dict(), scheduler=scheduler.state_dict(),
             epoch=e+1, best=best, stale=stale, target=a.target, model=name, seed=0,
             train_units=len(train), validation_units=len(val), pos_weight=float(weight),
             parameters=sum(p.numel() for p in model.parameters()), rng=torch.get_rng_state(),
-            loader_rng=generator.get_state(), cuda_rng=torch.cuda.get_rng_state(), wall_seconds=row['wall_seconds'])
+            loader_rng=generator.get_state(), cuda_rng=torch.cuda.get_rng_state(), wall_seconds=row['wall_seconds'], epoch_record=row)
         temporary = latest.with_suffix('.partial'); torch.save(state, temporary); temporary.replace(latest)
-        if improved: torch.save(state, out / 'checkpoint_best_source.pt')
+        if improved:
+            selected = out / 'checkpoint_best_source.pt'
+            temporary = selected.with_suffix('.partial'); torch.save(state, temporary); temporary.replace(selected)
+        append_json(out / 'curve.jsonl', row); print(json.dumps(row), flush=True)
         if stale >= 3: break
     torch.cuda.synchronize()
     result = dict(status='HEAD_SOURCE_TRAINING_COMPLETE', target=a.target, model=name,
         best_source_loss=best, epochs=e+1, train_units=len(train), validation_units=len(val),
         parameters=sum(p.numel() for p in model.parameters()), head_only=True, frozen_FlexHook_loaded=False,
+        training_margin_input='frozen own-source GT-candidate decode',
+        validation_margin_input=val.margin_reference_record,
         physical_gpu=os.environ.get('PRESENCE_PHYSICAL_GPU'), optimizer_updates=(e+1)*len(train_loader),
         target_GT_open_attempts=len(access), wall_seconds=prior_wall+time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=False,

@@ -1,5 +1,6 @@
 """Separate legal own-source validation labels; never imported by runtime."""
 from argparse import ArgumentParser
+import fcntl
 import json
 from pathlib import Path
 import sys
@@ -14,6 +15,16 @@ def main():
     p = ArgumentParser(description=__doc__)
     p.add_argument('--target', choices=list(IN_DOMAIN), required=True)
     a = p.parse_args()
+    output = PUBLIC / (a.target + '_source_validation.json')
+    lock_path = RUN / 'heads' / IN_DOMAIN[a.target] / '.validation.lock'; lock_path.parent.mkdir(parents=True, exist_ok=True)
+    lock = lock_path.open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
+    if output.exists():
+        receipt = json.loads(output.read_text())
+        for row in receipt['videos']:
+            directory = RUN / 'features' / a.target / IN_DOMAIN[a.target] / 'videos' / row['video']
+            if file_sha(directory / 'labels.npy') != row['labels_sha256'] or file_sha(directory / 'GT_counts.npy') != row['counts_sha256']:
+                raise ValueError('Changed completed own-source validation labels')
+        print(json.dumps(dict(status='SOURCE_VALIDATION_ALREADY_COMPLETE', target=a.target)), flush=True); return
     from scripts.multidomain_diagnostics import target_root
     from scripts.analyze_pf_full_offline import load_eval_gt, overlaps, matched_gt
     meta = target_metadata(a.target)

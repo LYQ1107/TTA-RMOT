@@ -169,3 +169,39 @@ def test_short_tracks_keep_initial_prior_and_do_not_supply_pseudo_labels():
     state.replace_prior(intercept=[5.], slope=4., scores=[[9., 8., 1.]])
     assert np.array_equal(state.prior[:, :2], before[:, :2])
     assert (state.pseudo_labels()[:, :2] == -1).all()
+
+
+def test_target_head_identity_uses_archived_scores_without_rewriting_replay(tmp_path, monkeypatch):
+    import json
+    import numpy as np
+    import flex_uda.presence.runtime as runtime
+    from flex_uda.presence.data import FeatureUnits
+    folder = tmp_path / 'videos/v'; folder.mkdir(parents=True)
+    (folder / 'seal.json').write_text('{}')
+    meta = dict(video_id='v', target='Dance', model='V2-best', observations=2, frames=[1, 2],
+                queries=[dict(expression_id='q', start=5, stop=7)])
+    (folder / 'metadata.json').write_text(json.dumps(meta))
+    arrays = dict(observations=np.array([[1, 7], [2, 7]]), pcd=np.zeros((2, 768), 'float16'),
+                  margin=np.array([.01, -.01], 'float32'), boxes=np.ones((2, 4), 'float32'),
+                  sentence=np.ones((1, 768), 'float32'))
+    for name, value in arrays.items(): np.save(folder / (name+'.npy'), value)
+    archive = np.array([0., 0., 0., 0., 0., -.02, .02], dtype='float64')
+    monkeypatch.setattr(runtime, 'sealed_margins', lambda target, model:(archive, dict(path='immutable bank')))
+    data = FeatureUnits(tmp_path, labels=False)
+    assert data[0]['margin'].dtype == torch.float32
+    assert data[0]['margin'].item() < 0 and data[1]['margin'].item() > 0
+    assert np.array_equal(np.load(folder / 'margin.npy'), arrays['margin'])
+
+
+def test_source_validation_objective_is_json_native_and_conditional_on_positive_units():
+    import json, math
+    from scripts.presence_train import epoch
+    class Constant(nn.Module):
+        def forward(self, sent, **kwargs): return torch.zeros(len(sent)), torch.zeros(len(sent), 11)
+    def batch(n, count):
+        return dict(pcd=torch.zeros(n, 1, 768), margin=torch.zeros(n, 1), box=torch.zeros(n, 1, 4),
+                    sent=torch.zeros(n, 768), padding_mask=torch.zeros(n, 1, dtype=torch.bool), count=torch.full((n,), count))
+    result = epoch(Constant(), [batch(16, 0), batch(2, 1)], torch.device('cpu'), torch.tensor(1.))
+    assert abs(result['count_CE']-math.log(11)) < 1e-6
+    assert abs(result['loss']-(math.log(2)+.5*math.log(11))) < 1e-6
+    json.dumps(dict(result=result, selected=result['loss'] < float('inf')))

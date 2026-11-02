@@ -12,11 +12,19 @@ class FeatureUnits(Dataset):
     def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos'):
         self.root, self.validation, self.labels = Path(root), validation, labels
         self.units, self.shards, self.arrays = [], [], OrderedDict()
+        self.identity_reference = self.margin_reference_record = None
         self.positive_units = 0
         for folder in sorted((self.root / shard_subdir).iterdir()):
             if not (folder / 'seal.json').is_file():
                 raise ValueError('Unsealed feature shard: ' + str(folder))
             meta = json.loads((folder / 'metadata.json').read_text())
+            if shard_subdir == 'videos' and meta['queries'] and 'start' in meta['queries'][0]:
+                # Target and own-source-validation identities use the SAME
+                # archived native scores. margin.npy remains the actual replay
+                # output for audit; old features/scores are never rewritten.
+                if self.identity_reference is None:
+                    from flex_uda.presence.runtime import sealed_margins
+                    self.identity_reference, self.margin_reference_record = sealed_margins(meta['target'], meta['model'])
             obs = np.load(folder / 'observations.npy', mmap_mode='r')
             n = len(obs)
             frames, starts, nums = np.unique(obs[:, 0], return_index=True, return_counts=True)
@@ -43,6 +51,12 @@ class FeatureUnits(Dataset):
             folder, _ = self.shards[shard]
             names = ['pcd', 'margin', 'boxes', 'sentence'] + (['labels'] if self.labels else [])
             self.arrays[shard] = {name: np.load(folder / (name+'.npy'), mmap_mode='r') for name in names}
+            if self.identity_reference is not None:
+                meta = self.shards[shard][1]; queries = meta['queries']; n = meta['observations']
+                start = queries[0]['start']; stop = queries[-1]['stop']
+                if any(q['start'] != start+j*n or q['stop'] != start+(j+1)*n for j, q in enumerate(queries)):
+                    raise ValueError('Canonical identity score order differs from feature query-major order')
+                self.arrays[shard]['margin'] = self.identity_reference[start:stop]
             # These are read-only mmaps, not materialized feature copies.
             # Keep their small handles open: random frame/query batches would
             # otherwise reopen several NPY files for nearly every unit.
@@ -53,7 +67,7 @@ class FeatureUnits(Dataset):
         shard, qi, frame, a, b, ba, bb, count = self.units[index]
         ar = self.arrays_for(shard)
         result = dict(pcd=torch.from_numpy(ar['pcd'][a:b].astype('float32')),
-                      margin=torch.from_numpy(ar['margin'][a:b].copy()),
+                      margin=torch.from_numpy(ar['margin'][a:b].astype('float32')),
                       box=torch.from_numpy(ar['boxes'][ba:bb].copy()),
                       sent=torch.from_numpy(ar['sentence'][qi].copy()), count=count, index=index)
         if self.labels: result['y'] = torch.from_numpy(ar['labels'][a:b].copy())

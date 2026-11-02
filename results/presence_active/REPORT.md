@@ -36,7 +36,7 @@ LaMOT此前下载的官方GitHub压缩包已含496条Sports Train标注，45个T
 
 三个源Train真实smoke也已通过：KITTI0000为4768行、Dance dancetrack0001为819行、Sports v_-6Os86HzwCs_c001为203行；仅合法自身源GT生成监督，不读取其他目标标签。
 
-14项定向CPU功能检查已通过：最终PCD与margin、句子mask池化、padding不变性、空集合梯度、候选dropout/count同步、教师证据不重复累加、两条不同轨迹的No规则、dancing路由修正、模拟DS、流状态序列化、快速校准、原始及数值GT拒绝、YesTrack原生回退、短轨迹先验保持。尚不能据此宣称完整方法通过。
+16项定向CPU功能检查已通过：最终PCD与margin、句子mask池化、padding不变性、空集合梯度、候选dropout/count同步、教师证据不重复累加、两条不同轨迹的No规则、dancing路由修正、模拟DS、流状态序列化、快速校准、原始及数值GT拒绝、YesTrack原生回退、短轨迹先验保持、目标身份输入使用封存分数且不改写复算文件，以及源验证损失的正单元归一化/JSON原生标量。尚不能据此宣称完整方法通过。
 
 三域合法源缓存各做了独立的3步、batch256真实GPU训练功能检查，loss/总梯度有限且非零，没有覆盖正式Head checkpoint。按指定结构精确实现的参数量为1,521,676（约1.52M）。Sports的三帧smoke子集恰好全正，按该小子集公式其presence权重为0，梯度来自count项；正式Sports源Train有28,271正单元/2,130负单元，默认pos_weight=0.0753422，不是0，正式训练仍按完整源集比率计算，不采用smoke权重。
 
@@ -77,8 +77,10 @@ C1逐行复现并复用旧官方结果；C6用同一批既有封存门控和LaMO
 
 1. 首次目标smoke误用教师环境，缺`yacs`，在构建模型前失败。改用既有dfot FlexHook环境；不改共享环境，重做后通过。
 2. KITTI源表达目录链接到既有合法源数据，初版白名单只允许外层根路径，误拦一个合法源表达。仅补入官方Train表达目录的真实路径；不放行其他项目代码或目标GT。失败尝试日志与成功smoke均保留。
-3. KITTI额外全行误差门槛在frame101触发0.0010823011（符号翻转0），与既有公开`multidomain_generality/smoke_V2-best.json`的历史整批forward复算误差完全相同。用户要求的是预固定三帧≤1e-3、0翻转，保持此门槛不变；其他帧记录全部误差/超限行数，仍逐行要求符号一致，不改写原封存margin。未封存视频恢复，其余健康导出不重启。
+3. KITTI额外全行误差门槛在frame101触发0.0010823011（符号翻转0），与既有公开`multidomain_generality/smoke_V2-best.json`的历史整批forward复算误差完全相同。额外全帧审计还发现KITTI0011/frame298和Dance0030/frame962近零分数的符号差异（分别误差0.0008719、0.0002027）。原验收范围是预固定三帧≤1e-3、0翻转，保持不变；其余全行误差和翻转如实记录，不把它们扩成额外停止条件。**目标/源验证的Head身份输入及Native/排序始终读已封存官方完整margin**；本轮`margin.npy`保留真实复算输出，仅作数值审计，PCD与旧文件不改写。源GT候选没有历史库，仍用其正常冻结decode margin。该读取策略在正式Head优化前落实并增加回归。未封存视频恢复，健康缓存不重算。
 4. C6参照首次CPU TrackEval因调用传入相对路径、vendor工作目录解析错误失败。入口统一resolve绝对路径；保留失败日志后重评通过，预测SHA和评测规则未改。
+5. GPU6共享环境后来出现约56.75GiB的新占用，一次KITTI恢复进程OOM（本进程约2.30GiB、卡仅余18.25MiB）。未停止其他项目。确认GPU6已无本项目CUDA进程后，登记集合由4/6改为4/5，GPU5入场余约77.9GB、1个进程；GPU4两个健康导出原样保留。新CUDA任务读取任务级登记，退休GPU6不能再启动任务；源头训练、标签准备、CPU解码/评测均支持锁内复用。两名无科学子进程的旧CPU等待协调器已退出，新队列继续，未停止健康GPU进程。
+6. KITTI正式Head首epoch完成计算后，在写曲线时遇到NumPy bool不能JSON序列化，尚未保存任何有效Head checkpoint。将epoch指标返回Python原生float/int；同时按全部正单元汇总条件count CE，避免顺序验证的全负batch改变CE归一化。训练每个minibatch的BCE+0.5CE、权重、lr、seed等不变；checkpoint改为原子落盘后写日志。已增加最小数值回归并恢复该未封存epoch，失败日志保留，不伪造损失曲线或跳过epoch。
 
 ## 记录与恢复入口
 

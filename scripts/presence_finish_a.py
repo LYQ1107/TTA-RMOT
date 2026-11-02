@@ -80,9 +80,12 @@ def collect():
             artifacts.append(dict(kind='complete_target_features', target=target, model=model,
                 path=str(feature), sha256=file_sha(feature), rows=info['rows']))
             costs.append(dict(stage='target_features', target=target, model=model,
-                wall_seconds=info['wall_seconds'], GPU_hours=info['wall_seconds']/3600,
+                wall_seconds_latest_worker=info['wall_seconds'],
+                successful_video_stage_seconds=sum(r['wall_seconds'] for r in info['videos']),
+                GPU_hours=sum(r['wall_seconds'] for r in info['videos'])/3600,
                 physical_gpu=info.get('physical_gpu'), peak_allocated_bytes=info.get('peak_allocated_bytes'),
-                GPU_hours_definition='one admitted process elapsed time, shared GPU; not utilization integral'))
+                GPU_hours_definition='successful immutable video stages across all resumed workers; shared-GPU elapsed, not utilization integral',
+                failed_and_initial_model_load_overhead='separate launcher/attempt logs; not assumed zero'))
     for target, model in IN_DOMAIN.items():
         for stage, path in [
             ('source_features', RUN / 'features/source_train' / target / model / 'export_receipt.json'),
@@ -96,7 +99,8 @@ def collect():
         artifacts.append(dict(kind='source_head', model=model, path=str(checkpoint), sha256=file_sha(checkpoint)))
     fields = list(dict.fromkeys(k for row in rows for k in row))
     write_csv(PUBLIC / 'stage_A.csv', [{k: row.get(k) for k in fields} for row in rows])
-    write_csv(PUBLIC / 'stage_A_costs.csv', costs)
+    cost_fields = list(dict.fromkeys(k for row in costs for k in row))
+    write_csv(PUBLIC / 'stage_A_costs.csv', [{k: row.get(k) for k in cost_fields} for row in costs])
     atomic_json(PUBLIC / 'artifacts_stage_A.json', dict(files=artifacts))
     stage_a_gate()
     gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
@@ -127,7 +131,10 @@ def collect():
 
 
 def main():
-    p = ArgumentParser(description=__doc__); p.add_argument('--check-references-only', action='store_true'); a = p.parse_args()
+    p = ArgumentParser(description=__doc__)
+    p.add_argument('--check-references-only', action='store_true'); p.add_argument('--collect-only', action='store_true'); a = p.parse_args()
+    if a.collect_only:
+        print(json.dumps(collect(), indent=2), flush=True); return
     if a.check_references_only:
         from flex_uda.presence.runtime import runtime_guard
         attempts = runtime_guard()

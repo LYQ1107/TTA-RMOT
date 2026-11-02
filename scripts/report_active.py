@@ -122,7 +122,7 @@ def main():
             assigned_worker_wall_hours=sum(r.get('wall_seconds', 0) for r in attempts)/3600,
             failed_worker_attempts=sum(r['status'] != 'RETURNED_SUCCESSFULLY' for r in attempts),
             wall_is_not_utilization_integral=True, optimizer_updates=updates,
-            LoRA_trainable_parameters=24576 if updates else 0,
+            LoRA_trainable_parameters=24576 if method in ('FULL', 'RANDOM_ACQ', 'MINUS_PRES', 'MINUS_DS', 'MINUS_ROUTE', 'MINUS_FAST', 'RESET_LORA') else 0,
             peak_teacher_allocated_bytes=seal.get('teacher', {}).get('peak_allocated_bytes'),
             peak_student_allocated_bytes=max((r.get('parent_peak_allocated_bytes', 0) for r in attempts), default=0),
             covered_pairs=sum(r.get('covered_pairs', 0) for r in receipts) if method.startswith('YESTRACK') else None,

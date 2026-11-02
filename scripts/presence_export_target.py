@@ -55,6 +55,7 @@ def export_video(model, tokenizer, transform, device, meta, video, target, name,
         index[j*n:(j+1)*n, 1:] = observations
     index.flush()
     parity, maximum_error, sign_flips, extra_tolerance_rows = [], 0., 0, 0
+    fixed_maximum_error = fixed_sign_flips = 0
     with torch.no_grad():
         for t in selected_frames:
             candidates = list(episode.current_candidates(t)) if t in episode.observations_by_frame else []
@@ -77,14 +78,19 @@ def export_video(model, tokenizer, transform, device, meta, video, target, name,
                     error = float(np.abs(cpu - expected).max())
                     flips = int(((cpu > 0) != (expected > 0)).sum())
                     maximum_error = max(maximum_error, error); sign_flips += flips
+                    if t in reference_checks:
+                        fixed_maximum_error = max(fixed_maximum_error, error)
+                        fixed_sign_flips += flips
                     extra_tolerance_rows += int((np.abs(cpu-expected) > 1e-3).sum())
                     # The user gate is the pre-fixed THREE real frames, not a
                     # new per-row acceptance criterion. Historical V2/KITTI
                     # scores were already documented to differ by0.0010823
                     # under FP32 frozen-encoder replay (old smoke_V2-best.json).
                     # Keep all extra errors visible; never rewrite old scores.
-                    # Native sign identity remains checked on EVERY row.
-                    if (t in reference_checks and error > 1e-3) or flips:
+                    # Native / head identity inputs use the original sealed
+                    # bank (FeatureUnits), including its near-zero decisions.
+                    # Extra replay differences remain audit, not extra gates.
+                    if t in reference_checks and (error > 1e-3 or flips):
                         raise RuntimeError(f'Sealed-margin parity failed: {target}/{name}/{video}/{t}: {error}, {flips}')
                     if t in checks:
                         base = query_margins(model, prepared, qt, batched=True)
@@ -117,6 +123,8 @@ def export_video(model, tokenizer, transform, device, meta, video, target, name,
         candidate_batch=8, query_batch=64,
         maximum_margin_error=maximum_error, sign_flips=sign_flips, parity=parity,
         fixed_reference_tolerance_frames=sorted(reference_checks), extra_audit_rows_over_1e_3=extra_tolerance_rows,
+        fixed_reference_max_error=fixed_maximum_error, fixed_reference_sign_flips=fixed_sign_flips,
+        identity_input_policy='sealed complete official margins; replay margin.npy retained as audit',
         old_KITTI_replay_discrepancy_reference='results/multidomain_generality/smoke_V2-best.json',
         files_sha256={p: file_sha(folder / p) for p in files},
         wall_seconds=time.perf_counter()-begin, cache=cache.stats)
@@ -134,6 +142,8 @@ def main():
     import compat.sitecustomize
     import torch
     from flex_uda.presence.runtime import RUN, OLD, TARGET_KEY, load_model, target_metadata, sealed_margins, runtime_guard
+    from flex_uda.presence.resources import admitted_device
+    admitted_device()
     access = runtime_guard([OLD / 'runtime' / TARGET_KEY[a.target]])
     folder = RUN / 'features' / a.target / a.model
     folder.mkdir(parents=True, exist_ok=True)
@@ -141,7 +151,8 @@ def main():
     # registered physical GPUs while the original queue is still exporting.
     # The queued copy waits here and reuses the completed bank, never writes it
     # concurrently or restarts the healthy priority worker.
-    lock_handle = (folder / '.export.lock').open('a')
+    inherited = os.environ.get('PRESENCE_EXPORT_LOCK_FD')
+    lock_handle = os.fdopen(int(inherited), 'a') if inherited else (folder / '.export.lock').open('a')
     fcntl.flock(lock_handle, fcntl.LOCK_EX)
     completion = folder / ('smoke_receipt.json' if a.smoke else 'export_receipt.json')
     if completion.exists():
@@ -151,6 +162,13 @@ def main():
                 if file_sha(Path(video['path']) / name) != sha: raise ValueError('Changed completed feature bank')
         print(json.dumps(dict(status='ALREADY_SEALED_NO_GPU_RELOAD', target=a.target, model=a.model)), flush=True)
         return
+    # Serialize new frozen-export contexts on one physical card. Existing
+    # healthy pre-lease workers remain untouched; memory admission still waits
+    # for enough real space rather than assuming a lock reserves VRAM.
+    resource_root = RUN / 'resources'; resource_root.mkdir(exist_ok=True)
+    gpu_lock = (resource_root / (os.environ['CUDA_VISIBLE_DEVICES']+'.export.lock')).open('a')
+    fcntl.flock(gpu_lock, fcntl.LOCK_EX)
+    admitted_device(20480)
     started = time.perf_counter()
     device = torch.device('cuda:0')
     torch.manual_seed(0)
@@ -174,4 +192,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try: main()
+    except Exception as exc:
+        print(json.dumps(dict(status='TARGET_EXPORT_FAILED', error=repr(exc))), flush=True)
+        raise

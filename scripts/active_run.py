@@ -269,6 +269,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
             new_calls=sum(s['new_calls'] for s in sessions), cache_hits=sum(s['cache_hits'] for s in sessions),
             forward_seconds=sum(s['forward_seconds'] for s in sessions),
             equivalent_forward_seconds=sum(s['equivalent_forward_seconds'] for s in sessions),
+            peak_allocated_bytes=max(s['peak_allocated_bytes'] for s in sessions),
             prior_session_resume_included=True)
         for video in ordered:
             value = np.load(out / 'videos' / video / 'mask.npy')

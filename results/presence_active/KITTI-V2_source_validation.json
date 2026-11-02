@@ -1,0 +1,41 @@
+{
+  "target": "KITTI-V2",
+  "legal_source_validation_only": true,
+  "candidate_matching": "IoU>=0.5 one-to-one existing v2 matcher",
+  "validation_loss_count": "sum of matched positive candidates; same label definition as GT-candidate train and dropout",
+  "GT_counts_npy": "total official GT per frame; offline diagnostics only, not loss targets",
+  "videos": [
+    {
+      "video": "0005",
+      "units": 58509,
+      "GT_detections": 43688,
+      "candidate_positive_rows": 37954,
+      "labels_sha256": "a36940102786b8ed8a352adb806bc77c6725e24275b81c71288ea207114dd0f0",
+      "counts_sha256": "6122f771b817aec22a99bb1318beda32858afa98a7e3a9999bdaa45a1a3212f0"
+    },
+    {
+      "video": "0011",
+      "units": 85044,
+      "GT_detections": 104124,
+      "candidate_positive_rows": 76690,
+      "labels_sha256": "02ff442edf2e7964a236d61a41718c37e60101eede07d02364ed19491df3cce5",
+      "counts_sha256": "fa662a9b56fac237d19ab60ff7b13deb560170d7ff28239afb07796a14b351a2"
+    },
+    {
+      "video": "0013",
+      "units": 70380,
+      "GT_detections": 36248,
+      "candidate_positive_rows": 28731,
+      "labels_sha256": "6657ba619e8cf74004c5147393f8c9f24ae8da99331a2c127e28eb86da6e8178",
+      "counts_sha256": "a4b43e12438c499fe38977a23b600cb57b8e42c7062a180fd7d7a7d2336f355d"
+    },
+    {
+      "video": "0019",
+      "units": 243570,
+      "GT_detections": 307226,
+      "candidate_positive_rows": 218944,
+      "labels_sha256": "6e00afed5103c43246e959424d5da5426557d4b297d0773fc5c7c547b98241d8",
+      "counts_sha256": "03b136dbe844f3e102069f0098a60cb76ead136eac6e01b3d605cdb47bcaae51"
+    }
+  ]
+}
