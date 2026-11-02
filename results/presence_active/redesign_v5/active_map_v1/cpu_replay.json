@@ -1,0 +1,94 @@
+{
+  "status": "FINITE_OR_EXPLICIT_SKIP",
+  "rows": [
+    {
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "result": {
+        "status": "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES",
+        "identity": {
+          "status": "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES",
+          "positive": 0,
+          "negative": 48,
+          "unqueried_confident_excluded": 90,
+          "queried_confident_without_agreeing_evidence": 1
+        },
+        "presence": {
+          "status": "SKIP_INSUFFICIENT_CONFIRMED_CLASSES",
+          "positive": 0,
+          "negative": 2,
+          "conflicting_queries": 0
+        },
+        "temperature": 1.0,
+        "bias": 0.0,
+        "slope": 1.0,
+        "source_prior_variance": 1.0,
+        "source_slope_anchor": 1.0,
+        "source_temperature_anchor": 1.0,
+        "source_bias_anchor": 0.0,
+        "objective": "sum BCE + fixed unit source Gaussian priors",
+        "teacher_evidence_not_reapplied": true,
+        "support_uses_target_GT": false
+      },
+      "original_legacy_slope": -2.1439629244653666e-05,
+      "original_legacy_temperature": 2.3539448199234108,
+      "original_legacy_bias": -20.444819769154556,
+      "belief_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active/C1/FULL/rho_0.3/videos/dancetrack0004/belief.npz",
+      "belief_sha256": "59e621ab3abea36feade6133844fb5549f38ae15cd9c21268d87326ba0708d6f",
+      "questions_sha256": "bc37adfb79dfe08491bf91436b09cbcd92d5040de6ec629bdc49a170b57681f3"
+    },
+    {
+      "pair": "C3",
+      "video": "v_00HRwkvvjtQ_c001",
+      "result": {
+        "status": "SOURCE_MAP_UPDATED",
+        "identity": {
+          "status": "MAP_UPDATED",
+          "positive": 6,
+          "negative": 1,
+          "unqueried_confident_excluded": 28,
+          "queried_confident_without_agreeing_evidence": 2,
+          "data_before": 3.7638720812291906,
+          "prior_before": 0.0,
+          "objective_before": 3.7638720812291906,
+          "data_after": 1.7467987308620547,
+          "prior_after": 0.6972004924891324,
+          "objective_after": 2.443999223351187,
+          "closure_calls": 9,
+          "optimizer_iterations": 9,
+          "queries": [
+            0,
+            4,
+            7
+          ]
+        },
+        "presence": {
+          "status": "SKIP_INSUFFICIENT_CONFIRMED_CLASSES",
+          "positive": 1,
+          "negative": 0,
+          "conflicting_queries": 0
+        },
+        "temperature": 1.0,
+        "bias": 0.0,
+        "slope": 1.6481755512692653,
+        "source_prior_variance": 1.0,
+        "source_slope_anchor": 1.0,
+        "source_temperature_anchor": 1.0,
+        "source_bias_anchor": 0.0,
+        "objective": "sum BCE + fixed unit source Gaussian priors",
+        "teacher_evidence_not_reapplied": true,
+        "support_uses_target_GT": false
+      },
+      "original_legacy_slope": 430.2909647438867,
+      "original_legacy_temperature": 4480260.353006757,
+      "original_legacy_bias": 20.565321754527606,
+      "belief_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active/C3/FULL/rho_0.3/videos/v_00HRwkvvjtQ_c001/belief.npz",
+      "belief_sha256": "be023b1278d4458238f164e6a44b5bb335c888bad90bd16225164ea34512368d",
+      "questions_sha256": "ad7cb9353b4bff72ba679b6b8f2d605809e6f33bfe9991d1f2a892c916664d9c"
+    }
+  ],
+  "GT_open_attempts": 0,
+  "purpose": "fresh source priors plus fixed legacy teacher evidence; not an interactive-policy equivalence or HOTA test",
+  "new_model_or_teacher_calls": 0,
+  "new_GPU_hours": 0
+}

@@ -9,7 +9,8 @@ from flex_tta.runtime.pf_receipts import atomic_json,file_sha
 
 
 def main():
-    p=ArgumentParser(description=__doc__);p.add_argument('--publication',required=True);a=p.parse_args()
+    p=ArgumentParser(description=__doc__);p.add_argument('--publication',required=True)
+    p.add_argument('--fast-map-pilot-only',action='store_true');a=p.parse_args()
     record=PUBLIC / 'redesign_v5';out=RUN / 'redesign_v5'
     gate_path=record / 'gate.json';gate=json.loads(gate_path.read_text())
     artifacts=record / 'artifacts.json';info=json.loads(artifacts.read_text())
@@ -27,7 +28,15 @@ def main():
         old_stage_A_gate_unchanged=True,teacher_revision_unchanged=True,
         original_BC_hyperparameters_unchanged=True,first_jobs='C1/C3 FULL rho=.3 first-video resumable pilots',
         maximum_GPUs=2,matrix_GPU_hour_gate=40)
-    path=record / 'execution.json'
+    if a.fast_map_pilot_only:
+        prereg=record / 'active_map_v1/PREREG.md'
+        result.update(fast_mode='source_map_v1',pilot_only=True,maximum_pilot_videos=1,
+            active_root=str(out / 'active_map_v1'),public_root=str(record / 'active_map_v1'),
+            launcher_root=str(out / 'active_map_launchers'),prereg_path=str(prereg),prereg_sha256=file_sha(prereg),
+            original_BC_hyperparameters_unchanged=False,
+            registered_change='source-anchored MAP fast calibration with teacher-supported two-class evidence only',
+            original_teacher_source_head_and_LoRA_unchanged=True,full_matrix_authorized=False)
+    path=record / ('execution_map_v1.json' if a.fast_map_pilot_only else 'execution.json')
     if path.exists():
         if json.loads(path.read_text())!=result:raise ValueError('Do not replace an existing execution manifest')
     else:atomic_json(path,result)

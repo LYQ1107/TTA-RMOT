@@ -42,3 +42,19 @@ def test_video_prior_accepts_counts_above_ten(tmp_path,monkeypatch):
     result=runner.video_prior(meta,bank,'v','V2-best','Dance',np.ones(24))
     assert np.array_equal(result['expected'],[6.])
     assert result['track_means'].shape==(1,12)
+
+
+def test_pilot_only_manifest_blocks_registered_queue_before_gpu_access(tmp_path,monkeypatch):
+    import os,subprocess,sys
+    selection=tmp_path / 'selection.json';selection.write_text('{}')
+    gate=tmp_path / 'gate.json';gate.write_text(json.dumps(dict(status='PASS_SAME_DOMAIN',completed_full_A=True,
+        failed_targets=[],same_domain=[{}, {}, {}],selection_path=str(selection),selection_sha256=file_sha(selection))))
+    manifest=tmp_path / 'execution.json';manifest.write_text(json.dumps(dict(pilot_only=True,
+        gate_path=str(gate),gate_sha256=file_sha(gate),published_commit='prior-published-commit',
+        active_root=str(tmp_path / 'active'),stage_A_root=str(tmp_path / 'stage_A'),
+        public_root=str(tmp_path / 'public'),launcher_root=str(tmp_path / 'launchers'))))
+    env=dict(os.environ,PRESENCE_EXECUTION_MANIFEST=str(manifest),CUDA_VISIBLE_DEVICES='')
+    root=__import__('pathlib').Path(__file__).resolve().parents[1]
+    result=subprocess.run([sys.executable,'scripts/active_launch.py','--phase','registered'],cwd=root,
+        env=env,capture_output=True,text=True)
+    assert result.returncode!=0 and 'Only first-video small pilots are authorized' in result.stderr

@@ -61,6 +61,7 @@ def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1
     calibrated = expit(frame_presence/temperature+bias)
     return dict(queries=qrows, tracks=tids, track_positions=tracks, track_means=mean,
         lengths=[len(tracks[i]) for i in tids], expected=np.median(calibrated*expected, axis=1),
+        source_expected=np.median(expit(frame_presence)*expected,axis=1),
         max_presence=calibrated.max(axis=1), presence_logits=frame_presence,
         frame_presence=calibrated, frame_index=frame_index, width=local['width'], height=local['height'])
 
@@ -73,6 +74,10 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
     from flex_uda.presence.predictions import seal_mask
     from flex_uda.active.execution import authorize_active
     execution,publication=authorize_active()
+    fast_mode=execution.manifest.get('fast_mode','legacy') if execution.manifest else 'legacy'
+    if execution.manifest and execution.manifest.get('pilot_only'):
+        if pair not in ('C1','C3') or variant!='FULL' or rho!=.3 or pilot_videos!=1 or smoke_videos:
+            raise PermissionError('This new construction authorizes only the two fixed first-video FULL pilots')
     model_name, target = PAIRS[pair]
     torch.manual_seed(0); np.random.seed(0)
     torch.cuda.set_per_process_memory_fraction(min(.9, (16 << 30)/torch.cuda.get_device_properties(0).total_memory))
@@ -105,6 +110,16 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
             if vi < start_index: continue
             bank = meta['videos'][video]
             prior = video_prior(meta, bank, video, model_name, target, margins, temperature=temperature, bias=bias)
+            if fast_mode=='source_map_v1':
+                from flex_uda.active.belief import normalize_track_scores,solve_intercept
+                source_z=normalize_track_scores(prior['track_means'])
+                source_a=np.asarray([solve_intercept(z,max(.5,k),1.) for z,k in zip(source_z,prior['source_expected'])])
+            elif fast_mode!='legacy':raise ValueError('Unregistered fast calibration mode')
+            def calibrate(*args,**kwargs):
+                if fast_mode=='legacy':return fast_step(*args,**kwargs)
+                from flex_uda.active.map_calibration import source_map_fast_step
+                kwargs.pop('slope_reference',None)
+                return source_map_fast_step(*args,source_intercepts=source_a,**kwargs)
             texts = [q['query_text'] for q in prior['queries']]
             group = exclusive_group(texts, target)
             spec = next(s for s in specs if s['video_id'] == video)
@@ -178,7 +193,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 if variant != 'MINUS_FAST':
                     s, c = ds.values['IDENTITY'] if variant != 'MINUS_DS' else (.8, .8)
                     reference = (np.log(s/(1-c))-np.log((1-s)/c))/(2*np.log(4))
-                    fast = fast_step(state, prior['presence_logits'], temperature=temperature, bias=bias, slope_reference=reference)
+                    fast = calibrate(state, prior['presence_logits'], temperature=temperature, bias=bias, slope_reference=reference)
                     temperature, bias = fast['temperature'], fast['bias']
                     state.presence_max = expit(prior['presence_logits']/temperature+bias).max(axis=1)
                 slow_log = dict(status='DISABLED', optimizer_updates=0, GPU_seconds=0.)
@@ -192,7 +207,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                         rescore_work+=rescore_rows
                         state.replace_prior(scores=rescored)
                         if variant != 'MINUS_FAST':
-                            fast_after = fast_step(state, prior['presence_logits'], temperature=temperature, bias=bias)
+                            fast_after = calibrate(state, prior['presence_logits'], temperature=temperature, bias=bias)
                             temperature, bias = fast_after['temperature'], fast_after['bias']
                             state.presence_max = expit(prior['presence_logits']/temperature+bias).max(axis=1)
                             fast['after_slow'] = fast_after
@@ -272,6 +287,7 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 resume='same output directory and stream_NNN.pt; no healthy video rerun',
                 no_full_predictions_seal=True,stage_A_publication=publication,
                 execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None)
+            receipt['fast_mode']=fast_mode
             previous=out / 'pilot_receipt.json'
             if previous.exists():
                 old=json.loads(previous.read_text())

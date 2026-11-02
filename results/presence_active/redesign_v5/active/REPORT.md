@@ -8,11 +8,11 @@
 
 ## 真实pilot最新状态
 
-REAL_PILOT_COMPLETE_SOME_SLOW_UPDATES_NOT_OBSERVED。尚无完整B/C HOTA。
+BOTH_REAL_UPDATES_MEASURED。尚无完整B/C HOTA。
 
 | pair | videos | teacher_calls | new_forward_calls | optimizer_updates | gradient_min | gradient_max | LoRA_B_norm | teacher_forward_seconds | LoRA_seconds | rescore_seconds | final_positive_pairs | confident_never_asked | GT_open_attempts | full_RMOT_evaluation |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| C1 | 1 | 56 | 56 | 0 | None | None | 0.000000 | 2.414452 | 0.000000 | 0.000000 | 0 | 18 | 0 | False |
+| C1 | 3 | 162 | 162 | 350 | 0.243896 | 27.045340 | 1.984835 | 5.688805 | 940.427426 | 103.193622 | 24 | 170 | 0 | False |
 | C3 | 1 | 43 | 43 | 200 | 0.154162 | 2.747926 | 1.450984 | 2.166746 | 424.603327 | 43.560146 | 76 | 115 | 0 | False |
 
 高置信不等于正确，未问过即高置信单列；GT未进入本诊断，不据此调整阈值。C1缺少有效互斥列表样本时应跳过，不能强制伪正例制造梯度；完整矩阵成本门槛仍须真实C1/C3更新计时，未通过不展开108项。每次pilot快照、日志和stream checkpoint SHA独立保留；后续按视频顺序恢复，不重做健康首视频。

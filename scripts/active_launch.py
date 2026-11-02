@@ -25,6 +25,9 @@ def main():
     a = p.parse_args()
     from flex_uda.active.execution import authorize_active
     execution,publication=authorize_active()
+    if execution.manifest and execution.manifest.get('pilot_only'):
+        if a.phase!='pilot' or a.pilot_videos!=1:
+            raise PermissionError('Only first-video small pilots are authorized for this construction')
     if a.phase == 'pilot':
         selected_jobs = [dict(pair=pair, method='FULL', rho=.3, pilot_videos=a.pilot_videos) for pair in a.pilot_pairs]
     else:

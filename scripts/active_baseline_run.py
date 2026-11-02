@@ -16,6 +16,8 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 def run(a):
     from flex_uda.active.execution import authorize_active
     execution,publication=authorize_active()
+    if execution.manifest and execution.manifest.get('pilot_only'):
+        raise PermissionError('No new complete baseline is authorized by the small-pilot manifest')
     access = runtime_guard(); begin = time.perf_counter()
     from flex_uda.active.teacher_client import TeacherClient
     from flex_uda.presence.predictions import seal_mask, verify_predictions
