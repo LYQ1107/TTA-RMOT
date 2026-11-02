@@ -9,9 +9,10 @@ from torch.utils.data import Dataset
 
 
 class FeatureUnits(Dataset):
-    def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos', labels_root=None):
+    def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos', labels_root=None, track_ids=False):
         self.root, self.validation, self.labels = Path(root), validation, labels
         self.labels_root = Path(labels_root) if labels_root else None
+        self.track_ids = track_ids
         self.shard_subdir = shard_subdir
         self.units, self.shards, self.arrays = [], [], OrderedDict()
         self.identity_reference = self.margin_reference_record = None
@@ -56,6 +57,7 @@ class FeatureUnits(Dataset):
         if shard not in self.arrays:
             folder, _ = self.shards[shard]
             names = ['pcd', 'margin', 'boxes', 'sentence'] + (['labels'] if self.labels else [])
+            if self.track_ids: names.append('observations')
             self.arrays[shard] = {name: np.load(self.label_path(folder) if name == 'labels' else folder / (name+'.npy'),
                                                mmap_mode='r') for name in names}
             if self.identity_reference is not None:
@@ -78,6 +80,7 @@ class FeatureUnits(Dataset):
                       box=torch.from_numpy(ar['boxes'][ba:bb].copy()),
                       sent=torch.from_numpy(ar['sentence'][qi].copy()), count=count, index=index)
         if self.labels: result['y'] = torch.from_numpy(ar['labels'][a:b].copy())
+        if self.track_ids: result['track_id'] = torch.from_numpy(ar['observations'][ba:bb, 1].astype('int64'))
         return result
 
 
@@ -87,7 +90,8 @@ def collate_units(rows, *, augment=False):
         row = dict(row)
         if augment:
             keep = torch.rand(len(row['margin'])) >= .1
-            for k in ('pcd', 'margin', 'box', 'y'): row[k] = row[k][keep]
+            for k in ('pcd', 'margin', 'box', 'y', 'track_id'):
+                if k in row: row[k] = row[k][keep]
             row['count'] = int(row['y'].sum())
             row['margin'] = row['margin'] + .1*torch.randn_like(row['margin'])
             row['pcd'] = torch.nn.functional.dropout(row['pcd'], p=.1, training=True)
@@ -95,6 +99,8 @@ def collate_units(rows, *, augment=False):
     lengths = torch.tensor([len(r['margin']) for r in result])
     n = int(lengths.max())
     batch = {k: pad_sequence([r[k] for r in result], batch_first=True) for k in ('pcd', 'margin', 'box')}
+    if 'track_id' in result[0]:
+        batch['track_id'] = pad_sequence([r['track_id'] for r in result], batch_first=True)
     batch.update(sent=torch.stack([r['sent'] for r in result]),
                  count=torch.tensor([r['count'] for r in result]),
                  padding_mask=torch.arange(n)[None] >= lengths[:, None],

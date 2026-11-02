@@ -21,7 +21,7 @@ def decode(target, model_name, batch_size=256, *, head_checkpoint=None, output_d
     import torch
     from torch.utils.data import DataLoader
     from flex_uda.presence.data import FeatureUnits, collate_units
-    from flex_uda.presence.head import PresenceHead
+    from flex_uda.presence.residual import ARCHITECTURE, head_from_checkpoint
     from flex_uda.presence.predictions import seal_mask, verify_predictions
     from flex_uda.presence.runtime import runtime_guard
     from scripts.diag_pf_countmatched import topk_ids
@@ -37,20 +37,38 @@ def decode(target, model_name, batch_size=256, *, head_checkpoint=None, output_d
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'): verify_predictions(folder / method)
         print(json.dumps(dict(status='ALREADY_SEALED_NO_RERUN', target=target, model=model_name)), flush=True)
         return receipt
-    root = RUN / 'features' / target / model_name
-    data = FeatureUnits(root, labels=False)
     head_path = Path(head_checkpoint) if head_checkpoint else RUN / 'heads' / model_name / 'checkpoint_best_source.pt'
     state = torch.load(head_path, map_location='cpu', weights_only=False)
-    model = PresenceHead().eval(); model.load_state_dict(state['head'])
+    residual = state.get('architecture') == ARCHITECTURE
+    root = RUN / 'features' / target / model_name
+    data = FeatureUnits(root, labels=False, track_ids=residual)
+    model = head_from_checkpoint(state).eval()
     # CPU decode is intentional; leaves the two admitted GPU slots available.
     loader = DataLoader(data, batch_size=batch_size, shuffle=False, num_workers=0, collate_fn=collate_units)
-    presence = np.empty(len(data), dtype='float32'); probabilities = np.empty((len(data), 11), dtype='float32')
+    cap = max(u[6]-u[5] for u in data.units) if residual else 10
+    presence = np.empty(len(data), dtype='float32'); probabilities = np.zeros((len(data), cap+1), dtype='float32')
+    joint = np.zeros_like(probabilities) if residual else None
+    raw_k = np.empty(len(data), dtype='int64')
     with torch.no_grad():
         for batch in loader:
-            p, k = model(**{n: batch[n] for n in ('pcd', 'margin', 'box', 'sent', 'padding_mask')})
+            names = ('pcd', 'margin', 'box', 'sent', 'padding_mask') + (('track_id',) if residual else ())
+            output = model(**{n: batch[n] for n in names})
+            if residual:
+                p, k = output['presence'], output['logits']
+                prob = k.softmax(-1)
+                ix = batch['index'].numpy()
+                joint[ix, :prob.shape[1]] = prob.numpy()
+                conditional = torch.zeros_like(prob)
+                if prob.shape[1] > 1: conditional[:, 1:] = k[:, 1:].softmax(-1)
+                # Empty sets have no conditional positive count distribution.
+                conditional[batch['padding_mask'].all(1)] = 0
+                probabilities[ix, :prob.shape[1]] = conditional.numpy()
+                raw_k[ix] = k.argmax(1).numpy()
+            else:
+                p, k = output
+                probabilities[batch['index'].numpy()] = k.softmax(-1).numpy()
             presence[batch['index'].numpy()] = p.numpy()
-            probabilities[batch['index'].numpy()] = k.softmax(-1).numpy()
-    raw_k = np.where(presence >= 0, np.maximum(1, probabilities.argmax(1)), 0)
+    if not residual: raw_k = np.where(presence >= 0, np.maximum(1, probabilities.argmax(1)), 0)
     smooth_k = np.empty_like(raw_k)
     units_by_query = defaultdict(list)
     for j, unit in enumerate(data.units): units_by_query[unit[0], unit[1]].append(j)
@@ -78,9 +96,14 @@ def decode(target, model_name, batch_size=256, *, head_checkpoint=None, output_d
     folder.mkdir(parents=True, exist_ok=True)
     for name, values in [('presence_logits', presence), ('count_probs', probabilities), ('raw_k', raw_k), ('smooth_k', smooth_k)]:
         np.save(folder / (name+'.npy'), values)
+    if residual: np.save(folder / 'joint_count_probs.npy', joint)
     extra = dict(head_checkpoint=str(head_path), head_checkpoint_sha256=file_sha(head_path),
                  margin_reference=ref, teacher_calls=0, test_time_optimizer_updates=0,
                  source_learning_rate=state.get('learning_rate',3e-4))
+    if residual:
+        extra.update(head_architecture=ARCHITECTURE, count_decoder='joint_MAP_0_to_n',
+            presence_definition='marginal_P(count>0); MAP count can disagree with probability>=0.5',
+            conditional_count_probabilities=True, count_cap=None)
     for name, mask in masks.items():
         seal_mask(folder / name, meta, mask, target=target, model=model_name, method=name,
                   GT_open_attempts=len(attempts), extra=extra)
