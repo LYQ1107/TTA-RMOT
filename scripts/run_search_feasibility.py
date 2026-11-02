@@ -3,20 +3,26 @@ from argparse import ArgumentParser
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import time
 ROOT = Path(__file__).resolve().parents[1]; sys.path.insert(0, str(ROOT))
-from scripts.search_feasibility_common import RUN, dump, require_prereg
+from scripts.search_feasibility_common import PUBLIC, RUN, dump, require_prereg
 
 
 def main(phase):
     require_prereg(); start = time.perf_counter()
     dest = RUN / 'launchers' / (phase + '_' + str(time.time_ns())); dest.mkdir(parents=True)
+    if phase == 'finalize':
+        snapshot = RUN / 'offline/initial_aggregation'; snapshot.mkdir(exist_ok=True)
+        for name in ('summary.csv','verdicts.json','bootstrap.json','costs.json','validation.json'):
+            if not (snapshot/name).exists(): shutil.copy2(PUBLIC/name,snapshot/name)
     env = dict(os.environ, CUDA_VISIBLE_DEVICES='', OMP_NUM_THREADS='1', MKL_NUM_THREADS='1',
                OPENBLAS_NUM_THREADS='1', TOKENIZERS_PARALLELISM='false', HF_HUB_OFFLINE='1')
-    names = ['prepare_search_feasibility', 'simulate_search_feasibility'] if phase == 'search' else [
-        'evaluate_search_feasibility', 'summarize_search_feasibility', 'report_search_feasibility']
+    names = (['prepare_search_feasibility', 'simulate_search_feasibility'] if phase == 'search' else
+        ['summarize_search_feasibility', 'validate_search_feasibility', 'report_search_feasibility'] if phase == 'finalize' else
+        ['evaluate_search_feasibility', 'summarize_search_feasibility', 'validate_search_feasibility', 'report_search_feasibility'])
     results = []
     for name in names:
         begin = time.perf_counter(); log = dest / (name + '.log')
@@ -34,5 +40,5 @@ def main(phase):
 
 
 if __name__ == '__main__':
-    p = ArgumentParser(); p.add_argument('--phase', choices=('search', 'offline'), required=True)
+    p = ArgumentParser(); p.add_argument('--phase', choices=('search', 'offline', 'finalize'), required=True)
     main(p.parse_args().phase)

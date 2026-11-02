@@ -1,0 +1,68 @@
+{
+  "teacher_calls": 0,
+  "model_calls": 0,
+  "optimizer_updates": 0,
+  "GPU_hours": 0,
+  "CPU_stage_wall_seconds": {
+    "prepare": 8.156017665984109,
+    "search": 11.56210817815736,
+    "GT_labels_oracle_and_evaluation": 27.85928499000147,
+    "summary_and_bootstrap": 6.894451298983768,
+    "validation_and_regression": 8.721440786961466
+  },
+  "hypothetical_questions_not_real_teacher_calls": true,
+  "note": "Only sealed probabilities/margins are replayed. These CPU timings do not estimate live teacher or model latency.",
+  "CPU_measured_stage_wall_seconds_total": 63.19330292008817,
+  "all_completed_launcher_stages": [
+    {
+      "stage": "summarize_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 7.989673119038343,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/finalize_1793585746048514512/summarize_search_feasibility.log"
+    },
+    {
+      "stage": "validate_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 9.22843753406778,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/finalize_1793585746048514512/validate_search_feasibility.log"
+    },
+    {
+      "stage": "evaluate_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 28.088140680920333,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/offline_1793585466470076405/evaluate_search_feasibility.log"
+    },
+    {
+      "stage": "summarize_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 5.794729807879776,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/offline_1793585466470076405/summarize_search_feasibility.log"
+    },
+    {
+      "stage": "validate_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 6.918434369144961,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/offline_1793585466470076405/validate_search_feasibility.log"
+    },
+    {
+      "stage": "report_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 0.8522252100519836,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/offline_1793585466470076405/report_search_feasibility.log"
+    },
+    {
+      "stage": "prepare_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 8.43596122181043,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/search_1793584794437871065/prepare_search_feasibility.log"
+    },
+    {
+      "stage": "simulate_search_feasibility",
+      "exit_code": 0,
+      "wall_seconds": 11.715903758071363,
+      "log": "/data2/user/FlexHook-TTA/results/runs/search_feasibility_20261102/launchers/search_1793584794437871065/simulate_search_feasibility.log"
+    }
+  ],
+  "all_completed_launcher_stage_wall_seconds": 79.02350570098497,
+  "cost_coverage": "All completed launcher stages including repeated aggregation/validation; excludes current final report rendering and coding/publication time."
+}

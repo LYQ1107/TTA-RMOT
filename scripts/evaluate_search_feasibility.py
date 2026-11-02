@@ -1,5 +1,6 @@
 """Independent post-seal GT labels, ORACLE simulation, then fixed probe metrics."""
 from functools import lru_cache
+from fractions import Fraction
 import gzip
 import json
 import math
@@ -21,6 +22,12 @@ def selection_metrics(selected, labels, g):
     return dict(selected_count=k, TP=tp, FP=k-tp, FN=positives-tp,
                 precision=precision, recall=recall, F1=f1,
                 count_MAE=abs(k-g), presence_accuracy=int(bool(k) == bool(g)))
+
+
+def exact_f1(metrics, positives, g):
+    k = metrics['selected_count']
+    if not g: return Fraction(int(not k), 1)
+    return Fraction(2*metrics['TP'], k+positives) if k+positives else Fraction(0, 1)
 
 
 def main():
@@ -96,7 +103,7 @@ def main():
                 order = expected_order
                 answers = [lab['labels'][i] if verifier == 'GT_ORACLE' else r['probabilities'][verifier][i] >= .5 for i in order]
                 if tuple(x['method'] for x in group['runs']) != METHODS: raise ValueError('Missing fixed method')
-                f1 = {}; questions = {}
+                f1 = {}; f1_exact = {}; questions = {}
                 for run in group['runs']:
                     positions = run['selected_positions']; asked = run['asked_positions']; k = run['b_hat']
                     if len(set(positions)) != len(positions) or len(set(asked)) != len(asked): raise ValueError('Repeated candidate')
@@ -107,6 +114,7 @@ def main():
                         raise ValueError('Search output is not prescribed prefix')
                     selected = [order[i-1] for i in positions]
                     metrics = selection_metrics(selected, lab['labels'], lab['g']); f1[run['method']] = metrics['F1']
+                    f1_exact[run['method']] = exact_f1(metrics, lab['matched_candidates'], lab['g'])
                     questions[run['method']] = run['m']; total += 1
                     yield dict(list_id=r['list_id'], target=r['target'], video=r['video'], frame=r['frame'], query=r['query'],
                         model=model, cross_domain=int(model != IN_DOMAIN[r['target']]), verifier=verifier, method=run['method'],
@@ -124,15 +132,15 @@ def main():
                     cross_domain=int(model != IN_DOMAIN[r['target']]), verifier=verifier, N=r['N'], g=lab['g'],
                     verifier_yes=sum(answers), C_dense=c_dense, C_online=c_online,
                     A_GT=lab['A_GT'][model], dense_F1=f1['DENSE'], pba_F1=f1['PBA_0.2'],
-                    search_failure=int(f1['DENSE'] - f1['PBA_0.2'] > .1),
+                    search_failure=int(f1_exact['DENSE'] - f1_exact['PBA_0.2'] > Fraction(1, 10)),
                     simulated_pba_questions=questions['PBA_0.2']))
     metrics_path = dest / 'search_runs.csv.gz'; csv_rows(metrics_path, metrics_rows())
     if len(combinations) != len(runtime) * 3 * 4 or total != len(runtime) * 3 * 4 * len(METHODS):
         raise ValueError('Incomplete result cross product')
-    csv_rows(PUBLIC / 'conflict.csv', conflict_rows)
+    conflict_path = dest / 'conflict.csv'; csv_rows(conflict_path, conflict_rows)
     result = dict(status='ALL_SEARCH_AND_ORACLE_RESULTS_OFFLINE_SCORED', teacher_search=sealed,
         oracle_seal=record(dest / 'oracle_seal.json'), metrics=record(metrics_path), lists=record(PUBLIC / 'lists.csv'),
-        conflicts=record(PUBLIC / 'conflict.csv'), runs=total, all_combinations=len(combinations),
+        conflicts=record(conflict_path), runs=total, all_combinations=len(combinations),
         GT_feedback_to_search=False, teacher_calls=0, model_calls=0, optimizer_updates=0, GPU_hours=0,
         CPU_wall_seconds=time.perf_counter()-start)
     dump(dest / 'evaluation.json', result)
