@@ -1,0 +1,49 @@
+seed: 0
+presence:
+  dimension: 256
+  count_cap: 10
+  lr: 0.0003
+  weight_decay: 0.01
+  batch_size: 256
+  epochs: 20
+  patience: 3
+  count_loss_weight: 0.5
+  pos_weight_cap: 10.0
+  candidate_dropout: 0.1
+  margin_noise_std: 0.1
+  pcd_dropout: 0.1
+active:
+  budgets: [0.1, 0.3, 1.0]
+  rounds: 4
+  minimum_track_observations: 3
+  prior_slope: 1.0
+  low_presence_count: 0.5
+  teacher_yes_threshold: 0.5
+  ds_em_steps: 20
+  ds_beta_prior: [8.0, 2.0]
+  posterior_positive: 0.95
+  posterior_negative: 0.05
+  maximum_matrix_gpu_hours: 40
+fast:
+  lbfgs_steps: 50
+  intercept_l2: 0.1
+slow:
+  rank: 4
+  alpha: 8
+  layers: [-2, -1]
+  projections: [wq, wv]
+  lr: 0.0002
+  weight_decay: 0.0001
+  grad_clip: 5.0
+  amp: true
+  steps_per_round: 50
+  batch_size: 32
+  observations_per_track: 8
+teacher:
+  config: configs/teacher/base_qwen2b.yaml
+  views: [CROP, CLIP, FRAME_BOX]
+  batch_size: 8
+resources:
+  maximum_physical_gpus: 2
+  minimum_free_mib: 20480
+  new_cache_root: /data1/user/TTA-RMOT-assets/presence_active_20261102
