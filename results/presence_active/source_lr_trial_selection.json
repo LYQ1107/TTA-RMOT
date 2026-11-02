@@ -1,0 +1,72 @@
+{
+  "models": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "selected": "source_lr1e5",
+      "learning_rate": 1e-05,
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/heads_source_lr1e5/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "aea84d5150fa075490a034cfafaa8abffac49c8bfdae75e9c3b7ce015f5df696",
+      "best_source_loss": 1.639183738585197,
+      "candidates": [
+        {
+          "variant": "default",
+          "loss": 2.1646261807226574,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads/V2-best/training_receipt.json",
+          "sha256": "a7cd8d467119178c466ad0a80a8482c82fd657f8c750e49964a8b90c1ec0222b"
+        },
+        {
+          "variant": "source_lr1e5",
+          "loss": 1.639183738585197,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads_source_lr1e5/V2-best/training_receipt.json",
+          "sha256": "27e5b8ed1de7c89802f6e495e919c1bbaf68c34bab925faac55137f08402ef3d"
+        }
+      ]
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "selected": "source_lr1e5",
+      "learning_rate": 1e-05,
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/heads_source_lr1e5/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "7e18e5a517988e70799a4f277231fff311815cd4a07b7105b6f53e536b3ca8f0",
+      "best_source_loss": 4.235332448590531,
+      "candidates": [
+        {
+          "variant": "default",
+          "loss": 7.4347190549676085,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads/Dance-best/training_receipt.json",
+          "sha256": "a188b90e39b45a57d30dbd614c9dd09a623429a54304fb8ff940870a1fbf9760"
+        },
+        {
+          "variant": "source_lr1e5",
+          "loss": 4.235332448590531,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads_source_lr1e5/Dance-best/training_receipt.json",
+          "sha256": "9574cdf4637020a7a423297aed5f42186794ded2eb7487882e9c1c8b840cad24"
+        }
+      ]
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "selected": "source_lr1e5",
+      "learning_rate": 1e-05,
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/heads_source_lr1e5/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "efd07cbb6cf73cb810b4f03ef59f1e9eaf04ef7fb8cfa0e15171cb1a9748a28f",
+      "best_source_loss": 0.7457131374425718,
+      "candidates": [
+        {
+          "variant": "default",
+          "loss": 0.8183932443684641,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads/LaMOT-best/training_receipt.json",
+          "sha256": "6d093b130306987604ef3e31ab0da9bb8fb70e560d6b2b9a4e74d440ba7745f9"
+        },
+        {
+          "variant": "source_lr1e5",
+          "loss": 0.7457131374425718,
+          "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/heads_source_lr1e5/LaMOT-best/training_receipt.json",
+          "sha256": "dcc71becb44c98809000585cf8a9dfbca0854adaf8898d984b62340bf714e78d"
+        }
+      ]
+    }
+  },
+  "selection_uses_source_validation_loss_only": true,
+  "trial_HOTA_not_computed_at_selection": true
+}
