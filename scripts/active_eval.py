@@ -83,12 +83,14 @@ def summarize(folder, target):
         native_margin, _ = sealed_margins(target, seal['model'])
         query_index = {(q['video_id'], q['expression_id']):q for q in meta['episodes']}
         native_correct = native_count_error = native_observable_correct = native_observable_error = 0
+        decoded_count_error = decoded_observable_error = decoded_positive_frames = selected_count_total = 0
         head_tp = head_fn = head_fp = head_tn = native_tp = native_fn = native_fp = native_tn = 0
         overflow_units = 0
         for video in sorted(videos):
             md = videos[video]['metadata']
             frames = videos[video]['observations'][:, 0]
             observed_frames = set(frames)
+            candidate_counts = dict(zip(*np.unique(frames, return_counts=True)))
             for q in md['queries']:
                 t = truth[video, q['expression_id']]; n = len(t['frames'])
                 head_present = plogits[offset:offset+n] >= 0; scene_present = t['counts'] > 0
@@ -98,6 +100,14 @@ def summarize(folder, target):
                 accessible = np.asarray([positive_counts.get(frame, 0) for frame in t['frames']])
                 observable_correct += int(((plogits[offset:offset+n] >= 0) == (accessible > 0)).sum())
                 observable_error += float(np.abs(raw_k[offset:offset+n]-accessible).sum())
+                # The head predicts a desired k; top-k can only output the
+                # candidates that actually exist. Keep both errors explicit.
+                decoded_k = np.minimum(raw_k[offset:offset+n],
+                    np.asarray([candidate_counts.get(frame, 0) for frame in t['frames']]))
+                decoded_count_error += float(np.abs(decoded_k-t['counts']).sum())
+                decoded_observable_error += float(np.abs(decoded_k-accessible).sum())
+                decoded_positive_frames += int((decoded_k > 0).sum())
+                selected_count_total += int(decoded_k.sum())
                 query = query_index[video, q['expression_id']]
                 source_scores = native_margin[query['start']:query['stop']]
                 selected_counts = dict(zip(*np.unique(frames[source_scores > 0], return_counts=True)))
@@ -124,7 +134,17 @@ def summarize(folder, target):
                       head_presence_TP=head_tp, head_presence_FN=head_fn, head_presence_FP=head_fp, head_presence_TN=head_tn,
                       native_presence_TP=native_tp, native_presence_FN=native_fn, native_presence_FP=native_fp, native_presence_TN=native_tn,
                       supported_count_above_cap10_units=overflow_units,
+                      decoded_count_MAE=decoded_count_error/units,
+                      decoded_count_MAE_observable=decoded_observable_error/units,
+                      decoded_positive_frame_queries=decoded_positive_frames,
+                      decoded_mean_k=selected_count_total/units,
+                      head_presence_recall=head_tp/(head_tp+head_fn) if head_tp+head_fn else None,
+                      head_presence_false_positive_rate=head_fp/(head_fp+head_tn) if head_fp+head_tn else None,
+                      native_presence_recall=native_tp/(native_tp+native_fn) if native_tp+native_fn else None,
+                      native_presence_false_positive_rate=native_fp/(native_fp+native_tn) if native_fp+native_tn else None,
                       scene_vs_observable='head/scene fields use official GT count; observable fields use matched-positive candidate count')
+        if selected_count_total != result['prediction_rows']:
+            raise ValueError('Decoded frame counts differ from sealed top-k output')
         source_domain = next(t for t, name in IN_DOMAIN.items() if name == seal['model'])
         seen = set()
         for directory in (RUN / 'features/source_train' / source_domain / seal['model'] / 'videos').iterdir():
@@ -139,6 +159,12 @@ def summarize(folder, target):
         for group, sequences in groups.items():
             result[group+'_episodes'] = len(sequences)
             result[group+'_HOTA'] = 100*float(np.mean(metric.combine_sequences(sequences)['HOTA'])) if sequences else None
+        from scripts.presence_finish_a import references
+        native_folder = dict(references(target, seal['model']))['NATIVE']
+        native_stats = official_stats(native_folder)
+        for group, sequences in groups.items():
+            values = {key:native_stats['rows'][key] for key in sequences}
+            result['NATIVE_'+group+'_HOTA'] = 100*float(np.mean(metric.combine_sequences(values)['HOTA'])) if values else None
     atomic_json(folder / 'offline_summary.json', result)
     return result
 

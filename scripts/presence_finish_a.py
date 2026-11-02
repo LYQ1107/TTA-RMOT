@@ -116,9 +116,13 @@ def collect():
     if start >= 0: text = text[:start]
     text = text.replace('阶段A尚未完成训练/官方评测；阶段B/C尚未调用教师或启动LoRA适应。',
         '阶段A已完成源头训练及九套完整候选的官方评测；阶段B/C尚未调用教师或启动LoRA适应。')
+    text = text.replace('默认三头训练及三个同域官方评测已完成，九套A评测尚在补齐；',
+        '默认三头训练及九套完整候选的A评测已完成；')
     text = text.replace('九套目标和三套源特征正在最多两张经准入GPU上全量导出；尚无新的完整HOTA。',
         '九套目标和三套源特征已完成导出；三个PresenceHead及全部阶段A完整HOTA见下方结果。')
     text = text.replace('其余缓存继续中，尚未报告新的HOTA。', '缓存和阶段A评测已完成，完整结果如下。')
+    text = text.replace('三套源和三套同域目标特征、默认头及同域官方HOTA已完成；其余目标缓存和A评测在同两张登记GPU及CPU队列中继续。',
+        '三套源和九套目标特征、默认头及全部A官方HOTA已完成，见下方结果。')
     text += '\n## 阶段A完整结果\n\n'+'\n'.join(table)+'\n\n'
     text += f'固定同域门槛：`{gate["status"]}`。失败目标：{gate["failed_targets"]}。'
     text += ('必须先定位实现/泛化原因；当前不启动B/C。\n\n' if gate['failed_targets'] else
