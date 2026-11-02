@@ -1,0 +1,26 @@
+{
+  "phase": "redesign_v3_before_official_evaluation",
+  "status": "PASS",
+  "tests_passed": 22,
+  "command": "/home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q tests/test_presence_residual.py tests/test_presence_active.py",
+  "compileall": "PASS",
+  "new_checks": [
+    "native-initialized MAP cardinality including empty sets, exact zero ties, tiny positive margins and more than ten candidates",
+    "padding and permutation with explicit track-ID tie order",
+    "finite nonzero count-loss gradients and strict checkpoint round trip",
+    "candidate dropout keeps track IDs and count supervision synchronized"
+  ],
+  "existing_checks_include": [
+    "GT guard blocks raw and numerical target labels",
+    "source label identity does not merge duplicate sentence texts",
+    "corrected source labels do not rewrite frozen feature shards",
+    "canonical identity margin bank remains unchanged",
+    "belief, reliability, active acquisition and YesTrack native fallback unit checks"
+  ],
+  "is_scientific_success": false,
+  "new_teacher_calls_in_this_head_phase": 0,
+  "target_LoRA_updates_in_this_head_phase": 0,
+  "GPU_model_inference_not_repeated": true,
+  "real_full_source_initialization_checks": "training worker asserts zero MAP-count disagreements on each full own-source validation bank before optimization; receipts follow",
+  "numerics": "network and inputs FP32; only short count-energy cumulative sums and count softmax/loss use FP64 to retain near-zero boundary increments"
+}

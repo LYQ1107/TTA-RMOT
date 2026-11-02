@@ -86,6 +86,7 @@ def summarize(folder, target):
         decoded_count_error = decoded_observable_error = decoded_positive_frames = selected_count_total = 0
         head_tp = head_fn = head_fp = head_tn = native_tp = native_fn = native_fp = native_tn = 0
         overflow_units = 0
+        map_tp = map_fn = map_fp = map_tn = changed_units = added_rows = removed_rows = 0
         for video in sorted(videos):
             md = videos[video]['metadata']
             frames = videos[video]['observations'][:, 0]
@@ -113,6 +114,12 @@ def summarize(folder, target):
                 selected_counts = dict(zip(*np.unique(frames[source_scores > 0], return_counts=True)))
                 native_k = np.asarray([selected_counts.get(frame, 0) for frame in t['frames']])
                 native_present = native_k > 0
+                map_present = decoded_k > 0
+                map_tp += int((map_present & scene_present).sum()); map_fn += int((~map_present & scene_present).sum())
+                map_fp += int((map_present & ~scene_present).sum()); map_tn += int((~map_present & ~scene_present).sum())
+                changed_units += int((decoded_k != native_k).sum())
+                added_rows += int(np.maximum(decoded_k-native_k, 0).sum())
+                removed_rows += int(np.maximum(native_k-decoded_k, 0).sum())
                 native_correct += int((native_present == scene_present).sum())
                 native_count_error += float(np.abs(native_k-t['counts']).sum())
                 native_observable_correct += int((native_present == (accessible > 0)).sum())
@@ -133,6 +140,14 @@ def summarize(folder, target):
                       native_count_MAE_observable=native_observable_error/units,
                       head_presence_TP=head_tp, head_presence_FN=head_fn, head_presence_FP=head_fp, head_presence_TN=head_tn,
                       native_presence_TP=native_tp, native_presence_FN=native_fn, native_presence_FP=native_fp, native_presence_TN=native_tn,
+                      decoded_presence_TP=map_tp, decoded_presence_FN=map_fn, decoded_presence_FP=map_fp, decoded_presence_TN=map_tn,
+                      decoded_presence_accuracy=(map_tp+map_tn)/units,
+                      decoded_presence_recall=map_tp/(map_tp+map_fn) if map_tp+map_fn else None,
+                      decoded_presence_false_positive_rate=map_fp/(map_fp+map_tn) if map_fp+map_tn else None,
+                      changed_count_units_vs_native=changed_units,
+                      added_prediction_rows_vs_native=added_rows, removed_prediction_rows_vs_native=removed_rows,
+                      count_decoder=seal.get('count_decoder', 'separate_presence_threshold_then_conditional_mode'),
+                      head_presence_definition=seal.get('presence_definition', 'independent presence sigmoid>=0.5'),
                       supported_count_above_cap10_units=overflow_units,
                       decoded_count_MAE=decoded_count_error/units,
                       decoded_count_MAE_observable=decoded_observable_error/units,
