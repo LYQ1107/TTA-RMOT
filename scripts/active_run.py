@@ -36,7 +36,8 @@ def video_spec(target, video, bank):
 def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1., bias=0.):
     folder = RUN / 'features' / target / model_name / 'videos' / video
     local = json.loads((folder / 'metadata.json').read_text())
-    decoded = RUN / 'stage_A' / target / model_name
+    from flex_uda.active.execution import active_paths
+    decoded = active_paths().stage_a / target / model_name
     presence = np.load(decoded / 'presence_logits.npy', mmap_mode='r')
     counts = np.load(decoded / 'count_probs.npy', mmap_mode='r')
     qrows = [q for q in meta['episodes'] if q['video_id'] == video]
@@ -55,7 +56,7 @@ def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1
         offset += len(previous['queries'])*len(previous['frames'])
     size = len(qrows)*len(local['frames'])
     frame_presence = np.asarray(presence[offset:offset+size]).reshape(len(qrows), -1).astype(float)
-    expected = (np.asarray(counts[offset:offset+size])@np.arange(11)).reshape(len(qrows), -1)
+    expected = (np.asarray(counts[offset:offset+size])@np.arange(counts.shape[-1])).reshape(len(qrows), -1)
     frame_index = {t: i for i, t in enumerate(local['frames'])}
     calibrated = expit(frame_presence/temperature+bias)
     return dict(queries=qrows, tracks=tids, track_positions=tracks, track_means=mean,
@@ -70,15 +71,14 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
     from flex_uda.active.adapt import SlowAdapter
     from flex_uda.active.teacher_client import TeacherClient
     from flex_uda.presence.predictions import seal_mask
-    gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
-    if gate['status'] != 'PASS_ALL_THREE_SAME_DOMAIN' or not gate.get('published_commit'):
-        raise PermissionError('Complete/publish Stage A and investigate its source-domain gate before teacher/LoRA runs')
+    from flex_uda.active.execution import authorize_active
+    execution,publication=authorize_active()
     model_name, target = PAIRS[pair]
     torch.manual_seed(0); np.random.seed(0)
     torch.cuda.set_per_process_memory_fraction(min(.9, (16 << 30)/torch.cuda.get_device_properties(0).total_memory))
     attempts = runtime_guard(); started = time.perf_counter()
     meta = target_metadata(target); margins, margin_seal = sealed_margins(target, model_name)
-    out = RUN / 'active' / pair / variant / ('rho_'+str(rho))
+    out = execution.active / pair / variant / ('rho_'+str(rho))
     if smoke_videos: out = out / ('smoke_'+str(smoke_videos))
     out.mkdir(parents=True, exist_ok=True)
     if (out / 'predictions_seal.json').exists():
@@ -258,7 +258,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 rescore_GPU_seconds=sum(v['rescore_GPU_seconds'] for v in video_receipts),
                 GT_open_attempts=len(attempts), wall_seconds=time.perf_counter()-started,
                 resume='same output directory and stream_NNN.pt; no healthy video rerun',
-                no_full_predictions_seal=True))
+                no_full_predictions_seal=True,stage_A_publication=publication,
+                execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None))
             return
         mask = np.zeros(len(margins), dtype=bool)
         video_receipts = [json.loads((out / 'videos' / video / 'receipt.json').read_text()) for video in ordered]
@@ -280,7 +281,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 LoRA_GPU_seconds=sum(v['slow_GPU_seconds'] for v in video_receipts),
                 rescore_GPU_seconds=sum(v['rescore_GPU_seconds'] for v in video_receipts), margin_input=margin_seal,
                 video_transductive=True, strict_frame_causal=False, ordered_video_stream=True,
-                wall_seconds=time.perf_counter()-started))
+                wall_seconds=time.perf_counter()-started,stage_A_publication=publication,
+                execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None))
     finally:
         if teacher is not None and teacher.child.poll() is None: teacher.close()
 
@@ -294,7 +296,8 @@ def main():
     a = p.parse_args()
     if a.pilot_videos and a.smoke_videos: p.error('Choose an independent smoke OR a resumable final-path pilot')
     from flex_uda.active.receipts import record_attempt
-    folder = RUN / 'active' / a.pair / a.variant / ('rho_'+str(a.rho))
+    from flex_uda.active.execution import active_paths
+    folder = active_paths().active / a.pair / a.variant / ('rho_'+str(a.rho))
     if a.smoke_videos: folder = folder / ('smoke_'+str(a.smoke_videos))
     with record_attempt(folder, phase='pilot' if a.pilot_videos else 'smoke' if a.smoke_videos else 'full'):
         run(a.pair, a.rho, a.variant, smoke_videos=a.smoke_videos, pilot_videos=a.pilot_videos)

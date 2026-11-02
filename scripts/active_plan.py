@@ -41,9 +41,11 @@ def dimensions(target):
 
 
 def estimate():
+    from flex_uda.active.execution import active_paths
+    execution=active_paths()
     records = []; sources = []
     for pair in ('C1', 'C3'):
-        path = RUN / 'active' / pair / 'FULL/rho_0.3/pilot_receipt.json'
+        path = execution.active / pair / 'FULL/rho_0.3/pilot_receipt.json'
         record = json.loads(path.read_text())
         if record['GT_open_attempts']: raise ValueError('Pilot GT access')
         updates = sum(r['slow']['optimizer_updates'] for v in record['video_receipts'] for r in v['rounds'])
@@ -94,7 +96,7 @@ def estimate():
         unit_costs=dict(seconds_per_call=call, seconds_per_CROP=crop, seconds_per_LoRA_update=update,
                         seconds_per_rescore_candidate_query=rescore),
         teacher_or_GPU_called_by_estimator=False, GT_opened_by_estimator=False)
-    atomic_json(PUBLIC / 'BC_cost_estimate.json', result)
+    atomic_json(execution.public / 'BC_cost_estimate.json', result)
     return result
 
 
@@ -103,11 +105,12 @@ def main():
     if a.estimate:
         result = estimate(); print(json.dumps({k:v for k,v in result.items() if k != 'jobs'}, indent=2), flush=True)
     else:
+        from flex_uda.active.execution import active_paths
         plan = dict(jobs=jobs(), first_real_pilots=[dict(pair=p, method='FULL', rho=.3, videos=1) for p in ('C1', 'C3')],
             uniform_extra_budgets='rho0.1 and1.0 retained to satisfy explicitly requested three-point call-HOTA curves',
             native_and_presence='already sealed Stage A / historical official results, no teacher',
             teacher_calls_before_published_A_gate=0, GPU_limit=2, matrix_40h_gate_not_bypassed=True)
-        atomic_json(PUBLIC / 'BC_plan.json', plan); print(json.dumps(dict(jobs=len(plan['jobs']), GPU_calls=0, GT_opens=0)), flush=True)
+        atomic_json(active_paths().public / 'BC_plan.json', plan); print(json.dumps(dict(jobs=len(plan['jobs']), GPU_calls=0, GT_opens=0)), flush=True)
 
 
 if __name__ == '__main__': main()

@@ -14,19 +14,18 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 
 
 def run(a):
-    gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
-    if gate['status'] != 'PASS_ALL_THREE_SAME_DOMAIN' or not gate.get('published_commit'):
-        raise PermissionError('Complete/publish Stage A gate before teacher controls')
+    from flex_uda.active.execution import authorize_active
+    execution,publication=authorize_active()
     access = runtime_guard(); begin = time.perf_counter()
     from flex_uda.active.teacher_client import TeacherClient
     from flex_uda.presence.predictions import seal_mask, verify_predictions
     model, target = PAIRS[a.pair]; meta = target_metadata(target)
     margins, reference = sealed_margins(target, model)
     if a.method not in ('YESTRACK_FULL_D10', 'UNIFORM_K'):
-        full = RUN / 'active' / a.pair / 'FULL' / ('rho_'+str(a.rho))
+        full = execution.active / a.pair / 'FULL' / ('rho_'+str(a.rho))
         verify_predictions(full)
     else: full = None
-    out = RUN / 'active' / a.pair / a.method / ('original_delta10' if a.method == 'YESTRACK_FULL_D10' else 'rho_'+str(a.rho))
+    out = execution.active / a.pair / a.method / ('original_delta10' if a.method == 'YESTRACK_FULL_D10' else 'rho_'+str(a.rho))
     if (out / 'predictions_seal.json').exists():
         print(json.dumps(dict(status='ALREADY_SEALED_NO_RERUN', path=str(out))), flush=True); return
     out.mkdir(parents=True, exist_ok=True)
@@ -74,7 +73,9 @@ def run(a):
                 coverage=receipts, margin_input=reference, LoRA_GPU_seconds=0.,
                 video_transductive=a.method != 'YESTRACK_FULL_D10',
                 strict_frame_causal=a.method == 'YESTRACK_FULL_D10',
-                native_fallback_for_uncovered=a.method.startswith('YESTRACK'), wall_seconds=time.perf_counter()-begin))
+                native_fallback_for_uncovered=a.method.startswith('YESTRACK'), wall_seconds=time.perf_counter()-begin,
+                stage_A_publication=publication,
+                execution_manifest_sha256=file_sha(execution.manifest_path) if execution.manifest else None))
     finally:
         if teacher is not None and teacher.child.poll() is None: teacher.close()
 
@@ -86,7 +87,8 @@ def main():
     p.add_argument('--rho', choices=[.1, .3, 1.], type=float, default=.3)
     a = p.parse_args()
     from flex_uda.active.receipts import record_attempt
-    folder = RUN / 'active' / a.pair / a.method / ('original_delta10' if a.method == 'YESTRACK_FULL_D10' else 'rho_'+str(a.rho))
+    from flex_uda.active.execution import active_paths
+    folder = active_paths().active / a.pair / a.method / ('original_delta10' if a.method == 'YESTRACK_FULL_D10' else 'rho_'+str(a.rho))
     with record_attempt(folder, phase='full_baseline'): run(a)
 
 

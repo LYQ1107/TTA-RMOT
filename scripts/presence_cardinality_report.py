@@ -122,7 +122,9 @@ def main():
     if version=='v5':text+='v5新增拟合CPU时间=0、优化更新=0。两个源斜率的原始v4拟合/验证成本保留在v4成本表，不计为本轮新开销，也不把所复用的校准说成无监督或无源监督。\n\n'
     if gate['failed_targets']:
         text+='**本次固定构造未通过：'+', '.join(gate['failed_targets'])+'。未生成六跨域新头成绩，未启动B/C，不把未运行写为0 HOTA。**\n'
-    else:text+='同域通过后还须完成九格A和发布；只有真实C1/C3 pilot及40GPU小时关卡之后才可展开B/C，不把源通过当研究成功。\n'
+    else:
+        text+=('九格A已完整计算，' if gate['completed_full_A'] else '同域通过后还须完成九格A，')
+        text+='发布后继续真实C1/C3 pilot及40GPU小时关卡；不把源通过当研究成功。\n'
     text+='\n新缓存/预测在data1既有presence_active_20261102/redesign_'+version+'，经原data2 results/runs链接访问。机器路径与SHA在artifacts.json、selection.json；大文件不入Git。独立日志包logs.tar.gz包含阶段回执、全部官方详细表和失败尝试，旧归档不改。\n'
     (RECORD / 'REPORT.md').write_text(text)
     paths=sorted(p for p in OUT.rglob('*') if p.is_file() and (p.suffix in ('.log','.json','.jsonl') or p.name in ('pedestrian_detailed.csv','pedestrian_summary.txt')))

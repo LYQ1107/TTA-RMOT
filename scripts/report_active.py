@@ -23,8 +23,9 @@ def write_table(path, rows):
 
 
 def folder_for(job):
+    from flex_uda.active.execution import active_paths
     suffix = 'original_delta10' if job['method'] == 'YESTRACK_FULL_D10' else 'rho_'+str(job['rho'])
-    return RUN / 'active' / job['pair'] / job['method'] / suffix
+    return active_paths().active / job['pair'] / job['method'] / suffix
 
 
 def behavior_and_reliability(folder, target, pair, method, rho, truth):
@@ -92,6 +93,9 @@ def behavior_and_reliability(folder, target, pair, method, rho, truth):
 
 
 def main():
+    global PUBLIC
+    from flex_uda.active.execution import active_paths
+    execution=active_paths();PUBLIC=execution.public
     p = ArgumentParser(description=__doc__); p.add_argument('--partial', action='store_true'); a = p.parse_args()
     from scripts.active_eval import summarize, bootstrap, sports418, offline_labels
     from scripts.presence_finish_a import references
@@ -141,7 +145,7 @@ def main():
         if row['method'] != 'FULL': continue
         pair, rho, target = row['pair'], row['rho'], row['target']
         native = dict(references(target, PAIRS[pair][0]))['NATIVE']
-        targets = [('NATIVE', native), ('PRES_TOPK', RUN / 'stage_A' / target / PAIRS[pair][0] / 'PRES_TOPK')]
+        targets = [('NATIVE', native), ('PRES_TOPK', execution.stage_a / target / PAIRS[pair][0] / 'PRES_TOPK')]
         targets += [(r['method'], Path(r['path'])) for r in rows if r['pair'] == pair and r['method'] != 'FULL' and r['rho'] in (rho, None)]
         for method, folder in targets:
             comparisons[f'{pair}/rho{rho}/FULL_minus_{method}'] = bootstrap(row['path'], folder, target)

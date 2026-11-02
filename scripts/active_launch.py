@@ -21,14 +21,13 @@ def main():
     p.add_argument('--phase', choices=['pilot', 'registered'], required=True)
     p.add_argument('--jobs-json', type=Path)
     a = p.parse_args()
-    gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
-    if gate['status'] != 'PASS_ALL_THREE_SAME_DOMAIN' or not gate.get('published_commit'):
-        raise PermissionError('Publish all three own-source Stage-A gates first')
+    from flex_uda.active.execution import authorize_active
+    execution,publication=authorize_active()
     if a.phase == 'pilot':
         selected_jobs = [dict(pair=pair, method='FULL', rho=.3, pilot_videos=1) for pair in ('C1', 'C3')]
     else:
         if not a.jobs_json: p.error('Explicit documented job list required after real-pilot cost estimate')
-        plan = json.loads(a.jobs_json.read_text()); cost_path = PUBLIC / 'BC_cost_estimate.json'
+        plan = json.loads(a.jobs_json.read_text()); cost_path = execution.public / 'BC_cost_estimate.json'
         if plan['cost_estimate_sha256'] != file_sha(cost_path): raise ValueError('Changed cost estimate')
         cost = json.loads(cost_path.read_text())
         if cost['total_GPU_hours_estimate'] > 40 and plan['tier'] != 'MAIN_AND_CRITICAL_ONLY':
@@ -37,7 +36,7 @@ def main():
         fixed = requested_jobs()
         if any(job not in fixed for job in selected_jobs): raise ValueError('Unregistered method or budget')
     def output(job):
-        return RUN / 'active' / job['pair'] / job['method'] / (
+        return execution.active / job['pair'] / job['method'] / (
             'original_delta10' if job['method'] == 'YESTRACK_FULL_D10' else 'rho_'+str(job['rho']))
     selected_jobs = [job for job in selected_jobs if not (output(job) / (
         'pilot_receipt.json' if a.phase == 'pilot' else 'predictions_seal.json')).exists()]
@@ -45,7 +44,7 @@ def main():
         print(json.dumps(dict(status='ALREADY_COMPLETE_NO_RERUN', phase=a.phase)), flush=True); return
     for job in selected_jobs:
         if job['method'].startswith('YESTRACK_BUDGET'):
-            dependency = RUN / 'active' / job['pair'] / 'FULL' / ('rho_'+str(job['rho'])) / 'predictions_seal.json'
+            dependency = execution.active / job['pair'] / 'FULL' / ('rho_'+str(job['rho'])) / 'predictions_seal.json'
             queued = any(j['method'] == 'FULL' and j['pair'] == job['pair'] and j['rho'] == job['rho'] for j in selected_jobs)
             if not dependency.exists() and not queued: raise ValueError('Budget control has no sealed/queued FULL dependency')
     selected_jobs.sort(key=lambda j: j['method'] != 'FULL')
@@ -54,9 +53,9 @@ def main():
     eligible = sorted([g for g in current if g['free_mib'] >= 43008],
         key=lambda g: (g['compute_processes'], -g['free_mib'], g['index']))[:min(2, len(selected_jobs))]
     if not eligible: raise RuntimeError('No shared GPU fits fixed teacher20GiB+student16GiB+headroom; do not evict other processes')
-    out = RUN / 'active_launchers' / str(time.time_ns()); out.mkdir(parents=True)
+    out = execution.launchers / str(time.time_ns()); out.mkdir(parents=True)
     atomic_json(out / 'admission.json', dict(selected=eligible, all_gpus=current, jobs=selected_jobs,
-        stage_A_publication=gate['published_commit'], maximum_physical_GPUs=2,
+        stage_A_publication=publication, maximum_physical_GPUs=2,
         teacher_memory_cap_GiB=20, student_memory_cap_GiB=16, admission_required_mib=43008,
         sharing_authorized=True, foreign_processes_stopped=0, resources_not_reserved=True))
     queue = Queue()
@@ -70,10 +69,14 @@ def main():
             # Budget controls only start once the corresponding FULL run is
             # sealed. This internal wait never starts a duplicate FULL stream.
             if job['method'].startswith('YESTRACK_BUDGET'):
-                dependency = RUN / 'active' / job['pair'] / 'FULL' / ('rho_'+str(job['rho'])) / 'predictions_seal.json'
+                dependency = execution.active / job['pair'] / 'FULL' / ('rho_'+str(job['rho'])) / 'predictions_seal.json'
                 while not dependency.exists():
                     if failed.is_set(): raise RuntimeError('FULL dependency failed; do not invent a matching budget')
                     time.sleep(10)
+            # Admission is rechecked inside this blocking coordinator. Keep
+            # the registered cards; do not evict other work or borrow a third.
+            while next(g for g in query() if g['uuid']==gpu['uuid'])['free_mib']<43008:
+                time.sleep(20)
             env = dict(os.environ, CUDA_VISIBLE_DEVICES=gpu['uuid'], PRESENCE_PHYSICAL_GPU=str(gpu['index']),
                 OMP_NUM_THREADS='2', MKL_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1', HF_HUB_OFFLINE='1',
                 TOKENIZERS_PARALLELISM='false', PYTHONPATH=f'{ROOT}/compat:{ROOT}:/data2/user/TTA-RMOT-assets/flexhook/pydeps')
