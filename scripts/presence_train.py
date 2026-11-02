@@ -41,6 +41,8 @@ def main():
     p = ArgumentParser(description=__doc__)
     p.add_argument('--target', choices=list(IN_DOMAIN), required=True)
     p.add_argument('--resume', action='store_true')
+    p.add_argument('--learning-rate', type=float, default=3e-4)
+    p.add_argument('--output', type=Path, help='Independent source-only hyperparameter trial; never overwrite default')
     a = p.parse_args()
     from flex_uda.presence.resources import admitted_device
     admitted_device()
@@ -48,7 +50,7 @@ def main():
     from scripts.multidomain_runtime import guard
     access = guard()  # only the already-exported own-source numerical labels are needed
     name = IN_DOMAIN[a.target]
-    out = RUN / 'heads' / name; out.mkdir(parents=True, exist_ok=True)
+    out = (a.output or RUN / 'heads' / name).resolve(); out.mkdir(parents=True, exist_ok=True)
     lock = (out / '.train.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
     if (out / 'training_receipt.json').exists():
         print(json.dumps(dict(status='SOURCE_HEAD_ALREADY_COMPLETE_NO_RERUN', model=name)), flush=True); return
@@ -66,7 +68,7 @@ def main():
     train_loader = DataLoader(train, batch_size=256, shuffle=True, generator=generator, num_workers=0,
         collate_fn=partial(collate_units, augment=True), pin_memory=True)
     val_loader = DataLoader(val, batch_size=256, shuffle=False, num_workers=0, collate_fn=collate_units, pin_memory=True)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=3e-4, weight_decay=.01)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=a.learning_rate, weight_decay=.01)
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=20)
     latest = out / 'checkpoint_latest.pt'; start_epoch = 0; best = float('inf'); stale = 0
     prior_wall = 0.
@@ -89,6 +91,7 @@ def main():
             lr_used=lr_used, lr_next=optimizer.param_groups[0]['lr'], selected=improved, wall_seconds=prior_wall+time.perf_counter()-started)
         state = dict(head=model.state_dict(), optimizer=optimizer.state_dict(), scheduler=scheduler.state_dict(),
             epoch=e+1, best=best, stale=stale, target=a.target, model=name, seed=0,
+            learning_rate=a.learning_rate,
             train_units=len(train), validation_units=len(val), pos_weight=float(weight),
             parameters=sum(p.numel() for p in model.parameters()), rng=torch.get_rng_state(),
             loader_rng=generator.get_state(), cuda_rng=torch.cuda.get_rng_state(), wall_seconds=row['wall_seconds'], epoch_record=row)
@@ -106,7 +109,8 @@ def main():
         validation_margin_input=val.margin_reference_record,
         physical_gpu=os.environ.get('PRESENCE_PHYSICAL_GPU'), optimizer_updates=(e+1)*len(train_loader),
         target_GT_open_attempts=len(access), wall_seconds=prior_wall+time.perf_counter()-started,
-        peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=False,
+        peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=a.learning_rate != 3e-4,
+        learning_rate=a.learning_rate, changes={'lr':[3e-4,a.learning_rate]} if a.learning_rate != 3e-4 else {},
         checkpoint=str(out / 'checkpoint_best_source.pt'), checkpoint_sha256=file_sha(out / 'checkpoint_best_source.pt'))
     atomic_json(out / 'training_receipt.json', result)
 

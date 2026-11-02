@@ -17,7 +17,7 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 FPS = {'KITTI-V2': 10, 'Dance': 20, 'SportsMOT': 25}
 
 
-def decode(target, model_name, batch_size=256):
+def decode(target, model_name, batch_size=256, *, head_checkpoint=None, output_dir=None):
     import torch
     from torch.utils.data import DataLoader
     from flex_uda.presence.data import FeatureUnits, collate_units
@@ -26,7 +26,7 @@ def decode(target, model_name, batch_size=256):
     from flex_uda.presence.runtime import runtime_guard
     from scripts.diag_pf_countmatched import topk_ids
     attempts = runtime_guard(); start = time.perf_counter()
-    folder = RUN / 'stage_A' / target / model_name
+    folder = Path(output_dir) if output_dir else RUN / 'stage_A' / target / model_name
     folder.mkdir(parents=True, exist_ok=True)
     lock = (folder / '.decode.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
     saved = folder / 'decode_receipt.json'
@@ -39,7 +39,7 @@ def decode(target, model_name, batch_size=256):
         return receipt
     root = RUN / 'features' / target / model_name
     data = FeatureUnits(root, labels=False)
-    head_path = RUN / 'heads' / model_name / 'checkpoint_best_source.pt'
+    head_path = Path(head_checkpoint) if head_checkpoint else RUN / 'heads' / model_name / 'checkpoint_best_source.pt'
     state = torch.load(head_path, map_location='cpu', weights_only=False)
     model = PresenceHead().eval(); model.load_state_dict(state['head'])
     # CPU decode is intentional; leaves the two admitted GPU slots available.
@@ -79,7 +79,8 @@ def decode(target, model_name, batch_size=256):
     for name, values in [('presence_logits', presence), ('count_probs', probabilities), ('raw_k', raw_k), ('smooth_k', smooth_k)]:
         np.save(folder / (name+'.npy'), values)
     extra = dict(head_checkpoint=str(head_path), head_checkpoint_sha256=file_sha(head_path),
-                 margin_reference=ref, teacher_calls=0, test_time_optimizer_updates=0)
+                 margin_reference=ref, teacher_calls=0, test_time_optimizer_updates=0,
+                 source_learning_rate=state.get('learning_rate',3e-4))
     for name, mask in masks.items():
         seal_mask(folder / name, meta, mask, target=target, model=model_name, method=name,
                   GT_open_attempts=len(attempts), extra=extra)
@@ -159,11 +160,12 @@ def main():
     p.add_argument('--target', choices=list(IN_DOMAIN), required=True)
     p.add_argument('--model', choices=['V2-best', 'Dance-best', 'LaMOT-best'], required=True)
     p.add_argument('--phase', choices=['decode', 'evaluate'], required=True)
+    p.add_argument('--head-checkpoint', type=Path); p.add_argument('--output-dir', type=Path)
     a = p.parse_args()
-    if a.phase == 'decode': decode(a.target, a.model)
+    if a.phase == 'decode': decode(a.target, a.model, head_checkpoint=a.head_checkpoint, output_dir=a.output_dir)
     else:
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'):
-            print(json.dumps(evaluate_folder(RUN / 'stage_A' / a.target / a.model / method, a.target)), flush=True)
+            print(json.dumps(evaluate_folder((a.output_dir or RUN / 'stage_A' / a.target / a.model) / method, a.target)), flush=True)
 
 
 if __name__ == '__main__': main()

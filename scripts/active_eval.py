@@ -9,7 +9,7 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / 'vendor/FlexHook/TrackEval'))
-from flex_uda.presence.runtime import RUN, PUBLIC, IN_DOMAIN, target_metadata
+from flex_uda.presence.runtime import RUN, PUBLIC, IN_DOMAIN, target_metadata, sealed_margins
 from flex_uda.presence.predictions import verify_predictions
 from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 
@@ -80,25 +80,65 @@ def summarize(folder, target):
         plogits = np.load(decoded / 'presence_logits.npy'); raw_k = np.load(decoded / ('smooth_k.npy' if seal['method'].endswith('SMOOTH') else 'raw_k.npy'))
         offset = 0; correct = count_error = no_candidates = 0; units = 0
         observable_correct = observable_error = 0
+        native_margin, _ = sealed_margins(target, seal['model'])
+        query_index = {(q['video_id'], q['expression_id']):q for q in meta['episodes']}
+        native_correct = native_count_error = native_observable_correct = native_observable_error = 0
+        head_tp = head_fn = head_fp = head_tn = native_tp = native_fn = native_fp = native_tn = 0
+        overflow_units = 0
         for video in sorted(videos):
             md = videos[video]['metadata']
             frames = videos[video]['observations'][:, 0]
             observed_frames = set(frames)
             for q in md['queries']:
                 t = truth[video, q['expression_id']]; n = len(t['frames'])
-                correct += int(((plogits[offset:offset+n] >= 0) == (t['counts'] > 0)).sum())
+                head_present = plogits[offset:offset+n] >= 0; scene_present = t['counts'] > 0
+                correct += int((head_present == scene_present).sum())
                 count_error += float(np.abs(raw_k[offset:offset+n]-t['counts']).sum())
                 positive_counts = dict(zip(*np.unique(frames[t['labels']], return_counts=True)))
                 accessible = np.asarray([positive_counts.get(frame, 0) for frame in t['frames']])
                 observable_correct += int(((plogits[offset:offset+n] >= 0) == (accessible > 0)).sum())
                 observable_error += float(np.abs(raw_k[offset:offset+n]-accessible).sum())
+                query = query_index[video, q['expression_id']]
+                source_scores = native_margin[query['start']:query['stop']]
+                selected_counts = dict(zip(*np.unique(frames[source_scores > 0], return_counts=True)))
+                native_k = np.asarray([selected_counts.get(frame, 0) for frame in t['frames']])
+                native_present = native_k > 0
+                native_correct += int((native_present == scene_present).sum())
+                native_count_error += float(np.abs(native_k-t['counts']).sum())
+                native_observable_correct += int((native_present == (accessible > 0)).sum())
+                native_observable_error += float(np.abs(native_k-accessible).sum())
+                head_tp += int((head_present & scene_present).sum()); head_fn += int((~head_present & scene_present).sum())
+                head_fp += int((head_present & ~scene_present).sum()); head_tn += int((~head_present & ~scene_present).sum())
+                native_tp += int((native_present & scene_present).sum()); native_fn += int((~native_present & scene_present).sum())
+                native_fp += int((native_present & ~scene_present).sum()); native_tn += int((~native_present & ~scene_present).sum())
+                overflow_units += int((accessible > 10).sum())
                 no_candidates += sum(frame not in observed_frames for frame in t['frames'])
                 units += n; offset += n
         if offset != len(plogits): raise ValueError('Presence evaluation unit order differs')
         result.update(frame_query_units=units, presence_accuracy_head=correct/units,
                       count_MAE_head=count_error/units, presence_accuracy_observable=observable_correct/units,
                       count_MAE_observable=observable_error/units, zero_candidate_units=no_candidates,
+                      native_presence_accuracy=native_correct/units, native_count_MAE=native_count_error/units,
+                      native_presence_accuracy_observable=native_observable_correct/units,
+                      native_count_MAE_observable=native_observable_error/units,
+                      head_presence_TP=head_tp, head_presence_FN=head_fn, head_presence_FP=head_fp, head_presence_TN=head_tn,
+                      native_presence_TP=native_tp, native_presence_FN=native_fn, native_presence_FP=native_fp, native_presence_TN=native_tn,
+                      supported_count_above_cap10_units=overflow_units,
                       scene_vs_observable='head/scene fields use official GT count; observable fields use matched-positive candidate count')
+        source_domain = next(t for t, name in IN_DOMAIN.items() if name == seal['model'])
+        seen = set()
+        for directory in (RUN / 'features/source_train' / source_domain / seal['model'] / 'videos').iterdir():
+            m = json.loads((directory / 'metadata.json').read_text())
+            seen.update(' '.join(q['query_text'].lower().split()) for q in m['queries'])
+        groups = dict(SEEN_EXACT_PHRASE={}, UNSEEN_EXACT_PHRASE={})
+        for query in meta['episodes']:
+            key = query['video_id']+'+'+query['expression_id']
+            if key not in stats['rows']: continue
+            group = 'SEEN_EXACT_PHRASE' if ' '.join(query['query_text'].lower().split()) in seen else 'UNSEEN_EXACT_PHRASE'
+            groups[group][key] = stats['rows'][key]
+        for group, sequences in groups.items():
+            result[group+'_episodes'] = len(sequences)
+            result[group+'_HOTA'] = 100*float(np.mean(metric.combine_sequences(sequences)['HOTA'])) if sequences else None
     atomic_json(folder / 'offline_summary.json', result)
     return result
 
