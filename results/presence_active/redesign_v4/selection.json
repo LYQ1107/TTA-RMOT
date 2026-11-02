@@ -1,0 +1,101 @@
+{
+  "models": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "62cf4fcaffa72dc5df8cbbc2c18e5a4f62ef59128c2ffdeda748e8b72bf8f490",
+      "best_source_loss": 0.4316636254415038,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 3640240,
+          "alpha": 0.43374232273536323,
+          "temperature": 2.305516311374863,
+          "initial_NLL": 0.04207300769303678,
+          "fitted_NLL": 0.025815951618867104,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 894062,
+          "alpha": 0.39101595902882,
+          "temperature": 2.557440372724773,
+          "initial_NLL": 0.4259241125112647,
+          "fitted_NLL": 0.24428571223281775,
+          "iterations": 17,
+          "evaluations": 17
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/V2-best/training_receipt.json",
+      "receipt_sha256": "873ea7ebe69347cf0bdef07e158070b6947210f8e5bfaac96a8f5fa732a534b0"
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "b742ce3cf5a4184aaba28d48f5eb7d96af3c8b00da818ef3657f10db8b2657e6",
+      "best_source_loss": 0.7640061539552644,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 1315579,
+          "alpha": 3.3301250131978732,
+          "temperature": 0.3002890269995341,
+          "initial_NLL": 0.00185488386706274,
+          "fitted_NLL": 0.0008576596475693539,
+          "iterations": 15,
+          "evaluations": 15
+        },
+        {
+          "sign": "positive",
+          "rows": 56207,
+          "alpha": 0.16429269230065535,
+          "temperature": 6.086697990011642,
+          "initial_NLL": 1.474067941743942,
+          "fitted_NLL": 0.5804062501824159,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/Dance-best/training_receipt.json",
+      "receipt_sha256": "af56b516f9888524959c706e7435fe181aab58328796dc71797b767accfd2330"
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "5c951f1aa750728973657c0e8f3524c78c951022b6154b099751ce2751831e89",
+      "best_source_loss": 0.4474509250425922,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 136599,
+          "alpha": 0.4532202773070258,
+          "temperature": 2.2064326114044723,
+          "initial_NLL": 0.06932951044936478,
+          "fitted_NLL": 0.04545339515330955,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 198647,
+          "alpha": 0.6801548741543022,
+          "temperature": 1.4702533761055379,
+          "initial_NLL": 0.05282092606801226,
+          "fitted_NLL": 0.044668359035109156,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/LaMOT-best/training_receipt.json",
+      "receipt_sha256": "a7e7ce3e7a64956d50a640d1976b0e0246c533754d250e92b49b4140c30fea78"
+    }
+  },
+  "selection": "source TRAIN candidate NLL convex minimizers; validation only diagnostic",
+  "source_train_only": true,
+  "new_HOTA_not_computed_at_selection": true,
+  "prereg_sha256": "f0cc46b46b9539809c98baac8bccff576184ed455614243ff0036d8628c22e1e"
+}
