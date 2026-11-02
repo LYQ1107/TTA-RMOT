@@ -1,96 +1,83 @@
-# Presence–Active：进行中的独立方法实验
+# Presence–Identity + Active Verification + Fast/Slow TTA：阶段A未通过
 
-**源标签修复中：**全源核对发现Sports Train相同文本的不同表达文件被合并标签（27表达、564观测），旧LaMOT PresenceHead结果仅作历史，不作为主结果。KITTI/Dance全量源标签通过。按表达ID独立修复、原配方重训受影响头，旧数据和结果保留，见`SOURCE_LABEL_FIX.md`。B/C没有启动。
+## 结论与执行边界
 
-本报告当前为阶段A进度，不是完整方法的科研验收结论。默认三头训练及三个同域官方评测已完成，九套A评测尚在补齐；阶段B/C尚未调用教师或启动LoRA适应。不得把下面的smoke或测试通过当作HOTA提升。
+阶段A实现、完整缓存、默认源头训练、一次固定源学习率缓解对照和官方评测已完成；修正Sports源标签后，按源验证loss选择的头仍未通过“各自同域PRES_TOPK HOTA≥原生−1”门槛。**完整方法科研目标未完成，B/C没有启动。** 不能以18项功能检查、梯度或loss下降宣布科研成功。
 
-三个默认源头及同域官方评测已经完成：KITTI 40.599 / 原生42.752；Dance 21.605 / 32.139；SportsMOT 64.064 / 69.924。全部未过−1门槛，B/C保持锁定。其余跨域A缓存/评测继续，已授权的单次源学习率缓解对照定义见`SOURCE_LR_TRIAL.md`；默认结果不覆盖。
+本轮新增教师调用=0，目标LoRA更新=0。108项B/C矩阵均为NOT_RUN，而不是性能为0；真实pilot、调用量–HOTA曲线、消融、DS的GT对照及B/C视频bootstrap尚未产生。40GPU小时关卡没有绕过，也未虚构成本估算。继续需要解决给定PresenceHead的源域保持能力，不自行增加超参数搜索或替换方法。
 
-## 项目、范围与数据隔离
+项目为`LYQ1107/TTA-RMOT`，根`/data2/user/FlexHook-TTA`，分支`method/presence-active-20261102`，起点`9b04b070eddc9e80c0c9db1b582a02780689aa16`；不是LocateMOT/GroundJEV任务。
 
-- 分支 `method/presence-active-20261102`，起点 `9b04b070eddc9e80c0c9db1b582a02780689aa16`，根目录 `/data2/user/FlexHook-TTA`。
-- 不操作LocateMOT代码或进程；原始Sports图像/标注来自盘上既有公共数据存放位置，不是LocateMOT输出。
-- 六个跨域组合和三个同域模型全部保留；不修改历史结果、vendor代码或冻结教师的原后端/裁剪器。
-- 源标签只用于各自PresenceHead的源训练及用户允许的源官方测试早停；目标特征、主动提问和适应进程启用打开审计，评价GT不进入它们。
-- 按完整轨迹聚合/全视频存在性构造先验是视频转导式，不是严格逐帧因果；四帧视觉历史和CLIP输入仍不读取相应观测的未来图像。LoRA按视频ID顺序跨视频延续。
+## 阶段A主结果：默认配方，Sports采用修正标签
 
-## 阶段A：盘点及规模（全量导出前报告）
+|目标|源模型|Native|PRES_TOPK|Smooth|ORACLE数量|
+|---|---|---:|---:|---:|---:|
+|KITTI-V2|V2-best|42.752|40.599|40.635|47.593|
+|KITTI-V2|Dance-best|13.502|5.933|5.990|32.576|
+|KITTI-V2|LaMOT-best|22.398|21.340|21.553|37.595|
+|Dance|V2-best|8.218|4.849|4.981|45.794|
+|Dance|Dance-best|32.139|21.605|21.921|46.757|
+|Dance|LaMOT-best|15.476|15.812|16.121|46.214|
+|SportsMOT|V2-best|50.970|33.999|34.264|62.628|
+|SportsMOT|Dance-best|20.560|10.618|10.497|60.820|
+|SportsMOT|LaMOT-best|69.924|65.180|65.296|71.758|
 
-|源训练集|视频|表达文件|帧–句子单元|候选–句子特征行|PCD FP16字节|
-|---|---:|---:|---:|---:|---:|
-|KITTI-V2|16|8543|1099242|4534302|6964687872|
-|Dance|40|1560|164112|1371786|2107063296|
-|SportsMOT|45|496|30401|335246|514937856|
+九套完整候选、两种Presence解码、原生及数量ORACLE均全部报告：`stage_A_v2.csv`（36行，含DetA/AssA/IDF1/IDSW、输出行、Query-Empty、存在性/数量误差与原句分组）。ORACLE仅为历史GT诊断，不是可部署方法；没有据跨域HOTA选头。Sports为v4完整466表达，另保留相同v4内容的官方418序列敏感性。
 
-KITTI按未修改vendor `VIDEOS['kitti-2']['train']` 的16视频；旧源监督清单有17视频，额外含0017。本轮不直接沿用该历史自定义清单。所有源GT框保留，包括没有本句指代标签的合法候选；没有候选的采样图像也保留为空集合单元。KITTI每3帧、另两域每10帧抽样。
+`stage_A.csv`/`source_lr_trial.csv`是保留的v1历史结果，其中LaMOT PresenceHead受源标签合并bug影响，**不作为主结果**。主表使用独立v2预测，没有覆盖历史。
 
-LaMOT此前下载的官方GitHub压缩包已含496条Sports Train标注，45个Train视频图像及原框也齐全，无需新下载。MOT17/VisDrone Train未在既有LaMOT布局准备，本轮采用主要求的Sports Train部分，不引入TAO。
+## 唯一学习率缓解对照与固定选择规则
 
-九套目标完整特征26946084行，PCD本身41389185024字节；加源缓存、margin、索引和单元记录，初估51544164190字节。`/data2`起始仅余约5.7GB；用户授权新缓存放 `/data1/user/TTA-RMOT-assets/presence_active_20261102/`，指定 `results/runs/presence_active_20261102/` 仅新建链接，不迁移/删除旧数据。盘点时data1余270506663936字节。
+|源/同域|配方|源验证loss|HOTA|原生|Δ|源loss选择|
+|---|---|---:|---:|---:|---:|---|
+|KITTI-V2|default|2.164626|40.599|42.752|-2.153|否|
+|KITTI-V2|source_lr1e5|1.639184|40.188|42.752|-2.564|是|
+|Dance|default|7.434719|21.605|32.139|-10.534|否|
+|Dance|source_lr1e5|4.235332|25.671|32.139|-6.468|是|
+|SportsMOT|default|0.790022|65.180|69.924|-4.744|否|
+|SportsMOT|source_lr1e5|0.746052|63.937|69.924|-5.987|是|
 
-## 已完成的真实GPU检查
+替代lr1e-5先公开再运行，其余网络/损失/增强/seed0/批大小/早停不变。只按各自源官方验证 BCE+0.5条件count CE 选头，HOTA前封存选择；Sports标签修复只重做这两个既有配方，不是新学习率点。KITTI/Dance的选择未改。更低源loss不保证更高HOTA：KITTI仍保留loss规则选择，未看HOTA后改回默认。详见`source_lr_trial_v2.csv`、`source_lr_trial_selection_v2.json`和`stage_A_selected_gate_v2.json`。源官方测试用于用户允许的早停，非盲测。
 
-三个目标均strict加载官方checkpoint、FP32、修正后的RoBERTa BPE，在第一个视频的首/中/末MOT候选帧与已封存完整margin比较：
+## 失败排查与科学解释
 
-|目标/同域模型|候选–句子行|最大margin绝对误差|符号翻转|目标GT打开|
-|---|---:|---:|---:|---:|
-|KITTI-V2 / V2-best|1182|0.0005518794|0|0|
-|Dance / Dance-best|153|0.0002222061|0|0|
-|SportsMOT / LaMOT-best|224|0|0|0|
+1. 全源核对101视频、10599表达、6241334缓存标签：Sports的9视频/27表达有564个标签因相同文本跨表达文件取并集而错。改为表达文件ID/原始targets，新标签独立保存；修正后全量0不一致。KITTI/Dance从始至终全量一致。旧标签/特征/预测/模型不删改，见`SOURCE_LABEL_FIX.md`及两轮完整审计。
+2. 默认KITTI、Dance存在性准确率/数量MAE虽改善，正目标召回却下降；全帧准确率受空目标主导，不能代替RMOT质量。Dance原生TP20136，默认Head15150；FN22646→27632。按训练原句精确匹配，默认Dance Head的225个未见原句序列HOTA0，原生4.292；这是原句分组，不等于所有语义完全未见。
+3. Sports验证266786单元中27420个正候选数>10（10.278%）；指定“≥10”类别在解码中取k=10，存在表示上限。默认/替代头均表现出训练loss继续下降、源验证loss恶化；候选GT→tracker支持变化、原句变化和小源数据过拟合是可能因素，不把任一相关统计冒充唯一因果证明。不改类别数、阈值或GT口径绕过验收。
+4. 早先源标签检查只覆盖固定首视频，不能推断全源无误；本轮发现问题后补完整核对与最小修复。梯度/测试通过只说明有限工程性质，B/C尚无真实GPU集成结论。
+5. 六个跨域组合中，只有LaMOT→Dance的默认PRES_TOPK点值改善（15.476→15.812，+0.336），其他五个均下降。没有据此选择“最好组合”或声称显著改善；本阶段未预注册跨域A的显著性判定。
 
-三个源Train真实smoke也已通过：KITTI0000为4768行、Dance dancetrack0001为819行、Sports v_-6Os86HzwCs_c001为203行；仅合法自身源GT生成监督，不读取其他目标标签。
+最早导出parent最终exit1是延迟上报早先KITTI frame101额外全行数值门槛失败；恢复队列最终exit0，九套完整缓存和CPU评测均有独立完成证据。原非零退出及失败日志保留，不伪报原launcher从未失败。数值策略修复和数据标签修复分开记录。
 
-16项定向CPU功能检查已通过：最终PCD与margin、句子mask池化、padding不变性、空集合梯度、候选dropout/count同步、教师证据不重复累加、两条不同轨迹的No规则、dancing路由修正、模拟DS、流状态序列化、快速校准、原始及数值GT拒绝、YesTrack原生回退、短轨迹先验保持、目标身份输入使用封存分数且不改写复算文件，以及源验证损失的正单元归一化/JSON原生标量。尚不能据此宣称完整方法通过。
+## 数据、模型与数值口径
 
-三域合法源缓存各做了独立的3步、batch256真实GPU训练功能检查，loss/总梯度有限且非零，没有覆盖正式Head checkpoint。按指定结构精确实现的参数量为1,521,676（约1.52M）。Sports的三帧smoke子集恰好全正，按该小子集公式其presence权重为0，梯度来自count项；正式Sports源Train有28,271正单元/2,130负单元，默认pos_weight=0.0753422，不是0，正式训练仍按完整源集比率计算，不采用smoke权重。
+- 源KITTI按未修改vendor官方16视频Train（历史自定义17含0017，不混用）；Dance40 Train；Sports45 Train/496表达，不含TAO；可选MOT17/VisDrone Train未准备，不额外引入。
+- 源单元1099242/164112/30401，候选–句子特征4534302/1371786/335246。九套目标26946084行PCD；FP16特征，身份推理FP32，三个官方checkpoint strict加载、固定RoBERTa分词person=[5970]。
+- 预固定三真实帧维持≤1e-3、0翻转。额外全行复算存在微小误差/近零翻转，全部见`stage_A_numerical_audit.csv`；身份输入、Native/排序统一采用原封存完整分数，真实复算margin.npy仅审计，没有改写旧分数或PCD。
+- 目标导出/解码GT打开审计均0，预测先封存再由独立TrackEval/分析读GT。合法源GT仅用于各自源训练及源验证；目标运行时拒绝原始和数值GT标签。Sports公开原图存放在旧数据目录，仅作为合法原始数据，不操作另项目代码/进程。
 
-crowd-kit 1.4.2仅安装在本任务独立目录，2000条模拟任务上，本实现与其标签一致率1.0，两者准确率均0.946；灵敏度/特异度详见`ds_reference_comparison.json`。本实现带Beta(8,2)先验，参考实现不带该先验，不要求参数逐位一致。没有使用任何目标数据或GT。
+## 成本、资源与实现状态
 
-## 当前实现与未完成项
+已知成功阶段累计共享GPU进程耗时 **10.689133小时**（非利用率积分/独占预留时长），包括九套目标、三套源特征及八次源头训练。失败尝试及初次载入有未完全计时开销，不能把该数当严格总上限；日志保留，不假定为0。
 
-已实现PresenceHead、完整候选特征导出、源缓存、源验证标签准备、固定默认Head训练、TOPK/中值平滑解码和独立TrackEval接口。三套源和三套同域目标特征、默认头及同域官方HOTA已完成；其余目标缓存和A评测在同两张登记GPU及CPU队列中继续。
+源头训练/峰值显存/更新数见三个cost CSV和`cost_accounting_v2.json`。本轮新增教师forward/目标LoRA GPU小时均0。两个Gate-Reassign参照沿用同一批29410条历史教师判断，不是免费独立系统，也不是FULL成绩：C1 HOTA31.682、C6 CPU派生31.126。
 
-主动校验代码原型包含独立先验/证据、Beta(8,2)二分类DS、信息增益、三视图路由、原教师包装与跨环境服务、快校准、D1式LoRA、按视频恢复。crowd-kit模拟对照已完成；尚需真实集成验证、完整基线/消融及成本审计。40个Dance源Train视频的完整特征已导出，耗时3379.13秒；不会绕过当前失败的A门槛启动B/C。
+最多两张登记物理GPU；GPU6共享显存后来不足，确认无本项目CUDA后替换为GPU5，GPU4健康任务保留。GPU4/5后续继续按显存与进程数准入，未信号其他项目。CPU评测就绪即评，仅替换无子任务的旧CPU等待器，未重跑健康GPU单元。
 
-源验证损失以匹配到的正候选数为count，和源训练/候选dropout后的定义一致；另保存官方场景GT数，用于独立离线报告场景存在性/数量误差。两种数量不混用；没有候选支持时不靠GT要求模型多选错误框。
+PresenceHead精确参数1521676；默认结构/损失/AdamW3e-4等及固定单次1e-5见配置/定义。B/C原型包含信念先验与一次证据、Beta(8,2)DS、IG三视图、快校准、最后两块wq/wv LoRA及流恢复，但未以真实完整运行验证。crowd-kit模拟标签一致率1.0、双方准确率.946，不能代替目标科研结果。
 
-### 用户补充的YesTrack对照定义
+B/C仍保留默认A路径和旧失败gate，修复/源loss选择的v2头尚未接入正式FULL运行清单。不能手工只改gate为通过来运行；未来若新头真正过门槛，还须统一选择清单、准备所选头的九套A输出、发布后完成真实pilot及成本关卡。
 
-- `YESTRACK_BUDGET_RANDOM`：seed0派生视频子种子，均匀覆盖部分(句子,轨迹)对，优先首帧覆盖，余款缩小Δ；实际调用量严格匹配相同ρ的FULL。未覆盖的对逐行保留原生margin>0，**不是UNKNOWN**。
-- `YESTRACK_BUDGET_PRIOR`：同样预算/回退；各句内按轨迹z降序覆盖，句间按文件名排序逐层轮转，不按目标GT分配预算。
-- `YESTRACK_FULL_D10`：完整覆盖全部对、首帧加Δ=10关键帧、CROP、阈值0.4，不匹配预算；单独报告调用量/GPU时间并画入曲线。
+## 用户补充的YesTrack定义（已实现，未正式运行）
 
-按本轮ρ≤1和FULL预算定义，实际FULL调用数不超过全部候选–句子对数，故预算匹配版在“优先首帧覆盖”下通常没有重复调用余额；Δ取超过该视频最大轨迹跨度的整数。若预算恰足全部对，自然完整覆盖。关键帧为首观测、其后距离上次调用≥Δ的首个实际观测，按本次补充定义；不冒充上游全局帧取模逐位复现。每视频保存覆盖率、实际调用数和Δ。
+- BUDGET_RANDOM：seed0派生视频子种子均匀覆盖；BUDGET_PRIOR：各句内按z降序、句间字典序逐层覆盖；首帧优先、余量缩Δ、CROP/继承/阈值0.4；预算与同ρ的FULL实际逻辑提问匹配。未覆盖配对严格逐观测回退Native margin>0，不是UNKNOWN，不追加互斥门控。
+- FULL_D10：全配对、Δ10、不匹配预算；覆盖率/实际调用/Δ及GPU成本单列，画入未来调用–HOTA曲线。本轮未运行这些教师对照，不能宣称其精度。
+- 当前ρ≤1且FULL只问长度≥3轨迹，预算不超过全部配对数，首帧优先通常没有重复调用余额；Δ取超过最长轨迹跨度。所有逻辑调用、新forward、缓存和等价成本分别记录。
 
-用户已确认每轮提问上限以 `(句子, track)` 对为单位，不是跨句共用的物理track。规则未明示的实现约定会在正式运行前单列：不确定存在性范围0.1–0.9；存在性Yes取消低存在性时以至少1个目标求正常截距；预算总数向下取整；L2为0.1×mean(a²)。不会根据目标GT调整。
+## 交付与恢复
 
-只有完成阶段A、发布三域同域HOTA门槛后，才启动B/C真实教师/适应。完整B/C矩阵须先实测估算；超过40 GPU小时则只做用户要求的主方法/关键对照并报告等待，不自行扩展。
+主机器表`stage_A_v2.csv`、`source_lr_trial_v2.csv`；失败与修复全记录、训练曲线、官方详细表及失败日志见`experiment_logs.tar.gz/json`。18项定向检查与compileall见`validation.json`，真实六smoke见`smoke.json`。大文件路径/SHA见`artifacts_stage_A_v2.json`、原A清单和修复清单；不把特征/权重/原GT入git。
 
-完整B/C运行清单见`BC_plan.json`（108项，含用户补充的两个预算匹配YesTrack，以及三预算UNIFORM曲线点）。先做C1/C3的可恢复首视频pilot，状态保留在正式运行目录；后续从下一视频继续，不重跑健康pilot视频。成本估算以真实教师、非零LoRA更新和重打分计时为依据，不能把缓存命中或零更新当独立系统零成本。
+物理缓存`/data1/user/TTA-RMOT-assets/presence_active_20261102/`，用户授权的逻辑链接`/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/`；不迁移/删除旧数据。源修复标签、head、预测分别在`source_labels_by_expression_v2`、`heads_source_labels_v2`、`stage_A_label_v2`/`stage_A_source_lr1e5_label_v2`。完整B/C计划仍在`BC_plan.json`，108项状态在`matrix_status.csv`；不打开运行开关。
 
-### 已封存的Gate-Reassign参照（不是本轮新方法成绩）
-
-|组合|HOTA|DetA|AssA|IDF1|输出行|历史教师判断|本轮新教师调用|
-|---|---:|---:|---:|---:|---:|---:|---:|
-|C1 V2→Dance|31.682|29.781|33.734|27.505|211085|29410|0|
-|C6 LaMOT→Dance|31.126|28.046|34.577|26.638|211085|29410|0|
-
-C1逐行复现并复用旧官方结果；C6用同一批既有封存门控和LaMOT margin做CPU派生后新评测。两者共享同29410次门控，不把其历史成本当成零，不把这里的HOTA当作FULL的结果。完整封存/指标SHA见`reference_controls.json`。
-
-## 失败与修复
-
-1. 首次目标smoke误用教师环境，缺`yacs`，在构建模型前失败。改用既有dfot FlexHook环境；不改共享环境，重做后通过。
-2. KITTI源表达目录链接到既有合法源数据，初版白名单只允许外层根路径，误拦一个合法源表达。仅补入官方Train表达目录的真实路径；不放行其他项目代码或目标GT。失败尝试日志与成功smoke均保留。
-3. KITTI额外全行误差门槛在frame101触发0.0010823011（符号翻转0），与既有公开`multidomain_generality/smoke_V2-best.json`的历史整批forward复算误差完全相同。额外全帧审计还发现KITTI0011/frame298和Dance0030/frame962近零分数的符号差异（分别误差0.0008719、0.0002027）。原验收范围是预固定三帧≤1e-3、0翻转，保持不变；其余全行误差和翻转如实记录，不把它们扩成额外停止条件。**目标/源验证的Head身份输入及Native/排序始终读已封存官方完整margin**；本轮`margin.npy`保留真实复算输出，仅作数值审计，PCD与旧文件不改写。源GT候选没有历史库，仍用其正常冻结decode margin。该读取策略在正式Head优化前落实并增加回归。未封存视频恢复，健康缓存不重算。
-4. C6参照首次CPU TrackEval因调用传入相对路径、vendor工作目录解析错误失败。入口统一resolve绝对路径；保留失败日志后重评通过，预测SHA和评测规则未改。
-5. GPU6共享环境后来出现约56.75GiB的新占用，一次KITTI恢复进程OOM（本进程约2.30GiB、卡仅余18.25MiB）。未停止其他项目。确认GPU6已无本项目CUDA进程后，登记集合由4/6改为4/5，GPU5入场余约77.9GB、1个进程；GPU4两个健康导出原样保留。新CUDA任务读取任务级登记，退休GPU6不能再启动任务；源头训练、标签准备、CPU解码/评测均支持锁内复用。两名无科学子进程的旧CPU等待协调器已退出，新队列继续，未停止健康GPU进程。
-6. KITTI正式Head首epoch完成计算后，在写曲线时遇到NumPy bool不能JSON序列化，尚未保存任何有效Head checkpoint。将epoch指标返回Python原生float/int；同时按全部正单元汇总条件count CE，避免顺序验证的全负batch改变CE归一化。训练每个minibatch的BCE+0.5CE、权重、lr、seed等不变；checkpoint改为原子落盘后写日志。已增加最小数值回归并恢复该未封存epoch，失败日志保留，不伪造损失曲线或跳过epoch。
-
-## 记录与恢复入口
-
-- 盘点：`results/presence_active/inventory.json`。
-- 大文件：`/data1/user/TTA-RMOT-assets/presence_active_20261102/`；逻辑路径仍为 `/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/`。
-- launcher日志、准入快照和逐视频特征seal均在上述目录；已封存视频不重算，只恢复未完成视频。
-- 完整导出：`/home/szgx/anaconda3/envs/dfot/bin/python /data2/user/FlexHook-TTA/scripts/presence_launch.py --phase A-export`。
-
-参考实现只作结构/接口参考，未加载其额外权重：[SAM3](https://github.com/facebookresearch/sam3)、[crowd-kit](https://github.com/Toloka/crowd-kit)、[YesTrack](https://github.com/ggbondrighthere24/YesTrack)。
+**本阶段结果：A完整评测完成但验收失败；整个最终科研目标未完成。停止新增训练、教师和方法实验，等待是否允许重新设计存在性头的明确方向。**

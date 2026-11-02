@@ -1,0 +1,32 @@
+{
+  "status": "FAIL_SAME_DOMAIN",
+  "metrics": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "native_HOTA": 42.752,
+      "HOTA": 40.599,
+      "delta_HOTA": -2.153000000000006,
+      "passed": false
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "native_HOTA": 32.139,
+      "HOTA": 21.605,
+      "delta_HOTA": -10.534000000000002,
+      "passed": false
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "native_HOTA": 69.924,
+      "HOTA": 65.18,
+      "delta_HOTA": -4.744,
+      "passed": false
+    }
+  ],
+  "source_label_correction": true,
+  "legacy_gate_unchanged": true,
+  "published_commit": null
+}

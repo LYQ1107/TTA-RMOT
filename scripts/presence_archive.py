@@ -26,6 +26,8 @@ def log_files():
     files.update((RUN / 'resources').glob('*.json'))
     files.update((RUN / 'features').rglob('export_receipt.json'))
     files.update((RUN / 'features').rglob('smoke_receipt.json'))
+    for directory in (RUN / 'features').rglob('model_log'):
+        files.update(p for p in directory.rglob('*') if p.is_file() and p.suffix in ('.txt','.log','.yaml'))
     for name in ('stage_A', 'stage_A_source_lr1e5', 'stage_A_label_v2', 'stage_A_source_lr1e5_label_v2'):
         base = RUN / name
         files.update(p for p in base.rglob('*') if p.is_file() and
