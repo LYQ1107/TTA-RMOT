@@ -1,0 +1,125 @@
+{
+  "fits": [
+    {
+      "source": "KITTI-V2",
+      "model": "V2-best",
+      "alpha_neg": 0.43374232273536323,
+      "alpha_pos": 0.39101595902882,
+      "train_native_NLL": 0.1177597807566736,
+      "train_calibrated_NLL": 0.06889325681689536,
+      "validation_native_NLL": 0.8927417186389794,
+      "validation_calibrated_NLL": 0.4316636254415038,
+      "validation_native_Brier": 0.1826038580760354,
+      "validation_calibrated_Brier": 0.14549856075879122,
+      "CPU_fit_wall_seconds": 2.7330483058467507,
+      "function_evaluations": 36,
+      "parameters": 2,
+      "GPU_hours": 0.0,
+      "source_train_rows": 4534302,
+      "source_validation_rows": 2425382,
+      "GT_open_attempts": 0
+    },
+    {
+      "source": "Dance",
+      "model": "Dance-best",
+      "alpha_neg": 3.3301250131978732,
+      "alpha_pos": 0.16429269230065535,
+      "train_native_NLL": 0.06217674117139872,
+      "train_calibrated_NLL": 0.024603847192997064,
+      "validation_native_NLL": 0.40614048750217563,
+      "validation_calibrated_NLL": 0.7640061539552644,
+      "validation_native_Brier": 0.057887828842527696,
+      "validation_calibrated_Brier": 0.04464333163104472,
+      "CPU_fit_wall_seconds": 1.7035712050274014,
+      "function_evaluations": 33,
+      "parameters": 2,
+      "GPU_hours": 0.0,
+      "source_train_rows": 1371786,
+      "source_validation_rows": 3588445,
+      "GT_open_attempts": 0
+    },
+    {
+      "source": "SportsMOT",
+      "model": "LaMOT-best",
+      "alpha_neg": 0.4532202773070258,
+      "alpha_pos": 0.6801548741543022,
+      "train_native_NLL": 0.05954749735568869,
+      "train_calibrated_NLL": 0.04498822906699634,
+      "validation_native_NLL": 0.7418126954803668,
+      "validation_calibrated_NLL": 0.4474509250425922,
+      "validation_native_Brier": 0.11853900690893081,
+      "validation_calibrated_Brier": 0.11065506424732195,
+      "CPU_fit_wall_seconds": 0.9388484319206327,
+      "function_evaluations": 37,
+      "parameters": 2,
+      "GPU_hours": 0.0,
+      "source_train_rows": 335246,
+      "source_validation_rows": 2968201,
+      "GT_open_attempts": 0
+    }
+  ],
+  "CPU_decode_evaluation": [
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "decode_CPU_wall_seconds": 18.401938667986542,
+      "evaluations": [
+        {
+          "method": "PRES_TOPK",
+          "CPU_wall_seconds": 31.053874901961535
+        },
+        {
+          "method": "PRES_TOPK_SMOOTH",
+          "CPU_wall_seconds": 30.711082810070366
+        }
+      ]
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "decode_CPU_wall_seconds": 16.787640581838787,
+      "evaluations": [
+        {
+          "method": "PRES_TOPK",
+          "CPU_wall_seconds": 89.74109578994103
+        },
+        {
+          "method": "PRES_TOPK_SMOOTH",
+          "CPU_wall_seconds": 93.74423110089265
+        }
+      ]
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "decode_CPU_wall_seconds": 13.603938246844336,
+      "evaluations": [
+        {
+          "method": "PRES_TOPK",
+          "CPU_wall_seconds": 84.01775859482586
+        },
+        {
+          "method": "PRES_TOPK_SMOOTH",
+          "CPU_wall_seconds": 85.96744282403961
+        }
+      ]
+    }
+  ],
+  "coordinators": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/launchers/1793633846670706632/completion.json",
+      "status": "COMPLETE",
+      "phase": "train",
+      "wall_seconds": 12.499463762156665
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/launchers/1793633966455104947/completion.json",
+      "status": "COMPLETE",
+      "phase": "evaluate",
+      "wall_seconds": 368.5416842598934
+    }
+  ],
+  "new_GPU_hours": 0,
+  "new_teacher_calls": 0,
+  "target_LoRA_updates": 0
+}

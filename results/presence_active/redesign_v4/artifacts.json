@@ -1,0 +1,188 @@
+{
+  "predictions": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/KITTI-V2/V2-best/PRES_TOPK",
+      "prediction_seal_sha256": "2e824b894309f1d48c3d7f86e469fe4bf8d8d36a8dc4ea7ebcfd6bcbc5396d76",
+      "detailed_sha256": "e9c4c3f13a3295669df88491fce88cf81c27a48fda1571322c78d363b02bb0e3"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/KITTI-V2/V2-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "055054700d4c09885d26d4b7b6e3037172a5973b339a1f6dde5976fac9e56abc",
+      "detailed_sha256": "a61e4299ddd6a4a9b039b2333f224fec4a654bfe83cdc945d7c08b38b1bac45b"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/Dance/Dance-best/PRES_TOPK",
+      "prediction_seal_sha256": "84fa47542e34d9e25f269e2ed6a207005634218c1136b339da10b7b32fbf9094",
+      "detailed_sha256": "055a404b7f1df9fe1e64f1c6f4d044a76c131048d2eec9ba2035ecc7f3dd37e8"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/Dance/Dance-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "60e67081bb93995f5d52c73e8d175203be650704a9a7dddabf69bf6a371660e2",
+      "detailed_sha256": "8ffd89d149c4cf3f8e71a0f150466c267f393ab1e6afb7bfdfd7db57da8c4ef8"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/SportsMOT/LaMOT-best/PRES_TOPK",
+      "prediction_seal_sha256": "e97099dc0e1b87c262bd5c21e69a0249650b79541b9a22d818f61317b8f2fff4",
+      "detailed_sha256": "0dcaaf5faa29f49aaf4d97e92eb396a96a2e2d9dabda4c712d57dff13f0d1dfd"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "method": "PRES_TOPK_SMOOTH",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/SportsMOT/LaMOT-best/PRES_TOPK_SMOOTH",
+      "prediction_seal_sha256": "21ed6a991181ef70ca39c244f58880754c0cbfd94c60d40e4a70c5a42a70b547",
+      "detailed_sha256": "61a2335d5173872d96e37181b38ed2f6f1f7ca6643ce65c99ad2933c056d8e97"
+    }
+  ],
+  "source_heads": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "62cf4fcaffa72dc5df8cbbc2c18e5a4f62ef59128c2ffdeda748e8b72bf8f490",
+      "best_source_loss": 0.4316636254415038,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 3640240,
+          "alpha": 0.43374232273536323,
+          "temperature": 2.305516311374863,
+          "initial_NLL": 0.04207300769303678,
+          "fitted_NLL": 0.025815951618867104,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 894062,
+          "alpha": 0.39101595902882,
+          "temperature": 2.557440372724773,
+          "initial_NLL": 0.4259241125112647,
+          "fitted_NLL": 0.24428571223281775,
+          "iterations": 17,
+          "evaluations": 17
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/V2-best/training_receipt.json",
+      "receipt_sha256": "873ea7ebe69347cf0bdef07e158070b6947210f8e5bfaac96a8f5fa732a534b0"
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "b742ce3cf5a4184aaba28d48f5eb7d96af3c8b00da818ef3657f10db8b2657e6",
+      "best_source_loss": 0.7640061539552644,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 1315579,
+          "alpha": 3.3301250131978732,
+          "temperature": 0.3002890269995341,
+          "initial_NLL": 0.00185488386706274,
+          "fitted_NLL": 0.0008576596475693539,
+          "iterations": 15,
+          "evaluations": 15
+        },
+        {
+          "sign": "positive",
+          "rows": 56207,
+          "alpha": 0.16429269230065535,
+          "temperature": 6.086697990011642,
+          "initial_NLL": 1.474067941743942,
+          "fitted_NLL": 0.5804062501824159,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/Dance-best/training_receipt.json",
+      "receipt_sha256": "af56b516f9888524959c706e7435fe181aab58328796dc71797b767accfd2330"
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "5c951f1aa750728973657c0e8f3524c78c951022b6154b099751ce2751831e89",
+      "best_source_loss": 0.4474509250425922,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 136599,
+          "alpha": 0.4532202773070258,
+          "temperature": 2.2064326114044723,
+          "initial_NLL": 0.06932951044936478,
+          "fitted_NLL": 0.04545339515330955,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 198647,
+          "alpha": 0.6801548741543022,
+          "temperature": 1.4702533761055379,
+          "initial_NLL": 0.05282092606801226,
+          "fitted_NLL": 0.044668359035109156,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/heads/LaMOT-best/training_receipt.json",
+      "receipt_sha256": "a7e7ce3e7a64956d50a640d1976b0e0246c533754d250e92b49b4140c30fea78"
+    }
+  },
+  "decoded_arrays": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/KITTI-V2/V2-best",
+      "receipt_sha256": "0dfa1711270d63a2398331e23fb04e626415196a0b20244a2998949610bb1b43",
+      "files": {
+        "count_probs.npy": "a68f23f11b9e5aada367d03c449bfb85405285c9eec962b9660dd089a04bf6cc",
+        "smooth_k.npy": "11e17f0c33d1260b3b36a5f9c9fe0d9a7f2c5d90e93e803b294db05f1ff1d6a3",
+        "presence_logits.npy": "50f0469ab894274733de5bc423b8ba195dc514cb2e126b239027f6e5f42eeece",
+        "raw_k.npy": "f5ff08c4786e15163f32bbb15817a62ac5334932eff312d49f4d178652457468",
+        "joint_count_probs.npy": "0c7f63a30f5a358b5f6811e7a0517d2cdd065959a9e6ff91b2db472dd3f8c592"
+      }
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/Dance/Dance-best",
+      "receipt_sha256": "4ee9db8a1fb47084e52d651f3de5fa2165ea54de3d8845dbef20fb2d24aeb2ff",
+      "files": {
+        "count_probs.npy": "bae1e1ca9004e0d532d6d880ae85912871902358ecd727367c0a6318212e8b26",
+        "smooth_k.npy": "8152899306fe0fe16b32aefc869cd26ddeff6d7bbb3045031bff0cf9ce862441",
+        "presence_logits.npy": "523ecb94ceda15cd44663f1a576dadf09bd2b9a4023b67811e9386d2f988a0cd",
+        "raw_k.npy": "cc2ca1595f7b823b665c7fab439f30be8cd75730e85e2dc3eb6558c983417fcd",
+        "joint_count_probs.npy": "145e6bfb8cce88197a4bd670096533dbcc94f4063abc4419d9ef0c7142c19a29"
+      }
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v4/stage_A/SportsMOT/LaMOT-best",
+      "receipt_sha256": "b5e777fbab2751cfec14af287efbf492ac80f5f594917c44ebef66afbd85a81d",
+      "files": {
+        "count_probs.npy": "f842bb5d16e6135aa5741cda83bdbae9ac317f596713cb32bfff02da2ee3e097",
+        "smooth_k.npy": "948d0a77d72068962c38a43b1f133383498c14fd80265375c6c359f37d955b1c",
+        "presence_logits.npy": "b7d12a6e9d77aa0377000a5f8ed11b59b25bed291c29fcc6accda69f154cb11e",
+        "raw_k.npy": "cb337c50308237e812d8c79027fe7cac773d059849c944de09cfd124969dc7d5",
+        "joint_count_probs.npy": "8dffc2c1fb159a0f2e70c8b8e611bbc23e76c5ec56d7b191a544b45ff65d3506"
+      }
+    }
+  ]
+}

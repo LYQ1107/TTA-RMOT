@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 import subprocess
 import sys
+from argparse import ArgumentParser
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
@@ -10,9 +11,13 @@ from flex_uda.presence.runtime import target_metadata, IN_DOMAIN
 from flex_uda.presence.predictions import verify_predictions
 from flex_tta.runtime.pf_receipts import file_sha, atomic_json
 from scripts.presence_redesign import OUT, RECORD
+from flex_uda.presence.runtime import RUN,PUBLIC
 
 
 def main():
+    global OUT,RECORD
+    p=ArgumentParser(description=__doc__);p.add_argument('--version',choices=['v3','v4'],default='v3')
+    a=p.parse_args();OUT=RUN / ('redesign_'+a.version);RECORD=PUBLIC / ('redesign_'+a.version)
     choice = json.loads((RECORD / 'selection.json').read_text())['models']
     rows = []
     for target, name in IN_DOMAIN.items():
@@ -44,8 +49,12 @@ def main():
     changed = subprocess.check_output(['git','diff','--name-only',
         'efce389200aa5b93d47f6ef387f7c54a5e8ef890','--',*protected],cwd=ROOT,text=True).splitlines()
     if changed: raise ValueError('Historical report, official vendor or teacher unexpectedly changed')
+    if a.version=='v4':
+        old=subprocess.check_output(['git','diff','--name-only','77cd790f1a1a9cb4fe581f31d51b20af965dc436',
+            '--','results/presence_active/redesign_v3'],cwd=ROOT,text=True)
+        if old.strip():raise ValueError('Do not modify v3 historical results')
     names = {'presence_train.py','presence_redesign.py','presence_eval_offline.py','active_eval.py',
-             'active_run.py','active_teacher_worker.py'}
+             'active_run.py','active_teacher_worker.py','presence_bernoulli.py'}
     running = []
     for directory in Path('/proc').iterdir():
         if not directory.name.isdigit(): continue
@@ -60,7 +69,8 @@ def main():
     result = dict(status='PASS_COMPLETE_SOURCE_HEAD_TRIAL',cells=rows,
         protected_historical_report_vendor_and_teacher_unchanged=True,
         new_teacher_calls=0,target_LoRA_updates=0,task_scientific_workers_remaining=running,
-        tests_passed=22,stage_A_scientific_gate=json.loads((RECORD / 'gate.json').read_text())['status'],
+        tests_passed=json.loads((RECORD / 'functional_checks.json').read_text())['tests_passed'],
+        stage_A_scientific_gate=json.loads((RECORD / 'gate.json').read_text())['status'],
         integrity_is_not_scientific_success=True,validation_no_new_model_or_teacher_calls=True)
     atomic_json(RECORD / 'validation.json',result)
     print(json.dumps(result),flush=True)
