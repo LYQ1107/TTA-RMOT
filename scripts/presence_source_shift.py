@@ -4,6 +4,7 @@ Read exported own-source labels, not a target adaptation process. These
 descriptive statistics never set model thresholds, classes or hyperparameters.
 """
 import json
+from argparse import ArgumentParser
 from pathlib import Path
 import sys
 import numpy as np
@@ -15,7 +16,7 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 from scripts.diag_attrib_v2_common import write_csv
 
 
-def support(root):
+def support(root,labels_root=None):
     hist = np.zeros(11, dtype=np.int64)
     candidate_counts, positive_counts, phrase_set = [], [], set()
     raw_count_sum = overflow = units = videos = 0
@@ -23,7 +24,8 @@ def support(root):
         metadata = json.loads((directory / 'metadata.json').read_text())
         frames = np.asarray(metadata['frames'])
         observations = np.load(directory / 'observations.npy')
-        labels = np.load(directory / 'labels.npy', mmap_mode='r').reshape(len(metadata['queries']), len(observations))
+        label_path = (Path(labels_root) / 'videos' / directory.name / 'labels.npy') if labels_root else directory / 'labels.npy'
+        labels = np.load(label_path, mmap_mode='r').reshape(len(metadata['queries']), len(observations))
         unique, starts, counts = np.unique(observations[:, 0], return_index=True, return_counts=True)
         positive = np.zeros((len(labels), len(frames)), dtype=np.int64)
         candidates = np.zeros(len(frames), dtype=np.int64)
@@ -50,18 +52,24 @@ def support(root):
 
 
 def main():
+    parser=ArgumentParser(description=__doc__)
+    parser.add_argument('--sports-label-root',type=Path)
+    parser.add_argument('--output-prefix',default='source_support_shift')
+    args=parser.parse_args()
     rows, detail = [], {}
     for target, model in IN_DOMAIN.items():
         for split, root in [('TRAIN_GT_CANDIDATES', RUN / 'features/source_train' / target / model),
                             ('SOURCE_VALIDATION_TRACKER', RUN / 'features' / target / model)]:
-            result = support(root)
+            corrected=args.sports_label_root if target=='SportsMOT' and split=='TRAIN_GT_CANDIDATES' else None
+            result = support(root,labels_root=corrected)
             detail[target+'/'+split] = dict(model=model, source_domain=target, path=str(root), **result)
             rows.append(dict(source_domain=target, model=model, split=split,
                 **{k:v for k,v in result.items() if k != 'count_histogram_0_to_9_ge10'}))
-    write_csv(PUBLIC / 'source_support_shift.csv', rows)
-    atomic_json(PUBLIC / 'source_support_shift.json', dict(ORACLE_GT_DIAGNOSTIC_ONLY=True,
+    write_csv(PUBLIC / (args.output_prefix+'.csv'), rows)
+    atomic_json(PUBLIC / (args.output_prefix+'.json'), dict(ORACLE_GT_DIAGNOSTIC_ONLY=True,
         labels_scope='each head own-source train and own-source official validation only',
-        no_new_model_or_teacher_calls=True, no_hyperparameters_selected=True, records=detail))
+        no_new_model_or_teacher_calls=True, no_hyperparameters_selected=True, records=detail,
+        corrected_sports_labels_root=str(args.sports_label_root) if args.sports_label_root else None))
     print(json.dumps(rows, indent=2), flush=True)
 
 

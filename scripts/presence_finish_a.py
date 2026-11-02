@@ -177,15 +177,15 @@ def main():
     env = dict(os.environ, OMP_NUM_THREADS='2', MKL_NUM_THREADS='2', OPENBLAS_NUM_THREADS='1',
         PYTHONPATH=f'{ROOT}/compat:{ROOT}:/data2/user/TTA-RMOT-assets/flexhook/pydeps')
     log_root = RUN / 'finish_A' / str(time.time_ns()); log_root.mkdir(parents=True)
-    ready = [RUN / 'features' / t / m / 'export_receipt.json'
-             for t in IN_DOMAIN for m in ('V2-best', 'Dance-best', 'LaMOT-best')]
-    ready += [RUN / 'stage_A' / t / m / 'PRES_TOPK/official_completion.json' for t, m in IN_DOMAIN.items()]
-    # All waiting stays inside this one shell command. Source/GPU jobs keep
-    # their original parent; this worker neither restarts nor cancels them.
-    while not all(path.exists() for path in ready): time.sleep(20)
     jobs = [(t, m) for t in IN_DOMAIN for m in ('V2-best', 'Dance-best', 'LaMOT-best')]
     def cell(job):
         target, model = job
+        ready = [RUN / 'features' / target / model / 'export_receipt.json',
+                 RUN / 'heads' / model / 'training_receipt.json']
+        # Ready cells use CPU immediately; do not leave eight complete feature
+        # banks idle behind the last frozen GPU exporter. All waiting remains
+        # inside this one blocking coordinator and all immutable work is reused.
+        while not all(path.exists() for path in ready): time.sleep(20)
         commands = [['scripts/presence_eval_offline.py', '--target', target, '--model', model, '--phase', 'decode']]
         for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'):
             command = ['scripts/active_eval.py', '--target', target,
@@ -197,7 +197,7 @@ def main():
                 code = subprocess.call([sys.executable, *command], cwd=ROOT, env=env, stdout=log, stderr=subprocess.STDOUT)
                 if code: raise RuntimeError('Stage A CPU cell failed: '+str(log.name))
         print(json.dumps(dict(event='A_COMPLETE_CELL', target=target, model=model)), flush=True)
-    with ThreadPoolExecutor(max_workers=2) as pool: list(pool.map(cell, jobs))
+    with ThreadPoolExecutor(max_workers=4) as pool: list(pool.map(cell, jobs))
     result = collect()
     atomic_json(log_root / 'completion.json', result)
 

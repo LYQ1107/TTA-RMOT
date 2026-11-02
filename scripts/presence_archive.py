@@ -17,7 +17,7 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 def log_files():
     files = set()
     for name in ('launchers', 'priority_export', 'rescue_launchers', 'head_pipeline',
-                 'source_lr_trial', 'source_lr_eval', 'source_label_fix_v2', 'finish_A', 'pipeline'):
+                 'source_lr_trial', 'source_lr_eval', 'source_label_fix_v2', 'source_label_fix_v2_eval', 'finish_A', 'pipeline'):
         base = RUN / name
         if base.exists():
             files.update(p for p in base.rglob('*') if p.is_file() and p.suffix in ('.txt', '.log', '.json', '.jsonl'))
@@ -26,7 +26,7 @@ def log_files():
     files.update((RUN / 'resources').glob('*.json'))
     files.update((RUN / 'features').rglob('export_receipt.json'))
     files.update((RUN / 'features').rglob('smoke_receipt.json'))
-    for name in ('stage_A', 'stage_A_source_lr1e5'):
+    for name in ('stage_A', 'stage_A_source_lr1e5', 'stage_A_label_v2', 'stage_A_source_lr1e5_label_v2'):
         base = RUN / name
         files.update(p for p in base.rglob('*') if p.is_file() and
                      (p.name in ('decode_receipt.json', 'official_completion.json', 'offline_summary.json',
