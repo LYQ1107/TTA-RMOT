@@ -121,9 +121,8 @@ def main():
     a = p.parse_args()
     import compat.sitecustomize
     import torch
-    from scripts.multidomain_runtime import guard
-    from flex_uda.presence.runtime import RUN, OLD, TARGET_KEY, load_model, target_metadata, sealed_margins
-    access = guard([OLD / 'runtime' / TARGET_KEY[a.target]])
+    from flex_uda.presence.runtime import RUN, OLD, TARGET_KEY, load_model, target_metadata, sealed_margins, runtime_guard
+    access = runtime_guard([OLD / 'runtime' / TARGET_KEY[a.target]])
     folder = RUN / 'features' / a.target / a.model
     folder.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()

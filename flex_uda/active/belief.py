@@ -28,7 +28,7 @@ def evidence_increment(answer, sensitivity, specificity):
 
 
 class BeliefState:
-    def __init__(self, track_scores, expected_counts, presence_max, *, slope=1., use_presence=True):
+    def __init__(self, track_scores, expected_counts, presence_max, *, slope=1., use_presence=True, track_lengths=None):
         self.z = normalize_track_scores(track_scores)
         self.expected = np.asarray(expected_counts, dtype=float)
         self.presence_max = np.asarray(presence_max, dtype=float)
@@ -37,13 +37,18 @@ class BeliefState:
         self.a = (np.asarray([solve_intercept(z, max(.5, k), slope) for z, k in zip(self.z, self.expected)])
                   if use_presence else np.zeros(len(self.z)))
         self.evidence = np.zeros_like(self.z)
+        self.frozen_tracks = (np.asarray(track_lengths) < 3 if track_lengths is not None else np.zeros(self.z.shape[1], dtype=bool))
+        self.initial_prior = self.a[:, None] + self.slope*self.z
         self.absent = np.zeros(len(self.z), dtype=bool)
         self.confirmed_present = np.zeros(len(self.z), dtype=bool)
         self.no_tracks = [set() for _ in self.z]
         self.events = []
 
     @property
-    def prior(self): return self.a[:, None] + self.slope*self.z
+    def prior(self):
+        value = self.a[:, None] + self.slope*self.z
+        value[:, self.frozen_tracks] = self.initial_prior[:, self.frozen_tracks]
+        return value
 
     @property
     def logits(self):
@@ -83,4 +88,6 @@ class BeliefState:
 
     def pseudo_labels(self):
         p = self.posterior
-        return np.where(p > .95, 1, np.where(p < .05, 0, -1)).astype('int8')
+        labels = np.where(p > .95, 1, np.where(p < .05, 0, -1)).astype('int8')
+        labels[:, self.frozen_tracks] = -1
+        return labels

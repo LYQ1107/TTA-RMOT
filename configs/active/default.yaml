@@ -47,3 +47,9 @@ resources:
   maximum_physical_gpus: 2
   minimum_free_mib: 20480
   new_cache_root: /data1/user/TTA-RMOT-assets/presence_active_20261102
+baselines:
+  yestrack_names: [YESTRACK_BUDGET_RANDOM, YESTRACK_BUDGET_PRIOR, YESTRACK_FULL_D10]
+  yestrack_threshold: 0.4
+  yestrack_uncovered: NATIVE_MARGIN_POSITIVE
+  yestrack_original_delta: 10
+  prior_pair_coverage_order: per_query_descending_z_round_robin_lexical_queries

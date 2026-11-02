@@ -26,7 +26,8 @@ class LocalTeacher:
         self.backend = FrozenYesTrack(self.config)
         self.views = PairedViews(videos, self.backend.upstream)
         self.cache = TeacherCache(cache_path)
-        self.stats = dict(logical_calls=0, new_calls=0, cache_hits=0, forward_seconds=0., batches=0)
+        self.stats = dict(logical_calls=0, new_calls=0, cache_hits=0, forward_seconds=0.,
+                          equivalent_forward_seconds=0., batches=0)
         self.image_shas = {}
 
     def prepare(self, request):
@@ -68,7 +69,9 @@ class LocalTeacher:
             self.stats['logical_calls'] += 1
             if old is not None:
                 self.stats['cache_hits'] += 1
-                responses[i] = dict(old, cache_hit=True)
+                self.stats['equivalent_forward_seconds'] += old['batch_forward_seconds']/old['batch_size']
+                responses[i] = dict(old, cache_hit=True, requested_view=request['view'],
+                    clip=info['clip'], clip_fallback=info['clip_fallback'], effective_view=info['effective_view'])
             else:
                 pending.append((i, cache_key, images, prompt, info))
         for a in range(0, len(pending), 8):
@@ -77,24 +80,28 @@ class LocalTeacher:
             self.stats['forward_seconds'] += raw[0]['batch_forward_seconds']; self.stats['batches'] += 1
             self.stats['new_calls'] += len(rows)
             for (i, key, images, prompt, info), result in zip(rows, raw):
-                response = dict(info, **result, request_id=key, cache_hit=False)
+                response = dict(info, **result, request_id=key, cache_hit=False, requested_view=info['view'])
+                self.stats['equivalent_forward_seconds'] += result['batch_forward_seconds']/result['batch_size']
                 self.cache.put(key, response); responses[i] = response
         return responses
 
     def close(self):
         self.backend.seal_frozen()
         return dict(self.stats, cache=self.cache.stats(), teacher_weight_sha256=self.backend.weight_sha,
-                    backend_unmodified=True, revision=REVISION)
+                    backend_unmodified=True, revision=REVISION, model_load_seconds=self.backend.load_seconds,
+                    peak_allocated_bytes=__import__('torch').cuda.max_memory_allocated())
 
 
 class TeacherClient:
     def __init__(self, runtime_path, cache_path, log_path, root):
         self.root = Path(root); self.log = Path(log_path).open('a')
+        self.started = time.perf_counter(); self.session_id = str(time.time_ns())
+        self.session_root = Path(log_path).parent / 'teacher_sessions'
         python = '/data2/user/TTA-RMOT-assets/teacher-p1/env/bin/python'
         command = [python, str(self.root / 'scripts/active_teacher_worker.py'), '--runtime', str(runtime_path), '--cache', str(cache_path)]
         self.child = subprocess.Popen(command, cwd=self.root, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                       stderr=self.log, text=True, bufsize=1)
-        self.stats = dict(logical_calls=0, new_calls=0, cache_hits=0, forward_seconds=0.)
+        self.stats = dict(logical_calls=0, new_calls=0, cache_hits=0, forward_seconds=0., equivalent_forward_seconds=0.)
         ready = self.read()
         if ready['status'] != 'READY': raise RuntimeError('Frozen teacher did not become ready')
 
@@ -115,4 +122,8 @@ class TeacherClient:
         self.child.stdin.write(json.dumps(dict(command='CLOSE'))+'\n'); self.child.stdin.flush()
         response = self.read(); code = self.child.wait(); self.log.close()
         if code or response['status'] != 'SEALED': raise RuntimeError('Teacher final frozen-weight audit failed')
-        return response['receipt']
+        from flex_tta.runtime.pf_receipts import atomic_json
+        receipt = dict(response['receipt'], process_wall_seconds=time.perf_counter()-self.started,
+                       process_wall_is_not_GPU_utilization_integral=True)
+        atomic_json(self.session_root / (self.session_id+'.json'), receipt)
+        return receipt

@@ -13,8 +13,8 @@ def send(value): print('ACTIVE_RESPONSE\t'+json.dumps(value), flush=True)
 def main():
     p = ArgumentParser(description=__doc__); p.add_argument('--runtime', type=Path, required=True)
     p.add_argument('--cache', type=Path, required=True); a = p.parse_args()
-    from scripts.multidomain_runtime import guard
-    access = guard()
+    from flex_uda.presence.runtime import runtime_guard
+    access = runtime_guard()
     videos = json.loads(a.runtime.read_text())
     from flex_uda.active.teacher_client import LocalTeacher
     teacher = LocalTeacher(videos, a.cache, ROOT)

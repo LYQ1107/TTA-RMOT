@@ -37,9 +37,6 @@ def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1
     folder = RUN / 'features' / target / model_name / 'videos' / video
     local = json.loads((folder / 'metadata.json').read_text())
     decoded = RUN / 'stage_A' / target / model_name
-    # Read the order that the standalone presence decoder actually used.
-    from flex_uda.presence.data import FeatureUnits
-    units = FeatureUnits(RUN / 'features' / target / model_name, labels=False)
     presence = np.load(decoded / 'presence_logits.npy', mmap_mode='r')
     counts = np.load(decoded / 'count_probs.npy', mmap_mode='r')
     qrows = [q for q in meta['episodes'] if q['video_id'] == video]
@@ -48,16 +45,18 @@ def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1
     obs = np.asarray(bank['observations']); tracks = defaultdict(list)
     for j, (t, i) in enumerate(bank['observations']): tracks[i].append(j)
     mean = np.stack([[margins[q['start']+np.asarray(tracks[i])].mean() for i in tids] for q in qrows])
-    frame_presence = np.empty((len(qrows), len(local['frames'])), dtype=float)
-    expected = np.empty_like(frame_presence)
-    qindex = {q['expression_id']: i for i, q in enumerate(qrows)}
+    # FeatureUnits/standalone decode order is sorted video, then query, then
+    # actual image frame. Resolve this index without rebuilding a whole-dataset
+    # Python unit list separately for each video in the stream.
+    offset = 0
+    for directory in sorted((RUN / 'features' / target / model_name / 'videos').iterdir()):
+        previous = json.loads((directory / 'metadata.json').read_text())
+        if previous['video_id'] == video: break
+        offset += len(previous['queries'])*len(previous['frames'])
+    size = len(qrows)*len(local['frames'])
+    frame_presence = np.asarray(presence[offset:offset+size]).reshape(len(qrows), -1).astype(float)
+    expected = (np.asarray(counts[offset:offset+size])@np.arange(11)).reshape(len(qrows), -1)
     frame_index = {t: i for i, t in enumerate(local['frames'])}
-    for j, unit in enumerate(units.units):
-        shard, qi, frame = unit[:3]; _, sm = units.shards[shard]
-        if sm['video_id'] != video: continue
-        q = qindex[sm['queries'][qi]['expression_id']]; fi = frame_index[frame]
-        frame_presence[q, fi] = presence[j]
-        expected[q, fi] = np.dot(counts[j], np.arange(11))
     calibrated = expit(frame_presence/temperature+bias)
     return dict(queries=qrows, tracks=tids, track_positions=tracks, track_means=mean,
         lengths=[len(tracks[i]) for i in tids], expected=np.median(calibrated*expected, axis=1),
@@ -67,8 +66,7 @@ def video_prior(meta, bank, video, model_name, target, margins, *, temperature=1
 
 def run(pair, rho, variant, *, smoke_videos=0):
     import torch
-    from scripts.multidomain_runtime import guard
-    from flex_uda.presence.runtime import episode_from_bank, cache_for, load_model
+    from flex_uda.presence.runtime import episode_from_bank, cache_for, load_model, runtime_guard
     from flex_uda.active.adapt import SlowAdapter
     from flex_uda.active.teacher_client import TeacherClient
     from flex_uda.presence.predictions import seal_mask
@@ -76,7 +74,9 @@ def run(pair, rho, variant, *, smoke_videos=0):
     if gate['status'] != 'PASS_ALL_THREE_SAME_DOMAIN' or not gate.get('published_commit'):
         raise PermissionError('Complete/publish Stage A and investigate its source-domain gate before teacher/LoRA runs')
     model_name, target = PAIRS[pair]
-    attempts = guard(); started = time.perf_counter()
+    torch.manual_seed(0); np.random.seed(0)
+    torch.cuda.set_per_process_memory_fraction(min(.9, (16 << 30)/torch.cuda.get_device_properties(0).total_memory))
+    attempts = runtime_guard(); started = time.perf_counter()
     meta = target_metadata(target); margins, margin_seal = sealed_margins(target, model_name)
     out = RUN / 'active' / pair / variant / ('rho_'+str(rho))
     if smoke_videos: out = out / ('smoke_'+str(smoke_videos))
@@ -105,16 +105,15 @@ def run(pair, rho, variant, *, smoke_videos=0):
             bank = meta['videos'][video]
             prior = video_prior(meta, bank, video, model_name, target, margins, temperature=temperature, bias=bias)
             texts = [q['query_text'] for q in prior['queries']]
-            state = BeliefState(prior['track_means'], prior['expected'], prior['max_presence'], slope=slope, use_presence=variant != 'MINUS_PRES')
-            identities = state.prior > 0
             group = exclusive_group(texts, target)
             spec = next(s for s in specs if s['video_id'] == video)
             tracks = defaultdict(list)
             for o in spec['observations']: tracks[o['track_id']].append(o)
             asked = defaultdict(set); accepted_questions = []; round_logs = []
             budget = int(np.floor(rho*sum(n >= 3 for n in prior['lengths'])*len(texts)))
-            seed = int(hashlib.sha256(video.encode()).hexdigest()[:8], 16)
-            random = np.random.RandomState(seed)
+            from flex_uda.active.baselines import video_rng
+            random = video_rng(video)
+            rescore_before, slow_before = rescore_seconds, slow_seconds
             if model is not None:
                 episode = episode_from_bank(video, bank, target, transform); cache = cache_for(model, tokenizer, episode, device)
                 if slow is None:
@@ -125,6 +124,14 @@ def run(pair, rho, variant, *, smoke_videos=0):
                         torch.set_rng_state(saved['torch_rng']); torch.cuda.set_rng_state(saved['cuda_rng'])
                 else: slow.set_cache(cache)
                 if variant == 'RESET_LORA': slow.reset_video()
+                elif vi > 0:
+                    begin_rescore = time.perf_counter()
+                    prior['track_means'] = slow.rescore(prior['tracks'], texts)
+                    rescore_seconds += time.perf_counter()-begin_rescore
+            state = BeliefState(prior['track_means'], prior['expected'], prior['max_presence'], slope=slope,
+                                use_presence=variant != 'MINUS_PRES', track_lengths=prior['lengths'])
+            identities = state.prior > 0
+            teacher_before = dict(teacher.stats)
             carry = 0
             for r in range(4):
                 values = ds.values if variant != 'MINUS_DS' else {v: (.8, .8) for v in ds.values}
@@ -199,7 +206,9 @@ def run(pair, rho, variant, *, smoke_videos=0):
             atomic_json(directory / 'questions.json', accepted_questions)
             atomic_json(directory / 'receipt.json', dict(video=video, budget=budget, questions=len(accepted_questions),
                 unspent_budget=budget-len(accepted_questions), exclusive_group=group, short_tracks=sum(n < 3 for n in prior['lengths']),
-                selected_rows=int(mask.sum()), mask_sha256=file_sha(directory / 'mask.npy'), rounds=round_logs))
+                selected_rows=int(mask.sum()), mask_sha256=file_sha(directory / 'mask.npy'), rounds=round_logs,
+                teacher_delta={k: teacher.stats[k]-teacher_before.get(k, 0) for k in ('logical_calls', 'new_calls', 'cache_hits', 'forward_seconds', 'equivalent_forward_seconds')},
+                slow_GPU_seconds=slow_seconds-slow_before, rescore_GPU_seconds=rescore_seconds-rescore_before))
             slope = state.slope
             checkpoint = dict(next_video=vi+1, ds=ds, slope=slope, temperature=temperature, bias=bias,
                 torch_rng=torch.get_rng_state(), cuda_rng=torch.cuda.get_rng_state(),
@@ -213,17 +222,26 @@ def run(pair, rho, variant, *, smoke_videos=0):
                 teacher=teacher_receipt, LoRA_GPU_seconds=slow_seconds, rescore_GPU_seconds=rescore_seconds, GT_open_attempts=len(attempts)))
             return
         mask = np.zeros(len(margins), dtype=bool)
+        video_receipts = [json.loads((out / 'videos' / video / 'receipt.json').read_text()) for video in ordered]
+        sessions = [json.loads(p.read_text()) for p in (out / 'teacher_sessions').glob('*.json')]
+        teacher_receipt = dict(teacher_receipt,
+            logical_calls=sum(v['questions'] for v in video_receipts),
+            new_calls=sum(s['new_calls'] for s in sessions), cache_hits=sum(s['cache_hits'] for s in sessions),
+            forward_seconds=sum(s['forward_seconds'] for s in sessions),
+            equivalent_forward_seconds=sum(s['equivalent_forward_seconds'] for s in sessions),
+            prior_session_resume_included=True)
         for video in ordered:
             value = np.load(out / 'videos' / video / 'mask.npy')
             qrows = [q for q in meta['episodes'] if q['video_id'] == video]
             for qi, q in enumerate(qrows): mask[q['start']:q['stop']] = value[qi]
         seal_mask(out, meta, mask, target=target, model=model_name, method=variant, GT_open_attempts=len(attempts),
-            extra=dict(pair=pair, rho=rho, teacher=teacher_receipt, LoRA_GPU_seconds=slow_seconds,
-                rescore_GPU_seconds=rescore_seconds, margin_input=margin_seal,
+            extra=dict(pair=pair, rho=rho, teacher=teacher_receipt,
+                LoRA_GPU_seconds=sum(v['slow_GPU_seconds'] for v in video_receipts),
+                rescore_GPU_seconds=sum(v['rescore_GPU_seconds'] for v in video_receipts), margin_input=margin_seal,
                 video_transductive=True, strict_frame_causal=False, ordered_video_stream=True,
                 wall_seconds=time.perf_counter()-started))
     finally:
-        if teacher is not None: teacher.close()
+        if teacher is not None and teacher.child.poll() is None: teacher.close()
 
 
 def main():

@@ -64,13 +64,15 @@ class SlowAdapter:
         self.model, self.cache = model, cache
         self.adapter = PCDLoRATTA(model, rank=rank, layer_indices=(-2, -1), projections=('wq', 'wv'), alpha=alpha).to(cache.device)
         self.parameters = [p for p in self.adapter.parameters() if p.requires_grad]
+        self.initial_trainable = [p.detach().clone() for p in self.parameters]
         self.optimizer = torch.optim.AdamW(self.parameters, lr=lr, weight_decay=.0001)
         self.scaler = torch.amp.GradScaler('cuda', enabled=cache.device.type == 'cuda')
         self.rng = np.random.RandomState(seed)
         self.updates = 0
 
     def reset_video(self):
-        self.adapter.reset_episode()
+        with torch.no_grad():
+            for p, initial in zip(self.parameters, self.initial_trainable): p.copy_(initial)
         self.optimizer.state.clear()
         self.scaler = torch.amp.GradScaler('cuda', enabled=self.cache.device.type == 'cuda')
 
@@ -83,6 +85,7 @@ class SlowAdapter:
         episode = self.cache.episode; pseudo = state.pseudo_labels(); samples = []
         if exclusive:
             for ti, track in enumerate(track_ids):
+                if state.frozen_tracks[ti]: continue
                 positives = np.flatnonzero(pseudo[:, ti] == 1)
                 if len(positives):
                     label = int(max(positives, key=lambda q: (state.posterior[q, ti], -q)))

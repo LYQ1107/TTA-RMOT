@@ -20,10 +20,19 @@ def decode(target, model_name, batch_size=256):
     from torch.utils.data import DataLoader
     from flex_uda.presence.data import FeatureUnits, collate_units
     from flex_uda.presence.head import PresenceHead
-    from flex_uda.presence.predictions import seal_mask
-    from scripts.multidomain_runtime import guard
+    from flex_uda.presence.predictions import seal_mask, verify_predictions
+    from flex_uda.presence.runtime import runtime_guard
     from scripts.diag_pf_countmatched import topk_ids
-    attempts = guard(); start = time.perf_counter()
+    attempts = runtime_guard(); start = time.perf_counter()
+    folder = RUN / 'stage_A' / target / model_name
+    saved = folder / 'decode_receipt.json'
+    if saved.exists():
+        receipt = json.loads(saved.read_text())
+        for name, sha in receipt['files_sha256'].items():
+            if file_sha(folder / name) != sha: raise ValueError('Changed completed presence decode')
+        for method in ('PRES_TOPK', 'PRES_TOPK_SMOOTH'): verify_predictions(folder / method)
+        print(json.dumps(dict(status='ALREADY_SEALED_NO_RERUN', target=target, model=model_name)), flush=True)
+        return receipt
     root = RUN / 'features' / target / model_name
     data = FeatureUnits(root, labels=False)
     head_path = RUN / 'heads' / model_name / 'checkpoint_best_source.pt'
@@ -62,7 +71,7 @@ def decode(target, model_name, batch_size=256):
         for method, counts in [('PRES_TOPK', raw_k), ('PRES_TOPK_SMOOTH', smooth_k)]:
             chosen = topk_ids(ids, dict(zip(ids, scores)), int(counts[j]))
             masks[method][q['start']+ba:q['start']+bb] = [i in chosen for i in ids]
-    folder = RUN / 'stage_A' / target / model_name; folder.mkdir(parents=True, exist_ok=True)
+    folder.mkdir(parents=True, exist_ok=True)
     for name, values in [('presence_logits', presence), ('count_probs', probabilities), ('raw_k', raw_k), ('smooth_k', smooth_k)]:
         np.save(folder / (name+'.npy'), values)
     extra = dict(head_checkpoint=str(head_path), head_checkpoint_sha256=file_sha(head_path),

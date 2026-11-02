@@ -103,3 +103,69 @@ def test_ds_recovers_reliable_synthetic_workers():
     ds.fit()
     assert all(.75 < s < .95 and .75 < c < .95 for s, c in ds.values.values())
     assert np.mean([(ds.posteriors[i] > .5) == label for i, label in enumerate(y)]) > .9
+
+
+def test_ds_checkpoint_roundtrip():
+    import pickle
+    from flex_uda.active.reliability import Reliability
+    ds = Reliability(); ds.add(('video', 'query', 7), 'CROP', True, True); ds.fit()
+    restored = pickle.loads(pickle.dumps(ds))
+    assert restored.values == ds.values
+    restored.add(('video', 'query', 8), 'CLIP', False, False)
+    assert len(restored.answers) == 2
+
+
+def test_fast_step_keeps_evidence_fixed():
+    import numpy as np
+    from flex_uda.active.belief import BeliefState
+    from flex_uda.active.adapt import fast_step
+    state = BeliefState([[4., 1., -1., -3.]], [.2], [.2])
+    for _ in range(5): state.observe(0, 0, True, 'CROP', (.8, .8), presence_question=True)
+    original = state.evidence.copy()
+    result = fast_step(state, np.array([[-2., -1.]]))
+    assert result['loss_after'] <= result['loss_before'] + 1e-7
+    assert np.array_equal(state.evidence, original)
+    assert np.isfinite(state.logits).all()
+
+
+def test_gt_runtime_guard_denies_raw_and_numerical_labels(tmp_path):
+    import os, subprocess, sys
+    code = """from flex_uda.presence.runtime import runtime_guard
+access = runtime_guard()
+for name in ['labels.json','gt.txt','labels.npy','GT_counts.npy']:
+    try: open(name,'rb')
+    except PermissionError: pass
+    else: raise RuntimeError('GT not blocked')
+assert len(access) == 4
+"""
+    env = dict(os.environ, PYTHONPATH=str(__import__('pathlib').Path(__file__).resolve().parents[1]))
+    result = subprocess.run([sys.executable, '-c', code], cwd=tmp_path, env=env, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_yestrack_native_fallback_budget_and_prior_order():
+    import numpy as np
+    from flex_uda.active.baselines import yestrack_video, budget_coverage
+    queries = [dict(expression_id='q'+str(q), query_text='person') for q in range(2)]
+    bank = dict(observations=[[t, i] for t in [1, 5, 11] for i in [1, 2]],
+                lines=[f'{t},{i},0,0,10,20,1,-1,-1,-1' for t in [1, 5, 11] for i in [1, 2]])
+    margin = np.array([[1., -1., 1., -1., 1., -1.], [-1., 1., -1., 1., -1., 1.]])
+    class Teacher:
+        def ask_many(self, rows):
+            return [dict(yes_probability=.9, request_id=str(i)) for i, _ in enumerate(rows)]
+    mask, receipt = yestrack_video('Dance', 'v', queries, bank, margin, Teacher(), 'YESTRACK_BUDGET_RANDOM', full_calls=1)
+    assert receipt['actual_calls'] == receipt['covered_pairs'] == 1
+    assert receipt['uncovered_native_exact'] and receipt['coverage_fraction'] == .25
+    assert len(budget_coverage('v', queries, [1, 2], np.array([[1, 0], [0, 1]]), 2, prior=True)) == 2
+    mask, receipt = yestrack_video('Dance', 'v', queries, bank, margin, Teacher(), 'YESTRACK_FULL_D10')
+    assert receipt['actual_calls'] == 8 and mask.all()
+
+
+def test_short_tracks_keep_initial_prior_and_do_not_supply_pseudo_labels():
+    import numpy as np
+    from flex_uda.active.belief import BeliefState
+    state = BeliefState([[2., 1., -3.]], [1.], [.5], track_lengths=[1, 2, 4])
+    before = state.prior.copy()
+    state.replace_prior(intercept=[5.], slope=4., scores=[[9., 8., 1.]])
+    assert np.array_equal(state.prior[:, :2], before[:, :2])
+    assert (state.pseudo_labels()[:, :2] == -1).all()

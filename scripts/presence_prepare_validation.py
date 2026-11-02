@@ -47,7 +47,9 @@ def main():
                          candidate_positive_rows=int(labels.sum()), labels_sha256=file_sha(folder / 'labels.npy'),
                          counts_sha256=file_sha(folder / 'GT_counts.npy')))
     atomic_json(PUBLIC / (a.target + '_source_validation.json'), dict(target=a.target,
-        legal_source_validation_only=True, candidate_matching='IoU>=0.5 one-to-one existing v2 matcher', videos=rows))
+        legal_source_validation_only=True, candidate_matching='IoU>=0.5 one-to-one existing v2 matcher',
+        validation_loss_count='sum of matched positive candidates; same label definition as GT-candidate train and dropout',
+        GT_counts_npy='total official GT per frame; offline diagnostics only, not loss targets', videos=rows))
 
 
 if __name__ == '__main__': main()

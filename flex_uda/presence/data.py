@@ -22,13 +22,17 @@ class FeatureUnits(Dataset):
             frames, starts, nums = np.unique(obs[:, 0], return_index=True, return_counts=True)
             ranges = {int(t): (int(a), int(a+c)) for t, a, c in zip(frames, starts, nums)}
             y = np.load(folder / 'labels.npy', mmap_mode='r') if labels else None
-            true_counts = np.load(folder / 'GT_counts.npy', mmap_mode='r') if validation else None
+            if validation and not (folder / 'GT_counts.npy').exists():
+                raise ValueError('Prepare independent own-source validation labels first')
             shard = len(self.shards); self.shards.append((folder, meta))
             for qi in range(len(meta['queries'])):
                 for fi, frame in enumerate(meta['frames']):
                     start, stop = ranges.get(frame, (0, 0))
-                    count = (int(true_counts[qi, fi]) if validation else
-                             int(y[qi*n+start:qi*n+stop].sum()) if labels else -1)
+                    # Training and validation both count positive CANDIDATES.
+                    # GT_counts.npy additionally records total scene GT, which
+                    # may exceed candidate support. It is offline diagnosis,
+                    # not an instruction to select extra false candidates.
+                    count = int(y[qi*n+start:qi*n+stop].sum()) if labels else -1
                     self.units.append((shard, qi, frame, qi*n+start, qi*n+stop, start, stop, count))
                     self.positive_units += count > 0
 
@@ -39,7 +43,9 @@ class FeatureUnits(Dataset):
             folder, _ = self.shards[shard]
             names = ['pcd', 'margin', 'boxes', 'sentence'] + (['labels'] if self.labels else [])
             self.arrays[shard] = {name: np.load(folder / (name+'.npy'), mmap_mode='r') for name in names}
-            while len(self.arrays) > 4: self.arrays.popitem(last=False)
+            # These are read-only mmaps, not materialized feature copies.
+            # Keep their small handles open: random frame/query batches would
+            # otherwise reopen several NPY files for nearly every unit.
         self.arrays.move_to_end(shard)
         return self.arrays[shard]
 

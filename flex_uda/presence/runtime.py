@@ -1,7 +1,9 @@
 """Official complete candidates and exact float32 vendor geometry, no GT IO."""
 from collections import OrderedDict, defaultdict
 import json
+import os
 from pathlib import Path
+import sys
 import numpy as np
 import torch
 from PIL import Image
@@ -14,6 +16,19 @@ RUN = ROOT / 'results/runs/presence_active_20261102'
 PUBLIC = ROOT / 'results/presence_active'
 TARGET_KEY = {'KITTI-V2': 'kitti', 'Dance': 'dance', 'SportsMOT': 'sports'}
 IN_DOMAIN = {'KITTI-V2': 'V2-best', 'Dance': 'Dance-best', 'SportsMOT': 'LaMOT-best'}
+
+
+def runtime_guard(extra_runtime_roots=()):
+    from scripts.multidomain_runtime import guard
+    attempts = guard(extra_runtime_roots)
+    def numerical_gt(event, args):
+        if event == 'open' and isinstance(args[0], (str, bytes, os.PathLike)):
+            path = Path(os.fsdecode(args[0])).resolve()
+            if path.name in ('labels.npy', 'GT_counts.npy'):
+                attempts.append(str(path))
+                raise PermissionError('Numerical evaluation/source truth is not a runtime input: ' + str(path))
+    sys.addaudithook(numerical_gt)
+    return attempts
 
 
 def target_metadata(target):

@@ -2,6 +2,7 @@
 from argparse import ArgumentParser
 from functools import partial
 import json
+import os
 from pathlib import Path
 import random
 import sys
@@ -48,7 +49,9 @@ def main():
     for root in (train_root, val_root):
         if not (root / 'export_receipt.json').exists(): raise ValueError('Incomplete source feature export')
     out = RUN / 'heads' / name; out.mkdir(parents=True, exist_ok=True)
-    device = torch.device('cuda:0'); model = PresenceHead().to(device)
+    device = torch.device('cuda:0')
+    torch.cuda.set_per_process_memory_fraction(min(.9, (4096 << 20)/torch.cuda.get_device_properties(0).total_memory))
+    model = PresenceHead().to(device)
     weight = torch.tensor(min(10., (len(train)-train.positive_units)/train.positive_units), device=device)
     generator = torch.Generator().manual_seed(0)
     train_loader = DataLoader(train, batch_size=256, shuffle=True, generator=generator, num_workers=0,
@@ -65,14 +68,16 @@ def main():
         torch.set_rng_state(saved['rng'].cpu()); generator.set_state(saved['loader_rng'].cpu())
         torch.cuda.set_rng_state(saved['cuda_rng'].cpu()); prior_wall = saved['wall_seconds']
     started = time.perf_counter()
-    for e in range(start_epoch, 20):
+    e = start_epoch-1
+    for e in range(start_epoch, start_epoch if stale >= 3 else 20):
+        lr_used = optimizer.param_groups[0]['lr']
         training = epoch(model, train_loader, device, weight, optimizer)
         validation = epoch(model, val_loader, device, weight)
         scheduler.step(); improved = validation['loss'] < best
         if improved: best, stale = validation['loss'], 0
         else: stale += 1
         row = dict(epoch=e+1, train=training, validation=validation, best=best, stale=stale,
-            lr=optimizer.param_groups[0]['lr'], selected=improved, wall_seconds=prior_wall+time.perf_counter()-started)
+            lr_used=lr_used, lr_next=optimizer.param_groups[0]['lr'], selected=improved, wall_seconds=prior_wall+time.perf_counter()-started)
         append_json(out / 'curve.jsonl', row); print(json.dumps(row), flush=True)
         state = dict(head=model.state_dict(), optimizer=optimizer.state_dict(), scheduler=scheduler.state_dict(),
             epoch=e+1, best=best, stale=stale, target=a.target, model=name, seed=0,
@@ -86,6 +91,7 @@ def main():
     result = dict(status='HEAD_SOURCE_TRAINING_COMPLETE', target=a.target, model=name,
         best_source_loss=best, epochs=e+1, train_units=len(train), validation_units=len(val),
         parameters=sum(p.numel() for p in model.parameters()), head_only=True, frozen_FlexHook_loaded=False,
+        physical_gpu=os.environ.get('PRESENCE_PHYSICAL_GPU'), optimizer_updates=(e+1)*len(train_loader),
         target_GT_open_attempts=len(access), wall_seconds=prior_wall+time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=False,
         checkpoint=str(out / 'checkpoint_best_source.pt'), checkpoint_sha256=file_sha(out / 'checkpoint_best_source.pt'))
