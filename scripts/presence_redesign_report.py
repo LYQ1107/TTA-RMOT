@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import sys
 import tarfile
+import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -41,6 +42,14 @@ def main():
             target_GT_open_attempts=receipt['target_GT_open_attempts'],
             first_gradient_norm=selected['train']['first_real_batch_gradient_norm']))
     own = [r for r in rows if r['own_domain'] == 'True' and r['method'] == 'PRES_TOPK']
+    with (PUBLIC / 'source_lr_trial_v2.csv').open() as handle:
+        historical = list(csv.DictReader(handle))
+    comparison = []
+    for row in own:
+        old = {r['source_variant']: r for r in historical if r['target'] == row['target'] and r['method'] == 'PRES_TOPK'}
+        comparison.append(dict(source=row['target'], native_HOTA=row['native_HOTA'],
+            original_default_HOTA=old['default']['HOTA'], original_source_lr1e5_HOTA=old['source_lr1e5']['HOTA'],
+            residual_v3_HOTA=row['HOTA'], v3_delta_vs_native=row['delta_HOTA']))
     metric_fields = ['target','model','method','native_HOTA','HOTA','delta_HOTA','DetA','AssA','IDF1','IDSW',
                      'prediction_rows','query_empty_prediction_rows','Present_HOTA','count_MAE_head',
                      'decoded_presence_recall','changed_count_units_vs_native','added_prediction_rows_vs_native',
@@ -51,15 +60,36 @@ def main():
     text = '# PresenceHead v3：授权结构/损失改造的真实结果\n\n'+status+'。\n\n'
     text += '## 1. 验收\n\n原门槛：三个自身源 PRES_TOPK HOTA 均不得低于完整 Native 超过 1。只按自身源验证新目标函数选择 checkpoint，不按 HOTA 回选旧头或 epoch。\n\n'
     text += table(['target','model','native_HOTA','HOTA','delta_HOTA','passed'], gate['same_domain'])
+    text += '\n与完整保留的旧设计对照（仅比较，不按 HOTA 重新选择）：\n\n'+table(
+        ['source','native_HOTA','original_default_HOTA','original_source_lr1e5_HOTA','residual_v3_HOTA','v3_delta_vs_native'], comparison)
     text += '\n## 2. 结构、监督与选择\n\n'
     text += ('本轮只执行 [PREREG.md](PREREG.md) 固定的一种结构：小型共享 PCD/几何集合网络为冻结排序的前缀能量学习残差，'
         '联合数量 softmax 覆盖 0..n；输出用联合 MAP，不改身份排序。原生 margin 提供零初始化；CE(count)+0.1 KL(native||head)，'
         '固定 lr1e-4、seed0、batch256、max20epoch/patience3。未训练 FlexHook、未加入教师。独立句子向量/ID 捷径移除，但 PCD 本身仍是查询条件特征。\n\n'
         '三个全量源验证集的 epoch0 原生数量等价检查均必须 0 差异；这只是初始化对照，不是增益。短前缀能量用 FP64 累加以避免近零正增量被大前缀舍入掉，'
-        '网络与缓存输入仍 FP32，旧 backbone/官方分数不改。Sports 源监督使用已核对全部表达身份的修正标签 v2。\n\n')
+        '网络与缓存输入仍 FP32，旧 backbone/官方分数不改。Sports 源监督使用已核对全部表达身份的修正标签 v2。'
+        '按原任务允许，自身源官方验证/测试用于早停，因此同域验收不是独立盲测；跨域 GT 不选训练 checkpoint。\n\n')
     text += table(['source','model','epochs','selected_epoch','native_prior_loss','source_loss','changed_source_units','validation_units'], costs)
     text += '\n存在性概率是联合分布的 P(k>0)，阈值0.5与联合MAP的 k>0 可能不一致；两者混淆会夸大召回。本表 decoded_* 指实际输出，head_* 为概率分支诊断。无固定10上限，但不保证召回或排序被修复。\n\n'
     text += '## 3. 完整已计算结果\n\n'+table(metric_fields, rows)
+    text += '\n### 3.1 数量决策与概率分支的区别\n\n'
+    behavior = []
+    for r in own:
+        decoded = Path(r['path']).parent
+        k = np.load(decoded / 'raw_k.npy')
+        p = np.load(decoded / 'presence_logits.npy')
+        behavior.append(dict(source=r['target'], MAP_presence_recall=float(r['decoded_presence_recall']),
+            native_presence_recall=float(r['native_presence_recall']), MAP_presence_FPR=float(r['decoded_presence_false_positive_rate']),
+            native_presence_FPR=float(r['native_presence_false_positive_rate']), MAP_count_MAE=float(r['decoded_count_MAE']),
+            native_count_MAE=float(r['native_count_MAE']), max_MAP_k=int(k.max()),
+            MAP_vs_probability_disagreements=int(((k>0) != (p>=0)).sum()),
+            above_ten_MAP_units=int((k>10).sum()), units=len(k)))
+    text += table(['source','MAP_presence_recall','native_presence_recall','MAP_presence_FPR','native_presence_FPR',
+        'MAP_count_MAE','native_count_MAE','max_MAP_k','above_ten_MAP_units','MAP_vs_probability_disagreements'], behavior)
+    text += ('\n身份排序完全不变，所以所有 HOTA 变化来自数量选择及其造成的关联/匹配变化，不能称为跨模态排序恢复。'
+        '若 MAE 下降但 HOTA 不保留，说明该平均误差不足以代表关键真目标的召回与关联；概率阈值准确率同样不能替代实际 MAP 输出。'
+        '大于10的输出说明容量上限确已去除，不意味着集合外漏检候选被补回。源GT候选→验证tracker候选的支持偏移仍在，'
+        '这里只能作为与结果一致的机制解释，不据此断言唯一失败原因；不再按这些验证结果改本轮阈值或损失。\n')
     if not gate['completed_full_A']:
         text += '\n本轮只完成三套同域和各自平滑对照；六个跨域新头结果未计算，不把旧头成绩当新头成绩，也不把 NOT_RUN 写为零。\n'
     text += '\n## 4. 成本与 GT 审计\n\n'+table(['source','model','GPU_hours','peak_allocated_GiB','physical_gpu','updates','parameters','first_gradient_norm','target_GT_open_attempts'], costs)
