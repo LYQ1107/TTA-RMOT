@@ -81,6 +81,11 @@ def collect(selection, selection_sha):
             f"{row['native_HOTA']:.3f}|{row['HOTA']:.3f}|{row['delta_HOTA']:+.3f}|{smooth:.3f}|"
             f"{'是' if row['selected_by_source_loss'] else '否'}|")
     text = '# 单次源域LR缓解对照：真实结果\n\n'
+    if (PUBLIC / 'source_label_full_audit.json').exists():
+        audit = json.loads((PUBLIC / 'source_label_full_audit.json').read_text())
+        if audit['cached_mismatching_observations']:
+            text += ('**历史v1口径：Sports头受源标签按相同文本合并的bug影响，不作为主结果；'
+                'KITTI/Dance不受影响。修复定义及独立v2结果见SOURCE_LABEL_FIX.md。旧数值完整保留。**\n\n')
     text += ('默认3e-4与固定替代1e-5，其他结构/损失/增强/seed/早停规则不变。'
         '选择文件在任何替代头HOTA计算前封存，只按各自源验证loss选，不按HOTA选择。'
         '源官方测试集用于任务明确允许的早停；不是盲测。全部默认结果保留。\n\n')

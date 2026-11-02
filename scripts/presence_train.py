@@ -43,6 +43,7 @@ def main():
     p.add_argument('--resume', action='store_true')
     p.add_argument('--learning-rate', type=float, default=3e-4)
     p.add_argument('--output', type=Path, help='Independent source-only hyperparameter trial; never overwrite default')
+    p.add_argument('--source-label-root', type=Path, help='Independent corrected own-source annotations; frozen features unchanged')
     a = p.parse_args()
     from flex_uda.presence.resources import admitted_device
     admitted_device()
@@ -57,7 +58,15 @@ def main():
     admitted_device(8192)
     train_root = RUN / 'features/source_train' / a.target / name
     val_root = RUN / 'features' / a.target / name
-    train, val = FeatureUnits(train_root), FeatureUnits(val_root, validation=True)
+    train, val = FeatureUnits(train_root, labels_root=a.source_label_root), FeatureUnits(val_root, validation=True)
+    label_input = (dict(path=str(a.source_label_root),
+        manifest_sha256=file_sha(a.source_label_root / 'labels_manifest.json')) if a.source_label_root else None)
+    if a.source_label_root:
+        manifest = json.loads((a.source_label_root / 'labels_manifest.json').read_text())
+        if manifest['source_domain'] != a.target or manifest['model'] != name:
+            raise ValueError('Corrected annotations must belong to this head own source')
+        for row in manifest['files']:
+            if file_sha(row['path']) != row['sha256']: raise ValueError('Corrected source annotation changed')
     for root in (train_root, val_root):
         if not (root / 'export_receipt.json').exists(): raise ValueError('Incomplete source feature export')
     device = torch.device('cuda:0')
@@ -92,6 +101,7 @@ def main():
         state = dict(head=model.state_dict(), optimizer=optimizer.state_dict(), scheduler=scheduler.state_dict(),
             epoch=e+1, best=best, stale=stale, target=a.target, model=name, seed=0,
             learning_rate=a.learning_rate,
+            corrected_source_labels=label_input,
             train_units=len(train), validation_units=len(val), pos_weight=float(weight),
             parameters=sum(p.numel() for p in model.parameters()), rng=torch.get_rng_state(),
             loader_rng=generator.get_state(), cuda_rng=torch.cuda.get_rng_state(), wall_seconds=row['wall_seconds'], epoch_record=row)
@@ -111,6 +121,7 @@ def main():
         target_GT_open_attempts=len(access), wall_seconds=prior_wall+time.perf_counter()-started,
         peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=a.learning_rate != 3e-4,
         learning_rate=a.learning_rate, changes={'lr':[3e-4,a.learning_rate]} if a.learning_rate != 3e-4 else {},
+        corrected_source_labels=label_input,
         checkpoint=str(out / 'checkpoint_best_source.pt'), checkpoint_sha256=file_sha(out / 'checkpoint_best_source.pt'))
     atomic_json(out / 'training_receipt.json', result)
 

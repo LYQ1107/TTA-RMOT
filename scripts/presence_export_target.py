@@ -108,9 +108,8 @@ def export_video(model, tokenizer, transform, device, meta, video, target, name,
     pcd.flush(); margin.flush()
     np.save(folder / 'boxes.npy', box)
     if source:
-        labels = np.zeros(n*nq, dtype=bool)
-        for j, query in enumerate(queries):
-            labels[j*n:(j+1)*n] = [query['query_text'] in bank['membership'].get(tuple(o), ()) for o in observations]
+        from flex_uda.presence.source import candidate_labels
+        labels = candidate_labels(bank, queries, observations)
         np.save(folder / 'labels.npy', labels)
     atomic_json(folder / 'metadata.json', dict(video_id=video, target=target, model=name,
         queries=queries, observations=n, frames=selected_frames, width=episode.width, height=episode.height,

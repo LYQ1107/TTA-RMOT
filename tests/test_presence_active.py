@@ -205,3 +205,32 @@ def test_source_validation_objective_is_json_native_and_conditional_on_positive_
     assert abs(result['count_CE']-math.log(11)) < 1e-6
     assert abs(result['loss']-(math.log(2)+.5*math.log(11))) < 1e-6
     json.dumps(dict(result=result, selected=result['loss'] < float('inf')))
+
+
+def test_source_labels_preserve_expression_identity_for_duplicate_text():
+    import numpy as np
+    from flex_uda.presence.source import candidate_labels
+    queries = [dict(expression_id='q1',query_text='same sentence'),
+               dict(expression_id='q2',query_text='same sentence')]
+    bank = dict(membership_query_key='expression_id',membership={(1,7):{'q1'},(1,8):{'q2'}})
+    labels = candidate_labels(bank,queries,[(1,7),(1,8)]).reshape(2,2)
+    assert np.array_equal(labels,[[True,False],[False,True]])
+
+
+def test_corrected_source_labels_do_not_rewrite_frozen_feature_shard(tmp_path):
+    import json
+    import numpy as np
+    from flex_uda.presence.data import FeatureUnits
+    folder = tmp_path / 'original/videos/v'; folder.mkdir(parents=True)
+    corrected = tmp_path / 'corrected/videos/v'; corrected.mkdir(parents=True)
+    (folder / 'seal.json').write_text('{}')
+    (folder / 'metadata.json').write_text(json.dumps(dict(video_id='v',observations=2,frames=[1],
+        queries=[dict(expression_id='q',query_text='same sentence')])) )
+    arrays = dict(observations=np.array([[1,7],[1,8]]),pcd=np.zeros((2,768),'float16'),
+        margin=np.ones(2,'float32'),boxes=np.ones((2,4),'float32'),sentence=np.ones((1,768),'float32'),
+        labels=np.array([True,True]))
+    for name,value in arrays.items(): np.save(folder / (name+'.npy'),value)
+    np.save(corrected / 'labels.npy',np.array([True,False]))
+    data = FeatureUnits(tmp_path / 'original',labels_root=tmp_path / 'corrected')
+    assert data[0]['count'] == 1 and data[0]['y'].tolist() == [True,False]
+    assert np.array_equal(np.load(folder / 'labels.npy'),[True,True])

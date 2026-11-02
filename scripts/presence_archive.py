@@ -17,11 +17,11 @@ from flex_tta.runtime.pf_receipts import atomic_json, file_sha
 def log_files():
     files = set()
     for name in ('launchers', 'priority_export', 'rescue_launchers', 'head_pipeline',
-                 'source_lr_trial', 'source_lr_eval', 'finish_A', 'pipeline'):
+                 'source_lr_trial', 'source_lr_eval', 'source_label_fix_v2', 'finish_A', 'pipeline'):
         base = RUN / name
         if base.exists():
             files.update(p for p in base.rglob('*') if p.is_file() and p.suffix in ('.txt', '.log', '.json', '.jsonl'))
-    for name in ('heads', 'heads_source_lr1e5'):
+    for name in ('heads', 'heads_source_lr1e5', 'heads_source_labels_v2'):
         files.update(p for p in (RUN / name).rglob('*') if p.is_file() and p.name in ('curve.jsonl', 'training_receipt.json'))
     files.update((RUN / 'resources').glob('*.json'))
     files.update((RUN / 'features').rglob('export_receipt.json'))

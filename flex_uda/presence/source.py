@@ -49,7 +49,7 @@ def source_banks(target):
     return result
 
 
-def make_bank(video, image_root, files, by_frame, queries, membership, target):
+def make_bank(video, image_root, files, by_frame, queries, membership, target, *, membership_query_key='query_text'):
     observations, lines = [], []
     for t, objects in sorted(by_frame.items()):
         for i, box in sorted(objects.items()):
@@ -57,7 +57,15 @@ def make_bank(video, image_root, files, by_frame, queries, membership, target):
             lines.append(','.join(map(str, [t, i, *box, 1, -1, -1, -1])))
     return dict(video_id=video, image_root=str(image_root.resolve()), observations=observations,
         lines=lines, image_frames=[int(p.stem) for p in files], queries=queries,
-        membership=membership, target=target)
+        membership=membership, membership_query_key=membership_query_key, target=target)
+
+
+def candidate_labels(bank, queries, observations):
+    """Use expression identity when identical text has distinct annotations."""
+    import numpy as np
+    key = bank.get('membership_query_key', 'query_text')
+    return np.asarray([query[key] in bank['membership'].get(tuple(o), ())
+                       for query in queries for o in observations], dtype=bool)
 
 
 def sports_banks():
@@ -73,7 +81,7 @@ def sports_banks():
             query_map[video].append(dict(expression_id=Path(name).stem, query_text=payload['language']))
             for frame, tracks in payload['targets'].items():
                 for i in tracks:
-                    membership[video][int(frame), int(i)].add(payload['language'])
+                    membership[video][int(frame), int(i)].add(Path(name).stem)
     result = {}
     for video, queries in sorted(query_map.items()):
         base = SPORTS_IMAGES / video
@@ -88,7 +96,8 @@ def sports_banks():
         missing = set(membership[video]) - observed
         if missing:
             raise ValueError(f'Official Sports source referring IDs have no boxes: {video}, {sorted(missing)[:3]}')
-        result[video] = make_bank(video, base / 'img1', files, by_frame, queries, membership[video], 'SportsMOT')
+        result[video] = make_bank(video, base / 'img1', files, by_frame, queries, membership[video], 'SportsMOT',
+                                  membership_query_key='expression_id')
     return result
 
 

@@ -50,7 +50,7 @@ def collect():
     from scripts.pf_diag_common import official_metrics
     from scripts.active_eval import offline_labels
     from scripts.report_presence_active import stage_a_gate
-    rows = []; artifacts = []; costs = []
+    rows = []; artifacts = []; costs = []; numerical_audit = []
     for target in IN_DOMAIN:
         _, truth, _ = offline_labels(target)
         meta = target_metadata(target)
@@ -77,13 +77,30 @@ def collect():
                     native_rows_verified_against_sealed_scores=method == 'NATIVE'))
             feature = RUN / 'features' / target / model / 'export_receipt.json'
             info = json.loads(feature.read_text())
+            if info['GT_open_attempts']: raise ValueError('Target feature export opened GT')
+            first_video = min(info['videos'], key=lambda v:v['video_id'])
+            fixed = first_video['parity']
+            fixed_error = first_video.get('fixed_reference_max_error',
+                max(p['sealed_max_error'] for p in fixed))
+            fixed_flips = first_video.get('fixed_reference_sign_flips',
+                sum(p['sealed_sign_flips'] for p in fixed))
+            if fixed_error > 1e-3 or fixed_flips:
+                raise ValueError('Pre-fixed real-frame feature parity gate failed')
+            numerical_audit.append(dict(target=target, model=model, rows=info['rows'],
+                fixed_three_frame_max_abs_error=fixed_error, fixed_three_frame_sign_flips=fixed_flips,
+                whole_replay_max_abs_error=max(r['maximum_margin_error'] for r in info['videos']),
+                whole_replay_sign_flips=sum(r['sign_flips'] for r in info['videos']),
+                whole_replay_rows_over_1e_3=sum(r.get('extra_audit_rows_over_1e_3',0) for r in info['videos']),
+                target_GT_open_attempts=info['GT_open_attempts'],
+                identity_margin_input='original sealed complete scores, not replay margin.npy',
+                reference_margin_sha256=info['margin_reference']['sha256']))
             artifacts.append(dict(kind='complete_target_features', target=target, model=model,
                 path=str(feature), sha256=file_sha(feature), rows=info['rows']))
             costs.append(dict(stage='target_features', target=target, model=model,
                 wall_seconds_latest_worker=info['wall_seconds'],
                 successful_video_stage_seconds=sum(r['wall_seconds'] for r in info['videos']),
                 GPU_hours=sum(r['wall_seconds'] for r in info['videos'])/3600,
-                physical_gpu=info.get('physical_gpu'), peak_allocated_bytes=info.get('peak_allocated_bytes'),
+                physical_gpu=info.get('physical_gpu'), peak_allocated_bytes_latest_worker=info.get('peak_allocated_bytes'),
                 GPU_hours_definition='successful immutable video stages across all resumed workers; shared-GPU elapsed, not utilization integral',
                 failed_and_initial_model_load_overhead='separate launcher/attempt logs; not assumed zero'))
     for target, model in IN_DOMAIN.items():
@@ -101,6 +118,7 @@ def collect():
     write_csv(PUBLIC / 'stage_A.csv', [{k: row.get(k) for k in fields} for row in rows])
     cost_fields = list(dict.fromkeys(k for row in costs for k in row))
     write_csv(PUBLIC / 'stage_A_costs.csv', [{k: row.get(k) for k in cost_fields} for row in costs])
+    write_csv(PUBLIC / 'stage_A_numerical_audit.csv', numerical_audit)
     atomic_json(PUBLIC / 'artifacts_stage_A.json', dict(files=artifacts))
     stage_a_gate()
     gate = json.loads((PUBLIC / 'stage_A_gate.json').read_text())
@@ -130,6 +148,10 @@ def collect():
     text += ('全部指标（含DetA/AssA/IDF1/IDSW、输出、空表达误检、场景及可观测存在性/数量误差）见`stage_A.csv`；'
         '源特征、训练及目标特征成本见`stage_A_costs.csv`；大文件路径和SHA见`artifacts_stage_A.json`。'
         'ORACLE只引用既有独立GT诊断，不是可部署方法。Sports主评测为v4全466序列，418敏感性保留相同v4内容。\n')
+    text += ('\n数值口径详见`stage_A_numerical_audit.csv`：预固定三真实帧维持≤1e-3、0符号翻转；'
+        '额外全行复算的微小误差/近零翻转不隐藏。PCD保留本轮真实计算，身份margin、原生判断和排序'
+        '统一用原封存完整分数，复算margin.npy只作审计，没有改写旧分数或健康特征。'
+        'GPU小时为共享卡上的成功阶段进程耗时，不是利用率积分；失败/初次载入额外开销见完整日志，未假定为零。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
     return gate
 

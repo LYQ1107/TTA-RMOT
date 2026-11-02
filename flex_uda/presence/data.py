@@ -9,8 +9,10 @@ from torch.utils.data import Dataset
 
 
 class FeatureUnits(Dataset):
-    def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos'):
+    def __init__(self, root, *, labels=True, validation=False, shard_subdir='videos', labels_root=None):
         self.root, self.validation, self.labels = Path(root), validation, labels
+        self.labels_root = Path(labels_root) if labels_root else None
+        self.shard_subdir = shard_subdir
         self.units, self.shards, self.arrays = [], [], OrderedDict()
         self.identity_reference = self.margin_reference_record = None
         self.positive_units = 0
@@ -29,7 +31,7 @@ class FeatureUnits(Dataset):
             n = len(obs)
             frames, starts, nums = np.unique(obs[:, 0], return_index=True, return_counts=True)
             ranges = {int(t): (int(a), int(a+c)) for t, a, c in zip(frames, starts, nums)}
-            y = np.load(folder / 'labels.npy', mmap_mode='r') if labels else None
+            y = np.load(self.label_path(folder), mmap_mode='r') if labels else None
             if validation and not (folder / 'GT_counts.npy').exists():
                 raise ValueError('Prepare independent own-source validation labels first')
             shard = len(self.shards); self.shards.append((folder, meta))
@@ -46,11 +48,16 @@ class FeatureUnits(Dataset):
 
     def __len__(self): return len(self.units)
 
+    def label_path(self, folder):
+        return ((self.labels_root / self.shard_subdir / folder.name / 'labels.npy')
+                if self.labels_root is not None else folder / 'labels.npy')
+
     def arrays_for(self, shard):
         if shard not in self.arrays:
             folder, _ = self.shards[shard]
             names = ['pcd', 'margin', 'boxes', 'sentence'] + (['labels'] if self.labels else [])
-            self.arrays[shard] = {name: np.load(folder / (name+'.npy'), mmap_mode='r') for name in names}
+            self.arrays[shard] = {name: np.load(self.label_path(folder) if name == 'labels' else folder / (name+'.npy'),
+                                               mmap_mode='r') for name in names}
             if self.identity_reference is not None:
                 meta = self.shards[shard][1]; queries = meta['queries']; n = meta['observations']
                 start = queries[0]['start']; stop = queries[-1]['stop']
