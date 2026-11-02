@@ -112,6 +112,7 @@ def collect(full=False):
     from scripts.presence_finish_a import references
     from scripts.pf_diag_common import official_metrics
     from flex_uda.presence.predictions import verify_predictions
+    from scripts.active_eval import official_stats
     selection = json.loads((RECORD / 'selection.json').read_text())['models']
     rows, gates, artifacts, costs = [], [], [], []
     jobs = list(IN_DOMAIN.items()) if not full else [(t, m) for t in IN_DOMAIN for m in IN_DOMAIN.values()]
@@ -130,8 +131,11 @@ def collect(full=False):
                 prediction_seal_sha256=file_sha(path / 'predictions_seal.json'),
                 detailed_sha256=file_sha(path / 'results/pedestrian_detailed.csv')))
             if method == 'PRES_TOPK' and IN_DOMAIN[target] == name:
+                native_exact = official_stats(native_folder)['HOTA_unrounded']
+                head_exact = row['HOTA_unrounded']
                 gates.append(dict(target=target, model=name, native_HOTA=native, HOTA=row['HOTA'],
-                    delta_HOTA=row['HOTA']-native, passed=row['HOTA'] >= native-1, path=str(path)))
+                    delta_HOTA=row['HOTA']-native, passed=head_exact >= native_exact-1, path=str(path),
+                    native_HOTA_unrounded=native_exact,HOTA_unrounded=head_exact,delta_HOTA_unrounded=head_exact-native_exact))
     for target, name in IN_DOMAIN.items():
         r = json.loads((OUT / 'heads' / name / 'training_receipt.json').read_text())
         costs.append(dict(target=target, model=name, epochs=r['epochs'], source_loss=r['best_source_loss'],

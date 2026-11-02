@@ -3,6 +3,7 @@ import csv
 import json
 from pathlib import Path
 import sys
+import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -85,7 +86,18 @@ def main():
         text += '本次固定改造仍有同域失败：'+', '.join(gate['failed_targets'])+'。遵守预注册，未启动 B/C、未追加第二个新结构或目标阈值搜索；完整方法仍未完成。\n'
     else:
         text += 'A 通过不等于 B/C 完成。后续仍需 v3 manifest/动态数量接口集成、真实 C1/C3 pilot、40 GPU小时估算；不得直接沿用旧失败 gate 或默认头路径。\n'
+    text += '\n完整新阶段日志、源选择曲线、官方详细表在 logs.tar.gz；清单及 SHA 见 logs.json。历史 experiment_logs.tar.gz 不改。模型/缓存与预测均不打包。\n'
     (RECORD / 'REPORT.md').write_text(text)
+    paths = sorted(p for p in OUT.rglob('*') if p.is_file() and (p.suffix in ('.log','.json','.jsonl') or
+        p.name in ('pedestrian_detailed.csv','pedestrian_summary.txt')))
+    files = [dict(path=str(p),archive_path=str(p.relative_to(OUT)),bytes=p.stat().st_size,sha256=file_sha(p)) for p in paths]
+    archive_path = RECORD / 'logs.tar.gz'
+    with tarfile.open(archive_path, 'w:gz') as archive:
+        for p, r in zip(paths, files): archive.add(p, arcname=r['archive_path'], recursive=False)
+    for r in files:
+        if file_sha(r['path']) != r['sha256']: raise RuntimeError('Wait for log owner to finish before packaging')
+    atomic_json(RECORD / 'logs.json',dict(path=str(archive_path),bytes=archive_path.stat().st_size,
+        sha256=file_sha(archive_path),files=files,scope='new v3 only; historical archive not rewritten'))
     atomic_json(RECORD / 'report_receipt.json', dict(status=status, gate_sha256=file_sha(RECORD / 'gate.json'),
         report_sha256=file_sha(RECORD / 'REPORT.md'), selection_sha256=file_sha(RECORD / 'selection.json'),
         completed_rows=len(rows), target_GT_open_attempts=sum(int(r['GT_open_attempts']) for r in rows),
