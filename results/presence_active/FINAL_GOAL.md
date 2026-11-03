@@ -29,23 +29,37 @@ goal 状态：ACTIVE，线程 `01a154f2-1527-7b80-a8d7-3679ea95c32b`，无另设
 - 单阻塞协调器等待；失败定位具体原因，最小修复后只恢复未完成单元。
 - 正在运行和等待不是阻塞；10项完成也不等于完整最终目标完成。
 
-## 当前恢复入口
+## 当前状态：10项完成，108项目标仍未完成
+
+2026-11-03最终协调器正常exit0；10套全视频预测先封存，官方评测、视频bootstrap、恢复/误检及成本归因均完成。
+覆盖4455个episode、5080381行固定MOT预测，框/ID/帧号逐行核验；最终会话GT打开0。
+Dance FULL37.724（Native8.218），Sports FULL43.914（Native50.970、预算匹配YT_PRIOR58.601）。
+因此有方向性正结果，但当前方法尚未普遍成立；slow在Sports显著退化，不以loss/梯度代替科学验收。
+
+10项分配worker wall为10.127小时上界（含失败/空等），有效LoRA/重打分8.580小时、新教师forward0.270小时；
+另列共享准备/历史研发，不把它们隐去或重复计入。原完整估算292.886小时不改；
+按完整C1/C3实测外推，108项277.461小时、剩余98项267.233小时。
+原矩阵ρ=.3主方法/关键对照子集28项35.812小时，其中18项未跑、约25.584小时。
+这只是范围/预算决策材料，不是新的运行授权；40小时关卡和10项白名单不改。
+当前goal保持ACTIVE但不启动剩余GPU任务，须由用户明确决定扩大预算或下一段已注册范围；不得将10项冒充108项完成。
+
+## 恢复入口与历史执行记录
 
 - 清单：`results/presence_active/redesign_v5/execution_map_v1_full.json`
 - 固定队列：`results/presence_active/redesign_v5/active_map_v1_full/registered_jobs.json`
 - 报告：`results/presence_active/redesign_v5/active_map_v1_full/REPORT.md`
 - 协调器：`results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/coordinator_1793694616111172762`
-- 已启动C1/C3健康流保持运行，不因设置goal重启或重置。
+- 本轮10项已全部完成，不重启它们；后续仅在新范围授权后恢复尚未完成单元。
 
 2026-11-03外部SIGTERM后恢复：旧协调器真实返回143且所有本任务子进程已退出，C3从stream_033（next_video34）恢复，34个已完成视频不重跑。
-当前durable观察入口为
+当时durable观察入口为
 `/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/durable_1793710403540105887`。
 原始启动信息保留作历史；恢复证据与成本界限见本阶段interruption_C3_FULL_20261103.json。
 观察会话丢失时，先确认该manager真实状态，再运行同环境Python的
 `scripts/active_durable.py --attach <上述durable目录>`；不要另开第二条队列。
 
 随后C3 FULL已完整封存并官方评测HOTA43.914。两个YT对照在首视频暴露共享缓存反序领取死锁，已CPU复现修复，仅停止确认死锁的两个teacher并恢复两项。
-当前最新durable目录为
+最后一个durable目录为
 `/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/durable_1793718645470682622`，
-manager启动PID72357；旧4050136已有exit1完成收据，不是当前运行入口。
+manager启动PID72357，现已有exit0完成收据；旧4050136为exit1，也不是运行中入口。
 恢复依据见deadlock_C3_YESTRACK_20261103.json，8项完整GPU结果不重跑，实际idle worker时间保留。

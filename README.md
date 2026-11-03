@@ -7,7 +7,7 @@
 ## 当前研究：存在性—身份解耦、主动教师与快慢适应
 
 分支 `method/presence-active-20261102`。最终 goal 保持 ACTIVE，范围为三数据集六方向及原固定预算/对照/消融，
-不是首视频 pilot；当前先完成 C1/C3、ρ=0.3 的10项全视频队列，原40 GPU小时扩展关卡不变。
+不是首视频 pilot；C1/C3、ρ=0.3 的10项全视频队列已全部完成，原40 GPU小时扩展关卡不变。
 不从旧报告中的“停止”或本页历史命令推断当前进程状态，也不据此重启健康作业。
 
 - [最终目标、执行边界与恢复入口](results/presence_active/FINAL_GOAL.md)。
@@ -18,12 +18,21 @@
   [成本](results/presence_active/redesign_v5/active_map_v1_full/costs.csv)、
   [预测/日志与checkpoint恢复清单](results/presence_active/redesign_v5/active_map_v1_full/logs.json)。
 - [已完成的九格Stage A与同域门槛](results/presence_active/redesign_v5/REPORT.md)。
+- [完整运行日志分片与SHA清单](results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz.parts/manifest.json)：
+  GitHub拒绝单个大包后改为原字节分片，原包保留服务器，按报告命令可精确还原。
 
 Dance全25视频/425表达：Native HOTA8.218，FULL37.724，MINUS_SLOW34.925，
 UNIFORM_K24.108，预算匹配YesTrack随机/分数优先20.750/22.711。
 FULL−MINUS_SLOW的95%视频聚类区间包含0，不能宣称慢分支已证明必要；FULL的LoRA/重打分共2.712小时，
-不能把约55秒教师forward当作整个系统成本。SportsMOT当前已完成对照有负向结果，也完整报告；
-其FULL及后续对照仍由原协调器接续，不因Dance的正向结果挑方向或改变参数。
+不能把约55秒教师forward当作整个系统成本。SportsMOT全45视频/466表达：Native50.970、FULL43.914、
+MINUS_SLOW45.451、UNIFORM_K40.804、预算匹配YesTrack随机/优先57.013/58.601。
+FULL−Native的95%视频聚类CI为[-10.743,-3.838]，slow额外效果为-1.536、CI[-2.968,-0.155]；
+不能隐藏失败或宣称普遍有效。最终协调器已正常退出，没有等待中的训练。
+
+10项及完整日志、固定框/ID覆盖、置信区间与成本已归档。108项仍有98项未运行；
+按本轮实测外推，剩余约267.233 GPU小时，超过原40小时关卡，不自行启动。
+原矩阵ρ=.3主方法/关键对照子集共28项，额外18项约25.584小时，作为下一步范围选择而非擅自缩小最终目标。
+详见[实测成本与资源复核](results/presence_active/redesign_v5/active_map_v1_full/measured_budget_review.json)。
 
 当前实验使用冻结Qwen3-VL教师与完整视频统计，是teacher-assisted、video-transductive设定，
 不是无外部教师的纯Source-Free自监督或严格逐帧因果在线方法。目标GT只在完整预测封存后的独立评测使用，

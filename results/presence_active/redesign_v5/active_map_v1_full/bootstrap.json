@@ -83,11 +83,84 @@
       ],
       "unit": "video, all correlated expressions and frames kept together",
       "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_NATIVE": {
+      "delta_HOTA": -7.056313580795766,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -10.742626653466425,
+        -3.8376352868721995
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_PRES_TOPK": {
+      "delta_HOTA": -9.013296579637142,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -12.604709511735924,
+        -5.84882235628571
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_YESTRACK_BUDGET_RANDOM": {
+      "delta_HOTA": -13.098613803371862,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -16.631984663586245,
+        -10.139100716027968
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_YESTRACK_BUDGET_PRIOR": {
+      "delta_HOTA": -14.686625925254717,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -17.90591588944286,
+        -11.974584032727941
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_UNIFORM_K": {
+      "delta_HOTA": 3.109920131583209,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -1.065336553654579,
+        6.914093175479642
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    "C3/rho0.3/FULL_minus_MINUS_SLOW": {
+      "delta_HOTA": -1.5364176582483964,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -2.968065304840187,
+        -0.15526664748034524
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
     }
   },
   "samples": 2000,
   "seed": 0,
   "cluster_unit": "video; correlated expressions/frames kept together",
   "KITTI": "four videos, points only",
-  "multiplicity": "descriptive comparisons, no target-GT selection of variants"
+  "multiplicity": "descriptive comparisons, no target-GT selection of variants",
+  "uncertainty_scope": "conditional on fixed predictions from the original ordered stream; no adaptation rerun under sampled video order, no seed/order uncertainty, and carried DS/LoRA state induces cross-video dependence"
 }

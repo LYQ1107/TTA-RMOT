@@ -46,3 +46,17 @@ def test_archive_exports_only_used_raw_responses_without_changing_cache(tmp_path
     active_archive.package(SimpleNamespace(active=active,public=public,launchers=launchers),[dict(path=str(folder))])
     with tarfile.open(public / 'experiment_logs.tar.gz') as archive:durable_names=archive.getnames()
     assert 'launchers/durable/coordinator.log' in durable_names
+
+
+def test_archive_transport_roundtrip_preserves_all_bytes(tmp_path):
+    from scripts.active_archive import archive_transport_parts,reassemble_archive
+    from flex_tta.runtime.pf_receipts import file_sha
+    original=tmp_path/'experiment_logs.tar.gz'
+    original.write_bytes(bytes(range(256))*23)
+    transport=archive_transport_parts(original,chunk_bytes=1024)
+    manifest=json.loads(open(transport['manifest']).read())
+    assert len(manifest['parts'])==6
+    assert sum(part['bytes'] for part in manifest['parts'])==original.stat().st_size
+    output=tmp_path/'restored.tar.gz'
+    assert reassemble_archive(transport['manifest'],output)==file_sha(original)
+    assert output.read_bytes()==original.read_bytes()

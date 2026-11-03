@@ -370,6 +370,7 @@ def main():
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
     atomic_json(PUBLIC / 'bootstrap.json', dict(comparisons=comparisons, samples=2000, seed=0,
         cluster_unit='video; correlated expressions/frames kept together', KITTI='four videos, points only',
+        uncertainty_scope='conditional on fixed predictions from the original ordered stream; no adaptation rerun under sampled video order, no seed/order uncertainty, and carried DS/LoRA state induces cross-video dependence',
         multiplicity='descriptive comparisons, no target-GT selection of variants'))
     atomic_json(PUBLIC / 'active_artifacts.json', dict(large_files_not_in_git=True, files=artifacts))
     if rows:

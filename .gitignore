@@ -79,3 +79,8 @@ results/manifests/refer_bdd_evaluation_manifest.jsonl
 results/diagnostics/pf_recoverability_20261025/countmatched/COUNT_MATCHED_FROZEN/
 results/diagnostics/pf_recoverability_20261025/features/cache/
 results/diagnostics/pf_recoverability_20261025/features/model_logs/
+
+# Current active-stage log archive exceeds GitHub's create-blob request limit.
+# Preserve the original on server; publish byte-exact parts and their manifest.
+/results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz
+!/results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz.parts/part_*.bin
