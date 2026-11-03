@@ -19,6 +19,9 @@ def test_archive_exports_only_used_raw_responses_without_changing_cache(tmp_path
     database.executemany('INSERT INTO outputs VALUES (?,?,?)',
         [('used',0,json.dumps(payload)),('unused',0,'{}')]);database.commit();database.close()
     public=tmp_path / 'public';public.mkdir();launchers=tmp_path / 'launchers';launchers.mkdir()
+    (launchers / 'C1_FULL_0.3.log').write_text('closed worker log')
+    (launchers / 'C1_FULL_0.3_completion.json').write_text(json.dumps(dict(exit_code=0)))
+    live=launchers / 'C3_FULL_0.3.log';live.write_text('another worker is still producing this log')
     monkeypatch.setattr(active_archive,'RUN',tmp_path)
     from flex_tta.runtime.pf_receipts import file_sha
     before=file_sha(cache)
@@ -27,3 +30,7 @@ def test_archive_exports_only_used_raw_responses_without_changing_cache(tmp_path
     assert rows==[dict(request_id='used',response=payload)]
     assert file_sha(cache)==before and result['raw_teacher_response_keys']==1
     assert len(result['checkpoints'])==1 and result['full108_matrix_completion_not_claimed']
+    import tarfile
+    with tarfile.open(public / 'experiment_logs.tar.gz') as archive:names=archive.getnames()
+    assert 'launchers/C1_FULL_0.3.log' in names and 'launchers/C3_FULL_0.3.log' not in names
+    assert result['unpackaged_launcher_logs']==[str(live)]

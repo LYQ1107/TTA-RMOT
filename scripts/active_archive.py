@@ -10,7 +10,7 @@ from flex_uda.presence.runtime import RUN
 
 def package(execution,rows):
     roots=[Path(row['path']) for row in rows if Path(row['path']).is_relative_to(execution.active)]
-    keys=set();files=[];checkpoints=[]
+    keys=set();files=[];checkpoints=[];unpackaged_launcher_logs=[]
     for root in roots:
         seal=json.loads((root / 'predictions_seal.json').read_text())
         if seal['GT_open_attempts'] or seal.get('teacher',{}).get('GT_open_attempts',0):
@@ -27,6 +27,11 @@ def package(execution,rows):
                 checkpoints.append(dict(path=str(path),bytes=path.stat().st_size,sha256=file_sha(path)))
     for path in execution.launchers.rglob('*'):
         if path.is_file() and path.suffix in ('.log','.json'):
+            if path.suffix=='.log':
+                receipts=[path.with_name(path.stem+'_completion.json'),path.with_suffix('.json')]
+                terminal=any(p.exists() and json.loads(p.read_text()).get('exit_code') is not None for p in receipts)
+                if not terminal:
+                    unpackaged_launcher_logs.append(str(path));continue
             files.append((path,'launchers/'+str(path.relative_to(execution.launchers))))
     cache=RUN / 'teacher/raw.sqlite'
     raw=execution.public / 'teacher_responses.jsonl.gz'
@@ -48,6 +53,8 @@ def package(execution,rows):
         if file_sha(row['path'])!=row['sha256']:raise RuntimeError('Log owner has not finished: '+row['path'])
     record=dict(status='COMPLETED_SEALED_METHOD_LOGS_PACKAGED',completed_active_methods=len(roots),
         full108_matrix_completion_not_claimed=True,files=manifest,checkpoints=checkpoints,
+        unpackaged_launcher_logs=unpackaged_launcher_logs,
+        launcher_log_scope='only after worker/evaluator wait() receipt; unfinished paths retained, not claimed completed',
         archive=dict(path=str(archive_path),bytes=archive_path.stat().st_size,sha256=file_sha(archive_path)),
         raw_teacher_response_keys=len(keys),raw_teacher_cache_source=str(cache),
         raw_response_cost_note='one immutable original response per input; per-method actual/cache/equivalent costs are in costs.csv',
