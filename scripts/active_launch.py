@@ -38,6 +38,9 @@ def main():
         if cost['total_GPU_hours_estimate'] > 40 and plan['tier'] != 'MAIN_AND_CRITICAL_ONLY':
             raise PermissionError('Over40h: do not expand the full matrix before user direction')
         selected_jobs = plan['jobs']
+        allowed=execution.manifest.get('allowed_registered_jobs') if execution.manifest else None
+        if allowed is not None and any(job not in allowed for job in selected_jobs):
+            raise PermissionError('This continuation authorizes only the published main/critical tier')
         fixed = requested_jobs()
         if any(job not in fixed for job in selected_jobs): raise ValueError('Unregistered method or budget')
     def output(job):

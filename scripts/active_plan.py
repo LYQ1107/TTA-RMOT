@@ -1,5 +1,6 @@
 """Fixed requested matrix and GT-free compute estimate from C1/C3 real pilots."""
 from argparse import ArgumentParser
+from functools import lru_cache
 import json
 from pathlib import Path
 import sys
@@ -26,6 +27,7 @@ def jobs():
     return result
 
 
+@lru_cache(maxsize=3)
 def dimensions(target):
     from collections import Counter, defaultdict
     meta = target_metadata(target); rows = []
