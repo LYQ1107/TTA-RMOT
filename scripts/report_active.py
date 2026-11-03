@@ -22,6 +22,25 @@ def write_table(path, rows):
         writer = csv.DictWriter(stream, fieldnames=fields,lineterminator='\n'); writer.writeheader(); writer.writerows(rows)
 
 
+def committed_teacher_equivalent_hours(receipts,teacher,method):
+    """One cost per committed question, separate from failed-session work."""
+    if method=='GATE_REASSIGN_REF':return teacher.get('equivalent_forward_seconds',0)/3600
+    if receipts and all('teacher_delta' in row for row in receipts):
+        return sum(row['teacher_delta']['equivalent_forward_seconds'] for row in receipts)/3600
+    # The budget baselines retain their exact ordered question-key lists.
+    # A repeated logical call stays repeated; only the physical cache is shared.
+    import sqlite3
+    keys=[key for row in receipts for key in row['question_keys']]
+    if len(keys)!=teacher['logical_calls']:raise ValueError('Incomplete committed teacher question list')
+    seconds=0.
+    with sqlite3.connect((RUN/'teacher/raw.sqlite').resolve().as_uri()+'?mode=ro',uri=True) as database:
+        for key in keys:
+            raw=database.execute('SELECT payload FROM outputs WHERE key=?',(key,)).fetchone()
+            if raw is None or raw[0] is None:raise ValueError('Missing sealed teacher answer '+key)
+            answer=json.loads(raw[0]);seconds+=answer['batch_forward_seconds']/answer['batch_size']
+    return seconds/3600
+
+
 def plot_adaptation_cost(rows, costs, public):
     """Use independent-equivalent teacher cost, not cache-dependent new calls."""
     import matplotlib
@@ -40,13 +59,14 @@ def plot_adaptation_cost(rows, costs, public):
         for mi,method in enumerate(methods):
             for row in (r for r in rows if r['pair']==pair and r['method']==method):
                 cost=lookup[pair,method,str(row['rho'])]
-                hours=sum(float(cost[k]) for k in ('teacher_equivalent_forward_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours'))
+                hours=float(cost.get('committed_teacher_equivalent_forward_GPU_hours',cost['teacher_equivalent_forward_GPU_hours']))
+                hours+=sum(float(cost[k]) for k in ('LoRA_GPU_hours','rescore_GPU_hours'))
                 if hours<=0:continue
                 ax.scatter(hours,float(row['HOTA']),color=palette(mi),s=40)
                 ax.annotate(labels[method]+' (rho='+str(row['rho'])+')',
                     (hours,float(row['HOTA'])),xytext=(5,4),textcoords='offset points',fontsize=7)
         ax.set(xscale='log',title=pair+': '+PAIRS[pair][0]+' -> '+PAIRS[pair][1],
-            xlabel='Equivalent teacher + LoRA/rescore process hours (log)',ylabel='Official HOTA')
+            xlabel='Committed teacher + valid-lineage LoRA/rescore hours (log)',ylabel='Official HOTA')
         ax.margins(x=.7,y=.18);ax.grid(alpha=.2)
     for ax in axes.flat[len(pairs):]:ax.set_visible(False)
     fig.suptitle('Completed jobs only; no cache discounts in teacher cost')
@@ -302,6 +322,7 @@ def main():
             teacher_cache_hits=seal.get('teacher', {}).get('cache_hits', 0),
             teacher_forward_GPU_hours=result['teacher_forward_GPU_hours'],
             teacher_equivalent_forward_GPU_hours=result['teacher_equivalent_forward_GPU_hours'],
+            committed_teacher_equivalent_forward_GPU_hours=committed_teacher_equivalent_hours(receipts,seal.get('teacher',{}),method),
             LoRA_GPU_hours=result['LoRA_GPU_hours'], rescore_GPU_hours=result['rescore_GPU_hours'],
             assigned_worker_wall_hours=sum(r.get('wall_seconds', 0) for r in attempts)/3600,
             failed_worker_attempts=sum(r['status'] != 'RETURNED_SUCCESSFULLY' for r in attempts),
@@ -402,6 +423,8 @@ def main():
         '不是GPU利用率积分，不能与同驻教师进程wall重复相加。源Head训练、前端与特征预计算另见阶段A。\n\n'
         '外部中断单独记录：worker wall如只有观测区间则标upper bound；未收尾教师会话的原始缓存/已完成视频可恢复开销与未知缓存请求分别注明。'
         'LoRA/重打分相位求和以最终有效checkpoint路径为准，未完成视频的浪费另见中断记录，不能默认为零或冒充精确计时。\n\n'
+        'teacher_equivalent_forward_GPU_hours保留含失败重试的会话口径；新增committed_teacher_equivalent_forward_GPU_hours只计最终有效问题一次，'
+        '用于计算量图，并与有效checkpoint路径的LoRA/重打分配对。全部真实新增forward及重试仍在原计时/worker账目中，不从实际支出抹去。\n\n'
         'adaptation_cost_vs_HOTA.png另画独立等价教师forward加LoRA/重打分的相位耗时，避免把同一教师预算等同总计算预算；'
         '它不包含共享源端/冻结打分/前端准备和载入开销，不能解释成完整系统总成本或GPU利用率积分。\n\n'
         '行为见behavior_round/video.csv。置信不等于正确；分别标记先验即高置信、从未问过但高置信，以及教师/最终新增确认。'
