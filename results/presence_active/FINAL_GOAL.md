@@ -38,6 +38,11 @@ C2/C5各FULL、UNIFORM_K、两种预算匹配YT（各4）；C4/C6另含MINUS_SLO
 新清单execution_map_v1_critical18.json，报告/预注册目录redesign_v5/active_map_v1_critical28。
 仍最多两张显存准入共享卡，原配置不变、不按GT调参。先公开预注册，再启动单durable协调器。
 
+新增18项预注册已公开11c16e7d；实际启动manager213246，C2 FULL在GPU5/PID213478，C4 FULL在GPU7/PID213479。
+当前恢复目录为results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/durable_1793724295166384263，
+观察handle6305；连接丢失只能attach该manager，不另开队列。完整启动收据见新报告目录execution_started.json。
+后面的旧10项durable目录均为历史、已终止，不是本轮运行入口。
+
 ## 上一阶段：10项完成，108项目标仍未完成
 
 2026-11-03最终协调器正常exit0；10套全视频预测先封存，官方评测、视频bootstrap、恢复/误检及成本归因均完成。

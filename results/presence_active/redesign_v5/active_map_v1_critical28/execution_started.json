@@ -1,0 +1,70 @@
+{
+  "status": "LIVE_QUEUE_STARTED_NOT_COMPLETED",
+  "client_date": "2026-11-04",
+  "scope": "ADDITIONAL_CRITICAL18",
+  "registered_jobs": 18,
+  "prior_completed_jobs_reused": 10,
+  "full_matrix_jobs": 108,
+  "remaining_after_this_scope": 80,
+  "full_matrix_authorized": false,
+  "prereg_public_commit": "11c16e7dc934d08da90ec3fc75bedd88121984d0",
+  "manager_pid": 213246,
+  "durable_dir": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/durable_1793724295166384263",
+  "coordinator": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/coordinator_1793724301173953273",
+  "launcher_pid": 213445,
+  "observer_session_id": 6305,
+  "initial_workers": [
+    {
+      "event": "ACTIVE_JOB_STARTED",
+      "job": {
+        "pair": "C2",
+        "method": "FULL",
+        "rho": 0.3
+      },
+      "physical_gpu": 5,
+      "pid": 213478,
+      "log": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/1793724305124859781/C2_FULL_0.3.log"
+    },
+    {
+      "event": "ACTIVE_JOB_STARTED",
+      "job": {
+        "pair": "C4",
+        "method": "FULL",
+        "rho": 0.3
+      },
+      "physical_gpu": 7,
+      "pid": 213479,
+      "log": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/1793724305124859781/C4_FULL_0.3.log"
+    }
+  ],
+  "maximum_shared_physical_GPUs": 2,
+  "foreign_processes_stopped": 0,
+  "preflight_GT_open_attempts": 0,
+  "final_runtime_GT_audits_pending": true,
+  "admission": {
+    "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/1793724305124859781/admission.json",
+    "sha256": "e3e9365dcc01eedcd3af54e4f64b70dd9a88817a5dc4cf29a470651d5dc0f666",
+    "selected": [
+      {
+        "index": 5,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 8757,
+        "free_mib": 72397,
+        "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "compute_processes": 1
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 16181,
+        "free_mib": 64973,
+        "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "compute_processes": 1
+      }
+    ]
+  },
+  "manifest_sha256": "56b80d76bb61bda539b8389054ee66ef3e4faf43b6589af5509cdbbdc1ea4fc7",
+  "plan_sha256": "6f3ebd459a443c7912084ea51e48f24671034b386565158c1dc12da14cce7972"
+}
