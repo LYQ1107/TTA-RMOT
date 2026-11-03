@@ -58,3 +58,20 @@ def test_pilot_only_manifest_blocks_registered_queue_before_gpu_access(tmp_path,
     result=subprocess.run([sys.executable,'scripts/active_launch.py','--phase','registered'],cwd=root,
         env=env,capture_output=True,text=True)
     assert result.returncode!=0 and 'Only first-video small pilots are authorized' in result.stderr
+
+
+def test_main_critical_manifest_blocks_unpublished_expansion_before_gpu_access(tmp_path,monkeypatch):
+    import sys
+    import flex_uda.active.execution as execution
+    from scripts import active_launch
+    cost=tmp_path / 'BC_cost_estimate.json'
+    cost.write_text(json.dumps(dict(total_GPU_hours_estimate=293)))
+    allowed=dict(pair='C1',method='FULL',rho=.3)
+    plan=tmp_path / 'plan.json'
+    plan.write_text(json.dumps(dict(tier='MAIN_AND_CRITICAL_ONLY',
+        cost_estimate_sha256=file_sha(cost),jobs=[dict(pair='C6',method='FULL',rho=.3)])))
+    paths=SimpleNamespace(public=tmp_path,manifest=dict(allowed_registered_jobs=[allowed]))
+    monkeypatch.setattr(execution,'authorize_active',lambda:(paths,'published'))
+    monkeypatch.setattr(sys,'argv',['active_launch.py','--phase','registered','--jobs-json',str(plan)])
+    with pytest.raises(PermissionError,match='only the published main/critical tier'):
+        active_launch.main()
