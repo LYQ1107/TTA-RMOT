@@ -100,7 +100,7 @@ def main():
     from scripts.active_eval import summarize, bootstrap, sports418, offline_labels
     from scripts.presence_finish_a import references
     rows = []; status = []; artifacts = []; round_rows = []; video_rows = []; reliability_rows = []; costs = []
-    cached_truth = {}
+    cached_truth = {}; attribution_rows=[]
     specifications = jobs()+[dict(pair=pair, method='GATE_REASSIGN_REF', rho=None) for pair in ('C1', 'C6')]
     for job in specifications:
         pair, method, rho = job['pair'], job['method'], job['rho']; target = PAIRS[pair][1]
@@ -113,6 +113,18 @@ def main():
         result.update(pair=pair, rho=rho); rows.append(result)
         status.append(dict(job, status='SEALED_AND_OFFICIALLY_EVALUATED'))
         if target == 'SportsMOT': sports418(folder)
+        if method!='GATE_REASSIGN_REF':
+            from scripts.active_attribution import attribute
+            attribution=attribute(folder,target)
+            attribution_rows.append(dict(pair=pair,method=method,rho=rho,
+                **{k:v for k,v in attribution.items() if k not in ('episodes','query_presence','method','model')},
+                query_present_GT_recall=attribution['query_presence']['query_present']['adapted_GT_recall'],
+                query_present_FP=attribution['query_presence']['query_present']['adapted_false_positive_rows'],
+                query_empty_FP=attribution['query_presence']['query_empty']['adapted_false_positive_rows'],
+                query_empty_nonempty_prediction_rate=attribution['query_presence']['query_empty']['adapted_nonempty_prediction_rate']))
+            path=folder / 'offline_attribution.json'
+            artifacts.append(dict(pair=pair,method=method,rho=rho,path=str(path),
+                bytes=path.stat().st_size,sha256=file_sha(path)))
         attempts = [json.loads(path.read_text()) for path in (folder / 'worker_attempts').glob('*.json')]
         receipts = [json.loads(path.read_text()) for path in (folder / 'videos').glob('*/receipt.json')]
         updates = sum(r['slow']['optimizer_updates'] for v in receipts for r in v.get('rounds', []))
@@ -151,6 +163,7 @@ def main():
             comparisons[f'{pair}/rho{rho}/FULL_minus_{method}'] = bootstrap(row['path'], folder, target)
     write_table(PUBLIC / 'main.csv', rows); write_table(PUBLIC / 'matrix_status.csv', status)
     write_table(PUBLIC / 'costs.csv', costs); write_table(PUBLIC / 'behavior_round.csv', round_rows)
+    write_table(PUBLIC / 'recovery_FP_attribution.csv',attribution_rows)
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
     atomic_json(PUBLIC / 'bootstrap.json', dict(comparisons=comparisons, samples=2000, seed=0,
         cluster_unit='video; correlated expressions/frames kept together', KITTI='four videos, points only',
@@ -195,6 +208,8 @@ def main():
         '行为见behavior_round/video.csv。置信不等于正确；分别标记先验即高置信、从未问过但高置信，以及教师/最终新增确认。'
         '达到固定确认数的调用是轮边界上界，不据此单独宣称越问越省。DS估计与GT后验诊断见reliability_vs_GT.csv，'
         '同时给出提问帧与50%轨迹多数标签；身份先验以轨迹标签为主要参照，重复视图/帧不是独立样本。\n\n'
+        'recovery_FP_attribution.csv用独立IoU>=0.5逐帧匹配比较Native，区分新增行FP与原有行匹配重分配的FP变化，'
+        '只作离线归因、不代替官方TrackEval，也不反馈在线阈值。\n\n'
         '完整机器表、bootstrap及大文件路径/SHA均在本目录；Sports使用v4全466和相同v4内容的旧418 ID敏感性。'
         '没有根据目标GT调整阈值、种子或选择最优变体。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
