@@ -1,0 +1,43 @@
+{
+  "status": "BATCH_CACHE_CIRCULAR_WAIT_REPRODUCED_AND_FIXED",
+  "completed_methods_preserved": 8,
+  "completed_control_videos_before_restart": 0,
+  "failed_manager_dir": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/durable_1793710403540105887",
+  "failed_manager_exit_code": 1,
+  "reason": "Two teachers claimed overlapping keys in opposite orders and blocked before flushing their owned batch.",
+  "original_CPU_regression": "test_active_teacher_concurrency.py failed with opposite-order deadlock, 10.13s",
+  "fixed_CPU_regressions_passed": 6,
+  "fix": "nonblocking claim; publish all owned results before waiting for another owner; no overwrite of immutable completed answers",
+  "backend_visual_inputs_thresholds_seed_budget_unchanged": true,
+  "model_or_teacher_updates_added": 0,
+  "source_teacher_backend_and_visual_builder_unchanged": true,
+  "only_confirmed_deadlocked_teachers_SIGTERM": [
+    29609,
+    29612
+  ],
+  "other_processes_stopped": 0,
+  "rows_dropped": 0,
+  "GT_used_for_recovery": false,
+  "physical_new_forward_calls_in_failed_attempts": 0,
+  "cache_payloads_completed_by_failed_owners": 0,
+  "idle_assigned_worker_seconds": 3534.287788102869,
+  "is_GPU_utilization_integral": false,
+  "cases": [
+    {
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "pid": 29609,
+      "parent": 29423,
+      "held": 27,
+      "seconds": 1767.1324143838137,
+      "session": "1793716698460042201"
+    },
+    {
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "pid": 29612,
+      "parent": 29424,
+      "held": 11,
+      "seconds": 1767.1553737190552,
+      "session": "1793716698476410780"
+    }
+  ]
+}

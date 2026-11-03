@@ -10,6 +10,7 @@ def test_live_teacher_journal_is_not_a_final_frozen_receipt(tmp_path):
     client.started=time.perf_counter();client.child=SimpleNamespace(pid=123)
     client.stats=dict(logical_calls=2,new_calls=1,cache_hits=1,forward_seconds=.2)
     client.returned_keys=['a','b']
+    client.parent_attempted_requests=2;client.pending_request_count=0
     client.progress('ANSWERS_RETURNED_NO_FINAL_WEIGHT_SEAL')
     record=json.loads((tmp_path/'progress/session.json').read_text())
     assert record['costs']==client.stats and record['returned_request_ids']==['a','b']

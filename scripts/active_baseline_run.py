@@ -69,7 +69,8 @@ def run(a):
             forward_seconds=sum(row['forward_seconds'] for row in sessions),
             equivalent_forward_seconds=sum(row['equivalent_forward_seconds'] for row in sessions),
             peak_allocated_bytes=max(row['peak_allocated_bytes'] for row in sessions),
-            prior_session_resume_included=True)
+            prior_session_resume_included=True,
+            interrupted_sessions_accounting=[row['interruption_accounting'] for row in sessions if 'interruption_accounting' in row])
         seal_mask(out, meta, mask, target=target, model=model, method=a.method, GT_open_attempts=len(access),
             extra=dict(pair=a.pair, rho=None if a.method == 'YESTRACK_FULL_D10' else a.rho, teacher=costs,
                 coverage=receipts, margin_input=reference, LoRA_GPU_seconds=0.,

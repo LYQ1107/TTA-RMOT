@@ -62,27 +62,44 @@ class LocalTeacher:
             effective_view='CROP' if fallback else view, clip_fallback=fallback)
 
     def ask_many(self, requests):
-        responses = [None]*len(requests); pending = []
+        responses = [None]*len(requests); pending = []; waiting = []
+        def cached(i,old,info):
+            self.stats['cache_hits'] += 1
+            self.stats['equivalent_forward_seconds'] += old['batch_forward_seconds']/old['batch_size']
+            responses[i] = dict(old, cache_hit=True, requested_view=info['view'],
+                clip=info['clip'], clip_fallback=info['clip_fallback'], effective_view=info['effective_view'])
+
         for i, request in enumerate(requests):
             cache_key, images, prompt, info = self.prepare(request)
-            old = self.cache.get_or_claim(cache_key)
+            old = self.cache.get_or_claim(cache_key,wait=False)
             self.stats['logical_calls'] += 1
-            if old is not None:
-                self.stats['cache_hits'] += 1
-                self.stats['equivalent_forward_seconds'] += old['batch_forward_seconds']/old['batch_size']
-                responses[i] = dict(old, cache_hit=True, requested_view=request['view'],
-                    clip=info['clip'], clip_fallback=info['clip_fallback'], effective_view=info['effective_view'])
+            if old is False:
+                waiting.append((i,cache_key,images,prompt,info))
+            elif old is not None:
+                cached(i,old,info)
             else:
                 pending.append((i, cache_key, images, prompt, info))
-        for a in range(0, len(pending), 8):
-            rows = pending[a:a+8]
-            raw = self.backend.forward([r[2] for r in rows], [r[3] for r in rows])
-            self.stats['forward_seconds'] += raw[0]['batch_forward_seconds']; self.stats['batches'] += 1
-            self.stats['new_calls'] += len(rows)
-            for (i, key, images, prompt, info), result in zip(rows, raw):
-                response = dict(info, **result, request_id=key, cache_hit=False, requested_view=info['view'])
-                self.stats['equivalent_forward_seconds'] += result['batch_forward_seconds']/result['batch_size']
-                self.cache.put(key, response); responses[i] = response
+
+        def forward_owned(items):
+            for a in range(0,len(items),8):
+                rows=items[a:a+8]
+                raw=self.backend.forward([r[2] for r in rows],[r[3] for r in rows])
+                self.stats['forward_seconds']+=raw[0]['batch_forward_seconds'];self.stats['batches']+=1
+                self.stats['new_calls']+=len(rows)
+                for (i,key,images,prompt,info),result in zip(rows,raw):
+                    response=dict(info,**result,request_id=key,cache_hit=False,requested_view=info['view'])
+                    self.stats['equivalent_forward_seconds']+=result['batch_forward_seconds']/result['batch_size']
+                    self.cache.put(key,response);responses[i]=response
+
+        # Publish everything owned before waiting on any other live owner.
+        # Opposite request orders can otherwise hold A while waiting for B,
+        # and hold B while waiting for A, with neither model ever forwarding.
+        forward_owned(pending)
+        for item in waiting:
+            i,key,images,prompt,info=item
+            old=self.cache.get_or_claim(key)
+            if old is None:forward_owned([item])  # a dead owner was reclaimed
+            else:cached(i,old,info)
         return responses
 
     def close(self):
@@ -105,6 +122,7 @@ class TeacherClient:
         ready = self.read()
         if ready['status'] != 'READY': raise RuntimeError('Frozen teacher did not become ready')
         self.returned_keys=[]
+        self.parent_attempted_requests=0;self.pending_request_count=0
         self.progress('READY_NO_FINAL_WEIGHT_SEAL')
 
     def progress(self,status):
@@ -113,6 +131,7 @@ class TeacherClient:
         atomic_json(self.session_root / 'progress' / (self.session_id+'.json'),
             dict(status=status,teacher_pid=self.child.pid,revision=REVISION,
                 costs=self.stats,returned_request_ids=self.returned_keys,
+                parent_attempted_requests=self.parent_attempted_requests,pending_request_count=self.pending_request_count,
                 process_wall_seconds=time.perf_counter()-self.started,
                 final_weight_seal_available=status=='SEALED'))
 
@@ -123,10 +142,13 @@ class TeacherClient:
         raise RuntimeError('Teacher process exited; inspect ' + self.log.name)
 
     def ask_many(self, requests):
+        self.parent_attempted_requests+=len(requests);self.pending_request_count=len(requests)
         self.child.stdin.write(json.dumps(dict(command='ASK', requests=requests))+'\n'); self.child.stdin.flush()
+        self.progress('ASK_SENT_AWAITING_ANSWERS_NO_FINAL_WEIGHT_SEAL')
         response = self.read()
         if response['status'] != 'ANSWERS': raise RuntimeError('Teacher failed: ' + str(response))
         self.stats = response['costs']
+        self.pending_request_count=0
         self.returned_keys.extend(a['request_id'] for a in response['answers'])
         self.progress('ANSWERS_RETURNED_NO_FINAL_WEIGHT_SEAL')
         return response['answers']
