@@ -14,6 +14,11 @@
 本阶段为 C1/C3、ρ=0.3 的 FULL、MINUS_SLOW、UNIFORM_K、两种预算匹配 YesTrack，共10项。
 完整108项目标保留，其余项目不伪报完成。协议见 PREREG.md，真实估算与运行状态随后追加。
 
+科研解释边界：Dance Val 已反复用于先前开发和诊断，不是盲测集；SportsMOT Val 也已有多轮诊断。
+本阶段虽在新完整HOTA之前固定配方和队列，仍不能把这些评测重新称为独立盲测。
+视频聚类置信区间只描述固定比较的不确定性，不能消除历史开发集复用或替代未见数据验证。
+方法使用完整视频统计，是 video-transductive 适应，不冒充严格逐帧因果在线方法。
+
 FULL 复用首视频检查点和随机状态，恢复目录为：
 
 - `/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C1/FULL/rho_0.3`
