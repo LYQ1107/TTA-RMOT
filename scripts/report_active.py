@@ -119,6 +119,7 @@ def saved_presence_decisions(folder,meta,truth,pair,method,rho):
         by_track=defaultdict(list)
         for j,(_,track) in enumerate(bank['observations']):by_track[track].append(j)
         mask=np.load(path.parent / 'mask.npy')
+        asked={(q['query_id'],q['track_id']) for q in json.loads((path.parent / 'questions.json').read_text())}
         with np.load(path) as belief:
             tracks=belief['tracks'].tolist();eligible=np.asarray([len(by_track[t])>=3 for t in tracks])
             for qi,query in enumerate(belief['queries'].tolist()):
@@ -126,7 +127,14 @@ def saved_presence_decisions(folder,meta,truth,pair,method,rho):
                 present=bool(gt['counts'].sum());retrievable=bool(labels.any())
                 yes,no=bool(belief['confirmed_present'][qi]),bool(belief['absent'][qi])
                 selected_tracks=sum(bool(mask[qi,by_track[t]].any()) for t in tracks)
-                majority=sum(len(by_track[t])>=3 and labels[by_track[t]].mean()>=.5 for t in tracks)
+                matched=np.asarray([labels[by_track[t]].mean()>=.5 for t in tracks],bool)
+                majority=int((matched&eligible).sum())
+                high_positive=(belief['posterior'][qi]>.95)&eligible
+                high_negative=(belief['posterior'][qi]<.05)&eligible
+                queried=np.asarray([(query,t) in asked for t in tracks],bool)
+                unqueried_positive=int((matched&eligible&~queried).sum())
+                wrong_negative=int((high_negative&matched).sum())
+                wrong_negative_unqueried=int((high_negative&matched&~queried).sum())
                 rows.append(dict(pair=pair,method=method,rho=rho,video=video,expression=query,
                     query_present_GT=present,query_retrievable_GT=retrievable,
                     GT_observations=int(gt['counts'].sum()),candidate_positive_observations=int(labels.sum()),
@@ -138,9 +146,44 @@ def saved_presence_decisions(folder,meta,truth,pair,method,rho):
                     teacher_false_presence_on_empty=yes and not present,
                     posterior_positive_tracks_p50=int((belief['posterior'][qi]>.5).sum()),
                     confident_positive_tracks_p95=int(((belief['posterior'][qi]>.95)&eligible).sum()),
+                    confident_negative_tracks_p05=int(high_negative.sum()),
+                    confident_positive_GT_TP=int((high_positive&matched).sum()),
+                    confident_positive_GT_FP=int((high_positive&~matched).sum()),
+                    confident_negative_GT_TN=int((high_negative&~matched).sum()),
+                    confident_negative_GT_FN=wrong_negative,
+                    confident_negative_GT_FN_unqueried=wrong_negative_unqueried,
+                    queried_eligible_pairs=int((queried&eligible).sum()),
+                    unqueried_GT_positive_tracks=unqueried_positive,
+                    final_confidence_coverage=float((high_positive|high_negative).sum()/eligible.sum()) if eligible.any() else None,
+                    final_GTpositive_confident_negative_rate=wrong_negative/majority if majority else None,
+                    unqueried_GTpositive_confident_negative_rate=wrong_negative_unqueried/unqueried_positive if unqueried_positive else None,
+                    final_belief_not_optimizer_sample_labels=True,
                     selected_prediction_tracks=selected_tracks,selected_prediction_rows=int(mask[qi].sum()),
                     ORACLE_GT_DIAGNOSTIC_ONLY=True,GT_feedback_to_runtime=False))
     return rows
+
+
+def final_confidence_summary(rows):
+    """Descriptive track-query counts, not labels actually seen by SGD."""
+    groups=defaultdict(list)
+    for row in rows:groups[row['pair'],row['method'],row['rho']].append(row)
+    fields=('eligible_tracks','matched_candidate_positive_tracks_majority',
+        'confident_positive_tracks_p95','confident_negative_tracks_p05',
+        'confident_positive_GT_TP','confident_positive_GT_FP','confident_negative_GT_TN',
+        'confident_negative_GT_FN','confident_negative_GT_FN_unqueried',
+        'queried_eligible_pairs','unqueried_GT_positive_tracks')
+    result=[]
+    for (pair,method,rho),values in sorted(groups.items()):
+        counts={key:sum(row[key] for row in values) for key in fields}
+        ratio=lambda a,b:counts[a]/counts[b] if counts[b] else None
+        result.append(dict(pair=pair,method=method,rho=rho,episodes=len(values),**counts,
+            high_positive_GT_precision=ratio('confident_positive_GT_TP','confident_positive_tracks_p95'),
+            high_negative_GT_error_rate=ratio('confident_negative_GT_FN','confident_negative_tracks_p05'),
+            GTpositive_high_negative_rate=ratio('confident_negative_GT_FN','matched_candidate_positive_tracks_majority'),
+            unqueried_GTpositive_high_negative_rate=ratio('confident_negative_GT_FN_unqueried','unqueried_GT_positive_tracks'),
+            unit='eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5',
+            final_belief_not_optimizer_sample_labels=True,GT_feedback_to_runtime=False))
+    return result
 
 
 def behavior_and_reliability(folder, target, pair, method, rho, truth):
@@ -299,6 +342,8 @@ def main():
     write_table(PUBLIC / 'recovery_FP_attribution.csv',attribution_rows)
     write_table(PUBLIC / 'calibration_calls.csv',calibration_rows)
     write_table(PUBLIC / 'presence_decisions.csv',presence_decisions)
+    confidence=final_confidence_summary(presence_decisions)
+    write_table(PUBLIC / 'final_confidence.csv',confidence)
     write_table(PUBLIC / 'video_differences.csv',video_differences(rows,execution))
     write_table(PUBLIC / 'sports418.csv',sports_sensitivity)
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
@@ -339,6 +384,18 @@ def main():
         table.append('|'+ '|'.join(str(r[k]) for k in ('pair','method','rho','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows','teacher_calls'))+'|')
     text += marker+'\n\n状态：'+('完整108项运行矩阵完成。' if not incomplete else f'部分完成：{len(incomplete)}项尚未完成，不宣称完整方法通过。')+'\n\n'
     text += '\n'.join(table)+'\n\n'
+    text += '### 最终信念置信诊断（GT仅离线，不是优化器训练样本标签）\n\n'
+    text += '|组合|方法|ρ|GT正长轨迹对|高置信正TP/FP|高置信负FN|其中未问教师|GT正例被高置信错负比例|\n'
+    text += '|---|---|---:|---:|---:|---:|---:|---:|\n'
+    for r in confidence:
+        rate=r['GTpositive_high_negative_rate'];rate='NA' if rate is None else f'{100*rate:.2f}%'
+        text += '|'+ '|'.join(map(str,(r['pair'],r['method'],r['rho'],r['matched_candidate_positive_tracks_majority'],
+            str(r['confident_positive_GT_TP'])+'/'+str(r['confident_positive_GT_FP']),r['confident_negative_GT_FN'],
+            r['confident_negative_GT_FN_unqueried'],rate)))+'|\n'
+    text += ('\n长轨迹限n>=3，GT标签沿用每帧IoU0.5匹配后>=50%观测为正；阈值仍是原p>.95/p<.05。'
+        '这是各视频结束时保存的belief，不是优化器每一步实际用过的标签，不能据此单独断言slow造成错误。'
+        '空目标多时总体错负率会掩盖GT正类受损，同时报告两个分母；不把高置信数量当正确证据或独立样本显著性。'
+        '完整计数见final_confidence.csv与presence_decisions.csv，因果组件比较仍依照预注册消融和视频bootstrap。\n\n')
     text += ('固定候选/原ID/原框不变；GT仅在封存后的独立评测中使用。Dance和Sports按视频聚类2000次seed0；KITTI仅点估计。'
         'C1 Gate-Reassign逐行复现旧参照，C6是同门控的新CPU派生参照；二者沿用同一批29410次历史判断，不将其成本解释成零成本独立系统。\n\n'
         '成本见costs.csv：真实新增forward、缓存复用、等价独立forward及LoRA/重打分分别报告；worker wall包含恢复失败尝试，'
