@@ -52,6 +52,38 @@ def calibration_calls(receipts,pair,method,rho):
     return rows
 
 
+def saved_presence_decisions(folder,meta,truth,pair,method,rho):
+    """Offline only: distinguish query absence from missing MOT candidates."""
+    rows=[]
+    for path in sorted(Path(folder).glob('videos/*/belief.npz')):
+        video=path.parent.name;bank=meta['videos'][video]
+        by_track=defaultdict(list)
+        for j,(_,track) in enumerate(bank['observations']):by_track[track].append(j)
+        mask=np.load(path.parent / 'mask.npy')
+        with np.load(path) as belief:
+            tracks=belief['tracks'].tolist();eligible=np.asarray([len(by_track[t])>=3 for t in tracks])
+            for qi,query in enumerate(belief['queries'].tolist()):
+                gt=truth[video,query];labels=gt['labels']
+                present=bool(gt['counts'].sum());retrievable=bool(labels.any())
+                yes,no=bool(belief['confirmed_present'][qi]),bool(belief['absent'][qi])
+                selected_tracks=sum(bool(mask[qi,by_track[t]].any()) for t in tracks)
+                majority=sum(len(by_track[t])>=3 and labels[by_track[t]].mean()>=.5 for t in tracks)
+                rows.append(dict(pair=pair,method=method,rho=rho,video=video,expression=query,
+                    query_present_GT=present,query_retrievable_GT=retrievable,
+                    GT_observations=int(gt['counts'].sum()),candidate_positive_observations=int(labels.sum()),
+                    eligible_tracks=int(eligible.sum()),matched_candidate_positive_tracks_majority=int(majority),
+                    belief_expected_count=float(belief['expected_counts'][qi]),
+                    low_presence_flag=bool(belief['low_presence'][qi]),
+                    teacher_confirmed_present=yes,teacher_absent=no,teacher_contradiction=yes and no,
+                    false_absence_with_retrievable_GT=no and retrievable,
+                    teacher_false_presence_on_empty=yes and not present,
+                    posterior_positive_tracks_p50=int((belief['posterior'][qi]>.5).sum()),
+                    confident_positive_tracks_p95=int(((belief['posterior'][qi]>.95)&eligible).sum()),
+                    selected_prediction_tracks=selected_tracks,selected_prediction_rows=int(mask[qi].sum()),
+                    ORACLE_GT_DIAGNOSTIC_ONLY=True,GT_feedback_to_runtime=False))
+    return rows
+
+
 def behavior_and_reliability(folder, target, pair, method, rho, truth):
     """Keep anchor-observation and majority-track GT diagnostic labels separate."""
     meta = target_metadata(target); rounds = []; videos = []; reliability = []
@@ -124,7 +156,7 @@ def main():
     from scripts.active_eval import summarize, bootstrap, sports418, offline_labels
     from scripts.presence_finish_a import references
     rows = []; status = []; artifacts = []; round_rows = []; video_rows = []; reliability_rows = []; costs = []
-    cached_truth = {}; attribution_rows=[];calibration_rows=[]
+    cached_truth = {};cached_meta={};attribution_rows=[];calibration_rows=[];presence_decisions=[]
     specifications = jobs()+[dict(pair=pair, method='GATE_REASSIGN_REF', rho=None) for pair in ('C1', 'C6')]
     for job in specifications:
         pair, method, rho = job['pair'], job['method'], job['rho']; target = PAIRS[pair][1]
@@ -169,7 +201,9 @@ def main():
             covered_pairs=sum(r.get('covered_pairs', 0) for r in receipts) if method.startswith('YESTRACK') else None,
             all_pairs=sum(r.get('all_pairs', 0) for r in receipts) if method.startswith('YESTRACK') else None,
             delta_by_video=json.dumps({r['video']:r['delta'] for r in receipts if 'delta' in r}, sort_keys=True)))
-        if target not in cached_truth: cached_truth[target] = offline_labels(target)[1]
+        if target not in cached_truth:
+            cached_meta[target],cached_truth[target],_=offline_labels(target)
+        presence_decisions+=saved_presence_decisions(folder,cached_meta[target],cached_truth[target],pair,method,rho)
         rr, vv, dd = behavior_and_reliability(folder, target, pair, method, rho, cached_truth[target])
         round_rows += rr; video_rows += vv; reliability_rows += dd
         for path in [folder / 'predictions_seal.json', folder / 'results/pedestrian_detailed.csv',
@@ -190,6 +224,7 @@ def main():
     write_table(PUBLIC / 'costs.csv', costs); write_table(PUBLIC / 'behavior_round.csv', round_rows)
     write_table(PUBLIC / 'recovery_FP_attribution.csv',attribution_rows)
     write_table(PUBLIC / 'calibration_calls.csv',calibration_rows)
+    write_table(PUBLIC / 'presence_decisions.csv',presence_decisions)
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
     atomic_json(PUBLIC / 'bootstrap.json', dict(comparisons=comparisons, samples=2000, seed=0,
         cluster_unit='video; correlated expressions/frames kept together', KITTI='four videos, points only',
@@ -238,6 +273,9 @@ def main():
         '只作离线归因、不代替官方TrackEval，也不反馈在线阈值。\n\n'
         'calibration_calls.csv逐调用保留MAP更新/SKIP、正负教师支持、排除的未问伪标签、b/T/beta和目标函数变化；'
         '区分“有证据才更新”与“没有学到存在性”的情况，不用数值稳定性代替精度。\n\n'
+        'presence_decisions.csv仅在完整封存后，将保存的存在/缺席/矛盾标志与官方GT及可检索候选对照，'
+        '同时区分p>0.5的轨迹、p>0.95的高置信伪正例和实际输出轨迹；帧级期望数量不等于视频内不同轨迹数。'
+        '这是事后诊断，不据此调整当前方法。\n\n'
         '完整机器表、bootstrap及大文件路径/SHA均在本目录；Sports使用v4全466和相同v4内容的旧418 ID敏感性。'
         '没有根据目标GT调整阈值、种子或选择最优变体。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
