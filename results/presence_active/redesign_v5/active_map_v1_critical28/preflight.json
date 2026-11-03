@@ -1,0 +1,159 @@
+{
+  "status": "PRELAUNCH_CPU_INPUT_CHECK",
+  "jobs": 18,
+  "checks": [
+    {
+      "pair": "C2",
+      "model": "Dance-best",
+      "target": "KITTI-V2",
+      "videos": 4,
+      "episodes": 862,
+      "margin_rows": 2425382,
+      "margin_sha256": "0afa3a08e3f6e7ba85338a16325bf65a017852a1cd79a195337531e98f3f01c5",
+      "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+      "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+      "stage_A_inputs_ready": true,
+      "first_images_ready": true
+    },
+    {
+      "pair": "C4",
+      "model": "Dance-best",
+      "target": "SportsMOT",
+      "videos": 45,
+      "episodes": 466,
+      "margin_rows": 2968201,
+      "margin_sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54",
+      "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+      "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+      "stage_A_inputs_ready": true,
+      "first_images_ready": true
+    },
+    {
+      "pair": "C5",
+      "model": "LaMOT-best",
+      "target": "KITTI-V2",
+      "videos": 4,
+      "episodes": 862,
+      "margin_rows": 2425382,
+      "margin_sha256": "2e3f28066a74f079888967a7d103d75c71458d3d922c800eb5ee7748f39f286d",
+      "checkpoint": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/SOTA_ckpts/LaMOT-best.pth",
+      "checkpoint_sha256": "400980a1c92eacaa10206f1f26f2ffff20055b8a3925499afb6c6e7d9ba4213f",
+      "stage_A_inputs_ready": true,
+      "first_images_ready": true
+    },
+    {
+      "pair": "C6",
+      "model": "LaMOT-best",
+      "target": "Dance",
+      "videos": 25,
+      "episodes": 425,
+      "margin_rows": 3588445,
+      "margin_sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517",
+      "checkpoint": "/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/public_files/FlexHook/SOTA_ckpts/LaMOT-best.pth",
+      "checkpoint_sha256": "400980a1c92eacaa10206f1f26f2ffff20055b8a3925499afb6c6e7d9ba4213f",
+      "stage_A_inputs_ready": true,
+      "first_images_ready": true
+    }
+  ],
+  "existing_new_method_directories": [],
+  "active_storage_realpath": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v5/active_map_v1",
+  "all_gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 50414,
+      "free_mib": 30740,
+      "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+      "compute_processes": 1
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 50750,
+      "free_mib": 30404,
+      "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+      "compute_processes": 1
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 50734,
+      "free_mib": 30420,
+      "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+      "compute_processes": 1
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 50042,
+      "free_mib": 31112,
+      "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "compute_processes": 1
+    },
+    {
+      "index": 4,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 17243,
+      "free_mib": 63912,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "compute_processes": 2
+    },
+    {
+      "index": 5,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 8757,
+      "free_mib": 72397,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "compute_processes": 1
+    },
+    {
+      "index": 6,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 17243,
+      "free_mib": 63912,
+      "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+      "compute_processes": 2
+    },
+    {
+      "index": 7,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 16181,
+      "free_mib": 64973,
+      "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "compute_processes": 1
+    }
+  ],
+  "currently_eligible": [
+    {
+      "index": 5,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 8757,
+      "free_mib": 72397,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "compute_processes": 1
+    },
+    {
+      "index": 7,
+      "name": "NVIDIA A800-SXM4-80GB",
+      "total_mib": 81920,
+      "used_mib": 16181,
+      "free_mib": 64973,
+      "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "compute_processes": 1
+    }
+  ],
+  "resource_note": "read-only snapshot, launcher re-audits; no reservation or foreign task stopped",
+  "regression_tests_passed": 5,
+  "regression_seconds": 5.67,
+  "GT_open_attempts": 0,
+  "GPU_model_or_teacher_calls": 0
+}

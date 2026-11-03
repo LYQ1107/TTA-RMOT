@@ -7,11 +7,14 @@
 ## 当前研究：存在性—身份解耦、主动教师与快慢适应
 
 分支 `method/presence-active-20261102`。最终 goal 保持 ACTIVE，范围为三数据集六方向及原固定预算/对照/消融，
-不是首视频 pilot；C1/C3、ρ=0.3 的10项全视频队列已全部完成，原40 GPU小时扩展关卡不变。
+不是首视频 pilot；C1/C3、ρ=0.3 的10项已完成。2026-11-04用户授权新增18项关键实验，
+覆盖其余四方向，准备累计28项；原40 GPU小时扩展关卡不变，其余80项未授权。
 不从旧报告中的“停止”或本页历史命令推断当前进程状态，也不据此重启健康作业。
 
 - [最终目标、执行边界与恢复入口](results/presence_active/FINAL_GOAL.md)。
 - [当前正式结果、置信区间与失败归因](results/presence_active/redesign_v5/active_map_v1_full/REPORT.md)。
+- [新增18项预注册](results/presence_active/redesign_v5/active_map_v1_critical28/PREREG.md)、
+  [累计28项独立报告](results/presence_active/redesign_v5/active_map_v1_critical28/REPORT.md)。
 - [固定10项预注册](results/presence_active/redesign_v5/active_map_v1_full/PREREG.md)、
   [108项逐项完成状态](results/presence_active/redesign_v5/active_map_v1_full/matrix_status.csv)。
 - [指标主表](results/presence_active/redesign_v5/active_map_v1_full/main.csv)、
@@ -31,7 +34,8 @@ FULL−Native的95%视频聚类CI为[-10.743,-3.838]，slow额外效果为-1.536
 
 10项及完整日志、固定框/ID覆盖、置信区间与成本已归档。108项仍有98项未运行；
 按本轮实测外推，剩余约267.233 GPU小时，超过原40小时关卡，不自行启动。
-原矩阵ρ=.3主方法/关键对照子集共28项，额外18项约25.584小时，作为下一步范围选择而非擅自缩小最终目标。
+原矩阵ρ=.3主方法/关键对照子集共28项，额外18项约25.584小时已于2026-11-04获得用户授权；
+不将28项子集当作缩小后的最终目标，其他预算/消融不自动启动。
 详见[实测成本与资源复核](results/presence_active/redesign_v5/active_map_v1_full/measured_budget_review.json)。
 
 当前实验使用冻结Qwen3-VL教师与完整视频统计，是teacher-assisted、video-transductive设定，
