@@ -4,7 +4,36 @@
 `/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
 继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
 
-## 当前研究：D-FIT 教师标签可拟合性诊断（运行中）
+## 当前研究：存在性—身份解耦、主动教师与快慢适应
+
+分支 `method/presence-active-20261102`。最终 goal 保持 ACTIVE，范围为三数据集六方向及原固定预算/对照/消融，
+不是首视频 pilot；当前先完成 C1/C3、ρ=0.3 的10项全视频队列，原40 GPU小时扩展关卡不变。
+不从旧报告中的“停止”或本页历史命令推断当前进程状态，也不据此重启健康作业。
+
+- [最终目标、执行边界与恢复入口](results/presence_active/FINAL_GOAL.md)。
+- [当前正式结果、置信区间与失败归因](results/presence_active/redesign_v5/active_map_v1_full/REPORT.md)。
+- [固定10项预注册](results/presence_active/redesign_v5/active_map_v1_full/PREREG.md)、
+  [108项逐项完成状态](results/presence_active/redesign_v5/active_map_v1_full/matrix_status.csv)。
+- [指标主表](results/presence_active/redesign_v5/active_map_v1_full/main.csv)、
+  [成本](results/presence_active/redesign_v5/active_map_v1_full/costs.csv)、
+  [预测/日志与checkpoint恢复清单](results/presence_active/redesign_v5/active_map_v1_full/logs.json)。
+- [已完成的九格Stage A与同域门槛](results/presence_active/redesign_v5/REPORT.md)。
+
+Dance全25视频/425表达：Native HOTA8.218，FULL37.724，MINUS_SLOW34.925，
+UNIFORM_K24.108，预算匹配YesTrack随机/分数优先20.750/22.711。
+FULL−MINUS_SLOW的95%视频聚类区间包含0，不能宣称慢分支已证明必要；FULL的LoRA/重打分共2.712小时，
+不能把约55秒教师forward当作整个系统成本。SportsMOT当前已完成对照有负向结果，也完整报告；
+其FULL及后续对照仍由原协调器接续，不因Dance的正向结果挑方向或改变参数。
+
+当前实验使用冻结Qwen3-VL教师与完整视频统计，是teacher-assisted、video-transductive设定，
+不是无外部教师的纯Source-Free自监督或严格逐帧因果在线方法。目标GT只在完整预测封存后的独立评测使用，
+Val已有历史开发复用，不称独立盲测。完整108项未完成，不将当前10项队列当作全部科研目标已完成。
+
+以下为历史阶段记录。各阶段报告、预测、失败和checkpoint均保留；其中“运行中/停止/未启动”只指当时阶段。
+尤其 [最初PresenceHead报告](results/presence_active/REPORT.md) 和
+[MAP首视频pilot报告](results/presence_active/redesign_v5/active_map_v1/REPORT.md) 均为封存历史，不覆盖为新结果。
+
+## 历史快照：D-FIT 教师标签可拟合性诊断
 
 分支`research/v2dance-diag-fit-20261030`，从965e71fe开始。三臂各200步真实smoke及实际CAP严格重载/逐位输出验证通过；
 三组8973步训练使用相同Naive8500教师判断、相同300窗口子集，不读目标GT，最后一步checkpoint为唯一新模型评测对象。
