@@ -28,6 +28,30 @@ def folder_for(job):
     return active_paths().active / job['pair'] / job['method'] / suffix
 
 
+def calibration_calls(receipts,pair,method,rho):
+    rows=[]
+    for video in receipts:
+        for round_info in video.get('rounds',[]):
+            before=round_info['fast']
+            positions=[('BEFORE_SLOW',before)]
+            if 'after_slow' in before:positions.append(('AFTER_SLOW',before['after_slow']))
+            for position,fast in positions:
+                identity,presence=fast.get('identity',{}),fast.get('presence',{})
+                rows.append(dict(pair=pair,method=method,rho=rho,video=video['video'],round=round_info['round'],
+                    position=position,status=fast['status'],slope=fast.get('slope'),
+                    temperature=fast.get('temperature'),bias=fast.get('bias'),
+                    identity_status=identity.get('status'),supported_positive=identity.get('positive'),
+                    supported_negative=identity.get('negative'),
+                    unqueried_excluded=identity.get('unqueried_confident_excluded'),
+                    presence_status=presence.get('status'),confirmed_positive=presence.get('positive'),
+                    confirmed_negative=presence.get('negative'),
+                    identity_objective_before=identity.get('objective_before'),
+                    identity_objective_after=identity.get('objective_after'),
+                    presence_objective_before=presence.get('objective_before'),
+                    presence_objective_after=presence.get('objective_after')))
+    return rows
+
+
 def behavior_and_reliability(folder, target, pair, method, rho, truth):
     """Keep anchor-observation and majority-track GT diagnostic labels separate."""
     meta = target_metadata(target); rounds = []; videos = []; reliability = []
@@ -100,7 +124,7 @@ def main():
     from scripts.active_eval import summarize, bootstrap, sports418, offline_labels
     from scripts.presence_finish_a import references
     rows = []; status = []; artifacts = []; round_rows = []; video_rows = []; reliability_rows = []; costs = []
-    cached_truth = {}; attribution_rows=[]
+    cached_truth = {}; attribution_rows=[];calibration_rows=[]
     specifications = jobs()+[dict(pair=pair, method='GATE_REASSIGN_REF', rho=None) for pair in ('C1', 'C6')]
     for job in specifications:
         pair, method, rho = job['pair'], job['method'], job['rho']; target = PAIRS[pair][1]
@@ -127,6 +151,7 @@ def main():
                 bytes=path.stat().st_size,sha256=file_sha(path)))
         attempts = [json.loads(path.read_text()) for path in (folder / 'worker_attempts').glob('*.json')]
         receipts = [json.loads(path.read_text()) for path in (folder / 'videos').glob('*/receipt.json')]
+        calibration_rows+=calibration_calls(receipts,pair,method,rho)
         updates = sum(r['slow']['optimizer_updates'] for v in receipts for r in v.get('rounds', []))
         costs.append(dict(pair=pair, method=method, rho=rho, teacher_calls=result['teacher_calls'],
             teacher_new_forward_calls=seal.get('teacher', {}).get('new_calls', 0),
@@ -164,6 +189,7 @@ def main():
     write_table(PUBLIC / 'main.csv', rows); write_table(PUBLIC / 'matrix_status.csv', status)
     write_table(PUBLIC / 'costs.csv', costs); write_table(PUBLIC / 'behavior_round.csv', round_rows)
     write_table(PUBLIC / 'recovery_FP_attribution.csv',attribution_rows)
+    write_table(PUBLIC / 'calibration_calls.csv',calibration_rows)
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
     atomic_json(PUBLIC / 'bootstrap.json', dict(comparisons=comparisons, samples=2000, seed=0,
         cluster_unit='video; correlated expressions/frames kept together', KITTI='four videos, points only',
@@ -210,6 +236,8 @@ def main():
         '同时给出提问帧与50%轨迹多数标签；身份先验以轨迹标签为主要参照，重复视图/帧不是独立样本。\n\n'
         'recovery_FP_attribution.csv用独立IoU>=0.5逐帧匹配比较Native，区分新增行FP与原有行匹配重分配的FP变化，'
         '只作离线归因、不代替官方TrackEval，也不反馈在线阈值。\n\n'
+        'calibration_calls.csv逐调用保留MAP更新/SKIP、正负教师支持、排除的未问伪标签、b/T/beta和目标函数变化；'
+        '区分“有证据才更新”与“没有学到存在性”的情况，不用数值稳定性代替精度。\n\n'
         '完整机器表、bootstrap及大文件路径/SHA均在本目录；Sports使用v4全466和相同v4内容的旧418 ID敏感性。'
         '没有根据目标GT调整阈值、种子或选择最优变体。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
