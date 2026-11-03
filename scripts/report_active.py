@@ -19,13 +19,36 @@ def write_table(path, rows):
     if not rows: return
     fields = list(dict.fromkeys(k for row in rows for k in row))
     with Path(path).open('w') as stream:
-        writer = csv.DictWriter(stream, fieldnames=fields); writer.writeheader(); writer.writerows(rows)
+        writer = csv.DictWriter(stream, fieldnames=fields,lineterminator='\n'); writer.writeheader(); writer.writerows(rows)
 
 
 def folder_for(job):
     from flex_uda.active.execution import active_paths
     suffix = 'original_delta10' if job['method'] == 'YESTRACK_FULL_D10' else 'rho_'+str(job['rho'])
     return active_paths().active / job['pair'] / job['method'] / suffix
+
+
+def video_differences(rows,execution):
+    from scripts.active_eval import official_stats
+    from scripts.presence_finish_a import references
+    from scripts.analyze_pf_video_uncertainty import pooled_hota
+    records=[]
+    for full in rows:
+        if full['method']!='FULL':continue
+        pair,rho,target=full['pair'],full['rho'],full['target']
+        native=dict(references(target,PAIRS[pair][0]))['NATIVE']
+        controls=[('NATIVE',native),('PRES_TOPK',execution.stage_a / target / PAIRS[pair][0] / 'PRES_TOPK')]
+        controls += [(r['method'],Path(r['path'])) for r in rows
+            if r['pair']==pair and r['method']!='FULL' and r['rho'] in (rho,None)]
+        a=official_stats(full['path']);weights=np.eye(len(a['videos']))
+        for method,folder in controls:
+            b=official_stats(folder)
+            if a['videos']!=b['videos']:raise ValueError('Different video coverage in attribution')
+            for i,video in enumerate(a['videos']):
+                first,second=float(pooled_hota(a['stats'],weights[i])),float(pooled_hota(b['stats'],weights[i]))
+                records.append(dict(pair=pair,rho=rho,target=target,comparison='FULL_minus_'+method,
+                    video=video,FULL_HOTA=first,reference_HOTA=second,delta_HOTA=first-second))
+    return records
 
 
 def calibration_calls(receipts,pair,method,rho):
@@ -156,19 +179,28 @@ def main():
     from scripts.active_eval import summarize, bootstrap, sports418, offline_labels
     from scripts.presence_finish_a import references
     rows = []; status = []; artifacts = []; round_rows = []; video_rows = []; reliability_rows = []; costs = []
-    cached_truth = {};cached_meta={};attribution_rows=[];calibration_rows=[];presence_decisions=[]
+    cached_truth = {};cached_meta={};attribution_rows=[];calibration_rows=[];presence_decisions=[];sports_sensitivity=[]
     specifications = jobs()+[dict(pair=pair, method='GATE_REASSIGN_REF', rho=None) for pair in ('C1', 'C6')]
     for job in specifications:
         pair, method, rho = job['pair'], job['method'], job['rho']; target = PAIRS[pair][1]
         folder = RUN / 'active' / pair / method if method == 'GATE_REASSIGN_REF' else folder_for(job)
         if not (folder / 'predictions_seal.json').exists():
-            status.append(dict(job, status='PILOT_ONLY' if (folder / 'pilot_receipt.json').exists() else 'NOT_RUN'))
+            status.append(dict(job, status='INCOMPLETE_NO_FULL_SEAL' if folder.exists() else 'NO_OUTPUT_YET'))
             continue
         seal = verify_predictions(folder)
         result = summarize(folder, target)
         result.update(pair=pair, rho=rho); rows.append(result)
         status.append(dict(job, status='SEALED_AND_OFFICIALLY_EVALUATED'))
-        if target == 'SportsMOT': sports418(folder)
+        if target == 'SportsMOT':
+            sensitivity=sports418(folder);subset=folder / 'sensitivity_418'
+            subset_seal=verify_predictions(subset)
+            sports_sensitivity.append(dict(pair=pair,method=method,rho=rho,model=seal['model'],
+                episode_count=418,prediction_rows=subset_seal['prediction_rows'],
+                **{k:sensitivity['metrics'][k] for k in ('HOTA','DetA','AssA','IDF1','IDSW')},
+                main466_HOTA=result['HOTA'],GT_protocol='same v4 GT content, original418 sequence IDs only',
+                teacher_calls_original_full466=result['teacher_calls'],
+                source_full466_seal_sha256=file_sha(folder / 'predictions_seal.json'),
+                subset_seal_sha256=file_sha(subset / 'predictions_seal.json'),path=str(subset)))
         if method!='GATE_REASSIGN_REF':
             from scripts.active_attribution import attribute
             attribution=attribute(folder,target)
@@ -225,6 +257,8 @@ def main():
     write_table(PUBLIC / 'recovery_FP_attribution.csv',attribution_rows)
     write_table(PUBLIC / 'calibration_calls.csv',calibration_rows)
     write_table(PUBLIC / 'presence_decisions.csv',presence_decisions)
+    write_table(PUBLIC / 'video_differences.csv',video_differences(rows,execution))
+    write_table(PUBLIC / 'sports418.csv',sports_sensitivity)
     write_table(PUBLIC / 'behavior_video.csv', video_rows); write_table(PUBLIC / 'reliability_vs_GT.csv', reliability_rows)
     atomic_json(PUBLIC / 'bootstrap.json', dict(comparisons=comparisons, samples=2000, seed=0,
         cluster_unit='video; correlated expressions/frames kept together', KITTI='four videos, points only',
@@ -253,7 +287,7 @@ def main():
             for h, label in zip(hh, ll):
                 if label not in labels: handles.append(h); labels.append(label)
         fig.legend(handles, labels, loc='lower center', ncol=3, fontsize=8)
-        fig.suptitle('PARTIAL: missing points are NOT run' if incomplete else 'All fixed budgets; no best-method selection')
+        fig.suptitle('PARTIAL: missing points lack a completed evaluation' if incomplete else 'All fixed budgets; no best-method selection')
         fig.tight_layout(rect=(0, .09, 1, .96)); fig.savefig(PUBLIC / 'teacher_calls_vs_HOTA.png', dpi=160); plt.close(fig)
     text = (PUBLIC / 'REPORT.md').read_text(); marker = '\n## 阶段B/C已封存结果'
     if marker in text: text = text[:text.index(marker)]
@@ -276,6 +310,10 @@ def main():
         'presence_decisions.csv仅在完整封存后，将保存的存在/缺席/矛盾标志与官方GT及可检索候选对照，'
         '同时区分p>0.5的轨迹、p>0.95的高置信伪正例和实际输出轨迹；帧级期望数量不等于视频内不同轨迹数。'
         '这是事后诊断，不据此调整当前方法。\n\n'
+        'video_differences.csv按视频独立聚合官方HOTA，列出FULL相对每个对照的收益分布；'
+        '其简单平均不是全数据集TP加权HOTA差值，不混为一谈。\n\n'
+        'sports418.csv明确列出同一v4 GT内容限制原418条ID的敏感性数值与封存SHA；'
+        '不是旧冲突模板，不用其结果回选方法，成本仍来自原完整466预测。\n\n'
         '完整机器表、bootstrap及大文件路径/SHA均在本目录；Sports使用v4全466和相同v4内容的旧418 ID敏感性。'
         '没有根据目标GT调整阈值、种子或选择最优变体。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
