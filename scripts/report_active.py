@@ -241,8 +241,11 @@ def main():
         '完整机器表、bootstrap及大文件路径/SHA均在本目录；Sports使用v4全466和相同v4内容的旧418 ID敏感性。'
         '没有根据目标GT调整阈值、种子或选择最优变体。\n')
     (PUBLIC / 'REPORT.md').write_text(text)
+    from scripts.active_archive import package
+    packaged=package(execution,rows)
     print(json.dumps(dict(status='FULL_MATRIX_COMPLETE' if not incomplete else 'PARTIAL_REPORTED_NOT_COMPLETE',
-        evaluated=len(rows), pending=len(incomplete), comparisons=len(comparisons))), flush=True)
+        evaluated=len(rows), pending=len(incomplete), comparisons=len(comparisons),
+        logs_manifest=str(PUBLIC / 'logs.json'),raw_teacher_keys=packaged['raw_teacher_response_keys'])), flush=True)
 
 
 if __name__ == '__main__': main()

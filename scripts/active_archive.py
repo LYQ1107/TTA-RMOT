@@ -1,0 +1,57 @@
+"""Package completed active logs and exact cached teacher responses, CPU only."""
+import gzip
+import json
+from pathlib import Path
+import sqlite3
+import tarfile
+from flex_tta.runtime.pf_receipts import atomic_json,file_sha
+from flex_uda.presence.runtime import RUN
+
+
+def package(execution,rows):
+    roots=[Path(row['path']) for row in rows if Path(row['path']).is_relative_to(execution.active)]
+    keys=set();files=[];checkpoints=[]
+    for root in roots:
+        seal=json.loads((root / 'predictions_seal.json').read_text())
+        if seal['GT_open_attempts'] or seal.get('teacher',{}).get('GT_open_attempts',0):
+            raise ValueError('Runtime/teacher GT isolation failed')
+        for path in (root / 'videos').glob('*/questions.json'):
+            keys.update(q['request_id'] for q in json.loads(path.read_text()))
+        for path in (root / 'videos').glob('*/receipt.json'):
+            keys.update(json.loads(path.read_text()).get('question_keys',[]))
+        for path in root.rglob('*'):
+            if not path.is_file() or path.is_symlink():continue
+            if path.suffix in ('.log','.json','.jsonl') or path.name in ('pedestrian_detailed.csv','pedestrian_summary.txt'):
+                files.append((path,'methods/'+str(path.relative_to(execution.active))))
+            elif path.suffix=='.pt':
+                checkpoints.append(dict(path=str(path),bytes=path.stat().st_size,sha256=file_sha(path)))
+    for path in execution.launchers.rglob('*'):
+        if path.is_file() and path.suffix in ('.log','.json'):
+            files.append((path,'launchers/'+str(path.relative_to(execution.launchers))))
+    cache=RUN / 'teacher/raw.sqlite'
+    raw=execution.public / 'teacher_responses.jsonl.gz'
+    if keys:
+        # A read-only snapshot of only this stage's actual input keys. Never
+        # invoke a backend or claim new cache leases in an offline reporter.
+        with sqlite3.connect(cache.resolve().as_uri()+'?mode=ro',uri=True) as database,gzip.open(raw,'wt') as output:
+            for key in sorted(keys):
+                row=database.execute('SELECT payload FROM outputs WHERE key=?',(key,)).fetchone()
+                if row is None or row[0] is None:raise ValueError('Missing completed teacher response '+key)
+                output.write(json.dumps(dict(request_id=key,response=json.loads(row[0])),sort_keys=True)+'\n')
+    manifest=[]
+    archive_path=execution.public / 'experiment_logs.tar.gz'
+    with tarfile.open(archive_path,'w:gz') as archive:
+        for path,name in sorted(files,key=lambda row:row[1]):
+            manifest.append(dict(path=str(path),archive_path=name,bytes=path.stat().st_size,sha256=file_sha(path)))
+            archive.add(path,arcname=name,recursive=False)
+    for row in manifest:
+        if file_sha(row['path'])!=row['sha256']:raise RuntimeError('Log owner has not finished: '+row['path'])
+    record=dict(status='COMPLETED_SEALED_METHOD_LOGS_PACKAGED',completed_active_methods=len(roots),
+        full108_matrix_completion_not_claimed=True,files=manifest,checkpoints=checkpoints,
+        archive=dict(path=str(archive_path),bytes=archive_path.stat().st_size,sha256=file_sha(archive_path)),
+        raw_teacher_response_keys=len(keys),raw_teacher_cache_source=str(cache),
+        raw_response_cost_note='one immutable original response per input; per-method actual/cache/equivalent costs are in costs.csv',
+        raw_teacher_responses=dict(path=str(raw),bytes=raw.stat().st_size,sha256=file_sha(raw)) if keys else None,
+        large_models_and_predictions_not_in_git=True,teacher_or_GPU_called_by_packager=False)
+    atomic_json(execution.public / 'logs.json',record)
+    return record
