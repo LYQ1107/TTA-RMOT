@@ -36,3 +36,10 @@ goal 状态：ACTIVE，线程 `01a154f2-1527-7b80-a8d7-3679ea95c32b`，无另设
 - 报告：`results/presence_active/redesign_v5/active_map_v1_full/REPORT.md`
 - 协调器：`results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/coordinator_1793694616111172762`
 - 已启动C1/C3健康流保持运行，不因设置goal重启或重置。
+
+2026-11-03外部SIGTERM后恢复：旧协调器真实返回143且所有本任务子进程已退出，C3从stream_033（next_video34）恢复，34个已完成视频不重跑。
+当前durable观察入口为
+`/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_full_launchers/durable_1793710403540105887`。
+原始启动信息保留作历史；恢复证据与成本界限见本阶段interruption_C3_FULL_20261103.json。
+观察会话丢失时，先确认该manager真实状态，再运行同环境Python的
+`scripts/active_durable.py --attach <上述durable目录>`；不要另开第二条队列。

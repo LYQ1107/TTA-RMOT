@@ -29,7 +29,9 @@ def package(execution,rows):
         if path.is_file() and path.suffix in ('.log','.json'):
             if path.suffix=='.log':
                 receipts=[path.with_name(path.stem+'_completion.json'),path.with_suffix('.json')]
-                terminal=any(p.exists() and json.loads(p.read_text()).get('exit_code') is not None for p in receipts)
+                if path.name=='coordinator.log':receipts.append(path.parent/'completion.json')
+                terminal=any(p.exists() and (json.loads(p.read_text()).get('exit_code') is not None or
+                    json.loads(p.read_text()).get('all_task_pids_confirmed_absent',False)) for p in receipts)
                 if not terminal:
                     unpackaged_launcher_logs.append(str(path));continue
             files.append((path,'launchers/'+str(path.relative_to(execution.launchers))))

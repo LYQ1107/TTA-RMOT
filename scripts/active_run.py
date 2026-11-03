@@ -277,7 +277,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
                 **{key:sum(s[key] for s in sessions) for key in ('new_calls','cache_hits','forward_seconds','equivalent_forward_seconds')},
                 peak_allocated_bytes=max(s['peak_allocated_bytes'] for s in sessions),
                 all_session_wall_seconds=sum(s['process_wall_seconds'] for s in sessions),
-                prior_session_resume_included=True)
+                prior_session_resume_included=True,
+                interrupted_sessions_accounting=[s['interruption_accounting'] for s in sessions if 'interruption_accounting' in s])
             receipt=dict(status='REAL_PILOT_COMPLETE_RESUMABLE_NOT_FULL_RMOT',
                 pair=pair, target=target, model=model_name, rho=rho, variant=variant,
                 videos=selected_videos, total_videos=len(ordered), video_receipts=video_receipts,
@@ -305,7 +306,8 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
             forward_seconds=sum(s['forward_seconds'] for s in sessions),
             equivalent_forward_seconds=sum(s['equivalent_forward_seconds'] for s in sessions),
             peak_allocated_bytes=max(s['peak_allocated_bytes'] for s in sessions),
-            prior_session_resume_included=True)
+            prior_session_resume_included=True,
+            interrupted_sessions_accounting=[s['interruption_accounting'] for s in sessions if 'interruption_accounting' in s])
         for video in ordered:
             value = np.load(out / 'videos' / video / 'mask.npy')
             qrows = [q for q in meta['episodes'] if q['video_id'] == video]

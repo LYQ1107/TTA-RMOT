@@ -104,6 +104,17 @@ class TeacherClient:
         self.stats = dict(logical_calls=0, new_calls=0, cache_hits=0, forward_seconds=0., equivalent_forward_seconds=0.)
         ready = self.read()
         if ready['status'] != 'READY': raise RuntimeError('Frozen teacher did not become ready')
+        self.returned_keys=[]
+        self.progress('READY_NO_FINAL_WEIGHT_SEAL')
+
+    def progress(self,status):
+        from flex_tta.runtime.pf_receipts import atomic_json
+        # Keep live journals outside *.json final receipts: never sum both.
+        atomic_json(self.session_root / 'progress' / (self.session_id+'.json'),
+            dict(status=status,teacher_pid=self.child.pid,revision=REVISION,
+                costs=self.stats,returned_request_ids=self.returned_keys,
+                process_wall_seconds=time.perf_counter()-self.started,
+                final_weight_seal_available=status=='SEALED'))
 
     def read(self):
         for line in self.child.stdout:
@@ -116,6 +127,8 @@ class TeacherClient:
         response = self.read()
         if response['status'] != 'ANSWERS': raise RuntimeError('Teacher failed: ' + str(response))
         self.stats = response['costs']
+        self.returned_keys.extend(a['request_id'] for a in response['answers'])
+        self.progress('ANSWERS_RETURNED_NO_FINAL_WEIGHT_SEAL')
         return response['answers']
 
     def close(self):
@@ -126,4 +139,5 @@ class TeacherClient:
         receipt = dict(response['receipt'], process_wall_seconds=time.perf_counter()-self.started,
                        process_wall_is_not_GPU_utilization_integral=True)
         atomic_json(self.session_root / (self.session_id+'.json'), receipt)
+        self.progress('SEALED')
         return receipt

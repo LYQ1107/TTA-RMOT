@@ -34,3 +34,15 @@ def test_archive_exports_only_used_raw_responses_without_changing_cache(tmp_path
     with tarfile.open(public / 'experiment_logs.tar.gz') as archive:names=archive.getnames()
     assert 'launchers/C1_FULL_0.3.log' in names and 'launchers/C3_FULL_0.3.log' not in names
     assert result['unpackaged_launcher_logs']==[str(live)]
+    (launchers / 'C3_FULL_0.3_completion.json').write_text(json.dumps(dict(
+        exit_code=None,coordinator_exit_code_observed=143,all_task_pids_confirmed_absent=True)))
+    closed=active_archive.package(SimpleNamespace(active=active,public=public,launchers=launchers),[dict(path=str(folder))])
+    with tarfile.open(public / 'experiment_logs.tar.gz') as archive:closed_names=archive.getnames()
+    assert 'launchers/C3_FULL_0.3.log' in closed_names
+    assert closed['unpackaged_launcher_logs']==[]
+    durable=launchers/'durable';durable.mkdir()
+    (durable/'coordinator.log').write_text('closed detached coordinator log')
+    (durable/'completion.json').write_text(json.dumps(dict(exit_code=0)))
+    active_archive.package(SimpleNamespace(active=active,public=public,launchers=launchers),[dict(path=str(folder))])
+    with tarfile.open(public / 'experiment_logs.tar.gz') as archive:durable_names=archive.getnames()
+    assert 'launchers/durable/coordinator.log' in durable_names

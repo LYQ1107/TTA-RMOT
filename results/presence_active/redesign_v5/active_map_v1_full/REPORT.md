@@ -104,6 +104,9 @@ C3 MINUS_SLOW的466条表达均有可检索目标，仍误判4条缺席；两个
 MINUS_SLOW的独立等价教师forward约55.58秒且不做LoRA/重打分；FULL仅这两项就用2.712小时。
 因此目前支持“完整教师辅助管线在Dance有收益”，不支持“慢更新已证明必要”或“只靠一分钟GPU即可获得FULL精度”。
 
+除原调用量图，另见[适应相位计算量–HOTA图](adaptation_cost_vs_HOTA.png)：横轴为独立等价教师forward加LoRA/重打分，
+不因缓存命中打折；不包含共享源端、冻结打分、前端及载入开销，也不是GPU利用率积分。图只显示已完成的固定预算点。
+
 科研解释边界：Dance Val 已反复用于先前开发和诊断，不是盲测集；SportsMOT Val 也已有多轮诊断。
 本阶段虽在新完整HOTA之前固定配方和队列，仍不能把这些评测重新称为独立盲测。
 视频聚类置信区间只描述固定比较的不确定性，不能消除历史开发集复用或替代未见数据验证。
@@ -115,6 +118,22 @@ FULL 复用首视频检查点和随机状态，恢复目录为：
 - `/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C3/FULL/rho_0.3`
 
 上述目录实际位于已授权的 data1。旧 pilot 报告、原失稳结果及 vendor 教师代码保持不动。
+
+## 外部终止与恢复：不隐藏失败或将其记为零成本
+
+原协调器handle48549返回143，现场确认本任务worker/teacher/launcher均退出；信号发起方未知，检查的末尾日志没有CUDA/NaN异常。
+C3 FULL的stream_033完整重载，34个视频已保存。使用同一原10项清单恢复第35个未完成视频，不重跑已封存7项的GPU预测，
+LoRA/DS/优化器/RNG从原checkpoint恢复，所有数值参数不改。
+新durable manager为独立session（SID4050136，观察者SID4050074），实际进程关系已核验；再次丢失观察连接时attach原manager，不新开队列。
+
+旧C3 worker的wall仅能界定为14958.098至15117.291秒，上界包含终止观测延迟，原RUNNING收据已按观测终止收尾并保留原SHA和内容快照。
+从不可变教师缓存owner3578961找回1869条实际新响应、181.770秒新forward，恢复时该owner无pending lease；
+旧会话的缓存逻辑请求和等价forward在未完整记账的末轮只能给出下界，不能假装是精确总数。
+丢弃的未完成视频至少已做50次LoRA更新、128.033秒，其他未写日志的部分不假定为零；有效checkpoint路径的相位时间与失败/丢弃开销分别报告。
+被中断教师会话缺少最后冻结权重/GT关闭审计，不能伪造成正常收尾；已返回ANSWERS经过原runtime guard检查，恢复后新会话重新执行冻结审计。
+后续每批返回答案会持久化独立progress journal，避免再丢失成本；不将live journal混入final会话求和。
+
+完整证据和时间界限见[中断记录](interruption_C3_FULL_20261103.json)。原日志、checkpoint、34个完整视频及旧结果不删改。
 
 ## 阶段B/C已封存结果
 

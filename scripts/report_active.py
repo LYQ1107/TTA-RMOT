@@ -22,6 +22,42 @@ def write_table(path, rows):
         writer = csv.DictWriter(stream, fieldnames=fields,lineterminator='\n'); writer.writeheader(); writer.writerows(rows)
 
 
+def plot_adaptation_cost(rows, costs, public):
+    """Use independent-equivalent teacher cost, not cache-dependent new calls."""
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    methods=('FULL','MINUS_SLOW','UNIFORM_K','YESTRACK_BUDGET_RANDOM','YESTRACK_BUDGET_PRIOR')
+    pairs=[pair for pair in PAIRS if any(r['pair']==pair and r['method'] in methods for r in rows)]
+    if not pairs:return
+    columns=min(3,len(pairs));lines=(len(pairs)+columns-1)//columns
+    fig,axes=plt.subplots(lines,columns,figsize=(5.5*columns,4.5*lines),squeeze=False)
+    lookup={(r['pair'],r['method'],str(r['rho'])):r for r in costs}
+    labels=dict(FULL='FULL',MINUS_SLOW='MINUS_SLOW',UNIFORM_K='UNIFORM',
+        YESTRACK_BUDGET_RANDOM='YT_RANDOM',YESTRACK_BUDGET_PRIOR='YT_PRIOR')
+    palette=plt.get_cmap('tab10')
+    for ax,pair in zip(axes.flat,pairs):
+        for mi,method in enumerate(methods):
+            for row in (r for r in rows if r['pair']==pair and r['method']==method):
+                cost=lookup[pair,method,str(row['rho'])]
+                hours=sum(float(cost[k]) for k in ('teacher_equivalent_forward_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours'))
+                if hours<=0:continue
+                ax.scatter(hours,float(row['HOTA']),color=palette(mi),s=40)
+                ax.annotate(labels[method]+' (rho='+str(row['rho'])+')',
+                    (hours,float(row['HOTA'])),xytext=(5,4),textcoords='offset points',fontsize=7)
+        ax.set(xscale='log',title=pair+': '+PAIRS[pair][0]+' -> '+PAIRS[pair][1],
+            xlabel='Equivalent teacher + LoRA/rescore process hours (log)',ylabel='Official HOTA')
+        ax.margins(x=.7,y=.18);ax.grid(alpha=.2)
+    for ax in axes.flat[len(pairs):]:ax.set_visible(False)
+    fig.suptitle('Completed jobs only; no cache discounts in teacher cost')
+    fig.text(.5,.01,'Excludes shared source preparation, frozen scoring, front-end and loading overhead.\n'
+        'Shared-device elapsed phase time is not a GPU-utilization integral; only sealed budget points are shown.\n'
+        'Discarded interrupted work is recorded separately in the wall-time ledger.',
+        ha='center',fontsize=8)
+    fig.tight_layout(rect=(0,.10,1,.94))
+    fig.savefig(Path(public) / 'adaptation_cost_vs_HOTA.png',dpi=160);plt.close(fig)
+
+
 def folder_for(job):
     from flex_uda.active.execution import active_paths
     suffix = 'original_delta10' if job['method'] == 'YESTRACK_FULL_D10' else 'rho_'+str(job['rho'])
@@ -226,6 +262,12 @@ def main():
             LoRA_GPU_hours=result['LoRA_GPU_hours'], rescore_GPU_hours=result['rescore_GPU_hours'],
             assigned_worker_wall_hours=sum(r.get('wall_seconds', 0) for r in attempts)/3600,
             failed_worker_attempts=sum(r['status'] != 'RETURNED_SUCCESSFULLY' for r in attempts),
+            worker_wall_is_upper_bound=any(r.get('wall_seconds_is_upper_bound',False) for r in attempts),
+            student_peak_is_lower_bound=any(r.get('parent_peak_allocated_bytes_unavailable_due_to_signal',False) for r in attempts),
+            interrupted_teacher_sessions=len(seal.get('teacher',{}).get('interrupted_sessions_accounting',[])),
+            teacher_peak_is_lower_bound=any(s.get('teacher_peak_memory_is_lower_bound',False)
+                for s in seal.get('teacher',{}).get('interrupted_sessions_accounting',[])),
+            interrupted_teacher_accounting=json.dumps(seal.get('teacher',{}).get('interrupted_sessions_accounting',[]),sort_keys=True),
             wall_is_not_utilization_integral=True, optimizer_updates=updates,
             LoRA_trainable_parameters=24576 if method in ('FULL', 'RANDOM_ACQ', 'MINUS_PRES', 'MINUS_DS', 'MINUS_ROUTE', 'MINUS_FAST', 'RESET_LORA') else 0,
             peak_teacher_allocated_bytes=seal.get('teacher', {}).get('peak_allocated_bytes'),
@@ -289,6 +331,7 @@ def main():
         fig.legend(handles, labels, loc='lower center', ncol=3, fontsize=8)
         fig.suptitle('PARTIAL: missing points lack a completed evaluation' if incomplete else 'All fixed budgets; no best-method selection')
         fig.tight_layout(rect=(0, .09, 1, .96)); fig.savefig(PUBLIC / 'teacher_calls_vs_HOTA.png', dpi=160); plt.close(fig)
+        plot_adaptation_cost(rows,costs,PUBLIC)
     text = (PUBLIC / 'REPORT.md').read_text(); marker = '\n## 阶段B/C已封存结果'
     if marker in text: text = text[:text.index(marker)]
     table = ['|组合|方法|ρ|HOTA|DetA|AssA|IDF1|IDSW|行数|Empty行|教师次数|', '|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|']
@@ -300,6 +343,10 @@ def main():
         'C1 Gate-Reassign逐行复现旧参照，C6是同门控的新CPU派生参照；二者沿用同一批29410次历史判断，不将其成本解释成零成本独立系统。\n\n'
         '成本见costs.csv：真实新增forward、缓存复用、等价独立forward及LoRA/重打分分别报告；worker wall包含恢复失败尝试，'
         '不是GPU利用率积分，不能与同驻教师进程wall重复相加。源Head训练、前端与特征预计算另见阶段A。\n\n'
+        '外部中断单独记录：worker wall如只有观测区间则标upper bound；未收尾教师会话的原始缓存/已完成视频可恢复开销与未知缓存请求分别注明。'
+        'LoRA/重打分相位求和以最终有效checkpoint路径为准，未完成视频的浪费另见中断记录，不能默认为零或冒充精确计时。\n\n'
+        'adaptation_cost_vs_HOTA.png另画独立等价教师forward加LoRA/重打分的相位耗时，避免把同一教师预算等同总计算预算；'
+        '它不包含共享源端/冻结打分/前端准备和载入开销，不能解释成完整系统总成本或GPU利用率积分。\n\n'
         '行为见behavior_round/video.csv。置信不等于正确；分别标记先验即高置信、从未问过但高置信，以及教师/最终新增确认。'
         '达到固定确认数的调用是轮边界上界，不据此单独宣称越问越省。DS估计与GT后验诊断见reliability_vs_GT.csv，'
         '同时给出提问帧与50%轨迹多数标签；身份先验以轨迹标签为主要参照，重复视图/帧不是独立样本。\n\n'
