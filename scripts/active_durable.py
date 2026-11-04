@@ -50,7 +50,10 @@ def main():
     if a.attach:return observe(a.attach)
     if not a.jobs_json:p.error('Supply the same published --jobs-json plan')
     if a.manager:
-        result=subprocess.run([sys.executable,str(ROOT/'scripts/active_continue.py'),
+        from flex_uda.active.execution import active_paths
+        configured=active_paths().manifest or {}
+        coordinator=configured.get('coordinator_script','scripts/active_continue.py')
+        result=subprocess.run([sys.executable,str(ROOT/coordinator),
             '--jobs-json',str(a.jobs_json)],cwd=ROOT)
         atomic_json(a.state_dir/'completion.json',dict(exit_code=result.returncode,
             manager_pid=os.getpid(),finished_time_ns=time.time_ns()))

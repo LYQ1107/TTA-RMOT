@@ -228,7 +228,7 @@ def behavior_and_reliability(folder, target, pair, method, rho, truth):
             track_y = bool(y[track_indices[track]].mean() >= .5)
             cumulative[answer['effective_view']].append((answer['yes_probability'] >= .5, bool(y[at]), track_y))
             key = video, query, track
-            if key not in identity_seen:
+            if answer.get('identity_vote') is not None and key not in identity_seen:
                 identity_seen.add(key)
                 cumulative['IDENTITY'].append((bool(answer['identity_vote']), bool(y[at]), track_y))
         used = 0; thresholds = {}; previous = 0

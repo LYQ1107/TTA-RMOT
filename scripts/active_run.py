@@ -75,6 +75,9 @@ def run(pair, rho, variant, *, smoke_videos=0, pilot_videos=0):
     from flex_uda.active.execution import authorize_active
     execution,publication=authorize_active()
     fast_mode=execution.manifest.get('fast_mode','legacy') if execution.manifest else 'legacy'
+    if fast_mode=='fraction_prior_v6':
+        from scripts.active_v6_run import run_v6
+        return run_v6(pair,rho,variant,smoke_videos=smoke_videos,pilot_videos=pilot_videos)
     if execution.manifest and execution.manifest.get('pilot_only'):
         if pair not in ('C1','C3') or variant!='FULL' or rho!=.3 or pilot_videos!=1 or smoke_videos:
             raise PermissionError('This new construction authorizes only the two fixed first-video FULL pilots')

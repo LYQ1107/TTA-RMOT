@@ -3,7 +3,16 @@
 本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，工作区/data2/user/FlexHook-TTA。
 它与LocateMOT/GroundJEV是不同任务；[继承旧首页](docs/history/LOCATEMOT_INHERITED_README_20261025.md)只作历史归档。
 
-## 当前研究：三域六方向28项关键实验已完成
+## 当前执行：v6四处修复与成本关卡关键集合
+
+2026-11-04用户否决v5剩余80项，改做v6修复后重跑；[固定口径](results/presence_active/redesign_v6/PREREG.md)、
+[当前状态/后续正式报告](results/presence_active/redesign_v6/REPORT.md)。
+全10项保守估84.058 GPU小时>20，故仅C1/C2/C3 FULL及C1/C3 MINUS_SLOW五项获本批授权，估42.029小时、非实耗。
+新数据在已授权data1资产根，原data2 RUN链接可见；最多两张准入共享卡，不停止他人任务。
+代码/CPU预检完成，真实GPU功能检查及正式队列待启动；不把工程通过当作新的HOTA提升。
+五项后报告等待，不启动其他预算/消融或v5剩余80项；必要时仅按>5%调用量变化补对应YT_PRIOR。
+
+## 上一阶段：三域六方向28项关键实验已完成
 
 分支method/presence-active-20261102。2026-11-04用户授权的新增18项已全部完成、协调器exit0；
 累计28/108，余80项未运行/未授权。完整目标不缩小，原40 GPU小时扩展关卡保留。

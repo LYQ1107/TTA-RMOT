@@ -98,7 +98,8 @@ def run(execution,plan_path):
     atomic_json(run_root / 'completion.json',completion)
     if completion['status']!='COMPLETE':
         raise RuntimeError('Preserve completed streams; inspect '+str(run_root / 'completion.json'))
-    subprocess.run([sys.executable,str(ROOT / 'scripts/report_active.py'),'--partial'],cwd=ROOT,
+    report_script=execution.manifest.get('report_script','scripts/report_active.py') if execution.manifest else 'scripts/report_active.py'
+    subprocess.run([sys.executable,str(ROOT / report_script),'--partial'],cwd=ROOT,
         env=dict(os.environ,CUDA_VISIBLE_DEVICES=''),check=True)
     print(json.dumps(dict(event='MAIN_CRITICAL_COMPLETE',coordinator=str(run_root),
         report=str(execution.public / 'REPORT.md'),jobs=len(jobs))),flush=True)

@@ -111,6 +111,11 @@ class SlowAdapter:
                 self.optimizer.zero_grad(set_to_none=True)
                 with torch.autocast(self.cache.device.type, dtype=torch.float16, enabled=self.scaler.is_enabled()):
                     margin, _ = margins_and_features(self.model, prepared, query_text)
+                    if exclusive and hasattr(state, 'asked_mask'):
+                        # v6 UNKNOWN pairs must not become implicit negative
+                        # classes in the otherwise unchanged exclusive CE.
+                        from flex_uda.active.v6 import exclusive_training_logits
+                        margin = exclusive_training_logits(margin, pseudo, [ti for ti, _, _ in selected])
                     loss = (F.cross_entropy(torch.cat([margin, torch.zeros_like(margin[:, :1])], 1), labels)
                             if exclusive else F.binary_cross_entropy_with_logits(margin[:, 0], labels.float()))
                 if not torch.isfinite(loss): raise FloatingPointError('Nonfinite slow LoRA objective')
