@@ -22,5 +22,8 @@ def test_coverage_reports_skips_and_the_final_after_slow_calibration():
               dict(video='second',rounds=[dict(positive_pairs=0,slow={'optimizer_updates':0},fast=fast)])]
     rows,summary=adaptation_coverage(receipts,'C1','FULL_v6')
     assert rows[0]['final_w']==.17 and rows[0]['identity_fit_calls']==1
+    assert rows[0]['new_video_single_answer_positive_upper_bound']>.95
+    assert rows[1]['initial_w']==.17 and rows[1]['new_video_single_answer_positive_upper_bound']<.95
+    assert summary['new_videos_single_answer_cannot_certify_positive']==1
     assert summary['optimizer_updates']==50 and summary['zero_slow_update_videos']==1
     assert summary['rounds_without_positive_pseudo_pairs']==1 and summary['videos']==2

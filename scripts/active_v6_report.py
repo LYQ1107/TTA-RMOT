@@ -23,7 +23,8 @@ def rescore_seconds(seal,method):
 
 
 def adaptation_coverage(receipts,pair,method):
-    rows=[]
+    from scipy.special import expit
+    rows=[];initial_w=1.
     for video in receipts:
         rounds=video.get('rounds',[])
         if not rounds:continue
@@ -36,13 +37,17 @@ def adaptation_coverage(receipts,pair,method):
             final_positive_pseudo_pairs=rounds[-1]['positive_pairs'],
             identity_fit_calls=sum(x.get('identity',{}).get('status')=='MAP_UPDATED' for x in calls),
             presence_fit_calls=sum(x.get('presence',{}).get('status')=='MAP_UPDATED' for x in calls),
-            final_w=final['slope'],final_temperature=final['temperature'],final_bias=final['bias']))
+            final_w=final['slope'],final_temperature=final['temperature'],final_bias=final['bias'],
+            initial_w=initial_w,new_video_single_answer_positive_upper_bound=float(expit(2*initial_w+2)),
+            new_video_single_answer_cannot_certify_positive=bool(expit(2*initial_w+2)<=.95)))
+        initial_w=final['slope']
     summary=dict(pair=pair,method=method,videos=len(rows),
         zero_slow_update_videos=sum(x['optimizer_updates']==0 for x in rows),
         optimizer_updates=sum(x['optimizer_updates'] for x in rows),
         rounds=sum(x['rounds'] for x in rows),
         rounds_without_positive_pseudo_pairs=sum(x['rounds_without_positive_pseudo_pairs'] for x in rows),
-        min_final_w=min(x['final_w'] for x in rows),max_final_w=max(x['final_w'] for x in rows))
+        min_final_w=min(x['final_w'] for x in rows),max_final_w=max(x['final_w'] for x in rows),
+        new_videos_single_answer_cannot_certify_positive=sum(x['new_video_single_answer_cannot_certify_positive'] for x in rows))
     return rows,summary
 
 
@@ -204,6 +209,8 @@ def report(execution):
     text+='\n\n## 教师与适应成本\n\n'+table(list(costs[0]),costs)
     if evidence_use:text+='\n\n## 教师回答到后验的证据利用（GT-free，不等于训练标签）\n\n'+table(list(evidence_use[0]),evidence_use)
     if coverage_summary:text+='\n\n## 证据与更新覆盖（GT-free，不是学习有效性的指标）\n\n'+table(list(coverage_summary[0]),coverage_summary)
+    text+='\n\n新视频a_q初始为0、ℓ0≤2且单次证据≤2，因此身份重拟合之前，首次回答的正后验上界为sigmoid(2w+2)。'
+    text+='此上界若≤0.95，单次回答无法生成正伪标签，需要重复证据；它不是教师正确率或新的在线阈值。'
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)
     alignment=public/'initial_cache_alignment.json'
     if alignment.exists():
