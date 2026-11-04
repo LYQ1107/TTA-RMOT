@@ -113,3 +113,25 @@ def test_fraction_is_selected_observations_not_frame_count_median():
     low, _, _ = selection_fractions(obs,[10,20],{1:0,2:1,3:2,4:3},margin,utilities,
                                     [[2.,2.,2.,2.]],bias=-20.)
     assert (low == 0).all()
+
+
+def test_current_frame_cache_track_ids_can_cross_teacher_json_boundary():
+    import json
+    from pathlib import Path
+    from tempfile import TemporaryDirectory
+    import torch
+    from flex_uda.presence.cardinality import BernoulliCardinalityHead,ARCHITECTURE
+    from flex_uda.active.v6_frames import FrameCacheV6
+    class Cache:
+        def _text(self,text):return text
+    with TemporaryDirectory() as directory:
+        path=Path(directory);head=path/'head.pt'
+        # Match the real source-head checkpoint schema, not a mock parser.
+        torch.save(dict(architecture=ARCHITECTURE,head=BernoulliCardinalityHead().state_dict()),head)
+        bank=dict(observations=[[1,7],[2,7],[3,7]])
+        try:
+            frame_cache=FrameCacheV6(None,Cache(),bank,[dict(query_text='person')],[1,2,3],head,path/'cache')
+        except KeyError as error:
+            # The real head loader may use state_dict rather than head.
+            raise AssertionError('Use the actual checkpoint schema in this regression') from error
+        assert json.loads(json.dumps(dict(track_id=frame_cache.tracks[0])))=={'track_id':7}

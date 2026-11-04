@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from scipy.special import expit
-from flex_tta.runtime.pf_receipts import atomic_json,file_sha
+from flex_tta.runtime.pf_receipts import atomic_json,append_json,file_sha
 from flex_uda.presence.features import margins_and_features
 from flex_uda.model.flexhook_uda import prepared_inputs
 from flex_uda.presence.cardinality import expected_iou_utilities
@@ -19,7 +19,7 @@ class FrameCacheV6:
         self.model,self.cache,self.bank,self.queries=model,cache,bank,queries
         self.frames=list(map(int,frames));self.frame_index={t:i for i,t in enumerate(self.frames)}
         self.sample_frames=sample32(self.frames)
-        self.observations=np.asarray(bank['observations']);self.tracks=sorted(set(self.observations[:,1]))
+        self.observations=np.asarray(bank['observations']);self.tracks=sorted({int(t) for t in self.observations[:,1]})
         self.positions={tuple(row):i for i,row in enumerate(self.observations.tolist())}
         self.by_track={t:np.flatnonzero(self.observations[:,1]==t) for t in self.tracks}
         self.by_frame={t:np.flatnonzero(self.observations[:,0]==t) for t in self.frames}
@@ -64,6 +64,7 @@ class FrameCacheV6:
         record=dict(kind='FIXED32' if sampled else 'VIDEO_START_ALL',frames=list(frames),
             candidate_query_rows=rows,model_step=model_step,GPU_seconds=time.perf_counter()-started)
         self.score_records.append(record)
+        append_json(self.folder/'score_attempts.jsonl',record)
         self._head_update(frames)
         return record
 
