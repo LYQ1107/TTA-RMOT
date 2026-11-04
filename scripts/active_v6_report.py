@@ -70,7 +70,7 @@ def report(execution):
     # No GT loads until this stage's entire fixed prediction set is sealed.
     for j in jobs:verify_predictions(folder(j['pair'],j['method']))
     rows=[];costs=[];presence=[];rounds=[];videos=[];reliability=[];calibration=[];artifacts=[];attributions={};evidence_use=[]
-    coverage=[];coverage_summary=[]
+    coverage=[];coverage_summary=[];sports_sensitivity=[]
     truth_cache={};meta_cache={};intervals={};summaries={}
     for j in jobs:
         pair,method=j['pair'],j['method'];target=PAIRS[pair][1];path=folder(pair,method)
@@ -78,6 +78,17 @@ def report(execution):
         r=dict(r,pair=pair,version='v6',method=method+'_v6' if method in ('FULL','MINUS_SLOW') else method+'_REMATCHED')
         rows.append(r);artifacts.append(dict(pair=pair,method=r['method'],path=str(path),
             seal_sha256=file_sha(path/'predictions_seal.json'),episodes=seal['episodes']))
+        if target=='SportsMOT':
+            from scripts.active_eval import official_stats
+            from scripts.pf_diag_common import official_metrics
+            subset=path/'sensitivity_418';subset_seal=verify_predictions(subset)
+            assert subset_seal['episode_count']==418
+            assert subset_seal['original_full466_seal_sha256']==file_sha(path/'predictions_seal.json')
+            sports_sensitivity.append(dict(pair=pair,method=r['method'],episodes=418,
+                **official_metrics(subset/'results'),HOTA_unrounded=official_stats(subset)['HOTA_unrounded'],
+                full466_HOTA=r['HOTA_unrounded'],prediction_rows=subset_seal['prediction_rows'],
+                GT_protocol=subset_seal['sensitivity_protocol'],path=str(subset),
+                prediction_seal_sha256=file_sha(subset/'predictions_seal.json')))
         receipts=[json.loads(p.read_text()) for p in sorted(path.glob('videos/*/receipt.json'))]
         teacher=seal['teacher']
         attempts=[json.loads(p.read_text()) for p in sorted(path.glob('worker_attempts/*.json'))]
@@ -180,7 +191,8 @@ def report(execution):
     for name,records in [('main',rows),('direction_summary',main),('costs',costs),('presence_decisions',presence),
         ('final_confidence',confidence),('mechanism_compare',mechanism),('recall_compare',recall),
         ('behavior_round',rounds),('behavior_video',videos),('reliability_vs_GT',reliability),('calibration_calls',calibration),
-        ('teacher_evidence_use',evidence_use),('adaptation_coverage',coverage),('adaptation_coverage_summary',coverage_summary)]:
+        ('teacher_evidence_use',evidence_use),('adaptation_coverage',coverage),('adaptation_coverage_summary',coverage_summary),
+        ('sports_sensitivity',sports_sensitivity)]:
         write_table(public/(name+'.csv'),records)
     atomic_json(public/'bootstrap.json',intervals);atomic_json(public/'artifacts.json',dict(new=artifacts,reused=baseline_refs))
     ds_compare=[]
@@ -216,6 +228,8 @@ def report(execution):
     text+='\n\n新视频a_q初始为0、ℓ0≤2且单次证据≤2，因此身份重拟合之前，首次回答的正后验上界为sigmoid(2w+2)。'
     text+='此上界若≤0.95，单次回答无法生成正伪标签，需要重复证据；它不是教师正确率或新的在线阈值。'
     text+='zero_positive_optimizer_updates单列该轮无正目标伪标签但仍执行的更新；二元目标域损失原本允许只用已问负例，不临时增加双类门控。'
+    if sports_sensitivity:text+='\n\n## SportsMOT 418条敏感性（v4内容不变，仅限制序列ID）\n\n'+table(
+        ['pair','method','full466_HOTA','HOTA_unrounded','DetA','AssA','IDF1','IDSW','episodes','prediction_rows'],sports_sensitivity)
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)
     alignment=public/'initial_cache_alignment.json'
     if alignment.exists():
