@@ -1,0 +1,171 @@
+{
+  "status": "V6_REAL_THREE_FRAME_SMOKE_PASSED",
+  "video": "dancetrack0004",
+  "frames": [
+    1,
+    2,
+    3
+  ],
+  "load": {
+    "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "strict_load": "<All keys matched successfully>",
+    "target_config": "dance",
+    "tokenizer_person": [
+      5970
+    ],
+    "precision": "FP32"
+  },
+  "candidate_query_rows": 153,
+  "PCD_shape": [
+    17,
+    9,
+    768
+  ],
+  "PCD_dtype": "float32",
+  "actual_trainable_parameters": 24576,
+  "unchanged_model_rescore_exact": true,
+  "teacher": {
+    "logical_calls": 3,
+    "new_calls": 1,
+    "cache_hits": 2,
+    "forward_seconds": 0.9421886820346117,
+    "equivalent_forward_seconds": 1.0594572079135105,
+    "batches": 1,
+    "cache": {
+      "complete_raw_responses": 134520,
+      "pending_leases": 0,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/teacher/raw.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 8.883754367940128,
+    "peak_allocated_bytes": 4316384256,
+    "GT_open_attempts": 0,
+    "process_wall_seconds": 24.419713359326124,
+    "process_wall_is_not_GPU_utilization_integral": true
+  },
+  "GT_open_attempts": 0,
+  "teacher_question_count": 3,
+  "initial_unasked_pseudo_labels": 0,
+  "fast": {
+    "status": "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES",
+    "identity": {
+      "status": "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES",
+      "positive": 0,
+      "negative": 3,
+      "unqueried_confident_excluded": 0,
+      "queried_confident_without_agreeing_evidence": 0
+    },
+    "presence": {
+      "status": "SKIP_INSUFFICIENT_CONFIRMED_CLASSES",
+      "positive": 0,
+      "negative": 1,
+      "conflicting_queries": 0
+    },
+    "temperature": 1.0,
+    "bias": 0.0,
+    "slope": 1.0,
+    "w": 1.0,
+    "teacher_evidence_not_reapplied": true,
+    "support_uses_target_GT": false
+  },
+  "ds": {
+    "queried_pairs": 3,
+    "prevalence": 0.4991665656682998,
+    "reliability": {
+      "CROP": {
+        "sensitivity": 0.3639120880253464,
+        "specificity": 0.6366389432540862
+      },
+      "CLIP": {
+        "sensitivity": 0.5,
+        "specificity": 0.5
+      },
+      "FRAME_BOX": {
+        "sensitivity": 0.5,
+        "specificity": 0.5
+      }
+    },
+    "EM_iterations": 20,
+    "Beta_prior": [
+      2.0,
+      2.0
+    ],
+    "repeated_same_view_answers": "conditionally independent observation factors; correlation is a modeling limitation",
+    "workers": [
+      "CROP",
+      "CLIP",
+      "FRAME_BOX"
+    ],
+    "identity_annotator": false,
+    "initial_sensitivity_specificity": [
+      0.8,
+      0.8
+    ],
+    "per_answer_log_odds_cap": 2.0
+  },
+  "cache": {
+    "status": "CURRENT_MODEL_CACHE_COMPLETE",
+    "source_head": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/V2-best/checkpoint_best_source.pt",
+    "source_head_sha256": "62cf4fcaffa72dc5df8cbbc2c18e5a4f62ef59128c2ffdeda748e8b72bf8f490",
+    "pcd_precision": "FP32",
+    "margin_precision": "FP32",
+    "source_head_uses": "margin only, unchanged two-slope Bernoulli head",
+    "records": [
+      {
+        "kind": "VIDEO_START_ALL",
+        "frames": [
+          1,
+          2,
+          3
+        ],
+        "candidate_query_rows": 153,
+        "model_step": 0,
+        "GPU_seconds": 0.8959893491119146
+      },
+      {
+        "kind": "FIXED32",
+        "frames": [
+          1,
+          2,
+          3
+        ],
+        "candidate_query_rows": 153,
+        "model_step": 0,
+        "GPU_seconds": 0.5637343553826213
+      }
+    ],
+    "decode_CPU_seconds": 0.009012471418827772,
+    "files": {
+      "fixed32.json": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active/smoke_C1/frames/fixed32.json",
+        "bytes": 142,
+        "sha256": "5c01e261275d6016f473383c07dbc8aefac9cae8b1be3d4eb549e87d34bfd28f"
+      },
+      "pcd.npy": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active/smoke_C1/frames/pcd.npy",
+        "bytes": 470144,
+        "sha256": "fadce88a89b8690acc0372fa2e2b42e3ee5cbcd5737e2cc7737d133ac0126d75"
+      },
+      "row_model_steps.npy": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active/smoke_C1/frames/row_model_steps.npy",
+        "bytes": 200,
+        "sha256": "ef96e79ade33aa023bbe8ae7309afc79a6ebeaac504e72c1f0d957d081040f26"
+      },
+      "presence_logits.npy": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active/smoke_C1/frames/presence_logits.npy",
+        "bytes": 536,
+        "sha256": "aba1ee311748db8b90fe8d36f562648fc879f9615f897c507c9923d8ecfeef39"
+      },
+      "margin.npy": {
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active/smoke_C1/frames/margin.npy",
+        "bytes": 740,
+        "sha256": "f7671f7df7d9693607c219c674146c7ea677b23de3ea25b7ab27583e80895ef7"
+      }
+    }
+  },
+  "physical_gpu": "6",
+  "full_RMOT_not_evaluated": true
+}
