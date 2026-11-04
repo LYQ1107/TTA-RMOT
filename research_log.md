@@ -2628,3 +2628,5 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - 原observer57210已真实exit1（manager1834232）；C1/C2均在首视频全帧评分结束、第一次教师请求前因np.int64不能JSON序列化退出。最小修复为FrameCache轨迹ID原值转Python int，真实head/cache到教师JSON回归通过，完整42项回归通过；不改公式、参数、随机数、候选或教师。原smoke显式转int没有覆盖此真实边界，缺口已补，未冒充方法负结果或隐藏失败。
 - 失败worker wall314.640/579.987秒与完整原日志/teacher关闭审计保留；原独立打分相位未持久化的时间标未知、不当0。两份首视频未封存缓存恢复性移入各方法failed_video_attempts/numpy_id_1793785863175932395，没有删除原文件；尚无完整视频/stream checkpoint，因此只重算未完成单元，无健康episode重跑。新增即时score_attempts.jsonl相位账目，修复发布后恢复完全相同五项清单，最多两卡，不停止外项目。
 - 兼容性修复公开bbe03d90（ref一次ReadTimeout后先读回旧头，使用同pending commit/lease补更新成功，不重新上传/覆写新头）。已恢复原5项：manager1862297、observer45542，C1 FULL GPU6/PID1862609，C2 FULL GPU4/PID1862611。原57210终止不再attach；新handle观察超时不等于停止，不新开第二队列。源码数值/清单哈希不变，仅额外细化离线成本：失败worker wall计入总费用，丢失的旧相位时间不伪造为0。
+- observer45542后来返回143；一次终止后诊断确认manager1862297与C1/C2原worker仍健康，未结束实验或重跑视频。只用active_durable --attach原durable目录接回，当前观察handle35415；不将观察连接退出混成实验失败，原启动和失败记录均保留。
+- 等待原队列期间，静态核验发现条件补跑的冻结YT_PRIOR seal没有rescore_GPU_seconds字段（基线本来只读原生封存margin，没有模型重打分）。仅修报告端对YesTrack此相位记0，FULL/−SLOW仍强制实测字段，不能以默认0掩盖缺失。3项CPU定向检查通过（2.92秒），合并既有回归45项全部通过（10.87秒），compileall/diff检查通过；未改GPU方法、教师、预算、候选或清单。

@@ -16,6 +16,12 @@ from scripts.report_active import (write_table,saved_presence_decisions,final_co
     behavior_and_reliability,calibration_calls,committed_teacher_equivalent_hours)
 
 
+def rescore_seconds(seal,method):
+    # Frozen YesTrack controls use the sealed native margins and never rescore.
+    # FULL/MINUS_SLOW must retain their measured frame-cache timings.
+    return seal.get('rescore_GPU_seconds',0.) if method.startswith('YESTRACK') else seal['rescore_GPU_seconds']
+
+
 def report(execution):
     from scripts.active_eval import summarize,offline_labels,bootstrap
     from scripts.active_attribution import attribute
@@ -50,7 +56,7 @@ def report(execution):
             logical_calls=teacher['logical_calls'],new_calls=teacher['new_calls'],cache_hits=teacher['cache_hits'],
             teacher_forward_GPU_hours=teacher['forward_seconds']/3600,
             committed_teacher_equivalent_forward_GPU_hours=committed_teacher_equivalent_hours(receipts,teacher,method),
-            LoRA_GPU_hours=seal['LoRA_GPU_seconds']/3600,rescore_GPU_hours=seal['rescore_GPU_seconds']/3600,
+            LoRA_GPU_hours=seal['LoRA_GPU_seconds']/3600,rescore_GPU_hours=rescore_seconds(seal,method)/3600,
             seal_process_wall_hours=seal['wall_seconds']/3600,
             assigned_worker_wall_hours_including_failures=recorded_wall/3600,
             failed_worker_attempts=sum(a.get('status')=='FAILED_RETAINED_FOR_RECOVERY' for a in attempts),
