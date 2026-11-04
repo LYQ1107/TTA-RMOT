@@ -30,7 +30,7 @@ def report(execution):
         return (execution.active if new else old)/pair/method/'rho_0.3'
     # No GT loads until this stage's entire fixed prediction set is sealed.
     for j in jobs:verify_predictions(folder(j['pair'],j['method']))
-    rows=[];costs=[];presence=[];rounds=[];videos=[];reliability=[];calibration=[];artifacts=[];attributions={}
+    rows=[];costs=[];presence=[];rounds=[];videos=[];reliability=[];calibration=[];artifacts=[];attributions={};evidence_use=[]
     truth_cache={};meta_cache={};intervals={};summaries={}
     for j in jobs:
         pair,method=j['pair'],j['method'];target=PAIRS[pair][1];path=folder(pair,method)
@@ -42,6 +42,10 @@ def report(execution):
         teacher=seal['teacher']
         attempts=[json.loads(p.read_text()) for p in sorted(path.glob('worker_attempts/*.json'))]
         recorded_wall=sum(a['wall_seconds'] for a in attempts if a.get('wall_seconds') is not None)
+        peaks=[a['parent_peak_allocated_bytes'] for a in attempts if a.get('parent_peak_allocated_bytes') is not None]
+        sessions=[json.loads(p.read_text()) for p in sorted(path.glob('teacher_sessions/*.json'))]
+        trainable={rr['slow']['trainable_parameters'] for v in receipts for rr in v.get('rounds',[])
+                   if rr['slow'].get('trainable_parameters') is not None}
         costs.append(dict(pair=pair,method=r['method'],rho=.3,
             logical_calls=teacher['logical_calls'],new_calls=teacher['new_calls'],cache_hits=teacher['cache_hits'],
             teacher_forward_GPU_hours=teacher['forward_seconds']/3600,
@@ -53,10 +57,21 @@ def report(execution):
             unfinished_attempt_wall_unknown=sum(a.get('wall_seconds') is None for a in attempts),
             wall_not_GPU_utilization_integral=True,
             incomplete_failed_score_phase_not_fabricated_as_zero=True,
-            peak_teacher_allocated_bytes=teacher['peak_allocated_bytes'],
+            peak_teacher_allocated_bytes=max(s['peak_allocated_bytes'] for s in sessions),
+            peak_parent_allocated_bytes=max(peaks) if peaks else None,
+            trainable_parameters_observed_in_updates=sorted(trainable),
             optimizer_updates=sum(rr['slow']['optimizer_updates'] for v in receipts for rr in v.get('rounds',[])),
             frame_prior_CPU_hours=sum(v.get('decode_CPU_seconds',0) for v in receipts)/3600))
         if method not in ('FULL','MINUS_SLOW'):continue
+        actual_answers=[a for p in sorted(path.glob('videos/*/questions.json')) for a in json.loads(p.read_text())]
+        yes=[a for a in actual_answers if a['yes_probability']>=.5]
+        no=[a for a in actual_answers if a['yes_probability']<.5]
+        evidence_use.append(dict(pair=pair,method=r['method'],teacher_yes=len(yes),teacher_no=len(no),
+            immediate_confident_positive_after_yes=sum(a['posterior_probability_after']>.95 for a in yes),
+            immediate_confident_negative_after_no=sum(a['posterior_probability_after']<.05 for a in no),
+            teacher_yes_still_posterior_nonpositive=sum(a['posterior_probability_after']<=.5 for a in yes),
+            teacher_yes_still_nonpositive_fraction=sum(a['posterior_probability_after']<=.5 for a in yes)/len(yes) if yes else None,
+            note='GT-free immediate post-answer posterior; not final labels, training samples, or semantic correctness'))
         if target not in truth_cache:
             meta,truth,_=offline_labels(target);meta_cache[target]=meta;truth_cache[target]=truth
         meta,truth=meta_cache[target],truth_cache[target]
@@ -69,6 +84,7 @@ def report(execution):
     with (old_public/'final_confidence.csv').open() as f:old_conf=list(csv.DictReader(f))
     with (old_public/'direction_summary.csv').open() as f:old_directions={x['pair']:x for x in csv.DictReader(f)}
     with (old_public/'reliability_vs_GT.csv').open() as f:old_reliability=list(csv.DictReader(f))
+    with (old_public/'presence_decisions.csv').open() as f:old_presence=list(csv.DictReader(f))
     comparisons=[];main=[];mechanism=[];recall=[];baseline_refs=[]
     for pair in sorted({j['pair'] for j in jobs if j['method']=='FULL'}):
         target=PAIRS[pair][1];model=PAIRS[pair][0];current=folder(pair,'FULL')
@@ -98,10 +114,18 @@ def report(execution):
         for label,item in [('v5',b),('v6',c)]:
             denom=int(item['matched_candidate_positive_tracks_majority']);wrong=int(item['confident_negative_GT_FN'])
             unasked=int(item['confident_negative_GT_FN_unqueried'])
+            source_presence=presence if label=='v6' else old_presence
+            expected_method='FULL_v6' if label=='v6' else 'FULL'
+            query_rows=[x for x in source_presence if x['pair']==pair and x['method']==expected_method]
+            truth=lambda value:str(value)=='True'
             mechanism.append(dict(pair=pair,version=label,GT_positive_long_track_pairs=denom,
                 high_confident_negative_GT_positive_pairs=wrong,high_negative_rate_among_GT_positive=wrong/denom if denom else None,
                 high_negative_unasked_GT_positive_pairs=unasked,
                 unasked_fraction_within_high_negative_GT_positive=unasked/wrong if wrong else None,
+                GT_present_queries=sum(truth(x['query_present_GT']) for x in query_rows),
+                inferred_absent_queries=sum(truth(x['teacher_absent']) for x in query_rows),
+                GT_present_but_inferred_absent=sum(truth(x['query_present_GT']) and truth(x['teacher_absent']) for x in query_rows),
+                retrievable_GT_but_inferred_absent=sum(truth(x['false_absence_with_retrievable_GT']) for x in query_rows),
                 note='posterior diagnosis, not masked optimizer pseudo labels'))
             ap=folder(pair,'FULL',label=='v6')/'offline_attribution.json'
             ar=attributions[pair,'FULL'] if label=='v6' else json.loads(ap.read_text())
@@ -114,7 +138,8 @@ def report(execution):
             intervals[pair+'__FULL_v6_minus_MINUS_SLOW_v6']=bootstrap(current,folder(pair,'MINUS_SLOW'),target)
     for name,records in [('main',rows),('direction_summary',main),('costs',costs),('presence_decisions',presence),
         ('final_confidence',confidence),('mechanism_compare',mechanism),('recall_compare',recall),
-        ('behavior_round',rounds),('behavior_video',videos),('reliability_vs_GT',reliability),('calibration_calls',calibration)]:
+        ('behavior_round',rounds),('behavior_video',videos),('reliability_vs_GT',reliability),('calibration_calls',calibration),
+        ('teacher_evidence_use',evidence_use)]:
         write_table(public/(name+'.csv'),records)
     atomic_json(public/'bootstrap.json',intervals);atomic_json(public/'artifacts.json',dict(new=artifacts,reused=baseline_refs))
     ds_compare=[]
@@ -145,6 +170,7 @@ def report(execution):
     text+='\n\n## 高置信错负（最终posterior，非伪标签）\n\n'+table(list(mechanism[0]),mechanism)
     text+='\n\n## GT召回与预测行数\n\n'+table(list(recall[0]),recall)
     text+='\n\n## 教师与适应成本\n\n'+table(list(costs[0]),costs)
+    if evidence_use:text+='\n\n## 教师回答到后验的证据利用（GT-free，不等于训练标签）\n\n'+table(list(evidence_use[0]),evidence_use)
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)
     text+='\n\nDS完整估计/实测特异度与敏感度、两种GT口径见reliability_vs_GT.csv；'
     text+='v5相同表保留于../redesign_v5/active_map_v1_critical28/reliability_vs_GT.csv。\n'
@@ -152,6 +178,7 @@ def report(execution):
     text+='本设定冻结教师辅助、video-transductive，Val历史开发复用，非盲测/严格帧因果。\n'
     text+='缓存含视频起始全帧与LoRA后固定32帧版本，非所有帧最后模型；PCD为FP32，但原两标量存在性头只读margin。\n'
     text+='GT仅在完整预测封存后独立CPU评测；未问伪标签UNKNOWN是规则，不是语义正确率。\n'
+    text+='teacher_absent是算法依据若干候选No与模型存在性推断的缺席标志，并非教师审阅完整视频后的全局不存在结论。\n'
     text+='调用变化>5%才按v6逐视频预算补跑YT_PRIOR，未触发者复用v5且明确非新逐视频精确匹配。\n'
     (public/'REPORT.md').write_text(text)
     print(json.dumps(verdict),flush=True)
