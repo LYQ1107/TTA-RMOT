@@ -1,46 +1,51 @@
 # TTA-RMOT
 
-本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，服务器工作目录
-`/data2/user/FlexHook-TTA`。它与 LocateMOT / GroundJEV 是不同任务；不会从本库启动其训练流程。
-继承的旧首页全文已[归档](docs/history/LOCATEMOT_INHERITED_README_20261025.md)，旧代码、研究记录及独立工作区均保留。
+本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，工作区/data2/user/FlexHook-TTA。
+它与LocateMOT/GroundJEV是不同任务；[继承旧首页](docs/history/LOCATEMOT_INHERITED_README_20261025.md)只作历史归档。
 
-## 当前研究：存在性—身份解耦、主动教师与快慢适应
+## 当前研究：三域六方向28项关键实验已完成
 
-分支 `method/presence-active-20261102`。最终 goal 保持 ACTIVE，范围为三数据集六方向及原固定预算/对照/消融，
-不是首视频 pilot；C1/C3、ρ=0.3 的10项已完成。2026-11-04用户授权新增18项关键实验，
-覆盖其余四方向，已启动独立队列、目标累计28项；原40 GPU小时扩展关卡不变，其余80项未授权。
-不从旧报告中的“停止”或本页历史命令推断当前进程状态，也不据此重启健康作业。
+分支method/presence-active-20261102。2026-11-04用户授权的新增18项已全部完成、协调器exit0；
+累计28/108，余80项未运行/未授权。完整目标不缩小，原40 GPU小时扩展关卡保留。
+当前这批没有等待中的训练，不重启已完成队列。
 
-- [最终目标、执行边界与恢复入口](results/presence_active/FINAL_GOAL.md)。
-- [当前正式结果、置信区间与失败归因](results/presence_active/redesign_v5/active_map_v1_full/REPORT.md)。
+|方向|Native HOTA|FULL|预算匹配YT_PRIOR|
+|---|---:|---:|---:|
+|V2→Dance|8.218|37.724|22.711|
+|Dance→KITTI-V2|13.502|16.100|24.286|
+|V2→SportsMOT|50.970|43.914|58.601|
+|Dance→SportsMOT|20.560|32.191|46.099|
+|LaMOT→KITTI-V2|22.398|18.315|27.588|
+|LaMOT→Dance|15.476|36.469|20.822|
+
+FULL相对Native为4升2降，但仅两个Dance方向超过全部当前简单对照，不能宣称普遍有效。
+慢分支只有C4的正向条件CI不跨0，C3显著退化，C1/C6区间含0；不以loss/有限非零梯度代替科研验收。
+KITTI只有4视频，仅点估计；Dance/Sports用视频聚类2000次seed0，区间不覆盖重排视频后的重新适应或seed不确定性。
+
+- [28项完整报告、全部对照、置信区间与失败归因](results/presence_active/redesign_v5/active_map_v1_critical28/REPORT.md)。
+- [六方向汇总](results/presence_active/redesign_v5/active_map_v1_critical28/direction_summary.csv)、
+  [官方完整指标](results/presence_active/redesign_v5/active_map_v1_critical28/main.csv)、
+  [108项完成状态](results/presence_active/redesign_v5/active_map_v1_critical28/matrix_status.csv)。
+- [成本、峰值显存与实际/等价教师开销](results/presence_active/redesign_v5/active_map_v1_critical28/costs.csv)、
+  [剩余预算复核](results/presence_active/redesign_v5/active_map_v1_critical28/remaining_budget_review.json)。
+- [预测/checkpoint/日志恢复清单](results/presence_active/redesign_v5/active_map_v1_critical28/logs.json)、
+  [完整性审计](results/presence_active/redesign_v5/active_map_v1_critical28/phase_validation.json)。
+- [完整日志8片](results/presence_active/redesign_v5/active_map_v1_critical28/experiment_logs.tar.gz.parts/manifest.json)、
+  [原始教师响应3片](results/presence_active/redesign_v5/active_map_v1_critical28/teacher_responses.jsonl.gz.parts/manifest.json)；
+  原包保留服务器，报告中的命令可按SHA精确还原，不丢弃记录。
 - [新增18项预注册](results/presence_active/redesign_v5/active_map_v1_critical28/PREREG.md)、
-  [累计28项独立报告](results/presence_active/redesign_v5/active_map_v1_critical28/REPORT.md)。
-- [固定10项预注册](results/presence_active/redesign_v5/active_map_v1_full/PREREG.md)、
-  [108项逐项完成状态](results/presence_active/redesign_v5/active_map_v1_full/matrix_status.csv)。
-- [指标主表](results/presence_active/redesign_v5/active_map_v1_full/main.csv)、
-  [成本](results/presence_active/redesign_v5/active_map_v1_full/costs.csv)、
-  [预测/日志与checkpoint恢复清单](results/presence_active/redesign_v5/active_map_v1_full/logs.json)。
-- [已完成的九格Stage A与同域门槛](results/presence_active/redesign_v5/REPORT.md)。
-- [完整运行日志分片与SHA清单](results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz.parts/manifest.json)：
-  GitHub拒绝单个大包后改为原字节分片，原包保留服务器，按报告命令可精确还原。
+  [上一阶段10项原报告](results/presence_active/redesign_v5/active_map_v1_full/REPORT.md)、
+  [已封存九格Stage A](results/presence_active/redesign_v5/REPORT.md)。
+- [最终goal与完整目标边界](results/presence_active/FINAL_GOAL.md)。
 
-Dance全25视频/425表达：Native HOTA8.218，FULL37.724，MINUS_SLOW34.925，
-UNIFORM_K24.108，预算匹配YesTrack随机/分数优先20.750/22.711。
-FULL−MINUS_SLOW的95%视频聚类区间包含0，不能宣称慢分支已证明必要；FULL的LoRA/重打分共2.712小时，
-不能把约55秒教师forward当作整个系统成本。SportsMOT全45视频/466表达：Native50.970、FULL43.914、
-MINUS_SLOW45.451、UNIFORM_K40.804、预算匹配YesTrack随机/优先57.013/58.601。
-FULL−Native的95%视频聚类CI为[-10.743,-3.838]，slow额外效果为-1.536、CI[-2.968,-0.155]；
-不能隐藏失败或宣称普遍有效。上一阶段协调器已退出；新增18项使用独立协调器运行，GPU/PID见新报告，不重跑旧结果。
+28套共15806个episode、10701529行，固定框/ID/帧号逐行核验；20项定向测试通过。
+新增18项实际wall7.5685小时、累计worker14.674小时，只使用GPU5/7且无新worker失败。
+累计28项worker24.801小时为含旧失败的保守上界；教师/LoRA/重打分与历史共享准备分开报告，不将缓存等同零成本。
+按各目标实测单位重新保守外推，剩余80项约211.431 GPU小时；未获下一段授权前不自动启动。
 
-10项及完整日志、固定框/ID覆盖、置信区间与成本已归档。108项仍有98项未运行；
-按本轮实测外推，剩余约267.233 GPU小时，超过原40小时关卡，不自行启动。
-原矩阵ρ=.3主方法/关键对照子集共28项，额外18项约25.584小时已于2026-11-04获得用户授权；
-不将28项子集当作缩小后的最终目标，其他预算/消融不自动启动。
-详见[实测成本与资源复核](results/presence_active/redesign_v5/active_map_v1_full/measured_budget_review.json)。
-
-当前实验使用冻结Qwen3-VL教师与完整视频统计，是teacher-assisted、video-transductive设定，
-不是无外部教师的纯Source-Free自监督或严格逐帧因果在线方法。目标GT只在完整预测封存后的独立评测使用，
-Val已有历史开发复用，不称独立盲测。完整108项未完成，不将当前10项队列当作全部科研目标已完成。
+当前设定是冻结Qwen3-VL辅助、video-transductive，不是无教师纯自监督或严格帧因果在线。
+目标GT仅在预测封存后的独立评测使用，Val已有历史开发复用，不称盲测。
+历史中断/死锁、负结果、旧checkpoint及报告保留，不把28项当作108项全部完成。
 
 以下为历史阶段记录。各阶段报告、预测、失败和checkpoint均保留；其中“运行中/停止/未启动”只指当时阶段。
 尤其 [最初PresenceHead报告](results/presence_active/REPORT.md) 和

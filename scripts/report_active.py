@@ -63,8 +63,10 @@ def plot_adaptation_cost(rows, costs, public):
                 hours+=sum(float(cost[k]) for k in ('LoRA_GPU_hours','rescore_GPU_hours'))
                 if hours<=0:continue
                 ax.scatter(hours,float(row['HOTA']),color=palette(mi),s=40)
+                offset={'UNIFORM_K':(5,18),'YESTRACK_BUDGET_RANDOM':(5,-17)}.get(method,(5,4))
                 ax.annotate(labels[method]+' (rho='+str(row['rho'])+')',
-                    (hours,float(row['HOTA'])),xytext=(5,4),textcoords='offset points',fontsize=7)
+                    (hours,float(row['HOTA'])),xytext=offset,textcoords='offset points',fontsize=7,
+                    arrowprops=dict(arrowstyle='-',lw=.4,color='.5'))
         ax.set(xscale='log',title=pair+': '+PAIRS[pair][0]+' -> '+PAIRS[pair][1],
             xlabel='Committed teacher + valid-lineage LoRA/rescore hours (log)',ylabel='Official HOTA')
         ax.margins(x=.7,y=.18);ax.grid(alpha=.2)

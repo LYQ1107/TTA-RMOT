@@ -29,7 +29,17 @@ goal 状态：ACTIVE，线程 `01a154f2-1527-7b80-a8d7-3679ea95c32b`，无另设
 - 单阻塞协调器等待；失败定位具体原因，最小修复后只恢复未完成单元。
 - 正在运行和等待不是阻塞；10项完成也不等于完整最终目标完成。
 
-## 当前授权：2026-11-04新增18项，累计28项
+## 当前状态：2026-11-04新增18项完成，累计28/108
+
+新增18个GPU任务与独立官方评测全部成功，manager213246/观察handle6305正常exit0；本批队列不再运行。
+28套15806个episode/10701529行逐行核对固定MOT，原10个seal不变；20项定向回归通过。
+FULL六方向HOTA为37.724/16.100/43.914/32.191/18.315/36.469，仅两个Dance方向超过全部当前简单对照。
+新18项实际wall7.5685h、累计worker14.674h，无新失败；28项worker合计24.801h含旧中断/死锁费用。
+按各目标实测单位保守外推，余80项约211.431 GPU小时，未授权；原40h关卡保留。
+最终goal仍非complete，28项详细报告、全部指标/成本/行为/可靠性/恢复/分片日志见active_map_v1_critical28。
+当前停止新增GPU队列，等待用户决定下一段范围/预算；不是缩小108项完整目标。
+
+### 本批授权与执行历史
 
 用户明确答复“先跑18项”，goal恢复ACTIVE。下一批为原矩阵C2/C4/C5/C6的18项，ρ=.3：
 C2/C5各FULL、UNIFORM_K、两种预算匹配YT（各4）；C4/C6另含MINUS_SLOW（各5）。
@@ -39,8 +49,8 @@ C2/C5各FULL、UNIFORM_K、两种预算匹配YT（各4）；C4/C6另含MINUS_SLO
 仍最多两张显存准入共享卡，原配置不变、不按GT调参。先公开预注册，再启动单durable协调器。
 
 新增18项预注册已公开11c16e7d；实际启动manager213246，C2 FULL在GPU5/PID213478，C4 FULL在GPU7/PID213479。
-当前恢复目录为results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/durable_1793724295166384263，
-观察handle6305；连接丢失只能attach该manager，不另开队列。完整启动收据见新报告目录execution_started.json。
+本批恢复目录为results/runs/presence_active_20261102/redesign_v5/active_map_critical18_launchers/durable_1793724295166384263，
+现已正常exit0，不再attach/重启。完整启动收据及完成/日志清单见新报告目录。
 后面的旧10项durable目录均为历史、已终止，不是本轮运行入口。
 
 ## 上一阶段：10项完成，108项目标仍未完成

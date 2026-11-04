@@ -1,0 +1,762 @@
+{
+  "status": "DESCRIPTIVE_CRITICAL28_NOT_FULL108_ACCEPTANCE",
+  "above_NATIVE": 4,
+  "below_NATIVE": 2,
+  "above_all_simple_controls": 2,
+  "directions": [
+    {
+      "pair": "C1",
+      "source": "V2-best",
+      "target": "Dance",
+      "NATIVE": 8.218023278370481,
+      "PRES_TOPK": 10.320883397533184,
+      "FULL": 37.723954510309625,
+      "YESTRACK_BUDGET_RANDOM": 20.750309979888737,
+      "YESTRACK_BUDGET_PRIOR": 22.710562286007747,
+      "UNIFORM_K": 24.10794837948786,
+      "MINUS_SLOW": 34.92453237647193,
+      "delta_NATIVE": 29.505931231939144,
+      "delta_NATIVE_CI95": [
+        21.736195040497527,
+        38.15861988374222
+      ],
+      "delta_YT_PRIOR": 15.013392224301878,
+      "delta_YT_PRIOR_CI95": [
+        9.342513190496984,
+        20.07449585997138
+      ],
+      "above_all_simple_controls": true
+    },
+    {
+      "pair": "C2",
+      "source": "Dance-best",
+      "target": "KITTI-V2",
+      "NATIVE": 13.501502990288703,
+      "PRES_TOPK": 13.781386736365283,
+      "FULL": 16.099629903374577,
+      "YESTRACK_BUDGET_RANDOM": 24.393550936618492,
+      "YESTRACK_BUDGET_PRIOR": 24.2856949360245,
+      "UNIFORM_K": 24.413312965419834,
+      "delta_NATIVE": 2.598126913085874,
+      "delta_NATIVE_CI95": null,
+      "delta_YT_PRIOR": -8.186065032649921,
+      "delta_YT_PRIOR_CI95": null,
+      "above_all_simple_controls": false
+    },
+    {
+      "pair": "C3",
+      "source": "V2-best",
+      "target": "SportsMOT",
+      "NATIVE": 50.97047846720586,
+      "PRES_TOPK": 52.927461466047234,
+      "FULL": 43.91416488641009,
+      "YESTRACK_BUDGET_RANDOM": 57.01277868978195,
+      "YESTRACK_BUDGET_PRIOR": 58.60079081166481,
+      "UNIFORM_K": 40.80424475482688,
+      "MINUS_SLOW": 45.45058254465849,
+      "delta_NATIVE": -7.056313580795766,
+      "delta_NATIVE_CI95": [
+        -10.742626653466425,
+        -3.8376352868721995
+      ],
+      "delta_YT_PRIOR": -14.686625925254717,
+      "delta_YT_PRIOR_CI95": [
+        -17.90591588944286,
+        -11.974584032727941
+      ],
+      "above_all_simple_controls": false
+    },
+    {
+      "pair": "C4",
+      "source": "Dance-best",
+      "target": "SportsMOT",
+      "NATIVE": 20.559603304869942,
+      "PRES_TOPK": 21.010887407715792,
+      "FULL": 32.19130697901041,
+      "YESTRACK_BUDGET_RANDOM": 42.90760531391715,
+      "YESTRACK_BUDGET_PRIOR": 46.09893939637592,
+      "UNIFORM_K": 40.80424475482688,
+      "MINUS_SLOW": 27.10387447698202,
+      "delta_NATIVE": 11.631703674140471,
+      "delta_NATIVE_CI95": [
+        8.225979372052388,
+        15.791781808091718
+      ],
+      "delta_YT_PRIOR": -13.907632417365505,
+      "delta_YT_PRIOR_CI95": [
+        -16.344051088548003,
+        -11.586650347011858
+      ],
+      "above_all_simple_controls": false
+    },
+    {
+      "pair": "C5",
+      "source": "LaMOT-best",
+      "target": "KITTI-V2",
+      "NATIVE": 22.39830567256699,
+      "PRES_TOPK": 23.87553292700683,
+      "FULL": 18.315360219848152,
+      "YESTRACK_BUDGET_RANDOM": 27.127530310696518,
+      "YESTRACK_BUDGET_PRIOR": 27.588195011841616,
+      "UNIFORM_K": 25.674444073607777,
+      "delta_NATIVE": -4.082945452718839,
+      "delta_NATIVE_CI95": null,
+      "delta_YT_PRIOR": -9.272834791993464,
+      "delta_YT_PRIOR_CI95": null,
+      "above_all_simple_controls": false
+    },
+    {
+      "pair": "C6",
+      "source": "LaMOT-best",
+      "target": "Dance",
+      "NATIVE": 15.475742574192424,
+      "PRES_TOPK": 15.15126321329042,
+      "FULL": 36.46877674399777,
+      "YESTRACK_BUDGET_RANDOM": 20.670762721756965,
+      "YESTRACK_BUDGET_PRIOR": 20.821630175303536,
+      "UNIFORM_K": 24.10794837948786,
+      "MINUS_SLOW": 35.58404024687921,
+      "delta_NATIVE": 20.993034169805348,
+      "delta_NATIVE_CI95": [
+        15.53439972325336,
+        26.851827894149604
+      ],
+      "delta_YT_PRIOR": 15.647146568694236,
+      "delta_YT_PRIOR_CI95": [
+        9.996012675107517,
+        21.16844290944988
+      ],
+      "above_all_simple_controls": true
+    }
+  ],
+  "slow_comparisons": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "delta_HOTA": 2.7994221338376946,
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -0.7514731951734667,
+        7.1886737085990955
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    {
+      "pair": "C3",
+      "target": "SportsMOT",
+      "delta_HOTA": -1.5364176582483964,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -2.968065304840187,
+        -0.15526664748034524
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "delta_HOTA": 5.087432502028392,
+      "clusters": 45,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        2.652000465735144,
+        7.760424300289191
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    },
+    {
+      "pair": "C6",
+      "target": "Dance",
+      "delta_HOTA": 0.8847364971185598,
+      "clusters": 25,
+      "samples": 2000,
+      "seed": 0,
+      "CI95": [
+        -0.7986719285353038,
+        3.3560226527798362
+      ],
+      "unit": "video, all correlated expressions and frames kept together",
+      "pooling": "official TP-weighted HOTA"
+    }
+  ],
+  "mechanism": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "final_confidence": {
+        "pair": "C1",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "425",
+        "eligible_tracks": "11152",
+        "matched_candidate_positive_tracks_majority": "567",
+        "confident_positive_tracks_p95": "486",
+        "confident_negative_tracks_p05": "9849",
+        "confident_positive_GT_TP": "323",
+        "confident_positive_GT_FP": "163",
+        "confident_negative_GT_TN": "9718",
+        "confident_negative_GT_FN": "131",
+        "confident_negative_GT_FN_unqueried": "106",
+        "queried_eligible_pairs": "2351",
+        "unqueried_GT_positive_tracks": "148",
+        "high_positive_GT_precision": "0.6646090534979424",
+        "high_negative_GT_error_rate": "0.013300842725149762",
+        "GTpositive_high_negative_rate": "0.2310405643738977",
+        "unqueried_GTpositive_high_negative_rate": "0.7162162162162162",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C1",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "Dance",
+        "gt_observations": "212541",
+        "baseline_selected_rows": "99704",
+        "adapted_selected_rows": "163608",
+        "baseline_matched_gt": "10337",
+        "adapted_matched_gt": "126224",
+        "recovered_gt": "119728",
+        "lost_gt": "3841",
+        "new_false_positive_rows": "36455",
+        "removed_false_positive_rows": "88449",
+        "unchanged_rows_new_FP": "11",
+        "unchanged_rows_removed_FP": "0",
+        "baseline_false_positive_rows": "89367",
+        "adapted_false_positive_rows": "37384",
+        "net_gt_recovery": "115887",
+        "net_FP_change": "-51983",
+        "prediction_seal_sha256": "b2469125c41d7fcad487b54b5de83ff903b9ac0fa5c79777b5b2e10d36f9c52a",
+        "native_prediction_seal_sha256": "14a4489d46f0a790959b884a8a2bc6c8f8026245358bbf82a0cdc5b53014619c",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.5938807100747621",
+        "query_present_FP": "16000",
+        "query_empty_FP": "21384",
+        "query_empty_nonempty_prediction_rate": "0.04155844155844156"
+      },
+      "fast_calls": 180,
+      "identity_status_counts": {
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 68,
+        "MAP_UPDATED": 112
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 67,
+        "MAP_UPDATED": 113
+      },
+      "video_gains": {
+        "FULL_minus_GATE_REASSIGN_REF": {
+          "down": 5,
+          "up": 15,
+          "equal": 5
+        },
+        "FULL_minus_MINUS_SLOW": {
+          "down": 4,
+          "equal": 15,
+          "up": 6
+        },
+        "FULL_minus_NATIVE": {
+          "up": 20,
+          "down": 2,
+          "equal": 3
+        },
+        "FULL_minus_PRES_TOPK": {
+          "up": 20,
+          "down": 2,
+          "equal": 3
+        },
+        "FULL_minus_UNIFORM_K": {
+          "up": 19,
+          "down": 5,
+          "equal": 1
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "up": 19,
+          "down": 6
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "up": 20,
+          "down": 5
+        }
+      }
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "final_confidence": {
+        "pair": "C2",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "862",
+        "eligible_tracks": "69854",
+        "matched_candidate_positive_tracks_majority": "8441",
+        "confident_positive_tracks_p95": "812",
+        "confident_negative_tracks_p05": "66155",
+        "confident_positive_GT_TP": "410",
+        "confident_positive_GT_FP": "402",
+        "confident_negative_GT_TN": "59027",
+        "confident_negative_GT_FN": "7128",
+        "confident_negative_GT_FN_unqueried": "6219",
+        "queried_eligible_pairs": "12882",
+        "unqueried_GT_positive_tracks": "6402",
+        "high_positive_GT_precision": "0.5049261083743842",
+        "high_negative_GT_error_rate": "0.10774695790189706",
+        "GTpositive_high_negative_rate": "0.8444497097500296",
+        "unqueried_GTpositive_high_negative_rate": "0.971415182755389",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C2",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "KITTI-V2",
+        "gt_observations": "491286",
+        "baseline_selected_rows": "99889",
+        "adapted_selected_rows": "38433",
+        "baseline_matched_gt": "25841",
+        "adapted_matched_gt": "23351",
+        "recovered_gt": "12232",
+        "lost_gt": "14722",
+        "new_false_positive_rows": "9560",
+        "removed_false_positive_rows": "68526",
+        "unchanged_rows_new_FP": "0",
+        "unchanged_rows_removed_FP": "0",
+        "baseline_false_positive_rows": "74048",
+        "adapted_false_positive_rows": "15082",
+        "net_gt_recovery": "-2490",
+        "net_FP_change": "-58966",
+        "prediction_seal_sha256": "b59c40e1c967b36332b216519091a766f64043a657365dbb172ecc05e8ff8846",
+        "native_prediction_seal_sha256": "0a0b1736280909ae2f62c83c4f252e28a75af10cb0279fc59867fe7fee9cfd94",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.04753035909836633",
+        "query_present_FP": "15082",
+        "query_empty_FP": "0",
+        "query_empty_nonempty_prediction_rate": ""
+      },
+      "fast_calls": 32,
+      "identity_status_counts": {
+        "MAP_UPDATED": 18,
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 14
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 8,
+        "MAP_UPDATED": 24
+      },
+      "video_gains": {
+        "FULL_minus_NATIVE": {
+          "up": 4
+        },
+        "FULL_minus_PRES_TOPK": {
+          "up": 3,
+          "down": 1
+        },
+        "FULL_minus_UNIFORM_K": {
+          "down": 4
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "down": 4
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "down": 4
+        }
+      }
+    },
+    {
+      "pair": "C3",
+      "target": "SportsMOT",
+      "final_confidence": {
+        "pair": "C3",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "466",
+        "eligible_tracks": "11738",
+        "matched_candidate_positive_tracks_majority": "5528",
+        "confident_positive_tracks_p95": "16",
+        "confident_negative_tracks_p05": "4347",
+        "confident_positive_GT_TP": "13",
+        "confident_positive_GT_FP": "3",
+        "confident_negative_GT_TN": "3274",
+        "confident_negative_GT_FN": "1073",
+        "confident_negative_GT_FN_unqueried": "1019",
+        "queried_eligible_pairs": "2329",
+        "unqueried_GT_positive_tracks": "3854",
+        "high_positive_GT_precision": "0.8125",
+        "high_negative_GT_error_rate": "0.24683689901081204",
+        "GTpositive_high_negative_rate": "0.1941027496382055",
+        "unqueried_GTpositive_high_negative_rate": "0.26440062272963155",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C3",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "SportsMOT",
+        "gt_observations": "1533675",
+        "baseline_selected_rows": "1214424",
+        "adapted_selected_rows": "485840",
+        "baseline_matched_gt": "899440",
+        "adapted_matched_gt": "439469",
+        "recovered_gt": "78160",
+        "lost_gt": "538131",
+        "new_false_positive_rows": "12615",
+        "removed_false_positive_rows": "280696",
+        "unchanged_rows_new_FP": "28",
+        "unchanged_rows_removed_FP": "560",
+        "baseline_false_positive_rows": "314984",
+        "adapted_false_positive_rows": "46371",
+        "net_gt_recovery": "-459971",
+        "net_FP_change": "-268613",
+        "prediction_seal_sha256": "3f9fdbcf278b8f8bd0e7d5353f90697d016d2bf38cd3a5cd40cdf3d96abc2874",
+        "native_prediction_seal_sha256": "629097be0652bcbc92f52a24291eef14a3653d0b769b681c58a1eb08c18d9c90",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.28654636738552824",
+        "query_present_FP": "46371",
+        "query_empty_FP": "0",
+        "query_empty_nonempty_prediction_rate": ""
+      },
+      "fast_calls": 360,
+      "identity_status_counts": {
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 352,
+        "MAP_UPDATED": 8
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 360
+      },
+      "video_gains": {
+        "FULL_minus_MINUS_SLOW": {
+          "down": 28,
+          "up": 17
+        },
+        "FULL_minus_NATIVE": {
+          "up": 17,
+          "down": 28
+        },
+        "FULL_minus_PRES_TOPK": {
+          "up": 13,
+          "down": 32
+        },
+        "FULL_minus_UNIFORM_K": {
+          "up": 25,
+          "down": 20
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "down": 42,
+          "up": 3
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "down": 39,
+          "up": 6
+        }
+      }
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "final_confidence": {
+        "pair": "C4",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "466",
+        "eligible_tracks": "11738",
+        "matched_candidate_positive_tracks_majority": "5528",
+        "confident_positive_tracks_p95": "600",
+        "confident_negative_tracks_p05": "9065",
+        "confident_positive_GT_TP": "516",
+        "confident_positive_GT_FP": "84",
+        "confident_negative_GT_TN": "5429",
+        "confident_negative_GT_FN": "3636",
+        "confident_negative_GT_FN_unqueried": "3575",
+        "queried_eligible_pairs": "1826",
+        "unqueried_GT_positive_tracks": "4437",
+        "high_positive_GT_precision": "0.86",
+        "high_negative_GT_error_rate": "0.4011031439602868",
+        "GTpositive_high_negative_rate": "0.6577424023154848",
+        "unqueried_GTpositive_high_negative_rate": "0.8057245886860491",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C4",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "SportsMOT",
+        "gt_observations": "1533675",
+        "baseline_selected_rows": "212575",
+        "adapted_selected_rows": "266760",
+        "baseline_matched_gt": "147093",
+        "adapted_matched_gt": "240722",
+        "recovered_gt": "150896",
+        "lost_gt": "57267",
+        "new_false_positive_rows": "19121",
+        "removed_false_positive_rows": "58480",
+        "unchanged_rows_new_FP": "2",
+        "unchanged_rows_removed_FP": "87",
+        "baseline_false_positive_rows": "65482",
+        "adapted_false_positive_rows": "26038",
+        "net_gt_recovery": "93629",
+        "net_FP_change": "-39444",
+        "prediction_seal_sha256": "9c89b2b393d6051c8f180689706234871c0779e464028013ee6d918a1b34ecbf",
+        "native_prediction_seal_sha256": "71994fee29fe16fe1ade83c4bbc64308cc44a74993b5c84d671fbd1d86eeddc1",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.15695763444015193",
+        "query_present_FP": "26038",
+        "query_empty_FP": "0",
+        "query_empty_nonempty_prediction_rate": ""
+      },
+      "fast_calls": 360,
+      "identity_status_counts": {
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 191,
+        "MAP_UPDATED": 169
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 248,
+        "MAP_UPDATED": 112
+      },
+      "video_gains": {
+        "FULL_minus_MINUS_SLOW": {
+          "down": 12,
+          "up": 33
+        },
+        "FULL_minus_NATIVE": {
+          "up": 42,
+          "down": 3
+        },
+        "FULL_minus_PRES_TOPK": {
+          "down": 4,
+          "up": 41
+        },
+        "FULL_minus_UNIFORM_K": {
+          "down": 40,
+          "up": 5
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "down": 44,
+          "up": 1
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "down": 40,
+          "up": 5
+        }
+      }
+    },
+    {
+      "pair": "C5",
+      "target": "KITTI-V2",
+      "final_confidence": {
+        "pair": "C5",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "862",
+        "eligible_tracks": "69854",
+        "matched_candidate_positive_tracks_majority": "8441",
+        "confident_positive_tracks_p95": "186",
+        "confident_negative_tracks_p05": "66506",
+        "confident_positive_GT_TP": "91",
+        "confident_positive_GT_FP": "95",
+        "confident_negative_GT_TN": "59355",
+        "confident_negative_GT_FN": "7151",
+        "confident_negative_GT_FN_unqueried": "5978",
+        "queried_eligible_pairs": "12778",
+        "unqueried_GT_positive_tracks": "6046",
+        "high_positive_GT_precision": "0.489247311827957",
+        "high_negative_GT_error_rate": "0.10752413316091781",
+        "GTpositive_high_negative_rate": "0.8471745053903565",
+        "unqueried_GTpositive_high_negative_rate": "0.9887528944756864",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C5",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "KITTI-V2",
+        "gt_observations": "491286",
+        "baseline_selected_rows": "332822",
+        "adapted_selected_rows": "50134",
+        "baseline_matched_gt": "92531",
+        "adapted_matched_gt": "30953",
+        "recovered_gt": "8166",
+        "lost_gt": "69744",
+        "new_false_positive_rows": "8136",
+        "removed_false_positive_rows": "229209",
+        "unchanged_rows_new_FP": "1",
+        "unchanged_rows_removed_FP": "38",
+        "baseline_false_positive_rows": "240291",
+        "adapted_false_positive_rows": "19181",
+        "net_gt_recovery": "-61578",
+        "net_FP_change": "-221110",
+        "prediction_seal_sha256": "fb6070d4716f58877a96addfe3e868947f89ac6a77218787168356fda01d1dd0",
+        "native_prediction_seal_sha256": "365280acbecac9c530e9406347dc222e1567d3adb11d013c80687730e3d33dbc",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.06300403430995388",
+        "query_present_FP": "19181",
+        "query_empty_FP": "0",
+        "query_empty_nonempty_prediction_rate": ""
+      },
+      "fast_calls": 32,
+      "identity_status_counts": {
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 22,
+        "MAP_UPDATED": 10
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 8,
+        "MAP_UPDATED": 24
+      },
+      "video_gains": {
+        "FULL_minus_NATIVE": {
+          "down": 3,
+          "up": 1
+        },
+        "FULL_minus_PRES_TOPK": {
+          "down": 4
+        },
+        "FULL_minus_UNIFORM_K": {
+          "down": 4
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "down": 4
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "down": 4
+        }
+      }
+    },
+    {
+      "pair": "C6",
+      "target": "Dance",
+      "final_confidence": {
+        "pair": "C6",
+        "method": "FULL",
+        "rho": "0.3",
+        "episodes": "425",
+        "eligible_tracks": "11152",
+        "matched_candidate_positive_tracks_majority": "567",
+        "confident_positive_tracks_p95": "142",
+        "confident_negative_tracks_p05": "8604",
+        "confident_positive_GT_TP": "76",
+        "confident_positive_GT_FP": "66",
+        "confident_negative_GT_TN": "8430",
+        "confident_negative_GT_FN": "174",
+        "confident_negative_GT_FN_unqueried": "124",
+        "queried_eligible_pairs": "2696",
+        "unqueried_GT_positive_tracks": "163",
+        "high_positive_GT_precision": "0.5352112676056338",
+        "high_negative_GT_error_rate": "0.020223152022315203",
+        "GTpositive_high_negative_rate": "0.30687830687830686",
+        "unqueried_GTpositive_high_negative_rate": "0.7607361963190185",
+        "unit": "eligible (query, predicted track) pair; n>=3 and GT-majority>=0.5",
+        "final_belief_not_optimizer_sample_labels": "True",
+        "GT_feedback_to_runtime": "False"
+      },
+      "recovery": {
+        "pair": "C6",
+        "method": "FULL",
+        "rho": "0.3",
+        "target": "Dance",
+        "gt_observations": "212541",
+        "baseline_selected_rows": "509926",
+        "adapted_selected_rows": "148750",
+        "baseline_matched_gt": "67294",
+        "adapted_matched_gt": "100453",
+        "recovered_gt": "49077",
+        "lost_gt": "15918",
+        "new_false_positive_rows": "26817",
+        "removed_false_positive_rows": "421246",
+        "unchanged_rows_new_FP": "125",
+        "unchanged_rows_removed_FP": "31",
+        "baseline_false_positive_rows": "442632",
+        "adapted_false_positive_rows": "48297",
+        "net_gt_recovery": "33159",
+        "net_FP_change": "-394335",
+        "prediction_seal_sha256": "4566ebb85af49f64a447edcc3a5488dbcb0f896b78bb373d3d19402a874bba6e",
+        "native_prediction_seal_sha256": "b71a13f13bfdc3a7e289ca1faebcd01f9a5cf091842b0fb6b7ca8715a802d6df",
+        "definition": "offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching",
+        "FP_accounting": "new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP",
+        "GT_feedback_to_runtime": "False",
+        "all_predictions_sealed_before_GT": "True",
+        "query_present_GT_recall": "0.4726288104412796",
+        "query_present_FP": "22869",
+        "query_empty_FP": "25428",
+        "query_empty_nonempty_prediction_rate": "0.05714285714285714"
+      },
+      "fast_calls": 144,
+      "identity_status_counts": {
+        "SKIP_INSUFFICIENT_TEACHER_SUPPORTED_CLASSES": 76,
+        "MAP_UPDATED": 68
+      },
+      "presence_status_counts": {
+        "SKIP_INSUFFICIENT_CONFIRMED_CLASSES": 125,
+        "MAP_UPDATED": 19
+      },
+      "video_gains": {
+        "FULL_minus_GATE_REASSIGN_REF": {
+          "down": 7,
+          "up": 15,
+          "equal": 3
+        },
+        "FULL_minus_MINUS_SLOW": {
+          "equal": 16,
+          "up": 4,
+          "down": 5
+        },
+        "FULL_minus_NATIVE": {
+          "up": 21,
+          "down": 4
+        },
+        "FULL_minus_PRES_TOPK": {
+          "up": 21,
+          "down": 4
+        },
+        "FULL_minus_UNIFORM_K": {
+          "up": 16,
+          "down": 8,
+          "equal": 1
+        },
+        "FULL_minus_YESTRACK_BUDGET_PRIOR": {
+          "up": 19,
+          "down": 6
+        },
+        "FULL_minus_YESTRACK_BUDGET_RANDOM": {
+          "up": 19,
+          "down": 6
+        }
+      }
+    }
+  ],
+  "mechanism_oracle_note": "GT in these tables was computed only offline after sealing; final belief is not optimizer sample labels",
+  "labels": [
+    "Dance-only advantage over all current simple controls; not a generally validated TTA method",
+    "slow loop has stable positive conditional CI only in C4 among the4 tested directions; C3 is negative",
+    "KITTI4 videos point estimates only; no seed/order uncertainty or blind-test claim"
+  ],
+  "new_model_teacher_or_GT_calls": 0
+}

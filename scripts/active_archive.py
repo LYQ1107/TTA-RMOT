@@ -114,7 +114,8 @@ def package(execution,rows):
             github_transport=archive_transport_parts(archive_path) if archive_path.stat().st_size>32 << 20 else None),
         raw_teacher_response_keys=len(keys),raw_teacher_cache_source=str(cache),
         raw_response_cost_note='one immutable original response per input; per-method actual/cache/equivalent costs are in costs.csv',
-        raw_teacher_responses=dict(path=str(raw),bytes=raw.stat().st_size,sha256=file_sha(raw)) if keys else None,
+        raw_teacher_responses=dict(path=str(raw),bytes=raw.stat().st_size,sha256=file_sha(raw),
+            github_transport=archive_transport_parts(raw) if raw.stat().st_size>32 << 20 else None) if keys else None,
         large_models_and_predictions_not_in_git=True,teacher_or_GPU_called_by_packager=False)
     atomic_json(execution.public / 'logs.json',record)
     return record
