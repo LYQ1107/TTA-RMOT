@@ -63,3 +63,19 @@ sigmoid(2w+2)≈0.912<0.95。这20视频的2918个被问过的(句子,轨迹)对
 逐视频更新与参数见C1_adaptation_coverage.csv和C1_adaptation_summary.json。
 C3 FULL已在原GPU6接续，C2原GPU4继续，随后只执行C1/C3 MINUS_SLOW及规则触发的YT_PRIOR。
 本批尚未完成，不扩展v5剩余80项或其他五项v6。
+
+## 第二个完整封存结果：C2 FULL_v6
+
+C2（Dance-best→KITTI-V2）完整4视频/862表达已封存后完成官方TrackEval，生成GT打开0。
+
+| 方法 | HOTA | DetA | AssA | IDF1 | IDSW | 预测行数 |
+|---|---:|---:|---:|---:|---:|---:|
+| FULL_v6 | 26.8182 | 11.858 | 60.794 | 21.548 | 574 | 370093 |
+
+相对v5 FULL 16.0996为+10.7186；相对UNIFORM_K 24.4133为+2.4049、YT_PRIOR 24.2857为+2.5325。
+教师调用20955次，与v5完全相同，按规则无需重跑此方向YT_PRIOR；这是调用数匹配，不是教师各视图GPU时间相同。
+4/4视频有慢速更新，共450步，最终w始终1；7/16轮没有正伪标签，未强行更新。
+见C2_adaptation_coverage.csv/C2_adaptation_summary.json和interim_official_results.json。
+只有4个KITTI目标验证视频，仅报点估计；同时保留C1的下降，不据两个方向推断六方向≥4或跨数据集普遍性。
+
+C1 MINUS_SLOW在原GPU4接续PID2020004，C3 FULL继续原GPU6；全部5项仍未完成。
