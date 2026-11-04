@@ -23,6 +23,7 @@ def rescore_seconds(seal,method):
 
 
 def adaptation_coverage(receipts,pair,method):
+    """Round-end label counts are NOT the labels sampled by the optimizer."""
     from scipy.special import expit
     rows=[];initial_w=1.
     for video in receipts:
@@ -33,9 +34,9 @@ def adaptation_coverage(receipts,pair,method):
         calls+=[rr['fast']['after_slow'] for rr in rounds if 'after_slow' in rr['fast']]
         rows.append(dict(pair=pair,method=method,video=video['video'],rounds=len(rounds),
             optimizer_updates=sum(rr['slow']['optimizer_updates'] for rr in rounds),
-            rounds_without_positive_pseudo_pairs=sum(rr['positive_pairs']==0 for rr in rounds),
-            zero_positive_update_rounds=sum(rr['positive_pairs']==0 and rr['slow']['optimizer_updates']>0 for rr in rounds),
-            zero_positive_optimizer_updates=sum(rr['slow']['optimizer_updates'] for rr in rounds if rr['positive_pairs']==0),
+            rounds_without_final_positive_pseudo_pairs=sum(rr['positive_pairs']==0 for rr in rounds),
+            zero_final_positive_update_rounds=sum(rr['positive_pairs']==0 and rr['slow']['optimizer_updates']>0 for rr in rounds),
+            optimizer_updates_in_zero_final_positive_rounds=sum(rr['slow']['optimizer_updates'] for rr in rounds if rr['positive_pairs']==0),
             final_positive_pseudo_pairs=rounds[-1]['positive_pairs'],
             identity_fit_calls=sum(x.get('identity',{}).get('status')=='MAP_UPDATED' for x in calls),
             presence_fit_calls=sum(x.get('presence',{}).get('status')=='MAP_UPDATED' for x in calls),
@@ -47,9 +48,10 @@ def adaptation_coverage(receipts,pair,method):
         zero_slow_update_videos=sum(x['optimizer_updates']==0 for x in rows),
         optimizer_updates=sum(x['optimizer_updates'] for x in rows),
         rounds=sum(x['rounds'] for x in rows),
-        rounds_without_positive_pseudo_pairs=sum(x['rounds_without_positive_pseudo_pairs'] for x in rows),
-        zero_positive_update_rounds=sum(x['zero_positive_update_rounds'] for x in rows),
-        zero_positive_optimizer_updates=sum(x['zero_positive_optimizer_updates'] for x in rows),
+        rounds_without_final_positive_pseudo_pairs=sum(x['rounds_without_final_positive_pseudo_pairs'] for x in rows),
+        zero_final_positive_update_rounds=sum(x['zero_final_positive_update_rounds'] for x in rows),
+        optimizer_updates_in_zero_final_positive_rounds=sum(x['optimizer_updates_in_zero_final_positive_rounds'] for x in rows),
+        optimizer_input_class_counts_recorded=False,
         min_final_w=min(x['final_w'] for x in rows),max_final_w=max(x['final_w'] for x in rows),
         new_videos_single_answer_cannot_certify_positive=sum(x['new_video_single_answer_cannot_certify_positive'] for x in rows))
     return rows,summary
@@ -227,7 +229,9 @@ def report(execution):
     if coverage_summary:text+='\n\n## 证据与更新覆盖（GT-free，不是学习有效性的指标）\n\n'+table(list(coverage_summary[0]),coverage_summary)
     text+='\n\n新视频a_q初始为0、ℓ0≤2且单次证据≤2，因此身份重拟合之前，首次回答的正后验上界为sigmoid(2w+2)。'
     text+='此上界若≤0.95，单次回答无法生成正伪标签，需要重复证据；它不是教师正确率或新的在线阈值。'
-    text+='zero_positive_optimizer_updates单列该轮无正目标伪标签但仍执行的更新；二元目标域损失原本允许只用已问负例，不临时增加双类门控。'
+    text+='optimizer_updates_in_zero_final_positive_rounds只按轮末零正标签分组，不能解释为优化时只用了负例。'
+    text+='旧slow记录未保存实际输入类别计数，真实正负优化样本比例未知；轮末f/后验可能已在LoRA及重校准后变化，不用最终belief冒充训练标签。'
+    text+='原二元损失确实允许只用已问负例，但本批不据此倒推哪些实际步骤为负例独占，不临时改损失或补跑。'
     if sports_sensitivity:text+='\n\n## SportsMOT 418条敏感性（v4内容不变，仅限制序列ID）\n\n'+table(
         ['pair','method','full466_HOTA','HOTA_unrounded','DetA','AssA','IDF1','IDSW','episodes','prediction_rows'],sports_sensitivity)
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)

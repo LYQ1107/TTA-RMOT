@@ -78,8 +78,16 @@ C2（Dance-best→KITTI-V2）完整4视频/862表达已封存后完成官方Trac
 
 相对v5 FULL 16.0996为+10.7186；相对UNIFORM_K 24.4133为+2.4049、YT_PRIOR 24.2857为+2.5325。
 教师调用20955次，与v5完全相同，按规则无需重跑此方向YT_PRIOR；这是调用数匹配，不是教师各视图GPU时间相同。
-4/4视频有慢速更新，共450步，最终w始终1；7/16轮没有正伪标签，未强行更新。
+4/4视频有慢速更新，共450步，最终w始终1；7/16轮的轮末正伪标签数为0，不代表这些轮次的实际优化输入类别比例。
 见C2_adaptation_coverage.csv/C2_adaptation_summary.json和interim_official_results.json。
 只有4个KITTI目标验证视频，仅报点估计；同时保留C1的下降，不据两个方向推断六方向≥4或跨数据集普遍性。
 
 C1 MINUS_SLOW在原GPU4接续PID2020004，C3 FULL继续原GPU6；全部5项仍未完成。
+
+## 优化标签记录的口径更正
+
+轮末positive_pairs来自LoRA重打分与after_slow校准之后，不是慢速优化入口的标签快照。
+旧slow日志只保存样本数/loss/梯度/实际步数，没有输入正负类别计数，因此不能把轮末无正标签却有更新称为“负例独占训练”。
+最终汇总改用optimizer_updates_in_zero_final_positive_rounds，真实优化类别比例标未知；
+C1/C2早期coverage文件中的无正标签统计也明确为轮末，优化次数和HOTA均不改，不补跑健康单元。
+C1后20视频的单次回答上界与2918对全只问一次的独立机制证据不依赖这个错误推断。

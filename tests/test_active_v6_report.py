@@ -26,7 +26,8 @@ def test_coverage_reports_skips_and_the_final_after_slow_calibration():
     assert rows[1]['initial_w']==.17 and rows[1]['new_video_single_answer_positive_upper_bound']<.95
     assert summary['new_videos_single_answer_cannot_certify_positive']==1
     assert summary['optimizer_updates']==50 and summary['zero_slow_update_videos']==1
-    assert summary['rounds_without_positive_pseudo_pairs']==1 and summary['videos']==2
-    negative_only=[dict(video='negative_only',rounds=[dict(positive_pairs=0,slow={'optimizer_updates':50},fast=fast)])]
-    _,negative=adaptation_coverage(negative_only,'C3','FULL_v6')
-    assert negative['zero_positive_optimizer_updates']==50 and negative['zero_positive_update_rounds']==1
+    assert summary['rounds_without_final_positive_pseudo_pairs']==1 and summary['videos']==2
+    zero_final=[dict(video='zero_final_positive',rounds=[dict(positive_pairs=0,slow={'optimizer_updates':50},fast=fast)])]
+    _,observed=adaptation_coverage(zero_final,'C3','FULL_v6')
+    assert observed['optimizer_updates_in_zero_final_positive_rounds']==50 and observed['zero_final_positive_update_rounds']==1
+    assert observed['optimizer_input_class_counts_recorded'] is False
