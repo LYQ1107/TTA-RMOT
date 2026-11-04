@@ -1,0 +1,82 @@
+{
+  "status": "V6_AUTHORIZED_SET_VALIDATED",
+  "primary_jobs": 5,
+  "conditional_jobs": 0,
+  "total_episodes": 2644,
+  "prediction_rows": 2700559,
+  "methods": [
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "episodes": 425,
+      "prediction_rows": 200166,
+      "HOTA": 26.367792898879237,
+      "optimizer_updates": 150,
+      "zero_gradient_updates": 0,
+      "frame_cache_candidate_query_rows": 3601739,
+      "GT_open_attempts": 0,
+      "prediction_seal_sha256": "76f5fd74eb5d57dced226f7ab97859fc4eab85222e47733a4690e25527a06eeb"
+    },
+    {
+      "pair": "C2",
+      "method": "FULL",
+      "episodes": 862,
+      "prediction_rows": 370093,
+      "HOTA": 26.81821203402474,
+      "optimizer_updates": 450,
+      "zero_gradient_updates": 0,
+      "frame_cache_candidate_query_rows": 2727813,
+      "GT_open_attempts": 0,
+      "prediction_seal_sha256": "bb72ae165e919572de09c26bfdbc394baffc99c23193812e8331efbd52b3e463"
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "episodes": 466,
+      "prediction_rows": 1004405,
+      "HOTA": 59.341507241836425,
+      "optimizer_updates": 3000,
+      "zero_gradient_updates": 0,
+      "frame_cache_candidate_query_rows": 3213703,
+      "GT_open_attempts": 0,
+      "prediction_seal_sha256": "f746d28d86f183ed89c222492bde0fc2687f816bdb58cc0f04a4320cd14e3e7f"
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "episodes": 425,
+      "prediction_rows": 113029,
+      "HOTA": 28.17540601309242,
+      "optimizer_updates": 0,
+      "zero_gradient_updates": 0,
+      "frame_cache_candidate_query_rows": 3588445,
+      "GT_open_attempts": 0,
+      "prediction_seal_sha256": "0509668efc67b35f83c0049e207aaa00bee7568cd16a4890ddb29fcd63f0f1cf"
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "episodes": 466,
+      "prediction_rows": 1012866,
+      "HOTA": 59.62058592412208,
+      "optimizer_updates": 0,
+      "zero_gradient_updates": 0,
+      "frame_cache_candidate_query_rows": 2968201,
+      "GT_open_attempts": 0,
+      "prediction_seal_sha256": "05839b9cffeab480750868e0f1bfbdd05521367c7235cba686d19a4dd9c43a5c"
+    }
+  ],
+  "old_v5_seals_unchanged": true,
+  "unasked_pseudo_labels_never_generated": true,
+  "teacher_evidence_not_double_counted": true,
+  "prior_formula_and_w_bounds_verified": true,
+  "absence_three_strata_and_presence_threshold_verified": true,
+  "DS_beta2_without_identity_verified": true,
+  "fixed32_frames_and_full_start_coverage_verified": true,
+  "FP32_margin_PCD_shapes_verified": true,
+  "MOT_rows_boxes_IDs_frames_exact": true,
+  "GT_open_attempts_by_validator": 0,
+  "GPU_or_teacher_called_by_validator": false,
+  "original_v5_80_not_started": true,
+  "not_all_six_FULL_directions_claimed": true
+}

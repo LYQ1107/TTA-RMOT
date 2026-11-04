@@ -1,0 +1,20 @@
+{
+  "status": "EXACT_EQUALITY_PASSED_IN_ORIGINAL_WORKER_NUMPY",
+  "numpy_version": "2.2.6",
+  "numpy_module": "/data2/user/TTA-RMOT-assets/flexhook/pydeps/numpy/__init__.py",
+  "checked_video_beliefs": 144,
+  "unequal_beliefs": 0,
+  "first_attempt": {
+    "numpy_version": "1.26.4",
+    "exit_code": 1,
+    "unequal_beliefs": 135,
+    "example_fraction": 0.125,
+    "stored_logit": -1.9459101490553135,
+    "recomputed_logit": -1.9459101490553132,
+    "cause": "validator invocation omitted the project pydeps path; log final bits differ"
+  },
+  "correction": "use the identical PYTHONPATH and NumPy 2.2.6 as the original workers",
+  "exact_equality_acceptance_retained": true,
+  "runtime_or_saved_arrays_modified": false,
+  "GPU_or_teacher_or_GT_called": false
+}
