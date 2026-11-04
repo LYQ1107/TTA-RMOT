@@ -2637,3 +2637,4 @@ GT-free数量诊断与离线归因分别执行，全部登记预测封存前不�
 - C2 FULL_v6完整4视频/862表达封存后官方HOTA26.8182120（v5 16.0996299，+10.7186），DetA11.858、AssA60.794、IDF121.548、IDSW574、370093预测行，生成GT0。教师20955次与v5完全相同，无需重跑YTprior；超过固定Uniform24.4133及YTprior24.2857，但KITTI只有4视频仅点估计，不宣称显著/普遍。4视频均有更新合计450步，w始终1，与C1后20视频断供不同；7/16轮零正标签照常保留。C1 MINUS_SLOW在原GPU4/PID2020004接续，C3 FULL原GPU6健康继续；不扩大或改配方。
 - C3真实流出现positive_pairs=0仍有固定32帧重打分：与Dance互斥CE不同，原二元损失允许只用已问且高置信的负伪标签更新。仅新增离线zero_positive_optimizer_updates/rounds，区分无正监督但有更新与完全SKIP，不将无正伪标签一概写成没训练；不临时加入双类慢速门控，不改变原损失或队列。该观察不等于负例语义正确或更新有益，待封存后GT召回/DS事后值验证。
 - 核验既有active_eval --sports418衔接：GPU方法封存后原队列已安排官方466主评测及418敏感性，后者只限制原序列ID、保留v4 GT内容而非旧冲突模板。报告端显式读取该已完成subset的seal/官方充分统计与summary，输出sports_sensitivity.csv并列主/敏感HOTA；不增加GPU或新GT口径，不漏报原本已计算的敏感性。
+- observer35415再次以143结束后，一次终止后诊断确认原manager1862297、C3 FULL/PID2010726、C1 MINUS_SLOW/PID2020004均仍运行；只attach相同durable目录，观察handle49676，不重启实验。C1/C2原完整封存结果不动，C3已完成33视频；这一终端连接中断不记成GPU方法失败，收据observer_reconnected_2.json。
