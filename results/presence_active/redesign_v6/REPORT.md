@@ -32,3 +32,26 @@ manager1834232已正常收尾exit1：C1/C2完成首视频全帧打分后，在�
 详见failures.json；同一五项清单恢复，不增加GPU卡或实验范围。
 修复实际已公开bbe03d90，新manager1862297/observer45542接续同一清单，C1 GPU6/PID1862609、C2 GPU4/PID1862611。
 见execution_resumed.json；不attach旧57210或重启健康新队列。
+
+## 首个完整封存结果：C1 FULL_v6（其余任务继续）
+
+C1（V2-best→Dance）完整25视频/425表达已封存后完成官方TrackEval，生成进程GT打开次数0。
+
+| 方法 | HOTA | DetA | AssA | IDF1 | IDSW | 预测行数 | Query-Empty行数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| FULL_v6 | 26.3678 | 17.461 | 39.849 | 20.446 | 528 | 200166 | 121762 |
+
+相对v5 FULL 37.7240下降11.3562；相对复用UNIFORM_K 24.1079为+2.2598、YT_PRIOR 22.7106为+3.6572。
+教师逻辑调用3334次，v5为3311次，差异0.6947%≤5%，按规则无需重跑此方向YT_PRIOR。
+这只是一个方向的点估计，不能代替六方向≥4获胜的判定或说明跨域普遍性。
+
+只在2/25视频发生慢速更新，共150次；23/25视频没有慢速更新。
+首视频最终w=1，dancetrack0014后为0.17139285，后续保持；不是w=0饱和，但存在证据/更新覆盖不足的线索。
+该统计GT-free，不等于GT召回或伪标签精度；完整错负、召回和DS事后对照待本批固定集合完成后统一分析。
+实测重打分相位2.2516小时、LoRA相位0.0880小时、新教师forward0.0369小时；
+这些共享卡相位计时不是GPU利用率积分，失败worker/总wall和等价缓存费用留待完整账目。
+
+原始官方评测收据、seal SHA与路径见interim_official_results.json/CSV；
+逐视频更新与参数见C1_adaptation_coverage.csv和C1_adaptation_summary.json。
+C3 FULL已在原GPU6接续，C2原GPU4继续，随后只执行C1/C3 MINUS_SLOW及规则触发的YT_PRIOR。
+本批尚未完成，不扩展v5剩余80项或其他五项v6。

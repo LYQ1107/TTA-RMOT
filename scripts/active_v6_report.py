@@ -22,6 +22,30 @@ def rescore_seconds(seal,method):
     return seal.get('rescore_GPU_seconds',0.) if method.startswith('YESTRACK') else seal['rescore_GPU_seconds']
 
 
+def adaptation_coverage(receipts,pair,method):
+    rows=[]
+    for video in receipts:
+        rounds=video.get('rounds',[])
+        if not rounds:continue
+        final=rounds[-1]['fast'];final=final.get('after_slow',final)
+        calls=[rr['fast'] for rr in rounds]
+        calls+=[rr['fast']['after_slow'] for rr in rounds if 'after_slow' in rr['fast']]
+        rows.append(dict(pair=pair,method=method,video=video['video'],rounds=len(rounds),
+            optimizer_updates=sum(rr['slow']['optimizer_updates'] for rr in rounds),
+            rounds_without_positive_pseudo_pairs=sum(rr['positive_pairs']==0 for rr in rounds),
+            final_positive_pseudo_pairs=rounds[-1]['positive_pairs'],
+            identity_fit_calls=sum(x.get('identity',{}).get('status')=='MAP_UPDATED' for x in calls),
+            presence_fit_calls=sum(x.get('presence',{}).get('status')=='MAP_UPDATED' for x in calls),
+            final_w=final['slope'],final_temperature=final['temperature'],final_bias=final['bias']))
+    summary=dict(pair=pair,method=method,videos=len(rows),
+        zero_slow_update_videos=sum(x['optimizer_updates']==0 for x in rows),
+        optimizer_updates=sum(x['optimizer_updates'] for x in rows),
+        rounds=sum(x['rounds'] for x in rows),
+        rounds_without_positive_pseudo_pairs=sum(x['rounds_without_positive_pseudo_pairs'] for x in rows),
+        min_final_w=min(x['final_w'] for x in rows),max_final_w=max(x['final_w'] for x in rows))
+    return rows,summary
+
+
 def report(execution):
     from scripts.active_eval import summarize,offline_labels,bootstrap
     from scripts.active_attribution import attribute
@@ -37,6 +61,7 @@ def report(execution):
     # No GT loads until this stage's entire fixed prediction set is sealed.
     for j in jobs:verify_predictions(folder(j['pair'],j['method']))
     rows=[];costs=[];presence=[];rounds=[];videos=[];reliability=[];calibration=[];artifacts=[];attributions={};evidence_use=[]
+    coverage=[];coverage_summary=[]
     truth_cache={};meta_cache={};intervals={};summaries={}
     for j in jobs:
         pair,method=j['pair'],j['method'];target=PAIRS[pair][1];path=folder(pair,method)
@@ -69,6 +94,7 @@ def report(execution):
             optimizer_updates=sum(rr['slow']['optimizer_updates'] for v in receipts for rr in v.get('rounds',[])),
             frame_prior_CPU_hours=sum(v.get('decode_CPU_seconds',0) for v in receipts)/3600))
         if method not in ('FULL','MINUS_SLOW'):continue
+        a,b=adaptation_coverage(receipts,pair,r['method']);coverage+=a;coverage_summary.append(b)
         actual_answers=[a for p in sorted(path.glob('videos/*/questions.json')) for a in json.loads(p.read_text())]
         yes=[a for a in actual_answers if a['yes_probability']>=.5]
         no=[a for a in actual_answers if a['yes_probability']<.5]
@@ -145,7 +171,7 @@ def report(execution):
     for name,records in [('main',rows),('direction_summary',main),('costs',costs),('presence_decisions',presence),
         ('final_confidence',confidence),('mechanism_compare',mechanism),('recall_compare',recall),
         ('behavior_round',rounds),('behavior_video',videos),('reliability_vs_GT',reliability),('calibration_calls',calibration),
-        ('teacher_evidence_use',evidence_use)]:
+        ('teacher_evidence_use',evidence_use),('adaptation_coverage',coverage),('adaptation_coverage_summary',coverage_summary)]:
         write_table(public/(name+'.csv'),records)
     atomic_json(public/'bootstrap.json',intervals);atomic_json(public/'artifacts.json',dict(new=artifacts,reused=baseline_refs))
     ds_compare=[]
@@ -177,6 +203,7 @@ def report(execution):
     text+='\n\n## GT召回与预测行数\n\n'+table(list(recall[0]),recall)
     text+='\n\n## 教师与适应成本\n\n'+table(list(costs[0]),costs)
     if evidence_use:text+='\n\n## 教师回答到后验的证据利用（GT-free，不等于训练标签）\n\n'+table(list(evidence_use[0]),evidence_use)
+    if coverage_summary:text+='\n\n## 证据与更新覆盖（GT-free，不是学习有效性的指标）\n\n'+table(list(coverage_summary[0]),coverage_summary)
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)
     alignment=public/'initial_cache_alignment.json'
     if alignment.exists():
