@@ -9,7 +9,8 @@
 [当前状态/后续正式报告](results/presence_active/redesign_v6/REPORT.md)。
 全10项保守估84.058 GPU小时>20，故仅C1/C2/C3 FULL及C1/C3 MINUS_SLOW五项获本批授权，估42.029小时、非实耗。
 新数据在已授权data1资产根，原data2 RUN链接可见；最多两张准入共享卡，不停止他人任务。
-GPU6真实三帧检查通过；首个manager1834232因轨迹ID的JSON类型错误真实exit1，兼容性修复后42项回归通过，等待同清单恢复。
+GPU6真实三帧检查通过；首个manager1834232因轨迹ID的JSON类型错误真实exit1，兼容性修复后42项回归通过。
+已公开bbe03d90并恢复同一5项清单：新manager1862297，C1 FULL GPU6/PID1862609、C2 FULL GPU4/PID1862611。
 尚无新的完整HOTA结果；失败费用/缓存保留，不把工程通过或进程正常当作指标提升，见新报告failures.json及启动/恢复记录。
 五项后报告等待，不启动其他预算/消融或v5剩余80项；必要时仅按>5%调用量变化补对应YT_PRIOR。
 

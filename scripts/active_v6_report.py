@@ -40,12 +40,20 @@ def report(execution):
             seal_sha256=file_sha(path/'predictions_seal.json'),episodes=seal['episodes']))
         receipts=[json.loads(p.read_text()) for p in sorted(path.glob('videos/*/receipt.json'))]
         teacher=seal['teacher']
+        attempts=[json.loads(p.read_text()) for p in sorted(path.glob('worker_attempts/*.json'))]
+        recorded_wall=sum(a['wall_seconds'] for a in attempts if a.get('wall_seconds') is not None)
         costs.append(dict(pair=pair,method=r['method'],rho=.3,
             logical_calls=teacher['logical_calls'],new_calls=teacher['new_calls'],cache_hits=teacher['cache_hits'],
             teacher_forward_GPU_hours=teacher['forward_seconds']/3600,
             committed_teacher_equivalent_forward_GPU_hours=committed_teacher_equivalent_hours(receipts,teacher,method),
             LoRA_GPU_hours=seal['LoRA_GPU_seconds']/3600,rescore_GPU_hours=seal['rescore_GPU_seconds']/3600,
-            worker_wall_hours=seal['wall_seconds']/3600,peak_teacher_allocated_bytes=teacher['peak_allocated_bytes'],
+            seal_process_wall_hours=seal['wall_seconds']/3600,
+            assigned_worker_wall_hours_including_failures=recorded_wall/3600,
+            failed_worker_attempts=sum(a.get('status')=='FAILED_RETAINED_FOR_RECOVERY' for a in attempts),
+            unfinished_attempt_wall_unknown=sum(a.get('wall_seconds') is None for a in attempts),
+            wall_not_GPU_utilization_integral=True,
+            incomplete_failed_score_phase_not_fabricated_as_zero=True,
+            peak_teacher_allocated_bytes=teacher['peak_allocated_bytes'],
             optimizer_updates=sum(rr['slow']['optimizer_updates'] for v in receipts for rr in v.get('rounds',[])),
             frame_prior_CPU_hours=sum(v.get('decode_CPU_seconds',0) for v in receipts)/3600))
         if method not in ('FULL','MINUS_SLOW'):continue

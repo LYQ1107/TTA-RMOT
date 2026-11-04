@@ -30,3 +30,5 @@ manager1834232已正常收尾exit1：C1/C2完成首视频全帧打分后，在�
 42项CPU回归通过，数值方法/预注册/种子均不改。两个失败worker wall314.640/579.987秒保留，
 原始单独打分相位时间缺失不假设0；失败未封存缓存已移到各方法failed_video_attempts，可恢复，未删除。
 详见failures.json；同一五项清单恢复，不增加GPU卡或实验范围。
+修复实际已公开bbe03d90，新manager1862297/observer45542接续同一清单，C1 GPU6/PID1862609、C2 GPU4/PID1862611。
+见execution_resumed.json；不attach旧57210或重启健康新队列。

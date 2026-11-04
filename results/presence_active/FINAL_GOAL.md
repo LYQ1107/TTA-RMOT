@@ -6,7 +6,8 @@
 当前按用户四项修复及补充逐帧缓存/32帧规则实现v6；完整口径见redesign_v6/PREREG.md。
 运行前保守估全10项84.058 GPU小时>20，严格触发用户回退：仅C1/C2/C3 FULL_v6和C1/C3 MINUS_SLOW_v6五项。
 五项估42.029 GPU小时、无缓存/SKIP折扣，非实耗；正式运行前先推送代码/预注册并做真实单GPU检查。
-两步均已完成并公开5bb096f6/a12bca6f；首个5项队列manager1834232/handle57210已真实exit1，轨迹ID类型修复后42项回归通过，待同清单恢复。
+两步均已完成并公开5bb096f6/a12bca6f；首个5项队列manager1834232/handle57210已真实exit1，轨迹ID类型修复后42项回归通过。
+修复已公开bbe03d90；同清单恢复manager1862297、阻塞observer45542，C1 FULL GPU6、C2 FULL GPU4，恢复收据redesign_v6/execution_resumed.json。
 最多两张准入共享卡、优先进程少的卡；v5 checkpoint/结果/Stage A保留，目标GT隔离与所有其余配方不变。
 五项后报告等待，不擅自补另外五项或任何完整矩阵；仅>5%调用量变化的同方向YT_PRIOR条件重匹配获授权。
 当前真实执行以redesign_v6的清单/收据为准，旧blocked状态只反映此前v5预算授权缺口，不是v6失败或完成。
