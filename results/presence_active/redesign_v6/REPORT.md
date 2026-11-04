@@ -1,10 +1,11 @@
 # v6：四处修复与20小时成本关卡下的关键集合
 
-当前进度：3/5项正式任务已完整封存并完成官方评测，另2项MINUS_SLOW继续原队列，整批尚未验收。
+当前进度：4/5项正式任务已完整封存并完成官方评测，仅C3 MINUS_SLOW继续原队列，整批尚未验收。
 C1 FULL_v6 HOTA26.3678，相对v5下降11.3562；C2 FULL_v6 HOTA26.8182，相对v5提高10.7186。
 C3 FULL_v6 HOTA59.3415，相对v5提高15.4273。
 三项点估计均超过按原规则复用的两个简单对照；调用量变化均≤5%，无需重跑YT_PRIOR。
 但这不代替六方向≥4的验收，也不代表视频聚类CI或慢速消融已通过；完整值、成本与失败线索见下文。
+C1 MINUS_SLOW_v6 HOTA28.1754，高于FULL_v6的26.3678，慢速闭环点估计−1.8076；不能因三个FULL方向胜简单对照就宣称慢速模块普适有效。
 
 2026-11-04启动快照（历史）：代码/CPU预检及真实GPU功能检查完成后才启动5项正式队列。
 起点公开提交b2a12167，独立分支codex/presence-active-v6-20261104。
@@ -112,5 +113,24 @@ v4 GT内容不变、仅限制原418条ID的敏感性HOTA59.6889，详见C3_sport
 更新覆盖及所有参数见C3_adaptation_coverage.csv/C3_adaptation_summary.json。
 实测重打分相位1.9082小时、LoRA0.9562小时、新教师forward0.0847小时；共享卡计时与独立等价费用不混用。
 
-两个MINUS_SLOW分支仍运行：C1原GPU4/PID2020004，C3原GPU6/PID2131465。
+C1 MINUS_SLOW现已完成（见下），仅C3原GPU6/PID2131465继续运行。
 本轮仅三个FULL方向，不能宣称已达到六方向四胜或擅自启动其余五项/完整矩阵。
+
+## 第四个完整封存结果：C1 MINUS_SLOW_v6
+
+完整25视频/425表达封存后官方HOTA28.1754060，DetA22.490、AssA35.314、IDF123.597、IDSW403，113029预测行。
+教师3334次，与FULL_v6完全相同；GT打开0、LoRA更新0。
+
+| C1闭环分支 | HOTA | Present HOTA | Query-Present预测行 | Query-Empty预测行 |
+|---|---:|---:|---:|---:|
+| FULL_v6 | 26.3678 | 32.6455 | 78404 | 121762 |
+| MINUS_SLOW_v6 | 28.1754 | 30.1156 | 80021 | 33008 |
+| FULL−MINUS | -1.8076 | +2.5299 | -1617 | +88754 |
+
+FULL在Present组的HOTA更高但空表达预测更多，整体点估计更低；CI和GT召回仍待固定全批完成后计算。
+此对照是SLOW闭环（LoRA、固定32帧刷新、后续获取/快校准反馈）的总差异，不是孤立LoRA权重的因果效应。
+详见C1_slow_closed_loop.json与C1_MINUS_SLOW_adaptation_coverage.csv；不临时更换最终方法或改参数。
+
+收尾代码检查：46项定向CPU回归通过（9.65秒），compileall/diff通过；
+运行数值代码自兼容修复后未再变，v5/vendor/教师后端受保护路径不变。
+code_validation_before_final_analysis.json记录具体命令；实验级全量封存/GT隔离审计尚未冒充完成。
