@@ -1,0 +1,54 @@
+{
+  "status": "FIRST_VIDEO_UNADAPTED_CACHE_SCORE_ALIGNMENT_DIAGNOSTIC",
+  "rows": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "video": "dancetrack0004",
+      "unchanged_initial_model_rows": 72301,
+      "excluded_LoRA_refreshed_observations": 118,
+      "bitwise_equal": false,
+      "max_absolute_error": 0.0009222030639648438,
+      "mean_absolute_error": 9.858718828248727e-05,
+      "p99_absolute_error": 0.00036525726318359375,
+      "nonidentical_rows": 71969,
+      "margin_positive_disagreements": 0,
+      "cache_margin_sha256": "6e48dfc37c6d64b311c5092d2d1d2d35a451d59541e9041550e335d29512e49f",
+      "video_receipt_sha256": "a7af0d006328c0121c37d02c1a055baa7aa290b1042884f045996cb7c56f2288",
+      "source_margin_seal": {
+        "target": "Dance",
+        "model": "V2-best",
+        "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/FROZEN.npy",
+        "sha256": "fd57998fa49760c65d5a458dc4656514ffdd8dcad8db4c586a98a6d17db9bbaa",
+        "bytes": 28707688,
+        "coverage": "complete"
+      }
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "video": "0005",
+      "unchanged_initial_model_rows": 186362,
+      "excluded_LoRA_refreshed_observations": 118,
+      "bitwise_equal": false,
+      "max_absolute_error": 7.62939453125e-06,
+      "mean_absolute_error": 1.5679793681724415e-10,
+      "p99_absolute_error": 0.0,
+      "nonidentical_rows": 15,
+      "margin_positive_disagreements": 0,
+      "cache_margin_sha256": "ec15a56c8bc52e1c49b33f811590ddf75684b4a6837836c1b171140d35555136",
+      "video_receipt_sha256": "f322d121911ba2dba8c7aec38cf7615ca88b231556cdd0d7c38b72363a46338f",
+      "source_margin_seal": {
+        "target": "KITTI-V2",
+        "model": "Dance-best",
+        "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/Dance-best/complete.npy",
+        "sha256": "0afa3a08e3f6e7ba85338a16325bf65a017852a1cd79a195337531e98f3f01c5",
+        "bytes": 19403184,
+        "coverage": "complete"
+      }
+    }
+  ],
+  "GT_open_attempts": 0,
+  "GPU_model_or_teacher_called": false,
+  "no_new_acceptance_threshold_or_parameter_change": true
+}

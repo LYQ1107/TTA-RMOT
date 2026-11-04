@@ -178,6 +178,13 @@ def report(execution):
     text+='\n\n## 教师与适应成本\n\n'+table(list(costs[0]),costs)
     if evidence_use:text+='\n\n## 教师回答到后验的证据利用（GT-free，不等于训练标签）\n\n'+table(list(evidence_use[0]),evidence_use)
     if ds_compare:text+='\n\n## DS估计与事后GT（实际提问集合，轨迹多数口径）\n\n'+table(list(ds_compare[0]),ds_compare)
+    alignment=public/'initial_cache_alignment.json'
+    if alignment.exists():
+        observed=json.loads(alignment.read_text())['rows']
+        text+='\n\n## 首视频未更新缓存与历史源分数（CPU抽查）\n\n'+table(
+            ['pair','unchanged_initial_model_rows','excluded_LoRA_refreshed_observations',
+             'bitwise_equal','max_absolute_error','mean_absolute_error','margin_positive_disagreements'],observed)
+        text+='\n\n当前与历史评分路径不逐位一致，原因未单独归因；抽查原生符号判定无差异不代表全库或PRES_TOPK等价。'
     text+='\n\nDS完整估计/实测特异度与敏感度、两种GT口径见reliability_vs_GT.csv；'
     text+='v5相同表保留于../redesign_v5/active_map_v1_critical28/reliability_vs_GT.csv。\n'
     text+='视频聚类bootstrap2000次seed0，KITTI仅4视频点估计；条件于既定有序流，不覆盖重新适应/训练seed不确定性。\n'
