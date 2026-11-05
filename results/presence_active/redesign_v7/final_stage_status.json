@@ -1,0 +1,52 @@
+{
+  "status": "V7_FIXED_AUTHORIZED_TIER_COMPLETE_AND_STOPPED",
+  "primary_jobs": 12,
+  "conditional_YT_PRIOR_jobs": 0,
+  "total_episodes": 6220,
+  "prediction_rows": 9545893,
+  "GT_open_attempts": 0,
+  "arms": [
+    {
+      "method": "FULL_v7",
+      "six_directions_complete": false,
+      "point_estimate_wins": [
+        "C1",
+        "C3",
+        "C4"
+      ],
+      "directions_above_both_controls": 3,
+      "Dance_both_within_two_of_v5": false,
+      "result": "NOT_EVALUATED",
+      "may_request_curves_and_ablations": false,
+      "automatically_authorized": false
+    },
+    {
+      "method": "MINUS_SLOW_v7",
+      "six_directions_complete": true,
+      "point_estimate_wins": [
+        "C1",
+        "C2",
+        "C3",
+        "C5",
+        "C6"
+      ],
+      "directions_above_both_controls": 5,
+      "Dance_both_within_two_of_v5": false,
+      "result": "FAIL",
+      "may_request_curves_and_ablations": false,
+      "automatically_authorized": false
+    }
+  ],
+  "may_request_curves_and_ablations": false,
+  "new_experiment_automatically_authorized": false,
+  "v6_C4_C6_started": false,
+  "remaining_v5_80_started": false,
+  "unselected_v7_FULL_C2_C5_C6_started": false,
+  "original_108_job_goal_not_claimed_complete": true,
+  "registered_plan_sha256": "1a9ab531387dad4f030fb6bd2744d90018e922c58d98f29af4b81778c2e62d09",
+  "numerical_code_local_reference": "ea08a284a80bcdf7c2b556fff266c1dcf59aa8af",
+  "numerical_code_public_reference": "6fe50860242df9fd8f5bfd69f7fcf3e73443b379",
+  "original_runtime_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7",
+  "durable_recovery_dir": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/launchers/durable_1793915191037718367",
+  "exact_log_and_teacher_archive_validation": "ARCHIVE_AND_ORIGINAL_TEACHER_RECORDS_VERIFIED"
+}

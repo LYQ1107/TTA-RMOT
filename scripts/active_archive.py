@@ -24,7 +24,7 @@ def archive_transport_parts(archive_path,chunk_bytes=16 << 20):
     record=dict(status='BYTE_EXACT_SPLIT_FOR_GITHUB_API',original_name=archive_path.name,
         original_bytes=archive_path.stat().st_size,original_sha256=file_sha(archive_path),
         chunk_bytes=chunk_bytes,parts=parts,
-        reason='GitHub create-blob API returned 422: input too large; original archive retained on server')
+        reason='Byte-exact split for GitHub transport size limits; original archive retained on server')
     atomic_json(manifest,record)
     return dict(manifest=str(manifest),manifest_sha256=file_sha(manifest),parts=parts,
         original_archive_retained=True,all_bytes_in_order=True)
