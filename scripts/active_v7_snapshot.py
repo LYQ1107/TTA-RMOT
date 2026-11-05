@@ -13,6 +13,8 @@ def snapshot():
     execution,_=authorize_active();public=execution.public
     plan=json.loads((public/'registered_jobs.json').read_text())
     started=json.loads((public/'execution_started.json').read_text());coordinator=Path(started['coordinator'])
+    recovery=public/'storage_recovery.json'
+    if recovery.exists():coordinator=Path(json.loads(recovery.read_text()).get('resumed_coordinator',str(coordinator)))
     completed,failed=completed_evaluations(plan,coordinator)
     result=dict(status='INTERIM_V7_OFFICIAL_RECEIPTS_NOT_FINAL',completed_jobs=len(completed),
         expected_primary_jobs=len(plan['jobs']),completed=completed,failed_evaluations=failed,

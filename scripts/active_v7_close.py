@@ -82,7 +82,10 @@ def close(execution):
     write_table(public/'reliability_final.csv',final_reliability)
     absorbing=diagnose_absorbing_prior(execution)
     started=read('execution_started.json');durable=Path(started['durable_dir'])
-    launch=json.loads((durable/'launch.json').read_text());finished=json.loads((durable/'completion.json').read_text())
+    launch=json.loads((durable/'launch.json').read_text())
+    recovery=read('storage_recovery.json') if (public/'storage_recovery.json').exists() else None
+    final_durable=Path(recovery['resumed_durable_dir']) if recovery else durable
+    finished=json.loads((final_durable/'completion.json').read_text())
     assert finished['exit_code']==0
     total=lambda name:sum(float(r[name]) for r in costs)
     cost=dict(primary_jobs=12,conditional_YT_PRIOR_jobs=len(controls['jobs']),
@@ -96,6 +99,9 @@ def close(execution):
         scheduler_wall_hours=(finished['finished_time_ns']-launch['launched_time_ns'])/3.6e12,
         failed_worker_attempts=int(total('failed_worker_attempts')),
         optimizer_updates=int(total('optimizer_updates')),
+        worker_wall_includes_estimated_failed_attempt=any(r.get('worker_wall_includes_estimated_attempts')=='True' for r in costs),
+        incomplete_failed_rescore_GPU_phases=int(total('incomplete_failed_rescore_GPU_phases')),
+        measured_GPU_phase_total_is_lower_bound=bool(int(total('incomplete_failed_rescore_GPU_phases'))),
         GPU_phase_and_worker_times_are_not_utilization_integrals=True,
         scheduler_wall_includes_waiting_loading_CPU_evaluation_and_reports=True,
         teacher_subprocess_wall_not_double_added=True,
@@ -115,7 +121,7 @@ def close(execution):
         registered_plan_sha256=file_sha(public/'registered_jobs.json'),
         numerical_code_local_reference='ea08a284a80bcdf7c2b556fff266c1dcf59aa8af',
         numerical_code_public_reference='6fe50860242df9fd8f5bfd69f7fcf3e73443b379',
-        original_runtime_root=str(execution.active.parent),durable_recovery_dir=str(durable),
+        original_runtime_root=str(execution.active.parent),durable_recovery_dir=str(final_durable),
         exact_log_and_teacher_archive_validation=archive_audit['status'])
     atomic_json(public/'final_stage_status.json',final)
     report=public/'REPORT.md';text=report.read_text()
@@ -133,6 +139,8 @@ def close(execution):
     text+='\nGT审计及完整候选/EB更新/实际优化输入核验见validation.json；逐句截断前后似然和生效次数见presence_likelihood.csv。\n'
     text+='完整关闭日志与实际用到的唯一教师原响应见logs.json、archive_validation.json及其列出的归档；checkpoint仅发布路径/大小/SHA，预测与PCD留服务器。\n'
     text+='\n运行根目录：`'+str(execution.active.parent)+'`。原durable恢复记录：`'+str(durable)+'`。封存方法不会重跑已完成episode。\n'
+    if recovery:
+        text+='\nENOSPC恢复见storage_recovery.json与storage_copy_manifest.json：原始文件保留，仅C4工作副本及日志换盘；前36视频和7200步从checkpoint恢复。失败worker壁钟由文件时间估算并明确标记；中断的全视频打分GPU时间未知，新增GPU相位合计为已测下界，不把缺失成本记为0。最终durable：`'+str(final_durable)+'`。\n'
     text+='\n## 最终研究边界与停止\n\n'
     text+='不以loss下降、梯度非零、代码通过或某个单方向提升代替六方向验收；不跨FULL/MINUS逐格挑最优。v7复合改动包含EB、伪标签、复核和损失平衡，未做单因素消融，不能把全部差值仅归因EB。\n'
     text+='DS各视图来自同一MLLM且相关；分层内按价值选题会影响π估计，未证明无偏。数据流先验可以导致无新教师证据的拒绝，存在/空句误拒及未问错负均完整报告。固定32帧不是末模型全视频重打分。\n'

@@ -95,19 +95,19 @@ GT召回是独立IoU≥.5最大基数匹配，不替代官方TrackEval；新增/
 
 ## 5. 慢速更新、成本与成对差值
 
-| pair | method | rho | logical_questions | new_teacher_calls | cache_hits | replayed_answers | teacher_forward_GPU_hours | teacher_equivalent_GPU_hours | replay_teacher_cost_in_MINUS_dependency | LoRA_GPU_hours | rescore_GPU_hours | assigned_worker_wall_hours | failed_worker_attempts | peak_parent_allocated_bytes | peak_teacher_allocated_bytes | trainable_parameters_observed_in_updates | optimizer_updates | videos_with_LoRA_updates | wall_is_not_GPU_utilization_integral |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| C1 | MINUS_SLOW | 0.300000 | 3264 | 595 | 2669 | 0 | 0.012809 | 0.042194 | False | 0.000000 | 0.000000 | 0.040861 | 0 | None | 4472145920 | [] | 0 | 0 | True |
-| C1 | FULL | 0.300000 | 3195 | 572 | 2623 | 0 | 0.034324 | 0.064342 | False | 2.415356 | 2.544065 | 5.037107 | 0 | 4578221056 | 4522808832 | [24576] | 3900 | 23 | True |
-| C1 | SLOW_REPLAY | 0.300000 | 3264 | 0 | 0 | 3264 | 0.000000 | 0.042194 | True | 1.659143 | 2.147413 | 3.830350 | 0 | 4575358464 | None | [24576] | 3050 | 18 | True |
-| C2 | MINUS_SLOW | 0.300000 | 20955 | 9477 | 11478 | 0 | 0.318490 | 0.646320 | False | 0.000000 | 0.000000 | 0.428484 | 0 | None | 5469817344 | [] | 0 | 0 | True |
-| C3 | MINUS_SLOW | 0.300000 | 3508 | 1720 | 1788 | 0 | 0.039901 | 0.090459 | False | 0.000000 | 0.000000 | 0.075097 | 0 | None | 5899776000 | [] | 0 | 0 | True |
-| C3 | FULL | 0.300000 | 3508 | 1761 | 1747 | 0 | 0.043687 | 0.089526 | False | 3.070007 | 1.315566 | 4.477327 | 0 | 4582467584 | 5904013312 | [24576] | 7000 | 40 | True |
-| C3 | SLOW_REPLAY | 0.300000 | 3508 | 0 | 0 | 3508 | 0.000000 | 0.090459 | True | 2.191930 | 1.776948 | 3.988956 | 0 | 4582467584 | None | [24576] | 4550 | 26 | True |
-| C4 | MINUS_SLOW | 0.300000 | 3508 | 1234 | 2274 | 0 | 0.027750 | 0.081677 | False | 0.000000 | 0.000000 | 0.061267 | 0 | None | 5896557568 | [] | 0 | 0 | True |
-| C4 | FULL | 0.300000 | 3508 | 1258 | 2250 | 0 | 0.027714 | 0.072779 | False | 3.510564 | 1.604821 | 5.185544 | 0 | 4583483392 | 5255084032 | [24576] | 8400 | 44 | True |
-| C5 | MINUS_SLOW | 0.300000 | 20955 | 13042 | 7913 | 0 | 0.247136 | 0.465638 | False | 0.000000 | 0.000000 | 0.355100 | 0 | None | 5474210304 | [] | 0 | 0 | True |
-| C6 | MINUS_SLOW | 0.300000 | 2233 | 594 | 1639 | 0 | 0.025479 | 0.046053 | False | 0.000000 | 0.000000 | 0.050530 | 0 | None | 4676065280 | [] | 0 | 0 | True |
+| pair | method | rho | logical_questions | new_teacher_calls | cache_hits | replayed_answers | teacher_forward_GPU_hours | teacher_equivalent_GPU_hours | replay_teacher_cost_in_MINUS_dependency | LoRA_GPU_hours | rescore_GPU_hours | assigned_worker_wall_hours | failed_worker_attempts | worker_wall_includes_estimated_attempts | incomplete_failed_rescore_GPU_phases | peak_parent_allocated_bytes | peak_teacher_allocated_bytes | trainable_parameters_observed_in_updates | optimizer_updates | videos_with_LoRA_updates | wall_is_not_GPU_utilization_integral |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| C1 | MINUS_SLOW | 0.300000 | 3264 | 595 | 2669 | 0 | 0.012809 | 0.042194 | False | 0.000000 | 0.000000 | 0.040861 | 0 | False | 0 | None | 4472145920 | [] | 0 | 0 | True |
+| C1 | FULL | 0.300000 | 3195 | 572 | 2623 | 0 | 0.034324 | 0.064342 | False | 2.415356 | 2.544065 | 5.037107 | 0 | False | 0 | 4578221056 | 4522808832 | [24576] | 3900 | 23 | True |
+| C1 | SLOW_REPLAY | 0.300000 | 3264 | 0 | 0 | 3264 | 0.000000 | 0.042194 | True | 1.659143 | 2.147413 | 3.830350 | 0 | False | 0 | 4575358464 | None | [24576] | 3050 | 18 | True |
+| C2 | MINUS_SLOW | 0.300000 | 20955 | 9477 | 11478 | 0 | 0.318490 | 0.646320 | False | 0.000000 | 0.000000 | 0.428484 | 0 | False | 0 | None | 5469817344 | [] | 0 | 0 | True |
+| C3 | MINUS_SLOW | 0.300000 | 3508 | 1720 | 1788 | 0 | 0.039901 | 0.090459 | False | 0.000000 | 0.000000 | 0.075097 | 0 | False | 0 | None | 5899776000 | [] | 0 | 0 | True |
+| C3 | FULL | 0.300000 | 3508 | 1761 | 1747 | 0 | 0.043687 | 0.089526 | False | 3.070007 | 1.315566 | 4.477327 | 0 | False | 0 | 4582467584 | 5904013312 | [24576] | 7000 | 40 | True |
+| C3 | SLOW_REPLAY | 0.300000 | 3508 | 0 | 0 | 3508 | 0.000000 | 0.090459 | True | 2.191930 | 1.776948 | 3.988956 | 0 | False | 0 | 4582467584 | None | [24576] | 4550 | 26 | True |
+| C4 | MINUS_SLOW | 0.300000 | 3508 | 1234 | 2274 | 0 | 0.027750 | 0.081677 | False | 0.000000 | 0.000000 | 0.061267 | 0 | False | 0 | None | 5896557568 | [] | 0 | 0 | True |
+| C4 | FULL | 0.300000 | 3508 | 1258 | 2250 | 0 | 0.027714 | 0.072779 | False | 3.510564 | 1.604821 | 5.185544 | 0 | False | 0 | 4583483392 | 5255084032 | [24576] | 8400 | 44 | True |
+| C5 | MINUS_SLOW | 0.300000 | 20955 | 13042 | 7913 | 0 | 0.247136 | 0.465638 | False | 0.000000 | 0.000000 | 0.355100 | 0 | False | 0 | None | 5474210304 | [] | 0 | 0 | True |
+| C6 | MINUS_SLOW | 0.300000 | 2233 | 594 | 1639 | 0 | 0.025479 | 0.046053 | False | 0.000000 | 0.000000 | 0.050530 | 0 | False | 0 | None | 4676065280 | [] | 0 | 0 | True |
 
 | pair | method | loss_type | sample_count_unit | videos_with_updates | optimizer_updates | actual_target_or_positive_samples | actual_NONE_or_negative_samples | NONE_reweighted_samples |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -138,13 +138,13 @@ FULL−MINUS包括选题反馈；REPLAY−MINUS固定教师内容但包含LoRA�
 
 成本关卡见budget_preflight.json；本批结束后停止，不自动开预算曲线/消融、未选v7 FULL、v6扩展或旧80项。
 
-## 十一项阶段判读（仅C4固定回放尚在运行）
+## 磁盘满恢复（最后一项尚未正式封存）
 
-C3固定教师证据回放HOTA62.102780，相对MINUS为−3.242482，45视频聚类95% CI[−4.950690,−1.412725]。在本次固定问答与适应流条件下，增加慢速LoRA及其f/快速校准/EB下游反馈产生负向总效应，不将结论推广为所有方向的LoRA必然有害。
+C4回放在完成36视频、保存7200步后因/data1可用空间0中断；第37视频的部分打分保留，实际子进程退出码未能持久化，不猜测。原件保留，逐文件SHA核验后的工作副本与日志接到data2；见storage_recovery.json和storage_copy_manifest.json。恢复只补剩9视频，11份原官评按seal校验后复用，不重跑。
 
-回放实际26个视频4550步、BCE正/负暴露115562/30038；固定的是步数上限、skip规则与问答，实际更新覆盖不是FULL的40视频7000步。对MINUS召回.780639→.918328、匹配GT净增211169，但FP总数净增571391、预测行数1517412→2299972；有目标误判空2→0、高置信GT错负27→25仍未带来整体HOTA收益。新增行FP与不变行匹配变化继续在recall_compare.csv分开记录。
+45项相关检查通过。真实只读报告预检未调用旧摘要/归因计算函数，原11项main.csv逐字不变；新诊断写公共报告缓存，不向满盘旧目录写回。现表成本仍只含已封存11项；C4失败壁钟估算和未测完的打分GPU相位将在最终报告明确列出，不记成0。
 
-C4 FULL相对MINUS+15.721841，CI[11.158589,20.752579]是真实正向结果，但其获取问题可变，固定证据回放仍待完成。C1回放差−1.200113的CI跨0。不能跨方向挑选FULL/MINUS或以某一个方向代替预注册六方向验收；MINUS仍FAIL，FULL六方向仍NOT_EVALUATED。
+固定证据慢速效应目前：C1−MINUS为−1.200113，CI跨0；C3为−3.242482，CI[−4.950690,−1.412725]，召回虽升但FP净增571391。C4 FULL相对MINUS+15.721841的真实收益不改写六方向验收，最终仍等待C4固定回放。
 
 ## SportsMOT 418条敏感性（v4内容不变，仅限制序列ID）
 

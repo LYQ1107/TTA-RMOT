@@ -26,7 +26,7 @@ def selection_changes(iou,before,after):
     return result
 
 
-def attribute(folder,target):
+def attribute(folder,target,*,persist=True):
     """Fixed IoU>=.5 assignment complements, not replaces, official TrackEval."""
     from flex_uda.presence.predictions import verify_predictions
     from flex_uda.presence.runtime import target_metadata
@@ -89,5 +89,5 @@ def attribute(folder,target):
         definition='offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching',
         FP_accounting='new-row FP minus removed-row FP plus unchanged-row new FP minus unchanged-row removed FP',
         GT_feedback_to_runtime=False,all_predictions_sealed_before_GT=True)
-    atomic_json(folder / 'offline_attribution.json',result)
+    if persist:atomic_json(folder / 'offline_attribution.json',result)
     return result

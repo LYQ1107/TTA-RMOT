@@ -13,6 +13,22 @@ from scripts.active_run import PAIRS
 from scripts.report_active import write_table,saved_presence_decisions,final_confidence_summary,behavior_and_reliability
 
 
+def sealed_diagnostic(folder,target,name,compute,public):
+    """Read sealed diagnostics without rewriting a full shared asset volume."""
+    folder=Path(folder);digest=file_sha(folder/'predictions_seal.json')
+    cached=Path(public)/'offline_diagnostics'/(digest+'_'+name)
+    for path in (folder/name,cached):
+        if path.exists():
+            result=json.loads(path.read_text())
+            if result['prediction_seal_sha256']!=digest or result['target']!=target:
+                raise ValueError('Offline diagnostic does not match the sealed predictions')
+            return result
+    result=compute(folder,target,persist=False)
+    assert result['prediction_seal_sha256']==digest and result['target']==target
+    cached.parent.mkdir(parents=True,exist_ok=True);atomic_json(cached,result)
+    return result
+
+
 def verdict_for(method, directions, control_pending):
     by={r['pair']:r for r in directions};values={p:r.get(method) for p,r in by.items()}
     complete=all(values.get(p) is not None for p in PAIRS)
@@ -59,11 +75,13 @@ def plot_stream(rows, public):
 
 
 def report(execution):
-    from scripts.active_eval import summarize,bootstrap,offline_labels
-    from scripts.active_attribution import attribute
+    from scripts.active_eval import summarize as compute_summary,bootstrap,offline_labels
+    from scripts.active_attribution import attribute as compute_attribution
     from scripts.presence_finish_a import references
     from scripts.presence_redesign_report import table
     public=execution.public;plan=json.loads((public/'registered_jobs.json').read_text())
+    summarize=lambda f,t:sealed_diagnostic(f,t,'offline_summary.json',compute_summary,public)
+    attribute=lambda f,t:sealed_diagnostic(f,t,'offline_attribution.json',compute_attribution,public)
     decisions_path=public/'baseline_budget_decisions.json'
     decisions=json.loads(decisions_path.read_text()) if decisions_path.exists() else dict(jobs=[],decisions=[])
     jobs=plan['jobs']+decisions['jobs']
@@ -105,6 +123,8 @@ def report(execution):
             LoRA_GPU_hours=seal.get('LoRA_GPU_seconds',0)/3600,rescore_GPU_hours=seal.get('rescore_GPU_seconds',0)/3600,
             assigned_worker_wall_hours=sum(x.get('wall_seconds',0) for x in attempts)/3600,
             failed_worker_attempts=sum(x['status']=='FAILED_RETAINED_FOR_RECOVERY' for x in attempts),
+            worker_wall_includes_estimated_attempts=any(x.get('wall_seconds_estimated',False) for x in attempts),
+            incomplete_failed_rescore_GPU_phases=sum(x.get('incomplete_failed_rescore_GPU_phases',0) for x in attempts),
             peak_parent_allocated_bytes=max((x['parent_peak_allocated_bytes'] for x in attempts if x.get('parent_peak_allocated_bytes') is not None),default=None),
             peak_teacher_allocated_bytes=max((x['peak_allocated_bytes'] for x in sessions),default=None),
             trainable_parameters_observed_in_updates=sorted({rr['slow']['trainable_parameters'] for v in receipts for rr in v.get('rounds',[]) if 'trainable_parameters' in rr['slow']}),

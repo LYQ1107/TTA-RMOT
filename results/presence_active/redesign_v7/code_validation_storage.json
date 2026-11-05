@@ -1,0 +1,126 @@
+{
+  "status": "STORAGE_RECOVERY_ORCHESTRATION_REGRESSION_PASSED",
+  "checks": {
+    "pytest": {
+      "command": [
+        "/home/szgx/anaconda3/envs/dfot/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_active_v7_recovery.py",
+        "tests/test_active_v7.py",
+        "tests/test_active_v6.py",
+        "tests/test_active_v6_report.py",
+        "tests/test_active_v6_close.py",
+        "tests/test_active_attribution.py",
+        "tests/test_active_execution.py",
+        "tests/test_active_archive.py",
+        "tests/test_active_stage_snapshot.py"
+      ],
+      "exit_code": 0,
+      "seconds": 9.287516044918448,
+      "stdout": ".............................................                            [100%]\n=============================== warnings summary ===============================\n../../../home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345\n  /home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio\n    self._mark_plugins_for_rewrite(hook, disable_autoload)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n45 passed, 1 warning in 5.80s\n",
+      "stderr": ""
+    },
+    "compile": {
+      "command": [
+        "/home/szgx/anaconda3/envs/dfot/bin/python",
+        "-m",
+        "compileall",
+        "-q",
+        "flex_uda/active",
+        "scripts/active_continue.py",
+        "scripts/active_v7_storage_recovery.py",
+        "scripts/active_v7_report.py",
+        "scripts/active_v7_close.py",
+        "scripts/active_v7_snapshot.py",
+        "scripts/active_v7_validate.py",
+        "scripts/active_eval.py",
+        "scripts/active_attribution.py"
+      ],
+      "exit_code": 0,
+      "seconds": 2.478893645107746,
+      "stdout": "",
+      "stderr": ""
+    },
+    "diff_check": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03225442813709378,
+      "stdout": "",
+      "stderr": ""
+    },
+    "numerical_and_plan_protected": {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "ea08a284a80bcdf7c2b556fff266c1dcf59aa8af",
+        "--",
+        "flex_uda/active/v7.py",
+        "flex_uda/active/v7_frozen.py",
+        "flex_uda/active/v7_slow.py",
+        "scripts/active_v7_run.py",
+        "scripts/active_v7_launch.py",
+        "scripts/active_v7_continue.py",
+        "flex_uda/teacher/yestrack_backend.py",
+        "flex_uda/teacher/visual_input_builder.py",
+        "results/presence_active/redesign_v7/PREREG.md",
+        "results/presence_active/redesign_v7/registered_jobs.json",
+        "results/presence_active/redesign_v7/execution.json"
+      ],
+      "exit_code": 0,
+      "seconds": 0.011514764279127121,
+      "stdout": "",
+      "stderr": ""
+    },
+    "historical_results_protected": {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "07c9003",
+        "--",
+        "results/presence_active/redesign_v5",
+        "results/presence_active/redesign_v6",
+        "vendor/FlexHook"
+      ],
+      "exit_code": 0,
+      "seconds": 0.01227682689204812,
+      "stdout": "",
+      "stderr": ""
+    },
+    "read_only_closed_report": {
+      "command": [
+        "/home/szgx/anaconda3/envs/dfot/bin/python",
+        "-c",
+        "from flex_uda.active.execution import authorize_active; import scripts.active_eval as e; import scripts.active_attribution as a; exec(\"def forbidden(*args, **kwargs):\\n raise RuntimeError(\\\"An old closed diagnostic unexpectedly needs recomputation: \\\"+str(args))\"); e.summarize=forbidden; a.attribute=forbidden; from scripts.active_v7_report import report; execution,_=authorize_active(); report(execution)"
+      ],
+      "exit_code": 0,
+      "seconds": 48.023766573984176,
+      "stdout": "{\"status\": \"REGISTERED_TIER_REPORTED\", \"arms\": [{\"method\": \"FULL_v7\", \"six_directions_complete\": false, \"point_estimate_wins\": [\"C1\", \"C3\", \"C4\"], \"directions_above_both_controls\": 3, \"Dance_both_within_two_of_v5\": false, \"result\": \"NOT_EVALUATED\", \"may_request_curves_and_ablations\": false, \"automatically_authorized\": false}, {\"method\": \"MINUS_SLOW_v7\", \"six_directions_complete\": true, \"point_estimate_wins\": [\"C1\", \"C2\", \"C3\", \"C5\", \"C6\"], \"directions_above_both_controls\": 5, \"Dance_both_within_two_of_v5\": false, \"result\": \"FAIL\", \"may_request_curves_and_ablations\": false, \"automatically_authorized\": false}], \"completed_jobs\": 11, \"expected_primary_jobs\": 12, \"conditional_controls_pending\": false, \"may_request_curves_and_ablations\": false, \"automatically_authorized\": false, \"remaining_v5_80_denied\": true, \"v6_C4_C6_denied\": true}\n",
+      "stderr": ""
+    },
+    "eleven_official_metrics_unchanged": {
+      "command": [
+        "git",
+        "diff",
+        "--exit-code",
+        "--",
+        "results/presence_active/redesign_v7/main.csv"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05947613017633557,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "tests_passed": 45,
+  "runtime_GT_or_teacher_or_GPU_calls": 0,
+  "no_official_evaluator_or_attribution_recomputation_in_readonly_report": true,
+  "numerical_hyperparameters_changed": false
+}

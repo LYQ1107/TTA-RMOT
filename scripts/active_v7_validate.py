@@ -168,6 +168,17 @@ def validate(execution):
             optimizer_updates=updates,actual_optimized_positive_samples=positive,actual_optimized_negative_samples=negative,
             zero_gradient_updates=int(zero_grad),GT_open_attempts=0,prediction_seal_sha256=file_sha(folder/'predictions_seal.json')))
         sum_episodes+=len(sealed);sum_rows+=seal['prediction_rows']
+    recovery_audit=dict(used=False)
+    recovery_path=public/'storage_recovery.json'
+    if recovery_path.exists():
+        recovery=json.loads(recovery_path.read_text())
+        original=execution.active/'C4/SLOW_REPLAY/rho_0.3'
+        for item in recovery['protected_completed_files']:
+            assert file_sha(original/item['relative_path'])==item['sha256']
+        assert file_sha(Path(recovery['checkpoint_path']))==recovery['checkpoint_sha256']
+        recovery_audit=dict(used=True,protected_completed_files_verified=len(recovery['protected_completed_files']),
+            completed_videos_not_rerun=recovery['completed_videos_preserved'],
+            resumed_next_video=recovery['next_video'],originals_retained=True)
     assert not attempts
     result=dict(status='V7_AUTHORIZED_TIER_VALIDATED',primary_jobs=len(plan['jobs']),conditional_jobs=len(decisions['jobs']),
         total_episodes=sum_episodes,prediction_rows=sum_rows,methods=records,old_v6_seals_unchanged=True,
@@ -176,6 +187,7 @@ def validate(execution):
         fixed_replay_questions_and_original_answers_verified=True,fixed_replay_DS_state_equal_to_MINUS_verified=True,
         MINUS_no_frame_rescore_verified=True,
         full_frame_and_fixed32_coverage_verified=True,GT_open_attempts=0,GPU_or_teacher_called=False,
+        storage_recovery=recovery_audit,
         v6_C4_C6_and_old80_not_started=True)
     atomic_json(public/'validation.json',result)
     print(json.dumps({k:v for k,v in result.items() if k!='methods'},indent=2))

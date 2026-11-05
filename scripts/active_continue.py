@@ -17,6 +17,31 @@ def folder_for(execution,job):
     return execution.active / job['pair'] / job['method'] / ('rho_'+str(job['rho']))
 
 
+def reuse_evaluations(execution,jobs,source,destination):
+    """Recover closed official evaluations, without running GT evaluation again."""
+    evaluated={}
+    for job in jobs:
+        receipt=Path(source)/('evaluation_'+job['pair']+'_'+job['method']+'.json')
+        if not receipt.exists():continue
+        row=json.loads(receipt.read_text())
+        if row.get('exit_code')!=0:continue
+        folder=folder_for(execution,job);seal=folder/'predictions_seal.json'
+        metrics=row['metrics']
+        if metrics['prediction_seal_sha256']!=file_sha(seal):
+            raise ValueError('Recovered official evaluation has a different prediction seal')
+        if json.loads((folder/'offline_summary.json').read_text())!=metrics or metrics['GT_open_attempts']!=0:
+            raise ValueError('Recovered official evaluation summary or runtime GT audit changed')
+        if metrics['target']=='SportsMOT':
+            subset=json.loads((folder/'sensitivity_418/predictions_seal.json').read_text())
+            if subset['original_full466_seal_sha256']!=file_sha(seal):
+                raise ValueError('Recovered SportsMOT sensitivity uses a different prediction seal')
+        reused=dict(row,reused_closed_official_evaluation=True,
+            original_receipt=str(receipt),original_receipt_sha256=file_sha(receipt))
+        key=(job['pair'],job['method'],job['rho']);evaluated[key]=reused
+        atomic_json(destination/receipt.name,reused)
+    return evaluated
+
+
 def prepare(execution):
     cost_path=execution.public / 'BC_cost_estimate.json'
     cost=json.loads(cost_path.read_text())
@@ -55,12 +80,15 @@ def run(execution,plan_path):
     run_root=execution.launchers / ('coordinator_'+str(time.time_ns()))
     run_root.mkdir(parents=True)
     atomic_json(run_root / 'plan.json',plan)
+    reuse=os.environ.get('PRESENCE_REUSE_EVALUATIONS_FROM')
+    evaluated=reuse_evaluations(execution,plan['jobs'],reuse,run_root) if reuse else {}
+    if reuse:print(json.dumps(dict(event='REUSED_CLOSED_OFFICIAL_EVALUATIONS',count=len(evaluated),source=reuse)),flush=True)
     launcher=execution.manifest.get('launcher_script','scripts/active_launch.py') if execution.manifest else 'scripts/active_launch.py'
     launch=subprocess.Popen([sys.executable,str(ROOT / launcher),
         '--phase','registered','--jobs-json',str(plan_path)],cwd=ROOT)
     print(json.dumps(dict(event='CONTINUATION_STARTED',coordinator=str(run_root),
         jobs=len(plan['jobs']),launch_pid=launch.pid)),flush=True)
-    jobs=plan['jobs'];evaluated={};evaluation=None;errors=[]
+    jobs=plan['jobs'];evaluation=None;errors=[]
     from scripts.active_run import PAIRS
     while True:
         if evaluation is not None and evaluation['process'].poll() is not None:

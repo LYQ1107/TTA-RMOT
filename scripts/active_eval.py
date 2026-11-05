@@ -50,7 +50,7 @@ def official_stats(folder):
     return dict(videos=videos, stats=stats, rows=by, HOTA_unrounded=exact)
 
 
-def summarize(folder, target):
+def summarize(folder, target, *, persist=True):
     from scripts.presence_eval_offline import evaluate_folder
     folder = Path(folder); seal = verify_predictions(folder)
     evaluated = evaluate_folder(folder, target)
@@ -180,7 +180,7 @@ def summarize(folder, target):
         for group, sequences in groups.items():
             values = {key:native_stats['rows'][key] for key in sequences}
             result['NATIVE_'+group+'_HOTA'] = 100*float(np.mean(metric.combine_sequences(values)['HOTA'])) if values else None
-    atomic_json(folder / 'offline_summary.json', result)
+    if persist:atomic_json(folder / 'offline_summary.json', result)
     return result
 
 
