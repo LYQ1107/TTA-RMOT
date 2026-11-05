@@ -55,7 +55,8 @@ def run(execution,plan_path):
     run_root=execution.launchers / ('coordinator_'+str(time.time_ns()))
     run_root.mkdir(parents=True)
     atomic_json(run_root / 'plan.json',plan)
-    launch=subprocess.Popen([sys.executable,str(ROOT / 'scripts/active_launch.py'),
+    launcher=execution.manifest.get('launcher_script','scripts/active_launch.py') if execution.manifest else 'scripts/active_launch.py'
+    launch=subprocess.Popen([sys.executable,str(ROOT / launcher),
         '--phase','registered','--jobs-json',str(plan_path)],cwd=ROOT)
     print(json.dumps(dict(event='CONTINUATION_STARTED',coordinator=str(run_root),
         jobs=len(plan['jobs']),launch_pid=launch.pid)),flush=True)

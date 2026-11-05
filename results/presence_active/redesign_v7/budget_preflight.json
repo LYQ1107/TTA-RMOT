@@ -1,0 +1,266 @@
+{
+  "status": "TWELVE_JOB_FALLBACK",
+  "requested_15_GPU_hours_estimate": 94.85810770638074,
+  "conditional_baseline_upper_GPU_hours": 0.897779449813901,
+  "selected_GPU_hours_estimate": 76.67761364896656,
+  "user_gate_GPU_hours": 20,
+  "estimates": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.046584426671702206,
+      "teacher_equivalent_GPU_hours": 0.046584426671702206,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.273432985797895,
+      "teacher_equivalent_GPU_hours": 0.046584426671702206,
+      "LoRA_GPU_hours": 2.633298627896713,
+      "rescore_GPU_hours": 8.593549931229479
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.226848559126193,
+      "teacher_equivalent_GPU_hours": 0.0,
+      "LoRA_GPU_hours": 2.633298627896713,
+      "rescore_GPU_hours": 8.593549931229479
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483,
+      "teacher_equivalent_GPU_hours": 0.499533877149483,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C2",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 3.081527911029721,
+      "teacher_equivalent_GPU_hours": 0.499533877149483,
+      "LoRA_GPU_hours": 0.5356439460896784,
+      "rescore_GPU_hours": 2.0463500877905596
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144,
+      "teacher_equivalent_GPU_hours": 0.07558182035028144,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.232830324035756,
+      "teacher_equivalent_GPU_hours": 0.07558182035028144,
+      "LoRA_GPU_hours": 4.9264454550521135,
+      "rescore_GPU_hours": 8.230803048633362
+    },
+    {
+      "pair": "C3",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.157248503685476,
+      "teacher_equivalent_GPU_hours": 0.0,
+      "LoRA_GPU_hours": 4.9264454550521135,
+      "rescore_GPU_hours": 8.230803048633362
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144,
+      "teacher_equivalent_GPU_hours": 0.07558182035028144,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.232830324035756,
+      "teacher_equivalent_GPU_hours": 0.07558182035028144,
+      "LoRA_GPU_hours": 4.9264454550521135,
+      "rescore_GPU_hours": 8.230803048633362
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.157248503685476,
+      "teacher_equivalent_GPU_hours": 0.0,
+      "LoRA_GPU_hours": 4.9264454550521135,
+      "rescore_GPU_hours": 8.230803048633362
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483,
+      "teacher_equivalent_GPU_hours": 0.499533877149483,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C5",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 3.081527911029721,
+      "teacher_equivalent_GPU_hours": 0.499533877149483,
+      "LoRA_GPU_hours": 0.5356439460896784,
+      "rescore_GPU_hours": 2.0463500877905596
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.046584426671702206,
+      "teacher_equivalent_GPU_hours": 0.046584426671702206,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.273432985797895,
+      "teacher_equivalent_GPU_hours": 0.046584426671702206,
+      "LoRA_GPU_hours": 2.633298627896713,
+      "rescore_GPU_hours": 8.593549931229479
+    }
+  ],
+  "dimensions": {
+    "C1": {
+      "target": "Dance",
+      "model": "V2-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    },
+    "C2": {
+      "target": "KITTI-V2",
+      "model": "Dance-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C3": {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C4": {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C5": {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C6": {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    }
+  },
+  "selected_jobs": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    }
+  ],
+  "selected_conditional_YT_PRIOR_upper_GPU_hours": 0.15377420025706143,
+  "frame_cache_bytes_estimate": 58596858744,
+  "data1_available_bytes": 84038717440,
+  "cache_root": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v7",
+  "new_GPU_or_teacher_calls": 0,
+  "GT_open_attempts": 0,
+  "estimate_scope": "conservative shared-device elapsed GPU phases; no cache/skip discount; not a utilization integral",
+  "teacher_loading_and_CPU_costs_not_in_phase_estimate": true,
+  "replay_teacher_cost_incremental_zero_but_MINUS_teacher_dependency_included": true,
+  "prior_v6_cost_estimate_sha256": "d1a142c03d9edd6153f7ea13a1102091c0b08c16b4760460e048b03d6ddc0615"
+}
