@@ -1,6 +1,6 @@
 {
   "status": "INTERIM_V7_OFFICIAL_RECEIPTS_NOT_FINAL",
-  "completed_jobs": 10,
+  "completed_jobs": 11,
   "expected_primary_jobs": 12,
   "completed": [
     {
@@ -182,6 +182,36 @@
       "prediction_seal_sha256": "d7e277506613df339eb62515c41d062ea70a91ed09f283cb1743c606520b2e68",
       "evaluation_receipt": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/launchers/coordinator_1793863672677211187/evaluation_C3_FULL.json",
       "evaluation_receipt_sha256": "a7b3e6e7e36fef64554fcfee944d09eee60f513557419f17275c043854f3b986"
+    },
+    {
+      "pair": "C3",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "HOTA": 62.103,
+      "DetA": 54.194,
+      "AssA": 71.175,
+      "IDF1": 60.913,
+      "IDSW": 4114.0,
+      "HOTA_unrounded": 62.10277997139022,
+      "prediction_rows": 2299972,
+      "query_empty_prediction_rows": 0,
+      "query_empty_FP": 0,
+      "Present_HOTA": 62.1027799713902,
+      "query_present_episodes": 466,
+      "query_empty_episodes": 0,
+      "teacher_calls": 3508,
+      "teacher_forward_GPU_hours": 0.0,
+      "teacher_equivalent_forward_GPU_hours": 0.09045878521600016,
+      "LoRA_GPU_hours": 2.1919302049690548,
+      "rescore_GPU_hours": 1.7769475766557217,
+      "GT_open_attempts": 0,
+      "future_frames": true,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/active/C3/SLOW_REPLAY/rho_0.3",
+      "prediction_seal_sha256": "62962d395ec67d18c498df3c4bda4cdff26b3c64841c76d1c28db79e0b742de6",
+      "evaluation_receipt": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/launchers/coordinator_1793863672677211187/evaluation_C3_SLOW_REPLAY.json",
+      "evaluation_receipt_sha256": "63e56e7b0c77ff11c000e0d46949e393a87d4f812b081dba7ca7ac235cd4f13d"
     },
     {
       "pair": "C4",
