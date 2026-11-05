@@ -1,6 +1,6 @@
 {
   "status": "INTERIM_V7_OFFICIAL_RECEIPTS_NOT_FINAL",
-  "completed_jobs": 2,
+  "completed_jobs": 3,
   "expected_primary_jobs": 12,
   "completed": [
     {
@@ -62,6 +62,36 @@
       "prediction_seal_sha256": "e036e69ce6fe77e3e9476f67df6d318dfb8b06f22f2f059123b44bdb1c1c50aa",
       "evaluation_receipt": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/launchers/coordinator_1793863672677211187/evaluation_C3_MINUS_SLOW.json",
       "evaluation_receipt_sha256": "0f763129abb0296615dab85f63da872df3e75328572854c08ddcebd652b7f8b1"
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "HOTA": 45.657,
+      "DetA": 30.011,
+      "AssA": 69.461,
+      "IDF1": 40.131,
+      "IDSW": 1480.0,
+      "HOTA_unrounded": 45.65691239177472,
+      "prediction_rows": 815058,
+      "query_empty_prediction_rows": 0,
+      "query_empty_FP": 0,
+      "Present_HOTA": 45.65691239177472,
+      "query_present_episodes": 466,
+      "query_empty_episodes": 0,
+      "teacher_calls": 3508,
+      "teacher_forward_GPU_hours": 0.0277503000105369,
+      "teacher_equivalent_forward_GPU_hours": 0.08167697461123838,
+      "LoRA_GPU_hours": 0.0,
+      "rescore_GPU_hours": 0.0,
+      "GT_open_attempts": 0,
+      "future_frames": true,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/active/C4/MINUS_SLOW/rho_0.3",
+      "prediction_seal_sha256": "9249c48e53486c7622104a2132780219a2be74176f3aabb3b5566162b6b2483f",
+      "evaluation_receipt": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/launchers/coordinator_1793863672677211187/evaluation_C4_MINUS_SLOW.json",
+      "evaluation_receipt_sha256": "931dbd630697659f8e03c641003be26f63a16ff7f550a7583f9f19eff7e4c1b9"
     }
   ],
   "failed_evaluations": [],

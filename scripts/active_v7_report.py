@@ -36,7 +36,8 @@ def plot_stream(rows, public):
                 seq=[x for x in rows if x['pair']==pair and x['method']==method]
                 ax.plot([0]+[x['video_index']+1 for x in seq],[.5]+[x['after_'+field] for x in seq],label=method,lw=1.4)
             ax.set(title=pair+': '+PAIRS[pair][1],xlabel='Completed videos (ID order)',ylabel=field,ylim=(-.02,1.02))
-            ax.grid(alpha=.2);ax.legend(fontsize=7)
+            ax.grid(alpha=.2)
+            if ax.lines:ax.legend(fontsize=7)
         fig.suptitle('GT-free online EB; each direction/arm starts Beta(1,1)')
         fig.tight_layout();fig.savefig(public/(field+'_stream.png'),dpi=150);plt.close(fig)
 
@@ -93,6 +94,7 @@ def report(execution):
             llrows.extend(dict(pair=pair,method=method,video=v['video'],**x) for x in p['queries'])
             for rr in v['rounds']:
                 s=rr['slow'];slowrows.append(dict(pair=pair,method=method,video=v['video'],round=rr['round'],
+                    status=s['status'],weights_used_for_optimizer=s['optimizer_updates']>0,
                     training_pool_positive=s.get('training_pool_positive',0),training_pool_negative=s.get('training_pool_negative',0),
                     actual_positive_samples=s['actual_optimized_positive_samples'],actual_negative_samples=s['actual_optimized_negative_samples'],
                     optimizer_updates=s['optimizer_updates'],binary_positive_weight=s['binary_positive_weight'],none_class_weight=s['none_class_weight'],
@@ -133,6 +135,7 @@ def report(execution):
             if method!='MINUS_SLOW' and (pair,'MINUS_SLOW') in summaries:
                 intervals[pair+'__'+method+'_v7_minus_MINUS_SLOW_v7']=bootstrap(folder(pair,method),folder(pair,'MINUS_SLOW'),target)
     confidence=final_confidence_summary(presence)
+    likelihood_by_query={(r['pair'],r['method']+'_v7',r['video'],r['query']):r for r in llrows}
     existence=[]
     for pair,method in sorted({(r['pair'],r['method']) for r in presence}):
         values=[r for r in presence if r['pair']==pair and r['method']==method]
@@ -140,6 +143,10 @@ def report(execution):
             query_empty_episodes=sum(not r['query_present_GT'] for r in values),
             correctly_inferred_empty=sum(not r['query_present_GT'] and r['teacher_absent'] for r in values),
             present_incorrectly_inferred_empty=sum(r['query_present_GT'] and r['teacher_absent'] for r in values),
+            empty_rejected_without_presence_answers=sum(not r['query_present_GT'] and r['teacher_absent']
+                and likelihood_by_query[pair,method,r['video'],r['expression']]['presence_answers']==0 for r in values),
+            present_rejected_without_presence_answers=sum(r['query_present_GT'] and r['teacher_absent']
+                and likelihood_by_query[pair,method,r['video'],r['expression']]['presence_answers']==0 for r in values),
             query_empty_prediction_rows=sum(r['selected_prediction_rows'] for r in values if not r['query_present_GT'])))
     for name,values in [('main',rows),('direction_summary',directions),('costs',costs),('eb_stream',stream),
         ('presence_likelihood',llrows),('slow_rounds',slowrows),('presence_decisions',presence),
@@ -152,13 +159,17 @@ def report(execution):
         may_request_curves_and_ablations=any(g['may_request_curves_and_ablations'] for g in gates),
         automatically_authorized=False,remaining_v5_80_denied=True,v6_C4_C6_denied=True)
     atomic_json(public/'verdict.json',verdict);plot_stream(stream,public)
-    text='# v7：在线EB存在性与慢速分支公平检验\n\n'+json.dumps(verdict,ensure_ascii=False,indent=2)+'\n\n'
+    primary_done=sum(not r['method'].startswith('YESTRACK') for r in rows)
+    text='# v7：在线EB存在性与慢速分支公平检验\n\n'
+    text+=f'当前已封存并完成官方评测 {primary_done}/{len(plan["jobs"])} 个主项；只对实际完成集合统计，不能把阶段结果当最终验收。\n\n'
+    text+=table(['method','six_directions_complete','directions_above_both_controls','Dance_both_within_two_of_v5','result'],gates)
     text+='## 1. 六方向主表（未运行格为NA，不是0）\n\n'+table(list(directions[0]),directions)
     text+='\n## 2. 完整官方指标\n\n'+table(['pair','method','HOTA_unrounded','DetA','AssA','IDF1','IDSW',
         'prediction_rows','query_empty_prediction_rows','Present_HOTA','teacher_calls','GT_open_attempts'],rows)
     text+='\n## 3. 存在性与在线比例\n\n'+table(list(existence[0]),existence)
     text+='\n![rho stream](rho_hat_stream.png)\n\n![pi stream](pi_hat_stream.png)\n\n'
     text+='逐视频先验与软计数见eb_stream.csv/原presence.json；逐句未截断/截断LL和触发次数见presence_likelihood.csv。停止概率与按最后DS重算概率分别记录，不冒充同一个时点。\n'
+    text+='presence_decisions.csv中的teacher_absent/teacher_confirmed_present是继承的字段名，v7实际表示EB的终止判空/判存在，不是教师直接审阅完整视频的标注；无分层回答而仅由先验触发的拒绝另行列出。\n'
     text+='\n## 4. 高置信错负与真实恢复\n\n'+table(['pair','method','matched_candidate_positive_tracks_majority',
         'confident_negative_GT_FN','confident_negative_GT_FN_unqueried','GTpositive_high_negative_rate'],confidence)
     text+='\n此表高置信错负仍用v6的p<.05以可比；实际伪监督阈值为.15/.85，且未问始终UNKNOWN。最终posterior不是实际优化输入。\n\n'
