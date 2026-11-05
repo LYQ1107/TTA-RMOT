@@ -58,16 +58,28 @@ def report(execution):
     with (old_public/'direction_summary.csv').open() as handle:old={r['pair']:r for r in csv.DictReader(handle)}
     with (Path(execution.manifest['prior_v6_public_root'])/'direction_summary.csv').open() as handle:
         old6={r['pair']:r for r in csv.DictReader(handle)}
-    rows=[];costs=[];presence=[];stream=[];llrows=[];slowrows=[];recall=[];reliability=[];artifacts=[];intervals={};truths={}
+    rows=[];costs=[];presence=[];stream=[];llrows=[];slowrows=[];recall=[];reliability=[];artifacts=[];intervals={};truths={};sports_sensitivity=[]
     summaries={}
     for job in jobs:
         pair,method=job['pair'],job['method'];target=PAIRS[pair][1];path=folder(pair,method)
         seal=verify_predictions(path);r=summarize(path,target);r.update(pair=pair,method=method+'_v7')
         rows.append(r);summaries[pair,method]=r
+        if target=='SportsMOT':
+            from scripts.active_eval import official_stats
+            from scripts.pf_diag_common import official_metrics
+            subset=path/'sensitivity_418';subset_seal=verify_predictions(subset)
+            assert subset_seal['episode_count']==418
+            assert subset_seal['original_full466_seal_sha256']==file_sha(path/'predictions_seal.json')
+            sports_sensitivity.append(dict(pair=pair,method=r['method'],episodes=418,
+                **official_metrics(subset/'results'),HOTA_unrounded=official_stats(subset)['HOTA_unrounded'],
+                full466_HOTA=r['HOTA_unrounded'],prediction_rows=subset_seal['prediction_rows'],
+                GT_protocol=subset_seal['sensitivity_protocol'],path=str(subset),
+                prediction_seal_sha256=file_sha(subset/'predictions_seal.json')))
         artifacts.append(dict(pair=pair,method=method,path=str(path),seal_sha256=file_sha(path/'predictions_seal.json'),
             episodes=seal['episodes']))
         teacher=seal['teacher'];attempts=[json.loads(p.read_text()) for p in path.glob('worker_attempts/*.json')]
         receipts=[json.loads(p.read_text()) for p in sorted(path.glob('videos/*/receipt.json'))]
+        sessions=[json.loads(p.read_text()) for p in sorted(path.glob('teacher_sessions/*.json'))]
         costs.append(dict(pair=pair,method=method,rho=.3,logical_questions=teacher['logical_calls'],
             new_teacher_calls=teacher.get('new_calls',0),cache_hits=teacher.get('cache_hits',0),
             replayed_answers=teacher.get('replayed_answers',0),
@@ -76,6 +88,10 @@ def report(execution):
             replay_teacher_cost_in_MINUS_dependency=method=='SLOW_REPLAY',
             LoRA_GPU_hours=seal.get('LoRA_GPU_seconds',0)/3600,rescore_GPU_hours=seal.get('rescore_GPU_seconds',0)/3600,
             assigned_worker_wall_hours=sum(x.get('wall_seconds',0) for x in attempts)/3600,
+            failed_worker_attempts=sum(x['status']=='FAILED_RETAINED_FOR_RECOVERY' for x in attempts),
+            peak_parent_allocated_bytes=max((x['parent_peak_allocated_bytes'] for x in attempts if x.get('parent_peak_allocated_bytes') is not None),default=None),
+            peak_teacher_allocated_bytes=max((x['peak_allocated_bytes'] for x in sessions),default=None),
+            trainable_parameters_observed_in_updates=sorted({rr['slow']['trainable_parameters'] for v in receipts for rr in v.get('rounds',[]) if 'trainable_parameters' in rr['slow']}),
             optimizer_updates=sum(rr['slow']['optimizer_updates'] for v in receipts for rr in v.get('rounds',[])),
             videos_with_LoRA_updates=sum(any(rr['slow']['optimizer_updates'] for rr in v.get('rounds',[])) for v in receipts),
             wall_is_not_GPU_utilization_integral=True))
@@ -150,7 +166,7 @@ def report(execution):
             query_empty_prediction_rows=sum(r['selected_prediction_rows'] for r in values if not r['query_present_GT'])))
     for name,values in [('main',rows),('direction_summary',directions),('costs',costs),('eb_stream',stream),
         ('presence_likelihood',llrows),('slow_rounds',slowrows),('presence_decisions',presence),
-        ('existence_summary',existence),('final_confidence',confidence),('recall_compare',recall),('reliability_vs_GT',reliability)]:
+        ('existence_summary',existence),('final_confidence',confidence),('recall_compare',recall),('reliability_vs_GT',reliability),('sports_sensitivity',sports_sensitivity)]:
         write_table(public/(name+'.csv'),values)
     atomic_json(public/'bootstrap.json',intervals);atomic_json(public/'artifacts.json',dict(new=artifacts))
     gates=[verdict_for(m,directions,control_pending) for m in ('FULL_v7','MINUS_SLOW_v7')]
@@ -163,7 +179,8 @@ def report(execution):
     text='# v7：在线EB存在性与慢速分支公平检验\n\n'
     text+=f'当前已封存并完成官方评测 {primary_done}/{len(plan["jobs"])} 个主项；只对实际完成集合统计，不能把阶段结果当最终验收。\n\n'
     text+=table(['method','six_directions_complete','directions_above_both_controls','Dance_both_within_two_of_v5','result'],gates)
-    text+='\n## 1. 六方向主表（未运行格为NA，不是0）\n\n'+table(list(directions[0]),directions)
+    text+='\n## 1. 六方向主表（未运行格为NA，不是0）\n\n'+table(list(directions[0]),
+        [{k:'NA' if v is None else v for k,v in row.items()} for row in directions])
     text+='\n## 2. 完整官方指标\n\n'+table(['pair','method','HOTA_unrounded','DetA','AssA','IDF1','IDSW',
         'prediction_rows','query_empty_prediction_rows','Present_HOTA','teacher_calls','GT_open_attempts'],rows)
     text+='\n## 3. 存在性与在线比例\n\n'+table(list(existence[0]),existence)
@@ -183,6 +200,8 @@ def report(execution):
     text+='\n## 6. 不确定性与边界\n\n完整视频bootstrap2000次seed0见bootstrap.json；KITTI四视频仅点估计，条件于当前固定流，未覆盖重新适应后的顺序/seed不确定性。\n'
     text+='\n视频转导式/冻结教师辅助，Val历史开发复用，非严格帧因果或盲测。所有GT仅封存后独立CPU读取。DS事后值仅实际提问集合，不代表全候选教师准确率。worker/phase elapsed非GPU利用率积分；历史候选、冻结推理、源头成本不是零。\n'
     text+='\n成本关卡见budget_preflight.json；本批结束后停止，不自动开预算曲线/消融、未选v7 FULL、v6扩展或旧80项。\n'
+    if sports_sensitivity:text+='\n## SportsMOT 418条敏感性（v4内容不变，仅限制序列ID）\n\n'+table(
+        ['pair','method','full466_HOTA','HOTA_unrounded','DetA','AssA','IDF1','IDSW','episodes','prediction_rows'],sports_sensitivity)
     (public/'REPORT.md').write_text(text)
     print(json.dumps(verdict,ensure_ascii=False),flush=True)
 
