@@ -160,6 +160,8 @@ def validate(execution):
                 for name,shape in [('margin.npy',mask.shape),('pcd.npy',mask.shape+(768,))]:
                     value=np.load(directory/'frame_cache'/name,mmap_mode='r');assert value.dtype==np.float32 and value.shape==shape
             if method=='SLOW_REPLAY':
+                source_receipt=json.loads((source.parent/'receipt.json').read_text())
+                assert [r['ds'] for r in receipt['rounds']]==[r['ds'] for r in source_receipt['rounds']]
                 assert not (folder/'teacher_sessions').exists()
         if not method.startswith('YESTRACK'):assert logical==seal['teacher']['logical_calls']
         records.append(dict(pair=pair,method=method,episodes=len(sealed),prediction_rows=seal['prediction_rows'],
@@ -171,7 +173,8 @@ def validate(execution):
         total_episodes=sum_episodes,prediction_rows=sum_rows,methods=records,old_v6_seals_unchanged=True,
         fixed_MOT_rows_exact=True,EB_likelihood_and_clipping_verified=True,EB_online_Beta_and_unclipped_pi_updates_verified=True,
         asked_only_pseudo_labels_and_balanced_loss_weights_verified=True,actual_optimizer_input_accounting_verified=True,
-        fixed_replay_questions_and_original_answers_verified=True,MINUS_no_frame_rescore_verified=True,
+        fixed_replay_questions_and_original_answers_verified=True,fixed_replay_DS_state_equal_to_MINUS_verified=True,
+        MINUS_no_frame_rescore_verified=True,
         full_frame_and_fixed32_coverage_verified=True,GT_open_attempts=0,GPU_or_teacher_called=False,
         v6_C4_C6_and_old80_not_started=True)
     atomic_json(public/'validation.json',result)

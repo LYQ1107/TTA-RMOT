@@ -113,7 +113,8 @@ def close(execution):
         v6_C4_C6_started=False,remaining_v5_80_started=False,unselected_v7_FULL_C2_C5_C6_started=False,
         original_108_job_goal_not_claimed_complete=True,
         registered_plan_sha256=file_sha(public/'registered_jobs.json'),
-        numerical_code_frozen_since='ea08a284a80bcdf7c2b556fff266c1dcf59aa8af',
+        numerical_code_local_reference='ea08a284a80bcdf7c2b556fff266c1dcf59aa8af',
+        numerical_code_public_reference='6fe50860242df9fd8f5bfd69f7fcf3e73443b379',
         original_runtime_root=str(execution.active.parent),durable_recovery_dir=str(durable),
         exact_log_and_teacher_archive_validation=archive_audit['status'])
     atomic_json(public/'final_stage_status.json',final)
@@ -128,6 +129,7 @@ def close(execution):
     text+='\n轨迹多数标签口径仅作诊断；同一轨迹的重复帧/视图高度相关，不能把这些行当独立样本作显著性检验，也不把选题后的正确率推广到全库。\n'
     text+='\n## 最终成本、日志与恢复路径\n\n'+table(['metric','value'],[dict(metric=k,value=v) for k,v in cost.items()])
     text+='\n主集合为六MINUS、三FULL、三REPLAY；额外YT仅按FULL调用变化严格>5%规则触发。MINUS与FULL调用量不同，复用对照不伪称逐臂精确等预算。\n'
+    text+='预算匹配的是教师调用次数，不是图像张数、token数或GPU时间；不同看法的实测forward成本分别保留。表中是本批方法实验的新增成本，smoke见gpu_smoke.json，历史冻结打分/Stage A输入的成本未重测，不等于零。\n'
     text+='\nGT审计及完整候选/EB更新/实际优化输入核验见validation.json；逐句截断前后似然和生效次数见presence_likelihood.csv。\n'
     text+='完整关闭日志与实际用到的唯一教师原响应见logs.json、archive_validation.json及其列出的归档；checkpoint仅发布路径/大小/SHA，预测与PCD留服务器。\n'
     text+='\n运行根目录：`'+str(execution.active.parent)+'`。原durable恢复记录：`'+str(durable)+'`。封存方法不会重跑已完成episode。\n'

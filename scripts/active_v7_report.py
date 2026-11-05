@@ -190,6 +190,7 @@ def report(execution):
     text+='\n## 4. 高置信错负与真实恢复\n\n'+table(['pair','method','matched_candidate_positive_tracks_majority',
         'confident_negative_GT_FN','confident_negative_GT_FN_unqueried','GTpositive_high_negative_rate'],confidence)
     text+='\n此表高置信错负仍用v6的p<.05以可比；实际伪监督阈值为.15/.85，且未问始终UNKNOWN。最终posterior不是实际优化输入。\n\n'
+    text+='v7组合prior截断到[-2,2]且未问对evidence=0，因此未判空句子的未问对posterior至少为sigmoid(-2)≈.1192；本表未问p<.05来自整句判空置零，不是未问对被赋了训练负标签。\n\n'
     text+=table(list(recall[0]),recall)
     text+='\nGT召回是独立IoU≥.5最大基数匹配，不替代官方TrackEval；新增/删除预测行的FP与不变行匹配重分配分列。\n'
     text+='\n## 5. 慢速更新、成本与成对差值\n\n'+table(list(costs[0]),costs)
