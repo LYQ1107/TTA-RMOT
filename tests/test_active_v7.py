@@ -97,3 +97,15 @@ def test_six_direction_gate_is_not_rescued_by_five_control_wins():
     assert result['directions_above_both_controls']==5
     assert result['result']=='FAIL' and not result['Dance_both_within_two_of_v5']
     assert verdict_for('FULL_v7',rows,False)['result']=='NOT_EVALUATED'
+
+
+def test_training_summary_distinguishes_ce_none_from_binary_negative_examples():
+    from scripts.active_v7_report import training_summary
+    ce=dict(pair='C1',method='FULL',loss_type='EXCLUSIVE_LIST_CE',sample_count_unit='target/none',
+        status='SLOW_UPDATED',video='v1',optimizer_updates=1,actual_positive_samples=32,
+        actual_negative_samples=0,NONE_reweighted_samples=0)
+    binary=dict(ce,pair='C3',loss_type='BINARY_BCE',sample_count_unit='query-track-frame',
+        actual_positive_samples=16,actual_negative_samples=16)
+    a,b=training_summary([ce,binary])
+    assert a['actual_NONE_or_negative_samples']==0 and a['NONE_reweighted_samples']==0
+    assert b['actual_NONE_or_negative_samples']==16 and a['sample_count_unit']!=b['sample_count_unit']

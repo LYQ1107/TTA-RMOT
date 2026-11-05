@@ -25,6 +25,22 @@ def verdict_for(method, directions, control_pending):
         may_request_curves_and_ablations=passed,automatically_authorized=False)
 
 
+def training_summary(rounds):
+    """Keep CE target/NONE examples distinct from BCE positive/negative pairs."""
+    keys=sorted({(r['pair'],r['method'],r['loss_type'],r['sample_count_unit'])
+                 for r in rounds if r['status']!='DISABLED'})
+    result=[]
+    for pair,method,loss,unit in keys:
+        values=[r for r in rounds if (r['pair'],r['method'],r['loss_type'],r['sample_count_unit'])==(pair,method,loss,unit)]
+        result.append(dict(pair=pair,method=method,loss_type=loss,sample_count_unit=unit,
+            videos_with_updates=len({r['video'] for r in values if r['optimizer_updates']>0}),
+            optimizer_updates=sum(r['optimizer_updates'] for r in values),
+            actual_target_or_positive_samples=sum(r['actual_positive_samples'] for r in values),
+            actual_NONE_or_negative_samples=sum(r['actual_negative_samples'] for r in values),
+            NONE_reweighted_samples=sum(r['NONE_reweighted_samples'] for r in values)))
+    return result
+
+
 def plot_stream(rows, public):
     import matplotlib
     matplotlib.use('Agg')
@@ -111,9 +127,12 @@ def report(execution):
             for rr in v['rounds']:
                 s=rr['slow'];slowrows.append(dict(pair=pair,method=method,video=v['video'],round=rr['round'],
                     status=s['status'],weights_used_for_optimizer=s['optimizer_updates']>0,
+                    loss_type='DISABLED' if s['status']=='DISABLED' else 'EXCLUSIVE_LIST_CE' if v['exclusive_group'] else 'BINARY_BCE',
+                    sample_count_unit=s.get('training_pool_count_unit','no student optimizer'),
                     training_pool_positive=s.get('training_pool_positive',0),training_pool_negative=s.get('training_pool_negative',0),
                     actual_positive_samples=s['actual_optimized_positive_samples'],actual_negative_samples=s['actual_optimized_negative_samples'],
                     optimizer_updates=s['optimizer_updates'],binary_positive_weight=s['binary_positive_weight'],none_class_weight=s['none_class_weight'],
+                    NONE_reweighted_samples=s['actual_optimized_negative_samples'] if v['exclusive_group'] and s['none_class_weight']<1 else 0,
                     positive_rechecks=rr['positive_rechecks'],round_end_positive_pairs=rr['positive_pairs'],
                     round_end_counts_not_optimizer_inputs=True))
         ar=attribute(path,target)
@@ -164,9 +183,10 @@ def report(execution):
             present_rejected_without_presence_answers=sum(r['query_present_GT'] and r['teacher_absent']
                 and likelihood_by_query[pair,method,r['video'],r['expression']]['presence_answers']==0 for r in values),
             query_empty_prediction_rows=sum(r['selected_prediction_rows'] for r in values if not r['query_present_GT'])))
+    slow_summary=training_summary(slowrows)
     for name,values in [('main',rows),('direction_summary',directions),('costs',costs),('eb_stream',stream),
         ('presence_likelihood',llrows),('slow_rounds',slowrows),('presence_decisions',presence),
-        ('existence_summary',existence),('final_confidence',confidence),('recall_compare',recall),('reliability_vs_GT',reliability),('sports_sensitivity',sports_sensitivity)]:
+        ('existence_summary',existence),('final_confidence',confidence),('recall_compare',recall),('reliability_vs_GT',reliability),('sports_sensitivity',sports_sensitivity),('slow_training_summary',slow_summary)]:
         write_table(public/(name+'.csv'),values)
     atomic_json(public/'bootstrap.json',intervals);atomic_json(public/'artifacts.json',dict(new=artifacts))
     gates=[verdict_for(m,directions,control_pending) for m in ('FULL_v7','MINUS_SLOW_v7')]
@@ -194,9 +214,11 @@ def report(execution):
     text+=table(list(recall[0]),recall)
     text+='\nGT召回是独立IoU≥.5最大基数匹配，不替代官方TrackEval；新增/删除预测行的FP与不变行匹配重分配分列。\n'
     text+='\n## 5. 慢速更新、成本与成对差值\n\n'+table(list(costs[0]),costs)
+    if slow_summary:text+='\n'+table(list(slow_summary[0]),slow_summary)
     effects=[dict(comparison=k,**v) for k,v in intervals.items() if k.endswith('minus_MINUS_SLOW_v7')]
     if effects:text+='\n'+table(['comparison','delta_HOTA','CI95','clusters'],effects)
     text+='\n逐轮真实优化输入正负暴露、训练池计数、两种权重、更新步数见slow_rounds.csv与原逐步records；不由轮末标签倒推。SLOW_REPLAY复用MINUS实际问题/帧/看法/原始回答，新增教师调用为0；独立部署总成本仍包含MINUS教师依赖，不能说完全不用教师。\n'
+    text+='互斥CE的负样本计数指NONE类训练样本，不是所有负类梯度；正例列表中已知负类仍可受CE约束。BCE的负样本则是负(query,track,frame)实例，两个单位不混加。没有NONE样本时，NONE频率降权未实际触发，不能宣称该机制已获实验验证。\n'
     text+='\nFULL−MINUS包括选题反馈；REPLAY−MINUS固定教师内容但包含LoRA及模型引起的f/快校准/EB下游效应，并非将派生状态也固定。零adapter输入已用相同冻结bank锚定，后续FP32打分路径及32帧近似的限制仍需披露。\n'
     text+='\n## 6. 不确定性与边界\n\n完整视频bootstrap2000次seed0见bootstrap.json；KITTI四视频仅点估计，条件于当前固定流，未覆盖重新适应后的顺序/seed不确定性。\n'
     text+='\n视频转导式/冻结教师辅助，Val历史开发复用，非严格帧因果或盲测。所有GT仅封存后独立CPU读取。DS事后值仅实际提问集合，不代表全候选教师准确率。worker/phase elapsed非GPU利用率积分；历史候选、冻结推理、源头成本不是零。\n'

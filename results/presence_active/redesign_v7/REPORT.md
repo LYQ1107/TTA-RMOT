@@ -1,23 +1,25 @@
 # v7：在线EB存在性与慢速分支公平检验
 
-当前已封存并完成官方评测 7/12 个主项；只对实际完成集合统计，不能把阶段结果当最终验收。
+当前已封存并完成官方评测 8/12 个主项；只对实际完成集合统计，不能把阶段结果当最终验收。
 
-最新C3 FULL：HOTA 65.133068，对MINUS 65.345262为−0.212194，视频聚类95% CI[−1.672129,1.316876]跨0；未证明慢速增益，也不能断言它必然有害。40/45视频实际发生更新，共7000步；成功优化的正/负样本暴露分别115407/108593，不能用“没训练或纯负例训练”解释这一结果。LoRA与重打分分别3.070007/1.315566小时，教师调用仍3508，但FULL与MINUS选题内容不相同；固定证据回放尚待完成。
+C1 FULL HOTA35.166028，对MINUS38.849551为−3.683522，25视频95% CI[−9.777914,1.400499]跨0；不证明慢速必然有害，但点值已低于预注册35.724保留门槛。独立IoU≥.5召回62.7907%→56.1727%，匹配GT观测净减14066、FP总数净增20156；Empty预测18477→35767。正确标空293→302仍不足以抵消这些错误，且有目标句误判空6→9。
 
-C3 FULL的独立IoU≥.5 GT召回78.0639%→80.8298%，匹配GT观测净增42420，但FP总数净增75330（不是新增预测行误检的同义词）。有目标句误判空2→52，高置信错负27→291，其中221个未问对由整句判空置零；未问对仍UNKNOWN、不参与训练。FULL对YT_PRIOR +6.532277，CI[4.827158,8.233172]，但这一总体改善不能归因于慢速分支。
+C1 FULL实际23/25视频更新、3900步，列表CE成功优化124800个目标类样本、0个NONE样本，NONE频率降权未触发。该计数不意味着所有负类都无梯度：正例列表中已知负类仍可受CE约束。LoRA/重打分分别2.415356/2.544065小时。未补造NONE标签或改变损失；单位明确记录在slow_training_summary.csv和逐轮表中。
 
-六MINUS仍为5/6点胜两简单对照较好者，但C6=30.204325低于固定34.469保留门槛，故该臂FAIL。C6最后6视频的102句先验全拒绝另见absorbing_prior.csv/json；这不是未完成或漏评。FULL只计划三个方向，六方向门槛未评估；当前C1/C4 FULL与三回放继续，不跨臂拼最优，也不开旧80项或未选FULL。
+C3 FULL65.133068对MINUS65.345262为−.212194，45视频CI[−1.672129,1.316876]跨0。实际40视频、7000步，BCE正/负实例115407/108593，额外LoRA3.070007h、重打分1.315566h。GT召回增加但FP和误判空也增加，详见下表；最终w在45个视频均为1（fast_weight_C3.json），不能用最终w归零解释无额外收益。两方向FULL−MINUS都包含选题反馈，尚不能孤立归因LoRA权重，固定证据回放继续。
+
+六MINUS为5/6点胜较好简单对照，但C6=30.204325低于34.469，故该臂FAIL；C6尾部6视频102句先验全拒绝见absorbing_prior.csv/json，非漏跑。FULL六方向整体仍未评估（成本回退只授权C1/C3/C4），同时已知C1保留条件不满足。当前只继续C4 FULL和三固定回放，不跨臂挑最优，不开旧80项、v6扩展、未选FULL或新方法。
 
 | method | six_directions_complete | directions_above_both_controls | Dance_both_within_two_of_v5 | result |
 | --- | --- | --- | --- | --- |
-| FULL_v7 | False | 1 | False | NOT_EVALUATED |
+| FULL_v7 | False | 2 | False | NOT_EVALUATED |
 | MINUS_SLOW_v7 | True | 5 | False | FAIL |
 
 ## 1. 六方向主表（未运行格为NA，不是0）
 
 | pair | source | target | NATIVE | PRES_TOPK | FULL_v5 | FULL_v6 | FULL_v7 | MINUS_SLOW_v7 | SLOW_REPLAY_v7 | YT_PRIOR | UNIFORM_K | YT_PRIOR_rematch_pending |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| C1 | V2-best | Dance | 8.218023 | 10.320883 | 37.723955 | 26.367793 | NA | 38.849551 | NA | 22.710562 | 24.107948 | False |
+| C1 | V2-best | Dance | 8.218023 | 10.320883 | 37.723955 | 26.367793 | 35.166028 | 38.849551 | NA | 22.710562 | 24.107948 | False |
 | C2 | Dance-best | KITTI-V2 | 13.501503 | 13.781387 | 16.099630 | 26.818212 | NA | 25.313445 | NA | 24.285695 | 24.413313 | False |
 | C3 | V2-best | SportsMOT | 50.970478 | 52.927461 | 43.914165 | 59.341507 | 65.133068 | 65.345262 | NA | 58.600791 | 40.804245 | False |
 | C4 | Dance-best | SportsMOT | 20.559603 | 21.010887 | 32.191307 | NA | NA | 45.656912 | NA | 46.098939 | 40.804245 | False |
@@ -29,6 +31,7 @@ C3 FULL的独立IoU≥.5 GT召回78.0639%→80.8298%，匹配GT观测净增42420
 | pair | method | HOTA_unrounded | DetA | AssA | IDF1 | IDSW | prediction_rows | query_empty_prediction_rows | Present_HOTA | teacher_calls | GT_open_attempts |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | C1 | MINUS_SLOW_v7 | 38.849551 | 44.840000 | 33.728000 | 37.332000 | 1386.000000 | 183380 | 18477 | 40.248855 | 3264 | 0 |
+| C1 | FULL_v7 | 35.166028 | 37.435000 | 33.111000 | 32.586000 | 1327.000000 | 189470 | 35767 | 37.559187 | 3195 | 0 |
 | C2 | MINUS_SLOW_v7 | 25.313445 | 11.013000 | 58.264000 | 19.629000 | 701.000000 | 155932 | 0 | 25.313445 | 20955 | 0 |
 | C3 | MINUS_SLOW_v7 | 65.345262 | 60.290000 | 70.837000 | 65.297000 | 2848.000000 | 1517412 | 0 | 65.345262 | 3508 | 0 |
 | C3 | FULL_v7 | 65.133068 | 59.881000 | 70.858000 | 64.876000 | 3195.000000 | 1635162 | 0 | 65.133068 | 3508 | 0 |
@@ -40,6 +43,7 @@ C3 FULL的独立IoU≥.5 GT召回78.0639%→80.8298%，匹配GT观测净增42420
 
 | pair | method | query_present_episodes | query_empty_episodes | correctly_inferred_empty | present_incorrectly_inferred_empty | empty_rejected_without_presence_answers | present_rejected_without_presence_answers | query_empty_prediction_rows |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| C1 | FULL_v7 | 40 | 385 | 302 | 9 | 95 | 1 | 35767 |
 | C1 | MINUS_SLOW_v7 | 40 | 385 | 293 | 6 | 96 | 1 | 18477 |
 | C2 | MINUS_SLOW_v7 | 862 | 0 | 0 | 296 | 0 | 0 | 0 |
 | C3 | FULL_v7 | 466 | 0 | 0 | 52 | 0 | 0 | 0 |
@@ -59,6 +63,7 @@ presence_decisions.csv中的teacher_absent/teacher_confirmed_present是继承的
 
 | pair | method | matched_candidate_positive_tracks_majority | confident_negative_GT_FN | confident_negative_GT_FN_unqueried | GTpositive_high_negative_rate |
 | --- | --- | --- | --- | --- | --- |
+| C1 | FULL_v7 | 567 | 135 | 121 | 0.238095 |
 | C1 | MINUS_SLOW_v7 | 567 | 86 | 76 | 0.151675 |
 | C2 | MINUS_SLOW_v7 | 8441 | 2508 | 2122 | 0.297121 |
 | C3 | FULL_v7 | 5528 | 291 | 221 | 0.052641 |
@@ -74,6 +79,7 @@ v7组合prior截断到[-2,2]且未问对evidence=0，因此未判空句子的未
 | pair | method | GT_observations | matched_GT | GT_recall | output_rows | recovered_GT | lost_GT | net_GT_vs_Native | new_FP_rows | removed_FP_rows | unchanged_rows_new_FP | unchanged_rows_removed_FP | net_FP_vs_Native | definition |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | C1 | MINUS_SLOW | 212541 | 133456 | 0.627907 | 183380 | 124690 | 1571 | 123119 | 46430 | 85885 | 12 | 0 | -39443 | offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching |
+| C1 | FULL | 212541 | 119390 | 0.561727 | 189470 | 115259 | 6206 | 109053 | 69648 | 88945 | 10 | 0 | -19287 | offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching |
 | C2 | MINUS_SLOW | 491286 | 70575 | 0.143654 | 155932 | 53656 | 8922 | 44734 | 63808 | 52499 | 6 | 6 | 11309 | offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching |
 | C3 | MINUS_SLOW | 1533675 | 1197247 | 0.780639 | 1517412 | 348657 | 50850 | 297807 | 170541 | 165288 | 221 | 293 | 5181 | offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching |
 | C3 | FULL | 1533675 | 1239667 | 0.808298 | 1635162 | 438007 | 97780 | 340227 | 303144 | 222971 | 504 | 166 | 80511 | offline max-cardinality framewise IoU>=0.5 assignment, not official HOTA matching |
@@ -88,6 +94,7 @@ GT召回是独立IoU≥.5最大基数匹配，不替代官方TrackEval；新增/
 | pair | method | rho | logical_questions | new_teacher_calls | cache_hits | replayed_answers | teacher_forward_GPU_hours | teacher_equivalent_GPU_hours | replay_teacher_cost_in_MINUS_dependency | LoRA_GPU_hours | rescore_GPU_hours | assigned_worker_wall_hours | failed_worker_attempts | peak_parent_allocated_bytes | peak_teacher_allocated_bytes | trainable_parameters_observed_in_updates | optimizer_updates | videos_with_LoRA_updates | wall_is_not_GPU_utilization_integral |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | C1 | MINUS_SLOW | 0.300000 | 3264 | 595 | 2669 | 0 | 0.012809 | 0.042194 | False | 0.000000 | 0.000000 | 0.040861 | 0 | None | 4472145920 | [] | 0 | 0 | True |
+| C1 | FULL | 0.300000 | 3195 | 572 | 2623 | 0 | 0.034324 | 0.064342 | False | 2.415356 | 2.544065 | 5.037107 | 0 | 4578221056 | 4522808832 | [24576] | 3900 | 23 | True |
 | C2 | MINUS_SLOW | 0.300000 | 20955 | 9477 | 11478 | 0 | 0.318490 | 0.646320 | False | 0.000000 | 0.000000 | 0.428484 | 0 | None | 5469817344 | [] | 0 | 0 | True |
 | C3 | MINUS_SLOW | 0.300000 | 3508 | 1720 | 1788 | 0 | 0.039901 | 0.090459 | False | 0.000000 | 0.000000 | 0.075097 | 0 | None | 5899776000 | [] | 0 | 0 | True |
 | C3 | FULL | 0.300000 | 3508 | 1761 | 1747 | 0 | 0.043687 | 0.089526 | False | 3.070007 | 1.315566 | 4.477327 | 0 | 4582467584 | 5904013312 | [24576] | 7000 | 40 | True |
@@ -95,11 +102,18 @@ GT召回是独立IoU≥.5最大基数匹配，不替代官方TrackEval；新增/
 | C5 | MINUS_SLOW | 0.300000 | 20955 | 13042 | 7913 | 0 | 0.247136 | 0.465638 | False | 0.000000 | 0.000000 | 0.355100 | 0 | None | 5474210304 | [] | 0 | 0 | True |
 | C6 | MINUS_SLOW | 0.300000 | 2233 | 594 | 1639 | 0 | 0.025479 | 0.046053 | False | 0.000000 | 0.000000 | 0.050530 | 0 | None | 4676065280 | [] | 0 | 0 | True |
 
+| pair | method | loss_type | sample_count_unit | videos_with_updates | optimizer_updates | actual_target_or_positive_samples | actual_NONE_or_negative_samples | NONE_reweighted_samples |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| C1 | FULL | EXCLUSIVE_LIST_CE | sampled track-frame target/none | 23 | 3900 | 124800 | 0 | 0 |
+| C3 | FULL | BINARY_BCE | sampled query-track-frame | 40 | 7000 | 115407 | 108593 | 0 |
+
 | comparison | delta_HOTA | CI95 | clusters |
 | --- | --- | --- | --- |
+| C1__FULL_v7_minus_MINUS_SLOW_v7 | -3.683522 | [-9.777914, 1.400499] | 25 |
 | C3__FULL_v7_minus_MINUS_SLOW_v7 | -0.212194 | [-1.672129, 1.316876] | 45 |
 
 逐轮真实优化输入正负暴露、训练池计数、两种权重、更新步数见slow_rounds.csv与原逐步records；不由轮末标签倒推。SLOW_REPLAY复用MINUS实际问题/帧/看法/原始回答，新增教师调用为0；独立部署总成本仍包含MINUS教师依赖，不能说完全不用教师。
+互斥CE的负样本计数指NONE类训练样本，不是所有负类梯度；正例列表中已知负类仍可受CE约束。BCE的负样本则是负(query,track,frame)实例，两个单位不混加。没有NONE样本时，NONE频率降权未实际触发，不能宣称该机制已获实验验证。
 
 FULL−MINUS包括选题反馈；REPLAY−MINUS固定教师内容但包含LoRA及模型引起的f/快校准/EB下游效应，并非将派生状态也固定。零adapter输入已用相同冻结bank锚定，后续FP32打分路径及32帧近似的限制仍需披露。
 
