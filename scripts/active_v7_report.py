@@ -163,7 +163,7 @@ def report(execution):
     text='# v7：在线EB存在性与慢速分支公平检验\n\n'
     text+=f'当前已封存并完成官方评测 {primary_done}/{len(plan["jobs"])} 个主项；只对实际完成集合统计，不能把阶段结果当最终验收。\n\n'
     text+=table(['method','six_directions_complete','directions_above_both_controls','Dance_both_within_two_of_v5','result'],gates)
-    text+='## 1. 六方向主表（未运行格为NA，不是0）\n\n'+table(list(directions[0]),directions)
+    text+='\n## 1. 六方向主表（未运行格为NA，不是0）\n\n'+table(list(directions[0]),directions)
     text+='\n## 2. 完整官方指标\n\n'+table(['pair','method','HOTA_unrounded','DetA','AssA','IDF1','IDSW',
         'prediction_rows','query_empty_prediction_rows','Present_HOTA','teacher_calls','GT_open_attempts'],rows)
     text+='\n## 3. 存在性与在线比例\n\n'+table(list(existence[0]),existence)

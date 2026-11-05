@@ -76,3 +76,24 @@ def test_fast_does_not_use_presence_decisions_without_stratified_teacher_support
     assert r['presence']['positive']==0 and r['presence']['negative']==0
     assert r['presence']['status']=='SKIP_INSUFFICIENT_CONFIRMED_CLASSES'
     assert np.array_equal(before,s.evidence)
+
+
+def test_replay_recheck_uses_original_eligibility_but_keeps_changed_posterior():
+    import pytest
+    from scripts.active_v7_validate import validate_recheck
+    original=dict(kind='POSITIVE_RECHECK',posterior_probability_before=.7,requested_view='CLIP',frame_id=12)
+    replay=dict(original,posterior_probability_before=.95)
+    history=[dict(yes_probability=.9,effective_view='CLIP',frame_id=2)]
+    validate_recheck(replay,history,original)
+    with pytest.raises(AssertionError):validate_recheck(replay,history)
+
+
+def test_six_direction_gate_is_not_rescued_by_five_control_wins():
+    from scripts.active_v7_report import verdict_for
+    values=[38.849551,25.313445,65.345262,45.656912,30.331540,30.204325]
+    controls=[24.107948,24.413313,58.600791,46.098939,27.588195,24.107948]
+    rows=[dict(pair='C'+str(i+1),MINUS_SLOW_v7=v,YT_PRIOR=c,UNIFORM_K=c) for i,(v,c) in enumerate(zip(values,controls))]
+    result=verdict_for('MINUS_SLOW_v7',rows,False)
+    assert result['directions_above_both_controls']==5
+    assert result['result']=='FAIL' and not result['Dance_both_within_two_of_v5']
+    assert verdict_for('FULL_v7',rows,False)['result']=='NOT_EVALUATED'

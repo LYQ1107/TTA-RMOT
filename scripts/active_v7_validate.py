@@ -15,6 +15,16 @@ from scripts.active_v6_prepare import sample32
 from flex_uda.active.v7 import balanced_weights,weak_rank_logits
 
 
+def validate_recheck(question, history, original_question=None):
+    """A fixed replay's selection eligibility belongs to its original MINUS state."""
+    reference=original_question if original_question is not None else question
+    assert reference['kind']=='POSITIVE_RECHECK'
+    assert len(history)==1 and history[0]['yes_probability']>=.5
+    assert .5<=reference['posterior_probability_before']<.85
+    assert question['requested_view']==history[0]['effective_view']
+    assert question['frame_id']!=history[0]['frame_id']
+
+
 def validate(execution):
     attempts=runtime_guard();public=execution.public
     plan=json.loads((public/'registered_jobs.json').read_text());jobs=list(plan['jobs'])
@@ -46,6 +56,12 @@ def validate(execution):
                 assert receipt['actual_calls']==full['questions'];continue
             answers=json.loads((directory/'questions.json').read_text());logical+=len(answers)
             assert len(answers)==receipt['questions']<=receipt['budget']
+            frozen=None
+            if method=='SLOW_REPLAY':
+                source=execution.active/pair/'MINUS_SLOW/rho_0.3/videos'/video/'questions.json'
+                frozen=json.loads(source.read_text());assert len(frozen)==len(answers)
+                keys=('request_id','frame_id','track_id','query_id','effective_view','yes_probability','yes_logit','no_logit','round','kind')
+                assert all(tuple(a[k] for k in keys)==tuple(b[k] for k in keys) for a,b in zip(answers,frozen))
             by_track=defaultdict(list)
             for j,(_,t) in enumerate(bank['observations']):by_track[t].append(j)
             observation_keys=set(map(tuple,bank['observations']))
@@ -53,7 +69,7 @@ def validate(execution):
                 tracks=b['tracks'].tolist();qid={q:i for i,q in enumerate(b['queries'].tolist())};tid={t:i for i,t in enumerate(tracks)}
                 eligible=np.asarray([len(by_track[t])>=3 for t in tracks]);evidence=np.zeros_like(b['evidence']);asked=np.zeros_like(b['asked_mask'])
                 history=defaultdict(list);presence_groups=defaultdict(list);per_round=set()
-                for a in answers:
+                for ai,a in enumerate(answers):
                     q,t=qid[a['query_id']],tid[a['track_id']];key=(q,t)
                     assert eligible[t] and (a['frame_id'],a['track_id']) in observation_keys
                     assert (q,t,a['round']) not in per_round;per_round.add((q,t,a['round']))
@@ -61,10 +77,7 @@ def validate(execution):
                     evidence[q,t]+=a['evidence_delta'];asked[q,t]=True
                     if method!='SLOW_REPLAY':assert a['presence_probability_before']>=.1
                     if a['kind']=='POSITIVE_RECHECK':
-                        assert len(history[key])==1 and history[key][0]['yes_probability']>=.5
-                        assert .5<=a['posterior_probability_before']<.85
-                        assert a['requested_view']==history[key][0]['effective_view']
-                        assert a['frame_id']!=history[key][0]['frame_id']
+                        validate_recheck(a,history[key],None if frozen is None else frozen[ai])
                     if a['kind']=='PRESENCE':presence_groups[key].append(a)
                     assert a['prior_stratum']==int(b['prior_strata'][q,t])
                     assert a['identity_used_as_DS_annotator'] is False
@@ -147,10 +160,6 @@ def validate(execution):
                 for name,shape in [('margin.npy',mask.shape),('pcd.npy',mask.shape+(768,))]:
                     value=np.load(directory/'frame_cache'/name,mmap_mode='r');assert value.dtype==np.float32 and value.shape==shape
             if method=='SLOW_REPLAY':
-                source=execution.active/pair/'MINUS_SLOW/rho_0.3/videos'/video/'questions.json'
-                frozen=json.loads(source.read_text());assert len(frozen)==len(answers)
-                keys=('request_id','frame_id','track_id','query_id','effective_view','yes_probability','yes_logit','no_logit','round','kind')
-                assert all(tuple(a[k] for k in keys)==tuple(b[k] for k in keys) for a,b in zip(answers,frozen))
                 assert not (folder/'teacher_sessions').exists()
         if not method.startswith('YESTRACK'):assert logical==seal['teacher']['logical_calls']
         records.append(dict(pair=pair,method=method,episodes=len(sealed),prediction_rows=seal['prediction_rows'],
