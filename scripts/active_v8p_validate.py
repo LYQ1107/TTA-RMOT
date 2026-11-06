@@ -95,9 +95,15 @@ def validate(execution,plan_path=None):
         records.append(dict(job,episodes=seal['episode_count'],prediction_rows=rows,optimizer_updates=updates,
             prediction_seal_sha256=file_sha(path/'predictions_seal.json'),GT_open_attempts=0))
     assert not attempts
+    observed_updates=sum(r.get('optimizer_updates',0) for r in records)
+    observed_replays=sum(r['method']=='SLOW_REPLAY' for r in records)
     result=dict(status='PASS',jobs=len(records),records=records,GT_open_attempts=0,
-        asked_only_labels=True,balanced_16_16_actual_updates=True,full_coverage=True,
-        fixed_replay_presence_byte_exact=True,GPU_or_teacher_calls=0)
+        asked_only_labels=True,observed_optimizer_updates=observed_updates,
+        balanced_16_16_actual_updates='CHECKED_EVERY_OBSERVED_UPDATE' if observed_updates else 'NOT_EVALUATED_NO_UPDATES',
+        full_coverage=True,observed_replay_jobs=observed_replays,
+        fixed_replay_presence_byte_exact=True if observed_replays else 'NOT_EVALUATED_NO_REPLAY',
+        GPU_or_teacher_calls=0,
+        audit_output_note='Do not interpret vacuous frozen-model checks as real LoRA/replay evidence; numeric protocol is unchanged')
     atomic_json(execution.public/('validation_'+plan['tier']+'.json'),result);return result
 
 

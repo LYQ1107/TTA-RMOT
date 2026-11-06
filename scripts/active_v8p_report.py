@@ -140,6 +140,8 @@ def report(execution):
         presence.append(dict(pair=pair,protocol=protocol,presence_inference=protocol=='CHECKLIST',
             false_absent=sum(r['output_absent'] and r['query_present_GT'] for r in rows),
             correct_empty=sum(r['output_absent'] and not r['query_present_GT'] for r in rows),
+            present_queries_zero_prediction_rows=sum(r['query_present_GT'] and r['selected_prediction_rows']==0 for r in rows),
+            empty_queries_zero_prediction_rows=sum(not r['query_present_GT'] and r['selected_prediction_rows']==0 for r in rows),
             present_episodes=sum(r['query_present_GT'] for r in rows),
             empty_episodes=sum(not r['query_present_GT'] for r in rows),
             query_empty_prediction_rows=summary['query_empty_prediction_rows']))
@@ -201,8 +203,9 @@ def report(execution):
     text+='### 成对视频聚类不确定性\n\n'+table([
         dict(comparison=k,delta_HOTA=v['delta_HOTA'],CI95=v['CI95'],clusters=v['clusters'])
         for k,v in intervals.items()],['comparison','delta_HOTA','CI95','clusters'])+'\n\nKITTI只有4个视频，CI=None表示按预注册只报告点估计，不表示差值为零。\n\n'
-    text+='## 2. 存在性（最终输出拒绝口径）\n\n'+table(presence,['pair','protocol','false_absent','correct_empty','present_episodes','empty_episodes','query_empty_prediction_rows'])+'\n\n'
+    text+='## 2. 存在性（最终输出拒绝口径）\n\n'+table(presence,['pair','protocol','false_absent','correct_empty','present_queries_zero_prediction_rows','empty_queries_zero_prediction_rows','present_episodes','empty_episodes','query_empty_prediction_rows'])+'\n\n'
     text+='PRESUPPOSED 的判空为 0 是协议的设计结果，不是学习出了完美存在性。C1/C6 用原 v8 seal SHA 直接引用，新增调用为 0。\n\n'
+    text+='false_absent/correct_empty 沿用 EVIDENCE+PRIOR_BUDGET_EXHAUSTED 的拒绝原因口径；zero_prediction_rows 另计最终零行输出，包含未拒绝整句但轨迹后验没有选中任何目标的情形。二者不能混用。\n\n'
     text+='## 3. 消融与预算曲线\n\n'+('阶段 A 通过，按预注册 B1→B2→空闲卡 B3 顺序接续；未完成项目不填数。' if gate['result']=='PASS' else '阶段 A 未通过，按用户停止条件不运行任何阶段 B 项目。')+'\n\n'
     text+='## 4. 行为分析与归因\n\n![CHECKLIST](behavior_checklist.png)\n\n![PRESUPPOSED](behavior_presupposed.png)\n\n'
     text+='完整错拒、高置信错负、教师支持覆盖在 presence_decisions.csv、final_confidence.csv；DS 与 GT 事后特异度在 reliability_vs_GT.csv，分别保留锚点与轨迹多数标签。\n\n'

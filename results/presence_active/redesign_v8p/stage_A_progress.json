@@ -1,5 +1,5 @@
 {
-  "status": "STAGE_A_METRICS_COMPLETE_AUDIT_IN_PROGRESS",
+  "status": "STAGE_A_COMPLETE_PASS_B1_STARTED",
   "registered_code_commit": "fe1de118a81a8e628b729c5f267db91de3059837",
   "completed_new_directions": [
     {
@@ -148,6 +148,31 @@
     "C6"
   ],
   "remaining_new_directions": [],
-  "C3_floor": 63.35,
-  "stage_B_started": false
+  "gate": {
+    "result": "PASS",
+    "wins": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "directions_above_both_controls": 6,
+    "checks": {
+      "control_wins_at_least_five": true,
+      "C1_floor": true,
+      "C6_floor": true,
+      "C3_floor": true
+    },
+    "stage_B_authorized": true,
+    "thresholds": {
+      "C1": 35.724,
+      "C6": 34.469,
+      "C3": 63.35
+    }
+  },
+  "stage_B_started": true,
+  "B1_registered_jobs": 24,
+  "original_v8_queue_unchanged": true
 }
