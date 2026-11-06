@@ -88,6 +88,8 @@ def report(execution,tier):
     atomic_json(public/(tier+'_bootstrap.json'),intervals)
     atomic_json(public/(tier+'_prediction_paths.json'),dict(files=artifacts))
     text='## '+tier+'\n\n'+table(rows,['pair','method','rho','HOTA','DetA','AssA','IDF1','delta_vs_MINUS','CI95_vs_MINUS','logical_calls','new_calls','cache_hits','reused'])+'\n\n'
+    if tier=='B1' and (public/'B1_FINDINGS.md').exists():
+        text='关键反例与归因边界见[B1_FINDINGS.md](B1_FINDINGS.md)。\n\n'+text
     text+='### 成本\n\n'+table(rows,['pair','method','rho','teacher_GPU_hours','original_reused_method_teacher_GPU_hours','teacher_equivalent_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
     text+='复用行的teacher_GPU_hours=0只指本阶段没有新增forward，不是该系统无需GPU；原方法实际成本在original_reused_method_teacher_GPU_hours，缓存等价forward成本另列。\n\n'
     if tier=='B2':text+='![预算曲线](budget_curves.png)\n\n预算 .1/1.0 每视频实际调用精确匹配；.3 按预注册直接复用历史对照。\n\n'
