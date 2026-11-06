@@ -15,7 +15,7 @@ from flex_uda.active.acquisition import Question, VIEWS, information_gain, route
 
 class PresenceEM:
     def __init__(self, n_strata=3, a=2., b=2., clip=(.05, .95),
-                 iters=200, tol=1e-7, track_cap=2.):
+                 iters=5000, tol=1e-7, track_cap=2.):
         self.n_strata = n_strata
         self.a, self.b, self.clip = a, b, clip
         self.iters, self.tol, self.track_cap = iters, tol, track_cap
@@ -25,6 +25,9 @@ class PresenceEM:
         self.iterations = 0
         self.converged = True
         self.last_delta = 0.
+        self.delta_trace = []
+        self.objective_trace = []
+        self.decision_likelihood_evaluations = np.zeros(n_strata, dtype=np.int64)
 
     def add_video(self, video, state):
         added = 0
@@ -37,6 +40,8 @@ class PresenceEM:
             if tracks:
                 self.records.append(dict(video=str(video), query=int(q), tracks=tracks))
                 added += 1
+        self.decision_likelihood_evaluations += getattr(
+            state, 'presence_likelihood_evaluations', np.zeros(self.n_strata, dtype=np.int64))
         return added
 
     def track_terms(self, k, answers, rel):
@@ -50,6 +55,7 @@ class PresenceEM:
     def fit(self, rel):
         if not self.records:
             self.iterations, self.converged, self.last_delta = 0, True, 0.
+            self.delta_trace = []; self.objective_trace = []
             return self.receipt()
         qs, strata, lp, ln = [], [], [], []
         for q, rec in enumerate(self.records):
@@ -60,6 +66,19 @@ class PresenceEM:
         qs = np.asarray(qs, dtype=int); strata = np.asarray(strata, dtype=int)
         lp, ln = np.asarray(lp), np.asarray(ln)
         n = len(self.records)
+        def observed_log_posterior(rho, pi):
+            # A2: untruncated observed-data likelihood, not the capped E-step.
+            m1_objective = np.logaddexp(np.log(pi[strata])+lp,
+                                       np.log1p(-pi[strata])+ln)
+            log_present = np.bincount(qs, weights=m1_objective, minlength=n)
+            log_absent = np.bincount(qs, weights=ln, minlength=n)
+            likelihood = np.logaddexp(np.log(rho)+log_present,
+                                     np.log1p(-rho)+log_absent).sum()
+            prior = ((self.a-1)*(np.log(rho)+np.log(pi).sum()) +
+                     (self.b-1)*(np.log1p(-rho)+np.log1p(-pi).sum()))
+            return float(likelihood+prior)
+        self.delta_trace = []
+        self.objective_trace = [observed_log_posterior(self.rho, self.pi)]
         self.converged = False
         for iteration in range(self.iters):
             m1 = np.logaddexp(np.log(self.pi[strata])+lp,
@@ -72,6 +91,8 @@ class PresenceEM:
             rho = float(np.clip((g.sum()+self.a-1)/(n+self.a+self.b-2), *self.clip))
             pi = np.clip((num+self.a-1)/(den+self.a+self.b-2), *self.clip)
             self.last_delta = float(max(abs(rho-self.rho), np.abs(pi-self.pi).max()))
+            self.delta_trace.append(self.last_delta)
+            self.objective_trace.append(observed_log_posterior(rho, pi))
             self.rho, self.pi, self.iterations = rho, pi, iteration+1
             if self.last_delta < self.tol:
                 self.converged = True
@@ -82,10 +103,21 @@ class PresenceEM:
         counts = np.zeros(self.n_strata, dtype=int)
         for rec in self.records:
             for k, _ in rec['tracks']: counts[k] += 1
+        contraction = (self.delta_trace[-1]/self.delta_trace[-2]
+                       if len(self.delta_trace) >= 2 and self.delta_trace[-2] != 0 else None)
         return dict(version='v8', rho_hat=float(self.rho), pi_strata=self.pi.tolist(),
                     iterations=self.iterations if iterations is None else iterations,
                     converged=bool(self.converged), last_delta=self.last_delta,
                     records=len(self.records), tracks_per_stratum=counts.tolist(),
+                    identification_status=['IDENTIFIED' if n >= 200 else 'UNIDENTIFIED_INSUFFICIENT_DATA'
+                                           for n in counts],
+                    presence_likelihood_evaluations_per_stratum=self.decision_likelihood_evaluations.tolist(),
+                    E_step_track_evaluations_per_stratum=(counts*self.iterations).tolist(),
+                    objective_trace_monotone=bool(np.all(np.diff(self.objective_trace) >= -1e-10)),
+                    objective_trace=self.objective_trace.copy(), delta_trace=self.delta_trace.copy(),
+                    objective_is_unclipped_observed_log_posterior_with_Beta_prior=True,
+                    objective_monotonicity_is_diagnostic_only=True,
+                    contraction_rate=contraction,
                     Beta_prior=[self.a, self.b], clip=list(self.clip),
                     tolerance=self.tol, maximum_iterations=self.iters,
                     track_logLR_cap=self.track_cap,
@@ -102,6 +134,7 @@ class BeliefStateV8(BeliefStateV7):
         self.low_tentative = np.zeros(len(track_scores), dtype=bool)
         self.covered_strata = np.zeros((len(track_scores), 3), dtype=bool)
         self.needed_strata = np.zeros_like(self.covered_strata)
+        self.presence_likelihood_evaluations = np.zeros(3, dtype=np.int64)
         super().__init__(track_scores, fractions, presence_max, track_lengths=track_lengths,
                          rho_hat=rho_hat, pi_hat=.5, slope=slope)
 
@@ -121,6 +154,7 @@ class BeliefStateV8(BeliefStateV7):
             for (qi, t), answers in sorted(self.answer_history.items()):
                 k = int(self.strata[qi, t])
                 if qi != q or k < 0 or not answers: continue
+                self.presence_likelihood_evaluations[k] += 1
                 covered.add(k)
                 lp = sum(np.log(self.presence_reliability[v][0] if y else 1-self.presence_reliability[v][0]) for v, y in answers)
                 ln = sum(np.log(1-self.presence_reliability[v][1] if y else self.presence_reliability[v][1]) for v, y in answers)

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "passed": 15,
+  "failed": 0,
+  "warnings": 1,
+  "pytest_seconds": 152.42,
+  "synthetic_result_subdirectory": "sampler_conformance",
+  "previous_full_runs": [{"passed":13,"seconds":160.40},{"passed":14,"seconds":159.55}],
+  "overlapping_full_runs_not_added_together": true,
+  "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=compat:ROOT:pydeps OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 /home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q --maxfail=1 tests/test_active_v8.py",
+  "GPU_calls": 0,
+  "teacher_calls": 0,
+  "old_200_iteration_failure_retained": true
+}

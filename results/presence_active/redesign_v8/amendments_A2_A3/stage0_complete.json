@@ -1,0 +1,35 @@
+{
+  "status": "COMPLETE_STAGE0_A2_A3",
+  "exact_v7_error": 0.0,
+  "real_replay_videos": 148,
+  "all_real_EM_converged": true,
+  "CPU_tests": {
+    "status": "PASS",
+    "passed": 15,
+    "failed": 0,
+    "warnings": 1,
+    "pytest_seconds": 152.42,
+    "synthetic_result_subdirectory": "sampler_conformance",
+    "previous_full_runs": [
+      {
+        "passed": 13,
+        "seconds": 160.4
+      },
+      {
+        "passed": 14,
+        "seconds": 159.55
+      }
+    ],
+    "overlapping_full_runs_not_added_together": true,
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=compat:ROOT:pydeps OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 /home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q --maxfail=1 tests/test_active_v8.py",
+    "GPU_calls": 0,
+    "teacher_calls": 0,
+    "old_200_iteration_failure_retained": true
+  },
+  "GT_feedback_to_runtime": false,
+  "generation_GT_open_attempts": 0,
+  "GPU_calls": 0,
+  "teacher_calls": 0,
+  "prereg_sha256": "dbffdf0e0fce393609980e2e852493d00ee764095e478109997dee0ac86cd9ef",
+  "manifest_sha256": "6cf99e497abfb5763f8d720c3298a2fd78c864da56a53ad17d8d997d7db871f9"
+}

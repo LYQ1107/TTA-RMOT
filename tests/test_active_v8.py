@@ -26,6 +26,34 @@ def test_no_answers_leave_em_statistics_unchanged():
     assert em.fit(REL) == before
 
 
+def test_A2_registered_limit_objective_and_contraction_are_diagnostic():
+    em = PresenceEM()
+    assert em.iters == 5000 and em.tol == 1e-7
+    s = state()
+    s.observe(0, 0, True, 'CROP', (.8, .8))
+    s.observe(0, 4, False, 'CLIP', (.8, .8))
+    em.add_video('v', s); receipt = em.fit(REL)
+    assert len(receipt['objective_trace']) == receipt['iterations']+1
+    assert len(receipt['delta_trace']) == receipt['iterations']
+    assert receipt['objective_trace_monotone'] == bool(np.all(np.diff(receipt['objective_trace']) >= -1e-10))
+    assert np.isclose(receipt['contraction_rate'], receipt['delta_trace'][-1]/receipt['delta_trace'][-2])
+    assert receipt['objective_monotonicity_is_diagnostic_only']
+
+
+def test_A3_200_answered_pairs_identification_and_likelihood_counts():
+    em = PresenceEM(); s = state()
+    s.observe(0, 0, True, 'CROP', (.8, .8))
+    s.observe(0, 3, False, 'CROP', (.8, .8))
+    em.add_video('v', s)
+    receipt = em.receipt()
+    assert receipt['tracks_per_stratum'] == [1, 1, 0]
+    assert receipt['presence_likelihood_evaluations_per_stratum'] == [2, 1, 0]
+    assert receipt['identification_status'] == ['UNIDENTIFIED_INSUFFICIENT_DATA']*3
+    em.records.extend([dict(video='test', query=q, tracks=[(0, [('CROP', True)])]) for q in range(199)])
+    assert em.receipt()['tracks_per_stratum'][0] == 200
+    assert em.receipt()['identification_status'][0] == 'IDENTIFIED'
+
+
 def test_scalar_terms_and_vectorized_fit_follow_registered_capped_map():
     em = PresenceEM(); s = state()
     s.observe(0, 0, True, 'CROP', (.8, .8))
@@ -147,11 +175,48 @@ print('normal_generation_GT_open_attempts=0; deliberate_denied=1')
     assert 'normal_generation_GT_open_attempts=0' in result.stdout
 
 
+def test_live_round_glance_first_and_no_duplicate_query_inflight():
+    from collections import defaultdict
+    from scripts.active_v8_run import live_round
+    s=state(17,9);queries=[dict(expression_id=str(q),query_text='red person') for q in range(17)]
+    tracks={t:[dict(frame_id=f,bbox_xywh=[10,10,20,30]) for f in range(8)] for t in range(9)}
+    class Teacher:
+        batches=[]
+        def ask_many(self,requests):
+            assert len({r['query_id'] for r in requests})==len(requests)
+            self.batches.append(requests)
+            return [dict(r,effective_view=r['view'],yes_probability=.2) for r in requests]
+    teacher=Teacher()
+    answers=live_round(s,questions_v8(s,['red person']*17,[8]*9,REL,0),17,
+        defaultdict(set),tracks,SimpleNamespace(tracks=list(range(9))),queries,'Dance','fake',
+        dict(width=100,height=100),teacher)
+    assert len(answers)==17 and all(a['kind']=='GLANCE' for a in answers)
+    assert s.asked_mask.any(1).all()
+
+
+def test_live_round_rechecks_tentative_state_after_glance_before_identity():
+    from collections import defaultdict
+    from scripts.active_v8_run import live_round
+    from flex_uda.active.acquisition import Question
+    s=state(rho_hat=.12,pi_strata=[.95]*3)
+    tracks={t:[dict(frame_id=f,bbox_xywh=[10,10,20,30]) for f in range(8)] for t in range(9)}
+    class Teacher:
+        def ask_many(self,requests):
+            return [dict(r,effective_view=r['view'],yes_probability=.2) for r in requests]
+    possible=[Question(0,0,'CROP','GLANCE',1),Question(0,3,'CROP','PRESENCE_COVER',1),
+              Question(0,1,'CROP','IDENTITY',1)]
+    result=live_round(s,possible,3,defaultdict(set),tracks,SimpleNamespace(tracks=list(range(9))),
+        [dict(expression_id='q',query_text='red person')],'Dance','fake',dict(width=100,height=100),Teacher())
+    assert s.low_tentative[0]
+    assert [r['kind'] for r in result]==['GLANCE','PRESENCE_COVER']
+
+
 @pytest.mark.parametrize('rho', [.1, 1.])
 def test_registered_synthetic_200_video_recovery(rho):
-    from scripts.active_v8_stage0 import synthetic_recovery, PUBLIC
+    from scripts.active_v8_stage0 import synthetic_recovery, PUBLIC, AMENDED_PUBLIC
     from flex_tta.runtime.pf_receipts import atomic_json, file_sha
     result = synthetic_recovery(rho)
-    atomic_json(PUBLIC/f'stage0_synthetic_rho_{rho}.json', dict(result,
+    destination=Path(os.environ.get('V8_SYNTHETIC_RESULT_ROOT',str(AMENDED_PUBLIC)))
+    atomic_json(destination/f'stage0_synthetic_rho_{rho}.json', dict(result,
         prereg_sha256=file_sha(PUBLIC/'PREREG.md'), manifest_sha256=file_sha(PUBLIC/'manifest.json')))
     assert result['status'] == 'PASS', json.dumps({k: v for k, v in result.items() if k != 'stream'})

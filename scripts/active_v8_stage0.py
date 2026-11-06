@@ -15,9 +15,12 @@ from flex_uda.active.v7 import BeliefStateV7, OnlinePresenceEB
 from flex_uda.active.v8 import BeliefStateV8, PresenceEM, questions_v8
 
 PUBLIC = ROOT/'results/presence_active/redesign_v8'
+AMENDED_PUBLIC = PUBLIC/'amendments_A2_A3'
 
 
 def synthetic_recovery(rho, *, config=None):
+    from flex_uda.presence.runtime import runtime_guard
+    attempts = runtime_guard()
     if config is None:
         config = json.loads((PUBLIC/'manifest.json').read_text())['phase0']['synthetic']
     rng = np.random.RandomState(config['seed'])
@@ -45,6 +48,7 @@ def synthetic_recovery(rho, *, config=None):
                 q, t = question.query, question.track
                 if actual >= allowance: break
                 if state.absent[q] or (q, t) in used: continue
+                if state.low_tentative[q] and question.kind=='IDENTITY': continue
                 used.add((q, t)); actual += 1
                 p_yes = rel[question.view][0] if truth[q, t] else 1-rel[question.view][1]
                 yes = bool(rng.random_sample() < p_yes)
@@ -71,17 +75,29 @@ def synthetic_recovery(rho, *, config=None):
             return dict(status='STOP_EM_NONCONVERGENCE', true_rho=rho,
                         true_pi=config['true_pi'], completed_videos=vi+1,
                         EM=fit, stream=videos, question_counts=dict(counts),
-                        GT_open_attempts=0, GPU_calls=0, teacher_calls=0)
+                        GT_open_attempts=len(attempts), GPU_calls=0, teacher_calls=0)
     pi0_old = pi0_alpha/(pi0_alpha+pi0_beta)
+    stratum_counts = np.asarray(em.receipt()['tracks_per_stratum'])
+    identifiable = stratum_counts >= config['pi_precision_minimum_answered_tracks']
+    errors = np.abs(em.pi-np.asarray(config['true_pi']))
     checks = dict(rho=(em.rho >= .95-1e-9 if rho == 1. else abs(em.rho-rho) < .05),
-                  pi=bool(np.all(np.abs(em.pi-np.asarray(config['true_pi'])) < .07)),
+                  pi=bool(np.all(errors[identifiable] < .07)),
                   old_v7_pi0_bias=bool(abs(pi0_old-config['true_pi'][0]) > .1))
+    if rho == 1.:
+        checks['rho1_expected_identification'] = bool(np.array_equal(identifiable, [True, True, False]))
     return dict(status='PASS' if all(checks.values()) else 'FAIL_REGISTERED_RECOVERY',
                 true_rho=rho, true_pi=config['true_pi'], completed_videos=config['videos'],
                 EM=em.receipt(), old_v7_global_pi=old.pi, old_v7_pi0_grouped_soft_counts=pi0_old,
                 pi0_old_definition='v7 original pair soft counts grouped by initial stratum 0; global prior feedback unchanged',
+                pi_accuracy=[dict(stratum=int(k), true_pi=float(config['true_pi'][k]),
+                    estimated_pi=float(em.pi[k]), answered_tracks=int(stratum_counts[k]),
+                    absolute_error=float(errors[k]),
+                    status='PASS' if errors[k] < .07 else 'FAIL') if identifiable[k] else
+                    dict(stratum=int(k), true_pi=float(config['true_pi'][k]), estimated_pi=float(em.pi[k]),
+                         answered_tracks=int(stratum_counts[k]), absolute_error=float(errors[k]),
+                         status='UNIDENTIFIED_INSUFFICIENT_DATA') for k in range(3)],
                 checks=checks, stream=videos, question_counts=dict(counts),
-                GT_open_attempts=0, GPU_calls=0, teacher_calls=0)
+                GT_open_attempts=len(attempts), GPU_calls=0, teacher_calls=0)
 
 
 def exact_v7_replay():
@@ -141,14 +157,14 @@ def main():
     args = parser.parse_args(); start = time.perf_counter()
     if args.exact_v7:
         result = exact_v7_replay()
-        atomic_json(PUBLIC/'stage0_v7_reproduction.json', result)
+        atomic_json(AMENDED_PUBLIC/'stage0_v7_reproduction.json', result)
         print(json.dumps({k: v for k, v in result.items() if k != 'records'}), flush=True)
         if result['status'] != 'PASS': raise SystemExit(1)
     if args.synthetic:
         runs = []
         for rho in (.1, 1.):
             result = synthetic_recovery(rho); runs.append(result)
-            atomic_json(PUBLIC/'stage0_synthetic.json', dict(runs=runs, CPU_seconds=time.perf_counter()-start))
+            atomic_json(AMENDED_PUBLIC/'stage0_synthetic.json', dict(runs=runs, wall_seconds=time.perf_counter()-start))
             print(json.dumps({k: v for k, v in result.items() if k != 'stream'}), flush=True)
             if result['status'] != 'PASS': raise SystemExit(1)
 

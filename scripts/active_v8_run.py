@@ -21,7 +21,7 @@ from scripts.active_run import PAIRS,video_spec
 
 def live_round(state, possible, allowance, asked, tracks, fc, queries, target, video, local, teacher):
     result=[];used=set()
-    # Rechecks exhaust their priority before any ordinary question. At most
+    # GLANCE -> RECHECK -> COVER -> ordinary, with at most
     # one question for a sentence is in flight, so absence really stops new calls.
     phases=[[q for q in possible if q.kind==kind] for kind in ('GLANCE','POSITIVE_RECHECK','PRESENCE_COVER')]
     phases.append([q for q in possible if q.kind not in ('GLANCE','POSITIVE_RECHECK','PRESENCE_COVER')])
@@ -31,6 +31,7 @@ def live_round(state, possible, allowance, asked, tracks, fc, queries, target, v
             for question in pending:
                 q,ti=question.query,question.track
                 if state.absent[q] or (q,ti) in used:continue
+                if state.low_tentative[q] and question.kind=='IDENTITY':continue
                 if q in inflight or len(chosen)>=min(8,allowance-len(result)):
                     deferred.append(question);continue
                 obs=keyframe(tracks[fc.tracks[ti]],asked[q,ti],local['width'],local['height'])
@@ -49,12 +50,14 @@ def live_round(state, possible, allowance, asked, tracks, fc, queries, target, v
 def ingest(state,q,ti,kind,answer,gain,*,replay=False):
     view=answer['effective_view'];yes=answer['yes_probability']>=.5
     before=float(state.posterior[q,ti]);exist=float(state.presence_probability[q]);was_absent=bool(state.absent[q])
+    tentative=bool(state.low_tentative[q])
     state.observe(q,ti,yes,view,state.presence_reliability[view],presence_question=kind in ('GLANCE','PRESENCE','PRESENCE_COVER'))
     return dict(answer,kind=kind,information_gain=gain,identity_vote=None,identity_used_as_DS_annotator=False,
         prior_stratum=int(state.strata[q,ti]),posterior_probability_before=before,
         posterior_probability_after=float(state.posterior[q,ti]),
         evidence_delta=state.events[-1]['delta'],unclipped_evidence_delta=state.events[-1]['unclipped_delta'],
         presence_probability_before=exist,presence_probability_after=float(state.presence_probability[q]),
+        low_tentative_before=tentative,
         replay_fixed_answer=replay,replayed_after_counterfactual_absence=replay and was_absent)
 
 
@@ -157,6 +160,7 @@ def run(pair,variant,pilot_videos=0):
             tid={t:i for i,t in enumerate(fc.tracks)};qid={q['expression_id']:i for i,q in enumerate(queries)}
             for r in range(4):
                 state.recompute_presence(ds.values);before=state.pseudo_labels()
+                pool_histogram=np.histogram(state.posterior[:,~state.frozen_tracks],bins=np.linspace(0,1,21))[0].tolist()
                 allowance=round_budget(budget,r)+carry
                 if replay:
                     answers=[ingest(state,qid[a['query_id']],tid[a['track_id']],a['kind'],a,a['information_gain'],replay=True)
@@ -203,6 +207,8 @@ def run(pair,variant,pilot_videos=0):
                     new_distinct_confirmed_pairs=new_distinct,additional_distinct_confirmed_pairs=int(ever.sum()),
                     initial_confirmed_pairs=0,confident_pairs_never_asked=0,
                     absent_queries=int(state.absent.sum()),fast=fast,slow=slow_log,ds=ds.receipt())
+                row['all_pair_posterior_before_round_histogram']=pool_histogram
+                row['posterior_histogram_edges']=np.linspace(0,1,21).tolist()
                 rounds.append(row);append_json(out/'rounds.jsonl',row)
                 print(json.dumps({k:v for k,v in row.items() if k not in ('fast','slow','ds')}),flush=True)
             posterior=state.posterior;selected_tracks=posterior>.5
@@ -227,7 +233,7 @@ def run(pair,variant,pilot_videos=0):
                 presence_logLR_unclipped_sum=state.presence_logLR_unclipped_sum,
                 presence_logLR_clipped_sum=state.presence_logLR_clipped_sum,presence_logLR_clip_count=state.presence_logLR_clip_count,
                 low_tentative=state.low_tentative,covered_strata=state.covered_strata,needed_strata=state.needed_strata,
-                output_absent=state.output_absence())
+                output_absent=state.output_absence(),presence_likelihood_evaluations=state.presence_likelihood_evaluations)
             before_em=em.receipt()
             if replay:
                 eb_record=dict(before=start_parameters,after=start_parameters,replay_frozen=True)
@@ -240,6 +246,7 @@ def run(pair,variant,pilot_videos=0):
             # Shadow estimator is diagnostic only; its values never enter v8.
             state.pi_start=shadow.pi
             eb_record['v7_shadow']=shadow.finish_video(state,ds.values)
+            eb_record['v7_shadow_definition']='Original v7 outcome-filtered update formula on current v8 decisions and stratified answer channels; not a rerun of the historical v7 schedule'
             per_query=[dict(query=q['expression_id'],decision_probability=float(state.presence_probability[i]),
                 recomputed_probability=float(state.presence_probability_recomputed[i]),absent=bool(state.absent[i]),
                 present=bool(state.confirmed_present[i]),weak_rank_logit=float(state.weak_presence_logits[i]),
@@ -286,7 +293,11 @@ def run(pair,variant,pilot_videos=0):
                 replayed_answers=sum(v['questions'] for v in receipts))
         assert not opened
         if pilot_videos and len(selected)<len(ordered):
-            atomic_json(out/'pilot_receipt.json',dict(status='V8_FIRST_VIDEOS_RESUMABLE',videos=selected,teacher=teacher_record,GT_open_attempts=0))
+            atomic_json(out/'pilot_receipt.json',dict(status='V8_FIRST_VIDEOS_RESUMABLE',videos=selected,teacher=teacher_record,
+                GT_open_attempts=0,pair=pair,variant=variant,next_video=len(selected),
+                em=em.receipt(),snapshot_count=len(selected)*5,
+                GLANCE_BUDGET_SHORTFALL_videos=sum(v['GLANCE_BUDGET_SHORTFALL'] for v in receipts),
+                unasked_queries=sum(v['glance_unanswered_queries'] for v in receipts)))
             return
         mask=np.zeros(len(margins),dtype=bool)
         for video in ordered:
@@ -306,8 +317,11 @@ def run(pair,variant,pilot_videos=0):
 if __name__=='__main__':
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--pair',choices=list(PAIRS),required=True)
     p.add_argument('--variant',choices=['FULL','MINUS_SLOW','SLOW_REPLAY'],required=True)
+    p.add_argument('--ablation',choices=['MINUS_EM','MINUS_GLANCE','V7_ESTIMATOR','RANDOM_ACQ','MINUS_DS','MINUS_ROUTE','MINUS_PRES'])
     p.add_argument('--pilot-videos',type=int,default=0);a=p.parse_args()
     from flex_uda.active.execution import active_paths
     from flex_uda.active.receipts import record_attempt
+    if a.ablation:
+        raise PermissionError('Stage4 implementation/dispatch requires the completed registered main gate; no ablation launched here')
     folder=active_paths().active/a.pair/a.variant/'rho_0.3'
     with record_attempt(folder,phase='v8_full_stream'):run(a.pair,a.variant,a.pilot_videos)
