@@ -83,7 +83,9 @@ def replay(name,pair):
             state.pi_start=em.pi;fit=em.finish_video(state,rel);after=parameters(em,name)
         else:
             em.add_video(video,state);after=em.fit(rel)
-            if not after['converged']:raise RuntimeError(f'{name}/{pair}/{video} estimator nonconvergence; preserve completed units')
+            if not after['converged']:
+                atomic_json(out/f'{video}_fit_failure.json',dict(before=before,after=after,GT_open_attempts=0))
+                raise RuntimeError(f'{name}/{pair}/{video} estimator nonconvergence; preserve completed units')
         reproduction={}
         if name=='E0':
             expected=original['EB']['after']

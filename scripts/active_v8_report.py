@@ -212,6 +212,10 @@ def report(execution):
             key=pair+'__'+method+'_minus_MINUS';intervals[key]=interval
             effects.append(dict(pair=pair,method=method,**interval))
     gate=verdict(directions)
+    v9_manifest=ROOT/'results/presence_active/redesign_v9_offline/manifest.json'
+    if v9_manifest.exists() and json.loads(v9_manifest.read_text()).get('stage4_paused'):
+        gate.update(stage4_authorized=False,stage4_policy='PAUSED_BY_USER_V9_INSTRUCTION',
+                    formal_main_rule_unchanged=True)
     replays=[x for x in effects if x['method']=='SLOW_REPLAY' and x['pair'] in ('C1','C4')]
     slow_complete=len(replays)==2
     slow_pass=slow_complete and all(x['delta_HOTA']>=0 for x in replays) and any(x['CI95'][0]>0 for x in replays)

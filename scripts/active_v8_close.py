@@ -67,8 +67,10 @@ def close(execution):
         main_scheduler_wall_excludes_prior_pilot_scheduler_and_publication_gap=True)
     assert totals['logical_questions']==totals['new_calls']+totals['cache_hits']+totals['replayed_answers']
     atomic_json(public/'cost_totals.json',totals)
-    state=dict(status='STAGE2_3_COMPLETE_GATE_PASS' if gate['main']['result']=='PASS' else 'COMPLETE_STOPPED_MAIN_GATE_FAIL',
+    paused=gate['main'].get('stage4_policy')=='PAUSED_BY_USER_V9_INSTRUCTION'
+    state=dict(status='STAGE2_3_COMPLETE_STAGE4_PAUSED_BY_USER_V9' if paused else 'STAGE2_3_COMPLETE_GATE_PASS' if gate['main']['result']=='PASS' else 'COMPLETE_STOPPED_MAIN_GATE_FAIL',
         main_gate=gate['main'],slow_gate=gate['slow'],stage4_launched=False,
+        stage4_paused_by_user_v9=paused,
         old80_or_v6_extension_started=False,official_jobs=len(main),
         official_episodes=sum(int(r['query_present_episodes'])+int(r['query_empty_episodes']) for r in main),
         prediction_rows=sum(int(r['prediction_rows']) for r in main),GT_open_attempts=0,
@@ -85,7 +87,7 @@ def close(execution):
     text+='完整关闭日志、唯一原始教师响应、checkpoint路径与SHA见logs.json及archive_validation.json；大模型、PCD缓存和逐行预测留服务器，不进入git。日志传输分片实际重组验证原字节，不重打包修改记录。\n\n'
     text+='v8修复为复合变更，没有单因素消融时不能把全部v8−v7差值单独归因EM；同一冻结MLLM的视图/帧回答相关，分层内仍按价值选题，合成可恢复不证明真实条件独立模型或选择机制已正确。\n\n'
     text+='运行与恢复根目录：`'+str(execution.active.parent)+'`；durable：`'+str(durable)+'`。\n\n'
-    text+=('主判据通过；仅预注册阶段4具备后续授权，不运行其他方法。\n' if gate['main']['result']=='PASS'
+    text+=('主判据形式通过；用户v9新指令已暂停阶段4，原阶段3完成，不自动启动预算曲线或消融。\n' if paused else '主判据通过；仅预注册阶段4具备后续授权，不运行其他方法。\n' if gate['main']['result']=='PASS'
            else '主判据未通过；授权11项已完成，停止，不运行阶段4、旧80项、v6扩展或新方法。\n')
     (public/'REPORT.md').write_text(text)
     print(json.dumps(state),flush=True);return state

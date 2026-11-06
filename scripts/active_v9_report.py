@@ -37,14 +37,24 @@ def report():
         text+='E1尚未完成六方向，不能选择或提前判为失败；E2已按GT-free适用性规则排除。\n\n'
     else:
         text+='E1未通过时不以E0/E3替代为新方法；E2因SportsMOT文本复用不分离而不可用。不调整阈值或为单一数据集开先验例外。\n\n'
+    if selection['status']=='STOP_NO_ESTIMATOR_PASSED':
+        failed=[]
+        for r in rows:
+            if r['estimator']!='E1' or r['ALL_GATES_PASS']:continue
+            reasons=[label for key,label in [('false_absent_gate','错拒上限'),('correct_empty_gate','正确标空下限'),('rho_gate','rho误差')] if not r[key]]
+            failed.append(r['pair']+'：'+'、'.join(reasons)+'未通过')
+        text+='失败门槛：'+'；'.join(failed)+'。\n\n'
     text+='本轮门槛使用官方val/test GT，是在val上进行开发，不是盲测。所有估计/生成进程CPU-only、GT打开0；GT只由估计封存后的独立诊断进程读取。原v8阶段3队列继续，阶段4暂停。\n\n'
     text+='## 1. 固定门槛与全部结果\n\n'
     text+=table(rows,['estimator','pair','output_false_absent','output_correct_empty','rho_hat','rho_GT','rho_error',
         'false_absent_gate','correct_empty_gate','rho_gate','ALL_GATES_PASS'])+'\n\n'
     text+='B2两类门槛都用最终输出拒绝（EVIDENCE+PRIOR_BUDGET_EXHAUSTED）；视频末按新估计器重新决定预算耗尽拒绝集合。数值门槛、选择优先级不变。\n\n'
     text+='## 2. 估计器终值、Laplace与截断诊断\n\n'
-    text+=table(rows,['estimator','pair','pi_or_mu','tau','rho_laplace_std','uncapped_output_disagreements','uncapped_evidence_disagreements'])+'\n\n'
+    text+=table(rows,['estimator','pair','pi_or_mu','marginal_pi','GT_pi_strata','tau','rho_laplace_std','uncapped_output_disagreements','uncapped_evidence_disagreements'])+'\n\n'
     text+='E1的mu是logit-normal随机效应的中心，不等于边际平均匹配率；每视频结果另存marginal_pi_strata。Laplace使用不截断光滑目标的全5参数Hessian；奇异/非正定标不可识别，边界处局部高斯近似的限制保留在每个收据。B1不截断判定仅作诊断，不影响选择。\n\n'
+    if any(r['estimator']=='E1' for r in rows):
+        plot_trajectories(rows)
+        text+='![rho逐视频估计与Laplace局部不确定性](rho_laplace_stream.png)\n\n'
     text+='## 3. 先验拒绝与证据拒绝\n\n'
     text+=table(rows,['estimator','pair','evidence_false_absent','evidence_correct_empty','low_tentative','PRIOR_BUDGET_EXHAUSTED',
         'prior_budget_GT_present','prior_budget_correct_empty','correct_empty_majority_from_prior_budget'])+'\n\n'
@@ -65,8 +75,32 @@ def report():
     text+='弱排名固定为v8实际逐轮温度/偏置作用于封存StageA logits；不用视频末排名前视，不按反事实重新拟合快分支。E3仅复现旧估计公式在v8固定问题流上的效果，不冒充历史v7闭环。E0收据逐视频核对原v8参数及拒绝集合。\n\n'
     if selection['status']=='STOP_NO_ESTIMATOR_PASSED':
         text+='## 停止\n\nE1未通过全部固定门槛，E2不可用；本轮停止v9方法实施，不生成live v9.py，不运行MINUS_SLOW_v9，不开启阶段4或任何新方法。原v8阶段3不受此停止影响。\n'
-    (PUBLIC/'REPORT.md').write_text(text)
+    (PUBLIC/'REPORT.md').write_text(text.rstrip()+'\n')
     return selection
+
+
+def plot_trajectories(rows):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import numpy as np
+    fig,axes=plt.subplots(2,3,figsize=(15,7))
+    for ax,pair in zip(axes.flat,PAIRS):
+        for name in ('E0','E1','E3'):
+            path=PUBLIC/f'{name}_{pair}.json'
+            if not path.exists():continue
+            records=json.loads(path.read_text())['records']
+            x=np.arange(1,len(records)+1);y=np.array([r['after']['rho_hat'] for r in records])
+            line,=ax.plot(x,y,label=name)
+            if name=='E1':
+                sd=np.array([r['after']['rho_laplace_std'] if r['after']['rho_laplace_std'] is not None else np.nan for r in records])
+                ax.fill_between(x,np.maximum(0,y-sd),np.minimum(1,y+sd),color=line.get_color(),alpha=.15,label='local +/-1 SD')
+        gt=next(r['rho_GT'] for r in rows if r['pair']==pair)
+        ax.axhline(gt,color='black',ls='--',label='offline GT')
+        ax.set(title=pair,xlabel='Video ID order (end fit for next video)',ylabel='rho',ylim=(0,1))
+        ax.grid(alpha=.2);ax.legend(fontsize=6)
+    fig.suptitle('GT only in post-seal diagnostics; boundary Gaussian approximation has limitations')
+    fig.tight_layout();fig.savefig(PUBLIC/'rho_laplace_stream.png',dpi=150);plt.close(fig)
 
 
 if __name__=='__main__':print(json.dumps({k:v for k,v in report().items() if k!='rows'}),flush=True)

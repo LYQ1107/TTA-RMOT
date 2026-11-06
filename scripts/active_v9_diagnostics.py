@@ -100,6 +100,7 @@ def diagnostics():
 
 def evaluate_estimators(truth):
     manifest=json.loads((PUBLIC/'manifest.json').read_text());rows=[]
+    d1=json.loads((PUBLIC/'D1_D2_diagnostics.json').read_text())['D1']
     for name in ('E0','E1','E3'):
         for pair in PAIRS:
             if not (DATA/name/pair/'estimates_seal.json').exists():continue
@@ -122,6 +123,8 @@ def evaluate_estimators(truth):
                 correct_empty_majority_from_prior_budget=bool(correct and prior_correct>correct/2),
                 rho_hat=final['rho_hat'],rho_GT=present/len(qq),rho_error=error,
                 pi_or_mu=json.dumps(final['pi_strata']),tau=final.get('tau'),rho_laplace_std=final.get('rho_laplace_std'),
+                marginal_pi=json.dumps(final.get('marginal_pi_strata',final['pi_strata'])),
+                GT_pi_strata=json.dumps([next(r['pooled_pi'] for r in d1 if r['pair']==pair and r['stratum']==k) for k in range(3)]),
                 false_absent_gate=false_pass,correct_empty_gate=empty_pass,rho_gate=error<=.15,
                 ALL_GATES_PASS=false_pass and empty_pass and error<=.15,
                 uncapped_output_disagreements=count(lambda q,y:q['uncapped_output_absent'] is not None and q['output_absent']!=q['uncapped_output_absent']),

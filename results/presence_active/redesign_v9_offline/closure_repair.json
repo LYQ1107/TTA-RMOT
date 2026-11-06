@@ -1,0 +1,10 @@
+{
+  "scope": "CPU post-seal closure reporting only",
+  "first_attempt_exit_code": 1,
+  "error": "TypeError: dict() got multiple values for keyword argument 'status'",
+  "cause": "audit status and final scientific status supplied as duplicate dict keyword arguments",
+  "fix": "explicit dict(result, status=...) override for the audit status",
+  "estimates_or_predictions_changed": false,
+  "new_fits_or_teacher_or_GPU_calls": 0,
+  "original_results_and_logs_preserved": true
+}
