@@ -99,6 +99,7 @@ def run(pair,variant,pilot_videos=0):
         device=torch.device('cuda:0')
         torch.cuda.set_per_process_memory_fraction(min(.9,(16<<30)/torch.cuda.get_device_properties(0).total_memory))
         model,tokenizer,transform,loaded=load_model(target,model_name,out/'model_log',device)
+        atomic_json(out/'model_load.json',dict(loaded,version='v8',pair=pair,variant=variant))
     if not replay:
         from flex_uda.active.teacher_client import TeacherClient
         teacher=TeacherClient(runtime,RUN/'teacher/raw.sqlite',out/'teacher_server.log',ROOT)
