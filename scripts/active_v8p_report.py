@@ -200,6 +200,7 @@ def report(execution):
     text='# v8P：查询协议条件存在性推断\n\n'
     text+='阶段 A：**'+gate['result']+'**。超过两项对照：'+str(gate['directions_above_both_controls'])+'/6；逐项门槛见 stage_A_gate.json。\n\n'
     text+='## 1. 主表（HOTA 未四舍五入）\n\n'+table(main,['pair','protocol','NATIVE','PRES_TOPK','YT_PRIOR','UNIFORM_K','v7','v8','v8P','DetA','AssA','IDF1','delta_v8P_v8'])+'\n\n'
+    text+='v7/v8/v8P均指各版MINUS_SLOW主方法，不逐格挑选FULL或REPLAY的较好结果；C1/C6按指令直接引用原v8。\n\n'
     text+='### 成对视频聚类不确定性\n\n'+table([
         dict(comparison=k,delta_HOTA=v['delta_HOTA'],CI95=v['CI95'],clusters=v['clusters'])
         for k,v in intervals.items()],['comparison','delta_HOTA','CI95','clusters'])+'\n\nKITTI只有4个视频，CI=None表示按预注册只报告点估计，不表示差值为零。\n\n'

@@ -47,15 +47,32 @@ def report(execution,tier):
             assert m['prediction_seal_sha256']==file_sha(path/'predictions_seal.json')
             base=json.loads((main(pair)/'offline_summary.json').read_text())
             rows.append(dict(pair=pair,method='MINUS_PRESUPPOSITION',rho=.3,HOTA=m['HOTA_unrounded'],
+                DetA=m['DetA'],AssA=m['AssA'],IDF1=m['IDF1'],IDSW=m['IDSW'],
+                prediction_rows=m['prediction_rows'],query_empty_prediction_rows=m['query_empty_prediction_rows'],
                 delta_vs_MINUS=m['HOTA_unrounded']-base['HOTA_unrounded'],path=str(path),
-                prediction_seal_sha256=file_sha(path/'predictions_seal.json'),reused=True,new_calls=0,cache_hits=0))
+                prediction_seal_sha256=file_sha(path/'predictions_seal.json'),reused=True,new_calls=0,cache_hits=0,
+                logical_calls=seal['teacher']['logical_calls'],teacher_GPU_hours=0,
+                original_reused_method_teacher_GPU_hours=seal['teacher'].get('forward_seconds',0)/3600,
+                teacher_equivalent_GPU_hours=seal['teacher'].get('equivalent_forward_seconds',0)/3600,
+                GT_open_attempts=seal['GT_open_attempts']))
             intervals[pair+'__MINUS_PRESUPPOSITION']=bootstrap(path,main(pair),PAIRS[pair][1])
             rows[-1]['CI95_vs_MINUS']=intervals[pair+'__MINUS_PRESUPPOSITION']['CI95']
     if tier=='B2':
         with (public/'direction_summary.csv').open() as handle:old=list(csv.DictReader(handle))
         for r in old:
             for method,field in [('MINUS_SLOW','v8P'),('YESTRACK_BUDGET_PRIOR','YT_PRIOR'),('UNIFORM_K','UNIFORM_K')]:
+                source=main(r['pair']) if method=='MINUS_SLOW' else Path(execution.manifest['prior_v5_active_root'])/r['pair']/method/'rho_0.3'
+                inherited=verify_predictions(source)
+                sm=json.loads((source/'offline_summary.json').read_text())
+                assert sm['prediction_seal_sha256']==file_sha(source/'predictions_seal.json')
+                assert sm['HOTA_unrounded']==float(r[field])
                 rows.append(dict(pair=r['pair'],method=method,rho=.3,HOTA=float(r[field]),reused=True,
+                    DetA=sm['DetA'],AssA=sm['AssA'],IDF1=sm['IDF1'],IDSW=sm['IDSW'],
+                    prediction_rows=inherited['prediction_rows'],logical_calls=inherited['teacher']['logical_calls'],
+                    new_calls=0,cache_hits=0,teacher_GPU_hours=0,
+                    original_reused_method_teacher_GPU_hours=inherited['teacher'].get('forward_seconds',0)/3600,
+                    teacher_equivalent_GPU_hours=inherited['teacher'].get('equivalent_forward_seconds',0)/3600,
+                    path=str(source),prediction_seal_sha256=file_sha(source/'predictions_seal.json'),
                     budget_note='rho=.3 retained historical controls, as explicitly registered'))
         import matplotlib
         matplotlib.use('Agg')
@@ -71,7 +88,8 @@ def report(execution,tier):
     atomic_json(public/(tier+'_bootstrap.json'),intervals)
     atomic_json(public/(tier+'_prediction_paths.json'),dict(files=artifacts))
     text='## '+tier+'\n\n'+table(rows,['pair','method','rho','HOTA','DetA','AssA','IDF1','delta_vs_MINUS','CI95_vs_MINUS','logical_calls','new_calls','cache_hits','reused'])+'\n\n'
-    text+='### 成本\n\n'+table(rows,['pair','method','rho','teacher_GPU_hours','teacher_equivalent_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
+    text+='### 成本\n\n'+table(rows,['pair','method','rho','teacher_GPU_hours','original_reused_method_teacher_GPU_hours','teacher_equivalent_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
+    text+='复用行的teacher_GPU_hours=0只指本阶段没有新增forward，不是该系统无需GPU；原方法实际成本在original_reused_method_teacher_GPU_hours，缓存等价forward成本另列。\n\n'
     if tier=='B2':text+='![预算曲线](budget_curves.png)\n\n预算 .1/1.0 每视频实际调用精确匹配；.3 按预注册直接复用历史对照。\n\n'
     (public/(tier+'_REPORT.md')).write_text(text)
     base=(public/'REPORT.md').read_text().split('\n<!-- CONDITIONAL_B -->')[0]
