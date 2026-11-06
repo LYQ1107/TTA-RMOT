@@ -1,0 +1,206 @@
+{
+  "version": "v8",
+  "base_remote_commit": "48ed3b6f0762da4a5879260b6d2102f767dad519",
+  "base_local_tree": "bdff31a527abd50cf62f8842a409fd5fb45d893c",
+  "branch": "codex/presence-active-v8-20261106",
+  "project_root": "/data2/user/FlexHook-TTA",
+  "github_repository": "LYQ1107/TTA-RMOT",
+  "prereg_path": "results/presence_active/redesign_v8/PREREG.md",
+  "amendments": [
+    {
+      "id": "A1",
+      "date": "2026-11-06",
+      "reason": "截断边界与合成真值冲突，在任何实验结果产生之前修改",
+      "user_authorized": true,
+      "section": "2.5.1",
+      "rho_1_assertion": "rho_hat >= 0.95 - 1e-9",
+      "rho_01_assertion": "abs(rho_hat - 0.1) < 0.05",
+      "pi_assertion": "max(abs(pi_hat_k - pi_k)) < 0.07",
+      "old_v7_assertion": "abs(pi0_old - 0.8) > 0.1",
+      "other_acceptance_criteria_unchanged": true,
+      "interpretation": "rho=1.0 reaches the designed clipping ceiling, not an estimation error"
+    }
+  ],
+  "phase0": {
+    "CPU_only": true,
+    "teacher_calls": 0,
+    "GPU_calls": 0,
+    "v7_replay_absolute_tolerance": 1e-9,
+    "EM": {
+      "n_strata": 3,
+      "a": 2,
+      "b": 2,
+      "clip": [
+        0.05,
+        0.95
+      ],
+      "iters": 200,
+      "tol": 1e-7,
+      "track_cap": 2
+    },
+    "stop_on_EM_nonconvergence": true,
+    "stop_on_v7_reproduction_failure": true,
+    "synthetic": {
+      "videos": 200,
+      "queries_per_video": 17,
+      "tracks_per_video": 30,
+      "observations_per_track": 8,
+      "rounds": 4,
+      "budget_rho": 0.3,
+      "seed": 0,
+      "true_rho": [
+        0.1,
+        1
+      ],
+      "true_pi": [
+        0.8,
+        0.3,
+        0.05
+      ],
+      "sensitivity": 0.8,
+      "specificity": 0.8,
+      "sampling": "questions_v8 with deterministic base prior thirds; answers generated only on selected queries; no outcome-based fixture/seed selection"
+    }
+  },
+  "pilots": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "pilot_videos": 2
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "pilot_videos": 2
+    }
+  ],
+  "allowed_registered_jobs": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "stage": 2
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "stage": 3
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "stage": 3
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "stage": 3
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "stage": 3,
+      "dependency": "MINUS_SLOW_v8_sealed"
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "stage": 3,
+      "dependency": "MINUS_SLOW_v8_sealed"
+    }
+  ],
+  "main_gate": {
+    "method": "MINUS_SLOW_v8",
+    "minimum_directions_above_both_controls": 5,
+    "C1_min_HOTA": 35.724,
+    "C6_min_HOTA": 34.469,
+    "strict_control_comparison": true
+  },
+  "slow_gate": {
+    "pairs": [
+      "C1",
+      "C4"
+    ],
+    "both_point_differences_ge_zero": true,
+    "one_CI95_lower_gt_zero": true
+  },
+  "bootstrap": {
+    "video_cluster": true,
+    "iterations": 2000,
+    "seed": 0,
+    "KITTI": "point_only"
+  },
+  "stage4": {
+    "authorized_only_if_main_gate_passes": true,
+    "budget_rhos": [
+      0.1,
+      1
+    ],
+    "budget_methods": [
+      "MINUS_SLOW",
+      "YT_PRIOR",
+      "UNIFORM_K"
+    ],
+    "ablations": [
+      "MINUS_EM",
+      "MINUS_GLANCE",
+      "V7_ESTIMATOR",
+      "RANDOM_ACQ",
+      "MINUS_DS",
+      "MINUS_ROUTE",
+      "MINUS_PRES"
+    ],
+    "pairs": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ]
+  },
+  "maximum_GPUs": 2,
+  "shared_GPU_allowed": true,
+  "foreign_processes_stopped": 0,
+  "v7_files_immutable": true,
+  "target_GT_only_independent_CPU_after_seal": true,
+  "prediction_generation_GT_open_attempts_required": 0,
+  "old_v5_remaining80_authorized": false,
+  "v6_expansion_authorized": false,
+  "status": "PREREGISTERED_BEFORE_V8_COMPUTATION"
+}
