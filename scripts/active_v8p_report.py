@@ -81,7 +81,7 @@ def report(execution):
         old={r['pair']:r for r in csv.DictReader(handle)}
     protocols=json.loads(Path(execution.manifest['protocol_path']).read_text())['targets']
     main=[];presence=[];decisions=[];costs=[];recall=[];artifacts=[];rounds=[];histograms=[]
-    streams=[];glances=[];reliability=[];intervals={};truths={}
+    streams=[];glances=[];reliability=[];intervals={};truths={};budget_rows=[]
     paths={pair:Path(reuses[pair]['folder']) if pair in reuses else execution.active/pair/'MINUS_SLOW/rho_0.3'
            for pair in PAIRS}
     seals={pair:verify_predictions(path) for pair,path in paths.items()}
@@ -155,6 +155,16 @@ def report(execution):
             unchanged_rows_new_FP=ar['unchanged_rows_new_FP'],unchanged_rows_removed_FP=ar['unchanged_rows_removed_FP'],
             output_rows=ar['adapted_selected_rows'],v8_output_rows=oldar['adapted_selected_rows']))
         teacher=seal['teacher']
+        # rho=.3 is explicit historical reuse, not an unverified assertion
+        # that nominal rho guarantees identical realized teacher budgets.
+        for control in ('YESTRACK_BUDGET_PRIOR','UNIFORM_K'):
+            controlpath=Path(execution.manifest['prior_v5_active_root'])/pair/control/'rho_0.3'
+            cs=json.loads((controlpath/'predictions_seal.json').read_text())
+            nc=cs['teacher']['logical_calls'];nm=teacher['logical_calls']
+            budget_rows.append(dict(pair=pair,control=control,MINUS_v8P_calls=nm,
+                historical_control_calls=nc,relative_difference=(nm-nc)/nc if nc else None,
+                reuse_as_explicitly_registered=True,control_path=str(controlpath),
+                control_seal_sha256=file_sha(controlpath/'predictions_seal.json')))
         attempts=[json.loads(p.read_text()) for p in path.glob('worker_attempts/*.json')]
         sessions=[json.loads(p.read_text()) for p in (path/'teacher_sessions').glob('*.json')]
         costs.append(dict(pair=pair,protocol=protocol,reused_v8=pair in reuses,
@@ -180,6 +190,7 @@ def report(execution):
                       ('recall_compare',recall),('question_behavior',rounds),('eb_stream',streams),
                       ('glance_hits',glances),('reliability_vs_GT',reliability)]:
         write_csv(public/(name+'.csv'),rows)
+    write_csv(public/'baseline_budget_comparison.csv',budget_rows)
     atomic_json(public/'posterior_histograms.json',histograms)
     atomic_json(public/'bootstrap.json',intervals)
     atomic_json(public/'prediction_paths.json',dict(files=artifacts))
@@ -197,6 +208,7 @@ def report(execution):
     text+='GT 恢复采用离线 IoU≥.5 最大基数匹配，不冒充官方 HOTA；新增行 FP 与不变行匹配重分配分开记录。\n\n'
     text+='## 5. 成本与审计\n\n'+table(costs,['pair','reused_v8','logical_calls','new_calls_this_round','cache_hits_this_round','new_teacher_GPU_hours_this_round','teacher_GPU_hours','teacher_equivalent_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
     text+='teacher_GPU_hours 是该方法原有的新调用相位时长，new_teacher_GPU_hours_this_round 单列本轮新增；引用 C1/C6 不等于原方法无成本。equivalent 时长包含缓存条目的原始 forward 成本，不等于本轮实际 GPU 耗时。所有相位时长均非独占利用率积分。\n\n'
+    text+=table(budget_rows,['pair','control','MINUS_v8P_calls','historical_control_calls','relative_difference'])+'\n\nρ=.3按本轮明确指令保留历史对照，不因名义预算相同就声称实际调用严格相等；B2的.1/1.0逐视频匹配。\n\n'
     text+='bootstrap.json：Dance/SportsMOT 按视频聚类，2000 次、seed 0；KITTI 只有 4 视频，仅点估计。生成 GT 打开尝试全部为 0，逐预测 SHA 在 prediction_paths.json；先封存后独立 GT 评测。MINUS 不挂 LoRA、无学生参数更新。原 v8 阶段 3 未中断，旧 80 项未启动。\n\n'
     text+='## 6. 限制与停止条件\n\nC1 协议规则明确在看到 D3 后制定，在这三个数据集上等价于按数据集设定存在性先验，不是普遍可识别性定理。KITTI 仅四视频；这些官方 val 已用于开发，不宣称盲测。所有方向与失败均上报。\n'
     (public/'REPORT.md').write_text(text)

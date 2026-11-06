@@ -71,6 +71,41 @@
         "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C4/MINUS_SLOW/rho_0.3",
         "prediction_seal_sha256": "cdaf62ab15c2156ef2f43de381f13ff2c5d8100e873728545d5831a24b6c9d0d"
       }
+    },
+    {
+      "event": "POST_SEAL_EVALUATION_FINISHED",
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "exit_code": 0,
+      "log": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/launchers/coordinator_1793968063292947214/evaluation_C2_MINUS_SLOW.log",
+      "metrics": {
+        "target": "KITTI-V2",
+        "model": "Dance-best",
+        "method": "MINUS_SLOW",
+        "rho": 0.3,
+        "HOTA": 27.176,
+        "DetA": 13.503,
+        "AssA": 54.771,
+        "IDF1": 23.524,
+        "IDSW": 1132,
+        "HOTA_unrounded": 27.176405389761815,
+        "prediction_rows": 328731,
+        "query_empty_prediction_rows": 0,
+        "query_empty_FP": 0,
+        "Present_HOTA": 27.176405389761804,
+        "query_present_episodes": 862,
+        "query_empty_episodes": 0,
+        "teacher_calls": 20955,
+        "teacher_forward_GPU_hours": 0.05448593842654696,
+        "teacher_equivalent_forward_GPU_hours": 0.5048934282658086,
+        "LoRA_GPU_hours": 0,
+        "rescore_GPU_hours": 0,
+        "GT_open_attempts": 0,
+        "future_frames": true,
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C2/MINUS_SLOW/rho_0.3",
+        "prediction_seal_sha256": "b754aade123a7d851fa782fc4e05a12486e156b4b82fe4bc037626180c27579d"
+      }
     }
   ],
   "reused_directions": [
@@ -78,7 +113,6 @@
     "C6"
   ],
   "remaining_new_directions": [
-    "C2",
     "C5"
   ],
   "C3_floor": 63.35,
