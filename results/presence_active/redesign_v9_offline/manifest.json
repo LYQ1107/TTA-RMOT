@@ -23,7 +23,7 @@
   "false_absent_max": {"C1": 15, "C2": 150, "C3": 20, "C4": 20, "C5": 150, "C6": 15},
   "correct_empty_min": {"C1": 312, "C6": 297},
   "rho_absolute_error_max": 0.15,
-  "gate_absence_counting_scope": "PENDING_USER_CONFIRMATION; always report EVIDENCE and final-output rejection separately; no estimator selection before confirmation",
+  "gate_absence_counting_scope": "FINAL_OUTPUT_REJECTION: EVIDENCE + PRIOR_BUDGET_EXHAUSTED, for both false-absence and correct-empty gates",
   "selection": ["E1 if all gates pass", "E2 only if E1 fails and E2 passes", "otherwise STOP"],
   "official_val_used_for_development_not_blind_test": true,
   "amendments": [{
@@ -33,5 +33,13 @@
     "decision": "Per-track LLR clipped to [-2,2] at each quadrature node, then summed over tracks, then integrated",
     "unclipped_decision": "Diagnostic only: count sentence-level absence disagreements per direction",
     "reason": "Laplace standard deviation needs a smooth fitting objective; clipping guards against overly optimistic DS at the decision layer, not the parameter-estimation layer"
+  }, {
+    "id": "B2",
+    "registered_before_any_v9_result": true,
+    "gate_scope": "Both false-absence and correct-empty thresholds use final-output rejection (EVIDENCE + PRIOR_BUDGET_EXHAUSTED)",
+    "fixed_inputs": "Use the original v8 questions and budgets; no resampling or extra questions",
+    "budget_exhausted_set": "Recompute under each estimator: at video end p<0.1 without complete required-stratum evidence coverage",
+    "diagnostics": "Report evidence-only counts, PRIOR_BUDGET_EXHAUSTED count and its GT-present subset separately; flag reliance on prior-based rejection",
+    "reason": "Use the same output scope for both gates, matching v8 correct-empty baselines 347/330; a counterfactual estimator changes the video-end low-probability set despite fixed questions and budgets"
   }]
 }
