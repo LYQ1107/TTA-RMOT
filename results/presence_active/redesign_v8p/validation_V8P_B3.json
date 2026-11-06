@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "jobs": 2,
+  "records": [
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "episodes": 466,
+      "prediction_rows": 1239835,
+      "optimizer_updates": 2650,
+      "prediction_seal_sha256": "37002070189b4b37e7482360730adf97ab4d1aec76a139765c456102321f5877",
+      "GT_open_attempts": 0
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "episodes": 466,
+      "prediction_rows": 1496310,
+      "optimizer_updates": 1150,
+      "prediction_seal_sha256": "d00e29b1ea2464d1587cfb63b384a110a97ed3beed7fabaffddb15f8eb43d82a",
+      "GT_open_attempts": 0
+    }
+  ],
+  "GT_open_attempts": 0,
+  "asked_only_labels": true,
+  "observed_optimizer_updates": 3800,
+  "balanced_16_16_actual_updates": "CHECKED_EVERY_OBSERVED_UPDATE",
+  "full_coverage": true,
+  "observed_replay_jobs": 1,
+  "fixed_replay_presence_byte_exact": true,
+  "GPU_or_teacher_calls": 0,
+  "audit_output_note": "Do not interpret vacuous frozen-model checks as real LoRA/replay evidence; numeric protocol is unchanged"
+}
