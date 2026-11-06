@@ -1,5 +1,5 @@
 {
-  "status": "STAGE_A_IN_PROGRESS_NO_GLOBAL_VERDICT",
+  "status": "STAGE_A_METRICS_COMPLETE_AUDIT_IN_PROGRESS",
   "registered_code_commit": "fe1de118a81a8e628b729c5f267db91de3059837",
   "completed_new_directions": [
     {
@@ -106,15 +106,48 @@
         "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C2/MINUS_SLOW/rho_0.3",
         "prediction_seal_sha256": "b754aade123a7d851fa782fc4e05a12486e156b4b82fe4bc037626180c27579d"
       }
+    },
+    {
+      "event": "POST_SEAL_EVALUATION_FINISHED",
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "exit_code": 0,
+      "log": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/launchers/coordinator_1793968063292947214/evaluation_C5_MINUS_SLOW.log",
+      "metrics": {
+        "target": "KITTI-V2",
+        "model": "LaMOT-best",
+        "method": "MINUS_SLOW",
+        "rho": 0.3,
+        "HOTA": 29.231,
+        "DetA": 15.242,
+        "AssA": 56.16,
+        "IDF1": 25.862,
+        "IDSW": 2939,
+        "HOTA_unrounded": 29.23131541800287,
+        "prediction_rows": 1334241,
+        "query_empty_prediction_rows": 0,
+        "query_empty_FP": 0,
+        "Present_HOTA": 29.23131541800287,
+        "query_present_episodes": 862,
+        "query_empty_episodes": 0,
+        "teacher_calls": 20955,
+        "teacher_forward_GPU_hours": 0.22113135993273722,
+        "teacher_equivalent_forward_GPU_hours": 0.5680610310078873,
+        "LoRA_GPU_hours": 0,
+        "rescore_GPU_hours": 0,
+        "GT_open_attempts": 0,
+        "future_frames": true,
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C5/MINUS_SLOW/rho_0.3",
+        "prediction_seal_sha256": "e3ef6f44c4ac4140064646b28640f6d778504ed7cdff3e2ed95eefc469b98854"
+      }
     }
   ],
   "reused_directions": [
     "C1",
     "C6"
   ],
-  "remaining_new_directions": [
-    "C5"
-  ],
+  "remaining_new_directions": [],
   "C3_floor": 63.35,
   "stage_B_started": false
 }

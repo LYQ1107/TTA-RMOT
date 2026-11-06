@@ -198,6 +198,9 @@ def report(execution):
     text='# v8P：查询协议条件存在性推断\n\n'
     text+='阶段 A：**'+gate['result']+'**。超过两项对照：'+str(gate['directions_above_both_controls'])+'/6；逐项门槛见 stage_A_gate.json。\n\n'
     text+='## 1. 主表（HOTA 未四舍五入）\n\n'+table(main,['pair','protocol','NATIVE','PRES_TOPK','YT_PRIOR','UNIFORM_K','v7','v8','v8P','DetA','AssA','IDF1','delta_v8P_v8'])+'\n\n'
+    text+='### 成对视频聚类不确定性\n\n'+table([
+        dict(comparison=k,delta_HOTA=v['delta_HOTA'],CI95=v['CI95'],clusters=v['clusters'])
+        for k,v in intervals.items()],['comparison','delta_HOTA','CI95','clusters'])+'\n\nKITTI只有4个视频，CI=None表示按预注册只报告点估计，不表示差值为零。\n\n'
     text+='## 2. 存在性（最终输出拒绝口径）\n\n'+table(presence,['pair','protocol','false_absent','correct_empty','present_episodes','empty_episodes','query_empty_prediction_rows'])+'\n\n'
     text+='PRESUPPOSED 的判空为 0 是协议的设计结果，不是学习出了完美存在性。C1/C6 用原 v8 seal SHA 直接引用，新增调用为 0。\n\n'
     text+='## 3. 消融与预算曲线\n\n'+('阶段 A 通过，按预注册 B1→B2→空闲卡 B3 顺序接续；未完成项目不填数。' if gate['result']=='PASS' else '阶段 A 未通过，按用户停止条件不运行任何阶段 B 项目。')+'\n\n'

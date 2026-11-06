@@ -39,6 +39,7 @@ def report(execution,tier):
             path=str(path),prediction_seal_sha256=file_sha(path/'predictions_seal.json'),reused=False)
         rows.append(row);artifacts.append(dict(job,path=str(path),sha256=row['prediction_seal_sha256'],episodes=seal['episodes']))
         intervals[pair+'__'+method+'__'+str(rho)+'_minus_MINUS']=bootstrap(path,base,PAIRS[pair][1])
+        row['CI95_vs_MINUS']=intervals[pair+'__'+method+'__'+str(rho)+'_minus_MINUS']['CI95']
     if tier=='B1':
         for pair in ('C2','C3','C4','C5'):
             path=Path(execution.manifest['prior_v8_active_root'])/pair/'MINUS_SLOW/rho_0.3'
@@ -49,6 +50,7 @@ def report(execution,tier):
                 delta_vs_MINUS=m['HOTA_unrounded']-base['HOTA_unrounded'],path=str(path),
                 prediction_seal_sha256=file_sha(path/'predictions_seal.json'),reused=True,new_calls=0,cache_hits=0))
             intervals[pair+'__MINUS_PRESUPPOSITION']=bootstrap(path,main(pair),PAIRS[pair][1])
+            rows[-1]['CI95_vs_MINUS']=intervals[pair+'__MINUS_PRESUPPOSITION']['CI95']
     if tier=='B2':
         with (public/'direction_summary.csv').open() as handle:old=list(csv.DictReader(handle))
         for r in old:
@@ -68,7 +70,7 @@ def report(execution,tier):
     write_csv(public/(tier+'_summary.csv'),rows)
     atomic_json(public/(tier+'_bootstrap.json'),intervals)
     atomic_json(public/(tier+'_prediction_paths.json'),dict(files=artifacts))
-    text='## '+tier+'\n\n'+table(rows,['pair','method','rho','HOTA','DetA','AssA','IDF1','delta_vs_MINUS','logical_calls','new_calls','cache_hits','reused'])+'\n\n'
+    text='## '+tier+'\n\n'+table(rows,['pair','method','rho','HOTA','DetA','AssA','IDF1','delta_vs_MINUS','CI95_vs_MINUS','logical_calls','new_calls','cache_hits','reused'])+'\n\n'
     text+='### 成本\n\n'+table(rows,['pair','method','rho','teacher_GPU_hours','teacher_equivalent_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
     if tier=='B2':text+='![预算曲线](budget_curves.png)\n\n预算 .1/1.0 每视频实际调用精确匹配；.3 按预注册直接复用历史对照。\n\n'
     (public/(tier+'_REPORT.md')).write_text(text)
