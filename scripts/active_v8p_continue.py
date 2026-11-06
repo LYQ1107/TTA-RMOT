@@ -14,6 +14,8 @@ def main():
     p.add_argument('--jobs-json',type=Path,required=True);a=p.parse_args()
     execution,_=authorize_active();assert execution.manifest['version']=='v8P'
     run(execution,a.jobs_json)
+    from scripts.active_v8p_validate import validate
+    validate(execution,a.jobs_json)
     gate=json.loads((execution.public/'stage_A_gate.json').read_text())
     atomic_json(execution.public/'queue_completion.json',dict(status='V8P_STAGE_A_COMPLETE',
         gate=gate,original_v8_stage3_unmodified=True,old80_launched=False))

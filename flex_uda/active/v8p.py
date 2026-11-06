@@ -1,9 +1,11 @@
 """Post-D3 query-protocol switch; the CHECKLIST numerical path is v8 itself."""
+from dataclasses import replace
 import hashlib
 import json
 import numpy as np
 from flex_uda.active.v8 import BeliefStateV8, PresenceEM, questions_v8
 from flex_uda.active.v7 import questions_v7
+from flex_uda.active.v6 import ReliabilityV6
 
 CHECKLIST = 'CHECKLIST'
 PRESUPPOSED = 'PRESUPPOSED'
@@ -100,4 +102,53 @@ def questions_v8p(protocol, state, texts, lengths, reliability, round_index):
     # presence=1. Unlike filtering v8's output, this never constructs GLANCE.
     result = questions_v7(state, texts, lengths, reliability, round_index)
     assert all(q.kind in ('IDENTITY', 'POSITIVE_RECHECK') for q in result)
+    return result
+
+
+ABLATIONS = ('RANDOM_ACQ', 'MINUS_DS', 'MINUS_ROUTE',
+             'MINUS_GLANCE', 'MINUS_EB', 'MINUS_PRES')
+
+
+class FixedHalfEstimator(DisabledPresenceEstimator):
+    def receipt(self):
+        return dict(super().receipt(), protocol=CHECKLIST, rho_hat=.5,
+                    presence_inference=True, status='FIXED_HALF_NO_EM')
+
+    def add_video(self, video, state):
+        return 0
+
+
+class FixedReliability(ReliabilityV6):
+    def fit(self):
+        self.values = {v: (.8, .8) for v in self.workers}
+        return self.values
+
+    def receipt(self):
+        return dict(super().receipt(), ablation='MINUS_DS', fixed_reliability=.8)
+
+
+def setup(protocol, ablation=None):
+    assert ablation is None or ablation in ABLATIONS
+    effective = PRESUPPOSED if ablation == 'MINUS_PRES' else protocol
+    estimator = (FixedHalfEstimator() if ablation == 'MINUS_EB' else
+                 presence_estimator(effective))
+    reliability = FixedReliability() if ablation == 'MINUS_DS' else ReliabilityV6()
+    return effective, estimator, reliability
+
+
+def variant_questions(protocol, state, texts, lengths, reliability, round_index,
+                      *, ablation=None, rng=None):
+    result = questions_v8p(protocol, state, texts, lengths, reliability, round_index)
+    if ablation == 'MINUS_GLANCE':
+        result = [q for q in result if q.kind != 'GLANCE']
+    if ablation == 'MINUS_ROUTE' and round_index < 2:
+        result = [replace(q, view='CROP') for q in result]
+    if ablation == 'RANDOM_ACQ':
+        # Registered seed-0 video RNG, same phase priorities and budget.
+        groups = {}
+        for q in result:
+            groups.setdefault(q.kind, []).append(q)
+        shuffled = {k: iter([v[i] for i in rng.permutation(len(v))])
+                    for k, v in groups.items()}
+        result = [next(shuffled[q.kind]) for q in result]
     return result

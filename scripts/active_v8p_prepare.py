@@ -74,6 +74,7 @@ def prepare():
         protocol_path=str(public/'protocols.json'), protocol_sha256=file_sha(public/'protocols.json'),
         prior_v8_active_root=old['active_root'], prior_v8_public_root=old['public_root'],
         prior_v8_durable_completion=str(RUN/'redesign_v8/launchers/durable_1793959350550541895/completion.json'),
+        prior_v8_admission_path=str(RUN/'redesign_v8/launchers/workers_1793959360708780690/admission.json'),
         user_authorization='v8P stage A; B only upon the preregistered stage-A PASS',
         registered_tier='V8P_STAGE_A', full_matrix_authorized=False)
     atomic_json(public/'execution.json', manifest)

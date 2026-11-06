@@ -19,30 +19,35 @@ def main():
     execution,_=authorize_active();plan=json.loads(a.jobs_json.read_text())
     assert execution.manifest['version']=='v8P'
     assert file_sha(plan['prereg_path'])==plan['prereg_sha256']
-    assert file_sha(execution.public/'BC_cost_estimate.json')==plan['cost_estimate_sha256']
+    assert file_sha(Path(plan.get('cost_estimate_path',execution.public/'BC_cost_estimate.json')))==plan['cost_estimate_sha256']
     assert all(j in execution.manifest['allowed_registered_jobs'] for j in plan['jobs'])
     dependency=Path(execution.manifest['prior_v8_durable_completion'])
-    if not dependency.exists():
-        print(json.dumps(dict(event='V8P_WAITING_ORIGINAL_V8_SLOTS',completion=str(dependency),maximum_total_project_GPUs=2)),flush=True)
-    while not dependency.exists():time.sleep(5)
-    previous=json.loads(dependency.read_text())
-    atomic_json(execution.public/'original_v8_queue_dependency.json',dict(path=str(dependency),sha256=file_sha(dependency),receipt=previous))
-    print(json.dumps(dict(event='ORIGINAL_V8_GPU_SLOTS_RELEASED',receipt=previous)),flush=True)
+    original=json.loads(Path(execution.manifest['prior_v8_admission_path']).read_text())
+    original_indices={g['index'] for g in original['selected']}
     def folder(job):return execution.active/job['pair']/job['method']/('rho_'+str(job['rho']))
     jobs=[j for j in plan['jobs'] if not (folder(j)/'predictions_seal.json').exists() and not (a.pilot_videos and (folder(j)/'pilot_receipt.json').exists())]
     if not jobs:
         print(json.dumps(dict(event='ALREADY_COMPLETE_NO_RERUN')),flush=True);return
     jobs.sort(key=lambda j:({'MINUS_SLOW':0,'FULL':1,'SLOW_REPLAY':2}.get(j['method'],3),j['pair']))
     from scripts.select_gpu import query
-    all_gpus=query()
     slow_jobs=any(j['method'] in ('FULL','SLOW_REPLAY') for j in jobs)
     minimum=43008 if slow_jobs else 24576
-    selected=sorted([g for g in all_gpus if g['free_mib']>=minimum],
-        key=lambda g:(g['compute_processes'],-g['free_mib'],g['index']))[:min(2,len(jobs))]
-    if not selected:raise RuntimeError('No shared GPU passes registered memory admission; do not evict foreign work')
+    while True:
+        all_gpus=query();original_running=not dependency.exists()
+        allowed=original_indices if original_running else {g['index'] for g in all_gpus}
+        selected=sorted([g for g in all_gpus if g['index'] in allowed and g['free_mib']>=minimum and
+            (not plan.get('requires_idle_GPU') or g['compute_processes']==0)],
+            key=lambda g:(g['compute_processes'],-g['free_mib'],g['index']))[:min(2,len(jobs))]
+        if selected:break
+        print(json.dumps(dict(event='V8P_WAITING_REGISTERED_GPU_MEMORY',allowed_indices=sorted(allowed),
+            required_mib=minimum,maximum_total_project_GPUs=2)),flush=True)
+        time.sleep(20)
+    if original_running:assert original_indices | {g['index'] for g in selected}==original_indices
     root=execution.launchers/('workers_'+str(time.time_ns()));root.mkdir(parents=True)
     atomic_json(root/'admission.json',dict(selected=selected,all_gpus=all_gpus,jobs=jobs,
-        required_mib=minimum,maximum_physical_GPUs=2,sharing_authorized=True,foreign_processes_stopped=0))
+        required_mib=minimum,maximum_physical_GPUs=2,sharing_authorized=True,foreign_processes_stopped=0,
+        original_v8_still_running=original_running,original_v8_indices=sorted(original_indices),
+        original_admission_path=execution.manifest['prior_v8_admission_path']))
     queue=Queue()
     failed=Event()
     for job in jobs:queue.put(job)
@@ -60,10 +65,17 @@ def main():
             env=dict(os.environ,CUDA_VISIBLE_DEVICES=gpu['uuid'],PRESENCE_PHYSICAL_GPU=str(gpu['index']),
                 OMP_NUM_THREADS='2',MKL_NUM_THREADS='2',OPENBLAS_NUM_THREADS='1',HF_HUB_OFFLINE='1',
                 TOKENIZERS_PARALLELISM='false',PYTHONPATH=f'{ROOT}/compat:{ROOT}:/data2/user/TTA-RMOT-assets/flexhook/pydeps')
-            if job['method'].startswith('YESTRACK'):
-                command=[sys.executable,str(ROOT/'scripts/active_baseline_run.py'),'--pair',job['pair'],'--method',job['method'],'--rho',str(job['rho'])]
+            if job['method'] in ('YESTRACK_BUDGET_PRIOR','UNIFORM_K'):
+                dependency=execution.active/job['pair']/'MINUS_SLOW'/('rho_'+str(job['rho']))/'predictions_seal.json'
+                while not dependency.exists():
+                    if failed.is_set():return receipts
+                    time.sleep(2)
+                command=[sys.executable,str(ROOT/'scripts/active_v8p_baseline.py'),'--pair',job['pair'],'--method',job['method'],'--rho',str(job['rho'])]
             else:
-                command=[sys.executable,str(ROOT/'scripts/active_v8p_run.py'),'--pair',job['pair'],'--variant',job['method'],'--rho',str(job['rho'])]
+                from flex_uda.active.v8p import ABLATIONS
+                variant='MINUS_SLOW' if job['method'] in ABLATIONS else job['method']
+                command=[sys.executable,str(ROOT/'scripts/active_v8p_run.py'),'--pair',job['pair'],'--variant',variant,'--rho',str(job['rho'])]
+                if job['method'] in ABLATIONS:command+=['--ablation',job['method']]
             if a.pilot_videos:
                 assert job['method']=='MINUS_SLOW' and job['pair'] in ('C1','C2') and a.pilot_videos==2
                 command+=['--pilot-videos',str(a.pilot_videos)]

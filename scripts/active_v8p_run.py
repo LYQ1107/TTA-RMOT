@@ -13,7 +13,8 @@ from flex_tta.runtime.pf_receipts import atomic_json,append_json,file_sha
 from flex_uda.presence.runtime import RUN,target_metadata,sealed_margins,runtime_guard
 from flex_uda.active.v6 import ReliabilityV6
 from flex_uda.active.v8 import fast_step_v8
-from flex_uda.active.v8p import belief_state,presence_estimator,questions_v8p,CHECKLIST,PRESUPPOSED
+from flex_uda.active.v8p import belief_state,setup,variant_questions,ABLATIONS,CHECKLIST,PRESUPPOSED
+from flex_uda.active.baselines import video_rng
 from flex_uda.active.v7 import OnlinePresenceEB
 from flex_uda.active.v7_frozen import FrozenFrameInputs
 from flex_uda.active.acquisition import keyframe,exclusive_group,expression_types,round_budget
@@ -77,21 +78,22 @@ def anchor_unupdated_replay(fc, frozen, directory):
         anchor_only_while_total_optimizer_updates_zero=True))
 
 
-def run(pair,variant,pilot_videos=0,rho=.3):
+def run(pair,variant,pilot_videos=0,rho=.3,ablation=None):
     from flex_uda.active.execution import authorize_active
     from flex_uda.presence.predictions import seal_mask,verify_predictions
-    execution,publication=authorize_active();job=dict(pair=pair,method=variant,rho=rho)
+    execution,publication=authorize_active();method=ablation or variant;job=dict(pair=pair,method=method,rho=rho)
     assert execution.manifest['version']=='v8P' and job in execution.manifest['allowed_registered_jobs']
     opened=runtime_guard();begin=time.perf_counter();model_name,target=PAIRS[pair]
     protocol_path=Path(execution.manifest['protocol_path'])
     assert file_sha(protocol_path)==execution.manifest['protocol_sha256']
     protocol=json.loads(protocol_path.read_text())['targets'][target]['protocol']
-    if protocol==CHECKLIST and variant=='MINUS_SLOW' and rho==.3:
+    if protocol==CHECKLIST and variant=='MINUS_SLOW' and rho==.3 and ablation is None:
         raise PermissionError('CHECKLIST main C1/C6 use sealed v8 references; no rerun')
-    inference=protocol==CHECKLIST
+    effective,em,ds=setup(protocol,ablation)
+    inference=effective==CHECKLIST
     np.random.seed(0);torch.manual_seed(0)
     meta=target_metadata(target);margins,margin_seal=sealed_margins(target,model_name)
-    out=execution.active/pair/variant/('rho_'+str(rho));out.mkdir(parents=True,exist_ok=True)
+    out=execution.active/pair/method/('rho_'+str(rho));out.mkdir(parents=True,exist_ok=True)
     if (out/'predictions_seal.json').exists():
         print(json.dumps(dict(event='ALREADY_SEALED_NO_RERUN',path=str(out))),flush=True);return
     replay=variant=='SLOW_REPLAY';slow_enabled=variant!='MINUS_SLOW'
@@ -111,7 +113,7 @@ def run(pair,variant,pilot_videos=0,rho=.3):
         from flex_uda.active.teacher_client import TeacherClient
         teacher=TeacherClient(runtime,RUN/'teacher/raw.sqlite',out/'teacher_server.log',ROOT)
     ordered=sorted(meta['videos']);selected=ordered[:pilot_videos] if pilot_videos else ordered
-    ds=ReliabilityV6();em=presence_estimator(protocol);shadow=OnlinePresenceEB() if inference else None;w=1.;temperature=1.;bias=0.;saved=None;start=0
+    shadow=OnlinePresenceEB() if inference else None;w=1.;temperature=1.;bias=0.;saved=None;start=0
     checkpoints=sorted(out.glob('stream_*.pt'))
     if checkpoints:
         saved=torch.load(checkpoints[-1],map_location='cpu',weights_only=False)
@@ -139,6 +141,13 @@ def run(pair,variant,pilot_videos=0,rho=.3):
                         slow.updates=saved['slow_updates']
                         torch.set_rng_state(saved['torch_rng']);torch.cuda.set_rng_state(saved['cuda_rng'])
                 else:slow.set_cache(cache)
+                frame_root=execution.manifest.get('frame_cache_root')
+                if frame_root:
+                    storage=Path(frame_root)/pair/method/('rho_'+str(rho))/video
+                    storage.mkdir(parents=True,exist_ok=True)
+                    link=directory/'frame_cache'
+                    if not link.exists():link.symlink_to(storage,target_is_directory=True)
+                    else:assert link.resolve()==storage
                 fc=FrameCacheV6(model,cache,bank,queries,local['frames'],execution.manifest['source_heads'][model_name]['checkpoint'],directory/'frame_cache')
                 fc.score(model_step=slow.updates)
                 if replay and slow.updates==0:
@@ -146,7 +155,7 @@ def run(pair,variant,pilot_videos=0,rho=.3):
                     anchor_unupdated_replay(fc,frozen,directory)
             else:fc=FrozenFrameInputs(execution.stage_a,target,model_name,video,bank,queries,margins)
             fractions,probability,_=fc.decode(temperature,bias);lengths=[len(fc.by_track[t]) for t in fc.tracks]
-            state=belief_state(protocol,fc.track_means(),fractions,probability.max(1),track_lengths=lengths,
+            state=belief_state(effective,fc.track_means(),fractions,probability.max(1),track_lengths=lengths,
                 rho_hat=start_parameters['rho_hat'],pi_strata=start_parameters['pi_strata'],slope=w)
             state.recompute_presence(ds.values)
             if replay:
@@ -157,6 +166,7 @@ def run(pair,variant,pilot_videos=0,rho=.3):
             for obs in video_spec(target,video,bank)['observations']:tracks[obs['track_id']].append(obs)
             budget=int(np.floor(rho*sum(n>=3 for n in lengths)*len(queries)))
             group=exclusive_group(texts,target);asked=defaultdict(set);answers_saved=[];rounds=[];carry=0;had_sample=False
+            acquisition_rng=video_rng(video)
             ever=np.zeros_like(state.asked_mask)
             before_teacher=dict(teacher.stats) if teacher else None
             source_answers=json.loads((dependency/'videos'/video/'questions.json').read_text()) if replay else None
@@ -174,7 +184,8 @@ def run(pair,variant,pilot_videos=0,rho=.3):
                     answers=[ingest(state,qid[a['query_id']],tid[a['track_id']],a['kind'],a,a['information_gain'],replay=True)
                              for a in source_answers if a['round']==r+1]
                 else:
-                    possible=questions_v8p(protocol,state,texts,lengths,ds.values,r)
+                    possible=variant_questions(effective,state,texts,lengths,ds.values,r,
+                        ablation=ablation,rng=acquisition_rng)
                     answers=live_round(state,possible,allowance,asked,tracks,fc,queries,target,video,local,teacher)
                 for answer in answers:
                     q,ti=qid[answer['query_id']],tid[answer['track_id']]
@@ -271,7 +282,7 @@ def run(pair,variant,pilot_videos=0,rho=.3):
             append_json(out/'eb_stream.jsonl',dict(video=video,video_index=vi,**eb_record))
             atomic_json(directory/'questions.json',answers_saved)
             if slow_enabled:fc.close()
-            atomic_json(directory/'receipt.json',dict(version='v8P',protocol=protocol,presence_inference=inference,video=video,budget=budget,questions=len(answers_saved),
+            atomic_json(directory/'receipt.json',dict(version='v8P',protocol=protocol,presence_inference=inference,ablation=ablation,video=video,budget=budget,questions=len(answers_saved),
                 unspent_budget=budget-len(answers_saved),exclusive_group=group,selected_rows=int(mask.sum()),
                 mask_sha256=file_sha(directory/'mask.npy'),rounds=rounds,
                 teacher_delta={k:teacher.stats[k]-before_teacher[k] for k in before_teacher} if teacher else None,
@@ -314,8 +325,8 @@ def run(pair,variant,pilot_videos=0,rho=.3):
         for video in ordered:
             local_mask=np.load(out/'videos'/video/'mask.npy');qrows=[q for q in meta['episodes'] if q['video_id']==video]
             for qi,q in enumerate(qrows):mask[q['start']:q['stop']]=local_mask[qi]
-        seal_mask(out,meta,mask,target=target,model=model_name,method=variant,GT_open_attempts=0,
-            extra=dict(version='v8P',protocol=protocol,presence_inference=inference,pair=pair,rho=rho,teacher=teacher_record,margin_input=margin_seal,
+        seal_mask(out,meta,mask,target=target,model=model_name,method=method,GT_open_attempts=0,
+            extra=dict(version='v8P',protocol=protocol,presence_inference=inference,ablation=ablation,pair=pair,rho=rho,teacher=teacher_record,margin_input=margin_seal,
                 LoRA_GPU_seconds=sum(v['slow_GPU_seconds'] for v in receipts),
                 rescore_GPU_seconds=sum(v['rescore_GPU_seconds'] for v in receipts),
                 video_transductive=True,strict_frame_causal=False,ordered_video_stream=True,
@@ -330,9 +341,10 @@ if __name__=='__main__':
     p.add_argument('--pair',choices=list(PAIRS),required=True)
     p.add_argument('--variant',choices=['FULL','MINUS_SLOW','SLOW_REPLAY'],required=True)
     p.add_argument('--rho',type=float,choices=[.1,.3,1.],default=.3)
+    p.add_argument('--ablation',choices=ABLATIONS)
     p.add_argument('--pilot-videos',type=int,default=0);a=p.parse_args()
     from flex_uda.active.execution import active_paths
     from flex_uda.active.receipts import record_attempt
-    folder=active_paths().active/a.pair/a.variant/('rho_'+str(a.rho))
+    folder=active_paths().active/a.pair/(a.ablation or a.variant)/('rho_'+str(a.rho))
     with record_attempt(folder,phase='v8P_full_stream'):
-        run(a.pair,a.variant,a.pilot_videos,a.rho)
+        run(a.pair,a.variant,a.pilot_videos,a.rho,a.ablation)

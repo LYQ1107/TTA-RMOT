@@ -121,3 +121,35 @@ def test_stage_A_c3_floor_is_not_replaced_by_five_wins(c3, expected):
     result=verdict(rows)
     assert result['directions_above_both_controls']==6
     assert result['result']==expected
+
+
+def test_conditional_B_scope_is_exact_and_does_not_resume_old80():
+    from scripts.active_v8p_stage_b import tier_jobs
+    b1,b2,b3=(tier_jobs(t) for t in ('B1','B2','B3'))
+    assert len(b1)==24 and len(b2)==36 and len(b3)==2
+    assert {j['method'] for j in b1}=={'RANDOM_ACQ','MINUS_DS','MINUS_ROUTE','MINUS_GLANCE','MINUS_EB','MINUS_PRES'}
+    assert all(j['pair'] in ('C1','C6') for j in b1 if j['method'] in ('MINUS_GLANCE','MINUS_EB','MINUS_PRES'))
+    assert {j['rho'] for j in b2}=={.1,1.}
+    assert {j['method'] for j in b2}=={'MINUS_SLOW','YESTRACK_BUDGET_PRIOR','UNIFORM_K'}
+    assert b3==[dict(pair='C4',method=m,rho=.3) for m in ('FULL','SLOW_REPLAY')]
+
+
+def test_registered_ablations_preserve_the_unchanged_fields():
+    from flex_uda.active.v8p import setup,variant_questions
+    from flex_uda.active.baselines import video_rng
+    effective,em,ds=setup(CHECKLIST,'MINUS_EB')
+    assert effective==CHECKLIST and em.receipt()['rho_hat']==.5
+    assert em.fit(REL)['pi_strata']==[.5,.5,.5]
+    effective,_,_=setup(CHECKLIST,'MINUS_PRES')
+    assert effective==PRESUPPOSED
+    args,kwargs=inputs();s=belief_state(PRESUPPOSED,*args,**kwargs)
+    original=questions_v8p(PRESUPPOSED,s,['red person']*3,kwargs['track_lengths'],REL,0)
+    random1=variant_questions(PRESUPPOSED,s,['red person']*3,kwargs['track_lengths'],REL,0,
+        ablation='RANDOM_ACQ',rng=video_rng('fake'))
+    random2=variant_questions(PRESUPPOSED,s,['red person']*3,kwargs['track_lengths'],REL,0,
+        ablation='RANDOM_ACQ',rng=video_rng('fake'))
+    assert random1==random2 and sorted(random1,key=str)==sorted(original,key=str)
+    assert [q.kind for q in original]==[q.kind for q in random1]
+    _,_,fixed=setup(PRESUPPOSED,'MINUS_DS')
+    fixed.add(('v','q',0),'CROP',True);fixed.fit()
+    assert fixed.values==REL
