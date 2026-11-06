@@ -79,18 +79,25 @@ def run_conditional(execution):
     for tier in ('B1','B2','B3'):
         if tier=='B3':
             from scripts.select_gpu import query
-            audit=query()
-            original=Path(execution.manifest['prior_v8_durable_completion'])
-            if not original.exists():
-                indices={g['index'] for g in json.loads(Path(execution.manifest['prior_v8_admission_path']).read_text())['selected']}
-                eligible=[g for g in audit if g['index'] in indices]
-            else:eligible=audit
-            atomic_json(execution.public/'B3_idle_admission.json',dict(audit=audit,
-                only_genuinely_idle_GPU=True,foreign_processes_stopped=0))
-            if not any(g['compute_processes']==0 and g['free_mib']>=43008 for g in eligible):
-                atomic_json(execution.public/'B3_deferred.json',dict(status='DEFERRED_NO_IDLE_GPU',
-                    no_GPU_or_teacher_calls=True))
-                break
+            waiting=False
+            while True:
+                audit=query()
+                original=Path(execution.manifest['prior_v8_durable_completion'])
+                if not original.exists():
+                    indices={g['index'] for g in json.loads(Path(execution.manifest['prior_v8_admission_path']).read_text())['selected']}
+                    eligible=[g for g in audit if g['index'] in indices]
+                else:eligible=audit
+                atomic_json(execution.public/'B3_idle_admission.json',dict(audit=audit,
+                    only_genuinely_idle_GPU=True,foreign_processes_stopped=0,
+                    original_v8_still_running=not original.exists()))
+                if any(g['compute_processes']==0 and g['free_mib']>=43008 for g in eligible):break
+                if not waiting:
+                    print(json.dumps(dict(event='V8P_B3_WAITING_GENUINELY_IDLE_GPU',
+                        maximum_total_project_GPUs=2,original_queue_unmodified=True)),flush=True)
+                    waiting=True
+                # Internal resource wait in the same durable command, not an
+                # agent polling loop or a silent decision to drop B3.
+                time.sleep(30)
         manifest,plan=prepare_tier(execution,tier)
         if manifest is None:break
         env=dict(os.environ,PRESENCE_EXECUTION_MANIFEST=str(manifest),CUDA_VISIBLE_DEVICES='')

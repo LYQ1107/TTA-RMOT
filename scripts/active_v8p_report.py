@@ -192,6 +192,7 @@ def report(execution):
     text+='## 3. 消融与预算曲线\n\n'+('阶段 A 通过，按预注册 B1→B2→空闲卡 B3 顺序接续；未完成项目不填数。' if gate['result']=='PASS' else '阶段 A 未通过，按用户停止条件不运行任何阶段 B 项目。')+'\n\n'
     text+='## 4. 行为分析与归因\n\n![CHECKLIST](behavior_checklist.png)\n\n![PRESUPPOSED](behavior_presupposed.png)\n\n'
     text+='完整错拒、高置信错负、教师支持覆盖在 presence_decisions.csv、final_confidence.csv；DS 与 GT 事后特异度在 reliability_vs_GT.csv，分别保留锚点与轨迹多数标签。\n\n'
+    text+='PRESUPPOSED 中未问对的 evidence=0，组合先验截断[-2,2]且不判整句空，因此未问对 posterior≥sigmoid(-2)≈.119；其 p<.05 高置信错负为0是构造保证，不是学会了语义或恢复了所有GT的证据。普通漏检、已问错误负例和新增误检仍需看下表。\n\n'
     text+=table(recall,['pair','GT_recall','v8_GT_recall','output_rows','v8_output_rows','recovered_GT','lost_GT','new_FP_rows','removed_FP_rows'])+'\n\n'
     text+='GT 恢复采用离线 IoU≥.5 最大基数匹配，不冒充官方 HOTA；新增行 FP 与不变行匹配重分配分开记录。\n\n'
     text+='## 5. 成本与审计\n\n'+table(costs,['pair','reused_v8','logical_calls','new_calls_this_round','cache_hits_this_round','new_teacher_GPU_hours_this_round','teacher_GPU_hours','teacher_equivalent_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
