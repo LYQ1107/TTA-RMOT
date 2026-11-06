@@ -36,6 +36,41 @@
         "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C3/MINUS_SLOW/rho_0.3",
         "prediction_seal_sha256": "f15184875441edf1479b35b32da1f18731763663278838085e6c21e5bcc1a364"
       }
+    },
+    {
+      "event": "POST_SEAL_EVALUATION_FINISHED",
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "exit_code": 0,
+      "log": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/launchers/coordinator_1793968063292947214/evaluation_C4_MINUS_SLOW.log",
+      "metrics": {
+        "target": "SportsMOT",
+        "model": "Dance-best",
+        "method": "MINUS_SLOW",
+        "rho": 0.3,
+        "HOTA": 48.847,
+        "DetA": 33.387,
+        "AssA": 71.468,
+        "IDF1": 44.581,
+        "IDSW": 1423,
+        "HOTA_unrounded": 48.847077403355854,
+        "prediction_rows": 850445,
+        "query_empty_prediction_rows": 0,
+        "query_empty_FP": 0,
+        "Present_HOTA": 48.847077403355854,
+        "query_present_episodes": 466,
+        "query_empty_episodes": 0,
+        "teacher_calls": 3508,
+        "teacher_forward_GPU_hours": 0.01880893132558817,
+        "teacher_equivalent_forward_GPU_hours": 0.09629169495102868,
+        "LoRA_GPU_hours": 0,
+        "rescore_GPU_hours": 0,
+        "GT_open_attempts": 0,
+        "future_frames": true,
+        "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8p/active/C4/MINUS_SLOW/rho_0.3",
+        "prediction_seal_sha256": "cdaf62ab15c2156ef2f43de381f13ff2c5d8100e873728545d5831a24b6c9d0d"
+      }
     }
   ],
   "reused_directions": [
@@ -44,7 +79,6 @@
   ],
   "remaining_new_directions": [
     "C2",
-    "C4",
     "C5"
   ],
   "C3_floor": 63.35,
