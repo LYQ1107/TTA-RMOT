@@ -212,11 +212,11 @@ def test_live_round_rechecks_tentative_state_after_glance_before_identity():
 
 
 @pytest.mark.parametrize('rho', [.1, 1.])
-def test_registered_synthetic_200_video_recovery(rho):
+def test_registered_synthetic_200_video_recovery(rho, tmp_path):
     from scripts.active_v8_stage0 import synthetic_recovery, PUBLIC, AMENDED_PUBLIC
     from flex_tta.runtime.pf_receipts import atomic_json, file_sha
     result = synthetic_recovery(rho)
-    destination=Path(os.environ.get('V8_SYNTHETIC_RESULT_ROOT',str(AMENDED_PUBLIC)))
+    destination=Path(os.environ.get('V8_SYNTHETIC_RESULT_ROOT',str(tmp_path)))
     atomic_json(destination/f'stage0_synthetic_rho_{rho}.json', dict(result,
         prereg_sha256=file_sha(PUBLIC/'PREREG.md'), manifest_sha256=file_sha(PUBLIC/'manifest.json')))
     assert result['status'] == 'PASS', json.dumps({k: v for k, v in result.items() if k != 'stream'})
