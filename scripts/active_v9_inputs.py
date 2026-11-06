@@ -1,6 +1,7 @@
 """v9 read-only sealed-input inventory and D3 exact-text reuse; no GT."""
 import csv
 import json
+import os
 from pathlib import Path
 import sys
 import numpy as np
@@ -17,6 +18,20 @@ SOURCE=Path(V8['active_root'])
 DATA=Path('/data2/user/TTA-RMOT-assets/presence_active_v9_offline_20261106')
 
 
+def estimation_guard():
+    attempts=runtime_guard()
+    # These new post-seal artifacts contain target labels too. Keep them out
+    # of estimators just as the shared guard excludes raw/feature GT.
+    def reject_diagnostic_gt(event,args):
+        if event=='open' and isinstance(args[0],(str,bytes,os.PathLike)):
+            path=Path(os.fsdecode(args[0])).resolve()
+            if path.parent==PUBLIC.resolve() and (path.name.startswith(('D1_','D2_')) or
+                path.name in ('presence_truth.csv','estimator_gates.csv','selection.json')):
+                attempts.append(str(path));raise PermissionError('v9 offline GT diagnostic is not an estimation input: '+str(path))
+    sys.addaudithook(reject_diagnostic_gt)
+    return attempts
+
+
 def write_csv(path,rows):
     path.parent.mkdir(parents=True,exist_ok=True)
     keys=list(dict.fromkeys(k for r in rows for k in r))
@@ -29,7 +44,7 @@ def rel_from(receipt):
 
 
 def d3_and_inventory():
-    attempts=runtime_guard();inputs=[];video_rows=[];query_rows=[];summaries=[]
+    attempts=estimation_guard();inputs=[];video_rows=[];query_rows=[];summaries=[]
     for target in ('Dance','KITTI-V2','SportsMOT'):
         meta=target_metadata(target)
         texts={v:[q for q in meta['episodes'] if q['video_id']==v] for v in sorted(meta['videos'])}

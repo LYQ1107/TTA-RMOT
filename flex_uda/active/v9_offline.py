@@ -131,9 +131,12 @@ class RandomEffectsBelief(BeliefStateV8):
             self.presence_logLR_clip_count=np.zeros(len(self.a),int)
         for q in range(len(self.a)) if queries is None else queries:
             needed={int(k) for k in self.strata[q] if k>=0};covered=set();tracks=[]
-            for (qi,t),answers in sorted(self.answer_history.items()):
-                k=int(self.strata[qi,t])
-                if qi!=q or k<0 or not answers:continue
+            # Same increasing track-index order as filtering the global sorted
+            # answer dictionary, without scanning other sentences per answer.
+            for t in np.flatnonzero(self.asked_mask[q]):
+                answers=self.answer_history[q,int(t)]
+                k=int(self.strata[q,t])
+                if k<0 or not answers:continue
                 tracks.append((k,answers));covered.add(k);self.presence_likelihood_evaluations[k]+=1
             raw,_=decision_llr(tracks,self.pi_strata_start,self.tau_start,self.presence_reliability,capped=False)
             clipped,count=decision_llr(tracks,self.pi_strata_start,self.tau_start,self.presence_reliability,capped=True)

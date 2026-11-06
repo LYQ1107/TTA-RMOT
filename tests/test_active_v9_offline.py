@@ -1,5 +1,7 @@
 """Numerical likelihood checks only; no teacher, GPU or target GT."""
 import numpy as np
+import subprocess
+import sys
 from scipy.special import logsumexp
 from flex_uda.active.v8 import PresenceEM
 from flex_uda.active.v9_offline import RandomEffectsPresence,RandomEffectsBelief,decision_llr,GH_LOGW,GH_X
@@ -55,3 +57,15 @@ def test_random_effects_coverage_and_B2_output_remain_distinct():
         assert not s.absent[0]
     s.observe(0,6,False,'CROP',REL['CROP'])
     assert s.absent[0] and not s.low_tentative[0]
+
+
+def test_estimator_rejects_the_new_derived_gt_artifacts():
+    code='''from scripts.active_v9_inputs import estimation_guard,PUBLIC
+attempts=estimation_guard()
+try: (PUBLIC/'presence_truth.csv').open()
+except PermissionError: pass
+else: raise AssertionError('derived GT must not enter an estimator')
+assert len(attempts)==1
+'''
+    result=subprocess.run([sys.executable,'-c',code],capture_output=True,text=True)
+    assert result.returncode==0,result.stdout+result.stderr
