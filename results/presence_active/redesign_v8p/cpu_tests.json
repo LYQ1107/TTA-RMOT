@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "passed": 22,
+  "failed": 0,
+  "deselected": 2,
+  "deselected_reason": "Unchanged v8 200-video synthetic estimator recovery tests are outside this protocol switch; their historical receipts are not overwritten.",
+  "seconds": 6.39,
+  "command": "env CUDA_VISIBLE_DEVICES='' PYTHONPATH=/data2/user/FlexHook-TTA/compat:/data2/user/FlexHook-TTA:/data2/user/TTA-RMOT-assets/flexhook/pydeps OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1 /home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q tests/test_active_v8p.py tests/test_active_v8.py -k 'not registered_synthetic_200_video_recovery'",
+  "checklist_two_video_byte_exact": true,
+  "presupposed_no_PresenceEM": true,
+  "presupposed_no_presence_questions": true,
+  "presupposed_absent_always_false": true,
+  "compileall": "PASS",
+  "v8_numeric_files_unchanged_from_base": true,
+  "scientific_results": false
+}
+
