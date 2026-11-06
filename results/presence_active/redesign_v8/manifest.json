@@ -19,6 +19,35 @@
       "old_v7_assertion": "abs(pi0_old - 0.8) > 0.1",
       "other_acceptance_criteria_unchanged": true,
       "interpretation": "rho=1.0 reaches the designed clipping ceiling, not an estimation error"
+    },
+    {
+      "id": "A2",
+      "date": "2026-11-06",
+      "user_authorized": true,
+      "registered_before_any_real_v8_data_results": true,
+      "reason": "5122e3a 同一固定合成流早期仅有85句，观测似然平坦导致EM线性收敛；用户复现报告表明原200次上限不足，并非振荡。用户给出的复现数字仅作修订依据，须由本轮重新验证，不当作本轮结果。",
+      "iters_before": 200,
+      "iters_after": 5000,
+      "tol_unchanged": 1e-7,
+      "objective_trace_monotone": "Unclipped observed-data log posterior, including Beta(2,2) priors; record whether every iteration is nondecreasing within 1e-10; diagnostic only, never an acceptance gate.",
+      "contraction_rate": "last_delta / previous_delta; null if fewer than two deltas or previous_delta is zero",
+      "stop_if_not_converged_at_5000": true,
+      "other_acceptance_criteria_unchanged": true
+    },
+    {
+      "id": "A3",
+      "date": "2026-11-06",
+      "user_authorized": true,
+      "registered_before_any_real_v8_data_results": true,
+      "reason": "在用户报告的rho=1.0合成流中，存在性确定后极少询问第2档，200视频仅3个已回答轨迹对，pi_2缺少可识别数据；已回答轨迹不足不应当作估计偏差，未问档位不进入判定似然。",
+      "minimum_answered_track_pairs_per_stratum": 200,
+      "pi_precision_gate": "abs(pi_hat_k - pi_k) < 0.07 only if answered_track_pairs_k >= 200",
+      "insufficient_data_label": "UNIDENTIFIED_INSUFFICIENT_DATA",
+      "rho_acceptance_including_A1_unchanged": true,
+      "v7_regression_unchanged": true,
+      "real_phase0_tables_apply_same_identification_rule": true,
+      "required_counts": ["unique answered (video,query,track) pairs per stratum", "track-term evaluations in sentence-presence likelihood computations per stratum"],
+      "likelihood_counter_definition": "One count each time an answered pair contributes its track term to a sentence-presence recomputation; EM E-step term evaluations are recorded separately, not mixed with decisions."
     }
   ],
   "phase0": {
@@ -34,7 +63,7 @@
         0.05,
         0.95
       ],
-      "iters": 200,
+      "iters": 5000,
       "tol": 1e-7,
       "track_cap": 2
     },
@@ -59,7 +88,10 @@
       ],
       "sensitivity": 0.8,
       "specificity": 0.8,
-      "sampling": "questions_v8 with deterministic base prior thirds; answers generated only on selected queries; no outcome-based fixture/seed selection"
+      "sampling": "questions_v8 with deterministic base prior thirds; answers generated only on selected queries; no outcome-based fixture/seed selection",
+      "pi_precision_minimum_answered_tracks": 200,
+      "unidentified_status": "UNIDENTIFIED_INSUFFICIENT_DATA",
+      "result_subdirectory": "amendments_A2_A3"
     }
   },
   "pilots": [

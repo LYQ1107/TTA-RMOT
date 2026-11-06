@@ -17,3 +17,10 @@
 - Added inherited v8 belief/EM, balanced BCE and frozen-existence runner draft plus CPU tests/offline entrypoint. Only the nine CPU contracts are validated; runner/scheduler/GPU integration is not declared complete. The normal guard subprocess opens no GT; its separate intentional denial test counts1 and is not an online GT read.
 - Numerical cause observed: finite iteration budget exhausted before the registered tolerance, not the amended clipping-boundary assertion. The scalar one-step formula regression passes. General convergence/consistency or final recovery quality is not established; no hyperparameter or acceptance repair is inferred.
 - Publish code, exact failure data, test transcript and stopped report; wait for explicit user direction as required by the preregistration.
+
+## A2/A3 — preregister before any real v8 data result, 2026-11-06
+
+- User explicitly authorizes iters5000 (tol1e-7 unchanged), diagnostic-only unclipped posterior monotonicity and last-delta contraction rate. Still stop if5000 fails.
+- Per-stratum pi precision is tested only with >=200 unique answered pairs; otherwise UNIDENTIFIED_INSUFFICIENT_DATA, with decision-likelihood participation counts. Rho/A1 and old-v7 pi0 regression remain unchanged. Real six-direction phase0 tables use the same identification marker.
+- User-provided expected synthetic numbers are motivation to reproduce, not this run's measured results. Do not change fixture/seed/rho gate after seeing results. Preserve all pre-A2 receipts; use amendments_A2_A3 for new CPU records.
+- Plan: publish this amendment first; implement and rerun the full CPU suite. Only if it matches the amended acceptance continue exact v7/offline real-data diagnostics, then pilots and stages2/3. V7 stays immutable, no unregistered jobs.
