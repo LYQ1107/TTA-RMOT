@@ -1,0 +1,112 @@
+{
+  "version": "v8P",
+  "branch": "codex/presence-active-v8p-20261106",
+  "base_public_commit": "f53cbc1751fe4a129bbbdac7636c1599964437d7",
+  "amendments": [
+    {
+      "id": "C1",
+      "timing": "POST_D3_BEFORE_V8P_RESULTS",
+      "explicit_disclosure": "在看到 D3 之后制定",
+      "reason": "存在预设理论；在这三个数据集上等价于按数据集设定的存在性先验",
+      "CHECKLIST": "All videos have exactly identical sets of raw query texts",
+      "PRESUPPOSED": "Otherwise",
+      "expected": {
+        "Dance": "CHECKLIST",
+        "KITTI_V2": "PRESUPPOSED",
+        "SportsMOT": "PRESUPPOSED"
+      }
+    }
+  ],
+  "stage_A": {
+    "rho": 0.3,
+    "new_jobs": [
+      {
+        "pair": "C2",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      },
+      {
+        "pair": "C3",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      },
+      {
+        "pair": "C4",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      },
+      {
+        "pair": "C5",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      }
+    ],
+    "reuse_v8_MINUS": [
+      "C1",
+      "C6"
+    ],
+    "gate": {
+      "directions_above_both_controls_minimum": 5,
+      "C1_min": 35.724,
+      "C6_min": 34.469,
+      "C3_min": 63.35
+    }
+  },
+  "stage_B": {
+    "conditional_on": "STAGE_A_PASS",
+    "order": [
+      "B1",
+      "B2",
+      "B3"
+    ],
+    "B1_all_directions": [
+      "RANDOM_ACQ",
+      "MINUS_DS",
+      "MINUS_ROUTE"
+    ],
+    "B1_C1_C6": [
+      "MINUS_GLANCE",
+      "MINUS_EB",
+      "MINUS_PRES"
+    ],
+    "reuse_v8_C2_C5": "MINUS_PRESUPPOSITION",
+    "B2": {
+      "budgets": [
+        0.1,
+        1
+      ],
+      "methods": [
+        "MINUS_SLOW",
+        "YESTRACK_BUDGET_PRIOR",
+        "UNIFORM_K"
+      ],
+      "budget_matching": "actual calls per direction, per video"
+    },
+    "B3": {
+      "pair": "C4",
+      "methods": [
+        "FULL",
+        "SLOW_REPLAY"
+      ],
+      "requires": "genuinely free GPU"
+    }
+  },
+  "bootstrap": {
+    "iterations": 2000,
+    "seed": 0,
+    "unit": "video",
+    "KITTI": "POINT_ONLY"
+  },
+  "maximum_total_project_GPUs": 2,
+  "original_v8_stage3": "CONTINUE_UNMODIFIED",
+  "original_stage4": "PAUSED",
+  "v8_numeric_files_modifiable": false,
+  "GT_open_attempts_required": 0,
+  "dataset_episodes": {
+    "Dance": 425,
+    "KITTI_V2": 862,
+    "SportsMOT_v4": 466
+  },
+  "official_val_used_for_method_development": true
+}
+
