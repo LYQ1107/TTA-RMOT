@@ -327,3 +327,11 @@ C1 协议规则明确在看到 D3 后制定，在这三个数据集上等价于�
 
 复用行的teacher_GPU_hours=0只指本阶段没有新增forward，不是该系统无需GPU；原方法实际成本在original_reused_method_teacher_GPU_hours，缓存等价forward成本另列。
 
+
+## 关闭与可恢复记录
+
+完整新方法日志及原始教师输出见 logs.json，原字节/冻结revision/BF16概率验核见 archive_validation.json；大数组、模型与逐行预测留在 numerical_artifact_paths.json 和 prediction_paths.json 所列服务器路径，不进git。
+
+GPU相位时长不是独占显卡利用率积分；本轮与原v8共享同两张物理卡，不能把两个队列的相位时长相加后冒充独占卡时。新增调用、缓存、继承C1/C6与回放分别记账。
+
+关闭状态：REGISTERED_V8P_COMPLETE。原v8阶段3仍按其原队列独立运行/关闭，不由本关闭器启动旧阶段4。
