@@ -32,7 +32,9 @@ def report(execution,tier):
             prediction_rows=m['prediction_rows'],query_empty_prediction_rows=m['query_empty_prediction_rows'],
             delta_vs_MINUS=m['HOTA_unrounded']-b['HOTA_unrounded'],
             logical_calls=teacher['logical_calls'],new_calls=teacher.get('new_calls',0),cache_hits=teacher.get('cache_hits',0),
-            teacher_GPU_hours=teacher.get('forward_seconds',0)/3600,LoRA_GPU_hours=seal.get('LoRA_GPU_seconds',0)/3600,
+            teacher_GPU_hours=teacher.get('forward_seconds',0)/3600,
+            teacher_equivalent_GPU_hours=teacher.get('equivalent_forward_seconds',0)/3600,
+            LoRA_GPU_hours=seal.get('LoRA_GPU_seconds',0)/3600,
             rescore_GPU_hours=seal.get('rescore_GPU_seconds',0)/3600,wall_seconds=seal['wall_seconds'],GT_open_attempts=0,
             path=str(path),prediction_seal_sha256=file_sha(path/'predictions_seal.json'),reused=False)
         rows.append(row);artifacts.append(dict(job,path=str(path),sha256=row['prediction_seal_sha256'],episodes=seal['episodes']))
@@ -67,6 +69,7 @@ def report(execution,tier):
     atomic_json(public/(tier+'_bootstrap.json'),intervals)
     atomic_json(public/(tier+'_prediction_paths.json'),dict(files=artifacts))
     text='## '+tier+'\n\n'+table(rows,['pair','method','rho','HOTA','DetA','AssA','IDF1','delta_vs_MINUS','logical_calls','new_calls','cache_hits','reused'])+'\n\n'
+    text+='### 成本\n\n'+table(rows,['pair','method','rho','teacher_GPU_hours','teacher_equivalent_GPU_hours','LoRA_GPU_hours','rescore_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
     if tier=='B2':text+='![预算曲线](budget_curves.png)\n\n预算 .1/1.0 每视频实际调用精确匹配；.3 按预注册直接复用历史对照。\n\n'
     (public/(tier+'_REPORT.md')).write_text(text)
     base=(public/'REPORT.md').read_text().split('\n<!-- CONDITIONAL_B -->')[0]

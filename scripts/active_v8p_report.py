@@ -82,9 +82,12 @@ def report(execution):
     protocols=json.loads(Path(execution.manifest['protocol_path']).read_text())['targets']
     main=[];presence=[];decisions=[];costs=[];recall=[];artifacts=[];rounds=[];histograms=[]
     streams=[];glances=[];reliability=[];intervals={};truths={}
+    paths={pair:Path(reuses[pair]['folder']) if pair in reuses else execution.active/pair/'MINUS_SLOW/rho_0.3'
+           for pair in PAIRS}
+    seals={pair:verify_predictions(path) for pair,path in paths.items()}
     for pair,(model,target) in PAIRS.items():
-        path=Path(reuses[pair]['folder']) if pair in reuses else execution.active/pair/'MINUS_SLOW/rho_0.3'
-        seal=verify_predictions(path);digest=file_sha(path/'predictions_seal.json')
+        path=paths[pair]
+        seal=seals[pair];digest=file_sha(path/'predictions_seal.json')
         if pair in reuses:assert digest==reuses[pair]['seal_sha256']
         summary=json.loads((path/'offline_summary.json').read_text())
         assert summary['prediction_seal_sha256']==digest and summary['GT_open_attempts']==0
@@ -160,6 +163,7 @@ def report(execution):
             new_calls_this_round=0 if pair in reuses else teacher.get('new_calls',0),
             cache_hits_this_round=0 if pair in reuses else teacher.get('cache_hits',0),
             teacher_GPU_hours=teacher.get('forward_seconds',0)/3600,
+            new_teacher_GPU_hours_this_round=0 if pair in reuses else teacher.get('forward_seconds',0)/3600,
             teacher_equivalent_GPU_hours=teacher.get('equivalent_forward_seconds',0)/3600,
             wall_seconds=seal['wall_seconds'],assigned_worker_wall_seconds=sum(a.get('wall_seconds',0) for a in attempts),
             peak_teacher_allocated_bytes=max((s.get('peak_allocated_bytes',0) for s in sessions),default=0),
@@ -190,7 +194,8 @@ def report(execution):
     text+='完整错拒、高置信错负、教师支持覆盖在 presence_decisions.csv、final_confidence.csv；DS 与 GT 事后特异度在 reliability_vs_GT.csv，分别保留锚点与轨迹多数标签。\n\n'
     text+=table(recall,['pair','GT_recall','v8_GT_recall','output_rows','v8_output_rows','recovered_GT','lost_GT','new_FP_rows','removed_FP_rows'])+'\n\n'
     text+='GT 恢复采用离线 IoU≥.5 最大基数匹配，不冒充官方 HOTA；新增行 FP 与不变行匹配重分配分开记录。\n\n'
-    text+='## 5. 成本与审计\n\n'+table(costs,['pair','reused_v8','logical_calls','new_calls_this_round','cache_hits_this_round','teacher_GPU_hours','teacher_equivalent_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
+    text+='## 5. 成本与审计\n\n'+table(costs,['pair','reused_v8','logical_calls','new_calls_this_round','cache_hits_this_round','new_teacher_GPU_hours_this_round','teacher_GPU_hours','teacher_equivalent_GPU_hours','wall_seconds','GT_open_attempts'])+'\n\n'
+    text+='teacher_GPU_hours 是该方法原有的新调用相位时长，new_teacher_GPU_hours_this_round 单列本轮新增；引用 C1/C6 不等于原方法无成本。equivalent 时长包含缓存条目的原始 forward 成本，不等于本轮实际 GPU 耗时。所有相位时长均非独占利用率积分。\n\n'
     text+='bootstrap.json：Dance/SportsMOT 按视频聚类，2000 次、seed 0；KITTI 只有 4 视频，仅点估计。生成 GT 打开尝试全部为 0，逐预测 SHA 在 prediction_paths.json；先封存后独立 GT 评测。MINUS 不挂 LoRA、无学生参数更新。原 v8 阶段 3 未中断，旧 80 项未启动。\n\n'
     text+='## 6. 限制与停止条件\n\nC1 协议规则明确在看到 D3 后制定，在这三个数据集上等价于按数据集设定存在性先验，不是普遍可识别性定理。KITTI 仅四视频；这些官方 val 已用于开发，不宣称盲测。所有方向与失败均上报。\n'
     (public/'REPORT.md').write_text(text)
