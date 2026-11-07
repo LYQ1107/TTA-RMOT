@@ -1,0 +1,944 @@
+{
+  "status": "DIAGNOSTIC_ONLY_ORIGINAL_AUDIT_FAILURE_NOT_OVERRIDDEN",
+  "original_validation_or_predictions_changed": false,
+  "original_supervisor_exit_code": 1,
+  "online_current_coverage_failures": 0,
+  "replay_counterfactual_current_coverage_mismatches": 26,
+  "all_source_decision_coverage_valid": true,
+  "replay_snapshot_count": 350,
+  "all_six_presence_arrays_byte_exact": true,
+  "replay_questions_and_answers_exact": true,
+  "replay_DS_receipts_exact": true,
+  "frozen_replay_strata_provenance_explains_failure": true,
+  "GT_open_attempts": 0,
+  "model_or_teacher_calls": 0,
+  "jobs": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 0
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 10
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "current_final_coverage_mismatch_queries": 16
+    }
+  ],
+  "all_mismatched_queries": [
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0014",
+      "query": "dancing-person-dressed-all-in-white",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 29
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-dressed-all-in-green",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 14
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-dressed-all-in-purple",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 19
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-with-blue-Tshirt-and-white-pants",
+      "current_covered": [
+        false,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 14
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-with-purple-shirt-and-white-skirt",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 17
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-with-white-Tshirt-and-blue-pants",
+      "current_covered": [
+        false,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 16
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0026",
+      "query": "dancing-person-with-white-Tshirt-and-purple-skirt",
+      "current_covered": [
+        true,
+        false,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 16
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0058",
+      "query": "dancing-person-dressed-all-in-black",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 7
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0065",
+      "query": "dancing-person-with-white-Tshirt-and-purple-skirt",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 3
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "dancetrack0079",
+      "query": "dancing-person-dressed-all-in-white",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 15
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_4-EmEtrturE_c009",
+      "query": "volleyball-player-in-white-clothes",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 4
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_9MHDmAMxO5I_c003",
+      "query": "volleyball-player-in-white-clothes",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 7
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_BgwzTUxJaeU_c014",
+      "query": "american-team",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 3
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_G-vNjfx1GGc_c004",
+      "query": "soccer-player-in-black",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 34
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_G-vNjfx1GGc_c004",
+      "query": "soccer-player-in-yellow-clothes-and-green-shorts",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 13
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_G-vNjfx1GGc_c601",
+      "query": "soccer-player-in-black",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 26
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_ITo3sCnpw_k_c007",
+      "query": "arsenal-team",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 35
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_ITo3sCnpw_k_c007",
+      "query": "soccer-player-in-green",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 5
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_ITo3sCnpw_k_c012",
+      "query": "arsenal-team",
+      "current_covered": [
+        true,
+        true,
+        false
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 44
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_cC2mHWqMcjk_c007",
+      "query": "volleyball-player-in-black",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 6
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_cC2mHWqMcjk_c008",
+      "query": "volleyball-player-in-white",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 8
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_cC2mHWqMcjk_c009",
+      "query": "player-in-black",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 8
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_dw7LOz17Omg_c053",
+      "query": "football-player-in-black",
+      "current_covered": [
+        true,
+        false,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 11
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_dw7LOz17Omg_c067",
+      "query": "player-in-black-clothes",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 3
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_i2_L4qquVg0_c006",
+      "query": "football-player-in-purple-clothes",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 13
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "video": "v_i2_L4qquVg0_c010",
+      "query": "player-in-green-clothes",
+      "current_covered": [
+        false,
+        true,
+        true
+      ],
+      "current_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_covered": [
+        true,
+        true,
+        true
+      ],
+      "source_needed": [
+        true,
+        true,
+        true
+      ],
+      "source_absent": true,
+      "source_decision_coverage_ok": true,
+      "changed_counterfactual_track_strata": 3
+    }
+  ],
+  "prediction_seals": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C1/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "bf580efdd010a00232bff80b2e037e2341ef438f5ef1e4130a9cf0fa51b06aac"
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C2/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "97eefebdf1a80240f23be31692ec61d9988daaea96ebd6b6ed5d0a22bb9902de"
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C3/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "c81f71e7b15585691ce2fd5a8546377ae029abf864e9f0bc479b5883d7e2704f"
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C4/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "58fe1aa03690b22905b9dc42e8a5627c0590e557dfc61746007283ea0d60e217"
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C5/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "41fa13a28e875954c7a6ed3c49683d8374619ed9dd101cd98111bf18cceeb7fa"
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C6/MINUS_SLOW/rho_0.3/predictions_seal.json",
+      "sha256": "de0a6c5f07065c75394b47171be7b8acd2f21d1201ce82ebeebfd2f987045aae"
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C1/FULL/rho_0.3/predictions_seal.json",
+      "sha256": "f00c26f1042c286a7d96a1fc8291bac3b95513aa3e35aa64c88b56fbbea7ee74"
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C4/FULL/rho_0.3/predictions_seal.json",
+      "sha256": "b4358f75de5a35df890ccdffee817cb20073e15b54267f8f283ab887f9d86036"
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C6/FULL/rho_0.3/predictions_seal.json",
+      "sha256": "d5dc45366ec6f28a40bcc68d2aa3e6083e574f599ea479befda44882b14f1221"
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C1/SLOW_REPLAY/rho_0.3/predictions_seal.json",
+      "sha256": "f965c7ba7b902bf2cf477a05131fcb6a27bc1af29c6bc2d1c78133d2ce924f0e"
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active/C4/SLOW_REPLAY/rho_0.3/predictions_seal.json",
+      "sha256": "a8940a63e771ab675c0fc1227e8fcc5398e9f4bde87f2a7fb9ef0afec859e446"
+    }
+  ]
+}
