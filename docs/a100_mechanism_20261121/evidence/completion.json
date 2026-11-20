@@ -1,0 +1,75 @@
+{
+  "status": "PASS_FROZEN_PAIRED_EVIDENCE",
+  "teacher": {
+    "logical_calls": 900,
+    "new_calls": 900,
+    "cache_hits": 0,
+    "forward_seconds": 50.59194254560862,
+    "equivalent_forward_seconds": 50.59194254560862,
+    "batches": null,
+    "cache": {
+      "complete_raw_responses": 900,
+      "pending_leases": 0,
+      "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/evidence/teacher.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 597.5588139860192,
+    "peak_allocated_bytes": 5451120640,
+    "aggregation": "returned responses across attempts; original pre-forward file-open failure did not launch an unreturned batch"
+  },
+  "final_session_teacher": {
+    "logical_calls": 300,
+    "new_calls": 300,
+    "cache_hits": 0,
+    "forward_seconds": 14.5941433229018,
+    "equivalent_forward_seconds": 14.5941433229018,
+    "batches": 38,
+    "cache": {
+      "complete_raw_responses": 900,
+      "pending_leases": 0,
+      "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/evidence/teacher.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 597.5588139860192,
+    "peak_allocated_bytes": 5451120640
+  },
+  "phase_wall_seconds": {
+    "teacher_load": 603.2195025359979,
+    "teacher_service": 124.80376639199676,
+    "final_frozen_seal": 15.719856834970415
+  },
+  "process_wall_seconds": 781.853944434959,
+  "physical_GPU": "0",
+  "responses": 900,
+  "locations": 300,
+  "manifest_sha256": "214a0a36c40c31341740c8b1b18eb2ce2b7347825f062ccb33138dd96acec35b",
+  "responses_sha256": "d48bae6f8c53bd05144572595bc1819aa566c6262cf3c9b1cc13c7e3f208461f",
+  "GT_open_attempts": 0,
+  "clip_fallback_responses": 0,
+  "failed_sessions": [
+    {
+      "status": "FAILED",
+      "returncode": 1,
+      "wall_seconds": 1287.8913996210322,
+      "budget_seconds": 0,
+      "physical_GPU": 0,
+      "process_started": 459516.573409792,
+      "hard_deadline_terminated": false,
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/evidence/process_00.log",
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_collect.py"
+      ]
+    }
+  ],
+  "failed_first_session_terminal_weight_hash_available": false,
+  "all_returned_responses_share_final_frozen_parameter_hash": true,
+  "phase_wall_seconds_scope": "final resumed session only; failed attempt cost retained separately",
+  "all_attempts_wall_seconds": 2069.7509999260074,
+  "preparation_cost_not_deployment_benchmark": true
+}
