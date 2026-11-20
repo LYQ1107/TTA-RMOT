@@ -1,0 +1,6 @@
+{
+  "change": "GPU0/1 may consume pending benchmark jobs only after their causal stream is complete; queued jobs then use one A100 each, identical limits and fresh models",
+  "reason": "Reuse authorized idle GPUs without parallelizing dependent video adaptation",
+  "scientific_inputs_or_hyperparameters_changed": false,
+  "GT_has_been_read_this_round": false
+}

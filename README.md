@@ -14,15 +14,33 @@
 其他分支和GitHub尚未回收的旧对象可能仍使仓库总体统计较大；上述命令只克隆当前分支。
 
 2026-11-20 已恢复到 A100：`/data3/liuyeqiang/FlexHook-TTA`；大型资产保留 NAS。
-最终科研状态为 v8P 的 66 项新增官评已完成。恢复路径、数据核验、现有结果与继续工作入口见
+恢复前 v8P 的 66 项新增官评已封存。恢复路径、数据核验、现有结果与继续工作入口见
 [A100 恢复与研究交接](docs/A100_RESTORE_20261120.md)。下文各“当前执行”是历史阶段记录。
 [完整研究历程与方法演变（TXT）](docs/TTA_RMOT_研究心路历程与完整交接_20261120.txt)
 记录从 QCS-TTA 到 v8P 的验证链、负结果、当前成果与后续建议。
 
-本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，工作区/data2/user/FlexHook-TTA。
+**本轮 A100 三阶段新实证**已贯通真实学生/Qwen/快校准、C4 固定问答归因与真实冷启动计时。
+[完整历程＋本轮实证（TXT）](docs/TTA_RMOT_完整历程与A100三阶段实证_20261120.txt)、
+[三阶段详细报告（TXT）](docs/A100_三阶段实验完整报告_20261120.txt)、
+[计划与边界](docs/A100_THREE_STAGE_PLAN_20261120.md)、
+[轻量原始收据与可复算统计](docs/a100_three_stage_20261120/)。
+
+C4 HOTA：MINUS **48.8471**，零 LoRA 同32帧重算 **50.7874**，匹配 LoRA **52.1517**。
+LoRA−重算 **+1.3642**，视频95%区间 **[-2.3067, 4.8633]**；固定重算数量的排序差
+**−0.6095 [-1.0549, −0.2496]**。本轮没有建立 LoRA 语义排序的独立正贡献。
+[归因图](docs/a100_three_stage_20261120/stage2/causal_attribution.png)。
+
+完整C4新教师冷进程：MINUS_v8P **47.4783 / 11229.13秒**，YT_PRIOR **46.0915 / 10837.50秒**，
+UNIFORM_K **40.8334 / 1266.15秒**；各3508次真实调用、0缓存命中。
+600秒短切片三次均无教师反馈，得分来自初始输出，不能据此证明主动选题有效。
+[600秒曲线](docs/a100_three_stage_20261120/stage3/cost_utility.png)、
+[完整C4时间曲线](docs/a100_three_stage_20261120/stage3/full_cost_utility.png)。
+
+本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，当前A100工作区为
+`/data3/liuyeqiang/FlexHook-TTA`，A800原路径为`/data2/user/FlexHook-TTA`。
 它与LocateMOT/GroundJEV是不同任务；[继承旧首页](docs/history/LOCATEMOT_INHERITED_README_20261025.md)只作历史归档。
 
-## 当前执行：v6四处修复与成本关卡关键集合
+## 历史执行：v6四处修复与成本关卡关键集合
 
 2026-11-04用户否决v5剩余80项，改做v6修复后重跑；[固定口径](results/presence_active/redesign_v6/PREREG.md)、
 [当前状态/后续正式报告](results/presence_active/redesign_v6/REPORT.md)。

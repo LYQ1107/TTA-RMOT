@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Source this file for the restored code's verified CPU environment.
+# Source this file for the restored project's isolated Python environment.
 tta_a100_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 bash "$tta_a100_root/scripts/mount_nas_a800.sh" || return
 export TTA_RMOT_ROOT="$tta_a100_root"

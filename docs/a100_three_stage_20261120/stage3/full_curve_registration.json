@@ -1,0 +1,17 @@
+{
+  "purpose": "Supplement full C4 actual-cost endpoints with meaningful post-cold anytime curves, retaining the primary600s short protocol.",
+  "fixed_grid_seconds": [
+    0,
+    600,
+    1200,
+    2400,
+    4800,
+    9600,
+    19200
+  ],
+  "additional_grid_rule": "Include completion times of all three full methods, regardless of scores.",
+  "predictions": "Use existing committed snapshots only; no new GPU jobs.",
+  "unprocessed_samples": "retained as empty",
+  "GT_has_been_read_this_round": false,
+  "reason": "Repeated600s trials can be dominated by actual NAS cold loading, so initial decoder availability must not be confused with active acquisition."
+}

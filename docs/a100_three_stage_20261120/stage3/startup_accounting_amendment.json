@@ -1,0 +1,7 @@
+{
+  "change": "Publish available initial student predictions before frozen teacher initialization; each prediction receives parent-observed commit time.",
+  "checkpoint_verification": "Stage1 verifies official source SHA; timed trials reuse that verification, avoiding an unnecessary second full-file SHA read before strict loading.",
+  "charge": "All actual model loading, feature extraction and teacher work still charged; empty/unprocessed remaining samples retained.",
+  "reason": "Measure deployable anytime outputs and required work, including real NAS latency.",
+  "GT_has_been_read_this_round": false
+}

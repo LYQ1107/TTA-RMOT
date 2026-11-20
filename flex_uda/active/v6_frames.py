@@ -14,7 +14,7 @@ from flex_uda.active.v6 import selection_fractions
 
 
 class FrameCacheV6:
-    def __init__(self,model,cache,bank,queries,frames,head_path,folder):
+    def __init__(self,model,cache,bank,queries,frames,head_path,folder,*,store_pcd=True):
         from scripts.active_v6_prepare import sample32
         self.model,self.cache,self.bank,self.queries=model,cache,bank,queries
         self.frames=list(map(int,frames));self.frame_index={t:i for i,t in enumerate(self.frames)}
@@ -27,7 +27,8 @@ class FrameCacheV6:
         self.texts=[cache._text(q['query_text']) for q in queries]
         q,n=len(queries),len(self.observations)
         self.margin=np.lib.format.open_memmap(self.folder/'margin.npy',mode='w+',dtype='float32',shape=(q,n))
-        self.pcd=np.lib.format.open_memmap(self.folder/'pcd.npy',mode='w+',dtype='float32',shape=(q,n,768))
+        self.pcd=(np.lib.format.open_memmap(self.folder/'pcd.npy',mode='w+',dtype='float32',shape=(q,n,768))
+                  if store_pcd else None)
         self.row_model_steps=np.zeros(n,dtype=np.int64)
         checkpoint=torch.load(head_path,map_location='cpu',weights_only=False)
         self.head=head_from_checkpoint(checkpoint).eval()
@@ -52,7 +53,8 @@ class FrameCacheV6:
                     if not torch.isfinite(value).all() or not torch.isfinite(feature).all():
                         raise FloatingPointError('Nonfinite current-model v6 frame cache')
                     self.margin[qa:qa+value.shape[1],ids]=value.float().cpu().numpy().T
-                    self.pcd[qa:qa+value.shape[1],ids]=feature.float().cpu().numpy().transpose(1,0,2)
+                    if self.pcd is not None:
+                        self.pcd[qa:qa+value.shape[1],ids]=feature.float().cpu().numpy().transpose(1,0,2)
                     rows+=value.numel()
                 self.row_model_steps[ids]=model_step
             if fi%32==0 or fi==len(frames)-1:
@@ -60,7 +62,8 @@ class FrameCacheV6:
                 print(json.dumps(dict(event='V6_FRAME_CACHE_PROGRESS',scope='FIXED32' if sampled else 'ALL',
                     completed_frames=fi+1,total_frames=len(frames),candidate_query_rows=rows)),flush=True)
         torch.cuda.synchronize(self.cache.device)
-        self.margin.flush();self.pcd.flush()
+        self.margin.flush()
+        if self.pcd is not None:self.pcd.flush()
         record=dict(kind='FIXED32' if sampled else 'VIDEO_START_ALL',frames=list(frames),
             candidate_query_rows=rows,model_step=model_step,GPU_seconds=time.perf_counter()-started)
         self.score_records.append(record)
@@ -132,11 +135,12 @@ class FrameCacheV6:
         return np.stack([self.margin[:,self.by_track[t]].mean(axis=1) for t in self.tracks],axis=1)
 
     def close(self):
-        self.margin.flush();self.pcd.flush()
+        self.margin.flush()
+        if self.pcd is not None:self.pcd.flush()
         np.save(self.folder/'row_model_steps.npy',self.row_model_steps)
         np.save(self.folder/'presence_logits.npy',self.raw_presence)
         record=dict(status='CURRENT_MODEL_CACHE_COMPLETE',source_head=self.head_path,source_head_sha256=self.head_sha,
-            pcd_precision='FP32',margin_precision='FP32',source_head_uses='margin only, unchanged two-slope Bernoulli head',
+            pcd_precision='FP32',pcd_persisted=self.pcd is not None,margin_precision='FP32',source_head_uses='margin only, unchanged two-slope Bernoulli head',
             records=self.score_records,decode_CPU_seconds=self.decode_seconds,
             files={p.name:dict(path=str(p),bytes=p.stat().st_size,sha256=file_sha(p))
                    for p in self.folder.iterdir() if p.suffix in ('.npy','.json') and p.name!='cache_receipt.json'})

@@ -1,0 +1,23 @@
+{
+  "phase_wall_seconds": {
+    "teacher_load": 586.7680575749837
+  },
+  "accounted_wall_seconds": 600,
+  "import_setup_snapshot_and_other_seconds": 13.231942425016314,
+  "actual_total_process_wall_seconds": 600.2842007190338,
+  "deadline_stop_overhead_seconds": 0.2842007190338336,
+  "attempted_logical_requests": 0,
+  "returned_requests": 0,
+  "completed_new_teacher_calls": 0,
+  "completed_cache_hits": 0,
+  "synchronized_backend_forward_wall_seconds": 0.0,
+  "unfinished_phases": [
+    {
+      "phase": "teacher_load",
+      "billed_seconds": 586.7680575749837,
+      "attempted_requests": null
+    }
+  ],
+  "in_flight_teacher_completion_unknown": false,
+  "note": "phase wall includes CPU/IO and GPU work, not GPU utilization integral; unfinished work billed without prediction credit"
+}
