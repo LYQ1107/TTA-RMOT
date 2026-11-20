@@ -1,0 +1,27 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "branch": "research/v2dance-mllm-naive-distill-20261028",
+  "P1_start": "7026d82cbd9ccde2465f98d6c24c48e2fccd1e34",
+  "actual_training_source_commit": "c064881c31beafb14433a1a6c65bf652a3a81347",
+  "training_source_identical_public_tree_commit": "620e428a73bc895a192b0ff92afca8309d20b3b0",
+  "verified_training_tree": "4dd56756099afa5600031678dd5bda92bf7e2189",
+  "actual_inference_source_commit": "bbe13543b707df431f1c1ed1e406fe81d43e8e51",
+  "inference_code_published_in": "6ac76271d758c77e4321ff5978f8c12ba6206a6a",
+  "complete_first_official_metrics_published_in": "7a6f5b56ce15afd7176f596cbc59a13e2bd7789a",
+  "original_source_commit_to_public_mapping": {
+    "c064881c31beafb14433a1a6c65bf652a3a81347": "620e428a73bc895a192b0ff92afca8309d20b3b0",
+    "1c4919d286a94657b3f3c3a2fffd08cb091a2618": "6ac76271d758c77e4321ff5978f8c12ba6206a6a",
+    "809f34306524244d2ce7b48c22cc15b3731606a7": "7a6f5b56ce15afd7176f596cbc59a13e2bd7789a"
+  },
+  "mapping_reason": "Connected GitHub publication recreated commit metadata but verified every Git blob and identical full tree. Original execution commits remain unmodified in receipts.",
+  "planned_local_source_archive_branch": "codex/archive-mllm-local-source-20261029",
+  "final_alignment": "After publishing the final identical tree, preserve original local history in the archive branch and recreate the requested research branch from the fetched public HEAD, without reset or rewriting historical experiments.",
+  "training_file_sha256": {
+    "flex_uda/mllm_training.py": "7bda341fd07bcf30dfff97d5356e05d5bc3c99dec2e0bdac8f10cef21698d778",
+    "flex_uda/losses/distillation.py": "80b4ef641c305993bb14c049eb58f4fdfb4274b50e3d567ec69d64a527f47c1d",
+    "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+    "compat/sitecustomize.py": "8271f73151cbfedced1b310bc8582d14efb32bdd4dbef5431eb6202b7027e7ac",
+    "vendor/FlexHook/models/mymodel.py": "766eb9d109407d4a426dd257dddf28b929e135a58b5eda3e801adfccf01ca7b0"
+  },
+  "historical_results_unchanged_from_P1_start": ["results/teacher_probe", "results/uda", "results/positive_free", "results/diagnostics"]
+}

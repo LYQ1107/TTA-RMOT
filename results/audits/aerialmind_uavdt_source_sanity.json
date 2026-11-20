@@ -1,0 +1,38 @@
+Training with Self-Cross Attention.
+Namespace(lr=0.0002, lr_backbone_names=['backbone.0'], lr_temporal_names=['STReasoner', 'fusion_module', 'refer_embed'], lr_backbone=2e-05, lr_linear_proj_names=['reference_points', 'sampling_offsets'], lr_linear_proj_mult=0.1, batch_size=2, weight_decay=0.0001, epochs=50, lr_drop=40, save_period=50, lr_drop_epochs=None, clip_max_norm=0.1, meta_arch='temp_rmot', sgd=False, with_box_refine=True, two_stage=False, accurate_ratio=False, frozen_weights=None, nu_anchors=1, backbone='resnet50', enable_fpn=False, dilation=False, position_embedding='sine', position_embedding_scale=6.283185307179586, num_feature_levels=4, enc_layers=6, dec_layers=6, dim_feedforward=1024, hidden_dim=256, dropout=0.0, nheads=8, num_queries=300, dec_n_points=4, enc_n_points=4, decoder_cross_self=False, sigmoid_attn=False, crop=False, cj=False, extra_track_attn=False, loss_normalizer=False, max_size=1333, val_width=800, filter_ignore=False, masks=False, aux_loss=True, mix_match=False, set_cost_class=2, set_cost_bbox=5, set_cost_giou=2, set_cost_refer=2, mask_loss_coef=1, dice_loss_coef=1, cls_loss_coef=2, bbox_loss_coef=5, giou_loss_coef=2, refer_loss_coef=2, focal_alpha=0.25, dataset_file='e2e_rmot', gt_file_train=None, gt_file_val=None, coco_path='/data/workspace/detectron2/datasets/coco/', coco_panoptic_path=None, remove_difficult=False, append_crowd=False, output_dir='', device='cuda:0', seed=42, resume='', start_epoch=0, eval=False, vis=False, num_workers=0, pretrained=None, cache_mode=False, rmot_path='/data2/user/reference_envs/temprmot/source', input_video='figs/demo.mp4', data_txt_path_train='./datasets/data_path/refer-kitti.train', img_path='data/valid/JPEGImages/', query_interaction_layer='QIM', sample_mode='random_interval', sample_interval=1, random_drop=0.1, fp_ratio=0.3, merger_dropout=0.0, update_query_pos=True, sampler_steps=[60, 80, 90], sampler_lengths=[4, 4, 4, 4], exp_name='submit', memory_bank_score_thresh=0.0, memory_bank_len=4, memory_bank_type=None, memory_bank_with_self_attn=False, use_checkpoint=False, visualization=False, fp16=False, zyn4tan=False, use_history_inform=False, tracking=False, hist_len=4, lr_trans=1e-05, save_dir='')
+{
+  "status": "complete",
+  "provenance": {
+    "source_root": "/data2/user/reference_envs/temprmot/source",
+    "source_commit": "6a65640d849fdee4a32bb055945ee34c3b0edeb1",
+    "checkpoint": "/data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth",
+    "checkpoint_sha256": "4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b",
+    "text_root": "/data2/user/reference_envs/temprmot/roberta-base",
+    "load_report": {
+      "missing_keys": [],
+      "unexpected_keys": []
+    },
+    "device": "cuda:0",
+    "source_parameter_count": 174509548,
+    "trainable_parameter_count": 0
+  },
+  "video": "M0203",
+  "expression": "Auto stopped at red stoplight",
+  "frame_index": 1,
+  "query_text": "Auto stopped at red stoplight",
+  "snapshot_candidates": 300,
+  "valid_candidates": 0,
+  "output_candidates": 300,
+  "feature_shape": [
+    300,
+    256
+  ],
+  "source_prob_min": 0.305312842130661,
+  "source_prob_max": 0.36178192496299744,
+  "valid_objectness_min": null,
+  "valid_objectness_max": null,
+  "valid_source_prob_min": null,
+  "valid_source_prob_max": null,
+  "valid_box_area_min": null,
+  "valid_box_area_max": null
+}

@@ -1,0 +1,41 @@
+{
+  "status": "COMPLETED_STOPPED_NO_NEW_FULL_TTA",
+  "interpretation": "all entries are offline diagnostics, not new TTA methods",
+  "identity_count_effect": {
+    "frozen_HOTA": 8.218,
+    "identity_HOTA": 8.8179,
+    "countmatched_HOTA": 8.8206,
+    "descriptive_gain_ratio": 1.0045007501250223,
+    "causal_percentage_established": false,
+    "independently_deployable_count_rule_found": false
+  },
+  "query_presence": {
+    "preset_offline_max": {
+      "n": 425,
+      "positives": 40,
+      "prevalence": 0.09411764705882353,
+      "AUROC": 0.7257792207792207,
+      "AUPRC": 0.19937330504283773,
+      "video_cluster_AUROC_CI95": [
+        0.6265052891815587,
+        0.8212026076218373
+      ],
+      "video_cluster_AUPRC_CI95": [
+        0.14375301964814838,
+        0.36254809025686546
+      ]
+    },
+    "random_AUPRC": 0.09411764705882353,
+    "online_GT_selected_threshold": false
+  },
+  "frozen_features": {
+    "generic_PCD_cross_video_clothing_Top1": 0.5091210613598673,
+    "random_gallery": 0.3275370286068799,
+    "probe_same_frame_AUROC": 0.5864024998082971,
+    "original_head_same_frame_AUROC": 0.6164835902154742,
+    "diagnostic_probe_beats_original_head": false,
+    "all17_types_semantically_generalized": false
+  },
+  "validated_independent_unlabeled_semantic_learning_signal": "NOT_ESTABLISHED",
+  "research_decision": "No evidence for another full LoRA TTA run. Some frozen query/appearance signal remains; causal consistency may audit UNKNOWN, but is not a reliable semantic label."
+}

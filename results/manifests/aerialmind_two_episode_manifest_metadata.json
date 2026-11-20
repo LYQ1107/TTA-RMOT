@@ -1,0 +1,36 @@
+{
+  "format": "locatemot-qcs-manifests-v1",
+  "dataset": "aerialmind_two_episode",
+  "videos": [
+    "uav0000009_03358_v",
+    "M0203"
+  ],
+  "runtime_rows": 1226,
+  "evaluation_rows": 1226,
+  "runtime_manifest": "/data2/user/LocateMOT/results/manifests/aerialmind_two_episode_runtime_manifest.jsonl",
+  "evaluation_manifest": "/data2/user/LocateMOT/results/manifests/aerialmind_two_episode_evaluation_manifest.jsonl",
+  "runtime_contains_gt": false,
+  "runtime_forbidden_field_names": [
+    "label_path",
+    "expression_path",
+    "gt_box",
+    "gt_id",
+    "label"
+  ],
+  "runtime_forbidden_fields_found": [],
+  "evaluation_contains_gt_paths": true,
+  "query_text_source": "filename",
+  "trackeval_frame_offset": 0,
+  "label_formats": {
+    "uav0000009_03358_v": "xywh_topleft",
+    "M0203": "cxcywh"
+  },
+  "expression_filter": [
+    "Auto stopped at red stoplight",
+    "Automobiles driving in approaching direction"
+  ],
+  "source_files": {
+    "config": "/data2/user/LocateMOT/configs/tta/qcs_tta_aerialmind.yaml",
+    "config_sha256": "49c48b1cee8211cbb4ddf854859c773834a31ab2bd008f8995e29e4801fbb5dd"
+  }
+}

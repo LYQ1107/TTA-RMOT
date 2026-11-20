@@ -1,0 +1,29 @@
+{
+  "protocol": "DEVELOPMENT_TEACHER_PROBE",
+  "target_GT_read": false,
+  "manifest": "/data2/user/FlexHook-TTA/results/teacher_probe/manifest.jsonl",
+  "manifest_sha256": "a75c2da4453cc279c7560f831a53bb09fcb9f17d71ffbaf5db4885fe0eadee2c",
+  "stage": "/data2/user/TTA-RMOT-assets/teacher-p1/staging_full",
+  "samples": 8381,
+  "videos": 25,
+  "video_queries": 425,
+  "anchor_quantiles": [
+    0.1,
+    0.3,
+    0.5,
+    0.7,
+    0.9
+  ],
+  "expected_upper_bound": 8500,
+  "zero_candidate_queries": [],
+  "images": 2218,
+  "parser_counts": {
+    "MIXED": 425
+  },
+  "seed": 17,
+  "frame_offset": 0,
+  "source_runtime_manifest_sha256": "82479554c8c770f299db6ed82e766a07d568e2fe7006d515fe88fc5ced676d6f",
+  "selection_is_GT_blind": true,
+  "history_is_causal": true,
+  "readonly_staging_on_completion": true
+}

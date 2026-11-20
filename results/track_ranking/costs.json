@@ -1,0 +1,160 @@
+{
+  "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+  "new_teacher_calls": 0,
+  "new_model_calls": 0,
+  "GPU_hours": 0,
+  "optimizer_updates": 0,
+  "CPU_completed_worker_wall_seconds": 358.14384233090095,
+  "CPU_failed_worker_wall_seconds": 0.3171679941006005,
+  "completed_stages": [
+    {
+      "stage": "summarize_track_ranking",
+      "exit_code": 0,
+      "wall_seconds": 14.248471897095442,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/aggregate_1793588278840401698/summarize_track_ranking.log"
+    },
+    {
+      "stage": "preflight",
+      "exit_code": 0,
+      "wall_seconds": 5.354704406810924,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/preflight.log"
+    },
+    {
+      "stage": "noise_rates",
+      "exit_code": 0,
+      "wall_seconds": 4.372157581849024,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/noise_rates.log"
+    },
+    {
+      "stage": "target_Dance",
+      "exit_code": 0,
+      "wall_seconds": 49.98342948989011,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_Dance.log"
+    },
+    {
+      "stage": "target_SportsMOT",
+      "exit_code": 0,
+      "wall_seconds": 110.61440449510701,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_SportsMOT.log"
+    },
+    {
+      "stage": "target_KITTI-V2",
+      "exit_code": 0,
+      "wall_seconds": 147.04533260618336,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_KITTI-V2.log"
+    },
+    {
+      "stage": "validate_track_ranking",
+      "exit_code": 0,
+      "wall_seconds": 9.805164072895423,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793588810811285310/validate_track_ranking.log"
+    },
+    {
+      "stage": "report_track_ranking",
+      "exit_code": 0,
+      "wall_seconds": 7.174959941999987,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793588810811285310/report_track_ranking.log"
+    },
+    {
+      "stage": "validate_track_ranking",
+      "exit_code": 0,
+      "wall_seconds": 9.545217839069664,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793589142154273156/validate_track_ranking.log"
+    }
+  ],
+  "failed_stages": [
+    {
+      "stage": "preflight",
+      "exit_code": 1,
+      "wall_seconds": 0.3171679941006005,
+      "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793587844660860302/preflight.log"
+    }
+  ],
+  "completed_launchers": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/aggregate_1793588278840401698/completion.json",
+      "status": "COMPLETE",
+      "phase": "aggregate",
+      "stages": [
+        {
+          "stage": "summarize_track_ranking",
+          "exit_code": 0,
+          "wall_seconds": 14.248471897095442,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/aggregate_1793588278840401698/summarize_track_ranking.log"
+        }
+      ],
+      "wall_seconds": 14.250512992963195,
+      "new_teacher_calls": 0,
+      "new_model_calls": 0,
+      "GPU_hours": 0,
+      "optimizer_updates": 0
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/completion.json",
+      "status": "COMPLETE",
+      "phase": "metrics",
+      "stages": [
+        {
+          "stage": "preflight",
+          "exit_code": 0,
+          "wall_seconds": 5.354704406810924,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/preflight.log"
+        },
+        {
+          "stage": "noise_rates",
+          "exit_code": 0,
+          "wall_seconds": 4.372157581849024,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/noise_rates.log"
+        },
+        {
+          "stage": "target_Dance",
+          "exit_code": 0,
+          "wall_seconds": 49.98342948989011,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_Dance.log"
+        },
+        {
+          "stage": "target_SportsMOT",
+          "exit_code": 0,
+          "wall_seconds": 110.61440449510701,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_SportsMOT.log"
+        },
+        {
+          "stage": "target_KITTI-V2",
+          "exit_code": 0,
+          "wall_seconds": 147.04533260618336,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/metrics_1793588026987247580/target_KITTI-V2.log"
+        }
+      ],
+      "wall_seconds": 156.777245830046,
+      "new_teacher_calls": 0,
+      "new_model_calls": 0,
+      "GPU_hours": 0,
+      "optimizer_updates": 0
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793588810811285310/completion.json",
+      "status": "COMPLETE",
+      "phase": "report",
+      "stages": [
+        {
+          "stage": "validate_track_ranking",
+          "exit_code": 0,
+          "wall_seconds": 9.805164072895423,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793588810811285310/validate_track_ranking.log"
+        },
+        {
+          "stage": "report_track_ranking",
+          "exit_code": 0,
+          "wall_seconds": 7.174959941999987,
+          "log": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/launchers/report_1793588810811285310/report_track_ranking.log"
+        }
+      ],
+      "wall_seconds": 16.983401705045253,
+      "new_teacher_calls": 0,
+      "new_model_calls": 0,
+      "GPU_hours": 0,
+      "optimizer_updates": 0
+    }
+  ],
+  "note": "Three target CPU workers run concurrently: accumulated worker wall time is not elapsed end-to-end time or physical CPU-core time. Excludes current report compression/rendering, coding and GitHub publication."
+}

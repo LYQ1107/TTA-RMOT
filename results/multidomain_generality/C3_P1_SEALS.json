@@ -1,0 +1,73 @@
+{
+  "status": "C3_ALL_SCORE_AND_GT_FREE_PREDICTION_SEALS_COMPLETE_BEFORE_GT",
+  "source": "V2-best",
+  "target": "SportsMOT",
+  "videos": 45,
+  "episodes": 466,
+  "complete_rows": 2968201,
+  "historical_rows": 2956145,
+  "score_seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/V2-best/scores_seal.json",
+  "score_seal_sha256": "748773f92a1608fdcad5c49d0da6784af23dbf3feb9990677bc4565b3d0996be",
+  "complete_margin_sha256": "9b710eafe6e05df47599af0db6b55869b348248972bc6295186ed421b08afddd",
+  "historical_margin_sha256": "892c6e7e1be696dfdba1438f8b75493f099cb826fcda52322a16ff93466b7d3a",
+  "input_score_paths": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/V2-best/complete.npy",
+      "sha256": "9b710eafe6e05df47599af0db6b55869b348248972bc6295186ed421b08afddd"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/LaMOT-best/complete.npy",
+      "sha256": "cc78b7b479eb6c51906275a16a736022b93fcd7cbbe07a120f9a2135cc678e3d"
+    }
+  ],
+  "methods": {
+    "NATIVE": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/NATIVE/predictions_seal.json",
+      "seal_sha256": "629097be0652bcbc92f52a24291eef14a3653d0b769b681c58a1eb08c18d9c90",
+      "episodes": 466,
+      "prediction_rows": 1214424
+    },
+    "IN_DOMAIN": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/IN_DOMAIN/predictions_seal.json",
+      "seal_sha256": "9ee3e35fd187bfeadc2c7c88b8991f9a1e2f30d0ae86583ea48f77f3531dc370",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "R_SxK_I": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/R_SxK_I/predictions_seal.json",
+      "seal_sha256": "a40172bec3c81ec52c22c3f821fcc07ed22883ef8cff3d2dfbdd628015aa3522",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "R_IxK_S": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/R_IxK_S/predictions_seal.json",
+      "seal_sha256": "f79cf18dbca8036ca540251215ac0b942517221d255d90edcadb1322a87829c4",
+      "episodes": 466,
+      "prediction_rows": 1214424
+    },
+    "B0_GLOBAL": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/B0_GLOBAL/predictions_seal.json",
+      "seal_sha256": "93451536210c93946e5e54e61fcca39615b00463595157654d23960cee1de442",
+      "episodes": 466,
+      "prediction_rows": 1560418
+    },
+    "HIST_LaMOT-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/HIST_LaMOT-best/predictions_seal.json",
+      "seal_sha256": "e73066e0538476997e73e627fbb87fe1f668d9d956b364d629855fd2da5eec3d",
+      "episodes": 466,
+      "prediction_rows": 1554322
+    },
+    "HIST_V2-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/HIST_V2-best/predictions_seal.json",
+      "seal_sha256": "19f8bf9eb79fafc5a1f11d4379010edc36b25f229a1a75c69367b27adb936090",
+      "episodes": 466,
+      "prediction_rows": 1209337
+    }
+  },
+  "indexed_files": 3262,
+  "prediction_index_sha256": "e0bc30dfa3d6eab032a8d686defdcf777a2e94d7012633f21d943dce9f6eadea",
+  "GT_open_attempts": 0,
+  "training_updates": 0,
+  "teacher_calls": 0,
+  "formal_metrics": "NOT_COMPUTED_YET"
+}

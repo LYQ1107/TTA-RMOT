@@ -1,0 +1,71 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "branch": "research/v2dance-evidence-teacher-p1-20261026",
+  "status": "P1_COMPLETE_STOP_BEFORE_STUDENT_TRAINING",
+  "canonical_worktree": "/data2/user/FlexHook-TTA",
+  "published_results": {
+    "local_source_commit": "ecdf0a81132ce9b11682cb12119f1a711c3e30bc",
+    "github_commit": "0685e51257494aab163720e47205fcdd3491bab1",
+    "identical_git_tree": "841bc83ee2807cc216353adfe43d13d47439f7e4",
+    "url": "https://github.com/LYQ1107/TTA-RMOT/commit/0685e51257494aab163720e47205fcdd3491bab1"
+  },
+  "mapping_note": "Local and GitHub commit IDs differ because publication uses the connected GitHub API; the exact Git tree is verified before each non-force ref update. This metadata-only delivery commit follows the pinned results commit.",
+  "source_to_identical_published_tree_commits": {
+    "afdce21dfb2321678f7ec5944ae690753593a743": "8cce99dc194fcd6e289905b85fe3c65403ab7de5",
+    "1a00e37ec0336587805439825d697392683a3eb3": "165135cf251bf3367a40c82717b4fe5364a415e4",
+    "1486c9d720bcb920d062e4cf9590c91d7e862553": "faf1bf7e8e7809f2252206e757e194675400b1f8",
+    "57ea58a13901a0782290775bc0523c3074b40d05": "862c8059109a07d4d877ba0f679cb9ee31fc6e66",
+    "bd9c58a7f1a1c976d69744d3b15af5ff2214b6c1": "32206b63f9a2848cdccecbda2d51e3660820a04e",
+    "fc1c30851547698a1268eaca88210a3c9449c585": "d8ab11e535aaf3a4f1daf3618b27c9572e518577",
+    "4eb3cd7831c3b8da08b5bcf8b84a512dd6eb1e13": "e22a6f3f5973a45a4f92788445d8d335e3166f49",
+    "3bae1a108eae0e79b40e528ccfbd55eb7866c572": "8cf9b84dcc37ecfb5271bf327cd5c24471279650",
+    "9b189ff8b2db7f6421cd38fd042c32c9ef6b49ed": "4a4b797b67fa0cde2fb683b122052dadf93ea965",
+    "472b8d8ae2bbf3f36011abf787c997ce0165949a": "6992717a5075b7530c489892e8425bddb5ecd34c",
+    "a16646762163e28a2b4c53612af16d295e23bb52": "ddcf7d56cdf6d5ed3ed330a59723121bc12ad9d0",
+    "dde72c99d0d56b77c45c93203c72d5055c67a801": "a214bdbba61239c9d083a0952c3f0aa161380aae",
+    "ecdf0a81132ce9b11682cb12119f1a711c3e30bc": "0685e51257494aab163720e47205fcdd3491bab1"
+  },
+  "coverage": {
+    "videos": 25,
+    "video_expression_episodes": 425,
+    "methods": 6,
+    "full_pairs_per_method": 8381,
+    "complete_smoke_pairs_per_method": 1649
+  },
+  "teacher_condition": {
+    "actual": "T0 Qwen/Qwen3-VL-2B-Instruct frozen BF16 without adapters",
+    "T1": "MISSING_OFFICIAL_V2_USER_WAIVED_NO_SUBSTITUTE",
+    "TCP_TRP": "ORIGINAL_POLICY_WITH_USER_AUTHORIZED_CAUSAL_13_ACTIVE_FRAME_WINDOW_RESET_NOT_FULL_PREFIX",
+    "pretraining_overlap": "UNKNOWN"
+  },
+  "scientific_verdict": "SIMPLE_TEACHER_ONLY_NO_EVIDENCE_CONTRIBUTION",
+  "evidence_P2_ready": false,
+  "formal_P2_executable": false,
+  "student_training_started": false,
+  "audit": {
+    "teacher_target_GT_open_attempts": 0,
+    "teacher_parameter_updates": 0,
+    "future_frame_requests": 0,
+    "B_C_visual_call_slot_mismatches": 0,
+    "D_Bplus_visual_call_slot_mismatches": 0
+  },
+  "checks": {
+    "targeted_tests": 12,
+    "real_RGB_metadata_parity_checks": 40,
+    "complete_archive_members_verified": 102,
+    "historical_TTA_diagnostics_UDA_results_unchanged": true
+  },
+  "recovery": {
+    "run_root": "/data2/user/FlexHook-TTA/results/runs/teacher_probe_p1_20261026_v1",
+    "raw_response_SQLite": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/raw.sqlite",
+    "full_raw_index": "/data2/user/TTA-RMOT-assets/teacher-p1/cache/full_p1_T0_response_index.jsonl.gz",
+    "raw_index_sha256": "3d505fdf034b58dcd2b311ad64684f4bd5fa06d417aed35bdb3fb90373d8cd18",
+    "raw_index_records": 204327,
+    "public_predictions": "results/teacher_probe/teacher_outputs.jsonl",
+    "public_seal": "results/teacher_probe/config_hashes.json",
+    "complete_text_logs": "results/teacher_probe/logs/teacher_p1_complete_text_logs.tar.gz",
+    "archive_verification": "results/teacher_probe/logs/archive_index.json",
+    "large_payload_policy": "Weights, images and complete raw caches stay on the server, as requested. Small results, all compact predictions, code and complete text logs are published."
+  },
+  "next_action": "WAIT_FOR_NEW_EXPLICIT_USER_DIRECTION_NO_AUTOMATIC_TRAINING"
+}

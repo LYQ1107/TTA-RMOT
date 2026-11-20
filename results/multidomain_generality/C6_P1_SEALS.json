@@ -1,0 +1,73 @@
+{
+  "status": "C6_ALL_SCORE_AND_GT_FREE_PREDICTION_SEALS_COMPLETE_BEFORE_GT",
+  "source": "LaMOT-best",
+  "target": "Dance",
+  "videos": 25,
+  "episodes": 425,
+  "complete_rows": 3588445,
+  "historical_rows": 3576681,
+  "score_seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/dance/LaMOT-best/scores_seal.json",
+  "score_seal_sha256": "810993c5dfcb25280a0d2d9e2e9998cac7679cf0fa99e07b2d2cdaab636e17c9",
+  "complete_margin_sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517",
+  "historical_margin_sha256": "1e5a45f853f59de50193902a1ca76e276854f4d3546b187cf0fb37ce38126c84",
+  "input_score_paths": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/dance/LaMOT-best/complete.npy",
+      "sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/OFFICIAL_DANCE_COMPLETE.npy",
+      "sha256": "b82fd2e6e8e0f7fe37fa904cd5a62c19d642969a82e5f0f9fee2b50479e4ef0b"
+    }
+  ],
+  "methods": {
+    "NATIVE": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/NATIVE/predictions_seal.json",
+      "seal_sha256": "b71a13f13bfdc3a7e289ca1faebcd01f9a5cf091842b0fb6b7ca8715a802d6df",
+      "episodes": 425,
+      "prediction_rows": 509926
+    },
+    "IN_DOMAIN": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/IN_DOMAIN/predictions_seal.json",
+      "seal_sha256": "8d1f258d926898878ecb4259ae2b049e4ae3aecaee379bcc545c9b6f9b3d319f",
+      "episodes": 425,
+      "prediction_rows": 254910
+    },
+    "R_SxK_I": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/R_SxK_I/predictions_seal.json",
+      "seal_sha256": "11c80b30bba60a9db1615f02701160a3a8178539513cab440a9cd6b1d7d55b31",
+      "episodes": 425,
+      "prediction_rows": 254910
+    },
+    "R_IxK_S": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/R_IxK_S/predictions_seal.json",
+      "seal_sha256": "be222009edb3d99560a423d4d55c90eb7c231fe3b1a31243a1a664e53be31eb2",
+      "episodes": 425,
+      "prediction_rows": 509926
+    },
+    "B0_GLOBAL": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/B0_GLOBAL/predictions_seal.json",
+      "seal_sha256": "6fbcfff396af32ec49eb94410654ef888df94df107f837b91e10d73b5c5887d0",
+      "episodes": 425,
+      "prediction_rows": 254910
+    },
+    "HIST_Dance-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/HIST_Dance-best/predictions_seal.json",
+      "seal_sha256": "9b8c9eaba9c161e8933725f75f70cbf088098c966603b4ca5bdd8f67727684f9",
+      "episodes": 425,
+      "prediction_rows": 254118
+    },
+    "HIST_LaMOT-best": {
+      "seal_path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/HIST_LaMOT-best/predictions_seal.json",
+      "seal_sha256": "648965559247811c1750797e6449b76610c64f13b8c5cfdc28679f0b5ff56296",
+      "episodes": 425,
+      "prediction_rows": 508237
+    }
+  },
+  "indexed_files": 2975,
+  "prediction_index_sha256": "a7759af1d52467e51280d9ad90d6b5697d0cf57b4988457b86fb29ae96673b42",
+  "GT_open_attempts": 0,
+  "training_updates": 0,
+  "teacher_calls": 0,
+  "formal_metrics": "NOT_COMPUTED_YET"
+}

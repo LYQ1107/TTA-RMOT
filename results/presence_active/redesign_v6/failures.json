@@ -1,0 +1,25 @@
+{
+  "classification": "IMPLEMENTATION_COMPATIBILITY_NOT_METHOD_RESULT",
+  "durable_manager": 1834232,
+  "observer_handle": 57210,
+  "observed_terminal_exit_code": 1,
+  "first_actionable_root_cause": "FrameCacheV6 extracted numpy.int64 track IDs; TeacherClient JSON boundary requires native Python integers",
+  "failure_point": "first teacher ask_many, after first-video full scoring, before any completed video or LoRA step",
+  "attempts": [
+    {"pair": "C1", "pid": 1834567, "physical_gpu": 6, "worker_wall_seconds": 314.6402815389447},
+    {"pair": "C2", "pid": 1834566, "physical_gpu": 4, "worker_wall_seconds": 579.9866503891535}
+  ],
+  "successful_completed_videos": 0,
+  "healthy_completed_episode_reruns": 0,
+  "foreign_processes_stopped": 0,
+  "original_worker_ledgers_and_teacher_sessions_retained": true,
+  "failed_cache_recoverable_paths": [
+    "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v6/active/C1/FULL/rho_0.3/failed_video_attempts/numpy_id_1793785863175932395",
+    "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v6/active/C2/FULL/rho_0.3/failed_video_attempts/numpy_id_1793785863175932395"
+  ],
+  "failed_cache_files_deleted": false,
+  "failure_cost_rule": "worker wall retained; original per-phase scoring time unavailable, not fabricated as zero; not GPU utilization integral",
+  "fix": "Convert track IDs to Python int in FrameCacheV6; preserve identical values; add real checkpoint-schema cache-to-JSON regression; persist future score phase ledger immediately",
+  "numeric_method_and_prereg_unchanged": true,
+  "resume_rule": "After verified terminal exit1 and published compatibility fix, same five-job plan from last valid checkpoint; these first videos had no valid stream checkpoint"
+}

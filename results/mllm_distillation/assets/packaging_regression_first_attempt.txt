@@ -1,0 +1,62 @@
+........F..............                                                  [100%]
+=================================== FAILURES ===================================
+____ test_delivery_uses_original_reference_receipt_without_fabricating_one _____
+
+tmp_path = PosixPath('/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0')
+
+    def test_delivery_uses_original_reference_receipt_without_fabricating_one(tmp_path):
+        import json
+        from scripts.package_mllm_delivery import original_receipt,archive
+        from flex_tta.runtime.pf_receipts import file_sha
+        parent=tmp_path/'parent.json';parent.write_text('{"status":"complete"}\n')
+        pair=tmp_path/'reference';pair.mkdir()
+        (pair/'reference_receipt.json').write_text(json.dumps(dict(parent_receipt=str(parent),parent_receipt_sha256=file_sha(parent))))
+        source=original_receipt(pair)
+        assert source==parent and not (pair/'completion.json').exists()
+>       result=archive(tmp_path/'receipts.tar.gz',[(source,'completion.json')])
+
+tests/test_mllm_distillation.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+scripts/package_mllm_delivery.py:42: in archive
+    return dict(path=str(path.relative_to(ROOT)),sha256=file_sha(path),bytes=path.stat().st_size,members=members)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0/receipts.tar.gz')
+other = (PosixPath('/data2/user/FlexHook-TTA'),)
+
+    def relative_to(self, *other):
+        """Return the relative path to another path identified by the passed
+        arguments.  If the operation is not possible (because this is not
+        a subpath of the other path), raise ValueError.
+        """
+        # For the purpose of this method, drive and root are considered
+        # separate parts, i.e.:
+        #   Path('c:/').relative_to('c:')  gives Path('/')
+        #   Path('c:/').relative_to('/')   raise ValueError
+        if not other:
+            raise TypeError("need at least one argument")
+        parts = self._parts
+        drv = self._drv
+        root = self._root
+        if root:
+            abs_parts = [drv, root] + parts[1:]
+        else:
+            abs_parts = parts
+        to_drv, to_root, to_parts = self._parse_args(other)
+        if to_root:
+            to_abs_parts = [to_drv, to_root] + to_parts[1:]
+        else:
+            to_abs_parts = to_parts
+        n = len(to_abs_parts)
+        cf = self._flavour.casefold_parts
+        if (root or drv) if n == 0 else cf(abs_parts[:n]) != cf(to_abs_parts):
+            formatted = self._format_parsed_parts(to_drv, to_root, to_parts)
+>           raise ValueError("{!r} is not in the subpath of {!r}"
+                    " OR one path is relative and the other is absolute."
+                             .format(str(self), str(formatted)))
+E           ValueError: '/tmp/pytest-of-user/pytest-57/test_delivery_uses_original_re0/receipts.tar.gz' is not in the subpath of '/data2/user/FlexHook-TTA' OR one path is relative and the other is absolute.
+
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/pathlib.py:818: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_mllm_distillation.py::test_delivery_uses_original_reference_receipt_without_fabricating_one
+1 failed, 22 passed in 4.78s

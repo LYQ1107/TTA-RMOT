@@ -1,0 +1,69 @@
+{
+  "version": "v8",
+  "status": "STOP_EM_NONCONVERGENCE",
+  "stage": "0a",
+  "prereg_remote_commit": "4d44d479e5d462b16eb5c4b164ec73284d20f32e",
+  "prereg_sha256": "eb6cdd49d7fced34823ce76e6111424b92c3b18e8a375db8243b18c525e68401",
+  "manifest_sha256": "56a8b00042b20849c2fbdb1514af48fa490ecfc634e7a214de4f3279a9ed67d8",
+  "amendment_A1_applied_before_results": true,
+  "tests": {
+    "canonical": {
+      "passed": 9,
+      "failed": 1,
+      "parameter_case_not_run": 1,
+      "seconds": 7.59,
+      "exit_code": 1
+    },
+    "earlier_targeted": {
+      "passed": 9,
+      "deselected": 2,
+      "seconds": 5.33,
+      "overlaps_canonical": true
+    },
+    "failed_test": "tests/test_active_v8.py::test_registered_synthetic_200_video_recovery[0.1]",
+    "first_failure": {
+      "completed_videos": 5,
+      "iterations": 200,
+      "last_delta": 8.198819538840496e-7,
+      "tolerance": 1e-7,
+      "converged": false,
+      "rho_hat": 0.23273205643681252,
+      "pi_strata": [
+        0.43335323219726707,
+        0.15119714931447706,
+        0.5567154949779427
+      ],
+      "records": 85,
+      "tracks_per_stratum": [
+        108,
+        477,
+        48
+      ]
+    }
+  },
+  "not_executed": [
+    "stage0b",
+    "stage0c",
+    "stage0d",
+    "stage0e",
+    "stage1",
+    "stage2",
+    "stage3",
+    "stage4"
+  ],
+  "true_teacher_calls": 0,
+  "GPU_calls": 0,
+  "optimizer_updates": 0,
+  "true_GT_files_opened": 0,
+  "guard_unit_test": {
+    "normal_generation_attempts": 0,
+    "deliberate_denied_attempts": 1,
+    "subprocess_only": true
+  },
+  "main_gate": "NOT_EVALUATED",
+  "slow_gate": "NOT_EVALUATED",
+  "all_other_acceptance_criteria_unchanged": true,
+  "source_runner_status": "IMPLEMENTATION_DRAFT_NOT_GPU_VALIDATED",
+  "v7_files_unchanged": true,
+  "resume_requires_explicit_user_direction": true
+}

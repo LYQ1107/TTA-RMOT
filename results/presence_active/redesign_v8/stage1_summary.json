@@ -1,0 +1,133 @@
+{
+  "status": "STAGE1_COMPLETE",
+  "videos": 4,
+  "query_episodes": 459,
+  "GLANCE_coverage": 1.0,
+  "snapshot_files": 20,
+  "GT_open_attempts": 0,
+  "physical_GPUs": [
+    0,
+    4
+  ],
+  "admission": {
+    "selected": [
+      {
+        "index": 0,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 7685,
+        "free_mib": 73469,
+        "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+        "compute_processes": 1
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 9423,
+        "free_mib": 71731,
+        "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+        "compute_processes": 1
+      }
+    ],
+    "all_gpus": [
+      {
+        "index": 0,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 7685,
+        "free_mib": 73469,
+        "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+        "compute_processes": 1
+      },
+      {
+        "index": 1,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 27079,
+        "free_mib": 54075,
+        "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+        "compute_processes": 1
+      },
+      {
+        "index": 2,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 25613,
+        "free_mib": 55542,
+        "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+        "compute_processes": 2
+      },
+      {
+        "index": 3,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 17511,
+        "free_mib": 63643,
+        "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+        "compute_processes": 1
+      },
+      {
+        "index": 4,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 9423,
+        "free_mib": 71731,
+        "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+        "compute_processes": 1
+      },
+      {
+        "index": 5,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 27781,
+        "free_mib": 53373,
+        "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+        "compute_processes": 1
+      },
+      {
+        "index": 6,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 9423,
+        "free_mib": 71731,
+        "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+        "compute_processes": 1
+      },
+      {
+        "index": 7,
+        "name": "NVIDIA A800-SXM4-80GB",
+        "total_mib": 81920,
+        "used_mib": 25985,
+        "free_mib": 55170,
+        "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+        "compute_processes": 2
+      }
+    ],
+    "jobs": [
+      {
+        "pair": "C1",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      },
+      {
+        "pair": "C2",
+        "method": "MINUS_SLOW",
+        "rho": 0.3
+      }
+    ],
+    "required_mib": 24576,
+    "maximum_physical_GPUs": 2,
+    "sharing_authorized": true,
+    "foreign_processes_stopped": 0
+  },
+  "logical_calls": 5885,
+  "new_calls": 1581,
+  "cache_hits": 4304,
+  "teacher_forward_seconds": 196.60153486020863,
+  "scheduler_wall_seconds": 441.200429,
+  "durable": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/launchers/durable_1793958018537421143",
+  "source_phase0_commit": "122ad412a922025f44e8798829e5fd26005b32c1",
+  "formal_RMOT_not_evaluated": true,
+  "pilot_cost_in_final_resumed_stream": true
+}

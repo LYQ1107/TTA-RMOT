@@ -1,0 +1,120 @@
+{
+  "status": "ALL_AVAILABLE_MODELS_PROBE_SEALED_BEFORE_GT",
+  "models": {
+    "2B": {
+      "status": "ALL_FIXED_PROBE_CALLS_SEALED",
+      "model": "2B",
+      "model_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "manifest_sha256": "c878d0f6f7774f695580457cabda4dce31b6122ec50010314a5a4bf6aefb71fd",
+      "frames": 50,
+      "budgets": {
+        "T1_CROP_YESNO": {
+          "planned_logical_calls": 6426,
+          "new_logical_calls": 6375,
+          "cached_logical_calls": 51,
+          "forward_batches_or_generations": 818,
+          "model_forward_calls": 818,
+          "forward_path_seconds": 98.37799784378149,
+          "parse_failures": 0,
+          "peak_allocated_bytes": 4678529024
+        },
+        "T2_CROP_CHOICE": {
+          "planned_logical_calls": 378,
+          "new_logical_calls": 375,
+          "cached_logical_calls": 3,
+          "forward_batches_or_generations": 68,
+          "model_forward_calls": 68,
+          "forward_path_seconds": 8.052991473348811,
+          "parse_failures": 0,
+          "peak_allocated_bytes": 5130259456
+        },
+        "T3_FRAME_SOM": {
+          "planned_logical_calls": 850,
+          "new_logical_calls": 833,
+          "cached_logical_calls": 17,
+          "forward_batches_or_generations": 833,
+          "model_forward_calls": 3689,
+          "forward_path_seconds": 309.86192987067625,
+          "parse_failures": 9,
+          "peak_allocated_bytes": 4698367488
+        }
+      },
+      "frozen": {
+        "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "frozen_parameters_unchanged": true,
+        "optimizer_updates": 0,
+        "forward_batches": 4575,
+        "model_load_and_initial_hash_seconds": 7.362670976901427
+      },
+      "target_GT_open_attempts": [],
+      "isolation": {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0004",
+          "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0018",
+          "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0034",
+          "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0058",
+          "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0079",
+          "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/manifest.jsonl",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      "student_updates": 0,
+      "teacher_updates": 0,
+      "worker_seconds": 440.5190704171546,
+      "physical_gpu": "0",
+      "prompt_code_sha256": "7c910b7489e91d122881bb9975ddc9f02f41ab233c87b3bf72d7c9047ed8881c",
+      "original_backend_sha256": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+      "original_visual_builder_sha256": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+      "outputs_path": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/outputs.jsonl",
+      "outputs_sha256": "4593daa55db1a432f81d64ef8bcb50cd572bb1aa9b5b5798123e85cf5f9257fd",
+      "agreement_path": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/GT_free_agreements.json",
+      "agreement_sha256": "510371a60bf86afa7f09e89ad9fd3b8d6aa00eade15d945e357fdb935e04a4cc"
+    }
+  },
+  "worker_attempts": [
+    {
+      "tag": "2B_smoke",
+      "physical_gpu": 0,
+      "pid": 975606,
+      "exit_code": 0,
+      "worker_seconds": 27.991697715129703,
+      "log": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe_launchers/1793457120619181791/2B_smoke.log"
+    },
+    {
+      "tag": "2B_full",
+      "physical_gpu": 0,
+      "pid": 975956,
+      "exit_code": 0,
+      "worker_seconds": 445.78597605600953,
+      "log": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe_launchers/1793457120619181791/2B_full.log"
+    }
+  ],
+  "maximum_physical_GPUs": 1,
+  "actual_wall_seconds": 474.0308384699747,
+  "GPU_process_hours": 0.13160490938087202,
+  "skipped_8B": true,
+  "no_student_training": true
+}

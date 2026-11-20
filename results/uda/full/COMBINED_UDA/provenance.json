@@ -1,0 +1,25 @@
+{
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "experiment_commit": "6cd4c6c993ef9c96e4baf3596f80451ec205f618",
+  "physical_gpu": "4",
+  "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+  "plan_sha256": {
+    "source_train_plan.jsonl": "8908c38f55b589ad868b040f25aa7283a57d844a22de093379943b369e337a18",
+    "target_plan.jsonl": "7fe5b4eff9ebe786fab089faf57bf536f92149ddd5f13302f9bc2bbc74ac9283"
+  },
+  "total_steps": 8973,
+  "steps_per_epoch": 8973,
+  "target_manifest": "/data2/user/FlexHook-TTA/manifests/dance_val_runtime.jsonl",
+  "target_GT_used": false,
+  "external_semantic_teacher": false,
+  "trainable_parameters": 24576
+}

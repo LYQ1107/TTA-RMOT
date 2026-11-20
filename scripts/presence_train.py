@@ -1,0 +1,170 @@
+"""Train only the new source presence head on sealed frozen feature sets."""
+from argparse import ArgumentParser
+from functools import partial
+import fcntl
+import json
+import os
+from pathlib import Path
+import random
+import sys
+import time
+import numpy as np
+import torch
+from torch.utils.data import DataLoader
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from flex_uda.presence.runtime import RUN, PUBLIC, IN_DOMAIN
+from flex_uda.presence.data import FeatureUnits, collate_units, head_loss
+from flex_uda.presence.head import PresenceHead
+from flex_uda.presence.residual import ARCHITECTURE, ResidualCountHead, residual_loss
+from flex_tta.runtime.pf_receipts import atomic_json, append_json, file_sha
+
+
+def epoch(model, loader, device, weight, optimizer=None):
+    model.train(optimizer is not None)
+    if isinstance(model, ResidualCountHead):
+        totals = np.zeros(6)
+        first_gradient_norm = None
+        with torch.set_grad_enabled(optimizer is not None):
+            for batch in loader:
+                batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
+                output = model(**{k: batch[k] for k in ('pcd', 'margin', 'box', 'sent', 'padding_mask', 'track_id')})
+                loss, ce, kl = residual_loss(output, batch['count'])
+                if not torch.isfinite(loss): raise FloatingPointError('Nonfinite residual count loss')
+                if optimizer is not None:
+                    optimizer.zero_grad(set_to_none=True); loss.backward()
+                    if first_gradient_norm is None:
+                        norm = torch.stack([p.grad.detach().square().sum() for p in model.parameters() if p.grad is not None]).sum().sqrt()
+                        first_gradient_norm = float(norm)
+                        if not torch.isfinite(norm) or norm <= 0:
+                            raise FloatingPointError('First real source batch must have finite nonzero gradient')
+                    optimizer.step()
+                n = len(batch['count'])
+                predicted = output['logits'].argmax(-1)
+                native = ((batch['margin'] > 0) & ~batch['padding_mask']).sum(-1)
+                totals += [float(ce.detach())*n, float(kl.detach())*n, n, int((batch['count'] > 0).sum()),
+                           int((predicted != native).sum()), int((predicted-batch['count']).abs().sum())]
+        ce, kl = float(totals[0]/totals[2]), float(totals[1]/totals[2])
+        return dict(loss=ce+.1*kl, count_NLL=ce, native_KL=kl, units=int(totals[2]), positive_units=int(totals[3]),
+                    native_MAP_changed_units=int(totals[4]), MAP_count_MAE=float(totals[5]/totals[2]),
+                    first_real_batch_gradient_norm=first_gradient_norm)
+    totals = np.zeros(4)  # BCE sum, positive-count CE sum, units, positive units
+    with torch.set_grad_enabled(optimizer is not None):
+        for batch in loader:
+            batch = {k: v.to(device, non_blocking=True) for k, v in batch.items()}
+            output = model(**{k: batch[k] for k in ('pcd', 'margin', 'box', 'sent', 'padding_mask')})
+            loss, bce, ce = head_loss(output, batch['count'], weight)
+            if not torch.isfinite(loss): raise FloatingPointError('Nonfinite source presence head loss')
+            if optimizer is not None:
+                optimizer.zero_grad(set_to_none=True); loss.backward(); optimizer.step()
+            n = len(batch['count'])
+            positive = int((batch['count'] > 0).sum())
+            totals += [float(bce.detach())*n, float(ce.detach())*positive, n, positive]
+    bce = float(totals[0]/totals[2]); ce = float(totals[1]/totals[3]) if totals[3] else 0.
+    return dict(loss=bce+.5*ce, BCE=bce, count_CE=ce, units=int(totals[2]), positive_units=int(totals[3]))
+
+
+def main():
+    p = ArgumentParser(description=__doc__)
+    p.add_argument('--target', choices=list(IN_DOMAIN), required=True)
+    p.add_argument('--resume', action='store_true')
+    p.add_argument('--learning-rate', type=float, default=3e-4)
+    p.add_argument('--output', type=Path, help='Independent source-only hyperparameter trial; never overwrite default')
+    p.add_argument('--source-label-root', type=Path, help='Independent corrected own-source annotations; frozen features unchanged')
+    p.add_argument('--architecture', choices=['default', ARCHITECTURE], default='default')
+    a = p.parse_args()
+    from flex_uda.presence.resources import admitted_device
+    admitted_device()
+    random.seed(0); np.random.seed(0); torch.manual_seed(0)
+    from scripts.multidomain_runtime import guard
+    access = guard()  # only the already-exported own-source numerical labels are needed
+    name = IN_DOMAIN[a.target]
+    residual = a.architecture == ARCHITECTURE
+    default_out = RUN / 'redesign_v3/heads' / name if residual else RUN / 'heads' / name
+    out = (a.output or default_out).resolve(); out.mkdir(parents=True, exist_ok=True)
+    lock = (out / '.train.lock').open('a'); fcntl.flock(lock, fcntl.LOCK_EX)
+    if (out / 'training_receipt.json').exists():
+        print(json.dumps(dict(status='SOURCE_HEAD_ALREADY_COMPLETE_NO_RERUN', model=name)), flush=True); return
+    admitted_device(8192)
+    train_root = RUN / 'features/source_train' / a.target / name
+    val_root = RUN / 'features' / a.target / name
+    train = FeatureUnits(train_root, labels_root=a.source_label_root, track_ids=residual)
+    val = FeatureUnits(val_root, validation=True, track_ids=residual)
+    label_input = (dict(path=str(a.source_label_root),
+        manifest_sha256=file_sha(a.source_label_root / 'labels_manifest.json')) if a.source_label_root else None)
+    if a.source_label_root:
+        manifest = json.loads((a.source_label_root / 'labels_manifest.json').read_text())
+        if manifest['source_domain'] != a.target or manifest['model'] != name:
+            raise ValueError('Corrected annotations must belong to this head own source')
+        for row in manifest['files']:
+            if file_sha(row['path']) != row['sha256']: raise ValueError('Corrected source annotation changed')
+    for root in (train_root, val_root):
+        if not (root / 'export_receipt.json').exists(): raise ValueError('Incomplete source feature export')
+    device = torch.device('cuda:0')
+    torch.cuda.set_per_process_memory_fraction(min(.9, (4096 << 20)/torch.cuda.get_device_properties(0).total_memory))
+    torch.backends.cuda.matmul.allow_tf32 = False
+    torch.backends.cudnn.allow_tf32 = False
+    model = (ResidualCountHead() if residual else PresenceHead()).to(device)
+    weight = torch.tensor(min(10., (len(train)-train.positive_units)/train.positive_units), device=device)
+    generator = torch.Generator().manual_seed(0)
+    train_loader = DataLoader(train, batch_size=256, shuffle=True, generator=generator, num_workers=0,
+        collate_fn=partial(collate_units, augment=True), pin_memory=True)
+    val_loader = DataLoader(val, batch_size=256, shuffle=False, num_workers=0, collate_fn=collate_units, pin_memory=True)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=a.learning_rate, weight_decay=.01)
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=20)
+    latest = out / 'checkpoint_latest.pt'; start_epoch = 0; best = float('inf'); stale = 0
+    prior_wall = 0.
+    if a.resume or latest.exists():
+        saved = torch.load(latest, map_location=device, weights_only=False)
+        model.load_state_dict(saved['head']); optimizer.load_state_dict(saved['optimizer']); scheduler.load_state_dict(saved['scheduler'])
+        start_epoch, best, stale = saved['epoch'], saved['best'], saved['stale']
+        torch.set_rng_state(saved['rng'].cpu()); generator.set_state(saved['loader_rng'].cpu())
+        torch.cuda.set_rng_state(saved['cuda_rng'].cpu()); prior_wall = saved['wall_seconds']
+    started = time.perf_counter()
+    if residual and not start_epoch:
+        initial = epoch(model, val_loader, device, weight)
+        if initial['native_MAP_changed_units']:
+            raise ValueError('Residual initialization must exactly reproduce native counts on real source validation')
+        atomic_json(out / 'epoch0_native_prior.json', dict(metrics=initial, selected=False,
+            reason='initialization reference only; checkpoint selection begins after epoch1'))
+    e = start_epoch-1
+    for e in range(start_epoch, start_epoch if stale >= 3 else 20):
+        lr_used = optimizer.param_groups[0]['lr']
+        training = epoch(model, train_loader, device, weight, optimizer)
+        validation = epoch(model, val_loader, device, weight)
+        scheduler.step(); improved = validation['loss'] < best
+        if improved: best, stale = validation['loss'], 0
+        else: stale += 1
+        row = dict(epoch=e+1, train=training, validation=validation, best=best, stale=stale,
+            lr_used=lr_used, lr_next=optimizer.param_groups[0]['lr'], selected=improved, wall_seconds=prior_wall+time.perf_counter()-started)
+        state = dict(head=model.state_dict(), optimizer=optimizer.state_dict(), scheduler=scheduler.state_dict(),
+            epoch=e+1, best=best, stale=stale, target=a.target, model=name, seed=0,
+            learning_rate=a.learning_rate,
+            architecture=a.architecture,
+            corrected_source_labels=label_input,
+            train_units=len(train), validation_units=len(val), pos_weight=float(weight),
+            parameters=sum(p.numel() for p in model.parameters()), rng=torch.get_rng_state(),
+            loader_rng=generator.get_state(), cuda_rng=torch.cuda.get_rng_state(), wall_seconds=row['wall_seconds'], epoch_record=row)
+        temporary = latest.with_suffix('.partial'); torch.save(state, temporary); temporary.replace(latest)
+        if improved:
+            selected = out / 'checkpoint_best_source.pt'
+            temporary = selected.with_suffix('.partial'); torch.save(state, temporary); temporary.replace(selected)
+        append_json(out / 'curve.jsonl', row); print(json.dumps(row), flush=True)
+        if stale >= 3: break
+    torch.cuda.synchronize()
+    result = dict(status='HEAD_SOURCE_TRAINING_COMPLETE', target=a.target, model=name,
+        best_source_loss=best, epochs=e+1, train_units=len(train), validation_units=len(val),
+        parameters=sum(p.numel() for p in model.parameters()), head_only=True, frozen_FlexHook_loaded=False,
+        training_margin_input='frozen own-source GT-candidate decode',
+        validation_margin_input=val.margin_reference_record,
+        physical_gpu=os.environ.get('PRESENCE_PHYSICAL_GPU'), optimizer_updates=(e+1)*len(train_loader),
+        target_GT_open_attempts=len(access), wall_seconds=prior_wall+time.perf_counter()-started,
+        peak_allocated_bytes=torch.cuda.max_memory_allocated(), defaults_changed=a.learning_rate != 3e-4,
+        learning_rate=a.learning_rate, changes={'lr':[3e-4,a.learning_rate]} if a.learning_rate != 3e-4 else {},
+        architecture=a.architecture, objective='count_NLL+0.1_KL(native||head)' if residual else 'BCE+0.5_positive_count_CE',
+        corrected_source_labels=label_input,
+        checkpoint=str(out / 'checkpoint_best_source.pt'), checkpoint_sha256=file_sha(out / 'checkpoint_best_source.pt'))
+    atomic_json(out / 'training_receipt.json', result)
+
+
+if __name__ == '__main__': main()

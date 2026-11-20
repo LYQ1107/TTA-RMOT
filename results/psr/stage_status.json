@@ -1,0 +1,38 @@
+{
+  "project": "LYQ1107/TTA-RMOT",
+  "protocol": "USER_AUTHORIZED25VAL_SAME_SET_PSR_NOT_FORMAL_TRAIN_TO_VAL",
+  "formal40Train_asset_missing": true,
+  "teacher_policies": 4,
+  "teacher_direct_judgments_each": 8500,
+  "source_videos": 17,
+  "target_videos": 25,
+  "target_queries": 425,
+  "trainable_parameters": 24576,
+  "fixed_updates": 8973,
+  "methods": {
+    "NAIVE_PAIRED": "COMPLETE",
+    "PSR": "COMPLETE",
+    "UNIFORM_PAIRED": "COMPLETE",
+    "CONFIDENCE_PAIRED": "COMPLETE",
+    "PSR_DISCOVERY": "COMPLETE",
+    "PSR_GEOMETRY": "COMPLETE",
+    "NAIVE_TEMPORAL": "COMPLETE",
+    "MEAN_TEACHER_MATCHED": "COMPLETE"
+  },
+  "predictions": {
+    "NAIVE_PAIRED": "SEALED_425",
+    "PSR": "SEALED_425",
+    "UNIFORM_PAIRED": "SEALED_425",
+    "CONFIDENCE_PAIRED": "SEALED_425",
+    "PSR_DISCOVERY": "SEALED_425",
+    "PSR_GEOMETRY": "SEALED_425",
+    "NAIVE_TEMPORAL": "SEALED_425",
+    "MEAN_TEACHER_MATCHED": "SEALED_425"
+  },
+  "GT_metrics": "COMPLETE_OFFLINE",
+  "old_Naive8_0327": "HISTORICAL_ONLY_DIFFERENT_SAMPLING",
+  "current_GPU_limit": 4,
+  "raw_cache_root": "/data2/user/TTA-RMOT-assets/psr",
+  "private_run_root": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1",
+  "source_and_target_GT_permissions": "sourceGT legal; targetGT only independent evaluation after seal"
+}

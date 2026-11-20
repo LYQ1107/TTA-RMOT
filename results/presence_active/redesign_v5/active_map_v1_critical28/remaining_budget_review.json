@@ -1,0 +1,969 @@
+{
+  "status": "BATCH18_FINISHED_NEXT80_NOT_AUTHORIZED",
+  "completed": 28,
+  "remaining": 80,
+  "old_cost_estimates_not_overwritten": true,
+  "original_registered_full108_GPU_hours": 292.88630367713597,
+  "previous_full108_GPU_hours": 277.4612638401637,
+  "previous_remaining80_GPU_hours": 241.6491770744947,
+  "target_specific_updated_full108_GPU_hours": 239.54483170969203,
+  "target_specific_updated_remaining80_GPU_hours": 211.43125683038733,
+  "original_cost_gate_GPU_hours": 40,
+  "newly_authorized_remaining_jobs": 0,
+  "new18_totals": {
+    "teacher_forward_GPU_hours": 2.164570771179731,
+    "committed_teacher_equivalent_forward_GPU_hours": 3.7309262618426016,
+    "LoRA_GPU_hours": 7.0903965604181085,
+    "rescore_GPU_hours": 4.961682281849853,
+    "assigned_worker_wall_hours": 14.673977665021603,
+    "optimizer_updates": 12800.0
+  },
+  "all28_totals": {
+    "teacher_forward_GPU_hours": 2.4347015712425737,
+    "committed_teacher_equivalent_forward_GPU_hours": 4.060264444359199,
+    "LoRA_GPU_hours": 14.012716050460844,
+    "rescore_GPU_hours": 6.619678979618798,
+    "assigned_worker_wall_hours": 24.80059022069855,
+    "optimizer_updates": 25800.0
+  },
+  "new18_wall_hours": 7.568497521305833,
+  "new18_failed_attempts": 0,
+  "target_unit_costs": {
+    "Dance": {
+      "seconds_per_update": 1.8959750120856333,
+      "seconds_per_rescore_candidate_query": 0.007620743031412141,
+      "seconds_per_teacher_call": 0.05030112058132211,
+      "seconds_per_CROP_call": 0.031965625738854704
+    },
+    "KITTI-V2": {
+      "seconds_per_update": 2.4103977574035524,
+      "seconds_per_rescore_candidate_query": 0.0024885132738017833,
+      "seconds_per_teacher_call": 0.08581827524400566,
+      "seconds_per_CROP_call": 0.061365915108357934
+    },
+    "SportsMOT": {
+      "seconds_per_update": 1.9705781820208454,
+      "seconds_per_rescore_candidate_query": 0.008153442731032287,
+      "seconds_per_teacher_call": 0.07756401176197639,
+      "seconds_per_CROP_call": 0.06371347273547313
+    }
+  },
+  "unit_measurements": {
+    "Dance": [
+      {
+        "pair": "C1",
+        "seconds_per_update": 1.8959750120856333,
+        "seconds_per_rescore_candidate_query": 0.005484421758848157,
+        "seconds_per_teacher_call": 0.01658993718515551
+      },
+      {
+        "pair": "C6",
+        "seconds_per_update": 1.7890201951377094,
+        "seconds_per_rescore_candidate_query": 0.007620743031412141,
+        "seconds_per_teacher_call": 0.05030112058132211
+      }
+    ],
+    "KITTI-V2": [
+      {
+        "pair": "C2",
+        "seconds_per_update": 2.4103977574035524,
+        "seconds_per_rescore_candidate_query": 0.0024885132738017833,
+        "seconds_per_teacher_call": 0.08581827524400566
+      },
+      {
+        "pair": "C5",
+        "seconds_per_update": 2.4075766801147256,
+        "seconds_per_rescore_candidate_query": 0.0024832420515781893,
+        "seconds_per_teacher_call": 0.08326409862011787
+      }
+    ],
+    "SportsMOT": [
+      {
+        "pair": "C3",
+        "seconds_per_update": 1.9262722350901458,
+        "seconds_per_rescore_candidate_query": 0.008153442731032287,
+        "seconds_per_teacher_call": 0.07756401176197639
+      },
+      {
+        "pair": "C4",
+        "seconds_per_update": 1.9705781820208454,
+        "seconds_per_rescore_candidate_query": 0.008142464028129648,
+        "seconds_per_teacher_call": 0.06635617805364104
+      }
+    ]
+  },
+  "estimates": [
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.580589608334017
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.00979391255276576
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.00979391255276576
+    },
+    {
+      "pair": "C1",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.015411704444777304
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.02960372117037266
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.02960372117037266
+    },
+    {
+      "pair": "C1",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.7209995974233796
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.09902240506658547
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.09902240506658547
+    },
+    {
+      "pair": "C1",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.15582169353414005
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.364044694076103
+    },
+    {
+      "pair": "C1",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C2",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 2.4129669944595964
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.1190498753102144
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.1190498753102144
+    },
+    {
+      "pair": "C2",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.166487453973371
+    },
+    {
+      "pair": "C2",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 2.7460134176357083
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.3572007641932335
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.3572007641932335
+    },
+    {
+      "pair": "C2",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.499533877149483
+    },
+    {
+      "pair": "C2",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.911687817956995
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.1907373983275653
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.1907373983275653
+    },
+    {
+      "pair": "C2",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.66520827747077
+    },
+    {
+      "pair": "C2",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 4.759830159292253
+    },
+    {
+      "pair": "C2",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 2.7460134176357083
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.006776898332489
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.020529896770319123
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.020529896770319123
+    },
+    {
+      "pair": "C3",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.024992848234414614
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.06208523954334438
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.06208523954334438
+    },
+    {
+      "pair": "C3",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.234685819559763
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.20774131749138433
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.20774131749138433
+    },
+    {
+      "pair": "C3",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.2529017694616886
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 5.388690843910736
+    },
+    {
+      "pair": "C3",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.006776898332489
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.020529896770319123
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.020529896770319123
+    },
+    {
+      "pair": "C4",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.024992848234414614
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.06208523954334438
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.06208523954334438
+    },
+    {
+      "pair": "C4",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.234685819559763
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.20774131749138433
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.20774131749138433
+    },
+    {
+      "pair": "C4",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.2529017694616886
+    },
+    {
+      "pair": "C4",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 5.388690843910736
+    },
+    {
+      "pair": "C4",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C5",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 2.4129669944595964
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.1190498753102144
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.1190498753102144
+    },
+    {
+      "pair": "C5",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.166487453973371
+    },
+    {
+      "pair": "C5",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 2.7460134176357083
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.3572007641932335
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.3572007641932335
+    },
+    {
+      "pair": "C5",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.499533877149483
+    },
+    {
+      "pair": "C5",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.911687817956995
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.1907373983275653
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.1907373983275653
+    },
+    {
+      "pair": "C5",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 1.66520827747077
+    },
+    {
+      "pair": "C5",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 4.759830159292253
+    },
+    {
+      "pair": "C5",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "KITTI-V2",
+      "completed": false,
+      "total_GPU_hours_estimate": 2.7460134176357083
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.580589608334017
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.00979391255276576
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.00979391255276576
+    },
+    {
+      "pair": "C6",
+      "method": "UNIFORM_K",
+      "rho": 0.1,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.015411704444777304
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.02960372117037266
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.02960372117037266
+    },
+    {
+      "pair": "C6",
+      "method": "UNIFORM_K",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.7209995974233796
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.09902240506658547
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.09902240506658547
+    },
+    {
+      "pair": "C6",
+      "method": "UNIFORM_K",
+      "rho": 1.0,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 0.15582169353414005
+    },
+    {
+      "pair": "C6",
+      "method": "YESTRACK_FULL_D10",
+      "rho": null,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.364044694076103
+    },
+    {
+      "pair": "C6",
+      "method": "RANDOM_ACQ",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_PRES",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_DS",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_ROUTE",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_FAST",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C1",
+      "method": "RESET_LORA",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_PRES",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_DS",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_ROUTE",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_FAST",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C3",
+      "method": "RESET_LORA",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_PRES",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_DS",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_ROUTE",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_FAST",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C4",
+      "method": "RESET_LORA",
+      "rho": 0.3,
+      "target": "SportsMOT",
+      "completed": false,
+      "total_GPU_hours_estimate": 6.057365870448356
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_PRES",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_DS",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_ROUTE",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_FAST",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": true,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C6",
+      "method": "RESET_LORA",
+      "rho": 0.3,
+      "target": "Dance",
+      "completed": false,
+      "total_GPU_hours_estimate": 3.611762330560942
+    }
+  ],
+  "limitations": [
+    "no-cache equivalent teacher cost, all4x50 steps and5 rescores/video; no skip discounts",
+    "worst of two measured sources per target; no longer substitutes Dance/Sports for unmeasured KITTI",
+    "shared-device elapsed phase time, not a GPU utilization integral",
+    "new18 wall includes post-seal CPU evaluation/reporting; no matched serial baseline, so not measured parallel speedup",
+    "shared preparation/discarded historical heads and unmeasured failure costs remain separate",
+    "cost-only metadata, no target GT or HOTA used to change experiment parameters"
+  ]
+}

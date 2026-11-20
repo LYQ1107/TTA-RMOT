@@ -1,0 +1,315 @@
+{
+  "status": "ASSET_BLOCKED_NO_FORMAL_UDA_STARTED",
+  "observed_at": "2026-10-26T17:07:59.679169+08:00",
+  "project": "LYQ1107/TTA-RMOT",
+  "branch": "research/flexhook-v2-dance-uda-20261026",
+  "checkpoint": {
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "verified": true
+  },
+  "source": {
+    "complete_train_manifest": "/data2/user/reference_repos/TempRMOT/datasets/data_path/refer-kitti-v2.train",
+    "complete_train_manifest_sha256": "8095f9cdab1d149c0c13772e243d4b9e820fc469a77b28738ebdd523f313ed7f",
+    "complete_train_video_ids": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004",
+      "0006",
+      "0007",
+      "0008",
+      "0009",
+      "0010",
+      "0012",
+      "0014",
+      "0015",
+      "0016",
+      "0017",
+      "0018",
+      "0020"
+    ],
+    "complete_train_videos": 17,
+    "source_val_videos": 4,
+    "vendored_flexhook_default_train_ids": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004",
+      "0006",
+      "0007",
+      "0008",
+      "0009",
+      "0010",
+      "0012",
+      "0014",
+      "0015",
+      "0016",
+      "0018",
+      "0020"
+    ],
+    "explicit_full_source_difference": [
+      "0017"
+    ],
+    "train_frames": 5939,
+    "train_expressions": 8896,
+    "videos": [
+      {
+        "video_id": "0000",
+        "split": "train",
+        "frames": 154,
+        "images_contiguous": true,
+        "expressions": 596,
+        "annotated_track_ids": 11,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0000"
+      },
+      {
+        "video_id": "0001",
+        "split": "train",
+        "frames": 447,
+        "images_contiguous": true,
+        "expressions": 614,
+        "annotated_track_ids": 95,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0001"
+      },
+      {
+        "video_id": "0002",
+        "split": "train",
+        "frames": 233,
+        "images_contiguous": true,
+        "expressions": 449,
+        "annotated_track_ids": 16,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0002"
+      },
+      {
+        "video_id": "0003",
+        "split": "train",
+        "frames": 144,
+        "images_contiguous": true,
+        "expressions": 442,
+        "annotated_track_ids": 8,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0003"
+      },
+      {
+        "video_id": "0004",
+        "split": "train",
+        "frames": 314,
+        "images_contiguous": true,
+        "expressions": 541,
+        "annotated_track_ids": 31,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0004"
+      },
+      {
+        "video_id": "0005",
+        "split": "val",
+        "frames": 297,
+        "images_contiguous": true,
+        "expressions": 197,
+        "annotated_track_ids": 33,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0005"
+      },
+      {
+        "video_id": "0006",
+        "split": "train",
+        "frames": 270,
+        "images_contiguous": true,
+        "expressions": 618,
+        "annotated_track_ids": 11,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0006"
+      },
+      {
+        "video_id": "0007",
+        "split": "train",
+        "frames": 800,
+        "images_contiguous": true,
+        "expressions": 711,
+        "annotated_track_ids": 55,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0007"
+      },
+      {
+        "video_id": "0008",
+        "split": "train",
+        "frames": 390,
+        "images_contiguous": true,
+        "expressions": 620,
+        "annotated_track_ids": 21,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0008"
+      },
+      {
+        "video_id": "0009",
+        "split": "train",
+        "frames": 803,
+        "images_contiguous": true,
+        "expressions": 605,
+        "annotated_track_ids": 81,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0009"
+      },
+      {
+        "video_id": "0010",
+        "split": "train",
+        "frames": 294,
+        "images_contiguous": true,
+        "expressions": 572,
+        "annotated_track_ids": 15,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0010"
+      },
+      {
+        "video_id": "0011",
+        "split": "val",
+        "frames": 373,
+        "images_contiguous": true,
+        "expressions": 228,
+        "annotated_track_ids": 57,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0011"
+      },
+      {
+        "video_id": "0012",
+        "split": "train",
+        "frames": 78,
+        "images_contiguous": true,
+        "expressions": 339,
+        "annotated_track_ids": 3,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0012"
+      },
+      {
+        "video_id": "0013",
+        "split": "val",
+        "frames": 340,
+        "images_contiguous": true,
+        "expressions": 207,
+        "annotated_track_ids": 44,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0013"
+      },
+      {
+        "video_id": "0014",
+        "split": "train",
+        "frames": 106,
+        "images_contiguous": true,
+        "expressions": 361,
+        "annotated_track_ids": 16,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0014"
+      },
+      {
+        "video_id": "0015",
+        "split": "train",
+        "frames": 376,
+        "images_contiguous": true,
+        "expressions": 478,
+        "annotated_track_ids": 20,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0015"
+      },
+      {
+        "video_id": "0016",
+        "split": "train",
+        "frames": 209,
+        "images_contiguous": true,
+        "expressions": 505,
+        "annotated_track_ids": 23,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0016"
+      },
+      {
+        "video_id": "0017",
+        "split": "train",
+        "frames": 145,
+        "images_contiguous": true,
+        "expressions": 353,
+        "annotated_track_ids": 9,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0017"
+      },
+      {
+        "video_id": "0018",
+        "split": "train",
+        "frames": 339,
+        "images_contiguous": true,
+        "expressions": 618,
+        "annotated_track_ids": 18,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0018"
+      },
+      {
+        "video_id": "0019",
+        "split": "val",
+        "frames": 1059,
+        "images_contiguous": true,
+        "expressions": 230,
+        "annotated_track_ids": 69,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0019"
+      },
+      {
+        "video_id": "0020",
+        "split": "train",
+        "frames": 837,
+        "images_contiguous": true,
+        "expressions": 474,
+        "annotated_track_ids": 113,
+        "image_root": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/KITTI/training/image_02/0020"
+      }
+    ]
+  },
+  "target": {
+    "train_videos": 40,
+    "val_videos": 25,
+    "train_expressions": 1560,
+    "val_expressions": 425,
+    "train_frames": 41796,
+    "train_val_overlap": [],
+    "missing_train_tracker_videos": [
+      "dancetrack0001",
+      "dancetrack0002",
+      "dancetrack0006",
+      "dancetrack0008",
+      "dancetrack0012",
+      "dancetrack0015",
+      "dancetrack0016",
+      "dancetrack0020",
+      "dancetrack0023",
+      "dancetrack0024",
+      "dancetrack0027",
+      "dancetrack0029",
+      "dancetrack0032",
+      "dancetrack0033",
+      "dancetrack0037",
+      "dancetrack0039",
+      "dancetrack0044",
+      "dancetrack0045",
+      "dancetrack0049",
+      "dancetrack0051",
+      "dancetrack0052",
+      "dancetrack0053",
+      "dancetrack0055",
+      "dancetrack0057",
+      "dancetrack0061",
+      "dancetrack0062",
+      "dancetrack0066",
+      "dancetrack0068",
+      "dancetrack0069",
+      "dancetrack0072",
+      "dancetrack0074",
+      "dancetrack0075",
+      "dancetrack0080",
+      "dancetrack0082",
+      "dancetrack0083",
+      "dancetrack0086",
+      "dancetrack0087",
+      "dancetrack0096",
+      "dancetrack0098",
+      "dancetrack0099"
+    ],
+    "public_release_status": "AUDITED_PUBLIC_RELEASE",
+    "public_release_train_files": 0,
+    "public_release_val_files": 25
+  },
+  "target_gt_payloads_read": false,
+  "source_gt_access_authorized": true,
+  "gpu_and_filesystem_snapshot": {
+    "gpus": "index, uuid, name, memory.total [MiB], memory.used [MiB], memory.free [MiB], utilization.gpu [%]\n0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, NVIDIA A800-SXM4-80GB, 81920 MiB, 73859 MiB, 7296 MiB, 100 %\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, NVIDIA A800-SXM4-80GB, 81920 MiB, 43847 MiB, 37308 MiB, 100 %\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, NVIDIA A800-SXM4-80GB, 81920 MiB, 57589 MiB, 23565 MiB, 100 %\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, NVIDIA A800-SXM4-80GB, 81920 MiB, 9779 MiB, 71376 MiB, 74 %\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, NVIDIA A800-SXM4-80GB, 81920 MiB, 9783 MiB, 71372 MiB, 100 %\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, NVIDIA A800-SXM4-80GB, 81920 MiB, 0 MiB, 81154 MiB, 0 %\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, NVIDIA A800-SXM4-80GB, 81920 MiB, 27866 MiB, 53289 MiB, 95 %\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, NVIDIA A800-SXM4-80GB, 81920 MiB, 57583 MiB, 23571 MiB, 100 %\n",
+    "gpu_processes": "gpu_uuid, pid, process_name, used_gpu_memory [MiB]\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, /home/szgx/anaconda3/envs/vllmedit/bin/python, 37270 MiB\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491618, /home/szgx/anaconda3/envs/vllmedit/bin/python, 36552 MiB\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, python, 16376 MiB\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, python, 5932 MiB\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3123917, sglang::scheduler, 21514 MiB\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, /home/szgx/anaconda3/envs/vllmedit/bin/python, 57568 MiB\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, python, 5710 MiB\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 3153158, /data2/user/LocateMOT_GroundJEV/external/GroundAnything/.venv-serve/bin/python, 4054 MiB\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, python, 5710 MiB\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 3153345, /data2/user/LocateMOT_GroundJEV/external/GroundAnything/.venv-serve/bin/python, 4054 MiB\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, python, 5614 MiB\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3140738, sglang::scheduler, 22236 MiB\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 2491843, /home/szgx/anaconda3/envs/vllmedit/bin/python, 57562 MiB\n",
+    "disk": "Filesystem      Size  Used Avail Use% Mounted on\nudev           1008G     0 1008G   0% /dev\ntmpfs           202G  4.1M  202G   1% /run\n/dev/sda2       1.8T  1.3T  414G  76% /\ntmpfs          1008G  1.8G 1007G   1% /dev/shm\ntmpfs           5.0M     0  5.0M   0% /run/lock\n/dev/loop0      128K  128K     0 100% /snap/bare/5\n/dev/loop1      347M  347M     0 100% /snap/gnome-3-38-2004/119\n/dev/loop2       64M   64M     0 100% /snap/core20/1828\n/dev/loop3       92M   92M     0 100% /snap/gtk-common-themes/1535\n/dev/loop4       46M   46M     0 100% /snap/snap-store/638\n/dev/loop5       50M   50M     0 100% /snap/snapd/18357\n/dev/sda1       511M  6.1M  505M   2% /boot/efi\n/dev/nvme0n1    3.5T  3.1T  171G  95% /data1\n/dev/nvme1n1p1  3.5T  3.3T  160G  96% /data0\n/dev/nvme2n1p1  3.5T  2.9T  563G  85% /data2\n/dev/nvme3n1p1  3.5T  3.2T  267G  93% /data3\ntmpfs           202G   40K  202G   1% /run/user/1009\ntmpfs           202G   32K  202G   1% /run/user/1000\ntmpfs           202G   36K  202G   1% /run/user/1001\ntmpfs           202G   32K  202G   1% /run/user/1004\ntmpfs           202G   40K  202G   1% /run/user/1008\ntmpfs           202G   32K  202G   1% /run/user/1006\ntmpfs           202G   32K  202G   1% /run/user/1007\ntmpfs           202G   32K  202G   1% /run/user/1002\n",
+    "inodes": "Filesystem        Inodes   IUsed     IFree IUse% Mounted on\nudev           264167663    1091 264166572    1% /dev\ntmpfs          264177782    2044 264175738    1% /run\n/dev/sda2      117178368 8029173 109149195    7% /\ntmpfs          264177782     530 264177252    1% /dev/shm\ntmpfs          264177782       4 264177778    1% /run/lock\n/dev/loop0            29      29         0  100% /snap/bare/5\n/dev/loop1         18272   18272         0  100% /snap/gnome-3-38-2004/119\n/dev/loop2         11906   11906         0  100% /snap/core20/1828\n/dev/loop3         76208   76208         0  100% /snap/gtk-common-themes/1535\n/dev/loop4         17275   17275         0  100% /snap/snap-store/638\n/dev/loop5           496     496         0  100% /snap/snapd/18357\n/dev/sda1              0       0         0     - /boot/efi\n/dev/nvme0n1   234422272 7931357 226490915    4% /data1\n/dev/nvme1n1p1 234422272 7395736 227026536    4% /data0\n/dev/nvme2n1p1 234422272 5445712 228976560    3% /data2\n/dev/nvme3n1p1 234422272 6772046 227650226    3% /data3\ntmpfs           52835556      44  52835512    1% /run/user/1009\ntmpfs           52835556      72  52835484    1% /run/user/1000\ntmpfs           52835556     181  52835375    1% /run/user/1001\ntmpfs           52835556      88  52835468    1% /run/user/1004\ntmpfs           52835556     127  52835429    1% /run/user/1008\ntmpfs           52835556     101  52835455    1% /run/user/1006\ntmpfs           52835556      86  52835470    1% /run/user/1007\ntmpfs           52835556      60  52835496    1% /run/user/1002\n",
+    "mounts": "TARGET                                        SOURCE                FSTYPE      OPTIONS\n/                                             /dev/sda2             ext4        rw,relatime,errors=remount-ro,stripe=64\n\u251c\u2500/sys                                        sysfs                 sysfs       rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/kernel/security                      securityfs            securityfs  rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/fs/cgroup                            cgroup2               cgroup2     rw,nosuid,nodev,noexec,relatime,nsdelegate,memory_recursiveprot\n\u2502 \u251c\u2500/sys/fs/pstore                            pstore                pstore      rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/firmware/efi/efivars                 efivarfs              efivarfs    rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/fs/bpf                               bpf                   bpf         rw,nosuid,nodev,noexec,relatime,mode=700\n\u2502 \u251c\u2500/sys/kernel/debug                         debugfs               debugfs     rw,nosuid,nodev,noexec,relatime\n\u2502 \u2502 \u2514\u2500/sys/kernel/debug/tracing               tracefs               tracefs     rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/kernel/tracing                       tracefs               tracefs     rw,nosuid,nodev,noexec,relatime\n\u2502 \u251c\u2500/sys/fs/fuse/connections                  fusectl               fusectl     rw,nosuid,nodev,noexec,relatime\n\u2502 \u2514\u2500/sys/kernel/config                        configfs              configfs    rw,nosuid,nodev,noexec,relatime\n\u251c\u2500/proc                                       proc                  proc        rw,nosuid,nodev,noexec,relatime\n\u2502 \u2514\u2500/proc/sys/fs/binfmt_misc                  systemd-1             autofs      rw,relatime,fd=30,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=173789\n\u2502   \u2514\u2500/proc/sys/fs/binfmt_misc                binfmt_misc           binfmt_misc rw,nosuid,nodev,noexec,relatime\n\u251c\u2500/dev                                        udev                  devtmpfs    rw,nosuid,noexec,relatime,size=1056670652k,nr_inodes=264167663,mode=755,inode64\n\u2502 \u251c\u2500/dev/pts                                  devpts                devpts      rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000\n\u2502 \u251c\u2500/dev/shm                                  tmpfs                 tmpfs       rw,nosuid,nodev,inode64\n\u2502 \u251c\u2500/dev/mqueue                               mqueue                mqueue      rw,nosuid,nodev,noexec,relatime\n\u2502 \u2514\u2500/dev/hugepages                            hugetlbfs             hugetlbfs   rw,relatime,pagesize=2M\n\u251c\u2500/run                                        tmpfs                 tmpfs       rw,nosuid,nodev,noexec,relatime,size=211342228k,mode=755,inode64\n\u2502 \u251c\u2500/run/lock                                 tmpfs                 tmpfs       rw,nosuid,nodev,noexec,relatime,size=5120k,inode64\n\u2502 \u251c\u2500/run/credentials/systemd-sysusers.service none                  ramfs       ro,nosuid,nodev,noexec,relatime,mode=700\n\u2502 \u251c\u2500/run/user/1009                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1009,gid=1009,inode64\n\u2502 \u251c\u2500/run/user/1004                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1004,gid=1004,inode64\n\u2502 \u251c\u2500/run/user/1001                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1001,gid=1001,inode64\n\u2502 \u251c\u2500/run/user/1000                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1000,gid=1000,inode64\n\u2502 \u251c\u2500/run/user/1008                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1008,gid=1008,inode64\n\u2502 \u251c\u2500/run/user/1006                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1006,gid=1006,inode64\n\u2502 \u251c\u2500/run/user/1007                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1007,gid=1007,inode64\n\u2502 \u2514\u2500/run/user/1002                            tmpfs                 tmpfs       rw,nosuid,nodev,relatime,size=211342224k,nr_inodes=52835556,mode=700,uid=1002,gid=1002,inode64\n\u251c\u2500/snap/bare/5                                /dev/loop0            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/snap/gnome-3-38-2004/119                   /dev/loop1            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/snap/core20/1828                           /dev/loop2            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/snap/gtk-common-themes/1535                /dev/loop3            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/snap/snap-store/638                        /dev/loop4            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/snap/snapd/18357                           /dev/loop5            squashfs    ro,nodev,relatime,errors=continue\n\u251c\u2500/boot/efi                                   /dev/sda1             vfat        rw,relatime,fmask=0077,dmask=0077,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro\n\u251c\u2500/data1                                      /dev/nvme0n1          ext4        rw,relatime,stripe=32\n\u251c\u2500/data0                                      /dev/nvme1n1p1        ext4        rw,noatime,stripe=32\n\u251c\u2500/data2                                      /dev/nvme2n1p1        ext4        rw,noatime,stripe=32\n\u251c\u2500/data3                                      /dev/nvme3n1p1        ext4        rw,noatime,stripe=32\n\u251c\u2500/srv/lyq-v100-share/data0/user              /dev/nvme1n1p1[/user] ext4        rw,nosuid,nodev,noexec,noatime,stripe=32\n\u251c\u2500/srv/lyq-v100-share/data1/user              /dev/nvme0n1[/user]   ext4        rw,nosuid,nodev,noexec,relatime,stripe=32\n\u251c\u2500/srv/lyq-v100-share/data2/user              /dev/nvme2n1p1[/user] ext4        rw,nosuid,nodev,noexec,noatime,stripe=32\n\u2514\u2500/srv/lyq-v100-share/data3/user              /dev/nvme3n1p1[/user] ext4        rw,nosuid,nodev,noexec,noatime,stripe=32\n"
+  },
+  "gpu_snapshot_is_reservation": false,
+  "formal_training_started": false,
+  "next_required_asset": "40 official Train DETR+NeuralSORT outputs OR the exact pretrained front-end weights/config/code; no GT-derived replacement"
+}

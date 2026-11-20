@@ -1,0 +1,64 @@
+{
+  "scope": "smoke",
+  "method": "RELATIVE_ONLY",
+  "full_run_authorized": false,
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "source_checkpoint_expected_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "dataset_root": "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance",
+  "tracker_root": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+  "source_result": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json",
+  "output_root": "/data2/user/FlexHook-TTA/results/positive_free/server_smoke_20261025/ablation_smoke_v1/RELATIVE_ONLY",
+  "videos": [
+    "dancetrack0004"
+  ],
+  "max_expressions": 1,
+  "max_frames": 12,
+  "batch_size": 24,
+  "rank": 4,
+  "lr": 5e-05,
+  "update_interval": 4,
+  "seed": 0,
+  "nce_weight": 0.15,
+  "no_target_gt": true,
+  "source_free_prediction": true,
+  "target_gt_opened": false,
+  "target_labels_opened": false,
+  "future_frames_used": false,
+  "tracker_geometry_changed": false,
+  "tracker_ids_changed": false,
+  "no_external_model": true,
+  "no_hard_class_pseudolabels": true,
+  "fixed_mot": "DETR-NeuralSORT-Dance",
+  "episodes": [
+    {
+      "video": "dancetrack0004",
+      "expression_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+      "sentence": "dacning person with white Tshirt and purple pants",
+      "stats": {
+        "frames": 12,
+        "candidate_rows": 36,
+        "selected_rows": 0,
+        "optimizer_steps": 0
+      }
+    }
+  ],
+  "sequences": 1,
+  "hyperparameters": {
+    "batch_size": 24,
+    "rank": 4,
+    "lr": 5e-05,
+    "update_interval": 4,
+    "min_history": 3,
+    "nce_weight": 0.15,
+    "min_separation": 0.6,
+    "max_adapter_delta_norm": 2.0,
+    "seed": 0
+  },
+  "stats": {
+    "episodes": 1,
+    "frames": 12,
+    "candidates": 36,
+    "selected": 0,
+    "optimizer_steps": 0
+  }
+}

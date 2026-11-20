@@ -1,0 +1,138 @@
+{
+  "experiment": "FlexHook original Dance second-stage upper bound vs V2-to-Dance",
+  "accepted": true,
+  "task": "same_domain_ceiling_and_v2_to_dance_comparison",
+  "vendor": {
+    "repository": "https://github.com/buptLwz/FlexHook",
+    "commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+    "official_inference_script": "vendor/FlexHook/infer.sh"
+  },
+  "protocol": {
+    "target": "Refer-Dance validation",
+    "candidate_source": "official Dance DETR+NeuralSORT tracker bank",
+    "second_stage_same_domain": "refer-dance-best.pth",
+    "second_stage_cross_domain": "refer-kitti-v2-best.pth",
+    "source_free": true,
+    "target_ground_truth_used_for_inference": false,
+    "gt_templates_materialized_only_for_posthoc_trackeval": true,
+    "future_frames_used": false,
+    "tokenizer_compat": "compat/sitecustomize.py direct ByteLevel BPE construction; required for Transformers 5.4 local RoBERTa files"
+  },
+  "dataset": {
+    "name": "Refer-Dance validation",
+    "videos": 25,
+    "expressions_per_video": 17,
+    "sequences_evaluated": 425,
+    "frames": 25508,
+    "gt_detections": 212541,
+    "archive_sha256": "dc13c1d04b64f0336606b01e4c0a1fd6b5de8dd70b7e58dbbf6f5d9ca2e7fd09",
+    "source_root": "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance"
+  },
+  "runtime": {
+    "cuda_visible_devices": [3, 5],
+    "processes": 2,
+    "val_batch_size": 240,
+    "visual_backbone": "rope-swin-tiny",
+    "text_backbone": "roberta",
+    "text_len": 25,
+    "same_domain_result_root": "/data2/user/FlexHook-TTA/results/runs/flexhook_dance_to_dance_official_detr_neuralsort_corrected_tokenizer",
+    "v2_to_dance_result_root": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer"
+  },
+  "assets": {
+    "tracker_bank": {
+      "local_root": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs",
+      "files": 25,
+      "frames": 25508,
+      "rows": 211085,
+      "receipt_sha256": "b8f3133539d885c4174b6c0f7116dcdc9bcb6961a361e501c71fc6d808a269f8",
+      "ground_truth_read": false,
+      "expressions_read": false
+    },
+    "dance_checkpoint": {
+      "name": "refer-dance-best.pth",
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+      "bytes": 995771714,
+      "sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c"
+    },
+    "v2_checkpoint": {
+      "name": "refer-kitti-v2-best.pth",
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+      "bytes": 995768450,
+      "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613"
+    }
+  },
+  "metrics": {
+    "same_domain_dance_checkpoint": {
+      "HOTA": 32.134,
+      "DetA": 28.341,
+      "AssA": 36.491,
+      "DetRe": 48.210,
+      "DetPr": 40.323,
+      "AssRe": 42.166,
+      "AssPr": 65.616,
+      "LocA": 91.312,
+      "RHOTA": 41.932,
+      "HOTA_0": 35.555,
+      "LocA_0": 88.147,
+      "HOTALocA_0": 31.341,
+      "MOTA": -14.824,
+      "MOTP": 90.452,
+      "IDF1": 27.832,
+      "Dets": 254118,
+      "GT_Dets": 212541,
+      "IDs": 1412,
+      "GT_IDs": 252
+    },
+    "v2_to_dance": {
+      "HOTA": 8.206,
+      "DetA": 3.1857,
+      "AssA": 21.138,
+      "DetRe": 4.5275,
+      "DetPr": 9.6892,
+      "AssRe": 24.572,
+      "AssPr": 72.244,
+      "LocA": 92.099,
+      "RHOTA": 9.7826,
+      "HOTA_0": 8.9887,
+      "LocA_0": 89.042,
+      "HOTALocA_0": 8.0037,
+      "MOTA": -37.171,
+      "MOTP": 91.746,
+      "IDF1": 4.436,
+      "Dets": 99316,
+      "GT_Dets": 212541,
+      "IDs": 1740,
+      "GT_IDs": 252
+    },
+    "delta_same_domain_minus_v2": {
+      "HOTA": 23.928,
+      "DetA": 25.1553,
+      "AssA": 15.353,
+      "DetRe": 43.6825,
+      "DetPr": 30.6338,
+      "AssRe": 17.594,
+      "AssPr": -6.628,
+      "LocA": -0.787,
+      "RHOTA": 32.1494,
+      "HOTA_0": 26.5663,
+      "LocA_0": -0.895,
+      "HOTALocA_0": 23.3373,
+      "MOTA": 22.347,
+      "MOTP": -1.294,
+      "IDF1": 23.396,
+      "Dets": 154802,
+      "IDs": -328
+    }
+  },
+  "artifacts": {
+    "same_domain_merged_result_sha256": "de8ff46428818cbd1ee0dd2b6ea1a7692eae2b7e0133c521c1470b67b58da110",
+    "same_domain_trackeval_summary_sha256": "a0f7922789bad4d7fcf38e0d4b966e24c3de9496b5ce1d7d7a286d6d276aa30d",
+    "v2_merged_result_sha256": "fbf498a24b73d6b2db6d9c757d313f660c0d5b09a7dbfec5c2635b8ca517ee69",
+    "v2_trackeval_summary_sha256": "aa72d9ec9a44e29dd36ab65a7abf660db2af72215186dcfb39c2ea84c6267e60",
+    "same_domain_sequences_with_predictions": 103,
+    "v2_sequences_with_predictions": 185,
+    "same_domain_prediction_lines": 254118,
+    "v2_prediction_lines": 99316
+  },
+  "interpretation": "The released Dance checkpoint establishes a same-domain upper-bound reference of HOTA 32.134, closely reproducing the vendor's 32.165 reference. The fixed V2 checkpoint reaches HOTA 8.206 on the identical Dance candidate bank, leaving a 23.928-point HOTA gap. This is a checkpoint/domain calibration gap, not a claimed TTA gain; both runs are source-free and use the same tracker candidates and post-hoc evaluator."
+}
