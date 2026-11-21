@@ -1,4 +1,4 @@
-"""Human-readable final research report from the published sealed evidence."""
+"""Human-readable phase report from the published sealed evidence."""
 import json
 from pathlib import Path
 
@@ -37,6 +37,15 @@ def main():
 
     def add(value=''):
         lines.append(value.strip('\n'))
+
+    add('''范围与状态修正（2026-11-21）
+用户已撤回此前对整个科研目标的结项；本TXT仅记录上一批封存的阶段证据。
+后续持续研究的完成情况以当前Goal和新增报告为准，不能因重新生成本文而结项。
+用户已确认沿用官方固定候选框和Track ID，研究跨域指代适配模块。
+官方前端监督来源单独披露，不将上游检测/跟踪能力计入我方贡献。
+新增反馈范围核验见《TTA_RMOT_普通蒸馏高分来源与公平性核验_20261121.txt》；
+其中C4直接教师44.570、当前视频KD68.341、前缀KD69.050，无缓存官评完全复现。
+新观察机制在历史逐观察特征上使用重新拟合的同特征KD作对照，不与新鲜69.050直接归因。''')
 
     add('''TTA-RMOT：无标签跨域方案——完整验证、模块贡献与结论边界
 研究批次：2026-11-21；项目：/data3/liuyeqiang/FlexHook-TTA

@@ -69,7 +69,8 @@ def main():
     for pair in ('C4', 'C1'):
         for rho in (.05, .1, .2):
             prepare_evidence(pair, rho)
-    prep_jobs = json.loads((SUPERVISOR / 'observation_prepare_launch.json').read_text())['jobs']
+    prep_launch = SUPERVISOR / 'observation_prepare_launch.json'
+    prep_jobs = json.loads(prep_launch.read_text())['jobs'] if prep_launch.is_file() else []
     prep_by_pair = {j['pair']: j for j in prep_jobs}
     while pending or active:
         changed = False
@@ -107,7 +108,11 @@ def main():
                     if record['kind'] == 'OBSERVATION':
                         ready = OBSERVATION / 'inputs' / record['pair'] / 'completion.json'
                         if not ready.is_file():
-                            job = prep_by_pair[record['pair']]
+                            job = prep_by_pair.get(record['pair'])
+                            if job is None:
+                                failure = dict(kind='MISSING_OBSERVATION_INPUT', pair=record['pair'],
+                                    action='Complete a100_visual_classical_observation_prepare.py --pair '+record['pair']+' before launching.')
+                                break
                             proc = Path('/proc') / str(job['pid']) / 'stat'
                             dead = not proc.is_file() or proc.read_text().rsplit(')', 1)[1].split()[0] == 'Z'
                             if dead:

@@ -159,3 +159,46 @@ TP加权统计合并，不能改成简单平均各视频HOTA。45剪辑区间不
 
 所有数据均是已参与开发的数据。当前视频内允许转导，视频之间只使用已经发生的教师反馈；
 不宣称逐帧在线、独立盲测或任何未测预算/新域上的普遍胜利。
+
+10. 用户重新开启的持续科研Goal与强KD高分核验
+
+用户已明确沿用官方固定候选框与Track ID，只研究跨域指代适配；不重建检测器。
+上一批实证完成不等于整个科研Goal完成。阶段报告生成器现已保留这一范围修正。
+
+  python scripts/a100_visual_classical_benchmark_scope_launch.py
+  python scripts/a100_visual_classical_benchmark_scope_report.py
+
+首次运行比较SOURCE、直接回填教师、当前视频KD、过去KD、过去+当前KD，并将两套C4
+固定预测送入完全绕过episode缓存的原TrackEval。已完成路径再次运行复用封存结果，
+不构成新的冷启动或新的无缓存评测计时。结果：C4直接教师44.570、当前KD68.341、
+前缀KD69.050；复拟合0文件变化，无缓存官评分数差0。C1前缀亦逐文件复现。
+
+11. 新三观察对齐与稀疏证据研究（当前仍在运行）
+
+先在GT禁止进程保留原三次观察，并校验真实教师anchor：
+
+  python scripts/a100_visual_classical_observation_prepare.py --pair C4
+  python scripts/a100_visual_classical_observation_prepare.py --pair C1
+
+当前主机输入已备齐。若从干净环境运行调度器，需先完成这两步；本轮控制器同时会等待
+supervisor/observation_prepare_launch.json中记录的两条异步准备进程。不要重复启动仍在
+运行的控制器。控制器退出后，同名运行会复用已封存条件并继续有效stream.pt。
+
+  python scripts/a100_visual_classical_sparse_observation_launch.py
+
+16个预设条件使用物理GPU0/1/2/3：5%/10%/20%同预算质量曲线，10%三神经种子；
+30%同观察POOLED/ANCHOR对齐三神经种子，外加视觉、时序、恒定边、同总权重等对照。
+三种子共享冻结seed0问答，仅检验神经初始化，不算新域或三套独立证据。
+C1重求均值PCD/RGB差0；C4历史逐观察PCD对新鲜特征差约0.00521，故观察研究
+必须减它自己的同特征POOLED KD，不能把新鲜69.050直接当成纯净反事实。
+
+所有原始条件完成后，再生成双向数量投影并进行隔离官评：
+
+  python scripts/a100_visual_classical_sparse_observation_evaluate.py
+  python scripts/a100_visual_classical_sparse_observation_analyze.py
+  python scripts/a100_visual_classical_observation_diagnose.py
+
+评估入口要求16个条件均已封存；数量投影保持C1联合互斥且所有CountSelf必须0变化。
+先封存全部反事实，再开始GT。最后的诊断区分物理串ID与语义谓词变化，不假定两者等同。
+这轮重用历史特征和冻结问答，新增教师0，仅为质量/机制研究；运行耗时不当作冷部署成本。
+后续以实际结果决定保留什么；不因跑完这些条件而自动宣称完成持续科研Goal。
