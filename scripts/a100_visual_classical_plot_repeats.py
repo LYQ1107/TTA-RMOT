@@ -48,14 +48,17 @@ def main():
     fig.suptitle('Actual hard/soft distillation and matched graph ablations | seeds 0, 17, 42')
     save(fig, 'three_seed_same_evidence', 'Dots are algorithmic seeds on the same development videos, not independent datasets. Same source, inputs and teacher budget.')
 
-    fig, axes = plt.subplots(2, 2, figsize=(12, 7.4))
+    reverse=json.loads((OUT/'analysis/three_seed_reverse_counts.json').read_text())
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8.4))
     keys = ['FULL_vs_SOFT_KD', 'FULL_vs_NO_GRAPH', 'COUNT_FULL_vs_SOFT_KD']
-    labels = ['Full - soft KD', 'Full - no graph', 'Full - soft KD, fixed counts']
+    labels = ['Full - soft KD', 'Full - no graph', 'Same FULL counts', 'Same KD counts']
     for row, (title, records) in enumerate(studies.items()):
         for column, pair in enumerate(('C4', 'C1')):
             ax = axes[row, column]
-            for y, key in enumerate(keys):
-                item = records[pair]['comparisons'][key];point = item['mean_delta_HOTA']
+            items=[records[pair]['comparisons'][key] for key in keys]
+            items.append(reverse['raw' if row==0 else 'bounded'][pair]['SOFT_KD'])
+            for y, item in enumerate(items):
+                point = item['mean_delta_HOTA']
                 lo, hi = item['parent_and_seed_resampling_sensitivity_CI95']
                 ax.plot([lo, hi], [y, y], color='#afbdc9', linewidth=5, solid_capstyle='round')
                 lo, hi = item['fixed_seed_parent_CI95']
@@ -63,7 +66,7 @@ def main():
                 ax.scatter([point], [y], color='#123c45', s=28, zorder=4)
                 ax.text(point, y - .18, f'{point:+.3f}', ha='center', fontsize=9)
             ax.axvline(0, linestyle='--', color='#666', linewidth=1)
-            ax.set_yticks(range(3), labels);ax.set_ylim(2.5, -.6)
+            ax.set_yticks(range(4), labels);ax.set_ylim(3.5, -.6)
             ax.set_title(pair + ' | ' + title, fontsize=10)
             ax.set_xlabel('Difference in official HOTA; 95% descriptive intervals')
             ax.grid(axis='x', alpha=.15)

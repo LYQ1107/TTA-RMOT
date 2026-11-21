@@ -1,0 +1,502 @@
+{
+  "raw": {
+    "C4": {
+      "per_seed_HOTA": {
+        "0": {
+          "FULL": 68.98140691754558,
+          "PERMUTED_GRAPH": 64.09233048541752,
+          "COMPLETE_GRAPH": 64.32582516254637,
+          "PERMUTED_AT_FULL_COUNT": 64.2077088558247,
+          "COMPLETE_AT_FULL_COUNT": 68.23803430606
+        },
+        "17": {
+          "FULL": 68.78225655167081,
+          "PERMUTED_GRAPH": 63.70637518557899,
+          "COMPLETE_GRAPH": 64.19535211223459,
+          "PERMUTED_AT_FULL_COUNT": 63.929324108257944,
+          "COMPLETE_AT_FULL_COUNT": 68.12674138605388
+        },
+        "42": {
+          "FULL": 69.29326922974148,
+          "PERMUTED_GRAPH": 64.25227178790337,
+          "COMPLETE_GRAPH": 64.84601821642642,
+          "PERMUTED_AT_FULL_COUNT": 64.55208102777786,
+          "COMPLETE_AT_FULL_COUNT": 68.73111303206784
+        }
+      },
+      "mean_HOTA": {
+        "FULL": 69.0189775663193,
+        "PERMUTED_GRAPH": 64.01699248629996,
+        "COMPLETE_GRAPH": 64.45573183040246,
+        "PERMUTED_AT_FULL_COUNT": 64.22970466395351,
+        "COMPLETE_AT_FULL_COUNT": 68.3652962413939
+      },
+      "FULL_vs": {
+        "PERMUTED_GRAPH": {
+          "mean_delta_HOTA": 5.001985080019334,
+          "per_seed_delta_HOTA": [
+            4.889076432128064,
+            5.075881366091821,
+            5.040997441838115
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            3.99510360044117,
+            6.270576925940485
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            3.96788224270629,
+            6.3003887113696235
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_GRAPH": {
+          "mean_delta_HOTA": 4.563245735916837,
+          "per_seed_delta_HOTA": [
+            4.6555817549992184,
+            4.586904439436225,
+            4.447251013315068
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            3.6549761040116735,
+            5.612050858314743
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            3.641295694838948,
+            5.645679495493514
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "PERMUTED_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 4.7892729023657905,
+          "per_seed_delta_HOTA": [
+            4.773698061720879,
+            4.852932443412868,
+            4.741188201963624
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            3.852708977418447,
+            5.972846824993208
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            3.8247879031026426,
+            5.999186145958605
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.6536813249253868,
+          "per_seed_delta_HOTA": [
+            0.743372611485583,
+            0.6555151656169329,
+            0.5621561976736444
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            0.37531496095550165,
+            1.1325923395572148
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            0.34568261547358137,
+            1.1479373294331114
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        }
+      },
+      "same_actual_teacher_and_prefix_head": true,
+      "new_teacher_calls": 0,
+      "missing_part_nodes_and_anchor_precision_unchanged": true,
+      "CountSelf_and_original_graph_decisions_identical": true,
+      "all_development_data": true,
+      "descriptive_intervals_not_blind_confirmation": true
+    },
+    "C1": {
+      "per_seed_HOTA": {
+        "0": {
+          "FULL": 39.71842001325461,
+          "PERMUTED_GRAPH": 40.010944286604506,
+          "COMPLETE_GRAPH": 40.59743202638037,
+          "PERMUTED_AT_FULL_COUNT": 39.20527480201043,
+          "COMPLETE_AT_FULL_COUNT": 39.65678882542411
+        },
+        "17": {
+          "FULL": 42.508714030858314,
+          "PERMUTED_GRAPH": 42.22947667153154,
+          "COMPLETE_GRAPH": 41.93780163569586,
+          "PERMUTED_AT_FULL_COUNT": 41.70201710293595,
+          "COMPLETE_AT_FULL_COUNT": 42.16440720877575
+        },
+        "42": {
+          "FULL": 38.242213847771616,
+          "PERMUTED_GRAPH": 36.88598692329221,
+          "COMPLETE_GRAPH": 39.08530032934381,
+          "PERMUTED_AT_FULL_COUNT": 37.23879232945854,
+          "COMPLETE_AT_FULL_COUNT": 37.615403416685716
+        }
+      },
+      "mean_HOTA": {
+        "FULL": 40.15644929729484,
+        "PERMUTED_GRAPH": 39.70880262714275,
+        "COMPLETE_GRAPH": 40.54017799714001,
+        "PERMUTED_AT_FULL_COUNT": 39.38202807813497,
+        "COMPLETE_AT_FULL_COUNT": 39.81219981696186
+      },
+      "FULL_vs": {
+        "PERMUTED_GRAPH": {
+          "mean_delta_HOTA": 0.44764667015209386,
+          "per_seed_delta_HOTA": [
+            -0.2925242733498976,
+            0.2792373593267712,
+            1.356226924479408
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -1.3355611803158018,
+            2.134090860370952
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -1.7732106045672589,
+            2.4884181201660787
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_GRAPH": {
+          "mean_delta_HOTA": -0.38372869984516694,
+          "per_seed_delta_HOTA": [
+            -0.8790120131257595,
+            0.570912395162452,
+            -0.8430864815721932
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -2.4492213446121833,
+            1.554916024485992
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -2.7913628799224615,
+            1.688976950397349
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "PERMUTED_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.7744212191598739,
+          "per_seed_delta_HOTA": [
+            0.5131452112441792,
+            0.806696927922367,
+            1.0034215183130755
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -0.31184459938092807,
+            2.487095397842283
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -0.33198141704458267,
+            2.5766737013605026
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.34424948033298836,
+          "per_seed_delta_HOTA": [
+            0.06163118783049981,
+            0.34430682208256513,
+            0.6268104310859002
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -0.06312571804544949,
+            1.0124102588088526
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -0.14882945507751993,
+            1.3041261894625642
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        }
+      },
+      "same_actual_teacher_and_prefix_head": true,
+      "new_teacher_calls": 0,
+      "missing_part_nodes_and_anchor_precision_unchanged": true,
+      "CountSelf_and_original_graph_decisions_identical": true,
+      "all_development_data": true,
+      "descriptive_intervals_not_blind_confirmation": true
+    }
+  },
+  "bounded": {
+    "C4": {
+      "per_seed_HOTA": {
+        "0": {
+          "FULL": 69.1419763378653,
+          "PERMUTED_GRAPH": 64.00369112656848,
+          "COMPLETE_GRAPH": 64.3249472881061,
+          "PERMUTED_AT_FULL_COUNT": 64.16946464056446,
+          "COMPLETE_AT_FULL_COUNT": 68.34367744751943
+        },
+        "17": {
+          "FULL": 69.01247037357827,
+          "PERMUTED_GRAPH": 63.705779197374525,
+          "COMPLETE_GRAPH": 64.47097664144755,
+          "PERMUTED_AT_FULL_COUNT": 63.891075762090765,
+          "COMPLETE_AT_FULL_COUNT": 68.22877787779895
+        },
+        "42": {
+          "FULL": 69.53346522078606,
+          "PERMUTED_GRAPH": 64.09679111445202,
+          "COMPLETE_GRAPH": 64.8014798553094,
+          "PERMUTED_AT_FULL_COUNT": 64.60757512316584,
+          "COMPLETE_AT_FULL_COUNT": 68.98993412186913
+        }
+      },
+      "mean_HOTA": {
+        "FULL": 69.22930397740987,
+        "PERMUTED_GRAPH": 63.935420479465016,
+        "COMPLETE_GRAPH": 64.53246792828769,
+        "PERMUTED_AT_FULL_COUNT": 64.22270517527369,
+        "COMPLETE_AT_FULL_COUNT": 68.52079648239584
+      },
+      "FULL_vs": {
+        "PERMUTED_GRAPH": {
+          "mean_delta_HOTA": 5.293883497944866,
+          "per_seed_delta_HOTA": [
+            5.138285211296818,
+            5.306691176203742,
+            5.4366741063340385
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            4.277955746032998,
+            6.53999172826213
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            4.236854228254965,
+            6.583368098526768
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_GRAPH": {
+          "mean_delta_HOTA": 4.696836049122193,
+          "per_seed_delta_HOTA": [
+            4.817029049759199,
+            4.541493732130718,
+            4.73198536547666
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            3.7582082213260404,
+            5.76895149386273
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            3.719471201043831,
+            5.798779592388355
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "PERMUTED_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 5.006598802136186,
+          "per_seed_delta_HOTA": [
+            4.972511697300845,
+            5.121394611487503,
+            4.925890097620211
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            4.05388632774282,
+            6.196261676485225
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            4.021437990359649,
+            6.227924480772742
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.7085074950140419,
+          "per_seed_delta_HOTA": [
+            0.7982988903458761,
+            0.7836924957793201,
+            0.5435310989169295
+          ],
+          "original_parent_clusters": 13,
+          "fixed_seed_parent_CI95": [
+            0.4307720411468611,
+            1.1675140323461521
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            0.3888134768396402,
+            1.199932094107424
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        }
+      },
+      "same_actual_teacher_and_prefix_head": true,
+      "new_teacher_calls": 0,
+      "missing_part_nodes_and_anchor_precision_unchanged": true,
+      "CountSelf_and_original_graph_decisions_identical": true,
+      "all_development_data": true,
+      "descriptive_intervals_not_blind_confirmation": true
+    },
+    "C1": {
+      "per_seed_HOTA": {
+        "0": {
+          "FULL": 40.37821680133538,
+          "PERMUTED_GRAPH": 39.542127796086476,
+          "COMPLETE_GRAPH": 40.58711608216598,
+          "PERMUTED_AT_FULL_COUNT": 39.905402222358894,
+          "COMPLETE_AT_FULL_COUNT": 40.20415227824517
+        },
+        "17": {
+          "FULL": 40.24146345930703,
+          "PERMUTED_GRAPH": 40.82766357107906,
+          "COMPLETE_GRAPH": 41.12653544410188,
+          "PERMUTED_AT_FULL_COUNT": 39.55925912040959,
+          "COMPLETE_AT_FULL_COUNT": 39.74766996017312
+        },
+        "42": {
+          "FULL": 39.38335911718777,
+          "PERMUTED_GRAPH": 38.4412724627525,
+          "COMPLETE_GRAPH": 39.264086442041354,
+          "PERMUTED_AT_FULL_COUNT": 38.401373272194675,
+          "COMPLETE_AT_FULL_COUNT": 39.140016003444
+        }
+      },
+      "mean_HOTA": {
+        "FULL": 40.001013125943395,
+        "PERMUTED_GRAPH": 39.60368794330601,
+        "COMPLETE_GRAPH": 40.32591265610307,
+        "PERMUTED_AT_FULL_COUNT": 39.288678204987725,
+        "COMPLETE_AT_FULL_COUNT": 39.6972794139541
+      },
+      "FULL_vs": {
+        "PERMUTED_GRAPH": {
+          "mean_delta_HOTA": 0.39732518263738115,
+          "per_seed_delta_HOTA": [
+            0.8360890052489012,
+            -0.5862001117720297,
+            0.942086654435272
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -0.6426814377520724,
+            1.3659384462210824
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -1.030184603521592,
+            1.9868441336530691
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_GRAPH": {
+          "mean_delta_HOTA": -0.3248995301596788,
+          "per_seed_delta_HOTA": [
+            -0.20889928083060028,
+            -0.8850719847948554,
+            0.11927267514641926
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -1.5289235487079087,
+            0.852356856984802
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -1.9350267567215065,
+            1.1765036401637596
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "PERMUTED_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.7123349209556716,
+          "per_seed_delta_HOTA": [
+            0.4728145789764824,
+            0.682204338897435,
+            0.9819858449930976
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -0.10232255056896579,
+            1.9249775523185715
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -0.1424268798513761,
+            1.9635723492429191
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        },
+        "COMPLETE_AT_FULL_COUNT": {
+          "mean_delta_HOTA": 0.30373371198929533,
+          "per_seed_delta_HOTA": [
+            0.17406452309020892,
+            0.4937934991339077,
+            0.24334311374376938
+          ],
+          "original_parent_clusters": 25,
+          "fixed_seed_parent_CI95": [
+            -0.012234121889755409,
+            0.6925094149712548
+          ],
+          "parent_and_seed_resampling_sensitivity_CI95": [
+            -0.047533483288110995,
+            0.7946878155779352
+          ],
+          "bootstrap_samples": 10000,
+          "bootstrap_seed": 0,
+          "seed_resampling_seed": 1,
+          "seeds_are_algorithmic_repeats_not_independent_target_datasets": true
+        }
+      },
+      "same_actual_teacher_and_prefix_head": true,
+      "new_teacher_calls": 0,
+      "missing_part_nodes_and_anchor_precision_unchanged": true,
+      "CountSelf_and_original_graph_decisions_identical": true,
+      "all_development_data": true,
+      "descriptive_intervals_not_blind_confirmation": true
+    }
+  }
+}

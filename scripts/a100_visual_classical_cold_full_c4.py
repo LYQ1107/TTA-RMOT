@@ -45,10 +45,14 @@ def real_colours(bank,observations,samples):
     return np.asarray(colours),anchors
 
 
-def run(name,perception_mode='full'):
+def run(name,perception_mode='full',requested_methods=None):
+    methods=tuple(requested_methods) if requested_methods else METHODS
+    assert set(methods)<=set(METHODS)
+    labels_needed={method.split('_',1)[0] for method in methods}
     guard=generation_guard();forbidden=[];root=OUT/'cold_full_c4'/name
     if (root/'completion.json').is_file():
         assert json.loads((root/'completion.json').read_text())['protocol'].get('source_perception_mode','full')==perception_mode
+        if requested_methods:assert {m['method'] for m in json.loads((root/'completion.json').read_text())['methods']}==set(methods)
         return
     root.mkdir(parents=True,exist_ok=True)
     def cold_only(event,args):
@@ -86,6 +90,7 @@ def run(name,perception_mode='full'):
     if state_path.is_file():
         saved=torch.load(state_path,map_location='cpu',weights_only=False);start_video=saved['next_video'];bx=saved['x'];bz=saved['z'];by=saved['y']
         assert saved.get('perception_mode','full')==perception_mode
+        assert tuple(saved.get('requested_methods',METHODS))==methods
         receipts=saved['receipts'];moment_sum=saved['sum'];moment_square=saved['square'];image_rows=saved['image_rows']
     protocol=dict(name=name,pair='C4',videos=45,queries=466,seed=0,source='frozen official Dance-best',
         acquisition='COVER .3 query-balanced, three uniform observations and max-area anchor',
@@ -99,6 +104,9 @@ def run(name,perception_mode='full'):
         raw_soft_bounded_soft_and_hard_actual_training=True,bounds=[.02,.98],
         video_stream_causal=True,current_video_transductive=True,no_target_GT=True,
         restart_attempt=attempt,OS_cache_not_flushed=True,host_has_other_research_jobs=True)
+    protocol.update(requested_methods=list(methods),single_method_execution=len(methods)==1,
+        raw_soft_bounded_soft_and_hard_actual_training=labels_needed==set(LABELS),actual_trained_label_types=sorted(labels_needed),
+        shared_physical_source_and_teacher_stream=len(methods)>1,independent_cold_arms=len(methods)==1)
     atomic_json(root/'protocol.json',protocol)
     if attempt==0:assert not (root/'raw.sqlite').is_file(),'A fresh cold stream requires a new QA cache'
     common('imports_metadata_and_recovery_setup',PROCESS_BEGIN)
@@ -163,6 +171,7 @@ def run(name,perception_mode='full'):
         known=np.isfinite(answers);bx.append(raw[known]);bz.append(source[known]);by.append(answers[known])
         x=np.concatenate(bx);z=np.concatenate(bz);y=np.concatenate(by);prediction={};fits={}
         for label in LABELS:
+            if label not in labels_needed:continue
             t=time.perf_counter();target=np.clip(y,.02,.98) if label=='CLIP' else y
             scores,fit,head=fit_head(x,z,target,current,source.ravel(),mean,std,soft=label!='HARD',seed=0)
             torch.save(head,root/(label+'_latest_head.pt'));fit['measured_fit_and_head_save_seconds']=time.perf_counter()-t
@@ -173,7 +182,7 @@ def run(name,perception_mode='full'):
         columns=np.asarray([tracks.index(int(t)) for _,t in observations]);motion={}
         for qi,q in enumerate(queries):
             if 'MOTION' in expression_types(q['query_text']):motion[qi]=np.asarray([expit(output_presence[qi,output_frame_index[int(f)]])>=.5 for f,_ in observations])
-        for method in METHODS:
+        for method in methods:
             t=time.perf_counter()
             if method in prediction:score=prediction[method]
             else:
@@ -194,7 +203,7 @@ def run(name,perception_mode='full'):
             actual_frozen_encoder_statistics=dict(cache.stats),original_temporal_context_preserved=True,
             GT_open_attempts=len(guard),wall_seconds=time.perf_counter()-begin)
         atomic_json(current_dir/'receipt.json',receipt);receipts.append(receipt)
-        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode)
+        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode,requested_methods=methods)
         temporary=state_path.with_suffix('.tmp');torch.save(state,temporary);temporary.replace(state_path)
         del fc,cache,ep,sink;torch.cuda.empty_cache()
         print(json.dumps(dict(event='FRESH_C4_VIDEO_COMPLETE',video=video,completed=vi+1,total=len(videos),
@@ -203,7 +212,7 @@ def run(name,perception_mode='full'):
     assert not guard and not forbidden
     assert all(not p.requires_grad and p._version==versions[n] for n,p in student.named_parameters())
     seals=[]
-    for method in METHODS:
+    for method in methods:
         t=time.perf_counter();folder=root/'methods'/method;mask=np.zeros(m['candidate_query_rows'],dtype=bool)
         for video in videos:
             local=np.load(folder/'videos'/video/'mask.npy')
@@ -235,7 +244,9 @@ def run(name,perception_mode='full'):
     atomic_json(root/'completion.json',dict(status='SEALED_WHOLE_C4_REAL_COLD_STREAM',protocol=protocol,methods=seals,
         source=student_receipt,teacher=teacher_receipt,logical_teacher_calls=sum(map(len,by)),
         GT_open_attempts=0,prepaid_artifact_reads=0,cost_by_method=cost,phase_ledger=str(ledger_path),
-        actual_multiarm_worker_wall_seconds=all_attempt_wall,independent_cold_arm_deployments=False,
+        actual_multiarm_worker_wall_seconds=all_attempt_wall,actual_worker_wall_seconds=all_attempt_wall,
+        independent_cold_arm_deployments=len(methods)==1,
+        single_method_execution=len(methods)==1,
         single_uninterrupted_attempt=attempt==0,all_development_data=True,
         scope='same physically measured source/teacher stream + actually trained per-label heads and decoder costs; GT evaluation excluded'))
 
@@ -243,4 +254,5 @@ def run(name,perception_mode='full'):
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--name',default='C4_fresh_full_stream_seed0')
     p.add_argument('--perception-mode',choices=['full','track-three'],default='full')
-    a=p.parse_args();run(a.name,a.perception_mode)
+    p.add_argument('--methods',help='Comma-separated actually executed methods; omit for all registered controls')
+    a=p.parse_args();run(a.name,a.perception_mode,a.methods.split(',') if a.methods else None)

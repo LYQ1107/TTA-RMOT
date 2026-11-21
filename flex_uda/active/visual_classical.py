@@ -91,7 +91,7 @@ def infer(prior, features, teacher_probability, *, correction=True, graph=True):
     return expit(solution)
 
 
-def refine_distilled_prior(prior, features, teacher_probability, *, graph=True,source_weight=1.,node_mask=None,teacher_weight_factor=None):
+def refine_distilled_prior(prior, features, teacher_probability, *, graph=True,source_weight=1.,node_mask=None,teacher_weight_factor=None,weights_override=None):
     """V2: target-teacher-trained unary, known-answer anchors, classic graph.
 
     A queried node has only its teacher anchor, rather than counting its
@@ -104,7 +104,8 @@ def refine_distilled_prior(prior, features, teacher_probability, *, graph=True,s
     precision=np.zeros_like(prior);precision[seen]=1.+3.*np.abs(2.*answer[seen]-1.)
     if teacher_weight_factor is not None:precision*=np.asarray(teacher_weight_factor)
     target=np.zeros_like(prior);target[seen]=np.clip(logit(np.clip(answer[seen],.02,.98)),-4.,4.)
-    if node_mask is None:weights,_=visual_graph(features)
+    if weights_override is not None:weights=np.asarray(weights_override,dtype=float).copy()
+    elif node_mask is None:weights,_=visual_graph(features)
     else:
         node_mask=np.asarray(node_mask,dtype=bool);weights=np.zeros((len(prior),len(prior)))
         selected=np.flatnonzero(node_mask);local,_=visual_graph(np.asarray(features)[selected])
