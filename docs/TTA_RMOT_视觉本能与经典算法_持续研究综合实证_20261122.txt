@@ -9,7 +9,11 @@ TTA-RMOT：人类视觉启发与经典算法的持续研究综合实证
 但同架构HSV置零的C4普通KD更强，图对它仅+0.501837，区间[-0.292293,1.207896]跨0。
 C1图对均值KD +1.971637，原视频+神经种子区间[-0.069997,4.626153]跨0；固定KD数量排序差为负。
 强制非空/恢复KD集合让空查询变少，但SAFE对原图平均-0.258289，不能保留为已证实的有效贡献。
-因此继续自然768维PCD强蒸馏与独立图度量/正信念保护的预登记研究；未完成前不宣布新模块有效。
+自然768维研究已完成，详见后文全部强对照；完成队列仍不等于完整Goal验收。
+
+最新自然768主方案GRAPH_GUARD：C4比均值KD -0.460804，三个种子都负；比无保护图 -0.809855，区间负。该保护不保留。
+C1无保护PCD图比768均值 +3.260991，但对更强RGB均值的区间仍跨0；CHECKLIST下保护严格no-op。
+下一轮颜色—衣着部位语义绑定与教师单调校准正在进行，尚无本轮成功结论。
 
 一、始终没有改变的最终目标
 跨域RMOT：在与源训练场景不同的目标视频中，依据语言描述选出对应的人或多名人的轨迹。
@@ -530,7 +534,1302 @@ C1是同一真实流的两分支，common+own是实测组件和，不是两次�
 }
 这些是候选IoU成员计数，不是HOTA损失的可加分账；有正候选不代表原始全部GT都可恢复。
 
-十、仍需准确回答的科学问题与结论边界
+九补、实际被询问锚点的证据质量
+该诊断在自然768研究全部156输出封存后执行，不改变本轮任何适配预测或参数。
+Yes以p>=0.5计，沿用硬KD标签约定；0.5并不意味着肯定、可靠的证据。
+GT比较的是所问候选在锚帧是否匹配该查询目标；不是纯教师语义准确率，也不代表全部未问候选。
+C4全部466句都问过，但133句未问到GT正锚点；76句无Yes，其中59句没问到正锚点、17句问到了却仍无Yes。
+此口径为当前10%实际问答的锚点匹配，与旧119条整轨迹漏查口径/预算不同，不直接作升降比较。
+C1有31句完全未问，但其中仅1句有可恢复目标；不能盲目给所有未问或无Yes查询加预算。
+C1共40条有可恢复目标的查询，10条无Yes；352条无Yes中其余342条并无正候选。
+C4教师Yes在已问锚点的正匹配比例71.616%；C1仅26.087%。C1整体89.755%一致率受大量负例主导。
+C1概率>=0.9的88个样本也只有30个正匹配，34.091%；仅调高置信阈值不能保证正确。
+C1错误Yes常见衣着类别混淆，C4常见左右/深浅队伍；框定位、邻人入裁剪及可观察性也是混杂。
+已查看的原图只作定性诊断，不据少量样例声称这些错误的全局原因。
+这些GT诊断精确率不能作为适配时的教师权重；后续方案仍须只用图像、语言和教师反馈。
+C4
+{
+  "anchor_confusion": {
+    "TP": 492,
+    "asked": 1160,
+    "FP": 195,
+    "TN": 423,
+    "FN": 50
+  },
+  "anchor_rates": {
+    "anchor_membership_agreement": 0.7887931034482759,
+    "teacher_yes_precision": 0.7161572052401747,
+    "positive_anchor_recall": 0.9077490774907749,
+    "positive_anchor_rate": 0.4672413793103448
+  },
+  "query_coverage": {
+    "queries": 466,
+    "recoverable_positive_queries": 466,
+    "no_questions": 0,
+    "no_teacher_yes": 76,
+    "recoverable_no_questions": 0,
+    "recoverable_without_positive_asked_anchor": 133,
+    "recoverable_no_yes": 76,
+    "recoverable_no_yes_and_no_positive_anchor": 59,
+    "recoverable_no_yes_despite_positive_anchor": 17,
+    "no_positive_candidate_with_teacher_yes": 0
+  },
+  "query_types": {
+    "OTHER": {
+      "counts": {
+        "TP": 228,
+        "asked": 292,
+        "yes": 273,
+        "positive_asked_anchor": 244,
+        "FP": 45,
+        "FN": 16,
+        "TN": 3
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.791095890410959,
+        "teacher_yes_precision": 0.8351648351648352,
+        "positive_anchor_recall": 0.9344262295081968,
+        "positive_anchor_rate": 0.8356164383561644
+      }
+    },
+    "APPEARANCE": {
+      "counts": {
+        "FP": 55,
+        "asked": 566,
+        "yes": 257,
+        "positive_asked_anchor": 216,
+        "TP": 202,
+        "TN": 295,
+        "FN": 14
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.8780918727915195,
+        "teacher_yes_precision": 0.7859922178988327,
+        "positive_anchor_recall": 0.9351851851851852,
+        "positive_anchor_rate": 0.38162544169611307
+      }
+    },
+    "APPEARANCE+ROLE+SPATIAL": {
+      "counts": {
+        "FP": 42,
+        "asked": 94,
+        "yes": 67,
+        "positive_asked_anchor": 26,
+        "TP": 25,
+        "TN": 26,
+        "FN": 1
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.5425531914893617,
+        "teacher_yes_precision": 0.373134328358209,
+        "positive_anchor_recall": 0.9615384615384616,
+        "positive_anchor_rate": 0.2765957446808511
+      }
+    },
+    "ROLE+SPATIAL": {
+      "counts": {
+        "TN": 33,
+        "asked": 98,
+        "yes": 58,
+        "positive_asked_anchor": 33,
+        "TP": 26,
+        "FP": 32,
+        "FN": 7
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.6020408163265306,
+        "teacher_yes_precision": 0.4482758620689655,
+        "positive_anchor_recall": 0.7878787878787878,
+        "positive_anchor_rate": 0.336734693877551
+      }
+    },
+    "ROLE": {
+      "counts": {
+        "TN": 66,
+        "asked": 110,
+        "yes": 32,
+        "positive_asked_anchor": 23,
+        "FP": 21,
+        "TP": 11,
+        "FN": 12
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.7,
+        "teacher_yes_precision": 0.34375,
+        "positive_anchor_recall": 0.4782608695652174,
+        "positive_anchor_rate": 0.20909090909090908
+      }
+    }
+  },
+  "probability_quantiles": {
+    "TP": {
+      "count": 492,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.5,
+        0.818359375,
+        0.93359375,
+        0.9921875,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "FP": {
+      "count": 195,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.5,
+        0.5625,
+        0.70703125,
+        0.8671875,
+        0.96484375,
+        0.99609375,
+        1.0
+      ]
+    },
+    "TN": {
+      "count": 423,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.0001583099365234375,
+        0.00116729736328125,
+        0.004058837890625,
+        0.02294921875,
+        0.1826171875,
+        0.376953125,
+        0.46875
+      ]
+    },
+    "FN": {
+      "count": 50,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.003173828125,
+        0.094189453125,
+        0.1875,
+        0.294921875,
+        0.376953125,
+        0.41113281250000006,
+        0.46875
+      ]
+    }
+  },
+  "fixed_probability_bins": [
+    {
+      "lower": 0.0,
+      "upper": 0.1,
+      "count": 288,
+      "mean_teacher_probability": 0.01838761568069458,
+      "observed_positive_membership": 0.027777777777777776
+    },
+    {
+      "lower": 0.1,
+      "upper": 0.2,
+      "count": 46,
+      "mean_teacher_probability": 0.1456564198369565,
+      "observed_positive_membership": 0.10869565217391304
+    },
+    {
+      "lower": 0.2,
+      "upper": 0.3,
+      "count": 58,
+      "mean_teacher_probability": 0.2525255926724138,
+      "observed_positive_membership": 0.27586206896551724
+    },
+    {
+      "lower": 0.3,
+      "upper": 0.4,
+      "count": 44,
+      "mean_teacher_probability": 0.35791015625,
+      "observed_positive_membership": 0.2727272727272727
+    },
+    {
+      "lower": 0.4,
+      "upper": 0.5,
+      "count": 37,
+      "mean_teacher_probability": 0.44061444256756754,
+      "observed_positive_membership": 0.24324324324324326
+    },
+    {
+      "lower": 0.5,
+      "upper": 0.6,
+      "count": 34,
+      "mean_teacher_probability": 0.5330882352941176,
+      "observed_positive_membership": 0.20588235294117646
+    },
+    {
+      "lower": 0.6,
+      "upper": 0.7,
+      "count": 33,
+      "mean_teacher_probability": 0.6438210227272727,
+      "observed_positive_membership": 0.45454545454545453
+    },
+    {
+      "lower": 0.7,
+      "upper": 0.8,
+      "count": 47,
+      "mean_teacher_probability": 0.7581449468085106,
+      "observed_positive_membership": 0.44680851063829785
+    },
+    {
+      "lower": 0.8,
+      "upper": 0.9,
+      "count": 91,
+      "mean_teacher_probability": 0.8588169642857143,
+      "observed_positive_membership": 0.5164835164835165
+    },
+    {
+      "lower": 0.9,
+      "upper": 1.0,
+      "count": 482,
+      "mean_teacher_probability": 0.9818059517634855,
+      "observed_positive_membership": 0.8340248962655602
+    }
+  ],
+  "wrong_yes_anchor_context": {
+    "different_from_anchor_positive_queries": 120,
+    "no_query_positive_membership_at_anchor": 75
+  },
+  "common_wrong_yes_and_anchor_positive_query_pairs": [
+    {
+      "asked": "dark-side team player",
+      "anchor_positive_query": "basketball player",
+      "count": 14
+    },
+    {
+      "asked": "dark-side team player",
+      "anchor_positive_query": "light-side team player",
+      "count": 14
+    },
+    {
+      "asked": "dark-side team player",
+      "anchor_positive_query": "player",
+      "count": 14
+    },
+    {
+      "asked": "right-side team player",
+      "anchor_positive_query": "left-side team player",
+      "count": 12
+    },
+    {
+      "asked": "right-side team player",
+      "anchor_positive_query": "player",
+      "count": 12
+    },
+    {
+      "asked": "right-side team player",
+      "anchor_positive_query": "volleyball player",
+      "count": 12
+    },
+    {
+      "asked": "left-side team player",
+      "anchor_positive_query": "player",
+      "count": 10
+    },
+    {
+      "asked": "left-side team player",
+      "anchor_positive_query": "volleyball player",
+      "count": 10
+    },
+    {
+      "asked": "left-side team player",
+      "anchor_positive_query": "right-side team player",
+      "count": 9
+    },
+    {
+      "asked": "dark-side team player",
+      "anchor_positive_query": "basketball player in white clothes",
+      "count": 8
+    },
+    {
+      "asked": "dark-side team player",
+      "anchor_positive_query": "player in white",
+      "count": 6
+    },
+    {
+      "asked": "light-side team player",
+      "anchor_positive_query": "basketball player",
+      "count": 6
+    },
+    {
+      "asked": "light-side team player",
+      "anchor_positive_query": "dark-side team player",
+      "count": 6
+    },
+    {
+      "asked": "light-side team player",
+      "anchor_positive_query": "player",
+      "count": 6
+    },
+    {
+      "asked": "The player in the left-side team wearing white clothes.",
+      "anchor_positive_query": "player",
+      "count": 6
+    },
+    {
+      "asked": "The player in the left-side team wearing white clothes.",
+      "anchor_positive_query": "volleyball player",
+      "count": 6
+    },
+    {
+      "asked": "The player in the left-side team wearing white clothes.",
+      "anchor_positive_query": "right-side team player",
+      "count": 5
+    },
+    {
+      "asked": "The libero of the left-side team.",
+      "anchor_positive_query": "player",
+      "count": 5
+    },
+    {
+      "asked": "The libero of the left-side team.",
+      "anchor_positive_query": "volleyball player",
+      "count": 5
+    },
+    {
+      "asked": "goalkeeper",
+      "anchor_positive_query": "football player",
+      "count": 5
+    }
+  ]
+}
+C1
+{
+  "anchor_confusion": {
+    "TN": 954,
+    "asked": 1103,
+    "TP": 36,
+    "FP": 102,
+    "FN": 11
+  },
+  "anchor_rates": {
+    "anchor_membership_agreement": 0.8975521305530372,
+    "teacher_yes_precision": 0.2608695652173913,
+    "positive_anchor_recall": 0.7659574468085106,
+    "positive_anchor_rate": 0.04261106074342702
+  },
+  "query_coverage": {
+    "queries": 425,
+    "recoverable_positive_queries": 40,
+    "no_questions": 31,
+    "no_teacher_yes": 352,
+    "recoverable_no_questions": 1,
+    "recoverable_without_positive_asked_anchor": 16,
+    "recoverable_no_yes": 10,
+    "recoverable_no_yes_and_no_positive_anchor": 6,
+    "recoverable_no_yes_despite_positive_anchor": 4,
+    "no_positive_candidate_with_teacher_yes": 43
+  },
+  "query_types": {
+    "APPEARANCE": {
+      "counts": {
+        "TN": 954,
+        "asked": 1103,
+        "yes": 138,
+        "positive_asked_anchor": 47,
+        "TP": 36,
+        "FP": 102,
+        "FN": 11
+      },
+      "rates": {
+        "anchor_membership_agreement": 0.8975521305530372,
+        "teacher_yes_precision": 0.2608695652173913,
+        "positive_anchor_recall": 0.7659574468085106,
+        "positive_anchor_rate": 0.04261106074342702
+      }
+    }
+  },
+  "probability_quantiles": {
+    "TP": {
+      "count": 36,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.5,
+        0.826171875,
+        0.95703125,
+        0.9921875,
+        0.99609375,
+        1.0,
+        1.0
+      ]
+    },
+    "FP": {
+      "count": 102,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.5,
+        0.5964843750000001,
+        0.70703125,
+        0.9375,
+        0.9921875,
+        0.99609375,
+        1.0
+      ]
+    },
+    "TN": {
+      "count": 954,
+      "quantiles_0_10_25_50_75_90_100": [
+        3.528594970703125e-05,
+        0.0001583099365234375,
+        0.000553131103515625,
+        0.00193023681640625,
+        0.010986328125,
+        0.053466796875,
+        0.46875
+      ]
+    },
+    "FN": {
+      "count": 11,
+      "quantiles_0_10_25_50_75_90_100": [
+        0.010986328125,
+        0.015869140625,
+        0.02044677734375,
+        0.09521484375,
+        0.20458984375,
+        0.26953125,
+        0.3203125
+      ]
+    }
+  },
+  "fixed_probability_bins": [
+    {
+      "lower": 0.0,
+      "upper": 0.1,
+      "count": 905,
+      "mean_teacher_probability": 0.009529299762367544,
+      "observed_positive_membership": 0.0066298342541436465
+    },
+    {
+      "lower": 0.1,
+      "upper": 0.2,
+      "count": 31,
+      "mean_teacher_probability": 0.13561617943548387,
+      "observed_positive_membership": 0.06451612903225806
+    },
+    {
+      "lower": 0.2,
+      "upper": 0.3,
+      "count": 15,
+      "mean_teacher_probability": 0.24192708333333332,
+      "observed_positive_membership": 0.13333333333333333
+    },
+    {
+      "lower": 0.3,
+      "upper": 0.4,
+      "count": 8,
+      "mean_teacher_probability": 0.334716796875,
+      "observed_positive_membership": 0.125
+    },
+    {
+      "lower": 0.4,
+      "upper": 0.5,
+      "count": 6,
+      "mean_teacher_probability": 0.4280598958333333,
+      "observed_positive_membership": 0.0
+    },
+    {
+      "lower": 0.5,
+      "upper": 0.6,
+      "count": 13,
+      "mean_teacher_probability": 0.5432692307692307,
+      "observed_positive_membership": 0.15384615384615385
+    },
+    {
+      "lower": 0.6,
+      "upper": 0.7,
+      "count": 13,
+      "mean_teacher_probability": 0.6511418269230769,
+      "observed_positive_membership": 0.0
+    },
+    {
+      "lower": 0.7,
+      "upper": 0.8,
+      "count": 11,
+      "mean_teacher_probability": 0.7524857954545454,
+      "observed_positive_membership": 0.09090909090909091
+    },
+    {
+      "lower": 0.8,
+      "upper": 0.9,
+      "count": 13,
+      "mean_teacher_probability": 0.8605769230769231,
+      "observed_positive_membership": 0.23076923076923078
+    },
+    {
+      "lower": 0.9,
+      "upper": 1.0,
+      "count": 88,
+      "mean_teacher_probability": 0.9782936789772727,
+      "observed_positive_membership": 0.3409090909090909
+    }
+  ],
+  "wrong_yes_anchor_context": {
+    "different_from_anchor_positive_queries": 74,
+    "no_query_positive_membership_at_anchor": 28
+  },
+  "common_wrong_yes_and_anchor_positive_query_pairs": [
+    {
+      "asked": "dancing person with black shirt and brown pants",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 10
+    },
+    {
+      "asked": "dancing person with black shirt and blue pants",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 8
+    },
+    {
+      "asked": "dancing person with gray shirt and black pants",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 7
+    },
+    {
+      "asked": "dancing person dressed all in brown",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 5
+    },
+    {
+      "asked": "dancing person dressed all in purple",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 4
+    },
+    {
+      "asked": "dancing person dressed all in green",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 4
+    },
+    {
+      "asked": "dacning person with white Tshirt and purple pants",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 3
+    },
+    {
+      "asked": "dancing person with black shirt and blue pants",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 3
+    },
+    {
+      "asked": "dancing person with white shirt and black pants",
+      "anchor_positive_query": "dancing person dressed all in black",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with blue Tshirt and white skirt",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with purple shirt and white skirt",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with white Tshirt and black pants",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with white Tshirt and purple skirt",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with white shirt and black pants",
+      "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+      "count": 2
+    },
+    {
+      "asked": "dancing person with blue Tshirt and white pants",
+      "anchor_positive_query": "dancing person dressed all in white",
+      "count": 1
+    },
+    {
+      "asked": "dancing person with blue Tshirt and white skirt",
+      "anchor_positive_query": "dancing person dressed all in white",
+      "count": 1
+    },
+    {
+      "asked": "dancing person with black shirt and brown pants",
+      "anchor_positive_query": "dancing person with white Tshirt and black pants",
+      "count": 1
+    },
+    {
+      "asked": "dacning person with white Tshirt and purple pants",
+      "anchor_positive_query": "dancing person dressed all in white",
+      "count": 1
+    },
+    {
+      "asked": "dancing person dressed all in purple",
+      "anchor_positive_query": "dancing person with blue Tshirt and white pants",
+      "count": 1
+    },
+    {
+      "asked": "dancing person with purple shirt and white skirt",
+      "anchor_positive_query": "dancing person dressed all in white",
+      "count": 1
+    }
+  ]
+}
+
+十、自然768维教师头与经典图的独立拆解
+自然768->64 GELU->1，无312零填充或手工HSV学入头；软/硬教师均充分训练。
+主方法为PCD图+显式PRESUPPOSED共同正信念保护，CHECKLIST严格等同未保护PCD图。
+图与KD共享完全相同软头；PCD/RGB/纯颜色/同头隐藏特征及无图锚点均报告，未按域挑胜者。
+保护系数.1+3.9max(0,2min(p400,pfinal)-1)是固定启发式正则，不是GT校准概率或统计置信区间。
+66原始+90数量输出封存后统一156官评，独立NumPy充分统计复现PASS。
+复用既有1160/1103真实答案，0新增教师/主干前向；该质量不能与旧3512秒拼接。
+
+自然768 / C4
+三神经种子平均HOTA：
+  KD400 = 66.818683
+  KD_FINAL = 66.060308
+  KD_MEAN = 66.773474
+  HARD400 = 66.606188
+  HARD_FINAL = 66.120587
+  GRAPH_PCD = 67.122526
+  GRAPH_RGB = 67.201416
+  GRAPH_COLOUR = 66.823368
+  GRAPH_HIDDEN = 66.778434
+  ANCHORS = 66.772714
+  GRAPH_GUARD = 66.312671
+  BASE_RGB400 = 66.548969
+  BASE_RGB_FINAL = 65.566257
+  BASE_RGB_MEAN = 66.169708
+  BASE_RGB_HARD400 = 66.273134
+  BASE_RGB_HARD_FINAL = 65.574085
+  BASE_ZERO400 = 66.874561
+  BASE_ZERO_FINAL = 66.277843
+  BASE_ZERO_MEAN = 66.854409
+  BASE_ORIG400 = 66.409146
+  BASE_ORIG_FINAL = 65.764279
+  BASE_ORIG_MEAN = 66.340681
+对应效应（完整结果和全部失败均见JSON）：
+  GRAPH_GUARD_vs_KD_MEAN：-0.460804; parent95%[-0.943209, +0.092022]; parent+seed95%[-0.957433, +0.120294]
+  GRAPH_GUARD_vs_KD400：-0.506012; parent95%[-0.988954, +0.010072]; parent+seed95%[-1.011550, +0.027511]
+  GRAPH_GUARD_vs_KD_FINAL：+0.252362; parent95%[-0.451720, +1.106250]; parent+seed95%[-0.485421, +1.126774]
+  GRAPH_GUARD_vs_HARD400：-0.293517; parent95%[-1.427985, +0.742048]; parent+seed95%[-1.432768, +0.771479]
+  GRAPH_GUARD_vs_HARD_FINAL：+0.192084; parent95%[-0.882076, +1.201369]; parent+seed95%[-0.892157, +1.224654]
+  GRAPH_GUARD_vs_GRAPH_PCD：-0.809855; parent95%[-1.395038, -0.365374]; parent+seed95%[-1.431417, -0.326323]
+  GRAPH_GUARD_vs_GRAPH_RGB：-0.888746; parent95%[-1.427246, -0.483127]; parent+seed95%[-1.455022, -0.454510]
+  GRAPH_GUARD_vs_GRAPH_COLOUR：-0.510698; parent95%[-1.106344, -0.035433]; parent+seed95%[-1.119355, -0.026155]
+  GRAPH_GUARD_vs_GRAPH_HIDDEN：-0.465763; parent95%[-0.916838, -0.081465]; parent+seed95%[-0.925094, -0.041643]
+  GRAPH_GUARD_vs_ANCHORS：-0.460043; parent95%[-0.949494, +0.099439]; parent+seed95%[-0.963770, +0.127129]
+  GRAPH_GUARD_vs_BASE_RGB400：-0.236298; parent95%[-1.393875, +0.991565]; parent+seed95%[-1.399891, +1.003757]
+  GRAPH_GUARD_vs_BASE_RGB_FINAL：+0.746413; parent95%[-0.392327, +2.107912]; parent+seed95%[-0.418012, +2.130803]
+  GRAPH_GUARD_vs_BASE_RGB_MEAN：+0.142963; parent95%[-0.979766, +1.410712]; parent+seed95%[-0.999721, +1.415427]
+  GRAPH_GUARD_vs_BASE_RGB_HARD400：+0.039536; parent95%[-0.933764, +1.066854]; parent+seed95%[-0.965179, +1.126226]
+  GRAPH_GUARD_vs_BASE_RGB_HARD_FINAL：+0.738586; parent95%[-0.228127, +1.729508]; parent+seed95%[-0.273406, +1.817075]
+  GRAPH_GUARD_vs_BASE_ZERO400：-0.561891; parent95%[-1.046088, -0.106867]; parent+seed95%[-1.115127, -0.007804]
+  GRAPH_GUARD_vs_BASE_ZERO_FINAL：+0.034828; parent95%[-0.551331, +0.757756]; parent+seed95%[-0.636318, +0.902189]
+  GRAPH_GUARD_vs_BASE_ZERO_MEAN：-0.541739; parent95%[-1.054007, -0.056359]; parent+seed95%[-1.099879, -0.005790]
+  GRAPH_GUARD_vs_BASE_ORIG400：-0.096476; parent95%[-1.002113, +0.907960]; parent+seed95%[-1.025406, +0.908615]
+  GRAPH_GUARD_vs_BASE_ORIG_FINAL：+0.548392; parent95%[-0.491151, +1.816441]; parent+seed95%[-0.530432, +1.833882]
+  GRAPH_GUARD_vs_BASE_ORIG_MEAN：-0.028011; parent95%[-0.946190, +1.011623]; parent+seed95%[-0.954633, +1.042005]
+  GRAPH_PCD_vs_KD_MEAN：+0.349052; parent95%[-0.158519, +0.919798]; parent+seed95%[-0.183842, +0.925357]
+  GRAPH_RGB_vs_GRAPH_PCD：+0.078890; parent95%[-0.079971, +0.316002]; parent+seed95%[-0.103852, +0.335668]
+  GRAPH_HIDDEN_vs_GRAPH_PCD：-0.344092; parent95%[-0.816376, +0.107679]; parent+seed95%[-0.919523, +0.192551]
+  GRAPH_HIDDEN_vs_KD_MEAN：+0.004960; parent95%[-0.494556, +0.459173]; parent+seed95%[-0.558549, +0.515487]
+  KD_MEAN_vs_BASE_ZERO_MEAN：-0.080935; parent95%[-0.331244, +0.123905]; parent+seed95%[-0.442000, +0.214075]
+  COUNT_OWN_GRAPH_GUARD_vs_KD_MEAN：+0.213589; parent95%[+0.036261, +0.424973]; parent+seed95%[+0.026865, +0.443296]
+  COUNT_BASELINE_GRAPH_GUARD_vs_KD_MEAN：-0.037888; parent95%[-0.362603, +0.340783]; parent+seed95%[-0.375332, +0.374466]
+  COUNT_OWN_GRAPH_GUARD_vs_GRAPH_PCD：+0.052841; parent95%[-0.013565, +0.124068]; parent+seed95%[-0.027147, +0.140528]
+  COUNT_BASELINE_GRAPH_GUARD_vs_GRAPH_PCD：-0.068958; parent95%[-0.178821, +0.016474]; parent+seed95%[-0.184746, +0.018726]
+  COUNT_OWN_GRAPH_GUARD_vs_GRAPH_RGB：+0.115323; parent95%[+0.036589, +0.205689]; parent+seed95%[+0.021513, +0.234929]
+  COUNT_BASELINE_GRAPH_GUARD_vs_GRAPH_RGB：-0.053998; parent95%[-0.169264, +0.071796]; parent+seed95%[-0.185361, +0.079734]
+  COUNT_OWN_GRAPH_GUARD_vs_ANCHORS：+0.216078; parent95%[+0.047796, +0.423720]; parent+seed95%[+0.042391, +0.438578]
+  COUNT_BASELINE_GRAPH_GUARD_vs_ANCHORS：-0.022770; parent95%[-0.319509, +0.340098]; parent+seed95%[-0.333433, +0.381636]
+  COUNT_OWN_GRAPH_RGB_vs_GRAPH_PCD：+0.056494; parent95%[+0.009786, +0.122850]; parent+seed95%[-0.014364, +0.140353]
+  COUNT_BASELINE_GRAPH_RGB_vs_GRAPH_PCD：-0.007239; parent95%[-0.065044, +0.057337]; parent+seed95%[-0.071082, +0.059245]
+
+自然768 / C1
+三神经种子平均HOTA：
+  KD400 = 30.802412
+  KD_FINAL = 31.096934
+  KD_MEAN = 30.879332
+  HARD400 = 29.810124
+  HARD_FINAL = 30.174964
+  GRAPH_PCD = 34.140323
+  GRAPH_RGB = 34.671630
+  GRAPH_COLOUR = 34.869260
+  GRAPH_HIDDEN = 32.709377
+  ANCHORS = 30.880540
+  GRAPH_GUARD = 34.140323
+  BASE_RGB400 = 32.513977
+  BASE_RGB_FINAL = 32.032410
+  BASE_RGB_MEAN = 32.199208
+  BASE_RGB_HARD400 = 32.524795
+  BASE_RGB_HARD_FINAL = 31.674901
+  BASE_ZERO400 = 30.590421
+  BASE_ZERO_FINAL = 31.503418
+  BASE_ZERO_MEAN = 31.105765
+对应效应（完整结果和全部失败均见JSON）：
+  GRAPH_GUARD_vs_KD_MEAN：+3.260991; parent95%[+1.036703, +5.947662]; parent+seed95%[+0.823503, +6.049689]
+  GRAPH_GUARD_vs_KD400：+3.337911; parent95%[+0.822745, +6.242429]; parent+seed95%[+0.644394, +6.582568]
+  GRAPH_GUARD_vs_KD_FINAL：+3.043388; parent95%[+1.047709, +5.435711]; parent+seed95%[+0.650085, +5.747881]
+  GRAPH_GUARD_vs_HARD400：+4.330199; parent95%[+0.994652, +8.370437]; parent+seed95%[+0.761301, +8.628251]
+  GRAPH_GUARD_vs_HARD_FINAL：+3.965358; parent95%[+0.970465, +7.618961]; parent+seed95%[+0.577744, +8.061795]
+  GRAPH_GUARD_vs_GRAPH_PCD：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  GRAPH_GUARD_vs_GRAPH_RGB：-0.531308; parent95%[-2.205592, +1.368155]; parent+seed95%[-2.738929, +1.610004]
+  GRAPH_GUARD_vs_GRAPH_COLOUR：-0.728937; parent95%[-2.587710, +1.278270]; parent+seed95%[-2.702682, +1.336109]
+  GRAPH_GUARD_vs_GRAPH_HIDDEN：+1.430945; parent95%[-0.166447, +3.505393]; parent+seed95%[-0.385091, +3.699986]
+  GRAPH_GUARD_vs_ANCHORS：+3.259783; parent95%[+1.035884, +5.947577]; parent+seed95%[+0.823503, +6.047084]
+  GRAPH_GUARD_vs_BASE_RGB400：+1.626346; parent95%[-0.727976, +4.416474]; parent+seed95%[-0.794076, +4.554437]
+  GRAPH_GUARD_vs_BASE_RGB_FINAL：+2.107912; parent95%[-0.100037, +4.675187]; parent+seed95%[-0.290098, +4.861331]
+  GRAPH_GUARD_vs_BASE_RGB_MEAN：+1.941114; parent95%[-0.448904, +4.799102]; parent+seed95%[-0.516605, +4.921531]
+  GRAPH_GUARD_vs_BASE_RGB_HARD400：+1.615527; parent95%[-1.288727, +4.823150]; parent+seed95%[-1.706226, +5.034945]
+  GRAPH_GUARD_vs_BASE_RGB_HARD_FINAL：+2.465421; parent95%[-0.403122, +5.981997]; parent+seed95%[-0.660736, +6.147063]
+  GRAPH_GUARD_vs_BASE_ZERO400：+3.549902; parent95%[+0.935460, +6.645284]; parent+seed95%[+0.787176, +6.851933]
+  GRAPH_GUARD_vs_BASE_ZERO_FINAL：+2.636904; parent95%[+0.505462, +5.352598]; parent+seed95%[+0.350570, +5.527674]
+  GRAPH_GUARD_vs_BASE_ZERO_MEAN：+3.034558; parent95%[+0.625843, +5.963263]; parent+seed95%[+0.586744, +6.106213]
+  GRAPH_PCD_vs_KD_MEAN：+3.260991; parent95%[+1.036703, +5.947662]; parent+seed95%[+0.823503, +6.049689]
+  GRAPH_RGB_vs_GRAPH_PCD：+0.531308; parent95%[-1.368155, +2.205592]; parent+seed95%[-1.610004, +2.738929]
+  GRAPH_HIDDEN_vs_GRAPH_PCD：-1.430945; parent95%[-3.505393, +0.166447]; parent+seed95%[-3.699986, +0.385091]
+  GRAPH_HIDDEN_vs_KD_MEAN：+1.830045; parent95%[+0.013678, +3.971012]; parent+seed95%[-0.364173, +4.157311]
+  KD_MEAN_vs_BASE_ZERO_MEAN：-0.226433; parent95%[-1.192996, +1.001713]; parent+seed95%[-1.517128, +1.643498]
+  COUNT_OWN_GRAPH_GUARD_vs_KD_MEAN：+0.654136; parent95%[-0.303755, +2.159087]; parent+seed95%[-0.573305, +2.245852]
+  COUNT_BASELINE_GRAPH_GUARD_vs_KD_MEAN：-0.314668; parent95%[-0.995926, +0.285666]; parent+seed95%[-1.246215, +0.349499]
+  COUNT_OWN_GRAPH_GUARD_vs_GRAPH_PCD：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_GRAPH_GUARD_vs_GRAPH_PCD：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_OWN_GRAPH_GUARD_vs_GRAPH_RGB：+0.926404; parent95%[+0.171952, +2.299192]; parent+seed95%[+0.099740, +2.314501]
+  COUNT_BASELINE_GRAPH_GUARD_vs_GRAPH_RGB：-0.014794; parent95%[-0.887268, +1.276605]; parent+seed95%[-1.026635, +1.314322]
+  COUNT_OWN_GRAPH_GUARD_vs_ANCHORS：+0.605348; parent95%[-0.319284, +2.118014]; parent+seed95%[-0.592645, +2.174133]
+  COUNT_BASELINE_GRAPH_GUARD_vs_ANCHORS：-0.309429; parent95%[-0.993816, +0.290209]; parent+seed95%[-1.241446, +0.351951]
+  COUNT_OWN_GRAPH_RGB_vs_GRAPH_PCD：+0.014794; parent95%[-1.276605, +0.887268]; parent+seed95%[-1.314322, +1.026635]
+  COUNT_BASELINE_GRAPH_RGB_vs_GRAPH_PCD：-0.926404; parent95%[-2.299192, -0.171952]; parent+seed95%[-2.314501, -0.099740]
+本轮查询检索/FP/FN诊断：
+{
+  "conditions": {
+    "C4_seed0": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 21,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1346986,
+          "FP": 483127,
+          "FN": 158972
+        },
+        "HARD400": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 26,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1388600,
+          "FP": 545827,
+          "FN": 117358
+        },
+        "GRAPH_PCD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 60,
+          "positive_queries_without_correct_output": 80,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1380074,
+          "FP": 496022,
+          "FN": 125884
+        },
+        "GRAPH_GUARD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 38,
+          "positive_queries_without_correct_output": 58,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1415538,
+          "FP": 597311,
+          "FN": 90420
+        },
+        "GRAPH_RGB": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 59,
+          "positive_queries_without_correct_output": 77,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1385473,
+          "FP": 496988,
+          "FN": 120485
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 58,
+          "positive_queries_without_correct_output": 75,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1392353,
+          "FP": 529048,
+          "FN": 113605
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 12,
+          "regressed": 14
+        },
+        "GRAPH_PCD": {
+          "rescued": 4,
+          "regressed": 24
+        },
+        "GRAPH_GUARD": {
+          "rescued": 8,
+          "regressed": 6
+        },
+        "GRAPH_RGB": {
+          "rescued": 5,
+          "regressed": 22
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 5,
+          "regressed": 20
+        }
+      }
+    },
+    "C1_seed0": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 32,
+          "TP": 96318,
+          "FP": 73151,
+          "FN": 101067
+        },
+        "HARD400": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 31,
+          "TP": 90815,
+          "FP": 72280,
+          "FN": 106570
+        },
+        "GRAPH_PCD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 116610,
+          "FP": 75555,
+          "FN": 80775
+        },
+        "GRAPH_GUARD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 116610,
+          "FP": 75555,
+          "FN": 80775
+        },
+        "GRAPH_RGB": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 23,
+          "TP": 119378,
+          "FP": 75603,
+          "FN": 78007
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 23,
+          "TP": 113925,
+          "FP": 75445,
+          "FN": 83460
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 1,
+          "regressed": 1
+        },
+        "GRAPH_PCD": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_GUARD": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_RGB": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 2,
+          "regressed": 0
+        }
+      }
+    },
+    "C4_seed17": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 20,
+          "positive_queries_without_correct_output": 59,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1359525,
+          "FP": 485260,
+          "FN": 146433
+        },
+        "HARD400": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 32,
+          "positive_queries_without_correct_output": 64,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1383634,
+          "FP": 533518,
+          "FN": 122324
+        },
+        "GRAPH_PCD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 61,
+          "positive_queries_without_correct_output": 78,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1376691,
+          "FP": 487425,
+          "FN": 129267
+        },
+        "GRAPH_GUARD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 36,
+          "positive_queries_without_correct_output": 57,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1413046,
+          "FP": 586711,
+          "FN": 92912
+        },
+        "GRAPH_RGB": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 58,
+          "positive_queries_without_correct_output": 77,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1380295,
+          "FP": 485827,
+          "FN": 125663
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 58,
+          "positive_queries_without_correct_output": 73,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1389279,
+          "FP": 516130,
+          "FN": 116679
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 13,
+          "regressed": 18
+        },
+        "GRAPH_PCD": {
+          "rescued": 6,
+          "regressed": 25
+        },
+        "GRAPH_GUARD": {
+          "rescued": 8,
+          "regressed": 6
+        },
+        "GRAPH_RGB": {
+          "rescued": 5,
+          "regressed": 23
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 5,
+          "regressed": 19
+        }
+      }
+    },
+    "C1_seed17": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 32,
+          "TP": 97915,
+          "FP": 73937,
+          "FN": 99470
+        },
+        "HARD400": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 96976,
+          "FP": 70974,
+          "FN": 100409
+        },
+        "GRAPH_PCD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 116684,
+          "FP": 74666,
+          "FN": 80701
+        },
+        "GRAPH_GUARD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 116684,
+          "FP": 74666,
+          "FN": 80701
+        },
+        "GRAPH_RGB": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 24,
+          "TP": 121920,
+          "FP": 73880,
+          "FN": 75465
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 22,
+          "TP": 114561,
+          "FP": 74413,
+          "FN": 82824
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 1,
+          "regressed": 2
+        },
+        "GRAPH_PCD": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_GUARD": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_RGB": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 2,
+          "regressed": 0
+        }
+      }
+    },
+    "C4_seed42": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 21,
+          "positive_queries_without_correct_output": 56,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1357724,
+          "FP": 482792,
+          "FN": 148234
+        },
+        "HARD400": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 33,
+          "positive_queries_without_correct_output": 63,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1386351,
+          "FP": 537004,
+          "FN": 119607
+        },
+        "GRAPH_PCD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 63,
+          "positive_queries_without_correct_output": 84,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1375083,
+          "FP": 472111,
+          "FN": 130875
+        },
+        "GRAPH_GUARD": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 35,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1408422,
+          "FP": 589275,
+          "FN": 97536
+        },
+        "GRAPH_RGB": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 60,
+          "positive_queries_without_correct_output": 78,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1379456,
+          "FP": 474893,
+          "FN": 126502
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 58,
+          "positive_queries_without_correct_output": 77,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1381560,
+          "FP": 523327,
+          "FN": 124398
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 13,
+          "regressed": 20
+        },
+        "GRAPH_PCD": {
+          "rescued": 5,
+          "regressed": 33
+        },
+        "GRAPH_GUARD": {
+          "rescued": 7,
+          "regressed": 11
+        },
+        "GRAPH_RGB": {
+          "rescued": 4,
+          "regressed": 26
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 5,
+          "regressed": 26
+        }
+      }
+    },
+    "C1_seed42": {
+      "candidate_membership": {
+        "KD_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 29,
+          "TP": 97924,
+          "FP": 70388,
+          "FN": 99461
+        },
+        "HARD400": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 17,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 33,
+          "TP": 88400,
+          "FP": 71133,
+          "FN": 108985
+        },
+        "GRAPH_PCD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 120816,
+          "FP": 73823,
+          "FN": 76569
+        },
+        "GRAPH_GUARD": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 21,
+          "TP": 120816,
+          "FP": 73823,
+          "FN": 76569
+        },
+        "GRAPH_RGB": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 22,
+          "TP": 125103,
+          "FP": 71503,
+          "FN": 72282
+        },
+        "GRAPH_HIDDEN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 24,
+          "TP": 114052,
+          "FP": 76076,
+          "FN": 83333
+        }
+      },
+      "versus_KD_retrieval": {
+        "HARD400": {
+          "rescued": 2,
+          "regressed": 2
+        },
+        "GRAPH_PCD": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "GRAPH_GUARD": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "GRAPH_RGB": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "GRAPH_HIDDEN": {
+          "rescued": 3,
+          "regressed": 0
+        }
+      }
+    }
+  },
+  "postseal_GT_only": true,
+  "query_retrieval_is_any_IoU_positive_row_not_full_tracking": true,
+  "positive_presence_means_recoverable_candidate_not_all_physical_GT": true,
+  "not_additive_HOTA_decomposition": true
+}
+
+十一、颜色与衣着部位的语义绑定及单调校准
+固定11颜色HSV原型，不用目标GT拟合；依据语言绑定上衣/下装，dressed-all同时看两部分。
+dark/light-side用上身相对亮度，按轨迹长度加权；不是新神经网络或目标GT规则表。
+规则支持C4的225/466句、C1的425/425句；HS和V独立近似、光照偏移、衣着部位遮挡等局限公开。
+普通SEM1081蒸馏也获得完全相同物理兼容标量，ZERO1081同初始化只补0；保留全部旧768/RGB/零HSV强软硬KD。
+PAVA只用过去/当前教师概率，当前视频5个TrackID组交叉排除该组全部查询；目标GT诊断精确率不进入权重。
+修正是logit(KD)+clip(logit(PAVA)-logit(训练教师平均),-ln3,ln3)，有界正则而非独立贝叶斯证据。
+BIN去掉单调约束、SHUFFLED破坏图像对应、NAIVE_MEAN简单平均；同头与零头归因均报告。
+6条件84原始+90双向数量=174官评，全部输出封存后才GT；源/教师前向新增0，不是新的冷启动。
+后处理未触发行等于自身SEM头；新语义头的重新训练仍可改变相对历史1080头的其它输出，不宣称全系统局部无损。
+本轮仍在运行。上述内容是预登记设计，不是已得到的效果。
+
+十二、仍需准确回答的科学问题与结论边界
 严格同RGB主对照是否在两个方向都支持正增益，是否胜过所有充分软/硬checkpoint，详见上面的全部实际结果。
 即使均值提升，也应检查三个种子的方向、按原视频不确定性和双向数量投影，不凭某个单点封神。
 开发数据上的描述性区间没有修正多次开发或多重比较，也不能证明未见域总体性能。
@@ -538,7 +1837,7 @@ C1是同一真实流的两分支，common+own是实测组件和，不是两次�
 不借用Oracle、固定坏图的大差或直接回填弱基线，冒充对强普通KD的独立增益。
 如果严格同信息对照消除了旧优势，研究必须继续，不能弱化基线或以写完报告当作完成。
 
-十一、完整证据索引（仓库仅存精选统计，原始结果不上传）
+十三、完整证据索引（仓库仅存精选统计，原始结果不上传）
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/benchmark_scope_audit.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/sparse_observation_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/context_cohort_analysis.json
@@ -548,6 +1847,9 @@ C1是同一真实流的两分支，common+own是实测组件和，不是两次�
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/null_set_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/zero_colour_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/fresh_teacher_anchor_diagnosis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/canonical_pcd_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/preregistration_semantic_colour_v1.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_parent_statistics.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_statistical_reproduction.json
 公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。

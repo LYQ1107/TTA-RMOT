@@ -29,6 +29,14 @@ def main():
     for stem in ('strict_rgb','minimal_final','query_scope','context_cohort','budget_cold','sparse_observation','null_set','zero_colour'):
         assert load(stem+'_statistical_reproduction')['status'].startswith('PASS_')
     sparse=load('sparse_observation_analysis');context=load('context_cohort_analysis');scope=load('query_scope_analysis')
+    canonical=None
+    if (PUBLIC/'canonical_pcd_analysis.json').is_file() and (PUBLIC/'canonical_pcd_statistical_reproduction.json').is_file():
+        canonical=load('canonical_pcd_analysis')
+        assert load('canonical_pcd_statistical_reproduction')['status'].startswith('PASS_')
+    semantic=None
+    if (PUBLIC/'semantic_colour_analysis.json').is_file() and (PUBLIC/'semantic_colour_statistical_reproduction.json').is_file():
+        semantic=load('semantic_colour_analysis')
+        assert load('semantic_colour_statistical_reproduction')['status'].startswith('PASS_')
     lines=['TTA-RMOT：人类视觉启发与经典算法的持续研究综合实证',
         '2026-11-22；研究根目录 /data3/liuyeqiang/FlexHook-TTA','',
         '本文汇总已完成的实证及其适用范围，不自动将科研Goal标记完成。',
@@ -38,7 +46,14 @@ def main():
         '但同架构HSV置零的C4普通KD更强，图对它仅+0.501837，区间[-0.292293,1.207896]跨0。',
         'C1图对均值KD +1.971637，原视频+神经种子区间[-0.069997,4.626153]跨0；固定KD数量排序差为负。',
         '强制非空/恢复KD集合让空查询变少，但SAFE对原图平均-0.258289，不能保留为已证实的有效贡献。',
-        '因此继续自然768维PCD强蒸馏与独立图度量/正信念保护的预登记研究；未完成前不宣布新模块有效。','',
+        ('自然768维研究已完成，详见后文全部强对照；完成队列仍不等于完整Goal验收。'
+            if canonical is not None else '继续自然768维强蒸馏与独立图度量/正信念保护研究；未完成前不宣布新模块有效。'),'',
+        ('最新自然768主方案GRAPH_GUARD：C4比均值KD -0.460804，三个种子都负；比无保护图 -0.809855，区间负。该保护不保留。'
+            if canonical is not None else '自然768主方案尚未完成，暂不作机制成功判断。'),
+        ('C1无保护PCD图比768均值 +3.260991，但对更强RGB均值的区间仍跨0；CHECKLIST下保护严格no-op。'
+            if canonical is not None else ''),
+        ('下一轮颜色—衣着部位语义绑定与教师单调校准已完成，全部强对照详见后文。' if semantic is not None else
+            '下一轮颜色—衣着部位语义绑定与教师单调校准正在进行，尚无本轮成功结论。'),'',
         '一、始终没有改变的最终目标',
         '跨域RMOT：在与源训练场景不同的目标视频中，依据语言描述选出对应的人或多名人的轨迹。',
         '用户明确接受官方固定候选框与Track ID，把研究范围限定在跨域指代适配模块。',
@@ -153,16 +168,63 @@ def main():
         '早期全帧到三观察把学生相位7686.8秒降到1858.4秒；PCD/RGB在匹配问答中相同，但先验/门控有变化，非严格无损。',
         '这属于执行调度节省，不称LoRA或神经特征学习收益，也不是所有GPU利用率的积分。','',
         '九、GT仅在封存后做的错误回看',json.dumps(physical['postseal_candidate_membership_diagnosis'],ensure_ascii=False,indent=2),
-        '这些是候选IoU成员计数，不是HOTA损失的可加分账；有正候选不代表原始全部GT都可恢复。','',
-        '十、仍需准确回答的科学问题与结论边界',
+        '这些是候选IoU成员计数，不是HOTA损失的可加分账；有正候选不代表原始全部GT都可恢复。']
+    if (PUBLIC/'fresh_teacher_anchor_diagnosis.json').is_file():
+        teacher=load('fresh_teacher_anchor_diagnosis')
+        lines += ['', '九补、实际被询问锚点的证据质量',
+            '该诊断在自然768研究全部156输出封存后执行，不改变本轮任何适配预测或参数。',
+            'Yes以p>=0.5计，沿用硬KD标签约定；0.5并不意味着肯定、可靠的证据。',
+            'GT比较的是所问候选在锚帧是否匹配该查询目标；不是纯教师语义准确率，也不代表全部未问候选。',
+            'C4全部466句都问过，但133句未问到GT正锚点；76句无Yes，其中59句没问到正锚点、17句问到了却仍无Yes。',
+            '此口径为当前10%实际问答的锚点匹配，与旧119条整轨迹漏查口径/预算不同，不直接作升降比较。',
+            'C1有31句完全未问，但其中仅1句有可恢复目标；不能盲目给所有未问或无Yes查询加预算。',
+            'C1共40条有可恢复目标的查询，10条无Yes；352条无Yes中其余342条并无正候选。',
+            'C4教师Yes在已问锚点的正匹配比例71.616%；C1仅26.087%。C1整体89.755%一致率受大量负例主导。',
+            'C1概率>=0.9的88个样本也只有30个正匹配，34.091%；仅调高置信阈值不能保证正确。',
+            'C1错误Yes常见衣着类别混淆，C4常见左右/深浅队伍；框定位、邻人入裁剪及可观察性也是混杂。',
+            '已查看的原图只作定性诊断，不据少量样例声称这些错误的全局原因。',
+            '这些GT诊断精确率不能作为适配时的教师权重；后续方案仍须只用图像、语言和教师反馈。']
+        for pair,row in teacher['pairs'].items():lines += [pair,json.dumps(row,ensure_ascii=False,indent=2)]
+    if canonical is not None:
+        lines += ['', '十、自然768维教师头与经典图的独立拆解',
+            '自然768->64 GELU->1，无312零填充或手工HSV学入头；软/硬教师均充分训练。',
+            '主方法为PCD图+显式PRESUPPOSED共同正信念保护，CHECKLIST严格等同未保护PCD图。',
+            '图与KD共享完全相同软头；PCD/RGB/纯颜色/同头隐藏特征及无图锚点均报告，未按域挑胜者。',
+            '保护系数.1+3.9max(0,2min(p400,pfinal)-1)是固定启发式正则，不是GT校准概率或统计置信区间。',
+            '66原始+90数量输出封存后统一156官评，独立NumPy充分统计复现PASS。',
+            '复用既有1160/1103真实答案，0新增教师/主干前向；该质量不能与旧3512秒拼接。']
+        for pair in ('C4','C1'):
+            row=canonical['repeated']['CANONICAL_'+pair]
+            summary(lines,'自然768 / '+pair,row,list(row['comparisons']))
+        lines += ['本轮查询检索/FP/FN诊断：',json.dumps(canonical['query_diagnosis'],ensure_ascii=False,indent=2)]
+    else:lines += ['', '十、自然768维研究仍在进行；未读取未完成的局部分数作结论。']
+    if (PUBLIC/'preregistration_semantic_colour_v1.json').is_file():
+        lines += ['', '十一、颜色与衣着部位的语义绑定及单调校准',
+            '固定11颜色HSV原型，不用目标GT拟合；依据语言绑定上衣/下装，dressed-all同时看两部分。',
+            'dark/light-side用上身相对亮度，按轨迹长度加权；不是新神经网络或目标GT规则表。',
+            '规则支持C4的225/466句、C1的425/425句；HS和V独立近似、光照偏移、衣着部位遮挡等局限公开。',
+            '普通SEM1081蒸馏也获得完全相同物理兼容标量，ZERO1081同初始化只补0；保留全部旧768/RGB/零HSV强软硬KD。',
+            'PAVA只用过去/当前教师概率，当前视频5个TrackID组交叉排除该组全部查询；目标GT诊断精确率不进入权重。',
+            '修正是logit(KD)+clip(logit(PAVA)-logit(训练教师平均),-ln3,ln3)，有界正则而非独立贝叶斯证据。',
+            'BIN去掉单调约束、SHUFFLED破坏图像对应、NAIVE_MEAN简单平均；同头与零头归因均报告。',
+            '6条件84原始+90双向数量=174官评，全部输出封存后才GT；源/教师前向新增0，不是新的冷启动。',
+            '后处理未触发行等于自身SEM头；新语义头的重新训练仍可改变相对历史1080头的其它输出，不宣称全系统局部无损。']
+        if semantic is None:lines += ['本轮仍在运行。上述内容是预登记设计，不是已得到的效果。']
+        else:
+            for pair in ('C4','C1'):
+                row=semantic['repeated']['SEMANTIC_'+pair]
+                summary(lines,'语义与单调 / '+pair,row,list(row['comparisons']))
+            lines += ['检索/FP/FN：',json.dumps(semantic['query_diagnosis'],ensure_ascii=False,indent=2)]
+    lines += ['', '十二、仍需准确回答的科学问题与结论边界',
         '严格同RGB主对照是否在两个方向都支持正增益，是否胜过所有充分软/硬checkpoint，详见上面的全部实际结果。',
         '即使均值提升，也应检查三个种子的方向、按原视频不确定性和双向数量投影，不凭某个单点封神。',
         '开发数据上的描述性区间没有修正多次开发或多重比较，也不能证明未见域总体性能。',
         '没有固定全预算Pareto最优结论，没有所有视觉直觉都有效、所有LoRA都无效的结论。',
         '不借用Oracle、固定坏图的大差或直接回填弱基线，冒充对强普通KD的独立增益。',
         '如果严格同信息对照消除了旧优势，研究必须继续，不能弱化基线或以写完报告当作完成。','',
-        '十一、完整证据索引（仓库仅存精选统计，原始结果不上传）']
-    for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis','zero_colour_analysis'):
+        '十三、完整证据索引（仓库仅存精选统计，原始结果不上传）']
+    for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis','zero_colour_analysis','fresh_teacher_anchor_diagnosis','canonical_pcd_analysis','preregistration_semantic_colour_v1','semantic_colour_analysis'):
+        if not (PUBLIC/(stem+'.json')).is_file():continue
         lines.append(str(PUBLIC/(stem+'.json')))
     lines += [str(PUBLIC/'strict_rgb_parent_statistics.json'),str(PUBLIC/'strict_rgb_statistical_reproduction.json'),
         '公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。',

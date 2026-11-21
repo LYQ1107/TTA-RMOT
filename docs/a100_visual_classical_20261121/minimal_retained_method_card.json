@@ -1,5 +1,5 @@
 {
-  "status": "NOT_ACCEPTED_CANONICAL_STRONG_TEACHER_RESEARCH_RUNNING",
+  "status": "CANONICAL_GUARD_REJECTED_SEMANTIC_COLOUR_RUNNING",
   "method": "Original teacher-distilled head plus query-conditioned visual cohort inference",
   "task_boundary": "Cross-domain referring adaptation on official fixed boxes and TrackIDs; frontend is common input, not our contribution",
   "source_target": {
@@ -295,5 +295,87 @@
     "all_soft_hard_RGB_zero_HSV_controls_retained": true,
     "no_new_teacher_or_encoder": true,
     "new_matching_cold_cost_not_yet_measured": true
-  }
+  },
+  "canonical_followup_completed": true,
+  "canonical_verdict": {
+    "C4_guard_vs_KD": {
+      "delta_HOTA": -0.46080363901174337,
+      "per_neural_seed_delta": [
+        -0.3345485238083796,
+        -0.4437207507059924,
+        -0.6041416425208581
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -0.9432093878153023,
+        0.09202177433758663
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.9574334664444951,
+        0.1202938901587061
+      ]
+    },
+    "C4_guard_vs_unprotected": {
+      "delta_HOTA": -0.8098553778557639,
+      "per_neural_seed_delta": [
+        -0.7333413000682611,
+        -0.6786731000251223,
+        -1.0175517334739084
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -1.3950381544679626,
+        -0.36537417227646846
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -1.431416958060171,
+        -0.32632344739867164
+      ]
+    },
+    "C1_PCD_vs_KD": {
+      "delta_HOTA": 3.2609905923547493,
+      "per_neural_seed_delta": [
+        3.557978895671738,
+        2.3973573466281373,
+        3.8276355347643722
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        1.036703390216462,
+        5.947662067423541
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.8235034388234256,
+        6.049689022873023
+      ]
+    },
+    "C1_vs_strong_RGB": {
+      "delta_HOTA": 1.941114275057809,
+      "per_neural_seed_delta": [
+        1.6572124114117486,
+        1.6789501574901493,
+        2.487180256271529
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -0.44890413507480953,
+        4.799102343865286
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.5166049665565191,
+        4.921531473112257
+      ]
+    },
+    "guard_retained": false
+  },
+  "next_study": "preregistration_semantic_colour_v1.json",
+  "no_final_recipe_accepted": true
 }

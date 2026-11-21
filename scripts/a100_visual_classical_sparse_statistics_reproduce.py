@@ -41,8 +41,34 @@ def recompute(left, right):
     return result
 
 
+def resolve_record(directory,filename,name,cache):
+    path=(directory/filename).absolute();key=str(path)
+    if key not in cache:cache[key]=json.loads(path.read_text())
+    row=cache[key][name]
+    if 'reference' in row:
+        ref=row['reference']
+        return resolve_record(path.parent,ref['file'],ref['record'],cache)
+    return row
+
+
+def share_identical_statistics(statistics,filename):
+    """Keep every result key, storing identical numeric payloads only once."""
+    result={};seen={};count=0
+    for name,row in statistics.items():
+        if 'reference' in row:result[name]=row;continue
+        value=json.dumps(row,sort_keys=True,separators=(',',':'))
+        if value in seen:
+            result[name]=dict(reference=dict(file=filename,record=seen[value]));count+=1
+        else:result[name]=row;seen[value]=name
+    return result,count
+
+
 def main(directory, stem='sparse_observation'):
     statistics = json.loads((directory / (stem+'_parent_statistics.json')).read_text())
+    references=0;external={}
+    for name,row in list(statistics.items()):
+        if 'reference' in row:
+            ref=row['reference'];statistics[name]=resolve_record(directory,ref['file'],ref['record'],external);references+=1
     report = json.loads((directory / (stem+'_analysis.json')).read_text())
     maximum_error, effects = 0., 0
     def compare(a, b, name):
@@ -78,6 +104,7 @@ def main(directory, stem='sparse_observation'):
         HOTA_records=len(statistics), effect_records=effects, maximum_absolute_error=maximum_error,
         bootstrap_samples=10000, bootstrap_seed=0, original_parent_resampling=True,
         neural_seed_sensitivity_reproduced=True, no_raw_assets_or_GPU_required=True,
+        existing_public_statistic_references=references,
         arithmetic_reproduction_is_not_independent_validation=True)
     (directory / (stem+'_statistical_reproduction.json')).write_text(json.dumps(result, indent=2)+'\n')
     print(json.dumps(result))
