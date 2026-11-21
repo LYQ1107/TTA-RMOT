@@ -17,6 +17,7 @@ def main():
     for label,name in [('Full perception','C4_fresh_full_stream_seed0'),('Key observations','C4_fresh_track_three_seed0')]:
         root=OUT/'cold_full_c4'/name
         receipt=json.loads((root/'completion.json').read_text());evaluation=json.loads((root/'official_evaluation.json').read_text())
+        process=json.loads((root/'worker_process_receipt.json').read_text())
         phases=json.loads((root/'phase_ledger.json').read_text())['common_phases']
         seconds={}
         for p in phases:seconds[p['phase']]=seconds.get(p['phase'],0.)+p['seconds']
@@ -33,7 +34,9 @@ def main():
         summaries[label]=dict(components_seconds=components,cost_by_method=receipt['cost_by_method'],HOTA=evaluation['HOTA'],
             actual_teacher_new_calls=receipt['teacher']['new_calls'],cache_hits=receipt['teacher']['cache_hits'],
             single_uninterrupted_attempt=receipt['single_uninterrupted_attempt'],generation_GT_open_attempts=receipt['GT_open_attempts'],
-            actual_all_arm_experiment_worker_seconds=receipt['actual_multiarm_worker_wall_seconds'])
+            actual_all_arm_experiment_worker_seconds=receipt['actual_multiarm_worker_wall_seconds'],
+            external_all_arm_process_seconds=process['wall_seconds'],
+            external_process_envelope_seconds=process['wall_seconds']-receipt['actual_multiarm_worker_wall_seconds'])
     full=summaries['Full perception']['components_seconds']['Student forward + initial scores']
     sparse=summaries['Key observations']['components_seconds']['Student forward + initial scores']
     atomic_json(OUT/'analysis/physical_full_vs_key_C4.json',dict(runs=summaries,measured_student_forward_ratio=full/sparse,

@@ -47,6 +47,8 @@ collect准备四种策略的共享实验问答并集；该总并集不是任一�
 对C1互斥查询，优先解释后者；C4非互斥任务保留逐查询投影。
 UNIFORM等策略通过--policy选择。实际KD使用目标教师硬/软标签拟合残差MLP，非离线替换标签。
 --teacher-target-clip .02给软KD相同的概率边界，输出到独立_clipped组；不改硬标签。
+新鲜流中的CLIP_KD/CLIP_COHORT沿用该概率边界：CLIP表示概率裁剪，
+不是新增CLIP视觉编码器或CLIP时序视角；RAW表示原始教师软概率。
 seed17/42需先运行repeat_collect.py为相应策略分片准备缺失的真实教师回答，再同时指定
 --seed 17 --acquisition-seed 17（或42）；不能把随机初始化重复写成新增独立测试域。
 
@@ -104,6 +106,53 @@ field_collect复制本地冻结缓存作为仅按请求返回回答的broker，�
 
 前两个命令要求对应种子与数量对照的预测及官评已完整封存；没有完成时会等待。
 原视频聚类区间和原视频+种子敏感性区间同时保留，不把三次初始化当三份独立数据。
+
+7. 独立单方法冷启动（完整C4、同一GPU3）
+
+  python scripts/a100_visual_classical_single_cold_launch.py
+
+按预登记顺序CLIP_KD、CLIP_COHORT，各自独立新进程加载学生和教师、建立新SQLite，
+每视频只拟合CLIP这一类型的头，只生成这一种方法的预测。以源工作进程的外部
+Popen-to-exit为真实时间，官评另计。需要A100物理GPU3空闲，不会终止其他进程。
+顺序没有反向平衡，OS缓存保留，主机/NAS共享；这些限制保留在收据中。
+
+单独运行时，本轮命令为：
+
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_cold_full_c4.py --name C4_key_single_CLIP_KD_seed0 --perception-mode track-three --methods CLIP_KD
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_cold_full_c4.py --name C4_key_single_CLIP_COHORT_seed0 --perception-mode track-three --methods CLIP_COHORT
+
+以上name对应本轮结果；重复使用已完成name只复用原始收据，不构成新的冷启动测量。
+重新实测须换成未使用的name。--methods省略时仍执行原22方法对照，不应把它的
+完整多臂进程时间误认成单个部署方法的时间。
+
+8. 机制反例与可复现统计
+
+  python scripts/a100_visual_classical_geometry_launch.py
+  python scripts/a100_visual_classical_reverse_counts.py --published
+
+geometry比较真实图、打乱节点对应、同等总边精度的完全图，并保持相同教师和KD。
+reverse_counts只需Git发布的父视频充分统计，可重算反向数量对照的区间。
+
+  python scripts/a100_visual_classical_graph_evidence_launch.py
+
+该命令复现已封存的自适应图权重/协议保护假设。它在C4没有超过固定视觉图，
+不是最终核心方法。模型权重只用教师反馈，但教师预测更好仍不等于RMOT更好。
+
+9. 全量物理结果、固定问答和独立进程都完成后的导出
+
+  python scripts/a100_visual_classical_plot_cold_full.py
+  python scripts/a100_visual_classical_plot_single_cold.py
+  python scripts/a100_visual_classical_publish_cold.py
+  python scripts/a100_visual_classical_recheck_cold_statistics.py
+  python scripts/a100_visual_classical_final_report.py
+
+前3个命令要求本轮所有相关结果已封存，不会启动新训练或教师推理。
+统计复核命令只读取Git中的父视频充分统计和最终报告，不需要原图、GT、教师回答、
+checkpoint或GPU；重新计算全部公布的原视频聚类效应与区间，按TrackEval的
+TP加权统计合并，不能改成简单平均各视频HOTA。45剪辑区间不是该命令的复核范围。
+单进程成本图读取真实Popen-to-exit收据，22方法组件图使用共同前缀分摊，二者分别标注。
+稀疏感知仍保留原4次历史观察的上下文，2324指decoder位置，非全部backbone图像数。
+原始提供候选框/ID的检测与跟踪生成没有重测，不能把该成本宣称为从原视频检测起的总成本。
 
 *_launch.py是本次A100任务的持久化调度器，有些会等待先前控制器的GPU释放收据。
 在干净环境优先使用上述直接入口，并根据实际GPU空闲情况运行，不能盲目启动旧队列。

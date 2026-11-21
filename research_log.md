@@ -2961,3 +2961,34 @@ Timing scope clarification: all actual fresh pipelines accept provided frozen ca
 Teacher-evidence study completed, not retained as a new core contribution. C4 raw BMA_GUARD68.632364 vs visual69.018978 (-0.386613; parentCI[-0.596004,-0.154894]); bounded68.858971 vs69.229304 (-0.370333, CI negative). It beats equal pooling but loses the simpler visual graph. C1 bounded BMA40.527567 ties equal40.541015; no stable independent model-selection gain. Pure visual guard raw-0.010934/bounded+0.021451, both CI cross0, CHECKLIST identical. Real teacher-LOO excludes held answer/KD leakage; better teacher consistency alone does not establish RMOT contribution. Preserve all132 new outputs and aggregate stats, do not inflate narrative or select a per-domain winner by GT.
 
 To make the wall audit stronger, preregistered and launched independent SINGLE-method cold CLIP_KD then CLIP_COHORT on the SAME physicalGPU3, source/teacher reload and private freshQA each, actual3508 new calls expected, onlyCLIP head type fitted per video and one method written. Timing is external source-worker Popen-to-exit, GT excluded. Fixed order/retained OS cache/shared host and NAS disclosed. Added --methods selection, state tags and separate analysis names; defaults preserve original22-arm experiment and existing running workers remain unchanged in memory. Completion reuse now preserves the ORIGINAL physical worker-process receipt instead of timing an immediate no-op as a new cold run.
+
+First whole actually fresh sparse C4 stream completed:45/45 videos,22 methods,0 GT opens/0 prepaid research payload reads,3508 NEW questions/0 cache hits/456 GPU batches, teacher frozen9a133... unchanged. Raw KD68.604187->visual69.241305 (+0.637118 parentCI[0.214504,1.290955]); bounded KD69.050103->visual69.279862 (+0.229759 CI[-0.248615,0.835756]). Bounded400/final mean69.051978->same mean+graph69.316260 (+0.264282 CI crosses0). Thus point wins survive a strong baseline, but strongest smoothed/ensemble total significance is not established. Preserve all22 methods.
+
+Sparse actual phases:studentload317.858s,teacherload546.156s,real sparse student1858.388s,RGB/acquisition357.008s,teacher service+IO397.153s vsbackend-only82.488s,finalaudit14.314s. Same-label headfit45 times536.445s. Shared-prefix component cost CLIP_KD4088.166s/COHORT4088.766s (extra0.600s); all3head/22output experimental process actually5205.535s. Do not label component costs as independent single-method measurements. Independent GPU3 processes still running. Full-source fresh/reference fixedQA still pending; no whole-source speed ratio yet.
+
+
+2026-11-21 持续Goal：新鲜全C4固定数量结果与独立KD实测
+- 抽样感知29个CountMatched输出完成，7个CountSelf均0变化。CLIP图相对KD在图数量下+0.6963 HOTA（13原视频区间正），但在KD数量下+0.0338（跨0）；不声称普遍纯排序贡献。
+- 同GPU3独立单方法CLIP_KD完成：69.050103 HOTA，真实工作进程3721.309秒，3508新回答/456批次/0缓存。CLIP_COHORT随后独立加载运行，尚未比较其最终时间。
+- 仅纠正已启动父进程两处旧共享多臂文字标志，原件备份，数字与预测不变，公开metadata_audit收据。
+- 实现最终轻量统计导出与独立进程成本图入口，等待全部封存后执行。
+
+
+2026-11-21 持续Goal：完整C4真实全帧流与固定问答控制封存
+- 45视频/466查询/3508新Qwen/456批次/0缓存，全帧RAW图68.9223对KD68.2864（+0.6358，13父视频CI正）；匹配边界的CLIP图69.1032对KD68.6554（+0.4478，CI跨0）。
+- 学生前向全帧7686.826s对关键观察1858.388s，约4.14倍；同型不同GPU和共享NAS等范围保留，不宣称普遍Pareto最优。
+- 45视频固定问答PCD/RGB最大差均0；仅源先验与门控采样下CLIP图+0.0695、KD-0.0833，均未形成明确差异，不能写成严格无损证明。
+- 导出完整物理成本、全部配置效用和固定问答诊断图；正在等待全帧CountMatched以及独立图进程最后结果。
+
+
+2026-11-21 持续Goal：全帧CountMatched完整封存
+- 29投影/7个CountSelf全部通过，CLIP图按自己的数量对KD+0.8361；按KD数量仍+0.2311，13父视频CI[0.0712,0.4841]。对MEAN反向数量只有+0.0518且跨0。
+- 全帧与关键观察反向数量结果并列，避免把一侧投影当成普遍纯排序结论。独立图进程已至43/45，尚未冒充最终完结。
+
+
+2026-11-21 持续研究实验验收：同GPU独立进程、统计复核、完整报告
+- 独立CLIP_KD69.050103/3721.309s；CLIP_COHORT69.279862/3453.921s。同GPU3、各3508新Qwen/0缓存，PCD/先验/问题逐位相同，原始教师概率最大差0。+0.229759 HOTA的13父视频CI跨0；不声称强KD已被显著全面击败。
+- 固定顺序和共享NAS/OS缓存保留，独立墙钟差不归为图本身加速；多臂组件分摊与单臂实际总账分别公布。
+- 全帧/关键观察22方法、两套29数量投影、8方法固定问答与两独立进程全部完成。公开统计复核127个效应/区间，误差<3e-14，无需原始资产或GPU。
+- 保留固定视觉图与关键观察，拒绝无效复杂模块。C4普通KD改善证据成立；强均值/裁剪和C1的收益边界如实保留。数据仍为开发集。
+- 生成最终自包含TXT、复现入口、PDF/PNG图表和必要轻量收据；随后进行<100MB发布检查及已授权推送。
