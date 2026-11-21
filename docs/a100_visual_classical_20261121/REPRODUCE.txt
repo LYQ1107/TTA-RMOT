@@ -308,3 +308,14 @@ seed0严格复现物理KD/C1图，81原始+33数量先封存后114官评；不�
 scripts/a100_visual_classical_rgb_parity_analyze.py生成相同信息质量比较；
 scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem strict_rgb复核公开统计。
 该回放不增加教师/主干前向，拟合时长不冒充新独立冷启动；暂定方法尚未最终接受。
+
+2026-11-22 新鲜独立物理结果与压空机制后续
+minimal_final_analysis.json：原KD66.377114→扩展图67.204190，+0.827077，13原视频CI正；
+两独立wall3512.399/3512.535s，各1160新教师0命中，PCD/RGB/先验/问题/答案0差。
+但图的正查询空输出19→61，救回4/损失23，研究不能仅凭HOTA结项。
+新计划preregistration_null_set_v1.json在严格RGB官评前固定，45原始+21数量=66官评。
+运行 scripts/a100_visual_classical_null_set_launch.py，内部等待完整严格RGB源后只做CPU推断。
+图全空时保留匹配KD的完整集合；所有五个强KD共享相同非空协议控制。
+C1 CHECKLIST严格不变；0新教师/主干/头训练，不能把构造的非空0错误当真实检索成功。
+统计复算：python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem null_set。
+综合TXT在两物理/RGB/协议研究统计完整后运行scripts/a100_visual_classical_research_synthesis.py生成。

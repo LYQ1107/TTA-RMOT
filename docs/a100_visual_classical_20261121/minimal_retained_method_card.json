@@ -1,5 +1,5 @@
 {
-  "status": "PROVISIONAL_PENDING_STRICT_RGB1080_INFORMATION_PARITY",
+  "status": "PROVISIONAL_PENDING_RGB_PARITY_AND_QUERY_RETRIEVAL_SAFETY",
   "method": "Original teacher-distilled head plus query-conditioned visual cohort inference",
   "task_boundary": "Cross-domain referring adaptation on official fixed boxes and TrackIDs; frontend is common input, not our contribution",
   "source_target": {
@@ -249,5 +249,23 @@
   "physical_evidence_pending": "minimal_final_analysis.json",
   "goal_status": "ACTIVE",
   "method_design_uses_postsealed_development_diagnosis": true,
-  "strict_RGB_gap": "Extended graph sees spatial/role RGB; test equally exposed1080-dimensional KD before final superiority acceptance."
+  "strict_RGB_gap": "Extended graph sees spatial/role RGB; test equally exposed1080-dimensional KD before final superiority acceptance.",
+  "fresh_C4_physical_evidence": {
+    "KD_HOTA": 66.37711363459273,
+    "GRAPH_HOTA": 67.20419043629605,
+    "independent_wall_seconds": [
+      3512.3990396169247,
+      3512.534780150978
+    ],
+    "new_calls_each": 1160,
+    "cache_hits_each": 0,
+    "all_source_and_teacher_equal": true
+  },
+  "unresolved_query_retrieval_tradeoff": {
+    "positive_query_empty_KD": 19,
+    "positive_query_empty_GRAPH": 61,
+    "rescued_queries": 4,
+    "regressed_queries": 23,
+    "requires_null_set_followup": true
+  }
 }

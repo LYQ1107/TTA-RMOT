@@ -59,6 +59,7 @@ def figure(repeated):
 def main():
     official=json.loads((OUT/'analysis/strict_rgb_official.json').read_text())
     assert official['status']=='ALL_STRICT_RGB_OFFICIAL_COMPLETE' and official['methods']==114
+    implementation=json.loads((PUBLIC/'strict_rgb_execution_implementation_manifest.json').read_text())
     data={};summary={};sufficient={}
     for record in conditions():
         root=Path(record['folder']);pair=record['pair'];slug=pair+f"_seed{record['seed']}"
@@ -77,6 +78,7 @@ def main():
         audit=fit_audit(raw['receipts'])
         assert not any(row['videos_exceeding_registered_KL_tolerance'] for row in audit.values())
         summary[slug]=dict(pair=pair,seed=record['seed'],logical_teacher_calls=raw['logical_teacher_calls'],source_pool=raw['source_pool'],
+            physical_GPU=raw.get('physical_GPU',implementation['original_worker_physical_GPU_without_new_metadata_field'].get(slug)),
             raw_HOTA={name:row['HOTA'] for name,row in data[slug].items() if '__AT_' not in name},
             comparisons={name:effect([data[slug][a]],[data[slug][b]]) for name,(a,b) in contrasts(pair).items()},
             teacher_fit_audit=audit,physical_seed0_changed_rows=replay,CountSelf_changed_query_files=counts['CountSelf_changed_query_files'],
@@ -96,6 +98,7 @@ def main():
         no_new_teacher_or_encoder_calls=True,all_development_data=True,independent_blind_validation=False,
         same_feature_dimension_and_initialization=True,RGB_information_parity_for_primary_contrast=True,
         older_original_head_candidate_has_different_RGB_exposure=True,
+        execution_implementation=implementation,
         uncertainty='10000 original-parent resamples plus three neural-seed sensitivity; fixed actual QA; not corrected for iteration or multiple contrasts.',
         cost='Fresh source/teacher were physically measured elsewhere. These head refits reuse paid data; no new cold timing claim and no3seed mean quality attached to seed0 wall.',
         goal_status='ACTIVE_REQUIRES_SCIENTIFIC_ACCEPTANCE')

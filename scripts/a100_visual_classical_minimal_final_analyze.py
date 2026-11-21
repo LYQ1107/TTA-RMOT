@@ -173,7 +173,7 @@ def figure(runs,conditions):
     axes[1].set_yticks([0,1],['C4 independent fresh','C1 shared fresh']);axes[1].invert_yaxis()
     axes[1].axvline(0,color='black',lw=.8);axes[1].set(title='Actual fresh quality, fixed seed0',xlabel='HOTA gain; original-parent95% interval')
     for ax in axes:ax.grid(axis='y' if ax==axes[0] else 'x',alpha=.2)
-    fig.suptitle('Provided official boxes/IDs; no target GT in adaptation; all development data\nParallel A100 workers share NAS/OS/background load: no algorithmic speedup inferred from wall differences',fontsize=10)
+    fig.suptitle('Provisional original-head candidate; equal-RGB and query-retrieval checks pending\nProvided official boxes/IDs; no target GT in adaptation; all development data\nParallel A100 workers share NAS/OS/background load: no algorithmic speedup inferred from wall differences',fontsize=10)
     destination=PUBLIC/'figures';destination.mkdir(parents=True,exist_ok=True)
     fig.savefig(destination/'minimal_final_physical.png',dpi=180)
     fig.savefig(destination/'minimal_final_physical.pdf',metadata={'CreationDate':None,'ModDate':None});plt.close(fig)
@@ -207,6 +207,7 @@ def main():
         no_target_manual_labels_in_adaptation=True,upstream_official_proposals_shared=True,
         C4_real_singletons_vs_C1_paired_cost_scope_explicit=True,
         RGB1080_information_parity_requires_separate_strict_rgb_study=True,
+        query_retrieval_tradeoff_requires_null_set_followup=True,
         candidate_finally_accepted=False,goal_status='ACTIVE_PENDING_STRICT_RGB_PARITY_AND_ROOT_ACCEPTANCE')
     atomic_json(PUBLIC/'minimal_final_analysis.json',result);atomic_json(OUT/'analysis/minimal_final_analysis.json',result)
     (PUBLIC/'minimal_final_parent_statistics.json').write_text(json.dumps(sufficient,separators=(',',':'))+'\n')
@@ -215,6 +216,7 @@ def main():
         'Goal待根代理对全部科学验收和发布完成后判断。本脚本不自动结项。',
         '暂定候选：原1080维教师蒸馏头、均值checkpoint、查询条件视觉图；源主干/教师冻结。',
         '公平性尚需严格RGB1080对照：本候选图比原KD额外使用空间/角色RGB，不能仅凭本报告认定最终胜出。',
+        '封存后检索诊断：C4正查询空输出19→61，救回4条却损失23条正确检索；总HOTA提高不代表漏目标问题解决，尚待协议保护对照。',
         '不保留LoRA、观察anchor对齐、新8维位置、外观衰减时序或全域不确定性选题作为已证实贡献。',
         '适配只用目标图像、任务语言、官方候选框/ID和教师。人工标签仅用于预测封存后的评估。',
         'C4为Dance-best→SportsMOT，C1为KITTI-V2→Dance。官方前端是共享输入，不宣称完整检测器source-only。','',

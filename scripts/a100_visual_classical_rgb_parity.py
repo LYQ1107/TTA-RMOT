@@ -133,9 +133,18 @@ def run(pair,seed):
     atomic_json(root/'completion.json',dict(status='SEALED_STRICT_RGB_PARITY',pair=pair,seed=seed,methods=records,
         receipts=receipts,GT_open_attempts=0,new_teacher_calls=0,source_pool=str(source),
         logical_teacher_calls=sum(r['current_teacher_examples'] for r in receipts),wall_seconds=time.perf_counter()-start_time,
+        physical_GPU=__import__('os').environ.get('CUDA_VISIBLE_DEVICES'),
         implementation_sha256=file_sha(Path(__file__)),goal_status='ACTIVE'))
 
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--pair',choices=['C4','C1'],required=True);p.add_argument('--seed',type=int,default=0)
-    a=p.parse_args();run(a.pair,a.seed)
+    a=p.parse_args()
+    # The original GPU0/3 controller and the release-triggered GPU1/2 helper
+    # may reach the same registered condition. Fit it once, without changing
+    # or discarding any completed condition.
+    import fcntl
+    folder=PARITY/a.pair/f'seed{a.seed}';folder.mkdir(parents=True,exist_ok=True)
+    with (folder/'condition.lock').open('a') as lock:
+        fcntl.flock(lock,fcntl.LOCK_EX)
+        run(a.pair,a.seed)

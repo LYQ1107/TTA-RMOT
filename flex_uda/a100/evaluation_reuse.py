@@ -118,7 +118,7 @@ def dataset_for(folder,pair,seal):
     return trackeval.datasets.MotChallenge2DBox(cfg),seq_info
 
 
-def evaluate(folder,pair):
+def _evaluate(folder,pair):
     from flex_uda.presence.predictions import verify_predictions
     from trackeval.eval import eval_sequence
     from scripts.pf_diag_common import official_metrics
@@ -153,3 +153,31 @@ def evaluate(folder,pair):
     print(json.dumps(dict(event='MECHANISM_OFFICIAL_DONE',folder=str(folder),HOTA=stats['HOTA_unrounded'],
         reused=len(references),new=len(missing))),flush=True)
     return result
+
+
+def evaluate(folder,pair):
+    """Official evaluation in a fresh interpreter, separate from IO guards.
+
+    Quantity generation can install a permanent Python audit hook. A fork
+    inherits it; an exec does not. Keep that guard intact in the generating
+    process and give only the sealed prediction path to an evaluation worker.
+    The vendor matching, metric functions and exact episode cache are unchanged.
+    """
+    import subprocess
+    folder=Path(folder)
+    receipt=folder/'official_completion.json'
+    if receipt.is_file():return json.loads(receipt.read_text())
+    log=folder/'official_eval_process.log'
+    with log.open('w') as handle:
+        process=subprocess.run([sys.executable,'-m','flex_uda.a100.evaluation_reuse',
+            '--folder',str(folder),'--pair',pair],cwd=ROOT,stdin=subprocess.DEVNULL,stdout=handle,stderr=subprocess.STDOUT,
+            env=dict(os.environ,CUDA_VISIBLE_DEVICES='',OMP_NUM_THREADS='2',OPENBLAS_NUM_THREADS='2'))
+    if process.returncode:
+        raise RuntimeError('Isolated official evaluation failed: '+str(log)+'\n'+log.read_text()[-6000:])
+    return json.loads(receipt.read_text())
+
+
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--folder',required=True);parser.add_argument('--pair',choices=['C4','C1'],required=True)
+    args=parser.parse_args();_evaluate(args.folder,args.pair)
