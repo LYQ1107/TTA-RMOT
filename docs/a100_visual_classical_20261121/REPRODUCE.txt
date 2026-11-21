@@ -1,0 +1,112 @@
+跨域无标签RMOT：复现入口与信息范围
+
+项目根目录：/data3/liuyeqiang/FlexHook-TTA
+大模型、原图、冻结PCD历史特征与原始历史资产仍从只读NAS提供。
+完整预测、问答、训练状态、逐视频收据在a100_runs，不进入Git。
+本目录只保留代码说明、预登记、聚合统计、轻量收据和图表。
+
+1. 环境与源输入
+
+  cd /data3/liuyeqiang/FlexHook-TTA
+  source scripts/env_a100.sh
+  python scripts/a100_visual_classical_restore_canonical.py --list
+
+若45条C4源初始缓存已经存在，不需要重建。
+若从只含Git代码的环境复现，需先按docs/A100_RESTORE_20261120.md恢复NAS资产。
+缺少A100初始缓存时，可执行以下源模型专用重建：
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_restore_canonical.py
+
+该命令只做冻结Dance-best全帧前向及原源域基数头，不启动LoRA、固定32帧重算或旧队列；
+不覆盖已封存缓存。完整前向较慢，必须把它与现成PCD复用的CPU回放时间区分。
+C1使用原NAS封存源输入。目标GT从不参与上述步骤。
+
+2. 首轮固定证据与颜色输入
+
+  python scripts/a100_visual_classical_prepare.py --pair C4
+  python scripts/a100_visual_classical_prepare.py --pair C1
+  python scripts/a100_visual_classical_color_prepare.py --pair C4
+  python scripts/a100_visual_classical_color_prepare.py --pair C1
+  CUDA_VISIBLE_DEVICES=2 python scripts/a100_visual_classical_collect.py --pair C4
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_collect.py --pair C1
+  python scripts/a100_visual_classical_prefix_prepare.py
+
+collect准备四种策略的共享实验问答并集；该总并集不是任一部署方法的调用预算或冷启动成本。
+每个C4方法只能消费3508条自己的回答，C1为3334条。
+重新运行冻结Qwen时，相同问题的BF16软概率可能因批次有小幅变化；报告的精确数值对应
+收据中给定SHA的本地冻结回答，不能承诺换批次后逐位重现所有软标签结果。
+
+3. 强教师基线与同问答图控制
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_strong_prefix.py --pair C4 --policy COVER
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_strong_prefix.py --pair C1 --policy COVER
+  python scripts/a100_visual_classical_strong_countmatched.py --pair C4 --group strong_cover_seed0 --exclusive-projection
+  python scripts/a100_visual_classical_strong_countmatched.py --pair C1 --group strong_cover_seed0 --exclusive-projection
+
+常规未约束数量投影不带--exclusive-projection，另存为_counts；带该选项则是_counts_exclusive。
+对C1互斥查询，优先解释后者；C4非互斥任务保留逐查询投影。
+UNIFORM等策略通过--policy选择。实际KD使用目标教师硬/软标签拟合残差MLP，非离线替换标签。
+--teacher-target-clip .02给软KD相同的概率边界，输出到独立_clipped组；不改硬标签。
+seed17/42需先运行repeat_collect.py为相应策略分片准备缺失的真实教师回答，再同时指定
+--seed 17 --acquisition-seed 17（或42）；不能把随机初始化重复写成新增独立测试域。
+
+4. 反馈选题与纯静态控制
+
+  CUDA_VISIBLE_DEVICES=2 python scripts/a100_visual_classical_field_collect.py --pair C4
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_field_collect.py --pair C1
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_strong_prefix.py --pair C4 --policy FIELD
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_strong_prefix.py --pair C1 --policy FIELD
+
+FIELD_STATIC使用完全不看回答的封存问题序列；将上面--policy替换为FIELD_STATIC即可运行。
+两者初始图、先验、总问题预算、最终KD拟合和解码相同，检验反馈选题本身。
+field_collect复制本地冻结缓存作为仅按请求返回回答的broker，对缺失问题真实GPU前向。
+这属于质量对照的证据准备；共享缓存的采集墙钟不冒充冷启动部署时间。
+
+5. 封存后官评
+
+  python scripts/a100_visual_classical_evaluate_group.py --group strong_cover_seed0 --primary COHORT
+  python scripts/a100_visual_classical_evaluate_group.py --group strong_cover_seed0_counts_exclusive --primary COHORT__AT_COHORT_COUNT
+
+评估进程读取GT；适配生成进程被禁止读GT及未来教师分片。
+逐查询官评缓存位于offline_GT，只在序列、预测字节SHA和官方代码版本相同时复用；新查询
+仍执行原TrackEval匹配。空缓存可直接计算，不依赖开发机器的一次性回归测试文件。
+各方法采用相同原始候选框和ID；CountMatched只用方法本身的数量，不用GT数量。
+
+6. 真实冷启动与控制器
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_cold_slice.py --name fresh_C4_full_clip
+
+该命令重载学生/教师、重算首条完整视频、建立全新SQLite、实际教师推理及独立拟合分支。
+它只覆盖固定完整片段，不能把全C4的HOTA与该片段的墙钟拼成一条性能成本曲线。
+其中共同冷启动前缀真实执行一次，各分支拟合和后处理分别实测；非多次独立冷启动。
+
+新增完整C4真实流（全部45片段），必须使用新的name以测量全新教师SQLite：
+
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_cold_full_c4.py --name C4_fresh_full_stream_seed0
+
+已完成的视频有stream.pt检查点；同名重启仅继续未完成视频，累计报告重启开销，不再冒充
+一次无中断冷启动。原始软、同样边界的软、硬KD实际训练，每条分支报告400/4000/最终；
+固定400/最终均值也是普通蒸馏基线，图同样作用于该基线，不只给主方法额外信息。
+每视频只使用过去与当前反馈，不读取历史神经特征或研究问答库。
+
+  python scripts/a100_visual_classical_cold_full_countmatched.py --name C4_fresh_full_stream_seed0
+
+该命令等完整预测封存，再在独立禁止GT的生成进程做29个固定数量对照，随后隔离官评。
+完整新鲜流的普通方法官评可调用flex_uda.a100.evaluation_reuse.evaluate(folder, 'C4')；
+本机cold_full_launch.py在所有方法封存后调度官评和聚合成本，含本机先前GPU1工作等待依赖。
+不得把CountMatched诊断或GT官评时间混入可部署方法的成本。
+
+三种子归因统计与图表：
+
+  python scripts/a100_visual_classical_repeats_analyze.py --c1-exclusive --output-name three_seed_task_valid_results
+  python scripts/a100_visual_classical_repeats_analyze.py --group-suffix _clipped --counts-suffix _counts_exclusive --output-name three_seed_clipped_results
+  python scripts/a100_visual_classical_plot_repeats.py
+
+前两个命令要求对应种子与数量对照的预测及官评已完整封存；没有完成时会等待。
+原视频聚类区间和原视频+种子敏感性区间同时保留，不把三次初始化当三份独立数据。
+
+*_launch.py是本次A100任务的持久化调度器，有些会等待先前控制器的GPU释放收据。
+在干净环境优先使用上述直接入口，并根据实际GPU空闲情况运行，不能盲目启动旧队列。
+
+所有数据均是已参与开发的数据。当前视频内允许转导，视频之间只使用已经发生的教师反馈；
+不宣称逐帧在线、独立盲测或任何未测预算/新域上的普遍胜利。

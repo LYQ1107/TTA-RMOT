@@ -12,8 +12,8 @@ from flex_uda.active.color_cohort import part_mask
 from scripts.a100_visual_classical_prepare import OUT
 
 
-def run(seed=0):
-    results={};group='strong_cover_seed'+str(seed);policy='COVER' if seed==0 else 'COVER_S'+str(seed)
+def run(seed=0,acquisition='COVER'):
+    results={};group='strong_'+acquisition.lower()+'_seed'+str(seed);policy=acquisition if seed==0 else acquisition+'_S'+str(seed)
     for pair in ('C4','C1'):
         completion=json.loads((OUT/group/pair/'completion.json').read_text());assert completion['GT_open_attempts']==completion['forbidden_read_attempts']==0
         _,target=PAIRS[pair];m=metadata(target)
@@ -32,6 +32,9 @@ def run(seed=0):
                 anchors=[lookup[int(r['frame_id']),int(r['track_id'])] for r in selected]
                 anchor_hit=bool(labels[qi,anchors].any());static=bool(part_mask(q['query_text']).any())
                 count=dict(queries=1,query_present=int(present),positive_candidate_query=int(labels[qi].any()),
+                    questions=len(selected),questions_on_present_queries=int(present)*len(selected),
+                    questions_on_empty_queries=int(not present)*len(selected),
+                    queries_with_only_one_question=int(len(selected)==1),
                     no_positive_track_asked=int(present and not track_hit),no_positive_anchor_asked=int(present and not anchor_hit),
                     positive_track_seen_but_not_at_queried_anchor=int(present and track_hit and not anchor_hit),
                     source_zero_present_query=int(present and not old[qi].any()))
@@ -51,15 +54,18 @@ def run(seed=0):
                         no_positive_anchor_but_now_has_matched_positive=int(present and not anchor_hit and positive.any()))
                     total.update(c);detail['outputs'][name]=c
                 rows.append(detail)
-        results[pair]=dict(seed=seed,acquisition=dict(totals),outputs={k:dict(v) for k,v in methods.items()},queries=rows,
+        results[pair]=dict(seed=seed,policy=policy,acquisition=dict(totals),outputs={k:dict(v) for k,v in methods.items()},queries=rows,
             GT_only_after_this_seed_predictions_sealed=True,
             labels='IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness',
             anchor='actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor',
             error_counts_not_additive_HOTA_losses=True,all_development_data=True)
         print(json.dumps(dict(event='STRONG_METHOD_OFFLINE_DIAGNOSIS',pair=pair,seed=seed,acquisition=dict(totals),
             output_query_errors={k:{f:v[f] for f in ('present_zero_output','empty_query_output','old_zero_now_has_matched_positive')} for k,v in methods.items()})),flush=True)
-    atomic_json(OUT/'analysis'/('strong_diagnosis_seed'+str(seed)+'.json'),results)
+    suffix='' if acquisition=='COVER' else '_'+acquisition.lower()
+    atomic_json(OUT/'analysis'/('strong_diagnosis'+suffix+'_seed'+str(seed)+'.json'),results)
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--seed',type=int,default=0);a=p.parse_args();run(a.seed)
+    p=argparse.ArgumentParser();p.add_argument('--seed',type=int,default=0)
+    p.add_argument('--policy',choices=['COVER','UNIFORM','FIELD','FIELD_STATIC'],default='COVER')
+    a=p.parse_args();run(a.seed,a.policy)

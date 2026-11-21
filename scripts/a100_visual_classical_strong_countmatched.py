@@ -63,7 +63,8 @@ def run(pair,group,exclusive_projection=False):
         seal=seal_mask(root/name,m,mask,target=target,model=model,method=name,GT_open_attempts=len(gt),extra=dict(
             rank_method=rank,count_method=count,source_group=group,counts_from_GT=False,
             counts_equal_per_query_frame=True,same_teacher_answers=True,same_prefix_information=True,
-            common_projection='joint maximum-sum-score assignment to query-count slots; deterministic query/observation order for ties' if exclusive_projection else 'descending method score, descending source margin, ascending original ID',
+            common_projection={'exclusive_task':'joint maximum-sum-score assignment to fixed query-count slots; deterministic ties',
+                'nonexclusive_task':'descending method score, descending source margin, ascending original ID'} if exclusive_projection else 'descending method score, descending source margin, ascending original ID',
             exclusive_task_constraint_preserved=exclusive_projection,
             exclusivity_not_reapplied=not exclusive_projection,CountSelf_may_differ_due_to_common_projection=True))
         methods.append(dict(method=name,rows=seal['prediction_rows']))

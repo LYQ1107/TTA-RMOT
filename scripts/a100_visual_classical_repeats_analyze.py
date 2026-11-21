@@ -29,18 +29,22 @@ def paired(a,b):
         seeds_are_algorithmic_repeats_not_independent_target_datasets=True)
 
 
-def main():
-    while not all((OUT/('strong_cover_seed'+str(s)+suffix)/'official_evaluation.json').is_file() for s in SEEDS for suffix in ('','_counts')):time.sleep(15)
+def main(group_suffix='',counts_suffix='_counts',output_name='three_seed_results',c1_exclusive=False):
+    while not all((OUT/('strong_cover_seed'+str(s)+group_suffix+suffix)/'official_evaluation.json').is_file() for s in SEEDS for suffix in ('',counts_suffix)):time.sleep(15)
+    if c1_exclusive:
+        while not all((OUT/('strong_cover_seed'+str(s)+group_suffix+'_counts_exclusive')/'official_evaluation.json').is_file() for s in SEEDS):time.sleep(15)
     results={};allstats={}
     for pair in ('C4','C1'):
         data={};hota={}
         for seed in SEEDS:
-            group='strong_cover_seed'+str(seed);data[seed]={}
-            for family in (group,group+'_counts'):
-                for row in json.loads((OUT/family/'official_evaluation.json').read_text())['results']:
-                    if row['pair']==pair:
-                        key=('counts/' if family.endswith('_counts') else '')+row['method']
-                        data[seed][key]=read_stats(row['folder'])
+            group='strong_cover_seed'+str(seed)+group_suffix;data[seed]={}
+            count_family=group+('_counts_exclusive' if c1_exclusive and pair=='C1' else counts_suffix)
+            for family in (group,count_family):
+                record=json.loads((OUT/family/pair/'completion.json').read_text())
+                assert record['GT_open_attempts']==0
+                for row in record['methods']:
+                    key=('counts/' if family==count_family else '')+row['method']
+                    data[seed][key]=read_stats(OUT/family/pair/row['method'])
             completion=json.loads((OUT/group/pair/'completion.json').read_text())
             assert completion['GT_open_attempts']==completion['forbidden_read_attempts']==0
             assert completion.get('acquisition_seed',0)==seed
@@ -60,14 +64,18 @@ def main():
             primary_minus_per_seed_KD_envelope=[data[s]['COHORT']['HOTA']-v for s,v in zip(SEEDS,envelope)],
             strongest_and_envelope_are_evaluation_diagnostics_not_method_inputs=True,
             seeds=list(SEEDS),all_development_data=True,no_target_GT_in_adaptation=True,
+            C1_exclusivity_preserved_in_CountMatched=c1_exclusive or counts_suffix=='_counts_exclusive',
             no_unseen_target_confirmation=True,descriptive_intervals_not_corrected_for_research_adaptivity=True)
         allstats[pair]={str(s):{k:dict(parents=v['parent_videos'],numerator=v['parent_stats'][0].tolist(),
             denominator=v['parent_stats'][1].tolist()) for k,v in data[s].items()} for s in SEEDS}
         print(json.dumps(dict(event='THREE_SEED_MECHANISM_RESULT',pair=pair,mean_HOTA={k:v for k,v in means.items() if not k.startswith('counts/')},
             best_KD=strongest,comparison=results[pair]['primary_vs_strongest_fixed_checkpoint'],
             count_matched_vs_soft=comparisons['COUNT_FULL_vs_SOFT_KD'])),flush=True)
-    atomic_json(OUT/'analysis/three_seed_results.json',results)
-    atomic_json(OUT/'analysis/three_seed_sufficient_statistics.json',allstats)
+    atomic_json(OUT/'analysis'/(output_name+'.json'),results)
+    atomic_json(OUT/'analysis'/(output_name.replace('_results','_sufficient_statistics')+'.json'),allstats)
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    p=argparse.ArgumentParser();p.add_argument('--group-suffix',default='');p.add_argument('--counts-suffix',default='_counts');p.add_argument('--output-name',default='three_seed_results');p.add_argument('--c1-exclusive',action='store_true')
+    a=p.parse_args();main(a.group_suffix,a.counts_suffix,a.output_name,a.c1_exclusive)

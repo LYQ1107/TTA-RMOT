@@ -114,7 +114,7 @@ def run(pair,policy,seed=0,acquisition_seed=0,teacher_target_clip=0.):
 
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--pair',required=True,choices=['C4','C1']);p.add_argument('--policy',choices=['COVER','UNIFORM','PRIOR','FACILITY'],default='COVER');p.add_argument('--seed',type=int,default=0)
+    p=argparse.ArgumentParser();p.add_argument('--pair',required=True,choices=['C4','C1']);p.add_argument('--policy',choices=['COVER','UNIFORM','PRIOR','FACILITY','FIELD','FIELD_STATIC'],default='COVER');p.add_argument('--seed',type=int,default=0)
     p.add_argument('--acquisition-seed',type=int,default=0)
     p.add_argument('--teacher-target-clip',type=float,default=0.)
     a=p.parse_args();run(a.pair,a.policy,a.seed,a.acquisition_seed,a.teacher_target_clip)
