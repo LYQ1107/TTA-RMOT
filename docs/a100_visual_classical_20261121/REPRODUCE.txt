@@ -233,3 +233,24 @@ C1重求均值PCD/RGB差0；C4历史逐观察PCD对新鲜特征差约0.00521，�
   python scripts/a100_visual_classical_context_analyze.py
   python scripts/a100_visual_classical_context_report.py
   python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem context_cohort
+
+13. 10%预算的真实源模型/教师成本（新后台物理任务仍在运行）
+
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C1
+
+C4在GPU3运行，C1内部等待关系实验释放GPU后使用GPU0；不能重复启动已有任务。
+两个方向分别独立加载正确源主干/源数量头、冻结Qwen、新SQLite，真实计算三观察PCD/RGB。
+C4为Dance-best→SportsMOT，1160问题；C1为V2-best→Dance，1103问题，保留Dance互斥。
+每个方向内均值KD与均值KD+图共享同一个新鲜流和软KD头，分别记各自输出成本。
+真实外部Popen-to-exit包含双分支，不能把分摊common+own称作两次独立冷启动。
+已完成name只复用原始收据；失败尝试及其成本留worker_attempt_*.json，不用即时no-op计时替换。
+冷工作器新增--teacher-fraction默认仍为0.3、--pair默认仍为C4，旧入口科学设定保持。
+NAS/主机/OS缓存和其它任务共享。官方前端候选生成仍不在此成本边界内。
+
+两个方向都已封存并官评后：
+
+  python scripts/a100_visual_classical_budget_cold_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem budget_cold
+
+报告使用这次新精度配实际新成本，另列对历史输入/选题/回答的差异，不回填历史预测。

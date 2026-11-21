@@ -1,0 +1,22 @@
+{
+  "version": "FRESH_C4_10_PERCENT_MEAN_PAIR_V1",
+  "registered_after": "404-output quality study; scene-context quality study is still running, no context result used",
+  "reason": "The retained sparse mean+graph needs actual startup/student/teacher/fit costs at the new10% budget; quality replay wall is not deployment wall",
+  "pair": "C4",
+  "run_name": "C4_key_rho0p1_mean_pair_20261122",
+  "physical_GPU": 3,
+  "teacher_fraction": 0.1,
+  "expected_questions": 1160,
+  "methods": ["CLIP_MEAN", "CLIP_MEAN_COHORT"],
+  "source": "Official frozen Dance-best; same track-three decoder with original four-observation context",
+  "teacher": "Frozen Qwen CROP, max-area of original three observations; private fresh SQLite,0 expected hits",
+  "shared_inputs": "Both branches share one genuinely new source/teacher stream and one fully fitted bounded-soft KD head per video; same fixed400/final mean",
+  "cost": "Record external Popen-to-exit of actual two-branch worker AND common+own physically measured components; not two independent cold-arm measurements; graph marginal phase reported separately",
+  "concurrency": "GPU0/1/2 fit scene-context heads concurrently; shared NAS/CPU/OS cache and background jobs remain. No algorithmic speedup inferred from unrelated wall differences",
+  "input_boundary": "Provided official boxes and IDs. Upstream proposal detection/tracking generation not measured and not our contribution",
+  "GT": "Worker GT prohibited; evaluate fresh predictions only after both are sealed; no target manual labels in adaptation",
+  "comparison": "Official paired original-parent HOTA effect plus numeric/QA differences against the historical10% replay; no substitution of historical precision into new cost receipts",
+  "resumption": "Keep failed attempts and prior costs. Same completed name reuses immutable receipts and is not timed as a fresh no-op",
+  "all_development_data": true,
+  "goal_status": "ACTIVE"
+}
