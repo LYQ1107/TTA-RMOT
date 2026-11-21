@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+import threading
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -17,11 +18,20 @@ DESTINATION = OUT/'cold_full_c4'/NAME
 STATE = OUT/'supervisor/budget_cold_state.json'
 
 
-def main(pair='C4'):
-    prereg = ROOT/'docs/a100_visual_classical_20261121'/('preregistration_budget_cold_v1.json' if pair=='C4' else 'preregistration_budget_cold_C1_v1.json')
+def state_path(pair,graph_scope,single_method=None):
+    if single_method:return OUT/'supervisor'/('final_single_'+single_method.lower()+'_state.json')
+    return OUT/'supervisor/minimal_final_cold_state.json' if graph_scope=='extended' else STATE if pair=='C4' else OUT/'supervisor/budget_cold_C1_state.json'
+
+
+def main(pair='C4',graph_scope='clothing',single_method=None):
+    prereg = ROOT/'docs/a100_visual_classical_20261121'/('preregistration_minimal_final_single_v2.json' if single_method else 'preregistration_minimal_final_cold_v1.json' if graph_scope=='extended' else 'preregistration_budget_cold_v1.json' if pair=='C4' else 'preregistration_budget_cold_C1_v1.json')
     plan = json.loads(prereg.read_text())
+    if single_method:
+        assert graph_scope=='extended'
+        plan=dict(plan,**plan['jobs'][single_method])
+    assert plan['pair']==pair
     destination=OUT/'cold_full_c4'/plan['run_name']
-    state=STATE if pair=='C4' else OUT/'supervisor/budget_cold_C1_state.json'
+    state=state_path(pair,graph_scope,single_method)
     destination.mkdir(parents=True, exist_ok=True)
     receipt_path = destination/'worker_receipt.json'
     if (destination/'completion.json').is_file():
@@ -38,18 +48,29 @@ def main(pair='C4'):
                 time.sleep(5)
         log_path = destination/'worker.log'
         start = time.perf_counter()
-        command = [sys.executable,'scripts/a100_visual_classical_cold_full_c4.py','--name',plan['run_name'],'--pair',pair,
-            '--perception-mode','track-three','--teacher-fraction','.1','--methods','CLIP_MEAN,CLIP_MEAN_COHORT']
+        command = [sys.executable,'scripts/a100_visual_classical_cold_full_c4.py','--name',plan['run_name'],'--pair',pair,'--query-graph-scope',graph_scope,
+            '--perception-mode','track-three','--teacher-fraction','.1','--methods',','.join(plan['methods'])]
         with log_path.open('a', buffering=1) as log:
             child = subprocess.Popen(command, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
                 env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(plan['physical_GPU']), OMP_NUM_THREADS='4', OPENBLAS_NUM_THREADS='4'))
-            atomic_json(state, dict(status='RUNNING_FRESH10_PERCENT_'+pair,pid=os.getpid(),worker_pid=child.pid,
+            running=dict(status='RUNNING_FRESH10_PERCENT_'+pair,pid=os.getpid(),worker_pid=child.pid,
                 worker_log=str(log_path), run_root=str(destination), goal_status='ACTIVE',
-                preregistration_sha256=file_sha(prereg)))
+                query_graph_scope=graph_scope,preregistration_sha256=file_sha(prereg))
+            atomic_json(state,running)
+            stop_progress=threading.Event()
+            def progress():
+                while not stop_progress.wait(45):
+                    count=len(list((destination/'source').glob('*/receipt.json')))
+                    atomic_json(state,dict(running,completed=count))
+                    print(json.dumps(dict(event='PHYSICAL_PAIR_PROGRESS',pair=pair,scope=graph_scope,
+                        completed_videos=count,total_videos=45 if pair=='C4' else 25)),flush=True)
+            monitor=threading.Thread(target=progress,daemon=True);monitor.start()
             code = child.wait()
-        worker = dict(exit_code=code,actual_worker_process_wall_seconds=time.perf_counter()-start,
-            physical_GPU=plan['physical_GPU'],methods=plan['methods'],actual_two_branch_process=True,
-            independent_single_arm_processes=False,all_startup_and_inference_included=True,
+            observed=time.perf_counter()-start
+            stop_progress.set();monitor.join()
+        worker = dict(exit_code=code,actual_worker_process_wall_seconds=observed,
+            physical_GPU=plan['physical_GPU'],methods=plan['methods'],actual_two_branch_process=len(plan['methods'])==2,
+            independent_single_arm_processes=len(plan['methods'])==1,all_startup_and_inference_included=True,
             official_GT_evaluation_excluded=True,OS_NAS_shared_background_jobs_disclosed=True)
         attempt = len(list(destination.glob('worker_attempt_*.json')))
         atomic_json(destination/f'worker_attempt_{attempt}.json', worker)
@@ -69,7 +90,7 @@ def main(pair='C4'):
     atomic_json(state,dict(status='FRESH10_PERCENT_SEALED_EVALUATING',pid=os.getpid(),run_root=str(destination),goal_status='ACTIVE'))
     from flex_uda.a100.evaluation_reuse import evaluate
     results = {name:evaluate(destination/'methods'/name,pair) for name in plan['methods']}
-    atomic_json(destination/'official_evaluation.json',dict(status='COMPLETE_FRESH_BUDGET_PAIR',methods=results,
+    atomic_json(destination/'official_evaluation.json',dict(status='COMPLETE_FRESH_BUDGET_PAIR' if len(plan['methods'])==2 else 'COMPLETE_FRESH_BUDGET_SINGLE',methods=results,
         actual_worker_receipt=json.loads(receipt_path.read_text()),no_target_GT_in_adaptation=True,
         original_predictions_sealed_before_GT=True,goal_status='ACTIVE'))
     atomic_json(state,dict(status='PASS_FRESH_BUDGET_PAIR_RESEARCH_GOAL_ACTIVE',pid=os.getpid(),run_root=str(destination),goal_status='ACTIVE'))
@@ -79,11 +100,13 @@ def main(pair='C4'):
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
     parser.add_argument('--pair',choices=['C4','C1'],default='C4')
+    parser.add_argument('--scope',choices=['clothing','extended'],default='clothing')
+    parser.add_argument('--single-method',choices=['CLIP_MEAN','CLIP_MEAN_COHORT'])
     args=parser.parse_args()
     try:
-        main(args.pair)
+        main(args.pair,args.scope,args.single_method)
     except Exception as error:
-        state=STATE if args.pair=='C4' else OUT/'supervisor/budget_cold_C1_state.json'
+        state=state_path(args.pair,args.scope,args.single_method)
         row=json.loads(state.read_text()) if state.is_file() else {}
         row.update(status='FAILED_FRESH_BUDGET_PAIR_REQUIRES_ROOT_CAUSE',error=repr(error),goal_status='ACTIVE')
         atomic_json(state,row)

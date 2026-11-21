@@ -54,7 +54,7 @@ def count_comparisons(pair):
     return result
 
 
-def query_group_points(folders):
+def query_group_points(folders, selected_methods=('ORIGINAL_MEAN', 'ORIGINAL_GRAPH', 'MASKED_MEAN', 'CONTEXT_MEAN', 'CONTEXT_VISUAL', 'CONTEXT_FULL')):
     from flex_uda.a100.mechanism import metadata
     from flex_uda.active.acquisition import expression_types
     from flex_uda.active.color_cohort import part_mask
@@ -71,7 +71,7 @@ def query_group_points(folders):
     for name, queries in groups.items():
         wanted = {q['video_id']+'+'+q['expression_id'] for q in queries}
         row = dict(queries=len(queries), original_parents=len({q['video_id'].rsplit('_c', 1)[0] for q in queries}), HOTA={})
-        for method in ('ORIGINAL_MEAN', 'ORIGINAL_GRAPH', 'MASKED_MEAN', 'CONTEXT_MEAN', 'CONTEXT_VISUAL', 'CONTEXT_FULL'):
+        for method in selected_methods:
             folder = folders[method]
             if (folder/'official_equivalent.json').is_file():
                 folder = Path(json.loads((folder/'official_equivalent.json').read_text())['identical_prediction_reference'])

@@ -213,7 +213,7 @@ C1重求均值PCD/RGB差0；C4历史逐观察PCD对新鲜特征差约0.00521，�
 最后一条统计重算命令仅需Git中的父视频充分统计、NumPy和公布的分析JSON，
 不读取原图、教师问答、目标标签或GPU；它验证算术复现，不等于独立数据验证。
 
-12. 2026-11-22相对场景关系的新开发迭代（仍在运行）
+12. 2026-11-22相对场景关系的新开发迭代（96组官评已完成）
 
 404组官评和400个公布效应/区间已复算通过。10%预算C1均值KD+图相对均值KD
 +2.510 HOTA；C4 +0.608但种子敏感性区间跨0。三观察对齐/外观衰减时序未保留。
@@ -254,3 +254,57 @@ NAS/主机/OS缓存和其它任务共享。官方前端候选生成仍不在此�
   python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem budget_cold
 
 报告使用这次新精度配实际新成本，另列对历史输入/选题/回答的差异，不回填历史预测。
+
+14. 同头查询范围与最小性（105官评已完成）
+
+新上下文总体涨点不等于位置模块有效：位置独立增量区间跨0，零维度MASKED头
+也改善约0.387，须补充同头原图对照。不能据此宣称所有新增模块都有效。
+
+  CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python scripts/a100_visual_classical_query_scope_launch.py
+
+此入口复用已拟合原头/MASKED/上下文头的实际前缀分数，无新增拟合/教师。
+原衣着图、扩展空间/角色图、无图锚点各自在同一头上比较；统一原float32决策精度，
+原均值衣着图必须逐观测复现，C1衣着/扩展必须相同。63原始+42双向数量，共105官评。
+原始预测全部封存后无损复用相同字节以留出数量空间，不删除任何结果路径。
+全部新原始/反事实先封存再GT，末尾自动执行分析、TXT/图表及公开统计复算。
+完整输出已存在时可只重新导出：
+
+  python scripts/a100_visual_classical_query_scope_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem query_scope
+
+15. 最终保留最小方案的独立单方法真实验证（GPU1/2仍在运行）
+
+同一个原1080维头，衣着图扩展到此前跳过的空间/角色查询。C4三种子67.227724对
+均值KD66.275653；C1 36.815919对34.305499。源/教师冻结，不加8位置特征或新头。
+完整参数和贡献边界见minimal_retained_method_card.json；当前实际物理验证尚未完成。
+
+原共享最终流V1在执行前被更严格的V2两独立单方法取代，V1明确标NOT_RUN，不当作测量。
+
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4 --scope extended --single-method CLIP_MEAN
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4 --scope extended --single-method CLIP_MEAN_COHORT
+
+V2按计划分别用GPU2/1，实际重新加载学生/教师，各自新SQLite、1160个新问题、一个软头，
+只生成自己的一个方法；外部Popen-to-exit不含GT评估，不是common+own估算。
+图专用的mask/几何/求解/输出时间记在自己的分支，普通KD不承担新增图工作。
+启动顺序固定、并行A100和NAS/OS/其它负载共享；不因总wall偶然较短就说图算法加速主干。
+
+两独立C4及现有新鲜C1均完成后：
+
+  python scripts/a100_visual_classical_minimal_final_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem minimal_final
+
+C1输入425查询都在原衣着范围内，所以现有新鲜C1图可用于最终方案，但仍要在实际
+新数据上逐观测验证原/扩展等价；其计时继续标共享双分支，不能冒充独立单方法。
+最终分析还比对两独立C4的PCD/RGB/先验/选题/教师概率及最后头参数，并仅在封存后
+读取GT做候选漏选诊断。没有独立新划分，始终不得宣称新域盲测已经完成。
+
+2026-11-22 严格RGB1080公平性补查（进行中，Goal ACTIVE）
+原扩展图额外暴露空间/角色RGB；此前1088上下文同时加入位置与初始化变化。
+新登记 preregistration_strict_rgb_parity_v1.json，六条件三种子在GPU0/3拟合。
+运行 scripts/a100_visual_classical_rgb_parity_launch.py；源数据必须先来自真实物理流：
+C4_minimal_single_KD_rho0p1_20261122 / C1_key_rho0p1_mean_pair_20261122。
+头维度1080、输入RGB信息一致；软400/final/mean和硬400/final均作为强对照。
+seed0严格复现物理KD/C1图，81原始+33数量先封存后114官评；不读目标GT做适配。
+scripts/a100_visual_classical_rgb_parity_analyze.py生成相同信息质量比较；
+scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem strict_rgb复核公开统计。
+该回放不增加教师/主干前向，拟合时长不冒充新独立冷启动；暂定方法尚未最终接受。

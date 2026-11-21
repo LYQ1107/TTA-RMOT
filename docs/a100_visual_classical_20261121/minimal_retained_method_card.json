@@ -1,0 +1,253 @@
+{
+  "status": "PROVISIONAL_PENDING_STRICT_RGB1080_INFORMATION_PARITY",
+  "method": "Original teacher-distilled head plus query-conditioned visual cohort inference",
+  "task_boundary": "Cross-domain referring adaptation on official fixed boxes and TrackIDs; frontend is common input, not our contribution",
+  "source_target": {
+    "C4": "Official Dance-best to SportsMOT",
+    "C1": "Official KITTI-V2 V2-best to Dance"
+  },
+  "adaptation_inputs": [
+    "target images",
+    "task language queries",
+    "frozen source features/quantity head",
+    "frozen Qwen teacher feedback"
+  ],
+  "target_manual_labels_in_adaptation": false,
+  "evaluation_GT_only_after_prediction_seals": true,
+  "setting": "Current-video transductive, past+current teacher prefix; not frame-online",
+  "perception": "Three uniform observations per provided TrackID, original4observation encoder context preserved",
+  "teacher": {
+    "model": "Frozen Qwen3-VL-2B-Instruct",
+    "view": "CROP",
+    "anchor": "Max-area among original3observations",
+    "fraction": 0.1,
+    "questions": {
+      "C4": 1160,
+      "C1": 1103
+    },
+    "query_budget_balanced": true,
+    "early_absence_stop": false,
+    "schedule_is_not_claimed_globally_optimal": true
+  },
+  "head": {
+    "architecture": "Original1080->64 GELU->1 residual on source logit",
+    "source_and_teacher_frozen": true,
+    "head_learns_only_teacher_pseudo_targets": true,
+    "teacher_clip": [
+      0.02,
+      0.98
+    ],
+    "minimum_steps": 4000,
+    "maximum_steps": 16000,
+    "teacher_KL_stop": 0.005,
+    "prediction": "Fixed mean of400-step and final probabilities",
+    "normalization": "Past+current image-only channel moments",
+    "new8position_features": false
+  },
+  "classical_graph": {
+    "features": "Query-conditioned normalized PCD768 plus required body-part HSV312",
+    "query_scope": "Extended part mask for spatial/role queries previously skipped",
+    "neighbours": 3,
+    "weights": "Symmetric self-tuning kNN with symmetric degree normalization",
+    "visibility": "Only connect nodes with all required colour parts visible",
+    "unknown_KD_precision": 0.1,
+    "known_KD_precision": 0,
+    "teacher_precision": "1+3*abs(2p-1)",
+    "logit_cap": 4,
+    "objective": "Quadratic teacher-anchor + unknown-KD-unary + graph-Laplacian energy",
+    "decision_precision": "float32 as original budget worker",
+    "no_automatic_GT_parameter_selection": true
+  },
+  "decoder": "Threshold.5, original Dance exclusivity, no boxes/IDs changed",
+  "retained_contributions": {
+    "C4": {
+      "mean_HOTA": {
+        "KD": 66.2756531830987,
+        "OURS": 67.22772358443586
+      },
+      "gain": {
+        "delta_HOTA": 0.952070401337167,
+        "per_neural_seed_delta": [
+          0.8817490618905452,
+          0.8292493887654757,
+          1.1452127533554801
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.331416234831793,
+          1.6928288609196689
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.28779796342547326,
+          1.6911048978852659
+        ]
+      },
+      "scope_gain": {
+        "delta_HOTA": 0.34455580246847717,
+        "per_neural_seed_delta": [
+          0.2982830744879834,
+          0.4179744074949525,
+          0.3174099254224956
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.11835059939783033,
+          0.5998353153885587
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.10694212040459757,
+          0.6227399608998055
+        ]
+      },
+      "count_own": {
+        "delta_HOTA": 0.9547765318055875,
+        "per_neural_seed_delta": [
+          0.9093681172245169,
+          0.9518826354596257,
+          1.00307884273262
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.519474565531472,
+          1.5303306404032975
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.5131196495723428,
+          1.53927955801378
+        ]
+      },
+      "count_KD": {
+        "delta_HOTA": 0.3068202154428121,
+        "per_neural_seed_delta": [
+          0.32886979878807665,
+          0.3094638724496832,
+          0.2821269750906765
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.05278154827825693,
+          0.5467232739561166
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.046258829125489606,
+          0.5545907122014639
+        ]
+      }
+    },
+    "C1": {
+      "mean_HOTA": {
+        "KD": 34.30549889608344,
+        "OURS": 36.815918680711945
+      },
+      "gain": {
+        "delta_HOTA": 2.5104197846284984,
+        "per_neural_seed_delta": [
+          3.1427724844216627,
+          2.5011727174793066,
+          1.8873141519845262
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.8311303186445097,
+          4.587971070661638
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.7434028556441542,
+          4.768981862539317
+        ]
+      },
+      "scope_gain": {
+        "delta_HOTA": 0.0,
+        "per_neural_seed_delta": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.0,
+          0.0
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.0,
+          0.0
+        ]
+      },
+      "count_own": {
+        "delta_HOTA": 0.5620690126845247,
+        "per_neural_seed_delta": [
+          0.878158785506983,
+          0.16039278632104725,
+          0.6476554662255438
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.04608063779617454,
+          1.2867733869720763
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.0279588191240651,
+          1.5799237487035316
+        ]
+      },
+      "count_KD": {
+        "delta_HOTA": 0.0003665619527547885,
+        "per_neural_seed_delta": [
+          -0.08326073014223567,
+          0.2464677220591085,
+          -0.16210730605860846
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.9281157202727632,
+          0.7031761896680078
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.9651902738237688,
+          0.903311723595304
+        ]
+      }
+    }
+  },
+  "rejected_as_independent_core": [
+    "LoRA feature learning claim",
+    "anchor-aligned observer head",
+    "appearance-attenuated temporal edges",
+    "new8position features",
+    "global uncertainty allocation",
+    "DS or view-routing superiority transferred from old system without new controls"
+  ],
+  "limits": [
+    "All available data are development data",
+    "No independent new-domain blind validation",
+    "C1 improvement mainly quantity/selection calibration, not general pure ordering",
+    "Scope-extension increment itself mainly quantity calibration",
+    "No universal teacher-policy or wall-time Pareto optimum claim"
+  ],
+  "primary_physical_singleton_commands": [
+    "CUDA_VISIBLE_DEVICES=2 python scripts/a100_visual_classical_cold_full_c4.py --name C4_minimal_single_KD_rho0p1_20261122 --pair C4 --teacher-fraction .1 --perception-mode track-three --query-graph-scope extended --methods CLIP_MEAN",
+    "CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_cold_full_c4.py --name C4_minimal_single_GRAPH_rho0p1_20261122 --pair C4 --teacher-fraction .1 --perception-mode track-three --query-graph-scope extended --methods CLIP_MEAN_COHORT"
+  ],
+  "completed_name_reuses_original_receipts_not_a_new_cold_measurement": true,
+  "quality_evidence": "query_scope_analysis.json",
+  "physical_evidence_pending": "minimal_final_analysis.json",
+  "goal_status": "ACTIVE",
+  "method_design_uses_postsealed_development_diagnosis": true,
+  "strict_RGB_gap": "Extended graph sees spatial/role RGB; test equally exposed1080-dimensional KD before final superiority acceptance."
+}

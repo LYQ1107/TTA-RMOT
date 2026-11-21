@@ -66,7 +66,9 @@ def generate_counts(record):
         exclusive = exclusive_group([q['query_text'] for q in queries], target)
         scores = {r: np.load(sources[r] / 'videos' / video / 'scores.npy', mmap_mode='r') for r in ranks}
         counts = {c: np.load(sources[c] / 'videos' / video / 'mask.npy', mmap_mode='r') for c in count_names}
-        prior_path = FRESH / 'source' / video / 'sparse_inputs.npz' if pair == 'C4' else OUT / 'inputs' / pair / video / 'inputs.npz'
+        prior_path = (Path(record['fresh_prior_root']) / video / 'sparse_inputs.npz'
+            if 'fresh_prior_root' in record else
+            FRESH / 'source' / video / 'sparse_inputs.npz' if pair == 'C4' else OUT / 'inputs' / pair / video / 'inputs.npz')
         with np.load(prior_path) as a:
             tracks, prior = a['tracks'], a['prior']
         lookup = {int(t): i for i, t in enumerate(tracks)}

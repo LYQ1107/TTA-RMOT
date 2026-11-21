@@ -74,12 +74,13 @@ def figure(rows):
         ax.set(title=pair+': actual fresh10% source/teacher',ylabel='Measured common + own component seconds')
         ax.set_ylim(0,max(bottom)*1.12)
         ax.grid(axis='y',alpha=.15)
-    axes[1].legend(fontsize=8,loc='upper right')
+    handles,labels=axes[1].get_legend_handles_labels()
+    fig.legend(handles,labels,loc='lower center',bbox_to_anchor=(.5,-.15),ncol=3,fontsize=9)
     fig.suptitle('Physically measured shared two-branch streams; not independent cold-arm repeats\nOfficial supplied proposals/IDs; upstream detector/tracker generation excluded',fontsize=10)
     folder=PUBLIC/'figures'
     folder.mkdir(parents=True,exist_ok=True)
-    fig.savefig(folder/'sparse_budget_real_cost.png',dpi=180)
-    fig.savefig(folder/'sparse_budget_real_cost.pdf',metadata={'CreationDate':None,'ModDate':None})
+    fig.savefig(folder/'sparse_budget_real_cost.png',dpi=180,bbox_inches='tight')
+    fig.savefig(folder/'sparse_budget_real_cost.pdf',bbox_inches='tight',metadata={'CreationDate':None,'ModDate':None})
     plt.close(fig)
 
 

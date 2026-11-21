@@ -45,8 +45,9 @@ def real_colours(bank,observations,samples,extension='.jpg'):
     return np.asarray(colours),anchors
 
 
-def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,pair='C4'):
+def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,pair='C4',query_graph_scope='clothing'):
     assert 0 < teacher_fraction <= 1
+    assert query_graph_scope in ('clothing','extended')
     model_name,target_name=PAIRS[pair]
     methods=tuple(requested_methods) if requested_methods else METHODS
     assert set(methods)<=set(METHODS)
@@ -56,6 +57,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         assert json.loads((root/'completion.json').read_text())['protocol'].get('source_perception_mode','full')==perception_mode
         assert json.loads((root/'completion.json').read_text())['protocol'].get('teacher_fraction',.3)==teacher_fraction
         assert json.loads((root/'completion.json').read_text())['protocol']['pair']==pair
+        assert json.loads((root/'completion.json').read_text())['protocol'].get('query_graph_scope','clothing')==query_graph_scope
         if requested_methods:assert {m['method'] for m in json.loads((root/'completion.json').read_text())['methods']}==set(methods)
         return
     root.mkdir(parents=True,exist_ok=True)
@@ -97,10 +99,12 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         assert tuple(saved.get('requested_methods',METHODS))==methods
         assert saved.get('teacher_fraction',.3)==teacher_fraction
         assert saved.get('pair','C4')==pair
+        assert saved.get('query_graph_scope','clothing')==query_graph_scope
         receipts=saved['receipts'];moment_sum=saved['sum'];moment_square=saved['square'];image_rows=saved['image_rows']
     protocol=dict(name=name,pair=pair,videos=len(videos),queries=len(m['episodes']),seed=0,source='frozen official '+model_name,
         acquisition=f'COVER {teacher_fraction:g} query-balanced, three uniform observations and max-area anchor',
         teacher_fraction=teacher_fraction,
+        query_graph_scope=query_graph_scope,
         teacher='frozen original Qwen CROP interface',source_features_actually_recomputed=True,initial_cache_prepaid=False,
         source_perception_mode=perception_mode,all_source_frames_recomputed=perception_mode=='full',
         sparse_rule='union of three uniformly spaced observations per provided TrackID; all candidates at selected frames',
@@ -152,7 +156,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
                     output_margin[qi,ids]=np.interp(observations[ids,0],fc.observations[seen,0],fc.margin[qi,seen])
             np.save(current_dir/'output_margin.npy',output_margin)
         t=time.perf_counter();colour,anchors=real_colours(bank,observations,sink.samples,'.jpg' if target_name=='SportsMOT' else '.png');texts=[q['query_text'] for q in queries]
-        geometry,_,selected_colour=augmented_features(original,colour,texts);raw=np.concatenate([original,selected_colour],axis=2).astype('float32')
+        geometry,normalized_pcd,selected_colour=augmented_features(original,colour,texts);raw=np.concatenate([original,selected_colour],axis=2).astype('float32')
         source=np.clip(logit(np.clip(prior,.05,.95)),-2.,2.);current=raw.reshape(-1,1080)
         moment_sum+=current.sum(0,dtype=np.float64);moment_square+=np.square(current.astype(float)).sum(0);image_rows+=len(current)
         mean=moment_sum/image_rows;std=np.maximum(np.sqrt(np.maximum(moment_square/image_rows-mean**2,0)),1e-3)
@@ -194,9 +198,19 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             if method in prediction:score=prediction[method]
             else:
                 label,variant=method.split('_',1);score=prediction[label+('_MEAN' if variant.startswith('MEAN_') else '_KD')].copy()
+                # Only the graph branch pays for the extra query masks and
+                # extended geometry. Plain KD never needs this work.
+                if query_graph_scope=='extended':
+                    from flex_uda.active.context_cohort import context_part_mask
+                    graph_parts=np.stack([context_part_mask(text) for text in texts])
+                    graph_colour=np.stack([(colour*mask[None,:,None]).reshape(len(colour),-1) for mask in graph_parts])
+                    graph_colour/=np.maximum(np.linalg.norm(graph_colour,axis=2,keepdims=True),1e-8)
+                    graph_geometry=np.concatenate([normalized_pcd,graph_colour],axis=2).astype('float32')
+                else:
+                    graph_parts=np.stack([part_mask(text) for text in texts]);graph_geometry=geometry
                 for qi,text in enumerate(texts):
-                    selected=part_mask(text)>0
-                    if selected.any():score[qi]=refine_distilled_prior(score[qi],geometry[qi],answers[qi],
+                    selected=graph_parts[qi]>0
+                    if selected.any():score[qi]=refine_distilled_prior(score[qi],graph_geometry[qi],answers[qi],
                         graph=not variant.endswith('NO_GRAPH'),source_weight=1. if variant=='STRONG_PRIOR' else .1,
                         node_mask=np.all(colour[:,selected].sum(2)>0,axis=1))
             expanded=score[:,columns];mask=plain(expanded,exclusive_group(texts,target_name))
@@ -210,7 +224,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             actual_frozen_encoder_statistics=dict(cache.stats),original_temporal_context_preserved=True,
             GT_open_attempts=len(guard),wall_seconds=time.perf_counter()-begin)
         atomic_json(current_dir/'receipt.json',receipt);receipts.append(receipt)
-        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode,requested_methods=methods,teacher_fraction=teacher_fraction,pair=pair)
+        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode,requested_methods=methods,teacher_fraction=teacher_fraction,pair=pair,query_graph_scope=query_graph_scope)
         temporary=state_path.with_suffix('.tmp');torch.save(state,temporary);temporary.replace(state_path)
         del fc,cache,ep,sink;torch.cuda.empty_cache()
         print(json.dumps(dict(event=f'FRESH_{pair}_VIDEO_COMPLETE',video=video,completed=vi+1,total=len(videos),
@@ -227,6 +241,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         seal=seal_mask(folder,m,mask,target=target_name,model=model_name,method='FRESH_'+pair+'_'+method,GT_open_attempts=0,
             extra=dict(whole_C4_fresh_stream=pair=='C4',whole_target_fresh_stream=True,pair=pair,source_features_not_prepaid=True,teacher_answers_not_prepaid=True,
                 logical_teacher_calls=sum(map(len,by)),same_teacher_and_source_stream_for_all_arms=True,
+                query_graph_scope=query_graph_scope,
                 current_video_transductive=True,no_future_teacher_feedback=True,teacher_target_clip=.02 if method.startswith('CLIP') else 0.))
         seals.append(dict(method=method,rows=seal['prediction_rows'],seal_seconds=time.perf_counter()-t))
     observed=time.perf_counter()-PROCESS_BEGIN
@@ -264,4 +279,5 @@ if __name__=='__main__':
     p.add_argument('--methods',help='Comma-separated actually executed methods; omit for all registered controls')
     p.add_argument('--teacher-fraction',type=float,default=.3)
     p.add_argument('--pair',choices=['C4','C1'],default='C4')
-    a=p.parse_args();run(a.name,a.perception_mode,a.methods.split(',') if a.methods else None,a.teacher_fraction,a.pair)
+    p.add_argument('--query-graph-scope',choices=['clothing','extended'],default='clothing')
+    a=p.parse_args();run(a.name,a.perception_mode,a.methods.split(',') if a.methods else None,a.teacher_fraction,a.pair,a.query_graph_scope)
