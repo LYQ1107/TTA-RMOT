@@ -1,0 +1,40 @@
+{
+  "version": "VISUAL_CLASSICAL_V1_IMPLEMENTATION_ADDENDUM",
+  "before_first_round_GT": true,
+  "parent_preregistration_sha256": "7a6d2e38bdd3a559a41d5f1c6362f12a8c8cf7e28884994bd402cce59151ad0a",
+  "additional_strong_baseline": "DIRECT_NATIVE: exact source-frame top-k fallback on all unqueried pairs, teacher overrides queried pairs; shared motion gate",
+  "original_acquisition_comparison": "PRIOR/UNIFORM/UNCERTAINTY/COVER; existing sealed DS-v8P retained as separate historical reference, UNCERTAINTY not mislabeled as exact old DS policy",
+  "correction_ablation": "same graph and teacher precision; old source+clipped teacher evidence as anchor instead of teacher-overridable source",
+  "count_controls": {
+    "acquisition": "COVER",
+    "counts": "FULL",
+    "rankers": [
+      "FULL",
+      "KD_HARD",
+      "KD_SOFT",
+      "DIRECT_SOFT",
+      "NO_CORRECTION",
+      "NO_GRAPH"
+    ],
+    "reciprocal": "FULL and KD_SOFT at KD_SOFT counts",
+    "counts_from_GT": false
+  },
+  "feature_index_verified": "query-major index.npy columns(local_query,frame,track), selected rows checked explicitly",
+  "first_round_seed": 0,
+  "replication_seeds": [
+    17,
+    42
+  ],
+  "generation_code": {
+    "flex_uda/active/visual_classical.py": "65f0f7a291f8cb3395a4794f7a5e564281837328014db3bddbda2df14fb7c729",
+    "scripts/a100_visual_classical_collect.py": "7a031134a7de33357ba10218e68ed96fca3509fcde8a71f977a6474fc80ad259",
+    "scripts/a100_visual_classical_countmatched.py": "4b7fc3e55d73f442a6e33219df88693b3fe9ebe9c4bd22190f5cf8052b81d6c5",
+    "scripts/a100_visual_classical_evaluate.py": "dacc60876f9a5dea1fffe8c9f4732a903e53c11202ad24b34647b9d0667524fd",
+    "scripts/a100_visual_classical_finish.py": "ee1807838a577c31ddb6d90de0a5fb4d0de4822e8c1eb439e12ab6e05a45612e",
+    "scripts/a100_visual_classical_generate.py": "d008a0e938187326256aeb58252f3b84c97bad484b374781485cbc151f4af194",
+    "scripts/a100_visual_classical_launch.py": "f10081600d4c015f479c5d92c799fdc9f8c7a300499431b6e7138c8b57861061",
+    "scripts/a100_visual_classical_prepare.py": "4a09db466297d6c87a7451672301ac1d72310bbd26ea73372dc26352f0fc32ba"
+  },
+  "no_target_GT_parameter_search": true,
+  "source_commit": "bb67783cc2b90ce67eac016d1d8d1f857e18a30d"
+}

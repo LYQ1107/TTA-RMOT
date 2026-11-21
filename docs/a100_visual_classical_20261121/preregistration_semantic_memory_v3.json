@@ -1,0 +1,44 @@
+{
+  "version": "V3_CONDITIONAL_SEMANTIC_MEMORY",
+  "registered_after_V1_V2_development": true,
+  "before_any_V3_GT": true,
+  "unix_time": 1795203073.845033,
+  "motivation": "New frame-KD has >67000/>82000 stable-identity semantic flips on C1/C4; old stable v8P is not the baseline to which smoothing is added.",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "acquisition": "COVER",
+  "seed": 0,
+  "existing_heads": "same frame soft KD400 and track soft KD4000, same teacher evidence; mean ensemble control includes both heads",
+  "primary": "RESET_MEMORY_HMM",
+  "controls": [
+    "MEAN_ENSEMBLE",
+    "FRAME_EMA",
+    "FRAME_HMM",
+    "MEMORY_HMM",
+    "RESET_NO_HMM"
+  ],
+  "parameters": {
+    "hazard_static": 0.02,
+    "hazard_dynamic": 0.1,
+    "logit_clip": 6.0,
+    "reset_positive": 0.85,
+    "reset_negative": 0.15,
+    "blend": 0.5,
+    "EMA": 0.2,
+    "gap_reset": 2
+  },
+  "no_GT_parameter_search": true,
+  "no_new_teacher_calls": true,
+  "no_new_neural_parameters": true,
+  "method_uses_only_saved_teacher_trained_scores_and_target_tracking_times": true,
+  "categorical_None_state_prevents_closed_world_forcing": true,
+  "PRESUPPOSED_not_forced_every_frame": true,
+  "evaluation": "official HOTA, frozen prediction seals first; compare same-head ensemble to isolate memory from extra model capacity",
+  "scope": "full-video transductive forward/backward, not online causal",
+  "code_sha256": {
+    "flex_uda/active/semantic_memory.py": "47a2f582a612eea8c9089e6e1827015cdbbf1ffe31d3c1c0650afe1aa92df3a7",
+    "scripts/a100_visual_classical_memory_v3.py": "ee34b8ba10d7ca6c6918a66fe6329330402214f3c90ffa703c67fad68d20caf6"
+  }
+}

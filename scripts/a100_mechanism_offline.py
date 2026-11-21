@@ -25,7 +25,7 @@ def gt_root(target):
     return relocate('/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2')
 
 
-def evaluate(folder, pair, oracle=False):
+def evaluate(folder, pair, oracle=False, *, subset=False):
     from flex_uda.presence.predictions import verify_predictions
     folder = Path(folder)
     if (folder / 'official_completion.json').is_file():
@@ -37,7 +37,9 @@ def evaluate(folder, pair, oracle=False):
             assert file_sha(r['prediction_path']) == r['prediction_sha256']
     model, target = PAIRS[pair]; m = metadata(target); truth = gt_root(target) / 'gt_template'
     seq_info = {}
+    sealed_episodes={(r['video'],r['expression']) for r in seal['episodes']}
     for q in m['episodes']:
+        if subset and (q['video_id'],q['expression_id']) not in sealed_episodes:continue
         v, e = q['video_id'], q['expression_id']; seq_info[v+'+'+e] = int(q['frame_count'])
         p = folder / 'results' / v / e / 'gt.txt'
         if not p.exists(): p.symlink_to(truth / v / e / 'gt.txt')
@@ -57,6 +59,7 @@ def evaluate(folder, pair, oracle=False):
     assert int(values['Dets']) == seal['prediction_rows']
     result=dict(status='PASS',pair=pair,metrics=values,HOTA_unrounded=stats['HOTA_unrounded'],
         offline_oracle_uses_GT=oracle,wall_seconds=time.perf_counter()-begin,
+        sealed_episode_subset_only=subset,evaluated_episodes=len(seq_info),
         prediction_seal_sha256=file_sha(folder/'predictions_seal.json'),detailed_sha256=file_sha(folder/'results/pedestrian_detailed.csv'))
     atomic_json(folder/'official_completion.json',result)
     print(json.dumps(dict(event='MECHANISM_OFFICIAL_DONE',folder=str(folder),HOTA=stats['HOTA_unrounded'])),flush=True)

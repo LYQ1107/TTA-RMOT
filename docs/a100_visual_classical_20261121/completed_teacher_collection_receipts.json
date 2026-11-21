@@ -1,0 +1,224 @@
+{
+  "C4": {
+    "evidence": {
+      "status": "FROZEN_NEW_EVIDENCE_COMPLETE",
+      "pair": "C4",
+      "seed": 0,
+      "responses": 7724,
+      "responses_sha256": "f09a7ef0e699402dcb448e73574436937755f086209241b897916709047f99cd",
+      "GT_open_attempts": 0,
+      "teacher": {
+        "logical_calls": 7724,
+        "new_calls": 7724,
+        "cache_hits": 0,
+        "forward_seconds": 193.11106988874963,
+        "equivalent_forward_seconds": 193.11106988874957,
+        "batches": 984,
+        "cache": {
+          "complete_raw_responses": 7724,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/evidence/C4/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 625.0940641749767,
+        "peak_allocated_bytes": 4681774080
+      },
+      "teacher_load_wall_seconds": 630.1310109740007,
+      "teacher_service_wall_seconds": 934.5941024789936,
+      "final_weight_seal_wall_seconds": 17.68620130897034,
+      "process_wall_seconds": 2471.07744509005,
+      "shared_pool_preparation_not_deployment_cost": true,
+      "per_policy_logical_calls": {
+        "PRIOR": 3508,
+        "UNIFORM": 3508,
+        "UNCERTAINTY": 3508,
+        "COVER": 3508
+      }
+    },
+    "facility_evidence": {
+      "status": "FACILITY_REAL_FROZEN_EVIDENCE_COMPLETE",
+      "pair": "C4",
+      "responses": 3508,
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 85.17610575375147,
+        "equivalent_forward_seconds": 85.17610575375149,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/facility_evidence/C4/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 601.2298277110094,
+        "peak_allocated_bytes": 4681774080
+      },
+      "teacher_load_wall_seconds": 606.7898687479901,
+      "teacher_service_wall_seconds": 302.3185079219984,
+      "teacher_final_seal_wall_seconds": 16.952023235033266,
+      "process_wall_seconds": 942.8758334690356,
+      "GT_open_attempts": 0,
+      "policy": "FACILITY",
+      "responses_sha256": "98d2c16a0aac4ead7c5158bbef57871065ed70ea6c7cf2336dbecbf319b7c3e2",
+      "experimental_collection_not_live_deployment_wall": true
+    },
+    "repeat_evidence": {
+      "status": "SEALED_REPEAT_EVIDENCE",
+      "pair": "C4",
+      "seeds": [
+        17,
+        42
+      ],
+      "GT_open_attempts": 0,
+      "logical_calls_per_seed": {
+        "17": 3508,
+        "42": 3508
+      },
+      "existing_response_reuse_per_seed": {
+        "17": 2909,
+        "42": 2829
+      },
+      "new_union_positions": 1066,
+      "teacher": {
+        "logical_calls": 1066,
+        "new_calls": 1066,
+        "cache_hits": 0,
+        "forward_seconds": 27.359320782707073,
+        "equivalent_forward_seconds": 27.359320782707073,
+        "batches": 134,
+        "cache": {
+          "complete_raw_responses": 1066,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/repeat_evidence/C4/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 1029.2999977839645,
+        "peak_allocated_bytes": 4681774080
+      },
+      "teacher_load_seconds": 1036.2448502319749,
+      "teacher_service_seconds": 268.1256345459842,
+      "teacher_final_weight_seal_seconds": 18.23279848997481,
+      "process_wall_seconds": 1342.8492901810096,
+      "exact_frozen_answer_reuse_is_experimental_preparation_not_live_cache_speedup": true
+    }
+  },
+  "C1": {
+    "evidence": {
+      "status": "FROZEN_NEW_EVIDENCE_COMPLETE",
+      "pair": "C1",
+      "seed": 0,
+      "responses": 7285,
+      "responses_sha256": "de56e004044fd0a60b5ccd4c0c2f1d190985ecadf2ca7138717dec28eb3b3347",
+      "GT_open_attempts": 0,
+      "teacher": {
+        "logical_calls": 7285,
+        "new_calls": 7285,
+        "cache_hits": 0,
+        "forward_seconds": 174.33722729282454,
+        "equivalent_forward_seconds": 174.33722729282456,
+        "batches": 920,
+        "cache": {
+          "complete_raw_responses": 7285,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/evidence/C1/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 483.32128294504946,
+        "peak_allocated_bytes": 4678529024
+      },
+      "teacher_load_wall_seconds": 487.8232130029937,
+      "teacher_service_wall_seconds": 762.4932841670234,
+      "final_weight_seal_wall_seconds": 15.160958594002295,
+      "process_wall_seconds": 2295.5135050149984,
+      "shared_pool_preparation_not_deployment_cost": true,
+      "per_policy_logical_calls": {
+        "PRIOR": 3334,
+        "UNIFORM": 3334,
+        "UNCERTAINTY": 3334,
+        "COVER": 3334
+      }
+    },
+    "facility_evidence": {
+      "status": "FACILITY_REAL_FROZEN_EVIDENCE_COMPLETE",
+      "pair": "C1",
+      "responses": 3334,
+      "teacher": {
+        "logical_calls": 3334,
+        "new_calls": 3334,
+        "cache_hits": 0,
+        "forward_seconds": 77.77287744364003,
+        "equivalent_forward_seconds": 77.7728774436401,
+        "batches": 428,
+        "cache": {
+          "complete_raw_responses": 3334,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/facility_evidence/C1/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 600.7409176980145,
+        "peak_allocated_bytes": 4678529024
+      },
+      "teacher_load_wall_seconds": 605.4980465529952,
+      "teacher_service_wall_seconds": 229.81607778702164,
+      "teacher_final_seal_wall_seconds": 14.02711518801516,
+      "process_wall_seconds": 867.1069140980253,
+      "GT_open_attempts": 0,
+      "policy": "FACILITY",
+      "responses_sha256": "0738701d2c4a4d72ce3328b7867a8f560f5bba63fe6983dc82f9b9c264120b87",
+      "experimental_collection_not_live_deployment_wall": true
+    },
+    "repeat_evidence": {
+      "status": "SEALED_REPEAT_EVIDENCE",
+      "pair": "C1",
+      "seeds": [
+        17,
+        42
+      ],
+      "GT_open_attempts": 0,
+      "logical_calls_per_seed": {
+        "17": 3334,
+        "42": 3334
+      },
+      "existing_response_reuse_per_seed": {
+        "17": 2773,
+        "42": 2789
+      },
+      "new_union_positions": 913,
+      "teacher": {
+        "logical_calls": 913,
+        "new_calls": 913,
+        "cache_hits": 0,
+        "forward_seconds": 23.44817769632209,
+        "equivalent_forward_seconds": 23.44817769632209,
+        "batches": 115,
+        "cache": {
+          "complete_raw_responses": 913,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/repeat_evidence/C1/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 1028.198039095034,
+        "peak_allocated_bytes": 4678529024
+      },
+      "teacher_load_seconds": 1033.595980307029,
+      "teacher_service_seconds": 218.51164029201027,
+      "teacher_final_weight_seal_seconds": 18.052224910992663,
+      "process_wall_seconds": 1291.2876910729683,
+      "exact_frozen_answer_reuse_is_experimental_preparation_not_live_cache_speedup": true
+    }
+  }
+}
