@@ -15,6 +15,7 @@ import numpy as np
 from flex_tta.runtime.pf_receipts import atomic_json
 from flex_uda.a100.mechanism import OUT as DIAG, PAIRS, metadata
 from flex_uda.active.color_cohort import part_mask
+from flex_uda.active.acquisition import expression_types
 from scripts.a100_visual_classical_benchmark_scope import FRESH
 from scripts.a100_visual_classical_prepare import OUT
 from scripts.a100_visual_classical_observation_prepare import OBSERVATION
@@ -30,6 +31,12 @@ def diagnose():
                   for name in ('POOLED_SOFT', 'ANCHOR_KD', 'ANCHOR_FULL')}
         teacher = Counter()
         physical = Counter()
+        query_groups = {name: [] for name in ('static_clothing_branch', 'fallback_spatial', 'fallback_role', 'fallback_other')}
+        for query in m['episodes']:
+            types = expression_types(query['query_text'])
+            group = ('static_clothing_branch' if part_mask(query['query_text']).any() else
+                'fallback_spatial' if 'SPATIAL' in types else 'fallback_role' if 'ROLE' in types else 'fallback_other')
+            query_groups[group].append(query)
         for video, bank in sorted(m['videos'].items()):
             obs = np.asarray(bank['observations'])
             truth = np.load(DIAG / 'offline_GT' / pair / video / 'labels.npy') >= 0
@@ -92,8 +99,28 @@ def diagnose():
                     groups[scope].update(TP=int((mask & truth & selected).sum()),
                         FP=int((mask & ~truth & selected).sum()),
                         FN=int((~mask & truth & selected).sum()), rows=int(selected.sum()))
+        # Secondary point diagnostics on input-defined query groups. The
+        # official HOTA combiner is retained; these are not independent tests
+        # or an additive decomposition of the full-dataset HOTA.
+        import csv
+        from flex_uda.a100.evaluation_reuse import metrics
+        from scripts.analyze_pf_video_uncertainty import unpack
+        hota = metrics()[0]
+        grouped = {}
+        for group, queries in query_groups.items():
+            wanted = {q['video_id']+'+'+q['expression_id'] for q in queries}
+            grouped[group] = dict(queries=len(queries), parents=len({q['video_id'].rsplit('_c', 1)[0] for q in queries}), HOTA={})
+            if not wanted:
+                continue
+            for name in errors:
+                path = OBSERVATION / 'seed0' / pair / name / 'results/pedestrian_detailed.csv'
+                with path.open() as handle:
+                    rows = {r['seq']: unpack(r, hota) for r in csv.DictReader(handle) if r['seq'] in wanted}
+                assert len(rows) == len(wanted)
+                grouped[group]['HOTA'][name] = float(100*hota.combine_sequences(rows)['HOTA'].mean())
         result[pair] = dict(semantic_membership={k: dict(v) for k, v in totals.items()},
             physical_identity=dict(physical), teacher_anchor=dict(teacher),
+            input_defined_query_groups_seed0=grouped,
             seed0_candidate_membership_errors={k: {s: dict(c) for s, c in v.items()} for k, v in errors.items()})
     report = dict(status='POST_SEAL_OBSERVATION_GRANULARITY_DIAGNOSIS', pairs=result,
         target_GT_only_in_this_post_seal_evaluation=True, adaptation_uses_these_labels=False,

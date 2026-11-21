@@ -54,16 +54,18 @@ def generate_counts(record):
     if (root / 'completion.json').is_file():
         return str(root)
     m = metadata(target)
-    pairs = projection_pairs(record['kind'])
+    pairs = [tuple(p) for p in record['projection_pairs']] if 'projection_pairs' in record else projection_pairs(record['kind'])
     ranks = sorted({r for r, _ in pairs})
     count_names = sorted({c for _, c in pairs})
+    sources = {name: Path(record.get('method_sources', {}).get(name, source / name))
+               for name in set(ranks) | set(count_names)}
     masks = {key: np.zeros(m['candidate_query_rows'], dtype=bool) for key in pairs}
     for video, bank in sorted(m['videos'].items()):
         obs = np.asarray(bank['observations'])
         queries = [q for q in m['episodes'] if q['video_id'] == video]
         exclusive = exclusive_group([q['query_text'] for q in queries], target)
-        scores = {r: np.load(source / r / 'videos' / video / 'scores.npy', mmap_mode='r') for r in ranks}
-        counts = {c: np.load(source / c / 'videos' / video / 'mask.npy', mmap_mode='r') for c in count_names}
+        scores = {r: np.load(sources[r] / 'videos' / video / 'scores.npy', mmap_mode='r') for r in ranks}
+        counts = {c: np.load(sources[c] / 'videos' / video / 'mask.npy', mmap_mode='r') for c in count_names}
         prior_path = FRESH / 'source' / video / 'sparse_inputs.npz' if pair == 'C4' else OUT / 'inputs' / pair / video / 'inputs.npz'
         with np.load(prior_path) as a:
             tracks, prior = a['tracks'], a['prior']
@@ -112,7 +114,7 @@ def generate_counts(record):
     for count in count_names:
         if (count, count) not in pairs:
             continue
-        a = json.loads((source / count / 'predictions_seal.json').read_text())
+        a = json.loads((sources[count] / 'predictions_seal.json').read_text())
         b = json.loads((root / (count+'__AT_'+count+'_COUNT') / 'predictions_seal.json').read_text())
         before = {(r['video'], r['expression']): r['prediction_sha256'] for r in a['episodes']}
         after = {(r['video'], r['expression']): r['prediction_sha256'] for r in b['episodes']}

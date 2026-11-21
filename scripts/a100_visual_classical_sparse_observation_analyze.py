@@ -67,6 +67,17 @@ def effect(first, second):
     return result
 
 
+def fit_audit(receipts):
+    result = {}
+    for label in receipts[0]['fits']:
+        fitted = [r['fits'][label] for r in receipts if r['fits'][label].get('teacher_examples', 0)]
+        result[label] = dict(fitted_videos=len(fitted),
+            maximum_teacher_KL=max((r['teacher_KL'] for r in fitted), default=None),
+            maximum_steps=max((r['steps'] for r in fitted), default=0),
+            videos_exceeding_registered_KL_tolerance=sum(not r['teacher_fit_within_0_005'] for r in fitted))
+    return result
+
+
 def main():
     completion = json.loads((OUT / 'analysis/sparse_observation_official.json').read_text())
     assert completion['status'] == 'ALL_SPARSE_OBSERVATION_OFFICIAL_COMPLETE'
@@ -95,7 +106,12 @@ def main():
         summary[slug] = dict(kind=record['kind'], pair=record['pair'], seed=record['seed'],
             fraction=record.get('fraction', .3), logical_teacher_calls=raw.get('logical_teacher_calls', raw['receipts'][-1]['teacher_examples']),
             raw_HOTA={r['method']: data[slug][r['method']]['HOTA'] for r in raw['methods']},
+            raw_official_metrics={r['method']: completion['results'][str(source/r['method'])]['metrics']
+                for r in raw['methods']},
             comparisons={name: effect([data[slug][a]], [data[slug][b]]) for name, (a, b) in cs.items()},
+            actual_head_fit_seconds={label: float(sum(r['fits'][label].get('wall_seconds', 0.)
+                for r in raw['receipts'])) for label in raw['receipts'][0]['fits']},
+            teacher_fit_audit=fit_audit(raw['receipts']),
             generation_wall_seconds=raw['wall_seconds'],
             cost_scope='Historical features and recorded QA; not a cold deployment measurement.')
     repeated = {}
@@ -123,6 +139,7 @@ def main():
     result = dict(status='SPARSE_EVIDENCE_AND_OBSERVATION_ANALYZED', conditions=summary,
         repeated=repeated, observation_input_equivalence=preparation,
         cross_study_feature_scope='Budget study uses the actual fresh C4 features. Observation study uses historical per-observation PCD and freshly re-pooled RGB, with its own fully refitted matched pooled KD. C4 differences are disclosed; do not connect its observation POOL .3 point as an identical-input fresh-feature budget curve.',
+        compute_scope='Observation FULL and aligned-KD controls share aligned and pooled soft heads; the pooled head supplies non-static fallback. This differs from a single pooled-KD head. Actual individual head-fit receipts are reported, not falsely equalized by QA count; no new cold deployment cost is claimed.',
         all_development_data=True, independent_blind_validation=False,
         uncertainty='Descriptive parent-bootstrap of fixed outputs; fixed QA, neural seeds only. No correction for development iteration or multiple comparisons.',
         new_teacher_calls=0, official_evaluated_methods=completion['methods'],

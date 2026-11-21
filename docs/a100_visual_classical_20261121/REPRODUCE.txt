@@ -192,13 +192,44 @@ supervisor/observation_prepare_launch.json中记录的两条异步准备进程�
 C1重求均值PCD/RGB差0；C4历史逐观察PCD对新鲜特征差约0.00521，故观察研究
 必须减它自己的同特征POOLED KD，不能把新鲜69.050直接当成纯净反事实。
 
-所有原始条件完成后，再生成双向数量投影并进行隔离官评：
+所有原始条件完成后，当前机器先对重复封存预测做无损硬链接复用，以留出数量反事实空间。
+两个命令保留原预测路径、内容和封签；不处理未封存方法、权重、问答或NAS：
+
+  python tools/deduplicate_immutable_predictions.py --root a100_runs/visual_classical_20261121/observation_alignment --apply
+  python tools/deduplicate_immutable_predictions.py --root a100_runs/visual_classical_20261121/sparse_evidence --apply
+
+再生成双向数量投影并进行隔离官评：
 
   python scripts/a100_visual_classical_sparse_observation_evaluate.py
   python scripts/a100_visual_classical_sparse_observation_analyze.py
   python scripts/a100_visual_classical_observation_diagnose.py
+  python scripts/a100_visual_classical_sparse_observation_report.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py
 
 评估入口要求16个条件均已封存；数量投影保持C1联合互斥且所有CountSelf必须0变化。
 先封存全部反事实，再开始GT。最后的诊断区分物理串ID与语义谓词变化，不假定两者等同。
 这轮重用历史特征和冻结问答，新增教师0，仅为质量/机制研究；运行耗时不当作冷部署成本。
 后续以实际结果决定保留什么；不因跑完这些条件而自动宣称完成持续科研Goal。
+最后一条统计重算命令仅需Git中的父视频充分统计、NumPy和公布的分析JSON，
+不读取原图、教师问答、目标标签或GPU；它验证算术复现，不等于独立数据验证。
+
+12. 2026-11-22相对场景关系的新开发迭代（仍在运行）
+
+404组官评和400个公布效应/区间已复算通过。10%预算C1均值KD+图相对均值KD
++2.510 HOTA；C4 +0.608但种子敏感性区间跨0。三观察对齐/外观衰减时序未保留。
+这次新假设关注C4较弱且旧图排除的空间/角色查询，不引入新的重型时序网络。
+
+  python scripts/a100_visual_classical_context_launch.py
+
+该入口是单一阻塞控制器，使用GPU0/1/2并行C4三神经种子，GPU3完成C1图特异性。
+同10%冻结问答，同源PCD/RGB和候选框/ID。位置来自同帧候选的相对排名等经典统计；
+普通KD也得到这些特征，另有同维度零位置控制，避免把输入增强冒充图推断贡献。
+原图回归必须逐观测0变化。六条件全部封存后生成双向数量控制，再运行96组官评。
+禁止重复启动仍活跃的控制器；失败时保留stream.pt与原日志，只恢复未完成单元。
+预登记见preregistration_context_cohort_v1.json；它明确是看过上一阶段诊断后的开发迭代。
+
+96组评估全部完成后再运行：
+
+  python scripts/a100_visual_classical_context_analyze.py
+  python scripts/a100_visual_classical_context_report.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem context_cohort
