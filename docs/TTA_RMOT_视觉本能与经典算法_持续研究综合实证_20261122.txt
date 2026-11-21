@@ -1,0 +1,557 @@
+TTA-RMOT：人类视觉启发与经典算法的持续研究综合实证
+2026-11-22；研究根目录 /data3/liuyeqiang/FlexHook-TTA
+
+本文汇总已完成的实证及其适用范围，不自动将科研Goal标记完成。
+后续Goal状态以线程Goal工具为准；所有数字均来自封存收据及官方TrackEval，不承诺必然正结果。
+
+当前判定：尚未达到用户要求的完整科研验收，不能把一组显著差值包装为已经解决跨域RMOT。
+严格同RGB1080：C4图对充分均值KD +1.186539、对软400步 +0.807277，开发区间为正。
+但同架构HSV置零的C4普通KD更强，图对它仅+0.501837，区间[-0.292293,1.207896]跨0。
+C1图对均值KD +1.971637，原视频+神经种子区间[-0.069997,4.626153]跨0；固定KD数量排序差为负。
+强制非空/恢复KD集合让空查询变少，但SAFE对原图平均-0.258289，不能保留为已证实的有效贡献。
+因此继续自然768维PCD强蒸馏与独立图度量/正信念保护的预登记研究；未完成前不宣布新模块有效。
+
+一、始终没有改变的最终目标
+跨域RMOT：在与源训练场景不同的目标视频中，依据语言描述选出对应的人或多名人的轨迹。
+用户明确接受官方固定候选框与Track ID，把研究范围限定在跨域指代适配模块。
+适配使用目标图像、任务语言、冻结源模型输出、冻结教师反馈；不读取目标人工标签。
+源主干与Qwen教师冻结，允许用教师伪标签训练一个小残差头。不是宣称所有权重都不更新。
+GT只能在预测封存后用于独立评估/诊断；不能依据GT自动选题、拟合、选阈值或挑checkpoint。
+所有现有数据都参与过开发，用户目前没有未接触的新划分，所以不存在独立盲测结论。
+C4为Dance-best→SportsMOT：45剪辑、466查询、13个原视频；C1为KITTI-V2→Dance：25视频、425查询。
+官方候选的上游监督来源另行披露，既不重建前端，也不把前端性能记作我们的贡献。
+当前视频内是转导推断，按视频前缀使用过去/当前反馈；三次观察包含当前视频未来帧，不叫逐帧在线。
+
+二、为什么最初的快慢叙事发生了修正
+A800/NAS恢复以后，A100真实一图一句跑通了学生PCD、Qwen三视角27次真实调用/0缓存和快校准。
+旧SLOW_REPLAY虽固定问答，仍同时包含LoRA更新、固定32帧重算与重新快拟合。它的整体改善不能全归LoRA。
+匹配重算后：MINUS48.847077、RECALC_ONLY50.787438、SLOW_REPLAY52.151672。
+LoRA相对匹配重算+1.364233，但原先区间[-2.306727,4.863342]跨0；后续原视频聚类也没有建立独立正贡献。
+固定RECALC数量时神经margin排序差-0.609531；固定LoRA数量差-0.084175且跨0。
+这些是本配置的归因限制，不证明所有LoRA或所有神经适配永远无效。
+旧600秒冷预算下三策略均没有提交真实教师调用，冷启动已耗尽窗口；不能称主动策略全预算最省时。
+完整C4旧主动47.478与均匀40.833及其耗时有条件差异，也不能把它们拼接成新KD/图的增量。
+
+三、先做错误诊断，为什么没有继续盲加HMM
+C4候选可恢复约98.193%的GT观测，但旧系统119/466查询未问到正确轨迹；122条有目标零输出中82条属于漏查。
+一句至少问一次不足以覆盖RMOT的多名目标；覆盖应在查询—候选层面检查。
+诊断Oracle约80.224只是使用GT的参照，既不可部署，也不是保证语义模块可达到的严格上界。
+已有最终v8P稳定片段输出翻转0，包含整轨迹传播；它也可能稳定地传播错误。不能由此推断动态语义永远不变。
+无教师RAW加EMA仅约+0.275 HOTA且区间跨0；没有依据把复杂时序模块列为首要修复。
+强制所有查询清单式判空会错拒真实目标，任务契约必须明确。
+旧DS完整系统对固定可靠性约+8.798，但点概率质量并非各域一致，多视角路由也没有独立稳定收益。
+新保留方法没有强行继承全部历史模块，旧DS大差更不能当作新图相对强KD的涨幅。
+
+四、普通蒸馏为什么突然这么高，是否合理
+所谓普通KD不是逐框直接抄教师结果，而是充分训练的小头，使用同样轨迹结构、颜色和当前视频教师反馈。
+C4同解码SOURCE24.578、直接教师回填44.570、仅当前视频KD68.341、过去+当前KD69.050。
+C1对应10.804、23.599、39.040、39.030。主要高分来自当前教师监督与轨迹传播，不是历史反馈泄漏。
+两个方向重新拟合前缀KD均0个查询文件变化；C4各466查询独立绕过缓存官评，KD/图分数差均0。
+SOURCE同解码分数不是未修改的官方学生原生成绩；直接回填也不是完整发表方法的复现。
+标准稀疏关键帧和沿ID传播本就应给予合理强基线，不能拿掉这些能力来制造我们的优势。
+强KD：1080→64 GELU→1残差MLP，AdamW0.001/weight_decay0.001，batch512。
+至少4000步、最多16000步，按教师KL<=0.005停止；保留400步、充分最终和400/最终概率均值。
+教师软概率裁剪[0.02,0.98]，并保留硬伪标签充分训练；CLIP表示概率裁剪，不是CLIP视觉模型。
+同一输入/问答下新模块必须击败这些强对照，不能只击败没训练充分或没轨迹传播的弱教师。
+
+五、真实尝试过什么，哪些失败被保留下来
+5%/10%/20%同预算和30%三观察对齐：16条件、176原始加228数量反事实，404官评全部完成。
+10%历史固定问答，C4均值KD66.275653→衣着图66.883168，+0.607515，原视频+种子区间跨0。
+C1为34.305499→36.815919，+2.510420，区间[0.743403,4.768982]。
+5%C4图不及硬KD400步，不能讲预算越稀疏图越好的单调故事。
+将三次观察分别用anchor训练，C4/C1均低于匹配的聚合KD；完整观察图也不及聚合图。
+外观衰减时序不及常数连接，未作为有效模块保留。物理ID混杂不等于衣着语义反复变化。
+随后1088维场景位置研究96官评：整体改善存在，但8位置边的独立增量和位置输入本身未稳定成立。
+仅多8个零维的MASKED头已对原头+0.386791，暴露维度/初始化混杂，不能说零维学到空间。
+同头查询范围105官评：不改头权重而扩展空间/角色图，C4原均值66.275653→67.227724，+0.952070。
+扩展范围自身+0.344556，在五个已有头上都正；C1原查询已在衣着范围，扩展严格等同原图。
+但原扩展图额外使用空间/角色RGB，原KD头仍遮挡。此前1088输入控制又混入位置和初始化。
+因此上述证据仍不能单独完成最强同信息基线验收，才有本次严格RGB1080研究。
+
+六、这次严格相同RGB与新鲜源流的实证
+维度固定1080，初始化相同，普通KD与图都拿到相同查询解析RGB，没有8位置维度。
+C4只用这次真实独立KD流，1160条新教师答案；C1只用真实V2→Dance流，1103条。
+新复核不再产生教师或主干前向；每头的拟合时间是真实测量，但这不是又一次冷启动。
+种子0/17/42共享同一实际问答，只衡量神经训练敏感性，不能称三次独立教师/域重复。
+81原始加33数量输出全部封存，之后114官评；seed0逐决策复现实际物理KD，C1图也0变化。
+
+严格RGB / C4
+三神经种子平均HOTA：
+  ORIG_KD400 = 66.409146
+  ORIG_KD_FINAL = 65.764279
+  ORIG_KD_MEAN = 66.340681
+  RGB_KD400 = 66.548969
+  RGB_KD_FINAL = 65.566257
+  RGB_KD_MEAN = 66.169708
+  RGB_HARD400 = 66.273134
+  RGB_HARD_FINAL = 65.574085
+  RGB_GRAPH400 = 67.466823
+  RGB_GRAPH_FINAL = 66.977671
+  RGB_GRAPH_MEAN = 67.356246
+  RGB_GRAPH_HARD400 = 66.913206
+  RGB_GRAPH_HARD_FINAL = 66.284432
+  RGB_ANCHORS_MEAN = 66.180559
+  ORIG_GRAPH400 = 67.320336
+  ORIG_GRAPH_MEAN = 67.198998
+对应效应（完整结果和全部失败均见JSON）：
+  RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：+1.186539; parent95%[+0.413789, +2.158480]; parent+seed95%[+0.384850, +2.178142]
+  RGB_GRAPH_MEAN_vs_RGB_KD400：+0.807277; parent95%[+0.060676, +1.778292]; parent+seed95%[+0.044579, +1.795816]
+  RGB_GRAPH_MEAN_vs_RGB_KD_FINAL：+1.789989; parent95%[+0.936929, +2.879645]; parent+seed95%[+0.914215, +2.897818]
+  RGB_GRAPH_MEAN_vs_RGB_HARD400：+1.083112; parent95%[+0.345020, +1.918546]; parent+seed95%[+0.333464, +1.947355]
+  RGB_GRAPH_MEAN_vs_RGB_HARD_FINAL：+1.782162; parent95%[+1.008554, +2.608081]; parent+seed95%[+0.981877, +2.645513]
+  RGB_GRAPH_MEAN_vs_RGB_ANCHORS_MEAN：+1.175687; parent95%[+0.412540, +2.126698]; parent+seed95%[+0.382235, +2.146567]
+  RGB_KD_MEAN_vs_ORIG_KD_MEAN：-0.170974; parent95%[-0.771837, +0.239433]; parent+seed95%[-0.783975, +0.274977]
+  ORIG_GRAPH_MEAN_vs_RGB_KD_MEAN：+1.029291; parent95%[+0.227961, +2.051155]; parent+seed95%[+0.191794, +2.062115]
+  RGB_GRAPH_MEAN_vs_ORIG_GRAPH_MEAN：+0.157248; parent95%[-0.111049, +0.372447]; parent+seed95%[-0.138349, +0.408286]
+  COUNT_OWN_RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：+0.986775; parent95%[+0.412919, +1.780341]; parent+seed95%[+0.397349, +1.800833]
+  COUNT_BASELINE_RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：+0.288316; parent95%[-0.007340, +0.605273]; parent+seed95%[-0.054928, +0.621142]
+  COUNT_OWN_RGB_GRAPH_MEAN_vs_ORIG_GRAPH_MEAN：+0.065736; parent95%[-0.049631, +0.178288]; parent+seed95%[-0.059204, +0.209829]
+  COUNT_BASELINE_RGB_GRAPH_MEAN_vs_ORIG_GRAPH_MEAN：+0.046471; parent95%[-0.028969, +0.128440]; parent+seed95%[-0.031672, +0.136369]
+主对照判读：该开发方向的原视频+种子区间为正。
+
+严格RGB / C1
+三神经种子平均HOTA：
+  RGB_KD400 = 32.513977
+  RGB_KD_FINAL = 32.032410
+  RGB_KD_MEAN = 32.199208
+  RGB_HARD400 = 32.524795
+  RGB_HARD_FINAL = 31.674901
+  RGB_GRAPH400 = 33.378977
+  RGB_GRAPH_FINAL = 34.344782
+  RGB_GRAPH_MEAN = 34.170846
+  RGB_GRAPH_HARD400 = 34.598444
+  RGB_GRAPH_HARD_FINAL = 34.825442
+  RGB_ANCHORS_MEAN = 32.217248
+对应效应（完整结果和全部失败均见JSON）：
+  RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：+1.971637; parent95%[+0.111917, +4.552729]; parent+seed95%[-0.069997, +4.626153]
+  RGB_GRAPH_MEAN_vs_RGB_KD400：+1.656869; parent95%[-0.212220, +4.196985]; parent+seed95%[-0.369221, +4.276396]
+  RGB_GRAPH_MEAN_vs_RGB_KD_FINAL：+2.138435; parent95%[+0.433138, +4.285181]; parent+seed95%[+0.223858, +4.365672]
+  RGB_GRAPH_MEAN_vs_RGB_HARD400：+1.646050; parent95%[-1.095066, +4.731367]; parent+seed95%[-1.372442, +4.803505]
+  RGB_GRAPH_MEAN_vs_RGB_HARD_FINAL：+2.495944; parent95%[-0.011425, +5.384924]; parent+seed95%[-0.156071, +5.467619]
+  RGB_GRAPH_MEAN_vs_RGB_ANCHORS_MEAN：+1.953598; parent95%[+0.093570, +4.541131]; parent+seed95%[-0.089287, +4.625119]
+  COUNT_OWN_RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：+0.217532; parent95%[-0.037999, +0.526696]; parent+seed95%[-0.123749, +0.755731]
+  COUNT_BASELINE_RGB_GRAPH_MEAN_vs_RGB_KD_MEAN：-0.668508; parent95%[-1.430072, -0.133598]; parent+seed95%[-1.538076, -0.115965]
+主对照判读：区间含0或负值，尚不能宣布稳定超过公平普通KD。
+
+显式手工颜色通道归因 / C4
+三神经种子平均HOTA：
+  ZERO_400 = 66.874561
+  ZERO_FINAL = 66.277843
+  ZERO_MEAN = 66.854409
+  RGB_400 = 66.548969
+  RGB_FINAL = 65.566257
+  RGB_MEAN = 66.169708
+  RGB_GRAPH_MEAN = 67.356246
+对应效应（完整结果和全部失败均见JSON）：
+  RGB_MEAN_vs_ZERO_MEAN：-0.684702; parent95%[-1.921195, +0.298276]; parent+seed95%[-1.933903, +0.328132]
+  RGB_400_vs_ZERO_400：-0.325592; parent95%[-1.414730, +0.593680]; parent+seed95%[-1.459726, +0.625120]
+  RGB_FINAL_vs_ZERO_FINAL：-0.711585; parent95%[-1.838312, +0.261230]; parent+seed95%[-1.929836, +0.281330]
+  COUNT_OWN_RGB_MEAN_vs_ZERO_MEAN：-0.188517; parent95%[-0.748311, +0.272731]; parent+seed95%[-0.777663, +0.375685]
+  COUNT_BASELINE_RGB_MEAN_vs_ZERO_MEAN：-1.039411; parent95%[-1.955051, -0.359382]; parent+seed95%[-1.979442, -0.303843]
+
+显式手工颜色通道归因 / C1
+三神经种子平均HOTA：
+  ZERO_400 = 30.590421
+  ZERO_FINAL = 31.503418
+  ZERO_MEAN = 31.105765
+  RGB_400 = 32.513977
+  RGB_FINAL = 32.032410
+  RGB_MEAN = 32.199208
+  RGB_GRAPH_MEAN = 34.170846
+对应效应（完整结果和全部失败均见JSON）：
+  RGB_MEAN_vs_ZERO_MEAN：+1.093443; parent95%[-1.281178, +3.873399]; parent+seed95%[-1.450742, +4.025409]
+  RGB_400_vs_ZERO_400：+1.923556; parent95%[-0.215565, +4.600523]; parent+seed95%[-0.267892, +4.724688]
+  RGB_FINAL_vs_ZERO_FINAL：+0.528992; parent95%[-1.980361, +3.232451]; parent+seed95%[-2.100064, +3.395451]
+  COUNT_OWN_RGB_MEAN_vs_ZERO_MEAN：+0.761963; parent95%[+0.171847, +1.722654]; parent+seed95%[+0.149433, +1.843251]
+  COUNT_BASELINE_RGB_MEAN_vs_ZERO_MEAN：-0.255760; parent95%[-0.557047, -0.015506]; parent+seed95%[-0.847261, +0.153133]
+这只检验同1080维显式HSV通道，不是灰度PCD或自然768维架构，也不改变原共同选题。
+代码复核澄清：共同COVER实际只用冻结原始PCD距离，不用额外手工HSV；PCD和教师仍来自RGB图像。
+早期元数据中“固定RGB选题”的宽泛表述不能理解为手工HSV曾参与此次选题；封存结果本身未改。
+颜色归因不能替换完整RGB软/硬强KD主比较，图相对强KD的额外贡献仍单独报告。
+
+图压空的协议保护复核
+三神经种子平均HOTA：
+  KD_MEAN_PRESENCE = 66.141541
+  GRAPH_MEAN_PRESENCE = 67.281477
+  SAFE_MEAN = 67.097957
+  KD_400_PRESENCE = 66.522833
+  GRAPH_400_PRESENCE = 67.390318
+  SAFE_400 = 67.157853
+  KD_FINAL_PRESENCE = 65.549266
+  GRAPH_FINAL_PRESENCE = 66.924904
+  SAFE_FINAL = 66.731279
+  KD_HARD400_PRESENCE = 66.245085
+  GRAPH_HARD400_PRESENCE = 66.855416
+  SAFE_HARD400 = 66.756235
+  KD_HARD_FINAL_PRESENCE = 65.539557
+  GRAPH_HARD_FINAL_PRESENCE = 66.245642
+  SAFE_HARD_FINAL = 66.208890
+  RAW_KD_MEAN = 66.169708
+  RAW_GRAPH_MEAN = 67.356246
+对应效应（完整结果和全部失败均见JSON）：
+  SAFE_MEAN_vs_KD_MEAN_PRESENCE：+0.956416; parent95%[+0.292869, +1.797430]; parent+seed95%[+0.270252, +1.817507]
+  SAFE_MEAN_vs_GRAPH_MEAN_PRESENCE：-0.183520; parent95%[-0.550538, +0.052339]; parent+seed95%[-0.556199, +0.058320]
+  SAFE_MEAN_vs_KD_400_PRESENCE：+0.575124; parent95%[-0.077309, +1.460753]; parent+seed95%[-0.103610, +1.479800]
+  SAFE_MEAN_vs_KD_FINAL_PRESENCE：+1.548691; parent95%[+0.801256, +2.512537]; parent+seed95%[+0.769609, +2.528749]
+  SAFE_MEAN_vs_KD_HARD400_PRESENCE：+0.852872; parent95%[+0.197809, +1.571082]; parent+seed95%[+0.177348, +1.602845]
+  SAFE_MEAN_vs_KD_HARD_FINAL_PRESENCE：+1.558400; parent95%[+0.768039, +2.352790]; parent+seed95%[+0.748459, +2.411142]
+  COUNT_OWN_SAFE_MEAN_vs_KD_MEAN_PRESENCE：+0.973570; parent95%[+0.407055, +1.753614]; parent+seed95%[+0.391867, +1.772942]
+  COUNT_BASELINE_SAFE_MEAN_vs_KD_MEAN_PRESENCE：+0.261241; parent95%[+0.000150, +0.517817]; parent+seed95%[-0.046777, +0.528806]
+新鲜原头图曾让正查询空输出19→61，救回4却损失23条正确检索。该副作用是继续研究的理由。
+保护规则仅在图全空且显式任务保证存在时保留KD完整集合；所有强KD同样得到非空协议控制。
+不新增教师/主干/头训练；辅助硬基线得到额外软reference头，不称同单头成本。
+这与旧单例回填/宽泛no-Yes保护有区别，但必须靠下列结果判断，不能预设有效。
+{
+  "per_seed": {
+    "0": {
+      "counts": {
+        "RAW_KD_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 16,
+          "positive_queries_without_correct_output": 60,
+          "TP": 1359907,
+          "FP": 518006,
+          "FN": 146051
+        },
+        "RAW_GRAPH_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 61,
+          "positive_queries_without_correct_output": 80,
+          "TP": 1394684,
+          "FP": 497945,
+          "FN": 111274
+        },
+        "KD_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 58,
+          "TP": 1360248,
+          "FP": 520343,
+          "FN": 145710
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 67,
+          "TP": 1397455,
+          "FP": 508222,
+          "FN": 108503
+        },
+        "SAFE_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 61,
+          "TP": 1402812,
+          "FP": 526817,
+          "FN": 103146
+        }
+      },
+      "versus_protected_KD": {
+        "RAW_KD_MEAN": {
+          "rescued_queries": 0,
+          "regressed_queries": 2
+        },
+        "RAW_GRAPH_MEAN": {
+          "rescued_queries": 3,
+          "regressed_queries": 25
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "rescued_queries": 3,
+          "regressed_queries": 12
+        },
+        "SAFE_MEAN": {
+          "rescued_queries": 3,
+          "regressed_queries": 6
+        }
+      }
+    },
+    "17": {
+      "counts": {
+        "RAW_KD_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 17,
+          "positive_queries_without_correct_output": 58,
+          "TP": 1361460,
+          "FP": 522081,
+          "FN": 144498
+        },
+        "RAW_GRAPH_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 62,
+          "positive_queries_without_correct_output": 81,
+          "TP": 1396383,
+          "FP": 494000,
+          "FN": 109575
+        },
+        "KD_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 54,
+          "TP": 1362204,
+          "FP": 524341,
+          "FN": 143754
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 65,
+          "TP": 1400341,
+          "FP": 505050,
+          "FN": 105617
+        },
+        "SAFE_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 57,
+          "TP": 1405122,
+          "FP": 526311,
+          "FN": 100836
+        }
+      },
+      "versus_protected_KD": {
+        "RAW_KD_MEAN": {
+          "rescued_queries": 0,
+          "regressed_queries": 4
+        },
+        "RAW_GRAPH_MEAN": {
+          "rescued_queries": 2,
+          "regressed_queries": 29
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "rescued_queries": 2,
+          "regressed_queries": 13
+        },
+        "SAFE_MEAN": {
+          "rescued_queries": 2,
+          "regressed_queries": 5
+        }
+      }
+    },
+    "42": {
+      "counts": {
+        "RAW_KD_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 19,
+          "positive_queries_without_correct_output": 59,
+          "TP": 1341970,
+          "FP": 508166,
+          "FN": 163988
+        },
+        "RAW_GRAPH_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 61,
+          "positive_queries_without_correct_output": 78,
+          "TP": 1385026,
+          "FP": 481661,
+          "FN": 120932
+        },
+        "KD_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 57,
+          "TP": 1342208,
+          "FP": 511270,
+          "FN": 163750
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 66,
+          "TP": 1387972,
+          "FP": 491553,
+          "FN": 117986
+        },
+        "SAFE_MEAN": {
+          "queries": 466,
+          "positive_candidate_queries": 466,
+          "positive_queries_with_zero_output": 0,
+          "positive_queries_without_correct_output": 60,
+          "TP": 1393026,
+          "FP": 512006,
+          "FN": 112932
+        }
+      },
+      "versus_protected_KD": {
+        "RAW_KD_MEAN": {
+          "rescued_queries": 0,
+          "regressed_queries": 2
+        },
+        "RAW_GRAPH_MEAN": {
+          "rescued_queries": 3,
+          "regressed_queries": 24
+        },
+        "GRAPH_MEAN_PRESENCE": {
+          "rescued_queries": 3,
+          "regressed_queries": 12
+        },
+        "SAFE_MEAN": {
+          "rescued_queries": 3,
+          "regressed_queries": 6
+        }
+      }
+    }
+  },
+  "GT_only_postseal": true,
+  "not_additive_HOTA_attribution": true,
+  "forced_nonempty_is_not_proof_of_correct_retrieval": true
+}
+强制非空是构造性质，真实找对目标和FP/FN才说明问题是否改善；模块可能是数量修复，不能冒充新语义学习。
+
+七、候选方案如何把视觉启发变成经典计算
+先扫视再类比：每条固定轨迹保留三次真实观察，解析查询所需身体部位，形成源PCD与HSV外观描述。
+COVER高/中/低分层扫描和多样性帮助降低只看高分候选的风险，但所有KD/图共享，尚非独立最优选题贡献。
+图传播的是是否符合这句描述，不把外观相似的不同人合并成同一物理身份。
+对称自适应尺度3近邻，度归一化；缺少所需可见颜色部位的节点不强连。
+求解二次能量：sum_i a_i(z_i-z_KD_i)^2 + sum_i b_i(z_i-z_T_i)^2 + 1/2 sum_ij W_ij(z_i-z_j)^2。
+已问节点a_i=0以避免教师标签和拟合该标签的KD被误当作两份独立证据；未问节点a_i=0.1。
+b_i=1+3|2p_i-1|，logit边界4。这些是固定强度常数，不声称它们是由GT校准的真实可靠性。
+去图仍保留教师锚点；同头、同信息对照才隔离图的独立作用。
+最终是否保留RGB扩展头、原头或自然768维头，必须同时面对全部强KD，而不是按域挑胜者或只报最高checkpoint。
+图贡献若主要是数量校准就按数量校准报告；固定数量收益才支持额外排序判断。
+C1完全图与稀疏图没有稳定差，不能将C4视觉拓扑特异性推广到全部目标域。
+
+八、这次实际物理成本与精度，禁止拿旧精度配新时间
+C4_seed0
+实际本次HOTA：{"KD": 66.37711363459273, "OURS": 67.20419043629605}
+本次差：+0.827077; parent95%[+0.160327, +1.596675]
+C1_seed0
+实际本次HOTA：{"KD": 32.257394837681396, "OURS": 34.02470705951068}
+本次差：+1.767312; parent95%[-0.335187, +4.395118]
+C4_KD
+外部进程秒：3512.3990396169247
+相位秒：{"imports_metadata_and_recovery_setup": 11.358640737948008, "student_load_and_integrity_check": 388.8000083969673, "teacher_load_and_initial_integrity_check": 548.6917794280453, "real_sparse_frame_student_forward_and_initial_head": 1485.0324032728095, "real_RGB_sparse_inputs_and_image_only_acquisition": 275.40722565876786, "real_teacher_service_including_image_IO": 221.20381165482104, "teacher_final_frozen_weight_audit": 16.011313969036564}
+组件分账：{"CLIP_MEAN": {"common_wall_seconds": 2957.591707634274, "own_head_training_seconds": 550.3471430387581, "own_postprocess_and_output_seconds": 2.001919697970152, "shared_common_plus_own_branch_seconds": 3509.940770371002}}
+真实教师收据：{"logical_calls": 1160, "new_calls": 1160, "cache_hits": 0, "forward_seconds": 30.483182306634262, "equivalent_forward_seconds": 30.48318230663426, "batches": 164, "cache": {"complete_raw_responses": 1160, "pending_leases": 0, "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_minimal_single_KD_rho0p1_20261122/raw.sqlite"}, "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956", "backend_unmodified": true, "revision": "89644892e4d85e24eaac8bacfd4f463576704203", "model_load_seconds": 545.4907054970972, "peak_allocated_bytes": 6283755520}
+拟合收据：{"fitted_videos": 45, "maximum_teacher_KL": 0.0019995570182800293, "videos_exceeding_KL_tolerance": 0, "maximum_steps": 4000}
+decoder观察帧=2324；实际backbone图像前向=7419
+C4_OURS
+外部进程秒：3512.534780150978
+相位秒：{"imports_metadata_and_recovery_setup": 11.382616452989168, "student_load_and_integrity_check": 388.7654513400048, "teacher_load_and_initial_integrity_check": 548.928879719926, "real_sparse_frame_student_forward_and_initial_head": 1481.3225781533401, "real_RGB_sparse_inputs_and_image_only_acquisition": 272.63102256541606, "real_teacher_service_including_image_IO": 220.14481247297954, "teacher_final_frozen_weight_audit": 16.115208940929733}
+组件分账：{"CLIP_MEAN_COHORT": {"common_wall_seconds": 2950.1345965533983, "own_head_training_seconds": 556.1277200605255, "own_postprocess_and_output_seconds": 4.004039689083584, "shared_common_plus_own_branch_seconds": 3510.2663563030073}}
+真实教师收据：{"logical_calls": 1160, "new_calls": 1160, "cache_hits": 0, "forward_seconds": 29.258830547565594, "equivalent_forward_seconds": 29.258830547565587, "batches": 164, "cache": {"complete_raw_responses": 1160, "pending_leases": 0, "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_minimal_single_GRAPH_rho0p1_20261122/raw.sqlite"}, "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956", "backend_unmodified": true, "revision": "89644892e4d85e24eaac8bacfd4f463576704203", "model_load_seconds": 545.7017070020083, "peak_allocated_bytes": 6283755520}
+拟合收据：{"fitted_videos": 45, "maximum_teacher_KL": 0.0019995570182800293, "videos_exceeding_KL_tolerance": 0, "maximum_steps": 4000}
+decoder观察帧=2324；实际backbone图像前向=7419
+C1_SHARED
+外部进程秒：2814.085065174033
+相位秒：{"imports_metadata_and_recovery_setup": 14.198666346957907, "student_load_and_integrity_check": 338.71652501495555, "teacher_load_and_initial_integrity_check": 478.351275220979, "real_sparse_frame_student_forward_and_initial_head": 1289.0038621790009, "real_RGB_sparse_inputs_and_image_only_acquisition": 222.05794802797027, "real_teacher_service_including_image_IO": 146.90353657514788, "teacher_final_frozen_weight_audit": 17.03723269503098}
+组件分账：{"CLIP_MEAN": {"common_wall_seconds": 2513.236701266025, "own_head_training_seconds": 295.72984077082947, "own_postprocess_and_output_seconds": 0.8811161794001237, "shared_common_plus_own_branch_seconds": 2809.847658216255}, "CLIP_MEAN_COHORT": {"common_wall_seconds": 2513.236701266025, "own_head_training_seconds": 295.72984077082947, "own_postprocess_and_output_seconds": 2.008704114705324, "shared_common_plus_own_branch_seconds": 2810.97524615156}}
+真实教师收据：{"logical_calls": 1103, "new_calls": 1103, "cache_hits": 0, "forward_seconds": 26.1637322610477, "equivalent_forward_seconds": 26.16373226104769, "batches": 150, "cache": {"complete_raw_responses": 1103, "pending_leases": 0, "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_key_rho0p1_mean_pair_20261122/raw.sqlite"}, "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956", "backend_unmodified": true, "revision": "89644892e4d85e24eaac8bacfd4f463576704203", "model_load_seconds": 475.71713642496616, "peak_allocated_bytes": 6272599552}
+拟合收据：{"fitted_videos": 25, "maximum_teacher_KL": 0.0005310475826263428, "videos_exceeding_KL_tolerance": 0, "maximum_steps": 4000}
+decoder观察帧=1541；实际backbone图像前向=5634
+独立C4输入/教师一致性：{"videos": 45, "PCD_max_abs_difference": 0.0, "RGB_max_abs_difference": 0.0, "prior_max_abs_difference": 0.0, "ordered_question_list_changed_videos": 0, "question_symmetric_difference": 0, "common_answer_positions": 1160, "teacher_probability_max_abs_difference": 0.0, "last_video_head_weight_max_abs_difference": 0.0, "last_video_head_statistic_max_abs_difference": 0.0, "exact_source_questions_and_teacher_answers_equal": true, "head_weight_check_is_last_video_only": true}
+C4是两个独立单方法进程，包含导入、元数据、学生/教师加载、特征、真实Qwen、头拟合和输出。
+并行A100共享NAS/OS及后台负载，进程wall差不能直接当图的算法提速。
+C1是同一真实流的两分支，common+own是实测组件和，不是两次独立冷进程。
+上游官方候选检测/跟踪生成在输入边界之外，没有免费抹掉未测成本。
+新鲜C1与历史池先验最大差0.603、问题对称差458，所以不能拿历史36.816配本次wall。
+早期全帧到三观察把学生相位7686.8秒降到1858.4秒；PCD/RGB在匹配问答中相同，但先验/门控有变化，非严格无损。
+这属于执行调度节省，不称LoRA或神经特征学习收益，也不是所有GPU利用率的积分。
+
+九、GT仅在封存后做的错误回看
+{
+  "pairs": {
+    "C4": {
+      "query_counts": {
+        "queries": 466,
+        "queries_with_positive_candidate": 466,
+        "queries_without_any_correct_track_asked": 122,
+        "rescued_KD_miss_queries": 4,
+        "regressed_KD_correct_queries": 23
+      },
+      "candidate_membership": {
+        "KD": {
+          "TP": 1365559,
+          "FP": 519516,
+          "FN": 140399,
+          "positive_candidate_queries_with_zero_output": 19,
+          "positive_candidate_queries_with_no_correct_output": 59,
+          "true_positive_rows_on_unasked_tracks": 1238225,
+          "recovered_queries_without_correct_track_asked": 74
+        },
+        "OURS": {
+          "TP": 1397630,
+          "FP": 509521,
+          "FN": 108328,
+          "positive_candidate_queries_with_zero_output": 61,
+          "positive_candidate_queries_with_no_correct_output": 78,
+          "true_positive_rows_on_unasked_tracks": 1270953,
+          "recovered_queries_without_correct_track_asked": 62
+        }
+      }
+    },
+    "C1": {
+      "query_counts": {
+        "queries": 425,
+        "queries_with_positive_candidate": 40,
+        "queries_without_any_correct_track_asked": 10,
+        "rescued_KD_miss_queries": 2,
+        "regressed_KD_correct_queries": 0
+      },
+      "candidate_membership": {
+        "KD": {
+          "TP": 103350,
+          "FP": 67274,
+          "FN": 94035,
+          "positive_candidate_queries_with_zero_output": 13,
+          "positive_candidate_queries_with_no_correct_output": 16,
+          "true_positive_rows_on_unasked_tracks": 94417,
+          "recovered_queries_without_correct_track_asked": 2
+        },
+        "OURS": {
+          "TP": 117220,
+          "FP": 72929,
+          "FN": 80165,
+          "positive_candidate_queries_with_zero_output": 14,
+          "positive_candidate_queries_with_no_correct_output": 14,
+          "true_positive_rows_on_unasked_tracks": 107380,
+          "recovered_queries_without_correct_track_asked": 2
+        }
+      }
+    }
+  },
+  "target_GT_only_after_all_actual_predictions_sealed": true,
+  "IoU_membership_counts_not_additive_official_HOTA_attribution": true,
+  "query_presence_means_positive_candidate_recoverable_not_all_physical_GT": true,
+  "no_GT_used_in_adaptation": true
+}
+这些是候选IoU成员计数，不是HOTA损失的可加分账；有正候选不代表原始全部GT都可恢复。
+
+十、仍需准确回答的科学问题与结论边界
+严格同RGB主对照是否在两个方向都支持正增益，是否胜过所有充分软/硬checkpoint，详见上面的全部实际结果。
+即使均值提升，也应检查三个种子的方向、按原视频不确定性和双向数量投影，不凭某个单点封神。
+开发数据上的描述性区间没有修正多次开发或多重比较，也不能证明未见域总体性能。
+没有固定全预算Pareto最优结论，没有所有视觉直觉都有效、所有LoRA都无效的结论。
+不借用Oracle、固定坏图的大差或直接回填弱基线，冒充对强普通KD的独立增益。
+如果严格同信息对照消除了旧优势，研究必须继续，不能弱化基线或以写完报告当作完成。
+
+十一、完整证据索引（仓库仅存精选统计，原始结果不上传）
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/benchmark_scope_audit.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/sparse_observation_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/context_cohort_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/query_scope_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/budget_cold_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/minimal_final_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/null_set_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/zero_colour_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_parent_statistics.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_statistical_reproduction.json
+公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。
+原始新运行：/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121
+大型历史资产只读：/data3/liuyeqiang/nas/A800；新产物不覆盖NAS历史results。
+GitHub仅代码/实验TXT/精选JSON与PNG/PDF；snapshot和可达历史均必须小于100,000,000字节。
+Goal由根代理核验真实目标后单独判断；此报告不会自动结项。

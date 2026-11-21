@@ -8,7 +8,7 @@ import numpy as np
 from scipy.spatial.distance import cdist
 from scipy.stats import rankdata
 from flex_uda.active.acquisition import COLORS, expression_types
-from flex_uda.active.color_cohort import part_mask
+from flex_uda.active.color_cohort import part_mask,augmented_features
 
 
 def context_part_mask(text):
@@ -24,6 +24,20 @@ def context_part_mask(text):
         lower = bool(re.search(r'\b(pants|trousers|skirt|shorts)\b', text))
         return np.asarray([0., float(upper), float(lower)]) if upper or lower else np.asarray([1., 0., 0.])
     return np.asarray([0., 1., 0.]) if re.search(r'\b(team|libero)\b', text) else np.asarray([1., 0., 0.])
+
+
+def distillation_features(pcd,colours,texts,scope):
+    """Exact natural768D or matched1080D teacher-head inputs."""
+    if scope=='pcd':return np.asarray(pcd,dtype='float32')
+    if scope=='zero':
+        parsed=np.zeros(np.asarray(pcd).shape[:2]+(312,),dtype=np.asarray(pcd).dtype)
+    elif scope=='clothing':
+        parsed=augmented_features(pcd,colours,texts)[2]
+    elif scope=='extended':
+        parsed=np.stack([(colours*context_part_mask(text)[None,:,None]).reshape(len(colours),-1) for text in texts])
+        parsed/=np.maximum(np.linalg.norm(parsed,axis=2,keepdims=True),1e-8)
+    else:raise ValueError(scope)
+    return np.concatenate([pcd,parsed],axis=2).astype('float32')
 
 
 def relative_positions(bank):

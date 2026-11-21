@@ -319,3 +319,30 @@ minimal_final_analysis.json：原KD66.377114→扩展图67.204190，+0.827077，
 C1 CHECKLIST严格不变；0新教师/主干/头训练，不能把构造的非空0错误当真实检索成功。
 统计复算：python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem null_set。
 综合TXT在两物理/RGB/协议研究统计完整后运行scripts/a100_visual_classical_research_synthesis.py生成。
+
+23. 严格强基线补查完成与自然768维持续研究
+
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem strict_rgb
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem null_set
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem zero_colour
+  python scripts/a100_visual_classical_research_synthesis.py
+
+三组分别114/66/42官评均已完成；统计复核不重新训练或启动教师。报告保留C1区间跨零、颜色头未稳定增益、强制非空退步等结果。
+COVER实际用原始PCD距离，不用额外HSV；见acquisition_colour_scope_clarification.json。
+
+后续预登记自然768维充分教师头和经典图：
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_canonical_pcd.py --pair C4 --seed 0
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_canonical_pcd.py --pair C1 --seed 0
+
+seed17/42是相同问答下神经敏感性研究；当前控制器在GPU0..3运行已登记六条件，不要额外重复提交。
+all156完成后：
+
+  python scripts/a100_visual_classical_canonical_pcd_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem canonical_pcd
+
+PCD/混合RGB/纯颜色/同头隐藏图、无图锚点、正信念保护和全部软/硬强KD一起报告；主方法先登记，不能事后按域挑最优。
+新质量回放复用实付费问答，不是新的冷启动；若改最终配置，必须重新做匹配真实部署时间。
+生产入口已支持--head-query-scope pcd|clothing|extended|zero、--graph-metric pcd|combined|colour|hidden、
+--graph-prior constant|positive_agreement；后者须显式--task-protocol。预算launcher可用--plan-file和--job-key，
+未登记新冷启动计划，现有3512秒仍只属于原1080维候选。完整研究Goal尚未完成。

@@ -45,12 +45,25 @@ def real_colours(bank,observations,samples,extension='.jpg'):
     return np.asarray(colours),anchors
 
 
-def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,pair='C4',query_graph_scope='clothing'):
+def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,pair='C4',query_graph_scope='clothing',
+        head_query_scope='clothing',task_protocol=None,set_decoder='original',graph_metric='combined',graph_prior='constant'):
     assert 0 < teacher_fraction <= 1
     assert query_graph_scope in ('clothing','extended')
+    assert head_query_scope in ('clothing','extended','zero','pcd')
+    assert graph_metric in ('combined','pcd','colour','hidden')
+    assert graph_prior in ('constant','positive_agreement')
+    if graph_metric!='combined':assert query_graph_scope=='extended'
+    assert set_decoder in ('original','shared_singleton','retain_distilled_set')
     model_name,target_name=PAIRS[pair]
     methods=tuple(requested_methods) if requested_methods else METHODS
     assert set(methods)<=set(METHODS)
+    if set_decoder!='original':
+        assert task_protocol in ('CHECKLIST','PRESUPPOSED')
+        assert set(methods)<={'CLIP_MEAN','CLIP_MEAN_COHORT'}
+    if graph_prior!='constant' or graph_metric=='hidden':
+        assert set(methods)<={'CLIP_MEAN','CLIP_MEAN_COHORT'}
+    if graph_prior!='constant':assert task_protocol in ('CHECKLIST','PRESUPPOSED')
+    dimension=768 if head_query_scope=='pcd' else 1080
     labels_needed={method.split('_',1)[0] for method in methods}
     guard=generation_guard();forbidden=[];root=OUT/'cold_full_c4'/name
     if (root/'completion.json').is_file():
@@ -58,6 +71,10 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         assert json.loads((root/'completion.json').read_text())['protocol'].get('teacher_fraction',.3)==teacher_fraction
         assert json.loads((root/'completion.json').read_text())['protocol']['pair']==pair
         assert json.loads((root/'completion.json').read_text())['protocol'].get('query_graph_scope','clothing')==query_graph_scope
+        previous=json.loads((root/'completion.json').read_text())['protocol']
+        assert previous.get('head_query_scope','clothing')==head_query_scope
+        assert previous.get('task_protocol')==task_protocol and previous.get('set_decoder','original')==set_decoder
+        assert previous.get('graph_metric','combined')==graph_metric and previous.get('graph_prior','constant')==graph_prior
         if requested_methods:assert {m['method'] for m in json.loads((root/'completion.json').read_text())['methods']}==set(methods)
         return
     root.mkdir(parents=True,exist_ok=True)
@@ -92,7 +109,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         row=dict(phase=phase,seconds=time.perf_counter()-start,video=video,attempt=attempt)
         ledger['common_phases'].append(row);atomic_json(ledger_path,ledger)
         print(json.dumps(dict(event=f'FRESH_{pair}_COMMON_PHASE',**row)),flush=True)
-    state_path=root/'stream.pt';start_video=0;bx=[];bz=[];by=[];receipts=[];moment_sum=np.zeros(1080);moment_square=np.zeros(1080);image_rows=0
+    state_path=root/'stream.pt';start_video=0;bx=[];bz=[];by=[];receipts=[];moment_sum=np.zeros(dimension);moment_square=np.zeros(dimension);image_rows=0
     if state_path.is_file():
         saved=torch.load(state_path,map_location='cpu',weights_only=False);start_video=saved['next_video'];bx=saved['x'];bz=saved['z'];by=saved['y']
         assert saved.get('perception_mode','full')==perception_mode
@@ -100,11 +117,17 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         assert saved.get('teacher_fraction',.3)==teacher_fraction
         assert saved.get('pair','C4')==pair
         assert saved.get('query_graph_scope','clothing')==query_graph_scope
+        assert saved.get('head_query_scope','clothing')==head_query_scope
+        assert saved.get('task_protocol')==task_protocol and saved.get('set_decoder','original')==set_decoder
+        assert saved.get('graph_metric','combined')==graph_metric and saved.get('graph_prior','constant')==graph_prior
         receipts=saved['receipts'];moment_sum=saved['sum'];moment_square=saved['square'];image_rows=saved['image_rows']
     protocol=dict(name=name,pair=pair,videos=len(videos),queries=len(m['episodes']),seed=0,source='frozen official '+model_name,
         acquisition=f'COVER {teacher_fraction:g} query-balanced, three uniform observations and max-area anchor',
         teacher_fraction=teacher_fraction,
         query_graph_scope=query_graph_scope,
+        head_query_scope=head_query_scope,task_protocol=task_protocol,set_decoder=set_decoder,
+        head_feature_dimension=dimension,graph_metric=graph_metric,graph_prior=graph_prior,
+        acquisition_geometry='Frozen query-conditioned PCD only, unchanged by head colour or set-decoder controls',
         teacher='frozen original Qwen CROP interface',source_features_actually_recomputed=True,initial_cache_prepaid=False,
         source_perception_mode=perception_mode,all_source_frames_recomputed=perception_mode=='full',
         sparse_rule='union of three uniformly spaced observations per provided TrackID; all candidates at selected frames',
@@ -157,7 +180,10 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             np.save(current_dir/'output_margin.npy',output_margin)
         t=time.perf_counter();colour,anchors=real_colours(bank,observations,sink.samples,'.jpg' if target_name=='SportsMOT' else '.png');texts=[q['query_text'] for q in queries]
         geometry,normalized_pcd,selected_colour=augmented_features(original,colour,texts);raw=np.concatenate([original,selected_colour],axis=2).astype('float32')
-        source=np.clip(logit(np.clip(prior,.05,.95)),-2.,2.);current=raw.reshape(-1,1080)
+        if head_query_scope!='clothing':
+            from flex_uda.active.context_cohort import distillation_features
+            raw=distillation_features(original,colour,texts,head_query_scope)
+        source=np.clip(logit(np.clip(prior,.05,.95)),-2.,2.);current=raw.reshape(-1,dimension)
         moment_sum+=current.sum(0,dtype=np.float64);moment_square+=np.square(current.astype(float)).sum(0);image_rows+=len(current)
         mean=moment_sum/image_rows;std=np.maximum(np.sqrt(np.maximum(moment_square/image_rows-mean**2,0)),1e-3)
         np.savez_compressed(current_dir/'sparse_inputs.npz',pcd=original,colours=colour,prior=prior,tracks=tracks,anchors=anchors)
@@ -201,30 +227,50 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
                 # Only the graph branch pays for the extra query masks and
                 # extended geometry. Plain KD never needs this work.
                 if query_graph_scope=='extended':
-                    from flex_uda.active.context_cohort import context_part_mask
-                    graph_parts=np.stack([context_part_mask(text) for text in texts])
-                    graph_colour=np.stack([(colour*mask[None,:,None]).reshape(len(colour),-1) for mask in graph_parts])
-                    graph_colour/=np.maximum(np.linalg.norm(graph_colour,axis=2,keepdims=True),1e-8)
-                    graph_geometry=np.concatenate([normalized_pcd,graph_colour],axis=2).astype('float32')
+                    from flex_uda.active.grounded_graph import query_geometry
+                    hidden=None
+                    if graph_metric=='hidden':
+                        from torch.nn import functional as F
+                        saved_head=torch.load(root/'CLIP_latest_head.pt',map_location=device,weights_only=False)
+                        with torch.no_grad():
+                            values=torch.tensor((current-mean)/std,dtype=torch.float32,device=device)
+                            hidden=F.gelu(F.linear(values,saved_head['model']['0.weight'],saved_head['model']['0.bias'])).cpu().numpy().reshape(source.shape+(64,))
+                        del values,saved_head
+                    graph_parts,graph_geometry=query_geometry(original,colour,texts,graph_metric,hidden)
                 else:
                     graph_parts=np.stack([part_mask(text) for text in texts]);graph_geometry=geometry
+                source_weights=None
+                if graph_prior=='positive_agreement':
+                    from flex_uda.active.grounded_graph import positive_agreement_precision
+                    source_weights=positive_agreement_precision(prediction['CLIP_KD_400'],prediction['CLIP_KD'],task_protocol)
                 for qi,text in enumerate(texts):
                     selected=graph_parts[qi]>0
                     if selected.any():score[qi]=refine_distilled_prior(score[qi],graph_geometry[qi],answers[qi],
-                        graph=not variant.endswith('NO_GRAPH'),source_weight=1. if variant=='STRONG_PRIOR' else .1,
+                        graph=not variant.endswith('NO_GRAPH'),source_weight=source_weights[qi] if source_weights is not None else 1. if variant=='STRONG_PRIOR' else .1,
                         node_mask=np.all(colour[:,selected].sum(2)>0,axis=1))
             expanded=score[:,columns];mask=plain(expanded,exclusive_group(texts,target_name))
             for qi,gate in motion.items():mask[qi]&=gate
+            decoder_actions=None
+            if set_decoder!='original':
+                from flex_uda.active.task_decode import decode_with_contract
+                reference=prediction['CLIP_MEAN'][:,columns]
+                base_mask=plain(reference,exclusive_group(texts,target_name))
+                for qi,gate in motion.items():base_mask[qi]&=gate
+                mask,expanded,decoder_actions=decode_with_contract(expanded,mask,base_mask,reference,observations,tracks,prior,
+                    task_protocol,set_decoder,method!='CLIP_MEAN')
             folder=root/'methods'/method;destination=folder/'videos'/video;destination.mkdir(parents=True,exist_ok=True)
             np.save(destination/'mask.npy',mask);np.save(destination/'scores.npy',expanded.astype('float32'));immediate_predictions(folder,output_context,mask)
-            ledger['method_outputs'].append(dict(video=video,method=method,seconds=time.perf_counter()-t,attempt=attempt));atomic_json(ledger_path,ledger)
+            ledger['method_outputs'].append(dict(video=video,method=method,seconds=time.perf_counter()-t,attempt=attempt,
+                task_contract_actions=decoder_actions));atomic_json(ledger_path,ledger)
         receipt=dict(video=video,index=vi,visible_teacher_videos=videos[:vi+1],logical_teacher_calls=budget,teacher_examples=len(y),fits=fits,
             source_perception_mode=perception_mode,source_frames=len(scoring_frames),full_frames=len(full_frames),
             source_candidate_query_rows=len(fc.observations)*len(queries),full_candidate_query_rows=len(observations)*len(queries),
             actual_frozen_encoder_statistics=dict(cache.stats),original_temporal_context_preserved=True,
             GT_open_attempts=len(guard),wall_seconds=time.perf_counter()-begin)
         atomic_json(current_dir/'receipt.json',receipt);receipts.append(receipt)
-        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode,requested_methods=methods,teacher_fraction=teacher_fraction,pair=pair,query_graph_scope=query_graph_scope)
+        state=dict(next_video=vi+1,x=bx,z=bz,y=by,receipts=receipts,sum=moment_sum,square=moment_square,image_rows=image_rows,perception_mode=perception_mode,requested_methods=methods,teacher_fraction=teacher_fraction,pair=pair,query_graph_scope=query_graph_scope,
+            head_query_scope=head_query_scope,task_protocol=task_protocol,set_decoder=set_decoder)
+        state.update(graph_metric=graph_metric,graph_prior=graph_prior)
         temporary=state_path.with_suffix('.tmp');torch.save(state,temporary);temporary.replace(state_path)
         del fc,cache,ep,sink;torch.cuda.empty_cache()
         print(json.dumps(dict(event=f'FRESH_{pair}_VIDEO_COMPLETE',video=video,completed=vi+1,total=len(videos),
@@ -242,6 +288,8 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             extra=dict(whole_C4_fresh_stream=pair=='C4',whole_target_fresh_stream=True,pair=pair,source_features_not_prepaid=True,teacher_answers_not_prepaid=True,
                 logical_teacher_calls=sum(map(len,by)),same_teacher_and_source_stream_for_all_arms=True,
                 query_graph_scope=query_graph_scope,
+                head_query_scope=head_query_scope,task_protocol=task_protocol,set_decoder=set_decoder,
+                head_feature_dimension=dimension,graph_metric=graph_metric,graph_prior=graph_prior,
                 current_video_transductive=True,no_future_teacher_feedback=True,teacher_target_clip=.02 if method.startswith('CLIP') else 0.))
         seals.append(dict(method=method,rows=seal['prediction_rows'],seal_seconds=time.perf_counter()-t))
     observed=time.perf_counter()-PROCESS_BEGIN
@@ -280,4 +328,10 @@ if __name__=='__main__':
     p.add_argument('--teacher-fraction',type=float,default=.3)
     p.add_argument('--pair',choices=['C4','C1'],default='C4')
     p.add_argument('--query-graph-scope',choices=['clothing','extended'],default='clothing')
-    a=p.parse_args();run(a.name,a.perception_mode,a.methods.split(',') if a.methods else None,a.teacher_fraction,a.pair,a.query_graph_scope)
+    p.add_argument('--head-query-scope',choices=['clothing','extended','zero','pcd'],default='clothing')
+    p.add_argument('--task-protocol',choices=['CHECKLIST','PRESUPPOSED'])
+    p.add_argument('--set-decoder',choices=['original','shared_singleton','retain_distilled_set'],default='original')
+    p.add_argument('--graph-metric',choices=['combined','pcd','colour','hidden'],default='combined')
+    p.add_argument('--graph-prior',choices=['constant','positive_agreement'],default='constant')
+    a=p.parse_args();run(a.name,a.perception_mode,a.methods.split(',') if a.methods else None,a.teacher_fraction,a.pair,a.query_graph_scope,
+        a.head_query_scope,a.task_protocol,a.set_decoder,a.graph_metric,a.graph_prior)

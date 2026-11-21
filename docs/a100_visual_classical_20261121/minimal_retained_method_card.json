@@ -1,5 +1,5 @@
 {
-  "status": "PROVISIONAL_PENDING_RGB_PARITY_AND_QUERY_RETRIEVAL_SAFETY",
+  "status": "NOT_ACCEPTED_CANONICAL_STRONG_TEACHER_RESEARCH_RUNNING",
   "method": "Original teacher-distilled head plus query-conditioned visual cohort inference",
   "task_boundary": "Cross-domain referring adaptation on official fixed boxes and TrackIDs; frontend is common input, not our contribution",
   "source_target": {
@@ -245,11 +245,11 @@
     "CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_cold_full_c4.py --name C4_minimal_single_GRAPH_rho0p1_20261122 --pair C4 --teacher-fraction .1 --perception-mode track-three --query-graph-scope extended --methods CLIP_MEAN_COHORT"
   ],
   "completed_name_reuses_original_receipts_not_a_new_cold_measurement": true,
-  "quality_evidence": "query_scope_analysis.json",
+  "quality_evidence": "strict_rgb_analysis.json;zero_colour_analysis.json;null_set_analysis.json",
   "physical_evidence_pending": "minimal_final_analysis.json",
   "goal_status": "ACTIVE",
   "method_design_uses_postsealed_development_diagnosis": true,
-  "strict_RGB_gap": "Extended graph sees spatial/role RGB; test equally exposed1080-dimensional KD before final superiority acceptance.",
+  "strict_RGB_gap": "Equal1080D RGB control completed; new stronger zero-HSV control weakens a universal graph-superiority claim.",
   "fresh_C4_physical_evidence": {
     "KD_HOTA": 66.37711363459273,
     "GRAPH_HOTA": 67.20419043629605,
@@ -266,6 +266,34 @@
     "positive_query_empty_GRAPH": 61,
     "rescued_queries": 4,
     "regressed_queries": 23,
-    "requires_null_set_followup": true
+    "requires_null_set_followup": false,
+    "null_followup_completed_but_not_accepted": true
+  },
+  "physical_evidence": "minimal_final_analysis.json: original1080D provisional candidate only",
+  "legacy_retained_contributions_are_historical_descriptive": true,
+  "current_acceptance": {
+    "C4_same_RGB_graph_vs_mean": 1.1865386559052287,
+    "C4_graph_vs_zero_HSV_mean": 0.5018369114273232,
+    "C4_graph_vs_zero_HSV_parent_seed_CI95": [
+      -0.29229270669813123,
+      1.2078958583237511
+    ],
+    "C1_same_RGB_graph_vs_mean": 1.9716373351236836,
+    "C1_same_RGB_graph_parent_seed_CI95": [
+      -0.06999690649120502,
+      4.62615259298247
+    ],
+    "C1_graph_sorting_at_KD_counts": -0.6685084488530665,
+    "null_safe_minus_original_RGB_graph": -0.25828916198963253,
+    "null_safeguard_retained_as_proven_module": false
+  },
+  "canonical_followup": {
+    "preregistration": "preregistration_canonical_pcd_graph_v1.json",
+    "natural_head_dimension": 768,
+    "primary": "GRAPH_GUARD_vs_KD_MEAN",
+    "official_outputs": 156,
+    "all_soft_hard_RGB_zero_HSV_controls_retained": true,
+    "no_new_teacher_or_encoder": true,
+    "new_matching_cold_cost_not_yet_measured": true
   }
 }

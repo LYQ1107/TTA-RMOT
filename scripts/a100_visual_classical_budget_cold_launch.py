@@ -18,26 +18,39 @@ DESTINATION = OUT/'cold_full_c4'/NAME
 STATE = OUT/'supervisor/budget_cold_state.json'
 
 
-def state_path(pair,graph_scope,single_method=None):
+def custom_plan(path,job_key=None):
+    path=Path(path).absolute();plan=json.loads(path.read_text())
+    if job_key is not None:plan=dict(plan,**plan['jobs'][job_key])
+    return path,plan
+
+
+def state_path(pair,graph_scope,single_method=None,plan_file=None,job_key=None):
+    if plan_file:
+        _,plan=custom_plan(plan_file,job_key)
+        return OUT/'supervisor'/plan.get('state_filename',plan['run_name']+'_state.json')
     if single_method:return OUT/'supervisor'/('final_single_'+single_method.lower()+'_state.json')
     return OUT/'supervisor/minimal_final_cold_state.json' if graph_scope=='extended' else STATE if pair=='C4' else OUT/'supervisor/budget_cold_C1_state.json'
 
 
-def main(pair='C4',graph_scope='clothing',single_method=None):
-    prereg = ROOT/'docs/a100_visual_classical_20261121'/('preregistration_minimal_final_single_v2.json' if single_method else 'preregistration_minimal_final_cold_v1.json' if graph_scope=='extended' else 'preregistration_budget_cold_v1.json' if pair=='C4' else 'preregistration_budget_cold_C1_v1.json')
-    plan = json.loads(prereg.read_text())
-    if single_method:
-        assert graph_scope=='extended'
-        plan=dict(plan,**plan['jobs'][single_method])
+def main(pair='C4',graph_scope='clothing',single_method=None,plan_file=None,job_key=None):
+    if plan_file:
+        prereg,plan=custom_plan(plan_file,job_key)
+        graph_scope=plan.get('query_graph_scope',graph_scope)
+    else:
+        prereg = ROOT/'docs/a100_visual_classical_20261121'/('preregistration_minimal_final_single_v2.json' if single_method else 'preregistration_minimal_final_cold_v1.json' if graph_scope=='extended' else 'preregistration_budget_cold_v1.json' if pair=='C4' else 'preregistration_budget_cold_C1_v1.json')
+        plan = json.loads(prereg.read_text())
+        if single_method:
+            assert graph_scope=='extended'
+            plan=dict(plan,**plan['jobs'][single_method])
     assert plan['pair']==pair
     destination=OUT/'cold_full_c4'/plan['run_name']
-    state=state_path(pair,graph_scope,single_method)
+    state=state_path(pair,graph_scope,single_method,plan_file,job_key)
     destination.mkdir(parents=True, exist_ok=True)
     receipt_path = destination/'worker_receipt.json'
     if (destination/'completion.json').is_file():
         assert receipt_path.is_file(), 'Do not replace a missing original physical receipt with a no-op timing'
     else:
-        if pair=='C1':
+        if pair=='C1' and plan_file is None:
             atomic_json(state,dict(status='WAITING_FOR_CONTEXT_GPU_RELEASE',pid=os.getpid(),run_root=str(destination),goal_status='ACTIVE'))
             while True:
                 context=json.loads((OUT/'supervisor/context_cohort_state.json').read_text())
@@ -49,7 +62,10 @@ def main(pair='C4',graph_scope='clothing',single_method=None):
         log_path = destination/'worker.log'
         start = time.perf_counter()
         command = [sys.executable,'scripts/a100_visual_classical_cold_full_c4.py','--name',plan['run_name'],'--pair',pair,'--query-graph-scope',graph_scope,
-            '--perception-mode','track-three','--teacher-fraction','.1','--methods',','.join(plan['methods'])]
+            '--perception-mode','track-three','--teacher-fraction',str(plan.get('teacher_fraction',.1)),'--methods',','.join(plan['methods']),
+            '--head-query-scope',plan.get('head_query_scope','clothing'),'--set-decoder',plan.get('set_decoder','original')]
+        command+=['--graph-metric',plan.get('graph_metric','combined'),'--graph-prior',plan.get('graph_prior','constant')]
+        if plan.get('task_protocol'):command+=['--task-protocol',plan['task_protocol']]
         with log_path.open('a', buffering=1) as log:
             child = subprocess.Popen(command, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT,
                 env=dict(os.environ, CUDA_VISIBLE_DEVICES=str(plan['physical_GPU']), OMP_NUM_THREADS='4', OPENBLAS_NUM_THREADS='4'))
@@ -82,6 +98,12 @@ def main(pair='C4',graph_scope='clothing',single_method=None):
             print(log_path.read_text()[-7000:],flush=True)
             raise RuntimeError('Fresh budget worker failed; keep receipt and stream')
     completion = json.loads((destination/'completion.json').read_text())
+    protocol=completion['protocol']
+    assert protocol.get('head_query_scope','clothing')==plan.get('head_query_scope','clothing')
+    assert protocol.get('set_decoder','original')==plan.get('set_decoder','original')
+    assert protocol.get('task_protocol')==plan.get('task_protocol')
+    assert protocol.get('graph_metric','combined')==plan.get('graph_metric','combined')
+    assert protocol.get('graph_prior','constant')==plan.get('graph_prior','constant')
     assert completion['GT_open_attempts'] == completion['prepaid_artifact_reads'] == 0
     assert completion['logical_teacher_calls'] == plan['expected_questions']
     assert completion['teacher']['new_calls'] == plan['expected_questions']
@@ -102,11 +124,13 @@ if __name__ == '__main__':
     parser.add_argument('--pair',choices=['C4','C1'],default='C4')
     parser.add_argument('--scope',choices=['clothing','extended'],default='clothing')
     parser.add_argument('--single-method',choices=['CLIP_MEAN','CLIP_MEAN_COHORT'])
+    parser.add_argument('--plan-file',type=Path,help='Explicit registered deployment plan; keeps default historical plans unchanged')
+    parser.add_argument('--job-key',help='Named job within the explicit plan')
     args=parser.parse_args()
     try:
-        main(args.pair,args.scope,args.single_method)
+        main(args.pair,args.scope,args.single_method,args.plan_file,args.job_key)
     except Exception as error:
-        state=state_path(args.pair,args.scope,args.single_method)
+        state=state_path(args.pair,args.scope,args.single_method,args.plan_file,args.job_key)
         row=json.loads(state.read_text()) if state.is_file() else {}
         row.update(status='FAILED_FRESH_BUDGET_PAIR_REQUIRES_ROOT_CAUSE',error=repr(error),goal_status='ACTIVE')
         atomic_json(state,row)

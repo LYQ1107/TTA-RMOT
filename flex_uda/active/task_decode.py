@@ -54,3 +54,21 @@ def retain_nonempty_distillation(graph_mask,baseline_mask,protocol):
         rejected=~result.any(1)&np.asarray(baseline_mask).any(1)
         result[rejected]=baseline_mask[rejected]
     return result,rejected
+
+
+def decode_with_contract(score,mask,baseline_mask,reference,observations,tracks,prior,protocol,mode,refined):
+    """Production decoder for the exact registered singleton/null-set controls."""
+    if mode=='original':return mask,score,None
+    before_empty=~np.asarray(mask).any(1)
+    protected,prepared=nonempty_from_reference(baseline_mask,reference,observations,tracks,prior,protocol)
+    if mode=='shared_singleton' or not refined:
+        result,changes=nonempty_from_reference(mask,reference,observations,tracks,prior,protocol)
+        actions=dict(singleton_queries=len(changes),retained_baseline_queries=0)
+    elif mode=='retain_distilled_set':
+        result,rejected=retain_nonempty_distillation(mask,protected,protocol)
+        actions=dict(singleton_queries=sum(bool(rejected[r['query_index']]) for r in prepared),
+            baseline_singletons_prepared=len(prepared),retained_baseline_queries=int(rejected.sum()))
+    else:raise ValueError(mode)
+    output=np.array(score,copy=True)
+    if protocol=='PRESUPPOSED':output[before_empty]=reference[before_empty]
+    return result,output,actions

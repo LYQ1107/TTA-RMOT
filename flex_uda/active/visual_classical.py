@@ -100,7 +100,7 @@ def refine_distilled_prior(prior, features, teacher_probability, *, graph=True,s
     prior=np.asarray(prior,dtype=float);answer=np.asarray(teacher_probability,dtype=float)
     seen=np.isfinite(answer)
     unary=np.clip(logit(np.clip(prior,1e-6,1-1e-6)),-4.,4.)
-    source_precision=np.full_like(prior,source_weight);source_precision[seen]=0.
+    source_precision=np.broadcast_to(np.asarray(source_weight,dtype=float),prior.shape).copy();source_precision[seen]=0.
     precision=np.zeros_like(prior);precision[seen]=1.+3.*np.abs(2.*answer[seen]-1.)
     if teacher_weight_factor is not None:precision*=np.asarray(teacher_weight_factor)
     target=np.zeros_like(prior);target[seen]=np.clip(logit(np.clip(answer[seen],.02,.98)),-4.,4.)
