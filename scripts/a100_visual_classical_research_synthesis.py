@@ -23,10 +23,10 @@ def summary(lines,title,row,contrasts):
 
 
 def main():
-    strict=load('strict_rgb_analysis');physical=load('minimal_final_analysis');null=load('null_set_analysis')
+    strict=load('strict_rgb_analysis');physical=load('minimal_final_analysis');null=load('null_set_analysis');colour=load('zero_colour_analysis')
     assert strict['status']=='STRICT_RGB1080_PARITY_ANALYZED'
     assert physical['status']=='PROVISIONAL_MINIMAL_FRESH_EVIDENCE_ANALYZED'
-    for stem in ('strict_rgb','minimal_final','query_scope','context_cohort','budget_cold','sparse_observation','null_set'):
+    for stem in ('strict_rgb','minimal_final','query_scope','context_cohort','budget_cold','sparse_observation','null_set','zero_colour'):
         assert load(stem+'_statistical_reproduction')['status'].startswith('PASS_')
     sparse=load('sparse_observation_analysis');context=load('context_cohort_analysis');scope=load('query_scope_analysis')
     lines=['TTA-RMOT：人类视觉启发与经典算法的持续研究综合实证',
@@ -97,6 +97,12 @@ def main():
         e=row['comparisons']['RGB_GRAPH_MEAN_vs_RGB_KD_MEAN']
         lo,hi=e['parent_and_neural_seed_sensitivity_CI95']
         lines.append('主对照判读：'+('该开发方向的原视频+种子区间为正。' if lo>0 else '区间含0或负值，尚不能宣布稳定超过公平普通KD。'))
+    for pair in ('C4','C1'):
+        summary(lines,'显式手工颜色通道归因 / '+pair,colour['repeated']['ZERO_COLOUR_'+pair],[
+            'RGB_MEAN_vs_ZERO_MEAN','RGB_400_vs_ZERO_400','RGB_FINAL_vs_ZERO_FINAL',
+            'COUNT_OWN_RGB_MEAN_vs_ZERO_MEAN','COUNT_BASELINE_RGB_MEAN_vs_ZERO_MEAN'])
+    lines += ['这只检验同1080维显式HSV通道，不是灰度PCD或自然768维架构，也不改变原共同RGB选题。',
+        '颜色归因不能替换完整RGB软/硬强KD主比较，图相对强KD的额外贡献仍单独报告。']
     summary(lines,'图压空的协议保护复核',null['repeated']['NULL_SET_C4'],[
         'SAFE_MEAN_vs_KD_MEAN_PRESENCE','SAFE_MEAN_vs_GRAPH_MEAN_PRESENCE',
         'SAFE_MEAN_vs_KD_400_PRESENCE','SAFE_MEAN_vs_KD_FINAL_PRESENCE',
@@ -148,7 +154,7 @@ def main():
         '不借用Oracle、固定坏图的大差或直接回填弱基线，冒充对强普通KD的独立增益。',
         '如果严格同信息对照消除了旧优势，研究必须继续，不能弱化基线或以写完报告当作完成。','',
         '十一、完整证据索引（仓库仅存精选统计，原始结果不上传）']
-    for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis'):
+    for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis','zero_colour_analysis'):
         lines.append(str(PUBLIC/(stem+'.json')))
     lines += [str(PUBLIC/'strict_rgb_parent_statistics.json'),str(PUBLIC/'strict_rgb_statistical_reproduction.json'),
         '公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。',
