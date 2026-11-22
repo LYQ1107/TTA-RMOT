@@ -1,0 +1,34 @@
+{
+  "status": "REGISTERED_QUERY_ONLY_STRATA_BEFORE_THIS_DIAGNOSIS",
+  "registered_unix": 1795339241.2080579,
+  "source_sha256": "0cab6060f5fbaa96c9cbba0031fb0b177d608224ff1e4240b4b00466d64753ee",
+  "purpose": "Test where the retained mechanisms can contribute, rather than claiming every module helps every query or setting.",
+  "groups": [
+    "ALL",
+    "APPEARANCE",
+    "SPATIAL",
+    "MOTION",
+    "ROLE",
+    "OTHER",
+    "CUE_SUPPORTED",
+    "CUE_UNSUPPORTED",
+    "PARSER_SUPPORTED",
+    "PARSER_UNSUPPORTED",
+    "COMPOSITIONAL_COLOUR_WITHOUT_CUE",
+    "REFERENCE_SCOPE_REVIEW"
+  ],
+  "strata_definition": "Frozen published a100_language_scope_audit.classify and expression_types, based only on task-query text; overlapping groups, not manual labels or observed errors.",
+  "studies": {
+    "transfer": 234,
+    "query_consistency": 252,
+    "view_fusion": 468,
+    "direct_fill": 90
+  },
+  "GT_barrier": "Analyze each existing study only after its own full raw/count seal, official evaluations and analysis.json; no new predictions, GT match or teacher/head training.",
+  "comparisons": "All already registered contrasts in the respective study, within the same query subset; no promotion of a subgroup-best arm.",
+  "statistic": "Unmodified vendor HOTA.combine_sequences over subset queries, never average query HOTA. Exact local subset sufficient arrays and full precision; public overview rounded and explicitly display-only.",
+  "interpretation": "Development-data point estimates and seed sensitivity, no subgroup population CIs, no cherry-picked acceptance or global dominance claim; KITTI only4 original videos.",
+  "GPUs_and_new_teacher_encoder_head_calls": 0,
+  "running_numeric_helpers_changed": false,
+  "goal_status": "ACTIVE"
+}
