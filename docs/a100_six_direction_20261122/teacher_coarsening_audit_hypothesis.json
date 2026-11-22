@@ -1,0 +1,11 @@
+{
+  "study": "Exact teacher variation discarded by a constant query/TrackID prediction",
+  "hypothesis": "A constant score cannot reproduce teacher probabilities that differ between observations; the exact excess Bernoulli loss can be measured without target labels.",
+  "primary_measure": "Uniform distinct-request Jensen entropy gap; decompose within requested anchor across views and between requested anchors.",
+  "controls": "All four fixed policies and all six settings, plus CROP-only gap and fixed training clipping cost.",
+  "no_semantic_quality_claim": "Teacher variation can be state information or teacher error. Policy-specific smaller gap is not necessarily better.",
+  "no_future_input_to_learning": true,
+  "no_manual_GT_or_quality_predictions": true,
+  "no_new_teacher_or_model_fits": true,
+  "goal_status": "ACTIVE"
+}

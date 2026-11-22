@@ -14,6 +14,8 @@
 
 ## 当前工作状态（2026-11-22）
 
+- 最新观察器58872/PID2366032，原20149、56634因已记录的文本格式失败退出1，2361710因依赖启动竞态退出1，均不再使用。registry已移出失败active行并完整归档。I1全部828输出已封存，2337463正常官评中，不读中途质量选主方法。文本v3控制2368289、监督审计v3控制2368290已登记并启动；v3等同严格decoder/首8至少4，使用lm-format-enforcer0.11.3约束原schema枚举及原句literalspan。依赖只装/var/tmp/.../query_scope_vendor_v3并由该进程PYTHONPATH启用，共享.venv/torch/transformers未改。真实Qwen tokenizer311步正例与两个非法类别/非字面span负控PASS，尚非GPU生成或语义准确率证明。v1/v2各8条生成都失败原格式门槛，raw/source/log保留，v2load473.710s/457实际forward已记收据；不得把它们当可用语义监督或隐藏成本。
+- 新teacher-coarsening审计24setting-policy完成：DESIGN在C2/C5最优常数分数相对原始回答的Bernoulli excess=.018712/.019044 nats/request，来自不同requested-anchor；其它4为0因为没有重复状态/视角，并非教师完美。它量化平均丢弃的教师变化，不是真语义收益。历史PCD三锚点C2/0005索引恢复完成，但均值与当前A100不同(maxabs.00260448,meanabs3.79844e-6,96.60345%exact)；旧batch64/query-isolation与当前batch8不同。不得称逐字一致或用旧头比较新输入归因；后续如用历史锚点则所有普通对照同输入重训，或另取A100新锚点（尚未启动）。
 - 最新I1进度：18个GPU条件全完成，1776份policy-prefix收据全过KL.005，1356实际普通fit、12次同64宽继续优化（实际没有扩宽）。12个真实末prefix保存头CPU独立核验PASS，KL对GPU最大差2.71635e-9，见observation_policy_fit_receipt_audit.json及独立脚本。当前生成CountMatched，828全封存前禁止本项GT；text-only解析已进入独立模型加载，不能重复启动。以唯一observer20149的后续状态为准。
 - 11月23日新增：同冻结2BQwen的text-only查询结构准备2352422已登记，等待I1全部18个GPU条件释放后用一个空闲0..3卡。948唯一任务文本/两个固定提示1896次生成；不看图片/QA/预测/GT。scripts/a100_query_scope_teacher.py及query_scope/prompt源码已冻结，原子因素尚未学得、共识不是真值，普通与后续结构化KD必须拿到同一结构并只读当前/过去查询。不要为等待而重复启动。
 - 11月23日图片可观测性诊断2354561已完成：74视频/2166给定ID/6400观察/4588图片，148个来源均值重构误差0。逐锚点外观保留本地，收据anchor_observability_receipt.json；同ID颜色变化不能当真实串人标签，三锚点不能测全时序。新普通对照须获得相同逐锚点输入。新增scoped-supervision只读审计2356540等待上述固定文本结果，随后148setting-video的DESIGN自己QA做完全同图片/非查询上下文的属性对比与子句约束；没有新伪原子标签、没有新神经头或HOTA贡献声明。

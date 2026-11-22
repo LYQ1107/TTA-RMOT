@@ -24,9 +24,9 @@ from scripts.a100_six_direction import OUT as SIX,PUBLIC
 from scripts.a100_observation_design_quality import STATE as I1_STATE
 from scripts.a100_observation_design_collect import TEACHER_SHA
 
-OUT=SIX/'query_scope_teacher_20261123'
+OUT=SIX/'query_scope_teacher_20261123_v3'
 STATE=OUT/'supervisor/state.json'
-REGISTRATION=PUBLIC/'query_scope_teacher_registration_v1.json'
+REGISTRATION=PUBLIC/'query_scope_teacher_registration_v3.json'
 SUCCESS='PASS_QUERY_TEXT_SCOPE_TEACHER_PREPARATION_NO_GT'
 
 
@@ -69,6 +69,8 @@ def prepare():
 def worker():
     import torch
     import yaml
+    from lmformatenforcer.integrations.transformers import build_token_enforcer_tokenizer_data
+    from flex_uda.active.query_scope_constraints import batch_prefix
     from flex_uda.a100.runtime import relocate
     from flex_uda.active.teacher_client import REVISION
     from flex_uda.teacher.yestrack_backend import FrozenYesTrack
@@ -76,6 +78,10 @@ def worker():
     guard=generation_guard();torch.set_num_threads(4);torch.manual_seed(0)
     torch.backends.cuda.matmul.allow_tf32=False;torch.backends.cudnn.allow_tf32=False
     start=time.perf_counter();torch.cuda.set_device(0)
+    ledger_path=OUT/'phase_ledger.json'
+    ledger=dict(worker_pid=os.getpid(),started_unix=time.time(),physical_GPU=os.environ.get('CUDA_VISIBLE_DEVICES'),
+        phases=[],actual_new_generation_prompts=0,actual_model_forward_calls=0)
+    atomic_json(ledger_path,ledger)
     reservation=torch.empty(256<<20,dtype=torch.float32,device='cuda:0')
     plan=json.loads(REGISTRATION.read_text());rows=json.loads((OUT/'input_manifest.json').read_text())['queries']
     expected=len(rows)*len(PROMPTS);phases=[];checkpoint=OUT/'raw_outputs.json'
@@ -94,6 +100,8 @@ def worker():
     assert config['revision']==REVISION and config['lora_path'] is None
     t=time.perf_counter();backend=FrozenYesTrack(config,device='cuda:0');torch.cuda.synchronize()
     phases.append(dict(phase='teacher_load_and_integrity',seconds=time.perf_counter()-t))
+    ledger.update(phases=phases,worker_wall_seconds_to_checkpoint=time.perf_counter()-start)
+    atomic_json(ledger_path,ledger)
     assert backend.weight_sha==TEACHER_SHA
     # Only instrumentation on this separate model instance is changed.
     # Its original hooks record binary Yes/No, which is not this task.
@@ -103,6 +111,10 @@ def worker():
         actual_forward_calls+=1
     handle=backend.model.register_forward_pre_hook(count_forward,with_kwargs=True)
     backend.processor.tokenizer.padding_side='left';del reservation;torch.cuda.empty_cache()
+    t=time.perf_counter();tokenizer_data=build_token_enforcer_tokenizer_data(backend.processor.tokenizer)
+    phases.append(dict(phase='literal_span_JSON_constraint_tokenizer_setup',seconds=time.perf_counter()-t))
+    ledger.update(phases=phases,worker_wall_seconds_to_checkpoint=time.perf_counter()-start)
+    atomic_json(ledger_path,ledger)
     input_tokens=generated_tokens=padded_generation_token_slots=0;t_all=time.perf_counter()
     for variant,prompt in PROMPTS.items():
         answers.setdefault(variant,{})
@@ -117,9 +129,10 @@ def worker():
             assert not any(k.startswith('pixel_values') for k in inputs)
             assert not bool((inputs['input_ids']==backend.model.config.image_token_id).any())
             width=inputs['input_ids'].shape[1];torch.cuda.synchronize();t=time.perf_counter()
+            prefix=batch_prefix(tokenizer_data,[r['text'] for r in batch])
             with torch.inference_mode():
                 output=backend.model.generate(**inputs,max_new_tokens=plan['max_new_tokens'],
-                    do_sample=False,num_beams=1,use_cache=True)
+                    do_sample=False,num_beams=1,use_cache=True,prefix_allowed_tokens_fn=prefix)
             torch.cuda.synchronize();elapsed=time.perf_counter()-t
             generated=output[:,width:];strings=backend.processor.batch_decode(generated,skip_special_tokens=True)
             input_tokens+=int(inputs['attention_mask'].sum());pad=backend.processor.tokenizer.pad_token_id
@@ -131,6 +144,12 @@ def worker():
             backend.check_versions()
             atomic_json(checkpoint,dict(variants=answers,teacher_weight_SHA=TEACHER_SHA,
                 prompt_sha256=prompt_shas,registered_source_sha256=plan['source_sha256'],not_to_Git=True))
+            ledger.update(actual_new_generation_prompts=sum(len(v) for v in answers.values())-resumed,
+                actual_model_forward_calls=actual_forward_calls,language_input_tokens=input_tokens,
+                nonpadding_generated_tokens=generated_tokens,padded_generation_token_slots=padded_generation_token_slots,
+                text_generation_wall_seconds_to_checkpoint=time.perf_counter()-t_all,
+                worker_wall_seconds_to_checkpoint=time.perf_counter()-start)
+            atomic_json(ledger_path,ledger)
             progress('text_only_scope_generation')
             print(json.dumps(dict(event='TEXT_SCOPE_GENERATION',variant=variant,
                 completed=len(answers[variant]),total=len(rows))),flush=True)
@@ -141,6 +160,8 @@ def worker():
     phases.append(dict(phase='text_generation_and_checkpoint_IO',seconds=time.perf_counter()-t_all))
     handle.remove();t=time.perf_counter();frozen=backend.seal_frozen()
     phases.append(dict(phase='teacher_final_weight_integrity',seconds=time.perf_counter()-t))
+    ledger.update(phases=phases,worker_wall_seconds_to_checkpoint=time.perf_counter()-start,sealed_frozen=True)
+    atomic_json(ledger_path,ledger)
     counts=Counter();structures={}
     for row in rows:
         one=answers['PARSE'][row['key']]['parsed'];two=answers['SCOPE_REVIEW'][row['key']]['parsed']
@@ -160,6 +181,8 @@ def worker():
         worker_wall_seconds=time.perf_counter()-start,manual_target_GT_open_attempts=0,
         images_or_image_QA_or_quality_predictions_read=0,new_image_teacher_questions=0,
         new_student_or_adaptation_fits=0,raw_outputs_and_full_structures_not_to_Git=True,
+        registration=REGISTRATION.name,
+        decoding='JSON schema, required enums and literal original-query span constraints; syntax is not semantic truth.',
         no_posthoc_prompt_promoted=True,teacher_agreement_not_semantic_accuracy=True,
         cost_scope='One shared frozen teacher load for language-only preprocessing, not an RMOT deployment cost or accuracy gain.',
         downstream_fairness='All ordinary/factorized KD receive identical structures; prefix adaptation reads no future-video information.',

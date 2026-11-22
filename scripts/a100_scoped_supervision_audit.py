@@ -22,9 +22,9 @@ from scripts.a100_query_scope_teacher import OUT as SCOPES, STATE as SCOPE_STATE
 from scripts.a100_observation_design_collect import OUT as ANSWERS, TEACHER_SHA
 from scripts.a100_six_direction import OUT as SIX, PUBLIC
 
-OUT = SIX/'scoped_supervision_audit_20261123'
+OUT = SIX/'scoped_supervision_audit_20261123_v3'
 STATE = OUT/'supervisor/state.json'
-REGISTRATION = PUBLIC/'scoped_supervision_audit_registration_v1.json'
+REGISTRATION = PUBLIC/'scoped_supervision_audit_registration_v3.json'
 SUCCESS = 'PASS_SCOPED_SUPERVISION_OBSERVABILITY_AUDIT_NO_GT'
 
 
@@ -166,6 +166,9 @@ def main():
     STATE.parent.mkdir(parents=True, exist_ok=True)
     atomic_json(STATE, dict(status='AWAITING_FIXED_QUERY_SCOPE_EXTRACTION', pid=os.getpid(), completed=0))
     while True:
+        if not SCOPE_STATE.is_file():
+            time.sleep(15)
+            continue
         previous = json.loads(SCOPE_STATE.read_text())
         if previous['status'].startswith('FAILED_'):
             raise RuntimeError('Resolve text-scope extraction failure first')
