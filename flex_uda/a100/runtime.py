@@ -57,12 +57,21 @@ def load_student(output, device, *, verify_weights=True, model_name='Dance-best'
     from transformers import RobertaTokenizerFast
     from scripts.multidomain_sports_smoke import config
     from scripts.multidomain_kitti_scores import config_for
-    from scripts.multidomain_runtime import CHECKPOINTS
+    from scripts.multidomain_runtime import checkpoint_spec
     from flex_tta.runtime.pf_receipts import file_sha
     begin = time.perf_counter()
     print(json.dumps(dict(event='STUDENT_LOAD_START',device=str(device))),flush=True)
-    original_checkpoint, expected = CHECKPOINTS[model_name]
+    original_checkpoint, expected = checkpoint_spec(model_name)
     checkpoint = ROOT / 'assets/official_checkpoints' / original_checkpoint.name
+    if not checkpoint.is_file():
+        # LaMOT was restored as a separate read-only NAS asset, not inside
+        # the directory holding the V2/Dance checkpoints. Resolve the same
+        # registered official weight; do not write into that NAS directory.
+        candidate = relocate(original_checkpoint)
+        if model_name == 'LaMOT-best' and not candidate.is_file():
+            paths = json.loads((ROOT/'configs/a100_paths.json').read_text())
+            candidate = Path(paths['assets']['lamot_checkpoint.pth'])
+        checkpoint = candidate
     if verify_weights and file_sha(checkpoint) != expected:
         raise ValueError('Changed official '+model_name+' checkpoint')
     prior_cwd = Path.cwd()

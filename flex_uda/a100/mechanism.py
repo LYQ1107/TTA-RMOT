@@ -11,8 +11,9 @@ from flex_uda.a100.runtime import ROOT, HISTORY, relocate
 
 OUT = ROOT / 'a100_runs/mechanism_20261121'
 OLD = ROOT / 'a100_runs/three_stage_20261120'
-PAIRS = {'C1': ('V2-best', 'Dance'), 'C4': ('Dance-best', 'SportsMOT'),
-         'C5': ('LaMOT-best', 'KITTI-V2')}
+PAIRS = {'C1': ('V2-best', 'Dance'), 'C2': ('Dance-best', 'KITTI-V2'),
+         'C3': ('V2-best', 'SportsMOT'), 'C4': ('Dance-best', 'SportsMOT'),
+         'C5': ('LaMOT-best', 'KITTI-V2'), 'C6': ('LaMOT-best', 'Dance')}
 KEYS = {'Dance': 'dance', 'SportsMOT': 'sports', 'KITTI-V2': 'kitti'}
 
 
