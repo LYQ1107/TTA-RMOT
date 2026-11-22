@@ -2677,7 +2677,62 @@ GPU0/1分别C4普通/组合，GPU2/3分别C1普通/组合；每份独立加载�
 主质量分已知后补做机制审计，主配方与正在执行的物理源码不改；不是独立盲测，也不按最高控制重新选配方。
 零边图保留相同局部教师锚点；ANCHOR_CAL随后原PAVA。置乱控制按固定hash打乱线索与候选对应，再用原样跨TrackID前缀重拟合PAVA。
 6条件24原始+42数量=66份新控制，全部封存后本组GT，0新增教师/编码器/神经头拟合。不是旧封存v8P66。
-已登记并执行，成分归因尚无新结论。
+
+PURE_COMPONENTS_C4
+三神经种子平均HOTA：
+  ANCHOR_ONLY = 67.153617
+  ANCHOR_CAL = 67.632599
+  SHUFFLED_CAL = 67.067326
+  SHUFFLED_JOINT = 67.067326
+  KD = 67.151609
+  PROTOCOL_JOINT = 67.629222
+  PROTOCOL_GRAPH = 67.151609
+  FINAL_CAL = 67.629222
+对应效应（完整结果和全部失败均见JSON）：
+  PROTOCOL_JOINT_vs_KD：+0.477613; parent95%[+0.178490, +0.807913]; parent+seed95%[+0.165546, +0.838314]
+  PROTOCOL_JOINT_vs_ANCHOR_ONLY：+0.475605; parent95%[+0.177551, +0.799776]; parent+seed95%[+0.170548, +0.833248]
+  PROTOCOL_JOINT_vs_ANCHOR_CAL：-0.003376; parent95%[-0.012119, +0.001419]; parent+seed95%[-0.013392, +0.002398]
+  PROTOCOL_JOINT_vs_SHUFFLED_CAL：+0.561896; parent95%[+0.260378, +0.887856]; parent+seed95%[+0.250933, +0.913257]
+  PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+0.561896; parent95%[+0.260378, +0.887856]; parent+seed95%[+0.250933, +0.913257]
+  PROTOCOL_JOINT_vs_FINAL_CAL：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  PROTOCOL_JOINT_vs_PROTOCOL_GRAPH：+0.477613; parent95%[+0.178490, +0.807913]; parent+seed95%[+0.165546, +0.838314]
+  PROTOCOL_GRAPH_vs_ANCHOR_ONLY：-0.002008; parent95%[-0.015873, +0.010221]; parent+seed95%[-0.017029, +0.015835]
+  ANCHOR_ONLY_vs_KD：+0.002008; parent95%[-0.010221, +0.015873]; parent+seed95%[-0.015835, +0.017029]
+  ANCHOR_CAL_vs_KD：+0.480990; parent95%[+0.181128, +0.814371]; parent+seed95%[+0.167538, +0.844387]
+  FINAL_CAL_vs_SHUFFLED_CAL：+0.561896; parent95%[+0.260378, +0.887856]; parent+seed95%[+0.250933, +0.913257]
+  COUNT_OWN_PROTOCOL_JOINT_vs_ANCHOR_CAL：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_PROTOCOL_JOINT_vs_ANCHOR_CAL：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_OWN_PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+0.155667; parent95%[+0.056851, +0.299676]; parent+seed95%[+0.054292, +0.300779]
+  COUNT_BASELINE_PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+0.076794; parent95%[+0.018041, +0.147327]; parent+seed95%[+0.013921, +0.155421]
+
+PURE_COMPONENTS_C1
+三神经种子平均HOTA：
+  ANCHOR_ONLY = 32.786992
+  ANCHOR_CAL = 33.796668
+  SHUFFLED_CAL = 33.689313
+  SHUFFLED_JOINT = 36.859434
+  KD = 32.721677
+  PROTOCOL_JOINT = 38.429592
+  PROTOCOL_GRAPH = 37.437423
+  FINAL_CAL = 33.777631
+对应效应（完整结果和全部失败均见JSON）：
+  PROTOCOL_JOINT_vs_KD：+5.707914; parent95%[+1.805506, +10.453419]; parent+seed95%[+1.694525, +10.591625]
+  PROTOCOL_JOINT_vs_ANCHOR_ONLY：+5.642600; parent95%[+1.742416, +10.391976]; parent+seed95%[+1.641722, +10.509994]
+  PROTOCOL_JOINT_vs_ANCHOR_CAL：+4.632923; parent95%[+1.448680, +8.338802]; parent+seed95%[+1.311040, +8.745540]
+  PROTOCOL_JOINT_vs_SHUFFLED_CAL：+4.740279; parent95%[+1.339962, +8.766362]; parent+seed95%[+1.193463, +9.098046]
+  PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+1.570157; parent95%[-0.226370, +4.996764]; parent+seed95%[-0.238837, +4.990254]
+  PROTOCOL_JOINT_vs_FINAL_CAL：+4.651960; parent95%[+1.478301, +8.343609]; parent+seed95%[+1.345328, +8.769437]
+  PROTOCOL_JOINT_vs_PROTOCOL_GRAPH：+0.992168; parent95%[-0.059217, +2.646655]; parent+seed95%[-0.059848, +2.645936]
+  PROTOCOL_GRAPH_vs_ANCHOR_ONLY：+4.650432; parent95%[+1.253279, +9.125682]; parent+seed95%[+1.204512, +9.271135]
+  ANCHOR_ONLY_vs_KD：+0.065314; parent95%[-0.000004, +0.171727]; parent+seed95%[-0.046318, +0.274206]
+  ANCHOR_CAL_vs_KD：+1.074991; parent95%[-0.021168, +2.408435]; parent+seed95%[-0.087737, +2.607191]
+  FINAL_CAL_vs_SHUFFLED_CAL：+0.088319; parent95%[-0.284737, +0.568094]; parent+seed95%[-0.410760, +0.605020]
+  COUNT_OWN_PROTOCOL_JOINT_vs_ANCHOR_CAL：+0.555231; parent95%[+0.050648, +1.458973]; parent+seed95%[+0.002007, +1.728298]
+  COUNT_BASELINE_PROTOCOL_JOINT_vs_ANCHOR_CAL：+0.290210; parent95%[-0.012121, +0.812655]; parent+seed95%[-0.100599, +0.865741]
+  COUNT_OWN_PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+1.862692; parent95%[-0.000774, +5.905900]; parent+seed95%[-0.000764, +5.922925]
+  COUNT_BASELINE_PROTOCOL_JOINT_vs_SHUFFLED_JOINT：+1.255715; parent95%[-0.249487, +4.231013]; parent+seed95%[-0.271283, +4.330722]
+内部成分归因检查：{"C4_beats_simple_teacher_anchor_overwrite": true, "C1_beats_simple_teacher_anchor_overwrite": true, "C1_pool_edges_beyond_raw_anchors": true, "C4_visual_correspondence_beyond_shuffled": true}
+如果成分证据不成立，不能把汇聚整体差全部算成图边或语义对应；不得事后晋级表现更高的控制。
 
 十二、仍需准确回答的科学问题与结论边界
 候选诊断标签来自全候选库的逐query逐帧IoU.5一对一匹配。canonical正/负选中数不是教师纯语义正确率，也不是各方法TrackEval重新匹配后的实际TP/FP。
@@ -2737,6 +2792,7 @@ bootstrap只重组封存预测的统计，不在每个抽样中重训适配/选�
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/protocol_calibration_scientific_review.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/preregistration_protocol_cold_v1.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/preregistration_pure_components_v1.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/pure_components_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_parent_statistics.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_statistical_reproduction.json
 公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。

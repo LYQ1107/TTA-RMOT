@@ -17,7 +17,12 @@ def main():
     result=json.loads((PUBLIC/'protocol_calibration_analysis.json').read_text())
     review=json.loads((PUBLIC/'protocol_calibration_scientific_review.json').read_text())
     assert json.loads((PUBLIC/'protocol_calibration_statistical_reproduction.json').read_text())['status'].startswith('PASS_')
-    fig,axes=plt.subplots(2,2,figsize=(12,7.5),constrained_layout=True)
+    pure=None
+    if (PUBLIC/'pure_components_analysis.json').is_file() and (PUBLIC/'pure_components_statistical_reproduction.json').is_file():
+        assert json.loads((PUBLIC/'pure_components_statistical_reproduction.json').read_text())['status'].startswith('PASS_')
+        pure=json.loads((PUBLIC/'pure_components_analysis.json').read_text())
+    fig,axes=plt.subplots(2,2,figsize=(13.5,8.5))
+    fig.subplots_adjust(left=.20,right=.98,bottom=.10,top=.80,wspace=.58,hspace=.38)
     order=('KD','BASE_PROTOCOL','FINAL_CAL','FINAL_LOCAL','FINAL_GLOBAL','PROTOCOL_JOINT')
     labels=('ordinary\nFINAL','ordinary +\nprotocol','FINAL +\nPAVA','local +\nPAVA','global +\nPAVA','contract +\nPAVA')
     contrasts=('KD','BASE_PROTOCOL','FINAL_CAL','PROTOCOL_GRAPH')
@@ -32,18 +37,24 @@ def main():
         ax.set(xticks=range(len(order)),xticklabels=labels,ylabel='Official pooled HOTA (0-100)',title=pair+' | exact shared converged head')
         ax.margins(y=.22,x=.1);ax.grid(axis='y',alpha=.2);ax.tick_params(axis='x',labelsize=8)
         ax=axes[1,column]
-        for i,name in enumerate(contrasts):
-            e=row['comparisons']['PROTOCOL_JOINT_vs_'+name];value=e['delta_HOTA'];lo,hi=e['parent_and_neural_seed_sensitivity_CI95']
+        effects=[row['comparisons']['PROTOCOL_JOINT_vs_'+name] for name in contrasts]
+        effect_labels=('vs ordinary FINAL','vs ordinary + protocol','vs PAVA only','PAVA increment')
+        if pure is not None:
+            source=pure['repeated']['PURE_COMPONENTS_'+pair]['comparisons']
+            effects=[row['comparisons']['PROTOCOL_JOINT_vs_KD'],*[source['PROTOCOL_JOINT_vs_'+name] for name in ('ANCHOR_ONLY','ANCHOR_CAL','SHUFFLED_JOINT')]]
+            effect_labels=('vs ordinary FINAL','vs raw teacher overwrite','vs raw anchors + PAVA','vs shuffled visual cues')
+        for i,e in enumerate(effects):
+            value=e['delta_HOTA'];lo,hi=e['parent_and_neural_seed_sensitivity_CI95']
             ax.plot([lo,hi],[i,i],color='#b44b87',linewidth=2);ax.scatter(value,i,color='#b44b87',s=40,zorder=3)
             ax.text(.98,i-.18,f'{value:+.3f} [{lo:+.3f}, {hi:+.3f}]',transform=ax.get_yaxis_transform(),
                 ha='right',va='bottom',fontsize=7)
         ax.axvline(0,color='#555555',linestyle='--',linewidth=1)
-        ax.set(yticks=range(len(contrasts)),yticklabels=('vs ordinary FINAL','vs ordinary + protocol','vs PAVA only','PAVA increment'),
+        ax.set(yticks=range(len(contrasts)),yticklabels=effect_labels,
             xlabel='Contract + PAVA minus comparator (HOTA)',title='Original-parent + neural-seed sensitivity')
         ax.invert_yaxis();ax.margins(x=.52,y=.2);ax.grid(axis='x',alpha=.2)
     fig.suptitle('Task-contract pooling + visual calibration | '+review['status']+
         '\nSame teacher QA and head; 3 seeds; all DEV; descriptive intervals, no blind or multiplicity-corrected validation'+
-        '\n0 new teacher/encoder forwards or neural-head fits; fresh deployment cost is a separate requirement',fontsize=10)
+        '\n0 new teacher/encoder forwards or neural-head fits in these replays; fresh end-to-end costs reported separately',fontsize=10,y=.985)
     preview=OUT/'analysis/publication_figure_previews';preview.mkdir(parents=True,exist_ok=True);(PUBLIC/'figures').mkdir(exist_ok=True)
     fig.savefig(preview/'protocol_calibration.png',dpi=160,bbox_inches='tight')
     fig.savefig(PUBLIC/'figures/protocol_calibration.pdf',bbox_inches='tight',metadata={'CreationDate':None,'ModDate':None});plt.close(fig)

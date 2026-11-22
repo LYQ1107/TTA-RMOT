@@ -17,7 +17,7 @@ from scripts.a100_visual_classical_sparse_statistics_reproduce import resolve_re
 PUBLIC=ROOT/'docs/a100_visual_classical_20261121'
 LOCAL=ROOT/'a100_runs/visual_classical_20261121/analysis/cross_study_row_sharing_20261122'
 BASES=('sparse_observation','strict_rgb','canonical_pcd','zero_colour')
-TARGETS=('semantic_colour','joint_visual','appearance_cold','direct_teacher','direct_teacher_pcd','native_factorial','predictive_topology','native_cold','stable_topology','confidence_teacher','contract_graph','weighted_classical','cue_consensus','coverage_search','optional_transfer','protocol_calibration')
+TARGETS=('semantic_colour','joint_visual','appearance_cold','direct_teacher','direct_teacher_pcd','native_factorial','predictive_topology','native_cold','stable_topology','confidence_teacher','contract_graph','weighted_classical','cue_consensus','coverage_search','optional_transfer','protocol_calibration','pure_components','protocol_cold')
 ENCODING=('parent_rows','parent_rows_zlib_base64','parent_rows_archive_owner',
     'parent_rows_archive_zlib_base64','parent_rows_archive_codec','numerator','denominator')
 
@@ -33,7 +33,7 @@ def same_types(a,b):
     return a==b
 
 
-def main(apply=False):
+def main(apply=False,receipt_name='aggregate_cross_study_row_regression.json'):
     LOCAL.mkdir(parents=True,exist_ok=True);candidate=LOCAL/'candidate';candidate.mkdir(exist_ok=True)
     for path in PUBLIC.glob('*.json'):
         destination=candidate/path.name
@@ -86,10 +86,12 @@ def main(apply=False):
             path=PUBLIC/row['file'];destination=backup/path.name
             if not destination.exists():destination.write_bytes(path.read_bytes())
             path.write_bytes((candidate/path.name).read_bytes())
-        (PUBLIC/'aggregate_cross_study_row_regression.json').write_text(json.dumps(report,indent=2)+'\n')
+        (PUBLIC/receipt_name).write_text(json.dumps(report,indent=2)+'\n')
     (LOCAL/'last_candidate.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps(report),flush=True)
 
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true');args=parser.parse_args();main(args.apply)
+    parser=argparse.ArgumentParser();parser.add_argument('--apply',action='store_true')
+    parser.add_argument('--receipt-name',default='aggregate_cross_study_row_regression.json')
+    args=parser.parse_args();main(args.apply,args.receipt_name)

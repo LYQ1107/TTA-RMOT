@@ -25,7 +25,7 @@
 - CUE144、SEARCH84、OPTIONAL150均执行和算术复算完成，但科学主门槛未通过，均不保留。SEARCH296个新真实回答改善覆盖却未改善总HOTA；OPTIONAL门控没有独立正贡献，不晋级事后STRICT控制。
 - PROTOCOL_CALIBRATION114已通过预定质量及强基线门槛：C4 67.629222对共享FINAL+.477613、CI[.165546,.838314]；C1 38.429592、+5.707914、CI[1.694525,10.591625]。普通同协议对照也通过。C4两种数量投影均小幅正，C1跨0；C4 canonical query净救回0/1/-3，未解决所有漏查。全DEV，协议与域在现有数据重合，非独立泛化验证。
 - 当前PROTOCOL_COLD_FINAL控制器2150067，四个独立新实际进程0/1/2/3，普通强Final给相同非空/清单协议，组合承担RGB/全局汇聚/PAVA真实成本；4526新QA/0cache预期，全部4封存后GT。代码在preregistration_protocol_cold_v1.json冻结；不要修改运行中的数值辅助文件。
-- 唯一阻塞监视session71095、observer2149976；旧64759已正常0结束。动态registry和状态见a100_runs/visual_classical_20261121/supervisor/active_research_jobs_20261122.json及research_goal_active_continuation.json。接续当前监视，不启动第二个。
+- 唯一阻塞监视session49896、observer2162819；旧64759已正常0结束。动态registry和状态见a100_runs/visual_classical_20261121/supervisor/active_research_jobs_20261122.json及research_goal_active_continuation.json。接续当前监视，不启动第二个。
 
 ## 长任务规则
 
@@ -47,7 +47,7 @@ silently alter an experimental protocol. Do not modify running numerical helpers
 - C1多轮改善主要含数量/基率效应；双向CountMatched有负值/跨0，不能包装普遍语义排序突破。教师Yes正匹配不是纯教师语义准确率，GT诊断率不能拿来给教师加权。
 - 全部历史强软/硬、RGB、SEM、零HSV头及失败FIELD/BMA/保护/时序/锚点均保留。CLIP_KD中的CLIP是概率裁剪，不是新视觉模型。
 - 质量回放0新前向不等于部署0成本；若保留配方变了，须配套新实际执行，不拼旧时间和新精度。固定前端生成成本未测，OS/NAS缓存未清理，共享主机负载如实披露。
-- parent_statistics是官方HOTA聚合充分计数，可用脚本NumPy重算；精确引用、float64无损字节编码不改变指标，不是上传特征/权重。只压缩新公开产物，原始可读备份本地保留；压缩后重算全部受影响效应。
+- parent_statistics是官方HOTA聚合充分计数，可用脚本NumPy重算；精确引用、float64无损字节编码不改变指标，不是上传特征/权重。新统计payload只压缩新公开产物，原始可读备份本地保留；压缩后重算全部受影响效应。为用户<100MB约束，可仅去掉旧JSON字符串外排版空白，保留全部token/结构/数值/类型并留原文；这不改变统计编码或运行输入。
 - 最小方法卡仍PROVISIONAL、candidate_finally_accepted=false。按预登记科学门槛核验，不能自动让队列PASS关闭Goal。
 
 此前完整执行备忘录归档本地analysis/AGENTS_full_before_continuation_index_20261122.md；既有已发布历史仍在Git8bc165f。研究结果索引保留于research_log.md和各阶段TXT/JSON。
@@ -65,3 +65,5 @@ silently alter an experimental protocol. Do not modify running numerical helpers
 2026-11-22 PROTOCOL_CALIBRATION114启动，控制器2144506，CPU两槽，0新教师/编码器/头拟合。双方统一强加权收敛FINAL，不以GT选检查点；PRESUPPOSED原KD、CHECKLIST原全局汇聚，再原PAVA。普通KD也有同协议信息的非空Bernoulli条件化基线。旧均值组件结果已知，属于开发后简化非独立盲测。70视频稠密/秩一求解、旧CAL/全局重放及Finalmask校验全部0差。门槛含两域胜强Final与协议对照、模块条件贡献。唯一旧93426已结束，须记录新监视；不启动第二个。Goal ACTIVE。
 
 2026-11-22 协议/视觉校准114已通过预先固定质量门槛：C4 67.629222 vs强FINAL+.477613、CI[.165546,.838314]；C1 38.429592、+5.707914、CI[1.694525,10.591625]。C4PAVA、C1场景汇聚各有条件独立贡献；C1排序跨0、C4query净救回0/1/-3仍是限制。全DEV非盲测。新PROTOCOL_COLD_FINAL控制器2150067，四份独立0/1/2/3冷流，普通Final也给非空/清单协议，组合承担真实RGB和PAVA。旧64759正常0结束；新唯一监视待记录。尚未验收成本/一致性，Goal仍ACTIVE。仅5份从未执行且已失败门槛的旧冷流原型移出tip，逐字保留8d6faa1和/var/tmp归档；真正实测源码未移除。
+
+2026-11-22 PURE_COMPONENTS66已完成，90HOTA/120效应复算PASS、原主配方/CAL0差、所有CountSelf0。纯图边C1+4.632923 CI[1.311040,8.745540]；真cue对置乱C4+.561896 CI[.250933,.913257]；对简单老师回填两域都三seed正/CI正。不要再加新方法或换更高控制，现有质量/模块归因门槛已满足，等待PROTOCOL_COLD_FINAL2150067四份实际运行与一致性/成本，以及<100MB发布。唯一监视71095/2149976继续。Goal ACTIVE；C1排序和视觉单独效应仍不稳定、所有数据DEV且协议/域重合。
