@@ -14,6 +14,10 @@
 
 ## 当前工作状态（2026-11-22）
 
+- 最新I1进度：18个GPU条件全完成，1776份policy-prefix收据全过KL.005，1356实际普通fit、12次同64宽继续优化（实际没有扩宽）。12个真实末prefix保存头CPU独立核验PASS，KL对GPU最大差2.71635e-9，见observation_policy_fit_receipt_audit.json及独立脚本。当前生成CountMatched，828全封存前禁止本项GT；text-only解析已进入独立模型加载，不能重复启动。以唯一observer20149的后续状态为准。
+- 11月23日新增：同冻结2BQwen的text-only查询结构准备2352422已登记，等待I1全部18个GPU条件释放后用一个空闲0..3卡。948唯一任务文本/两个固定提示1896次生成；不看图片/QA/预测/GT。scripts/a100_query_scope_teacher.py及query_scope/prompt源码已冻结，原子因素尚未学得、共识不是真值，普通与后续结构化KD必须拿到同一结构并只读当前/过去查询。不要为等待而重复启动。
+- 11月23日图片可观测性诊断2354561已完成：74视频/2166给定ID/6400观察/4588图片，148个来源均值重构误差0。逐锚点外观保留本地，收据anchor_observability_receipt.json；同ID颜色变化不能当真实串人标签，三锚点不能测全时序。新普通对照须获得相同逐锚点输入。新增scoped-supervision只读审计2356540等待上述固定文本结果，随后148setting-video的DESIGN自己QA做完全同图片/非查询上下文的属性对比与子句约束；没有新伪原子标签、没有新神经头或HOTA贡献声明。
+- 最新理论与三候选验收说明docs/TTA_RMOT_三个候选创新的任务建模与验收_20261123.txt。用户要求借鉴经典思想为任务建模和学习提供理论支撑，不是给判断套现成校准算法；当前三个候选仍未统一验收。唯一观察20149/PID2316456与动态registry不变，text/监督审计都已加入，不要新建第二观察器。
 - 11月23日最新调度：2320838已完成71153真实Qwen输入并集采集；四策略各55019逻辑预算的实际回答已封存，收据observation_design_collection_receipt.json。I1质量现在由2337463接管（scripts/a100_observation_policy_adopt.py，执行私有同字节副本），保留原三条真实训练进程2333162/2333163/2333164，继续0..3的18条件/828屏障。旧2330579只替换控制器；一个被condition.lock阻塞的重复C1启动器2336033在进入优化前清理；所有真正模型/计时0重启。早启动器2333029仍只等待自己的3条件，后续以唯一observer20149/PID2316456及registry为准。禁止再启第二观察器或重复同条件。
 - 普通容量收据元数据已独立核验：helper最终KL/width是实际值，但与旧fit字典合并时CE/entropy/architecture文字留旧；这些旧字段没用于收敛gate或HOTA。scripts/a100_capacity_loss_receipt_audit.py对5个实际checkpointCPU前向重算，全部仍过KL.005，CPU/GPU最大误差1.08046e-9；补充capacity_loss_receipt_audit.json，旧日志/权重/预测/GT均不重写。当前I1的fit_capacity.py及所有numericalhelpers源码继续冻结，不能为修元数据改掉正在执行的recipe；新I1里如触发扩宽，应按最终KL/width解释，继承CE不算新最终CE，后续可补对账。
 - 截至2026-11-23：容量补充162已全部官评，180统计/36效应压缩前后独立复算PASS；444个普通前缀全过原KL.005。参照C2/C5比充分拟合同回退普通头+1.517156/+1.282209，双向CountMatched均正但KITTI仅4视频无总体CI；仍落后最强RAW_RGB/RAW_MEAN，Goal未完成。C2更充分拟合反而HOTA下降，不泛化成所有蒸馏坏。参照C2seed0自己也有一个参照头前缀未达门槛，负分解效应不能独立排除优化影响。
