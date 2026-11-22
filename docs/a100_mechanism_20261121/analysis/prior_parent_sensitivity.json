@@ -1,0 +1,111 @@
+{
+  "status": "EXPLORATORY_PRIOR_RESULTS_PARENT_GROUP_SENSITIVITY",
+  "source": "completed20261120 stage2; no GPU inference, no new training, no metric changes",
+  "reason": "Sports45 clips belong to13 original videos; retain original45-clip uncertainty and add more conservative parent grouping",
+  "points": {
+    "MINUS": 48.847077403355854,
+    "MINUS_RECALC_ONLY": 50.78743810131694,
+    "SLOW_REPLAY_MATCHED": 52.151671588757345,
+    "FROZEN_RANK__RECALC_COUNT": 47.979302338465075,
+    "LORA_RANK__RECALC_COUNT": 47.36977085194679,
+    "FROZEN_RANK__LORA_COUNT": 49.44935257163412,
+    "LORA_RANK__LORA_COUNT": 49.36517786743912
+  },
+  "comparisons": {
+    "MINUS_RECALC_ONLY_vs_MINUS": {
+      "delta_HOTA": 1.9403606979610828,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -1.3644615899103285,
+          5.60005517740569
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.7938091376096507,
+          4.587253147673443
+        ]
+      }
+    },
+    "SLOW_REPLAY_MATCHED_vs_MINUS_RECALC_ONLY": {
+      "delta_HOTA": 1.3642334874404085,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -3.7544541381315475,
+          5.488942093180939
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -2.3067266110016966,
+          4.8633422823138055
+        ]
+      }
+    },
+    "SLOW_REPLAY_MATCHED_vs_MINUS": {
+      "delta_HOTA": 3.3045941854014913,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -1.1925311334110094,
+          7.451870628933262
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          0.20100359635699364,
+          6.697036180814937
+        ]
+      }
+    },
+    "LORA_RANK__RECALC_COUNT_vs_FROZEN_RANK__RECALC_COUNT": {
+      "delta_HOTA": -0.6095314865182857,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -1.1973960893523647,
+          -0.11024979057161781
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -1.0548714884674282,
+          -0.24961040555103092
+        ]
+      }
+    },
+    "LORA_RANK__LORA_COUNT_vs_FROZEN_RANK__LORA_COUNT": {
+      "delta_HOTA": -0.08417470419500006,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.2390100453904985,
+          0.1026744423372152
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.2137661810215091,
+          0.04487172989751146
+        ]
+      }
+    }
+  }
+}

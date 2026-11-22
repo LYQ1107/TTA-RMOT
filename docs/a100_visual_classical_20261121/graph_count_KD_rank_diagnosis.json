@@ -1,0 +1,55 @@
+{
+  "status": "EXISTING_SEALED_QUANTITY_CONTROL_DIAGNOSIS",
+  "pairs": {
+    "C4": {
+      "mean_HOTA_KD": 66.16970756349771,
+      "mean_HOTA_KD_rank_graph_count": 66.36947145563785,
+      "graph_quantity_with_KD_ranking_vs_KD": {
+        "delta_HOTA": 0.1997638921401498,
+        "per_neural_seed_delta": [
+          -0.01156059220333816,
+          0.2363287018785769,
+          0.3745235667452107
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.32619517545219157,
+          0.8530523409742655
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.36509907167465644,
+          0.8806554939760682
+        ]
+      }
+    },
+    "C1": {
+      "mean_HOTA_KD": 32.199208253359814,
+      "mean_HOTA_KD_rank_graph_count": 33.95331364265463,
+      "graph_quantity_with_KD_ranking_vs_KD": {
+        "delta_HOTA": 1.7541053892948095,
+        "per_neural_seed_delta": [
+          1.6773620688955617,
+          2.077509637876531,
+          1.5074444611123354
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.022538164991925038,
+          4.197687132455755
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.10691211814813695,
+          4.237535561409727
+        ]
+      }
+    }
+  },
+  "no_new_predictions_or_GPU_or_teacher": true,
+  "posthoc_description_not_preregistered_new_method": true,
+  "no_automatic_selection_or_parameter_change": true,
+  "goal_status": "ACTIVE"
+}

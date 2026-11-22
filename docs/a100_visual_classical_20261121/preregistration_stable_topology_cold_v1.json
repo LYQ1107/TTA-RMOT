@@ -1,0 +1,111 @@
+{
+  "version": "ONE_SE_AND_CONFIDENCE_WEIGHTED_ORDINARY_FOUR_FRESH_ACTUAL_V1_CONDITIONAL",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "status_at_registration": "PREPARED_NOT_LAUNCHED",
+  "registration": "BeforeinspectionofanynewONE_SEorweightedKDGTmetrics. OriginalstrictV1failedC4andneverlauncheditsconditionalphysicalfollowup.",
+  "quality_plans": [
+    "preregistration_stable_topology_v2.json",
+    "preregistration_confidence_teacher_v1.json",
+    "preregistration_confidence_stable_comparison_addendum.json"
+  ],
+  "promotion": [
+    "Allstable144/weighted54/native4outputsandNumPyreproductionPASS",
+    "ONE_SE-nativeunweightedKDmeanC4/C1positiveall3seedsandparent+seedCIabove0",
+    "ONE_SEbeatslocalJC1CIabove0andcompleteJC4CIabove0;reversecomparisonsmustnotbeCIstrictlynegative",
+    "ONE_SEbeatsweightedordinarysoftmeanall3seedsandparent+seedCIabove0bothdomains",
+    "ONE_SEmeanpointaboveall5weightedsoft/hardsnapshotsbothdomains;reportallintervalsincludingcrosszero",
+    "PrimaryremainsONE_SE;neverpromoteTWO_SE/MEDIAN/DELETE_ONEbecausebestGT"
+  ],
+  "teacher_fraction": 0.1,
+  "query_graph_scope": "extended",
+  "head_query_scope": "pcd",
+  "head_source_logit": "zero",
+  "graph_metric": "combined",
+  "graph_prior": "constant",
+  "set_decoder": "original",
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C4_pcd768_direct_confidence_kd_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_confidence_kd_fast.py",
+      "worker_sha256": "2a8baf82aa3a1941c7ef38c8ae4c5f8203ce54e789dc7a8b21c1cca0290811d4",
+      "reuse_previous_fresh_KD": false
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C4_pcd768_direct_stable_one_se_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_stable_topology.py",
+      "worker_sha256": "544a722109ee7022f843eaf6f4d253c065ec7b44f29264cf8d564ea886f2fee0",
+      "reuse_previous_fresh_KD": false
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C1_pcd768_direct_confidence_kd_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_confidence_kd_fast.py",
+      "worker_sha256": "2a8baf82aa3a1941c7ef38c8ae4c5f8203ce54e789dc7a8b21c1cca0290811d4",
+      "reuse_previous_fresh_KD": false
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C1_pcd768_direct_stable_one_se_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_stable_topology.py",
+      "worker_sha256": "544a722109ee7022f843eaf6f4d253c065ec7b44f29264cf8d564ea886f2fee0",
+      "reuse_previous_fresh_KD": false
+    }
+  },
+  "defer_official_evaluation": true,
+  "expected_new_teacher_calls": 4526,
+  "expected_cache_hits": 0,
+  "all_four_are_new_physical_processes": true,
+  "source": "Frozenofficialsourcecheckpoint+Qwen,threeobservations/original4context,providedofficialboxes/IDs acceptedbyhuman. Bothalgorithmsusetargetimages/query/teacheronly,notmanualGT.",
+  "baseline": "Nativeconfidence-weightedordinaryKDsoft400/finalmean;sourcez0,normalizedw=1+3abs(2rawp-1). SkipunusedRGBstatistics,fullnewsource/teacherforward/privateSQLite.",
+  "candidate": "Unweightednativedirectsoftmean+fixedONE_SEteacherpredictivegraph+fixedPAVA,RGBrealcost. Sameneuralarchitecture butheadloss/weightsintentionallydifferfromweightedKD;do notcallthispairasame-headablation.",
+  "attribution": "Same-headcausalcontrolsremaininseparateunweightedqualityresearch. Thisactualgrouptestscompletecandidateversusconfidencereweightedordinarycompetitor.",
+  "expected_parity": "BothactualPCD/prior/tracks/anchors/orderedquestions/teacherprobabilitiesequal;KD_RGBzero/J_RGBrealdisclosed. Eachfinalscore/maskmustmatchitsownweightedKDorONE_SEseed0qualityreference. FinalNNweightdifferenceexpected,normalizationmustmatch.",
+  "cost": "EachfreshPopen-to-exitincludingimports,allloads,sourceforward,realteacher,headfits,manualRGB,graph/PAVA/output/audits. FournewpredictionssealbeforeanygroupGT. Do notassignoldunweightedtimeorqualitytoweightedbaseline.",
+  "GPU_scope": "GPU0weightedC4KD,1ONE_SEC4,2weightedC1KD,3ONE_SEC1. OnlyafterallweightedqualityGPUworkersandpreviousnativeactualfinished. No4..9.",
+  "host_limits": "SharedNAS/OS/cacheunflushed;concurrentprocessesandotherhostload,nostatisticalalgorithmicspeedup/all-budgetParetoproof.",
+  "all_development_data": true,
+  "independent_blind_validation": false,
+  "not_new_independent_neural_seeds": true,
+  "code_sha256": {
+    "runtime": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "calibration": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "graph": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "selector": "b2095915fe3a6b11fef70406068ed0378635fa6eb22775fe444611766a404aaa",
+    "strict_graph_core": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+    "base_stream": "4ca314815baa3472e0da04e929a639ee9406344cbee81f1e9fb7ed68e9d236cf",
+    "fit": "768521e8dd7701897dcba502ed21a11b824edc67fb5328b8377e9c7cbdc4a280",
+    "weighted_fit": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87"
+  },
+  "no_automatic_goal_close": true
+}

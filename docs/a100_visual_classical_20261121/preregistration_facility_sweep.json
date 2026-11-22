@@ -1,0 +1,29 @@
+{
+  "protocol": "visual_facility_sweep_v1",
+  "primary": "FACILITY__COHORT",
+  "motivation": "The existing119/466 coverage gap calls for looking at distinct visual groups, not repeatedly choosing high source scores.",
+  "acquisition": "Greedy maximization of sum_i sqrt(track_length_i) max_selected exp(-distance_i_selected / image-only bandwidth)",
+  "geometry": "the same query-specific normalized PCD + real part-colour descriptors as colour-cohort inference",
+  "bandwidth": "median third-neighbour squared distance among eligible tracks, per query/video; no labels or teacher answers",
+  "query_allocation": "exact same fixed per-query quotas and eligible length>=3 as existing COV/UNIFORM",
+  "teacher": "same frozen Qwen CROP, same anchors and prompts; new real GPU observations, no GT in selection",
+  "budgets": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "seed": 0,
+  "controls": [
+    "same-feature actual KD under FACILITY",
+    "same classical learner under COV and UNIFORM",
+    "no graph / PCD-only / colour-only / stronger unary",
+    "fixed output-count comparisons"
+  ],
+  "no_target_GT_parameter_sweep": true,
+  "no_source_prior_ranking_for_selection": true,
+  "scope": "video-stream teacher causal, current video transductive; all data development",
+  "caveats": [
+    "facility coverage is a surrogate, not guaranteed target recall",
+    "short but true targets may receive lower weight",
+    "higher coverage must still pass actual RMOT evaluation"
+  ]
+}

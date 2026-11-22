@@ -1,0 +1,13 @@
+{
+  "reason": "C1 descriptions are mutually exclusive; independent per-query CountMatched can illegally duplicate detections",
+  "target": "C1 seeds0,17,42",
+  "teacher_questions_unchanged": true,
+  "counts_from_methods_only": true,
+  "GT_counts_used": false,
+  "projection": "joint Hungarian assignment to fixed query-count slots, one query per detection, identical rule across arms",
+  "baselines": "all hard/soft 400/4000/final plus module controls; reverse counts include400 early heads",
+  "old_independent_projection_retained_as_separate_diagnostic": true,
+  "no_metric_or_method_predictions_rewritten": true,
+  "all_development_data": true,
+  "CountSelf_original_hash_equivalence_reported": true
+}

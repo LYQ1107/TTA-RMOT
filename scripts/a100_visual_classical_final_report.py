@@ -1,0 +1,287 @@
+"""Human-readable phase report from the published sealed evidence."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+DIRECTORY = ROOT / 'docs/a100_visual_classical_20261121'
+
+
+def read(name):
+    return json.loads((DIRECTORY / (name + '.json')).read_text())
+
+
+def effect(record):
+    if 'mean_delta_HOTA' in record:
+        point = record['mean_delta_HOTA']
+        interval = record['fixed_seed_parent_CI95']
+        sensitivity = record['parent_and_seed_resampling_sensitivity_CI95']
+        return (f'{point:+.6f} HOTA；原视频区间[{interval[0]:+.6f}, {interval[1]:+.6f}]；'
+                f'原视频+种子敏感性区间[{sensitivity[0]:+.6f}, {sensitivity[1]:+.6f}]')
+    interval = record['original_parent_video']['CI95']
+    return (f'{record["delta_HOTA"]:+.6f} HOTA；'
+            f'原视频区间[{interval[0]:+.6f}, {interval[1]:+.6f}]')
+
+
+def main():
+    full = read('fresh_whole_C4')
+    key = read('fresh_whole_C4_sparse')
+    replay = read('fresh_sparse_fixedQA')
+    independent = read('independent_single_cold_C4')
+    physical = read('physical_full_vs_key_C4')
+    costs = read('fresh_cold_C4_cost_receipts')['runs']
+    raw = read('three_seed_task_valid_results')
+    bounded = read('three_seed_clipped_results')
+    recheck = read('fresh_cold_C4_statistical_reproduction')
+    assert independent['status'].startswith('PASS') and recheck['status'].startswith('PASS')
+    lines = []
+
+    def add(value=''):
+        lines.append(value.strip('\n'))
+
+    add('''范围与状态修正（2026-11-21）
+用户已撤回此前对整个科研目标的结项；本TXT仅记录上一批封存的阶段证据。
+后续持续研究的完成情况以当前Goal和新增报告为准，不能因重新生成本文而结项。
+用户已确认沿用官方固定候选框和Track ID，研究跨域指代适配模块。
+官方前端监督来源单独披露，不将上游检测/跟踪能力计入我方贡献。
+新增反馈范围核验见《TTA_RMOT_普通蒸馏高分来源与公平性核验_20261121.txt》；
+其中C4直接教师44.570、当前视频KD68.341、前缀KD69.050，无缓存官评完全复现。
+新观察机制在历史逐观察特征上使用重新拟合的同特征KD作对照，不与新鲜69.050直接归因。''')
+
+    add('''TTA-RMOT：无标签跨域方案——完整验证、模块贡献与结论边界
+研究批次：2026-11-21；项目：/data3/liuyeqiang/FlexHook-TTA
+本报告对应预测、问答、实际成本及隔离官评全部封存后的结果。
+
+一、我们要解决什么，最终做出了什么
+
+目标是跨域RMOT：给定目标域视频和语言查询，输出被指代对象的轨迹。
+适配只使用目标域图片、任务查询、已提供的冻结候选框/轨迹，以及冻结教师反馈。
+我们没有用目标域GT训练或调适配阈值，没有改成有监督目标域训练。
+GT只在输出封存之后进入独立官评/错误诊断；适配进程GT打开次数为0。
+方案曾在这两套开发数据上迭代，不能把“适配不读GT”写成“从未看过开发评估结果”。
+
+最终保留的是：充分训练的教师蒸馏小头 + 教师锚定的视觉相似性图推断，
+并以三次关键观察减少不必要的学生神经前向。
+源学生主干、Qwen教师都冻结；小头确实用教师软/硬伪标签训练。
+这是在认真做强普通蒸馏之后，检验经典算法能否补充它，而不是宣布所有权重学习无效。
+当前完整实测支持在C4上存在小幅额外收益；强概率裁剪/均值基线缩小了收益与确定性。
+没有证据支持“在所有域、所有预算下全面胜过任何蒸馏方法”。
+
+二、与“人类视觉本能和经典算法”的关系
+
+1. 先扫视，再细看：COVER按每条查询分配预算，并轮流覆盖源分数的高/中/低层，
+   配合外观距离选择尚未充分代表的候选，缓解只盯着高分轨迹的盲区。
+   这是一条固定探索规则。它与所有主要KD/图对照共享，不把其贡献计入图的增量。
+   当前没有证明COVER在所有条件下稳定优于UNIFORM，主动选题最优不是本轮结论。
+2. 看清以后作类比：当前查询若涉及静态衣着，依据冻结PCD和解析后的RGB属性，
+   在当前视频候选之间建立对称、自适应尺度、度归一化的3近邻图。
+   问过教师的节点提供锚点，未问节点保留较弱的蒸馏先验，用经典二次能量求解。
+   这传播的是“是否符合这句描述”，不把外观相似的不同人合并成同一Track ID。
+3. 少算没用的位置：每条已提供轨迹保留3次均匀观察，同时保留原来的4观察历史上下文。
+   原下游主要使用这些观察，新的执行路径避免计算大量不会被消费的decoder位置。
+   这是推理调度/工程贡献，不是LoRA学到了新特征，也不是教师额外给了标签。
+
+最终图能量可写为：
+  sum_i a_i (z_i-z_KD_i)^2 + sum_i b_i (z_i-z_T_i)^2
+  + 1/2 sum_ij W_ij (z_i-z_j)^2。
+未问节点a_i=0.1；已问节点a_i=0，避免把拟合教师的KD当作第二个独立教师证据。
+教师锚点b_i=1+3|2p_i-1|，教师logit和KD logit均有固定边界。
+这组精度常数是固定机制，并非经GT校准的真实概率可靠性估计。
+不适用衣着相似性的动作/方位查询回退到共同KD，不强行传播。
+
+三、实验合同：哪些输入相同，哪些信息不能偷看
+
+C4：Dance-best → SportsMOT，45剪辑、466查询，属于13个原视频。
+C1：V2-best → Dance，25视频；有互斥约束时解码和CountMatched都保留该约束。
+两套数据都是开发数据；用户明确当前没有独立未参与开发的划分。
+每个C4方法使用3508条自己的教师反馈，C1为3334条。
+比较时使用相同候选框/ID、相同神经/RGB输入、相同问题与回答、相同蒸馏头。
+关闭图仍保留本地教师锚点，避免把“没有教师指导”冒充图消融。
+严格按视频顺序预测：只用过去和当前图像/回答，不读未来视频的标签分片或整批训练状态。
+当前视频内部允许转导，三次均匀观察会看到该视频后面的帧，不宣称逐帧在线。
+所有GT指标在完整预测封存后计算；CountMatched数量来自方法自身，不用GT数量。
+所有新运行产物写入本地a100_runs；NAS历史结果和大资产只读。
+
+四、普通教师基线究竟有多强
+
+除了直接把教师答案作为输出，还实际训练硬/软残差MLP：1080→64→1，GELU。
+输入为同样的768维冻结PCD与312维解析RGB，不额外只给主方法高级特征。
+归一化仅由过去与当前无标签特征更新；不使用全目标未来统计。
+优化器AdamW，lr=0.001、weight_decay=0.001、batch=512；每视频重新拟合当前可用前缀。
+保留400步、4000步与最终检查点；至少4000步，最多16000步，按教师拟合条件停止。
+另有普通的400步/最终预测均值，不能只拿没收敛的弱基线比较。
+RAW表示原始教师软概率。CLIP表示概率裁剪至[0.02,0.98]，不是新增CLIP视觉编码器，
+也不是CLIP时序教师视角。本轮新鲜流采用冻结Qwen的CROP接口。
+旧v8P中的DS、多视角路由、旧47/48分结果是不同历史条件，不能与本轮增量相加。
+''')
+
+    add('五、相同证据下的三种子逐视频流结果\n')
+    for family, records in [('原始软概率', raw), ('双方均裁剪概率', bounded)]:
+        for pair in ('C4', 'C1'):
+            row = records[pair]
+            add(f'{family} / {pair}：普通SOFT_KD={row["mean_HOTA"]["SOFT_KD"]:.6f}，'
+                f'COHORT={row["mean_HOTA"]["COHORT"]:.6f}。')
+            add('  图对普通蒸馏：' + effect(row['comparisons']['FULL_vs_SOFT_KD']))
+            add('  图对同头NO_GRAPH：' + effect(row['comparisons']['FULL_vs_NO_GRAPH']))
+    add('''
+种子为0/17/42，包含各自选题与训练初始化重复，不是三份独立目标域数据。
+C4主区间按13原视频聚类，不能把同一原视频的45剪辑当45份独立数据。
+C4原始软概率的平均增量约0.756，原视频和种子敏感性区间均为正。
+双方概率裁剪后平均增量约0.528，但原视频+种子敏感性区间跨0；证据更弱。
+C1平均分提升，但强基线、正确互斥数量控制和种子不确定性下不能宣布稳定排序收益。
+所有区间为开发数据上的描述性区间，没有修正整个研发过程中多次尝试带来的选择性。
+''')
+
+    add('六、完整C4新鲜物理执行：22种输出全部保留\n')
+    add('方法                           全帧特征HOTA     关键观察HOTA')
+    for method, score in full['HOTA'].items():
+        add(f'{method:<30} {score:>12.6f} {key["HOTA"][method]:>16.6f}')
+    for label, record in [('全帧', full), ('关键观察', key)]:
+        add('\n' + label + '条件内的主要同证据差值：')
+        for name in ('RAW_COHORT_vs_RAW_KD', 'RAW_COHORT_vs_RAW_NO_GRAPH',
+                     'CLIP_COHORT_vs_CLIP_KD', 'CLIP_COHORT_vs_CLIP_MEAN',
+                     'CLIP_MEAN_COHORT_vs_CLIP_MEAN'):
+            add('  ' + name + '：' + effect(record['comparisons'][name]))
+    add('''
+普通蒸馏本身已经取得约68～69 HOTA。新图的贡献必须以上述同条件差值表述，
+不能把从旧v8P约48分到本轮约69分的全部涨幅都算成新经典算法的独立贡献。
+CLIP_STRONG_PRIOR在全帧条件略高于弱先验图；先验权重旋钮不是已独立证实的创新。
+均值基线及其加图结果均保留，不按每个域的GT挑出一个最好变体充当统一方法。
+''')
+
+    add('七、数量与排序归因：必须双向看CountMatched\n')
+    for label, stem in [('全帧', 'fresh_whole_C4_countmatched'),
+                        ('关键观察', 'fresh_whole_C4_sparse_countmatched')]:
+        data = read(stem)
+        add(label + '：')
+        for prefix in ('RAW', 'CLIP'):
+            for suffix in ('FULL', 'BASELINE'):
+                name = f'{prefix}_COHORT_vs_{prefix}_KD_AT_{suffix}_COUNTS'
+                add('  ' + name + '：' + effect(data['comparisons'][name]))
+        add('  各CountSelf逐查询预测字节变化：' + str(data['count_self_changed_query_files']))
+    add('''
+全帧C4在固定KD数量时仍有较小的正排序效应；关键观察版的反向固定数量差接近0。
+以图的数量固定时收益较大，以强KD/均值的数量固定时可能消失，不能省略后者。
+HOTA不是可加指标，不把两个CountMatched差值相减/相加冒充精确贡献分解。
+C1必须采用保留互斥关系的联合投影；旧逐查询强行top-k不能用于证明其纯排序能力。
+''')
+
+    add('八、图的视觉结构究竟有没有作用\n')
+    add('''三种子同问答/同头控制包括真实视觉图、打乱节点对应以及同总边精度的完全图。
+C4概率裁剪条件，在相同FULL数量下，真实图比完全图高约0.709 HOTA，
+原视频+种子敏感性区间约[0.389,1.200]；支持视觉邻接结构并非随便连边都一样。
+打乱对应损害更大，但该约5分差不能当作战胜充分训练KD的收益。
+C1真实图没有稳定超过简单完全图，因此不能说视觉几何的跨域贡献已在两域都证实。
+这些几何控制只改变连接结构，不再训练头、不再新增教师问题。
+''')
+
+    add('九、关键观察是否破坏输入：固定问答干预\n')
+    add(f'45视频PCD最大差={replay["actual_full_vs_sparse_PCD_max_delta"]}；'
+        f'RGB最大差={replay["actual_full_vs_sparse_RGB_max_delta"]}。')
+    add('复用相同参考特征及相同3508个真实回答，只改源先验/门控的抽样与插值：')
+    for method in ('RAW_KD', 'RAW_COHORT', 'CLIP_KD', 'CLIP_COHORT'):
+        add('  ' + method + '：' + effect(replay['comparisons'][method + '_sparse_source_vs_full_FIXED_QA']))
+    add('''这些结果没有显示明确精度损失，但区间跨0不等于已完成严格非劣/等效检验。
+实际新鲜关键观察流的选题也可能变化，故其全帧差值不是只有一个采样因素。
+固定问答回放只用于质量归因，不能把复用回答的耗时称作真实冷启动。
+''')
+
+    add('十、真实成本：先给分相位账，再给两个独立进程的总账\n')
+    add('相位（秒）                                      全帧          关键观察')
+    for phase in ('student_load_and_integrity_check', 'teacher_load_and_initial_integrity_check',
+                  'real_RGB_sparse_inputs_and_image_only_acquisition',
+                  'real_teacher_service_including_image_IO', 'teacher_final_frozen_weight_audit'):
+        add(f'{phase:<52} {costs["full"]["phase_totals_seconds"][phase]:>10.3f} '
+            f'{costs["key"]["phase_totals_seconds"][phase]:>14.3f}')
+    dense_seconds = costs['full']['phase_totals_seconds']['real_all_frame_student_forward_and_initial_head']
+    key_seconds = costs['key']['phase_totals_seconds']['real_sparse_frame_student_forward_and_initial_head']
+    add(f'学生真实前向+初始分数：{dense_seconds:.3f} → {key_seconds:.3f}秒；'
+        f'约{dense_seconds / key_seconds:.3f}倍，减少{100 * (1-key_seconds/dense_seconds):.3f}%。')
+    add('decoder位置26970→2324；候选×查询位置2968201→293129。')
+    add('关键观察需7419张不同历史上下文图像；2324不是全部backbone前向图像数。')
+    for label in ('full', 'key'):
+        row = costs[label]
+        add(f'{label}：3508新问题，{row["teacher"]["batches"]}个真实批次，缓存命中0；'
+            f'Qwen后端纯前向{row["teacher"]["forward_seconds"]:.3f}秒。')
+        add(f'  实际22方法进程总账{row["external_process"]["wall_seconds"]:.3f}秒，不能当作单方法时间。')
+        for method in ('CLIP_KD', 'CLIP_COHORT'):
+            add(f'  共享前缀+自身分支分摊 {method}：'
+                f'{row["cost_by_method"][method]["shared_common_plus_own_branch_seconds"]:.3f}秒。')
+    add('\n独立单方法实测：同一物理GPU3，固定顺序KD在前、图在后，各自重新加载两模型、私有新SQLite。')
+    for method, record in independent['methods'].items():
+        add(f'  {method}：HOTA={record["HOTA"]:.6f}，外部Popen-to-exit='
+            f'{record["actual_worker_process_seconds"]:.6f}秒'
+            f'（{record["actual_worker_process_seconds"]/60:.3f}分钟），'
+            f'{record["teacher"]["new_calls"]}新问题，{record["teacher"]["cache_hits"]}缓存。')
+    add('  独立运行精度差：' + effect(independent['comparison']))
+    for field in ('source_features_bitwise_equal', 'source_priors_bitwise_equal', 'same_requested_questions',
+                  'maximum_raw_teacher_probability_difference'):
+        add('  ' + field + '：' + str(independent[field]))
+    add('''
+每视频拟合一个CLIP类型的头，共45次前缀拟合，不是整数据集只训练一次头。
+各自工作进程外部时间包括加载、前向、教师、拟合、写出及退出；隔离GT官评不计入部署成本。
+两个进程顺序未反向平衡，OS缓存保留，主机/NAS共享，不能据细小时间差宣称图本身更快。
+全帧/关键观察多臂运行采用同型号不同GPU，时长也受共享资源影响。
+这些成本以前置候选框/物理ID已经提供为前提，没有重测上游检测/跟踪生成。
+不宣称从原视频检测起的完整系统总成本，也不宣称全预算帕累托最优或扩展定律。
+学生和教师冷启动仍可能超过600秒，10分钟冷启动总预算问题没有被抹掉。
+''')
+
+    add('十一、失败过哪些方向，为什么没有继续堆模块\n')
+    add('''1. 首条完整视频真实冷启动曾出现图弱于软KD的负结果，已保留；全C4不能抹掉个例失败。
+2. HMM/时序平滑没有稳定超过强轨迹级KD，且C1轨迹混杂会传播错误身份，未列为核心。
+3. 动态FIELD反馈选题在C4低于静态控制约1.848 HOTA；全局不确定性会饿死部分查询。
+   不能把“会反馈”本身写成有效创新，也不能因原有覆盖盲区就保证epsilon探索一定涨分。
+4. 自适应图证据BMA/协议保护共132输出的对照完整封存后官评，C4弱于固定视觉图约0.37～0.39。
+   C1未超过简单等权方案，不保留该复杂模块为最终核心。
+5. COVER、特定弱先验权重、颜色细分、额外专家、动作时序和多视角路由没有全部得到
+   独立稳定正贡献；不能把每个听起来合理的视觉本能都算作已证实创新。
+6. C1图可能通过数量校准改善总分，固定KD数量的排序诊断可为负；不改名成新语义学习。
+7. 旧LoRA独立增益区间跨0、600秒冷启动零教师反馈的结论保持，不因本轮结果重新包装。
+''')
+
+    add('十二、现在可以下什么结论，不能下什么结论\n')
+    add('''可以：在不使用目标域人工标签进行适配的跨域RMOT设置中，真实可执行的普通蒸馏
+已经很强；同证据、同头的经典视觉图仍能在C4给出小幅额外改善，部分贡献对数量敏感。
+真实视觉结构在C4的受控连接对照中有作用；关键观察大幅减少实际前向，未观测到明确质量损失。
+这使“人类视觉启发+经典算法”成为有代码、有反例、有贡献边界的可执行方案。
+
+不能：说所有涨幅来自新模块；说LoRA/所有权重更新普遍无效；说图在所有域稳定获益；
+说强蒸馏/均值基线已被显著全面击败；说主动策略普遍最省时间；说600秒冷启动已解决；
+说已有独立新域盲测或逐帧在线证明；说已修复上游检测与物理ID关联。
+本轮研发解决的是明确协议与当前开发数据下的可复现方法及因果验证，不是普适保证。
+下一步论文强化应使用冻结后的单一方案验证未参与开发的数据，而不是继续在当前GT上调旋钮。
+用户已说明暂时没有独立划分，本轮不因此伪造一个“新测试集”。
+
+十三、代码、收据和复核入口
+
+核心实现：
+  flex_uda/active/strong_prefix_teacher.py：实际强KD头与训练收敛记录。
+  flex_uda/active/visual_classical.py：覆盖顺序、视觉图及教师锚定二次推断。
+  flex_uda/active/color_cohort.py：查询静态衣着解析及相同RGB输入。
+  scripts/a100_visual_classical_cold_full_c4.py：全帧/关键观察真实源前向与新鲜Qwen流。
+  scripts/a100_visual_classical_single_cold_launch.py：两个独立单方法冷启动。
+  scripts/a100_visual_classical_cold_full_countmatched.py：双向固定数量与CountSelf。
+  scripts/a100_visual_classical_sparse_replay.py：固定问答采样干预。
+
+轻量证据目录：docs/a100_visual_classical_20261121/
+完整复现顺序见REPRODUCE.txt；所有原始预测、问答、数组和头状态在本地a100_runs，未推到Git。
+fresh_cold_C4_sufficient_statistics.json保存按原视频合并的官方充分统计，不含原始样本。
+只用Git文件的统计复核：
+  .venv/bin/python scripts/a100_visual_classical_recheck_cold_statistics.py
+  .venv/bin/python scripts/a100_visual_classical_reverse_counts.py --published
+''')
+    add(f'本次公开统计复核：{recheck["comparisons_checked"]}个效应/区间全部通过，'
+        f'最大绝对误差={recheck["maximum_absolute_error"]:.3g}。')
+    add('''复核使用10000次、seed0、13原视频聚类，按照TrackEval的TP加权统计合并，
+不以简单平均视频分数代替官评；不需要下载图像、GT、教师答案或checkpoint。
+KD父进程旧共享多臂文字标志已透明修正，原JSON有备份，预测/分数/时间未改动。
+详见single_cold_metadata_audit.json；完整试错过程见持续研究阶段记录及research_log.md。
+Git发布仍执行小于100,000,000字节限制，真实大资产与实验中间状态不进入仓库。
+''')
+    path = ROOT / 'docs/TTA_RMOT_无标签跨域方案_完整验证与贡献结论_20261121.txt'
+    path.write_text('\n\n'.join(lines) + '\n')
+    print(json.dumps(dict(status='FINAL_RESEARCH_REPORT_WRITTEN', path=str(path), bytes=path.stat().st_size), ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()

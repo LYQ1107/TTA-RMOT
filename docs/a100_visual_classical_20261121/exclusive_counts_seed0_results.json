@@ -1,0 +1,224 @@
+{
+  "HOTA": {
+    "SOFT_KD_400__AT_COHORT_COUNT": 39.089296869754506,
+    "SOFT_KD_4000__AT_COHORT_COUNT": 39.729198528089036,
+    "SOFT_KD__AT_COHORT_COUNT": 39.729198528089036,
+    "HARD_KD_400__AT_COHORT_COUNT": 38.65075309431241,
+    "HARD_KD_4000__AT_COHORT_COUNT": 39.061752710876874,
+    "HARD_KD__AT_COHORT_COUNT": 39.061752710876874,
+    "NO_GRAPH__AT_COHORT_COUNT": 39.666582519711426,
+    "COHORT__AT_COHORT_COUNT": 39.71842001325461,
+    "WHITENED_COHORT__AT_COHORT_COUNT": 39.82913093967584,
+    "STRONG_PRIOR__AT_COHORT_COUNT": 39.74167866504546,
+    "PEER__AT_COHORT_COUNT": 39.71842001325461,
+    "UNIFORM_PRECISION__AT_COHORT_COUNT": 39.71842001325461,
+    "COHORT__AT_SOFT_KD_COUNT": 37.51889946653301,
+    "SOFT_KD__AT_SOFT_KD_COUNT": 38.38670985048452,
+    "COHORT__AT_HARD_KD_COUNT": 38.42340574460785,
+    "HARD_KD__AT_HARD_KD_COUNT": 39.057716572966996,
+    "COHORT__AT_SOFT_KD_400_COUNT": 37.21951337533802,
+    "SOFT_KD_400__AT_SOFT_KD_400_COUNT": 37.086179726855846,
+    "COHORT__AT_HARD_KD_400_COUNT": 38.698059994091096,
+    "HARD_KD_400__AT_HARD_KD_400_COUNT": 39.937647469219
+  },
+  "comparisons": {
+    "COUNT_FULL_vs_SOFT_KD": {
+      "delta_HOTA": -0.01077851483442771,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -0.7484192464189462,
+          0.7009180161452828
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -0.7484192464189462,
+          0.7009180161452828
+        ]
+      }
+    },
+    "COUNT_FULL_vs_HARD_KD": {
+      "delta_HOTA": 0.6566673023777341,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -0.1615883282263196,
+          1.7005877678002816
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -0.1615883282263196,
+          1.7005877678002816
+        ]
+      }
+    },
+    "COUNT_FULL_vs_SOFT_KD_400": {
+      "delta_HOTA": 0.6291231435001023,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          0.020783225974026823,
+          1.4170760964542848
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          0.020783225974026823,
+          1.4170760964542848
+        ]
+      }
+    },
+    "COUNT_FULL_vs_HARD_KD_400": {
+      "delta_HOTA": 1.0676669189422014,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          0.12017852889747704,
+          2.301502158192613
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          0.12017852889747704,
+          2.301502158192613
+        ]
+      }
+    },
+    "COUNT_FULL_vs_NO_GRAPH": {
+      "delta_HOTA": 0.051837493543182234,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -0.582711123362308,
+          0.707574254305198
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -0.582711123362308,
+          0.707574254305198
+        ]
+      }
+    },
+    "COUNT_FULL_vs_STRONG_PRIOR": {
+      "delta_HOTA": -0.0232586517908544,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -0.39923881201829836,
+          0.35943858872918116
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -0.39923881201829836,
+          0.35943858872918116
+        ]
+      }
+    },
+    "COUNT_SOFT_KD": {
+      "delta_HOTA": -0.8678103839515146,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -2.6145289898843824,
+          0.24562615915032243
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -2.6145289898843824,
+          0.24562615915032243
+        ]
+      }
+    },
+    "COUNT_HARD_KD": {
+      "delta_HOTA": -0.6343108283591476,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -1.7287651294839048,
+          0.1477377198580331
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -1.7287651294839048,
+          0.1477377198580331
+        ]
+      }
+    },
+    "COUNT_SOFT_KD_400": {
+      "delta_HOTA": 0.13333364848217144,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -0.4728849544504753,
+          0.9243591576264886
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -0.4728849544504753,
+          0.9243591576264886
+        ]
+      }
+    },
+    "COUNT_HARD_KD_400": {
+      "delta_HOTA": -1.2395874751279052,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 25,
+        "CI95": [
+          -3.8329938141005333,
+          0.559759073972702
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 25,
+        "CI95": [
+          -3.8329938141005333,
+          0.559759073972702
+        ]
+      }
+    }
+  },
+  "seed": 0,
+  "pair": "C1",
+  "target_GT_counts_never_used": true,
+  "exclusivity_preserved": true,
+  "all_development_data": true,
+  "full_countself_changed_query_files": 0,
+  "full_countself_total_query_files": 425,
+  "confidence_descriptive_not_corrected_for_research_adaptivity": true
+}

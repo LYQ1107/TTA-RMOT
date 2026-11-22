@@ -1,0 +1,21 @@
+{
+  "name": "NATIVE_PCD_RESOURCE_ONLY_AMENDMENT_BEFORE_ANY_NATIVE_PREDICTION",
+  "date": "2026-11-22",
+  "reason": "RGB head suite has no pending conditions and only one last worker; use already-released0..3 GPUs rather than leave3idle.",
+  "original_plan": "preregistration_direct_teacher_pcd_nores_v1.json",
+  "allocation": "Only GPUs not owned by RGB active workers and actually below512MiB; require RGB pending empty before any overlap. Native controller owns each allocatedGPU until its child exits.",
+  "unchanged": [
+    "inputs",
+    "teacher responses and budget",
+    "head dimensions",
+    "all3neural seeds",
+    "optimizer and fit criteria",
+    "method choices",
+    "CountMatched",
+    "all72seals-before-nativeGT"
+  ],
+  "no_native_worker_or_shared_numeric_edit": true,
+  "no_native_GT_results_or_predictions_seen": true,
+  "cost": "Quality-only small-head component times include co-tenancy; not independent cold wall. Earlier four actual physical workers all already exited.",
+  "goal_status": "ACTIVE"
+}

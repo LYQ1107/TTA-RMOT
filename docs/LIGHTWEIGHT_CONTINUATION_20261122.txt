@@ -1,0 +1,34 @@
+TTA-RMOT：2026-11-22轻量持续研究发布
+
+发布分支：codex/visual-classical-evidence-20261122
+仓库：https://github.com/LYQ1107/TTA-RMOT
+
+原研究分支codex/presence-active-v8p-20261106保留在8bc165fa8c3a598babeb9f862efec01252f6b84c。
+本分支以f915e49490bcddd7661d9650cca373e1c453a172为父提交基础，带入当前完整代码树与精选结果，
+省去中间反复更新报告/统计所积累的历史对象。原中间提交仍可通过旧分支追踪，不强推或改写旧分支。
+这是Git发布整理，不是重跑、改分数或隐藏失败。各已完成实验的数值源码SHA与本地原始收据仍保留。
+
+为何另建分支：
+本次同一代码树预检：若接在8bc165f后，可达对象约102.26MB，超过用户上限；
+接在f915e494后，快照约98.63MB、可达对象约93.45MB。最终数字以对实际发布提交运行
+python tools/check_publication_size.py --ref HEAD为准，快照和可达对象都必须<100,000,000字节。
+这些数字是Git未压缩对象/树的口径，不是模型大小、实验显存或原始数据大小。
+
+只发布必要源码、预登记、TXT、官方HOTA聚合充分统计、独立重算收据和小型图表。
+checkpoint、原始图片/特征、SQLite、全量预测、训练状态和逐批日志仍留NAS或本地a100_runs，
+不通过扩展名改名或分片绕过大小限制。大历史资产的NAS入口只读。
+本机/var/tmp只是新输出/已完成结果的本地存储，不是向NAS回写。
+
+研究状态：
+完整科研Goal继续ACTIVE，最小方法卡PROVISIONAL。普通蒸馏很强，已有稳定改善及不稳定/失败部分分别保留。
+共享强加权头的C4置信区间仍跨0，全面No隔离失败，V1/ONE_SE拓扑选择也未晋级。
+留轨迹视觉冲突144项与同预算覆盖搜索84项按预登记继续；提交时若无完整结果，报告明确标为进行中。
+不能把发布完成、控制器PASS或某个方向涨分当作科研目标已完成。
+
+用户明确任务边界为沿用官方固定候选，研究跨域指代适配。适配仅使用目标图片、任务语言和冻结教师指导。
+人工目标GT只在本研究预测与数量对照封存后隔离评估。所有现有数据为开发数据，没有未使用新划分。
+详细说明见TTA_RMOT_官方固定候选与普通蒸馏公平对比说明_20261122.txt，
+完整证据见a100_visual_classical_20261121/REPRODUCE.txt与各analysis/parent_statistics/reproduction。
+
+只克隆本轻量发布历史：
+git clone --single-branch --branch codex/visual-classical-evidence-20261122 https://github.com/LYQ1107/TTA-RMOT.git

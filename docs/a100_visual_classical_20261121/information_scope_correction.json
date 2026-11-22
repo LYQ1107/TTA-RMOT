@@ -1,0 +1,14 @@
+{
+  "version": "INFORMATION_SCOPE_CORRECTION",
+  "unix_time": 1795204133.064255,
+  "correction": "The V1 KD heads were fitted using the whole target teacher pool before prediction. V2/V3 inherit those heads. This is dataset-transductive, not video-stream-causal.",
+  "target_GT_training_leak": false,
+  "target_labels_still_evaluation_only": true,
+  "old_outputs_retained": true,
+  "V1_local_graph": "uses only own-video teacher evidence, but compared against global batch KD; comparisons are diagnostic and not proof of matched online TTA superiority",
+  "V2_V3": "same batch teacher-trained heads as baselines, hence matched batch scope; not video-stream TTA proof",
+  "next_protocol": "strict video-stream causality: fit only past+current video teacher feedback; current video may be transductive; no future video normalization or fitted batch checkpoint",
+  "teacher_replay": "static frozen teacher recordings are split by policy and video; shared preparation cost is not deployment wall",
+  "independent_blind_validation": false,
+  "no_relabeling_old_results_as_causal": true
+}

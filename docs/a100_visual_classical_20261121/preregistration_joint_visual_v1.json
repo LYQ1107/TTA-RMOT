@@ -1,0 +1,82 @@
+{
+  "name": "JOINT_VISUAL_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "motivation": "After all174 semantic outputs/evaluations and independent reproduction: monotone regularization improves same-head mean KD on both directions, but does not clearly beat strongest C4 KD; C1 per-query shuffling retains much gain. Neural cue input itself has no clear independent gain. Test existing graph plus auxiliary appearance regularization and isolate query-level shifts.",
+  "task": "Fixed official boxes/IDs accepted by human. Target images, task queries, frozen teacher only; no target manual labels in adaptation.",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "QA_seed": 0,
+  "common_teacher_answers": {
+    "C4": 1160,
+    "C1": 1103
+  },
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "new_head_fits": 0,
+  "main_head": "Already sealed STRICT_RGB1080 soft400/final mean; no new scalar or head initialization. Same head for KD, GRAPH, CAL and JOINT.",
+  "primary": "JOINT: existing RGB graph, then the fixed crossfit PAVA odds regularizer from SEMANTIC_COLOUR_V1. No positive guard/nonempty fallback/LoRA.",
+  "auxiliary": "PAVA maps are exactly the previous teacher-only maps: physical HSV cue, past/current prefix, current TrackID five-fold exclusion, odds cap ln3. Correlated regularization, not independent Bayesian evidence.",
+  "raw_methods": {
+    "CAL": "PAVA regularizer on original RGB1080 KD mean, no graph.",
+    "JOINT": "PAVA regularizer on existing RGB1080 graph mean.",
+    "SHUFFLED": "Same graph, prior per-query track-permuted auxiliary cue/maps; retains per-query cue marginals.",
+    "ROW_SHIFT": "Same graph, equal-track mean of real PAVA log-odds correction for each query applied to every track. Preserves within-query score ranking (audit); exclusive joint assignment may still change.",
+    "GLOBAL_SHUFFLED": "Same graph, cues permuted across all valid query/track cells within family/video before both fitting and prediction; destroys query-level appearance correspondence too.",
+    "QUERY_TEACHER": "Same graph, per-text teacher-only empirical-Bayes odds: current-fold-excluded/past per-query mean shrunk by two family-prior observations. No colour compatibility values; availability and families shared.",
+    "ANCHOR_CAL": "Same KD and teacher anchors but no visual edges, then real PAVA. Isolates edges from merely restoring queried labels.",
+    "EARLY_GRAPH": "Graph on already sealed SEM1081 soft400 scores; robustness control against strong early KD.",
+    "EARLY_CAL": "Real PAVA on that same SEM400 head.",
+    "EARLY_JOINT": "Real PAVA after graph on that same SEM400 head."
+  },
+  "main_contrasts": [
+    "JOINT vs KD",
+    "JOINT vs GRAPH",
+    "JOINT vs CAL",
+    "JOINT vs ANCHOR_CAL",
+    "JOINT vs ROW_SHIFT",
+    "JOINT vs SHUFFLED",
+    "JOINT vs GLOBAL_SHUFFLED",
+    "JOINT vs QUERY_TEACHER"
+  ],
+  "robustness": "Keep all old full-RGB, natural768, zero-HSV, semantic1081 soft/hard checkpoints and prior semantic MONO as strong controls. Do not pick a different primary head by domain. EARLY variants are robustness tests, not an automatic replacement recipe.",
+  "countmatched": {
+    "ranking_and_count_names": [
+      "JOINT",
+      "KD",
+      "GRAPH",
+      "CAL",
+      "ROW_SHIFT"
+    ],
+    "comparisons": [
+      "JOINT vs KD",
+      "JOINT vs GRAPH",
+      "JOINT vs CAL",
+      "JOINT vs ROW_SHIFT"
+    ],
+    "both_directions": true,
+    "CountSelf": 5,
+    "outputs_per_condition": 13,
+    "coarse_scores": "Use exact track-level score expansion in memory; avoid duplicating dense score files. Existing KD/graph expansion must equal saved arrays, maps must reproduce prior MONO_ONLY, self-count must be unchanged."
+  },
+  "expected": {
+    "conditions": 6,
+    "new_raw": 60,
+    "new_count": 78,
+    "new_official": 138
+  },
+  "generation": "All138 outputs and registered counterfactuals seal before this study target-GT evaluation. CPU quality replay only. No active numerical worker changes once launched.",
+  "statistics": "Same official HOTA and original-parent / shared-neural-seed descriptive intervals; bootstrap fixed sealed outputs only, no refit per resample or multiplicity correction. Query retrieval and TP/FP/FN diagnosed after seals.",
+  "retention": "Require independent increments over graph and calibration ablations and face all strong teacher controls. If gains are base-rate/count calibration, say so. No guarantee of positive outcomes, no completion for a queue/report.",
+  "cost": "Paid source and teacher streams reused. CPU component receipts only; any retained final recipe still needs matching physical single-method cold measurement.",
+  "storage_preflight_free_bytes": 4131123200,
+  "do_not_modify_NAS": true
+}

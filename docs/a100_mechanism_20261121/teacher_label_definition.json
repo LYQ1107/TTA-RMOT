@@ -1,0 +1,7 @@
+{
+  "registered_before_bank_results": true,
+  "primary": "candidate overlaps any query-positive GT box at IoU>=.5",
+  "rationale": "one-to-one detection matching marks duplicate boxes unmatched even when semantic membership is true; semantic bank should not conflate duplicate localization with teacher semantics",
+  "sensitivity": "also report original one-to-one assignment labels",
+  "C5": "unchanged original sealed candidate membership labels; raw gt_template unavailable"
+}

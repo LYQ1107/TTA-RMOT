@@ -1,0 +1,8 @@
+{
+  "version": "OBSERVATION_SERIALIZATION_PRECISION_NOTE",
+  "before_any_observation_worker_launched": true,
+  "budget_workers_unchanged": true,
+  "change": "Preserve actual interpolated decision precision in saved scores instead of casting to float32, so later CountSelf does not create serialization-only ties. No mathematical prediction/parameter/budget change.",
+  "source_identity": "Controller initial code fingerprint retained; observation workers additionally seal actual implementation SHA at completion.",
+  "no_new_GT_evaluation": true
+}

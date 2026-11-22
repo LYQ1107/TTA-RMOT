@@ -1,0 +1,30 @@
+{
+  "version": "SAME_HEAD_QUERY_SCOPE_MINIMALITY_V1",
+  "registered_after": "All96 context outputs and144 effects reproduced. C4 FULL67.4948 vs original mean66.2757; same-feature mean66.5911. Position-edge increment0.0720 CIcross0; zero-feature MASKED mean66.6624 vs original66.2757 shows initialization/dimension confound.",
+  "reason": "Isolate query coverage of classical inference without changing a single head weight, dimension, teacher answer or checkpoint. Missing MASKED+clothing-graph control must be supplied before attributing the new overall gain to context.",
+  "pairs": ["C4", "C1"],
+  "neural_seeds": [0,17,42],
+  "teacher_fraction": 0.1,
+  "teacher_QA": "Same sealed seed0 shards,1160 C4/1103 C1. No new question or new teacher call.",
+  "heads_C4": ["ORIGINAL_MEAN", "ORIGINAL_400", "MASKED_MEAN", "CONTEXT_MEAN", "CONTEXT_400"],
+  "heads_C1": ["ORIGINAL_MEAN", "ORIGINAL_400"],
+  "head_updates": 0,
+  "primary_method": "ORIGINAL_MEAN_EXTENDED",
+  "policies": {
+    "CLOTHING": "Original part_mask and original query-aware PCD/RGB graph; untouched original head scores",
+    "EXTENDED": "Same actual head unary; use context_part_mask to include previously skipped spatial/role RGB evidence and3NN, no position features or edges",
+    "ANCHORS": "Same extended applicability and teacher overwrite, graph weights all0"
+  },
+  "geometry": "Common float64 PCD/colour normalization followed by float32 geometry exactly as original augmented_features, with only part mask changed. C1 every original mask already active: CLOTHING and EXTENDED must exactly match.",
+  "decision_precision": "Preserve float32 head arrays and assign graph outputs into float32 for every new arm, matching original budget worker. Report changes versus earlier float64 CONTEXT_VISUAL as a numerical audit, not a new module.",
+  "original_mean_clothing_regression": "Must match every original MEAN_GRAPH decision in both pairs/all seeds; no IDs/boxes changed",
+  "comparisons": "For each head EXTENDED vs same KD, CLOTHING, ANCHORS; across heads all strong400/mean controls, MASKED dimension control, and current CONTEXT_FULL. No posthoc per-domain checkpoint selection.",
+  "quantities": "PrimaryEXTENDED vs CLOTHING and same original KD, both own and baseline donor counts,7 projections per condition including3 CountSelf. C1 original exclusivity kept.",
+  "size": "63 raw methods plus42 quantity counterfactuals,105 official outputs,6 conditions",
+  "GT": "All new raw/counterfactual outputs sealed before new isolated official evaluation; GT never in inference or automatic parameter selection",
+  "statistics": "Original-parent10000 paired bootstrap seed0; same fixed QA, three neural heads only; development iteration and multiplicity uncorrected",
+  "cost": "Reused scores/features/QA; CPU inference-only mechanism study, not new deployment timing. Fresh physical streams onGPU0/3 continue independently.",
+  "acceptance": "Do not retain relative-position as independently effective from a0.072 CIcross0. Separate initialized head changes, graph applicability, teacher overwrite, and quantity/ranking effects. Preserve all negative results; retain the smallest supported mechanism.",
+  "all_development_data": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,2486 @@
+{
+  "status": "CONTEXT_COHORT_ANALYZED",
+  "conditions": {
+    "C4_seed0": {
+      "pair": "C4",
+      "seed": 0,
+      "logical_teacher_calls": 1160,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 62.64347526545403,
+        "ORIGINAL_PERMUTED": 62.53943932497531,
+        "MASKED_MEAN": 66.52782327436867,
+        "CONTEXT_SOFT400": 66.65302381609541,
+        "CONTEXT_SOFT_FINAL": 66.09659123174713,
+        "CONTEXT_MEAN": 66.41533551339298,
+        "CONTEXT_HARD400": 66.76768641716082,
+        "CONTEXT_HARD_FINAL": 65.83499421218563,
+        "CONTEXT_ANCHORS": 66.42820845988886,
+        "CONTEXT_VISUAL": 67.24175056094684,
+        "CONTEXT_FULL": 67.33099177718891,
+        "CONTEXT_COMPLETE": 62.34334791000853,
+        "CONTEXT_PERMUTED": 62.417078192825734,
+        "BASE_SOFT_400": 66.47574316336026,
+        "BASE_SOFT_FINAL": 65.7682305865456,
+        "ORIGINAL_MEAN": 66.35355871686116,
+        "BASE_HARD_400": 66.32783327717497,
+        "BASE_HARD_FINAL": 65.2691755717521,
+        "BASE_NO_GRAPH": 65.76018410128893,
+        "BASE_GRAPH": 66.54487214414975,
+        "ORIGINAL_GRAPH": 66.93702470426372
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 4.293549438809691,
+          "per_neural_seed_delta": [
+            4.293549438809691
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            2.931706707128044,
+            5.888095052607865
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.397585379288408,
+          "per_neural_seed_delta": [
+            4.397585379288408
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.157650890918688,
+            5.913065774743975
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.9156562637959382,
+          "per_neural_seed_delta": [
+            0.9156562637959382
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.06801138212269606,
+            2.123076168204556
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT400": {
+          "delta_HOTA": 0.6779679610935005,
+          "per_neural_seed_delta": [
+            0.6779679610935005
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.2902628812885101,
+            1.8780917889521525
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT_FINAL": {
+          "delta_HOTA": 1.2344005454417868,
+          "per_neural_seed_delta": [
+            1.2344005454417868
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.011122580942858932,
+            2.728545985527583
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD400": {
+          "delta_HOTA": 0.563305360028096,
+          "per_neural_seed_delta": [
+            0.563305360028096
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.27347377463135164,
+            1.4583700366727306
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD_FINAL": {
+          "delta_HOTA": 1.4959975650032789,
+          "per_neural_seed_delta": [
+            1.4959975650032789
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.4927864456334458,
+            2.553819606367457
+          ]
+        },
+        "CONTEXT_FULL_vs_MASKED_MEAN": {
+          "delta_HOTA": 0.8031685028202418,
+          "per_neural_seed_delta": [
+            0.8031685028202418
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.2168808089287854,
+            1.9923653454335613
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.9027833173000488,
+          "per_neural_seed_delta": [
+            0.9027833173000488
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.07297812354902075,
+            2.105481624550187
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": 0.0892412162420726,
+          "per_neural_seed_delta": [
+            0.0892412162420726
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.036855532979553726,
+            0.23147637956730796
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 4.987643867180381,
+          "per_neural_seed_delta": [
+            4.987643867180381
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.3004655847691575,
+            7.065234464445034
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 4.913913584363179,
+          "per_neural_seed_delta": [
+            4.913913584363179
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.3508390688800973,
+            6.90736257601163
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.9774330603277548,
+          "per_neural_seed_delta": [
+            0.9774330603277548
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.08219859402689098,
+            2.030404656061464
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_GRAPH": {
+          "delta_HOTA": 0.39396707292519295,
+          "per_neural_seed_delta": [
+            0.39396707292519295
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.185811113525747,
+            0.9835290096199616
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_400": {
+          "delta_HOTA": 0.8552486138286497,
+          "per_neural_seed_delta": [
+            0.8552486138286497
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.08949133529998222,
+            1.7789515414522719
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_FINAL": {
+          "delta_HOTA": 1.5627611906433145,
+          "per_neural_seed_delta": [
+            1.5627611906433145
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.4959189436442959,
+            2.8497361860669517
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_400": {
+          "delta_HOTA": 1.0031585000139387,
+          "per_neural_seed_delta": [
+            1.0031585000139387
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.1386968418275302,
+            1.9137193365163483
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_FINAL": {
+          "delta_HOTA": 2.0618162054368128,
+          "per_neural_seed_delta": [
+            2.0618162054368128
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.8341037164013184,
+            3.3721750473745424
+          ]
+        },
+        "CONTEXT_MEAN_vs_MASKED_MEAN": {
+          "delta_HOTA": -0.11248776097569646,
+          "per_neural_seed_delta": [
+            -0.11248776097569646
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.6611683185560061,
+            0.3666656149275114
+          ]
+        },
+        "CONTEXT_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.06177679653181656,
+          "per_neural_seed_delta": [
+            0.06177679653181656
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.5407400360445778,
+            0.592824831781785
+          ]
+        },
+        "MASKED_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.17426455750751302,
+          "per_neural_seed_delta": [
+            0.17426455750751302
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.06257765769450678,
+            0.4315349024830929
+          ]
+        },
+        "CONTEXT_VISUAL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.8264150475538656,
+          "per_neural_seed_delta": [
+            0.8264150475538656
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.1618255040894407,
+            2.0881112962368347
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.8893604689521055,
+          "per_neural_seed_delta": [
+            0.8893604689521055
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.4904131967250073,
+            1.3875869657575814
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.007891478838204,
+          "per_neural_seed_delta": [
+            4.007891478838204
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            2.8156216579534723,
+            5.459733919073109
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.8489348996491657,
+          "per_neural_seed_delta": [
+            0.8489348996491657
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.21052067410662403,
+            1.789573830294315
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.045737041467234,
+          "per_neural_seed_delta": [
+            1.045737041467234
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.44208546968194185,
+            1.7935837497059774
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.8489851006249722,
+          "per_neural_seed_delta": [
+            0.8489851006249722
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.21106324685943287,
+            1.788912688347929
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": -0.027750594050033328,
+          "per_neural_seed_delta": [
+            -0.027750594050033328
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.08269480338436494,
+            0.0
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 0.846587170046945,
+          "per_neural_seed_delta": [
+            0.846587170046945
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.1978393321775485,
+            1.8023898564554475
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 4.399828322370951,
+          "per_neural_seed_delta": [
+            4.399828322370951
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            2.9754500048410613,
+            6.207679908427033
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.24637005200730755,
+          "per_neural_seed_delta": [
+            0.24637005200730755
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.04267059683582488,
+            0.5364726552621245
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.41021350709330306,
+          "per_neural_seed_delta": [
+            0.41021350709330306
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.0077720076899520695,
+            0.8009866342620579
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "CONTEXT_FULL": 0,
+        "CONTEXT_MEAN": 0,
+        "ORIGINAL_GRAPH": 0,
+        "ORIGINAL_MEAN": 0
+      },
+      "teacher_fit_audit": {
+        "MASKED": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0013140738010406494,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "SOFT": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0016681253910064697,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "HARD": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0029746023938059807,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        }
+      },
+      "actual_head_fit_seconds": {
+        "MASKED": 467.5799801480025,
+        "SOFT": 458.7551489517791,
+        "HARD": 464.58981559739914
+      },
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    },
+    "C4_seed17": {
+      "pair": "C4",
+      "seed": 17,
+      "logical_teacher_calls": 1160,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 62.41443799848605,
+        "ORIGINAL_PERMUTED": 62.35982568056458,
+        "MASKED_MEAN": 66.5756403158353,
+        "CONTEXT_SOFT400": 66.92091899999222,
+        "CONTEXT_SOFT_FINAL": 65.79760101992026,
+        "CONTEXT_MEAN": 66.44674752276327,
+        "CONTEXT_HARD400": 66.2817195916161,
+        "CONTEXT_HARD_FINAL": 65.66324144126897,
+        "CONTEXT_ANCHORS": 66.44943854606737,
+        "CONTEXT_VISUAL": 67.44125064415559,
+        "CONTEXT_FULL": 67.48420563666386,
+        "CONTEXT_COMPLETE": 62.52868525552705,
+        "CONTEXT_PERMUTED": 62.379843446797345,
+        "BASE_SOFT_400": 66.59003515396512,
+        "BASE_SOFT_FINAL": 65.94709184598145,
+        "ORIGINAL_MEAN": 66.41030189548157,
+        "BASE_HARD_400": 66.32959782628427,
+        "BASE_HARD_FINAL": 65.29007257459214,
+        "BASE_NO_GRAPH": 65.95128712399084,
+        "BASE_GRAPH": 66.50166397998038,
+        "ORIGINAL_GRAPH": 66.82157687675209
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 4.407138878266039,
+          "per_neural_seed_delta": [
+            4.407138878266039
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.0274026027500853,
+            6.050670207405571
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.461751196187507,
+          "per_neural_seed_delta": [
+            4.461751196187507
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.2245068629419973,
+            5.991782542853886
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 1.037458113900584,
+          "per_neural_seed_delta": [
+            1.037458113900584
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.3667381388387785,
+            1.908358159109762
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT400": {
+          "delta_HOTA": 0.5632866366716343,
+          "per_neural_seed_delta": [
+            0.5632866366716343
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.2151571269078694,
+            1.592015997728453
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT_FINAL": {
+          "delta_HOTA": 1.686604616743594,
+          "per_neural_seed_delta": [
+            1.686604616743594
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.7551729634097178,
+            2.8226613325140204
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD400": {
+          "delta_HOTA": 1.2024860450477632,
+          "per_neural_seed_delta": [
+            1.2024860450477632
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.16135534309766622,
+            2.3869018575283016
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD_FINAL": {
+          "delta_HOTA": 1.8209641953948932,
+          "per_neural_seed_delta": [
+            1.8209641953948932
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.8602367417780513,
+            2.852375711343685
+          ]
+        },
+        "CONTEXT_FULL_vs_MASKED_MEAN": {
+          "delta_HOTA": 0.9085653208285578,
+          "per_neural_seed_delta": [
+            0.9085653208285578
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.1737773085309783,
+            1.809692452985007
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 1.034767090596489,
+          "per_neural_seed_delta": [
+            1.034767090596489
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.380883303332438,
+            1.8797292296283252
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": 0.04295499250827106,
+          "per_neural_seed_delta": [
+            0.04295499250827106
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.07400543849607218,
+            0.19858827989931063
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 4.955520381136807,
+          "per_neural_seed_delta": [
+            4.955520381136807
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.332224047797706,
+            6.921690793313614
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 5.104362189866514,
+          "per_neural_seed_delta": [
+            5.104362189866514
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.5585101950040876,
+            7.011095327719789
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.073903741182292,
+          "per_neural_seed_delta": [
+            1.073903741182292
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.35849415609261154,
+            2.0364935518989657
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_GRAPH": {
+          "delta_HOTA": 0.6626287599117688,
+          "per_neural_seed_delta": [
+            0.6626287599117688
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.18676374584071453,
+            1.1408184831474262
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_400": {
+          "delta_HOTA": 0.8941704826987404,
+          "per_neural_seed_delta": [
+            0.8941704826987404
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.19469788031836263,
+            1.762739239816998
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_FINAL": {
+          "delta_HOTA": 1.5371137906824117,
+          "per_neural_seed_delta": [
+            1.5371137906824117
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.6216432546771241,
+            2.730587214667245
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_400": {
+          "delta_HOTA": 1.1546078103795878,
+          "per_neural_seed_delta": [
+            1.1546078103795878
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.25261202205287814,
+            2.170275374903056
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_FINAL": {
+          "delta_HOTA": 2.194133062071714,
+          "per_neural_seed_delta": [
+            2.194133062071714
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            1.0262426916725613,
+            3.4891748230773456
+          ]
+        },
+        "CONTEXT_MEAN_vs_MASKED_MEAN": {
+          "delta_HOTA": -0.12889279307202628,
+          "per_neural_seed_delta": [
+            -0.12889279307202628
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.6055492611443991,
+            0.23339937634977692
+          ]
+        },
+        "CONTEXT_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.03644562728170797,
+          "per_neural_seed_delta": [
+            0.03644562728170797
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.5075046961933598,
+            0.4143428738760558
+          ]
+        },
+        "MASKED_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.16533842035373425,
+          "per_neural_seed_delta": [
+            0.16533842035373425
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.06978232830694538,
+            0.3545595525246195
+          ]
+        },
+        "CONTEXT_VISUAL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.994503121392313,
+          "per_neural_seed_delta": [
+            0.994503121392313
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.29182005566717034,
+            1.8965492060234954
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.8621326268936826,
+          "per_neural_seed_delta": [
+            0.8621326268936826
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.3798045668300826,
+            1.4583678760580592
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.113883806646015,
+          "per_neural_seed_delta": [
+            4.113883806646015
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            2.889231529274051,
+            5.621580242527632
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.9002968516492871,
+          "per_neural_seed_delta": [
+            0.9002968516492871
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.26908221725517123,
+            1.7758751459100888
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.0062193071381245,
+          "per_neural_seed_delta": [
+            1.0062193071381245
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.35087742871030303,
+            1.9120193601631332
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.8899698626841968,
+          "per_neural_seed_delta": [
+            0.8899698626841968
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.26727570608178797,
+            1.7569194421531291
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": -0.018617362383707814,
+          "per_neural_seed_delta": [
+            -0.018617362383707814
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.07117617688947923,
+            0.00886182824208781
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 0.9145543990740066,
+          "per_neural_seed_delta": [
+            0.9145543990740066
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.28281715949447206,
+            1.8069151390609122
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 4.589747768552897,
+          "per_neural_seed_delta": [
+            4.589747768552897
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.2260336609728286,
+            6.294854037189827
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.3393031704218572,
+          "per_neural_seed_delta": [
+            0.3393031704218572
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.04967992086178761,
+            0.7091201848302702
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.3178452266262184,
+          "per_neural_seed_delta": [
+            0.3178452266262184
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.20860908259446836,
+            0.8059063756019883
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "CONTEXT_FULL": 0,
+        "CONTEXT_MEAN": 0,
+        "ORIGINAL_GRAPH": 0,
+        "ORIGINAL_MEAN": 0
+      },
+      "teacher_fit_audit": {
+        "MASKED": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0016254782676696777,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "SOFT": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.002591252326965332,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "HARD": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0022672810591757298,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        }
+      },
+      "actual_head_fit_seconds": {
+        "MASKED": 481.69259137578774,
+        "SOFT": 482.6766286388738,
+        "HARD": 487.4420387634309
+      },
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    },
+    "C4_seed42": {
+      "pair": "C4",
+      "seed": 42,
+      "logical_teacher_calls": 1160,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 61.84909068627896,
+        "ORIGINAL_PERMUTED": 61.94013257161164,
+        "MASKED_MEAN": 66.8838674660744,
+        "CONTEXT_SOFT400": 67.19548834431076,
+        "CONTEXT_SOFT_FINAL": 66.38954984817852,
+        "CONTEXT_MEAN": 66.91136327602938,
+        "CONTEXT_HARD400": 66.66632385217027,
+        "CONTEXT_HARD_FINAL": 65.81359371442575,
+        "CONTEXT_ANCHORS": 66.89985708499546,
+        "CONTEXT_VISUAL": 67.58516447694572,
+        "CONTEXT_FULL": 67.66906257579632,
+        "CONTEXT_COMPLETE": 62.65085892123544,
+        "CONTEXT_PERMUTED": 62.66443948171144,
+        "BASE_SOFT_400": 66.08431596243814,
+        "BASE_SOFT_FINAL": 65.29652072891065,
+        "ORIGINAL_MEAN": 66.06309893695337,
+        "BASE_HARD_400": 66.44264731959596,
+        "BASE_HARD_FINAL": 65.43164763086253,
+        "BASE_NO_GRAPH": 65.28393606200123,
+        "BASE_GRAPH": 66.2523072185894,
+        "ORIGINAL_GRAPH": 66.89090176488635
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 5.041811078607388,
+          "per_neural_seed_delta": [
+            5.041811078607388
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.860436186344152,
+            6.447105779501564
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.950769193274709,
+          "per_neural_seed_delta": [
+            4.950769193274709
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.7612978781063036,
+            6.391475974280905
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.7576992997669407,
+          "per_neural_seed_delta": [
+            0.7576992997669407
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.007128140390081937,
+            1.713903606253426
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT400": {
+          "delta_HOTA": 0.4735742314855571,
+          "per_neural_seed_delta": [
+            0.4735742314855571
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.2614789571789224,
+            1.4388355584459314
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT_FINAL": {
+          "delta_HOTA": 1.2795127276177993,
+          "per_neural_seed_delta": [
+            1.2795127276177993
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.3758557564463974,
+            2.3812672132161397
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD400": {
+          "delta_HOTA": 1.0027387236260523,
+          "per_neural_seed_delta": [
+            1.0027387236260523
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.0678937326705011,
+            1.9969256349445157
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD_FINAL": {
+          "delta_HOTA": 1.8554688613705679,
+          "per_neural_seed_delta": [
+            1.8554688613705679
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.9033409436383188,
+            2.891216820230572
+          ]
+        },
+        "CONTEXT_FULL_vs_MASKED_MEAN": {
+          "delta_HOTA": 0.7851951097219114,
+          "per_neural_seed_delta": [
+            0.7851951097219114
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.15359120549479677,
+            1.4617621206071325
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.7692054908008572,
+          "per_neural_seed_delta": [
+            0.7692054908008572
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.006751126448255473,
+            1.7189236162217034
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": 0.08389809885059663,
+          "per_neural_seed_delta": [
+            0.08389809885059663
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.019493505448822647,
+            0.2526276677053697
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 5.018203654560878,
+          "per_neural_seed_delta": [
+            5.018203654560878
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.4129083275379424,
+            6.958972273405091
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 5.004623094084877,
+          "per_neural_seed_delta": [
+            5.004623094084877
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.528364712605899,
+            6.806725323736766
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.605963638842951,
+          "per_neural_seed_delta": [
+            1.605963638842951
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.9648208795944637,
+            2.2723999432160933
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_GRAPH": {
+          "delta_HOTA": 0.7781608109099665,
+          "per_neural_seed_delta": [
+            0.7781608109099665
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.3724582981032235,
+            1.197769843914997
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_400": {
+          "delta_HOTA": 1.5847466133581776,
+          "per_neural_seed_delta": [
+            1.5847466133581776
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.9582974878044694,
+            2.342814443519264
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_FINAL": {
+          "delta_HOTA": 2.3725418468856674,
+          "per_neural_seed_delta": [
+            2.3725418468856674
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            1.4371848174624078,
+            3.260656698632855
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_400": {
+          "delta_HOTA": 1.2264152562003545,
+          "per_neural_seed_delta": [
+            1.2264152562003545
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.48527168129654613,
+            2.0586813860751536
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_FINAL": {
+          "delta_HOTA": 2.2374149449337892,
+          "per_neural_seed_delta": [
+            2.2374149449337892
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            1.1598550317508096,
+            3.4264273610085345
+          ]
+        },
+        "CONTEXT_MEAN_vs_MASKED_MEAN": {
+          "delta_HOTA": 0.027495809954970696,
+          "per_neural_seed_delta": [
+            0.027495809954970696
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.47952221181022026,
+            0.4390054558825287
+          ]
+        },
+        "CONTEXT_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.8482643390760103,
+          "per_neural_seed_delta": [
+            0.8482643390760103
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.1692110921891317,
+            1.4392688556825712
+          ]
+        },
+        "MASKED_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.8207685291210396,
+          "per_neural_seed_delta": [
+            0.8207685291210396
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.26777674915908706,
+            1.336071327648701
+          ]
+        },
+        "CONTEXT_VISUAL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.6738012009163441,
+          "per_neural_seed_delta": [
+            0.6738012009163441
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.09402830595745186,
+            1.6478478242991843
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.957443502258144,
+          "per_neural_seed_delta": [
+            0.957443502258144
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.4928664632603727,
+            1.567750903445231
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.297097132085895,
+          "per_neural_seed_delta": [
+            4.297097132085895
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.1678938910959467,
+            5.645786962115417
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.7670752899826994,
+          "per_neural_seed_delta": [
+            0.7670752899826994
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.2848182767962669,
+            1.4095097907469378
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.1337129687781982,
+          "per_neural_seed_delta": [
+            1.1337129687781982
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.46394355435962814,
+            2.0168518148377106
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.7590775294778354,
+          "per_neural_seed_delta": [
+            0.7590775294778354
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.28345399229395557,
+            1.3924918051138764
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": 0.025500517576602988,
+          "per_neural_seed_delta": [
+            0.025500517576602988
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.0001496877785715611,
+            0.09242275374611135
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 0.7980981086529937,
+          "per_neural_seed_delta": [
+            0.7980981086529937
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.2874782919062994,
+            1.4970809487461518
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 4.617038189395757,
+          "per_neural_seed_delta": [
+            4.617038189395757
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.2716570048132874,
+            6.297246909860428
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.3016584359068162,
+          "per_neural_seed_delta": [
+            0.3016584359068162
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.032258291179069684,
+            0.6770432330772466
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.4660080733193013,
+          "per_neural_seed_delta": [
+            0.4660080733193013
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.13040541004992576,
+            0.7993290005742757
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "CONTEXT_FULL": 0,
+        "CONTEXT_MEAN": 0,
+        "ORIGINAL_GRAPH": 0,
+        "ORIGINAL_MEAN": 0
+      },
+      "teacher_fit_audit": {
+        "MASKED": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0009452700614929199,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "SOFT": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.0011161863803863525,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        },
+        "HARD": {
+          "fitted_videos": 45,
+          "maximum_teacher_KL": 0.002708293264731765,
+          "maximum_steps": 4000,
+          "videos_exceeding_registered_KL_tolerance": 0
+        }
+      },
+      "actual_head_fit_seconds": {
+        "MASKED": 476.5828729303321,
+        "SOFT": 473.24404394754674,
+        "HARD": 477.16363307402935
+      },
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    },
+    "C1_seed0": {
+      "pair": "C1",
+      "seed": 0,
+      "logical_teacher_calls": 1103,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 37.243580732849104,
+        "ORIGINAL_PERMUTED": 36.366548931457956,
+        "BASE_SOFT_400": 34.64058442604523,
+        "BASE_SOFT_FINAL": 33.55799607801735,
+        "ORIGINAL_MEAN": 33.91090010265479,
+        "BASE_HARD_400": 32.772703742095324,
+        "BASE_HARD_FINAL": 32.60572910182768,
+        "BASE_NO_GRAPH": 33.600919170288165,
+        "BASE_GRAPH": 36.83387483258926,
+        "ORIGINAL_GRAPH": 37.053672587076456
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": -0.18990814577264814,
+          "per_neural_seed_delta": [
+            -0.18990814577264814
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -1.9613646826476958,
+            1.8248948961301985
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.6871236556184996,
+          "per_neural_seed_delta": [
+            0.6871236556184996
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -1.4317127385781097,
+            3.292636475043593
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.7052787341664981,
+          "per_neural_seed_delta": [
+            0.7052787341664981
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.018780898231925396,
+            2.0657996035519792
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.8003254102371073,
+          "per_neural_seed_delta": [
+            0.8003254102371073
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.3008035401290792,
+            2.7142372964576666
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "ORIGINAL_GRAPH": 0
+      },
+      "teacher_fit_audit": {},
+      "actual_head_fit_seconds": {},
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    },
+    "C1_seed17": {
+      "pair": "C1",
+      "seed": 17,
+      "logical_teacher_calls": 1103,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 37.24618295717574,
+        "ORIGINAL_PERMUTED": 36.195968100048844,
+        "BASE_SOFT_400": 35.00967316637569,
+        "BASE_SOFT_FINAL": 34.45080668641572,
+        "ORIGINAL_MEAN": 34.27534378991581,
+        "BASE_HARD_400": 33.95737113138884,
+        "BASE_HARD_FINAL": 32.86735347211693,
+        "BASE_NO_GRAPH": 34.49132698793382,
+        "BASE_GRAPH": 36.68525204374291,
+        "ORIGINAL_GRAPH": 36.776516507395115
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": -0.46966644978062533,
+          "per_neural_seed_delta": [
+            -0.46966644978062533
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -2.0080165609889336,
+            1.00542900952731
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.5805484073462708,
+          "per_neural_seed_delta": [
+            0.5805484073462708
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -1.2548252777228972,
+            2.6188788265377636
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.2162556999707519,
+          "per_neural_seed_delta": [
+            0.2162556999707519
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.11800678409132494,
+            0.6429441606525259
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.5982384398700233,
+          "per_neural_seed_delta": [
+            0.5982384398700233
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.28503604697022755,
+            1.9612716685749592
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "ORIGINAL_GRAPH": 0
+      },
+      "teacher_fit_audit": {},
+      "actual_head_fit_seconds": {},
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    },
+    "C1_seed42": {
+      "pair": "C1",
+      "seed": 42,
+      "logical_teacher_calls": 1103,
+      "raw_HOTA": {
+        "ORIGINAL_COMPLETE": 37.474955033881336,
+        "ORIGINAL_PERMUTED": 36.32326017756775,
+        "BASE_SOFT_400": 34.66308700591089,
+        "BASE_SOFT_FINAL": 33.091036254537336,
+        "ORIGINAL_MEAN": 34.73025279567974,
+        "BASE_HARD_400": 34.30293374006269,
+        "BASE_HARD_FINAL": 33.89229233792664,
+        "BASE_NO_GRAPH": 33.09272687282893,
+        "BASE_GRAPH": 36.691942601463815,
+        "ORIGINAL_GRAPH": 36.617566947664265
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": -0.8573880862170711,
+          "per_neural_seed_delta": [
+            -0.8573880862170711
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -2.315982014438604,
+            0.5713747827238962
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.29430677009651873,
+          "per_neural_seed_delta": [
+            0.29430677009651873
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -2.126377533138787,
+            3.080511524638369
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.6600745064003348,
+          "per_neural_seed_delta": [
+            0.6600745064003348
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.022619330847090603,
+            1.5042691630020544
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.6575029619198034,
+          "per_neural_seed_delta": [
+            0.6575029619198034
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.29100424688421245,
+            2.0638055144526954
+          ]
+        }
+      },
+      "CountSelf_changed_query_files": {
+        "ORIGINAL_GRAPH": 0
+      },
+      "teacher_fit_audit": {},
+      "actual_head_fit_seconds": {},
+      "new_teacher_calls": 0,
+      "not_cold_deployment_cost": true
+    }
+  },
+  "repeated": {
+    "CONTEXT_C4": {
+      "neural_seeds": [
+        0,
+        17,
+        42
+      ],
+      "condition_keys": [
+        "C4_seed0",
+        "C4_seed17",
+        "C4_seed42"
+      ],
+      "QA_seed": 0,
+      "mean_HOTA": {
+        "ORIGINAL_COMPLETE": 62.302334650073014,
+        "ORIGINAL_PERMUTED": 62.27979919238385,
+        "MASKED_MEAN": 66.66244368542613,
+        "CONTEXT_SOFT400": 66.92314372013281,
+        "CONTEXT_SOFT_FINAL": 66.09458069994864,
+        "CONTEXT_MEAN": 66.59114877072854,
+        "CONTEXT_HARD400": 66.57190995364907,
+        "CONTEXT_HARD_FINAL": 65.77060978929346,
+        "CONTEXT_ANCHORS": 66.59250136365057,
+        "CONTEXT_VISUAL": 67.42272189401605,
+        "CONTEXT_FULL": 67.49475332988304,
+        "CONTEXT_COMPLETE": 62.50763069559034,
+        "CONTEXT_PERMUTED": 62.48712037377817,
+        "BASE_SOFT_400": 66.38336475992118,
+        "BASE_SOFT_FINAL": 65.6706143871459,
+        "ORIGINAL_MEAN": 66.2756531830987,
+        "BASE_HARD_400": 66.36669280768507,
+        "BASE_HARD_FINAL": 65.33029859240226,
+        "BASE_NO_GRAPH": 65.665135762427,
+        "BASE_GRAPH": 66.4329477809065,
+        "ORIGINAL_GRAPH": 66.88316778196737
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 4.580833131894373,
+          "per_neural_seed_delta": [
+            4.293549438809691,
+            4.407138878266039,
+            5.041811078607388
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.293342431776118,
+            6.09810708261909
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            3.1957615862552426,
+            6.121629416419044
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.603368589583542,
+          "per_neural_seed_delta": [
+            4.397585379288408,
+            4.461751196187507,
+            4.950769193274709
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.3936685231445076,
+            6.0872678771250905
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            3.3330272768308618,
+            6.096512537050698
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.9036045591544877,
+          "per_neural_seed_delta": [
+            0.9156562637959382,
+            1.037458113900584,
+            0.7576992997669407
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.10894680459464103,
+            1.900680804020879
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.0719579364980103,
+            1.9258311813702946
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT400": {
+          "delta_HOTA": 0.5716096097502307,
+          "per_neural_seed_delta": [
+            0.6779679610935005,
+            0.5632866366716343,
+            0.4735742314855571
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.23122608752200358,
+            1.6279326354811339
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.23317807405891397,
+            1.6501451286444009
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_SOFT_FINAL": {
+          "delta_HOTA": 1.4001726299343933,
+          "per_neural_seed_delta": [
+            1.2344005454417868,
+            1.686604616743594,
+            1.2795127276177993
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.39858548377801195,
+            2.6265758717832135
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.33602584968421895,
+            2.652886091618395
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD400": {
+          "delta_HOTA": 0.9228433762339705,
+          "per_neural_seed_delta": [
+            0.563305360028096,
+            1.2024860450477632,
+            1.0027387236260523
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.008132344999418117,
+            1.9274876352430441
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.04680923431256791,
+            1.9908141419491936
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_HARD_FINAL": {
+          "delta_HOTA": 1.72414354058958,
+          "per_neural_seed_delta": [
+            1.4959975650032789,
+            1.8209641953948932,
+            1.8554688613705679
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.7716726893916911,
+            2.739719782817213
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.7366311439608908,
+            2.7588949791062536
+          ]
+        },
+        "CONTEXT_FULL_vs_MASKED_MEAN": {
+          "delta_HOTA": 0.8323096444569037,
+          "per_neural_seed_delta": [
+            0.8031685028202418,
+            0.9085653208285578,
+            0.7851951097219114
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.05965086466028815,
+            1.7217462365291212
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.016297389585938883,
+            1.7682194291523556
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.902251966232465,
+          "per_neural_seed_delta": [
+            0.9027833173000488,
+            1.034767090596489,
+            0.7692054908008572
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.11653853543736203,
+            1.8907181469643914
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.076871925649082,
+            1.9131486915804352
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": 0.07203143586698009,
+          "per_neural_seed_delta": [
+            0.0892412162420726,
+            0.04295499250827106,
+            0.08389809885059663
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.03597330516165442,
+            0.2160347424560991
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.04130149916862156,
+            0.21965385537375134
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 4.987122634292689,
+          "per_neural_seed_delta": [
+            4.987643867180381,
+            4.955520381136807,
+            5.018203654560878
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.3590108148720055,
+            6.965674247419941
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            3.3588820556753523,
+            6.9722631575438605
+          ]
+        },
+        "CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 5.007632956104857,
+          "per_neural_seed_delta": [
+            4.913913584363179,
+            5.104362189866514,
+            5.004623094084877
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.500915551705904,
+            6.904666288031826
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            3.485236666631837,
+            6.9139661185918975
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.2191001467843325,
+          "per_neural_seed_delta": [
+            0.9774330603277548,
+            1.073903741182292,
+            1.605963638842951
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.5235013749113568,
+            2.0718687146311887
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.3761884117565296,
+            2.116656749702119
+          ]
+        },
+        "CONTEXT_FULL_vs_ORIGINAL_GRAPH": {
+          "delta_HOTA": 0.6115855479156428,
+          "per_neural_seed_delta": [
+            0.39396707292519295,
+            0.6626287599117688,
+            0.7781608109099665
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.18481251281311065,
+            1.0348998917607781
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.0879373729055889,
+            1.0789328500673663
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_400": {
+          "delta_HOTA": 1.111388569961856,
+          "per_neural_seed_delta": [
+            0.8552486138286497,
+            0.8941704826987404,
+            1.5847466133581776
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.43472557904163006,
+            1.9406408821481254
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.300777522134656,
+            2.002958617283835
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_SOFT_FINAL": {
+          "delta_HOTA": 1.8241389427371313,
+          "per_neural_seed_delta": [
+            1.5627611906433145,
+            1.5371137906824117,
+            2.3725418468856674
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.9637130464722836,
+            2.8850329216797745
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.7861938915515932,
+            2.9530665459907937
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_400": {
+          "delta_HOTA": 1.1280605221979603,
+          "per_neural_seed_delta": [
+            1.0031585000139387,
+            1.1546078103795878,
+            1.2264152562003545
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.35255647495543146,
+            2.014394213153286
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.31815740681985183,
+            2.0324375694985877
+          ]
+        },
+        "CONTEXT_FULL_vs_BASE_HARD_FINAL": {
+          "delta_HOTA": 2.164454737480772,
+          "per_neural_seed_delta": [
+            2.0618162054368128,
+            2.194133062071714,
+            2.2374149449337892
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            1.1568522792818061,
+            3.333487301435177
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            1.0975721823335065,
+            3.3619830711697483
+          ]
+        },
+        "CONTEXT_MEAN_vs_MASKED_MEAN": {
+          "delta_HOTA": -0.07129491469758402,
+          "per_neural_seed_delta": [
+            -0.11248776097569646,
+            -0.12889279307202628,
+            0.027495809954970696
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.48902928498960185,
+            0.2785182224372337
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.5284375599580288,
+            0.3125893898657597
+          ]
+        },
+        "CONTEXT_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.3154955876298449,
+          "per_neural_seed_delta": [
+            0.06177679653181656,
+            0.03644562728170797,
+            0.8482643390760103
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.22146586191573003,
+            0.7034693617480846
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.3458834369295745,
+            0.9751137848382789
+          ]
+        },
+        "MASKED_MEAN_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.38679050232742895,
+          "per_neural_seed_delta": [
+            0.17426455750751302,
+            0.16533842035373425,
+            0.8207685291210396
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.11708910060645958,
+            0.6627972737757609
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.022449406448255497,
+            0.9183628276798017
+          ]
+        },
+        "CONTEXT_VISUAL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.8315731232875075,
+          "per_neural_seed_delta": [
+            0.8264150475538656,
+            0.994503121392313,
+            0.6738012009163441
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.025709921991633074,
+            1.8656707483745387
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.021859101518078922,
+            1.8899902007392202
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.9029788660346441,
+          "per_neural_seed_delta": [
+            0.8893604689521055,
+            0.8621326268936826,
+            0.957443502258144
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.4782190095553574,
+            1.4639903463568948
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.46840539396416,
+            1.4717496492340167
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 4.139624139190038,
+          "per_neural_seed_delta": [
+            4.007891478838204,
+            4.113883806646015,
+            4.297097132085895
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            2.963545752566138,
+            5.577280008076835
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            2.9503157125242088,
+            5.582274704371741
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.838769013760384,
+          "per_neural_seed_delta": [
+            0.8489348996491657,
+            0.9002968516492871,
+            0.7670752899826994
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.2694663728823195,
+            1.6561102149515234
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.2625018914850454,
+            1.6771282779691417
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 1.0618897724611855,
+          "per_neural_seed_delta": [
+            1.045737041467234,
+            1.0062193071381245,
+            1.1337129687781982
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.43261833670506855,
+            1.88789564959252
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.4313226304634358,
+            1.8926618162140811
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_ANCHORS": {
+          "delta_HOTA": 0.8326774975956681,
+          "per_neural_seed_delta": [
+            0.8489851006249722,
+            0.8899698626841968,
+            0.7590775294778354
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.26818467284341857,
+            1.6420990950626884
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.2610004252436068,
+            1.6637692856758206
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_VISUAL": {
+          "delta_HOTA": -0.006955812952379385,
+          "per_neural_seed_delta": [
+            -0.027750594050033328,
+            -0.018617362383707814,
+            0.025500517576602988
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.04269625548634484,
+            0.022015393209928527
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.05797789528596186,
+            0.039874378224253104
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_COMPLETE": {
+          "delta_HOTA": 0.8530798925913151,
+          "per_neural_seed_delta": [
+            0.846587170046945,
+            0.9145543990740066,
+            0.7980981086529937
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.27130485060314447,
+            1.6985515459829046
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.25840734277722166,
+            1.7120190207951362
+          ]
+        },
+        "COUNT_OWN_CONTEXT_FULL_vs_CONTEXT_PERMUTED": {
+          "delta_HOTA": 4.535538093439868,
+          "per_neural_seed_delta": [
+            4.399828322370951,
+            4.589747768552897,
+            4.617038189395757
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            3.173362178381857,
+            6.255036709012134
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            3.1396573043266085,
+            6.2784372601756395
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_CONTEXT_MEAN": {
+          "delta_HOTA": 0.295777219445327,
+          "per_neural_seed_delta": [
+            0.24637005200730755,
+            0.3393031704218572,
+            0.3016584359068162
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.007149291351772171,
+            0.6067844600445307
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.01885257745861501,
+            0.6293619512855599
+          ]
+        },
+        "COUNT_BASELINE_CONTEXT_FULL_vs_ORIGINAL_MEAN": {
+          "delta_HOTA": 0.3980222690129409,
+          "per_neural_seed_delta": [
+            0.41021350709330306,
+            0.3178452266262184,
+            0.4660080733193013
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.024345238676052722,
+            0.7472496222345371
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.012809839044050733,
+            0.7637907437017994
+          ]
+        }
+      }
+    },
+    "CONTEXT_C1": {
+      "neural_seeds": [
+        0,
+        17,
+        42
+      ],
+      "condition_keys": [
+        "C1_seed0",
+        "C1_seed17",
+        "C1_seed42"
+      ],
+      "QA_seed": 0,
+      "mean_HOTA": {
+        "ORIGINAL_COMPLETE": 37.32157290796872,
+        "ORIGINAL_PERMUTED": 36.29525906969152,
+        "BASE_SOFT_400": 34.7711148661106,
+        "BASE_SOFT_FINAL": 33.6999463396568,
+        "ORIGINAL_MEAN": 34.30549889608344,
+        "BASE_HARD_400": 33.67766953784895,
+        "BASE_HARD_FINAL": 33.121791637290414,
+        "BASE_NO_GRAPH": 33.72832434368364,
+        "BASE_GRAPH": 36.73702315926533,
+        "ORIGINAL_GRAPH": 36.815918680711945
+      },
+      "comparisons": {
+        "ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": -0.5056542272567816,
+          "per_neural_seed_delta": [
+            -0.18990814577264814,
+            -0.46966644978062533,
+            -0.8573880862170711
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -2.0660064484592406,
+            1.11552315976143
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -2.085872833814259,
+            1.1967900680831909
+          ]
+        },
+        "ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.5206596110204297,
+          "per_neural_seed_delta": [
+            0.6871236556184996,
+            0.5805484073462708,
+            0.29430677009651873
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -1.547999951348336,
+            2.972433405312569
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -1.6117048151982871,
+            2.974602202789565
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_COMPLETE": {
+          "delta_HOTA": 0.527202980179195,
+          "per_neural_seed_delta": [
+            0.7052787341664981,
+            0.2162556999707519,
+            0.6600745064003348
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.058648338796163685,
+            1.2114456873224155
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            0.03800890265190566,
+            1.465439109487708
+          ]
+        },
+        "COUNT_OWN_ORIGINAL_GRAPH_vs_ORIGINAL_PERMUTED": {
+          "delta_HOTA": 0.685355604008978,
+          "per_neural_seed_delta": [
+            0.8003254102371073,
+            0.5982384398700233,
+            0.6575029619198034
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            -0.27929417610170965,
+            2.2299773321654635
+          ],
+          "parent_and_neural_seed_sensitivity_CI95": [
+            -0.284399347353907,
+            2.3013545668054984
+          ]
+        }
+      }
+    }
+  },
+  "input_defined_query_group_points_seed0": {
+    "static_clothing": {
+      "queries": 256,
+      "original_parents": 13,
+      "HOTA": {
+        "ORIGINAL_MEAN": 61.50370137650722,
+        "ORIGINAL_GRAPH": 62.736309731482685,
+        "MASKED_MEAN": 62.24288171536261,
+        "CONTEXT_MEAN": 62.48862042847525,
+        "CONTEXT_VISUAL": 63.258418001684134,
+        "CONTEXT_FULL": 63.3757807133337
+      }
+    },
+    "fallback_spatial": {
+      "queries": 78,
+      "original_parents": 4,
+      "HOTA": {
+        "ORIGINAL_MEAN": 48.73927724104382,
+        "ORIGINAL_GRAPH": 48.73927724104382,
+        "MASKED_MEAN": 48.06643031741808,
+        "CONTEXT_MEAN": 47.16637084207855,
+        "CONTEXT_VISUAL": 50.12063001831946,
+        "CONTEXT_FULL": 50.29320906133389
+      }
+    },
+    "fallback_role": {
+      "queries": 27,
+      "original_parents": 6,
+      "HOTA": {
+        "ORIGINAL_MEAN": 42.876815588443776,
+        "ORIGINAL_GRAPH": 42.876815588443776,
+        "MASKED_MEAN": 39.967837113789535,
+        "CONTEXT_MEAN": 39.80516558892636,
+        "CONTEXT_VISUAL": 41.684416117674196,
+        "CONTEXT_FULL": 41.684416117674196
+      }
+    },
+    "fallback_other": {
+      "queries": 105,
+      "original_parents": 13,
+      "HOTA": {
+        "ORIGINAL_MEAN": 78.41436660897229,
+        "ORIGINAL_GRAPH": 78.41436660897229,
+        "MASKED_MEAN": 78.41418022401923,
+        "CONTEXT_MEAN": 78.28667463196123,
+        "CONTEXT_VISUAL": 78.28667463196123,
+        "CONTEXT_FULL": 78.28667463196123
+      }
+    }
+  },
+  "all_development_data": true,
+  "registered_after_previous_development_diagnosis": true,
+  "independent_blind_validation": false,
+  "new_teacher_calls": 0,
+  "no_GT_in_adaptation": true,
+  "uncertainty": "Descriptive parent/seed bootstrap, same fixed QA; not a correction for iteration or multiple comparisons.",
+  "compute": "Features/QA prepaid. New context input has three head fits for controls; individual fit receipts are actual but not cold deployment times.",
+  "official_evaluated_methods": 96,
+  "goal_status": "ACTIVE"
+}
