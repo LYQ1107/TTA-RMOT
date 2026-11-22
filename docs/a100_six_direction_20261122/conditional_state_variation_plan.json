@@ -1,0 +1,17 @@
+{
+  "study": "PAID_STATE_VARIATION_CONSTANT_PREDICTOR_FLOOR",
+  "source_sha256": "685538aee6b259d7f4fad71d38eebaeaace0ccc17666e5526c129b24276d1c66",
+  "intended_cases": "Completed conditions only, C1 appearance-dominant and C2/C5 repeated-state examples first; no partial HOTA.",
+  "theory": "Best bag-constant squared error is within-query/track variance of the same clipped teacher targets. Every frame-aware model must be compared with this floor and equally informed ordinary learners.",
+  "common_target_clip": [
+    0.02,
+    0.98
+  ],
+  "strong_teacher_flip_thresholds": [
+    0.1,
+    0.9
+  ],
+  "no_GT_or_future_heads_or_model_changes": true,
+  "no_new_optimizer_or_quality_predictions": true,
+  "no_semantic_identification_or_HOTA_claim_from_this_diagnostic": true
+}
