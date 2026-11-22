@@ -17,7 +17,7 @@ from scripts.a100_visual_classical_sparse_statistics_reproduce import resolve_re
 PUBLIC=ROOT/'docs/a100_visual_classical_20261121'
 LOCAL=ROOT/'a100_runs/visual_classical_20261121/analysis/cross_study_row_sharing_20261122'
 BASES=('sparse_observation','strict_rgb','canonical_pcd','zero_colour')
-TARGETS=('semantic_colour','joint_visual','appearance_cold','direct_teacher','direct_teacher_pcd','native_factorial','predictive_topology','native_cold','stable_topology','confidence_teacher','contract_graph','weighted_classical')
+TARGETS=('semantic_colour','joint_visual','appearance_cold','direct_teacher','direct_teacher_pcd','native_factorial','predictive_topology','native_cold','stable_topology','confidence_teacher','contract_graph','weighted_classical','cue_consensus','coverage_search','optional_transfer','protocol_calibration')
 ENCODING=('parent_rows','parent_rows_zlib_base64','parent_rows_archive_owner',
     'parent_rows_archive_zlib_base64','parent_rows_archive_codec','numerator','denominator')
 
@@ -43,12 +43,17 @@ def main(apply=False):
         name=stem+'_parent_statistics.json';path=PUBLIC/name
         if not path.is_file():continue
         document=json.loads(path.read_text());resolved={record:resolve_record(PUBLIC,name,record,cache) for record in document}
-        if stem in BASES:
+        published=bool(subprocess.check_output(['git','ls-tree','HEAD','--',str(path.relative_to(ROOT))]))
+        if stem in BASES or published:
+            # Once a report has been pushed it becomes a read-only provider
+            # for later studies; never rewrite it as an unpublished target.
+            destination=candidate/name
+            if not destination.is_symlink():
+                destination.unlink();destination.symlink_to(path)
             for record,value in resolved.items():
                 for index,pair in enumerate(zip(value['numerator'],value['denominator'])):
                     seen.setdefault(key(pair),(name,record,index))
             continue
-        assert not subprocess.check_output(['git','ls-tree','HEAD','--',str(path.relative_to(ROOT))]),'Never rewrite already-published aggregate files'
         payload={};shared=0
         for record,raw in document.items():
             value=resolved[record];records+=1;expected[name,record]=value

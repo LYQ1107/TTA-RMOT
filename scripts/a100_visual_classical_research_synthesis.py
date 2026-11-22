@@ -8,6 +8,12 @@ sys.path.insert(0,str(ROOT))
 from scripts.a100_visual_classical_sparse_observation_report import describe
 
 PUBLIC=ROOT/'docs/a100_visual_classical_20261121'
+FULL_DIAGNOSTICS=False
+
+
+def diagnostic_record(stem,key,value):
+    if FULL_DIAGNOSTICS:return json.dumps(value,ensure_ascii=False,indent=2)
+    return '完整原始记录：'+str(PUBLIC/(stem+'.json'))+'，字段 '+key+'。对应专题TXT亦保留完整记录；本报告保留历程、全部HOTA/效应与结论。'
 
 
 def load(stem):
@@ -86,6 +92,10 @@ def main():
         '本文汇总已完成的实证及其适用范围，不自动将科研Goal标记完成。',
         '后续Goal状态以线程Goal工具为准；所有数字均来自封存收据及官方TrackEval，不承诺必然正结果。','',
         '当前方法状态：'+load('minimal_retained_method_card')['status'],
+        ('最新共享收敛头方案：C4 67.151609→67.629222（+.477613），C1 32.721677→38.429592（+5.707914），三个种子均正，原视频+种子描述区间均正。'
+            if (PUBLIC/'protocol_calibration_scientific_review.json').is_file() else ''),
+        ('精度与既定模块门槛已过，四卡真实冷启动及教师回填/纯图边/视觉对应补查另行验收；尚不代表Goal全部完成，也非独立盲测。'
+            if (PUBLIC/'protocol_calibration_scientific_review.json').is_file() else ''),
         '本文区分已完成的开发数据实证、真实执行成本和独立泛化；一组显著差值不意味着所有跨域RMOT错误已经解决。',
         ('已验证的残差配方：原RGB1080均值KD+视觉图+固定PAVA，C4 66.169708→67.692534（+1.522827），C1 32.199208→36.618032（+4.418824）。'
             if joint is not None else '联合主配方尚待完整官评和统计复现。'),
@@ -98,6 +108,7 @@ def main():
         ('强原生PCD普通均值C4为67.082937，旧残差组合对它+.609597的区间跨0；因此继续统一原生768直接头的机制与真实成本验收，不能在旧优势上结项。' if direct_pcd is not None else ''),
         '', '先用人话解释普通蒸馏为什么高，以及我们究竟要证明什么：',
         '强普通KD不是把教师问过的几个框直接复制出去。它用同样的少量教师回答训练共享小头，再预测没问过的查询-轨迹组合，并沿官方轨迹输出整段结果。',
+        '最新强置信度加权普通头：均值C4 67.102356/C1 32.259906，充分收敛FINAL为67.151609/32.721677；后者两个方向都更高。只胜过均值不能自动算赢完整强基线家族。',
         '双方沿用相同官方候选，冻结源编码器本身也已有视觉语义能力；因此强KD高分有合理来源，不能为了突出新模块而限制它正常推广、充分训练或使用已有视觉特征。',
         '旧47.478、早期68/69和当前66/67来自不同预算、感知/先验与协议条件，不能把跨设置分数差全算成新模块增益。',
         '当前人类视觉启发落在两处：用相似衣着与视觉特征构建局部参照关系；把语言中的颜色与衣着部位绑定，利用教师反馈校准这种视觉线索。',
@@ -121,7 +132,7 @@ def main():
         '跨域RMOT：在与源训练场景不同的目标视频中，依据语言描述选出对应的人或多名人的轨迹。',
         '用户明确接受官方固定候选框与Track ID，把研究范围限定在跨域指代适配模块。',
         '适配使用目标图像、任务语言、冻结源模型输出、冻结教师反馈；不读取目标人工标签。',
-        '源主干与Qwen教师冻结，允许用教师伪标签训练一个小残差头。不是宣称所有权重都不更新。',
+        '源主干与Qwen教师冻结，允许用教师伪标签训练共享小分类头；最新直接头没有固定源logit残差。不是宣称所有权重都不更新。',
         'GT只能在预测封存后用于独立评估/诊断；不能依据GT自动选题、拟合、选阈值或挑checkpoint。',
         '所有现有数据都参与过开发，用户目前没有未接触的新划分，所以不存在独立盲测结论。',
         'C4为Dance-best→SportsMOT：45剪辑、466查询、13个原视频；C1为KITTI-V2→Dance：25视频、425查询。',
@@ -198,7 +209,7 @@ def main():
         '保护规则仅在图全空且显式任务保证存在时保留KD完整集合；所有强KD同样得到非空协议控制。',
         '不新增教师/主干/头训练；辅助硬基线得到额外软reference头，不称同单头成本。',
         '这与旧单例回填/宽泛no-Yes保护有区别，但必须靠下列结果判断，不能预设有效。',
-        json.dumps(null['query_retrieval_diagnosis'],ensure_ascii=False,indent=2),
+        diagnostic_record('null_set_analysis','query_retrieval_diagnosis',null['query_retrieval_diagnosis']),
         '强制非空是构造性质，真实找对目标和FP/FN才说明问题是否改善；模块可能是数量修复，不能冒充新语义学习。']
     lines += ['', '七、候选方案如何把视觉启发变成经典计算',
         '先扫视再类比：每条固定轨迹保留三次真实观察，解析查询所需身体部位，形成源PCD与HSV外观描述。',
@@ -222,7 +233,7 @@ def main():
             '真实教师收据：'+json.dumps(row['teacher']),
             '拟合收据：'+json.dumps(row['teacher_fit_audit']),
             'decoder观察帧='+str(row['decoder_frames'])+'；实际backbone图像前向='+str(row['backbone_image_forwards'])]
-    lines += ['独立C4输入/教师一致性：'+json.dumps(physical['C4_independent_input_teacher_audit']),
+    lines += ['独立C4输入/教师一致性：'+diagnostic_record('minimal_final_analysis','C4_independent_input_teacher_audit',physical['C4_independent_input_teacher_audit']),
         'C4是两个独立单方法进程，包含导入、元数据、学生/教师加载、特征、真实Qwen、头拟合和输出。',
         '并行A100共享NAS/OS及后台负载，进程wall差不能直接当图的算法提速。',
         'C1是同一真实流的两分支，common+own是实测组件和，不是两次独立冷进程。',
@@ -230,7 +241,7 @@ def main():
         '新鲜C1与历史池先验最大差0.603、问题对称差458，所以不能拿历史36.816配本次wall。',
         '早期全帧到三观察把学生相位7686.8秒降到1858.4秒；PCD/RGB在匹配问答中相同，但先验/门控有变化，非严格无损。',
         '这属于执行调度节省，不称LoRA或神经特征学习收益，也不是所有GPU利用率的积分。','',
-        '九、GT仅在封存后做的错误回看',json.dumps(physical['postseal_candidate_membership_diagnosis'],ensure_ascii=False,indent=2),
+        '九、GT仅在封存后做的错误回看',diagnostic_record('minimal_final_analysis','postseal_candidate_membership_diagnosis',physical['postseal_candidate_membership_diagnosis']),
         '这些是候选IoU成员计数，不是HOTA损失的可加分账；有正候选不代表原始全部GT都可恢复。']
     if (PUBLIC/'fresh_teacher_anchor_diagnosis.json').is_file():
         teacher=load('fresh_teacher_anchor_diagnosis')
@@ -247,7 +258,7 @@ def main():
             'C1错误Yes常见衣着类别混淆，C4常见左右/深浅队伍；框定位、邻人入裁剪及可观察性也是混杂。',
             '已查看的原图只作定性诊断，不据少量样例声称这些错误的全局原因。',
             '这些GT诊断精确率不能作为适配时的教师权重；后续方案仍须只用图像、语言和教师反馈。']
-        for pair,row in teacher['pairs'].items():lines += [pair,json.dumps(row,ensure_ascii=False,indent=2)]
+        for pair,row in teacher['pairs'].items():lines += [pair,diagnostic_record('fresh_teacher_anchor_diagnosis','pairs.'+pair,row)]
     if canonical is not None:
         lines += ['', '十、自然768维教师头与经典图的独立拆解',
             '自然768->64 GELU->1，无312零填充或手工HSV学入头；软/硬教师均充分训练。',
@@ -259,7 +270,7 @@ def main():
         for pair in ('C4','C1'):
             row=canonical['repeated']['CANONICAL_'+pair]
             summary(lines,'自然768 / '+pair,row,list(row['comparisons']))
-        lines += ['本轮查询检索/FP/FN诊断：',json.dumps(canonical['query_diagnosis'],ensure_ascii=False,indent=2)]
+        lines += ['本轮查询检索/FP/FN诊断：',diagnostic_record('canonical_pcd_analysis','query_diagnosis',canonical['query_diagnosis'])]
     else:lines += ['', '十、自然768维研究仍在进行；未读取未完成的局部分数作结论。']
     if (PUBLIC/'preregistration_semantic_colour_v1.json').is_file():
         lines += ['', '十一、颜色与衣着部位的语义绑定及单调校准',
@@ -281,7 +292,7 @@ def main():
             for pair in ('C4','C1'):
                 row=semantic['repeated']['SEMANTIC_'+pair]
                 summary(lines,'语义与单调 / '+pair,row,list(row['comparisons']))
-            lines += ['检索/FP/FN：',json.dumps(semantic['query_diagnosis'],ensure_ascii=False,indent=2)]
+            lines += ['检索/FP/FN：',diagnostic_record('semantic_colour_analysis','query_diagnosis',semantic['query_diagnosis'])]
     if (PUBLIC/'preregistration_joint_visual_v1.json').is_file():
         lines += ['', '十一补、视觉图与外观校准的联合机制拆解',
             'SEM神经输入缺乏独立增益，主方案回到旧RGB1080均值头；显式物理线索只进入经典PAVA正则。',
@@ -295,7 +306,7 @@ def main():
             for pair in ('C4','C1'):
                 row=joint['repeated']['JOINT_'+pair]
                 summary(lines,'图与校准联合 / '+pair,row,list(row['comparisons']))
-            lines += ['联合检索/FP/FN：',json.dumps(joint['query_diagnosis'],ensure_ascii=False,indent=2)]
+            lines += ['联合检索/FP/FN：',diagnostic_record('joint_visual_analysis','query_diagnosis',joint['query_diagnosis'])]
     if (PUBLIC/'preregistration_appearance_joint_cold_v1.json').is_file():
         lines += ['', '十一再补、四卡独立真实冷启动',
             'GPU0 C4KD、1 C4JOINT、2 C1KD、3 C1JOINT；各自模型重载、新源前向、新SQLite，预计4526真实教师问答。',
@@ -312,11 +323,11 @@ def main():
                     '实际后处理/输出秒='+str(row['actual_all_method_postprocess_and_output_seconds']),
                     '其中外观校准CPU秒='+str(row['appearance_regularization_CPU_seconds']),
                     '真实教师='+json.dumps(row['teacher']),'充分拟合='+json.dumps(row['teacher_fit_audit'])]
-            lines += ['实际两臂输入比较：',json.dumps(appearance_cold['actual_within_pair_evidence_audit'],indent=2),
-                '与开发质量源比较：',json.dumps(appearance_cold['quality_source_evidence_audit'],indent=2),
-                '预先固定seed0预测比较：',json.dumps(appearance_cold['expected_seed0_prediction_audit'],indent=2),
-                '实际查询权衡：',json.dumps(appearance_cold['postseal_candidate_membership_diagnosis'],ensure_ascii=False,indent=2),
-                '验收与边界辅助字段：',json.dumps(appearance_cold['acceptance'],indent=2),
+            lines += ['实际两臂输入比较：',diagnostic_record('appearance_cold_analysis','actual_within_pair_evidence_audit',appearance_cold['actual_within_pair_evidence_audit']),
+                '与开发质量源比较：',diagnostic_record('appearance_cold_analysis','quality_source_evidence_audit',appearance_cold['quality_source_evidence_audit']),
+                '预先固定seed0预测比较：',diagnostic_record('appearance_cold_analysis','expected_seed0_prediction_audit',appearance_cold['expected_seed0_prediction_audit']),
+                '实际查询权衡：',diagnostic_record('appearance_cold_analysis','postseal_candidate_membership_diagnosis',appearance_cold['postseal_candidate_membership_diagnosis']),
+                '验收与边界辅助字段：',diagnostic_record('appearance_cold_analysis','acceptance',appearance_cold['acceptance']),
                 '这些是实际新运行各自的精度/时间，不是第四个独立神经种子；并行NAS/OS负载不支持算法加速或全预算Pareto最优宣称。']
     if (PUBLIC/'preregistration_direct_teacher_nores_v1.json').is_file():
         lines += ['', '十一末、标准直接教师分类头：去掉固定源先验的公平性补查',
@@ -329,7 +340,7 @@ def main():
             for pair in ('C4','C1'):
                 row=direct['repeated']['DIRECT_'+pair]
                 summary(lines,'标准直接教师 / '+pair,row,list(row['comparisons']))
-            lines += ['直接头的检索/FP/FN：',json.dumps(direct['query_diagnosis'],ensure_ascii=False,indent=2),
+            lines += ['直接头的检索/FP/FN：',diagnostic_record('direct_teacher_analysis','query_diagnosis',direct['query_diagnosis']),
                 '若此项消除了此前残差优势，就必须继续修正方法和论文叙事。保留配方/最强主对照改变需对应真实物理成本验证。']
     if (PUBLIC/'preregistration_direct_teacher_pcd_nores_v1.json').is_file():
         lines += ['', '十一附、原生PCD768标准直接教师分类头',
@@ -342,7 +353,7 @@ def main():
             for pair in ('C4','C1'):
                 row=direct_pcd['repeated']['DIRECT_'+pair]
                 summary(lines,'原生PCD直接教师 / '+pair,row,list(row['comparisons']))
-            lines += ['原生直接头检索/FP/FN：',json.dumps(direct_pcd['query_diagnosis'],ensure_ascii=False,indent=2),
+            lines += ['原生直接头检索/FP/FN：',diagnostic_record('direct_teacher_pcd_analysis','query_diagnosis',direct_pcd['query_diagnosis']),
                 '这些是固定输入和问答的小头质量补查，不是新的真实冷启动时间点；变更配方/主对照须完成匹配物理验证。']
     if (PUBLIC/'preregistration_native_direct_cold_v1.json').is_file():
         lines += ['', '十一续、强原生基线后的统一最小化：原生直接头＋经典校准',
@@ -372,11 +383,11 @@ def main():
                     '阶段秒='+json.dumps(row['phase_seconds']),
                     '头拟合/保存秒='+str(row['actual_head_fit_and_save_seconds'])+'；后处理/输出秒='+str(row['actual_all_method_postprocess_and_output_seconds']),
                     '其中PAVA CPU秒='+str(row['appearance_regularization_CPU_seconds'])+'；真实教师='+str(row['teacher']['new_calls'])+'；缓存命中='+str(row['teacher']['cache_hits'])]
-            lines += ['本次实际两臂输入：',json.dumps(native_cold['actual_within_pair_evidence_audit'],indent=2),
-                '与原生质量源的输入：',json.dumps(native_cold['quality_source_evidence_audit'],indent=2),
-                '全部保存分数/预测的重放：',json.dumps(native_cold['expected_seed0_prediction_audit'],indent=2),
-                '本次查询权衡：',json.dumps(native_cold['postseal_candidate_membership_diagnosis'],indent=2),
-                '本次验收字段：',json.dumps(native_cold['acceptance'],indent=2),
+            lines += ['本次实际两臂输入：',diagnostic_record('native_cold_analysis','actual_within_pair_evidence_audit',native_cold['actual_within_pair_evidence_audit']),
+                '与原生质量源的输入：',diagnostic_record('native_cold_analysis','quality_source_evidence_audit',native_cold['quality_source_evidence_audit']),
+                '全部保存分数/预测的重放：',diagnostic_record('native_cold_analysis','expected_seed0_prediction_audit',native_cold['expected_seed0_prediction_audit']),
+                '本次查询权衡：',diagnostic_record('native_cold_analysis','postseal_candidate_membership_diagnosis',native_cold['postseal_candidate_membership_diagnosis']),
+                '本次验收字段：',diagnostic_record('native_cold_analysis','acceptance',native_cold['acceptance']),
                 '这是新实测精度和新实测成本，不是第4个独立神经种子；不声称算法提速或所有预算最优。']
         if (PUBLIC/'preregistration_native_optimized_cold_v2.json').is_file():
             lines += ['原生真实成本V2另做了必要纠正：常规768D KD不使用手工RGB统计，旧共同实现却仍为它计算HSV和重复图像IO，会高估基线成本。',
@@ -415,7 +426,7 @@ def main():
         else:
             for pair,row in stable['repeated'].items():summary(lines,'ONE_SE稳定选择 / '+pair,row,list(row['comparisons']))
             lines += ['逐视频选择计数：'+json.dumps({k:r['stability_global_video_counts'] for k,r in stable['conditions'].items()}),
-                '封存后检索诊断：'+json.dumps(stable['query_diagnosis'],separators=(',',':'))]
+                '封存后检索诊断：'+diagnostic_record('stable_topology_analysis','query_diagnosis',stable['query_diagnosis'])]
             lines += ['V2主方法也未晋级：C4 +.481959，parent+seedCI[-.042041,.993548]仍跨0；C1相比完全图-.819848且区间为负。',
                 '没有把TWO_SE/MEDIAN的探索性结果改称ONE_SE主检验通过；其预备额外GPU冷流没有启动。']
     if (PUBLIC/'preregistration_confidence_teacher_v1.json').is_file():
@@ -438,7 +449,7 @@ def main():
         if contract is None:lines += ['本轮仍在运行，尚不能宣称改善正确检索或减少误删。']
         else:
             for pair,row in contract['repeated'].items():summary(lines,'负证据边界 / '+pair,row,list(row['comparisons']))
-            lines += ['正确检索、空输出及误报漏报：'+json.dumps(contract['query_diagnosis'],separators=(',',':')),
+            lines += ['正确检索、空输出及误报漏报：'+diagnostic_record('contract_graph_analysis','query_diagnosis',contract['query_diagnosis']),
                 '主方案失败：C4比完整J下降.384532，原视频+种子CI[-.670867,-.074881]为负；seed0虽然净救回5查询，但FP增加51,935。全面限制No传播不可保留。']
     if (PUBLIC/'preregistration_weighted_classical_v1.json').is_file():
         lines += ['', '十一更后续、强加权基础上的完全同头归因',
@@ -448,7 +459,7 @@ def main():
         if weighted_classical is None:lines += ['本轮仍在运行；旧未加权真实时间不能套到这个新配方精度。']
         else:
             for pair,row in weighted_classical['repeated'].items():summary(lines,'共享强加权头的经典模块 / '+pair,row,list(row['comparisons']))
-            lines += ['查询权衡：'+json.dumps(weighted_classical['query_diagnosis'],separators=(',',':')),
+            lines += ['查询权衡：'+diagnostic_record('weighted_classical_analysis','query_diagnosis',weighted_classical['query_diagnosis']),
                 '主验收未通过：C4共享加权J67.580033对强加权KD+.477677，parent+seedCI[-.069102,1.060519]跨0；C1+3.467750区间正。不能把一域稳定、一域不确定写成全面完成。',
                 '如保留此共享基础，须新的对应真实执行/成本与来源核验；没有因复用质量队列完成自动结束Goal。']
     if (PUBLIC/'preregistration_cue_consensus_v1.json').is_file():
@@ -460,7 +471,7 @@ def main():
             consensus=load('cue_consensus_analysis')
             assert load('cue_consensus_statistical_reproduction')['status'].startswith('PASS_')
             for pair,row in consensus['repeated'].items():summary(lines,'选择性视觉冲突 / '+pair,row,list(row['comparisons']))
-            lines += ['查询权衡：'+json.dumps(consensus['query_diagnosis'],separators=(',',':')),
+            lines += ['查询权衡：'+diagnostic_record('cue_consensus_analysis','query_diagnosis',consensus['query_diagnosis']),
                 '完整根代理复核：主假设失败，不保留。C4 67.547497相对原完整共享加权J-.032536，区间[-.126173,.085614]跨0；相对强加权KD+.445142，区间[-.091387,1.028821]仍跨0。',
                 '三个种子都没有救回新的漏找query（rescue/regress均0），却FP分别增加4990/5347/7190。对随机同量隔离没有稳定优势。C1完全不变不是新贡献。',
                 '294HOTA/336效应独立复算PASS只是算术可信，不等于新机制有效；没有启动该配方额外实际冷流。其成本不沿用旧方法时间。']
@@ -476,10 +487,87 @@ def main():
             coverage=load('coverage_search_analysis')
             assert load('coverage_search_statistical_reproduction')['status'].startswith('PASS_')
             for pair,row in coverage['repeated'].items():summary(lines,'同预算覆盖搜索 / '+pair,row,list(row['comparisons']))
-            lines += ['封存后覆盖/检索诊断：'+json.dumps(coverage['query_diagnosis'],separators=(',',':')),
-                '按预登记核验而非队列PASS决定是否保留；新的质量研究仍不等于对应实际部署成本。']
+            lines += ['封存后覆盖/检索诊断：'+diagnostic_record('coverage_search_analysis','query_diagnosis',coverage['query_diagnosis']),
+                '根代理完整复核：主门槛失败，不保留。新KD66.982569对旧强KD67.102356 -.119787；新J67.239436低于旧J67.580033，差-.340597，三个种子均负。',
+                '新J对自己的软KD、旧强软KD、旧完整收敛FINAL均无可靠正增益。270拟合全4000步达标，不能归成普通头欠拟合。',
+                '实际正确候选覆盖改善：未问到正确candidate的查询122→113，未得到正确Yes的查询147→134。与旧J相比，新J净救回13/8/4条query，却多出34603/33914/31842个FP观测；覆盖改善不是HOTA必然提高。',
+                '图比坏完全图+4.15不证明优于强KD；新J比CAL还低.172124。只读单一CountMatched正差也不能宣称普遍排序突破。',
+                '没有启动失败SEARCH配方额外真实冷流，质量复用时间不冒充实际部署成本。Goal继续ACTIVE。']
         else:lines += ['本轮已启动真实缺失回答采集及后续质量队列，尚无完整评分结果。Goal继续ACTIVE。']
+    if (PUBLIC/'preregistration_optional_transfer_v1.json').is_file():
+        lines += ['', '十一进一步、图选择器必须允许不作跨人类推',
+            '旧选择器只能在局部/全局两种非零传播图之间选。只读教师收据、不读GT的审计发现：C4 36/45视频两图都不及0.5中性教师预测，C1仅1/25；这本身不是HOTA结论。',
+            '新候选集加入IDENTITY：部署时严格保留同一个强加权KD，再接原PAVA；不把它混同成已问节点仍强制替换原始教师概率的零边图。',
+            '留TrackID教师预测时，最佳图相对中性IDENTITY的风险下降须超过一倍配对query SE才使用，否则原KD不作传播。PRESUPPOSED用平衡softCE，CHECKLIST用BCE。',
+            'SE只是共享轨迹/交叉拟合依赖下的敏感性正则，不声称校准置信度或GT最优性。严格最小风险、被迫用图、固定全局、原局部/CAL及局部原始教师锚点回填控制均保留。',
+            '6条件36原始+114数量=150输出，全封存后本研究GT，0新增教师/主干/头拟合。70视频旧CV风险、完整图、IDENTITY→CAL重放均0差、GT0；教师风险主规则在C4选择44IDENTITY/1LOCAL，C1选择5IDENTITY/20GLOBAL。']
+        if (PUBLIC/'optional_transfer_analysis.json').is_file() and (PUBLIC/'optional_transfer_statistical_reproduction.json').is_file():
+            optional=load('optional_transfer_analysis')
+            assert load('optional_transfer_statistical_reproduction')['status'].startswith('PASS_')
+            for pair,row in optional['repeated'].items():summary(lines,'允许不传播的教师预测选择 / '+pair,row,list(row['comparisons']))
+            lines += ['查询检索及误报漏报：'+diagnostic_record('optional_transfer_analysis','query_diagnosis',optional['query_diagnosis']),
+                '根代理复核：primary仍未接受。虽然对均值KD，C4+.360045、C1+5.019675的区间均正，但C4对更强充分收敛FINAL仅+.310792，区间[-.063214,.762190]跨0。',
+                '新门控对被迫传播C4+.084777区间跨0、C1-.266020且区间上界近0，没有稳定独立收益；不把更高的STRICT对照事后改称primary成功。',
+                '没有启动该失败配方新实际冷流。是否只是取消已问节点的强制教师锚点，须读ANCHOR_OPTIONAL控制。与SEARCH叠加必须另测，不能把两组涨幅相加。']
+        else:lines += ['本轮已启动，尚无完整新HOTA实证。若保留须相应新真实物理执行，不沿用旧固定图wall。Goal继续ACTIVE。']
+    if (PUBLIC/'preregistration_protocol_calibration_v1.json').is_file():
+        lines += ['', '十一之五、回到共享收敛头：任务协议与视觉校准的最简组合',
+            '旧OPTIONAL、SEARCH以及选择性No规则均未通过，不把其中最高对照事后晋级。',
+            '本轮双方统一使用强加权充分收敛FINAL，而不是只与略弱均值比较；不按目标GT选择checkpoint。',
+            '任务提供PRESUPPOSED时原样保留FINAL，CHECKLIST时应用原同总边权全局图，然后统一执行原PAVA。函数只看任务协议，不看域名或GT。',
+            '这里全局是已有候选之间的证据汇聚，不是新增FRAME_BOX教师视角；双方仍使用同一冻结CROP教师接口、相同回答和预算。',
+            '普通基线也取得同样协议，对独立Bernoulli候选边缘条件化为至少一个候选；清单原样。该对照假设候选覆盖场景，不强制单人，也不提供真实存在性。',
+            '固定局部/全局、仅校准、仅协议池化和两方向数量投影全部保留；36原始+78数量共114个输出全封存后本研究GT。',
+            '旧均值头的CAL/全局组件结果已经看过，当前规则是开发结果驱动的简化，不是独立确认性验证。',
+            '全局秩一求解已在70视频与原稠密算子/旧组件核验，概率与决策不变；仅求解阶段线性，不将建图成本隐藏。']
+        if (PUBLIC/'protocol_calibration_analysis.json').is_file() and (PUBLIC/'protocol_calibration_statistical_reproduction.json').is_file():
+            assert load('protocol_calibration_statistical_reproduction')['status'].startswith('PASS_')
+            result=load('protocol_calibration_analysis')
+            for pair,row in result['repeated'].items():
+                summary(lines,pair,row,[name for name in row['comparisons'] if name.startswith('PROTOCOL_JOINT_vs_') or name.startswith('COUNT_') or name in ('FINAL_CAL_vs_KD','PROTOCOL_GRAPH_vs_KD')])
+            review=PUBLIC/'protocol_calibration_scientific_review.json'
+            if review.is_file():
+                checks=json.loads(review.read_text())
+                lines += ['主科学验收状态：'+checks['status'],'逐项门槛：'+json.dumps(checks['checks'],ensure_ascii=False),
+                    '完整验收及效应见：'+str(review)]
+            lines += ['配套真实成本必须来自对应新配方和FINAL读出，不引用旧均值头wall；算术复算PASS并不自动完成Goal。']
+            lines += ['C4相对强Final双数量投影均有小幅正差；C1两投影区间跨0，主要是数量/查询基率校准，不作普遍语义排序宣称。',
+                'C4三个种子相对Final的canonical query净救回0/1/-3，C1为0/2/-2；总体HOTA正不等于漏查已全部消除。',
+                '当前两个方向中，协议和数据集重合；代码接收任务协议而非域名，但尚无同域跨协议或未见域验证，不能据此证明普遍的协议泛化。',
+                diagnostic_record('protocol_calibration_analysis','query_diagnosis',result['query_diagnosis'])]
+        else:lines += ['本轮已启动，结果尚未完整核验；不提前宣布有效。']
+    if (PUBLIC/'preregistration_protocol_cold_v1.json').is_file():
+        lines += ['', '十一之六、共享收敛头与同任务协议的四卡真实冷启动',
+            'GPU0/1分别C4普通/组合，GPU2/3分别C1普通/组合；每份独立加载源与Qwen、真实提特征、独立新SQLite、重训相同强加权头，预期4526真实回答/0缓存。',
+            '普通基线也获得非空/清单协议，使用收敛FINAL并跳过未使用RGB；组合支付RGB、汇聚、PAVA成本。全部四份预测封存后本组GT。']
+        if (PUBLIC/'protocol_cold_analysis.json').is_file() and (PUBLIC/'protocol_cold_statistical_reproduction.json').is_file():
+            assert load('protocol_cold_statistical_reproduction')['status'].startswith('PASS_')
+            actual=load('protocol_cold_analysis')
+            for pair,row in actual['conditions'].items():
+                lines += [pair,'本次真实HOTA：'+json.dumps(row['raw_HOTA']),describe(row['comparisons']['JOINT_vs_KD'])]
+            for name,row in actual['runs'].items():
+                lines += [name,'完整外部进程wall秒='+str(row['worker']['actual_worker_process_wall_seconds']),
+                    '阶段秒='+json.dumps(row['phase_seconds']),
+                    '拟合保存秒='+str(row['actual_head_fit_and_save_seconds'])+'；后处理输出秒='+str(row['actual_all_method_postprocess_and_output_seconds']),
+                    '真实教师='+str(row['teacher']['new_calls'])+'；缓存='+str(row['teacher']['cache_hits'])]
+            lines += ['实际与质量预测/输入一致性：'+json.dumps(actual['expected_seed0_prediction_audit']),
+                '各方法真实Popen-to-exit，不套旧均值头时间。OS/NAS缓存未清、主机共享与错峰负载不受控，不作算法提速或全预算最优宣称。']
+        else:lines += ['已按通过的质量门槛启动，物理收据尚待完整验收。尚无新的完成时长，不引用旧时间。']
+    if (PUBLIC/'preregistration_pure_components_v1.json').is_file():
+        lines += ['', '十一之七、回填老师答案、跨候选图边和视觉对应的纯净拆解',
+            '主质量分已知后补做机制审计，主配方与正在执行的物理源码不改；不是独立盲测，也不按最高控制重新选配方。',
+            '零边图保留相同局部教师锚点；ANCHOR_CAL随后原PAVA。置乱控制按固定hash打乱线索与候选对应，再用原样跨TrackID前缀重拟合PAVA。',
+            '6条件24原始+42数量=66份新控制，全部封存后本组GT，0新增教师/编码器/神经头拟合。不是旧封存v8P66。']
+        if (PUBLIC/'pure_components_analysis.json').is_file() and (PUBLIC/'pure_components_statistical_reproduction.json').is_file():
+            assert load('pure_components_statistical_reproduction')['status'].startswith('PASS_')
+            pure=load('pure_components_analysis')
+            for pair,row in pure['repeated'].items():summary(lines,pair,row,list(row['comparisons']))
+            lines += ['内部成分归因检查：'+json.dumps(pure['attribution_checks']),
+                '如果成分证据不成立，不能把汇聚整体差全部算成图边或语义对应；不得事后晋级表现更高的控制。']
+        else:lines += ['已登记并执行，成分归因尚无新结论。']
     lines += ['', '十二、仍需准确回答的科学问题与结论边界',
+        '候选诊断标签来自全候选库的逐query逐帧IoU.5一对一匹配。canonical正/负选中数不是教师纯语义正确率，也不是各方法TrackEval重新匹配后的实际TP/FP。',
+        '定性诊断可见框定位、重叠邻人、模糊与光照歧义；例如一个视觉上all-black的TeacherYes候选IoU仅.405，不能直接叫教师语义答错。样例用于解释，非随机频率估计，未参与参数选择。',
         '严格同RGB主对照是否在两个方向都支持正增益，是否胜过所有充分软/硬checkpoint，详见上面的全部实际结果。',
         '即使均值提升，也应检查三个种子的方向、按原视频不确定性和双向数量投影，不凭某个单点封神。',
         '开发数据上的描述性区间没有修正多次开发或多重比较，也不能证明未见域总体性能。',
@@ -491,6 +579,8 @@ def main():
     for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis','zero_colour_analysis','fresh_teacher_anchor_diagnosis','canonical_pcd_analysis','preregistration_semantic_colour_v1','semantic_colour_analysis','joint_visual_analysis','appearance_cold_analysis','direct_teacher_analysis','direct_teacher_pcd_analysis','native_factorial_analysis','native_cold_analysis','preregistration_predictive_topology_v1','predictive_topology_analysis','preregistration_stable_topology_v2','stable_topology_analysis','preregistration_confidence_teacher_v1','confidence_teacher_analysis','preregistration_contract_graph_v1','contract_graph_analysis','preregistration_weighted_classical_v1','weighted_classical_analysis'):
         if not (PUBLIC/(stem+'.json')).is_file():continue
         lines.append(str(PUBLIC/(stem+'.json')))
+    for stem in ('cue_consensus_analysis','cue_consensus_scientific_review','preregistration_coverage_search_v1','coverage_search_evidence_receipt','coverage_search_analysis','coverage_search_scientific_review','teacher_transfer_null_audit','preregistration_optional_transfer_v1','optional_transfer_sanity','optional_transfer_analysis','optional_transfer_scientific_review','preregistration_protocol_calibration_v1','protocol_calibration_sanity','protocol_calibration_analysis','protocol_calibration_scientific_review','preregistration_protocol_cold_v1','protocol_cold_analysis','preregistration_pure_components_v1','pure_components_analysis'):
+        if (PUBLIC/(stem+'.json')).is_file():lines.append(str(PUBLIC/(stem+'.json')))
     lines += [str(PUBLIC/'strict_rgb_parent_statistics.json'),str(PUBLIC/'strict_rgb_statistical_reproduction.json'),
         '公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。',
         '原始新运行：/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121',
@@ -498,8 +588,14 @@ def main():
         'GitHub仅代码/实验TXT/精选JSON与PNG/PDF；snapshot和可达历史均必须小于100,000,000字节。',
         'Goal由根代理核验真实目标后单独判断；此报告不会自动结项。']
     path=ROOT/'docs/TTA_RMOT_视觉本能与经典算法_持续研究综合实证_20261122.txt'
+    if FULL_DIAGNOSTICS:
+        path=ROOT/'a100_runs/visual_classical_20261121/analysis/TTA_RMOT_持续研究完整逐查询计数版_20261122.txt'
     path.write_text('\n'.join(lines)+'\n')
     print(json.dumps(dict(status='RESEARCH_SYNTHESIS_WRITTEN',path=str(path),goal_auto_closed=False),ensure_ascii=False))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--full-diagnostics',action='store_true')
+    FULL_DIAGNOSTICS=parser.parse_args().full_diagnostics
+    main()

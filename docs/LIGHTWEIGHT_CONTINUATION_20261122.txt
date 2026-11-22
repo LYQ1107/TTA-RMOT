@@ -32,3 +32,9 @@ checkpoint、原始图片/特征、SQLite、全量预测、训练状态和逐批
 
 只克隆本轻量发布历史：
 git clone --single-branch --branch codex/visual-classical-evidence-20261122 https://github.com/LYQ1107/TTA-RMOT.git
+
+最新续跑：SEARCH84、OPTIONAL150已完成并独立复算，科学门槛均未通过，失败保留；共享收敛FINAL的协议/视觉校准114正在执行。它是根据开发结果做的简化，不是盲测。新的四卡真实成本代码仅有条件准备，未执行，不能引用成收据。原分支及已推送历史保留，无force push。
+
+为100MB快照限制，仅从最新代码树移出5份未执行且质量门槛已失败的旧冷流worker，未删除任何真实测量所用冻结源码或实验结果。原文逐字保留在Git 8d6faa1616599a87aa25d4aad8e244a82b535074，以及本机/var/tmp归档。恢复任一文件可用 git show 8d6faa1616599a87aa25d4aad8e244a82b535074:脚本路径。清单及hash见unexecuted_cold_prototype_retirement.json；这些历史条件计划不能当作实际成本。
+
+同一归档进一步包含这5个未执行worker的6份未执行调度/分析脚本，共11份；均逐字保留Git 8d6faa1及本机归档，真正测量的冻结源码仍在最新树。当前综合TXT保留全部HOTA/效应和历程，重复原始计数/审计表引用专题TXT/JSON；含全部重复表的单一完整TXT由--full-diagnostics生成到本地a100_runs，未删除任何实验数据。

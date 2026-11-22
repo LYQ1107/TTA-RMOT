@@ -1,10 +1,10 @@
-# Fresh common confidence-weighted foundation; plain decoder matches sealed quality study.
-"""Fresh whole-C4 source/teacher stream and physically timed same-evidence arms.
+"""Fresh single-method target stream using the canonical converged head.
 
-One common source/teacher stream is measured, then actual head fits and each
-decoder are charged separately. No historical feature/QA payload is consumed.
-Multiple arms share work for experimental economy; they are not independent
-repeated cold deployments. Ground truth is prohibited in this worker.
+Ordinary: FINAL with the supplied nonempty/checklist contract, no unused RGB.
+Proposed: FINAL with protocol pooling, then the frozen visual PAVA. Every
+worker independently computes features, asks its frozen teacher and fits the
+same weighted head. No historical feature/QA payload or target GT is consumed.
+The wrapper times Popen-to-exit; source candidate generation is outside scope.
 """
 import time
 PROCESS_BEGIN=time.perf_counter()
@@ -25,15 +25,16 @@ from flex_uda.active.visual_classical import visual_graph,acquisition_order,refi
 from scripts.a100_visual_classical_prepare import OUT
 from scripts.a100_visual_classical_cold_slice import SparsePCD
 
-LABELS=('RAW','CLIP','HARD')
-BASE_METHODS=tuple(label+'_KD'+suffix for label in LABELS for suffix in ('_400','_4000',''))+tuple(
-    label+'_'+name for label in ('RAW','CLIP') for name in ('COHORT','NO_GRAPH','STRONG_PRIOR'))+tuple(
-    label+'_MEAN' for label in LABELS)+tuple(label+'_MEAN_'+variant for label in ('RAW','CLIP') for variant in ('COHORT','NO_GRAPH'))
-METHODS=BASE_METHODS+('CLIP_MEAN_CAL','CLIP_MEAN_COHORT_CAL')
+LABELS=('CLIP',)
+BASE_METHODS=('CLIP_KD_NONEMPTY',)
+METHODS=('CLIP_KD_NONEMPTY','CLIP_KD_PROTOCOL_CAL')
 
 
-def real_colours(bank,observations,samples,extension='.jpg'):
+def real_colours(bank,observations,samples,extension='.jpg',*,compute_rgb=True):
     boxes=np.asarray([list(map(float,s.split(',')[2:6])) for s in bank['lines']]);frames={};colours=[];anchors=[]
+    if not compute_rgb:
+        anchors=[int(observations[rows[np.argmax(np.prod(boxes[rows,2:4],axis=1))],0]) for rows in samples]
+        return np.zeros((len(samples),3,104),dtype=float),anchors
     for rows in samples:
         hist=[]
         for row in rows:
@@ -51,7 +52,9 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         head_query_scope='clothing',task_protocol=None,set_decoder='original',graph_metric='combined',graph_prior='constant',head_source_logit='residual'):
     assert 0 < teacher_fraction <= 1
     assert perception_mode=='track-three' and teacher_fraction==.1
-    assert tuple(requested_methods or ())==('CLIP_MEAN_COHORT_CAL',)
+    assert tuple(requested_methods or ()) in (('CLIP_KD_NONEMPTY',),('CLIP_KD_PROTOCOL_CAL',))
+    assert task_protocol in ('PRESUPPOSED','CHECKLIST')
+    assert query_graph_scope=='extended' and graph_metric=='combined' and graph_prior=='constant' and set_decoder=='original'
     assert head_query_scope=='pcd' and head_source_logit=='zero'
     assert query_graph_scope in ('clothing','extended')
     assert head_query_scope in ('clothing','extended','zero','pcd')
@@ -160,6 +163,11 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         appearance_rule='fixed teacher-only TrackID-crossfit PAVA, ln3 bounded odds, after graph if requested' if calibrated else None)
     protocol.update(confidence_weighted_teacher_head=True,confidence_rule='1+3*abs(2*raw_teacher_p-1); normalized weighted CE/KL',
         quality_plain_decoder=True,source_motion_presence_gate_applied=False)
+    protocol.update(shared_head_readout='CONVERGED_FINAL',task_contract_pooling=calibrated,
+        task_contract_rule='PRESUPPOSED identity; CHECKLIST equal-edge global pool; then PAVA',
+        RGB_statistics_computed=calibrated,unused_RGB_statistics_skipped=not calibrated,
+        source_motion_presence_gate_applied=False,quality_plain_decoder=True,
+        ordinary_same_task_nonempty_conditioning=not calibrated)
     atomic_json(root/'protocol.json',protocol)
     if attempt==0:assert not (root/'raw.sqlite').is_file(),'A fresh cold stream requires a new QA cache'
     common('imports_metadata_and_recovery_setup',PROCESS_BEGIN)
@@ -186,18 +194,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
         assert fc.tracks==list(map(int,tracks))
         common('real_all_frame_student_forward_and_initial_head' if perception_mode=='full' else 'real_sparse_frame_student_forward_and_initial_head',t,video)
         output_context=SimpleNamespace(bank=bank,queries=queries)
-        output_frame_index={int(f):i for i,f in enumerate(full_frames)}
-        output_presence=np.stack([np.interp(full_frames,fc.frames,fc.raw_presence[qi]) for qi in range(len(queries))])
-        if perception_mode=='track-three':
-            # This contains only interpolated sampled margins, for identical
-            # counterfactual tie breaking. No unobserved neural margin is read.
-            output_margin=np.zeros((len(queries),len(observations)),dtype='float32')
-            for track in tracks:
-                ids=np.flatnonzero(observations[:,1]==track);seen=fc.by_track[int(track)]
-                for qi in range(len(queries)):
-                    output_margin[qi,ids]=np.interp(observations[ids,0],fc.observations[seen,0],fc.margin[qi,seen])
-            np.save(current_dir/'output_margin.npy',output_margin)
-        t=time.perf_counter();colour,anchors=real_colours(bank,observations,sink.samples,'.jpg' if target_name=='SportsMOT' else '.png');texts=[q['query_text'] for q in queries]
+        t=time.perf_counter();colour,anchors=real_colours(bank,observations,sink.samples,'.jpg' if target_name=='SportsMOT' else '.png',compute_rgb=calibrated);texts=[q['query_text'] for q in queries]
         geometry,normalized_pcd,selected_colour=augmented_features(original,colour,texts);raw=np.concatenate([original,selected_colour],axis=2).astype('float32')
         if head_query_scope!='clothing':
             from flex_uda.active.context_cohort import distillation_features
@@ -216,7 +213,7 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             for ti in order[:quota[qi]]:requests.append(dict(target=target_name,video_id=video,query_id=q['expression_id'],query_text=q['query_text'],
                 track_id=int(tracks[ti]),frame_id=anchors[ti],view='CROP',local_query=qi,local_track=ti))
         atomic_json(current_dir/'questions_before_answers.json',dict(requests=requests,GT_open_attempts=len(guard)))
-        common('real_RGB_sparse_inputs_and_image_only_acquisition',t,video)
+        common('real_RGB_sparse_inputs_and_image_only_acquisition' if calibrated else 'anchor_and_PCD_only_acquisition_no_RGB_histograms',t,video)
         t=time.perf_counter();answers=np.full(prior.shape,np.nan);returned=[]
         for offset in range(0,len(requests),8):
             batch=requests[offset:offset+8];responses=client.ask_many([{k:v for k,v in r.items() if k not in ('local_query','local_track')} for r in batch])
@@ -237,40 +234,26 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
             for point,value in scores.items():prediction[label+'_KD'+('' if point=='CONVERGED' else '_'+point)]=value.reshape(source.shape)
             prediction[label+'_MEAN']=.5*(prediction[label+'_KD_400']+prediction[label+'_KD'])
             del head
-        columns=np.asarray([tracks.index(int(t)) for _,t in observations]);motion={}
-        for qi,q in enumerate(queries):
-            if 'MOTION' in expression_types(q['query_text']):motion[qi]=np.asarray([expit(output_presence[qi,output_frame_index[int(f)]])>=.5 for f,_ in observations])
+        columns=np.asarray([tracks.index(int(t)) for _,t in observations])
         appearance_inputs=None
         for method in methods:
             t=time.perf_counter()
-            base_method=method[:-4] if method.endswith('_CAL') else method
-            if base_method in prediction:score=prediction[base_method]
-            else:
-                label,variant=base_method.split('_',1);score=prediction[label+('_MEAN' if variant.startswith('MEAN_') else '_KD')].copy()
-                # Only the graph branch pays for the extra query masks and
-                # extended geometry. Plain KD never needs this work.
-                if query_graph_scope=='extended':
-                    from flex_uda.active.grounded_graph import query_geometry
-                    hidden=None
-                    if graph_metric=='hidden':
-                        from torch.nn import functional as F
-                        saved_head=torch.load(root/'CLIP_latest_head.pt',map_location=device,weights_only=False)
-                        with torch.no_grad():
-                            values=torch.tensor((current-mean)/std,dtype=torch.float32,device=device)
-                            hidden=F.gelu(F.linear(values,saved_head['model']['0.weight'],saved_head['model']['0.bias'])).cpu().numpy().reshape(source.shape+(64,))
-                        del values,saved_head
-                    graph_parts,graph_geometry=query_geometry(original,colour,texts,graph_metric,hidden)
-                else:
-                    graph_parts=np.stack([part_mask(text) for text in texts]);graph_geometry=geometry
-                source_weights=None
-                if graph_prior=='positive_agreement':
-                    from flex_uda.active.grounded_graph import positive_agreement_precision
-                    source_weights=positive_agreement_precision(prediction['CLIP_KD_400'],prediction['CLIP_KD'],task_protocol)
-                for qi,text in enumerate(texts):
-                    selected=graph_parts[qi]>0
-                    if selected.any():score[qi]=refine_distilled_prior(score[qi],graph_geometry[qi],answers[qi],
-                        graph=not variant.endswith('NO_GRAPH'),source_weight=source_weights[qi] if source_weights is not None else 1. if variant=='STRONG_PRIOR' else .1,
-                        node_mask=np.all(colour[:,selected].sum(2)>0,axis=1))
+            score=prediction['CLIP_KD'].copy()
+            if not calibrated:
+                from flex_uda.active.protocol_calibration import nonempty_baseline
+                score=nonempty_baseline(score,task_protocol)
+            pooling_receipt=None
+            if calibrated:
+                pooling_begin=time.perf_counter()
+                from flex_uda.active.protocol_calibration import global_pool,contract_graph
+                if task_protocol=='CHECKLIST':
+                    from flex_uda.active.topology_selection import graph_matrices
+                    _,_,global_weights,valid,supported=graph_matrices(original,colour,texts)
+                    pooled=global_pool(score,answers,global_weights,valid,supported)
+                else:pooled=score
+                score=contract_graph(score,pooled,task_protocol)
+                pooling_receipt=dict(protocol=task_protocol,operator='GLOBAL' if task_protocol=='CHECKLIST' else 'IDENTITY',
+                    actual_CPU_seconds=time.perf_counter()-pooling_begin,readout='CONVERGED_FINAL',target_GT_used=False)
             appearance_receipt=None
             if method.endswith('_CAL'):
                 appearance_begin=time.perf_counter()
@@ -278,16 +261,10 @@ def run(name,perception_mode='full',requested_methods=None,teacher_fraction=.3,p
                 appearance_receipt['actual_CPU_seconds']=time.perf_counter()-appearance_begin
             expanded=score[:,columns];mask=plain(expanded,exclusive_group(texts,target_name))
             decoder_actions=None
-            if set_decoder!='original':
-                from flex_uda.active.task_decode import decode_with_contract
-                reference=prediction['CLIP_MEAN'][:,columns]
-                base_mask=plain(reference,exclusive_group(texts,target_name))
-                mask,expanded,decoder_actions=decode_with_contract(expanded,mask,base_mask,reference,observations,tracks,prior,
-                    task_protocol,set_decoder,base_method!='CLIP_MEAN')
             folder=root/'methods'/method;destination=folder/'videos'/video;destination.mkdir(parents=True,exist_ok=True)
             np.save(destination/'mask.npy',mask);np.save(destination/'scores.npy',expanded.astype('float32'));immediate_predictions(folder,output_context,mask)
             ledger['method_outputs'].append(dict(video=video,method=method,seconds=time.perf_counter()-t,attempt=attempt,
-                task_contract_actions=decoder_actions,appearance_regularization=appearance_receipt));atomic_json(ledger_path,ledger)
+                task_contract_actions=decoder_actions,appearance_regularization=appearance_receipt,task_contract_pooling=pooling_receipt));atomic_json(ledger_path,ledger)
         if calibrated:commit_appearance_history(appearance_history,appearance_inputs,answers)
         receipt=dict(video=video,index=vi,visible_teacher_videos=videos[:vi+1],logical_teacher_calls=budget,teacher_examples=len(y),fits=fits,
             source_perception_mode=perception_mode,source_frames=len(scoring_frames),full_frames=len(full_frames),

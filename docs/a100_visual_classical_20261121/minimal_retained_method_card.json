@@ -6,7 +6,7 @@
   "task": "Cross-domain referring multi-object tracking with human-accepted fixed official boxes/TrackIDs. Target images, task language and frozen teacher feedback only during adaptation.",
   "frontend_boundary": "Shared official McByte candidates accepted by human; default upstream detector has SportsMOT pretraining and exact original generation weights/logs were not recovered. No claim of source-only detector or a new association frontend.",
   "information": {
-    "source": "Frozen official Dance-best→SportsMOT or KITTI-V2 best→Dance",
+    "source": "Frozen official Dance-best\u2192SportsMOT or KITTI-V2 best\u2192Dance",
     "teacher": "Frozen official Qwen2B CROP interface; no target-domain prompt search",
     "target_manual_GT": "Never in adaptation, acquisition, automatic threshold/checkpoint selection. Isolated evaluation/diagnosis only after seals; all existing data have been used for development.",
     "stream": "Past/current video prefix; current video transductive, not frame-online",
@@ -30,7 +30,7 @@
     "active_selection_contribution_separately_proven": false
   },
   "ordinary_teacher_head": {
-    "architecture": "768→64 GELU→1 directteacherclassifier, train/predict fixedsourcez=0",
+    "architecture": "768\u219264 GELU\u21921 directteacherclassifier, train/predict fixedsourcez=0",
     "source_prior": "Still common acquisition/tie-break information; no fixed addition to neuralhead.",
     "target": "Same teacher probabilities clipped[.02,.98]",
     "training": "AdamW lr.001/wd.001,min4000/max16000,teacherKL<=.005;prefixnormalization;reset same seed pervideo",
@@ -581,12 +581,50 @@
     "scientific_review": "cue_consensus_scientific_review.json"
   },
   "coverage_search": {
-    "status": "RUNNING_REGISTERED_BEFORE_NEW_EVIDENCE",
+    "status": "COMPLETE_PRIMARY_FAILED_NOT_RETAINED",
     "controller_pid": 2118268,
     "primary": "JOINT",
     "same_teacher_budget": 1160,
     "ordinary_KD_gets_same_SEARCH_answers": true,
     "C1_CHECKLIST_unchanged": true,
-    "reference": "preregistration_coverage_search_v1.json"
-  }
+    "reference": "preregistration_coverage_search_v1.json",
+    "retained": false,
+    "C4_HOTA": 67.23943586097636,
+    "C4_vs_own_KD": 0.25686735567751384,
+    "C4_vs_original_J": -0.34059706875713874,
+    "unasked_correct_queries": 113,
+    "correct_Yes_query_gain": 13,
+    "scientific_review": "coverage_search_scientific_review.json"
+  },
+  "optional_transfer": {
+    "status": "COMPLETE_PRIMARY_FAILED_NOT_RETAINED",
+    "primary": "OPTIONAL_JOINT",
+    "controller_pid": 2128080,
+    "reference": "preregistration_optional_transfer_v1.json",
+    "identity_is_exact_KD": true,
+    "anchor_fallback_control": true,
+    "no_new_teacher_encoder_or_head_fits": true,
+    "retained": false,
+    "C4_HOTA": 67.46240110477721,
+    "C1_HOTA": 37.27958099254844,
+    "C4_vs_strong_FINAL_CI": [
+      -0.06321371363745006,
+      0.7621898066045691
+    ],
+    "scientific_review": "optional_transfer_scientific_review.json"
+  },
+  "protocol_calibration_status": {
+    "status": "QUALITY_ACCEPTED_ACTUAL_COST_REQUIRED",
+    "shared_ordinary_head": "CONVERGED_FINAL",
+    "ordinary_has_same_protocol": true,
+    "all_quality_gates_passed": true,
+    "development_derived_not_blind": true,
+    "actual_cold": "STARTED_NOT_YET_VALIDATED",
+    "C4_HOTA": 67.6292220788727,
+    "C1_HOTA": 38.429591523633796,
+    "C4_vs_FINAL": 0.4776131463240034,
+    "C1_vs_FINAL": 5.707914203154289,
+    "unresolved": "C1 ranking intervals cross0; C4 canonical query net rescue 0/1/-3, not all coverage errors solved"
+  },
+  "pure_components_audit": "RUNNING_NO_NEW_TEACHER_ENCODER_NEURAL_FITS"
 }
