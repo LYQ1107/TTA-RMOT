@@ -106,6 +106,9 @@ def dataset_for(folder,pair,seal):
     from flex_uda.a100.mechanism import metadata,PAIRS
     from scripts.a100_mechanism_offline import gt_root
     _,target=PAIRS[pair];m=metadata(target);truth=gt_root(target)/'gt_template';folder=Path(folder)
+    if target=='KITTI-V2' and not truth.is_dir():
+        from flex_uda.a100.kitti_gt_restore import recover
+        truth=recover(folder)/'gt_template'
     wanted={(r['video'],r['expression']) for r in seal['episodes']};seq_info={}
     for q in m['episodes']:
         v,e=q['video_id'],q['expression_id']
@@ -179,5 +182,6 @@ def evaluate(folder,pair):
 
 if __name__=='__main__':
     import argparse
-    parser=argparse.ArgumentParser();parser.add_argument('--folder',required=True);parser.add_argument('--pair',choices=['C4','C1'],required=True)
+    from flex_uda.a100.mechanism import PAIRS
+    parser=argparse.ArgumentParser();parser.add_argument('--folder',required=True);parser.add_argument('--pair',choices=tuple(PAIRS),required=True)
     args=parser.parse_args();_evaluate(args.folder,args.pair)
