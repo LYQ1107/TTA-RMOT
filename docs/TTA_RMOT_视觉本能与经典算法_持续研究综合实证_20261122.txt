@@ -5738,7 +5738,162 @@ WEAK控制逐query总边权与剪边图相同，避免只减弱传播强度就�
 全面No隔离失败后，保留同一强加权普通头，只在排除当前轨迹全部教师监督后的视觉校准正修正达到已有ln3上限时，限制这条No向外传播；局部No锚点仍保留。
 CHECKLIST完整图不变；随机同数量No隔离及同总边权均匀弱化为预登记对照，不能事后从对照挑最高分。
 6条件30原始+114数量=144新输出，全封存后本研究GT，0新增教师/编码器/头拟合。门槛继承冻结校准上限，没有用目标GT扫描阈值。
-本轮待完整预测、官评和独立算术复现，当前没有新方案已胜过普通KD的结论。
+
+选择性视觉冲突 / CUE_CONSENSUS_C4
+三神经种子平均HOTA：
+  CONSENSUS_GRAPH = 67.098440
+  CONSENSUS_JOINT = 67.547497
+  ALL_PROTOCOL_JOINT = 67.547497
+  WEAK_JOINT = 67.592967
+  RANDOM_JOINT = 67.539964
+  KD = 67.102356
+  KD400 = 67.029183
+  KD_FINAL = 67.151609
+  HARD400 = 66.929557
+  HARD_FINAL = 66.760965
+  CAL = 67.494914
+  FULL_GRAPH = 67.071969
+  FULL_JOINT = 67.580033
+  UNWEIGHTED_KD = 67.082937
+  UNWEIGHTED_JOINT = 67.638744
+  RES_KD = 66.169708
+  RES_KD400 = 66.548969
+  RES_KD_FINAL = 65.566257
+  RES_HARD400 = 66.273134
+  RES_HARD_FINAL = 65.574085
+  RES_PCD_KD_MEAN = 66.773474
+  RES_ZERO_HSV_MEAN = 66.854409
+  RES_SEM_MEAN = 66.436670
+  RES_SEM400 = 66.859061
+  RES_SEM_HARD400 = 66.352895
+  RGB_KD400 = 66.556006
+  RGB_KD_FINAL = 66.444269
+  RGB_KD_MEAN = 66.518722
+  RGB_HARD400 = 66.793289
+  RGB_HARD_FINAL = 66.617809
+对应效应（完整结果和全部失败均见JSON）：
+  CONSENSUS_JOINT_vs_KD：+0.445142; parent95%[-0.066269, +0.963093]; parent+seed95%[-0.091387, +1.028821]
+  CONSENSUS_JOINT_vs_KD400：+0.518314; parent95%[+0.046210, +1.028633]; parent+seed95%[+0.023982, +1.044343]
+  CONSENSUS_JOINT_vs_KD_FINAL：+0.395888; parent95%[-0.152036, +0.960375]; parent+seed95%[-0.175827, +1.012844]
+  CONSENSUS_JOINT_vs_HARD400：+0.617940; parent95%[-0.295029, +1.576031]; parent+seed95%[-0.299535, +1.590995]
+  CONSENSUS_JOINT_vs_HARD_FINAL：+0.786532; parent95%[-0.127140, +1.780118]; parent+seed95%[-0.150895, +1.789533]
+  CONSENSUS_JOINT_vs_CAL：+0.052583; parent95%[-0.293185, +0.382830]; parent+seed95%[-0.311611, +0.426876]
+  CONSENSUS_JOINT_vs_FULL_GRAPH：+0.475529; parent95%[+0.036858, +0.962254]; parent+seed95%[+0.013265, +0.972408]
+  CONSENSUS_JOINT_vs_FULL_JOINT：-0.032536; parent95%[-0.109321, +0.083881]; parent+seed95%[-0.126173, +0.085614]
+  CONSENSUS_JOINT_vs_UNWEIGHTED_KD：+0.464560; parent95%[+0.023111, +0.925665]; parent+seed95%[+0.004086, +0.954478]
+  CONSENSUS_JOINT_vs_UNWEIGHTED_JOINT：-0.091246; parent95%[-0.187201, +0.024251]; parent+seed95%[-0.233228, +0.090782]
+  CONSENSUS_JOINT_vs_RES_KD：+1.377790; parent95%[+0.344303, +2.754402]; parent+seed95%[+0.316713, +2.780187]
+  CONSENSUS_JOINT_vs_RES_KD400：+0.998528; parent95%[-0.035410, +2.306855]; parent+seed95%[-0.056925, +2.344311]
+  CONSENSUS_JOINT_vs_RES_KD_FINAL：+1.981240; parent95%[+0.874213, +3.480719]; parent+seed95%[+0.829069, +3.502326]
+  CONSENSUS_JOINT_vs_RES_HARD400：+1.274363; parent95%[+0.398923, +2.458563]; parent+seed95%[+0.377019, +2.471343]
+  CONSENSUS_JOINT_vs_RES_HARD_FINAL：+1.973413; parent95%[+1.060671, +3.089914]; parent+seed95%[+1.034780, +3.124511]
+  CONSENSUS_JOINT_vs_RES_PCD_KD_MEAN：+0.774023; parent95%[+0.087947, +1.484795]; parent+seed95%[+0.070905, +1.500650]
+  CONSENSUS_JOINT_vs_RES_ZERO_HSV_MEAN：+0.693088; parent95%[+0.089524, +1.257459]; parent+seed95%[+0.063405, +1.278351]
+  CONSENSUS_JOINT_vs_RES_SEM_MEAN：+1.110827; parent95%[+0.056828, +2.452815]; parent+seed95%[+0.028720, +2.482701]
+  CONSENSUS_JOINT_vs_RES_SEM400：+0.688436; parent95%[-0.282494, +1.946907]; parent+seed95%[-0.303247, +1.981241]
+  CONSENSUS_JOINT_vs_RES_SEM_HARD400：+1.194602; parent95%[+0.190478, +2.484158]; parent+seed95%[+0.160359, +2.553939]
+  CONSENSUS_JOINT_vs_RGB_KD400：+0.991491; parent95%[+0.246140, +1.930070]; parent+seed95%[+0.186467, +2.004481]
+  CONSENSUS_JOINT_vs_RGB_KD_FINAL：+1.103229; parent95%[+0.397451, +2.039060]; parent+seed95%[+0.381377, +2.071153]
+  CONSENSUS_JOINT_vs_RGB_KD_MEAN：+1.028775; parent95%[+0.314910, +1.953275]; parent+seed95%[+0.293379, +1.985336]
+  CONSENSUS_JOINT_vs_RGB_HARD400：+0.754209; parent95%[-0.183147, +1.783033]; parent+seed95%[-0.195154, +1.803170]
+  CONSENSUS_JOINT_vs_RGB_HARD_FINAL：+0.929688; parent95%[+0.026037, +1.940241]; parent+seed95%[+0.019599, +1.963141]
+  CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+0.449058; parent95%[-0.016375, +0.949562]; parent+seed95%[-0.034335, +0.961692]
+  CONSENSUS_JOINT_vs_ALL_PROTOCOL_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  CONSENSUS_JOINT_vs_WEAK_JOINT：-0.045469; parent95%[-0.135794, +0.076446]; parent+seed95%[-0.142823, +0.077139]
+  CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.007533; parent95%[+0.000000, +0.022104]; parent+seed95%[-0.007781, +0.045888]
+  CONSENSUS_GRAPH_vs_KD：-0.003916; parent95%[-0.358351, +0.393574]; parent+seed95%[-0.400692, +0.462502]
+  COUNT_OWN_CONSENSUS_JOINT_vs_KD：+0.386527; parent95%[+0.139807, +0.652273]; parent+seed95%[+0.135409, +0.668077]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_KD：-0.013221; parent95%[-0.184692, +0.179824]; parent+seed95%[-0.199619, +0.188450]
+  COUNT_OWN_CONSENSUS_JOINT_vs_CAL：+0.197460; parent95%[+0.000028, +0.443785]; parent+seed95%[-0.005628, +0.452886]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_CAL：-0.140531; parent95%[-0.367771, +0.056833]; parent+seed95%[-0.376688, +0.064066]
+  COUNT_OWN_CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+0.042796; parent95%[-0.003100, +0.108225]; parent+seed95%[-0.018086, +0.111305]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+0.017147; parent95%[-0.018867, +0.060259]; parent+seed95%[-0.023594, +0.080165]
+  COUNT_OWN_CONSENSUS_JOINT_vs_FULL_JOINT：+0.004292; parent95%[+0.000000, +0.015869]; parent+seed95%[+0.000000, +0.016330]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_FULL_JOINT：-0.037117; parent95%[-0.079357, +0.000000]; parent+seed95%[-0.079335, -0.000123]
+  COUNT_OWN_CONSENSUS_JOINT_vs_WEAK_JOINT：+0.004292; parent95%[+0.000000, +0.015869]; parent+seed95%[+0.000000, +0.016330]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_WEAK_JOINT：-0.037642; parent95%[-0.079801, -0.000915]; parent+seed95%[-0.079859, -0.000858]
+  COUNT_OWN_CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+
+选择性视觉冲突 / CUE_CONSENSUS_C1
+三神经种子平均HOTA：
+  CONSENSUS_GRAPH = 33.824772
+  CONSENSUS_JOINT = 35.727657
+  ALL_PROTOCOL_JOINT = 35.730878
+  WEAK_JOINT = 35.727657
+  RANDOM_JOINT = 35.727657
+  KD = 32.259906
+  KD400 = 30.247221
+  KD_FINAL = 32.721677
+  HARD400 = 27.864359
+  HARD_FINAL = 27.322294
+  CAL = 33.666335
+  FULL_GRAPH = 33.824772
+  FULL_JOINT = 35.727657
+  UNWEIGHTED_KD = 32.074099
+  UNWEIGHTED_JOINT = 35.731536
+  RES_KD = 32.199208
+  RES_KD400 = 32.513977
+  RES_KD_FINAL = 32.032410
+  RES_HARD400 = 32.524795
+  RES_HARD_FINAL = 31.674901
+  RES_PCD_KD_MEAN = 30.879332
+  RES_ZERO_HSV_MEAN = 31.105765
+  RES_SEM_MEAN = 32.919218
+  RES_SEM400 = 32.581700
+  RES_SEM_HARD400 = 32.636322
+  RGB_KD400 = 29.540881
+  RGB_KD_FINAL = 32.140524
+  RGB_KD_MEAN = 32.349380
+  RGB_HARD400 = 25.515721
+  RGB_HARD_FINAL = 26.241846
+对应效应（完整结果和全部失败均见JSON）：
+  CONSENSUS_JOINT_vs_KD：+3.467750; parent95%[+0.703284, +7.017831]; parent+seed95%[+0.645826, +7.089281]
+  CONSENSUS_JOINT_vs_KD400：+5.480436; parent95%[+2.244139, +9.345261]; parent+seed95%[+2.123079, +9.483678]
+  CONSENSUS_JOINT_vs_KD_FINAL：+3.005979; parent95%[+0.686596, +5.812812]; parent+seed95%[+0.650461, +5.917394]
+  CONSENSUS_JOINT_vs_HARD400：+7.863297; parent95%[+3.990907, +12.450795]; parent+seed95%[+3.672581, +12.831250]
+  CONSENSUS_JOINT_vs_HARD_FINAL：+8.405362; parent95%[+4.531036, +12.775852]; parent+seed95%[+4.158738, +13.077727]
+  CONSENSUS_JOINT_vs_CAL：+2.061321; parent95%[+0.235171, +4.400948]; parent+seed95%[+0.077480, +4.473763]
+  CONSENSUS_JOINT_vs_FULL_GRAPH：+1.902885; parent95%[+0.253693, +4.262108]; parent+seed95%[+0.203721, +4.376431]
+  CONSENSUS_JOINT_vs_FULL_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  CONSENSUS_JOINT_vs_UNWEIGHTED_KD：+3.653557; parent95%[+0.892970, +7.207210]; parent+seed95%[+0.821748, +7.311135]
+  CONSENSUS_JOINT_vs_UNWEIGHTED_JOINT：-0.003880; parent95%[-0.347132, +0.304903]; parent+seed95%[-0.517379, +0.384510]
+  CONSENSUS_JOINT_vs_RES_KD：+3.528448; parent95%[+0.815890, +6.829794]; parent+seed95%[+0.760055, +6.895624]
+  CONSENSUS_JOINT_vs_RES_KD400：+3.213680; parent95%[+0.482998, +6.590327]; parent+seed95%[+0.436848, +6.642487]
+  CONSENSUS_JOINT_vs_RES_KD_FINAL：+3.695246; parent95%[+1.215223, +6.645541]; parent+seed95%[+1.067258, +6.710822]
+  CONSENSUS_JOINT_vs_RES_HARD400：+3.202861; parent95%[-0.017202, +7.032308]; parent+seed95%[-0.284754, +7.285419]
+  CONSENSUS_JOINT_vs_RES_HARD_FINAL：+4.052755; parent95%[+1.079615, +7.726282]; parent+seed95%[+0.908400, +7.983318]
+  CONSENSUS_JOINT_vs_RES_PCD_KD_MEAN：+4.848325; parent95%[+1.645402, +8.639030]; parent+seed95%[+1.519857, +8.741974]
+  CONSENSUS_JOINT_vs_RES_ZERO_HSV_MEAN：+4.621892; parent95%[+1.375070, +8.526859]; parent+seed95%[+1.363814, +8.594663]
+  CONSENSUS_JOINT_vs_RES_SEM_MEAN：+2.808438; parent95%[+0.525986, +5.428215]; parent+seed95%[+0.416690, +5.484138]
+  CONSENSUS_JOINT_vs_RES_SEM400：+3.145957; parent95%[+0.632584, +6.248174]; parent+seed95%[+0.591410, +6.298749]
+  CONSENSUS_JOINT_vs_RES_SEM_HARD400：+3.091335; parent95%[+0.313798, +6.716552]; parent+seed95%[+0.127254, +6.804899]
+  CONSENSUS_JOINT_vs_RGB_KD400：+6.186776; parent95%[+2.931494, +9.937583]; parent+seed95%[+2.815918, +10.134403]
+  CONSENSUS_JOINT_vs_RGB_KD_FINAL：+3.587132; parent95%[+1.257502, +6.131950]; parent+seed95%[+1.141689, +6.328578]
+  CONSENSUS_JOINT_vs_RGB_KD_MEAN：+3.378277; parent95%[+0.998475, +6.149322]; parent+seed95%[+0.853673, +6.357213]
+  CONSENSUS_JOINT_vs_RGB_HARD400：+10.211936; parent95%[+4.360969, +15.976889]; parent+seed95%[+4.246974, +16.111837]
+  CONSENSUS_JOINT_vs_RGB_HARD_FINAL：+9.485810; parent95%[+4.191830, +15.061583]; parent+seed95%[+4.009873, +15.260847]
+  CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+1.902885; parent95%[+0.253693, +4.262108]; parent+seed95%[+0.203721, +4.376431]
+  CONSENSUS_JOINT_vs_ALL_PROTOCOL_JOINT：-0.003222; parent95%[-0.366845, +0.420743]; parent+seed95%[-0.409128, +0.507709]
+  CONSENSUS_JOINT_vs_WEAK_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  CONSENSUS_GRAPH_vs_KD：+1.564865; parent95%[-0.107506, +3.476489]; parent+seed95%[-0.286910, +3.587623]
+  COUNT_OWN_CONSENSUS_JOINT_vs_KD：+0.289217; parent95%[-0.224312, +1.028530]; parent+seed95%[-0.241913, +1.045022]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_KD：-0.502870; parent95%[-1.357392, +0.216743]; parent+seed95%[-1.434280, +0.252907]
+  COUNT_OWN_CONSENSUS_JOINT_vs_CAL：+0.092430; parent95%[-0.202840, +0.427703]; parent+seed95%[-0.275645, +0.533651]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_CAL：-0.446590; parent95%[-1.078305, +0.227813]; parent+seed95%[-1.118743, +0.254330]
+  COUNT_OWN_CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+0.501492; parent95%[+0.007471, +1.355605]; parent+seed95%[+0.007472, +1.358954]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_CONSENSUS_GRAPH：+0.724925; parent95%[-0.102747, +2.411280]; parent+seed95%[-0.103601, +2.677467]
+  COUNT_OWN_CONSENSUS_JOINT_vs_FULL_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_FULL_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_OWN_CONSENSUS_JOINT_vs_WEAK_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_WEAK_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_OWN_CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+  COUNT_BASELINE_CONSENSUS_JOINT_vs_RANDOM_JOINT：+0.000000; parent95%[+0.000000, +0.000000]; parent+seed95%[+0.000000, +0.000000]
+查询权衡：{"conditions":{"C4_seed0":{"candidate_membership":{"KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":24,"positive_queries_without_correct_output":56,"no_positive_candidate_queries_with_output":0,"TP":1388099,"FP":521773,"FN":117859},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":27,"positive_queries_without_correct_output":58,"no_positive_candidate_queries_with_output":0,"TP":1396166,"FP":506945,"FN":109792},"FULL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"no_positive_candidate_queries_with_output":0,"TP":1393887,"FP":485360,"FN":112071},"CONSENSUS_GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":64,"positive_queries_without_correct_output":82,"no_positive_candidate_queries_with_output":0,"TP":1398272,"FP":517915,"FN":107686},"CONSENSUS_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"no_positive_candidate_queries_with_output":0,"TP":1397140,"FP":490350,"FN":108818},"ALL_PROTOCOL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"no_positive_candidate_queries_with_output":0,"TP":1397140,"FP":490350,"FN":108818},"WEAK_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"no_positive_candidate_queries_with_output":0,"TP":1394507,"FP":484973,"FN":111451},"RANDOM_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"no_positive_candidate_queries_with_output":0,"TP":1396083,"FP":490138,"FN":109875}},"consensus_J_retrieval_versus":{"KD":{"rescued":3,"regressed":25},"CAL":{"rescued":3,"regressed":23},"CONSENSUS_GRAPH":{"rescued":6,"regressed":2},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}},"C1_seed0":{"candidate_membership":{"KD":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":12,"positive_queries_without_correct_output":15,"no_positive_candidate_queries_with_output":35,"TP":106615,"FP":69123,"FN":90770},"CAL":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":16,"no_positive_candidate_queries_with_output":34,"TP":120111,"FP":78381,"FN":77274},"FULL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":131640,"FP":73095,"FN":65745},"CONSENSUS_GRAPH":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":118516,"FP":72708,"FN":78869},"CONSENSUS_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":131640,"FP":73095,"FN":65745},"ALL_PROTOCOL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":132606,"FP":72923,"FN":64779},"WEAK_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":131640,"FP":73095,"FN":65745},"RANDOM_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":131640,"FP":73095,"FN":65745}},"consensus_J_retrieval_versus":{"KD":{"rescued":1,"regressed":0},"CAL":{"rescued":2,"regressed":0},"CONSENSUS_GRAPH":{"rescued":0,"regressed":0},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}},"C4_seed17":{"candidate_membership":{"KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":25,"positive_queries_without_correct_output":56,"no_positive_candidate_queries_with_output":0,"TP":1397980,"FP":511602,"FN":107978},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":27,"positive_queries_without_correct_output":57,"no_positive_candidate_queries_with_output":0,"TP":1399804,"FP":493929,"FN":106154},"FULL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"no_positive_candidate_queries_with_output":0,"TP":1396304,"FP":483800,"FN":109654},"CONSENSUS_GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":62,"positive_queries_without_correct_output":81,"no_positive_candidate_queries_with_output":0,"TP":1395972,"FP":512153,"FN":109986},"CONSENSUS_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"no_positive_candidate_queries_with_output":0,"TP":1398187,"FP":489147,"FN":107771},"ALL_PROTOCOL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"no_positive_candidate_queries_with_output":0,"TP":1398187,"FP":489147,"FN":107771},"WEAK_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"no_positive_candidate_queries_with_output":0,"TP":1396780,"FP":483800,"FN":109178},"RANDOM_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"no_positive_candidate_queries_with_output":0,"TP":1398017,"FP":488936,"FN":107941}},"consensus_J_retrieval_versus":{"KD":{"rescued":2,"regressed":21},"CAL":{"rescued":2,"regressed":20},"CONSENSUS_GRAPH":{"rescued":8,"regressed":2},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}},"C1_seed17":{"candidate_membership":{"KD":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":15,"positive_queries_without_correct_output":17,"no_positive_candidate_queries_with_output":33,"TP":107617,"FP":68820,"FN":89768},"CAL":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":16,"no_positive_candidate_queries_with_output":32,"TP":119402,"FP":76678,"FN":77983},"FULL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":26,"TP":127373,"FP":78326,"FN":70012},"CONSENSUS_GRAPH":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":118436,"FP":72451,"FN":78949},"CONSENSUS_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":26,"TP":127373,"FP":78326,"FN":70012},"ALL_PROTOCOL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":128347,"FP":77454,"FN":69038},"WEAK_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":26,"TP":127373,"FP":78326,"FN":70012},"RANDOM_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":14,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":26,"TP":127373,"FP":78326,"FN":70012}},"consensus_J_retrieval_versus":{"KD":{"rescued":3,"regressed":0},"CAL":{"rescued":3,"regressed":1},"CONSENSUS_GRAPH":{"rescued":0,"regressed":0},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}},"C4_seed42":{"candidate_membership":{"KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":24,"positive_queries_without_correct_output":53,"no_positive_candidate_queries_with_output":0,"TP":1402479,"FP":520499,"FN":103479},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":27,"positive_queries_without_correct_output":54,"no_positive_candidate_queries_with_output":0,"TP":1407376,"FP":509114,"FN":98582},"FULL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"no_positive_candidate_queries_with_output":0,"TP":1401501,"FP":489084,"FN":104457},"CONSENSUS_GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":63,"positive_queries_without_correct_output":79,"no_positive_candidate_queries_with_output":0,"TP":1401937,"FP":514722,"FN":104021},"CONSENSUS_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"no_positive_candidate_queries_with_output":0,"TP":1404072,"FP":496274,"FN":101886},"ALL_PROTOCOL_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"no_positive_candidate_queries_with_output":0,"TP":1404072,"FP":496274,"FN":101886},"WEAK_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"no_positive_candidate_queries_with_output":0,"TP":1401527,"FP":489084,"FN":104431},"RANDOM_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"no_positive_candidate_queries_with_output":0,"TP":1404072,"FP":496067,"FN":101886}},"consensus_J_retrieval_versus":{"KD":{"rescued":3,"regressed":22},"CAL":{"rescued":1,"regressed":19},"CONSENSUS_GRAPH":{"rescued":8,"regressed":1},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}},"C1_seed42":{"candidate_membership":{"KD":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":15,"no_positive_candidate_queries_with_output":34,"TP":107821,"FP":65265,"FN":89564},"CAL":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":15,"no_positive_candidate_queries_with_output":30,"TP":118782,"FP":75910,"FN":78603},"FULL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":133497,"FP":70341,"FN":63888},"CONSENSUS_GRAPH":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":121777,"FP":68688,"FN":75608},"CONSENSUS_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":133497,"FP":70341,"FN":63888},"ALL_PROTOCOL_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":134381,"FP":69559,"FN":63004},"WEAK_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":133497,"FP":70341,"FN":63888},"RANDOM_JOINT":{"queries":425,"recoverable_positive_queries":40,"positive_queries_empty":13,"positive_queries_without_correct_output":14,"no_positive_candidate_queries_with_output":25,"TP":133497,"FP":70341,"FN":63888}},"consensus_J_retrieval_versus":{"KD":{"rescued":1,"regressed":0},"CAL":{"rescued":2,"regressed":1},"CONSENSUS_GRAPH":{"rescued":0,"regressed":0},"FULL_JOINT":{"rescued":0,"regressed":0},"WEAK_JOINT":{"rescued":0,"regressed":0},"RANDOM_JOINT":{"rescued":0,"regressed":0}}}},"postseal_manual_GT_only":true,"not_additive_HOTA_attribution":true,"query_recall_is_any_IoU_positive_candidate_not_complete_GT":true}
+完整根代理复核：主假设失败，不保留。C4 67.547497相对原完整共享加权J-.032536，区间[-.126173,.085614]跨0；相对强加权KD+.445142，区间[-.091387,1.028821]仍跨0。
+三个种子都没有救回新的漏找query（rescue/regress均0），却FP分别增加4990/5347/7190。对随机同量隔离没有稳定优势。C1完全不变不是新贡献。
+294HOTA/336效应独立复算PASS只是算术可信，不等于新机制有效；没有启动该配方额外实际冷流。其成本不沿用旧方法时间。
 
 十一新证据、把有限检查次数分给尚未找到人的查询
 冻结旧问答不能凭空提供从未问过的候选证据。新COVERAGE_SEARCH保留原COVER逐query候选顺序和每视频10%总预算，仅在PRESUPPOSED按已观察No概率乘积/(query已花次数+1)重新分配余下预算。

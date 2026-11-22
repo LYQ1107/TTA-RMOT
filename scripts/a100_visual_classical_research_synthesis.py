@@ -461,7 +461,9 @@ def main():
             assert load('cue_consensus_statistical_reproduction')['status'].startswith('PASS_')
             for pair,row in consensus['repeated'].items():summary(lines,'选择性视觉冲突 / '+pair,row,list(row['comparisons']))
             lines += ['查询权衡：'+json.dumps(consensus['query_diagnosis'],separators=(',',':')),
-                '是否达到预登记门槛须逐项核验，不能仅凭队列完成宣告成功；其成本不沿用旧方法时间。']
+                '完整根代理复核：主假设失败，不保留。C4 67.547497相对原完整共享加权J-.032536，区间[-.126173,.085614]跨0；相对强加权KD+.445142，区间[-.091387,1.028821]仍跨0。',
+                '三个种子都没有救回新的漏找query（rescue/regress均0），却FP分别增加4990/5347/7190。对随机同量隔离没有稳定优势。C1完全不变不是新贡献。',
+                '294HOTA/336效应独立复算PASS只是算术可信，不等于新机制有效；没有启动该配方额外实际冷流。其成本不沿用旧方法时间。']
         else:lines += ['本轮待完整预测、官评和独立算术复现，当前没有新方案已胜过普通KD的结论。']
     if (PUBLIC/'preregistration_coverage_search_v1.json').is_file():
         lines += ['', '十一新证据、把有限检查次数分给尚未找到人的查询',

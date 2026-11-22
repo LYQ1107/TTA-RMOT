@@ -52,3 +52,5 @@ silently alter an experimental protocol. Do not modify running numerical helpers
 此前完整执行备忘录归档本地analysis/AGENTS_full_before_continuation_index_20261122.md；既有已发布历史仍在Git8bc165f。研究结果索引保留于research_log.md和各阶段TXT/JSON。
 
 2026-11-22 COVERAGE_SEARCH_V1启动，控制器2118268。这是直接处理未问到正确人的新证据实验：保留原COVER逐query候选顺序，先每query看一次，再按已观察No概率乘积/(query调用数+1)分配PRESUPPOSED剩余预算；CHECKLIST原均匀预算。不是校准存在性后验，不用GT/未请求回答。总1160不变，私有冻结COVER缓存仅broker使用，缺失QA真实GPU0..3推理；随后270强加权软/硬头拟合及84原始/数量对照全封存后GT。普通KD获得完全相同SEARCH回答，以拆选题贡献和后处理贡献。70视频无反馈原COVER问题集合差0，GT0。0..3分配由控制器内部预检，不重复agent级GPU轮询；仍由唯一阻塞监视93426等待。全部DEV，Goal ACTIVE。
+
+2026-11-22 CUE_CONSENSUS144及294HOTA/336效应独立复算PASS，但主科学门槛失败，不保留：C4 67.547497，比完整共享加权J-.032536，CI[-.126173,.085614]跨0；比强加权KD+.445142，CI[-.091387,1.028821]跨0。三个种子相对完整J均无查询净救回（rescue/regress均0），却FP增加4990/5347/7190。比等强度弱化为负，比随机同量隔离的差区间跨0，不支持该选择性规则有效。C1按契约完全不变，不算新贡献。没有运行额外新冷流。COVERAGE_SEARCH新证据45视频已封存：总1160、864缓存、296真实新增Qwen回答/296替换位置，教师权重不变/GT0，教师load474.124s，质量准备总651.908s，不是完整冷部署成本；三种子270fit继续，唯一监视93426，Goal ACTIVE。

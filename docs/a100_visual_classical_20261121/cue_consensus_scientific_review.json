@@ -1,0 +1,193 @@
+{
+  "status": "PRIMARY_NOT_ACCEPTED",
+  "retained": false,
+  "checks": {
+    "C4_vs_KD": false,
+    "C4_vs_UNWEIGHTED_KD": true,
+    "C1_vs_KD": true,
+    "C1_vs_UNWEIGHTED_KD": true,
+    "C4_specific_veto_vs_FULL_JOINT": false,
+    "C4_specific_veto_vs_WEAK_JOINT": false,
+    "C4_specific_veto_vs_RANDOM_JOINT": false,
+    "C4_correct_query_net_rescue": false
+  },
+  "all_registered_primary_checks_passed": false,
+  "details": {
+    "C4_vs_KD": {
+      "delta_HOTA": 0.44514159766229966,
+      "per_neural_seed_delta": [
+        0.6672238442081095,
+        0.3043923901913672,
+        0.3638085585874222
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -0.06626943016073286,
+        0.9630934409281975
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.09138662806452065,
+        1.0288207891305539
+      ]
+    },
+    "C4_vs_UNWEIGHTED_KD": {
+      "delta_HOTA": 0.4645602599657413,
+      "per_neural_seed_delta": [
+        0.5379757125247409,
+        0.4351838382183786,
+        0.4205212291541045
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.02311083225497466,
+        0.9256650016034148
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.0040859989010595486,
+        0.9544778487308322
+      ]
+    },
+    "C1_vs_KD": {
+      "delta_HOTA": 3.467750089440069,
+      "per_neural_seed_delta": [
+        3.566146897820822,
+        2.8259427080647868,
+        4.011160662434598
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.703284083606477,
+        7.017830643764984
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.6458257085049339,
+        7.089281251293137
+      ]
+    },
+    "C1_vs_UNWEIGHTED_KD": {
+      "delta_HOTA": 3.6535571026958436,
+      "per_neural_seed_delta": [
+        4.080469553240587,
+        2.8921839587603415,
+        3.988017796086602
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.8929700882179703,
+        7.207209883207203
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.8217481859262626,
+        7.311135191620055
+      ]
+    },
+    "C4_specific_veto_vs_FULL_JOINT": {
+      "delta_HOTA": -0.032535696905635327,
+      "per_neural_seed_delta": [
+        0.004002974029688744,
+        -0.04189515659358278,
+        -0.05971490815301195
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -0.10932079293468615,
+        0.08388054846733618
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.126172867856695,
+        0.08561396623194471
+      ]
+    },
+    "C4_specific_veto_vs_WEAK_JOINT": {
+      "delta_HOTA": -0.04546938504122503,
+      "per_neural_seed_delta": [
+        -0.02190166274513672,
+        -0.054755954867914625,
+        -0.05975053751062376
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        -0.13579423807868216,
+        0.07644625418832983
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.14282336862769363,
+        0.07713915732253179
+      ]
+    },
+    "C4_specific_veto_vs_RANDOM_JOINT": {
+      "delta_HOTA": 0.007533366692679048,
+      "per_neural_seed_delta": [
+        0.027109065195702442,
+        -0.0011172974215725162,
+        -0.0033916676960927816
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.0,
+        0.02210397035449697
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        -0.007780576606064452,
+        0.04588802759374531
+      ]
+    }
+  },
+  "C4_full_J_query_tradeoff": [
+    {
+      "rescued": 0,
+      "regressed": 0
+    },
+    {
+      "rescued": 0,
+      "regressed": 0
+    },
+    {
+      "rescued": 0,
+      "regressed": 0
+    }
+  ],
+  "C4_mean_net_rescue": 0.0,
+  "C4_HOTA": 67.54749723282787,
+  "C4_vs_full_J": -0.032535696905635327,
+  "C4_false_positive_increases_by_seed": [
+    4990,
+    5347,
+    7190
+  ],
+  "C1_primary_exactly_unchanged_by_contract": true,
+  "all144_sealed_before_new_GT": true,
+  "independent_arithmetic_reproduction": {
+    "status": "PASS_PUBLISHED_CUE_CONSENSUS_STATISTICS_REPRODUCED",
+    "HOTA_records": 294,
+    "effect_records": 336,
+    "maximum_absolute_error": 2.842170943040401e-14,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 0,
+    "original_parent_resampling": true,
+    "neural_seed_sensitivity_reproduced": true,
+    "no_raw_assets_or_GPU_required": true,
+    "existing_public_statistic_references": 213,
+    "shared_parent_row_references": 776,
+    "losslessly_encoded_aggregate_records": 81,
+    "arithmetic_reproduction_is_not_independent_validation": true
+  },
+  "all_datasets_development": true,
+  "no_matching_new_physical_followup_launched": true,
+  "goal_status": "ACTIVE",
+  "next_registered_study": "COVERAGE_SEARCH_V1 real missing answers collected,270fits/84outputs pending"
+}
