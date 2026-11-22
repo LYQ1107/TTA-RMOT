@@ -1,0 +1,62 @@
+{
+  "user_clarification": "六个跨域实验设置，三个候选创新点；学习经典算法的思想为论文提供理论支撑，不是用经典算法校准判断。",
+  "terminology": "three candidate innovations in one unified framework, evaluated in six cross-domain experimental settings",
+  "settings": [
+    "C1 V2→Dance",
+    "C2 Dance→KITTI-V2",
+    "C3 V2→SportsMOT",
+    "C4 Dance→SportsMOT",
+    "C5 LaMOT→KITTI-V2",
+    "C6 LaMOT→Dance"
+  ],
+  "candidate_innovations": [
+    {
+      "id": "I1",
+      "name": "覆盖与疑点共同驱动的主动观察",
+      "human_inspiration": "先形成场景覆盖，再集中细看疑点",
+      "classical_principles": [
+        "覆盖与边际收益递减",
+        "主动感知与信息互补"
+      ],
+      "task_design": "Define query-candidate coverage units and genuinely new observations, coupled to evidence groups and structural residuals.",
+      "conditional_theory": "Frozen equal-cost coverage batches have a monotone submodular objective; greedy bound applies only if actually implemented with those assumptions."
+    },
+    {
+      "id": "I2",
+      "name": "相关性受控的证据推理",
+      "human_inspiration": "重复听到同一判断不等于获得独立证据，少量可疑反馈可被纠正",
+      "classical_principles": [
+        "稳健估计与有限影响",
+        "相关证据的信息量约束"
+      ],
+      "task_design": "Task-specific exact-request deduplication and bounded group influence; distinguish regularization from independent Bayesian evidence.",
+      "conditional_theory": "Fixed-unary strongly convex robust inference admits a conditional single-group stability bound; current DS and group means do not instantiate that theorem."
+    },
+    {
+      "id": "I3",
+      "name": "视觉与语言关系约束下的结构化适配",
+      "human_inspiration": "用外观、身份与描述间的关系交叉检查判断",
+      "classical_principles": [
+        "约束推理与最小改动",
+        "关系失配下的软约束"
+      ],
+      "task_design": "Conservative visual-language relations with explicit scope, uncertainty and task-contract conditions.",
+      "conditional_theory": "Correct convex relations give a squared-error projection property; relation misspecification adds an explicit risk term; neither proves HOTA improvement."
+    }
+  ],
+  "status": "PRINCIPLE_INSPIRED_CANDIDATE_DESIGN_NOT_YET_A_VALIDATED_UNIFIED_METHOD",
+  "evaluation": "Same method and parameter rules across settings; shared-budget ordinary distillation, three leave-one-module-out ablations and necessary interaction/quantity controls. A module need not improve every setting separately.",
+  "no_target_manual_labels_in_adaptation": true,
+  "physical_GPU_scope": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "existing_registered_jobs_continue": true,
+  "goal_status": "ACTIVE",
+  "theory_document": "../TTA_RMOT_视觉本能与经典思想_理论设计与实证边界_20261122.txt",
+  "classical_algorithm_names_are_not_our_innovations": true,
+  "classic_theorems_are_not_new_theorems_or_HOTA_guarantees": true,
+  "ongoing_experiment_recipes_unchanged": true
+}

@@ -1,0 +1,269 @@
+{
+  "status": "POST_SEAL_OBSERVATION_GRANULARITY_DIAGNOSIS",
+  "pairs": {
+    "C4": {
+      "semantic_membership": {
+        "all_queries": {
+          "query_track_pairs_with_GT_visible_rows": 11219,
+          "pairs_with_any_positive_row": 6137,
+          "membership_mixed_pairs": 902,
+          "membership_mixed_pairs_seen_by_three_nodes": 185,
+          "GT_visible_rows": 2905193,
+          "minority_semantic_membership_rows": 13700,
+          "positive_rows_in_mixed_pairs": 204787
+        },
+        "static_clothing": {
+          "query_track_pairs_with_GT_visible_rows": 6224,
+          "pairs_with_any_positive_row": 2758,
+          "membership_mixed_pairs": 796,
+          "membership_mixed_pairs_seen_by_three_nodes": 152,
+          "GT_visible_rows": 1693789,
+          "minority_semantic_membership_rows": 11936,
+          "positive_rows_in_mixed_pairs": 188154
+        }
+      },
+      "physical_identity": {
+        "tracks_with_GT_visible_rows": 1075,
+        "tracks_with_multiple_GT_ids": 209,
+        "GT_visible_rows": 289707,
+        "majority_identity_rows": 282888
+      },
+      "teacher_anchor": {
+        "asked_pairs": 3508,
+        "anchor_GT_union_visible": 3095,
+        "binary_teacher_agrees_with_anchor_IoU_membership": 2826,
+        "visible_anchor_pairs_with_valid_track_majority": 3095,
+        "anchor_truth_differs_from_valid_track_majority": 21
+      },
+      "input_defined_query_groups_seed0": {
+        "static_clothing_branch": {
+          "queries": 256,
+          "parents": 13,
+          "HOTA": {
+            "POOLED_SOFT": 66.63833639604802,
+            "ANCHOR_KD": 63.94238963409663,
+            "ANCHOR_FULL": 65.55951108511015
+          }
+        },
+        "fallback_spatial": {
+          "queries": 78,
+          "parents": 4,
+          "HOTA": {
+            "POOLED_SOFT": 49.43047995202684,
+            "ANCHOR_KD": 49.43047995202684,
+            "ANCHOR_FULL": 49.43047995202684
+          }
+        },
+        "fallback_role": {
+          "queries": 27,
+          "parents": 6,
+          "HOTA": {
+            "POOLED_SOFT": 48.04535061155697,
+            "ANCHOR_KD": 48.04535061155697,
+            "ANCHOR_FULL": 48.04535061155697
+          }
+        },
+        "fallback_other": {
+          "queries": 105,
+          "parents": 13,
+          "HOTA": {
+            "POOLED_SOFT": 78.135903449385,
+            "ANCHOR_KD": 78.135903449385,
+            "ANCHOR_FULL": 78.135903449385
+          }
+        }
+      },
+      "seed0_candidate_membership_errors": {
+        "POOLED_SOFT": {
+          "stable_membership": {
+            "TP": 1228599,
+            "FP": 269439,
+            "FN": 72572,
+            "rows": 2431103
+          },
+          "mixed_membership": {
+            "TP": 185416,
+            "FP": 134610,
+            "FN": 19371,
+            "rows": 474090
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 27391,
+            "FN": 0,
+            "rows": 63008
+          }
+        },
+        "ANCHOR_KD": {
+          "stable_membership": {
+            "TP": 1225836,
+            "FP": 298500,
+            "FN": 75335,
+            "rows": 2431103
+          },
+          "mixed_membership": {
+            "TP": 185705,
+            "FP": 154308,
+            "FN": 19082,
+            "rows": 474090
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 27622,
+            "FN": 0,
+            "rows": 63008
+          }
+        },
+        "ANCHOR_FULL": {
+          "stable_membership": {
+            "TP": 1235651,
+            "FP": 284208,
+            "FN": 65520,
+            "rows": 2431103
+          },
+          "mixed_membership": {
+            "TP": 191154,
+            "FP": 158055,
+            "FN": 13633,
+            "rows": 474090
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 26807,
+            "FN": 0,
+            "rows": 63008
+          }
+        }
+      }
+    },
+    "C1": {
+      "semantic_membership": {
+        "all_queries": {
+          "query_track_pairs_with_GT_visible_rows": 10353,
+          "pairs_with_any_positive_row": 721,
+          "membership_mixed_pairs": 161,
+          "membership_mixed_pairs_seen_by_three_nodes": 58,
+          "GT_visible_rows": 3342761,
+          "minority_semantic_membership_rows": 12055,
+          "positive_rows_in_mixed_pairs": 28442
+        },
+        "static_clothing": {
+          "query_track_pairs_with_GT_visible_rows": 10353,
+          "pairs_with_any_positive_row": 721,
+          "membership_mixed_pairs": 161,
+          "membership_mixed_pairs_seen_by_three_nodes": 58,
+          "GT_visible_rows": 3342761,
+          "minority_semantic_membership_rows": 12055,
+          "positive_rows_in_mixed_pairs": 28442
+        }
+      },
+      "physical_identity": {
+        "tracks_with_GT_visible_rows": 609,
+        "tracks_with_multiple_GT_ids": 420,
+        "GT_visible_rows": 196633,
+        "majority_identity_rows": 143943
+      },
+      "teacher_anchor": {
+        "asked_pairs": 3334,
+        "anchor_GT_union_visible": 2510,
+        "binary_teacher_agrees_with_anchor_IoU_membership": 3052,
+        "visible_anchor_pairs_with_valid_track_majority": 2510,
+        "anchor_truth_differs_from_valid_track_majority": 5
+      },
+      "input_defined_query_groups_seed0": {
+        "static_clothing_branch": {
+          "queries": 425,
+          "parents": 25,
+          "HOTA": {
+            "POOLED_SOFT": 39.029949614828865,
+            "ANCHOR_KD": 36.78490274009846,
+            "ANCHOR_FULL": 39.469909108113946
+          }
+        },
+        "fallback_spatial": {
+          "queries": 0,
+          "parents": 0,
+          "HOTA": {}
+        },
+        "fallback_role": {
+          "queries": 0,
+          "parents": 0,
+          "HOTA": {}
+        },
+        "fallback_other": {
+          "queries": 0,
+          "parents": 0,
+          "HOTA": {}
+        }
+      },
+      "seed0_candidate_membership_errors": {
+        "POOLED_SOFT": {
+          "stable_membership": {
+            "TP": 127857,
+            "FP": 36957,
+            "FN": 41086,
+            "rows": 3247510
+          },
+          "mixed_membership": {
+            "TP": 8366,
+            "FP": 11289,
+            "FN": 20076,
+            "rows": 95251
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 12029,
+            "FN": 0,
+            "rows": 245684
+          }
+        },
+        "ANCHOR_KD": {
+          "stable_membership": {
+            "TP": 121031,
+            "FP": 37364,
+            "FN": 47912,
+            "rows": 3247510
+          },
+          "mixed_membership": {
+            "TP": 6951,
+            "FP": 8379,
+            "FN": 21491,
+            "rows": 95251
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 9101,
+            "FN": 0,
+            "rows": 245684
+          }
+        },
+        "ANCHOR_FULL": {
+          "stable_membership": {
+            "TP": 133489,
+            "FP": 30970,
+            "FN": 35454,
+            "rows": 3247510
+          },
+          "mixed_membership": {
+            "TP": 8359,
+            "FP": 10096,
+            "FN": 20083,
+            "rows": 95251
+          },
+          "unmatched_union": {
+            "TP": 0,
+            "FP": 11224,
+            "FN": 0,
+            "rows": 245684
+          }
+        }
+      }
+    }
+  },
+  "target_GT_only_in_this_post_seal_evaluation": true,
+  "adaptation_uses_these_labels": false,
+  "teacher_agreement_is_candidate_IoU_diagnostic_not_pure_semantic_accuracy": true,
+  "error_counts_not_an_additive_official_HOTA_attribution": true,
+  "all_development_data": true,
+  "goal_status": "ACTIVE"
+}

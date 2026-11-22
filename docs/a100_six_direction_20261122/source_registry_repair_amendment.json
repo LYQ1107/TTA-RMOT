@@ -1,0 +1,21 @@
+{
+  "reason": "Initial new C5/C6 workers failed before weight loading: runtime.load_student indexed V2/Dance-only CHECKPOINTS rather than existing checkpoint_spec. NAS official_checkpoints directory does not contain separate LaMOT asset.",
+  "fix": "Use existing official checkpoint_spec; prefer original two weight paths, otherwise read-only relocation or restored a100_paths LaMOT asset; original expected SHA verification retained. No model/optimizer/teacher arithmetic changed.",
+  "healthy_workers_preserved": [
+    "C2",
+    "C3"
+  ],
+  "retry_only": [
+    "C5",
+    "C6"
+  ],
+  "GT_reads": 0,
+  "observed_failure_state": "PRESERVING_ACTIVE_SIX_DIRECTION_JOBS_AFTER_FAILURE",
+  "group_controller_will_resume_after_healthy_workers_exit": true,
+  "same_source_collection_lock_prevents_duplicate_QA": true,
+  "implementation_sha256_after_fix": {
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "scripts/a100_six_direction.py": "81d44a3395d8d02f5633cfcd1c9f99f001c6df2680720d7bc1fc6c5ba6f96b12",
+    "scripts/a100_six_direction_lamot_recovery.py": "c163fa0482e0ce3f01e08bdd2ec255fd2fc7bfff69f2ab1abbbbb7bc478d4425"
+  }
+}

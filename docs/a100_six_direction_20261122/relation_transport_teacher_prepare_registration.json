@@ -1,0 +1,32 @@
+{
+  "status": "REGISTERED_TEACHER_ONLY_PREFIX_PROTOTYPE_AFTER_DEV_DIAGNOSIS",
+  "registered_unix": 1795343153.0064566,
+  "source_sha256": "7a67bd1de85132f299c1e687b13651c55cb6789c2484f2a573af2fccbf2f95fd",
+  "relation_module_sha256": "2de093190983e680b35246ee19ef1edb64ccf9ffc5c2338403666c785c490736",
+  "idea": "Object/view bias is stable within(query,TrackID,view,video); relational state changes. Within-group contrasts cancel a stable additive nuisance, rather than blindly smoothing time.",
+  "assumptions": "Teacher logits admit approximate additive stable-group + oriented horizontal-state component; supplied TrackID usually refers to same object. This is conditional, not proven semantic truth.",
+  "query_scope": "Conservative single literalleft/right; exclude motion, orientation, team/reference-object ambiguity. Same textual rule in all6settings, not dataset-name branch.",
+  "estimator": {
+    "probability_clip": [
+      0.02,
+      0.98
+    ],
+    "sample_confidence": "1+3abs(2p-1)",
+    "total_weight_per_group": 1.0,
+    "mu": 0.01,
+    "Huber_delta": 1.0,
+    "beta_constraint": "nonnegative",
+    "future_logit_shift_cap": "ln3"
+  },
+  "input": "Only actual requested legacy single-frameCROP/FRAME_BOX QA and input-box coordinates; exact input response multiplicity does not add weight; source/body/Qwen unchanged.",
+  "prefix": "Fit after past/current video only, save per-video coefficient before reading any future video. Three neural seeds will share the same teacher-only field fit.",
+  "implemented_theory": "Strongly convex scalar fit/KKT, fixed-weight nuisance cancellation, bounded monotone transport and exact zero/unsupported fallback; not HOTA guarantee.",
+  "tests": "5tests passed: nuisance offsets, independent scalar minimization, unexcited/opposite evidence, bounded monotonic transport/fallback, exact-duplicate and pixel-scale invariance.",
+  "no_new_predictions_in_this_preparation": true,
+  "new_teacher_encoder_head_or_GPU_calls": 0,
+  "target_manual_GT_in_this_preparation": false,
+  "scientific_status": "Development-derived candidate only. Before declaring benefit, full method must beat same-geometry sufficient per-frame ordinary distillation, static/mean/shuffled controls and CountMatched; all new outputs sealed before own GT.",
+  "no_independent_test_set": true,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

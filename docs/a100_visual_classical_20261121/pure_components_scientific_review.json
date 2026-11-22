@@ -1,0 +1,111 @@
+{
+  "status": "ATTRIBUTION_ACCEPTED_ACTUAL_COST_PENDING",
+  "candidate_finally_accepted": false,
+  "checks": {
+    "C4_beats_simple_teacher_anchor_overwrite": true,
+    "C1_beats_simple_teacher_anchor_overwrite": true,
+    "C1_pool_edges_beyond_raw_anchors": true,
+    "C4_visual_correspondence_beyond_shuffled": true
+  },
+  "details": {
+    "C4_vs_simple_teacher_overwrite": {
+      "delta_HOTA": 0.47560512981068825,
+      "per_neural_seed_delta": [
+        0.5433371598200125,
+        0.4348737379780374,
+        0.44860449163401483
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.17755099506640756,
+        0.7997757287895365
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.17054757494541484,
+        0.833247801408253
+      ]
+    },
+    "C1_vs_simple_teacher_overwrite": {
+      "delta_HOTA": 5.642599790106535,
+      "per_neural_seed_delta": [
+        5.366047622082725,
+        6.568766474280373,
+        4.992985273956506
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        1.7424163948442923,
+        10.39197588872433
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        1.6417224141551645,
+        10.509993515957404
+      ]
+    },
+    "C1_pure_edges": {
+      "delta_HOTA": 4.632923344879465,
+      "per_neural_seed_delta": [
+        4.715091912790875,
+        5.775008223694044,
+        3.4086698981534767
+      ],
+      "original_parent_groups": 25,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        1.4486798457680599,
+        8.338802369523705
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        1.3110395964801738,
+        8.74554035100496
+      ]
+    },
+    "C4_visual_correspondence": {
+      "delta_HOTA": 0.5618963375122187,
+      "per_neural_seed_delta": [
+        0.6070342620133289,
+        0.5507127900952753,
+        0.527941960428052
+      ],
+      "original_parent_groups": 13,
+      "samples": 10000,
+      "seed": 0,
+      "fixed_neural_seeds_parent_CI95": [
+        0.26037797753680963,
+        0.8878556789485328
+      ],
+      "parent_and_neural_seed_sensitivity_CI95": [
+        0.250933201930057,
+        0.9132568505143339
+      ]
+    }
+  },
+  "maximum_primary_CAL_replay_probability_error": 0.0,
+  "all66_outputs_sealed_before_this_study_GT": true,
+  "all_CountSelf_files_unchanged": true,
+  "independence": "Posthoc mechanistic audit on DEV, not independent blind or multiplicity-corrected confirmation",
+  "caveat": "C1 visual-correspondence CI crosses0; C4 graph is disabled and vs anchor+PAVA is a nearzero difference; C1 ranking remains largely quantity-driven. Do not promote higher controls.",
+  "full_effects_reference": "pure_components_analysis.json",
+  "independent_arithmetic_reproduction": {
+    "status": "PASS_PUBLISHED_PURE_COMPONENTS_STATISTICS_REPRODUCED",
+    "HOTA_records": 90,
+    "effect_records": 120,
+    "maximum_absolute_error": 1.4210854715202004e-14,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 0,
+    "original_parent_resampling": true,
+    "neural_seed_sensitivity_reproduced": true,
+    "no_raw_assets_or_GPU_required": true,
+    "existing_public_statistic_references": 45,
+    "shared_parent_row_references": 743,
+    "losslessly_encoded_aggregate_records": 45,
+    "arithmetic_reproduction_is_not_independent_validation": true
+  },
+  "goal_status": "ACTIVE",
+  "arithmetic_receipt_refreshed_after_lossless_row_sharing": true
+}

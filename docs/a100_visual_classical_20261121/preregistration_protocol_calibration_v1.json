@@ -1,0 +1,70 @@
+{
+  "status": "PREREGISTERED_BEFORE_NEW_OUTPUTS_AND_STUDY_GT",
+  "created_UTC": "2026-11-22T06:15:31.363120+00:00",
+  "goal_status": "ACTIVE",
+  "primary": "PROTOCOL_JOINT",
+  "rationale": "Development-derived simplification after OPTIONAL/SEARCH failed. Mean-based CAL and GLOBAL components already scored; this is not an independent confirmation. Shared fixed converged FINAL replaces mean on both sides, no per-domain GT-best checkpoint.",
+  "primary_rule": "Task-provided PRESUPPOSED: exact ordinary FINAL identity. Task-provided CHECKLIST: frozen equal-total-edge GLOBAL pooling. Both then same frozen visual PAVA. Never branch on dataset or target presence labels.",
+  "ordinary_baselines": {
+    "shared_head": "Exact confidence-weighted 768D direct converged FINAL, source logit zero; same COVER answers; min4000/max16000 teacher-KL convergence",
+    "protocol_control": "Independent Bernoulli candidate marginals condition on >=1 for PRESUPPOSED, CHECKLIST unchanged; assumes fixed candidate coverage, not a GT oracle",
+    "preserved": "Weighted mean/400/final/hard400/hard-final plus all previous native/RGB/SEM ordinary heads"
+  },
+  "controls": [
+    "PROTOCOL_GRAPH before PAVA",
+    "FINAL_CAL identity plus PAVA",
+    "FINAL_LOCAL always local plus PAVA",
+    "FINAL_GLOBAL always global plus PAVA",
+    "BASE_PROTOCOL conventional nonempty baseline"
+  ],
+  "frozen_global": "Same .1 source precision, raw known-answer anchor, confidence weights, and complete graph total edge weight as existing operator; rank-one solve must match dense probabilities <=1e-12 and decisions exactly",
+  "conditions": {
+    "directions": [
+      "C4",
+      "C1"
+    ],
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "QA_seed": 0,
+    "C4_teacher": 1160,
+    "C1_teacher": 1103
+  },
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "new_head_fits": 0,
+  "raw_outputs": 36,
+  "CountMatched_outputs": 78,
+  "official_total": 114,
+  "count_both_directions_vs": [
+    "KD_FINAL aliased KD",
+    "BASE_PROTOCOL",
+    "FINAL_CAL",
+    "PROTOCOL_GRAPH"
+  ],
+  "all114_sealed_before_study_GT": true,
+  "scientific_gate": {
+    "primary": "Both directions vs shared FINAL and BASE_PROTOCOL: all3 seed deltas positive and parent+seed CI strictly positive; report whole strong ordinary family including mean",
+    "modules": "PAVA incremental effect vs PROTOCOL_GRAPH: positive parent+seed CI in at least one direction; CHECKLIST scene pooling vs FINAL_CAL positive CI. Do not require every mechanism every domain, no universal ranking claim.",
+    "protocol": "Report always-local/global/identity controls; bad-control gap alone cannot show improvement beyond strong ordinary baseline",
+    "ranking": "Report both CountMatched projections. Quantity-driven benefit cannot be called pure semantic ranking.",
+    "cost": "Only if quality gates pass, matched fresh 4 arms, exact shared FINAL readout; existing mean-based cold times cannot be reused"
+  },
+  "adaptation_inputs": "Target images, task queries, official frozen boxes/TrackIDs, frozen teacher; no target manual labels. GT only isolated evaluation after seals.",
+  "temporal_contract": "Current video transductive and past/current video teacher prefix; no future video answers; not frame online",
+  "all_development": true,
+  "no_independent_blind_validation": true,
+  "descriptive_intervals_no_development_or_multiplicity_correction": true,
+  "implementation_sha256": {
+    "flex_uda/active/protocol_calibration.py": "c19abf043e35ae911108e3a8a4e849fd0730156034c8cbe45c3535f42a95e174",
+    "scripts/a100_visual_classical_protocol_calibration.py": "52c8c64b5d072838e37d0f6b352ecaa8315a04a40cb23fac5ca5aeebb76505c8",
+    "scripts/a100_visual_classical_protocol_calibration_launch.py": "48f8e630ffeef7bea867f0038340504380fe6be4f4457a8fe2d8d34018ece77d",
+    "scripts/a100_visual_classical_protocol_calibration_analyze.py": "5f28b4d22619249bf9d7529fd1840d5b9e3efde994d41be6f7d7a66519b220e6",
+    "scripts/a100_visual_classical_protocol_calibration_sanity.py": "fa929bc6b0aebe1d9e957148abbbc185f4ecc0716140f9f9643eb632891f6ea9",
+    "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84"
+  },
+  "storage": "/var/tmp/liuyeqiang-tta-rmot-a100-20261122/protocol_calibration"
+}

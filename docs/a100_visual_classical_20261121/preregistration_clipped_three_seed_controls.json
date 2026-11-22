@@ -1,0 +1,22 @@
+{
+  "purpose": "repeat a competent probability-bounded teacher-distillation control and same-head graph, not select a new GT-optimal clipping value",
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "fixed_teacher_probability_bounds": [
+    0.02,
+    0.98
+  ],
+  "bounds_inherited_from_original_graph": true,
+  "same_acquisition_questions_as_corresponding_raw_seed": true,
+  "no_new_teacher_calls": true,
+  "hard_teacher_targets_unchanged": true,
+  "all_actual_400_4000_final_KD_baselines_reported": true,
+  "exclusive_CountMatched_on_C1": true,
+  "no_target_GT_in_fitting": true,
+  "all_development_data": true,
+  "group_suffix": "_clipped",
+  "not_a_claim_that_probability_clipping_is_a_new_visual_module": true
+}

@@ -1,0 +1,343 @@
+{
+  "status": "INTERMEDIATE_ACCEPTED_C1_C4_ONLY_SIX_DIRECTION_GOAL_ACTIVE",
+  "candidate_finally_accepted": false,
+  "primary": "CONVERGED_FINAL_PROTOCOL_VISUAL_CALIBRATION",
+  "scope": "Official fixed McByte candidates/IDs; cross-domain referring adaptation only. Target images/task queries/frozen teacher, no manual target GT in adaptation. All existing data DEV.",
+  "human_vision_inspiration": [
+    "Bind visible colour to clothing part, then use sparse teacher feedback to calibrate this image cue",
+    "Use task contract to decide whether scene-wide candidate evidence should be pooled; do not assume a few No answers establish absence in a presupposed-present task"
+  ],
+  "common_ordinary_foundation": {
+    "features": "Frozen query-conditioned PCD768, three uniform observations per TrackID with original temporal context",
+    "source_logit": "ZERO",
+    "head": "768->64 GELU->1",
+    "targets": "Teacher probabilities clipped [.02,.98]",
+    "confidence": "1+3*abs(2*raw_teacher_p-1)",
+    "optimizer": "AdamW lr=.001 weight_decay=.001; batch512",
+    "stopping": "min4000 max16000, teacher weighted KL<=.005",
+    "readout": "CONVERGED_FINAL",
+    "teacher": "Original frozen Qwen CROP, same max-area anchor among same3 observations, unchanged prompts/weights",
+    "acquisition": "Same COVER10% query-balanced source-prior strata/PCD diversity, C4=1160 and C1=1103 QA; not a new selection-policy contribution"
+  },
+  "retained_operators": {
+    "PRESUPPOSED": "Exact shared FINAL unary, then visual PAVA; no global negative propagation or forced singleton/nonempty output",
+    "CHECKLIST": "Original total-edge-matched complete-graph teacher-anchor energy, then same PAVA",
+    "graph": "Known source precision0; unknown .1; teacher confidence1+3abs(2p-1); existing logit clipping; exact rank-one global solve",
+    "visual": "Fixed HSV/clothing-part cue, teacher-only monotone PAVA, current TrackID5fold exclusion plus past/current video prefix, ln3-capped odds correction; not an independent Bayesian observation",
+    "decoder": "Same >.5 and inherited fixed task exclusivity for both sides; no manual target-GT threshold/quantities"
+  },
+  "ordinary_controls": [
+    "Same FINAL with supplied nonempty/checklist task protocol",
+    "Same FINAL with raw known-teacher overwrite",
+    "Weighted and unweighted soft400/final/mean and hard400/final",
+    "Earlier full-information RGB/SEM/zero-HSV/residual families"
+  ],
+  "attribution_controls": [
+    "Zero graph edges with identical raw anchors and PAVA",
+    "Fixed within-query visual-cue permutation with same crossfit/refitting/cap",
+    "Always-local/global and PAVA-only",
+    "Both per-query/frame CountMatched projections, no GT counts"
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "QA_path_shared_seed": 0,
+  "quality": {
+    "PROTOCOL_CALIBRATION_C4": {
+      "mean_HOTA": 67.6292220788727,
+      "ordinary_FINAL": 67.15160893254868,
+      "ordinary_with_protocol": 67.14188040031489,
+      "vs_FINAL": {
+        "delta_HOTA": 0.4776131463240034,
+        "per_neural_seed_delta": [
+          0.539809444952553,
+          0.4433898406780372,
+          0.44964015334142005
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.17849048520769595,
+          0.8079126895824801
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.16554628143039204,
+          0.838313835342524
+        ]
+      },
+      "vs_protocol_ordinary": {
+        "delta_HOTA": 0.4873416785578068,
+        "per_neural_seed_delta": [
+          0.5534420382454357,
+          0.4517491697337306,
+          0.45683382769425407
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.17840765806099376,
+          0.8291735220953251
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.1684658855476767,
+          0.8587109466939808
+        ]
+      }
+    },
+    "PROTOCOL_CALIBRATION_C1": {
+      "mean_HOTA": 38.429591523633796,
+      "ordinary_FINAL": 32.7216773204795,
+      "ordinary_with_protocol": 32.7216773204795,
+      "vs_FINAL": {
+        "delta_HOTA": 5.707914203154289,
+        "per_neural_seed_delta": [
+          5.5200060577773655,
+          6.6120664845412875,
+          4.991670067144213
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.8055059388743904,
+          10.453418852655236
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.6945246888329955,
+          10.591625009632466
+        ]
+      },
+      "vs_protocol_ordinary": {
+        "delta_HOTA": 5.707914203154289,
+        "per_neural_seed_delta": [
+          5.5200060577773655,
+          6.6120664845412875,
+          4.991670067144213
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.8055059388743904,
+          10.453418852655236
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.6945246888329955,
+          10.591625009632466
+        ]
+      }
+    }
+  },
+  "attribution": {
+    "PURE_COMPONENTS_C4": {
+      "vs_teacher_overwrite": {
+        "delta_HOTA": 0.47560512981068825,
+        "per_neural_seed_delta": [
+          0.5433371598200125,
+          0.4348737379780374,
+          0.44860449163401483
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.17755099506640756,
+          0.7997757287895365
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.17054757494541484,
+          0.833247801408253
+        ]
+      },
+      "vs_identical_anchors_PAVA": {
+        "delta_HOTA": -0.0033764309926169744,
+        "per_neural_seed_delta": [
+          -0.004519056177954894,
+          -0.004556184550196463,
+          -0.0010540522496995663
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.012118676221396757,
+          0.0014193264822148174
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.01339193131371476,
+          0.0023981366373623317
+        ]
+      },
+      "vs_shuffled_correspondence": {
+        "delta_HOTA": 0.5618963375122187,
+        "per_neural_seed_delta": [
+          0.6070342620133289,
+          0.5507127900952753,
+          0.527941960428052
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.26037797753680963,
+          0.8878556789485328
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.250933201930057,
+          0.9132568505143339
+        ]
+      }
+    },
+    "PURE_COMPONENTS_C1": {
+      "vs_teacher_overwrite": {
+        "delta_HOTA": 5.642599790106535,
+        "per_neural_seed_delta": [
+          5.366047622082725,
+          6.568766474280373,
+          4.992985273956506
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.7424163948442923,
+          10.39197588872433
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.6417224141551645,
+          10.509993515957404
+        ]
+      },
+      "vs_identical_anchors_PAVA": {
+        "delta_HOTA": 4.632923344879465,
+        "per_neural_seed_delta": [
+          4.715091912790875,
+          5.775008223694044,
+          3.4086698981534767
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.4486798457680599,
+          8.338802369523705
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.3110395964801738,
+          8.74554035100496
+        ]
+      },
+      "vs_shuffled_correspondence": {
+        "delta_HOTA": 1.5701574634159907,
+        "per_neural_seed_delta": [
+          1.4884030936485644,
+          1.5861798919889836,
+          1.635889404610424
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.22636958216361278,
+          4.9967638565183625
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.23883678069282777,
+          4.99025392546586
+        ]
+      }
+    }
+  },
+  "actual": {
+    "seed": 0,
+    "independent_workers": 4,
+    "physical_GPU": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "new_teacher_QA": 4526,
+    "cache_hits": 0,
+    "soft_CLIP_neural_fits": 140,
+    "HOTA": {
+      "C4_seed0": {
+        "KD": 66.88453794588249,
+        "JOINT": 67.43797998412792
+      },
+      "C1_seed0": {
+        "KD": 32.60338963435036,
+        "JOINT": 38.12339569212772
+      }
+    },
+    "wall_seconds": {
+      "C4_KD": 3751.853912716033,
+      "C4_JOINT": 3909.9717483429704,
+      "C1_KD": 3002.593456269009,
+      "C1_JOINT": 3147.1025358450133
+    },
+    "source_questions_teacher_probs_masks_and_saved_scores_match_quality_exactly": true,
+    "last_video_head_weights_and_normalization_match_exactly": true,
+    "ordinary_skips_unused_RGB": true,
+    "RGB_input_acquisition_seconds": {
+      "C4_KD": 0,
+      "C4_JOINT": 324.94088376522996,
+      "C1_KD": 0,
+      "C1_JOINT": 232.603941053967
+    },
+    "no_algorithmic_speedup_or_all_budget_Pareto_claim": true,
+    "OS_NAS_caches_not_flushed": true,
+    "research_integrity_and_output_bookkeeping_included": true,
+    "previous_mean_head_timings_not_reused": true,
+    "executed_core_source_revision": "af46773b1364791f35c3e5874850d13dee0ee5ca",
+    "source_files_sha256": {
+      "scripts/a100_visual_classical_cold_protocol_final.py": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "scripts/a100_visual_classical_protocol_cold_launch.py": "c8b2bc8751297f2ef6bf006ead20382ac6ff567e499eb858aa99f2a5d3a8b62d",
+      "scripts/a100_visual_classical_protocol_cold_analyze.py": "66196457ce90d69f1d5a7cef6130ff82428716446d5d615c8b1416f0688a89ef",
+      "scripts/a100_visual_classical_protocol_calibration_review.py": "27d23bc70580e5626d120f29a33c3ed76e52a21b4ce56aa480b55fba7647bcc7",
+      "scripts/a100_visual_classical_budget_cold_launch.py": "ba0b9dd93c1fcb37692ec949e92e15cf2de68f2f68943cfb5401ce0c60980657",
+      "flex_uda/active/protocol_calibration.py": "c19abf043e35ae911108e3a8a4e849fd0730156034c8cbe45c3535f42a95e174",
+      "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+      "flex_uda/active/appearance_runtime.py": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+      "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+      "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+      "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+      "flex_uda/active/visual_classical.py": "5a0aa8a4a97d95fafd8d747d2344d367db542aa6c50c093ba5dcfb344f04c333"
+    }
+  },
+  "limits": [
+    "C1 benefits largely quantity/base-rate calibration; both fixed-count ordering intervals cross zero.",
+    "C4 query retrieval is not uniformly rescued; no claim all coverage failures resolved.",
+    "Not every module has a positive conditional interval in every domain.",
+    "Intervals describe fixed predictions after repeated development, not multiplicity-corrected or pipeline-refit generalization.",
+    "Cold worker includes research integrity/output bookkeeping; OS/NAS caches unflushed, shared host load/staggered starts. No all-budget Pareto/speedup claim.",
+    "Only referring adaptation is studied; official front-end generation and its upstream supervision are outside the cost/source-only claim.",
+    "Legacy all-label-types boolean does not mean actual RAW/HARD fits; authoritative actual type is CLIP, as separately disclosed."
+  ],
+  "protocol_and_dataset_confounded": true,
+  "independent_unseen_domain_validation": false,
+  "upstream_detector_target_supervision_explicitly_accepted_by_user": true,
+  "whole_pipeline_source_only_claim": false,
+  "scientific_review": "protocol_final_scientific_review.json",
+  "all_negative_studies_retained": true,
+  "previous_provisional_method_card_revision": "430a57bf07fbd97406d30339745892a8c60d663f",
+  "goal_completion": {
+    "status": "ACTIVE",
+    "scope": "six directions C1..C6 under latest user instruction",
+    "old_two_direction_results": "accepted intermediate evidence only"
+  },
+  "latest_scope_amendment": {
+    "date": "2026-11-22",
+    "user_scope": "six directions C1..C6; integrated mechanisms; fair ordinary teacher distillation",
+    "existing_evidence_scope": [
+      "C1",
+      "C4"
+    ],
+    "whole_research_goal_complete": false,
+    "historical_two_direction_acceptance_preserved": true
+  }
+}

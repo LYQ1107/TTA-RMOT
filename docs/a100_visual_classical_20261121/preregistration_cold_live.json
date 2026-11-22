@@ -1,0 +1,24 @@
+{
+  "phase": "cold full-clip execution",
+  "selection": "first lexicographic C4 clip v_00HRwkvvjtQ_c001, all 1162 frames and 8 provided queries",
+  "settings": "frozen Dance-best source and Qwen3-VL-2B; same inherited CROP prompts; COVER budget .3; fully fitted 1080d KD and query-static cohort",
+  "source_and_teacher_actually_loaded": true,
+  "real_source_forward_all_frames": true,
+  "teacher_cache_fresh": true,
+  "target_labels_in_adaptation": false,
+  "source_features_not_read_from_previous_runs": true,
+  "comparators": [
+    "actual soft KD",
+    "actual hard KD"
+  ],
+  "independent_same_seed_fits": true,
+  "cost": "one measured common cold prefix + separately measured real head fit and output for each arm",
+  "limitations": [
+    "one full clip only",
+    "shared measured cold prefix, not separate cold runs",
+    "OS page cache not flushed",
+    "current video transductive",
+    "no whole-C4 time extrapolation"
+  ],
+  "output": "a100_runs/visual_classical_20261121/cold_live/C4_first_full_clip_seed0"
+}

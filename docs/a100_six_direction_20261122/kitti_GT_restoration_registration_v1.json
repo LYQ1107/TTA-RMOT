@@ -1,0 +1,24 @@
+{
+  "status": "REGISTERED_BEFORE_RAW_GT_READING",
+  "registered_unix": 1795338173.3112717,
+  "restoration_module_sha256": "9b9872d096e5843aff4454780dc94c7854cef5b5ef977747318a4e735ce7d51b",
+  "evaluation_caller_sha256": "b32d98475b97c30a219a044ea8da49060ba740543f3fed354ed550bd02ba3419",
+  "reason": "Original KITTI gt_template missing in NAS; raw official V2 expressions and normalized label boxes available, plus original A800 per-file hashes for all862 templates.",
+  "sources": "Unchanged track_ranking_20261102 four KITTI video receipts with pinned file SHA256; raw LocateMOT/data/refer_kitti_v2 on read-only NAS.",
+  "geometry": "TempRMOT inference.py write_gt: normalized TOP-LEFT xywh times actual image width/height, original IDs, raw frame0+1. No field or membership chosen using prediction or metric.",
+  "serialization": "Try documented TempRMOT scalar writer first, then fixed bounded text formatting and row ordering alternatives; only original byte hashes can accept an output.",
+  "acceptance": "All862 expected byte lengths and SHA256 must match original A800 GT input records. No approximate reconstruction, HOTA-based choice, partial query skip, or GT protocol substitution.",
+  "raw_GT_barrier": "This specific study all raw/count outputs:234 transfer,252 query consistency,468 view fusion, checked before first raw GT open. Specific sub-study cannot inherit broader parent study seal.",
+  "on_failure": "Preserve recovery attempt and all existing predictions; do not score KITTI until original templates restored; other already sealed evaluation work can remain valid.",
+  "official_download_metadata_only": {
+    "public_directory_accessible": true,
+    "anonymous_archive_API_errno": 121,
+    "single_template_API_errno": -20,
+    "GT_payload_bytes_read": false
+  },
+  "no_raw_GT_contents_read_yet": true,
+  "training_or_teacher_or_candidate_or_metric_changed": false,
+  "no_new_GPU_work": true,
+  "large_assets_not_to_Git": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,359 @@
+{
+  "runs": {
+    "Full perception": {
+      "components_seconds": {
+        "Student load": 483.11926909099566,
+        "Teacher load + audit": 479.43101336597465,
+        "Student forward + initial scores": 7686.82606395625,
+        "RGB + scheduling": 342.6853084951872,
+        "Teacher service + I/O": 376.28272231062874,
+        "Other common work": 55.37245744600659
+      },
+      "cost_by_method": {
+        "RAW_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 53.844519103644416,
+          "own_postprocess_and_output_seconds": 3.4618509326828644,
+          "shared_common_plus_own_branch_seconds": 9481.02320470137
+        },
+        "RAW_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.6550335888751,
+          "own_postprocess_and_output_seconds": 3.3123093511676416,
+          "shared_common_plus_own_branch_seconds": 9943.684177605086
+        },
+        "RAW_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.40194781916216,
+          "shared_common_plus_own_branch_seconds": 9944.001648759935
+        },
+        "CLIP_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 50.22611778101418,
+          "own_postprocess_and_output_seconds": 3.441809855401516,
+          "shared_common_plus_own_branch_seconds": 9477.384762301459
+        },
+        "CLIP_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.0235455227084,
+          "own_postprocess_and_output_seconds": 3.1893477361882105,
+          "shared_common_plus_own_branch_seconds": 9942.92972792394
+        },
+        "CLIP_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.1831649302039295,
+          "shared_common_plus_own_branch_seconds": 9951.3190779594
+        },
+        "HARD_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 50.94132282526698,
+          "own_postprocess_and_output_seconds": 3.7988928651902825,
+          "shared_common_plus_own_branch_seconds": 9478.4570503555
+        },
+        "HARD_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.3043392334366,
+          "own_postprocess_and_output_seconds": 3.817467871005647,
+          "shared_common_plus_own_branch_seconds": 9941.838641769486
+        },
+        "HARD_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.5090443070512,
+          "own_postprocess_and_output_seconds": 3.984653532039374,
+          "shared_common_plus_own_branch_seconds": 9942.210532504134
+        },
+        "RAW_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.744924418977462,
+          "shared_common_plus_own_branch_seconds": 9945.34462535975
+        },
+        "RAW_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.984232970047742,
+          "shared_common_plus_own_branch_seconds": 9945.58393391082
+        },
+        "RAW_STRONG_PRIOR": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.587407203274779,
+          "shared_common_plus_own_branch_seconds": 9945.187108144048
+        },
+        "CLIP_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.9136901000747457,
+          "shared_common_plus_own_branch_seconds": 9952.049603129271
+        },
+        "CLIP_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 4.045836683246307,
+          "shared_common_plus_own_branch_seconds": 9952.181749712443
+        },
+        "CLIP_STRONG_PRIOR": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.7960752403596416,
+          "shared_common_plus_own_branch_seconds": 9951.931988269556
+        },
+        "RAW_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 2.7899486620444804,
+          "shared_common_plus_own_branch_seconds": 9943.389649602817
+        },
+        "CLIP_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 2.7163726369617507,
+          "shared_common_plus_own_branch_seconds": 9950.852285666158
+        },
+        "HARD_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.5090443070512,
+          "own_postprocess_and_output_seconds": 2.580961227300577,
+          "shared_common_plus_own_branch_seconds": 9940.806840199395
+        },
+        "RAW_MEAN_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.399214935488999,
+          "shared_common_plus_own_branch_seconds": 9943.998915876262
+        },
+        "RAW_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.452394006308168,
+          "shared_common_plus_own_branch_seconds": 9944.052094947081
+        },
+        "CLIP_MEAN_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.4257300788303837,
+          "shared_common_plus_own_branch_seconds": 9951.561643108027
+        },
+        "CLIP_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.440551429055631,
+          "shared_common_plus_own_branch_seconds": 9951.576464458252
+        }
+      },
+      "HOTA": {
+        "RAW_KD_400": 68.58230295185128,
+        "RAW_KD_4000": 68.28644576235759,
+        "RAW_KD": 68.28644576235759,
+        "CLIP_KD_400": 68.77090094503512,
+        "CLIP_KD_4000": 68.65544262876207,
+        "CLIP_KD": 68.65544262876207,
+        "HARD_KD_400": 68.65872678529003,
+        "HARD_KD_4000": 68.12189571229518,
+        "HARD_KD": 68.12189571229518,
+        "RAW_COHORT": 68.92227469086943,
+        "RAW_NO_GRAPH": 68.29577205551355,
+        "RAW_STRONG_PRIOR": 68.63571518151159,
+        "CLIP_COHORT": 69.10320214802607,
+        "CLIP_NO_GRAPH": 68.66036373962639,
+        "CLIP_STRONG_PRIOR": 69.16039063926469,
+        "RAW_MEAN": 68.64619426687703,
+        "CLIP_MEAN": 68.951218801355,
+        "HARD_MEAN": 68.41494798475064,
+        "RAW_MEAN_COHORT": 69.0765271270129,
+        "RAW_MEAN_NO_GRAPH": 68.6318115310675,
+        "CLIP_MEAN_COHORT": 69.11496592064654,
+        "CLIP_MEAN_NO_GRAPH": 68.94001548607683
+      },
+      "actual_teacher_new_calls": 3508,
+      "cache_hits": 0,
+      "single_uninterrupted_attempt": true,
+      "generation_GT_open_attempts": 0,
+      "actual_all_arm_experiment_worker_seconds": 11058.99660809699,
+      "external_all_arm_process_seconds": 11067.513818162959,
+      "external_process_envelope_seconds": 8.517210065969266
+    },
+    "Key observations": {
+      "components_seconds": {
+        "Student load": 317.8580494270427,
+        "Teacher load + audit": 560.4700533410069,
+        "Student forward + initial scores": 1858.3881764438702,
+        "RGB + scheduling": 357.0079930733191,
+        "Teacher service + I/O": 397.1531124076573,
+        "Other common work": 58.04042949085124
+      },
+      "cost_by_method": {
+        "RAW_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 54.569625410134904,
+          "own_postprocess_and_output_seconds": 3.2670934427296743,
+          "shared_common_plus_own_branch_seconds": 3606.754533036612
+        },
+        "RAW_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.3698042549659,
+          "own_postprocess_and_output_seconds": 2.991426821681671,
+          "shared_common_plus_own_branch_seconds": 4077.279045260395
+        },
+        "RAW_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 2.927430591895245,
+          "shared_common_plus_own_branch_seconds": 4077.4523545687553
+        },
+        "CLIP_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 51.95736929902341,
+          "own_postprocess_and_output_seconds": 2.8642805223353207,
+          "shared_common_plus_own_branch_seconds": 3603.739464005106
+        },
+        "CLIP_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 529.6494002521504,
+          "own_postprocess_and_output_seconds": 2.8089558291248977,
+          "shared_common_plus_own_branch_seconds": 4081.3761702650227
+        },
+        "CLIP_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 2.803136269794777,
+          "shared_common_plus_own_branch_seconds": 4088.165935779689
+        },
+        "HARD_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 52.68976620177273,
+          "own_postprocess_and_output_seconds": 2.825124735129066,
+          "shared_common_plus_own_branch_seconds": 3604.432705120649
+        },
+        "HARD_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.659217438777,
+          "own_postprocess_and_output_seconds": 2.8810340537456796,
+          "shared_common_plus_own_branch_seconds": 4071.45806567627
+        },
+        "HARD_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.8785024774261,
+          "own_postprocess_and_output_seconds": 2.8137075760168955,
+          "shared_common_plus_own_branch_seconds": 4071.6100242371904
+        },
+        "RAW_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.5350050356937572,
+          "shared_common_plus_own_branch_seconds": 4078.0599290125538
+        },
+        "RAW_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3437201980268583,
+          "shared_common_plus_own_branch_seconds": 4077.868644174887
+        },
+        "RAW_STRONG_PRIOR": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.5310323709854856,
+          "shared_common_plus_own_branch_seconds": 4078.0559563478455
+        },
+        "CLIP_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.4028272847644985,
+          "shared_common_plus_own_branch_seconds": 4088.7656267946586
+        },
+        "CLIP_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.3409144235774875,
+          "shared_common_plus_own_branch_seconds": 4088.7037139334716
+        },
+        "CLIP_STRONG_PRIOR": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.360223863972351,
+          "shared_common_plus_own_branch_seconds": 4088.7230233738665
+        },
+        "RAW_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 2.7758860159665346,
+          "shared_common_plus_own_branch_seconds": 4077.3008099928265
+        },
+        "CLIP_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 2.4672824518056586,
+          "shared_common_plus_own_branch_seconds": 4087.8300819616998
+        },
+        "HARD_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.8785024774261,
+          "own_postprocess_and_output_seconds": 2.6157928698230535,
+          "shared_common_plus_own_branch_seconds": 4071.4121095309965
+        },
+        "RAW_MEAN_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3168366657337174,
+          "shared_common_plus_own_branch_seconds": 4077.8417606425937
+        },
+        "RAW_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3228593810927123,
+          "shared_common_plus_own_branch_seconds": 4077.8477833579527
+        },
+        "CLIP_MEAN_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.2108158122282475,
+          "shared_common_plus_own_branch_seconds": 4088.5736153221224
+        },
+        "CLIP_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.1263255154481158,
+          "shared_common_plus_own_branch_seconds": 4088.489125025342
+        }
+      },
+      "HOTA": {
+        "RAW_KD_400": 68.62520103595119,
+        "RAW_KD_4000": 68.60418664378174,
+        "RAW_KD": 68.60418664378174,
+        "CLIP_KD_400": 68.78331037810588,
+        "CLIP_KD_4000": 69.05010333743509,
+        "CLIP_KD": 69.05010333743509,
+        "HARD_KD_400": 68.71158409334845,
+        "HARD_KD_4000": 68.19151655212676,
+        "HARD_KD": 68.19151655212676,
+        "RAW_COHORT": 69.24130505728006,
+        "RAW_NO_GRAPH": 68.58922433151551,
+        "RAW_STRONG_PRIOR": 68.90097955959045,
+        "CLIP_COHORT": 69.27986184656068,
+        "CLIP_NO_GRAPH": 69.04260937139603,
+        "CLIP_STRONG_PRIOR": 69.18292069110443,
+        "RAW_MEAN": 68.73694940527618,
+        "CLIP_MEAN": 69.05197814629388,
+        "HARD_MEAN": 68.41486411375213,
+        "RAW_MEAN_COHORT": 69.25177619385165,
+        "RAW_MEAN_NO_GRAPH": 68.7439022521834,
+        "CLIP_MEAN_COHORT": 69.31625965047824,
+        "CLIP_MEAN_NO_GRAPH": 69.06945693500678
+      },
+      "actual_teacher_new_calls": 3508,
+      "cache_hits": 0,
+      "single_uninterrupted_attempt": true,
+      "generation_GT_open_attempts": 0,
+      "actual_all_arm_experiment_worker_seconds": 5198.3801235120045,
+      "external_all_arm_process_seconds": 5205.535485408967,
+      "external_process_envelope_seconds": 7.155361896962859
+    }
+  },
+  "measured_student_forward_ratio": 4.136286574242752,
+  "official_candidates_provided_upstream_generation_not_remeasured": true,
+  "common_prefix_measured_once_per_condition": true,
+  "branch_cost_is_component_accounting_not_independent_cold_deployments": true,
+  "different_A100_GPUs_concurrent_host_NAS_and_OS_cache_retained": true
+}

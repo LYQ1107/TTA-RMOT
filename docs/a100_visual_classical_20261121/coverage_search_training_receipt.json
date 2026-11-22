@@ -1,0 +1,37 @@
+{
+  "status": "PASS_ALL270_FITS_SUFFICIENT_TEACHER_OPTIMIZATION",
+  "conditions": [
+    {
+      "seed": 0,
+      "videos": 45,
+      "head_fits": 90,
+      "logical_QA": 1160,
+      "GT_open_attempts": 0
+    },
+    {
+      "seed": 17,
+      "videos": 45,
+      "head_fits": 90,
+      "logical_QA": 1160,
+      "GT_open_attempts": 0
+    },
+    {
+      "seed": 42,
+      "videos": 45,
+      "head_fits": 90,
+      "logical_QA": 1160,
+      "GT_open_attempts": 0
+    }
+  ],
+  "fits": 270,
+  "steps_histogram": {
+    "4000": 270
+  },
+  "max_weighted_teacher_KL": 0.0013524293899536133,
+  "max_soft_KL": 0.0013524293899536133,
+  "max_hard_KL": 0.0009346676524728537,
+  "target_manual_GT_used_for_stopping": false,
+  "raw_predictions_sealed_for_all3seeds": true,
+  "new_teacher_calls_in_fitting": 0,
+  "not_quality_HOTA_result": true
+}

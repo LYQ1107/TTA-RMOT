@@ -1,0 +1,9 @@
+{
+  "version": "V1_DIRECT_NATIVE_STRENGTHENING",
+  "before_any_first_round_target_GT": true,
+  "reason": "Code inspection found that applying exclusivity before native fallback could suppress an otherwise positive teacher override. Preserve a raw plain-teacher baseline in addition to structured DIRECT_SOFT.",
+  "definition": "DIRECT_NATIVE: every queried observation uses raw teacher p>.5; every unqueried observation exactly equals frozen source-frame prediction. No extra exclusivity, motion gate, or graph on this baseline.",
+  "model_parameter_changes": false,
+  "teacher_questions_changed": false,
+  "generation_code_sha256": "8507aadf48c56a472f7d6b77dd3ac2c3edd35536a8c50fc17e484f3bc833a49c"
+}

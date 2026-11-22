@@ -1,0 +1,638 @@
+{
+  "status": "POSTSEAL_FRESH_TEACHER_ANCHOR_DIAGNOSIS",
+  "pairs": {
+    "C4": {
+      "anchor_confusion": {
+        "TP": 492,
+        "asked": 1160,
+        "FP": 195,
+        "TN": 423,
+        "FN": 50
+      },
+      "anchor_rates": {
+        "anchor_membership_agreement": 0.7887931034482759,
+        "teacher_yes_precision": 0.7161572052401747,
+        "positive_anchor_recall": 0.9077490774907749,
+        "positive_anchor_rate": 0.4672413793103448
+      },
+      "query_coverage": {
+        "queries": 466,
+        "recoverable_positive_queries": 466,
+        "no_questions": 0,
+        "no_teacher_yes": 76,
+        "recoverable_no_questions": 0,
+        "recoverable_without_positive_asked_anchor": 133,
+        "recoverable_no_yes": 76,
+        "recoverable_no_yes_and_no_positive_anchor": 59,
+        "recoverable_no_yes_despite_positive_anchor": 17,
+        "no_positive_candidate_with_teacher_yes": 0
+      },
+      "query_types": {
+        "OTHER": {
+          "counts": {
+            "TP": 228,
+            "asked": 292,
+            "yes": 273,
+            "positive_asked_anchor": 244,
+            "FP": 45,
+            "FN": 16,
+            "TN": 3
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.791095890410959,
+            "teacher_yes_precision": 0.8351648351648352,
+            "positive_anchor_recall": 0.9344262295081968,
+            "positive_anchor_rate": 0.8356164383561644
+          }
+        },
+        "APPEARANCE": {
+          "counts": {
+            "FP": 55,
+            "asked": 566,
+            "yes": 257,
+            "positive_asked_anchor": 216,
+            "TP": 202,
+            "TN": 295,
+            "FN": 14
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.8780918727915195,
+            "teacher_yes_precision": 0.7859922178988327,
+            "positive_anchor_recall": 0.9351851851851852,
+            "positive_anchor_rate": 0.38162544169611307
+          }
+        },
+        "APPEARANCE+ROLE+SPATIAL": {
+          "counts": {
+            "FP": 42,
+            "asked": 94,
+            "yes": 67,
+            "positive_asked_anchor": 26,
+            "TP": 25,
+            "TN": 26,
+            "FN": 1
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.5425531914893617,
+            "teacher_yes_precision": 0.373134328358209,
+            "positive_anchor_recall": 0.9615384615384616,
+            "positive_anchor_rate": 0.2765957446808511
+          }
+        },
+        "ROLE+SPATIAL": {
+          "counts": {
+            "TN": 33,
+            "asked": 98,
+            "yes": 58,
+            "positive_asked_anchor": 33,
+            "TP": 26,
+            "FP": 32,
+            "FN": 7
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.6020408163265306,
+            "teacher_yes_precision": 0.4482758620689655,
+            "positive_anchor_recall": 0.7878787878787878,
+            "positive_anchor_rate": 0.336734693877551
+          }
+        },
+        "ROLE": {
+          "counts": {
+            "TN": 66,
+            "asked": 110,
+            "yes": 32,
+            "positive_asked_anchor": 23,
+            "FP": 21,
+            "TP": 11,
+            "FN": 12
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.7,
+            "teacher_yes_precision": 0.34375,
+            "positive_anchor_recall": 0.4782608695652174,
+            "positive_anchor_rate": 0.20909090909090908
+          }
+        }
+      },
+      "probability_quantiles": {
+        "TP": {
+          "count": 492,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.5,
+            0.818359375,
+            0.93359375,
+            0.9921875,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "FP": {
+          "count": 195,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.5,
+            0.5625,
+            0.70703125,
+            0.8671875,
+            0.96484375,
+            0.99609375,
+            1.0
+          ]
+        },
+        "TN": {
+          "count": 423,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.0001583099365234375,
+            0.00116729736328125,
+            0.004058837890625,
+            0.02294921875,
+            0.1826171875,
+            0.376953125,
+            0.46875
+          ]
+        },
+        "FN": {
+          "count": 50,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.003173828125,
+            0.094189453125,
+            0.1875,
+            0.294921875,
+            0.376953125,
+            0.41113281250000006,
+            0.46875
+          ]
+        }
+      },
+      "fixed_probability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 288,
+          "mean_teacher_probability": 0.01838761568069458,
+          "observed_positive_membership": 0.027777777777777776
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 46,
+          "mean_teacher_probability": 0.1456564198369565,
+          "observed_positive_membership": 0.10869565217391304
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 58,
+          "mean_teacher_probability": 0.2525255926724138,
+          "observed_positive_membership": 0.27586206896551724
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 44,
+          "mean_teacher_probability": 0.35791015625,
+          "observed_positive_membership": 0.2727272727272727
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 37,
+          "mean_teacher_probability": 0.44061444256756754,
+          "observed_positive_membership": 0.24324324324324326
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 34,
+          "mean_teacher_probability": 0.5330882352941176,
+          "observed_positive_membership": 0.20588235294117646
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 33,
+          "mean_teacher_probability": 0.6438210227272727,
+          "observed_positive_membership": 0.45454545454545453
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 47,
+          "mean_teacher_probability": 0.7581449468085106,
+          "observed_positive_membership": 0.44680851063829785
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 91,
+          "mean_teacher_probability": 0.8588169642857143,
+          "observed_positive_membership": 0.5164835164835165
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 482,
+          "mean_teacher_probability": 0.9818059517634855,
+          "observed_positive_membership": 0.8340248962655602
+        }
+      ],
+      "wrong_yes_anchor_context": {
+        "different_from_anchor_positive_queries": 120,
+        "no_query_positive_membership_at_anchor": 75
+      },
+      "common_wrong_yes_and_anchor_positive_query_pairs": [
+        {
+          "asked": "dark-side team player",
+          "anchor_positive_query": "basketball player",
+          "count": 14
+        },
+        {
+          "asked": "dark-side team player",
+          "anchor_positive_query": "light-side team player",
+          "count": 14
+        },
+        {
+          "asked": "dark-side team player",
+          "anchor_positive_query": "player",
+          "count": 14
+        },
+        {
+          "asked": "right-side team player",
+          "anchor_positive_query": "left-side team player",
+          "count": 12
+        },
+        {
+          "asked": "right-side team player",
+          "anchor_positive_query": "player",
+          "count": 12
+        },
+        {
+          "asked": "right-side team player",
+          "anchor_positive_query": "volleyball player",
+          "count": 12
+        },
+        {
+          "asked": "left-side team player",
+          "anchor_positive_query": "player",
+          "count": 10
+        },
+        {
+          "asked": "left-side team player",
+          "anchor_positive_query": "volleyball player",
+          "count": 10
+        },
+        {
+          "asked": "left-side team player",
+          "anchor_positive_query": "right-side team player",
+          "count": 9
+        },
+        {
+          "asked": "dark-side team player",
+          "anchor_positive_query": "basketball player in white clothes",
+          "count": 8
+        },
+        {
+          "asked": "dark-side team player",
+          "anchor_positive_query": "player in white",
+          "count": 6
+        },
+        {
+          "asked": "light-side team player",
+          "anchor_positive_query": "basketball player",
+          "count": 6
+        },
+        {
+          "asked": "light-side team player",
+          "anchor_positive_query": "dark-side team player",
+          "count": 6
+        },
+        {
+          "asked": "light-side team player",
+          "anchor_positive_query": "player",
+          "count": 6
+        },
+        {
+          "asked": "The player in the left-side team wearing white clothes.",
+          "anchor_positive_query": "player",
+          "count": 6
+        },
+        {
+          "asked": "The player in the left-side team wearing white clothes.",
+          "anchor_positive_query": "volleyball player",
+          "count": 6
+        },
+        {
+          "asked": "The player in the left-side team wearing white clothes.",
+          "anchor_positive_query": "right-side team player",
+          "count": 5
+        },
+        {
+          "asked": "The libero of the left-side team.",
+          "anchor_positive_query": "player",
+          "count": 5
+        },
+        {
+          "asked": "The libero of the left-side team.",
+          "anchor_positive_query": "volleyball player",
+          "count": 5
+        },
+        {
+          "asked": "goalkeeper",
+          "anchor_positive_query": "football player",
+          "count": 5
+        }
+      ]
+    },
+    "C1": {
+      "anchor_confusion": {
+        "TN": 954,
+        "asked": 1103,
+        "TP": 36,
+        "FP": 102,
+        "FN": 11
+      },
+      "anchor_rates": {
+        "anchor_membership_agreement": 0.8975521305530372,
+        "teacher_yes_precision": 0.2608695652173913,
+        "positive_anchor_recall": 0.7659574468085106,
+        "positive_anchor_rate": 0.04261106074342702
+      },
+      "query_coverage": {
+        "queries": 425,
+        "recoverable_positive_queries": 40,
+        "no_questions": 31,
+        "no_teacher_yes": 352,
+        "recoverable_no_questions": 1,
+        "recoverable_without_positive_asked_anchor": 16,
+        "recoverable_no_yes": 10,
+        "recoverable_no_yes_and_no_positive_anchor": 6,
+        "recoverable_no_yes_despite_positive_anchor": 4,
+        "no_positive_candidate_with_teacher_yes": 43
+      },
+      "query_types": {
+        "APPEARANCE": {
+          "counts": {
+            "TN": 954,
+            "asked": 1103,
+            "yes": 138,
+            "positive_asked_anchor": 47,
+            "TP": 36,
+            "FP": 102,
+            "FN": 11
+          },
+          "rates": {
+            "anchor_membership_agreement": 0.8975521305530372,
+            "teacher_yes_precision": 0.2608695652173913,
+            "positive_anchor_recall": 0.7659574468085106,
+            "positive_anchor_rate": 0.04261106074342702
+          }
+        }
+      },
+      "probability_quantiles": {
+        "TP": {
+          "count": 36,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.5,
+            0.826171875,
+            0.95703125,
+            0.9921875,
+            0.99609375,
+            1.0,
+            1.0
+          ]
+        },
+        "FP": {
+          "count": 102,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.5,
+            0.5964843750000001,
+            0.70703125,
+            0.9375,
+            0.9921875,
+            0.99609375,
+            1.0
+          ]
+        },
+        "TN": {
+          "count": 954,
+          "quantiles_0_10_25_50_75_90_100": [
+            3.528594970703125e-05,
+            0.0001583099365234375,
+            0.000553131103515625,
+            0.00193023681640625,
+            0.010986328125,
+            0.053466796875,
+            0.46875
+          ]
+        },
+        "FN": {
+          "count": 11,
+          "quantiles_0_10_25_50_75_90_100": [
+            0.010986328125,
+            0.015869140625,
+            0.02044677734375,
+            0.09521484375,
+            0.20458984375,
+            0.26953125,
+            0.3203125
+          ]
+        }
+      },
+      "fixed_probability_bins": [
+        {
+          "lower": 0.0,
+          "upper": 0.1,
+          "count": 905,
+          "mean_teacher_probability": 0.009529299762367544,
+          "observed_positive_membership": 0.0066298342541436465
+        },
+        {
+          "lower": 0.1,
+          "upper": 0.2,
+          "count": 31,
+          "mean_teacher_probability": 0.13561617943548387,
+          "observed_positive_membership": 0.06451612903225806
+        },
+        {
+          "lower": 0.2,
+          "upper": 0.3,
+          "count": 15,
+          "mean_teacher_probability": 0.24192708333333332,
+          "observed_positive_membership": 0.13333333333333333
+        },
+        {
+          "lower": 0.3,
+          "upper": 0.4,
+          "count": 8,
+          "mean_teacher_probability": 0.334716796875,
+          "observed_positive_membership": 0.125
+        },
+        {
+          "lower": 0.4,
+          "upper": 0.5,
+          "count": 6,
+          "mean_teacher_probability": 0.4280598958333333,
+          "observed_positive_membership": 0.0
+        },
+        {
+          "lower": 0.5,
+          "upper": 0.6,
+          "count": 13,
+          "mean_teacher_probability": 0.5432692307692307,
+          "observed_positive_membership": 0.15384615384615385
+        },
+        {
+          "lower": 0.6,
+          "upper": 0.7,
+          "count": 13,
+          "mean_teacher_probability": 0.6511418269230769,
+          "observed_positive_membership": 0.0
+        },
+        {
+          "lower": 0.7,
+          "upper": 0.8,
+          "count": 11,
+          "mean_teacher_probability": 0.7524857954545454,
+          "observed_positive_membership": 0.09090909090909091
+        },
+        {
+          "lower": 0.8,
+          "upper": 0.9,
+          "count": 13,
+          "mean_teacher_probability": 0.8605769230769231,
+          "observed_positive_membership": 0.23076923076923078
+        },
+        {
+          "lower": 0.9,
+          "upper": 1.0,
+          "count": 88,
+          "mean_teacher_probability": 0.9782936789772727,
+          "observed_positive_membership": 0.3409090909090909
+        }
+      ],
+      "wrong_yes_anchor_context": {
+        "different_from_anchor_positive_queries": 74,
+        "no_query_positive_membership_at_anchor": 28
+      },
+      "common_wrong_yes_and_anchor_positive_query_pairs": [
+        {
+          "asked": "dancing person with black shirt and brown pants",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 10
+        },
+        {
+          "asked": "dancing person with black shirt and blue pants",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 8
+        },
+        {
+          "asked": "dancing person with gray shirt and black pants",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 7
+        },
+        {
+          "asked": "dancing person dressed all in brown",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 5
+        },
+        {
+          "asked": "dancing person dressed all in purple",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 4
+        },
+        {
+          "asked": "dancing person dressed all in green",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 4
+        },
+        {
+          "asked": "dacning person with white Tshirt and purple pants",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 3
+        },
+        {
+          "asked": "dancing person with black shirt and blue pants",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 3
+        },
+        {
+          "asked": "dancing person with white shirt and black pants",
+          "anchor_positive_query": "dancing person dressed all in black",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with blue Tshirt and white skirt",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with purple shirt and white skirt",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with white Tshirt and black pants",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with white Tshirt and purple skirt",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with white shirt and black pants",
+          "anchor_positive_query": "dancing person with white Tshirt and blue pants",
+          "count": 2
+        },
+        {
+          "asked": "dancing person with blue Tshirt and white pants",
+          "anchor_positive_query": "dancing person dressed all in white",
+          "count": 1
+        },
+        {
+          "asked": "dancing person with blue Tshirt and white skirt",
+          "anchor_positive_query": "dancing person dressed all in white",
+          "count": 1
+        },
+        {
+          "asked": "dancing person with black shirt and brown pants",
+          "anchor_positive_query": "dancing person with white Tshirt and black pants",
+          "count": 1
+        },
+        {
+          "asked": "dacning person with white Tshirt and purple pants",
+          "anchor_positive_query": "dancing person dressed all in white",
+          "count": 1
+        },
+        {
+          "asked": "dancing person dressed all in purple",
+          "anchor_positive_query": "dancing person with blue Tshirt and white pants",
+          "count": 1
+        },
+        {
+          "asked": "dancing person with purple shirt and white skirt",
+          "anchor_positive_query": "dancing person dressed all in white",
+          "count": 1
+        }
+      ]
+    }
+  },
+  "source_teacher_budgets": {
+    "C4": 1160,
+    "C1": 1103
+  },
+  "new_teacher_or_encoder_calls": 0,
+  "postseal_GT_only": true,
+  "no_automatic_parameter_or_acquisition_changes": true,
+  "interpretation": [
+    "GT agreement means IoU candidate membership at the queried anchor, not pure semantic teacher accuracy.",
+    "Queried nodes are a selected subset; rates cannot be extrapolated to all candidates.",
+    "Recoverable presence means at least one positive candidate row, not complete GT coverage.",
+    "Some language attributes require temporal or scene context unavailable in the queried crop.",
+    "All data are development data; this is diagnosis, not a new policy or HOTA effect."
+  ],
+  "detailed_query_records_local_only": true,
+  "teacher_yes_rule": "Probability>=.5, matching hard-KD label convention; equality does not mean certain positive.",
+  "probability_bins_are_diagnosis_not_GT_threshold_selection": true
+}

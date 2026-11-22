@@ -1,0 +1,31 @@
+{
+  "version": "FRAME_KD_CONVERGENCE_BASELINE",
+  "unix_time": 1795203292.8062584,
+  "before_any_frame_KD4000_GT": true,
+  "registered_after_V1_development_diagnosis": true,
+  "reason": "400-step frame teacher fit still has KL .08-.14; strengthen before claiming memory superiority.",
+  "steps": 4000,
+  "architecture_and_optimizer_unchanged": true,
+  "acquisitions": [
+    "PRIOR",
+    "UNIFORM",
+    "UNCERTAINTY",
+    "COVER"
+  ],
+  "supervision": [
+    "HARD",
+    "SOFT"
+  ],
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "additional_COVER_structured_decoder": true,
+  "source_raw_frame_logits_unchanged": true,
+  "no_extra_teacher_data": true,
+  "target_GT_not_used_for_training_or_stopping": true,
+  "original_400step_results_retained": true,
+  "anchor_feature_cache_is_unlabelled_generated_output": true,
+  "new_group": "frame_convergence",
+  "code_sha256": "bd745e545131ca8d15f7ecdc35bc37f2bf1e4e53cd1c15ef5232c5c9d8161b5d"
+}
