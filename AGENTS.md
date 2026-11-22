@@ -14,6 +14,10 @@
 
 ## 当前工作状态（2026-11-22）
 
+- I1完整828官评/288效应已全部结束，独立NumPy复算在新无损压缩前后均PASS(1.42e-14)。主DESIGN_MEAN C1..6=35.608/37.854/68.157/68.745/38.637/36.178；UNIFORM_MEAN=34.044/36.159/69.381/69.227/37.389/36.426。C3对uniform=-1.224 CI[-1.883,-.477]，其余不是全胜；DESIGN=COVERAGE在四设置完全相同，KITTI增状态配粗均值反而-.437/-.047。双方CountMatched除C1外正负交叉，不能称排序支配。完整TXT为docs/TTA_RMOT_六设置主动观察实证与理论修正_20261123.txt。不要据此改仍活跃FULL_FINAL或称Goal完成。
+- I1封存后的显式事后候选成员诊断已完成（scripts/a100_observation_policy_postseal_diagnose.py）：C4design正确袋397/466对uniform387，却未超过其HOTA；C3 398对387同样不自动胜；C1 40可恢复查询全部问到正确袋仍有5零输出。KITTI为原已核验次序的数值成员，不作新真实ID/一对一oracle；CLIP只查名义锚点，不叫teacherGT准确率。该脚本不改模型或问题，当前活跃研究不消费这些GT统计。新I1统计6109502→1159497bytes，只共享值/类型完全相同的父行；原文SIX/analysis/observation_policy_publication_row_sharing/original，提供者不重写。
+- 文本V3/监督范围审计完整成功：query_scope_teacher_receipt.json（948文本1896生成、624共识、580共同主体外观、33歧义，9687.278s真实成本/75309forward）；scoped_supervision_audit_receipt.json（148视频、0GT/0新GPU）。KITTI同视觉包含关系raw概率正残差约46%但不是GT错率；Sports约20%且严格正含小误差；数十万相关配对不是独立样本。当前模型不消费解析；未来若用须计准备成本并给普通同解析，不能把共识/原始概率当真值。
+- 理论范围已进一步澄清：1/m袋权重对“均匀复制某袋整组观察”不变；不能推出任意只复制异质袋一个成员也不变。新query_profile_duplication_scope.json给出反例（KL .196314→.161147，袋质量2.5→2.8），旧检查只复制单观察袋。准确request_id去重是独立预处理；不称逆倾向无偏。只修理论说明/补充独立数学审计，没有改活跃query_profile或训练helper。最新已推送4a6736f，snapshot96474347/reachable96637026，后续聚合另经复算/体积gate发布。
 - 强同信息轨迹均值普通补充2413456已排队，scripts/a100_conditional_coarse_baseline.py；等主研究18GPU条件全部释放才用0..3。同原3观察的PCD均值、sqrt(mean颜色)、有效比例/几何时间，软硬充分头/早晚均值/原teacher回填共5输出；90raw+288count=378自有，+18共享primary=396统计。自己和主1692全封存才本补充GT；未看主分数固定，不改活跃数值。它是同信息均值对手，不能声称直接复用旧含源先验的数值。当前主研究C1前两视频全部12臂拟合gate通过，仅工程收据、无中途HOTA读取。
 - 最新实际执行：统一条件观测六设置研究2409934（scripts/a100_conditional_six_setting.py），18条件/12学习器/432raw+1260双向数量=1692，全部封存后本项GT。主FULL_FINAL预先固定。充分0源logit逐帧/平铺软硬KD、同上下文直接模型、平衡/偏好/条件结构消融及其它3策略的FULL；当前/过去归一化及所有模型公平warm-start。源码/假设已登记冻结，别改活跃数值helper。新PCD/RGB版本全模型同输入重训，CLIP锚点与实际多视角原始混合投影边界明确，完整质量尚未完成。原有强轨迹均值对手仍须对照，不以只赢局部头结项。
 - 共享逐观察RGB2406266（scripts/a100_dense_rgb_collect.py），74视频/517686候选观察/54496图像、4CPU线程，所有6400旧锚点做逐值一致核验，全部学习器共享；原始派生数组只本地，NAS不变/0GT/0QA/0神经前向。这是准备成本，不是新创新/冷部署。
