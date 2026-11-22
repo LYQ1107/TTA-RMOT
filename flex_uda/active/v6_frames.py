@@ -14,9 +14,10 @@ from flex_uda.active.v6 import selection_fractions
 
 
 class FrameCacheV6:
-    def __init__(self,model,cache,bank,queries,frames,head_path,folder,*,store_pcd=True):
+    def __init__(self,model,cache,bank,queries,frames,head_path,folder,*,store_pcd=True,pcd_sink=None):
         from scripts.active_v6_prepare import sample32
         self.model,self.cache,self.bank,self.queries=model,cache,bank,queries
+        self.pcd_sink=pcd_sink
         self.frames=list(map(int,frames));self.frame_index={t:i for i,t in enumerate(self.frames)}
         self.sample_frames=sample32(self.frames)
         self.observations=np.asarray(bank['observations']);self.tracks=sorted({int(t) for t in self.observations[:,1]})
@@ -55,6 +56,8 @@ class FrameCacheV6:
                     self.margin[qa:qa+value.shape[1],ids]=value.float().cpu().numpy().T
                     if self.pcd is not None:
                         self.pcd[qa:qa+value.shape[1],ids]=feature.float().cpu().numpy().transpose(1,0,2)
+                    if self.pcd_sink is not None:
+                        self.pcd_sink(qa,ids,feature)
                     rows+=value.numel()
                 self.row_model_steps[ids]=model_step
             if fi%32==0 or fi==len(frames)-1:

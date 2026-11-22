@@ -1,0 +1,79 @@
+{
+  "version": "SIX_DIRECTION_TRANSFER_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "purpose": "Expand the already developed common recipe to all six directions before claiming a six-direction solution; this is an intermediate diagnostic matrix, not a new invention acceptance.",
+  "pairs": {
+    "C1": [
+      "V2-best",
+      "Dance"
+    ],
+    "C2": [
+      "Dance-best",
+      "KITTI-V2"
+    ],
+    "C3": [
+      "V2-best",
+      "SportsMOT"
+    ],
+    "C4": [
+      "Dance-best",
+      "SportsMOT"
+    ],
+    "C5": [
+      "LaMOT-best",
+      "KITTI-V2"
+    ],
+    "C6": [
+      "LaMOT-best",
+      "Dance"
+    ]
+  },
+  "task_protocol": {
+    "C1": "CHECKLIST",
+    "C2": "PRESUPPOSED",
+    "C3": "PRESUPPOSED",
+    "C4": "PRESUPPOSED",
+    "C5": "PRESUPPOSED",
+    "C6": "CHECKLIST"
+  },
+  "teacher_fraction": 0.1,
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "teacher": "frozen original Qwen CROP; same questions for every method and head seed",
+  "perception": "three uniformly spaced PCD observations per provided TrackID; original four-observation temporal context; source frozen",
+  "source_features": "reuse actual C1/C4 streams; physically regenerate C2/C3/C5/C6 on GPU0..3",
+  "classical_recipe": "same converged Final direct head; PRESUPPOSED identity/CHECKLIST equal-total-edge complete graph; same TrackID-crossfit prefix monotone HSV visual correction",
+  "ordinary_baseline": "same 768->64 GELU->1 direct soft/hard teacher head, no fixed source residual; AdamW lr.001 wd.001; weighted BCE 1+3|2rawp-1|; min4000/max16000 teacher KL<=.005; Final primary, Mean and hard controls retained; same task-contract conditioning control",
+  "modules": [
+    "COVER fixed prior-strata and image-feature diversity (common acquisition, not yet claimed independent contribution)",
+    "protocol-conditioned context pooling",
+    "teacher-only TrackID-crossfit visual cue regularization"
+  ],
+  "methods": [
+    "KD_FINAL",
+    "KD_MEAN",
+    "HARD_FINAL",
+    "BASE_PROTOCOL",
+    "RAW_TEACHER_FILL",
+    "PROTOCOL_GRAPH",
+    "VISUAL_ONLY",
+    "LOCAL_JOINT",
+    "JOINT"
+  ],
+  "quantity_controls": "JOINT and BASE_PROTOCOL rankings at both methods per-query per-frame counts; CountSelf must reproduce exact query files",
+  "GT": "all 18 raw conditions and 72 quantity controls sealed before this study evaluation; no target labels in adaptation or checkpoint selection",
+  "all_data_development": true,
+  "KITTI_only_four_videos": "report point values and seed sensitivity, no fabricated population CI",
+  "old_v8p_table_comparability": "old rho.3 full-perception/decode is historical reference only, not module effect; future matched rho.3 study may follow",
+  "cost": "new four evidence workers measured, then component head/inference receipts; not independent whole-method cold deployments",
+  "source_commit": "e0d24d3d977ef0fd76ec20703c1fdd79d17df04f",
+  "implementation_sha256": {
+    "scripts/a100_six_direction.py": "40ffe5d96a46cdf1d7f35a5e2edf9aa47f6fe32ec8c2fd7d55050ffe17ce5251",
+    "scripts/a100_six_direction_launch.py": "1058f6c39a6081dd7b2bc29b37fae21b75a6e909970a678daba2aacc4ccb5b83"
+  },
+  "scientific_success": "six directions must be individually reviewed; never close Goal just because this matrix executed"
+}

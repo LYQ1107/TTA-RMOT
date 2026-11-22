@@ -1,0 +1,22 @@
+{
+  "scientific_plan": "preregistration_strict_rgb_parity_v1.json",
+  "timing": "Before all strict RGB raw predictions seal and before any strict RGB official evaluation; C1 seeds0/17 completed, C1 seed42 and C4 seed0 running",
+  "reason": "Reuse GPUs1/2 after their authorized independent cold jobs finish, rather than leave them idle while the remaining two registered C4 neural seeds fit",
+  "additional_GPUs": [
+    1,
+    2
+  ],
+  "release_condition": "Both final independent source controllers have terminal PASS; their GPU source/teacher children have exited",
+  "conditions_only": [
+    "C4_seed17",
+    "C4_seed42"
+  ],
+  "same_numerics": "Identical original1080/RGB features, same prefix QA, seeds17/42, architecture, Torch4threads, TF32false, fitting rule and graph parameters",
+  "synchronization": "Per-condition process flock ensures exactly one fit stream; a second launcher waits and then reuses the sealed condition. No duplicate scientific output or overwritten prediction",
+  "no_new_teacher_or_encoder_calls": true,
+  "no_GT_feedback_used_for_change": true,
+  "no_seed_or_acceptance_change": true,
+  "goal_status": "ACTIVE",
+  "start_code_manifest": "strict_rgb_execution_implementation_manifest.json",
+  "older_workers_keep_loaded_start_implementation": true
+}

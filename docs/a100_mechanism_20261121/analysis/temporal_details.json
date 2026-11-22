@@ -1,0 +1,39 @@
+{
+  "status": "COMPLETE_SEALED_MASK_TEMPORAL_DIAGNOSIS",
+  "methods": {
+    "RAW_MARGIN": {
+      "selected_rows": 212576,
+      "selected_positive_candidate_rows": 146857,
+      "selected_negative_candidate_rows": 65719,
+      "missed_positive_candidate_rows": 1359101,
+      "stable_identity_membership_transitions": 2875967,
+      "stable_identity_membership_flips": 36690
+    },
+    "EMA_MARGIN": {
+      "selected_rows": 204616,
+      "selected_positive_candidate_rows": 143031,
+      "selected_negative_candidate_rows": 61585,
+      "missed_positive_candidate_rows": 1362927,
+      "stable_identity_membership_transitions": 2875967,
+      "stable_identity_membership_flips": 11931
+    },
+    "HYSTERESIS_MARGIN": {
+      "selected_rows": 211020,
+      "selected_positive_candidate_rows": 146144,
+      "selected_negative_candidate_rows": 64876,
+      "missed_positive_candidate_rows": 1359814,
+      "stable_identity_membership_transitions": 2875967,
+      "stable_identity_membership_flips": 23192
+    },
+    "MINUS": {
+      "selected_rows": 850445,
+      "selected_positive_candidate_rows": 624441,
+      "selected_negative_candidate_rows": 226004,
+      "missed_positive_candidate_rows": 881517,
+      "stable_identity_membership_transitions": 2875967,
+      "stable_identity_membership_flips": 0
+    }
+  },
+  "note": "Causal raw-margin filters are compared with RAW; existing MINUS is already track-constant, not augmented by these filters",
+  "GT_used_only_offline": true
+}

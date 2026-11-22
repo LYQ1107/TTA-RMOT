@@ -1,0 +1,133 @@
+{
+  "status": "PASS_NUMERICALLY_EQUIVALENT_PROFILE",
+  "physical_GPU": "1",
+  "model_load": {
+    "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+    "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+    "strict_load": "<All keys matched successfully>",
+    "model_load_seconds": 963.7700249860063,
+    "precision": "FP32",
+    "checkpoint_hash_verified_in_this_load": true,
+    "fused_window_process": false,
+    "fused_layernorm": false
+  },
+  "student_load_wall_seconds": 965.483469090017,
+  "records": [
+    {
+      "cache_mib": 512,
+      "frames": [
+        1,
+        78,
+        155,
+        233,
+        310,
+        388,
+        465,
+        542,
+        620,
+        697,
+        775,
+        852,
+        929,
+        1007,
+        1084,
+        1162
+      ],
+      "candidate_query_rows": 1208,
+      "feature_flow_wall_seconds": 25.91636924899649,
+      "phase_wall_seconds": {
+        "text_cache_and_encoder": 0.3631189509178512,
+        "image_IO_and_transform": 20.476451786933467,
+        "backbone": 2.515379619668238,
+        "PCD_decode": 1.5070572050171904,
+        "CPU_cardinality": 0.006673825962934643
+      },
+      "phase_calls": {
+        "text_cache_and_encoder": 37,
+        "image_IO_and_transform": 62,
+        "backbone": 62,
+        "PCD_decode": 29,
+        "CPU_cardinality": 1
+      },
+      "other_seconds": 1.0476878604968078,
+      "frozen_cache_stats": {
+        "backbone_calls": 62,
+        "backbone_images": 62,
+        "text_encoder_calls": 8,
+        "visual_hits": 52,
+        "visual_misses": 62,
+        "peak_cache_bytes": 419973120
+      },
+      "bitwise_equal_to_first": {
+        "margin": true,
+        "presence": true,
+        "utilities": true,
+        "raw_k": true
+      },
+      "phases_include_synchronization_overhead": true,
+      "model_already_resident": true
+    },
+    {
+      "cache_mib": 8192,
+      "frames": [
+        1,
+        78,
+        155,
+        233,
+        310,
+        388,
+        465,
+        542,
+        620,
+        697,
+        775,
+        852,
+        929,
+        1007,
+        1084,
+        1162
+      ],
+      "candidate_query_rows": 1208,
+      "feature_flow_wall_seconds": 29.522877704002894,
+      "phase_wall_seconds": {
+        "text_cache_and_encoder": 0.13920577196404338,
+        "image_IO_and_transform": 24.83615969296079,
+        "backbone": 1.981177996029146,
+        "PCD_decode": 0.8464912099880166,
+        "CPU_cardinality": 0.006953134958166629
+      },
+      "phase_calls": {
+        "text_cache_and_encoder": 37,
+        "image_IO_and_transform": 62,
+        "backbone": 62,
+        "PCD_decode": 29,
+        "CPU_cardinality": 1
+      },
+      "other_seconds": 1.7128898981027305,
+      "frozen_cache_stats": {
+        "backbone_calls": 62,
+        "backbone_images": 62,
+        "text_encoder_calls": 8,
+        "visual_hits": 52,
+        "visual_misses": 62,
+        "peak_cache_bytes": 419973120
+      },
+      "bitwise_equal_to_first": {
+        "margin": true,
+        "presence": true,
+        "utilities": true,
+        "raw_k": true
+      },
+      "phases_include_synchronization_overhead": true,
+      "model_already_resident": true
+    }
+  ],
+  "process_wall_seconds": 1044.4953460830147,
+  "GT_open_attempts": 0,
+  "limitations": [
+    "one fixed16-anchor slice; cannot extrapolate whole-C4 speedup",
+    "capacity512 measured first,8192 second; shared OS cache retained, no randomized crossover",
+    "phase timings include CPU/IO/synchronization and are not pureGPU kernel integrals",
+    "exact feature caching already exists; no low-dimensional approximation used"
+  ]
+}

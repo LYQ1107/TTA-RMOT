@@ -1,0 +1,85 @@
+{
+  "version": "SPARSE_EVIDENCE_AND_OBSERVATION_ALIGNMENT_V1",
+  "source_commit": "d5e63d6f02888806da3c1ebc96b2eaf402af17e5",
+  "reason": "Scope audit reproduced C4 KD69.050 exactly; current-only68.341. Retain this strong baseline and test evidence efficiency and anchor/track granularity.",
+  "task": "Official fixed candidate boxes/IDs; cross-domain referring adaptation; current-video transductive prefix.",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "target_GT_in_adaptation": false,
+  "GT_after_all_new_predictions_sealed": true,
+  "all_development_data": true,
+  "new_teacher_calls": 0,
+  "QA": "Same selected real seed0 C4 key KD / C1 COVER records. Budget subsets follow each query original response-blind question order, no response-based cherry picking.",
+  "budget_study": {
+    "primary_fraction": 0.1,
+    "primary_neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "additional_seed0_fractions": [
+      0.05,
+      0.2
+    ],
+    "full_fraction_reference": 0.3,
+    "allocation": "floor(rho*nqueries*eligible_tracks), equal per-query quota plus remainder in fixed query order",
+    "shared_inputs_and_feedback": true,
+    "methods": [
+      "SOFT_400",
+      "SOFT_FINAL",
+      "SOFT_MEAN_400_FINAL",
+      "HARD_400",
+      "HARD_FINAL",
+      "NO_GRAPH",
+      "GRAPH",
+      "MEAN_GRAPH"
+    ]
+  },
+  "observation_study": {
+    "fraction": 0.3,
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "observations": "same three uniformly spaced supplied-track observations; teacher is original max-area anchor among them",
+    "features": "Same frozen PCD768 plus query-parsed sqrt-HSV312; no new model or extra observation.",
+    "heads": "POOLED soft/hard and ANCHOR_ALIGNED soft, each1080->64 GELU->1 residual, prefix moments, min4000/max16000, KLstop.005, matched teacher clip.02/.98",
+    "static_clothing_only": true,
+    "non_static_queries": "Every observation arm falls back to the same pooled head.",
+    "expansion": "Piecewise linear node-logit interpolation within original Track ID, then same >.5/exclusive/motion-gate decoder; no boxes or IDs changed.",
+    "visual_edges": "symmetric degree-normalized self-tuning3NN excluding same TrackID; only nodes with visible required colour part",
+    "temporal_edges": "adjacent retained observations of same original TrackID; exp(-squared appearance distance/median positive temporal distance), applied AFTER normalization of unweighted temporal topology so attenuation cannot cancel",
+    "full_edges": ".5 visual + .5 appearance-weighted temporal",
+    "controls": [
+      "POOLED_SOFT",
+      "POOLED_MEAN",
+      "POOLED_HARD400",
+      "POOLED_HARD_FINAL",
+      "POOLED_GRAPH",
+      "ANCHOR_KD",
+      "ANCHOR_MEAN",
+      "ANCHOR_NO_GRAPH",
+      "ANCHOR_VISUAL_ONLY",
+      "ANCHOR_TEMPORAL_ONLY",
+      "ANCHOR_FULL",
+      "ANCHOR_MEAN_FULL",
+      "CONSTANT_TEMPORAL",
+      "MASS_MATCHED_CONSTANT_TEMPORAL"
+    ],
+    "unknown_unary_precision": 0.1,
+    "teacher_anchor_precision": "1+3*abs(2p-1); no duplicate known-node KD unary",
+    "head_fit": "No GT early stop or checkpoint choice; report400,final,and fixed mean."
+  },
+  "acceptance": "Report every budget/arm/seed including negative results. New modules need matched strong-head ablations, paired original-parent uncertainty, both-direction CountMatched with C1 exclusivity, and a later actual fresh cost run if retained. No goal completion from one positive development point.",
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "NAS_read_only": true,
+  "goal_status": "ACTIVE"
+}

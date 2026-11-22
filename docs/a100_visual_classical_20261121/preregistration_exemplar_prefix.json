@@ -1,0 +1,49 @@
+{
+  "protocol": "causal_exemplar_memory_v1",
+  "primary": "COVER__SUPPORT_MIX",
+  "seed": 0,
+  "motivation": "Teacher-only original-parent holdout finds Gaussian exemplar regression generalizes teacher answers better than a residual MLP. This is not yet RMOT evidence.",
+  "algorithm": "Gaussian residual regression on visible-prefix frozen PCD, source-logit offset, image-only bandwidth, fixed observation regularizer 0.1. Support variance gates MLP extrapolation toward kernel prediction.",
+  "mixture": "(1-variance)*matched_prefix_KD_logit + variance*kernel_logit",
+  "bandwidth": "median distance to tenth training neighbour, recomputed on visible prefix only",
+  "information_scope": "Past and current teacher answers only, exact current-prefix saved KD outputs; no batch trained head, no global target normalization, no future-payload reads",
+  "policies": [
+    "COVER",
+    "UNIFORM"
+  ],
+  "methods": [
+    "KERNEL",
+    "MEAN",
+    "SUPPORT_MIX",
+    "SUPPORT_GATED",
+    "SUPPORT_MIX_GRAPH"
+  ],
+  "ablations": {
+    "memory": "SUPPORT_GATED",
+    "adaptive_mixture": "MEAN",
+    "parametric_head": "KERNEL",
+    "acquisition": "UNIFORM__SUPPORT_MIX",
+    "optional_graph": "SUPPORT_MIX_GRAPH"
+  },
+  "baselines": [
+    "matched actual prefix-trained soft KD",
+    "same teacher direct native output",
+    "strong batch KD is separately scoped"
+  ],
+  "teacher_budget": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "new_teacher_calls": 0,
+  "target_GT_in_adaptation": false,
+  "no_target_GT_parameter_grid": true,
+  "primary_fixed_before_RMOT_evaluation": true,
+  "teacher_holdout_audit_not_used_to_pick_a_target_HOTA_winner": true,
+  "caveats": [
+    "all current data are development",
+    "Gaussian variance is model-based support, not calibrated true RMOT error probability",
+    "current full video transductive",
+    "cached source features and prepaid teacher answers, not cold live time"
+  ],
+  "acceptance": "full official metrics, parent-video paired intervals, CountMatched controls, final repeat seeds and real cost before goal completion"
+}

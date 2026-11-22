@@ -1,0 +1,25 @@
+{
+  "reason": "make actual soft KD receive the same bounded teacher probabilities already used by classic graph anchors",
+  "fixed_clip": 0.02,
+  "clip_source": "original V1 graph probability bounds [.02,.98], not a GT hyperparameter search",
+  "teacher_questions_features_source_initialization_and_prefixes_unchanged": true,
+  "minimum4000_maximum16000_KD": true,
+  "checkpoints": [
+    400,
+    4000,
+    "final"
+  ],
+  "soft_targets": "clip raw frozen Qwen p to [.02,.98]",
+  "hard_targets_unchanged": true,
+  "all_twelve_methods_reported": true,
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "seed": 0,
+  "current_cold_slice": "43/43 identical teacher request keys, maximum raw soft probability change .01953125; source-feature comparison being audited",
+  "no_new_teacher_calls": true,
+  "target_GT_only_after_prediction_seals": true,
+  "all_data_development": true,
+  "needed_to_exclude_regularization_mismatch_in_graph_vs_KD": true
+}

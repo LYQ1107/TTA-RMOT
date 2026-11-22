@@ -1,0 +1,10 @@
+{
+  "status": "CODE_SCOPE_CLARIFICATION_NO_PREDICTIONS_CHANGED",
+  "shared_acquisition": "COVER uses visual_graph(original[qi]) where original is frozen PCD; explicit HSV descriptors are not used by actual selection.",
+  "source_evidence": "scripts/a100_visual_classical_cold_full_c4.py: acquisition loop",
+  "PCD_and_teacher_see_original_RGB_images": true,
+  "zero_HSV_intervention": "Only312 channels of the1080D learned head are zeroed; PCD, teacher, questions and architecture stay fixed.",
+  "earlier_conditional_RGB_metadata": "Broad wording about RGB acquisition refers to image-derived inputs; it must not be read as an explicit HSV acquisition component.",
+  "immutable_seals_rewritten": false,
+  "adaptation_protocol_changed": false
+}

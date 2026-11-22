@@ -1,0 +1,19 @@
+{
+  "status": "REGISTERED_BEFORE_NEW_INTERVENTION_PREDICTIONS_AND_BANK_GT",
+  "purpose": "Supplement small-bank classification with full-C4 HOTA at exactly matched question positions and logical3508 budget",
+  "baseline_reproduction": "No-intervention DS explicit replay must reproduce all historical/C4-A100 MINUS prediction bytes before causal comparisons",
+  "groups": [
+    "DS__EXPLICIT_TASK__BANK_ORIGINAL",
+    "FIXED__EXPLICIT_TASK__BANK_ORIGINAL",
+    "DS__EXPLICIT_TASK__BANK_CROP",
+    "FIXED__EXPLICIT_TASK__BANK_CROP"
+  ],
+  "intervention": "Replace only the100 C4 positions selected before GT with new paired-view answers; other3408 original answers/order/frames identical",
+  "ORIGINAL": "Original realized view from fixed manifest, including inherited late-round information-gain routing",
+  "CROP": "CROP at the same100 physical positions",
+  "fusion": "DS or fixed sensitivity/specificity=.8 globally; unchanged inherited fast MAP fitting and decoding",
+  "scope": "partial routing intervention, not global removal of every routed question; response replay not live cost",
+  "new_teacher_calls_beyond900": 0,
+  "LoRA_updates": 0,
+  "no_new_GT_based_sample_selection": true
+}

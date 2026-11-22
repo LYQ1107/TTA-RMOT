@@ -1,0 +1,36 @@
+{
+  "status": "REGISTERED_OBJECT_REFERENCE_LEARNING_HYPOTHESIS_BEFORE_NEW_CODE_OR_QUALITY",
+  "context": "Existing DEV diagnostics, teacher-only predictive checks and bounded-field capacity audit are known. The current 450-output relation study is still running; none of its quality outputs was used to design this refinement.",
+  "innovation_scope": "Refinement of candidate I2/I3, not a fourth claimed innovation or a validated unified method.",
+  "problem": "An ordinary whole-track composite probability is not generally the probability at its mean sampled position. Adding a bounded state correction to it does not establish an object/reference decomposition.",
+  "local_hypothesis": "Teacher logit = stable query/object/view component + shared oriented horizontal-position response + error, only under the existing conservative language gate. Stable view-dependent errors and state-dependent errors remain limitations.",
+  "mechanism": "Estimate the already registered causal-prefix within-group slope. Before distillation, transport each actual frame pseudo-target to a fixed position reference of 0.5. Learn reference probabilities from frozen object/query features, then reconstruct current-position referring scores. This changes the learned target representation, rather than increasing the cap of an already composite score.",
+  "reference_target": "p_ref(e)=sigmoid(logit(clip(p_teacher(e),.02,.98))-beta*(oriented_x(e)-.5)) for eligible descriptions; unchanged clipped raw target otherwise.",
+  "weights": "Exactly the common original raw-frame confidence weight 1+3*abs(2*p_raw-1); no new confidence weight from transformed targets. Within a query/track cell, weighted probability averaging and summed weights preserve the reference-target Bernoulli cross-entropy exactly.",
+  "reference_head": "1081D frozen PCD/RGB/query cue ->64 GELU->1, direct zero-source-logit head. Same existing fixed min4000/max16000/KL<=.005 recipe. Head sees all paid query/track cells in the applicable video prefix, not only spatial queries.",
+  "reconstruction": "sigmoid(logit(p_reference_head)+beta*(oriented_x-.5)); no arbitrary post-hoc odds cap because the head is explicitly trained at the reference. This has no guarantee of correct semantics under model error.",
+  "no_posthoc_cap_relaxation": true,
+  "controls": [
+    "A same-architecture reference head trained on unshifted raw targets, then given the same slope/state reconstruction: isolate target decomposition from merely adding a state term.",
+    "A new adequate direct ordinary per-frame head gets the same paid answers, all1087D PCD/RGB/query/geometry inputs, all queries and the same fitting recipe; existing ordinary residual frame head also remains.",
+    "Same-fast-framework hybrid using ordinary per-frame predictions on eligible descriptions and DS_FULL elsewhere, so a gain cannot be attributed only to our fallback assembly.",
+    "Time-mean, at-reference and value-preserving circular-shuffle controls.",
+    "Both count directions, per-query/per-frame quantity equality, CountSelf identity."
+  ],
+  "eligibility_and_scope": "Same text gate and procedure in all six settings, no dataset-name numerical rule. An ineligible description or zero learned slope keeps the existing DS_FULL exactly. Consequently the current narrow reference prototype can affect only the two KITTI settings; it does not alone meet the full goal.",
+  "causal_prefix": "Past/current videos only. When the current prefix slope changes, recompute reference targets of past paid answers using that current slope; no future video answers, normalization or heads.",
+  "ordinary_frame_target_convention": "Reuse the strong comparator's exact-request deduplication and raw mean of actual views at the requested frame. Its CLIP-to-requested-anchor convention is disclosed, not certified as a true single-frame label.",
+  "conditional_theory": "Under a correct additive logit state model and exact beta, transporting a noiseless teacher target to the reference removes its position term. Exact learned reference plus exact beta reconstructs that model at any observed state. With errors, logit error equals reference error plus slope error times state displacement; sigmoid is1/4-Lipschitz. None of these implies HOTA improvement.",
+  "classical_source": {
+    "paper": "P. M. Robinson, Root-N-Consistent Semiparametric Regression, Econometrica56(4),931-954,1988",
+    "primary_full_text": "https://personal.soton.ac.uk/cz1y20/Reading_Group/mlts-2024s/week4/Robinson_1988_Root_N_Consistent_Semiparametric_Regression.pdf",
+    "verified_scope": "Original paper p931 equation1.1 and p932 identification discussion inspire separating a flexible stable component from a structured state component. This prototype is not Robinson's estimator; its dependent teacher groups/neural fit do not inherit his root-N/asymptotic results."
+  },
+  "adaptation_manual_target_labels": false,
+  "new_teacher_or_encoder_requests_for_this_fixed_evidence_refinement": 0,
+  "all_data_development": true,
+  "new_quality_runs_require_separate_frozen_source_registration": true,
+  "existing_live_numerical_helpers_changed": false,
+  "physical_GPU_scope": [0,1,2,3],
+  "goal_status": "ACTIVE"
+}

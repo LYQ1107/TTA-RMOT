@@ -1,0 +1,84 @@
+{
+  "status": "PREREGISTERED_BEFORE_NEW_PREDICTIONS_AND_STUDY_GT",
+  "created_UTC": "2026-11-22T05:08:27.197704+00:00",
+  "goal_status": "ACTIVE",
+  "primary": "OPTIONAL_JOINT",
+  "rationale": "Completedteacher-onlyreceipts:bothLOCAL/GLOBALworsethanneutralidentityon36of45C4videos,1of25C1. ThisisnotGT/HOTAevidencebutexposesforced-transfermodelset.",
+  "validation": {
+    "unary": 0.5,
+    "teacher_TrackID_folds": 5,
+    "exclude_all_queries_of_held_current_TrackID": true,
+    "fitted_KD_never_used_for_validation": true,
+    "loss": "PRESUPPOSEDbalancedsoftCE;CHECKLISTBCE;queryaverages",
+    "identity_risk": "ln2",
+    "primary": "BestLOCAL/GLOBALgraphmustbeatidentitybyonepairedquerySE;otherwiseidentity",
+    "SE": "Sensitivityregularizeronly;sharedtrack/querydependenciesremain;notcalibratedconfidence",
+    "numerical_tie": "32float64eps,notGTmargin"
+  },
+  "deployment": {
+    "identity": "ExactsharedconfidenceweightedKDunchanged,notzeroedgegraphwithrawteacheranchors",
+    "graph": "Frozenlocal3NNorglobaltotaledgeweightmatchedgraph",
+    "post": "SamefrozenPAVAappliedafteralloperators",
+    "decoder": "Sameplain>.5plusfixedexclusivity"
+  },
+  "controls": [
+    "STRICT_JOINT3modelminrisk",
+    "FORCED_JOINTbestgraphwithoutidentity",
+    "GLOBAL_JOINTalwaysdense",
+    "ExistingFULL_JOINTalwayslocal",
+    "ExistingCALexactidentitythenPAVA",
+    "ANCHOR_OPTIONAL_JOINTsamegatebutfallbackretainslocalrawteacheranchors"
+  ],
+  "shared_head": "Exactexistingconfidenceweighted768Ddirectsoftmean;noadditionalfit",
+  "conditions": {
+    "directions": [
+      "C4",
+      "C1"
+    ],
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "QA_seed": 0,
+    "C4_logical_teacher": 1160,
+    "C1_logical_teacher": 1103
+  },
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "new_head_fits": 0,
+  "raw_outputs": 36,
+  "CountMatched_outputs": 114,
+  "official_total": 150,
+  "all150_sealed_before_new_study_GT": true,
+  "count_both_directions_vs": [
+    "KD",
+    "CAL",
+    "OPTIONAL_GRAPH",
+    "FULL_JOINT",
+    "FORCED_JOINT",
+    "GLOBAL_JOINT"
+  ],
+  "scientific_gate": {
+    "primary": "Bothdirectionsvsweightedandunweightedmean:all3seedpositiveandparent+seedCIstrictlypositive",
+    "new_optional_gate": "VsFORCED_JOINT:positiveparent+seedCIatleastonedirection;nosignificantlynegativeintervalinother. Doesnotprovenoninferiorityoruniversality.",
+    "modules": "GraphconditionalonCALandPAVAconditionalonOPTIONAL_GRAPH:eachhaspositiveparent+seedCIinatleastonedirection;allstrongordinaryandGLOBALcontrolsreported",
+    "C4_correct_query": "MeanrescueminusregressversusFULL_JOINTstrictlypositive;TPFPFNalsoaudited",
+    "attribution": "ANCHOR_OPTIONALcomparisonmandatory;donotattributeallskipped-refinementgainpurelytocross-trackedges",
+    "ranking": "BothCountMatchedprojectionsreported;donotclaimuniversalsemanticrankingfromquantitygains",
+    "actual_cost": "Ifretained,ownmatchingfreshfourarmcoldstudy;oldtimecannotbepasted. CombiningwithSEARCHneedsseparatefactorialonexactSEARCHQA"
+  },
+  "all_development": true,
+  "no_independent_blind_validation": true,
+  "manual_target_GT_never_in_adaptation_or_selection": true,
+  "originalparent_seed_intervals_descriptive_not_multiplicity_corrected": true,
+  "implementation_sha256": {
+    "flex_uda/active/optional_transfer.py": "f79bdffa4b16d39237a8281044c15c8fa9049ee27021b659861f13d34f8a5035",
+    "scripts/a100_visual_classical_optional_transfer.py": "42928df6c3d1a349cd7e068e664968764d9172899413d1dceecd4a9ec154012d",
+    "scripts/a100_visual_classical_optional_transfer_launch.py": "37b52a74fb92cf8f7e60c0c84682441143922667e3133f7604c863cb913b2470",
+    "scripts/a100_visual_classical_optional_transfer_analyze.py": "947223eeda337eb6af66a5de20710d4789a15f23557f063d6f564b25cadd4cd2",
+    "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81"
+  }
+}

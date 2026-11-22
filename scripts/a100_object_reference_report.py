@@ -1,0 +1,83 @@
+"""Report completed relation/reference studies and comparator-fit limitations."""
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+PUBLIC = ROOT/'docs/a100_six_direction_20261122'
+DEST = ROOT/'docs/TTA_RMOT_对象关系学习与普通蒸馏充分性_20261122.txt'
+SETTINGS = dict(C1='V2→Dance', C2='Dance→KITTI-V2', C3='V2→SportsMOT',
+    C4='Dance→SportsMOT', C5='LaMOT→KITTI-V2', C6='LaMOT→Dance')
+
+
+def load(name):
+    return json.loads((PUBLIC/(name+'.json')).read_text())
+
+
+def main():
+    studies = ('relation_transport', 'object_reference', 'object_reference_fit_complete')
+    reports = {s:load(s+'_analysis') for s in studies}
+    receipts = {s:load(s+'_statistical_reproduction') for s in studies}
+    assert all(r['status'].startswith('PASS_') for r in receipts.values())
+    reference = reports['object_reference']; complete = reports['object_reference_fit_complete']
+    lines = ['TTA-RMOT：对象—关系学习与普通教师蒸馏充分性补充实证',
+        '2026-11-22；现有数据均为开发数据；科研Goal ACTIVE，未完成。', '',
+        '一、问题与研究原则',
+        '目标始终是六个跨域实验设置上的RMOT，用目标图片、任务查询、固定候选及冻结教师适配，人工目标标签只在本研究全部输出封存后的隔离评价使用。前端沿用官方候选，不把整个检测器声称为source-only。',
+        '用户要求学习经典算法的思想，为任务建模和论文理论提供支撑。这里要解释可辨识性、稳定成分和变化关系，而不是将DS、凸求解器、图传播等名称包装为创新。理论假设必须接受任务和消融检验，不能倒过来用公式给任意涨点背书。',
+        '三个候选点组成同一链条：有限预算下观察什么；从相关且有偏的证据中能识别什么；如何表达当前对象及其关系。现有结果还没有证明整条链条成立。', '',
+        '二、完成范围',
+        '有界关系迁移450输出、参照目标学习450输出、同容量普通头优化补充162输出均已封存并完成官方评价。它们各自遵守本项封存屏障；统计含共享原始主方法，共1080条HOTA记录、258项配对效应，不是1080个独立试验。',
+        '三个神经种子0/17/42；Sports按13个原始视频重采样，不把45切片当独立样本；Dance25视频；KITTI仅4视频，不报告总体置信区间。全部是多轮开发后的描述性证据。',
+        '这些是预付旧实际QA/冻结特征的质量回放；0新教师前向不代表0部署成本。新普通逐帧头和参照头的训练成本另计，不能拼接旧冷启动时间宣称新配方高效。', '',
+        '三、参照主方法与普通逐帧对手（三种子平均HOTA）',
+        '设置 | 参照主方法 | 普通直接逐帧头 | 原同回退逐帧头 | 优化后逐帧头 | 优化后同回退头']
+    for pair, title in SETTINGS.items():
+        a = reference['repeated'][pair]['mean_HOTA']; b = complete['repeated'][pair]['mean_HOTA']
+        lines.append(f"{title} | {a['REFERENCE_FULL']:.6f} | {a['FRAME_DIRECT']:.6f} | {a['FRAME_DIRECT_HYBRID']:.6f} | {b['FIT_COMPLETE_FRAME']:.6f} | {b['FIT_COMPLETE_HYBRID']:.6f}")
+    lines += ['',
+        '其它四个设置的参照主方法精确保留DS_FULL；那里大幅胜过新逐帧普通头，不是新参照模块的贡献。逐帧头并非现有最强普通对手，原RAW_MEAN/RAW_RGB等轨迹级蒸馏必须共同保留。',
+        '同容量优化补充后，C2仍有5个合法视频前缀未达预登记teacherKL<=0.005。C5全部达到，但这不等于C5主方法胜过所有普通基线。', '',
+        '四、机制拆解：当前状态有价值，简单分解未获支持',
+        '设置 | 有界迁移相对原粗模型 | 参照学习相对原粗模型 | 减去状态的目标分解效应 | 当前位置相对固定中心 | 当前位置相对时间置乱']
+    for pair in ('C2', 'C5'):
+        bounded = reports['relation_transport']['repeated'][pair]['comparisons']
+        a = reference['repeated'][pair]['comparisons']
+        lines.append(f"{SETTINGS[pair]} | {bounded['FULL_vs_COARSE_DS']['delta_HOTA']:+.6f} | {a['FULL_vs_COARSE_DS']['delta_HOTA']:+.6f} | {a['TARGET_DECOMPOSITION']['delta_HOTA']:+.6f} | {a['DYNAMIC_vs_AT_CENTER']['delta_HOTA']:+.6f} | {a['CURRENT_STATE_vs_SHUFFLE']['delta_HOTA']:+.6f}")
+    lines += ['',
+        '有界迁移对C2只+0.088810、C5反而下降约0.287，不能称为成功解决。新的参照学习比原粗模型提升约0.784/1.245，但其关键目标分解相对未减状态控制却为负（约-0.263/-0.609）。不能改用更高的未分解控制来假装原主方法通过消融。',
+        '当前位置比固定中心、时间置乱更好，支持该保守查询子集需要状态信息；并不证明共享加性logit分解正确。其它四设置完全回退，更不是六设置的普适新关系机制。', '',
+        '五、强普通基线仍是硬约束',
+        '主方法C2为33.3671，低于同信息RAW_RGB普通头33.9211；C5为35.9672，低于RAW_MEAN36.8296及RAW_RGB36.4188。不能只挑较弱的新逐帧对手宣布获胜。',
+        '相对优化后同回退普通头，C2约+1.07635、C5约+1.28221；C2普通头还有5个未达教师拟合门槛的前缀，前一个差值不能作为击败充分训练蒸馏的证据。C5原始比较仍需结合其它强普通对手和4视频范围解释。',
+        'CountMatched必须双向给出，不能只挑有利输出数量。以下是主方法相对同回退优化普通头在两个操作点上的差值：']
+    for pair in ('C2', 'C5'):
+        comparisons = complete['repeated'][pair]['comparisons']
+        a = comparisons['RANK_AT_FULL_COUNT_vs_FIT_COMPLETE_HYBRID']['delta_HOTA']
+        b = comparisons['RANK_AT_BASE_COUNT_vs_FIT_COMPLETE_HYBRID']['delta_HOTA']
+        lines.append(f"{SETTINGS[pair]}: 主方法数量 {a:+.6f}；普通头数量 {b:+.6f}；4视频无总体CI。")
+    floor = load('frame_fit_representation_audit')
+    probe = load('frame_kd_capacity_probe')
+    lines += ['', '六、普通头拟合障碍：已诊断，正在完整补齐',
+        f"还未过门槛的{len(floor['failed_prefixes'])}个前缀，没有实际归一化float32输入完全相同却目标冲突的情况；这种精确输入等价类的KL下界都为0。下界为0不意味着64隐藏单元网络必能拟合。",
+        f"最难C2seed0最终前缀有{probe['teacher_examples']}个教师例子；同输入、同教师概率、同置信度权重，先用float64优化，再按需要保函数扩宽。最终隐藏层{probe['hidden_width']}，部署float32教师KL={probe['teacher_KL']:.9f}，通过原0.005门槛。",
+        f"该单前缀优化GPU工作耗时{probe['wall_seconds']:.3f}秒，不含所有旧训练、特征、教师冷启动，也不是完整部署成本。它是公平性修复，不是论文创新或单独质量结果。",
+        '完整容量补充已登记并启动：只修5个仍失败的合法前缀，其余已达标输出逐字复用；普通逐帧与同回退混合头均保留，162份输出封存后才本项GT，原主方法不变，不用最终头回修过去视频。该完整质量结果尚未在本报告验收。', '',
+        '七、下一步理论应回答的任务矛盾',
+        '对理想布尔描述A且R，Yes可以支持A和R均成立，而No至少兼容(A=0,R=1)、(A=1,R=0)、(A=0,R=0)三种状态。仅靠同一个整句No，不能确定是对象属性不符、关系不符，还是两者都不符。这是条件逻辑说明，不是把真实教师输出当无噪声真值。',
+        '旧logit模型把对象偏好与位置关系相加，中心化可以在这个模型里消去固定干扰，却不能保证现实复合描述真的服从该模型。目标分解消融为负，要求我们先审查模型和监督的可辨识性，不能继续调大教师权重或叠更多校准器。',
+        '查询文本审计还发现大量KITTI表达被现有保守语法保留为未知；这主要是当前解析能力边界，不是数据错误或任务不可学。Dance的dancing也必须明确是角色还是当前动作，不能无条件删除或宣称帧级静态。',
+        '将来需要检查哪些互补观察或对比问题能区分这些原因；始终给普通蒸馏同样的问题、答案和元信息。只在任务确实需要时分开潜在属性；总是共同出现的因素可在当前查询族中合并，不能盲目增加原子问题。当前没有实现或证明新的共享因素方案。', '',
+        '八、复现与结论边界']
+    for stem in studies:
+        r = receipts[stem]
+        lines.append(f"{stem}: {r['HOTA_records']}条统计，{r['paired_effect_records']}项配对效应，最大数值误差{r['maximum_absolute_error']:.3g}。")
+        lines.append('OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 .venv/bin/python scripts/a100_six_setting_statistics_reproduce.py --stem '+stem)
+    lines += ['原始可读统计保留本机备份；公开payload仅无损共享相同父视频行，全部值和数值类型不变，压缩后已重新复算。',
+        '当前证据没有完成三个创新点的统一方法、六设置可靠超过强普通蒸馏、新主动观察的效用比较及配套真实端到端成本。科研Goal保持ACTIVE。']
+    DEST.write_text('\n'.join(lines)+'\n')
+    print(json.dumps(dict(status='OBJECT_REFERENCE_REPORT_WRITTEN', path=str(DEST),
+        research_goal_complete=False), ensure_ascii=False))
+
+
+if __name__ == '__main__':
+    main()

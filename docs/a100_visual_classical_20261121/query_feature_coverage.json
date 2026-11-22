@@ -1,0 +1,36 @@
+{
+  "status": "QUERY_ONLY_BRANCH_COVERAGE_NO_GT",
+  "pairs": {
+    "C4": {
+      "counts": {
+        "queries": 466,
+        "pooled_KD_fallback": 210,
+        "type_OTHER": 105,
+        "static_clothing_branch": 256,
+        "type_APPEARANCE": 280,
+        "type_SPATIAL": 108,
+        "type_ROLE": 135
+      },
+      "fallback_examples": [
+        "basketball player",
+        "player",
+        "The libero of the left-side team.",
+        "The libero of the right-side team.",
+        "The player in the right-side team wearing black clothes.",
+        "The volleyball player in the left-side team wearing white clothes.",
+        "left-side team player",
+        "right-side team player"
+      ]
+    },
+    "C1": {
+      "counts": {
+        "queries": 425,
+        "static_clothing_branch": 425,
+        "type_APPEARANCE": 425
+      },
+      "fallback_examples": []
+    }
+  },
+  "GT_open_attempts": 0,
+  "computed_before_new_GT_evaluation": true
+}

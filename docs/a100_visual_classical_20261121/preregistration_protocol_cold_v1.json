@@ -1,0 +1,117 @@
+{
+  "status": "CONDITIONAL_PREREGISTRATION_NOT_LAUNCHED",
+  "created_UTC": "2026-11-22T06:23:22.112167+00:00",
+  "quality_gate": "Require protocol_calibration_review quality_checks all true and exact NumPy reproduction before allocating GPUs",
+  "quality_data_all_DEV_and_development_derived": true,
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_KD_NONEMPTY"
+      ],
+      "run_name": "C4_protocol_final_KD_20261122",
+      "worker_script": "scripts/a100_visual_classical_cold_protocol_final.py",
+      "worker_sha256": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "query_graph_scope": "extended",
+      "head_query_scope": "pcd",
+      "head_source_logit": "zero",
+      "task_protocol": "PRESUPPOSED",
+      "set_decoder": "original",
+      "graph_metric": "combined",
+      "graph_prior": "constant",
+      "teacher_fraction": 0.1,
+      "expected_questions": 1160,
+      "compute_RGB_statistics": false,
+      "defer_official_evaluation": true
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_KD_PROTOCOL_CAL"
+      ],
+      "run_name": "C4_protocol_final_JOINT_20261122",
+      "worker_script": "scripts/a100_visual_classical_cold_protocol_final.py",
+      "worker_sha256": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "query_graph_scope": "extended",
+      "head_query_scope": "pcd",
+      "head_source_logit": "zero",
+      "task_protocol": "PRESUPPOSED",
+      "set_decoder": "original",
+      "graph_metric": "combined",
+      "graph_prior": "constant",
+      "teacher_fraction": 0.1,
+      "expected_questions": 1160,
+      "compute_RGB_statistics": true,
+      "defer_official_evaluation": true
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_KD_NONEMPTY"
+      ],
+      "run_name": "C1_protocol_final_KD_20261122",
+      "worker_script": "scripts/a100_visual_classical_cold_protocol_final.py",
+      "worker_sha256": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "query_graph_scope": "extended",
+      "head_query_scope": "pcd",
+      "head_source_logit": "zero",
+      "task_protocol": "CHECKLIST",
+      "set_decoder": "original",
+      "graph_metric": "combined",
+      "graph_prior": "constant",
+      "teacher_fraction": 0.1,
+      "expected_questions": 1103,
+      "compute_RGB_statistics": false,
+      "defer_official_evaluation": true
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_KD_PROTOCOL_CAL"
+      ],
+      "run_name": "C1_protocol_final_JOINT_20261122",
+      "worker_script": "scripts/a100_visual_classical_cold_protocol_final.py",
+      "worker_sha256": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "query_graph_scope": "extended",
+      "head_query_scope": "pcd",
+      "head_source_logit": "zero",
+      "task_protocol": "CHECKLIST",
+      "set_decoder": "original",
+      "graph_metric": "combined",
+      "graph_prior": "constant",
+      "teacher_fraction": 0.1,
+      "expected_questions": 1103,
+      "compute_RGB_statistics": true,
+      "defer_official_evaluation": true
+    }
+  },
+  "total_expected_new_teacher_QA": 4526,
+  "expected_cache_hits": 0,
+  "no_prepaid_feature_or_QA_reads": true,
+  "all_four_sealed_before_followup_GT": true,
+  "ordinary": "Fully converged confidence-weighted FINAL + same given nonempty/checklist protocol; not a weak mean-only comparator",
+  "frozen_geometry_and_acquisition": "Same three uniform observation PCD/temporal context and COVER questions/max-area anchor; KD skips unused manual RGB",
+  "physical_cost": "Independent single-method process Popen-to-exit includes cold model loading, real source/teacher forwards, 4000+-step weighted fitting, postprocess, output. Official fixed candidate generation and GT evaluation excluded.",
+  "limitations": "OS/NAS caches unflushed, shared host load/staggered starts; no algorithmic speedup, iso-budget sweep or Pareto optimality claim. Reexecution seed0, not a new independent neural seed.",
+  "implementation_sha256": {
+    "scripts/a100_visual_classical_cold_protocol_final.py": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+    "scripts/a100_visual_classical_protocol_cold_launch.py": "c8b2bc8751297f2ef6bf006ead20382ac6ff567e499eb858aa99f2a5d3a8b62d",
+    "scripts/a100_visual_classical_protocol_cold_analyze.py": "66196457ce90d69f1d5a7cef6130ff82428716446d5d615c8b1416f0688a89ef",
+    "scripts/a100_visual_classical_protocol_calibration_review.py": "27d23bc70580e5626d120f29a33c3ed76e52a21b4ce56aa480b55fba7647bcc7",
+    "scripts/a100_visual_classical_budget_cold_launch.py": "ba0b9dd93c1fcb37692ec949e92e15cf2de68f2f68943cfb5401ce0c60980657",
+    "flex_uda/active/protocol_calibration.py": "c19abf043e35ae911108e3a8a4e849fd0730156034c8cbe45c3535f42a95e174",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "flex_uda/active/appearance_runtime.py": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+    "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "flex_uda/active/visual_classical.py": "5a0aa8a4a97d95fafd8d747d2344d367db542aa6c50c093ba5dcfb344f04c333"
+  },
+  "goal_status": "ACTIVE",
+  "preexecution_documentation_amendment": "Worker docstring clarifies independent single-method FINAL/protocol runs; numerical flow unchanged; no physical workers launched.",
+  "preexecution_receipt_amendment": "Scientific-review JSON links to existing full effect table instead of repeating it; criteria and numerical analysis unchanged, no physical workers launched."
+}

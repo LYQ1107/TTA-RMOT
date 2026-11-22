@@ -1,0 +1,54 @@
+TTA-RMOT：共享收敛头、任务协议与视觉校准的四卡真实冷启动
+2026-11-22
+
+仅在预先固定质量门槛通过后执行。四份新单方法0/1/2/3进程，各自加载源/教师、重算特征、独立SQLite，所有新预测封存后本组GT。
+普通基线是共享强置信度加权收敛FINAL，并获得同一非空/清单任务协议；跳过不使用的手工RGB。组合承担真实RGB、场景汇聚和PAVA开销。
+不是复用旧均值头时间；原始FINAL及完整强软/硬/均值/RGB/SEM控制、双向数量及模块归因见protocol_calibration_analysis.json。
+
+C4_seed0
+{"KD": 66.88453794588249, "JOINT": 67.43797998412792}
++0.553442; parent95%[+0.149204, +1.030332]
+C1_seed0
+{"KD": 32.60338963435036, "JOINT": 38.12339569212772}
++5.520006; parent95%[+1.536519, +10.222415]
+
+C4_KD
+完整外部进程秒=3751.853912716033
+阶段秒={"imports_metadata_and_recovery_setup": 15.282038151985034, "student_load_and_integrity_check": 445.8063559520524, "teacher_load_and_initial_integrity_check": 599.115819597966, "real_sparse_frame_student_forward_and_initial_head": 1821.1700238748454, "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.791546088759787, "real_teacher_service_including_image_IO": 167.936629499658, "teacher_final_frozen_weight_audit": 15.774445043993182}
+RGB实际计算=False
+拟合/保存秒=665.9085057189222；后处理/输出秒=1.3676010885974392
+其中任务池化CPU秒=0；PAVA秒=0
+真实问答=1160；缓存命中=0
+
+C4_JOINT
+完整外部进程秒=3909.9717483429704
+阶段秒={"imports_metadata_and_recovery_setup": 15.312334029003978, "student_load_and_integrity_check": 445.82910015794914, "teacher_load_and_initial_integrity_check": 599.2040041909786, "real_sparse_frame_student_forward_and_initial_head": 1707.632193993195, "real_RGB_sparse_inputs_and_image_only_acquisition": 324.94088376522996, "real_teacher_service_including_image_IO": 161.16942888498306, "teacher_final_frozen_weight_audit": 13.196544395992532}
+RGB实际计算=True
+拟合/保存秒=631.9941826207796；后处理/输出秒=1.6986840348690748
+其中任务池化CPU秒=0.001922425115481019；PAVA秒=0.4081576878670603
+真实问答=1160；缓存命中=0
+
+C1_KD
+完整外部进程秒=3002.593456269009
+阶段秒={"imports_metadata_and_recovery_setup": 16.02533019403927, "student_load_and_integrity_check": 444.65466781600844, "teacher_load_and_initial_integrity_check": 598.4545840920182, "real_sparse_frame_student_forward_and_initial_head": 1433.1348619380733, "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.012589947902597, "real_teacher_service_including_image_IO": 125.91734589205589, "teacher_final_frozen_weight_audit": 16.162790741887875}
+RGB实际计算=False
+拟合/保存秒=351.85924263414927；后处理/输出秒=0.7725194471422583
+其中任务池化CPU秒=0；PAVA秒=0
+真实问答=1103；缓存命中=0
+
+C1_JOINT
+完整外部进程秒=3147.1025358450133
+阶段秒={"imports_metadata_and_recovery_setup": 15.897008913918398, "student_load_and_integrity_check": 445.0503950359998, "teacher_load_and_initial_integrity_check": 598.3448238200508, "real_sparse_frame_student_forward_and_initial_head": 1355.8526032040827, "real_RGB_sparse_inputs_and_image_only_acquisition": 232.603941053967, "real_teacher_service_including_image_IO": 121.7526224446483, "teacher_final_frozen_weight_audit": 15.828577400068752}
+RGB实际计算=True
+拟合/保存秒=352.54524128884077；后处理/输出秒=3.6357402780558914
+其中任务池化CPU秒=1.8139391031581908；PAVA秒=1.1163782989606261
+真实问答=1103；缓存命中=0
+
+双方输入/教师/最终头：{"C4":{"videos":45,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.6750863846903287,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1160,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":true,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true,"last_video_head_weight_max_abs_difference":0.0,"last_video_head_statistic_max_abs_difference":0.0,"head_weight_audit_is_last_video_only":true},"C1":{"videos":25,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.7012736287739717,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1103,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":true,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true,"last_video_head_weight_max_abs_difference":0.0,"last_video_head_statistic_max_abs_difference":0.0,"head_weight_audit_is_last_video_only":true}}
+质量源一致性：{"C4_KD":{"videos":45,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.6750863846903287,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1160,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":true,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true},"C4_JOINT":{"videos":45,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.0,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1160,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":false,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true},"C1_KD":{"videos":25,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.7012736287739717,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1103,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":true,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true},"C1_JOINT":{"videos":25,"PCD_max_abs_difference":0.0,"RGB_max_abs_difference":0.0,"prior_max_abs_difference":0.0,"anchor_changed_tracks":0,"ordered_question_list_changed_videos":0,"question_symmetric_difference":0,"common_answer_positions":1103,"teacher_probability_max_abs_difference":0.0,"KD_intentionally_skips_unused_RGB_statistics":false,"RGB_difference_is_disclosed_above":true,"exact_source_questions_and_teacher_answers_equal":true}}
+质量分数/文件重放：{"C4_KD":{"queries":466,"changed_query_prediction_files":0,"maximum_saved_score_probability_error":0.0,"GT_open_attempts":0,"not_a_new_independent_neural_seed":true},"C4_JOINT":{"queries":466,"changed_query_prediction_files":0,"maximum_saved_score_probability_error":0.0,"GT_open_attempts":0,"not_a_new_independent_neural_seed":true},"C1_KD":{"queries":425,"changed_query_prediction_files":0,"maximum_saved_score_probability_error":0.0,"GT_open_attempts":0,"not_a_new_independent_neural_seed":true},"C1_JOINT":{"queries":425,"changed_query_prediction_files":0,"maximum_saved_score_probability_error":0.0,"GT_open_attempts":0,"not_a_new_independent_neural_seed":true}}
+任务协议：{"C4":{"task_protocol":"PRESUPPOSED","ordinary":"FINAL nonempty-conditioned for PRESUPPOSED; unchanged for CHECKLIST","proposed":"FINAL identity for PRESUPPOSED; global pool for CHECKLIST; then visual PAVA"},"C1":{"task_protocol":"CHECKLIST","ordinary":"FINAL nonempty-conditioned for PRESUPPOSED; unchanged for CHECKLIST","proposed":"FINAL identity for PRESUPPOSED; global pool for CHECKLIST; then visual PAVA"}}
+全部数据为DEV；规则来自多轮开发后的简化，不是独立盲测。真实执行是seed0再执行，不是第四个独立神经种子。
+每个独立进程Popen-to-exit包括启动、加载、前向、拟合、校准、输出；官方GT评估不计部署成本。官方固定候选生成成本未测，OS/NAS缓存未清理，共享主机错峰负载不受控。
+不把单次秒差写成算法提速，也不把两个端点称为全预算最优成本曲线。数量/基率收益不冒充纯语义排序。
+Goal不由执行PASS或报告自动关闭。

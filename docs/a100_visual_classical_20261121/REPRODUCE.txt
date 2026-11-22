@@ -1,0 +1,588 @@
+2026-11-22 最新范围更正：六方向Goal ACTIVE。此目录的最终验收仅指C1/C4两方向中间证据；六方向新研究入口为docs/a100_six_direction_20261122/preregistration_transfer_v1.json及scripts/a100_six_direction*.py，不代表整个科研目标完成。
+
+CURRENT FINAL ACCEPTANCE (2026-11-22)
+31 evidence checks passed on the existing DEV directions. All four actual runs and NumPy reproductions complete; no live experiment remains.
+Primary: shared confidence-weighted converged FINAL, task-contract identity/global pooling, then frozen visual PAVA. Official fixed candidates; target-image/query/teacher adaptation only.
+See minimal_retained_method_card.json, protocol_final_scientific_review.json and the protocol_calibration/pure_components/protocol_cold evidence triplets.
+Main history: docs/TTA_RMOT_视觉本能与经典算法_持续研究综合实证_20261122.txt; expanded count-table TXT: a100_runs/visual_classical_20261121/analysis/TTA_RMOT_持续研究完整逐查询计数版_20261122.txt.
+All older running/prepared notes below are historical milestones, superseded by this final acceptance. Do not launch them as unfinished tasks. No independent unseen-domain/contract validation, universal ranking or all-budget Pareto claim.
+
+跨域无标签RMOT：复现入口与信息范围
+
+项目根目录：/data3/liuyeqiang/FlexHook-TTA
+大模型、原图、冻结PCD历史特征与原始历史资产仍从只读NAS提供。
+完整预测、问答、训练状态、逐视频收据在a100_runs，不进入Git。
+本目录只保留代码说明、预登记、聚合统计、轻量收据和图表。
+
+1. 环境与源输入
+
+  cd /data3/liuyeqiang/FlexHook-TTA
+  source scripts/env_a100.sh
+  python scripts/a100_visual_classical_restore_canonical.py --list
+
+若45条C4源初始缓存已经存在，不需要重建。
+若从只含Git代码的环境复现，需先按docs/A100_RESTORE_20261120.md恢复NAS资产。
+缺少A100初始缓存时，可执行以下源模型专用重建：
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_restore_canonical.py
+
+该命令只做冻结Dance-best全帧前向及原源域基数头，不启动LoRA、固定32帧重算或旧队列；
+不覆盖已封存缓存。完整前向较慢，必须把它与现成PCD复用的CPU回放时间区分。
+C1使用原NAS封存源输入。目标GT从不参与上述步骤。
+
+2. 首轮固定证据与颜色输入
+
+  python scripts/a100_visual_classical_prepare.py --pair C4
+  python scripts/a100_visual_classical_prepare.py --pair C1
+  python scripts/a100_visual_classical_color_prepare.py --pair C4
+  python scripts/a100_visual_classical_color_prepare.py --pair C1
+  CUDA_VISIBLE_DEVICES=2 python scripts/a100_visual_classical_collect.py --pair C4
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_collect.py --pair C1
+  python scripts/a100_visual_classical_prefix_prepare.py
+
+collect准备四种策略的共享实验问答并集；该总并集不是任一部署方法的调用预算或冷启动成本。
+每个C4方法只能消费3508条自己的回答，C1为3334条。
+重新运行冻结Qwen时，相同问题的BF16软概率可能因批次有小幅变化；报告的精确数值对应
+收据中给定SHA的本地冻结回答，不能承诺换批次后逐位重现所有软标签结果。
+
+3. 强教师基线与同问答图控制
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_strong_prefix.py --pair C4 --policy COVER
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_strong_prefix.py --pair C1 --policy COVER
+  python scripts/a100_visual_classical_strong_countmatched.py --pair C4 --group strong_cover_seed0 --exclusive-projection
+  python scripts/a100_visual_classical_strong_countmatched.py --pair C1 --group strong_cover_seed0 --exclusive-projection
+
+常规未约束数量投影不带--exclusive-projection，另存为_counts；带该选项则是_counts_exclusive。
+对C1互斥查询，优先解释后者；C4非互斥任务保留逐查询投影。
+UNIFORM等策略通过--policy选择。实际KD使用目标教师硬/软标签拟合残差MLP，非离线替换标签。
+--teacher-target-clip .02给软KD相同的概率边界，输出到独立_clipped组；不改硬标签。
+新鲜流中的CLIP_KD/CLIP_COHORT沿用该概率边界：CLIP表示概率裁剪，
+不是新增CLIP视觉编码器或CLIP时序视角；RAW表示原始教师软概率。
+seed17/42需先运行repeat_collect.py为相应策略分片准备缺失的真实教师回答，再同时指定
+--seed 17 --acquisition-seed 17（或42）；不能把随机初始化重复写成新增独立测试域。
+
+4. 反馈选题与纯静态控制
+
+  CUDA_VISIBLE_DEVICES=2 python scripts/a100_visual_classical_field_collect.py --pair C4
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_field_collect.py --pair C1
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_strong_prefix.py --pair C4 --policy FIELD
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_strong_prefix.py --pair C1 --policy FIELD
+
+FIELD_STATIC使用完全不看回答的封存问题序列；将上面--policy替换为FIELD_STATIC即可运行。
+两者初始图、先验、总问题预算、最终KD拟合和解码相同，检验反馈选题本身。
+field_collect复制本地冻结缓存作为仅按请求返回回答的broker，对缺失问题真实GPU前向。
+这属于质量对照的证据准备；共享缓存的采集墙钟不冒充冷启动部署时间。
+
+5. 封存后官评
+
+  python scripts/a100_visual_classical_evaluate_group.py --group strong_cover_seed0 --primary COHORT
+  python scripts/a100_visual_classical_evaluate_group.py --group strong_cover_seed0_counts_exclusive --primary COHORT__AT_COHORT_COUNT
+
+评估进程读取GT；适配生成进程被禁止读GT及未来教师分片。
+逐查询官评缓存位于offline_GT，只在序列、预测字节SHA和官方代码版本相同时复用；新查询
+仍执行原TrackEval匹配。空缓存可直接计算，不依赖开发机器的一次性回归测试文件。
+各方法采用相同原始候选框和ID；CountMatched只用方法本身的数量，不用GT数量。
+
+6. 真实冷启动与控制器
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_cold_slice.py --name fresh_C4_full_clip
+
+该命令重载学生/教师、重算首条完整视频、建立全新SQLite、实际教师推理及独立拟合分支。
+它只覆盖固定完整片段，不能把全C4的HOTA与该片段的墙钟拼成一条性能成本曲线。
+其中共同冷启动前缀真实执行一次，各分支拟合和后处理分别实测；非多次独立冷启动。
+
+新增完整C4真实流（全部45片段），必须使用新的name以测量全新教师SQLite：
+
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_cold_full_c4.py --name C4_fresh_full_stream_seed0
+
+已完成的视频有stream.pt检查点；同名重启仅继续未完成视频，累计报告重启开销，不再冒充
+一次无中断冷启动。原始软、同样边界的软、硬KD实际训练，每条分支报告400/4000/最终；
+固定400/最终均值也是普通蒸馏基线，图同样作用于该基线，不只给主方法额外信息。
+每视频只使用过去与当前反馈，不读取历史神经特征或研究问答库。
+
+  python scripts/a100_visual_classical_cold_full_countmatched.py --name C4_fresh_full_stream_seed0
+
+该命令等完整预测封存，再在独立禁止GT的生成进程做29个固定数量对照，随后隔离官评。
+完整新鲜流的普通方法官评可调用flex_uda.a100.evaluation_reuse.evaluate(folder, 'C4')；
+本机cold_full_launch.py在所有方法封存后调度官评和聚合成本，含本机先前GPU1工作等待依赖。
+不得把CountMatched诊断或GT官评时间混入可部署方法的成本。
+
+三种子归因统计与图表：
+
+  python scripts/a100_visual_classical_repeats_analyze.py --c1-exclusive --output-name three_seed_task_valid_results
+  python scripts/a100_visual_classical_repeats_analyze.py --group-suffix _clipped --counts-suffix _counts_exclusive --output-name three_seed_clipped_results
+  python scripts/a100_visual_classical_plot_repeats.py
+
+前两个命令要求对应种子与数量对照的预测及官评已完整封存；没有完成时会等待。
+原视频聚类区间和原视频+种子敏感性区间同时保留，不把三次初始化当三份独立数据。
+
+7. 独立单方法冷启动（完整C4、同一GPU3）
+
+  python scripts/a100_visual_classical_single_cold_launch.py
+
+按预登记顺序CLIP_KD、CLIP_COHORT，各自独立新进程加载学生和教师、建立新SQLite，
+每视频只拟合CLIP这一类型的头，只生成这一种方法的预测。以源工作进程的外部
+Popen-to-exit为真实时间，官评另计。需要A100物理GPU3空闲，不会终止其他进程。
+顺序没有反向平衡，OS缓存保留，主机/NAS共享；这些限制保留在收据中。
+
+单独运行时，本轮命令为：
+
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_cold_full_c4.py --name C4_key_single_CLIP_KD_seed0 --perception-mode track-three --methods CLIP_KD
+  CUDA_VISIBLE_DEVICES=3 python scripts/a100_visual_classical_cold_full_c4.py --name C4_key_single_CLIP_COHORT_seed0 --perception-mode track-three --methods CLIP_COHORT
+
+以上name对应本轮结果；重复使用已完成name只复用原始收据，不构成新的冷启动测量。
+重新实测须换成未使用的name。--methods省略时仍执行原22方法对照，不应把它的
+完整多臂进程时间误认成单个部署方法的时间。
+
+8. 机制反例与可复现统计
+
+  python scripts/a100_visual_classical_geometry_launch.py
+  python scripts/a100_visual_classical_reverse_counts.py --published
+
+geometry比较真实图、打乱节点对应、同等总边精度的完全图，并保持相同教师和KD。
+reverse_counts只需Git发布的父视频充分统计，可重算反向数量对照的区间。
+
+  python scripts/a100_visual_classical_graph_evidence_launch.py
+
+该命令复现已封存的自适应图权重/协议保护假设。它在C4没有超过固定视觉图，
+不是最终核心方法。模型权重只用教师反馈，但教师预测更好仍不等于RMOT更好。
+
+9. 全量物理结果、固定问答和独立进程都完成后的导出
+
+  python scripts/a100_visual_classical_plot_cold_full.py
+  python scripts/a100_visual_classical_plot_single_cold.py
+  python scripts/a100_visual_classical_publish_cold.py
+  python scripts/a100_visual_classical_recheck_cold_statistics.py
+  python scripts/a100_visual_classical_final_report.py
+
+前3个命令要求本轮所有相关结果已封存，不会启动新训练或教师推理。
+统计复核命令只读取Git中的父视频充分统计和最终报告，不需要原图、GT、教师回答、
+checkpoint或GPU；重新计算全部公布的原视频聚类效应与区间，按TrackEval的
+TP加权统计合并，不能改成简单平均各视频HOTA。45剪辑区间不是该命令的复核范围。
+单进程成本图读取真实Popen-to-exit收据，22方法组件图使用共同前缀分摊，二者分别标注。
+稀疏感知仍保留原4次历史观察的上下文，2324指decoder位置，非全部backbone图像数。
+原始提供候选框/ID的检测与跟踪生成没有重测，不能把该成本宣称为从原视频检测起的总成本。
+
+*_launch.py是本次A100任务的持久化调度器，有些会等待先前控制器的GPU释放收据。
+在干净环境优先使用上述直接入口，并根据实际GPU空闲情况运行，不能盲目启动旧队列。
+
+所有数据均是已参与开发的数据。当前视频内允许转导，视频之间只使用已经发生的教师反馈；
+不宣称逐帧在线、独立盲测或任何未测预算/新域上的普遍胜利。
+
+10. 用户重新开启的持续科研Goal与强KD高分核验
+
+用户已明确沿用官方固定候选框与Track ID，只研究跨域指代适配；不重建检测器。
+上一批实证完成不等于整个科研Goal完成。阶段报告生成器现已保留这一范围修正。
+
+  python scripts/a100_visual_classical_benchmark_scope_launch.py
+  python scripts/a100_visual_classical_benchmark_scope_report.py
+
+首次运行比较SOURCE、直接回填教师、当前视频KD、过去KD、过去+当前KD，并将两套C4
+固定预测送入完全绕过episode缓存的原TrackEval。已完成路径再次运行复用封存结果，
+不构成新的冷启动或新的无缓存评测计时。结果：C4直接教师44.570、当前KD68.341、
+前缀KD69.050；复拟合0文件变化，无缓存官评分数差0。C1前缀亦逐文件复现。
+
+11. 新三观察对齐与稀疏证据研究（当前仍在运行）
+
+先在GT禁止进程保留原三次观察，并校验真实教师anchor：
+
+  python scripts/a100_visual_classical_observation_prepare.py --pair C4
+  python scripts/a100_visual_classical_observation_prepare.py --pair C1
+
+当前主机输入已备齐。若从干净环境运行调度器，需先完成这两步；本轮控制器同时会等待
+supervisor/observation_prepare_launch.json中记录的两条异步准备进程。不要重复启动仍在
+运行的控制器。控制器退出后，同名运行会复用已封存条件并继续有效stream.pt。
+
+  python scripts/a100_visual_classical_sparse_observation_launch.py
+
+16个预设条件使用物理GPU0/1/2/3：5%/10%/20%同预算质量曲线，10%三神经种子；
+30%同观察POOLED/ANCHOR对齐三神经种子，外加视觉、时序、恒定边、同总权重等对照。
+三种子共享冻结seed0问答，仅检验神经初始化，不算新域或三套独立证据。
+C1重求均值PCD/RGB差0；C4历史逐观察PCD对新鲜特征差约0.00521，故观察研究
+必须减它自己的同特征POOLED KD，不能把新鲜69.050直接当成纯净反事实。
+
+所有原始条件完成后，当前机器先对重复封存预测做无损硬链接复用，以留出数量反事实空间。
+两个命令保留原预测路径、内容和封签；不处理未封存方法、权重、问答或NAS：
+
+  python tools/deduplicate_immutable_predictions.py --root a100_runs/visual_classical_20261121/observation_alignment --apply
+  python tools/deduplicate_immutable_predictions.py --root a100_runs/visual_classical_20261121/sparse_evidence --apply
+
+再生成双向数量投影并进行隔离官评：
+
+  python scripts/a100_visual_classical_sparse_observation_evaluate.py
+  python scripts/a100_visual_classical_sparse_observation_analyze.py
+  python scripts/a100_visual_classical_observation_diagnose.py
+  python scripts/a100_visual_classical_sparse_observation_report.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py
+
+评估入口要求16个条件均已封存；数量投影保持C1联合互斥且所有CountSelf必须0变化。
+先封存全部反事实，再开始GT。最后的诊断区分物理串ID与语义谓词变化，不假定两者等同。
+这轮重用历史特征和冻结问答，新增教师0，仅为质量/机制研究；运行耗时不当作冷部署成本。
+后续以实际结果决定保留什么；不因跑完这些条件而自动宣称完成持续科研Goal。
+最后一条统计重算命令仅需Git中的父视频充分统计、NumPy和公布的分析JSON，
+不读取原图、教师问答、目标标签或GPU；它验证算术复现，不等于独立数据验证。
+
+12. 2026-11-22相对场景关系的新开发迭代（96组官评已完成）
+
+404组官评和400个公布效应/区间已复算通过。10%预算C1均值KD+图相对均值KD
++2.510 HOTA；C4 +0.608但种子敏感性区间跨0。三观察对齐/外观衰减时序未保留。
+这次新假设关注C4较弱且旧图排除的空间/角色查询，不引入新的重型时序网络。
+
+  python scripts/a100_visual_classical_context_launch.py
+
+该入口是单一阻塞控制器，使用GPU0/1/2并行C4三神经种子，GPU3完成C1图特异性。
+同10%冻结问答，同源PCD/RGB和候选框/ID。位置来自同帧候选的相对排名等经典统计；
+普通KD也得到这些特征，另有同维度零位置控制，避免把输入增强冒充图推断贡献。
+原图回归必须逐观测0变化。六条件全部封存后生成双向数量控制，再运行96组官评。
+禁止重复启动仍活跃的控制器；失败时保留stream.pt与原日志，只恢复未完成单元。
+预登记见preregistration_context_cohort_v1.json；它明确是看过上一阶段诊断后的开发迭代。
+
+96组评估全部完成后再运行：
+
+  python scripts/a100_visual_classical_context_analyze.py
+  python scripts/a100_visual_classical_context_report.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem context_cohort
+
+13. 10%预算的真实源模型/教师成本（新后台物理任务仍在运行）
+
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C1
+
+C4在GPU3运行，C1内部等待关系实验释放GPU后使用GPU0；不能重复启动已有任务。
+两个方向分别独立加载正确源主干/源数量头、冻结Qwen、新SQLite，真实计算三观察PCD/RGB。
+C4为Dance-best→SportsMOT，1160问题；C1为V2-best→Dance，1103问题，保留Dance互斥。
+每个方向内均值KD与均值KD+图共享同一个新鲜流和软KD头，分别记各自输出成本。
+真实外部Popen-to-exit包含双分支，不能把分摊common+own称作两次独立冷启动。
+已完成name只复用原始收据；失败尝试及其成本留worker_attempt_*.json，不用即时no-op计时替换。
+冷工作器新增--teacher-fraction默认仍为0.3、--pair默认仍为C4，旧入口科学设定保持。
+NAS/主机/OS缓存和其它任务共享。官方前端候选生成仍不在此成本边界内。
+
+两个方向都已封存并官评后：
+
+  python scripts/a100_visual_classical_budget_cold_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem budget_cold
+
+报告使用这次新精度配实际新成本，另列对历史输入/选题/回答的差异，不回填历史预测。
+
+14. 同头查询范围与最小性（105官评已完成）
+
+新上下文总体涨点不等于位置模块有效：位置独立增量区间跨0，零维度MASKED头
+也改善约0.387，须补充同头原图对照。不能据此宣称所有新增模块都有效。
+
+  CUDA_VISIBLE_DEVICES='' OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python scripts/a100_visual_classical_query_scope_launch.py
+
+此入口复用已拟合原头/MASKED/上下文头的实际前缀分数，无新增拟合/教师。
+原衣着图、扩展空间/角色图、无图锚点各自在同一头上比较；统一原float32决策精度，
+原均值衣着图必须逐观测复现，C1衣着/扩展必须相同。63原始+42双向数量，共105官评。
+原始预测全部封存后无损复用相同字节以留出数量空间，不删除任何结果路径。
+全部新原始/反事实先封存再GT，末尾自动执行分析、TXT/图表及公开统计复算。
+完整输出已存在时可只重新导出：
+
+  python scripts/a100_visual_classical_query_scope_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem query_scope
+
+15. 最终保留最小方案的独立单方法真实验证（GPU1/2仍在运行）
+
+同一个原1080维头，衣着图扩展到此前跳过的空间/角色查询。C4三种子67.227724对
+均值KD66.275653；C1 36.815919对34.305499。源/教师冻结，不加8位置特征或新头。
+完整参数和贡献边界见minimal_retained_method_card.json；当前实际物理验证尚未完成。
+
+原共享最终流V1在执行前被更严格的V2两独立单方法取代，V1明确标NOT_RUN，不当作测量。
+
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4 --scope extended --single-method CLIP_MEAN
+  CUDA_VISIBLE_DEVICES='' python scripts/a100_visual_classical_budget_cold_launch.py --pair C4 --scope extended --single-method CLIP_MEAN_COHORT
+
+V2按计划分别用GPU2/1，实际重新加载学生/教师，各自新SQLite、1160个新问题、一个软头，
+只生成自己的一个方法；外部Popen-to-exit不含GT评估，不是common+own估算。
+图专用的mask/几何/求解/输出时间记在自己的分支，普通KD不承担新增图工作。
+启动顺序固定、并行A100和NAS/OS/其它负载共享；不因总wall偶然较短就说图算法加速主干。
+
+两独立C4及现有新鲜C1均完成后：
+
+  python scripts/a100_visual_classical_minimal_final_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem minimal_final
+
+C1输入425查询都在原衣着范围内，所以现有新鲜C1图可用于最终方案，但仍要在实际
+新数据上逐观测验证原/扩展等价；其计时继续标共享双分支，不能冒充独立单方法。
+最终分析还比对两独立C4的PCD/RGB/先验/选题/教师概率及最后头参数，并仅在封存后
+读取GT做候选漏选诊断。没有独立新划分，始终不得宣称新域盲测已经完成。
+
+2026-11-22 严格RGB1080公平性补查（进行中，Goal ACTIVE）
+原扩展图额外暴露空间/角色RGB；此前1088上下文同时加入位置与初始化变化。
+新登记 preregistration_strict_rgb_parity_v1.json，六条件三种子在GPU0/3拟合。
+运行 scripts/a100_visual_classical_rgb_parity_launch.py；源数据必须先来自真实物理流：
+C4_minimal_single_KD_rho0p1_20261122 / C1_key_rho0p1_mean_pair_20261122。
+头维度1080、输入RGB信息一致；软400/final/mean和硬400/final均作为强对照。
+seed0严格复现物理KD/C1图，81原始+33数量先封存后114官评；不读目标GT做适配。
+scripts/a100_visual_classical_rgb_parity_analyze.py生成相同信息质量比较；
+scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem strict_rgb复核公开统计。
+该回放不增加教师/主干前向，拟合时长不冒充新独立冷启动；暂定方法尚未最终接受。
+
+2026-11-22 新鲜独立物理结果与压空机制后续
+minimal_final_analysis.json：原KD66.377114→扩展图67.204190，+0.827077，13原视频CI正；
+两独立wall3512.399/3512.535s，各1160新教师0命中，PCD/RGB/先验/问题/答案0差。
+但图的正查询空输出19→61，救回4/损失23，研究不能仅凭HOTA结项。
+新计划preregistration_null_set_v1.json在严格RGB官评前固定，45原始+21数量=66官评。
+运行 scripts/a100_visual_classical_null_set_launch.py，内部等待完整严格RGB源后只做CPU推断。
+图全空时保留匹配KD的完整集合；所有五个强KD共享相同非空协议控制。
+C1 CHECKLIST严格不变；0新教师/主干/头训练，不能把构造的非空0错误当真实检索成功。
+统计复算：python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem null_set。
+综合TXT在两物理/RGB/协议研究统计完整后运行scripts/a100_visual_classical_research_synthesis.py生成。
+
+23. 严格强基线补查完成与自然768维持续研究
+
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem strict_rgb
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem null_set
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem zero_colour
+  python scripts/a100_visual_classical_research_synthesis.py
+
+三组分别114/66/42官评均已完成；统计复核不重新训练或启动教师。报告保留C1区间跨零、颜色头未稳定增益、强制非空退步等结果。
+COVER实际用原始PCD距离，不用额外HSV；见acquisition_colour_scope_clarification.json。
+
+后续预登记自然768维充分教师头和经典图：
+
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_canonical_pcd.py --pair C4 --seed 0
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_canonical_pcd.py --pair C1 --seed 0
+
+seed17/42是相同问答下神经敏感性研究；当前控制器在GPU0..3运行已登记六条件，不要额外重复提交。
+all156完成后：
+
+  python scripts/a100_visual_classical_canonical_pcd_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem canonical_pcd
+
+PCD/混合RGB/纯颜色/同头隐藏图、无图锚点、正信念保护和全部软/硬强KD一起报告；主方法先登记，不能事后按域挑最优。
+新质量回放复用实付费问答，不是新的冷启动；若改最终配置，必须重新做匹配真实部署时间。
+生产入口已支持--head-query-scope pcd|clothing|extended|zero、--graph-metric pcd|combined|colour|hidden、
+--graph-prior constant|positive_agreement；后者须显式--task-protocol。预算launcher可用--plan-file和--job-key，
+未登记新冷启动计划，现有3512秒仍只属于原1080维候选。完整研究Goal尚未完成。
+
+24. 自然768完整结果与后续语义绑定（完整Goal仍未完成）
+
+canonical_pcd_analysis.json及213HOTA/276效应复现已完成。预登记正信念保护在C4退步，不保留；
+C1对768头正增益仍未稳定胜过更强RGB头。所有真实GPU前向/问答和旧失败都保留。
+
+  python scripts/a100_visual_classical_canonical_deployment_replay.py
+
+该命令用保存头作数值核对，需要一张授权空闲GPU；本次12头和1056视频×方法检查全0差。
+它不训练，不请求教师，不是新质量或冷启动成本测量；无需反复重跑。
+
+  python scripts/a100_visual_classical_fresh_teacher_diagnose.py
+
+该GT诊断要求全部canonical原始/数量输出已封存，不能在适配生成进程调用。
+GT率不进入适配权重；原始逐查询诊断仅本地保存，Git导出聚合统计。
+
+新固定颜色/身体部位语义绑定与单调教师校准：
+
+  python scripts/a100_visual_classical_semantic_colour_sanity.py
+  CUDA_VISIBLE_DEVICES=0 python scripts/a100_visual_classical_semantic_colour.py --pair C4 --seed 0
+  CUDA_VISIBLE_DEVICES=1 python scripts/a100_visual_classical_semantic_colour.py --pair C1 --seed 0
+
+seed17/42使用同一实付费问答。当前控制器已在GPU0..3运行六个注册条件，勿重复提交；
+干净环境可使用直接入口，或确认GPU/前序状态后使用semantic_colour_launch.py。
+同输入SEM1081软/硬头与同初始化ZERO1081均保留，PAVA/BIN/打乱线索/朴素平均按计划一次封存。
+174输出封存和官评全部完成后：
+
+  python scripts/a100_visual_classical_semantic_colour_analyze.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem semantic_colour
+  python scripts/a100_visual_classical_research_synthesis.py
+
+semantic_colour_parent_statistics.json中的reference指向本目录已公开的精确基线记录；
+独立NumPy复现器自动读取，不需要GPU、原始GT或checkpoint。引用与官方统计数组逐值验证，
+只是减少Git中重复数据，不改变样本/指标/种子。全部仍属开发数据，不是独立验证。
+若保留配方，还需匹配的真实单方法冷启动；当前没有该新配方的部署时间收据。
+
+canonical_pcd与semantic_colour父视频统计共享完全相同的内部矩阵，所有结果键保留。
+复现器递归引用相对包含文件解析；跨目录CountSelf->raw多层引用回归已PASS。
+canonical213HOTA/276效应完整重算最大误差2.84e-14；原始展开统计本地备份，预测/官评不变。
+
+
+2026-11-22追加：语义单调、联合归因与四卡真实冷启
+
+当前保留候选是原RGB1080均值KD+查询条件视觉图+固定PAVA外观正则，适配不使用人工目标GT。
+不是LoRA/新8维位置/正信念保护/强制非空。用户接受官方候选框/TrackID，研究指代适配。
+C4同头均值66.169708→67.692534；C1为32.199208→36.618032，三个种子主差都正。
+C1主要数量/查询基率收益，固定KD数量排序为负；对旧硬400区间略跨0，不能称全部控制显著。
+C4图与校准的条件增量均有正的开发描述性区间，但部分短查询检索退步仍需披露。
+目前所有数据均是开发数据，没有独立盲测。所有统计都是固定输出的重采样，未重训整条前缀流程。
+
+纯CPU统计复现（不需NAS原图、GT、模型、QA或GPU）：
+
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem semantic_colour
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem joint_visual
+
+已通过258结果/336效应和282结果/384效应复现，最大绝对误差2.84e-14。
+充分统计既支持同文件/跨文件整记录引用，也支持parent_rows逐原视频数值行引用。
+每个数值和所有方法键均保留，没有四舍五入、删失败或改指标；引用规则见statistic_reference_format.json。
+
+若有本地完整固定问答与输入，可复现已封存联合质量研究：
+
+  CUDA_VISIBLE_DEVICES='' .venv/bin/python scripts/a100_visual_classical_joint_visual_launch.py
+
+6条件、60原始+78双向数量=138官评。复用原RGB头和SEM400头，0新增教师/主干/头拟合。
+所有输出及数量控制先封存再GT；不代表实际新冷启动时间。旧数值worker冻结后不修改。
+
+四卡独立真实冷启的固定计划：preregistration_appearance_joint_cold_v1.json。
+GPU0/1为C4 KD/JOINT，GPU2/3为C1 KD/JOINT，全部重新加载模型/计算源特征、私有新SQLite，预期4526实际教师调用/0缓存。
+通过a100_visual_classical_appearance_cold_launch.py调度，四份全封存后统一GT；不要在现有活动任务尚未结束时再次启动。
+复现已有目录会保留原始worker_receipt，不把空跑冒充新成本。真正新冷启需要新的run_name和私有目录，不能覆盖已有收据。
+新方法只在显式请求CLIP_MEAN_CAL或CLIP_MEAN_COHORT_CAL时启用，旧默认22个方法保持。
+生产代码420视频×方法与2394个交叉校准模型的无GT数值回放0差，见appearance_deployment_replay.json。
+
+四卡完整结束后，新增纯CPU实际收据统计入口：
+
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem appearance_cold
+
+appearance_cold_analysis.json和四卡冷启TXT使用各自实际运行的HOTA/进程wall。
+加载、真实学生/教师前向、拟合、校准和输出都计入；GT评估除外。
+NAS/OS共享并行负载和预先提供的检测/跟踪候选边界明确披露，不据单次wall差声称算法加速或全预算Pareto最优。
+旧3512秒仅属于旧候选，不能贴到新精度上；真实重复也不是第4个独立神经种子。
+
+根research_log.md现为当前阶段索引。完整旧文在Git8bc165f及本地analysis/research_log_full_before_index_20261122.md中保留。
+完整研究叙事TXT和所有正负结果继续保留，Goal由根代理完成实际验收后单独更新。
+
+标准直接教师头公平性（待完成，不能提前作正结论）：
+  scripts/a100_visual_classical_direct_teacher.py / _launch.py / _analyze.py
+  scripts/a100_visual_classical_direct_teacher_pcd.py / _pcd_launch.py / _pcd_analyze.py
+两种自然输入维度1080/768；训练和预测固定source-logit=0，冻结源编码器仍保留。
+每组6条件420小头拟合，48原始+24双向数量全部封存后官评；同1160(C4)/1103(C1)问答，新增源/教师前向0。
+NumPy重算入口：scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem direct_teacher（或direct_teacher_pcd）。
+RGB组磁盘满后只恢复有效完整视频断点，已完成预测16,168份重建一致；数值/种子/数据不变。
+部分旧原始结果无损移至本机/var/tmp，其原a100_runs路径保持可用；NAS仍只读，不上传原始结果。
+
+
+公开聚合统计采用无损JSON字段编码：仅将parent_rows的原始紧凑JSON做标准库zlib+base64，
+HOTA、原视频名和记录引用仍可直接阅读；不是原始特征/权重归档。semantic/joint/actual共544个已解析记录逐值完全一致，
+722个效应全NumPy重算PASS，最大算术误差2.84e-14；共节省533,263字节，没有删样本/方法或截断数值。
+原始可读矩阵备份在analysis/unencoded_public_parent_statistics_20261122，格式说明和回归收据公开。
+新直接头研究使用同一存储格式，不改变任何预测、官评或bootstrap。
+
+原生直接头后续机制/真实成本研究（运行中，不提前作最终验收）：
+  preregistration_native_direct_factorial_v1.json：native_factorial.py / _launch.py / _analyze.py，132官评。
+  preregistration_native_direct_cold_v1.json：native_cold_launch.py / _analyze.py，4独立实际单方法进程。
+新worker显式--head-query-scope pcd --head-source-logit zero；旧默认source-residual不变。
+原实测残差worker的精确归档为scripts/a100_visual_classical_cold_residual_v1_20261122.py，文件SHA与原计划a3fc1343...完全相同。
+旧实际计划仍保留原哈希，不静默改历史记录；复现实测归档时可复制计划并显式worker_script指向归档、新run_name，勿覆盖原收据。
+新独立NumPy入口：--stem native_factorial 和 --stem native_cold。新增冷启图PDF公开，PNG在本地analysis/publication_figure_previews。
+
+成本V2：请用preregistration_native_optimized_cold_v2.json；GPU0/2优化原生KD跳过不用的手工RGB，GPU1/3沿用同一轮未中断的新鲜J进程。
+V1未优化KD中止的3视频与40/75已完成回答记录在native_cost_protocol_correction.json及本地原worker_receipt中，不作为最终部署结果。
+native_cold_analyze.py明确记录预期的RGB差异，仍校验PCD/先验/锚点/问答/教师概率/头概率/掩码；不要擅自把差异归零。
+
+为保持公开可达历史<100MB，新增科学图只发布等内容矢量PDF；PNG预览逐字保留在本地analysis/publication_figure_previews。
+没有删除实验、负结果或图中数据；publication_figure_formats.json记录预览校验及PDF位置。
+新增聚合统计可采用无损IEEE754float64字节重排压缩，解码后的每个原始数值和类型均已逐项验证；不是float32截断。
+
+
+2026-11-22 教师留轨迹预测选择（Goal仍ACTIVE）：原生132机制控制及184效应重算PASS。局部J对同总权重完全图C4 +3.772352、CI正，但C1 -1.844362、CI负；不能宣称局部视觉图普适。预登记PREDICTIVE_TOPOLOGY_V1并启动CPU控制器2079596：不看GT或域名，只按给定PRESUPPOSED/CHECKLIST任务契约，TrackID五折排除所有同轨迹查询，0.5中性unary比较局部/整体算子的教师预测风险，选全局须严格更低损失。固定BCE/平衡softCE、等权混合、反向选择和无PAVA全局图对照全保留。6条件42原始+114数量=156输出全部封存后才本组GT。神经头不进入交叉验证，0新教师/编码器/拟合。旧Gaussian BMA失败不改。四卡物理固定局部配方继续，不能将其时间配新选择器精度。selector/worker/graph/PAVA数值冻结。唯一阻塞监视仍51120，registry动态新增本任务；不再新建监视。
+
+
+2026-11-22 STRICT预测选择156完成并复算336效应PASS：C4 67.413321对nativeKD +.330384、CI[-.239241,.939313]跨0，C1 37.493610、+5.419510、CI[1.779342,9.846585]正。预登记额外真实冷启条件未过，准备的两个实际worker没有启动。保留失败，不从TWO_SE等未测试规则中偷偷选最高分。下一轮STABLE_TOPOLOGY_V2固定ONE_SE主规则，传统配对查询风险均值改进需超过一倍SE才转全局；SE只作敏感性正则，不伪造共享轨迹查询独立置信度。TWO_SE/MEDIAN/DELETE_ONE为敏感性对照，所有144预测先封存后本组GT，0新增教师/编码器/拟合。70视频sanity严格风险与V1完全相同、GT0。控制器2090121，等待同一registry唯一监视；原四卡实际任务不改。Goal仍ACTIVE，另补计划教师置信度加权普通蒸馏对照，避免仅把teacher reliability权重当本方法独占信息。
+
+
+2026-11-22 原生真实四卡完成：4526真实问答/0缓存，PCD/先验/教师概率/最后头/保存分数/预测与质量研究均0差，NumPy4HOTA/2效应完全复算。seed0 C4 66.964470→67.661313、+0.696843、parentCI[.257709,1.188813]；C1 31.658042→35.696180、+4.038138、CI[1.139439,7.624778]。真实单方法wall C4KD3761.595/J4437.921s，C1KD3146.512/J3616.019s，额外RGB实际计费，不称免费或算法提速。旧监视51120正常0在新注册前结束，新唯一监视69071/observer2090205。已完成RGB直接头原始结果迁本机/var/tmp，rsync-aH/checksum0及32076链接全部可解析；原路径保留，释放约1.3GB，NAS未写。CONFIDENCE_TEACHER预登记单一固定w=1+3|2p-1|同时加权普通软/硬KD，其余强训练不变；6条件420拟合/54输出全封存后GT，使用已释放0..3，无新增教师/编码器。控制器2091667。新稳定选择144 CPU控制器2090121继续。Goal仍ACTIVE，不能仅凭旧主结果或完成队列结束。
+
+
+2026-11-22 ONE_SE144完整官评及282HOTA/344效应复算PASS，但primary未晋级：C4 67.564896、对nativeKD +.481959、parent+seedCI[-.042041,.993548]跨0；C1 36.756050、+4.681950虽正，却比同总边权完全图-.819848、CI[-2.132324,-.002214]负。原先C4错误切换少一个，C1也错过有益整体传播，不能把敏感性正则当校准置信度。TWO_SE/MEDIAN等对照均如实保留，不按GT最高分替换预登记ONE_SE，也未启动额外4卡Qwen冷流。当前保留候选仍是先前统一固定局部原生J，2方向匹配实际验证已过；是否最终保留还要等CONFIDENCE_TEACHER54强普通对照。目标保持ACTIVE。
+
+
+2026-11-22 负证据边界的新针对性对照：固定J在C4相对KD仍会丢短查询，oneSE结构选择也失败，不能只凭总体HOTA称所有漏找已解决。TASK_CONTRACT_BOUNDED_NEGATIVE_EVIDENCE_V1固定：PRESUPPOSED把教师No节点图边断开、保留其局部No锚点；CHECKLIST原完整传播。教师/头/源精度/解码不变，不强制非空、不抬高NN先验。WEAK为逐query同总边权均匀弱化，排除仅减小传播强度；ALLPOS也在CHECKLIST断No为协议对照。70视频sanity全图重放0、CHECKLIST0、边权误差1.42e-14、No局部锚点误差4.47e-10、GT0。138新预测全封存后GT；同批强加权KD作为比较，0新增教师/编码器/头拟合。新主验收同时要求对强普通KD的HOTA和C4正确query净救回，不以只减少空输出冒充找对人。控制器2101556，CPU2槽，按加权条件完成依赖启动；唯一阻塞监视69071保持，Goal仍ACTIVE。
+
+
+2026-11-22 CONFIDENCE54/420拟合及78HOTA/120效应复算PASS：加权均值C4 67.102356、C1 32.259906。旧J相对加权均值C4+.536388，原视频固定种子均值CI正，但parent+seed敏感性CI[-.010093,1.127430]仍跨0；C1+3.471630、CI[.700613,6.997502]正。不得改用较窄区间结项。全部420fit均4000步内达到加权KL<=.005，非训练不充分。下一步SAME_WEIGHTED_HEAD_V1让基线和经典模块共享同一已封存加权头，不新增拟合/教师/编码器；只对原图/PAVA增减，保留强软/硬快照及旧头。18原始+60数量=78输出全封存后GT；新控制器2104199，唯一监视69071。负证据边界138继续。两条选择器V1/V2均未晋级，未启动其额外冷流。Goal仍ACTIVE，新的同头配方若保留必须新真实物理成本，不能用旧未加权时间。
+
+
+2026-11-22继续研究：固定官方前端、强加权普通头与两个新假设
+
+用户明确沿用官方固定候选，只研究跨域指代适配。上游默认SportsMOT预训练不算我方贡献，
+不再擅自重建前端。适配只读目标图像/查询/冻结教师，人工GT只在所有本研究输出封存后评估。
+现有数据全为DEV，尚无独立盲测；Goal ACTIVE。
+
+已完成强基线补查：
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem confidence_teacher
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem weighted_classical
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem contract_graph
+
+强普通加权均值C4 67.102356/C1 32.259906；共享同一个头的J为67.580033/35.727657。
+C4 parent+seedCI跨0，不能宣布最终验收通过；C1改善较稳定。全面断No边在C4 HOTA下降，淘汰。
+
+留轨迹视觉冲突规则：
+  python scripts/a100_visual_classical_cue_consensus_launch.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem cue_consensus
+
+先运行生成再官评，总144输出。PRESUPPOSED仅在当前轨迹教师监督排除后的视觉正修正>=已有ln3上限时，
+隔离该No向外传播；CHECKLIST原样。局部No锚点仍有效。随机同数量No隔离与同总边权弱化都是对照。
+控制器已经运行时不要再次启动。该质量研究0新增教师/主干/头拟合，不能当作完整部署成本。
+
+同预算覆盖搜索（实际新增缺失教师回答）：
+  python scripts/a100_visual_classical_coverage_search_launch.py
+  python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem coverage_search
+
+控制器只分配空闲GPU0..3。先用独立本地SQLite向冻结Qwen真实询问缺失问题，原缓存只是质量复用。
+保留每query内原COVER候选顺序；先各问一次，再按已观察No乘积/(query调用数+1)分配PRESUPPOSED剩余预算。
+CHECKLIST回到原均匀query预算，70视频无反馈问题集合差0。C4总1160调用不变，普通充分软/硬KD获得同样新回答。
+随后270头拟合、27原始+57数量=84输出全封存后本研究GT。C1无新问答/输出，沿用共享加权头质量，不伪称新验证。
+No乘积是搜索代理，教师答案相关，不能称校准存在性后验。预登记门槛、强对照和所有失败必须保留。
+若保留新配方，还需自己的真实冷启动，不能将未加权旧配方wall贴给新精度。
+
+当前唯一阻塞观察器及动态队列在a100_runs/.../supervisor；禁止agent级反复ps/tail/nvidia轮询。
+前一条观察器正常结束后才能建立另一条；运行中的数值帮助文件不可修改。
+
+CUE_CONSENSUS完成后的根科学复核：144官评、294HOTA/336效应重算PASS，但主规则不保留。
+C4比完整J-.032536、区间跨0；三个种子均无新query救回，FP增加。详见cue_consensus_scientific_review.json。
+这不是否定所有No传播，而是当前选择性规则没有通过自己的对照。没有启动该配方新冷流。
+共享强头贡献图可以只读公开聚合JSON生成（无需GT/图片/模型）：
+  python scripts/a100_visual_classical_plot_weighted_evidence.py
+公开矢量PDF为figures/shared_weighted_evidence.pdf；PNG预览只放本地a100_runs，不重复上传。
+覆盖搜索45视频证据已采齐，1160逻辑/296真实新回答/864缓存；仍在三种子拟合及84输出验证。
+
+2026-11-22 continuation: SEARCH84 and OPTIONAL150 are complete negative studies.
+Independent arithmetic after lossless parent-row sharing:
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem coverage_search
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem optional_transfer
+Read their scientific_review.json, not just execution PASS. Both primary recipes were rejected.
+
+PROTOCOL_CALIBRATION_V1 is a development-derived simplification, not blind validation.
+Same converged FINAL head; task-provided PRESUPPOSED identity or CHECKLIST global pooling, followed by frozen visual PAVA.
+Ordinary gets the identical task protocol via a conventional nonempty Bernoulli baseline.
+Six conditions, 36 raw+78 CountMatched=114, all sealed before this study's manual GT.
+  .venv/bin/python scripts/a100_visual_classical_protocol_calibration_sanity.py
+  .venv/bin/python scripts/a100_visual_classical_protocol_calibration_launch.py
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem protocol_calibration
+  .venv/bin/python scripts/a100_visual_classical_protocol_calibration_review.py
+Generation requires private official candidates/images and immutable source QA/PCD pools; the NumPy arithmetic reproduction needs only published aggregate JSON.
+No new teacher/encoder/head fits in this quality replay. Its runtime is not cold deployment cost.
+
+Conditional fresh plan preregistration_protocol_cold_v1.json is PREPARED, not an executed result.
+Run protocol_cold_launch.py only after the registered quality_checks pass. Four independent GPU0/1/2/3 arms, fully recomputed source/teacher/head, 4526 new QA/0 cache expected; ordinary skips unused RGB. All four seals before followup GT.
+The actual ordinary arm is FINAL plus the supplied nonempty/checklist contract. Raw FINAL and all older ordinary baselines stay in the quality study.
+Do not launch earlier failed weighted/CV/cue/search recipes or substitute their timings.
+
+Canonical query/candidate diagnostic labels are full-bank one-to-one IoU.5 assignments, not pure teacher semantic truth or each method's official rematching. HOTA always uses the official evaluator.
+All data are DEV; no untouched split exists. No independence, global Pareto or universal semantic-ranking claim.
+
+PROTOCOL_CALIBRATION114 has passed its registered quality gates; corresponding fresh four-arm physical runs are now in progress. Goal remains ACTIVE until physical and attribution audits finish.
+PURE_COMPONENTS_V1: 24 raw+42 CountMatched=66 NEW controls on the same FINAL heads (not the archived v8P66). Raw teacher overwrite with zero edges, identical PAVA, and fixed shuffled cue correspondence/refitting distinguish the internal causes; no new teacher/encoder/neural fits. All66 seals before its evaluation.
+  .venv/bin/python scripts/a100_visual_classical_pure_components_launch.py
+  .venv/bin/python scripts/a100_visual_classical_sparse_statistics_reproduce.py --stem pure_components
+Main/cold recipe stays frozen; negative controls are never promoted posthoc.
+
+Readable comprehensive narrative plus every HOTA/effect table:
+  .venv/bin/python scripts/a100_visual_classical_research_synthesis.py
+Full duplicated per-query count tables are retained in per-study JSON/TXT. To also generate a single expanded local TXT:
+  .venv/bin/python scripts/a100_visual_classical_research_synthesis.py --full-diagnostics
+Output: a100_runs/visual_classical_20261121/analysis/TTA_RMOT_持续研究完整逐查询计数版_20261122.txt
+This display-only deduplication changes no metric, control or failure record, keeping the published branch under100MB.
+
+Fresh actual protocol worker trains only CLIP soft labels; consult actual_trained_label_types and ledger head_fits labels. Legacy raw_soft_bounded_soft_and_hard_actual_training boolean is an all-requested-types expression, not literal evidence that RAW/HARD were also trained. See protocol_cold_legacy_field_note.json. Running code is unchanged.
+
+PURE_COMPONENTS66 completed: all four attribution checks passed and90HOTA/120effects independently reproduced. Main recipe remains unchanged.
+C1 pure graph edges beyond identical raw anchors/PAVA +4.632923; C4 true cue correspondence versus fixed permutation +0.561896. Both intervals positive. Simple raw-teacher overwrite hybrid also loses in both directions. C1 visual-only and ranking caveats remain.
+After all four real cold arms and protocol_cold_statistical_reproduction exist, final evidence check:
+  .venv/bin/python scripts/a100_visual_classical_protocol_final_review.py
+This validates evidence only, never automatically completes the thread Goal. Final publication/remote size check and root review are still required.
+Published coverage.json has only external-to-string display whitespace removed; every original token, value and type remains identical. Original readable file is in Git af46773 and local backup; see publication_display_whitespace_receipt.json. No statistical numeric encoding changed.
+
+FINAL: all four fresh cold runs completed, with4526realQA/0cache, exact source/QA/probability/query-file parity and140fullyconvergedsoftCLIPfits. protocol_final_review checks31evidence criteria and allpassed; no Goal automatic closure.
+Fresh protocol_cold_analysis.json, parent_statistics, statistical_reproduction and dedicated TXT/PDF contain the actual times/seed0 scores. These are not prior mean-head timings.
+minimal_retained_method_card.json now describes only the final accepted implementation on existing DEV directions. Its earlier provisional card is recoverable at Git430a57b and local analysis backup. Every negative study remains in the detailed history/evidence files.
+Executed core frozen source is preserved at Gitaf46773 and the unchanged SHA256 list in preregistration_protocol_cold_v1.json. The legacy label-types clarification stays applicable.

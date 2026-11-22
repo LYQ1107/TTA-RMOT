@@ -1,0 +1,625 @@
+{
+  "runs": {
+    "full": {
+      "protocol": {
+        "name": "C4_fresh_full_stream_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "shared_physical_source_and_teacher_stream": true,
+        "independent_cold_arms": false,
+        "raw_soft_bounded_soft_and_hard_actual_training": true,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "model_load_seconds": 481.8332290399703,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 80.88806588994339,
+        "equivalent_forward_seconds": 80.88806588994333,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_fresh_full_stream_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 461.3122827230254,
+        "peak_allocated_bytes": 6277017088
+      },
+      "phase_totals_seconds": {
+        "imports_metadata_and_recovery_setup": 11.772308729006909,
+        "student_load_and_integrity_check": 483.11926909099566,
+        "teacher_load_and_initial_integrity_check": 464.7025291529717,
+        "real_all_frame_student_forward_and_initial_head": 7686.82606395625,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 342.6853084951872,
+        "real_teacher_service_including_image_IO": 376.28272231062874,
+        "teacher_final_frozen_weight_audit": 14.728484213002957
+      },
+      "cost_by_method": {
+        "RAW_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 53.844519103644416,
+          "own_postprocess_and_output_seconds": 3.4618509326828644,
+          "shared_common_plus_own_branch_seconds": 9481.02320470137
+        },
+        "RAW_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.6550335888751,
+          "own_postprocess_and_output_seconds": 3.3123093511676416,
+          "shared_common_plus_own_branch_seconds": 9943.684177605086
+        },
+        "RAW_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.40194781916216,
+          "shared_common_plus_own_branch_seconds": 9944.001648759935
+        },
+        "CLIP_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 50.22611778101418,
+          "own_postprocess_and_output_seconds": 3.441809855401516,
+          "shared_common_plus_own_branch_seconds": 9477.384762301459
+        },
+        "CLIP_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.0235455227084,
+          "own_postprocess_and_output_seconds": 3.1893477361882105,
+          "shared_common_plus_own_branch_seconds": 9942.92972792394
+        },
+        "CLIP_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.1831649302039295,
+          "shared_common_plus_own_branch_seconds": 9951.3190779594
+        },
+        "HARD_KD_400": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 50.94132282526698,
+          "own_postprocess_and_output_seconds": 3.7988928651902825,
+          "shared_common_plus_own_branch_seconds": 9478.4570503555
+        },
+        "HARD_KD_4000": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.3043392334366,
+          "own_postprocess_and_output_seconds": 3.817467871005647,
+          "shared_common_plus_own_branch_seconds": 9941.838641769486
+        },
+        "HARD_KD": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.5090443070512,
+          "own_postprocess_and_output_seconds": 3.984653532039374,
+          "shared_common_plus_own_branch_seconds": 9942.210532504134
+        },
+        "RAW_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.744924418977462,
+          "shared_common_plus_own_branch_seconds": 9945.34462535975
+        },
+        "RAW_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.984232970047742,
+          "shared_common_plus_own_branch_seconds": 9945.58393391082
+        },
+        "RAW_STRONG_PRIOR": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 4.587407203274779,
+          "shared_common_plus_own_branch_seconds": 9945.187108144048
+        },
+        "CLIP_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.9136901000747457,
+          "shared_common_plus_own_branch_seconds": 9952.049603129271
+        },
+        "CLIP_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 4.045836683246307,
+          "shared_common_plus_own_branch_seconds": 9952.181749712443
+        },
+        "CLIP_STRONG_PRIOR": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.7960752403596416,
+          "shared_common_plus_own_branch_seconds": 9951.931988269556
+        },
+        "RAW_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 2.7899486620444804,
+          "shared_common_plus_own_branch_seconds": 9943.389649602817
+        },
+        "CLIP_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 2.7163726369617507,
+          "shared_common_plus_own_branch_seconds": 9950.852285666158
+        },
+        "HARD_MEAN": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 514.5090443070512,
+          "own_postprocess_and_output_seconds": 2.580961227300577,
+          "shared_common_plus_own_branch_seconds": 9940.806840199395
+        },
+        "RAW_MEAN_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.399214935488999,
+          "shared_common_plus_own_branch_seconds": 9943.998915876262
+        },
+        "RAW_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 516.8828662757296,
+          "own_postprocess_and_output_seconds": 3.452394006308168,
+          "shared_common_plus_own_branch_seconds": 9944.052094947081
+        },
+        "CLIP_MEAN_COHORT": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.4257300788303837,
+          "shared_common_plus_own_branch_seconds": 9951.561643108027
+        },
+        "CLIP_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 9423.716834665043,
+          "own_head_training_seconds": 524.4190783641534,
+          "own_postprocess_and_output_seconds": 3.440551429055631,
+          "shared_common_plus_own_branch_seconds": 9951.576464458252
+        }
+      },
+      "GT_open_attempts": 0,
+      "prepaid_artifact_reads": 0,
+      "single_uninterrupted_attempt": true,
+      "single_method_execution": false,
+      "external_process": {
+        "exit_code": 0,
+        "wall_seconds": 11067.513818162959,
+        "queue_wait_excluded_seconds": 0.02665840502595529
+      },
+      "actual_internal_worker_seconds": 11058.99660809699,
+      "source_run": "C4_fresh_full_stream_seed0"
+    },
+    "key": {
+      "protocol": {
+        "name": "C4_fresh_track_three_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": true,
+        "independent_cold_arms": false,
+        "raw_soft_bounded_soft_and_hard_actual_training": true,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "model_load_seconds": 316.5603545829654,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 82.4883082768647,
+        "equivalent_forward_seconds": 82.48830827686473,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_fresh_track_three_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 542.4847983380314,
+        "peak_allocated_bytes": 6278827520
+      },
+      "phase_totals_seconds": {
+        "imports_metadata_and_recovery_setup": 10.898868146003224,
+        "student_load_and_integrity_check": 317.8580494270427,
+        "teacher_load_and_initial_integrity_check": 546.1562463250011,
+        "real_sparse_frame_student_forward_and_initial_head": 1858.3881764438702,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 357.0079930733191,
+        "real_teacher_service_including_image_IO": 397.1531124076573,
+        "teacher_final_frozen_weight_audit": 14.31380701600574
+      },
+      "cost_by_method": {
+        "RAW_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 54.569625410134904,
+          "own_postprocess_and_output_seconds": 3.2670934427296743,
+          "shared_common_plus_own_branch_seconds": 3606.754533036612
+        },
+        "RAW_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.3698042549659,
+          "own_postprocess_and_output_seconds": 2.991426821681671,
+          "shared_common_plus_own_branch_seconds": 4077.279045260395
+        },
+        "RAW_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 2.927430591895245,
+          "shared_common_plus_own_branch_seconds": 4077.4523545687553
+        },
+        "CLIP_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 51.95736929902341,
+          "own_postprocess_and_output_seconds": 2.8642805223353207,
+          "shared_common_plus_own_branch_seconds": 3603.739464005106
+        },
+        "CLIP_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 529.6494002521504,
+          "own_postprocess_and_output_seconds": 2.8089558291248977,
+          "shared_common_plus_own_branch_seconds": 4081.3761702650227
+        },
+        "CLIP_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 2.803136269794777,
+          "shared_common_plus_own_branch_seconds": 4088.165935779689
+        },
+        "HARD_KD_400": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 52.68976620177273,
+          "own_postprocess_and_output_seconds": 2.825124735129066,
+          "shared_common_plus_own_branch_seconds": 3604.432705120649
+        },
+        "HARD_KD_4000": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.659217438777,
+          "own_postprocess_and_output_seconds": 2.8810340537456796,
+          "shared_common_plus_own_branch_seconds": 4071.45806567627
+        },
+        "HARD_KD": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.8785024774261,
+          "own_postprocess_and_output_seconds": 2.8137075760168955,
+          "shared_common_plus_own_branch_seconds": 4071.6100242371904
+        },
+        "RAW_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.5350050356937572,
+          "shared_common_plus_own_branch_seconds": 4078.0599290125538
+        },
+        "RAW_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3437201980268583,
+          "shared_common_plus_own_branch_seconds": 4077.868644174887
+        },
+        "RAW_STRONG_PRIOR": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.5310323709854856,
+          "shared_common_plus_own_branch_seconds": 4078.0559563478455
+        },
+        "CLIP_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.4028272847644985,
+          "shared_common_plus_own_branch_seconds": 4088.7656267946586
+        },
+        "CLIP_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.3409144235774875,
+          "shared_common_plus_own_branch_seconds": 4088.7037139334716
+        },
+        "CLIP_STRONG_PRIOR": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.360223863972351,
+          "shared_common_plus_own_branch_seconds": 4088.7230233738665
+        },
+        "RAW_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 2.7758860159665346,
+          "shared_common_plus_own_branch_seconds": 4077.3008099928265
+        },
+        "CLIP_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 2.4672824518056586,
+          "shared_common_plus_own_branch_seconds": 4087.8300819616998
+        },
+        "HARD_MEAN": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 519.8785024774261,
+          "own_postprocess_and_output_seconds": 2.6157928698230535,
+          "shared_common_plus_own_branch_seconds": 4071.4121095309965
+        },
+        "RAW_MEAN_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3168366657337174,
+          "shared_common_plus_own_branch_seconds": 4077.8417606425937
+        },
+        "RAW_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 525.6071097931126,
+          "own_postprocess_and_output_seconds": 3.3228593810927123,
+          "shared_common_plus_own_branch_seconds": 4077.8477833579527
+        },
+        "CLIP_MEAN_COHORT": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.2108158122282475,
+          "shared_common_plus_own_branch_seconds": 4088.5736153221224
+        },
+        "CLIP_MEAN_NO_GRAPH": {
+          "common_wall_seconds": 3548.9178141837474,
+          "own_head_training_seconds": 536.4449853261467,
+          "own_postprocess_and_output_seconds": 3.1263255154481158,
+          "shared_common_plus_own_branch_seconds": 4088.489125025342
+        }
+      },
+      "GT_open_attempts": 0,
+      "prepaid_artifact_reads": 0,
+      "single_uninterrupted_attempt": true,
+      "single_method_execution": false,
+      "external_process": {
+        "exit_code": 0,
+        "wall_seconds": 5205.535485408967,
+        "queue_wait_excluded_seconds": 2.4137902073562145e-05
+      },
+      "actual_internal_worker_seconds": 5198.3801235120045,
+      "source_run": "C4_fresh_track_three_seed0"
+    },
+    "single_KD": {
+      "protocol": {
+        "name": "C4_key_single_CLIP_KD_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_KD"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ]
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "model_load_seconds": 316.0230236139614,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 82.02924394770525,
+        "equivalent_forward_seconds": 82.02924394770528,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_KD_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 465.3034152499167,
+        "peak_allocated_bytes": 6280584192
+      },
+      "phase_totals_seconds": {
+        "imports_metadata_and_recovery_setup": 11.368606545962393,
+        "student_load_and_integrity_check": 318.0519592589699,
+        "teacher_load_and_initial_integrity_check": 468.77313006296754,
+        "real_sparse_frame_student_forward_and_initial_head": 1693.5927428194555,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 318.9839451168664,
+        "real_teacher_service_including_image_IO": 357.5388709841063,
+        "teacher_final_frozen_weight_audit": 14.100492432015017
+      },
+      "cost_by_method": {
+        "CLIP_KD": {
+          "common_wall_seconds": 3194.9417003892595,
+          "own_head_training_seconds": 516.7748557865852,
+          "own_postprocess_and_output_seconds": 3.1341857601655647,
+          "shared_common_plus_own_branch_seconds": 3714.8507419360103
+        }
+      },
+      "GT_open_attempts": 0,
+      "prepaid_artifact_reads": 0,
+      "single_uninterrupted_attempt": true,
+      "single_method_execution": true,
+      "external_process": {
+        "exit_code": 0,
+        "wall_seconds": 3721.3086336600827,
+        "queue_wait_excluded_seconds": 2.9932940378785133e-05
+      },
+      "actual_internal_worker_seconds": 3714.8507419360103,
+      "source_run": "C4_key_single_CLIP_KD_seed0"
+    },
+    "single_cohort": {
+      "protocol": {
+        "name": "C4_key_single_CLIP_COHORT_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_COHORT"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ]
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "model_load_seconds": 288.28759874706157,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 81.97767399961594,
+        "equivalent_forward_seconds": 81.97767399961594,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_COHORT_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 450.31298385898117,
+        "peak_allocated_bytes": 6278275584
+      },
+      "phase_totals_seconds": {
+        "imports_metadata_and_recovery_setup": 10.486713882070035,
+        "student_load_and_integrity_check": 289.49911377497483,
+        "teacher_load_and_initial_integrity_check": 453.47398201096803,
+        "real_sparse_frame_student_forward_and_initial_head": 1537.9189241809072,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 291.680998459924,
+        "real_teacher_service_including_image_IO": 334.3070289957104,
+        "teacher_final_frozen_weight_audit": 14.24071930500213
+      },
+      "cost_by_method": {
+        "CLIP_COHORT": {
+          "common_wall_seconds": 2943.1895113610663,
+          "own_head_training_seconds": 505.39145980845205,
+          "own_postprocess_and_output_seconds": 2.9514023845549673,
+          "shared_common_plus_own_branch_seconds": 3451.5323735540733
+        }
+      },
+      "GT_open_attempts": 0,
+      "prepaid_artifact_reads": 0,
+      "single_uninterrupted_attempt": true,
+      "single_method_execution": true,
+      "external_process": {
+        "exit_code": 0,
+        "wall_seconds": 3453.921497729956,
+        "queue_wait_excluded_seconds": 2.4953973479568958e-05
+      },
+      "actual_internal_worker_seconds": 3451.5323735540733,
+      "source_run": "C4_key_single_CLIP_COHORT_seed0"
+    }
+  },
+  "frozen_candidates_provided": true,
+  "upstream_detection_and_tracking_generation_not_remeasured": true,
+  "GT_evaluation_excluded_from_deployment_cost": true,
+  "common_prefix_component_estimates_distinct_from_independent_process_walls": true,
+  "all_development_data": true
+}

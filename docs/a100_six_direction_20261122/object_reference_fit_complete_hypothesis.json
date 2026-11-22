@@ -1,0 +1,23 @@
+{
+  "status": "REGISTERED_ORDINARY_FIT_COMPLETION_SUPPLEMENT_HYPOTHESIS",
+  "registered_unix": 1795355704.54391,
+  "context": "Reference450study running, fixedview468complete and rawpoints inspected. The optimizer decision comes only from pre-quality teacherfit failures and two CPUprobes; no reference-studyGT metric has been inspected.",
+  "problem": "A direct ordinary head reaching16000steps can still fail the fixedteacherKL0.005criterion. Existingfirst-prefix fullheadprobe reaches0.00410485 without any new input/capacity.",
+  "rule": "Reuse original ordinary per-frame predictions exactly if their own prefix teacherKLpasses. Otherwise use only a valid same-prefix cached head, or reconstruct that prefix fit from rawpast/current data, then convexoutputlayer refinement and up to10x100 fullbatchLBFGSiterations,stopping at originalKL0.005. No futurevideoheads or thresholds fromGT.",
+  "comparator_information": "Same all-query1087D features, rawpaidframepseudo-targets, confidence weights,64hiddenwidth and source-zero architecture. Both original ordinary direct and newfit-completed versions remain reported.",
+  "comparisons": "ReferenceFULL versus fit-completed ordinaryframe and the same-fallback hybrid; both per-query/per-frame count directions and all3CountSelfidentities.",
+  "outputs": "36new rawmethodseals plus126countseals=162ownoutputs;18sharedREFERENCE_FULLrawoutputs alreadysealed bypredecessor. BorrowedprimaryHOTA read from ownCountSelfidentity after162andpredecessor450outputsseal.",
+  "own_reference_head_gate": "Report predecessor reference-head fit failures too; do not treat converged ordinary alone as finalmethodacceptance.",
+  "possible_fit_failure": "Keeporiginal0.005gate and report anyprefix still failing afterfixedoptimizationcap. Do not silently weaken gate, add capacity or replace fromGT.",
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "new_teacher_encoder_requests": 0,
+  "cost": "Fixed-evidence replay with conditionalextraoptimization receipts, not complete colddeploymenttiming.",
+  "all_data_development": true,
+  "manual_target_GT_in_adaptation": false,
+  "goal_status": "ACTIVE"
+}

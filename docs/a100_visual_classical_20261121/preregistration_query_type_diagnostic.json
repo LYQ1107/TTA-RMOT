@@ -1,0 +1,21 @@
+{
+  "version": "QUERY_TYPE_SECONDARY_POINT_DIAGNOSTIC_V1",
+  "before_new_GT_evaluation": true,
+  "basis": "Query-only audit found256/466 static-clothing branches and210 fallback queries in C4; all425 C1 queries use clothing branch.",
+  "priority_groups": [
+    "static_clothing_branch",
+    "otherwise SPATIAL",
+    "otherwise ROLE",
+    "otherwise OTHER"
+  ],
+  "methods": [
+    "POOLED_SOFT",
+    "ANCHOR_KD",
+    "ANCHOR_FULL"
+  ],
+  "seed": 0,
+  "official_metric_combination": true,
+  "group_points_only_no_confirmatory_subgroup_win": true,
+  "not_additive_HOTA_attribution": true,
+  "adaptation_or_hyperparameters_changed": false
+}

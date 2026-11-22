@@ -1,0 +1,26 @@
+{
+  "name": "DIRECT_TEACHER_NATIVE_PCD768_NO_SOURCE_RESIDUAL_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "reason": "Canonical ordinary teacher distillation uses native student PCD features. Existing C4 controls showed handcrafted RGB can hurt, so RGB1080 direct-only is insufficient as the standard benchmark. Complete both canonical768 and richRGB1080 classifier families, each alongside previous residual variants; this plan precedes any new RGB-direct GT results.",
+  "task": "Same accepted fixed official proposals; target images/queries/frozen teacher only; manual targetGT only postseal evaluation/diagnosis.",
+  "teacher_source": "Same source_spec collections as all strict studies;1160C4/1103C1 teacher responses; no new teacher/encoder calls.",
+  "input": "Native frozen query-conditioned768D PCD only in neural head; no padded zeros/HSV/semantic scalar. RGB remains available to the declared postprocessing graph/appearance module, and richer RGB1080 direct baselines are separately retained.",
+  "source_logit": "Exactly0 in both training and prediction. Source prior still common to acquisition/tie-break; this is not removal of the frozen source encoder.",
+  "fitting": "Same D→64 GELU→1, same seeds0/17/42, soft clip[.02,.98] and hard>=.5, min4000/max16000 teacherKL.005, prefix normalization; no targetGT checkpoint selection.",
+  "comparisons": "Five canonical direct teacher snapshots plus same-head GRAPH/CAL/JOINT. Compare against richRGB1080 direct and all prior residual controls. Any final recipe stays global across directions, not direction-specific GT best.",
+  "expected": {
+    "conditions": 6,
+    "head_fits": 420,
+    "raw_outputs": 48,
+    "count_outputs": 24,
+    "official_outputs": 72
+  },
+  "countmatched": "JOINT versus KD_MEAN in both quantity directions plus2CountSelf; all72outputs seal before this studyGT.",
+  "resource": "Wait until RGB-direct head generation has released all0..3 GPUs; then allocate only free0..3. Prior physical benchmark workers have already exited; no contamination of their Popen wall.",
+  "statistic": "Same HOTA/original-parent/shared-seed descriptive intervals; fixed sealed outputs, no refit in bootstrap or development/multiple-comparison correction.",
+  "scope": "This completes the principal native-PCD/full-RGB, fixed-residual/direct classifier audit; not a claim to exhaust every possible distillation architecture.",
+  "cost": "Quality refits only, not a new cold-time point. A changed retained recipe/primary strong comparator needs matching physical follow-up.",
+  "no_active_RGB_worker_or_shared_numeric_helpers_changed": true
+}
