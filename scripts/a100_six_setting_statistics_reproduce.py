@@ -30,13 +30,46 @@ QUERY={
     'RANK_AT_BASE_COUNT':('LATTICE_JOINT__AT_BASE_PROTOCOL_COUNT','BASE_PROTOCOL__AT_BASE_PROTOCOL_COUNT')}
 
 
+def registered_contrasts(directory,stem):
+    if stem=='transfer':return TRANSFER
+    if stem=='query_consistency':return QUERY
+    full='DS_FULL'
+    if stem=='view_fusion':
+        bases=('RAW_FINAL','RAW_MEAN','HARD_FINAL','RAW_SRC_FINAL')
+        result={**{'FULL_vs_'+b:(full,b) for b in bases},
+            'LEARNED_vs_FIXED_RELIABILITY':(full,'FIXED_FULL'),
+            'LEARNED_vs_RAW_PROBABILITY':(full,'RAW_FULL'),
+            'DS_LABELS_ON_SHARED_HEAD':('DS_FINAL','RAW_FINAL'),
+            'FIXED_LABELS_ON_SHARED_HEAD':('FIXED_FINAL','RAW_FINAL'),
+            'STRUCTURE_ON_DS_HEAD':(full,'DS_FINAL'),
+            'CONTEXT_CONDITIONAL':('DS_JOINT','DS_VISUAL'),
+            'VISUAL_CONDITIONAL':('DS_JOINT','DS_CONTEXT'),
+            'QUERY_CONSISTENCY_CONDITIONAL':(full,'DS_JOINT'),
+            'TRUE_QUERY_GRAPH_vs_SHUFFLE':(full,'DS_SHUFFLED')}
+    elif stem in ('view_fusion_direct_fill','view_fusion_flat_rgb'):
+        direct=stem=='view_fusion_direct_fill';base='RAW_TEACHER_FILL' if direct else 'RAW_RGB_FINAL'
+        return {('FULL_vs_DIRECT_TEACHER_FILL' if direct else 'FULL_vs_FLAT_RGB'):(full,base),
+            'RANK_AT_FULL_COUNT':(full+'__AT_'+full+'_COUNT',base+'__AT_'+full+'_COUNT'),
+            ('RANK_AT_DIRECT_FILL_COUNT' if direct else 'RANK_AT_RGB_COUNT'):(full+'__AT_'+base+'_COUNT',base+'__AT_'+base+'_COUNT')}
+    elif stem=='lame_reference':
+        bases=('RAW_LAME_KNN5','DS_RGB_LAME_KNN5')
+        result={'FULL_vs_ORDINARY_KD_LAME':(full,bases[0]),
+            'FULL_vs_SAME_DS_HEAD_RGB_LAME':(full,bases[1]),
+            'LAME_ON_ORDINARY_HEAD':(bases[0],'RAW_FINAL'),
+            'RGB_LAME_ON_DS_HEAD':(bases[1],'DS_FINAL')}
+    else:
+        return json.loads((directory/(stem+'_registration_v1.json')).read_text())['contrasts']
+    for base in bases:
+        result['RANK_AT_FULL_COUNT_vs_'+base]=(full+'__AT_'+full+'_COUNT',base+'__AT_'+full+'_COUNT')
+        result['RANK_AT_BASE_COUNT_vs_'+base]=(full+'__AT_'+base+'_COUNT',base+'__AT_'+base+'_COUNT')
+    return result
+
+
 def reproduce(directory,stem):
     filename=stem+'_parent_statistics.json';payload=json.loads((directory/filename).read_text());cache={}
     stats={name:resolve_record(directory,filename,name,cache) for name in payload}
     report=json.loads((directory/(stem+'_analysis.json')).read_text())
-    contrasts={'transfer':TRANSFER,'query_consistency':QUERY}.get(stem)
-    if contrasts is None:
-        registration=json.loads((directory/(stem+'_registration_v1.json')).read_text());contrasts=registration['contrasts']
+    contrasts=registered_contrasts(directory,stem)
     maximum=0.;effects=0;means=0
     def check(actual,expected,name):
         nonlocal maximum
