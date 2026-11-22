@@ -236,6 +236,8 @@ CUE_CONSENSUS controller 2114146 已启动，输出新建于本机/var/tmp并以
 2026-11-22 最终四卡真实冷流及独立NumPy4HOTA/2效应完成。4526真实QA/0cache；PCD/先验/锚点/有序QA/教师概率0差，四份运行共1782个查询预测文件及全部score/mask重放0差，末视频头权重/归一化0差；140软CLIPfit均4000步、KL<.005。seed0 C4同协议普通66.884538→67.437980，真实Popen wall3751.853913→3909.971748s；C1 32.603390→38.123396，3002.593456→3147.102536s。组合真实RGB输入/选题阶段324.940884/232.603941s；CPU PAVA/池化很小，但不把共享主机源前向波动当提速。31项最终实证检查全部通过，EVIDENCE_ACCEPTED_ON_EXISTING_DEV_DIRECTIONS。49896正常0结束，GPU未因监视恢复而重启。只剩报告、<100MB和远端发布及根Goal结项；不得再添新方法。全部DEV、C1主要数量校准、无独立泛化/全预算最优宣称。
 # 2026-11-22 用户重申六方向目标：重新开始持续研究
 
+最新用户澄清：准确说法是“六个跨域实验设置”，创新点可以归拢为三个，组成统一框架：①覆盖感知主动查证（先扫视再细看，语义去重/覆盖/疑点视角与预算）；②可靠性证据统筹（DS等经典融合，协议条件下的存在/身份解耦，弱化固执先验）；③视觉与语义结构一致性校准（外观、场景、查询偏序等约束）。所有设置使用相同方法/参数规则，各模块在相关任务和组合交互中验证，不为六个设置凑六个创新。六组C1..C6数值协议不变，现有研究继续。
+
 此前将C1/C4开发集验收等同于整个科研目标完成，范围过窄。最新用户明确要求C1..C6六方向、多个创新机制的组合、明确模块贡献、超过公平普通教师伪标签/蒸馏。线程Goal已重新建立，状态ACTIVE。既有两方向结果仍有效，但仅是中间证据；不推断其余四方向，也不承诺数据尚未支持的大幅涨分。
 
 下一研究从六方向统一输入/预算/任务协议与普通蒸馏基线开始，复用封存历史只作出处与诊断，避免盲跑旧66项。目标GT仍仅在新研究所有输出封存后由独立评价进程读取。先核实可用资产与组合机制，再登记假设和执行。普通蒸馏的“强”意指充分训练、输入/TrackID传播完整，不是额外oracle；不设故意欠拟合的对手。
@@ -247,3 +249,5 @@ CUE_CONSENSUS controller 2114146 已启动，输出新建于本机/var/tmp并以
 2026-11-22 查询一致性CPU后续已启动2178442，唯一监视40707不变。先复用已完成C1/C4头，补新六方向矩阵的六份原配方重放，再等其余四方向同组输入，最终180raw+72CountMatched=252组全部封存后评分。新数值模块query_consistency.py在GT0的文本审计中：Dance425句有25包含关系；KITTI862句327可保守解析、215关系/39同义对；Sports466句392可解析、1038关系/155同义对。Hildreth凸投影对独立SLSQP解最大概率差6.63e-9，数学校验通过不代表HOTA有效。所有方法同步改为普通逐query>.5，不以错误的17句互斥约束削弱对手。保留相同图置乱、仅同义、仅原组合、仅投影蒸馏及老师直接回填；目标GT不选规则或参数。Goal ACTIVE。
 
 2026-11-22 主监督器已从2175434切换为2179617，逐PID接管原健康2175447/2175448，两GPU源任务未重启、计时未重置；单独LaMOT恢复仍2176353。源码登记错误导致旧监督器保留健康任务后停止派发，现仅修复监督器恢复能力，不修改运行中数值计算。精确失败状态在six_direction_20261122/supervisor/attempt00_controller_source_registry_failure.json，公开controller_resume_amendment.json。唯一阻塞监视40707继续，CPU查询一致性控制器2178442继续。
+
+2026-11-22 FIXED_REQUESTED_MULTIVIEW_FUSION_V1 preregistered before fits/GT: one common framework across six cross-domain experimental settings, focusing I2 reliability pooling and I3 structure interactions. Reuse only old actually requested rho=.3 answers, not old predictions/beliefs/identity votes; ordinary soft/hard/source-residual families share all evidence and sufficient fits. Per-track/view means may span frames and are not exact cache duplicates. C1/C6 have CROP only, so DS learning falls back to fixed reliability; other sparse correlated views do not identify true accuracy. 18 conditions, 234 raw+234 CountMatched=468, all sealed before this GT. Waiting for current live transfer GPU stage to release GPU0..3; source teacher questions are prepaid, not zero-cost deployment or new acquisition validation. Scientific Goal ACTIVE.

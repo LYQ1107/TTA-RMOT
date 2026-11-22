@@ -1,0 +1,56 @@
+{
+  "user_clarification": "不是六个方向，是六个跨域的实验设置；创新点可以是三个",
+  "terminology": "three candidate innovations in one unified framework, evaluated in six cross-domain experimental settings",
+  "settings": [
+    "C1 V2→Dance",
+    "C2 Dance→KITTI-V2",
+    "C3 V2→SportsMOT",
+    "C4 Dance→SportsMOT",
+    "C5 LaMOT→KITTI-V2",
+    "C6 LaMOT→Dance"
+  ],
+  "candidate_innovations": [
+    {
+      "id": "I1",
+      "name": "覆盖感知主动查证",
+      "human_inspiration": "先扫视，再针对疑点细看",
+      "classical_tools": [
+        "语义去重",
+        "分层覆盖与多样性",
+        "信息增益/预算分配",
+        "疑点触发视角切换"
+      ]
+    },
+    {
+      "id": "I2",
+      "name": "可靠性证据统筹",
+      "human_inspiration": "比较不同证据，听取可靠的纠正",
+      "classical_tools": [
+        "Dawid–Skene可靠性估计",
+        "相关证据不过度累乘",
+        "协议条件下存在性/身份解耦"
+      ]
+    },
+    {
+      "id": "I3",
+      "name": "视觉与语义结构一致性校准",
+      "human_inspiration": "外观、场景与描述保持一致",
+      "classical_tools": [
+        "外观线索与单调校准",
+        "场景图约束",
+        "同义与包含关系的凸概率投影"
+      ]
+    }
+  ],
+  "status": "CANDIDATE_INNOVATIONS_REQUIRING_CAUSAL_EVIDENCE",
+  "evaluation": "Same method and parameter rules across settings; shared-budget ordinary distillation, three leave-one-module-out ablations and necessary interaction/quantity controls. A module need not improve every setting separately.",
+  "no_target_manual_labels_in_adaptation": true,
+  "physical_GPU_scope": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "existing_registered_jobs_continue": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,93 @@
+{
+  "study": "FIXED_REQUESTED_MULTIVIEW_FUSION_V1",
+  "registered_before_first_fit_or_this_study_GT": true,
+  "created_unix": 1795336608.9034855,
+  "source_base_commit": "7c28f7f5e5267e8ab5885eaab9fa8bd0d30959b1",
+  "source_sha256": {
+    "flex_uda/active/view_evidence.py": "08af6ea72a84a82620bda84c80cdc31c05774001e5fcd7769827900f71ce65f0",
+    "scripts/a100_view_fusion.py": "66db2f426bb11c775747526998c21de4710bda3b5d6acad701ece652c879a561",
+    "scripts/a100_view_fusion_launch.py": "e3c7fe3dd67c236a8997d979dd594c2f1ef13d107e4f723514fc562058d7c89d",
+    "scripts/a100_view_fusion_analyze.py": "a283752532383e99f970a1fa2d85da6e3aa7eb21b088b2886d56e3fa74233054"
+  },
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "primary": "DS_FULL",
+  "scope": "New attribution of fixed actually requested legacy rho=.3 teacher views with new common frozen three-observation track features; no old prediction, belief or identity_vote reuse.",
+  "human_inspiration": "Compare available visual evidence without treating correlated repeated looks as independent certainty; then enforce visual/semantic structural consistency.",
+  "tested_innovations": [
+    "I2 reliability-aware evidence pooling",
+    "I3 visual/semantic structural calibration",
+    "I2 x I3 interaction"
+  ],
+  "not_tested": "I1 new live acquisition policy, old vs new budget effect, or full deployment cost",
+  "shared_evidence": "Every arm receives all actually requested view probabilities; same frozen teacher SHA, candidates, features, normalization prefix, weight recipe, compute schedule and independent >.5 decoder.",
+  "temporal_scope": "Current video transductive; source feature normalization, head data, DS estimation and appearance calibration use only past/current video prefix; past predictions sealed and never revised.",
+  "fusion": {
+    "repeated_calls": "Mean probability per query/TrackID/effective view; may have different frame anchors, not exact duplicate/cost savings.",
+    "raw_mean": "Arithmetic probability mean of present views; unrequested views remain missing.",
+    "binary_votes": "Per-view mean >.5; Beta(8,2) sensitivity/specificity prior, 20 EM iterations, fitted prevalence used only internally.",
+    "learned_target": "expit(mean observed per-view log likelihood ratio), neutral prior, clip [.02,.98]; regularized evidence, not raw DS posterior.",
+    "fixed_target": "Identical votes/mean-log-LR/neutral prior with sensitivity=specificity=.8.",
+    "identifiability": "If fewer than 2 active views or no overlapping cells, DS targets equal fixed targets. Correlated two-view or sparse triple overlap does not identify true annotator accuracies.",
+    "absent_or_future_QA": "Never filled from SQLite or future videos."
+  },
+  "training": {
+    "head": "768 ->64 GELU ->1",
+    "source_residual": "Zero except additional ordinary RAW_SRC_FINAL: fixed source logit clipped [-2,2].",
+    "labels": [
+      "RAW soft per-view mean",
+      "HARD thresholded RAW",
+      "RAW_SRC soft mean with source residual",
+      "FIXED reliability soft",
+      "DS reliability soft"
+    ],
+    "common_weights": "1+3*abs(2*raw_mean-1), shared by all five heads",
+    "fitting": "Existing AdamW lr=.001 wd=.001 batch512, min4000 max16000, teacher KL<=.005; final canonical, raw early/final mean also reported.",
+    "no_GT_checkpoint_or_threshold_selection": true
+  },
+  "raw_methods": [
+    "RAW_FINAL",
+    "RAW_MEAN",
+    "HARD_FINAL",
+    "RAW_SRC_FINAL",
+    "FIXED_FINAL",
+    "DS_FINAL",
+    "DS_CONTEXT",
+    "DS_VISUAL",
+    "DS_JOINT",
+    "DS_FULL",
+    "FIXED_FULL",
+    "RAW_FULL",
+    "DS_SHUFFLED"
+  ],
+  "postprocessing": "Same protocol-conditioned scene pooling, teacher-prefix PAVA and conservative text implication convex projection for RAW/FIXED/DS full variants.",
+  "ordinary_baselines": [
+    "RAW_FINAL",
+    "RAW_MEAN",
+    "HARD_FINAL",
+    "RAW_SRC_FINAL"
+  ],
+  "controls": "Learned vs fixed reliability, learned vs raw probability, structure conditional on DS, context/visual/implication removals, deterministic shuffled implication graph, reliability x structure point interaction.",
+  "quantity": "DS_FULL compared with every ordinary baseline at both per-query/per-frame predicted counts. Thirteen count variants including all self-count consistency checks.",
+  "total_conditions": 18,
+  "raw_outputs": 234,
+  "quantity_outputs": 234,
+  "total_outputs": 468,
+  "GT_used_for_design_or_adaptation": false,
+  "GT_barrier": "All 18 conditions and all 468 raw/count outputs sealed before isolated official evaluator reads this study GT.",
+  "interpretation": "All available datasets DEV; parent/seed intervals descriptive, not held-out confirmation. KITTI 4 parent videos: no population CI. No result promoted post hoc.",
+  "physical_scope": "Only GPU0/1/2/3, wait current transfer GPU stage release then internal <512MiB preflight. Zero new teacher/encoder calls; replay wall is not deployment cost.",
+  "goal_status": "ACTIVE",
+  "goal_completion_by_execution_PASS": false
+}
