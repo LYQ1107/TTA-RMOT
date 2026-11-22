@@ -1,636 +1,329 @@
 {
-  "version": "NATIVE_PCD_DIRECT_CLASSICAL_REFINEMENT_V2",
-  "status": "PROVISIONAL_NO_ROBUST_TWO_DIRECTION_WIN_OVER_STRONG_WEIGHTED_KD",
-  "candidate_finally_accepted": false,
-  "goal_status": "ACTIVE",
-  "task": "Cross-domain referring multi-object tracking with human-accepted fixed official boxes/TrackIDs. Target images, task language and frozen teacher feedback only during adaptation.",
-  "frontend_boundary": "Shared official McByte candidates accepted by human; default upstream detector has SportsMOT pretraining and exact original generation weights/logs were not recovered. No claim of source-only detector or a new association frontend.",
-  "information": {
-    "source": "Frozen official Dance-best\u2192SportsMOT or KITTI-V2 best\u2192Dance",
-    "teacher": "Frozen official Qwen2B CROP interface; no target-domain prompt search",
-    "target_manual_GT": "Never in adaptation, acquisition, automatic threshold/checkpoint selection. Isolated evaluation/diagnosis only after seals; all existing data have been used for development.",
-    "stream": "Past/current video prefix; current video transductive, not frame-online",
-    "teacher_QA_seed": 0,
-    "neural_seeds": [
-      0,
-      17,
-      42
-    ]
+  "status": "ACCEPTED_ON_EXISTING_DEV_DIRECTIONS",
+  "candidate_finally_accepted": true,
+  "primary": "CONVERGED_FINAL_PROTOCOL_VISUAL_CALIBRATION",
+  "scope": "Official fixed McByte candidates/IDs; cross-domain referring adaptation only. Target images/task queries/frozen teacher, no manual target GT in adaptation. All existing data DEV.",
+  "human_vision_inspiration": [
+    "Bind visible colour to clothing part, then use sparse teacher feedback to calibrate this image cue",
+    "Use task contract to decide whether scene-wide candidate evidence should be pooled; do not assume a few No answers establish absence in a presupposed-present task"
+  ],
+  "common_ordinary_foundation": {
+    "features": "Frozen query-conditioned PCD768, three uniform observations per TrackID with original temporal context",
+    "source_logit": "ZERO",
+    "head": "768->64 GELU->1",
+    "targets": "Teacher probabilities clipped [.02,.98]",
+    "confidence": "1+3*abs(2*raw_teacher_p-1)",
+    "optimizer": "AdamW lr=.001 weight_decay=.001; batch512",
+    "stopping": "min4000 max16000, teacher weighted KL<=.005",
+    "readout": "CONVERGED_FINAL",
+    "teacher": "Original frozen Qwen CROP, same max-area anchor among same3 observations, unchanged prompts/weights",
+    "acquisition": "Same COVER10% query-balanced source-prior strata/PCD diversity, C4=1160 and C1=1103 QA; not a new selection-policy contribution"
   },
-  "candidate_choice": "Oneglobalnative768directsoftmean+graph+PAVA, not per-domain GTbest. Development choice for parsimony/cleanmatched-head attribution; previousresidualRGBJ has slightlyhigherabsolute points, differencescross0. Not independentlyblindselected.",
-  "perception": {
-    "rule": "Three uniformly spaced observations per provided track; original four-observation student context retained. Teacher anchor is largest box among the three.",
-    "neural_feature": "Frozen768D query-conditioned PCD only; remove312handcraftedHSVfromneuralhead. RGBpixels remainseen by frozenbackbone; manualRGB only in declaredclassicmodules.",
-    "selection": "Fixed image-only COVER query-balanced10% of eligible length>=3track/query pairs; original PCD geometry, not HSV-driven selection.",
-    "budget": {
-      "C4": 1160,
-      "C1": 1103
-    },
-    "ordinary_native_KD_optimization": "SkipunusedhandcraftedRGBhistogramsandgeometry; keepidenticalmax-areaanchorandPCD-basedCOVER. No information/NN/teacherbudget or scores intendedtochange.",
-    "active_selection_contribution_separately_proven": false
+  "retained_operators": {
+    "PRESUPPOSED": "Exact shared FINAL unary, then visual PAVA; no global negative propagation or forced singleton/nonempty output",
+    "CHECKLIST": "Original total-edge-matched complete-graph teacher-anchor energy, then same PAVA",
+    "graph": "Known source precision0; unknown .1; teacher confidence1+3abs(2p-1); existing logit clipping; exact rank-one global solve",
+    "visual": "Fixed HSV/clothing-part cue, teacher-only monotone PAVA, current TrackID5fold exclusion plus past/current video prefix, ln3-capped odds correction; not an independent Bayesian observation",
+    "decoder": "Same >.5 and inherited fixed task exclusivity for both sides; no manual target-GT threshold/quantities"
   },
-  "ordinary_teacher_head": {
-    "architecture": "768\u219264 GELU\u21921 directteacherclassifier, train/predict fixedsourcez=0",
-    "source_prior": "Still common acquisition/tie-break information; no fixed addition to neuralhead.",
-    "target": "Same teacher probabilities clipped[.02,.98]",
-    "training": "AdamW lr.001/wd.001,min4000/max16000,teacherKL<=.005;prefixnormalization;reset same seed pervideo",
-    "prediction": "Fixedmean400step/sufficientfinal;noautomaticGTcheckpointselection",
-    "role": "Sharedstrongteacher-distillationfoundation, notindependentnovelmodule."
-  },
-  "candidate_modules": {
-    "local_visual_cohort": "Same head/answers, query-specific normalized PCD+RGB adaptive3NN Laplacian regularization. Known teacher anchors have zero KD unary precision to avoid treating their fitted labels as independent evidence; provided physical IDs are not merged.",
-    "global_appearance_calibration": "Fixed11colour HSV prototypes bind query colour to body part; dark/light-side uses relative upper brightness. Teacher-only monotone PAVA map percue family, all past/current answers; currentTrackID five-fold exclusion across all its queries.",
-    "composition": "Graph first, then sigmoid(logit(graph)+clip(logit(PAVA)-logit(training_teacher_mean),-ln3,ln3)). Bounded regularization, not independent Bayesian evidence.",
-    "decoder": "Same>.5 and same provided exclusivity rule as strong KD. No forced presence, singleton/null-set fallback or positive-agreement guard."
-  },
+  "ordinary_controls": [
+    "Same FINAL with supplied nonempty/checklist task protocol",
+    "Same FINAL with raw known-teacher overwrite",
+    "Weighted and unweighted soft400/final/mean and hard400/final",
+    "Earlier full-information RGB/SEM/zero-HSV/residual families"
+  ],
+  "attribution_controls": [
+    "Zero graph edges with identical raw anchors and PAVA",
+    "Fixed within-query visual-cue permutation with same crossfit/refitting/cap",
+    "Always-local/global and PAVA-only",
+    "Both per-query/frame CountMatched projections, no GT counts"
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "QA_path_shared_seed": 0,
   "quality": {
-    "source": "direct_teacher_pcd_analysis.json",
-    "conditions": {
-      "C4": {
-        "mean_KD": 67.08293697286213,
-        "mean_GRAPH": 67.12162853453852,
-        "mean_CAL": 67.50143803855421,
-        "mean_JOINT": 67.63874372827331,
-        "selected_contrasts": {
-          "JOINT_vs_KD_MEAN": {
-            "delta_HOTA": 0.5558067554111924,
-            "per_neural_seed_delta": [
-              0.6968429610649878,
-              0.45405002273516004,
-              0.5165272824334295
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.15063308843043557,
-              0.9841180520445545
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.12654003247762624,
-              1.0205837711483305
-            ]
-          },
-          "JOINT_vs_GRAPH": {
-            "delta_HOTA": 0.5171151937348052,
-            "per_neural_seed_delta": [
-              0.5449229458235294,
-              0.5308428302656694,
-              0.4755798051152169
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.1284933867639803,
-              0.974225365765627
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.12566991007277425,
-              0.980772960763109
-            ]
-          },
-          "JOINT_vs_CAL": {
-            "delta_HOTA": 0.13730568971910864,
-            "per_neural_seed_delta": [
-              0.12510700326289736,
-              0.06523779321334189,
-              0.2215722726810867
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              -0.1701855474103662,
-              0.404776181003247
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -0.19392610442705943,
-              0.41273823065551873
-            ]
-          },
-          "GRAPH_vs_KD_MEAN": {
-            "delta_HOTA": 0.03869156167638721,
-            "per_neural_seed_delta": [
-              0.15192001524145837,
-              -0.07679280753050932,
-              0.04094747731821258
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              -0.28607744309319866,
-              0.3970140404795801
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -0.3130779338005823,
-              0.42418745138603364
-            ]
-          },
-          "CAL_vs_KD_MEAN": {
-            "delta_HOTA": 0.4185010656920838,
-            "per_neural_seed_delta": [
-              0.5717359578020904,
-              0.38881222952181815,
-              0.2949550097523428
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.11750412977829755,
-              0.7724328725665592
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.10232306507796404,
-              0.8207274123692748
-            ]
-          },
-          "COUNT_OWN_JOINT_vs_KD_MEAN": {
-            "delta_HOTA": 0.4232123021649083,
-            "per_neural_seed_delta": [
-              0.37169233873402163,
-              0.4036051115317463,
-              0.4943394562289569
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.20910733205863702,
-              0.6610758006767986
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.19956756740739212,
-              0.6739472886164577
-            ]
-          },
-          "COUNT_BASELINE_JOINT_vs_KD_MEAN": {
-            "delta_HOTA": 0.07492562295568916,
-            "per_neural_seed_delta": [
-              0.12254950978547186,
-              -0.0645191629280788,
-              0.16674652200967444
-            ],
-            "original_parent_groups": 13,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              -0.11210449205741616,
-              0.3203213351968054
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -0.1436635233549289,
-              0.36563269854428787
-            ]
-          }
-        }
-      },
-      "C1": {
-        "mean_KD": 32.07409946179218,
-        "mean_GRAPH": 33.87003771220909,
-        "mean_CAL": 33.49346862692297,
-        "mean_JOINT": 35.731536478903585,
-        "selected_contrasts": {
-          "JOINT_vs_KD_MEAN": {
-            "delta_HOTA": 3.657437017111407,
-            "per_neural_seed_delta": [
-              4.038137771056473,
-              2.780393526375768,
-              4.153779753901979
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.9798106591395281,
-              7.083777311457362
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.9089783232183326,
-              7.208642554510605
-            ]
-          },
-          "JOINT_vs_GRAPH": {
-            "delta_HOTA": 1.8614987666944955,
-            "per_neural_seed_delta": [
-              2.237529165667297,
-              1.5875955565246613,
-              1.7593715778915282
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.25691646291027453,
-              4.198438035524199
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.2126209234682163,
-              4.260851060340651
-            ]
-          },
-          "JOINT_vs_CAL": {
-            "delta_HOTA": 2.2380678519806168,
-            "per_neural_seed_delta": [
-              2.5254126079445953,
-              1.9275473069184699,
-              2.261243641078785
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.4946746572713776,
-              4.522029826130941
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.39825595259200447,
-              4.662029627208186
-            ]
-          },
-          "GRAPH_vs_KD_MEAN": {
-            "delta_HOTA": 1.795938250416911,
-            "per_neural_seed_delta": [
-              1.8006086053891757,
-              1.1927979698511066,
-              2.394408176010451
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.19005450082376857,
-              3.710191570496214
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              0.009809350849280191,
-              3.8078155058671554
-            ]
-          },
-          "CAL_vs_KD_MEAN": {
-            "delta_HOTA": 1.4193691651307898,
-            "per_neural_seed_delta": [
-              1.5127251631118774,
-              0.8528462194572981,
-              1.8925361128231941
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              0.090177226274116,
-              3.0534349267876744
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -0.0016292214826905845,
-              3.333388389975821
-            ]
-          },
-          "COUNT_OWN_JOINT_vs_KD_MEAN": {
-            "delta_HOTA": 0.37563605640535985,
-            "per_neural_seed_delta": [
-              0.4350560964749377,
-              0.3658113787280257,
-              0.3260406940131162
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              -0.19803978258364463,
-              1.2705129862552735
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -0.2319579557809111,
-              1.3113296428289063
-            ]
-          },
-          "COUNT_BASELINE_JOINT_vs_KD_MEAN": {
-            "delta_HOTA": -0.5028109567396477,
-            "per_neural_seed_delta": [
-              -0.2550028072234305,
-              -0.83634775880655,
-              -0.41708230418896264
-            ],
-            "original_parent_groups": 25,
-            "samples": 10000,
-            "seed": 0,
-            "fixed_neural_seeds_parent_CI95": [
-              -1.2227399489703936,
-              0.1863455716562868
-            ],
-            "parent_and_neural_seed_sensitivity_CI95": [
-              -1.3644554249355756,
-              0.22846589314729918
-            ]
-          }
-        }
-      }
-    }
-  },
-  "mechanism_control_plan": "preregistration_native_direct_factorial_v1.json",
-  "mechanism_control_status": "COMPLETE132_AND_INDEPENDENT_NUMPY_REPRODUCTION_PASS",
-  "strong_controls": "Allnative/fullRGB direct/residual,semantic1081,zeroHSVandsoft/hardcheckpoints retained. NativeJ haspositivepointmeansoverordinarycontrols;C4nativehard/SEM400/RGBhard400andC1oldhard400intervalscross0. Noall-baseline-significance claim.",
-  "scientific_limits": [
-    "C4nativegraphaloneandgraphaboveCALintervalscross0. C1graphaboveCALandcalibrationaboveGRAPHpositive. Singlemodulemarginals are context-dependent.",
-    "C1gainlargelyquantity/querybase-rate calibration;fixedKDcountdifferenceisnegativeandcrosses0. C4atnativeKDcountgaincrosses0;nosinglequantityprojectionasproof.",
-    "C4aggregateHOTAimproveswhile somequeriesloseallcorrectoutput;notallmissesresolved.",
-    "Nativefactorial132completed: localJ beatscompleteC4 butlosesC1; no universal locality claim. Teacher-only choice currentlyunderstudy.",
-    "AllDEV;fixedpredictionbootstrapnorefitordevelopment/multiplicitycorrection. Noindependentnewsplit.",
-    "Fixedofficialboxes/IDs accepted;upstreamfrontendsupervision/costnotourinnovation. Not frame-online.",
-    "JreallypaysforRGBfrontend;ordinarynativeKDmustskipunusedRGB. Noall-budgetPareto,scalinglaworfree-lunchclaim."
-  ],
-  "not_in_current_recipe": [
-    "target LoRA/backbone updates",
-    "new8Dposition or scalar neural input",
-    "temporal HMM/anchor-head alignment",
-    "positive-agreement protection",
-    "forced nonempty/null fallback",
-    "legacy DS/multiview routing as a necessary new contribution"
-  ],
-  "previous_residual_RGB_recipe": {
-    "mean_HOTA": {
-      "C4": 67.6925344180433,
-      "C1": 36.618032465899006
-    },
-    "source": "joint_visual_analysis.json",
-    "actual_four_cold": "appearance_cold_analysis.json",
-    "limitation": "AgainststrongnativeKDoldC4gap+.609597CI[-.145438,1.316629]crosses0. Oldactual3738/3029s correspondonlyoldresidualrecipe, notnewnativeaccuracy."
-  },
-  "actual_cold": {
-    "status": "COMPLETE_OPTIMIZED_NATIVE_4_ACTUAL_AND_NUMPY_PASS",
-    "plan": "preregistration_native_optimized_cold_v2.json",
-    "mapping": {
-      "GPU0": "C4fastKD",
-      "GPU1": "C4J",
-      "GPU2": "C1fastKD",
-      "GPU3": "C1J"
-    },
-    "expected_new_QA": 4526,
-    "expected_cache_hits": 0,
-    "all_four_seals_before_GT": true,
-    "early_J_evidence_and_scores_exact": "native_early_actual_J_parity.json",
-    "fair_cost_correction": "native_cost_protocol_correction.json;3-video unoptimizedKD attempts preservedandtheirresearchwall reportedseparately.",
-    "early_fast_KD_evidence_and_scores_exact": "native_early_actual_fast_KD_parity.json",
-    "analysis": "native_cold_analysis.json"
-  },
-  "all_prior_negative_results_preserved": true,
-  "references": [
-    "native_factorial_analysis.json",
-    "native_cold_analysis.json (whencomplete)",
-    "direct_teacher_analysis.json",
-    "direct_teacher_pcd_analysis.json",
-    "REPRODUCE.txt"
-  ],
-  "mechanism_control_result": {
-    "source": "native_factorial_analysis.json",
-    "local_minus_complete_C4": 3.772351913157204,
-    "local_minus_complete_C1": -1.8443615792095944,
-    "interpretation": "LocalstructurehelpsC4butcompletebeatslocalC1;universal3NNclaimrejected. Same totalweightdoesnotmeanequalnodedegree.",
-    "effect_C4": {
-      "delta_HOTA": 3.772351913157204,
-      "per_neural_seed_delta": [
-        3.8061544644232512,
-        3.769900022499918,
-        3.7410012525484433
-      ],
-      "original_parent_groups": 13,
-      "samples": 10000,
-      "seed": 0,
-      "fixed_neural_seeds_parent_CI95": [
-        2.2978234306697205,
-        5.663955563641533
-      ],
-      "parent_and_neural_seed_sensitivity_CI95": [
-        2.2947137029173517,
-        5.65831043683513
-      ]
-    },
-    "effect_C1": {
-      "delta_HOTA": -1.8443615792095944,
-      "per_neural_seed_delta": [
-        -1.7606820984206095,
-        -2.5436360112013574,
-        -1.2287666280068166
-      ],
-      "original_parent_groups": 25,
-      "samples": 10000,
-      "seed": 0,
-      "fixed_neural_seeds_parent_CI95": [
-        -3.4698080301521737,
-        -0.4559019739148428
-      ],
-      "parent_and_neural_seed_sensitivity_CI95": [
-        -3.746348866084266,
-        -0.41930233534473393
-      ]
-    }
-  },
-  "predictive_topology": {
-    "status": "COMPLETE156_BUT_REGISTERED_COLD_PROMOTION_FAILED_C4",
-    "plan": "preregistration_predictive_topology_v1.json",
-    "rule": "Taskcontractconditioned TrackIDgroupcrossfit teacherpredictiverisk onneutralunaries;nodatasetID,nomanualGT,nofittedNNunary.",
-    "old_Gaussian_BMA_failure_preserved": true,
-    "requires_own_matching_actual_cost_if_retained": true,
-    "mean_HOTA": {
-      "PREDICTIVE_C4": 67.41332122406517,
-      "PREDICTIVE_C1": 37.49360988826988
-    },
-    "primary_effects": {
-      "PREDICTIVE_C4": {
-        "delta_HOTA": 0.33038425120304754,
+    "PROTOCOL_CALIBRATION_C4": {
+      "mean_HOTA": 67.6292220788727,
+      "ordinary_FINAL": 67.15160893254868,
+      "ordinary_with_protocol": 67.14188040031489,
+      "vs_FINAL": {
+        "delta_HOTA": 0.4776131463240034,
         "per_neural_seed_delta": [
-          0.4361819938312834,
-          0.2257729820936163,
-          0.32919777768424296
+          0.539809444952553,
+          0.4433898406780372,
+          0.44964015334142005
         ],
         "original_parent_groups": 13,
         "samples": 10000,
         "seed": 0,
         "fixed_neural_seeds_parent_CI95": [
-          -0.22359038101598683,
-          0.9156775356762991
+          0.17849048520769595,
+          0.8079126895824801
         ],
         "parent_and_neural_seed_sensitivity_CI95": [
-          -0.2392411341291441,
-          0.9393133046043484
+          0.16554628143039204,
+          0.838313835342524
         ]
       },
-      "PREDICTIVE_C1": {
-        "delta_HOTA": 5.419510426477704,
+      "vs_protocol_ordinary": {
+        "delta_HOTA": 0.4873416785578068,
         "per_neural_seed_delta": [
-          5.675378287374453,
-          5.324029537577125,
-          5.259123454481532
-        ],
-        "original_parent_groups": 25,
-        "samples": 10000,
-        "seed": 0,
-        "fixed_neural_seeds_parent_CI95": [
-          1.8021446989311414,
-          9.780291535167185
-        ],
-        "parent_and_neural_seed_sensitivity_CI95": [
-          1.7793421004151966,
-          9.846584674636517
-        ]
-      }
-    },
-    "additional_actual_GPU_started": false
-  },
-  "confidence_weighted_ordinary_audit": {
-    "status": "COMPLETE54_AND_NUMPY_PASS",
-    "plan": "preregistration_confidence_teacher_v1.json",
-    "C4_oldJ_vs_weighted_mean_CI_crosses_zero": true,
-    "old_J_not_accepted_as_robust_all_strong_baseline_win": true
-  },
-  "stable_topology": {
-    "status": "COMPLETE144_BUT_PRIMARY_ONE_SE_FAILED_REGISTERED_PROMOTION",
-    "plan": "preregistration_stable_topology_v2.json",
-    "core_promotion_checks": {
-      "C4_beats_native_KD": false,
-      "C4_local_control": true,
-      "C4_global_control": true,
-      "C1_beats_native_KD": true,
-      "C1_local_control": true,
-      "C1_global_control": false
-    },
-    "mean_HOTA": {
-      "STABLE_C4": 67.56489575377617,
-      "STABLE_C1": 36.75604963216578
-    },
-    "primary_effects": {
-      "STABLE_C4": {
-        "delta_HOTA": 0.48195878091404626,
-        "per_neural_seed_delta": [
-          0.6062610121854703,
-          0.36635276972086217,
-          0.4732625608358063
+          0.5534420382454357,
+          0.4517491697337306,
+          0.45683382769425407
         ],
         "original_parent_groups": 13,
         "samples": 10000,
         "seed": 0,
         "fixed_neural_seeds_parent_CI95": [
-          -0.021810563429182393,
-          0.9716250513746808
+          0.17840765806099376,
+          0.8291735220953251
         ],
         "parent_and_neural_seed_sensitivity_CI95": [
-          -0.04204096719001975,
-          0.9935484050612159
+          0.1684658855476767,
+          0.8587109466939808
         ]
-      },
-      "STABLE_C1": {
-        "delta_HOTA": 4.6819501703735975,
+      }
+    },
+    "PROTOCOL_CALIBRATION_C1": {
+      "mean_HOTA": 38.429591523633796,
+      "ordinary_FINAL": 32.7216773204795,
+      "ordinary_with_protocol": 32.7216773204795,
+      "vs_FINAL": {
+        "delta_HOTA": 5.707914203154289,
         "per_neural_seed_delta": [
-          4.821902899920172,
-          4.48873717448091,
-          4.735210436719711
+          5.5200060577773655,
+          6.6120664845412875,
+          4.991670067144213
         ],
         "original_parent_groups": 25,
         "samples": 10000,
         "seed": 0,
         "fixed_neural_seeds_parent_CI95": [
-          1.5650675973624546,
-          8.460944915492256
+          1.8055059388743904,
+          10.453418852655236
         ],
         "parent_and_neural_seed_sensitivity_CI95": [
-          1.5192830396630974,
-          8.46702874776981
+          1.6945246888329955,
+          10.591625009632466
+        ]
+      },
+      "vs_protocol_ordinary": {
+        "delta_HOTA": 5.707914203154289,
+        "per_neural_seed_delta": [
+          5.5200060577773655,
+          6.6120664845412875,
+          4.991670067144213
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.8055059388743904,
+          10.453418852655236
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.6945246888329955,
+          10.591625009632466
+        ]
+      }
+    }
+  },
+  "attribution": {
+    "PURE_COMPONENTS_C4": {
+      "vs_teacher_overwrite": {
+        "delta_HOTA": 0.47560512981068825,
+        "per_neural_seed_delta": [
+          0.5433371598200125,
+          0.4348737379780374,
+          0.44860449163401483
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.17755099506640756,
+          0.7997757287895365
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.17054757494541484,
+          0.833247801408253
+        ]
+      },
+      "vs_identical_anchors_PAVA": {
+        "delta_HOTA": -0.0033764309926169744,
+        "per_neural_seed_delta": [
+          -0.004519056177954894,
+          -0.004556184550196463,
+          -0.0010540522496995663
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.012118676221396757,
+          0.0014193264822148174
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.01339193131371476,
+          0.0023981366373623317
+        ]
+      },
+      "vs_shuffled_correspondence": {
+        "delta_HOTA": 0.5618963375122187,
+        "per_neural_seed_delta": [
+          0.6070342620133289,
+          0.5507127900952753,
+          0.527941960428052
+        ],
+        "original_parent_groups": 13,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          0.26037797753680963,
+          0.8878556789485328
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          0.250933201930057,
+          0.9132568505143339
         ]
       }
     },
-    "no_extra_actual_GPU_launched": true,
-    "controls_not_promoted_by_GT_best": true,
-    "failure": "C4positivepointbutparent+seedCIcrosses0;C1ONE_SEalsofallsbelowCOMPLETEwithnegativeCI. Keepfailure;do notrenameMEDIAN/TWO_SEaspassedprimary."
+    "PURE_COMPONENTS_C1": {
+      "vs_teacher_overwrite": {
+        "delta_HOTA": 5.642599790106535,
+        "per_neural_seed_delta": [
+          5.366047622082725,
+          6.568766474280373,
+          4.992985273956506
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.7424163948442923,
+          10.39197588872433
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.6417224141551645,
+          10.509993515957404
+        ]
+      },
+      "vs_identical_anchors_PAVA": {
+        "delta_HOTA": 4.632923344879465,
+        "per_neural_seed_delta": [
+          4.715091912790875,
+          5.775008223694044,
+          3.4086698981534767
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          1.4486798457680599,
+          8.338802369523705
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          1.3110395964801738,
+          8.74554035100496
+        ]
+      },
+      "vs_shuffled_correspondence": {
+        "delta_HOTA": 1.5701574634159907,
+        "per_neural_seed_delta": [
+          1.4884030936485644,
+          1.5861798919889836,
+          1.635889404610424
+        ],
+        "original_parent_groups": 25,
+        "samples": 10000,
+        "seed": 0,
+        "fixed_neural_seeds_parent_CI95": [
+          -0.22636958216361278,
+          4.9967638565183625
+        ],
+        "parent_and_neural_seed_sensitivity_CI95": [
+          -0.23883678069282777,
+          4.99025392546586
+        ]
+      }
+    }
   },
-  "negative_transfer_contract_audit": {
-    "status": "COMPLETE_PRIMARY_FAILED",
-    "plan": "preregistration_contract_graph_v1.json",
-    "C4_HOTA": 67.25421152654063,
-    "C4_vs_full_J": -0.38453220173268,
-    "C4_vs_full_J_parent_seed_CI": [
-      -0.670866931,
-      -0.074881073
+  "actual": {
+    "seed": 0,
+    "independent_workers": 4,
+    "physical_GPU": [
+      0,
+      1,
+      2,
+      3
     ],
-    "reason": "BlanketNoisolationrescuesqueriesbutincreasesfalsepositives;HOTAdecreases;notretained"
+    "new_teacher_QA": 4526,
+    "cache_hits": 0,
+    "soft_CLIP_neural_fits": 140,
+    "HOTA": {
+      "C4_seed0": {
+        "KD": 66.88453794588249,
+        "JOINT": 67.43797998412792
+      },
+      "C1_seed0": {
+        "KD": 32.60338963435036,
+        "JOINT": 38.12339569212772
+      }
+    },
+    "wall_seconds": {
+      "C4_KD": 3751.853912716033,
+      "C4_JOINT": 3909.9717483429704,
+      "C1_KD": 3002.593456269009,
+      "C1_JOINT": 3147.1025358450133
+    },
+    "source_questions_teacher_probs_masks_and_saved_scores_match_quality_exactly": true,
+    "last_video_head_weights_and_normalization_match_exactly": true,
+    "ordinary_skips_unused_RGB": true,
+    "RGB_input_acquisition_seconds": {
+      "C4_KD": 0,
+      "C4_JOINT": 324.94088376522996,
+      "C1_KD": 0,
+      "C1_JOINT": 232.603941053967
+    },
+    "no_algorithmic_speedup_or_all_budget_Pareto_claim": true,
+    "OS_NAS_caches_not_flushed": true,
+    "research_integrity_and_output_bookkeeping_included": true,
+    "previous_mean_head_timings_not_reused": true,
+    "executed_core_source_revision": "af46773b1364791f35c3e5874850d13dee0ee5ca",
+    "source_files_sha256": {
+      "scripts/a100_visual_classical_cold_protocol_final.py": "d16fa649aa9e4e909ab6516856fd81ffcca7d52e887c3ef574afeceaafe8c28d",
+      "scripts/a100_visual_classical_protocol_cold_launch.py": "c8b2bc8751297f2ef6bf006ead20382ac6ff567e499eb858aa99f2a5d3a8b62d",
+      "scripts/a100_visual_classical_protocol_cold_analyze.py": "66196457ce90d69f1d5a7cef6130ff82428716446d5d615c8b1416f0688a89ef",
+      "scripts/a100_visual_classical_protocol_calibration_review.py": "27d23bc70580e5626d120f29a33c3ed76e52a21b4ce56aa480b55fba7647bcc7",
+      "scripts/a100_visual_classical_budget_cold_launch.py": "ba0b9dd93c1fcb37692ec949e92e15cf2de68f2f68943cfb5401ce0c60980657",
+      "flex_uda/active/protocol_calibration.py": "c19abf043e35ae911108e3a8a4e849fd0730156034c8cbe45c3535f42a95e174",
+      "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+      "flex_uda/active/appearance_runtime.py": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+      "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+      "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+      "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+      "flex_uda/active/visual_classical.py": "5a0aa8a4a97d95fafd8d747d2344d367db542aa6c50c093ba5dcfb344f04c333"
+    }
   },
-  "shared_weighted_head_attribution": {
-    "status": "COMPLETE_PRIMARY_C4_ROBUST_GATE_FAILED",
-    "plan": "preregistration_weighted_classical_v1.json",
-    "C4_HOTA": 67.58003292973349,
-    "C4_vs_weighted_KD": 0.47767729456792,
-    "C4_parent_seed_CI": [
-      -0.0691023637,
-      1.0605188893
-    ],
-    "C1_HOTA": 35.72765656448802,
-    "C1_vs_weighted_KD": 3.46775008944007,
-    "reason": "C4parentplusseedintervalcrosseszero;nonewphysicalfollowuplaunched"
-  },
-  "selective_visual_conflict_veto": {
-    "status": "COMPLETE_PRIMARY_FAILED_NOT_RETAINED",
-    "primary": "CONSENSUS_JOINT",
-    "same_weighted_head": true,
-    "reference": "preregistration_cue_consensus_v1.json",
-    "retained": false,
-    "C4_HOTA": 67.54749723282787,
-    "C4_vs_full_J": -0.032535696905635327,
-    "C4_query_net_rescue": 0,
-    "scientific_review": "cue_consensus_scientific_review.json"
-  },
-  "coverage_search": {
-    "status": "COMPLETE_PRIMARY_FAILED_NOT_RETAINED",
-    "controller_pid": 2118268,
-    "primary": "JOINT",
-    "same_teacher_budget": 1160,
-    "ordinary_KD_gets_same_SEARCH_answers": true,
-    "C1_CHECKLIST_unchanged": true,
-    "reference": "preregistration_coverage_search_v1.json",
-    "retained": false,
-    "C4_HOTA": 67.23943586097636,
-    "C4_vs_own_KD": 0.25686735567751384,
-    "C4_vs_original_J": -0.34059706875713874,
-    "unasked_correct_queries": 113,
-    "correct_Yes_query_gain": 13,
-    "scientific_review": "coverage_search_scientific_review.json"
-  },
-  "optional_transfer": {
-    "status": "COMPLETE_PRIMARY_FAILED_NOT_RETAINED",
-    "primary": "OPTIONAL_JOINT",
-    "controller_pid": 2128080,
-    "reference": "preregistration_optional_transfer_v1.json",
-    "identity_is_exact_KD": true,
-    "anchor_fallback_control": true,
-    "no_new_teacher_encoder_or_head_fits": true,
-    "retained": false,
-    "C4_HOTA": 67.46240110477721,
-    "C1_HOTA": 37.27958099254844,
-    "C4_vs_strong_FINAL_CI": [
-      -0.06321371363745006,
-      0.7621898066045691
-    ],
-    "scientific_review": "optional_transfer_scientific_review.json"
-  },
-  "protocol_calibration_status": {
-    "status": "QUALITY_ACCEPTED_ACTUAL_COST_REQUIRED",
-    "shared_ordinary_head": "CONVERGED_FINAL",
-    "ordinary_has_same_protocol": true,
-    "all_quality_gates_passed": true,
-    "development_derived_not_blind": true,
-    "actual_cold": "STARTED_NOT_YET_VALIDATED",
-    "C4_HOTA": 67.6292220788727,
-    "C1_HOTA": 38.429591523633796,
-    "C4_vs_FINAL": 0.4776131463240034,
-    "C1_vs_FINAL": 5.707914203154289,
-    "unresolved": "C1 ranking intervals cross0; C4 canonical query net rescue 0/1/-3, not all coverage errors solved"
-  },
-  "pure_components_audit": {
-    "status": "ATTRIBUTION_ACCEPTED_ACTUAL_COST_PENDING",
-    "all_four_checks_passed": true,
-    "C4_visual_correspondence_delta": 0.5618963375122187,
-    "C1_pure_edge_delta": 4.632923344879465,
-    "main_recipe_unchanged": true
-  }
+  "limits": [
+    "C1 benefits largely quantity/base-rate calibration; both fixed-count ordering intervals cross zero.",
+    "C4 query retrieval is not uniformly rescued; no claim all coverage failures resolved.",
+    "Not every module has a positive conditional interval in every domain.",
+    "Intervals describe fixed predictions after repeated development, not multiplicity-corrected or pipeline-refit generalization.",
+    "Cold worker includes research integrity/output bookkeeping; OS/NAS caches unflushed, shared host load/staggered starts. No all-budget Pareto/speedup claim.",
+    "Only referring adaptation is studied; official front-end generation and its upstream supervision are outside the cost/source-only claim.",
+    "Legacy all-label-types boolean does not mean actual RAW/HARD fits; authoritative actual type is CLIP, as separately disclosed."
+  ],
+  "protocol_and_dataset_confounded": true,
+  "independent_unseen_domain_validation": false,
+  "upstream_detector_target_supervision_explicitly_accepted_by_user": true,
+  "whole_pipeline_source_only_claim": false,
+  "scientific_review": "protocol_final_scientific_review.json",
+  "all_negative_studies_retained": true,
+  "previous_provisional_method_card_revision": "430a57bf07fbd97406d30339745892a8c60d663f",
+  "goal_completion": "Scientific evidence accepted within stated DEV scope; publication and thread Goal status are independently handled by Root, never automatically by this card"
 }

@@ -4,9 +4,9 @@ TTA-RMOT：人类视觉启发与经典算法的持续研究综合实证
 本文汇总已完成的实证及其适用范围，不自动将科研Goal标记完成。
 后续Goal状态以线程Goal工具为准；所有数字均来自封存收据及官方TrackEval，不承诺必然正结果。
 
-当前方法状态：PROVISIONAL_NO_ROBUST_TWO_DIRECTION_WIN_OVER_STRONG_WEIGHTED_KD
+当前方法状态：ACCEPTED_ON_EXISTING_DEV_DIRECTIONS
 最新共享收敛头方案：C4 67.151609→67.629222（+.477613），C1 32.721677→38.429592（+5.707914），三个种子均正，原视频+种子描述区间均正。
-精度与既定模块门槛已过，四卡真实冷启动及教师回填/纯图边/视觉对应补查另行验收；尚不代表Goal全部完成，也非独立盲测。
+现有开发方向的精度、纯净模块归因、四卡真实冷启动及逐项复现均已验收通过。31项实证检查全过；仍不是独立新域盲测，也不声称跨域RMOT所有错误已消除。
 本文区分已完成的开发数据实证、真实执行成本和独立泛化；一组显著差值不意味着所有跨域RMOT错误已经解决。
 已验证的残差配方：原RGB1080均值KD+视觉图+固定PAVA，C4 66.169708→67.692534（+1.522827），C1 32.199208→36.618032（+4.418824）。
 三个神经种子的主差均正，两个方向的主描述性区间正。C1固定KD数量排序为负，仍是数量/查询基率校准，不作普遍排序突破宣称。
@@ -2671,7 +2671,34 @@ C4三个种子相对Final的canonical query净救回0/1/-3，C1为0/2/-2；总�
 十一之六、共享收敛头与同任务协议的四卡真实冷启动
 GPU0/1分别C4普通/组合，GPU2/3分别C1普通/组合；每份独立加载源与Qwen、真实提特征、独立新SQLite、重训相同强加权头，预期4526真实回答/0缓存。
 普通基线也获得非空/清单协议，使用收敛FINAL并跳过未使用RGB；组合支付RGB、汇聚、PAVA成本。全部四份预测封存后本组GT。
-已按通过的质量门槛启动，物理收据尚待完整验收。尚无新的完成时长，不引用旧时间。
+C4_seed0
+本次真实HOTA：{"KD": 66.88453794588249, "JOINT": 67.43797998412792}
++0.553442; parent95%[+0.149204, +1.030332]
+C1_seed0
+本次真实HOTA：{"KD": 32.60338963435036, "JOINT": 38.12339569212772}
++5.520006; parent95%[+1.536519, +10.222415]
+C4_KD
+完整外部进程wall秒=3751.853912716033
+阶段秒={"imports_metadata_and_recovery_setup": 15.282038151985034, "student_load_and_integrity_check": 445.8063559520524, "teacher_load_and_initial_integrity_check": 599.115819597966, "real_sparse_frame_student_forward_and_initial_head": 1821.1700238748454, "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.791546088759787, "real_teacher_service_including_image_IO": 167.936629499658, "teacher_final_frozen_weight_audit": 15.774445043993182}
+拟合保存秒=665.9085057189222；后处理输出秒=1.3676010885974392
+真实教师=1160；缓存=0
+C4_JOINT
+完整外部进程wall秒=3909.9717483429704
+阶段秒={"imports_metadata_and_recovery_setup": 15.312334029003978, "student_load_and_integrity_check": 445.82910015794914, "teacher_load_and_initial_integrity_check": 599.2040041909786, "real_sparse_frame_student_forward_and_initial_head": 1707.632193993195, "real_RGB_sparse_inputs_and_image_only_acquisition": 324.94088376522996, "real_teacher_service_including_image_IO": 161.16942888498306, "teacher_final_frozen_weight_audit": 13.196544395992532}
+拟合保存秒=631.9941826207796；后处理输出秒=1.6986840348690748
+真实教师=1160；缓存=0
+C1_KD
+完整外部进程wall秒=3002.593456269009
+阶段秒={"imports_metadata_and_recovery_setup": 16.02533019403927, "student_load_and_integrity_check": 444.65466781600844, "teacher_load_and_initial_integrity_check": 598.4545840920182, "real_sparse_frame_student_forward_and_initial_head": 1433.1348619380733, "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.012589947902597, "real_teacher_service_including_image_IO": 125.91734589205589, "teacher_final_frozen_weight_audit": 16.162790741887875}
+拟合保存秒=351.85924263414927；后处理输出秒=0.7725194471422583
+真实教师=1103；缓存=0
+C1_JOINT
+完整外部进程wall秒=3147.1025358450133
+阶段秒={"imports_metadata_and_recovery_setup": 15.897008913918398, "student_load_and_integrity_check": 445.0503950359998, "teacher_load_and_initial_integrity_check": 598.3448238200508, "real_sparse_frame_student_forward_and_initial_head": 1355.8526032040827, "real_RGB_sparse_inputs_and_image_only_acquisition": 232.603941053967, "real_teacher_service_including_image_IO": 121.7526224446483, "teacher_final_frozen_weight_audit": 15.828577400068752}
+拟合保存秒=352.54524128884077；后处理输出秒=3.6357402780558914
+真实教师=1103；缓存=0
+实际与质量预测/输入一致性：{"C4_KD": {"queries": 466, "changed_query_prediction_files": 0, "maximum_saved_score_probability_error": 0.0, "GT_open_attempts": 0, "not_a_new_independent_neural_seed": true}, "C4_JOINT": {"queries": 466, "changed_query_prediction_files": 0, "maximum_saved_score_probability_error": 0.0, "GT_open_attempts": 0, "not_a_new_independent_neural_seed": true}, "C1_KD": {"queries": 425, "changed_query_prediction_files": 0, "maximum_saved_score_probability_error": 0.0, "GT_open_attempts": 0, "not_a_new_independent_neural_seed": true}, "C1_JOINT": {"queries": 425, "changed_query_prediction_files": 0, "maximum_saved_score_probability_error": 0.0, "GT_open_attempts": 0, "not_a_new_independent_neural_seed": true}}
+各方法真实Popen-to-exit，不套旧均值头时间。OS/NAS缓存未清、主机共享与错峰负载不受控，不作算法提速或全预算最优宣称。
 
 十一之七、回填老师答案、跨候选图边和视觉对应的纯净拆解
 主质量分已知后补做机制审计，主配方与正在执行的物理源码不改；不是独立盲测，也不按最高控制重新选配方。
@@ -2734,6 +2761,17 @@ PURE_COMPONENTS_C1
 内部成分归因检查：{"C4_beats_simple_teacher_anchor_overwrite": true, "C1_beats_simple_teacher_anchor_overwrite": true, "C1_pool_edges_beyond_raw_anchors": true, "C4_visual_correspondence_beyond_shuffled": true}
 如果成分证据不成立，不能把汇聚整体差全部算成图边或语义对应；不得事后晋级表现更高的控制。
 
+十一之八、根代理最终实证验收
+状态：EVIDENCE_ACCEPTED_ON_EXISTING_DEV_DIRECTIONS
+31项科学/物理/复现检查：{"C4_vs_KD": true, "C4_vs_BASE_PROTOCOL": true, "C4_vs_KD_MEAN": true, "C4_vs_UNWEIGHTED_KD": true, "C4_all_other_ordinary_points_positive": true, "C1_vs_KD": true, "C1_vs_BASE_PROTOCOL": true, "C1_vs_KD_MEAN": true, "C1_vs_UNWEIGHTED_KD": true, "C1_all_other_ordinary_points_positive": true, "PAVA_conditional_contribution_atleast_one_direction": true, "CHECKLIST_global_context_conditional_on_PAVA": true, "frozen_FINAL_masks_unchanged": true, "CountSelf_unchanged": true, "C4_beats_simple_teacher_anchor_overwrite": true, "C1_beats_simple_teacher_anchor_overwrite": true, "C1_pool_edges_beyond_raw_anchors": true, "C4_visual_correspondence_beyond_shuffled": true, "protocol_calibration_independent_arithmetic": true, "pure_components_independent_arithmetic": true, "protocol_cold_independent_arithmetic": true, "four_real_independent_workers": true, "only_GPU0_1_2_3": true, "real_teacher_QA4526_zero_cache": true, "all_actual_outputs_sealed_before_GT": true, "actual_evidence_matches_both_arms_and_quality": true, "actual_saved_probabilities_and_query_files_exact": true, "same_final_head_last_video_weights_and_normalization": true, "all_actual_fits_meet_teacher_KL_stop": true, "actual_single_soft_label_FINAL": true, "real_individual_wall_times_reported": true}
+已有开发方向和给定固定候选范围内，保留协议约束与视觉PAVA组合，源主干和教师冻结，不把普通蒸馏基础的收益算成我们的模块贡献。
+原始强Final三种子均值：C4 67.151609→67.629222；C1 32.721677→38.429592。对同协议普通头和简单老师回填混合头也有正的描述性区间。
+独立冷启动seed0同协议普通/组合：C4 66.884538→67.437980，对应3751.853913→3909.971748秒；C1 32.603390→38.123396，对应3002.593456→3147.102536秒。不能把三种子均值当这四次seed0独立精度。
+合计4526真实问答/0缓存；140个软CLIP头均充分4000步达到教师KL停止标准；全部保存分数与1782个查询预测文件差异0。CLIP表示概率裁剪，不是新视觉模型。
+C1纯图边对同原始锚点/PAVA+4.632923；C4真实视觉对应对置乱+.561896；C4图近零、C1视觉单独区间跨零，模块贡献有明确适用范围。
+全部既有失败仍保留，未晋级更高控制、未增加新LoRA/时序网络或偷偷改评估种子。
+Root仍独立检查最终Git发布和线程Goal工具；本生成器不会自动更改Goal。
+
 十二、仍需准确回答的科学问题与结论边界
 候选诊断标签来自全候选库的逐query逐帧IoU.5一对一匹配。canonical正/负选中数不是教师纯语义正确率，也不是各方法TrackEval重新匹配后的实际TP/FP。
 定性诊断可见框定位、重叠邻人、模糊与光照歧义；例如一个视觉上all-black的TeacherYes候选IoU仅.405，不能直接叫教师语义答错。样例用于解释，非随机频率估计，未参与参数选择。
@@ -2791,8 +2829,11 @@ bootstrap只重组封存预测的统计，不在每个抽样中重训适配/选�
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/protocol_calibration_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/protocol_calibration_scientific_review.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/preregistration_protocol_cold_v1.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/protocol_cold_analysis.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/preregistration_pure_components_v1.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/pure_components_analysis.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/pure_components_scientific_review.json
+/data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/protocol_final_scientific_review.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_parent_statistics.json
 /data3/liuyeqiang/FlexHook-TTA/docs/a100_visual_classical_20261121/strict_rgb_statistical_reproduction.json
 公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。

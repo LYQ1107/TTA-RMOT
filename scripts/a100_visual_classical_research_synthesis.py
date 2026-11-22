@@ -29,6 +29,8 @@ def summary(lines,title,row,contrasts):
 
 
 def main():
+    final_path=PUBLIC/'protocol_final_scientific_review.json'
+    final_accepted=final_path.is_file() and json.loads(final_path.read_text()).get('all_evidence_checks_passed',False)
     strict=load('strict_rgb_analysis');physical=load('minimal_final_analysis');null=load('null_set_analysis');colour=load('zero_colour_analysis')
     assert strict['status']=='STRICT_RGB1080_PARITY_ANALYZED'
     assert physical['status']=='PROVISIONAL_MINIMAL_FRESH_EVIDENCE_ANALYZED'
@@ -94,7 +96,8 @@ def main():
         '当前方法状态：'+load('minimal_retained_method_card')['status'],
         ('最新共享收敛头方案：C4 67.151609→67.629222（+.477613），C1 32.721677→38.429592（+5.707914），三个种子均正，原视频+种子描述区间均正。'
             if (PUBLIC/'protocol_calibration_scientific_review.json').is_file() else ''),
-        ('精度与既定模块门槛已过，四卡真实冷启动及教师回填/纯图边/视觉对应补查另行验收；尚不代表Goal全部完成，也非独立盲测。'
+        ('现有开发方向的精度、纯净模块归因、四卡真实冷启动及逐项复现均已验收通过。31项实证检查全过；仍不是独立新域盲测，也不声称跨域RMOT所有错误已消除。'
+            if final_accepted else '精度与既定模块门槛已过，四卡真实冷启动及教师回填/纯图边/视觉对应补查另行验收；尚不代表Goal全部完成，也非独立盲测。'
             if (PUBLIC/'protocol_calibration_scientific_review.json').is_file() else ''),
         '本文区分已完成的开发数据实证、真实执行成本和独立泛化；一组显著差值不意味着所有跨域RMOT错误已经解决。',
         ('已验证的残差配方：原RGB1080均值KD+视觉图+固定PAVA，C4 66.169708→67.692534（+1.522827），C1 32.199208→36.618032（+4.418824）。'
@@ -565,6 +568,17 @@ def main():
             lines += ['内部成分归因检查：'+json.dumps(pure['attribution_checks']),
                 '如果成分证据不成立，不能把汇聚整体差全部算成图边或语义对应；不得事后晋级表现更高的控制。']
         else:lines += ['已登记并执行，成分归因尚无新结论。']
+    if final_accepted:
+        final=load('protocol_final_scientific_review')
+        lines += ['', '十一之八、根代理最终实证验收',
+            '状态：'+final['status'],'31项科学/物理/复现检查：'+json.dumps(final['checks']),
+            '已有开发方向和给定固定候选范围内，保留协议约束与视觉PAVA组合，源主干和教师冻结，不把普通蒸馏基础的收益算成我们的模块贡献。',
+            '原始强Final三种子均值：C4 67.151609→67.629222；C1 32.721677→38.429592。对同协议普通头和简单老师回填混合头也有正的描述性区间。',
+            '独立冷启动seed0同协议普通/组合：C4 66.884538→67.437980，对应3751.853913→3909.971748秒；C1 32.603390→38.123396，对应3002.593456→3147.102536秒。不能把三种子均值当这四次seed0独立精度。',
+            '合计4526真实问答/0缓存；140个软CLIP头均充分4000步达到教师KL停止标准；全部保存分数与1782个查询预测文件差异0。CLIP表示概率裁剪，不是新视觉模型。',
+            'C1纯图边对同原始锚点/PAVA+4.632923；C4真实视觉对应对置乱+.561896；C4图近零、C1视觉单独区间跨零，模块贡献有明确适用范围。',
+            '全部既有失败仍保留，未晋级更高控制、未增加新LoRA/时序网络或偷偷改评估种子。',
+            'Root仍独立检查最终Git发布和线程Goal工具；本生成器不会自动更改Goal。']
     lines += ['', '十二、仍需准确回答的科学问题与结论边界',
         '候选诊断标签来自全候选库的逐query逐帧IoU.5一对一匹配。canonical正/负选中数不是教师纯语义正确率，也不是各方法TrackEval重新匹配后的实际TP/FP。',
         '定性诊断可见框定位、重叠邻人、模糊与光照歧义；例如一个视觉上all-black的TeacherYes候选IoU仅.405，不能直接叫教师语义答错。样例用于解释，非随机频率估计，未参与参数选择。',
@@ -579,7 +593,7 @@ def main():
     for stem in ('benchmark_scope_audit','sparse_observation_analysis','context_cohort_analysis','query_scope_analysis','budget_cold_analysis','minimal_final_analysis','strict_rgb_analysis','null_set_analysis','zero_colour_analysis','fresh_teacher_anchor_diagnosis','canonical_pcd_analysis','preregistration_semantic_colour_v1','semantic_colour_analysis','joint_visual_analysis','appearance_cold_analysis','direct_teacher_analysis','direct_teacher_pcd_analysis','native_factorial_analysis','native_cold_analysis','preregistration_predictive_topology_v1','predictive_topology_analysis','preregistration_stable_topology_v2','stable_topology_analysis','preregistration_confidence_teacher_v1','confidence_teacher_analysis','preregistration_contract_graph_v1','contract_graph_analysis','preregistration_weighted_classical_v1','weighted_classical_analysis'):
         if not (PUBLIC/(stem+'.json')).is_file():continue
         lines.append(str(PUBLIC/(stem+'.json')))
-    for stem in ('cue_consensus_analysis','cue_consensus_scientific_review','preregistration_coverage_search_v1','coverage_search_evidence_receipt','coverage_search_analysis','coverage_search_scientific_review','teacher_transfer_null_audit','preregistration_optional_transfer_v1','optional_transfer_sanity','optional_transfer_analysis','optional_transfer_scientific_review','preregistration_protocol_calibration_v1','protocol_calibration_sanity','protocol_calibration_analysis','protocol_calibration_scientific_review','preregistration_protocol_cold_v1','protocol_cold_analysis','preregistration_pure_components_v1','pure_components_analysis'):
+    for stem in ('cue_consensus_analysis','cue_consensus_scientific_review','preregistration_coverage_search_v1','coverage_search_evidence_receipt','coverage_search_analysis','coverage_search_scientific_review','teacher_transfer_null_audit','preregistration_optional_transfer_v1','optional_transfer_sanity','optional_transfer_analysis','optional_transfer_scientific_review','preregistration_protocol_calibration_v1','protocol_calibration_sanity','protocol_calibration_analysis','protocol_calibration_scientific_review','preregistration_protocol_cold_v1','protocol_cold_analysis','preregistration_pure_components_v1','pure_components_analysis','pure_components_scientific_review','protocol_final_scientific_review'):
         if (PUBLIC/(stem+'.json')).is_file():lines.append(str(PUBLIC/(stem+'.json')))
     lines += [str(PUBLIC/'strict_rgb_parent_statistics.json'),str(PUBLIC/'strict_rgb_statistical_reproduction.json'),
         '公开充分统计可在无GPU/无原始GT条件下用NumPy复算HOTA和效应；算术复现不是独立实验。',

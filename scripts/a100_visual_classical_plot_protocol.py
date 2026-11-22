@@ -16,6 +16,8 @@ PUBLIC=ROOT/'docs/a100_visual_classical_20261121'
 def main():
     result=json.loads((PUBLIC/'protocol_calibration_analysis.json').read_text())
     review=json.loads((PUBLIC/'protocol_calibration_scientific_review.json').read_text())
+    final=PUBLIC/'protocol_final_scientific_review.json'
+    if final.is_file():review=json.loads(final.read_text())
     assert json.loads((PUBLIC/'protocol_calibration_statistical_reproduction.json').read_text())['status'].startswith('PASS_')
     pure=None
     if (PUBLIC/'pure_components_analysis.json').is_file() and (PUBLIC/'pure_components_statistical_reproduction.json').is_file():

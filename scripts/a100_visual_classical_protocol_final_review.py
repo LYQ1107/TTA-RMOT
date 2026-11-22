@@ -50,9 +50,10 @@ def main():
             'Only referring adaptation is studied; official front-end generation and its upstream supervision are outside the cost/source-only claim.',
             'Legacy all-label-types boolean does not mean actual RAW/HARD fits; authoritative actual type is CLIP, as separately disclosed.'],
         full_sources=['protocol_calibration_analysis.json','pure_components_analysis.json','protocol_cold_analysis.json'],
-        publication_and_root_goal_review_still_required=True,goal_status='ACTIVE_REQUIRES_ROOT_FINAL_REVIEW')
+        publication_and_goal_tool_checked_separately=True,
+        goal_update_policy='Root explicitly updates the Goal after final publication; this checker never changes it')
     atomic_json(PUBLIC/'protocol_final_scientific_review.json',result)
-    print(json.dumps(dict(status=result['status'],checks=checks,goal_status=result['goal_status'])),flush=True)
+    print(json.dumps(dict(status=result['status'],checks=checks,goal_auto_closed=False)),flush=True)
     if not all(checks.values()):raise SystemExit(1)
 
 
