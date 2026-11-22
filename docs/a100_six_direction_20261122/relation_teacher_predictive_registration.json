@@ -1,0 +1,27 @@
+{
+  "status": "PREREGISTERED_TEACHER_ONLY_RELATION_PREDICTIVE_CHECK",
+  "registered_unix": 1795344745.5970879,
+  "source_sha256": "ba724bcc6366882d1c6642d7a607d4eacf7f07b9025cb88d6ccf7b3b169d6e30",
+  "registered_before_predictive_outputs": true,
+  "prior_information": "Earlier fitted teacher-only slopes and all DEV diagnostics are known",
+  "folds": 3,
+  "unit": "SHA(video,query,TrackID), jointly across views",
+  "training": "all past rows plus other current-video folds",
+  "heldout": "within each heldout view group, first chronological half frames anchor intercept; last half frames supply evaluation targets",
+  "models": [
+    "same fixed within-relation slope recipe",
+    "logit-constant anchor",
+    "raw-probability-constant anchor"
+  ],
+  "metrics": [
+    "raw teacher soft cross-entropy",
+    "raw teacher probability MSE"
+  ],
+  "confidence_weights": "same raw teacher confidence weights",
+  "reported_state_change_subset": "absolute query-oriented x displacement from anchor over .05; descriptive only",
+  "manual_GT_used": false,
+  "GPU_or_new_teacher_or_neural_fits": 0,
+  "no_quality_outputs_or_parameters_changed": true,
+  "not_an_RMOT_distillation_comparison": true,
+  "goal_status": "ACTIVE"
+}
