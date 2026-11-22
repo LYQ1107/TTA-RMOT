@@ -1,0 +1,24 @@
+{
+  "status": "REGISTERED_PER_EVIDENCE_REFERENCE_ORDER_AUDIT",
+  "registered_unix": 1795352771.068755,
+  "source_sha256": {
+    "scripts/a100_object_reference_order_audit.py": "58ffdd60f79e58a5b3a5cc4fbfc85ace4380413d977bac802cfc2ec76685d894",
+    "flex_uda/active/object_reference_views.py": "f314d28a67604de34c123cdb28c3b41cd703896fa276245634b4a8ed5007eb8c",
+    "tests/test_object_reference_views.py": "e012e6758bf0b4277b8f6610670839ea92935e1706edf07c28286c3b8fa7ec2e",
+    "flex_uda/active/object_reference.py": "4a05e4c80c65a2bc886a1ff65b397d53cc549057ae9f28ff26325b8c5b7d597f",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af"
+  },
+  "stage": "V1quality heads are running; no V1quality output or new predecessor450official metric inspected. Review identified a mismatch between per-view additive logits and transform-after-view-mean.",
+  "hypothesis": "Nonlinear probability averaging and logit transport do not generally commute; quantify pure order separately from clipping order before changing a quality method.",
+  "evidence": "All8eligible prefix inputs already audited: onlyCROP/FRAME_BOX, noCLIP. Same raw-frame confidence weights and cell order asV1; unsupported query targets remain exactly unchanged.",
+  "predefined_comparisons": [
+    "toy per-view intercept counterexample",
+    "actual compatible multi-view frame-cell frequency",
+    "canonicalize each request then mean views versus mean clipped views then canonicalize",
+    "new reference and matched unshifted target differences fromV1,including exact GPUfloat32identity"
+  ],
+  "outputs": "Local separate per-evidence pseudo-target candidate arrays and aggregate audit. No new candidate quality predictions, neural fits or HOTA; V1run and strong ordinary baselines stay immutable.",
+  "no_target_manual_labels": true,
+  "no_quality_output_read": true,
+  "goal_status": "ACTIVE"
+}

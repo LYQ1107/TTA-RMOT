@@ -35,7 +35,8 @@
       "task_design": "Within query/provided-TrackID/view/video centering, exact input/answer deduplication, unit group mass and a nonnegative robust scalar state-response fit. This is the current narrow prototype, not a completed general evidence learner.",
       "conditional_theory": "Fixed-weight centering cancels additive stable intercepts. No within-group state variation means no slope identification; ridge uniqueness does not fix it. Strong convexity and bounded group influence concern the scalar fit. Confidence-dependent weights, clipping and state-dependent teacher errors limit the claim.",
       "implementation": "flex_uda/active/relational_transport.py: evidence_rows, center_groups, fit",
-      "empirical_gate": "Teacher-only heldout response prediction is intermediate evidence. Compare centered/uncentered fits and matched ordinary per-frame distillation after all raw/count outputs seal; no target GT selects parameters."
+      "empirical_gate": "Teacher-only heldout response prediction is intermediate evidence. Compare centered/uncentered fits and matched ordinary per-frame distillation after all raw/count outputs seal; no target GT selects parameters.",
+      "ongoing_refinement": "Learn reference pseudo-targets after removing the teacher state component, rather than treating a composite unary as a reference. Current fixed-evidence trial and matched ordinary direct/residual frame baselines are registered separately; no acceptance claim."
     },
     {
       "id": "I3",
@@ -49,7 +50,8 @@
       "task_design": "Use learned within-object state response to produce observation-specific referring scores, with exact fallback for unsupported language. Existing query-implication constraints remain separate evidence; joint per-frame consistency after transport has not yet been implemented.",
       "conditional_theory": "A correct additive state model, correct reference unary/slope and no active cap give conditional reconstruction. The odds cap bounds the change, not its correctness. Convex projection properties require correct relations and the projection actually being applied to the stated variable.",
       "implementation": "flex_uda/active/relational_transport.py: transport; scripts/a100_relation_transport.py",
-      "empirical_gate": "Dynamic versus time-average, value-preserving shuffle, reference and both CountMatched controls; same geometry/answers for adequate ordinary frame distillation. A left/right-only gate is not evidence of universal module coverage."
+      "empirical_gate": "Dynamic versus time-average, value-preserving shuffle, reference and both CountMatched controls; same geometry/answers for adequate ordinary frame distillation. A left/right-only gate is not evidence of universal module coverage.",
+      "ongoing_refinement": "scripts/a100_object_reference.py trains a reference representation before state reconstruction; same-fallback ordinary hybrid, unshifted targets, time mean, reference-center, shuffled state and both count directions test the claimed contribution."
     }
   ],
   "status": "PRINCIPLE_INSPIRED_CANDIDATE_DESIGN_NOT_YET_A_VALIDATED_UNIFIED_METHOD",
@@ -70,5 +72,7 @@
   "not_yet_completed": "The three pieces are candidate mechanisms, not a validated unified framework. The active goal still requires reliable improvement over fair ordinary teacher distillation across all six settings, component/interaction attribution and actual deployment cost.",
   "classical_algorithm_names_are_not_our_innovations": true,
   "classic_theorems_are_not_new_theorems_or_HOTA_guarantees": true,
-  "ongoing_experiment_recipes_unchanged": true
+  "ongoing_experiment_recipes_unchanged": true,
+  "reference_refinement_registration": "object_reference_quality_registration_v1.json",
+  "reference_transport_order_audit": "object_reference_transport_order_audit.json: all8prefix target/control arrays exactly equal to per-evidence implementation; no duplicate GPU study needed on current inputs"
 }

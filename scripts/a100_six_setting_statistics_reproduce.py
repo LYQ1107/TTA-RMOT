@@ -57,6 +57,8 @@ def registered_contrasts(directory,stem):
             'FULL_vs_SAME_DS_HEAD_RGB_LAME':(full,bases[1]),
             'LAME_ON_ORDINARY_HEAD':(bases[0],'RAW_FINAL'),
             'RGB_LAME_ON_DS_HEAD':(bases[1],'DS_FINAL')}
+    elif stem=='object_reference':
+        return json.loads((directory/'object_reference_quality_registration_v1.json').read_text())['contrasts']
     else:
         return json.loads((directory/(stem+'_registration_v1.json')).read_text())['contrasts']
     for base in bases:

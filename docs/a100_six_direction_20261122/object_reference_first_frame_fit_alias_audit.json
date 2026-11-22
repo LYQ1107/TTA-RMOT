@@ -1,0 +1,22 @@
+{
+  "status": "FIRST_COMPLETED_DIRECT_FRAME_INPUT_ALIAS_DIAGNOSTIC",
+  "pair": "C2",
+  "seed": 0,
+  "video": "0005",
+  "stage": "Training-only diagnostic before resuming this valid prefix; no quality prediction or GT read",
+  "teacher_frame_examples": 1891,
+  "unique_actual_float32_network_inputs": 1891,
+  "colliding_input_groups": 0,
+  "examples_in_colliding_groups": 0,
+  "deterministic_input_teacher_KL_floor": -5.551115123125783e-17,
+  "observed_teacher_KL": 0.006392538547515869,
+  "observed_KL_minus_necessary_input_floor": 0.006392538547515925,
+  "registered_steps": 16000,
+  "registered_KL_gate_passed": false,
+  "original_registered_gate_unchanged": true,
+  "interpretation": "Any deterministic zero-residual head with these exact inputs must give identical predictions to identical input rows. Weighted conditional mean targets give its necessary BCE lower bound. This diagnoses attainable fit, not semantic correctness; it does not silently replace the registered KL gate.",
+  "next": "Complete the registered study with its original gate flags. If ordinary fit remains a concern, strengthen its representation/optimization in a separately registered comparator, never declare a win because a comparator cannot resolve its input aliases.",
+  "manual_target_GT_open_attempts": 0,
+  "new_teacher_encoder_GPU_or_neural_fits": 0,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,44 @@
+{
+  "status": "OBJECT_REFERENCE_DOMAIN_NAME_FIX_CHECKPOINT_RECOVERY",
+  "source_fix": {
+    "kind": "IO_DOMAIN_NAME_SHADOWING_FIX",
+    "unix": 1795353392.702263,
+    "source": "scripts/a100_object_reference.py",
+    "original_sha256": "4cc6ff93b0b2af8e8335d35e98248949c1fe50828196f84152fed574f35b11eb",
+    "new_sha256": "dd2a477d2c35d50333254f9763bd4e4c3b39173a374197a31548bba22b41b885",
+    "original_recipe_and_all_numerical_values_unchanged": true,
+    "affected_workers_all_terminal_before_source_edit": true,
+    "exact_change": "Rename the pseudo-target array to reference_target at its binding and two uses, preserving the target dataset string.",
+    "diff": "--- original_entry\n+++ fixed_entry\n@@ -161,7 +161,7 @@\n             preparation = json.loads((prepared/'completion.json').read_text())\n             beta = preparation['beta']\n             with np.load(prepared/'prefix_targets.npz') as a:\n-                target,control,weight,cell_q,cell_t,cell_v = [a[k] for k in\n+                reference_target,control,weight,cell_q,cell_t,cell_v = [a[k] for k in\n                     ('reference_target','unshifted_target','sample_weight','cell_query','cell_track','cell_video')]\n             current_cells = cell_v == len(preparation['ordered_videos'])-1\n             reference_x.append(raw[cell_q[current_cells],cell_t[current_cells]])\n@@ -172,9 +172,9 @@\n             ref_mean = reference_total/reference_rows\n             ref_std = np.maximum(np.sqrt(np.maximum(reference_square/reference_rows-ref_mean**2,0)),1e-3)\n             ref_x = np.concatenate(reference_x)\n-            assert len(ref_x) == len(target) == preparation['prefix_reference_groups']\n+            assert len(ref_x) == len(reference_target) == preparation['prefix_reference_groups']\n             fields = {}\n-            for name,label in (('REFERENCE',target),('UNSHIFTED',control)):\n+            for name,label in (('REFERENCE',reference_target),('UNSHIFTED',control)):\n                 predictions,receipt,head = fit_head(ref_x,np.zeros(len(ref_x)),label,current,np.zeros(prior.size),\n                     ref_mean,ref_std,sample_weight=weight,soft=True,seed=seed)\n                 receipt.update(architecture='1081->64 GELU->1 direct reference head; all prefix queries',\n"
+  },
+  "valid_C2_checkpoint": {
+    "pair": "C2",
+    "seed": 0,
+    "next_video": 1,
+    "first_video": "0005",
+    "completed_head_fits": 3,
+    "first_video_teacher_KL": {
+      "FRAME_DIRECT": 0.006392538547515869,
+      "REFERENCE": 9.21785831451416e-05,
+      "UNSHIFTED": 0.0002066493034362793
+    },
+    "completed_receipt_SHA256": "2eefff0509615f047f0c88ac06305110600467548479ff3ca382cfd06099b313"
+  },
+  "completed_other_conditions": [
+    "C1_seed0",
+    "C3_seed0",
+    "C4_seed0"
+  ],
+  "raw_or_count_methods_skipped": false,
+  "teacher_parameters_seeds_metrics_or_targets_changed": false,
+  "own_GT_not_opened": true,
+  "root_wall_across_restarts_not_a_deployment_cost": true,
+  "original_failure_archive": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/supervisor/target_name_fix_originals",
+  "goal_status": "ACTIVE",
+  "resumed_controller_pid": 2273461,
+  "previous_controller_pid": 2265078,
+  "resumed_from_saved_videos": true,
+  "first_prefix_inputs_and_direct_head_retained_for_baseline_adequacy_diagnostic": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/supervisor/target_name_fix_originals",
+  "resumed_C2_observed_completed_videos": 3,
+  "completed_first_video_receipt_preserved_exactly": true
+}
