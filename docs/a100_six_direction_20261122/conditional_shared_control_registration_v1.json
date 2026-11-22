@@ -68,5 +68,38 @@
   "independent_blind_validation": false,
   "no_new_primary_promotion_or_active_parent_recipe_changes": true,
   "quality_replay_not_cold_deployment": true,
-  "goal_status": "ACTIVE"
+  "goal_status": "ACTIVE",
+  "contrasts": {
+    "FULL_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL",
+      "LOCAL_TWO_FINAL"
+    ],
+    "FULL_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL",
+      "LOCAL_TWO_MEAN"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_CONTROL_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_LOCAL_TWO_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_LOCAL_TWO_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_CONTROL_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_LOCAL_TWO_MEAN_COUNT",
+      "LOCAL_TWO_MEAN__AT_LOCAL_TWO_MEAN_COUNT"
+    ]
+  },
+  "analysis_export_metadata": {
+    "derived_from_already_frozen_python_CONTRASTS": true,
+    "prior_registration_sha256": "c47aaf65fd5dc607f76f5919afc1ef0ae113a1dd6b2571caec59e192886078ff",
+    "source_unchanged": true,
+    "no_new_comparison_or_parameter": true,
+    "before_any_own_training_or_current_parent_quality_reads": true
+  }
 }
