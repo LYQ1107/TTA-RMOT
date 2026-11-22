@@ -14,6 +14,8 @@
 
 ## 当前工作状态（2026-11-22）
 
+- 11月23日最新调度：2320838已完成71153真实Qwen输入并集采集；四策略各55019逻辑预算的实际回答已封存，收据observation_design_collection_receipt.json。I1质量现在由2337463接管（scripts/a100_observation_policy_adopt.py，执行私有同字节副本），保留原三条真实训练进程2333162/2333163/2333164，继续0..3的18条件/828屏障。旧2330579只替换控制器；一个被condition.lock阻塞的重复C1启动器2336033在进入优化前清理；所有真正模型/计时0重启。早启动器2333029仍只等待自己的3条件，后续以唯一observer20149/PID2316456及registry为准。禁止再启第二观察器或重复同条件。
+- 普通容量收据元数据已独立核验：helper最终KL/width是实际值，但与旧fit字典合并时CE/entropy/architecture文字留旧；这些旧字段没用于收敛gate或HOTA。scripts/a100_capacity_loss_receipt_audit.py对5个实际checkpointCPU前向重算，全部仍过KL.005，CPU/GPU最大误差1.08046e-9；补充capacity_loss_receipt_audit.json，旧日志/权重/预测/GT均不重写。当前I1的fit_capacity.py及所有numericalhelpers源码继续冻结，不能为修元数据改掉正在执行的recipe；新I1里如触发扩宽，应按最终KL/width解释，继承CE不算新最终CE，后续可补对账。
 - 截至2026-11-23：容量补充162已全部官评，180统计/36效应压缩前后独立复算PASS；444个普通前缀全过原KL.005。参照C2/C5比充分拟合同回退普通头+1.517156/+1.282209，双向CountMatched均正但KITTI仅4视频无总体CI；仍落后最强RAW_RGB/RAW_MEAN，Goal未完成。C2更充分拟合反而HOTA下降，不泛化成所有蒸馏坏。参照C2seed0自己也有一个参照头前缀未达门槛，负分解效应不能独立排除优化影响。
 - I1后续质量已登记并排队2330579，scripts/a100_observation_design_quality.py，等待2320838的71153真实输入全完成后自动四GPU拟合/828输出官评；唯一观察20149/PID2316456不变。四策略各同预算/同自然768D普通学习器，FINAL、固定早期/充分最终MEAN、直接教师回填12方法，主DESIGN_MEAN；18条件216raw+612counts全封存再本项GT。C1真实交接索引检查PASS/GT0。该粗粒度学习器不验证状态辨识交互，也不替代完整I2/I3同QA强软/硬蒸馏消融，不把该I1组件队列当Goal完成。源码及prereg已冻结，不因看到结果改主策略/decoder。
 - 新理论说明docs/TTA_RMOT_经典思想如何支撑任务建模_20261122.txt及合成解析反例已发布ad18addcb078e543a6ff7b78e7e03edfc04f3f29（快照95870852/可达95131093bytes）；最新HEAD以Git为准。经典链式法则不是新定理，需任务观测/机制贡献，不能把教师各提示数字当校准联合概率。当前真实采集只用原prompts，不临时改STATE或追加原子问题。
