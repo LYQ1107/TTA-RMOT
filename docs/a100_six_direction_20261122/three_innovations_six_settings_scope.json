@@ -12,36 +12,44 @@
   "candidate_innovations": [
     {
       "id": "I1",
-      "name": "覆盖与疑点共同驱动的主动观察",
+      "name": "面向覆盖和可辨识性的主动观察",
       "human_inspiration": "先形成场景覆盖，再集中细看疑点",
       "classical_principles": [
         "覆盖与边际收益递减",
         "主动感知与信息互补"
       ],
-      "task_design": "Define query-candidate coverage units and genuinely new observations, coupled to evidence groups and structural residuals.",
-      "conditional_theory": "Frozen equal-cost coverage batches have a monotone submodular objective; greedy bound applies only if actually implemented with those assumptions."
+      "task_design": "Pay for object anchors, then choose new objects or state contrasts using a common conditional coverage/excitation objective. The current geometry-only prototype does not yet use teacher-dependent doubt or structural residuals.",
+      "conditional_theory": "The implemented frozen-anchor, equal-unit-cost second-stage proxy is monotone submodular. Its greedy bound concerns incremental proxy gain, not global two-stage optimality, true Fisher information, HOTA or wall-clock utility.",
+      "implementation": "flex_uda/active/observation_design.py",
+      "empirical_gate": "Same-budget DESIGN/COVERAGE_ONLY/PRIOR/UNIFORM evidence collection, ordinary distillation sharing each policy's exact answers, then complete six-setting quality and real cost. Manifests and physical input pilots are not this gate."
     },
     {
       "id": "I2",
-      "name": "相关性受控的证据推理",
-      "human_inspiration": "重复听到同一判断不等于获得独立证据，少量可疑反馈可被纠正",
+      "name": "分离稳定干扰与关系变化的对比证据学习",
+      "human_inspiration": "同一对象前后对比时，区分对象本身、观察通道与发生变化的关系；重复答案不自动成为独立证据",
       "classical_principles": [
+        "组内对比、消去干扰与可辨识性",
         "稳健估计与有限影响",
         "相关证据的信息量约束"
       ],
-      "task_design": "Task-specific exact-request deduplication and bounded group influence; distinguish regularization from independent Bayesian evidence.",
-      "conditional_theory": "Fixed-unary strongly convex robust inference admits a conditional single-group stability bound; current DS and group means do not instantiate that theorem."
+      "task_design": "Within query/provided-TrackID/view/video centering, exact input/answer deduplication, unit group mass and a nonnegative robust scalar state-response fit. This is the current narrow prototype, not a completed general evidence learner.",
+      "conditional_theory": "Fixed-weight centering cancels additive stable intercepts. No within-group state variation means no slope identification; ridge uniqueness does not fix it. Strong convexity and bounded group influence concern the scalar fit. Confidence-dependent weights, clipping and state-dependent teacher errors limit the claim.",
+      "implementation": "flex_uda/active/relational_transport.py: evidence_rows, center_groups, fit",
+      "empirical_gate": "Teacher-only heldout response prediction is intermediate evidence. Compare centered/uncentered fits and matched ordinary per-frame distillation after all raw/count outputs seal; no target GT selects parameters."
     },
     {
       "id": "I3",
-      "name": "视觉与语言关系约束下的结构化适配",
-      "human_inspiration": "用外观、身份与描述间的关系交叉检查判断",
+      "name": "对象—状态分解下的关系化指代",
+      "human_inspiration": "保持对象理解，更新其当前关系，并用语言描述间的兼容性检查局部判断",
       "classical_principles": [
+        "稳定成分与动态状态分解、关系迁移",
         "约束推理与最小改动",
         "关系失配下的软约束"
       ],
-      "task_design": "Conservative visual-language relations with explicit scope, uncertainty and task-contract conditions.",
-      "conditional_theory": "Correct convex relations give a squared-error projection property; relation misspecification adds an explicit risk term; neither proves HOTA improvement."
+      "task_design": "Use learned within-object state response to produce observation-specific referring scores, with exact fallback for unsupported language. Existing query-implication constraints remain separate evidence; joint per-frame consistency after transport has not yet been implemented.",
+      "conditional_theory": "A correct additive state model, correct reference unary/slope and no active cap give conditional reconstruction. The odds cap bounds the change, not its correctness. Convex projection properties require correct relations and the projection actually being applied to the stated variable.",
+      "implementation": "flex_uda/active/relational_transport.py: transport; scripts/a100_relation_transport.py",
+      "empirical_gate": "Dynamic versus time-average, value-preserving shuffle, reference and both CountMatched controls; same geometry/answers for adequate ordinary frame distillation. A left/right-only gate is not evidence of universal module coverage."
     }
   ],
   "status": "PRINCIPLE_INSPIRED_CANDIDATE_DESIGN_NOT_YET_A_VALIDATED_UNIFIED_METHOD",
@@ -55,7 +63,11 @@
   ],
   "existing_registered_jobs_continue": true,
   "goal_status": "ACTIVE",
-  "theory_document": "../TTA_RMOT_视觉本能与经典思想_理论设计与实证边界_20261122.txt",
+  "theory_document": "../TTA_RMOT_从经典思想到对象关系机制_理论与实验登记_20261122.txt",
+  "earlier_general_design_document": "../TTA_RMOT_视觉本能与经典思想_理论设计与实证边界_20261122.txt",
+  "derivation_order": "Task failure and necessary information -> explicit structural assumptions -> task-specific mechanism -> conditional mathematical property -> fair empirical test. Classic algorithm names and copied theorems are not the contributions.",
+  "three_point_chain": "What to observe -> what changes can be identified -> how to infer the current referring relation",
+  "not_yet_completed": "The three pieces are candidate mechanisms, not a validated unified framework. The active goal still requires reliable improvement over fair ordinary teacher distillation across all six settings, component/interaction attribution and actual deployment cost.",
   "classical_algorithm_names_are_not_our_innovations": true,
   "classic_theorems_are_not_new_theorems_or_HOTA_guarantees": true,
   "ongoing_experiment_recipes_unchanged": true

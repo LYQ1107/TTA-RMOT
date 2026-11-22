@@ -287,3 +287,8 @@ CUE_CONSENSUS controller 2114146 已启动，输出新建于本机/var/tmp并以
 2026-11-22 同图像五提示真实配对完成：GPU1 Qwen2B新60/0cache/10batch，全部同像素SHA/400visualtokens，冻结weight9a13380...不变，GT0/适配0。worker514.940s，teacherload487.104s，service含IO11.764s/内部forward4.799s，finalseal14.030s，固定顺序暖缓存不是逐variant部署对比。增量分析：LASTvs原始已改5/12，POSITION/TIME/STATE给定LAST只各再改1/12，STATEvsTIME/POSITION均0额外二元变化，所有翻转Yes→No；8位置+运动中LAST4元数据+1，4其它运动中LAST1元数据+0。不把回答变化冒称正确性/元数据贡献，不按confidence改主候选，不立即全采STATE；后续需匹配安慰剂/任务兼容反事实。全六设置官评仍待结束，RGB16/18后450自动开始；唯一27823/Goal ACTIVE。
 
 2026-11-22 继续正式流程：RGB18原始及90数量/原始已封存，450逐帧关系研究自动进入GPU，当前5/18；R3精确官评118/468已完成，不是仅凭父进程活着判定推进。观察器增加只读official_completion计数后由旧27823只SIGTERM143换成唯一29635/PID2254534；不改模型、指标、任何实验控制器、计时或检查点。新增成本范围说明：512MiB预检不证明独占，输入测试是共享研究环境/教师加载和暖cache的准备成本，不作公平单策略端到端或Pareto证据。普通RGB/Direct/LAME等仍必须完成评估后才审查主科学结论，Goal ACTIVE。
+
+
+2026-11-22 CLASSICAL_PRINCIPLES_IDENTIFICATION_THEORY_AUDIT
+
+用户进一步明确经典算法是思想与理论来源，不是把现成算法校准判断包装成创新。三点scope已与实际对象—关系原型对齐；一般能量设想、当前窄门控原型、已完成科学证据明确区分，所有运行数值与主方法登记保持不变。新增teacher-only可辨识性适用条件审计：复现全部冻结前缀参数；C2激励组1275/5343，C5为1269/4771，Gram11.546744/13.511074。八个有效前缀都有Huber二次区外残差，因此不把理想二次闭式收缩公式写成实际算法公式。二次区外组归一权重21.200%/28.017%，不是教师错误率。无变化时存在不同斜率的完全相同观测，正则唯一解不能制造辨识信息；两个独立数学检查通过。GT0、GPU0、无新预测/参数更改，Goal ACTIVE。结果见docs/a100_six_direction_20261122/relation_identification_theory_audit.json及对象—关系理论TXT；继续等待六设置官方评估和逐帧公平普通蒸馏。
