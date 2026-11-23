@@ -1,8 +1,8 @@
 {
   "status": "REGISTERED_MATCHED_JOINT_BINARY_COHORT_NO_GT",
-  "registered_unix": 1795431226.2865098,
+  "registered_unix": 1795433488.5831094,
   "source_sha256": {
-    "scripts/a100_joint_observation_collect.py": "29861e6f4cd236150be3efb81e4df22defb8bd520f9fef94a60f0aa0ec07ff6a",
+    "scripts/a100_joint_observation_collect.py": "82e4c8657ae8fe451840bdf3e804bf3d6ba748414c764dcd092c9bc412f9117e",
     "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
     "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
     "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
@@ -10,7 +10,8 @@
     "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
     "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
     "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
-    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2"
+    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353"
   },
   "worker_shards": 2,
   "allowed_GPU": [
@@ -47,5 +48,6 @@
   "no_adaptation_or_HOTA_or_GT": true,
   "shared_union_not_method_deployment_cost": true,
   "goal_status": "ACTIVE",
-  "input_execution_repair": "joint_observation_collection_preparation_repair.json"
+  "input_execution_repair": "joint_observation_collection_preparation_repair.json",
+  "IO_execution_amendment": "joint_observation_local_IO_handoff.json"
 }
