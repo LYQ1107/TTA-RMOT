@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## 最新：RSI三视频与条件区分反馈（2026-11-23）
+
+- 66899/PID2993943已exit0，C1首三视频0004/0005/0007，FROZEN/RAW/PRIOR各160问（56/40/64），只seed0；RAW/FROZEN首视频复用原始工程收据。RAW实际换题0/3/1，PRIOR换题0/3/0（对称差是两倍换题数）。普通joint/coarse全部付费信息充分拟合，max KL.000194。没有RMOT预测/HOTA，行为变化不是质量贡献，勿重跑5299或66899。
+- 初始No奖励.8688→.0574但新视频catch-up奖励仍大；V2精确源/plan备份rsi_curriculum_prefix_20261123/preserved_prior_control_v2。原始v1在Git72445d862f068e08ecbd42aeb809c3c9054d5337可恢复，不修改历史收据的数值。
+- rsi_discrimination_feedback与73077已exit0：同query/view不同候选配对，条件技能=max(H(mean teacherQ)-CE,0)，受Jensen信息差界定；常量校准/冻结S奖励0。148单元无标签审计140可完整三轮，余8不丢query/视频，只明确缺本地反馈。该新反馈尚未接入训练/无新任务质量，正式RSI六设置入口仍待实现。
+- 新关键训练对齐假设：旧case只有一个track_id、两个时刻，主要监督状态差；下一步先核对任务时间语义，再实现真实跨候选同帧教师pilot（AB/BA、同上下文binary、CROP强对照）。旧缓存不能伪造不同候选的联合回答。条件效用应保留对象稳定h_i，只消query共有b_q，不能把身份也中心化掉。随后同信息充分generic joint-KD与条件utility学习，再集成RSI/SGD。详见RSI TXT第9-11节及prospective scope。
+- 主四卡任务只续实际38672与67909控制器；当前21配方/582官评源码pin不可改，当前未读新HOTA。所有六设置、强对照、双数量及真实fresh冷成本要求保留，Goal ACTIVE。
+
 ## RSI首段实际证据优先（2026-11-23）
 
 - rsi_curriculum/inputs/learning及contract已实现，5299 CPU真实三轮工程检查exit0：C1首视频两分支各56问含6probe、86.077s，0新增教师/主干/GT/HOTA。不要再启动此已结束pilot。

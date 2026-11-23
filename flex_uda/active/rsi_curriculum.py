@@ -204,9 +204,12 @@ def select_round(actor, features, actions, quotas, reservation, served, stage, g
     return chosen, (torch.stack(log_probabilities).mean() if log_probabilities else scores.sum()*0)
 
 
-def update_challenger(actor, optimizer, log_probability, before, after, baseline, *, frozen=False):
+def update_challenger(actor, optimizer, log_probability, before, after, baseline, *, frozen=False, reward_override=None):
     """One myopic policy-gradient step on fresh, paid teacher-probe progress."""
     reward = math.tanh(before-after) if before is not None else 0.
+    if reward_override is not None:
+        assert math.isfinite(reward_override) and -1 <= reward_override <= 1
+        reward = float(reward_override) if before is not None else 0.
     advantage = reward-baseline
     before_parameters = torch.cat([p.detach().flatten().cpu().double() for p in actor.parameters()])
     if not frozen and before is not None:

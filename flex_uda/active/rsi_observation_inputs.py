@@ -76,6 +76,7 @@ class RSIVisualInputs:
         bag_keys = sorted(bags)
         arrays.update(joint_target=np.stack([np.mean([p[0] for p in grouped[k]], axis=0) for k in keys]),
                       binary_target=np.stack([np.mean([p[1] for p in grouped[k]], axis=0) for k in keys]),
+                      query_groups=np.asarray([k[0] for k in keys], dtype=int),
                       coarse_inputs=np.stack([self.coarse[q, t] for q, t in bag_keys]),
                       coarse_target=np.asarray([np.mean(bags[k]) for k in bag_keys]),
                       report=dict(requested_bundles=len(seen), unique_visual_pairs=len(keys),

@@ -427,3 +427,8 @@ RSI已写入持续有效目标及research_goal_RSI_amendment_20261123.json；Goa
 ## 2026-11-23 RSI首段真实闭环：参数更新不等于选题贡献
 
 新rsi_curriculum/inputs/learning与contract入口实际完成C1首视频三轮，两分支各56问含6probe，86.077s CPU，0新教师/主干/GT/HOTA。学习actor3次更新，但两分支UID集合/顺序/最终S权重完全相同；两充分普通对照KL3.36e-6/7.51e-7，不能宣称RSI增益。teacher probe NEITHER约.991/.881/.991，RAW奖励混有学No基率红利。全148单元三轮probe预算和首轮query覆盖通过，策略score identity误差1.39e-17。原版精确源码/plan已保存OUT/preserved_raw_reward_v1，公开receipt与raw_reward_mechanism_review保留。后续在未读新任务GT前固定null-prior progress控制，且须保证冻结S无正奖励，再沿同seed0前缀继续，不加种子。当前四卡六设置实验继续，Goal未完成。
+
+
+## 2026-11-23 RSI同seed前缀行为变化与条件反馈设计
+
+66899/PID2993943正常exit0，C1固定前三视频、3分支各160付费问答（56/40/64），RAW/FROZEN复用已完成首视频，其余自己的past/current前缀，无新GT/HOTA/教师主干。RAW换题0/3/1、prior-control换题0/3/0，行为变化不等于任务提升；初始No奖励.8688→.0574，但后续catch-up仍.977/.987，不能归因条件语义。V2精确源/plan已备份rsi_curriculum_prefix_20261123/preserved_prior_control_v2。新rsi_discrimination_feedback及73077已exit0：同query/view不同候选配对，proper-logscore技能受Jensen信息差界定，纯常量/冻结S奖励0；全部148无标签预算审核，140可完整3轮，余8单元不丢数据并明确无本地反馈轮。正式RSI集成及全六设置入口仍待实现，不伪称已启动/涨点。旧四卡实验pin未改，Goal ACTIVE。
