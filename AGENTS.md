@@ -1,5 +1,12 @@
 # AGENTS.md
 
+## RSI首段实际证据优先（2026-11-23）
+
+- rsi_curriculum/inputs/learning及contract已实现，5299 CPU真实三轮工程检查exit0：C1首视频两分支各56问含6probe、86.077s，0新增教师/主干/GT/HOTA。不要再启动此已结束pilot。
+- 真实学习actor更新3次，但与冻结actor的提问UID/完整顺序/最终S权重完全相同；probe NEITHER约.991/.881/.991。普通joint/coarse对手充分拟合。此结果不能证明RSI增益，完整收据和raw_reward_mechanism_review已保留。
+- 全148设置视频支持三轮新probe、每query首轮有训练查证，预算含probe无增加；epsilon策略score identity误差1.39e-17。下一步做teacher-prior进展对照和同seed跨视频累积，不换种子挑正例。原版精确源/plan保存在rsi_curriculum_engineering_20261123/preserved_raw_reward_v1。
+- 四卡主实验仍续38672与67909的实际控制器句柄，不改它们的pin源码；RSI正式质量实验尚未启动，Goal ACTIVE。
+
 ## 最新用户范围与实际执行（2026-11-23：RSI与四卡并行）
 
 - 用户新增RSI/双模型协同进化方向；保留人类视觉方式与经典思想、六个跨域设置、充分同信息蒸馏及目标GT隔离。有效目标已补充research_goal_RSI_amendment_20261123.json与持续目标CANON；Goal工具不支持改正在进行的objective，原Goal保持ACTIVE，不假结项重建。

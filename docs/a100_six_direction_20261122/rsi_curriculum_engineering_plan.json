@@ -1,0 +1,39 @@
+{
+  "status": "REGISTERED_REAL_TEACHER_ONLY_RSI_MECHANISM_EXPERIMENT_BEFORE_REQUESTS",
+  "registered_unix": 1795438897.717476,
+  "pair": "C1",
+  "video": "dancetrack0004",
+  "device": "cpu",
+  "neural_seeds": [
+    0
+  ],
+  "policies": [
+    "ADAPTIVE",
+    "FROZEN_ACTOR"
+  ],
+  "rounds": 3,
+  "teacher_budget": "Original matched per-query budget, including every probe; no extra answers",
+  "selection": "Learned 18D-observable challenger, epsilon=.2 mixture, without replacement, first unseen query-track if available",
+  "actor": "18->32tanh->1, Adam .03 one policy gradient update per round; frozen-actor control same initial scores/sampling seed/coverage/probes",
+  "solver": "Existing conditional-reference structured64 proper teacher fit, same old registered fit helper; no current/future full-Q model reused",
+  "probe": "Fixed metadata-hash query-track groups, 10 percent target, at least3 where feasible; entire reserved groups excluded from all within-video solver updates until final shared-data fit",
+  "reward": "tanh(macro-query fresh-teacher-probe CE before - after); one-step conditional proxy, not HOTA or verified semantics",
+  "ordinary": "Fully fit generic four-class joint KD and raw unit soft coarse KD get every paid reply including probes; proper CE-KL<=.005",
+  "no_RMOT_predictions_GT_or_HOTA": true,
+  "no_new_teacher_backbone_or_GPU_calls": true,
+  "prepaid_QA_research_library_not_cold_cost": true,
+  "source_sha256": {
+    "scripts/a100_rsi_curriculum_contract.py": "27662f3dd448b99d4283af62733c812f033354871462b8eda68f95d0e3e2ada5",
+    "flex_uda/active/rsi_curriculum.py": "67dd7581a49e601f6bdf5ba06841994144e7d1ed332d1864f8b05beba20e2628",
+    "flex_uda/active/rsi_observation_inputs.py": "a80546c024e54fc7272ad5aae1f0fb74f1ac5741547948fab6c5c3bf4f4135b8",
+    "flex_uda/active/rsi_curriculum_learning.py": "50d3df659d35fd1c340934dfc61406d99473f55273ea8c8dc5ee68e1ee387fd3",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5",
+    "flex_uda/active/conditional_joint_observation.py": "83c77b605077c2a4214fe655dcebbf516bc120637b3579d9c00eff36e2fa0448",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+    "flex_uda/active/joint_observation_fit.py": "885dca1f154754002975fdd0e7107b231e59f85e15ec6f16dd276a8c67844b1b",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "scripts/a100_joint_observation_collect.py": "82e4c8657ae8fe451840bdf3e804bf3d6ba748414c764dcd092c9bc412f9117e"
+  },
+  "goal_status": "ACTIVE"
+}
