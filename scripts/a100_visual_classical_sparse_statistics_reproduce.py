@@ -130,6 +130,10 @@ def resolve_record(directory,filename,name,cache):
     if 'reference' in row:
         ref=row['reference']
         return resolve_record(path.parent,ref['file'],ref['record'],cache)
+    if 'parents_reference' in row:
+        row=dict(row)
+        row['parents']=resolve_parent_groups(directory,filename,name,cache)
+        row.pop('parents_reference')
     values=parent_rows(row)
     if values is not None:
         rows=[resolve_parent_row(path.parent,path.name,name,i,cache) for i in range(len(values))]
@@ -137,6 +141,40 @@ def resolve_record(directory,filename,name,cache):
             'parent_rows_archive_owner','parent_rows_archive_zlib_base64','parent_rows_archive_codec')},
             numerator=[r[0] for r in rows],denominator=[r[1] for r in rows])
     return row
+
+
+def resolve_parent_groups(directory,filename,name,cache,trail=()):
+    """Restore a shared ordered parent list without decoding models or GT."""
+    path,payload=statistic_file(directory,filename,cache);identity=(str(path),name)
+    if identity in trail:raise ValueError('Cyclic parent-group reference: '+str(identity))
+    row=payload[name]
+    if 'parents' in row:return row['parents']
+    ref=row.get('parents_reference',row.get('reference'))
+    if ref is None:raise KeyError('Missing ordered parent groups for '+name)
+    return resolve_parent_groups(path.parent,ref.get('file',path.name),ref['record'],cache,(*trail,identity))
+
+
+def share_identical_parent_groups(statistics):
+    """Optional new-payload packing; all original records and values survive.
+
+    Apply only to new, unpublished statistics after aggregate-row packing.
+    Existing published providers must not be rewritten by this operation.
+    Small parent lists remain inline whenever a reference would be larger.
+    """
+    result={};owners={};shared=0
+    for name,row in statistics.items():
+        if 'parents' not in row:
+            result[name]=row;continue
+        token=json.dumps(row['parents'],separators=(',',':'))
+        owner=owners.get(token)
+        reference=dict(parents_reference=dict(record=owner)) if owner is not None else None
+        original_size=len(json.dumps(dict(parents=row['parents']),separators=(',',':')))
+        if reference is not None and len(json.dumps(reference,separators=(',',':')))<original_size:
+            result[name]=dict({k:v for k,v in row.items() if k!='parents'},**reference);shared+=1
+        else:
+            result[name]=row
+            if owner is None:owners[token]=name
+    return result,shared
 
 
 def share_identical_statistics(statistics,filename):
