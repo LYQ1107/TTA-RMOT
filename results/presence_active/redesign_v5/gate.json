@@ -1,0 +1,49 @@
+{
+  "status": "PASS_SAME_DOMAIN",
+  "failed_targets": [],
+  "criterion": "Every own-source PRES_TOPK HOTA >= complete NATIVE HOTA -1",
+  "same_domain": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "native_HOTA": 42.752,
+      "HOTA": 42.581,
+      "delta_HOTA": -0.17099999999999937,
+      "passed": true,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/stage_A/KITTI-V2/V2-best/PRES_TOPK",
+      "native_HOTA_unrounded": 42.7517234438567,
+      "HOTA_unrounded": 42.58141260821519,
+      "delta_HOTA_unrounded": -0.17031083564150862
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "native_HOTA": 32.139,
+      "HOTA": 32.117,
+      "delta_HOTA": -0.02200000000000557,
+      "passed": true,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/stage_A/Dance/Dance-best/PRES_TOPK",
+      "native_HOTA_unrounded": 32.138831849962436,
+      "HOTA_unrounded": 32.1170265350139,
+      "delta_HOTA_unrounded": -0.021805314948537102
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "native_HOTA": 69.924,
+      "HOTA": 69.968,
+      "delta_HOTA": 0.04399999999999693,
+      "passed": true,
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/stage_A/SportsMOT/LaMOT-best/PRES_TOPK",
+      "native_HOTA_unrounded": 69.9237624948249,
+      "HOTA_unrounded": 69.96806973183594,
+      "delta_HOTA_unrounded": 0.04430723701104
+    }
+  ],
+  "selection_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/selection.json",
+  "selection_sha256": "c9197b49a0bdbd841fc23c1814013467bb46865b4609a25b8966a32449d6a90e",
+  "completed_full_A": true,
+  "new_teacher_calls": 0,
+  "target_LoRA_updates": 0,
+  "historical_gate_and_results_unchanged": true
+}

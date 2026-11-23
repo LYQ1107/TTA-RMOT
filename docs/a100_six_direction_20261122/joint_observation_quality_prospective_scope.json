@@ -1,0 +1,85 @@
+{
+  "status": "PROSPECTIVE_QUALITY_SCOPE_FIT_AND_INFERENCE_NOT_IMPLEMENTED_OR_LAUNCHED",
+  "registered_unix": 1795431427.7410915,
+  "settings": {
+    "C1": [
+      "V2",
+      "Dance"
+    ],
+    "C2": [
+      "Dance",
+      "KITTI-V2"
+    ],
+    "C3": [
+      "V2",
+      "SportsMOT"
+    ],
+    "C4": [
+      "Dance",
+      "SportsMOT"
+    ],
+    "C5": [
+      "LaMOT",
+      "KITTI-V2"
+    ],
+    "C6": [
+      "LaMOT",
+      "Dance"
+    ]
+  },
+  "seeds": [
+    0
+  ],
+  "primary": "FULL_JOINT_SHARED_DESIGN_FINAL",
+  "candidate_components": {
+    "I1": "Matched-budget coverage/contrast paired observation against UNIFORM",
+    "I2": "Real complete-query joint teacher guidance versus same-context binary guidance",
+    "I3": "Reference-centered shared object and local-state prediction with signed interaction"
+  },
+  "factorial": {
+    "policy": [
+      "DESIGN",
+      "UNIFORM"
+    ],
+    "guidance": [
+      "JOINT",
+      "SHARED_BINARY"
+    ],
+    "reference": [
+      "SHARED",
+      "LOCAL"
+    ]
+  },
+  "mandatory_ordinary": [
+    "adequate unrestricted four-class joint KD with complete raw anchor inputs",
+    "adequate marginal KD with all same visual inputs and marginalized joint targets",
+    "adequate raw/unit and confidence/clipped coarse distillation, fixed early/final mean included"
+  ],
+  "ordinary_receive_all_own_same_joint_information": true,
+  "ordinary_not_limited_to_old_single_frame_labels": true,
+  "teacher_pool_and_context_relation_fix_shared_by_all": true,
+  "all_methods_refit_current_inputs": true,
+  "context_reference": "Original3 context anchors; preferentially disjoint3 real observation reference pool for teacher and dense-prediction partner. Intrinsic short-track fallback reported, not filtered by labels.",
+  "prefix_rule": "Past and current video only; no future teacher responses or normalizers; per-video model snapshots saved locally",
+  "optimizer_rule": "Deterministic seed0; adequate ordinary fit checked against its proper-target entropy floor, additional optimization/capacity only if required by its own training risk; no GT checkpoint/threshold choice",
+  "inference_rule": "Marginalize joint predictions with fixed same reference-pool partners for every comparable learner; no hard video absence from two No answers",
+  "evaluation": "All new-study raw and both-count outputs sealed before isolated official GT evaluation; no online GT feedback into adaptation",
+  "uncertainty": "Original parent video bootstrap at fixed seed0; KITTI4 no population CI; all DEV no independent blind validation",
+  "pass_rule": "Primary must beat adequate ordinary references across six settings, retained components/interaction attributable with dual CountMatched; no switching to posthoc higher controls; no positive result guarantee",
+  "cost_rule": "Research union/prepaid features not deployment cost. Actual same-fresh-input quality and full independent cold wall for final retained recipe after quality gate; no cold for rejected previous FULL",
+  "model_prototype_sha256": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+  "not_a_claim_new_classical_theorem_or_semantic_identification": true,
+  "fit_and_inference_source_not_yet_implemented": true,
+  "goal_status": "ACTIVE",
+  "common_inputs": {
+    "dimensions": 1101,
+    "base_frozen_PCD_colour_geometry": 1089,
+    "additional_unlabelled_track_geometry": 12,
+    "all_ordinary_baselines_receive_identical_features": true,
+    "trajectory_properties": "Aligned-history common image-translation/logsize nuisance cancellation; scene ranks and relative sizes; raw image motion retained. Not camera/world-motion identification."
+  },
+  "implementation_status": {
+    "new_joint_and_marginal_fit_helper": "IMPLEMENTED; 8-real-C2-target engineering run completed for structured64/generic128, no HOTA",
+    "full_six_setting_prefix_inference_and_official_runner": "NOT_IMPLEMENTED_OR_LAUNCHED"
+  }
+}

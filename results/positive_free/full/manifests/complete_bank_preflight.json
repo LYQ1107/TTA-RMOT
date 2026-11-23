@@ -1,0 +1,474 @@
+{
+  "protocol": "full_official_source_train_to_complete_unlabeled_dance_tta",
+  "training_source": "Refer-KITTI-V2 official source train, 17 videos; NEVER Dance target labels",
+  "target": "Refer-Dance validation, all 25 videos / 425 video-expression episodes",
+  "target_gt_opened": false,
+  "source_train_manifest": {
+    "status": "NOT_SPECIFIED"
+  },
+  "checkpoint": {
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "present": true,
+    "bytes": 995768450,
+    "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+    "sha256_valid": true
+  },
+  "target_video_count": 25,
+  "target_expression_count": 425,
+  "target_files": {
+    "dancetrack0004": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0004.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 4371,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0005": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0005.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 4576,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0007": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0007.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 9111,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0010": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0010.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 6740,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0014": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0014.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 12289,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0018": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0018.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 2507,
+      "tracker_frames": 503,
+      "missing_image_frames": []
+    },
+    "dancetrack0019": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0019.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 15880,
+      "tracker_frames": 2402,
+      "missing_image_frames": []
+    },
+    "dancetrack0025": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0025.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 6731,
+      "tracker_frames": 803,
+      "missing_image_frames": []
+    },
+    "dancetrack0026": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0026.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 3691,
+      "tracker_frames": 302,
+      "missing_image_frames": []
+    },
+    "dancetrack0030": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0030.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 7533,
+      "tracker_frames": 1263,
+      "missing_image_frames": []
+    },
+    "dancetrack0034": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0034.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 10195,
+      "tracker_frames": 923,
+      "missing_image_frames": []
+    },
+    "dancetrack0035": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0035.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 4927,
+      "tracker_frames": 703,
+      "missing_image_frames": []
+    },
+    "dancetrack0041": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0041.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 14320,
+      "tracker_frames": 1003,
+      "missing_image_frames": []
+    },
+    "dancetrack0043": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0043.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 1363,
+      "tracker_frames": 183,
+      "missing_image_frames": []
+    },
+    "dancetrack0047": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0047.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 9064,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0058": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0058.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 10798,
+      "tracker_frames": 1601,
+      "missing_image_frames": []
+    },
+    "dancetrack0063": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0063.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 7930,
+      "tracker_frames": 1000,
+      "missing_image_frames": []
+    },
+    "dancetrack0065": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0065.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 3486,
+      "tracker_frames": 702,
+      "missing_image_frames": []
+    },
+    "dancetrack0073": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0073.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 6881,
+      "tracker_frames": 703,
+      "missing_image_frames": []
+    },
+    "dancetrack0077": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0077.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 10780,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    },
+    "dancetrack0079": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0079.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 13997,
+      "tracker_frames": 1202,
+      "missing_image_frames": []
+    },
+    "dancetrack0081": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0081.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 17148,
+      "tracker_frames": 984,
+      "missing_image_frames": []
+    },
+    "dancetrack0090": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0090.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 11660,
+      "tracker_frames": 1004,
+      "missing_image_frames": []
+    },
+    "dancetrack0094": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0094.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 10522,
+      "tracker_frames": 603,
+      "missing_image_frames": []
+    },
+    "dancetrack0097": {
+      "tracker_file": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/tracker_outputs/dancetrack0097.txt",
+      "expression_count": 17,
+      "image_root_exists": true,
+      "has_frame_image": true,
+      "tracker_rows": 4585,
+      "tracker_frames": 1203,
+      "missing_image_frames": []
+    }
+  },
+  "target_inventory_pass": true,
+  "all_tracker_images_present": true,
+  "official_tracker_receipt": {
+    "path": "/data2/user/TTA-RMOT-assets/flexhook/runs/dance_detr_neuralsort_official/official_detr_neuralsort_receipt.json",
+    "files": 25,
+    "hash_mismatches": [],
+    "pass": true
+  },
+  "frozen_scores": {
+    "path": "/data2/user/FlexHook-TTA/results/runs/flexhook_v2_to_dance_official_detr_neuralsort_corrected_tokenizer/result.json",
+    "present": true,
+    "bytes": 393731645,
+    "sha256": "fbf498a24b73d6b2db6d9c757d313f660c0d5b09a7dbfec5c2635b8ca517ee69",
+    "supplement": {
+      "path": "/data2/user/FlexHook-TTA/results/runs/pf_frozen_complete_20261025/source_supplement.json",
+      "sha256": "3693edc6ef153b8ce0ca87aeec1b196d6b360ff775b8fe44755c4b15d7397639"
+    },
+    "coverage": {
+      "dancetrack0004": {
+        "observation_rows": 4371,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 4371,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0005": {
+        "observation_rows": 4576,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 4576,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0007": {
+        "observation_rows": 9111,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 9111,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0010": {
+        "observation_rows": 6740,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 6740,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0014": {
+        "observation_rows": 12289,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 12289,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0018": {
+        "observation_rows": 2507,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 2507,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0019": {
+        "observation_rows": 15880,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 15880,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0025": {
+        "observation_rows": 6731,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 6731,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0026": {
+        "observation_rows": 3691,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 3691,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0030": {
+        "observation_rows": 7533,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 7533,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0034": {
+        "observation_rows": 10195,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 10195,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0035": {
+        "observation_rows": 4927,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 4927,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0041": {
+        "observation_rows": 14320,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 14320,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0043": {
+        "observation_rows": 1363,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 1363,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0047": {
+        "observation_rows": 9064,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 9064,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0058": {
+        "observation_rows": 10798,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 10798,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0063": {
+        "observation_rows": 7930,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 7930,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0065": {
+        "observation_rows": 3486,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 3486,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0073": {
+        "observation_rows": 6881,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 6881,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0077": {
+        "observation_rows": 10780,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 10780,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0079": {
+        "observation_rows": 13997,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 13997,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0081": {
+        "observation_rows": 17148,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 17148,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0090": {
+        "observation_rows": 11660,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 11660,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0094": {
+        "observation_rows": 10522,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 10522,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      },
+      "dancetrack0097": {
+        "observation_rows": 4585,
+        "missing_expression_scores": 0,
+        "expected_tracker_rows": 4585,
+        "missing_tracker_observations": 0,
+        "extra_score_observations": 0
+      }
+    },
+    "all_tracker_candidates_scored": true,
+    "pass": true
+  },
+  "tokenizer": {
+    "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/pretrained/roberta-base",
+    "person_ids": [
+      5970
+    ],
+    "pass": true
+  },
+  "vendor_source_train_split": {
+    "videos": [
+      "0000",
+      "0001",
+      "0002",
+      "0003",
+      "0004",
+      "0006",
+      "0007",
+      "0008",
+      "0009",
+      "0010",
+      "0012",
+      "0014",
+      "0015",
+      "0016",
+      "0018",
+      "0020"
+    ],
+    "count": 16,
+    "missing_requested_source_ids": [
+      "0017"
+    ]
+  },
+  "server_assets_pass": true
+}

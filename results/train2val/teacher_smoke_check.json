@@ -1,0 +1,15 @@
+{
+  "status": "PASS_REAL_FOUR_TRAIN_ENDPOINTS",
+  "samples": 4,
+  "raw_output_path": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_smoke/shards/shard00/YES_FULL/teacher_outputs.jsonl",
+  "raw_output_sha256": "6e239530aedcb594d8fcf15163338c7a6d130567ad9c6b4909a1c812eeaf88f0",
+  "original_backend_and_visual_builder_unchanged": true,
+  "target_GT_open_attempts": 0,
+  "checks": [
+    "finite Yes/No logits",
+    "one real frame per candidate",
+    "sample/frame/ID alignment",
+    "cache re-open",
+    "frozen teacher hash"
+  ]
+}

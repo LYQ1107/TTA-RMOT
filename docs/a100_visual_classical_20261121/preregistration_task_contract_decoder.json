@@ -1,0 +1,20 @@
+{
+  "hypothesis": "cohort diffusion can suppress rare positive queries; test the existing explicit video-presence contract at decoding",
+  "protocol_source": "unchanged V1 preregistration: C4 PRESUPPOSED, C1 CHECKLIST",
+  "rule": "only all-empty static appearance query under PRESUPPOSED; select highest track-mean score singleton; ties original ID",
+  "no_per_frame_presence_guarantee": true,
+  "baseline_and_full_same_rule": true,
+  "teacher_scores_and_rankings_not_changed": true,
+  "extra_teacher_calls": 0,
+  "extra_neural_updates": 0,
+  "parameters_swept_using_GT": false,
+  "interpretation": "decoder/quantity contribution only; not evidence of learned semantics or calibrated Bayesian probabilities",
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "all_negative_results_retained": true,
+  "source_candidate_misses_can_still_make_forced_choice_wrong": true,
+  "all_existing_data_development": true
+}

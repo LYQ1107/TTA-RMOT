@@ -1,0 +1,47 @@
+{
+  "status": "SIMULATED_REFERENCE_COMPARISON",
+  "seed": 0,
+  "tasks": 2000,
+  "crowdkit_version": "1.4.2",
+  "ours_accuracy": 0.946,
+  "crowdkit_accuracy": 0.946,
+  "label_agreement": 1.0,
+  "workers": [
+    {
+      "worker": "CROP",
+      "simulated_accuracy": 0.9,
+      "ours_sensitivity": 0.9032373653553838,
+      "ours_specificity": 0.9093236190534828,
+      "crowdkit_sensitivity": 0.9059790605141336,
+      "crowdkit_specificity": 0.9107200552479222
+    },
+    {
+      "worker": "CLIP",
+      "simulated_accuracy": 0.85,
+      "ours_sensitivity": 0.8481326701230236,
+      "ours_specificity": 0.8467365956129809,
+      "crowdkit_sensitivity": 0.8487128671926197,
+      "crowdkit_specificity": 0.846699257895399
+    },
+    {
+      "worker": "FRAME_BOX",
+      "simulated_accuracy": 0.8,
+      "ours_sensitivity": 0.8070802361399042,
+      "ours_specificity": 0.7985342046908074,
+      "crowdkit_sensitivity": 0.8070582602124291,
+      "crowdkit_specificity": 0.7980887429563897
+    },
+    {
+      "worker": "IDENTITY",
+      "simulated_accuracy": 0.75,
+      "ours_sensitivity": 0.7874251178278472,
+      "ours_specificity": 0.740696581921356,
+      "crowdkit_sensitivity": 0.7872213463822785,
+      "crowdkit_specificity": 0.7398576959435397
+    }
+  ],
+  "expected_difference": "Our Beta(8,2) posterior-mean regularization; crowd-kit default unregularized EM. Not expected bit-exact.",
+  "target_data_used": false,
+  "target_GT_used": false,
+  "GPU_calls": 0
+}

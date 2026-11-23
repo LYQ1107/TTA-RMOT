@@ -1,0 +1,185 @@
+{
+  "status": "INTERFACE_PASS_NO_OPTIMIZER_STEP",
+  "checks": [
+    {
+      "video": "dancetrack0004",
+      "frame": 120,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.21183395385742188,
+      "KD_gradient_norm": 0.0036537273476635102,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 120,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 10.436285018920898,
+      "KD_gradient_norm": 0.253034855176413,
+      "optimizer_step_called": false,
+      "expanded_candidates": 4,
+      "expanded_gradient_norm": 0.2578866302957422,
+      "expanded_loss": 10.58222770690918
+    },
+    {
+      "video": "dancetrack0010",
+      "frame": 841,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.033959388732910156,
+      "KD_gradient_norm": 0.0009214255142561318,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0025",
+      "frame": 241,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 14.997591018676758,
+      "KD_gradient_norm": 0.18740661351844679,
+      "optimizer_step_called": false,
+      "expanded_candidates": 4,
+      "expanded_gradient_norm": 0.187591663197351,
+      "expanded_loss": 14.730735778808594
+    },
+    {
+      "video": "dancetrack0034",
+      "frame": 92,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.9962408542633057,
+      "KD_gradient_norm": 0.10426604745911801,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0047",
+      "frame": 841,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.008930683135986328,
+      "KD_gradient_norm": 0.0001397117060033347,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0065",
+      "frame": 350,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 4.186840534210205,
+      "KD_gradient_norm": 0.1523520768469744,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0081",
+      "frame": 98,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.2770552635192871,
+      "KD_gradient_norm": 0.004201788279866016,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0097",
+      "frame": 1082,
+      "candidates": 2,
+      "valid": 2,
+      "logits_shape": [
+        2,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.0034618377685546875,
+      "KD_gradient_norm": 5.5620511891741044e-05,
+      "optimizer_step_called": false
+    }
+  ],
+  "optimizer_updates": 0,
+  "adapter_delta_L2": 0.0,
+  "temporary_checkpoint_roundtrip": true,
+  "temporary_checkpoint_sha256": "53a924a128d07081697cafc8e8ceef30f280fde66d45df6b9fd032459b93d94d",
+  "temporary_checkpoint_deleted": true,
+  "method": "PSR_PARENT_WEIGHT_CONTROL",
+  "scope": "interface",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_PSR_STUDY",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only_not_Train_to_Val",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "trainable_parameters": 24576,
+  "frozen_parameters_unchanged": true,
+  "target_GT_open_attempts": [],
+  "wall_seconds": 15.801058309152722,
+  "peak_allocated_bytes": 1308563968,
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "pseudo_seal_sha256": "2178d3b4bfc4fed8ed22ce7fea44f9f5badf02d816b071133fdecefadd970587",
+  "optimizer_at_test_time": false,
+  "student_calls_MLLM": false,
+  "parent_weight_control": {
+    "kind": "POST_HOC_MECHANISM_CONTROL_NOT_PREREGISTERED_HEADLINE",
+    "geometry_opportunities": 263,
+    "parent_replay_terms": 526,
+    "unique_added_weak_labels": 0,
+    "extra_teacher_judgments": 0,
+    "extra_loss_coefficient": 0.25,
+    "normalization": "mean over both actual judged endpoints for each available geometry opportunity",
+    "new_target_frames_or_labels": false,
+    "target_GT_used": false,
+    "limitation": "tests opportunity-matched positive weighting; not a universal matched-gradient control"
+  },
+  "unique_parent_replay_terms_seen": 0,
+  "unique_expanded_samples_seen": 0
+}

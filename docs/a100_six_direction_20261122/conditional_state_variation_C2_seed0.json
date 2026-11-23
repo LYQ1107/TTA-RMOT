@@ -1,0 +1,308 @@
+{
+  "status": "PASS_PAID_STATE_VARIATION_DIAGNOSIS_NO_GT",
+  "pair": "C2",
+  "seed": 0,
+  "policy": "DESIGN",
+  "counts": {
+    "teacher_targets": 20955,
+    "query_track_bags": 19477,
+    "repeated_paid_state_bags": 1478,
+    "strong_teacher_state_flip_bags": 102
+  },
+  "optimal_bag_constant_soft_teacher_MSE": 0.0070500993836322915,
+  "models": {
+    "FRAME_SOFT": {
+      "common_soft_teacher_MSE": 0.0012292550410106815,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 443
+    },
+    "FRAME_HARD": {
+      "common_soft_teacher_MSE": 0.03611878262183122,
+      "below_optimal_bag_constant_floor": false,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 591
+    },
+    "FLAT_SOFT": {
+      "common_soft_teacher_MSE": 0.001285936442780475,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 414
+    },
+    "FLAT_HARD": {
+      "common_soft_teacher_MSE": 0.0336448053009188,
+      "below_optimal_bag_constant_floor": false,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 589
+    },
+    "DIRECT_POINT": {
+      "common_soft_teacher_MSE": 0.0013039723911322145,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 422
+    },
+    "DIRECT_BALANCED": {
+      "common_soft_teacher_MSE": 0.0016167598576904447,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 403
+    },
+    "DIRECT_PROFILE": {
+      "common_soft_teacher_MSE": 0.000878685827270794,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 416
+    },
+    "CONDITIONAL_BALANCED": {
+      "common_soft_teacher_MSE": 0.0014074549480060108,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 417
+    },
+    "FULL": {
+      "common_soft_teacher_MSE": 0.0007607988791393765,
+      "below_optimal_bag_constant_floor": true,
+      "strong_teacher_flip_bags_with_model_sign_flip": 102,
+      "repeated_paid_bags_with_model_probability_range_ge_0_5": 416
+    }
+  },
+  "per_video": [
+    {
+      "video": "0005",
+      "counts": {
+        "teacher_targets": 1891,
+        "query_track_bags": 1771,
+        "repeated_paid_state_bags": 120,
+        "strong_teacher_state_flip_bags": 4
+      },
+      "optimal_bag_constant_soft_teacher_MSE": 0.004327111390442273,
+      "models": {
+        "FRAME_SOFT": {
+          "common_soft_teacher_MSE": 0.000277974274241379,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 24
+        },
+        "FRAME_HARD": {
+          "common_soft_teacher_MSE": 0.04098267732417168,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 41
+        },
+        "FLAT_SOFT": {
+          "common_soft_teacher_MSE": 0.00010132888328050264,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 23
+        },
+        "FLAT_HARD": {
+          "common_soft_teacher_MSE": 0.04147389161515479,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 41
+        },
+        "DIRECT_POINT": {
+          "common_soft_teacher_MSE": 0.00015021821025749382,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 23
+        },
+        "DIRECT_BALANCED": {
+          "common_soft_teacher_MSE": 5.162164725845783e-05,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 23
+        },
+        "DIRECT_PROFILE": {
+          "common_soft_teacher_MSE": 5.808802185319496e-05,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 24
+        },
+        "CONDITIONAL_BALANCED": {
+          "common_soft_teacher_MSE": 0.00068707001847623,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 23
+        },
+        "FULL": {
+          "common_soft_teacher_MSE": 0.00022973283635063874,
+          "strong_teacher_flip_bags_with_model_sign_flip": 4,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 23
+        }
+      }
+    },
+    {
+      "video": "0011",
+      "counts": {
+        "teacher_targets": 3898,
+        "query_track_bags": 3666,
+        "repeated_paid_state_bags": 232,
+        "strong_teacher_state_flip_bags": 8
+      },
+      "optimal_bag_constant_soft_teacher_MSE": 0.003970187473722679,
+      "models": {
+        "FRAME_SOFT": {
+          "common_soft_teacher_MSE": 0.0012862036766701887,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 42
+        },
+        "FRAME_HARD": {
+          "common_soft_teacher_MSE": 0.03573573648831029,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 75
+        },
+        "FLAT_SOFT": {
+          "common_soft_teacher_MSE": 0.0011536956694511583,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 45
+        },
+        "FLAT_HARD": {
+          "common_soft_teacher_MSE": 0.035205258272393375,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 75
+        },
+        "DIRECT_POINT": {
+          "common_soft_teacher_MSE": 0.001660831965889043,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 46
+        },
+        "DIRECT_BALANCED": {
+          "common_soft_teacher_MSE": 0.0017009344868654695,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 36
+        },
+        "DIRECT_PROFILE": {
+          "common_soft_teacher_MSE": 0.0012297296290087083,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 41
+        },
+        "CONDITIONAL_BALANCED": {
+          "common_soft_teacher_MSE": 0.0015830608316891042,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 39
+        },
+        "FULL": {
+          "common_soft_teacher_MSE": 0.0009647177095332293,
+          "strong_teacher_flip_bags_with_model_sign_flip": 8,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 39
+        }
+      }
+    },
+    {
+      "video": "0013",
+      "counts": {
+        "teacher_targets": 3229,
+        "query_track_bags": 3046,
+        "repeated_paid_state_bags": 183,
+        "strong_teacher_state_flip_bags": 3
+      },
+      "optimal_bag_constant_soft_teacher_MSE": 0.005108858660031416,
+      "models": {
+        "FRAME_SOFT": {
+          "common_soft_teacher_MSE": 0.0013762181577602576,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 57
+        },
+        "FRAME_HARD": {
+          "common_soft_teacher_MSE": 0.022099908021849805,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 71
+        },
+        "FLAT_SOFT": {
+          "common_soft_teacher_MSE": 0.0014057315909470922,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 52
+        },
+        "FLAT_HARD": {
+          "common_soft_teacher_MSE": 0.021963094477157854,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 71
+        },
+        "DIRECT_POINT": {
+          "common_soft_teacher_MSE": 0.001660135790702736,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 47
+        },
+        "DIRECT_BALANCED": {
+          "common_soft_teacher_MSE": 0.0019472519969525482,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 47
+        },
+        "DIRECT_PROFILE": {
+          "common_soft_teacher_MSE": 0.00121428634914177,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 48
+        },
+        "CONDITIONAL_BALANCED": {
+          "common_soft_teacher_MSE": 0.0014747673179751227,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 53
+        },
+        "FULL": {
+          "common_soft_teacher_MSE": 0.0009388353495817049,
+          "strong_teacher_flip_bags_with_model_sign_flip": 3,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 49
+        }
+      }
+    },
+    {
+      "video": "0019",
+      "counts": {
+        "teacher_targets": 11937,
+        "query_track_bags": 10994,
+        "repeated_paid_state_bags": 943,
+        "strong_teacher_state_flip_bags": 87
+      },
+      "optimal_bag_constant_soft_teacher_MSE": 0.009012312101773971,
+      "models": {
+        "FRAME_SOFT": {
+          "common_soft_teacher_MSE": 0.0013216017147290036,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 320
+        },
+        "FRAME_HARD": {
+          "common_soft_teacher_MSE": 0.03926550583785524,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 404
+        },
+        "FLAT_SOFT": {
+          "common_soft_teacher_MSE": 0.0014843739811923134,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 294
+        },
+        "FLAT_HARD": {
+          "common_soft_teacher_MSE": 0.03505494154510878,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 402
+        },
+        "DIRECT_POINT": {
+          "common_soft_teacher_MSE": 0.0012738692593921431,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 306
+        },
+        "DIRECT_BALANCED": {
+          "common_soft_teacher_MSE": 0.001747814941356802,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 297
+        },
+        "DIRECT_PROFILE": {
+          "common_soft_teacher_MSE": 0.0008032671815263782,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 303
+        },
+        "CONDITIONAL_BALANCED": {
+          "common_soft_teacher_MSE": 0.0014460228063049013,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 302
+        },
+        "FULL": {
+          "common_soft_teacher_MSE": 0.0007301790016978071,
+          "strong_teacher_flip_bags_with_model_sign_flip": 87,
+          "repeated_paid_bags_with_model_probability_range_ge_0_5": 305
+        }
+      }
+    }
+  ],
+  "actual_own_current_video_predictions_no_future_head_replay": true,
+  "teacher_view_mixture_and_clipping_identical_to_parent_study": true,
+  "all_predictors_measured_against_common_soft_targets_even_when_their_own_training_is_hard": true,
+  "interpretation": "Below the constant floor demonstrates nonconstant predictions fitting paid teacher states. It does not prove correct target semantics, unseen-state generalization or benefit over a frame-aware ordinary baseline.",
+  "no_GT_HOTA_training_or_new_predictions": true,
+  "manual_GT_open_attempts": 0,
+  "original_global_fit_gates_unchanged": true,
+  "live_numerical_sources_unchanged": true,
+  "goal_status": "ACTIVE"
+}

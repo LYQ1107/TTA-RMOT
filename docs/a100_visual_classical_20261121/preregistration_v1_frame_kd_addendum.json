@@ -1,0 +1,35 @@
+{
+  "version": "V1_STRONG_FRAME_KD_ADDENDUM",
+  "before_any_first_round_GT": true,
+  "rationale": "Track-mean KD imposes semantic constancy and could weaken the baseline on mixed physical IDs. Add true queried-frame training and all-frame prediction before looking at any new GT results.",
+  "methods": [
+    "PRIOR__FRAME_KD_HARD",
+    "PRIOR__FRAME_KD_SOFT",
+    "UNIFORM__FRAME_KD_HARD",
+    "UNIFORM__FRAME_KD_SOFT",
+    "UNCERTAINTY__FRAME_KD_HARD",
+    "UNCERTAINTY__FRAME_KD_SOFT",
+    "COVER__FRAME_KD_HARD",
+    "COVER__FRAME_KD_SOFT"
+  ],
+  "source_initialization": "actual frozen raw frame margin, not clipped track-selection prior",
+  "architecture": "same 768->64 GELU->1 residual head",
+  "optimizer": "AdamW lr.001 wd.001 400steps batch<=512",
+  "teacher_inputs_and_budget_unchanged": true,
+  "new_teacher_calls": 0,
+  "same_PCD_features_as_full_method": true,
+  "whole_track_prediction_constraint": false,
+  "count_controls": "also FRAME_KD hard/soft at FULL counts, FULL vs frame soft at frame soft counts",
+  "actual_backbone_finetuning_not_claimed": true,
+  "code_sha256": {
+    "scripts/a100_visual_classical_analyze.py": "a0d2f3b522a29a83ab9fe80c7b1e8d3538e058a312a1c5027dfa20401f8a03c2",
+    "scripts/a100_visual_classical_collect.py": "7a031134a7de33357ba10218e68ed96fca3509fcde8a71f977a6474fc80ad259",
+    "scripts/a100_visual_classical_countmatched.py": "7830c2f122069bb9cc56582529c9f63fa5982d64de224e2bedcd6aa99449d097",
+    "scripts/a100_visual_classical_evaluate.py": "91831b7e22bb0e88eb0b9344242a74adb7d2cdd8beea77869fd3fd737eb5854c",
+    "scripts/a100_visual_classical_finish.py": "f647393282f10940f4a33bb966ea725038a0692dc88b2696f867633eb6d7041b",
+    "scripts/a100_visual_classical_frame_kd.py": "0c8101e05068c3a0b8547781b03de87b087e0756e91079cf4cc97bf5bc71945c",
+    "scripts/a100_visual_classical_generate.py": "f2f67aa159f48b40b86c59078c5f0084e03dd8fb3e0a525f93662739f69857db",
+    "scripts/a100_visual_classical_launch.py": "f10081600d4c015f479c5d92c799fdc9f8c7a300499431b6e7138c8b57861061",
+    "scripts/a100_visual_classical_prepare.py": "4a09db466297d6c87a7451672301ac1d72310bbd26ea73372dc26352f0fc32ba"
+  }
+}

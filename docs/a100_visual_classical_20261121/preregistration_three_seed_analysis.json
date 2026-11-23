@@ -1,0 +1,22 @@
+{
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "mean": "arithmetic mean of three independently pooled official HOTA values, not pooled duplicate-seed detections",
+  "primary_unit": {
+    "C4": 13,
+    "C1": 25
+  },
+  "parent_resampling_shared_across_seeds": true,
+  "bootstrap": 10000,
+  "bootstrap_seed": 0,
+  "primary": "fixed-seed paired parent bootstrap",
+  "seed_resampling_sensitivity": "parent + 3-seed multinomial, seed1",
+  "all_six_hard_soft_checkpoint_baselines_reported": true,
+  "baseline_envelope_is_post_hoc_diagnostic_not_method_selector": true,
+  "countmatched_all_baselines": true,
+  "all_development_data": true,
+  "no_multiple_testing_or_research_adaptivity_correction": true
+}

@@ -1,0 +1,276 @@
+"""Report every fixed cell, including blocked cells; no method/threshold fitting."""
+from collections import Counter
+import csv
+import gzip
+import json
+from pathlib import Path
+import sys
+import tarfile
+import numpy as np
+ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
+from scripts.multidomain_diagnostics import *
+from scripts.analyze_pf_video_uncertainty import HOTA,unpack,sufficient,pooled_hota,paired_clusters
+
+PAIRS=[('C1','V2-best','Dance'),('C2','Dance-best','KITTI-V2'),('C3','V2-best','SportsMOT'),
+       ('C4','Dance-best','SportsMOT'),('C5','LaMOT-best','KITTI-V2'),('C6','LaMOT-best','Dance')]
+
+
+def table(headers,rows):
+    def fmt(x):return '—' if x is None or x=='' else f'{x:.6f}' if isinstance(x,(float,np.floating)) else str(x)
+    return '\n'.join(['| '+' | '.join(headers)+' |','|'+'|'.join(['---']*len(headers))+'|']+
+        ['| '+' | '.join(fmt(x) for x in r)+' |' for r in rows])
+
+
+def detail(target,name,meta,source_model=None):
+    folder=base(target,source_model)/name;seal=verify(target,name,source_model)
+    done=json.loads((folder/'official_completion.json').read_text())
+    for f,k in [('pedestrian_summary.txt','summary_sha256'),('pedestrian_detailed.csv','detailed_sha256')]:
+        if file_sha(folder/'results'/f)!=done[k]:raise ValueError('Official result changed')
+    with (folder/'results/pedestrian_detailed.csv').open() as h:raw=list(csv.DictReader(h))
+    hota=HOTA({'PRINT_CONFIG':False});by={r['seq']:unpack(r,hota) for r in raw if r['seq']!='COMBINED'}
+    if len(by)!=len(meta['episodes']):raise ValueError('Official episode coverage differs')
+    videos=sorted({q['video_id'] for q in meta['episodes']})
+    stat=sufficient([hota.combine_sequences({k:r for k,r in by.items() if k.startswith(v+'+')}) for v in videos])
+    exact=float(pooled_hota(stat,np.ones(len(videos))))
+    combined=next(r for r in raw if r['seq']=='COMBINED')
+    if not np.isclose(exact,100*float(combined['HOTA___AUC']),atol=1e-8,rtol=0):raise ValueError('Official pooling mismatch')
+    return dict(seal=seal,done=done,rows=by,stats=stat,videos=videos,HOTA_unrounded=exact)
+
+
+def export_hota_stats(result):
+    numerator,denominator=result['stats']
+    return dict(videos=result['videos'],
+        assA_TP_numerator=numerator.tolist(),TP_FN_FP_denominator=denominator.tolist(),
+        formula='100 * mean(sqrt((weights @ numerator) / maximum(weights @ denominator, 1)))')
+
+
+def main():
+    require_plan();diagnostics=[];rho=[];structures=[];categories=[];bootstrap={};targets={};allpred=[];references={}
+    completed=[]
+    for combo,source,target in PAIRS:
+        available=combo in ('C1','C2') and (base(target)/'completion.json').exists()
+        if not available:
+            for configuration in CONFIGS:diagnostics.append(dict(combo=combo,source=source,target=target,configuration=configuration,
+                oracle='ORACLE' in configuration,status='BLOCKED_OFFICIAL_ASSETS' if combo not in ('C1','C2') else 'INFERENCE_RUNNING',
+                **dict.fromkeys(('HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows','source_R_at_1','in_domain_R_at_1','source_candidate_R_at_1','in_domain_candidate_R_at_1','HOTA_unrounded'),None)))
+            rho.append(dict(combo=combo,source=source,target=target,gap=None,rho=None,delta_rank=None,label='待官方资产' if combo not in ('C1','C2') else '推理进行中'))
+            continue
+        completed.append(combo);meta,_,_,_=inputs(target)
+        truth=json.loads((base(target)/'oracle.json').read_text());presence={(e['video'],e['expression']):e['present'] for e in truth['episodes']}
+        methods={c:detail(target,c,meta) for c in CONFIGS};targets[target]=dict(meta=meta,truth=truth,methods=methods)
+        for c in CONFIGS:
+            r=methods[c];m=r['done']['metrics']
+            diagnostics.append(dict(combo=combo,source=source,target=target,configuration=c,oracle='ORACLE' in c,status='COMPLETE',
+                **{k:m[k] for k in ('HOTA','DetA','AssA','IDF1','IDSW')},prediction_rows=r['seal']['prediction_rows'],
+                query_empty_prediction_rows=sum(e['selected_rows'] for e in r['seal']['episodes'] if not presence[e['video'],e['expression']]),
+                source_R_at_1=truth['retrieval']['source']['GT_R_at_1'],in_domain_R_at_1=truth['retrieval']['in_domain']['GT_R_at_1'],
+                source_candidate_R_at_1=truth['retrieval']['source']['R_at_1'],in_domain_candidate_R_at_1=truth['retrieval']['in_domain']['R_at_1'],
+                HOTA_unrounded=r['HOTA_unrounded']))
+            allpred.extend(dict(combo=combo,configuration=c,**e) for e in r['seal']['episodes'])
+        h={c:r['HOTA_unrounded'] for c,r in methods.items()};gap=h['IN_DOMAIN']-h['NATIVE']
+        ratio=(h['R_SxK_I']-h['NATIVE'])/gap if gap else None
+        label='跨域差距过小，不判定' if gap<3 else '数量主导' if ratio>=.7 else '数量与排序共同作用' if ratio>=.3 else '排序主导'
+        rho.append(dict(combo=combo,source=source,target=target,gap=gap,rho=ratio,delta_rank=h['IN_DOMAIN']-h['R_SxK_I'],label=label))
+        texts=Counter(q['query_text'] for q in meta['episodes']);pervideo=Counter(q['video_id'] for q in meta['episodes'])
+        structures.append(dict(target=target,status='COMPLETE_OFFLINE_ORACLE',role='ORACLE_DESCRIPTIVE_ONLY',
+            videos=len(pervideo),expressions=len(meta['episodes']),**truth['structure'],per_video_expressions=json.dumps(dict(pervideo),sort_keys=True),
+            shared_texts_across_videos=any(n>1 for n in texts.values()),unique_texts=len(texts)))
+        for c,r in methods.items():references[target+'__'+c]=dict(r['done'],seal_path=str(base(target)/c/'predictions_seal.json'))
+        if target=='KITTI-V2':
+            hota=HOTA({'PRINT_CONFIG':False})
+            category_map=json.loads((RUN/'source_query_categories.json').read_text())['mapping']
+            for c in ('NATIVE','IN_DOMAIN','R_SxK_I'):
+                for category in ('car','pedestrian'):
+                    chosen={q['video_id']+'+'+q['expression_id']:methods[c]['rows'][q['video_id']+'+'+q['expression_id']] for q in meta['episodes']
+                        if category_map[q['video_id']+'+'+q['expression_id']]==category}
+                    result=hota.combine_sequences(chosen)
+                    categories.append(dict(combo=combo,source=source,target=target,category=category,configuration=c,status='COMPLETE',
+                        HOTA=100*float(np.mean(result['HOTA'])),DetA=100*float(np.mean(result['DetA'])),AssA=100*float(np.mean(result['AssA'])),
+                        expressions=len(chosen),uncertainty='4 videos; point estimates only'))
+            for name in ('HIST_V2-best','HIST_Dance-best'):
+                r=detail(target,name,meta);references[target+'__'+name]=dict(r['done'],seal_path=str(base(target)/name/'predictions_seal.json'))
+        else:
+            nv=len(methods['NATIVE']['videos']);draws=np.random.default_rng(0).multinomial(nv,np.ones(nv)/nv,size=2000)
+            for a,b in [('R_SxK_I','NATIVE'),('IN_DOMAIN','R_SxK_I')]:
+                ma,mb=methods[a],methods[b];samples=paired_clusters(ma['stats'],mb['stats'],draws)
+                bootstrap[combo+'__'+a+'_minus_'+b]=dict(combo=combo,target=target,first=a,second=b,clusters=nv,samples=2000,seed=0,
+                    delta_HOTA=float(paired_clusters(ma['stats'],mb['stats'],np.ones(nv))),CI95=np.percentile(samples,[2.5,97.5]).tolist(),
+                    unit='video, all queries/frames kept together',pooling='official TP-weighted sufficient statistics')
+    known={s['target'] for s in structures}
+    for t in ('KITTI-V2','Dance','SportsMOT'):
+        if t not in known:structures.append(dict.fromkeys(list(structures[0]),None)|dict(target=t,status='BLOCKED_OFFICIAL_ASSETS' if t=='SportsMOT' else 'NOT_YET_EVALUATED',role='ORACLE_NOT_RUN'))
+    # Add blocked category rows explicitly rather than silently drop C5.
+    for c,s,t in PAIRS:
+        if t=='KITTI-V2' and c not in completed:
+            for cat in ('car','pedestrian'):
+                for rule in ('NATIVE','IN_DOMAIN','R_SxK_I'):categories.append(dict(combo=c,source=s,target=t,category=cat,configuration=rule,status='BLOCKED_OFFICIAL_ASSETS' if c=='C5' else 'INFERENCE_RUNNING',
+                    HOTA=None,DetA=None,AssA=None,expressions=None,uncertainty='4 videos; point estimates only'))
+    for f,rows in [('diagnostics.csv',diagnostics),('per_category.csv',categories),('structure_stats.csv',structures)]:write_csv(PUBLIC/f,rows)
+    matrix=[]
+    for s in ('V2-best','Dance-best','LaMOT-best'):
+        for t,inside in [('KITTI-V2','V2-best'),('Dance','Dance-best'),('SportsMOT','LaMOT-best')]:
+            r=next((r for r in rho if r['source']==s and r['target']==t),None)
+            matrix.append(dict(source=s,target=t,combo=r['combo'] if r else '',gap=r['gap'] if r else None,rho=r['rho'] if r else None,
+                delta_rank=r['delta_rank'] if r else None,label=r['label'] if r else '同域参照'))
+    write_csv(PUBLIC/'rho_matrix.csv',matrix)
+    atomic_json(PUBLIC/'bootstrap.json',dict(status='COMPLETE_DANCE_2000_SPORTS_ASSET_BLOCKED_KITTI_POINT_ONLY',comparisons=bootstrap,
+        planned_samples=2000,seed=0,KITTI='4 videos: no bootstrap',SportsMOT='not run; missing official assets'))
+    if (base('KITTI-V2')/'reference_completion.json').exists():
+        for r in json.loads((base('KITTI-V2')/'reference_completion.json').read_text())['methods']:
+            references['KITTI-V2__'+r['method']]=dict(r,seal_path=str(base('KITTI-V2')/r['method']/'predictions_seal.json'))
+    atomic_json(PUBLIC/'official_results.json',references)
+    reproduction=json.loads((RUN/'history_p0_stop/reproduction.json').read_text())
+    reproduction.update(status='AUTHORIZED_PARTIAL_SELF_CHECKS_COMPLETE' if 'C2' in completed else 'AUTHORIZED_PARTIAL_SELF_CHECKS_IN_PROGRESS',
+        new_official_references={k:r for k,r in references.items() if k.startswith('KITTI-V2__')},
+        KITTI_historical_scores_bit_exact=(RUN/'kitti/V2-best/scores_seal.json').exists(),
+        LaMOT_best_SportsMOT=dict(status='STOPPED_OFFICIAL_ASSETS_NOT_DOWNLOADED'),global_six_pair_experiment_complete=False)
+    atomic_json(PUBLIC/'reproduction.json',reproduction)
+    listed={(r['combo'],r['configuration']) for r in allpred}
+    for key,r in references.items():
+        target,name=key.split('__',1);combo='C1' if target=='Dance' else 'C2'
+        if (combo,name) not in listed:
+            s=json.loads(Path(r['seal_path']).read_text())
+            allpred.extend(dict(combo=combo,configuration=name,**e) for e in s['episodes'])
+    with gzip.open(PUBLIC/'all_prediction_files.csv.gz','wt') as h:
+        w=csv.DictWriter(h,fieldnames=list(allpred[0]));w.writeheader();w.writerows(allpred)
+    margins=[]
+    for target in targets:
+        _,_,_,paths=inputs(target)
+        margins.extend(dict(target=target,model=m,path=str(p),sha256=file_sha(p),bytes=p.stat().st_size)
+            for m,p in zip(('V2-best','Dance-best') if target=='Dance' else ('Dance-best','V2-best'),paths))
+    for m in CHECKPOINTS:
+        seal=RUN/'kitti'/m/'scores_seal.json'
+        if seal.exists():
+            r=json.loads(seal.read_text())
+            for coverage in ('complete','historical'):
+                p=Path(r[coverage+'_path'])
+                if not any(x['path']==str(p) for x in margins):margins.append(dict(target='KITTI-V2',model=m,path=str(p),sha256=file_sha(p),bytes=p.stat().st_size,coverage=coverage))
+    atomic_json(PUBLIC/'margin_paths.json',dict(status='SEALED_COMPLETED_TARGET_BANKS',files=margins))
+    costs=[]
+    for status in (RUN/'kitti/launchers').glob('*/launcher_status.json'):
+        for job in json.loads(status.read_text())['jobs']:costs.append(dict(job,launcher_status=str(status)))
+    interruptions=[dict(json.loads(p.read_text()),receipt_path=str(p)) for p in (RUN/'kitti/launchers').glob('*/external_interruption.json')]
+    for r in interruptions:
+        done=[json.loads(p.read_text()) for p in (RUN/'kitti'/r['model']/'video_receipts').glob('*.json') if p.stem in r['completed_videos_preserved'] and p.stem!='0005']
+        r['known_completed_video_compute_seconds_lower_bound']=sum(x['compute_seconds'] for x in done)
+    known_seconds=sum(r['wall_seconds'] for r in costs)
+    cost=dict(GPU_process_hours=known_seconds/3600,per_job=costs,max_GPUs=2,
+        interrupted_jobs=interruptions,exact_total_available=not bool(interruptions),
+        total_GPU_process_hours_lower_bound=(known_seconds+sum(r['known_completed_video_compute_seconds_lower_bound'] for r in interruptions))/3600,
+        total_GPU_process_hours_upper_bound=(known_seconds+sum(r['interrupted_wall_seconds_upper_bound'] for r in interruptions))/3600,
+        includes_failed_environment_attempts_and_smokes=True,teacher_calls=0,optimizer_updates=0,
+        actual_full_C2_complete='C2' in completed,partial_completed_job_costs_only_if_launcher_still_running=True)
+    cost['per_new_inference']=[]
+    for m in CHECKPOINTS:
+        known=sum(r['wall_seconds'] for r in costs if r['model']==m)
+        unknown=[r for r in interruptions if r['model']==m]
+        cost['per_new_inference'].append(dict(model=m,target='KITTI-V2',complete_rows=2425382,
+            known_GPU_process_hours=known/3600,
+            total_GPU_process_hours_lower_bound=(known+sum(r['known_completed_video_compute_seconds_lower_bound'] for r in unknown))/3600,
+            total_GPU_process_hours_upper_bound=(known+sum(r['interrupted_wall_seconds_upper_bound'] for r in unknown))/3600,
+            includes_smoke_and_failed_attempts=True,exact_total_available=not bool(unknown)))
+    cost['reused_inferences']=dict(C1_V2_to_Dance='No new GPU call; inherited frozen full-bank inference cost not remeasured, not a zero-cost independent system',
+        Dance_to_Dance='Existing sealed official scores; no new GPU call; inherited inference cost not remeasured')
+    atomic_json(PUBLIC/'costs.json',cost)
+    gt=dict(inference={m:json.loads((RUN/'kitti'/m/'scores_seal.json').read_text())['GT_open_attempts'] for m in CHECKPOINTS if (RUN/'kitti'/m/'scores_seal.json').exists()},
+        decoders={t:json.loads((base(t)/'GT_free_predictions.json').read_text())['GT_open_attempts'] for t in targets},
+        evaluation_and_oracle_separate_processes=True,no_target_GT_threshold_fitting=True,no_training=True,no_MLLM=True,
+        downloaded_annotation_payloads_not_opened_by_model=True)
+    atomic_json(PUBLIC/'gt_audit.json',gt)
+    inventory=json.loads((PUBLIC/'inventory.json').read_text())
+    inventory.update(status='PARTIAL_C1_C2_COMPLETE_C3_C6_BLOCKED_OFFICIAL_ASSETS' if 'C2' in completed else 'C1_COMPLETE_C2_RUNNING',
+        completed_combinations=completed,new_inference_GT_open_attempts=gt['inference'],
+        complete_score_banks=margins,full_scope_preserved=True,GT_open_attempts=0,
+        SportsMOT_required_assets_status=json.loads((PUBLIC/'downloads.json').read_text())['asset_gates'])
+    inventory['targets']['SportsMOT']['requested_expressions']=466
+    for item in inventory['targets']['SportsMOT']['required_paths']:
+        p=Path(item['path']);item.update(exists=p.exists(),is_symlink=p.is_symlink(),resolved=str(p.resolve()))
+    inventory['missing_assets']=[r for r in inventory['missing_assets'] if not Path(r['path']).exists()]
+    inventory.update(P1_started=True,P2_started=True,smoke_status='KITTI_TWO_COMPLETE_VIDEO_SMOKES_PASS_REMAINDER_REUSED_OR_ASSET_BLOCKED',
+        model_loads=sum(r['exit_code']==0 for r in costs)+len(interruptions),checkpoint_updates=0,teacher_calls=0,
+        new_GPU_process_hours=None,actual_GPU_cost_interval=[cost['total_GPU_process_hours_lower_bound'],cost['total_GPU_process_hours_upper_bound']],
+        downloads=len(json.loads((PUBLIC/'downloads.json').read_text())['files']),links_modified=2,
+        links_modified_scope='SportsMOT input asset layout only; separate task-local KITTI image link and post-seal evaluation GT links are not counted here',
+        GPU_hours_estimates={m+'_KITTI-V2':r['estimated_full_scoring_GPU_hours'] for m,r in inventory['smokes'].items()},
+        new_official_evaluation_jobs=sum(not r['reused_after_all_episode_row_equality'] for r in references.values()),
+        GT_open_attempts_scope='models and GT-free generators only; independent post-seal evaluation/oracle is allowed',
+        initial_asset_name_search='retained original P0 snapshot; public download attempts are separately logged')
+    inventory['SportsMOT_seqmap_mismatch'].update(original_prereg_expected=465,amended_expected=466,active_mismatch=False)
+    inventory['code_findings'].update(actual_runtime_token_checks='KITTI canonical person=[5970], official getitem/forward parity passed; Dance sealed corrected-tokenizer scores reused; Sports not run',
+        SportsMOT_official_paper_subset_number='No standalone subset number found in v5 main/repository; CVF supplement inaccessible, no local supplement')
+    atomic_json(PUBLIC/'inventory.json',inventory)
+    with tarfile.open(PUBLIC/'official_metrics_logs.tar.gz','w:gz') as archive:
+        for key,r in references.items():
+            folder=Path(r['seal_path']).parent
+            # Detailed CSVs are large raw results: retain their absolute paths +
+            # SHA in official_results.json, not duplicate every raw array in git.
+            for path in (folder/'results/pedestrian_summary.txt',folder/'official_completion.json',folder/'trackeval.log'):
+                if path.exists():archive.add(path,arcname=key+'/'+path.name)
+        for path in (RUN/'kitti/launchers').glob('*/*'):
+            if path.is_file():archive.add(path,arcname='GPU_launchers/'+str(path.relative_to(RUN/'kitti/launchers')))
+    publication=json.loads((RUN/'prereg_amendment_publication.json').read_text())
+    lines=['# 三数据集多域普遍性：授权恢复后的真实结果','',
+        '## 1. 判定汇总','',
+        '状态：C1、C2独立授权部分'+('均已完成' if 'C2' in completed else '中C1已完成、C2进行中')+'；C3–C6仍等待官方LaMOT权重和McByte/FlexHook数据包。**完整六组合未完成，不计算全局2/3判定，不宣称普遍成立/部分成立/不普遍。**','',
+        table(['源 / 目标','KITTI-V2','Dance','SportsMOT'],[[s]+[next((f"{r['rho']:.6f}：{r['label']}" if r['rho'] is not None else r['label']) for r in matrix if r['source']==s and r['target']==t) for t in ('KITTI-V2','Dance','SportsMOT')] for s in ('V2-best','Dance-best','LaMOT-best')]),'',
+        table(['组合','gap','ρ','Δrank','固定规则判定'],[[r[k] for k in ('combo','gap','rho','delta_rank','label')] for r in rho]),'',
+        'ρ使用官方detailed CSV未舍入HOTA计算；表内HOTA展示summary数值。缺失单元不是ρ=0，不删组合来做普遍性结论。','',
+        '研究边界：这里衡量固定候选、原生margin>0协议下的数量/排序损失，不证明目标域数量可以无监督估计。C1虽然ρ=98.46%，同域排序仍比源排序高约0.368 HOTA，25视频CI为正；“数量主导”不等于排序完全无损，也不等于新TTA成功。','',
+        '## 2. P0、下载、冒烟和自检','',
+        '补充预注册先推送'+publication['remote_commit']+'；恢复P0先推送e7bf73cf81a1ed6afc775815581e0564a77cbea3，随后才继续P1。原93行PREREG正文和首次P0封存保留。详见[P0_RESUMED.md](P0_RESUMED.md)、[downloads.json](downloads.json)。','',
+        'Sports seqmap实际466条、45视频；原465为文件末行无换行符造成wc -l少计。原图45视频26970有效帧已链接，没有重新下载。官方LaMOT GitHub原始Sports标注508份、45视频已下载，数字ID名不同于FlexHook文本名，未冒充通过466条一一映射。','',
+        '百度提取码验证成功且可列官方LaMOT-best（995768578字节）和45个McByte预测；初始匿名sharedownload errno2、无dlink；补齐官网签名接口后errno0，但list是不透明字符串、不是可下载链接，encrypt=0也相同。未把参数错误或不透明响应谎称登录失败；未执行网页JS/外部解析代理。公开BaiduPCS-Go客户端规定账号登录为必做，无账号凭据故停止该路径，不索取密码、不借他人登录、不自跑tracker。','',
+        '需要手动下载的精确网盘路径（分享根实际为/FlexHook）：','',
+        '- /FlexHook/SOTA_ckpts/LaMOT-best.pth','- /FlexHook/tracker_outputs/McByte-SportsMOT/（45文件逐个列在downloads.json）',
+        '- /FlexHook/datasets/LaMOT-main/annotations_v1/val/SportsMOT/','- /FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_labels.json',
+        '- /FlexHook/datasets/LaMOT-main/sequences/val/SportsMOT_RESOLUTION.json','- /FlexHook/datasets/LaMOT-main/sequences/val/TAO_frame2file.json（仅mix构造器辅助元数据，不运行TAO）','',
+        '目的目录：/data2/user/TTA-RMOT-assets/flexhook/lamot_20261101/flexhook_baidu/；不覆盖已有文件。LaMOT公开仓库无独立数据LICENSE，不能假定MIT；FlexHook代码MIT但单独checkpoint/数据授权未写。','',
+        '两套KITTI实机smoke strict全部key匹配，原生getitem/forward与冻结编码缓存数值误差≤2.1e-5、无符号翻转；box/grid完全一致。使用官方kitti2.yaml、infer.sh显式rope-swin-tiny/roberta覆盖、FP32、规范RoBERTa BPE、官方car/ped合并/帧偏移；没有额外类别token，所有候选同等打分。1视频估算V2 0.572601、Dance 0.630457 GPU小时，均未触发6小时停止门槛。','',
+        '逐目标文本/类别处理：KITTI保留car=0/pedestrian=1的官方候选解析和合并ID，但模型没有新加类别token；Dance复用已封存的规范BPE分数库，原17句不改写、候选class=0、无新类别前缀；Sports官方mix静态代码class=0/roberta，实际加载/tokenizer/末观测补分尚未运行，不能标为兼容性通过。Sports原图中存在macOS资源分叉._jpg，盘点仅计有效数字文件名；未来官方链接视图/seqLength也须核对，当前不据此制造Sports结果。','',
+        'V2 KITTI历史2355528行原值保留，只新增69854尾观测分数，完整2425382行已封存，历史npy SHA保持cb0a935c…1051687。完整覆盖原生HOTA如实见下表，不假定等于42.526。','']
+    if 'KITTI-V2__V2_COMPLETE_REFERENCE' in references:
+        rows=[]
+        for m in ('V2_COMPLETE_REFERENCE','HIST_V2-best','NATIVE','HIST_Dance-best'):
+            if 'KITTI-V2__'+m not in references:continue
+            r=references['KITTI-V2__'+m];rows.append([m,r['metrics']['HOTA'],r['prediction_rows'],r['reused_after_all_episode_row_equality']])
+        lines+=[table(['KITTI覆盖/模型','HOTA','行数','逐行相等后复用旧评测'],rows),'',
+        '历史V2分数逐位相同，862份原生预测逐行数值相同，HOTA42.526自检通过。新完整覆盖与历史覆盖均保留，不混用参照。','']
+    lines+=['源域官方封存GT_Dets=491286，infer.sh注释为491222，差64。沿用已通过42.526自检的原GT模板/过滤规则，没有修改GT来凑注释数字；所有本轮KITTI比较使用同一491286协议。','']
+    if 'C2' in completed:
+        lines+=['关键反向组合C2并不支持“排序近乎无损”：补同域数量后仍落后13.600 HOTA，GT R@1为0.197195对0.424417。Oracle同量时32.576对47.593，排序损失也没有消失。C2只有4视频，这些差距为点估计，不作统计显著性声明。C2已不满足汇总中要求的“C2也数量主导”必要条件；其余四组合缺资产，仍不擅自选择“部分成立/不普遍”的最终汇总标签。','']
+    lines+=['Dance历史32.134/254118行与完整32.139/254910行已核对SHA，新诊断统一完整范围。论文最新版正文只有LaMOT合并56.77，infer.sh合并56.756；未找到Sports子集官方数字，仓库无补充PDF、CVF补充入口403。只有官方资产核验全过后才允许Sports smoke和后续正式推理。','',
+        '## 3. 所有组合和固定配置','',
+        table(['组合','配置','HOTA','DetA','AssA','IDF1','IDSW','预测行','Empty行','状态'],[[r[k] for k in ('combo','configuration','HOTA','DetA','AssA','IDF1','IDSW','prediction_rows','query_empty_prediction_rows','status')] for r in diagnostics]),'',
+        'R_S×K_I和逆向数量交换是事后诊断；I(T)是目标域官方模型，不是可免费获得的Source-Free TTA门控。ORACLE两臂显式使用目标GT数量，仅诊断，不是可部署结果。B0_GLOBAL保持同域总行数，但不含逐帧逐表达的数量信息。','']
+    retrieval_rows=[]
+    for t,r in targets.items():
+        for m,x in r['truth']['retrieval'].items():retrieval_rows.append([t,m,x['GT_R_at_1'],x['R_at_1'],x['Hit_at_1'],x['valid_frames'],r['truth'][m+'_AUROC']])
+    lines+=[table(['目标','排序来源','GT R@1','条件候选R@1','Hit@1','可检索帧','全候选AUROC'],retrieval_rows),'',
+        '同帧GT R@1：对官方GT非空帧，top1候选以IoU≥0.5命中的GT数/该帧GT数，按帧均值（无可匹配候选的帧记0）。另外保留旧离线脚本的条件候选召回：在有IoU≥0.5候选的帧，top1命中的正候选数/该帧正候选数再均值。正候选可有重复框，故两个分母不等，不能混称。tie=(-margin,numeric ID)；Hit@1另列，不是AP。GT轨迹结构用一对一最大基数匹配。新增GT分母诊断未改变任何预测、HOTA或预注册判定。','',
+        '## 4. KITTI按表达类别','',table(['组合','类别','配置','HOTA','DetA','AssA','表达数','状态'],[[r[k] for k in ('combo','category','configuration','HOTA','DetA','AssA','expressions','status')] for r in categories]),'',
+        '评测分组使用官方表达canonical raw_sentence（缺失时原sentence），匹配car/auto与pedestrian/person/gender词；全部862条唯一分类，映射和原文件SHA见source_query_categories.csv。不能只在改写后的句子里搜索car：automobiles/autos等改写会被错误归成行人。映射只在V2参照预测封存后的离线进程生成，从未进入模型；不读referring label值来调预测。保留该类表达的全部候选（不事后按预测类别删框），官方HOTA.combine_sequences聚合。只有4个验证视频，不做bootstrap。','',
+        '## 5. 结构统计（ORACLE，仅描述）','',table(['目标','轨迹0表达','轨迹1表达','轨迹≥2表达','空表达率','Present GT帧率均值','p50','状态'],
+            [[s.get(k) for k in ('target','zero','one','two_or_more','empty_query_fraction','GT_frame_fraction_present_mean','GT_frame_fraction_present_p50','status')] for s in structures]),'',
+        '轨迹正例：一对一IoU≥0.5匹配观测达到该物理预测轨迹≥50%；不是预测ID=GT ID。逐视频表达数、共享文本见structure_stats.csv；Dance17句跨25视频共享。Sports未知项留空，不能以现成图像替代官方McByte轨迹统计。','',
+        '## 6. 不确定性','',table(['比较','ΔHOTA','95%视频聚类CI'],[[k,v['delta_HOTA'],str(v['CI95'])] for k,v in bootstrap.items()]),'',
+        '每次2000抽样、seed0，整视频为聚类单位，复用官方TP加权HOTA充分统计且对COMBINED自检；不是对相关表达/帧独立重采样。KITTI仅4视频，点估计。Sports45视频未运行，不伪造CI。','',
+        '## 7. 成本','',f"有完整退出记录的GPU进程时间共{cost['GPU_process_hours']:.6f}小时；加上外部中断作业，已发生总成本落在[{cost['total_GPU_process_hours_lower_bound']:.6f}, {cost['total_GPU_process_hours_upper_bound']:.6f}] GPU进程小时。外部SIGTERM未提供精确退出时刻，使用已完成视频计算耗时为下界、发现退出时刻为上界，不能伪造精确成本。若C2仍运行，其未完成时长暂不计。每次job/区间详见costs.json。最多2物理GPU，入场按进程少/显存足够共享，不终止别人。训练、微调、MLLM调用均0。",'',
+        'C1七套官方CSV全部在425份预测逐行一致和原SHA核验后复用，未重跑健康推理/评测。新KITTI评测记录在official_results.json；完整detailed CSV、原始日志、margin、预测保留在服务器，Git存summary/清单/压缩日志，detailed CSV不重复装入压缩包，其绝对路径及SHA可由official_results.json定位校验。复用旧推理不是一个“零GPU成本独立系统”，继承成本未重测、不能冒报为0。','',
+        '## 8. GT审计、失败和恢复','',
+        '模型/GT-free解码的GT打开尝试为0；官方评价和oracle在独立进程、预测SHA封存后执行，未向模型写回标签、阈值或参数。纯文本runtime从旧白名单元数据导出，不打开原表达标签。下载的JSON只复制/解压/哈希，未作为模型GT输入。','',
+        '首次选错vllmedit环境缺yacs，两子进程6秒退出；切回原dfot（torch2.7.0+cu128/transformers5.4.0），配置回归通过，未修改共享环境。smoke后P1发布锁按要求阻止提前全量运行，远端盘点发布后恢复，0005完成单元未重跑。V2 smoke对旧分数最大重算差0.0010823保留记录，不覆盖旧分数；实际官方forward缓存误差≤2.1e-5且无符号翻转。','',
+        'C2首个full作业发生外部SIGTERM（143），没有模型traceback，来源未确定。原进程确认已退出，保留0005/0011/0013完成回执和0019的72个完整帧/43240个已有分数，仅恢复未完成帧；新增逐帧flush和独立进程会话，未改checkpoint/精度/阈值/采样，未停止他人进程。成本记录保留中断区间，不把失败计算免费抹去。','',
+        '所有新代码和run均独立；vendor已有mydataloader旧test补丁原样保留，本轮未改vendor代码；仅新增授权数据软链接。历史结果、源checkpoint和其他项目进程未覆盖。完整范围继续保留，当前仅因缺官方二进制资产停止C3–C6。','',
+        '恢复路径：results/runs/multidomain_generality_20261101；大文件SHA见margin_paths.json、all_prediction_files.csv.gz、official_results.json和downloads.json。手动资产到位后先strict/45视频/466序列/smoke门槛，再按同一PREREG继续；不生成替代tracker，不开展方法或训练。','',
+        '官方来源：[FlexHook](https://github.com/buptLwz/FlexHook)、[DATASET.md](https://github.com/buptLwz/FlexHook/blob/main/datasets/DATASET.md)、[LaMOT](https://github.com/Nathan-Li123/LaMOT)、[论文v5](https://arxiv.org/html/2503.07516v5)。']
+    (PUBLIC/'REPORT.md').write_text('\n'.join(lines)+'\n')
+    validation=PUBLIC/'validation.json'
+    if validation.exists() and json.loads(validation.read_text()).get('status')=='PASS_AUTHORIZED_C1_C2_ONLY':
+        with (PUBLIC/'REPORT.md').open('a') as h:h.write('\n针对性回归3项通过，compileall通过；14套主预测、11595份完整/历史/源参照文件索引及逐帧数量等价自检通过。详见validation.json。当前任务GPU进程已全部结束，不再启动新实验。\n')
+    atomic_json(PUBLIC/'completion.json',dict(status='PARTIAL_C1_C2_COMPLETE_OFFICIAL_ASSETS_BLOCK_C3_TO_C6' if 'C2' in completed else 'PARTIAL_C1_COMPLETE_C2_RUNNING',
+        completed_combinations=completed,full_scope=['C1','C2','C3','C4','C5','C6'],global_verdict='NOT_COMPUTED_INCOMPLETE_PREREGISTERED_SCOPE',
+        prereg_amendment=publication,gt_audit=gt,costs=cost['GPU_process_hours']))
+    print(json.dumps(dict(event='MULTIDOMAIN_REPORT_WRITTEN',completed=completed,rho=rho),ensure_ascii=False),flush=True)
+
+
+if __name__=='__main__':main()

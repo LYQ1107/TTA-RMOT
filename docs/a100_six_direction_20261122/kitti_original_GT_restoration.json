@@ -1,0 +1,44 @@
+{
+  "status": "PASS_ALL862_ORIGINAL_GT_BYTE_HASHES",
+  "barrier": {
+    "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/query_consistency/all_predictions_sealed_before_GT.json",
+    "sha256": "70ae177ab7ab291336d473007b1571ca5a1a160ee0fe820f3bd3c5a6a1d2b63f",
+    "outputs": 252
+  },
+  "evaluation_root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/offline_GT/kitti_original_hash_restore",
+  "original_metadata_sources": [
+    {
+      "path": "/data3/liuyeqiang/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0005/receipt.json",
+      "sha256": "ab2ed142a7a1098dd22ec7f67c444dc6e3a83fe1b59906926cfb1aef64dd79a8"
+    },
+    {
+      "path": "/data3/liuyeqiang/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0011/receipt.json",
+      "sha256": "ccf57cb6ec06b56caf0971f19000a4a81028d68227a51a149d5b492a28baeee1"
+    },
+    {
+      "path": "/data3/liuyeqiang/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0013/receipt.json",
+      "sha256": "b2cd3f5f43852515d2b8ac5358ae93bd6fae3fbad0355a3365c8d13930c9835d"
+    },
+    {
+      "path": "/data3/liuyeqiang/FlexHook-TTA/results/runs/track_ranking_20261102/targets/KITTI-V2/0019/receipt.json",
+      "sha256": "1c30ac2f5835f94f338c612950dc0cd62bedd067c4f08db0dcecf85ccbf0e978"
+    }
+  ],
+  "reference_writer_source": "/data3/liuyeqiang/nas/A800/data2/user/reference_repos/TempRMOT/inference.py",
+  "reference_writer_sha256": "7d37c6de00157547cdb775fc0f4c50215b53cbe87d838346ec9d4391fb80e1c1",
+  "recipe": {
+    "order": "frame_track",
+    "box_format": ".6f",
+    "tail": ",1,1,1",
+    "id_format": "d",
+    "line_ending": "\n"
+  },
+  "matching_original_files": 862,
+  "mismatched_files": 0,
+  "total_bytes": 27484330,
+  "no_prediction_or_metric_input": true,
+  "GT_used_only_in_isolated_post_seal_evaluation": true,
+  "NAS_and_historical_outputs_unchanged": true,
+  "restored_GT_not_to_Git": true,
+  "goal_status": "ACTIVE"
+}

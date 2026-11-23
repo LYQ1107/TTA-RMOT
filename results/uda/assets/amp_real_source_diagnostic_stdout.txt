@@ -1,0 +1,74 @@
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/szgx/anaconda3/envs/dfot/lib/python3.10/site-packages/torch/functional.py:554: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at /pytorch/aten/src/ATen/native/TensorShape.cpp:4314.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+=> merge config from /data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml
+[Warning] Fused window process have not been installed. Please refer to get_started.md for installation.
+Tutel has not been installed. To use Swin-MoE, please install Tutel; otherwise, just ignore this.
+load success
+Loading weights:   0%|          | 0/197 [00:00<?, ?it/s]Loading weights: 100%|██████████| 197/197 [00:00<00:00, 4726.88it/s]
+[1mRobertaModel LOAD REPORT[0m from: pretrained/roberta-base
+Key                             | Status     | 
+--------------------------------+------------+-
+lm_head.layer_norm.bias         | UNEXPECTED | 
+lm_head.dense.bias              | UNEXPECTED | 
+lm_head.bias                    | UNEXPECTED | 
+roberta.embeddings.position_ids | UNEXPECTED | 
+lm_head.dense.weight            | UNEXPECTED | 
+lm_head.layer_norm.weight       | UNEXPECTED | 
+pooler.dense.weight             | MISSING    | 
+pooler.dense.bias               | MISSING    | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[2026-10-26 18:04:39 pcd_tta_model](run_flexhook_dance_pcd_tta.py 132): INFO Strict source checkpoint load: <All keys matched successfully>
+/data2/user/FlexHook-TTA/vendor/FlexHook/models/swin_transformer_rope.py:44: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "failed_step": 2666,
+  "loaded_checkpoint_step": 2500,
+  "parameters_are_latest_valid_checkpoint_not_unsaved_failed_state": true,
+  "source_video": "0006",
+  "source_expression": "automobiles-of-a-light-color-that-move-faster-than-the-ego-vehicle",
+  "source_frame": 146,
+  "gpu": {
+    "physical_gpu": 5,
+    "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+    "name": "NVIDIA A800-SXM4-80GB",
+    "free_mib": 81154,
+    "total_mib": 81920,
+    "processes": 0
+  },
+  "results": [
+    {
+      "AMP": true,
+      "loss_scale": 131072.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": false
+    },
+    {
+      "AMP": true,
+      "loss_scale": 65536.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": true
+    },
+    {
+      "AMP": true,
+      "loss_scale": 32768.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": true
+    },
+    {
+      "AMP": false,
+      "loss_scale": 1.0,
+      "source_loss": 2.4719748497009277,
+      "all_gradients_finite": true
+    }
+  ],
+  "optimizer_updates": 0,
+  "target_GT_open_attempts": []
+}

@@ -1,0 +1,182 @@
+{
+  "status": "PREREGISTERED_FRAME_RELATION_TRANSPORT_V1",
+  "registered_unix": 1795344202.1546023,
+  "stage": "Before any relation-quality raw/count predictions or this study GT scoring; earlier DEV diagnostics and transfer/query-consistency results known",
+  "source_sha256": {
+    "scripts/a100_relation_transport.py": "33e70d7258baad1cfee291265bbdcf4a0f22292405e7e93aebef0fdb8cb0c12c",
+    "flex_uda/active/relational_transport.py": "2de093190983e680b35246ee19ef1edb64ccf9ffc5c2338403666c785c490736",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "tests/test_relational_transport.py": "9d531e8857c0a8b1e07f3c151fd7a311c3627c5052796f32e907098b74dc9961",
+    "tests/test_relational_features.py": "b9dcf22c039d68364a5b9f02869e61ab4d5ddeb9faa744d54d75425e3be7d6d9"
+  },
+  "pairs": {
+    "C1": [
+      "V2-best",
+      "Dance"
+    ],
+    "C2": [
+      "Dance-best",
+      "KITTI-V2"
+    ],
+    "C3": [
+      "V2-best",
+      "SportsMOT"
+    ],
+    "C4": [
+      "Dance-best",
+      "SportsMOT"
+    ],
+    "C5": [
+      "LaMOT-best",
+      "KITTI-V2"
+    ],
+    "C6": [
+      "LaMOT-best",
+      "Dance"
+    ]
+  },
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "methods": [
+    "COARSE_DS",
+    "COARSE_RGB",
+    "FRAME_KD_FINAL",
+    "FRAME_TEACHER_FILL",
+    "RELATION_FULL",
+    "RELATION_TIME_AVERAGE",
+    "RELATION_SHUFFLED",
+    "RGB_RELATION",
+    "UNCENTERED_RELATION"
+  ],
+  "primary": "RELATION_FULL",
+  "contrasts": {
+    "FULL_vs_COARSE_DS": [
+      "RELATION_FULL",
+      "COARSE_DS"
+    ],
+    "FULL_vs_COARSE_RGB": [
+      "RELATION_FULL",
+      "COARSE_RGB"
+    ],
+    "FULL_vs_FRAME_KD_FINAL": [
+      "RELATION_FULL",
+      "FRAME_KD_FINAL"
+    ],
+    "FULL_vs_FRAME_TEACHER_FILL": [
+      "RELATION_FULL",
+      "FRAME_TEACHER_FILL"
+    ],
+    "FULL_vs_RELATION_TIME_AVERAGE": [
+      "RELATION_FULL",
+      "RELATION_TIME_AVERAGE"
+    ],
+    "TIME_ALIGNMENT_vs_SHUFFLE": [
+      "RELATION_FULL",
+      "RELATION_SHUFFLED"
+    ],
+    "OBJECT_REFERENCE_CONDITIONAL": [
+      "RELATION_FULL",
+      "UNCENTERED_RELATION"
+    ],
+    "RELATION_ON_RAW_RGB": [
+      "RGB_RELATION",
+      "COARSE_RGB"
+    ],
+    "OLD_STRUCTURE_GIVEN_RELATION": [
+      "RELATION_FULL",
+      "RGB_RELATION"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_DS": [
+      "RELATION_FULL__AT_RELATION_FULL_COUNT",
+      "COARSE_DS__AT_RELATION_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_DS": [
+      "RELATION_FULL__AT_COARSE_DS_COUNT",
+      "COARSE_DS__AT_COARSE_DS_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_RGB": [
+      "RELATION_FULL__AT_RELATION_FULL_COUNT",
+      "COARSE_RGB__AT_RELATION_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_RGB": [
+      "RELATION_FULL__AT_COARSE_RGB_COUNT",
+      "COARSE_RGB__AT_COARSE_RGB_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_KD_FINAL": [
+      "RELATION_FULL__AT_RELATION_FULL_COUNT",
+      "FRAME_KD_FINAL__AT_RELATION_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_KD_FINAL": [
+      "RELATION_FULL__AT_FRAME_KD_FINAL_COUNT",
+      "FRAME_KD_FINAL__AT_FRAME_KD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_TEACHER_FILL": [
+      "RELATION_FULL__AT_RELATION_FULL_COUNT",
+      "FRAME_TEACHER_FILL__AT_RELATION_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_TEACHER_FILL": [
+      "RELATION_FULL__AT_FRAME_TEACHER_FILL_COUNT",
+      "FRAME_TEACHER_FILL__AT_FRAME_TEACHER_FILL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_RELATION_TIME_AVERAGE": [
+      "RELATION_FULL__AT_RELATION_FULL_COUNT",
+      "RELATION_TIME_AVERAGE__AT_RELATION_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_RELATION_TIME_AVERAGE": [
+      "RELATION_FULL__AT_RELATION_TIME_AVERAGE_COUNT",
+      "RELATION_TIME_AVERAGE__AT_RELATION_TIME_AVERAGE_COUNT"
+    ]
+  },
+  "conditions": 18,
+  "raw_outputs": 162,
+  "count_outputs": 288,
+  "total_outputs": 450,
+  "actual_neural_fits": 444,
+  "inspiration": "Within-object nuisance elimination, bounded-influence convex estimation, and transport across observed visual states. Not a claim that classical score calibration is our innovation.",
+  "model_assumption": "Teacher clipped logit within query/TrackID/view/video equals a stable additive object/channel effect plus a common nonnegative coefficient times query-oriented horizontal position plus noise. TrackID purity, query reference-frame interpretation, and additive specification can fail.",
+  "teacher_only_fit": {
+    "preparation": "relation_transport_teacher_prepare.json",
+    "mu": 0.01,
+    "Huber_delta": 1.0,
+    "coefficient": "single scalar per pair/video-prefix, never future videos",
+    "max_logit_shift": "ln(3)",
+    "same_fixed_semantic_gate_for_all_settings": true
+  },
+  "reference": "Mean query-oriented positions of paid unique single-frame observations, averaged within each view and then across views. Unqueried cells use the same uniformly spaced up-to-three observation indices as the frozen PCD source.",
+  "intervention": "logit(base_qt)+clip(beta*(oriented_position_qtf-reference_qt),-ln(3),ln(3)); beta=0 or unsupported query gives exact base fallback",
+  "query_gate": "Conservative literal absolute left/right; exclude motion, team names, orientation and reference-object expressions. 246 KITTI queries per setting eligible; other four settings currently no eligible query. No dataset-specific numerical rule.",
+  "ordinary_frame_KD": {
+    "features": "1087D: same 768 PCD+312 query-conditioned RGB+1 appearance cue, normalized box centre xy/width/height, oriented x, and same gate indicator",
+    "target": "Mean raw answers at each query/track/requested-frame after exact request dedup, per-view aggregation. All actually requested views including CLIP anchor; all queries, not just our gated subgroup.",
+    "offset": "Causally emitted ordinary RAW_RGB_FINAL from the same past/current video, never final future-trained checkpoint",
+    "fitting": "Same 64 GELU head/AdamW/confidence weights/min4000,max16000/teacher KL<=.005 stopping; final checkpoint only; do not use GT to select training recipe",
+    "inference": "All candidate observations, 4096-row GPU batches; exact all-observation prefix feature moments without giant feature expansion"
+  },
+  "ablations": {
+    "time_average": "Average new per-frame probabilities on each track, retaining its base-rate change but eliminating temporal alignment",
+    "shuffle": "Deterministic nonzero circular per-track permutation, preserving every per-track probability value",
+    "uncentered": "Same beta and base, reference fixed .5 rather than observed object states",
+    "raw_RGB": "Same relational transport on ordinary RGB head; isolates conditional structure and interaction"
+  },
+  "quantity_control": "Both count donors; equal counts per query/frame; rank on per-observation scores, not old coarse scores; prior then supplied TrackID break ties; CountSelf must exactly reproduce official files",
+  "GT_used_in_adaptation": false,
+  "GT_rule": "All450 raw/count outputs sealed before this study official target GT evaluator. Core/supplements have their own independent output barriers.",
+  "new_teacher_encoder_calls": 0,
+  "quality_replay_not_real_deployment_cost": true,
+  "only_physical_GPU": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "scheduling": "Wait for all18 flat-RGB ordinary GPU conditions to finish, then internal memory preflight and preserve valid per-video checkpoints",
+  "all_data_development": true,
+  "independent_blind_validation": false,
+  "goal_status": "ACTIVE",
+  "acceptance": "Research candidate only. Requires wins against adequately fitted ordinary frame and coarse baselines, temporal/conditional contribution and CountMatched; no guarantee of positive HOTA; no posthoc higher control promotion.",
+  "tests": "8 mathematical/information-path checks passed; real C1/C2/C4 frame-label feature construction passed with zero GT reads and no GPU"
+}

@@ -1,0 +1,279 @@
+{
+  "status": "SEALED_FIXED_PROBE",
+  "protocol": "DEVELOPMENT_TEACHER_PROBE",
+  "method": "YES_FULL",
+  "condition": "T0",
+  "manifest_sha256": "c09a161246ce2635f1307ec0e13d6605f026b2f0a3280cb5a68efc2775961ed9",
+  "samples": 31200,
+  "planned_manifest_samples": 31200,
+  "videos": 40,
+  "resumed_completed_pairs": 0,
+  "newly_completed_pairs": 7800,
+  "video_queries": 1560,
+  "config_sha256": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+  "prompts_sha256": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2",
+  "protocol_sha256": "6033623cba07c2e37c9f17aa7a176a65d69d36318ff8a5e79606d4a16019db4e",
+  "predictions_sha256": "b40d8d641122ad6487ee60d1eceaa0416eae796ede743ae54fd8b13ecdffd0f7",
+  "budget": {
+    "actual_model_forward_batches": 3900,
+    "actual_candidate_prompt_forwards": 31196,
+    "actual_images": 31196,
+    "actual_visual_tokens": 3119600,
+    "actual_language_tokens": 1809376,
+    "actual_forward_seconds": 621.2746908294503,
+    "cache_hits": 31204,
+    "peak_allocated_bytes": 4677048320
+  },
+  "worker_elapsed_seconds": 763.8759371968918,
+  "inference_and_final_hash_seconds": 719.8638784820214,
+  "experiment_commit": "109dde07debe14356d349529884df813c8bcfb65",
+  "implementation_sha256": {
+    "flex_uda/teacher/semantic_parser.py": "e14bafb7e155b39b518e5d39fc396114a252d28ea32f0f08ec7354e91a899533",
+    "flex_uda/teacher/psr_supervision.py": "7460c4110cf51910fb6a6c286388408bb1f633a2042960f8256488b0b59371a8",
+    "flex_uda/teacher/mllm_pseudo_dataset.py": "967fff4fa3f8ce3b44344e1891bf3376b79f2d529572d8f0967e1cc5c245e375",
+    "flex_uda/teacher/teacher_probe.py": "a0d9994209add93f5b2df58147d3cf61dacffac9f0820e42b6055cd2500c96b3",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "flex_uda/teacher/evidence_verifier.py": "02e5aee6a6b91ced3c8bd9e6b9587fa4ab277d451c7bb39787ce6bad2d8e6997",
+    "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+    "flex_uda/teacher/visual_input_builder.py": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+    "flex_uda/teacher/psr_dataset.py": "bfab70a48270e6f0b97c6e077fc606b2e92637797a857fac7b98209fcd28c66e",
+    "flex_uda/teacher/__init__.py": "bd4ef41aa2d7f7bf909bfd1c5b8df9171031690b03ecad7576fc7b40c76dd8fe",
+    "flex_uda/teacher/budget_meter.py": "79d70f419c904512698b9c9f9a3e93569e5feaa67d9631ca1307872a40ad1024",
+    "flex_uda/teacher/teacher_types.py": "c785211f49b261fe8c89a88a1c04237ff207b896d72c6b0d7009e59b2253de53",
+    "flex_uda/teacher/isolation.py": "00b4ee2f6000b98a935c8a82ec38eb4306139419197d126a8c5071f542957000",
+    "flex_uda/teacher/psr_sampler.py": "5113de1a63161bd53ca1cb3fc7b49ff3629a64ddc7cfe88ffa053b6c9877711b",
+    "flex_uda/teacher/gt_blind_sampler.py": "f465e19e555e41e5c962eab3b9f095e18f1788c6a2a3d2910d3a9bb18c7dfb8a",
+    "scripts/run_teacher_probe.py": "0b61c92c9229f5824ab55f81e8ed66f41fdc71deeaef55b204d0f7882be6c44a"
+  },
+  "gpu_uuid": [
+    "44f62835-4095-23ec-d3dd-5af16a00705c",
+    "c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+    "0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+    "f35654b3-bbf5-7303-cfcb-9bd5d3e16e69"
+  ],
+  "gpu_admission": {
+    "gpus_csv": "0, GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 81920, 62165\n1, GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 81920, 65119\n2, GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 81920, 62157\n3, GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 81920, 65003\n4, GPU-44f62835-4095-23ec-d3dd-5af16a00705c, 81920, 81151\n5, GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 81920, 81151\n6, GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 81920, 64971\n7, GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 81920, 81151\n",
+    "compute_processes_csv": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 3170763, 18940\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3924761, 16026\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 3170764, 18948\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 1896420, 16142\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 2676408, 16174\n",
+    "selected_physical_gpu": "4",
+    "selected_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+    "free_mib": 81151.0,
+    "minimum_required_mib": 12288.0
+  },
+  "physical_gpu": [
+    "4",
+    "5",
+    "7",
+    "1"
+  ],
+  "numeric_dtype": "bfloat16",
+  "quantization": null,
+  "student_updates": 0,
+  "model_load_seconds": 38.630477843340486,
+  "frozen": {
+    "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "frozen_parameters_unchanged": true,
+    "optimizer_updates": 0,
+    "forward_batches": 3900,
+    "model_load_and_initial_hash_seconds": 38.630477843340486
+  },
+  "GT_access_audit": {
+    "target_GT_open_attempts": [],
+    "target_GT_reads": 0
+  },
+  "isolation": {
+    "kernel_read_whitelist": true,
+    "kernel_stage_write_denied": true,
+    "landlock_abi": 1,
+    "per_shard": [
+      {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/pseudo/inputs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard00/YES_FULL",
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/pseudo/inputs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard01/YES_FULL",
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/pseudo/inputs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard02/YES_FULL",
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      },
+      {
+        "landlock_abi": 1,
+        "kernel_read_whitelist": true,
+        "kernel_stage_write_denied": true,
+        "read_roots": [
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/pseudo/inputs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+          "/data2/user/FlexHook-TTA/flex_uda",
+          "/data2/user/FlexHook-TTA/flex_tta",
+          "/data2/user/FlexHook-TTA/scripts",
+          "/data2/user/FlexHook-TTA/configs",
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env",
+          "/home/szgx/anaconda3/envs/vllmedit",
+          "/usr",
+          "/usr/lib",
+          "/usr/lib64",
+          "/usr/bin",
+          "/etc",
+          "/proc",
+          "/sys",
+          "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard03/YES_FULL",
+          "/data2/user/TTA-RMOT-assets/train2val/20261031/cache",
+          "/dev",
+          "/tmp"
+        ],
+        "handled_filesystem_access": 8191
+      }
+    ]
+  },
+  "reliability_rules": {
+    "positive_threshold": 0.9,
+    "negative_threshold": 0.1,
+    "visual_dependence_min": 0.03,
+    "probability_spread_max": 0.2,
+    "status": "PRE_REGISTERED_FUNCTIONALITY_DEFAULT_NOT_SOURCE_CALIBRATED_NOT_P2_READY"
+  },
+  "preprocessing_cache": {
+    "mode": "READONLY_RGB_PATCH_SHA_LRU_V2",
+    "frame_decodes": 100,
+    "frame_hits": 680,
+    "patch_hits": 14820,
+    "patch_builds": 780,
+    "full_frame_mean_computes": 0,
+    "decoded_frame_limit": 128,
+    "resized_patch_limit": 1024,
+    "live_decoded_RGB_bytes": 518400000,
+    "live_patch_RGB_bytes": 239616000
+  },
+  "persistent_cache_reopen_check": true,
+  "cache": {
+    "complete_raw_responses": 27128,
+    "pending_leases": 8,
+    "path": "/data2/user/TTA-RMOT-assets/train2val/20261031/cache/raw.sqlite"
+  },
+  "worker_time_interpretation": "sum of four allocated worker elapsed times, NOT scheduler wall time",
+  "source_worker_receipts": [
+    {
+      "receipt": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard00/YES_FULL/receipt.json",
+      "receipt_sha256": "87f22f862f8b6c6f838cb863365e80c975d277845811745446fbbf14d98eb348",
+      "manifest": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard00/manifest.jsonl",
+      "manifest_sha256": "b474b624400b09cebf8e51bbfca9d8cbd41bf1600b1aac85d3f58eda1cfab33f",
+      "predictions": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard00/YES_FULL/teacher_outputs.jsonl",
+      "predictions_sha256": "62e9999a13ee11d95b52effab0dd22244028fb21bd5047baa387b520e03df69a",
+      "samples": 7800,
+      "physical_gpu": "4",
+      "worker_elapsed_seconds": 162.22298598499037
+    },
+    {
+      "receipt": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard01/YES_FULL/receipt.json",
+      "receipt_sha256": "1301d70d112cd3b3357c6d39bf2fcd0368643eb38037a563ca2fd17fbb5b4abc",
+      "manifest": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard01/manifest.jsonl",
+      "manifest_sha256": "444ccc92e2f8e60c9fd37bb2cf9973c8f40156db7e2b55cdbd28d5663e52c33b",
+      "predictions": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard01/YES_FULL/teacher_outputs.jsonl",
+      "predictions_sha256": "80c0cdbcbe6aa8bf5043f4f08dbb1a11203148da63559dde115c32a51ea68bbc",
+      "samples": 7800,
+      "physical_gpu": "5",
+      "worker_elapsed_seconds": 142.79691802500747
+    },
+    {
+      "receipt": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard02/YES_FULL/receipt.json",
+      "receipt_sha256": "074d8faf6f1f0ddc6d26506803f502d02fcb12311c54dc79bfcfeac24fcfd2e6",
+      "manifest": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard02/manifest.jsonl",
+      "manifest_sha256": "c1223a4a73562c78ccf14bb8bba0eb11e414abc01693ea2ed8fa4dfd670cfdfc",
+      "predictions": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard02/YES_FULL/teacher_outputs.jsonl",
+      "predictions_sha256": "8c1155c7571d0a7d929802881123c648f6d53aa60ad19980b0fe53e7cd57b062",
+      "samples": 7800,
+      "physical_gpu": "7",
+      "worker_elapsed_seconds": 155.6846996638924
+    },
+    {
+      "receipt": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard03/YES_FULL/receipt.json",
+      "receipt_sha256": "965e90d61b04015aa60f564088ddb484b4e2cf08c7d3915a5875a799d2be75a3",
+      "manifest": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard03/manifest.jsonl",
+      "manifest_sha256": "7afec2006d88f95af2edc766c16491267e93de3c5669c13182caf9d9e8f6669f",
+      "predictions": "/data2/user/FlexHook-TTA/results/runs/train2val_20261031/teacher_full/shards/shard03/YES_FULL/teacher_outputs.jsonl",
+      "predictions_sha256": "7fe6c057eb0cf349c1eaad6cecf71420dbeec7399bbe01175797a51722b7b750",
+      "samples": 7800,
+      "physical_gpu": "1",
+      "worker_elapsed_seconds": 303.1713335230015
+    }
+  ],
+  "whole_video_shards": true,
+  "source_commits": [
+    "109dde07debe14356d349529884df813c8bcfb65"
+  ]
+}

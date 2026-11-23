@@ -1,0 +1,45 @@
+{
+  "status": "PASS_ALL1048_NUMBERS_TYPES_AND_RECORDS_EXACT",
+  "studies": [
+    {
+      "stem": "semantic_colour",
+      "all_resolved_records_exact": 258,
+      "previous_bytes": 465282,
+      "current_bytes": 363607,
+      "saved_bytes": 101675
+    },
+    {
+      "stem": "joint_visual",
+      "all_resolved_records_exact": 282,
+      "previous_bytes": 349585,
+      "current_bytes": 274114,
+      "saved_bytes": 75471
+    },
+    {
+      "stem": "appearance_cold",
+      "all_resolved_records_exact": 4,
+      "previous_bytes": 21536,
+      "current_bytes": 16737,
+      "saved_bytes": 4799
+    },
+    {
+      "stem": "direct_teacher",
+      "all_resolved_records_exact": 228,
+      "previous_bytes": 261244,
+      "current_bytes": 208885,
+      "saved_bytes": 52359
+    },
+    {
+      "stem": "direct_teacher_pcd",
+      "all_resolved_records_exact": 276,
+      "previous_bytes": 263401,
+      "current_bytes": 211454,
+      "saved_bytes": 51947
+    }
+  ],
+  "lossless_IEEE754_float64": true,
+  "no_float32_cast_or_rounding": true,
+  "no_prediction_metric_seed_or_method_removed": true,
+  "payload": "OnlyaggregateofficialHOTA numerator/denominator counts, not checkpoints/targetimages/neuralfeatures/QA",
+  "decoder": "Base64+zlib UTF8JSONarchive; rows taggedfloat64_le_shuffled decode via8byte unshuffle andlittleendianfloat64;plain/referenceformatsstillwork"
+}

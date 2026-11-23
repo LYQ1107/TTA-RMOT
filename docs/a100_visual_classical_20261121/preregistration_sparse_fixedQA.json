@@ -1,0 +1,20 @@
+{
+  "scope": "C4 sparse source prior/gate intervention, fixed actual full-stream QA",
+  "seed": 0,
+  "teacher": "identical actually generated full-stream3508 probabilities, prefix-only",
+  "features": "same fresh FULL reference PCD/RGB and prefix channel statistics on both sides, no future videos",
+  "intervention": "source fraction only from truly sparse inference; source presence linearly interpolated from sparse frames",
+  "actual_sparse_feature_numeric_difference_recorded": true,
+  "actual_soft_bounded_soft_hard_training": true,
+  "checkpoints": [
+    "400",
+    "final"
+  ],
+  "graph_constants_unchanged": true,
+  "no_target_GT_in_generation": true,
+  "no_new_teacher_calls": true,
+  "no_cold_deployment_cost_claim": true,
+  "all_eight_methods_retained": true,
+  "no_GT_parameter_sweep": true,
+  "physical_GPU": 2
+}

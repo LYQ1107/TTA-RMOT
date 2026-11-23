@@ -1,0 +1,19 @@
+{
+  "status": "FINAL_CPU_REGRESSIONS_PASSED",
+  "passed": 49,
+  "seconds": 10.60,
+  "original_runtime_and_report_tests": 46,
+  "additional_FP_accounting_tests": 3,
+  "command": "CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python -m pytest -q tests/test_active_v6.py tests/test_active_v6_report.py tests/test_active_v6_close.py tests/test_map_calibration.py tests/test_presence_active.py tests/test_active_teacher_concurrency.py tests/test_active_execution.py tests/test_active_presence_decisions.py tests/test_active_archive.py",
+  "compileall_passed": true,
+  "git_diff_check_passed": true,
+  "runtime_numerical_code_unchanged_since_compatibility_fix": true,
+  "v5_vendor_teacher_protected_paths_unchanged": true,
+  "postqueue_validator_command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH='/data2/user/FlexHook-TTA/compat:/data2/user/FlexHook-TTA:/data2/user/TTA-RMOT-assets/flexhook/pydeps' PRESENCE_EXECUTION_MANIFEST='/data2/user/FlexHook-TTA/results/presence_active/redesign_v6/execution.json' /home/szgx/anaconda3/envs/dfot/bin/python scripts/active_v6_validate.py",
+  "postqueue_validator_exit_code": 0,
+  "postqueue_validator_acceptance_unchanged": true,
+  "postqueue_close_command": "CUDA_VISIBLE_DEVICES='' PYTHONPATH='/data2/user/FlexHook-TTA/compat:/data2/user/FlexHook-TTA:/data2/user/TTA-RMOT-assets/flexhook/pydeps' PRESENCE_EXECUTION_MANIFEST='/data2/user/FlexHook-TTA/results/presence_active/redesign_v6/execution.json' /home/szgx/anaconda3/envs/dfot/bin/python scripts/active_v6_close.py",
+  "postqueue_close_exit_code": 0,
+  "raw_GT_or_GPU_or_teacher_calls_by_checks": 0,
+  "all_five_evaluations_and_original_manager_exit_code": 0
+}

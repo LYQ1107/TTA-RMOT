@@ -1,0 +1,51 @@
+{
+  "status": "REGISTERED_MATCHED_JOINT_BINARY_COHORT_NO_GT",
+  "registered_unix": 1795431226.2865098,
+  "source_sha256": {
+    "scripts/a100_joint_observation_collect.py": "29861e6f4cd236150be3efb81e4df22defb8bd520f9fef94a60f0aa0ec07ff6a",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2"
+  },
+  "worker_shards": 2,
+  "allowed_GPU": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "only_allocate_if_memory_MiB_below": 512,
+  "policies": [
+    "DESIGN",
+    "UNIFORM"
+  ],
+  "teacher_modes": [
+    "JOINT_AB",
+    "JOINT_BA",
+    "SHARED_A",
+    "SHARED_B"
+  ],
+  "singleton_modes": [
+    "SINGLE"
+  ],
+  "neural_seeds": [],
+  "teacher_pool": "Up to three uniform real observations excluding original context anchors; insufficient disjoint rows filled by farthest temporal coverage using actual observations. No invented observations.",
+  "paired_time_selection": "Nearest new-pool observation to original paid slot; DESIGN partner maximizes equal-block normalized frozen-PCD/colour/geometry contrast, UNIFORM uses cyclic partner; prefer unused unordered pairs.",
+  "per_query_budget": "Equal minimum of the two input-only unique bundle counts; no teacher responses, labels or output predictions used to set quotas. Actual images, forwards and wall must be reported separately.",
+  "teacher_prompt": "All original query text; group last-moment scope; exact actual per-image times and normalized target center/size; same shared-context prefix for joint and binary controls.",
+  "source_features_and_dense_RGB_prepaid": true,
+  "partial_context_membership_fallbacks_reported": true,
+  "all_current_and_future_baselines_refit_on_new_inputs": true,
+  "no_old_quality_with_new_cost": true,
+  "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "raw_data_not_to_Git": true,
+  "no_adaptation_or_HOTA_or_GT": true,
+  "shared_union_not_method_deployment_cost": true,
+  "goal_status": "ACTIVE",
+  "input_execution_repair": "joint_observation_collection_preparation_repair.json"
+}

@@ -1,0 +1,5 @@
+Command: python -m compileall -q scripts/diag_attrib_audit.py scripts/diag_attrib_official_margin.py
+Observed shell output: /bin/bash: python: command not found
+The GPU command in the same shell used the correct /home/szgx/anaconda3/envs/dfot/bin/python independently.
+Recovery: reran compileall with /home/szgx/anaconda3/envs/dfot/bin/python, successfully; three targeted pytest checks passed.
+No model, threshold, checkpoint or numerical definition changed by this interpreter-path correction.

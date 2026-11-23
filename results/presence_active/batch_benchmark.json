@@ -1,0 +1,61 @@
+{
+  "status": "THREE_REAL_TARGETS_ALL_SHAPES_PASS",
+  "records": [
+    {
+      "target": "KITTI-V2",
+      "source": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/batch_benchmark/KITTI-V2/1793612209222152218/benchmark.json",
+      "sha256": "57266634920805919dcf26b55ef26d0827673179e386adef001cb5c27d82d9f4",
+      "checked_shapes": 24,
+      "fixed_frames": [
+        0,
+        148,
+        296
+      ],
+      "maximum_margin_error": 0.0005518794059753418,
+      "sign_flips": 0,
+      "decode_seconds_batch8": 2.738411995815113,
+      "decode_seconds_batch64": 0.79202941339463,
+      "decode_ratio": 3.4574625001340635,
+      "peak_allocated_bytes": 1312803840
+    },
+    {
+      "target": "Dance",
+      "source": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/batch_benchmark/Dance/1793612353821590054/benchmark.json",
+      "sha256": "515c35d251e0c5f4f19d8917309d13b3507cffa12c0a3866c9a1cb8684fa9279",
+      "checked_shapes": 24,
+      "fixed_frames": [
+        1,
+        602,
+        1203
+      ],
+      "maximum_margin_error": 0.00022792816162109375,
+      "sign_flips": 0,
+      "decode_seconds_batch8": 0.5313943501096219,
+      "decode_seconds_batch64": 0.17459927825257182,
+      "decode_ratio": 3.043508286104811,
+      "peak_allocated_bytes": 1300156416
+    },
+    {
+      "target": "SportsMOT",
+      "source": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/batch_benchmark/SportsMOT/1793612369541319192/benchmark.json",
+      "sha256": "7eeac7f2bf4dd3e3f49ef82c5419068ce2043088b84dd44a273ee28ffc9ebdeb",
+      "checked_shapes": 24,
+      "fixed_frames": [
+        1,
+        582,
+        1162
+      ],
+      "maximum_margin_error": 6.67572021484375e-06,
+      "sign_flips": 0,
+      "decode_seconds_batch8": 0.5644455652218312,
+      "decode_seconds_batch64": 0.35339287971146405,
+      "decode_ratio": 1.597218273561952,
+      "peak_allocated_bytes": 4168904704
+    }
+  ],
+  "selected_candidate_batch": 8,
+  "selected_query_batch": 64,
+  "caveat": "one pass on shared GPU, includes shape/kernel warmup; decode ratio is not end-to-end speedup",
+  "existing_healthy_exports_restarted": false,
+  "method_hyperparameters_changed": false
+}

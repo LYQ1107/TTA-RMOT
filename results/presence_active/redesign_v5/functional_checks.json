@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "tests_passed": 28,
+  "command": "python -m pytest -q tests/test_presence_cardinality.py tests/test_presence_residual.py tests/test_presence_active.py",
+  "compileall": "PASS",
+  "new_checks": [
+    "exact expected set-IoU for every prefix agrees with all binary label-set enumeration",
+    "utility is not normalized or misrepresented as a cardinality probability",
+    "empty-set utility, padding and zero-candidate frames",
+    "decision differs from cardinality mode without any coded native floor"
+  ],
+  "calibration_checkpoints": "exact v4 source-only checkpoints, no new fit",
+  "new_FlexHook_teacher_GPU_calls": 0,
+  "does_not_establish_scientific_success": true
+}

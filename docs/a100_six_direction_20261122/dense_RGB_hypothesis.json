@@ -1,0 +1,17 @@
+{
+  "study": "Shared actual per-frame RGB observations for learned state selection",
+  "problem": "Three-anchor descriptors can miss intermediate appearance changes. Per-frame ordinary controls must not be deprived of image evidence the proposed selector uses.",
+  "intervention": "Extract the existing three-part104binHSV descriptor for every provided candidate observation, once per target video; reuse across both source checkpoints and every ordinary/proposed learner.",
+  "fixed_design": {
+    "target_videos": 74,
+    "CPU_workers": 4,
+    "changed_IDs_or_boxes": 0,
+    "new_neural_calls": 0,
+    "teacher_QA_inputs": 0
+  },
+  "verification": "At all6400 earlier anchor observations, descriptors must be byteequal to the completed image-only audit; no GT semantic labels or source checkpoint selection.",
+  "no_innovation_or_HOTA_claim": "This is shared perception input preparation. Later learning comparisons must use the same full/sparse neural features and RGB inputs.",
+  "stronger_baseline_needed": "Check dense per-frame ordinary teacher heads with zero fixed source-logit residual and adequate fitting; historical frameKD used a fixed source residual. Reuse full frozen PCD on NAS consistently rather than assuming nearest-anchor inference is the final task.",
+  "costs": "Measure actual image decoding and histogram work; shared prep wall is not per-method cold deployment.",
+  "goal_status": "ACTIVE"
+}

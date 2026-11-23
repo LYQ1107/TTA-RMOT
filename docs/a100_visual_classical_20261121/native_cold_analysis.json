@@ -1,0 +1,931 @@
+{
+  "status": "FOUR_ACTUAL_NATIVE_DIRECT_COLD_ANALYZED_ROOT_REVIEW_REQUIRED",
+  "conditions": {
+    "C4_seed0": {
+      "raw_HOTA": {
+        "KD": 66.96447023210868,
+        "JOINT": 67.66131319317367
+      },
+      "comparisons": {
+        "JOINT_vs_KD": {
+          "delta_HOTA": 0.6968429610649878,
+          "per_neural_seed_delta": [
+            0.6968429610649878
+          ],
+          "original_parent_groups": 13,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            0.2577088699376581,
+            1.1888127828723873
+          ]
+        }
+      }
+    },
+    "C1_seed0": {
+      "raw_HOTA": {
+        "KD": 31.658042039064572,
+        "JOINT": 35.696179810121045
+      },
+      "comparisons": {
+        "JOINT_vs_KD": {
+          "delta_HOTA": 4.038137771056473,
+          "per_neural_seed_delta": [
+            4.038137771056473
+          ],
+          "original_parent_groups": 25,
+          "samples": 10000,
+          "seed": 0,
+          "fixed_neural_seeds_parent_CI95": [
+            1.1394390511117103,
+            7.6247782244620925
+          ]
+        }
+      }
+    }
+  },
+  "repeated": {},
+  "runs": {
+    "C4_KD": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "method": "CLIP_MEAN",
+      "protocol": {
+        "name": "C4_pcd768_direct_fast_kd_single_rho0p1_20261122",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER 0.1 query-balanced, three uniform observations and max-area anchor",
+        "teacher_fraction": 0.1,
+        "query_graph_scope": "extended",
+        "head_query_scope": "pcd",
+        "head_source_logit": "zero",
+        "task_protocol": "PRESUPPOSED",
+        "set_decoder": "original",
+        "head_feature_dimension": 768,
+        "graph_metric": "combined",
+        "graph_prior": "constant",
+        "acquisition_geometry": "Frozen query-conditioned PCD only, unchanged by head colour or set-decoder controls",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_MEAN"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ],
+        "RGB_statistics_computed": false,
+        "unused_RGB_statistics_skipped": true,
+        "appearance_regularization": false,
+        "appearance_rule": null
+      },
+      "worker": {
+        "exit_code": 0,
+        "actual_worker_process_wall_seconds": 3761.5947807449847,
+        "physical_GPU": 0,
+        "methods": [
+          "CLIP_MEAN"
+        ],
+        "actual_two_branch_process": false,
+        "independent_single_arm_processes": true,
+        "all_startup_and_inference_included": true,
+        "official_GT_evaluation_excluded": true,
+        "OS_NAS_shared_background_jobs_disclosed": true,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "actual_worker_process_wall_seconds": 3761.5947807449847,
+            "physical_GPU": 0,
+            "methods": [
+              "CLIP_MEAN"
+            ],
+            "actual_two_branch_process": false,
+            "independent_single_arm_processes": true,
+            "all_startup_and_inference_included": true,
+            "official_GT_evaluation_excluded": true,
+            "OS_NAS_shared_background_jobs_disclosed": true
+          }
+        ],
+        "failed_attempt_wall_seconds": 0
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "source_model": "Dance-best",
+        "target": "SportsMOT",
+        "model_load_seconds": 543.9909463439835,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 1160,
+        "new_calls": 1160,
+        "cache_hits": 0,
+        "forward_seconds": 30.062442106427625,
+        "equivalent_forward_seconds": 30.062442106427607,
+        "batches": 164,
+        "cache": {
+          "complete_raw_responses": 1160,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_fast_kd_single_rho0p1_20261122/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 602.4694664230337,
+        "peak_allocated_bytes": 6281029120
+      },
+      "cost_by_method": {
+        "CLIP_MEAN": {
+          "common_wall_seconds": 3195.748374092742,
+          "own_head_training_seconds": 561.7292657461949,
+          "own_postprocess_and_output_seconds": 2.053469375008717,
+          "shared_common_plus_own_branch_seconds": 3759.5311092139455
+        }
+      },
+      "phase_seconds": {
+        "imports_metadata_and_recovery_setup": 16.55188060202636,
+        "student_load_and_integrity_check": 545.2092358539812,
+        "teacher_load_and_initial_integrity_check": 605.7183759529144,
+        "real_sparse_frame_student_forward_and_initial_head": 1782.731724718702,
+        "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.637874653213657,
+        "real_teacher_service_including_image_IO": 209.06906987458933,
+        "teacher_final_frozen_weight_audit": 15.236521547078155
+      },
+      "teacher_fit_audit": {
+        "fitted_videos": 45,
+        "maximum_teacher_KL": 0.0006763190031051636,
+        "maximum_steps": 4000,
+        "videos_exceeding_registered_KL_tolerance": 0
+      },
+      "actual_head_fit_and_save_seconds": 561.7292657461949,
+      "actual_all_method_postprocess_and_output_seconds": 1.2953662399668247,
+      "appearance_regularization_CPU_seconds": 0,
+      "appearance_active_nodes": 0,
+      "decoder_frames": 2324,
+      "backbone_image_forwards": 7419,
+      "provided_official_proposals_boundary": true,
+      "handcrafted_RGB_statistics_computed": false,
+      "upstream_detector_and_tracker_generation_timed": false
+    },
+    "C4_JOINT": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_joint_single_rho0p1_20261122",
+      "method": "CLIP_MEAN_COHORT_CAL",
+      "protocol": {
+        "name": "C4_pcd768_direct_joint_single_rho0p1_20261122",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER 0.1 query-balanced, three uniform observations and max-area anchor",
+        "teacher_fraction": 0.1,
+        "query_graph_scope": "extended",
+        "head_query_scope": "pcd",
+        "head_source_logit": "zero",
+        "task_protocol": "PRESUPPOSED",
+        "set_decoder": "original",
+        "head_feature_dimension": 768,
+        "graph_metric": "combined",
+        "graph_prior": "constant",
+        "acquisition_geometry": "Frozen query-conditioned PCD only, unchanged by head colour or set-decoder controls",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_MEAN_COHORT_CAL"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ],
+        "appearance_regularization": true,
+        "appearance_rule": "fixed teacher-only TrackID-crossfit PAVA, ln3 bounded odds, after graph if requested"
+      },
+      "worker": {
+        "exit_code": 0,
+        "actual_worker_process_wall_seconds": 4437.920721831964,
+        "physical_GPU": 1,
+        "methods": [
+          "CLIP_MEAN_COHORT_CAL"
+        ],
+        "actual_two_branch_process": false,
+        "independent_single_arm_processes": true,
+        "all_startup_and_inference_included": true,
+        "official_GT_evaluation_excluded": true,
+        "OS_NAS_shared_background_jobs_disclosed": true,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "actual_worker_process_wall_seconds": 4437.920721831964,
+            "physical_GPU": 1,
+            "methods": [
+              "CLIP_MEAN_COHORT_CAL"
+            ],
+            "actual_two_branch_process": false,
+            "independent_single_arm_processes": true,
+            "all_startup_and_inference_included": true,
+            "official_GT_evaluation_excluded": true,
+            "OS_NAS_shared_background_jobs_disclosed": true
+          }
+        ],
+        "failed_attempt_wall_seconds": 0
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+        "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+        "strict_load": "<All keys matched successfully>",
+        "source_model": "Dance-best",
+        "target": "SportsMOT",
+        "model_load_seconds": 483.95630828500725,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 1160,
+        "new_calls": 1160,
+        "cache_hits": 0,
+        "forward_seconds": 31.914905174286105,
+        "equivalent_forward_seconds": 31.91490517428614,
+        "batches": 164,
+        "cache": {
+          "complete_raw_responses": 1160,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_joint_single_rho0p1_20261122/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 568.7294973109383,
+        "peak_allocated_bytes": 6279180800
+      },
+      "cost_by_method": {
+        "CLIP_MEAN_COHORT_CAL": {
+          "common_wall_seconds": 3856.2554367798148,
+          "own_head_training_seconds": 573.4362658523023,
+          "own_postprocess_and_output_seconds": 5.803035591845401,
+          "shared_common_plus_own_branch_seconds": 4435.4947382239625
+        }
+      },
+      "phase_seconds": {
+        "imports_metadata_and_recovery_setup": 15.127868853043765,
+        "student_load_and_integrity_check": 485.11913748900406,
+        "teacher_load_and_initial_integrity_check": 571.9861385279801,
+        "real_sparse_frame_student_forward_and_initial_head": 2123.0993502498604,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 408.5118755046278,
+        "real_teacher_service_including_image_IO": 225.0256312363781,
+        "teacher_final_frozen_weight_audit": 16.245746145024896
+      },
+      "teacher_fit_audit": {
+        "fitted_videos": 45,
+        "maximum_teacher_KL": 0.0006763190031051636,
+        "maximum_steps": 4000,
+        "videos_exceeding_registered_KL_tolerance": 0
+      },
+      "actual_head_fit_and_save_seconds": 573.4362658523023,
+      "actual_all_method_postprocess_and_output_seconds": 4.99209488381166,
+      "appearance_regularization_CPU_seconds": 0.954193293931894,
+      "appearance_active_nodes": 5329,
+      "decoder_frames": 2324,
+      "backbone_image_forwards": 7419,
+      "provided_official_proposals_boundary": true,
+      "handcrafted_RGB_statistics_computed": true,
+      "upstream_detector_and_tracker_generation_timed": false
+    },
+    "C1_KD": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "method": "CLIP_MEAN",
+      "protocol": {
+        "name": "C1_pcd768_direct_fast_kd_single_rho0p1_20261122",
+        "pair": "C1",
+        "videos": 25,
+        "queries": 425,
+        "seed": 0,
+        "source": "frozen official V2-best",
+        "acquisition": "COVER 0.1 query-balanced, three uniform observations and max-area anchor",
+        "teacher_fraction": 0.1,
+        "query_graph_scope": "extended",
+        "head_query_scope": "pcd",
+        "head_source_logit": "zero",
+        "task_protocol": "CHECKLIST",
+        "set_decoder": "original",
+        "head_feature_dimension": 768,
+        "graph_metric": "combined",
+        "graph_prior": "constant",
+        "acquisition_geometry": "Frozen query-conditioned PCD only, unchanged by head colour or set-decoder controls",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_MEAN"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ],
+        "RGB_statistics_computed": false,
+        "unused_RGB_statistics_skipped": true,
+        "appearance_regularization": false,
+        "appearance_rule": null
+      },
+      "worker": {
+        "exit_code": 0,
+        "actual_worker_process_wall_seconds": 3146.511946617975,
+        "physical_GPU": 2,
+        "methods": [
+          "CLIP_MEAN"
+        ],
+        "actual_two_branch_process": false,
+        "independent_single_arm_processes": true,
+        "all_startup_and_inference_included": true,
+        "official_GT_evaluation_excluded": true,
+        "OS_NAS_shared_background_jobs_disclosed": true,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "actual_worker_process_wall_seconds": 3146.511946617975,
+            "physical_GPU": 2,
+            "methods": [
+              "CLIP_MEAN"
+            ],
+            "actual_two_branch_process": false,
+            "independent_single_arm_processes": true,
+            "all_startup_and_inference_included": true,
+            "official_GT_evaluation_excluded": true,
+            "OS_NAS_shared_background_jobs_disclosed": true
+          }
+        ],
+        "failed_attempt_wall_seconds": 0
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-kitti-v2-best.pth",
+        "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+        "strict_load": "<All keys matched successfully>",
+        "source_model": "V2-best",
+        "target": "Dance",
+        "model_load_seconds": 542.4758705330314,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 1103,
+        "new_calls": 1103,
+        "cache_hits": 0,
+        "forward_seconds": 27.071915509877726,
+        "equivalent_forward_seconds": 27.07191550987774,
+        "batches": 150,
+        "cache": {
+          "complete_raw_responses": 1103,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_fast_kd_single_rho0p1_20261122/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 602.5009149889229,
+        "peak_allocated_bytes": 6271269888
+      },
+      "cost_by_method": {
+        "CLIP_MEAN": {
+          "common_wall_seconds": 2812.482625202276,
+          "own_head_training_seconds": 331.1813891144702,
+          "own_postprocess_and_output_seconds": 0.6880211982643232,
+          "shared_common_plus_own_branch_seconds": 3144.3520355150104
+        }
+      },
+      "phase_seconds": {
+        "imports_metadata_and_recovery_setup": 18.142614756943658,
+        "student_load_and_integrity_check": 543.6376626020065,
+        "teacher_load_and_initial_integrity_check": 605.2520714899292,
+        "real_sparse_frame_student_forward_and_initial_head": 1433.2286401139572,
+        "anchor_and_PCD_only_acquisition_no_RGB_histograms": 10.366094647091813,
+        "real_teacher_service_including_image_IO": 176.83079873246606,
+        "teacher_final_frozen_weight_audit": 16.088538727955893
+      },
+      "teacher_fit_audit": {
+        "fitted_videos": 25,
+        "maximum_teacher_KL": 0.0006629675626754761,
+        "maximum_steps": 4000,
+        "videos_exceeding_registered_KL_tolerance": 0
+      },
+      "actual_head_fit_and_save_seconds": 331.1813891144702,
+      "actual_all_method_postprocess_and_output_seconds": 0.5202086792560294,
+      "appearance_regularization_CPU_seconds": 0,
+      "appearance_active_nodes": 0,
+      "decoder_frames": 1541,
+      "backbone_image_forwards": 5634,
+      "provided_official_proposals_boundary": true,
+      "handcrafted_RGB_statistics_computed": false,
+      "upstream_detector_and_tracker_generation_timed": false
+    },
+    "C1_JOINT": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_joint_single_rho0p1_20261122",
+      "method": "CLIP_MEAN_COHORT_CAL",
+      "protocol": {
+        "name": "C1_pcd768_direct_joint_single_rho0p1_20261122",
+        "pair": "C1",
+        "videos": 25,
+        "queries": 425,
+        "seed": 0,
+        "source": "frozen official V2-best",
+        "acquisition": "COVER 0.1 query-balanced, three uniform observations and max-area anchor",
+        "teacher_fraction": 0.1,
+        "query_graph_scope": "extended",
+        "head_query_scope": "pcd",
+        "head_source_logit": "zero",
+        "task_protocol": "CHECKLIST",
+        "set_decoder": "original",
+        "head_feature_dimension": 768,
+        "graph_metric": "combined",
+        "graph_prior": "constant",
+        "acquisition_geometry": "Frozen query-conditioned PCD only, unchanged by head colour or set-decoder controls",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_MEAN_COHORT_CAL"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ],
+        "appearance_regularization": true,
+        "appearance_rule": "fixed teacher-only TrackID-crossfit PAVA, ln3 bounded odds, after graph if requested"
+      },
+      "worker": {
+        "exit_code": 0,
+        "actual_worker_process_wall_seconds": 3616.019064735039,
+        "physical_GPU": 3,
+        "methods": [
+          "CLIP_MEAN_COHORT_CAL"
+        ],
+        "actual_two_branch_process": false,
+        "independent_single_arm_processes": true,
+        "all_startup_and_inference_included": true,
+        "official_GT_evaluation_excluded": true,
+        "OS_NAS_shared_background_jobs_disclosed": true,
+        "attempts": [
+          {
+            "exit_code": 0,
+            "actual_worker_process_wall_seconds": 3616.019064735039,
+            "physical_GPU": 3,
+            "methods": [
+              "CLIP_MEAN_COHORT_CAL"
+            ],
+            "actual_two_branch_process": false,
+            "independent_single_arm_processes": true,
+            "all_startup_and_inference_included": true,
+            "official_GT_evaluation_excluded": true,
+            "OS_NAS_shared_background_jobs_disclosed": true
+          }
+        ],
+        "failed_attempt_wall_seconds": 0
+      },
+      "source": {
+        "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-kitti-v2-best.pth",
+        "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+        "strict_load": "<All keys matched successfully>",
+        "source_model": "V2-best",
+        "target": "Dance",
+        "model_load_seconds": 482.47395499807317,
+        "precision": "FP32",
+        "checkpoint_hash_verified_in_this_load": true,
+        "fused_window_process": false,
+        "fused_layernorm": false
+      },
+      "teacher": {
+        "logical_calls": 1103,
+        "new_calls": 1103,
+        "cache_hits": 0,
+        "forward_seconds": 27.48195557750296,
+        "equivalent_forward_seconds": 27.48195557750295,
+        "batches": 150,
+        "cache": {
+          "complete_raw_responses": 1103,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_joint_single_rho0p1_20261122/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 568.8190063019283,
+        "peak_allocated_bytes": 6271269888
+      },
+      "cost_by_method": {
+        "CLIP_MEAN_COHORT_CAL": {
+          "common_wall_seconds": 3303.096103997319,
+          "own_head_training_seconds": 307.0924795579631,
+          "own_postprocess_and_output_seconds": 3.7868265237193555,
+          "shared_common_plus_own_branch_seconds": 3613.9754100790014
+        }
+      },
+      "phase_seconds": {
+        "imports_metadata_and_recovery_setup": 16.64945650694426,
+        "student_load_and_integrity_check": 483.6346781309694,
+        "teacher_load_and_initial_integrity_check": 571.4961825900245,
+        "real_sparse_frame_student_forward_and_initial_head": 1709.478804711951,
+        "real_RGB_sparse_inputs_and_image_only_acquisition": 333.5896445553517,
+        "real_teacher_service_including_image_IO": 165.89577466412447,
+        "teacher_final_frozen_weight_audit": 16.563122294959612
+      },
+      "teacher_fit_audit": {
+        "fitted_videos": 25,
+        "maximum_teacher_KL": 0.0006629675626754761,
+        "maximum_steps": 4000,
+        "videos_exceeding_registered_KL_tolerance": 0
+      },
+      "actual_head_fit_and_save_seconds": 307.0924795579631,
+      "actual_all_method_postprocess_and_output_seconds": 3.611630634753965,
+      "appearance_regularization_CPU_seconds": 1.0915653343545273,
+      "appearance_active_nodes": 11764,
+      "decoder_frames": 1541,
+      "backbone_image_forwards": 5634,
+      "provided_official_proposals_boundary": true,
+      "handcrafted_RGB_statistics_computed": true,
+      "upstream_detector_and_tracker_generation_timed": false
+    }
+  },
+  "actual_within_pair_evidence_audit": {
+    "C4": {
+      "videos": 45,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.6750863846903287,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1160,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": true,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true,
+      "last_video_head_weight_max_abs_difference": 0.0,
+      "last_video_head_statistic_max_abs_difference": 0.0,
+      "head_weight_audit_is_last_video_only": true
+    },
+    "C1": {
+      "videos": 25,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.7012736287739717,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1103,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": true,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true,
+      "last_video_head_weight_max_abs_difference": 0.0,
+      "last_video_head_statistic_max_abs_difference": 0.0,
+      "head_weight_audit_is_last_video_only": true
+    }
+  },
+  "quality_source_evidence_audit": {
+    "C4_KD": {
+      "videos": 45,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.6750863846903287,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1160,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": true,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true
+    },
+    "C4_JOINT": {
+      "videos": 45,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.0,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1160,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": false,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true
+    },
+    "C1_KD": {
+      "videos": 25,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.7012736287739717,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1103,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": true,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true
+    },
+    "C1_JOINT": {
+      "videos": 25,
+      "PCD_max_abs_difference": 0.0,
+      "RGB_max_abs_difference": 0.0,
+      "prior_max_abs_difference": 0.0,
+      "anchor_changed_tracks": 0,
+      "ordered_question_list_changed_videos": 0,
+      "question_symmetric_difference": 0,
+      "common_answer_positions": 1103,
+      "teacher_probability_max_abs_difference": 0.0,
+      "KD_intentionally_skips_unused_RGB_statistics": false,
+      "RGB_difference_is_disclosed_above": true,
+      "exact_source_questions_and_teacher_answers_equal": true
+    }
+  },
+  "expected_seed0_prediction_audit": {
+    "C4_KD": {
+      "queries": 466,
+      "changed_query_prediction_files": 0,
+      "maximum_saved_score_probability_error": 0.0,
+      "no_GT_in_comparison": true,
+      "not_an_independent_neural_seed": true
+    },
+    "C4_JOINT": {
+      "queries": 466,
+      "changed_query_prediction_files": 0,
+      "maximum_saved_score_probability_error": 0.0,
+      "no_GT_in_comparison": true,
+      "not_an_independent_neural_seed": true
+    },
+    "C1_KD": {
+      "queries": 425,
+      "changed_query_prediction_files": 0,
+      "maximum_saved_score_probability_error": 0.0,
+      "no_GT_in_comparison": true,
+      "not_an_independent_neural_seed": true
+    },
+    "C1_JOINT": {
+      "queries": 425,
+      "changed_query_prediction_files": 0,
+      "maximum_saved_score_probability_error": 0.0,
+      "no_GT_in_comparison": true,
+      "not_an_independent_neural_seed": true
+    }
+  },
+  "postseal_candidate_membership_diagnosis": {
+    "pairs": {
+      "C4": {
+        "candidate_membership": {
+          "KD": {
+            "queries": 466,
+            "recoverable_positive_queries": 466,
+            "positive_queries_empty": 24,
+            "positive_queries_without_correct_output": 58,
+            "no_positive_candidate_queries_with_output": 0,
+            "TP": 1393833,
+            "FP": 524869,
+            "FN": 112125,
+            "queries_without_any_correct_whole_track_asked": 122,
+            "recovered_queries_without_correct_whole_track_asked": 76,
+            "true_positive_rows_on_unasked_tracks": 1267271
+          },
+          "JOINT": {
+            "queries": 466,
+            "recoverable_positive_queries": 466,
+            "positive_queries_empty": 58,
+            "positive_queries_without_correct_output": 75,
+            "no_positive_candidate_queries_with_output": 0,
+            "TP": 1397833,
+            "FP": 482374,
+            "FN": 108125,
+            "queries_without_any_correct_whole_track_asked": 122,
+            "recovered_queries_without_correct_whole_track_asked": 62,
+            "true_positive_rows_on_unasked_tracks": 1269999
+          }
+        },
+        "query_retrieval_tradeoff": {
+          "rescued": 5,
+          "regressed": 22
+        }
+      },
+      "C1": {
+        "candidate_membership": {
+          "KD": {
+            "queries": 425,
+            "recoverable_positive_queries": 40,
+            "positive_queries_empty": 13,
+            "positive_queries_without_correct_output": 15,
+            "no_positive_candidate_queries_with_output": 35,
+            "TP": 104722,
+            "FP": 71070,
+            "FN": 92663,
+            "queries_without_any_correct_whole_track_asked": 10,
+            "recovered_queries_without_correct_whole_track_asked": 2,
+            "true_positive_rows_on_unasked_tracks": 95351
+          },
+          "JOINT": {
+            "queries": 425,
+            "recoverable_positive_queries": 40,
+            "positive_queries_empty": 14,
+            "positive_queries_without_correct_output": 14,
+            "no_positive_candidate_queries_with_output": 25,
+            "TP": 130280,
+            "FP": 73456,
+            "FN": 67105,
+            "queries_without_any_correct_whole_track_asked": 10,
+            "recovered_queries_without_correct_whole_track_asked": 2,
+            "true_positive_rows_on_unasked_tracks": 120201
+          }
+        },
+        "query_retrieval_tradeoff": {
+          "rescued": 1,
+          "regressed": 0
+        }
+      }
+    },
+    "GT_only_after_all_four_actual_seals": true,
+    "not_additive_HOTA_attribution": true,
+    "positive_query_means_recoverable_candidate_not_all_physical_GT": true,
+    "whole_track_asked_coverage_is_not_anchor_frame_teacher_accuracy": true
+  },
+  "acceptance": {
+    "all_four_independent_actual_processes": true,
+    "all_four_sealed_before_any_group_GT": true,
+    "actual_teacher_calls": 4526,
+    "actual_cache_hits": 0,
+    "paired_actual_evidence_equal": true,
+    "old_quality_source_equal": true,
+    "actual_seed0_predictions_equal": true,
+    "actual_seed0_score_probabilities_equal": true,
+    "all_heads_meet_registered_teacher_KL": true,
+    "actual_point_gains_positive": {
+      "C4_seed0": true,
+      "C1_seed0": true
+    },
+    "actual_parent_CI_positive": {
+      "C4_seed0": true,
+      "C1_seed0": true
+    },
+    "previous_three_seed_primary_intervals_positive": true,
+    "C1_all_strong_KD_intervals_positive": false,
+    "C1_universal_semantic_ranking_claim": false,
+    "C4_no_query_retrieval_regression_claim": false,
+    "independent_blind_validation": false
+  },
+  "need_matched_followup_if_evidence_differs": false,
+  "all_development_data": true,
+  "no_target_manual_labels_in_adaptation": true,
+  "supplied_official_frontend_is_shared": true,
+  "old_3512_second_cost_not_reused": true,
+  "actual_reexecution_not_an_additional_independent_neural_seed": true,
+  "optimized_native_KD_skips_unused_RGB": true,
+  "J_RGB_frontend_is_real_additional_work": true,
+  "staggered_initialization_and_shared_host_load_disclosed": true,
+  "aborted_unoptimized_KD_research_costs": {
+    "C4": {
+      "exit_code": -15,
+      "actual_worker_process_wall_seconds": 1246.8823975780979,
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "actual_two_branch_process": false,
+      "independent_single_arm_processes": true,
+      "all_startup_and_inference_included": true,
+      "official_GT_evaluation_excluded": true,
+      "OS_NAS_shared_background_jobs_disclosed": true,
+      "attempts": [
+        {
+          "exit_code": -15,
+          "actual_worker_process_wall_seconds": 1246.8823975780979,
+          "physical_GPU": 0,
+          "methods": [
+            "CLIP_MEAN"
+          ],
+          "actual_two_branch_process": false,
+          "independent_single_arm_processes": true,
+          "all_startup_and_inference_included": true,
+          "official_GT_evaluation_excluded": true,
+          "OS_NAS_shared_background_jobs_disclosed": true
+        }
+      ],
+      "failed_attempt_wall_seconds": 1246.8823975780979
+    },
+    "C1": {
+      "exit_code": -15,
+      "actual_worker_process_wall_seconds": 1246.9302649589954,
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "actual_two_branch_process": false,
+      "independent_single_arm_processes": true,
+      "all_startup_and_inference_included": true,
+      "official_GT_evaluation_excluded": true,
+      "OS_NAS_shared_background_jobs_disclosed": true,
+      "attempts": [
+        {
+          "exit_code": -15,
+          "actual_worker_process_wall_seconds": 1246.9302649589954,
+          "physical_GPU": 2,
+          "methods": [
+            "CLIP_MEAN"
+          ],
+          "actual_two_branch_process": false,
+          "independent_single_arm_processes": true,
+          "all_startup_and_inference_included": true,
+          "official_GT_evaluation_excluded": true,
+          "OS_NAS_shared_background_jobs_disclosed": true
+        }
+      ],
+      "failed_attempt_wall_seconds": 1246.9302649589954
+    }
+  },
+  "conventional_direct_classifier_fairness_requires_separate_nores_study": false,
+  "uncertainty": "Fixed sealed actual seed0 parent-bootstrap only;3seed mechanism statistics remain separate; no development/multiplicity correction or pipeline refit.",
+  "scope": "Actual independent per-worker Popen-to-exit including all model loads, true forwards, calibration/fitting/output; GT excluded. Shared NAS/OS and other host jobs preclude a timing speedup claim.",
+  "goal_status": "ACTIVE_REQUIRES_ROOT_SCIENTIFIC_AND_PUBLICATION_REVIEW"
+}

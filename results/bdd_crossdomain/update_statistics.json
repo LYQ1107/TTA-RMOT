@@ -1,0 +1,145 @@
+{
+  "by_method": {
+    "ENTROPY_HEAD": {
+      "evidence": {
+        "SUPPORTED_NEG": 460001,
+        "SUPPORTED_POS": 86
+      },
+      "evidence_records": 460087,
+      "frames": 136188,
+      "grad_norm": {
+        "count": 31656,
+        "p50": 0.709602415561676,
+        "p95": 1.5333391726016998
+      },
+      "optimizer_steps": 31656,
+      "parameter_delta": {
+        "count": 31656,
+        "nonzero": 31656,
+        "p50": 0.06133519358455505,
+        "p95": 0.07262669271825502
+      },
+      "reason_counts": {
+        "entropy_updated": 31656,
+        "insufficient_entropy_candidates": 1994,
+        "update_schedule": 102538
+      },
+      "selected_rows_final": 0
+    },
+    "FROZEN": {
+      "evidence": {},
+      "evidence_records": 0,
+      "frames": 0,
+      "grad_norm": {
+        "count": 0,
+        "p50": null,
+        "p95": null
+      },
+      "optimizer_steps": 0,
+      "parameter_delta": {
+        "count": 0,
+        "nonzero": 0,
+        "p50": null,
+        "p95": null
+      },
+      "reason_counts": {},
+      "selected_rows_final": 0
+    },
+    "NO_STATE": {
+      "evidence": {
+        "UNKNOWN": 33531
+      },
+      "evidence_records": 33531,
+      "frames": 136188,
+      "grad_norm": {
+        "count": 0,
+        "p50": null,
+        "p95": null
+      },
+      "optimizer_steps": 0,
+      "parameter_delta": {
+        "count": 0,
+        "nonzero": 0,
+        "p50": null,
+        "p95": null
+      },
+      "reason_counts": {
+        "insufficient_supervision": 33650,
+        "update_schedule": 102538
+      },
+      "selected_rows_final": 0
+    },
+    "PROBE_CACHE": {
+      "evidence": {
+        "UNKNOWN": 33531
+      },
+      "evidence_records": 33531,
+      "frames": 136188,
+      "grad_norm": {
+        "count": 0,
+        "p50": null,
+        "p95": null
+      },
+      "optimizer_steps": 0,
+      "parameter_delta": {
+        "count": 0,
+        "nonzero": 0,
+        "p50": null,
+        "p95": null
+      },
+      "reason_counts": {
+        "method_has_no_optimizer": 136188
+      },
+      "selected_rows_final": 0
+    },
+    "PROBE_ST": {
+      "evidence": {},
+      "evidence_records": 0,
+      "frames": 136188,
+      "grad_norm": {
+        "count": 0,
+        "p50": null,
+        "p95": null
+      },
+      "optimizer_steps": 0,
+      "parameter_delta": {
+        "count": 0,
+        "nonzero": 0,
+        "p50": null,
+        "p95": null
+      },
+      "reason_counts": {
+        "insufficient_supervision": 33650,
+        "update_schedule": 102538
+      },
+      "selected_rows_final": 0
+    },
+    "QCS_TTA": {
+      "evidence": {
+        "UNKNOWN": 33531
+      },
+      "evidence_records": 33531,
+      "frames": 136188,
+      "grad_norm": {
+        "count": 0,
+        "p50": null,
+        "p95": null
+      },
+      "optimizer_steps": 0,
+      "parameter_delta": {
+        "count": 0,
+        "nonzero": 0,
+        "p50": null,
+        "p95": null
+      },
+      "reason_counts": {
+        "insufficient_supervision": 33650,
+        "update_schedule": 102538
+      },
+      "selected_rows_final": 0
+    }
+  },
+  "format": "locatemot-refer-bdd-update-statistics-v1",
+  "run_dir": "/data2/user/LocateMOT/results/runs/refer_bdd_full_qcs_20261020",
+  "runtime_gt_isolation": true
+}

@@ -1,0 +1,13 @@
+{
+  "status": "POST_SEAL_DIAGNOSIS_REGISTERED_AFTER_INTERIM_POINTS",
+  "registered_unix": 1795341577.698123,
+  "source_sha256": "086c533dcabda8404bc04ec30452cd3e2887830b39b9f8d5712c960156ab1c5d",
+  "question": "Are KITTI gains limited by constant Track-ID semantic decisions, physical ID mixing, or unsupported predicates? Do not add temporal memory without this evidence.",
+  "data": "Byte-identical restored862GT templates, fixed candidate boxes/TrackIDs/official frames, existingC2/C5seed0KD/JOINT outputs.",
+  "definition": "Unfiltered unionGT IoU.5 matching followed by query annotation membership, separating physical identity changes from within-GTID predicate membership changes.",
+  "scope": "Ground-truth offline diagnosis only after all234adaptation/count predictions sealed; no new adaptation outputs, teacher calls, feature extraction, model selection or HOTA metric change.",
+  "limitation": "Binary matched-row minimum error for a constant Track-ID decision, not a HOTA upper bound or unconditional semantic truth. Historical cached membership uses a different diagnostic matcher and will not be replaced.",
+  "no_target_GT_for_training_or_parameters": true,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

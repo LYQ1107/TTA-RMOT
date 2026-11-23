@@ -1,0 +1,81 @@
+{
+  "tier": "MAIN_AND_CRITICAL_ONLY",
+  "jobs": [
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "UNIFORM_K",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "UNIFORM_K",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_RANDOM",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "YESTRACK_BUDGET_PRIOR",
+      "rho": 0.3
+    }
+  ],
+  "cost_estimate_sha256": "9c3af09d7c75f36125b04cf48a3cbadb301d88d0f98ac75ebbbda88b1ff3f8cc",
+  "selected_total_GPU_hours_estimate": 11.02958443053801,
+  "full_matrix_GPU_hours_estimate": 292.88630367713597,
+  "estimate_is_conservative_no_cache_and_does_not_deduct_finished_first_videos": true,
+  "resumed_first_videos": [
+    {
+      "pair": "C1",
+      "pilot_receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C1/FULL/rho_0.3/pilot_receipts/first_001.json",
+      "pilot_receipt_sha256": "b17595173392fe38021ff1fbd1be5b2115baa07ecaf7101004c83c7babf4cfc1",
+      "checkpoint_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C1/FULL/rho_0.3/stream_000.pt",
+      "checkpoint_sha256": "8e9d5eaa37aac1438942a52811d194bf2e41104941d83c8f2163b38817afa798",
+      "next_video": 1
+    },
+    {
+      "pair": "C3",
+      "pilot_receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C3/FULL/rho_0.3/pilot_receipts/first_001.json",
+      "pilot_receipt_sha256": "e1e367f52f6bde405b1903bafbfc66a7d0db8343dcda699eb41f9bf65977e943",
+      "checkpoint_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C3/FULL/rho_0.3/stream_000.pt",
+      "checkpoint_sha256": "4f594cfcecc9fc63b8872ec128fde6c3e3b76867b3dd1c544abda5961a23af6c",
+      "next_video": 1
+    }
+  ],
+  "prereg_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/active_map_v1_full/PREREG.md",
+  "prereg_sha256": "d4d051bb64c9d5ca3d53c7e1c6f329a7d36590996215f38b9bec26d99036930a",
+  "maximum_GPUs": 2,
+  "remaining_matrix_not_authorized": true
+}

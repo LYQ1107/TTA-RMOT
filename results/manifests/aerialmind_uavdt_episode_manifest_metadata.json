@@ -1,0 +1,33 @@
+{
+  "format": "locatemot-qcs-manifests-v1",
+  "dataset": "aerialmind_uavdt_episode",
+  "videos": [
+    "M0203"
+  ],
+  "runtime_rows": 1007,
+  "evaluation_rows": 1007,
+  "runtime_manifest": "/data2/user/LocateMOT/results/manifests/aerialmind_uavdt_episode_runtime_manifest.jsonl",
+  "evaluation_manifest": "/data2/user/LocateMOT/results/manifests/aerialmind_uavdt_episode_evaluation_manifest.jsonl",
+  "runtime_contains_gt": false,
+  "runtime_forbidden_field_names": [
+    "label_path",
+    "expression_path",
+    "gt_box",
+    "gt_id",
+    "label"
+  ],
+  "runtime_forbidden_fields_found": [],
+  "evaluation_contains_gt_paths": true,
+  "query_text_source": "filename",
+  "trackeval_frame_offset": 0,
+  "label_formats": {
+    "M0203": "cxcywh"
+  },
+  "expression_filter": [
+    "Auto stopped at red stoplight"
+  ],
+  "source_files": {
+    "config": "/data2/user/LocateMOT/configs/tta/qcs_tta_aerialmind.yaml",
+    "config_sha256": "49c48b1cee8211cbb4ddf854859c773834a31ab2bd008f8995e29e4801fbb5dd"
+  }
+}

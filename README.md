@@ -1,0 +1,268 @@
+# TTA-RMOT
+
+本分支已按用户要求重建为 **小于100 MB的轻量发布**：保留代码、配置、实验方案、
+报告、指标表、关键诊断和研究总结；历史大资产留NAS，A100新实验的原始问答、特征和预测留本地`a100_runs`。
+[发布与NAS恢复说明](docs/LIGHTWEIGHT_BRANCH_20261120.md)、
+[NAS-only文件清单](docs/NAS_ONLY_ARTIFACTS_20261120.json)。
+
+只下载当前轻量分支：
+
+    git clone --single-branch --branch codex/rmot-seed0-joint-evidence-20261123 https://github.com/LYQ1107/TTA-RMOT.git
+    cd TTA-RMOT
+    python tools/check_publication_size.py
+
+其他分支和GitHub尚未回收的旧对象可能仍使仓库总体统计较大；上述命令只克隆当前分支。
+
+**2026-11-23 当前研究仍在进行**：沿用官方固定候选/ID，以目标图片、任务查询与冻结教师指导研究跨域指代适配。
+遵照用户要求，后续仅固定seed0，不追加多种子网格。六个设置876份单种子官方统计全部完成，
+876个HOTA、678项效应和6项交互已独立复算；当前FULL在六个设置均低于同一个充分普通对照COARSE_SOFT_MEAN。
+该配方未通过，三个候选创新尚未成立；继续研究联合观察反馈与对象/状态学习，物理pilot不代表精度成功。
+[六设置完整单种子结论与改进设计（TXT）](docs/TTA_RMOT_六设置单种子负结果与联合观察改进设计_20261123.txt)、
+[科学复核](docs/a100_six_direction_20261122/conditional_seed0_scientific_review.json)、
+[876份可复算统计](docs/a100_six_direction_20261122/conditional_seed0_scope_parent_statistics.json)。
+[已付证据压缩与泛化诊断（TXT）](docs/TTA_RMOT_已付教师证据的压缩与泛化诊断_20261123.txt)、
+[经典理论、机制边界与实际拟合成本（TXT）](docs/TTA_RMOT_经典理论与现有学习机制的边界_20261123.txt)、
+[全部拟合阶段分项](docs/a100_six_direction_20261122/conditional_learning_cost.json)。
+经典思想用于任务建模和学习约束；列表KL、链式法则及人类双系统比喻本身不算新发明。拟合阶段时间不是包含真实学生/教师前向的冷部署时间。
+本批所有对照共享输入版本并重训；新旧教师/特征协议不同，不能将新旧HOTA直接相减归为模块增益。现有数据全部参与过开发。
+
+2026-11-20 已恢复到 A100：`/data3/liuyeqiang/FlexHook-TTA`；大型资产保留 NAS。
+恢复前 v8P 的 66 项新增官评已封存。恢复路径、数据核验、现有结果与继续工作入口见
+[A100 恢复与研究交接](docs/A100_RESTORE_20261120.md)。下文各“当前执行”是历史阶段记录。
+[完整研究历程与方法演变（TXT）](docs/TTA_RMOT_研究心路历程与完整交接_20261120.txt)
+记录从 QCS-TTA 到 v8P 的验证链、负结果、当前成果与后续建议。
+
+**本轮 A100 三阶段新实证**已贯通真实学生/Qwen/快校准、C4 固定问答归因与真实冷启动计时。
+[完整历程＋本轮实证（TXT）](docs/TTA_RMOT_完整历程与A100三阶段实证_20261120.txt)、
+[三阶段详细报告（TXT）](docs/A100_三阶段实验完整报告_20261120.txt)、
+[计划与边界](docs/A100_THREE_STAGE_PLAN_20261120.md)、
+[轻量原始收据与可复算统计](docs/a100_three_stage_20261120/)。
+
+C4 HOTA：MINUS **48.8471**，零 LoRA 同32帧重算 **50.7874**，匹配 LoRA **52.1517**。
+LoRA−重算 **+1.3642**，原45片段95%区间 **[-2.3067, 4.8633]**；固定重算数量的排序差
+**−0.6095 [-1.0549, −0.2496]**。本轮没有建立 LoRA 语义排序的独立正贡献。
+[归因图](docs/a100_three_stage_20261120/stage2/causal_attribution.png)。
+
+完整C4新教师冷进程：MINUS_v8P **47.4783 / 11229.13秒**，YT_PRIOR **46.0915 / 10837.50秒**，
+UNIFORM_K **40.8334 / 1266.15秒**；各3508次真实调用、0缓存命中。
+600秒短切片三次均无教师反馈，得分来自初始输出，不能据此证明主动选题有效。
+[600秒曲线](docs/a100_three_stage_20261120/stage3/cost_utility.png)、
+[完整C4时间曲线](docs/a100_three_stage_20261120/stage3/full_cost_utility.png)。
+
+**2026-11-21 视觉本能与经典算法机制诊断**：
+[完整中文TXT](docs/TTA_RMOT_视觉本能与经典算法_机制诊断完整报告_20261121.txt)、
+[精选收据、可复算统计与图表](docs/a100_mechanism_20261121/)、
+[执行范围](docs/A100_机制诊断执行计划_20261121.txt)。
+C4候选可恢复GT约98.193%，原框/ID下逐帧语义oracle HOTA80.224；
+119/466查询未查到正确候选，122条有目标零输出中82条属于此类。
+最终v8P稳定片段翻转0次，不能仅因原分数抖动就再加平滑模块。
+冻结教师900次新回答、0命中；DS与路由的点结果依方向和指标变化，
+有限历史池不能证明全候选覆盖已修复，C4点诊断仅3个评估原视频。
+完整C4固定问答下DS **48.8471**、固定可靠性 **40.0487**，差
+**+8.7984 [2.5607, 15.8261]**（13原视频）；支持其系统级作用。
+原路由相对100位置CROP替换差 **−0.3052 [-3.9895, 3.9687]**，没有稳定正证据。
+系统级DS收益不等同于小样本概率估计更准或神经语义学习。
+
+Sports45片段来自13原视频。按原视频聚类，旧LoRA独立增量区间
+**[-3.7545, 5.4889]**，联合LoRA＋重算−MINUS区间也跨0；
+固定RECALC数量的排序差仍为负区间。旧报告原口径保留，新报告明确统计敏感性。
+本轮全部为已有开发数据的机制诊断；用户已明确没有独立数据，不包装成盲域验证。
+仅用小型JSON复算：`python tools/verify_a100_mechanism_evidence.py`，无需GPU或原始数据。
+
+本仓库为 [LYQ1107/TTA-RMOT](https://github.com/LYQ1107/TTA-RMOT)，当前A100工作区为
+`/data3/liuyeqiang/FlexHook-TTA`，A800原路径为`/data2/user/FlexHook-TTA`。
+它与LocateMOT/GroundJEV是不同任务；[继承旧首页](docs/history/LOCATEMOT_INHERITED_README_20261025.md)只作历史归档。
+
+## 历史执行：v6四处修复与成本关卡关键集合
+
+2026-11-04用户否决v5剩余80项，改做v6修复后重跑；[固定口径](results/presence_active/redesign_v6/PREREG.md)、
+[当前状态/后续正式报告](results/presence_active/redesign_v6/REPORT.md)。
+全10项保守估84.058 GPU小时>20，故仅C1/C2/C3 FULL及C1/C3 MINUS_SLOW五项获本批授权，估42.029小时、非实耗。
+新数据在已授权data1资产根，原data2 RUN链接可见；最多两张准入共享卡，不停止他人任务。
+GPU6真实三帧检查通过；首个manager1834232因轨迹ID的JSON类型错误真实exit1，兼容性修复后42项回归通过。
+已公开bbe03d90并恢复同一5项清单：新manager1862297，C1 FULL GPU6/PID1862609、C2 FULL GPU4/PID1862611。
+尚无新的完整HOTA结果；失败费用/缓存保留，不把工程通过或进程正常当作指标提升，见新报告failures.json及启动/恢复记录。
+五项后报告等待，不启动其他预算/消融或v5剩余80项；必要时仅按>5%调用量变化补对应YT_PRIOR。
+
+## 上一阶段：三域六方向28项关键实验已完成
+
+分支method/presence-active-20261102。2026-11-04用户授权的新增18项已全部完成、协调器exit0；
+累计28/108，余80项未运行/未授权。完整目标不缩小，原40 GPU小时扩展关卡保留。
+当前这批没有等待中的训练，不重启已完成队列。
+
+|方向|Native HOTA|FULL|预算匹配YT_PRIOR|
+|---|---:|---:|---:|
+|V2→Dance|8.218|37.724|22.711|
+|Dance→KITTI-V2|13.502|16.100|24.286|
+|V2→SportsMOT|50.970|43.914|58.601|
+|Dance→SportsMOT|20.560|32.191|46.099|
+|LaMOT→KITTI-V2|22.398|18.315|27.588|
+|LaMOT→Dance|15.476|36.469|20.822|
+
+FULL相对Native为4升2降，但仅两个Dance方向超过全部当前简单对照，不能宣称普遍有效。
+慢分支只有C4的正向条件CI不跨0，C3显著退化，C1/C6区间含0；不以loss/有限非零梯度代替科研验收。
+KITTI只有4视频，仅点估计；Dance/Sports用视频聚类2000次seed0，区间不覆盖重排视频后的重新适应或seed不确定性。
+
+- [28项完整报告、全部对照、置信区间与失败归因](results/presence_active/redesign_v5/active_map_v1_critical28/REPORT.md)。
+- [六方向汇总](results/presence_active/redesign_v5/active_map_v1_critical28/direction_summary.csv)、
+  [官方完整指标](results/presence_active/redesign_v5/active_map_v1_critical28/main.csv)、
+  [108项完成状态](results/presence_active/redesign_v5/active_map_v1_critical28/matrix_status.csv)。
+- [成本、峰值显存与实际/等价教师开销](results/presence_active/redesign_v5/active_map_v1_critical28/costs.csv)、
+  [剩余预算复核](results/presence_active/redesign_v5/active_map_v1_critical28/remaining_budget_review.json)。
+- [预测/checkpoint/日志恢复清单](results/presence_active/redesign_v5/active_map_v1_critical28/logs.json)、
+  [完整性审计](results/presence_active/redesign_v5/active_map_v1_critical28/phase_validation.json)。
+- [完整日志8片](results/presence_active/redesign_v5/active_map_v1_critical28/experiment_logs.tar.gz.parts/manifest.json)、
+  [原始教师响应3片](results/presence_active/redesign_v5/active_map_v1_critical28/teacher_responses.jsonl.gz.parts/manifest.json)；
+  原包保留服务器，报告中的命令可按SHA精确还原，不丢弃记录。
+- [新增18项预注册](results/presence_active/redesign_v5/active_map_v1_critical28/PREREG.md)、
+  [上一阶段10项原报告](results/presence_active/redesign_v5/active_map_v1_full/REPORT.md)、
+  [已封存九格Stage A](results/presence_active/redesign_v5/REPORT.md)。
+- [最终goal与完整目标边界](results/presence_active/FINAL_GOAL.md)。
+
+28套共15806个episode、10701529行，固定框/ID/帧号逐行核验；20项定向测试通过。
+新增18项实际wall7.5685小时、累计worker14.674小时，只使用GPU5/7且无新worker失败。
+累计28项worker24.801小时为含旧失败的保守上界；教师/LoRA/重打分与历史共享准备分开报告，不将缓存等同零成本。
+按各目标实测单位重新保守外推，剩余80项约211.431 GPU小时；未获下一段授权前不自动启动。
+
+当前设定是冻结Qwen3-VL辅助、video-transductive，不是无教师纯自监督或严格帧因果在线。
+目标GT仅在预测封存后的独立评测使用，Val已有历史开发复用，不称盲测。
+历史中断/死锁、负结果、旧checkpoint及报告保留，不把28项当作108项全部完成。
+
+以下为历史阶段记录。各阶段报告、预测、失败和checkpoint均保留；其中“运行中/停止/未启动”只指当时阶段。
+尤其 [最初PresenceHead报告](results/presence_active/REPORT.md) 和
+[MAP首视频pilot报告](results/presence_active/redesign_v5/active_map_v1/REPORT.md) 均为封存历史，不覆盖为新结果。
+
+## 历史快照：D-FIT 教师标签可拟合性诊断
+
+分支`research/v2dance-diag-fit-20261030`，从965e71fe开始。三臂各200步真实smoke及实际CAP严格重载/逐位输出验证通过；
+三组8973步训练使用相同Naive8500教师判断、相同300窗口子集，不读目标GT，最后一步checkpoint为唯一新模型评测对象。
+原实现的POS是p≥0.95，不是0.5；按新任务核对要求沿用。所有实现错误和无效尝试保留，不伪装成方法负结果。
+这是25Val同集诊断，不是论文主结果或Train→Val。拟合表A必须实际推送核验后，才允许完整425表达推理；预测封存后独立GT评测。
+[D-FIT报告与真实执行记录](results/diag_fit/REPORT.md)、[当前配置](configs/uda/diag_fit_cap.yaml)、[保留的实现失败](results/diag_fit/revoked_attempts.json)。
+
+## 已完成：Positive-Support Recovery，25Val同集开发研究
+
+独立分支 `research/v2dance-psr-trainval-20261029`，起点861840e。
+用户明确允许缺少40Train同配置MOT时使用现有25Val，所有新结果均不称Train→Val泛化或盲测。
+四种GT-free采样策略各425表达/8500真实冻结Qwen判断；同容量Naive与PSR主训练已各完成8973步。
+PSR新增254条有双端点证据、限定中间一帧的弱监督，不宣称它们都正确。
+本轮已全部完成并停止：13学生完整训练/425表达推理，47套官方评测数据集及预测归档（含复用基线、双向数量诊断）。
+首轮HOTA：Frozen **8.2180**、Naive **7.4499**、PSR **8.4204**、Uniform **8.4347**、匹配MeanTeacher **8.6095**。
+seed17的PSR未超过简单Uniform/MT，Present子集HOTA下降；当前不支持独立方法贡献。
+三seed主指标：PSR **8.7223±0.2614**、Naive **7.6174±0.1792**，固定Frozen **8.2180**。
+不新增弱标签的端点正例重加权控制 **8.4255**，与同seed PSR **8.4204**接近；没有建立PSR扩展模块的独立贡献。
+普通Uniform/MT等仅seed17，不将它们与三seed均值直接作统计优越声明。
+最多四张显存入场审计后的共享GPU，每卡串行，不停止别的项目；目标GT仅在完整预测封存后独立评测。
+[机制](docs/PSR_METHOD.md)、[预注册训练协议](docs/PSR_TRAINING_PROTOCOL.md)、
+[监督审计](docs/PSR_PSEUDO_LABEL_AUDIT.md)、[真实进度](docs/PSR_EXPERIMENT_RESULTS.md)、
+[当前科研判决](docs/PSR_FINAL_SCIENTIFIC_VERDICT.md)、[完整主训练日志](results/psr/training/)、[恢复索引](results/psr/recovery_index.json)。
+[首轮完整指标与成本](results/psr/full/TABLES.md)、[26组完整预测与日志](results/psr/full/artifact_index.json)。
+[三seed与权重控制](results/psr/confirmations/TABLES.md)、[最终交付清单](results/psr/final_delivery.json)。
+[PSR复现/环境/恢复入口](docs/PSR_REPRODUCIBILITY.md)、[实际归档完整性审计](results/psr/assets/delivery_audit_primary.json)。
+不把单seed微增或教师POS数量当作科研成功。以下所有旧实验保持原封不动。
+
+## 已完成：普通 MLLM 软概率蒸馏
+
+独立分支`research/v2dance-mllm-naive-distill-20261028`，起点为封存P1公开提交`7026d82c`。
+按用户最新“40Train没有的话先用val”，当前仅做**25Val同集无标签蒸馏开发诊断**，不是Train→Val泛化。
+复用冻结P1 A的8381条原始软概率/Yes-No logits，不重复调用MLLM，不用P1阈值筛选或把未采样候选当NEG。
+[预注册协议](docs/MLLM_DISTILLATION_PROTOCOL.md)、[软标签审计](docs/MLLM_PSEUDO_LABEL_AUDIT.md)、
+[结果状态](docs/MLLM_DISTILLATION_RESULTS.md)、[真实失败记录](docs/MLLM_DISTILLATION_FAILURE_ANALYSIS.md)。
+0step接口、修正后的6step训练smoke、真实恢复及完整8973步学生训练已完成，目标GT打开0。
+全部8381教师配对和17源视频/8973源窗口均已覆盖；完整25视频/425表达官方评测已完成。
+HOTA：Frozen **8.2180**、Source-only **7.4352**、Naive MLLM **8.0327**。
+全量候选AUROC0.6502→0.7549，但HOTA未超过Frozen、双向数量对照不支持稳定排序收益；不把loss或AP改善写成RMOT成功。
+完整[科研判决](docs/FINAL_SCIENTIFIC_VERDICT.md)、[结果与成本](docs/MLLM_DISTILLATION_RESULTS.md)、
+[5组425预测/收据及日志索引](results/mllm_distillation/logs/full_evaluation_archive_index.json)、
+[服务器恢复路径](results/mllm_distillation/recovery_index.json)。当前阶段已停止，不启动E4–E7或追加长训。
+
+## 已完成：P1 冻结视觉语义教师可靠性
+
+新分支`research/v2dance-evidence-teacher-p1-20261026`。执行[预注册P1协议](docs/TEACHER_EXPERIMENT_PROTOCOL.md)：
+冻结Qwen3-VL/安全复用YesTrack，比较整句、等预算多问法、分属性和证据验证，**不训练学生**。
+[机制审计](docs/TEACHER_METHOD_AUDIT.md)、[数据/权重来源](docs/TEACHER_DATA_PROVENANCE.md)、
+[预算公平性](docs/TEACHER_MODEL_AND_BUDGET_FAIRNESS.md)与[固定采样清单](results/teacher_probe/)分开保存。
+T0权重已核验并实际运行；官方V2 LoRA未取得，按用户授权如实保留T1缺失，不以其它权重替代。
+六组四对功能检查及源域203对校准已完成，POS/NEG门限仅由源开发集冻结为0.95/0.05。
+**P1已全部完成并停止**：25视频/425表达，六组完整smoke各1649对、固定probe各8381对。
+预测先封存再独立GT评测；教师0更新/0目标GT打开/0未来帧请求，GPU7失败仅补齐对应分片，未重启健康进程。
+在193个GT-present锚点的761个固定候选中，Frozen AP72.929%，整句A89.771%，
+等预算B88.576%，分属性C88.725%，证据验证D88.725%，B-plus88.536%，短窗口TCP/TRP84.393%。
+A相对Frozen的25视频配对AP增量95%区间为[+2.461,+31.137]个百分点；这是开发性稀疏教师证据，不是完整RMOT HOTA或蒸馏收益。
+D相对C原始AP不变；同接受数量精度差0、区间跨0，GT覆盖15.245%低于A33.122%；独立Evidence贡献Gate未通过。
+主口径A POS精度90.370%不代表全部425：全425官方匹配口径为57.911%，两种分母分别报告。
+官方V2 LoRA缺失已获用户允许，仅有T0结果；TCP/TRP按授权13个因果活动帧重置，不声称完整前缀复现。
+[完整16项问答与科研报告](docs/TEACHER_P1_FINAL_REPORT.md)、[指标/成本/逐视频表达分析](results/teacher_probe/)、
+[完整文本日志](results/teacher_probe/logs/)、[P2条件与缺口](docs/TEACHER_P2_READINESS.md)均保存。
+不启动学生训练或新的完整TTA；40Train匹配预测MOT仍缺失，P2当前不可执行。
+
+## 上一阶段：FlexHook V2 → Dance Offline UDA 诊断
+
+按2026-10-26最新指令先做[25Val同集无标签适应诊断](docs/UDA_METHOD_IMPLEMENTATION.md)，
+不将其称作40Train→Val UDA或未见视频泛化。目标GT不进入训练，四组单卡独立对照。
+[当前进度与资产缺口](docs/UDA_PROGRESS.md)；40Train图像/表达已补齐，原协议同配置Train MOT仍缺失。
+
+**25Val阶段四组已全部完成并停止**：各8973次LoRA更新，随后冻结checkpoint完整25视频/425表达官方评测。
+HOTA：Frozen **8.2180**；Source Rehearsal **7.4352**；Mean Teacher **8.2494**；Weak MIL **6.9281**；Combined **7.7293**。
+Teacher的数量匹配Frozen已达8.2479，其微小残差和视频区间不能支持可靠语义提升；Combined不优于较好单模块。
+没有有效目标MIL/presence正负证据，不能把代码具备该loss称为有效目标弱监督已验证。
+[完整科学报告](docs/UDA_FINAL_SCIENTIFIC_REPORT.md)、[官方指标及逐视频/表达明细](results/uda/)、
+[完整预测压缩包](results/uda/full/archives/)、[checkpoint与分数恢复索引](results/uda/full/full_recovery_index.json)
+及[完整运行/失败恢复日志](results/uda/full/logs/runtime_logs.tar.gz)已公开。
+原40Train→25Val正式目标仍未完成，不自动扩展训练或按Val结果调参。
+
+## 已完成研究：FlexHook V2 → Dance Positive-Free Online TTA
+
+最新用户授权的[快速可恢复性诊断](docs/PF_RECOVERABILITY_DIAGNOSTIC_20261025.md)独立于已完成六组结果：
+**已完成并停止**。完整425表达Count-Matched Frozen HOTA8.8206，Identity8.8179：
+输出数量配合原Frozen排序几乎重现全部收益；这是依赖Identity数量的后验诊断，不是新可部署方法。
+原模型presence有有限信号（离线AUROC0.7258/AP0.1994）；固定75帧冻结PCD保留少量可读出信息，
+但GT诊断探针没有超过同样本Frozen head，也未发现独立可靠的无标签语义监督。
+67项测试通过；[诊断分数与日志](results/diagnostics/pf_recoverability_20261025/)、
+[425条表达完整诊断预测](results/diagnostics/pf_recoverability_20261025/archives/countmatched_425_predictions.tar.gz)
+及[科研图](results/diagnostics/pf_recoverability_20261025/figures/recoverability_summary.png)均单独保留。
+没有重跑六方法、源训练或新完整TTA；等待用户下一条明确指令。
+
+固定官方 Refer-KITTI-V2 第二阶段 checkpoint、官方 Dance DETR+NeuralSORT 候选，
+在全部25视频/425表达上检验相对排序与轨迹身份自监督。没有目标GT在线监督、额外语义教师或源端重训。
+Source-Free 仅指第二阶段；固定跟踪器是 Dance 专用官方跟踪器，不能宣称整个系统无目标域监督。
+
+- 匹配基线为完整211,085条MOT候选的 `ZERO_UPDATE`，HOTA **8.2180**。
+  历史8.2060遗漏692条轨迹末观测，仅作旧协议对照，不能混算增益。
+- 六组顺序：`ZERO_UPDATE`、`RELATIVE_ONLY`、`PF_RANK`、`PF_RANK_GUARD`、`PF_IDENTITY`、`PF_HYBRID`。
+- 原配置：rank4 / LR5e-5 / update interval4 / seed0 / FP32；每episode重置学习状态，先预测后更新。
+- 最多四张物理GPU。共享须用户明确授权并实际检查显存，优先进程少的卡；不终止其他任务。
+- 预测完整封存后才由独立官方TrackEval和归因读取GT。本集已用于开发，不是独立盲测。
+
+## 实验与复查入口
+
+- [完整运行状态](docs/PF_FULL_EXPERIMENT_STATUS.md)：以这里记录的当前阶段为准，不因示例命令重启健康作业。
+- [官方全量结果表](docs/PF_FULL_RESULTS.md)：不把未完成方法当作完成。
+- [六方法最终科学报告](docs/PF_FINAL_SCIENTIFIC_REPORT_20261025.md)：全部25视频/425表达、官方指标、成本及完整归因。
+- [错误与收益分析](docs/PF_FAILURE_ANALYSIS.md)：真实GT恢复、误检、排序与成本权衡。
+- [Query-Present / Empty补充验收](docs/PF_SUPPLEMENTAL_ACCEPTANCE_20261025.md)。
+- [视频聚类与不确定性](docs/PF_VIDEO_GROUP_ANALYSIS_20261025.md)：25个完整视频为单位，不把相关帧当独立样本。
+- [精简机器可读结果](results/positive_free/full/)：官方summary/detailed CSV、逐表达/逐视频指标、审计、来源及离线诊断。
+- [完整文本日志压缩包](results/positive_free/full/logs/runtime_logs.tar.gz)：138个准备/调度/worker/model/官方评测/原型日志，逐文件复核；不含图像、权重及大容量margin流。
+- [执行协议](docs/PF_4GPU_EXECUTION_PLAN.md)与[研究记录](research_log.md)。
+
+六组已全部完成，最优点估计为Identity HOTA8.8179（+0.5999），但视频级95%区间包含0、
+AUROC下降且空查询误检上升，不能宣布稳定语义恢复。Hybrid8.3213未超过Identity。
+最终报告及[静态科研图](results/positive_free/full/figures/scientific_summary.png)已生成并检查；
+恢复索引位于`results/positive_free/full/manifests/full_recovery_index.json`。
+已完成[presence-aware交互审计原型](docs/PF_QUERY_PRESENCE_PROTOTYPE_20261025.md)和真实GPU0/1表达/12帧验证。
+它只消除加性偏置并报告UNKNOWN，尚无独立可靠的语义学习信号；0更新，不覆盖冻结预测。
+58项测试通过，上轮六组及presence原型已结束；新诊断单独记录，不自动启动新的完整TTA训练。
+
+## 代码、环境与大文件
+
+- `flex_tta/`：FlexHook适应模块、因果episode、冻结特征复用、原子完成收据。
+- `scripts/run_pf_full_suite.sh`：正式顺序执行；`run_pf_4gpu.sh`默认只打印计划，需要明确开关才启动全量。
+- `scripts/audit_pf_full.py`、`summarize_pf_full.py`、`analyze_pf_full_offline.py`：封存、官方结果整理及隔离的离线归因。
+- `scripts/analyze_pf_video_uncertainty.py`、`plot_pf_science.py`、`report_pf_full.py`：视频级分析与最终报告。
+- 服务器Python：`/home/szgx/anaconda3/envs/dfot/bin/python`；数据优先放在`/data2/user/TTA-RMOT-assets/`。
+- 原始预测、压缩margin、完整运行日志及恢复收据保留在
+  `/data2/user/FlexHook-TTA/results/runs/pf_*_completebank_full_20261025*`。
+- checkpoint、图像与大容量中间文件保留服务器/NAS；GitHub只保存必要代码、配置、精简记录与引用路径。
+
+复现与恢复前请先核对实验状态、固定资产和原episode receipts；不要覆盖已完成结果。

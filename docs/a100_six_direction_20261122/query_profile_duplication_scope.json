@@ -1,0 +1,33 @@
+{
+  "status": "PASS_QUERY_PROFILE_REPLICATION_SCOPE_AND_COUNTEREXAMPLE",
+  "scope": "Uniformly replicate every observation in a bag by the same factor; keep targets, predictions, confidence and eligibility fixed.",
+  "original_loss": 0.1963142235295992,
+  "whole_bag_replicated_loss": 0.19631422352959918,
+  "whole_bag_KL_error": 2.7755575615628914e-17,
+  "original_bag_weight_mass": [
+    2.5,
+    2.1999999999999997
+  ],
+  "whole_bag_replicated_weight_mass": [
+    2.5,
+    2.1999999999999997
+  ],
+  "partial_heterogeneous_duplicate_loss": 0.16114731953877862,
+  "partial_duplicate_weight_mass": [
+    2.8000000000000003,
+    2.1999999999999997
+  ],
+  "arbitrary_member_replication_invariance_explicitly_false": true,
+  "exact_request_repeat_deduplication_is_separate_preprocessing": true,
+  "one_over_count_is_not_inverse_propensity_or_unbiased_population_risk": true,
+  "earlier_audit_scope": "The first check duplicated the only observation in one bag. It did not test arbitrary partial replication within a heterogeneous bag.",
+  "no_GT_or_teacher_or_images_or_trained_head_read": true,
+  "new_GPU_or_training_calls": 0,
+  "source_sha256": {
+    "scripts/a100_query_profile_duplication_scope.py": "9d57ef494650bc938902bb750523ec2435157f0d5513a8f2364787cc4a6bd1f3",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba"
+  },
+  "no_live_numerical_source_changed": true,
+  "goal_status": "ACTIVE"
+}

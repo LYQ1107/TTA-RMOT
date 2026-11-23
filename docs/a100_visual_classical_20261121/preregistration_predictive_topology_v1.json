@@ -1,0 +1,48 @@
+{
+  "name": "TEACHER_PREDICTIVE_TOPOLOGY_SELECTION_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "motivation": "Nativefactorial132: localJbeatscompleteC4+3.772352CIpositive, but C1localJ-complete=-1.844362CInegative. Needteacher-onlyscalechoice, not datasetID/GT-besttopology.",
+  "previous_negative": "OldGaussianrestricted-evidence BMA withqueryintercept/3kernels/NoYesguard failedC4andC1. Itremainsnegative andisnotrerunorrenamed.",
+  "material_differences": [
+    "Directout-of-foldteacherpredictiverisk ratherthanGaussianmarginalevidence",
+    "Poolnormalizedquerylossesatvideolevel ratherthan2-answerperqueryevidence",
+    "TwoactualLaplaceoperators, local3NN andsametotalweightcomplete;no independent-expertorNoYesguard",
+    "FiveTrackIDfolds excludeallqueries forheldtracks; constantneutral.5unaries mean nofitted-headlabelleak",
+    "GivenPRESUPPOSEDcontractusesbalancedsoftCE, CHECKLISTusesBernoulliCE; comparebothunconditionedscoresascrossedcontrols",
+    "Applyselectedoperator tosamealreadysealednative768directhead, thenfixedexistingteacher-onlyPAVA"
+  ],
+  "scoring": "For eachquery averageheldsoftCEorhalfpositive/halfnegative normalizedsoftCE; equallyaveragequeries. Chooseglobalonlyifstrictlylowerloss; tieLocal. NoGTthreshold/checkpointselection.",
+  "scope": "Currentvideoteacheronly forselection, nofuturelabels/images orpreviousGTstatistics. Currentvideoistransductive; notframeonline. Taskcontractisexplicitexternalinput, not datasetnameinsidealgorithm.",
+  "controls": [
+    "SELECTED_GRAPH",
+    "SELECTED_JOINT",
+    "BCE_JOINT",
+    "BALANCED_JOINT",
+    "MEAN_JOINT",
+    "REVERSED_JOINT",
+    "GLOBAL_GRAPH"
+  ],
+  "existing_references": [
+    "KD",
+    "CAL",
+    "LOCAL_JOINT",
+    "GLOBAL_JOINT"
+  ],
+  "countmatched": "SelectedJ versusKD/CAL/SelectedGraph/LocalJ/GlobalJ/MeanJ bothdirections plusCountSelfs",
+  "expected": {
+    "conditions": 6,
+    "new_raw": 42,
+    "new_counts": 114,
+    "new_official": 156,
+    "new_head_fits": 0,
+    "new_teacher_encoder_calls": 0
+  },
+  "acceptance": "All156newoutputssealbeforeanynewGT. CompareeachdomainagainststrongnativeKD, allfixedexperts/mean andscoringcontrols. Do nothardcodedomainafterseeingresults; preservefailureifteacherchoicefails.",
+  "cost": "QualityCPUreplayonly; existing4physicalV2continueunchanged. Changedfinalrecipe needsitsownactualphysicalfollow-up, notoldJtime.",
+  "selector_sha256": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+  "implementation_sanity": "BeforeanyrealstudyGT/predictions, fixedNumPyadvanced-indexaxisorder usingexplicitmodelviews; mathematical scoringplan unchanged.",
+  "worker_sha256": "e6aa5f01cfcaacc4d0c9d317471295ee47fbcc0ec0c8808c1b52a59cf2d431b1",
+  "additional_global_graph_control": "ExposecompletegraphbeforePAVA toseparatelyauditcalibration; addedbeforeanynewpredictions/GT."
+}

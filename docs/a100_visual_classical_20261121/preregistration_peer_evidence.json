@@ -1,0 +1,32 @@
+{
+  "protocol": "peer_teacher_evidence_audit_v1",
+  "primary": "COVER__AUDIT",
+  "hypothesis": "Do not treat every confident teacher answer as truth. Visually coherent peers can identify a single contradictory response.",
+  "inputs": "exact same current-prefix RGB KD scores, parsed image descriptors and fixed teacher answers as the sealed cohort run; no new neural fit or teacher call",
+  "cohorts": "mutual2NN among colour-visible candidates; two other distinct queried members required",
+  "peer_model": "Beta(1,1) plus soft teacher counts; posterior probability theta>0.5 from other members only",
+  "precision": "multiply own teacher precision by min(1,peer-agreement-odds); no change without peer support",
+  "controls": [
+    "NO_AUDIT exact prediction regression",
+    "same total precision uniformly softened",
+    "same absolute precision multiset shuffled",
+    "peers across entire query without visual cohorts"
+  ],
+  "policies": [
+    "COVER",
+    "UNIFORM",
+    "FACILITY"
+  ],
+  "new_teacher_calls": 0,
+  "new_neural_updates": 0,
+  "no_target_GT_used": true,
+  "no_target_GT_parameter_grid": true,
+  "temporal_scope": "past/current source head and current teacher only; current video transductive",
+  "caveats": [
+    "requires visual cohort semantic coherence",
+    "correlated systematic teacher errors need not be corrected",
+    "lone rare candidates are not downweighted",
+    "all development data"
+  ],
+  "acceptance": "full official metrics, same-evidence controls, count matching if positive, repeat fixed configuration and live cost before goal completion"
+}

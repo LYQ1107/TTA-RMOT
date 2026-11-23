@@ -1,0 +1,19 @@
+{
+  "status": "REGISTERED_FIXED_QA_OBJECT_REFERENCE_TARGET_PREPARATION",
+  "registered_unix": 1795351946.1461034,
+  "source_sha256": {
+    "scripts/a100_object_reference_prepare.py": "b08d43dbdded083f5b394a735691742f1c6a09e6c8dc7c5ba627931650327a79",
+    "flex_uda/active/object_reference.py": "4a05e4c80c65a2bc886a1ff65b397d53cc549057ae9f28ff26325b8c5b7d597f",
+    "flex_uda/active/relational_transport.py": "2de093190983e680b35246ee19ef1edb64ccf9ffc5c2338403666c785c490736",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "tests/test_object_reference.py": "769e4a81c67595d1408170100d7290f247cdac88177b90e85be2a3709c62e723"
+  },
+  "hypothesis": "object_reference_hypothesis_v1.json",
+  "stage": "Before running the new preparation or neural fits; current450quality not read",
+  "inputs": "Original paid QA, frozen source tracks, task queries, already frozen teacher-only causal-prefix slopes and image dimensions; no quality predictions or targetGT",
+  "outputs": "Only local prefix pseudo-target arrays and aggregate preparation receipts. Recompute past targets at each current-prefix beta; never use future answers.",
+  "no_new_teacher_encoder_GPU_or_neural_fits": true,
+  "no_target_manual_labels": true,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

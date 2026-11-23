@@ -1,0 +1,35 @@
+{
+  "status": "REGISTERED_REAL_PREFIX_TEACHER_ONLY_FIT_ENGINEERING",
+  "registered_unix": 1795432226.2031567,
+  "source_sha256": {
+    "scripts/a100_joint_observation_real_fit_pilot.py": "66be61972ff16f33f4d7f9bf5656a9108bf3e89fae56012f3fc53d3bc44dd1b1",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+    "flex_uda/active/joint_observation_fit.py": "885dca1f154754002975fdd0e7107b231e59f85e15ec6f16dd276a8c67844b1b",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3"
+  },
+  "pair": "C2",
+  "video": "0005",
+  "selection": "All eight C2 cases from existing fixed unlabelled physical pilot; no probability/GT/quality filtering",
+  "models": {
+    "STRUCTURED": 64,
+    "GENERIC_JOINT": 128
+  },
+  "seeds": [
+    0
+  ],
+  "minimum_steps": 1000,
+  "maximum_steps": 4000,
+  "teacher_KL_gate": 0.005,
+  "physical_GPU": 0,
+  "preflight_memory_MiB": {
+    "0": 0,
+    "1": 0,
+    "2": 4305,
+    "3": 4375
+  },
+  "no_new_teacher_backbone_GT_or_RMOT_outputs": true,
+  "engineering_not_full_quality_study": true,
+  "not_reused_as_final_study_checkpoints": true,
+  "all_models_same_1101D_inputs": true,
+  "goal_status": "ACTIVE"
+}

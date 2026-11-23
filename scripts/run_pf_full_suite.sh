@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+PF_REPO="${PF_REPO:-/data2/user/FlexHook-TTA}"
+PF_PYTHON="${PF_PYTHON:-/home/szgx/anaconda3/envs/dfot/bin/python}"
+export PYTHONPATH="$PF_REPO/compat:$PF_REPO:/data2/user/TTA-RMOT-assets/flexhook/pydeps:${PYTHONPATH:-}"
+if [[ "${PF_LAUNCH_FULL:-NO}" != YES || "${FLEXHOOK_FULL_RUN_AUTHORIZED:-NO}" != YES ]]; then
+  echo 'BLOCKED: full-suite launch requires both explicit full-run switches' >&2
+  exit 3
+fi
+export PF_MATCHED_FROZEN_ROOT="${PF_MATCHED_FROZEN_ROOT:-$PF_REPO/results/runs/pf_zero_completebank_full_20261025_merged}"
+pf_select_gpu() {
+  "$PF_PYTHON" -c 'import os; from flex_tta.runtime.pf_shards import gpu_snapshot,eligible_gpus; x=eligible_gpus(gpu_snapshot(),shared=os.environ.get("PF_ALLOW_SHARED_GPU")=="YES"); assert x, "No GPU with sufficient memory for source-only equivalence"; print(x[0]["index"],x[0]["uuid"])'
+}
+if (( $# )); then PF_SUITE_METHODS=("$@"); else
+  PF_SUITE_METHODS=(ZERO_UPDATE RELATIVE_ONLY PF_RANK PF_RANK_GUARD PF_IDENTITY PF_HYBRID)
+fi
+for PF_SUITE_METHOD in "${PF_SUITE_METHODS[@]}"; do
+  PF_SUITE_LOWER="${PF_SUITE_METHOD,,}"
+  PF_SUITE_LOWER="${PF_SUITE_LOWER#pf_}"
+  if [[ "$PF_SUITE_METHOD" == ZERO_UPDATE ]]; then PF_SUITE_LOWER=zero; fi
+  PF_SUITE_RUN="$PF_REPO/results/runs/pf_${PF_SUITE_LOWER}_completebank_full_20261025"
+  PF_SUITE_MERGED="${PF_SUITE_RUN}_merged"
+  if [[ "$PF_SUITE_METHOD" != ZERO_UPDATE && ! -f "$PF_REPO/results/positive_free/full/zero_update/metrics.json" ]]; then
+    echo 'ZERO_UPDATE complete-bank baseline must be evaluated before subsequent methods' >&2; exit 4
+  fi
+  if [[ ! -f "$PF_SUITE_MERGED/$PF_SUITE_METHOD/run_metadata.json" ]]; then
+    PF_SUITE_DERIVE=NO
+    if [[ "$PF_SUITE_METHOD" == PF_RANK_GUARD ]]; then
+      PF_SUITE_RANK="$PF_REPO/results/runs/pf_rank_completebank_full_20261025_merged"
+      PF_SUITE_VERIFY="$PF_REPO/results/runs/pf_guard_equivalence_completebank_20261025"
+      if [[ ! -d "$PF_SUITE_VERIFY" ]]; then
+        read -r PF_SUITE_VERIFY_GPU PF_SUITE_VERIFY_UUID < <(pf_select_gpu)
+        CUDA_VISIBLE_DEVICES="$PF_SUITE_VERIFY_UUID" PF_PHYSICAL_GPU="$PF_SUITE_VERIFY_GPU" PF_GPU_UUID="$PF_SUITE_VERIFY_UUID" \
+          PF_GPU_MEMORY_BUDGET_MIB="${PF_GPU_MEMORY_BUDGET_MIB:-24576}" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
+          "$PF_PYTHON" "$PF_REPO/scripts/verify_pf_guard_equivalence.py" --rank-root "$PF_SUITE_RANK" \
+          --output-root "$PF_SUITE_VERIFY" --matched-frozen-root "$PF_MATCHED_FROZEN_ROOT" || echo 'Guard equivalence failed; preserve evidence and use direct full GPU fallback'
+      fi
+      if [[ -f "$PF_SUITE_VERIFY/equivalence.json" ]] && \
+        "$PF_PYTHON" -c 'import json,sys; assert json.load(open(sys.argv[1]))["status"] == "PASS"' "$PF_SUITE_VERIFY/equivalence.json"; then
+        "$PF_PYTHON" "$PF_REPO/scripts/derive_pf_rank_guard.py" --rank-root "$PF_SUITE_RANK" --output-root "$PF_SUITE_MERGED"
+        PF_SUITE_DERIVE=YES
+      fi
+    fi
+    if [[ "$PF_SUITE_DERIVE" != YES ]]; then
+      if [[ "$PF_SUITE_METHOD" != ZERO_UPDATE && "$PF_SUITE_METHOD" != RELATIVE_ONLY ]]; then
+        "$PF_PYTHON" "$PF_REPO/scripts/profile_pf_schedule.py" --run-root "$PF_SUITE_RUN"
+      fi
+      PF_METHOD="$PF_SUITE_METHOD" PF_RUN_ROOT="$PF_SUITE_RUN" bash "$PF_REPO/scripts/run_pf_4gpu.sh" --launch-full
+      "$PF_PYTHON" "$PF_REPO/scripts/merge_flexhook_pcd_shards.py" --shards-root "$PF_SUITE_RUN" \
+        --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" --resume
+    fi
+  fi
+  if [[ "$PF_SUITE_METHOD" == ZERO_UPDATE && ! -f "$PF_MATCHED_FROZEN_ROOT/ZERO_UPDATE/frozen_reference_receipt.json" ]]; then
+    "$PF_PYTHON" "$PF_REPO/scripts/audit_pf_full.py" --output-root "$PF_SUITE_MERGED" --method ZERO_UPDATE
+    cp "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit.json" "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit_historical_source.json"
+    read -r PF_SUITE_DIAG_GPU PF_SUITE_DIAG_UUID < <(pf_select_gpu)
+    PF_SUITE_DIAG="$PF_REPO/results/positive_free/full/manifests/zero_full_boundary_diagnosis.json"
+    CUDA_VISIBLE_DEVICES="$PF_SUITE_DIAG_UUID" OMP_NUM_THREADS=4 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=4 \
+      "$PF_PYTHON" "$PF_REPO/scripts/diagnose_pf_zero_boundary.py" --shard-root "$PF_SUITE_MERGED" --output "$PF_SUITE_DIAG"
+    "$PF_PYTHON" "$PF_REPO/scripts/seal_pf_frozen_reference.py" --output-root "$PF_SUITE_MERGED" --diagnosis "$PF_SUITE_DIAG"
+    cp "$PF_MATCHED_FROZEN_ROOT/ZERO_UPDATE/frozen_reference_receipt.json" "$PF_REPO/results/positive_free/full/manifests/matched_frozen_reference_receipt.json"
+  fi
+  "$PF_PYTHON" "$PF_REPO/scripts/audit_pf_full.py" --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" \
+    --matched-frozen-root "$PF_MATCHED_FROZEN_ROOT"
+  if [[ "$PF_SUITE_METHOD" == ZERO_UPDATE ]]; then
+    "$PF_PYTHON" -c 'import json,sys; a=json.load(open(sys.argv[1])); assert a["source_sign_mismatches"] == 0, "Diagnose ZERO_UPDATE/Frozen sign differences before continuing"' \
+      "$PF_SUITE_MERGED/ZERO_UPDATE/full_audit.json"
+  fi
+  "$PF_PYTHON" "$PF_REPO/scripts/evaluate_flexhook_dance_tta.py" --output-root "$PF_SUITE_MERGED" \
+    --dataset-root /data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance \
+    --vendor-root "$PF_REPO/vendor/FlexHook" --methods "$PF_SUITE_METHOD"
+  "$PF_PYTHON" "$PF_REPO/scripts/summarize_pf_full.py" --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD"
+  "$PF_PYTHON" "$PF_REPO/scripts/analyze_pf_full_offline.py" --output-root "$PF_SUITE_MERGED" --method "$PF_SUITE_METHOD" \
+    --baseline-root "$PF_REPO/results/runs/pf_zero_completebank_full_20261025_merged" --i-allow-offline-gt \
+    --output "$PF_REPO/results/positive_free/full/${PF_SUITE_METHOD,,}/offline_attribution.json"
+  echo "STAGE_COMPLETE $PF_SUITE_METHOD"
+done

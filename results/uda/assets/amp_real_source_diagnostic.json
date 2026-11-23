@@ -1,0 +1,45 @@
+{
+  "status": "DIAGNOSTIC_ONLY",
+  "failed_step": 2666,
+  "loaded_checkpoint_step": 2500,
+  "parameters_are_latest_valid_checkpoint_not_unsaved_failed_state": true,
+  "source_video": "0006",
+  "source_expression": "automobiles-of-a-light-color-that-move-faster-than-the-ego-vehicle",
+  "source_frame": 146,
+  "gpu": {
+    "physical_gpu": 5,
+    "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+    "name": "NVIDIA A800-SXM4-80GB",
+    "free_mib": 81154,
+    "total_mib": 81920,
+    "processes": 0
+  },
+  "results": [
+    {
+      "AMP": true,
+      "loss_scale": 131072.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": false
+    },
+    {
+      "AMP": true,
+      "loss_scale": 65536.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": true
+    },
+    {
+      "AMP": true,
+      "loss_scale": 32768.0,
+      "source_loss": 2.4724130630493164,
+      "all_gradients_finite": true
+    },
+    {
+      "AMP": false,
+      "loss_scale": 1.0,
+      "source_loss": 2.4719748497009277,
+      "all_gradients_finite": true
+    }
+  ],
+  "optimizer_updates": 0,
+  "target_GT_open_attempts": []
+}

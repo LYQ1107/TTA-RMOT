@@ -1,0 +1,27 @@
+{
+  "study": "PAID_WHOLE_QUERY_VISUAL_RESPONSE_GRAPH_OBSERVABILITY",
+  "source_sha256": {
+    "scripts/a100_response_graph_observability.py": "096b27e16fff91d96bfd19780cf26b5ad19e1a74023bc8a55a36f37ef7d60204",
+    "scripts/a100_scoped_supervision_audit.py": "0fa6c6b5bc15f74b04b27f5c8b313c0385d816c8c6cc2bf740875f754fecf860"
+  },
+  "selection": "All six settings, four policies, all148 setting-videos; no selection by current unified HOTA.",
+  "fixed_before_own_diagnostic_results": true,
+  "purpose": "Assess whether paid observations identify whole-query/visual interactions modulo additive query-view and exact-context effects, without trusting lossy semantic parses.",
+  "row_nodes": "Whole original query text and actual effective view, within each video and own policy.",
+  "column_nodes": "Exact rendered visual digest, provided ID/frame, effective view, bbox and complete non-query prompt.",
+  "assumption": "Additive row/column effects are a diagnostic subspace, not established true teacher bias or calibrated semantic probability.",
+  "requested_counts": "592 video-policy graphs; exact requests and identical query/context edges deduplicated separately.",
+  "clipping": 0.02,
+  "no_new_teacher_or_model_training_or_predictions": true,
+  "no_GT_or_current_unified_quality_reads": true,
+  "no_active_recipe_changes": true,
+  "limitations": [
+    "Cycle dimensions are correlated contrasts, not independent semantic labels.",
+    "High interaction energy may reflect semantics, teacher noise, or view-specific coupling.",
+    "Zero residual on a tree means lack of identifiability, not teacher correctness.",
+    "No claim that removing additive components improves HOTA."
+  ],
+  "classical_primary_reference": "https://arxiv.org/abs/0811.1067",
+  "relation_to_primary_reference": "Standard incidence projection; RMOT affinity interactions differ from errors in a single global ranking.",
+  "research_goal_status": "ACTIVE"
+}

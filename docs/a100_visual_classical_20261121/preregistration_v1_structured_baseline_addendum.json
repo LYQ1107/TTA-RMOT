@@ -1,0 +1,23 @@
+{
+  "version": "V1_FRAME_KD_COMMON_DECODER_CONTROL",
+  "before_target_GT": true,
+  "extra_methods": [
+    "COVER__FRAME_KD_HARD_STRUCTURED",
+    "COVER__FRAME_KD_SOFT_STRUCTURED"
+  ],
+  "definition": "reuse actual frame KD logits; optionally apply the same exclusivity and source motion gates as FULL, without graph/correction. Plain frame KD is also retained.",
+  "purpose": "avoid attributing inherited decoder constraints to the new modules",
+  "new_teacher_calls": 0,
+  "new_trainings": 0,
+  "code_sha256": {
+    "scripts/a100_visual_classical_analyze.py": "6cb337dbfd8f25119e0f103173e46c09d4a4c8298daa7bd7424236283c0e9830",
+    "scripts/a100_visual_classical_collect.py": "7a031134a7de33357ba10218e68ed96fca3509fcde8a71f977a6474fc80ad259",
+    "scripts/a100_visual_classical_countmatched.py": "7830c2f122069bb9cc56582529c9f63fa5982d64de224e2bedcd6aa99449d097",
+    "scripts/a100_visual_classical_evaluate.py": "91831b7e22bb0e88eb0b9344242a74adb7d2cdd8beea77869fd3fd737eb5854c",
+    "scripts/a100_visual_classical_finish.py": "f647393282f10940f4a33bb966ea725038a0692dc88b2696f867633eb6d7041b",
+    "scripts/a100_visual_classical_frame_kd.py": "bb0036769bc034e2585097a6988d3eeb42d9c62b0e86398576f34e3d7fdea0ed",
+    "scripts/a100_visual_classical_generate.py": "f2f67aa159f48b40b86c59078c5f0084e03dd8fb3e0a525f93662739f69857db",
+    "scripts/a100_visual_classical_launch.py": "f10081600d4c015f479c5d92c799fdc9f8c7a300499431b6e7138c8b57861061",
+    "scripts/a100_visual_classical_prepare.py": "4a09db466297d6c87a7451672301ac1d72310bbd26ea73372dc26352f0fc32ba"
+  }
+}

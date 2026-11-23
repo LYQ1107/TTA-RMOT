@@ -1,0 +1,68 @@
+protocol: DEVELOPMENT_TEACHER_PROBE
+seed: 17
+target_videos: 25
+target_expressions: 425
+smoke_anchor_quantiles: [0.5]
+probe_anchor_quantiles: [0.1, 0.3, 0.5, 0.7, 0.9]
+candidate_limit: 4
+candidate_rules: [highest_frozen_margin, closest_absolute_margin_to_zero, deterministic_random, longest_remaining_track]
+sampling_inputs: [fixed_official_MOT, images, runtime_sentence_only_manifest, sealed_Frozen_margins]
+allow_GT_sampling: false
+methods: [YES_FULL, YES_ENSEMBLE_BUDGET_MATCHED, STRUCTURED_EVIDENCE, EVIDENCE_VERIFIED, YES_ENSEMBLE_B_PLUS, YESTRACK_TCP_TRP, SOFTMATCH_WEIGHTED]
+conditions: [T0, T1]
+visual_variants: [original, no_image, candidate_occluded, area_matched_background_occluded, previous_observation]
+attribute_aggregation: minimum_all_required
+ensemble_aggregation: mean_equivalent_full_probabilities
+unsupported: full_expression_fallback_but_verifier_UNKNOWN
+tcp_trp:
+  stride: 4
+  stability_window: 6
+  stability_threshold: 0.4
+  stability_boost: 0.3
+  selective_refine_interval: [0.2, 0.8]
+  clip_context_frames: 13
+  scope: pre_registered_causal_clip_with_explicit_reset_not_full_video_HOTA
+source_calibration:
+  source_val_videos: ['0005', '0011', '0013', '0019']
+  windows_per_video: 16
+  positive_threshold_grid: [0.7, 0.8, 0.9, 0.95]
+  negative_threshold_grid: [0.3, 0.2, 0.1, 0.05]
+  require_source_precision: 0.8
+  min_source_accepted_positive: 5
+  reliability_probability_spread_max: 0.2
+  visual_dependence_min: 0.03
+  insufficient_source_support: UNKNOWN_NO_P2
+  choose_on: source_dev_only_then_freeze_before_target_GT_evaluation
+gates:
+  semantic_quality_scope: sampled_frame_queries_with_official_eligible_GT_present
+  all425_official_scored_metrics: auxiliary_not_proof_of_exhaustive_semantic_absence
+  min_scored_positive_opportunities: 50
+  min_positive_videos: 5
+  gate_A:
+    min_AUPRC_gain_vs_matched_Frozen: 0.05
+    min_Recall_at1_gain_vs_matched_Frozen: 0.03
+    require_video_CI_AUPRC_gain_lower_above_zero: true
+    min_POS_precision: 0.8
+    min_GT_positive_coverage: 0.1
+    min_distinct_accepted_positive: 25
+  gate_B:
+    required_comparators: [YES_ENSEMBLE_BUDGET_MATCHED, YES_ENSEMBLE_B_PLUS, SOFTMATCH_WEIGHTED]
+    compare_within_same_weight_condition: true
+    budget_and_visual_matched_B_and_Bplus_required: true
+    min_precision_gain_at_matched_coverage: 0.05
+    require_video_CI_precision_gain_lower_above_zero: true
+    minimum_GT_coverage_retained_vs_matched_baseline: 0.9
+  gate_C:
+    gate_A_required: true
+    gate_B_required_for_evidence_method_claim: true
+    provenance_and_legal_inputs_required: true
+    maximum_forward_budget_ratio_vs_Bplus: 1.1
+    output_if_insufficient: INSUFFICIENT_TEACHER_SUPERVISION
+    no_automatic_student_training: true
+bootstrap:
+  unit: complete_video
+  resamples: 2000
+  seed: 0
+  claim: descriptive_development_probe_not_unseen_test_significance
+teacher_max_physical_GPUs: 4
+student_training_authorized_in_P1: false

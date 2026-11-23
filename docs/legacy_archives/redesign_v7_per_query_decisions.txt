@@ -1,0 +1,12 @@
+Legacy v7 per-query decisions: preserved, excluded only from the new lightweight Git snapshot.
+
+This abandoned study is not a running A100 input. The original CSV remains unchanged at the read-only NAS location used by this checkout, and in the immutable previous public commit:
+https://github.com/LYQ1107/TTA-RMOT/blob/4b8e2c040c1c5486cd8c5cbc3609ce8b48151424/results/presence_active/redesign_v7/presence_decisions.csv
+
+Original bytes: 1211876
+SHA256: bac503e4c2164145ac44e5fc7d1b734c02835be50ed051c59517b4e557cb17dc
+
+To recover without changing NAS, choose a local destination and run:
+git show 4b8e2c040c1c5486cd8c5cbc3609ce8b48151424:results/presence_active/redesign_v7/presence_decisions.csv > /var/tmp/presence_decisions_v7_restored.csv
+
+All current experiment code, aggregate findings, negative results and exact HOTA sufficient statistics remain in the lightweight publication. The CSV was removed from the index only; no NAS file was modified.

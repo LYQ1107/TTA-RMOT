@@ -1,0 +1,64 @@
+{
+  "status": "PASS_DURABLE_PREFIX_REPLAY_AND_INTERRUPTED_VIDEO_QUARANTINE",
+  "failure": "ENOSPC",
+  "failed_controller_pid": 2040390,
+  "old_monitor_session": 66001,
+  "old_monitor_exit_code": 1,
+  "records": [
+    {
+      "pair": "C4",
+      "seed": 0,
+      "valid_durable_videos": 39,
+      "total": 45,
+      "unchanged_prefix_prediction_files_checked": 3240,
+      "completed": false
+    },
+    {
+      "pair": "C1",
+      "seed": 0,
+      "valid_durable_videos": 25,
+      "total": 25,
+      "unchanged_prefix_prediction_files_checked": 3400,
+      "completed": true
+    },
+    {
+      "pair": "C4",
+      "seed": 17,
+      "valid_durable_videos": 39,
+      "total": 45,
+      "unchanged_prefix_prediction_files_checked": 3240,
+      "completed": false
+    },
+    {
+      "pair": "C1",
+      "seed": 17,
+      "valid_durable_videos": 25,
+      "total": 25,
+      "unchanged_prefix_prediction_files_checked": 3400,
+      "completed": true
+    },
+    {
+      "pair": "C4",
+      "seed": 42,
+      "valid_durable_videos": 13,
+      "total": 45,
+      "unchanged_prefix_prediction_files_checked": 1120,
+      "completed": false
+    },
+    {
+      "pair": "C1",
+      "seed": 42,
+      "valid_durable_videos": 13,
+      "total": 25,
+      "unchanged_prefix_prediction_files_checked": 1768,
+      "completed": false
+    }
+  ],
+  "numeric_worker_or_protocol_changed": false,
+  "target_GT_read": false,
+  "completed_conditions_not_retrained": true,
+  "all_results_preserved": true,
+  "new_local_backing_directory": "/var/tmp/liuyeqiang-tta-rmot-a100-20261122/observation_alignment",
+  "original_paths_preserved_by_local_symlink": true,
+  "NAS_untouched": true
+}

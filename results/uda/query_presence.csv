@@ -1,0 +1,9 @@
+method,group,gt_observations,baseline_matched_gt,adapted_matched_gt,baseline_false_positive_rows,adapted_false_positive_rows,recovered_gt,lost_gt,new_false_positive_rows,removed_false_positive_rows,baseline_selected_rows,adapted_selected_rows,episodes,baseline_GT_recall,baseline_nonempty_prediction_episodes,baseline_nonempty_prediction_rate,adapted_GT_recall,adapted_nonempty_prediction_episodes,adapted_nonempty_prediction_rate,net_false_positive_change
+SOURCE_REHEARSAL,query_present,212541,10337,5249,1996,338,6,5094,2,1659,12333,5587,40,0.04863532212608391,32,0.8,0.024696411515895758,28,0.7,-1658
+SOURCE_REHEARSAL,query_empty,0,0,0,87371,35624,0,0,156,51903,87371,35624,385,,154,0.4,,111,0.2883116883116883,-51747
+MEAN_TEACHER_UDA,query_present,212541,10337,10790,1996,2203,1164,711,449,247,12333,12993,40,0.04863532212608391,32,0.8,0.05076667560611835,32,0.8,207
+MEAN_TEACHER_UDA,query_empty,0,0,0,87371,87275,0,0,10453,10549,87371,87275,385,,154,0.4,,165,0.42857142857142855,-96
+WEAK_MIL_UDA,query_present,212541,10337,3719,1996,162,0,6618,1,1835,12333,3881,40,0.04863532212608391,32,0.8,0.017497800424388706,20,0.5,-1834
+WEAK_MIL_UDA,query_empty,0,0,0,87371,21508,0,0,211,66074,87371,21508,385,,154,0.4,,85,0.22077922077922077,-65863
+COMBINED_UDA,query_present,212541,10337,7092,1996,1240,5,3250,1,753,12333,8332,40,0.04863532212608391,32,0.8,0.0333676796476915,28,0.7,-756
+COMBINED_UDA,query_empty,0,0,0,87371,58362,0,0,86,29095,87371,58362,385,,154,0.4,,128,0.33246753246753247,-29009

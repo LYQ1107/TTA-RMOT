@@ -1,0 +1,41 @@
+method: MEAN_TEACHER_UDA
+protocol:
+  name: TRANSDUCTIVE_VAL_DIAGNOSTIC
+  source_domain: refer_kitti_v2
+  target_domain: refer_dance
+  target_split: val
+  evaluation_split: same_val_development_only
+  seed: 17
+  test_time_update: false
+data:
+  source_train_manifest: manifests/source_kitti_v2_train.jsonl
+  source_val_manifest: manifests/source_kitti_v2_val.jsonl
+  target_manifest: manifests/dance_val_runtime.jsonl
+adapter:
+  type: lora
+  rank: 4
+  layers:
+  - -2
+  - -1
+optimizer:
+  name: adamw
+  lr: 5.0e-05
+  weight_decay: 0.0001
+  grad_clip: 1.0
+train:
+  coverage_cycles: 1
+  amp: true
+  save_every_steps: 250
+  source_target_batch_ratio:
+  - 1
+  - 1
+selection: source_val_CE_only
+loss:
+  source_ce: 1.0
+  consistency: 0.2
+  pseudo_bce: 0.2
+  source_presence: 0.0
+  weak_mil: 0.0
+  relation: 0.0
+  temporal: 0.0
+  source_anchor: 0.0

@@ -1,0 +1,10 @@
+{
+  "scope": "Independent legal source-train schema audit; no target GT, no teacher or GPU",
+  "selection": "Pre-fixed first source video; ALL expressions including positive cases",
+  "records": [
+    {"target": "KITTI-V2", "video": "0000", "queries": 596, "positive_queries": 596, "positive_pairs_expression_label": 37480, "positive_pairs_loader": 37480, "mismatching_queries": 0, "symmetric_difference": 0},
+    {"target": "Dance", "video": "dancetrack0001", "queries": 39, "positive_queries": 1, "positive_pairs_expression_label": 4912, "positive_pairs_loader": 4912, "mismatching_queries": 0, "symmetric_difference": 0}
+  ],
+  "comparison": "expression.label targets intersected with observed source GT candidates vs labels.expression_raw membership",
+  "NOT_a_claim_of_full_dataset_reannotation_or_accuracy": true
+}

@@ -1,0 +1,49 @@
+{
+  "status": "COMPLETE_TRAIN_TO_VAL_STOP_NO_NEW_METHOD",
+  "methods": [
+    "FROZEN",
+    "SAME_SET_D1",
+    "SAME_SET_D3",
+    "B1_SRC_RATE_GLOBAL",
+    "OFFICIAL_DANCE_COMPLETE",
+    "T2V_D1_s17",
+    "T2V_D1_s23",
+    "T2V_D1_s42",
+    "T2V_D3_s17"
+  ],
+  "official_prediction_sets": 22,
+  "GT": {
+    "official_GT_detections": 212541,
+    "query_present_episodes": 40,
+    "query_empty_episodes": 385,
+    "query_frames": 433636,
+    "GT_present_frames": 42782,
+    "GT_empty_frames": 390854,
+    "R1_denominator_GT_frames": 42782,
+    "GT_only_opened_in_independent_post_seal_evaluator": true,
+    "filter": "official mark!=0 and pedestrian class==1; no frame/ID shift",
+    "QueryEmpty_means_official_scored_GT_empty_not_a_model_input_label": true
+  },
+  "verdict": {
+    "literal_user_rule_verdict": "\u540c\u96c6\u589e\u76ca\u672a\u80fd\u6cdb\u5316\u5230\u672a\u89c1\u89c6\u9891\u548c\u8868\u8fbe",
+    "G": 8.363011115182989,
+    "retention": 0.006749726083736208,
+    "retention_label": "\u57fa\u672c\u672a\u4fdd\u7559",
+    "expression_split_limitation": "Train/Val share8 expression filenames: not a strict all-unseen-language test",
+    "does_not_establish_strict_unseen_expression_generalization": true,
+    "three_seed_HOTA": [
+      8.497779884494724,
+      8.839272455665844,
+      7.751981005388398
+    ],
+    "displayed_official_HOTA": [
+      8.4978,
+      8.8393,
+      7.752
+    ],
+    "HOTA_seed_std": 0.5560329489769089,
+    "unrounded_G": 8.363011115182989
+  },
+  "independent_offline_report_seconds": 37.569418877130374,
+  "report_sha256": "deb8d1996475e102d34c28d229be9d3acff808797298c6fceeadf9945248991c"
+}

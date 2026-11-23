@@ -1,0 +1,12 @@
+{
+  "reason": "CLI accepted only C1/C4 although fixed evaluation runtime PAIRS already covers all six settings",
+  "changed": "argparse --pair choices from literal C4/C1 to tuple(PAIRS)",
+  "matching_metric_cache_and_training_numerics_changed": false,
+  "target_label_content_opened": false,
+  "original_source_sha256": "a05164f4d03525d3dccae1999d921425a6395e9d7d0d217497a0d2594b82eae7",
+  "current_source_sha256": "a0e96622cadb5145c7e09344d3bc6671950b53010b38da350fa1d0f968928f9e",
+  "check": "python -m flex_uda.a100.evaluation_reuse --help lists C1,C2,C3,C4,C5,C6",
+  "experimental_workers_restarted": false,
+  "GT_barriers_preserved": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+  "source_train_videos": 17,
+  "target_adaptation_videos": 25,
+  "target_evaluation_videos": 25,
+  "target_queries": 425,
+  "target_adaptation_split": "same25Val",
+  "independent_target_generalization": false,
+  "source_free": false,
+  "online_TTA": false,
+  "target_GT_in_training": false,
+  "target_GT_threshold_selection": false,
+  "source_val_selection_windows": 64,
+  "coverage_cycles": 1,
+  "steps_per_method": 8973,
+  "MOT_candidate_rows": 211085,
+  "candidate_query_observations": 3588445,
+  "threshold": 0,
+  "rank": 4,
+  "seed": 17,
+  "lr": 5e-05,
+  "source_unique_frame_anchors": 393,
+  "target_unique_frame_anchors": 75,
+  "target_query_windows": 1275,
+  "all_frame_optimization": false,
+  "original40Train_to25Val_task_complete": false,
+  "GT_group_labels_offline_only": true,
+  "raw_roots": {
+    "training": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1",
+    "evaluation": "/data2/user/FlexHook-TTA/results/runs/uda_val_evaluation_20261026_v1"
+  }
+}

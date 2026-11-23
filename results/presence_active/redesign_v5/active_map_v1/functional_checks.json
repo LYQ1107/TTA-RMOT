@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "tests_passed": 37,
+  "wall_seconds": 9.35,
+  "command": "python -m pytest -q tests/test_map_calibration.py tests/test_active_execution.py tests/test_presence_cardinality.py tests/test_presence_residual.py tests/test_presence_active.py",
+  "compileall": "PASS",
+  "new_checks": [
+    "unqueried confidence cannot train the MAP calibrator",
+    "one-class identity and presence evidence skips without saturation",
+    "two-class supported MAP objective decreases with finite positive slope and temperature",
+    "unobserved intercepts remain unchanged and old teacher evidence is not applied twice",
+    "prior-dominated labels opposing teacher evidence are excluded",
+    "separable labels have a finite regularized solution",
+    "conflicting presence is UNKNOWN",
+    "pilot-only manifest blocks full queue before GPU access"
+  ],
+  "new_gpu_or_teacher_calls_by_tests": 0,
+  "tests_are_not_scientific_performance_evidence": true
+}

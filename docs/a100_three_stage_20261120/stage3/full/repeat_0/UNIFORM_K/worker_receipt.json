@@ -1,0 +1,36 @@
+{
+  "status": "COMPLETE",
+  "method": "UNIFORM_K",
+  "scope": "full",
+  "repeat": 0,
+  "last_video": "v_i2_L4qquVg0_c010",
+  "phases": {
+    "teacher_init": 505.00785268703476,
+    "teacher_service": 664.3548790424247,
+    "teacher_final_seal": 15.764098634012043
+  },
+  "teacher": {
+    "logical_calls": 3508,
+    "new_calls": 3508,
+    "cache_hits": 0,
+    "forward_seconds": 141.99799105257262,
+    "equivalent_forward_seconds": 141.99799105257256,
+    "batches": 456,
+    "cache": {
+      "complete_raw_responses": 3508,
+      "pending_leases": 0,
+      "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/three_stage_20261120/stage3/full/repeat_0/UNIFORM_K/teacher.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 495.0100556089892,
+    "peak_allocated_bytes": 5895100416
+  },
+  "actual_calls": 3508,
+  "GT_open_attempts": 0,
+  "wall_seconds": 1264.042533417989,
+  "physical_GPU": "0",
+  "needs_student": false,
+  "cold_definition": "process/model cold; shared OS page cache retained"
+}

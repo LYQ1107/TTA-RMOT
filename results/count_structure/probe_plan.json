@@ -1,0 +1,48 @@
+{
+  "status": "FIXED_GT_FREE_PROBE_MANIFEST",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0018",
+    "dancetrack0034",
+    "dancetrack0058",
+    "dancetrack0079"
+  ],
+  "frames": 50,
+  "manifest_path": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/manifest.jsonl",
+  "manifest_sha256": "c878d0f6f7774f695580457cabda4dce31b6122ec50010314a5a4bf6aefb71fd",
+  "candidates": 378,
+  "planned_logical_calls_2B": {
+    "T1_CROP_YESNO": 6426,
+    "T2_CROP_CHOICE": 378,
+    "T3_FRAME_SOM": 850
+  },
+  "models": {
+    "2B": {
+      "config": "/data2/user/FlexHook-TTA/configs/teacher/base_qwen2b.yaml",
+      "model_path": "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+      "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+      "methods": [
+        "T1_CROP_YESNO",
+        "T2_CROP_CHOICE",
+        "T3_FRAME_SOM"
+      ]
+    }
+  },
+  "local8B_available": false,
+  "model_search_roots": [
+    "/data2/user",
+    "/data3/user",
+    "/home/user/.cache/huggingface",
+    "/home/szgx/.cache/huggingface"
+  ],
+  "model_search_permission_notes": [],
+  "no_download": true,
+  "target_GT_open_attempts": 0,
+  "font": {
+    "path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+    "size": 24,
+    "sha256": "437a5ecec2ec177cba9284cbffc56055311347f3e9fe4f2b4b40323d0290a6db"
+  },
+  "scope": "5video50frame probe only; unobserved frames UNKNOWN, not full RMOT",
+  "student_updates": 0
+}

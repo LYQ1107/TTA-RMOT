@@ -1,0 +1,116 @@
+{
+  "selected_workers": [
+    {
+      "method": "SOURCE_REHEARSAL",
+      "config": "source_rehearsal",
+      "physical_gpu": 5,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 81154,
+      "total_mib": 81920,
+      "processes": 0
+    },
+    {
+      "method": "MEAN_TEACHER_UDA",
+      "config": "mean_teacher",
+      "physical_gpu": 4,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 57231,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "method": "WEAK_MIL_UDA",
+      "config": "weak_mil",
+      "physical_gpu": 6,
+      "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53289,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "method": "COMBINED_UDA",
+      "config": "combined",
+      "physical_gpu": 3,
+      "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53193,
+      "total_mib": 81920,
+      "processes": 2
+    }
+  ],
+  "all_gpus": [
+    {
+      "physical_gpu": 0,
+      "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 7296,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "physical_gpu": 1,
+      "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 37308,
+      "total_mib": 81920,
+      "processes": 3
+    },
+    {
+      "physical_gpu": 2,
+      "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 23565,
+      "total_mib": 81920,
+      "processes": 1
+    },
+    {
+      "physical_gpu": 3,
+      "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53193,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "physical_gpu": 4,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 57231,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "physical_gpu": 5,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 81154,
+      "total_mib": 81920,
+      "processes": 0
+    },
+    {
+      "physical_gpu": 6,
+      "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 53289,
+      "total_mib": 81920,
+      "processes": 2
+    },
+    {
+      "physical_gpu": 7,
+      "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 23571,
+      "total_mib": 81920,
+      "processes": 1
+    }
+  ],
+  "existing_processes": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491569, 37270\nGPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 2491618, 36552\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3571193, 16376\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 365778, 5932\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 3123917, 21514\nGPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2, 2491732, 57568\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 365778, 5710\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 3203688, 22236\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 365778, 5710\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 3222395, 18194\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 365778, 5614\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 3140738, 22236\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 2491843, 57562\n",
+  "sharing_authorized": true,
+  "no_foreign_process_killed": true,
+  "per_worker_allocator_budget_mib": 24576,
+  "admission_headroom_mib": 8192,
+  "resource_snapshot_is_not_reservation": true
+}

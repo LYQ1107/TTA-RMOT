@@ -1,0 +1,14 @@
+{
+  "status": "STARTUP_WAIT_REPAIRED_BEFORE_ANY_AUDIT_INPUT",
+  "old_pid": 2361693,
+  "new_pid": 2362049,
+  "error": "FileNotFoundError(2, 'No such file or directory')",
+  "reason": "Parser preparation had not yet written dependency state when the audit started.",
+  "source_before_SHA": "7794319352e4d1112f51cd4444378eb8c851ac3327c6e62c3d1028f80ca1c280",
+  "source_after_SHA": "f4cb07d0f29e2adf3d8e8d72a6486abce97619e027ca5fcbbf4a525cd83ce4a0",
+  "change": "Wait for missing dependency state, then follow the same success/failure conditions.",
+  "old_state_log_registration_preserved": true,
+  "no_raw_QA_GT_prediction_or_quality_input_read": true,
+  "parser_model_or_numerics_restarted": false,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,484 @@
+{
+  "NAIVE": {
+    "direct_samples": 8500,
+    "direct_teacher_AUROC": 0.9643722420735056,
+    "direct_teacher_AP": 0.6152732704449284,
+    "accepted_POS": 656,
+    "accepted_POS_correct": 363,
+    "accepted_POS_precision": 0.5533536585365854,
+    "positive_discovery_recall_within_queried_candidates": 0.7348178137651822,
+    "diagnostic_NEG_official_match_fraction": 0.0026917900403768506,
+    "UNKNOWN_not_hard_negative": true,
+    "correct_POS_not_source_selected": 325,
+    "new_correct_candidate_POS_vs_Naive": 0,
+    "lost_correct_candidate_POS_vs_Naive": 0,
+    "expanded_weak": 262,
+    "expanded_weak_official_correct": 168,
+    "expanded_weak_official_error_fraction": 0.3587786259541985,
+    "endpoint_positive_but_middle_wrong": 0,
+    "query_visible_endpoint_identity_change": 1,
+    "query_visible_middle_identity_change": 1,
+    "identity_audit_limit": "only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded",
+    "one_to_one_GT_coverage_counts": {
+      "direct_GT_observations": 363,
+      "expanded_GT_observations": 168,
+      "geometry_GT_observations": 170
+    },
+    "unique_direct_GT_observations": 363,
+    "unique_new_direct_GT_observations_vs_Naive": 0,
+    "unique_lost_direct_GT_observations_vs_Naive": 0,
+    "coverage_definition": "video/query/frame/official_GT_ID after one-to-one assignment; distinct from possibly duplicated matching candidate rows",
+    "selected_checkpoint_teacher_fit": {
+      "methods": {
+        "FROZEN": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 1.3389223548057796,
+            "soft_teacher_MSE": 0.13716377402902247,
+            "mean_student_probability": 0.07002176739688801,
+            "positive_selection_fraction": 0.06541176470588235
+          },
+          "POS": {
+            "samples": 656,
+            "soft_teacher_BCE": 8.451605775253467,
+            "soft_teacher_MSE": 0.8544908928384681,
+            "mean_student_probability": 0.09060263449957195,
+            "positive_selection_fraction": 0.08384146341463415
+          },
+          "NEG": {
+            "samples": 6687,
+            "soft_teacher_BCE": 0.2247905883581496,
+            "soft_teacher_MSE": 0.04792696087213816,
+            "mean_student_probability": 0.06472166293413956,
+            "positive_selection_fraction": 0.06206071481979961
+          },
+          "UNKNOWN": {
+            "samples": 1157,
+            "soft_teacher_BCE": 3.7453863119549737,
+            "soft_teacher_MSE": 0.24620437873177878,
+            "mean_student_probability": 0.0889852503035761,
+            "positive_selection_fraction": 0.07433016421780467
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 494,
+            "soft_teacher_BCE": 7.304274704820581,
+            "soft_teacher_MSE": 0.7143780278185674,
+            "mean_student_probability": 0.1260513415020761,
+            "positive_selection_fraction": 0.1194331983805668
+          }
+        },
+        "NAIVE_PAIRED": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 0.3634776052095731,
+            "soft_teacher_MSE": 0.08180404751379887,
+            "mean_student_probability": 0.09422262959636817,
+            "positive_selection_fraction": 0.009411764705882352
+          },
+          "POS": {
+            "samples": 656,
+            "soft_teacher_BCE": 2.003615233325663,
+            "soft_teacher_MSE": 0.6408077016984348,
+            "mean_student_probability": 0.20775984214525872,
+            "positive_selection_fraction": 0.06554878048780488
+          },
+          "NEG": {
+            "samples": 6687,
+            "soft_teacher_BCE": 0.09692860948653853,
+            "soft_teacher_MSE": 0.01319921364993861,
+            "mean_student_probability": 0.07270740171493321,
+            "positive_selection_fraction": 0.004037685060565276
+          },
+          "UNKNOWN": {
+            "samples": 1157,
+            "soft_teacher_BCE": 0.974093724791057,
+            "soft_teacher_MSE": 0.16136681925322172,
+            "mean_student_probability": 0.15419835769583518,
+            "positive_selection_fraction": 0.00864304235090752
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 494,
+            "soft_teacher_BCE": 1.8147334837714977,
+            "soft_teacher_MSE": 0.5371290873061766,
+            "mean_student_probability": 0.20570454246684336,
+            "positive_selection_fraction": 0.08502024291497975
+          }
+        }
+      },
+      "scope": "SOURCE_SELECTED_CHECKPOINT_ON_TRAINING_ANCHORS_NOT_INDEPENDENT_VALIDATION",
+      "official_GT_group_used_only_offline": true,
+      "not_used_for_checkpoint_or_threshold_selection": true
+    },
+    "one_to_one_GT_coverage_fraction_of_all": 0.0017079057687693197,
+    "new_weak_GT_coverage_fraction_of_all": 0.0007904357276948918,
+    "total_GT_observation_denominators": {
+      "all": 212541,
+      "non_teacher_endpoint": 210349,
+      "teacher_endpoint": 2192,
+      "potential_middle": 1102
+    },
+    "ordinary_geometry_expansion": {
+      "samples": 270,
+      "official_correct": 170,
+      "official_error_fraction": 0.37037037037037035
+    },
+    "warning": "official unmatched is not exhaustive semantic absence; sampled/weak counts are not unique people; soft NEG-like probability is not a hard negative label",
+    "teacher_POS_by_query_presence": {
+      "Query-Present": {
+        "accepted_POS": 417,
+        "official_correct": 363,
+        "official_precision": 0.8705035971223022,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      },
+      "Query-Empty": {
+        "accepted_POS": 239,
+        "official_correct": 0,
+        "official_precision": 0.0,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      }
+    }
+  },
+  "PSR": {
+    "direct_samples": 8500,
+    "direct_teacher_AUROC": 0.9652138585518532,
+    "direct_teacher_AP": 0.6047598753160235,
+    "accepted_POS": 657,
+    "accepted_POS_correct": 374,
+    "accepted_POS_precision": 0.5692541856925418,
+    "positive_discovery_recall_within_queried_candidates": 0.7648261758691206,
+    "diagnostic_NEG_official_match_fraction": 0.003143242029636282,
+    "UNKNOWN_not_hard_negative": true,
+    "correct_POS_not_source_selected": 344,
+    "new_correct_candidate_POS_vs_Naive": 177,
+    "lost_correct_candidate_POS_vs_Naive": 166,
+    "expanded_weak": 254,
+    "expanded_weak_official_correct": 170,
+    "expanded_weak_official_error_fraction": 0.3307086614173228,
+    "endpoint_positive_but_middle_wrong": 0,
+    "query_visible_endpoint_identity_change": 0,
+    "query_visible_middle_identity_change": 0,
+    "identity_audit_limit": "only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded",
+    "one_to_one_GT_coverage_counts": {
+      "direct_GT_observations": 374,
+      "expanded_GT_observations": 170,
+      "geometry_GT_observations": 174
+    },
+    "unique_direct_GT_observations": 374,
+    "unique_new_direct_GT_observations_vs_Naive": 177,
+    "unique_lost_direct_GT_observations_vs_Naive": 166,
+    "coverage_definition": "video/query/frame/official_GT_ID after one-to-one assignment; distinct from possibly duplicated matching candidate rows",
+    "selected_checkpoint_teacher_fit": {
+      "methods": {
+        "FROZEN": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 1.3224413814256237,
+            "soft_teacher_MSE": 0.1275434588334334,
+            "mean_student_probability": 0.0599539298120019,
+            "positive_selection_fraction": 0.05411764705882353
+          },
+          "POS": {
+            "samples": 657,
+            "soft_teacher_BCE": 8.6387174530035,
+            "soft_teacher_MSE": 0.8667801599895308,
+            "mean_student_probability": 0.07894869997769405,
+            "positive_selection_fraction": 0.0684931506849315
+          },
+          "NEG": {
+            "samples": 6681,
+            "soft_teacher_BCE": 0.18286734406190286,
+            "soft_teacher_MSE": 0.03796700189592081,
+            "mean_student_probability": 0.05627619158006098,
+            "positive_selection_fraction": 0.0523873671606047
+          },
+          "UNKNOWN": {
+            "samples": 1162,
+            "soft_teacher_BCE": 3.737846514472402,
+            "soft_teacher_MSE": 0.2246018031879649,
+            "mean_student_probability": 0.0703596140880239,
+            "positive_selection_fraction": 0.05593803786574871
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 489,
+            "soft_teacher_BCE": 7.5260833075059255,
+            "soft_teacher_MSE": 0.7367745721964212,
+            "mean_student_probability": 0.11306788198366595,
+            "positive_selection_fraction": 0.10020449897750511
+          }
+        },
+        "PSR": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 0.36053871695121786,
+            "soft_teacher_MSE": 0.08019973068080576,
+            "mean_student_probability": 0.09663292992067425,
+            "positive_selection_fraction": 0.013058823529411765
+          },
+          "POS": {
+            "samples": 657,
+            "soft_teacher_BCE": 1.9542475462434217,
+            "soft_teacher_MSE": 0.629676145035388,
+            "mean_student_probability": 0.2151569706659017,
+            "positive_selection_fraction": 0.076103500761035
+          },
+          "NEG": {
+            "samples": 6681,
+            "soft_teacher_BCE": 0.0998262635459714,
+            "soft_teacher_MSE": 0.014354308741415125,
+            "mean_student_probability": 0.07442607606738694,
+            "positive_selection_fraction": 0.006436162251160006
+          },
+          "UNKNOWN": {
+            "samples": 1162,
+            "soft_teacher_BCE": 0.9584330373948271,
+            "soft_teacher_MSE": 0.14810615042788686,
+            "mean_student_probability": 0.15729876109468294,
+            "positive_selection_fraction": 0.01549053356282272
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 489,
+            "soft_teacher_BCE": 1.7884775762171523,
+            "soft_teacher_MSE": 0.531133618771304,
+            "mean_student_probability": 0.2189705947567095,
+            "positive_selection_fraction": 0.09406952965235174
+          }
+        }
+      },
+      "scope": "SOURCE_SELECTED_CHECKPOINT_ON_TRAINING_ANCHORS_NOT_INDEPENDENT_VALIDATION",
+      "official_GT_group_used_only_offline": true,
+      "not_used_for_checkpoint_or_threshold_selection": true
+    },
+    "one_to_one_GT_coverage_fraction_of_all": 0.0017596604890350567,
+    "new_weak_GT_coverage_fraction_of_all": 0.0007998456768341167,
+    "total_GT_observation_denominators": {
+      "all": 212541,
+      "non_teacher_endpoint": 210349,
+      "teacher_endpoint": 2192,
+      "potential_middle": 1102
+    },
+    "ordinary_geometry_expansion": {
+      "samples": 263,
+      "official_correct": 174,
+      "official_error_fraction": 0.33840304182509506
+    },
+    "warning": "official unmatched is not exhaustive semantic absence; sampled/weak counts are not unique people; soft NEG-like probability is not a hard negative label",
+    "teacher_POS_by_query_presence": {
+      "Query-Present": {
+        "accepted_POS": 429,
+        "official_correct": 374,
+        "official_precision": 0.8717948717948718,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      },
+      "Query-Empty": {
+        "accepted_POS": 228,
+        "official_correct": 0,
+        "official_precision": 0.0,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      }
+    }
+  },
+  "UNIFORM": {
+    "direct_samples": 8500,
+    "direct_teacher_AUROC": 0.9654014704679045,
+    "direct_teacher_AP": 0.6312419870318651,
+    "accepted_POS": 639,
+    "accepted_POS_correct": 371,
+    "accepted_POS_precision": 0.5805946791862285,
+    "positive_discovery_recall_within_queried_candidates": 0.7525354969574036,
+    "diagnostic_NEG_official_match_fraction": 0.00280194661554343,
+    "UNKNOWN_not_hard_negative": true,
+    "correct_POS_not_source_selected": 352,
+    "new_correct_candidate_POS_vs_Naive": 235,
+    "lost_correct_candidate_POS_vs_Naive": 227,
+    "expanded_weak": 258,
+    "expanded_weak_official_correct": 172,
+    "expanded_weak_official_error_fraction": 0.33333333333333337,
+    "endpoint_positive_but_middle_wrong": 0,
+    "query_visible_endpoint_identity_change": 0,
+    "query_visible_middle_identity_change": 0,
+    "identity_audit_limit": "only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded",
+    "one_to_one_GT_coverage_counts": {
+      "direct_GT_observations": 371,
+      "expanded_GT_observations": 172,
+      "geometry_GT_observations": 176
+    },
+    "unique_direct_GT_observations": 371,
+    "unique_new_direct_GT_observations_vs_Naive": 234,
+    "unique_lost_direct_GT_observations_vs_Naive": 226,
+    "coverage_definition": "video/query/frame/official_GT_ID after one-to-one assignment; distinct from possibly duplicated matching candidate rows",
+    "selected_checkpoint_teacher_fit": {
+      "methods": {
+        "FROZEN": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 1.3547208963050281,
+            "soft_teacher_MSE": 0.12361983758496607,
+            "mean_student_probability": 0.04955709716252843,
+            "positive_selection_fraction": 0.044823529411764707
+          },
+          "POS": {
+            "samples": 639,
+            "soft_teacher_BCE": 9.548951410150787,
+            "soft_teacher_MSE": 0.9070497635887643,
+            "mean_student_probability": 0.05032690982817739,
+            "positive_selection_fraction": 0.04225352112676056
+          },
+          "NEG": {
+            "samples": 6781,
+            "soft_teacher_BCE": 0.1761338193734643,
+            "soft_teacher_MSE": 0.033653870044963466,
+            "mean_student_probability": 0.046712498457423014,
+            "positive_selection_fraction": 0.04291402448016517
+          },
+          "UNKNOWN": {
+            "samples": 1080,
+            "soft_teacher_BCE": 3.906466887347152,
+            "soft_teacher_MSE": 0.22496011830008683,
+            "mean_student_probability": 0.0669620170939823,
+            "positive_selection_fraction": 0.058333333333333334
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 493,
+            "soft_teacher_BCE": 8.25929815955364,
+            "soft_teacher_MSE": 0.7718294040400216,
+            "mean_student_probability": 0.07821351356163736,
+            "positive_selection_fraction": 0.07099391480730223
+          }
+        }
+      },
+      "scope": "SOURCE_SELECTED_CHECKPOINT_ON_TRAINING_ANCHORS_NOT_INDEPENDENT_VALIDATION",
+      "official_GT_group_used_only_offline": true,
+      "not_used_for_checkpoint_or_threshold_selection": true
+    },
+    "one_to_one_GT_coverage_fraction_of_all": 0.0017455455653262195,
+    "new_weak_GT_coverage_fraction_of_all": 0.0008092556259733416,
+    "total_GT_observation_denominators": {
+      "all": 212541,
+      "non_teacher_endpoint": 210349,
+      "teacher_endpoint": 2192,
+      "potential_middle": 1102
+    },
+    "ordinary_geometry_expansion": {
+      "samples": 268,
+      "official_correct": 176,
+      "official_error_fraction": 0.34328358208955223
+    },
+    "warning": "official unmatched is not exhaustive semantic absence; sampled/weak counts are not unique people; soft NEG-like probability is not a hard negative label",
+    "teacher_POS_by_query_presence": {
+      "Query-Present": {
+        "accepted_POS": 428,
+        "official_correct": 371,
+        "official_precision": 0.866822429906542,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      },
+      "Query-Empty": {
+        "accepted_POS": 211,
+        "official_correct": 0,
+        "official_precision": 0.0,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      }
+    }
+  },
+  "CONFIDENCE": {
+    "direct_samples": 8500,
+    "direct_teacher_AUROC": 0.9613731705536115,
+    "direct_teacher_AP": 0.5778150184589151,
+    "accepted_POS": 686,
+    "accepted_POS_correct": 370,
+    "accepted_POS_precision": 0.5393586005830904,
+    "positive_discovery_recall_within_queried_candidates": 0.7269155206286837,
+    "diagnostic_NEG_official_match_fraction": 0.003603062603212731,
+    "UNKNOWN_not_hard_negative": true,
+    "correct_POS_not_source_selected": 331,
+    "new_correct_candidate_POS_vs_Naive": 147,
+    "lost_correct_candidate_POS_vs_Naive": 140,
+    "expanded_weak": 271,
+    "expanded_weak_official_correct": 167,
+    "expanded_weak_official_error_fraction": 0.3837638376383764,
+    "endpoint_positive_but_middle_wrong": 0,
+    "query_visible_endpoint_identity_change": 0,
+    "query_visible_middle_identity_change": 0,
+    "identity_audit_limit": "only query-GT-visible IoU>=.5 identities; unobserved GT, same-clothes drift, and action changes cannot be excluded",
+    "one_to_one_GT_coverage_counts": {
+      "direct_GT_observations": 369,
+      "expanded_GT_observations": 166,
+      "geometry_GT_observations": 169
+    },
+    "unique_direct_GT_observations": 369,
+    "unique_new_direct_GT_observations_vs_Naive": 146,
+    "unique_lost_direct_GT_observations_vs_Naive": 140,
+    "coverage_definition": "video/query/frame/official_GT_ID after one-to-one assignment; distinct from possibly duplicated matching candidate rows",
+    "selected_checkpoint_teacher_fit": {
+      "methods": {
+        "FROZEN": {
+          "ALL": {
+            "samples": 8500,
+            "soft_teacher_BCE": 1.2584721789210234,
+            "soft_teacher_MSE": 0.1471789154292563,
+            "mean_student_probability": 0.08598700288088915,
+            "positive_selection_fraction": 0.07847058823529411
+          },
+          "POS": {
+            "samples": 686,
+            "soft_teacher_BCE": 7.472141703786327,
+            "soft_teacher_MSE": 0.8410055686708643,
+            "mean_student_probability": 0.09830773073481061,
+            "positive_selection_fraction": 0.08309037900874636
+          },
+          "NEG": {
+            "samples": 6661,
+            "soft_teacher_BCE": 0.268966234317383,
+            "soft_teacher_MSE": 0.06070210406905517,
+            "mean_student_probability": 0.08053985676926292,
+            "positive_selection_fraction": 0.07581444227593455
+          },
+          "UNKNOWN": {
+            "samples": 1153,
+            "soft_teacher_BCE": 3.278005399170158,
+            "soft_teacher_MSE": 0.2339585826855934,
+            "mean_student_probability": 0.11012526909229604,
+            "positive_selection_fraction": 0.09106678230702515
+          },
+          "OFFICIAL_GT_MATCH": {
+            "samples": 509,
+            "soft_teacher_BCE": 6.346312895268083,
+            "soft_teacher_MSE": 0.696366439232353,
+            "mean_student_probability": 0.14549933778042048,
+            "positive_selection_fraction": 0.12770137524557956
+          }
+        }
+      },
+      "scope": "SOURCE_SELECTED_CHECKPOINT_ON_TRAINING_ANCHORS_NOT_INDEPENDENT_VALIDATION",
+      "official_GT_group_used_only_offline": true,
+      "not_used_for_checkpoint_or_threshold_selection": true
+    },
+    "one_to_one_GT_coverage_fraction_of_all": 0.0017361356161869944,
+    "new_weak_GT_coverage_fraction_of_all": 0.000781025778555667,
+    "total_GT_observation_denominators": {
+      "all": 212541,
+      "non_teacher_endpoint": 210349,
+      "teacher_endpoint": 2192,
+      "potential_middle": 1102
+    },
+    "ordinary_geometry_expansion": {
+      "samples": 280,
+      "official_correct": 170,
+      "official_error_fraction": 0.3928571428571429
+    },
+    "warning": "official unmatched is not exhaustive semantic absence; sampled/weak counts are not unique people; soft NEG-like probability is not a hard negative label",
+    "teacher_POS_by_query_presence": {
+      "Query-Present": {
+        "accepted_POS": 434,
+        "official_correct": 370,
+        "official_precision": 0.8525345622119815,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      },
+      "Query-Empty": {
+        "accepted_POS": 252,
+        "official_correct": 0,
+        "official_precision": 0.0,
+        "definition": "offline official episode grouping, not supplied to teacher/student"
+      }
+    }
+  }
+}

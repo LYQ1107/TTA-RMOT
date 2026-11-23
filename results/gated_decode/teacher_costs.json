@@ -1,0 +1,771 @@
+{
+  "status": "COMPLETE_COST_ACCOUNTING",
+  "actual_unique_forwarded_calls": 86663,
+  "requested_gate_judgements": 89961,
+  "forward_batches": 10984,
+  "forward_seconds": 1350.9709115433507,
+  "mean_amortized_forward_seconds": 0.015588785427960614,
+  "Dance_forward_calls": 53805,
+  "Dance_forward_seconds": 809.8076826964971,
+  "Dance_amortized_forward_seconds": 0.015050788638537257,
+  "exhaustive_Dance_candidate_query_pairs": 3588445,
+  "exhaustive_Dance_forward_GPU_hours": 15.002479787782175,
+  "exhaustive_all_domain_mean_GPU_hours": 15.538749756955035,
+  "GPU_process_hours": 0.40942770582921284,
+  "worker_attempts": [
+    {
+      "smoke": false,
+      "pid": 2306053,
+      "physical_gpu": 2,
+      "exit_code": 0,
+      "worker_seconds": 1449.0873059809674,
+      "log": "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher_launchers/1793514272367783507/full.log"
+    },
+    {
+      "smoke": true,
+      "pid": 2304631,
+      "physical_gpu": 2,
+      "exit_code": 0,
+      "worker_seconds": 24.852435004198924,
+      "log": "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher_launchers/1793514272367783507/smoke.log"
+    }
+  ],
+  "smoke_receipt": {
+    "status": "REAL_T1_SMOKE_PASS",
+    "frames": 2,
+    "rows": 6,
+    "outputs_path": "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher/smoke_outputs.jsonl",
+    "outputs_sha256": "99015071d300c03587207439d17f4468c9a2a4532aa9c90e75904c75f80dce1c",
+    "manifest_sha256": "740fc3200bc988420c6e4c8daa1e0816efc1461fb364aa519329af35153e6a99",
+    "GT_open_attempts": 0,
+    "isolation": {
+      "landlock_abi": 1,
+      "kernel_read_whitelist": true,
+      "kernel_stage_write_denied": true,
+      "read_roots": [
+        "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0004/000061.png",
+        "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0005/000015.png",
+        "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher/manifest.jsonl",
+        "/data2/user/TTA-RMOT-assets/teacher-p1/models/Qwen3-VL-2B-Instruct",
+        "/data2/user/TTA-RMOT-assets/teacher-p1/references/YesTrack",
+        "/data2/user/FlexHook-TTA/flex_uda",
+        "/data2/user/FlexHook-TTA/flex_tta",
+        "/data2/user/FlexHook-TTA/scripts",
+        "/data2/user/FlexHook-TTA/configs",
+        "/home/szgx/anaconda3/envs/vllmedit",
+        "/usr",
+        "/usr/lib",
+        "/usr/lib64",
+        "/usr/bin",
+        "/etc",
+        "/proc",
+        "/sys",
+        "/data2/user/FlexHook-TTA/results/runs/gated_decode_20261101/teacher",
+        "/dev",
+        "/tmp"
+      ],
+      "handled_filesystem_access": 8191
+    },
+    "frozen": {
+      "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+      "frozen_parameters_unchanged": true,
+      "optimizer_updates": 0,
+      "forward_batches": 2,
+      "model_load_and_initial_hash_seconds": 9.803636587923393
+    },
+    "counts": [
+      {
+        "dataset": "Dance",
+        "video": "dancetrack0004",
+        "gate_mode": "normal",
+        "frame": 61,
+        "requested_calls": 3,
+        "new_calls": 3,
+        "cache_hits": 0,
+        "forward_batches": 1,
+        "forward_seconds": 1.3495823859702796,
+        "peak_allocated_bytes": 4420796416
+      },
+      {
+        "dataset": "KITTI",
+        "video": "0005",
+        "gate_mode": "normal",
+        "frame": 15,
+        "requested_calls": 3,
+        "new_calls": 3,
+        "cache_hits": 0,
+        "forward_batches": 1,
+        "forward_seconds": 0.08324735122732818,
+        "peak_allocated_bytes": 4420796416
+      }
+    ],
+    "cache_unique_calls": 6,
+    "original_backend_sha256": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "original_builder_sha256": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+    "worker_seconds": 19.286316931946203,
+    "physical_gpu": "2",
+    "student_updates": 0,
+    "teacher_updates": 0
+  },
+  "full_worker_seconds": 1443.4545331120025,
+  "full_frozen_seal": {
+    "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "frozen_parameters_unchanged": true,
+    "optimizer_updates": 0,
+    "forward_batches": 10982,
+    "model_load_and_initial_hash_seconds": 8.21532452502288
+  },
+  "by_dataset_mode": {
+    "Dance_normal": {
+      "requested_calls": 29410,
+      "new_calls": 29407,
+      "cache_hits": 3,
+      "forward_seconds": 441.3299866821617,
+      "peak_allocated_bytes": 4678529024
+    },
+    "Dance_early": {
+      "requested_calls": 27693,
+      "new_calls": 24395,
+      "cache_hits": 3298,
+      "forward_seconds": 367.1281136283651,
+      "peak_allocated_bytes": 4678529024
+    },
+    "KITTI_normal": {
+      "requested_calls": 32858,
+      "new_calls": 32855,
+      "cache_hits": 3,
+      "forward_seconds": 541.0799814956263,
+      "peak_allocated_bytes": 4693312512
+    }
+  },
+  "by_video": [
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0004",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 510,
+      "new_calls": 507,
+      "cache_hits": 3,
+      "forward_seconds": 8.079712658189237,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0005",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 544,
+      "new_calls": 544,
+      "cache_hits": 0,
+      "forward_seconds": 7.671814020257443,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0007",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1071,
+      "new_calls": 1071,
+      "cache_hits": 0,
+      "forward_seconds": 14.892607365502045,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0010",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 748,
+      "new_calls": 748,
+      "cache_hits": 0,
+      "forward_seconds": 10.550838064635172,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0014",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1411,
+      "new_calls": 1411,
+      "cache_hits": 0,
+      "forward_seconds": 19.95821972284466,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0018",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 680,
+      "new_calls": 680,
+      "cache_hits": 0,
+      "forward_seconds": 9.595717015909031,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0019",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 850,
+      "new_calls": 850,
+      "cache_hits": 0,
+      "forward_seconds": 12.071799031691626,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0025",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1156,
+      "new_calls": 1156,
+      "cache_hits": 0,
+      "forward_seconds": 16.373614688403904,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0026",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1547,
+      "new_calls": 1547,
+      "cache_hits": 0,
+      "forward_seconds": 21.494792664889246,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0030",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 816,
+      "new_calls": 816,
+      "cache_hits": 0,
+      "forward_seconds": 11.465965053997934,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0034",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1513,
+      "new_calls": 1513,
+      "cache_hits": 0,
+      "forward_seconds": 21.37604593927972,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0035",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 935,
+      "new_calls": 935,
+      "cache_hits": 0,
+      "forward_seconds": 13.048955007921904,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0041",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1989,
+      "new_calls": 1989,
+      "cache_hits": 0,
+      "forward_seconds": 28.074814572930336,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0043",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1054,
+      "new_calls": 1054,
+      "cache_hits": 0,
+      "forward_seconds": 14.944787420332432,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0047",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1020,
+      "new_calls": 1020,
+      "cache_hits": 0,
+      "forward_seconds": 14.239017379703,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0058",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 918,
+      "new_calls": 918,
+      "cache_hits": 0,
+      "forward_seconds": 12.903837337857112,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0063",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1122,
+      "new_calls": 1122,
+      "cache_hits": 0,
+      "forward_seconds": 16.11173630086705,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0065",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 680,
+      "new_calls": 680,
+      "cache_hits": 0,
+      "forward_seconds": 10.001366472803056,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0073",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1309,
+      "new_calls": 1309,
+      "cache_hits": 0,
+      "forward_seconds": 22.25098794605583,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0077",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1241,
+      "new_calls": 1241,
+      "cache_hits": 0,
+      "forward_seconds": 21.252750860527158,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0079",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1513,
+      "new_calls": 1513,
+      "cache_hits": 0,
+      "forward_seconds": 25.6192668764852,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0081",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 2312,
+      "new_calls": 2312,
+      "cache_hits": 0,
+      "forward_seconds": 39.29585762647912,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0090",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 1564,
+      "new_calls": 1564,
+      "cache_hits": 0,
+      "forward_seconds": 22.33874034602195,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0094",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 2397,
+      "new_calls": 2397,
+      "cache_hits": 0,
+      "forward_seconds": 39.09574129548855,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0097",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 510,
+      "new_calls": 510,
+      "cache_hits": 0,
+      "forward_seconds": 8.621001013088971,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0004",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 527,
+      "new_calls": 459,
+      "cache_hits": 68,
+      "forward_seconds": 6.536077574593946,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0005",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 544,
+      "new_calls": 476,
+      "cache_hits": 68,
+      "forward_seconds": 6.801104825455695,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0007",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1054,
+      "new_calls": 918,
+      "cache_hits": 136,
+      "forward_seconds": 12.769868761999533,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0010",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 748,
+      "new_calls": 646,
+      "cache_hits": 102,
+      "forward_seconds": 9.173950946889818,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0014",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1411,
+      "new_calls": 1275,
+      "cache_hits": 136,
+      "forward_seconds": 18.107365190749988,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0018",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 680,
+      "new_calls": 595,
+      "cache_hits": 85,
+      "forward_seconds": 8.548822162672877,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0019",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 918,
+      "new_calls": 799,
+      "cache_hits": 119,
+      "forward_seconds": 11.24768168758601,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0025",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1173,
+      "new_calls": 1020,
+      "cache_hits": 153,
+      "forward_seconds": 14.391044896561652,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0026",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1819,
+      "new_calls": 1598,
+      "cache_hits": 221,
+      "forward_seconds": 22.459162898827344,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0030",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 799,
+      "new_calls": 697,
+      "cache_hits": 102,
+      "forward_seconds": 9.738185525406152,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0034",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1700,
+      "new_calls": 1479,
+      "cache_hits": 221,
+      "forward_seconds": 20.688799194060266,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0035",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 935,
+      "new_calls": 816,
+      "cache_hits": 119,
+      "forward_seconds": 11.471994532970712,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0041",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1258,
+      "new_calls": 1122,
+      "cache_hits": 136,
+      "forward_seconds": 16.099777394672856,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0043",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1020,
+      "new_calls": 901,
+      "cache_hits": 119,
+      "forward_seconds": 12.984425328671932,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0047",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 952,
+      "new_calls": 833,
+      "cache_hits": 119,
+      "forward_seconds": 11.919322706991807,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0058",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 952,
+      "new_calls": 833,
+      "cache_hits": 119,
+      "forward_seconds": 11.848704267060384,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0063",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 952,
+      "new_calls": 833,
+      "cache_hits": 119,
+      "forward_seconds": 11.801821905886754,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0065",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 680,
+      "new_calls": 595,
+      "cache_hits": 85,
+      "forward_seconds": 10.123055644100532,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0073",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 901,
+      "new_calls": 782,
+      "cache_hits": 119,
+      "forward_seconds": 13.422700373455882,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0077",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1258,
+      "new_calls": 1105,
+      "cache_hits": 153,
+      "forward_seconds": 19.130626450292766,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0079",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1122,
+      "new_calls": 986,
+      "cache_hits": 136,
+      "forward_seconds": 16.910241397563368,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0081",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 2159,
+      "new_calls": 1938,
+      "cache_hits": 221,
+      "forward_seconds": 32.34933666931465,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0090",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 1411,
+      "new_calls": 1275,
+      "cache_hits": 136,
+      "forward_seconds": 18.212853766977787,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0094",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 2176,
+      "new_calls": 1938,
+      "cache_hits": 238,
+      "forward_seconds": 32.330905333394185,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "Dance",
+      "video": "dancetrack0097",
+      "gate_mode": "early",
+      "frames": 8,
+      "requested_calls": 544,
+      "new_calls": 476,
+      "cache_hits": 68,
+      "forward_seconds": 8.0602841922082,
+      "peak_allocated_bytes": 4678529024
+    },
+    {
+      "dataset": "KITTI",
+      "video": "0005",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 5910,
+      "new_calls": 5907,
+      "cache_hits": 3,
+      "forward_seconds": 99.44761803629808,
+      "peak_allocated_bytes": 4693312512
+    },
+    {
+      "dataset": "KITTI",
+      "video": "0011",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 11400,
+      "new_calls": 11400,
+      "cache_hits": 0,
+      "forward_seconds": 182.854690837441,
+      "peak_allocated_bytes": 4686033920
+    },
+    {
+      "dataset": "KITTI",
+      "video": "0013",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 4968,
+      "new_calls": 4968,
+      "cache_hits": 0,
+      "forward_seconds": 82.87188363610767,
+      "peak_allocated_bytes": 4690848768
+    },
+    {
+      "dataset": "KITTI",
+      "video": "0019",
+      "gate_mode": "normal",
+      "frames": 8,
+      "requested_calls": 10580,
+      "new_calls": 10580,
+      "cache_hits": 0,
+      "forward_seconds": 175.9057889857795,
+      "peak_allocated_bytes": 4686033920
+    }
+  ],
+  "peak_allocated_bytes": 4693312512,
+  "maximum_physical_GPUs": 1,
+  "source_candidate_truncation": [
+    {
+      "video": "0005",
+      "planned_before_cap": 5910,
+      "truncated": false,
+      "cap_track_ids": null
+    },
+    {
+      "video": "0011",
+      "planned_before_cap": 11400,
+      "truncated": false,
+      "cap_track_ids": null
+    },
+    {
+      "video": "0013",
+      "planned_before_cap": 4968,
+      "truncated": false,
+      "cap_track_ids": null
+    },
+    {
+      "video": "0019",
+      "planned_before_cap": 10580,
+      "truncated": false,
+      "cap_track_ids": null
+    }
+  ],
+  "GT_open_attempts": 0,
+  "semantics": "Forward timings include original synchronized upstream preprocessing/forward path, batches amortized; process hours also include model loading/hash/cropping/cache I/O. Teacher generated once, reused across score sources. No training cost incurred; prior student training inherited, not priced as free.",
+  "inherited_costs": "Fixed MOT frontend and all six FlexHook margin banks were already computed. Their prior GPU inference/training is excluded from this round incremental costs, not zero standalone-system cost. GPU_calls=0 inside file-only prediction seals means CPU decoding stage only; teacher calls are reported separately.",
+  "extrapolation_caveat": "Throughput estimate, not a measured exhaustive run; excludes repeated model loads and full-data cache/image I/O. No full-video teacher RMOT system was run."
+}

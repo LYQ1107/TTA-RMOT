@@ -1,0 +1,13 @@
+{
+  "status": "TEACHER_ONLY_PILOT_REGISTERED",
+  "registered_unix": 1795342210.8492727,
+  "source_sha256": "1f667d2e5f3fc3a2788ad3b176906b50bd51cd42703a5e1a3304cabf8649dbb1",
+  "question": "Does the existing paid teacher evidence contain within-object, within-view geometric variation sufficient to identify a changing relational factor?",
+  "motivation": "Post-seal KITTI GT diagnosis found constant-TrackID predicate error. This pilot itself opens noGT, no model outputs and changes no parameters/predictions.",
+  "important_input_audit": "CROP input prompts explicitly contain normalized position; do not claim the actual teacher lacks absolute position information. FRAME_BOX uses the full frame.",
+  "method": "Conservative literal left/right queries only; exclude motion/orientation/reference-object ambiguity; group byquery/track/effective_view and dedupe exact actual request inputs; examine within-group centered x/logit Gram and covariation.",
+  "scope": "C2/C5KITTI viability pilot only, no all6claim. Teacher covariance is not correctness; no fixed-effects estimator is deployed by this script.",
+  "exact_new_teacher_encoder_head_or_GPU_calls": 0,
+  "target_manual_GT_open_attempts": 0,
+  "goal_status": "ACTIVE"
+}
