@@ -1,0 +1,361 @@
+{
+  "status": "CONTROLLED_CONDITIONAL_REPEATABILITY_DIAGNOSIS_COMPLETE",
+  "comparisons": {
+    "DEFAULT": {
+      "sample_size": 8192,
+      "exact_same_logits": false,
+      "maximum_absolute_logit_difference": 1.2375073432922363,
+      "changed_raw_decisions": 88
+    },
+    "DETERMINISTIC": {
+      "sample_size": 8192,
+      "exact_same_logits": true,
+      "maximum_absolute_logit_difference": 0.0,
+      "changed_raw_decisions": 0
+    }
+  },
+  "cases": {
+    "DEFAULT_0": {
+      "status": "COMPLETE_TEACHER_ONLY_REPEATABILITY_FIT",
+      "case": "DEFAULT_0",
+      "pair": "C2",
+      "video": "0005",
+      "seed": 0,
+      "deterministic_algorithms": false,
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "kernel_gradient_repeats": {
+        "POINT_ONLY": {
+          "repeats": 32,
+          "deterministic_algorithms": false,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            0.8099742531776428,
+            0.8099742531776428
+          ]
+        },
+        "POINT_PLUS_PROFILE": {
+          "repeats": 32,
+          "deterministic_algorithms": false,
+          "changed_gradient_elements_across31_comparisons": 275,
+          "maximum_absolute_gradient_difference": 1.4551915228366852e-10,
+          "loss_range": [
+            1.0014817714691162,
+            1.0014817714691162
+          ]
+        }
+      },
+      "fit": {
+        "recipe": "FULL",
+        "kind": "conditional",
+        "balanced_exposure": true,
+        "profile_weight": 1.0,
+        "hard_targets": false,
+        "width": 32,
+        "steps": 4000,
+        "minimum_steps": 4000,
+        "prefix_warm_start": false,
+        "all_initial_task_probabilities": 0.5,
+        "metrics": {
+          "target_CE": 0.26005261719842115,
+          "target_entropy": 0.25976874938439026,
+          "target_KL": 0.00028386781403089145,
+          "supported_profile_KL": 8.736321406623052e-05,
+          "objective_excess": 0.000371231028097122
+        },
+        "trace": [
+          {
+            "step": 400,
+            "target_CE": 0.2975722719712209,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.03780352258683062,
+            "supported_profile_KL": 0.013555365265993593,
+            "objective_excess": 0.05135888785282421
+          },
+          {
+            "step": 4000,
+            "target_CE": 0.26005261719842115,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.00028386781403089145,
+            "supported_profile_KL": 8.736321406623052e-05,
+            "objective_excess": 0.000371231028097122
+          }
+        ],
+        "teacher_risk_continuations": [],
+        "target_fit_gate_pass": true,
+        "no_source_logit_residual": true,
+        "teacher_examples": 1891,
+        "wall_seconds": 58.18580345099326,
+        "target_GT_or_HOTA_used": false,
+        "final_CE_recomputed_from_actual_float32_deployed_head": true
+      },
+      "sample_size": 8192,
+      "no_target_GT_or_current_study_quality_read": true,
+      "GT_open_attempts": 0,
+      "no_new_teacher_or_backbone_calls": true,
+      "no_official_predictions_or_HOTA": true,
+      "cache_aggregate_sha256": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+      "wall_seconds": 62.18105886597186,
+      "not_a_method_quality_or_cold_cost_result": true,
+      "goal_status": "ACTIVE"
+    },
+    "DEFAULT_1": {
+      "status": "COMPLETE_TEACHER_ONLY_REPEATABILITY_FIT",
+      "case": "DEFAULT_1",
+      "pair": "C2",
+      "video": "0005",
+      "seed": 0,
+      "deterministic_algorithms": false,
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "kernel_gradient_repeats": {
+        "POINT_ONLY": {
+          "repeats": 32,
+          "deterministic_algorithms": false,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            0.8099742531776428,
+            0.8099742531776428
+          ]
+        },
+        "POINT_PLUS_PROFILE": {
+          "repeats": 32,
+          "deterministic_algorithms": false,
+          "changed_gradient_elements_across31_comparisons": 161,
+          "maximum_absolute_gradient_difference": 1.4551915228366852e-10,
+          "loss_range": [
+            1.0014817714691162,
+            1.0014817714691162
+          ]
+        }
+      },
+      "fit": {
+        "recipe": "FULL",
+        "kind": "conditional",
+        "balanced_exposure": true,
+        "profile_weight": 1.0,
+        "hard_targets": false,
+        "width": 32,
+        "steps": 4000,
+        "minimum_steps": 4000,
+        "prefix_warm_start": false,
+        "all_initial_task_probabilities": 0.5,
+        "metrics": {
+          "target_CE": 0.2603630675417012,
+          "target_entropy": 0.25976874938439026,
+          "target_KL": 0.0005943181573109246,
+          "supported_profile_KL": 0.0001903830774884177,
+          "objective_excess": 0.0007847012347993424
+        },
+        "trace": [
+          {
+            "step": 400,
+            "target_CE": 0.29772645434185696,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.0379577049574667,
+            "supported_profile_KL": 0.013596882202248368,
+            "objective_excess": 0.051554587159715067
+          },
+          {
+            "step": 4000,
+            "target_CE": 0.2603630675417012,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.0005943181573109246,
+            "supported_profile_KL": 0.0001903830774884177,
+            "objective_excess": 0.0007847012347993424
+          }
+        ],
+        "teacher_risk_continuations": [],
+        "target_fit_gate_pass": true,
+        "no_source_logit_residual": true,
+        "teacher_examples": 1891,
+        "wall_seconds": 61.01406897895504,
+        "target_GT_or_HOTA_used": false,
+        "final_CE_recomputed_from_actual_float32_deployed_head": true
+      },
+      "sample_size": 8192,
+      "no_target_GT_or_current_study_quality_read": true,
+      "GT_open_attempts": 0,
+      "no_new_teacher_or_backbone_calls": true,
+      "no_official_predictions_or_HOTA": true,
+      "cache_aggregate_sha256": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+      "wall_seconds": 63.775387472007424,
+      "not_a_method_quality_or_cold_cost_result": true,
+      "goal_status": "ACTIVE"
+    },
+    "DETERMINISTIC_0": {
+      "status": "COMPLETE_TEACHER_ONLY_REPEATABILITY_FIT",
+      "case": "DETERMINISTIC_0",
+      "pair": "C2",
+      "video": "0005",
+      "seed": 0,
+      "deterministic_algorithms": true,
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "kernel_gradient_repeats": {
+        "POINT_ONLY": {
+          "repeats": 32,
+          "deterministic_algorithms": true,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            0.8099742531776428,
+            0.8099742531776428
+          ]
+        },
+        "POINT_PLUS_PROFILE": {
+          "repeats": 32,
+          "deterministic_algorithms": true,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            1.0014817714691162,
+            1.0014817714691162
+          ]
+        }
+      },
+      "fit": {
+        "recipe": "FULL",
+        "kind": "conditional",
+        "balanced_exposure": true,
+        "profile_weight": 1.0,
+        "hard_targets": false,
+        "width": 32,
+        "steps": 4000,
+        "minimum_steps": 4000,
+        "prefix_warm_start": false,
+        "all_initial_task_probabilities": 0.5,
+        "metrics": {
+          "target_CE": 0.25998380663234705,
+          "target_entropy": 0.25976874938439026,
+          "target_KL": 0.00021505724795678471,
+          "supported_profile_KL": 5.802257139199219e-05,
+          "objective_excess": 0.0002730798193487769
+        },
+        "trace": [
+          {
+            "step": 400,
+            "target_CE": 0.29758760236560095,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.03781885298121068,
+            "supported_profile_KL": 0.013565041925725364,
+            "objective_excess": 0.051383894906936046
+          },
+          {
+            "step": 4000,
+            "target_CE": 0.25998380663234705,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.00021505724795678471,
+            "supported_profile_KL": 5.802257139199219e-05,
+            "objective_excess": 0.0002730798193487769
+          }
+        ],
+        "teacher_risk_continuations": [],
+        "target_fit_gate_pass": true,
+        "no_source_logit_residual": true,
+        "teacher_examples": 1891,
+        "wall_seconds": 72.52147197898012,
+        "target_GT_or_HOTA_used": false,
+        "final_CE_recomputed_from_actual_float32_deployed_head": true
+      },
+      "sample_size": 8192,
+      "no_target_GT_or_current_study_quality_read": true,
+      "GT_open_attempts": 0,
+      "no_new_teacher_or_backbone_calls": true,
+      "no_official_predictions_or_HOTA": true,
+      "cache_aggregate_sha256": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+      "wall_seconds": 75.34313502709847,
+      "not_a_method_quality_or_cold_cost_result": true,
+      "goal_status": "ACTIVE"
+    },
+    "DETERMINISTIC_1": {
+      "status": "COMPLETE_TEACHER_ONLY_REPEATABILITY_FIT",
+      "case": "DETERMINISTIC_1",
+      "pair": "C2",
+      "video": "0005",
+      "seed": 0,
+      "deterministic_algorithms": true,
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+      "kernel_gradient_repeats": {
+        "POINT_ONLY": {
+          "repeats": 32,
+          "deterministic_algorithms": true,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            0.8099742531776428,
+            0.8099742531776428
+          ]
+        },
+        "POINT_PLUS_PROFILE": {
+          "repeats": 32,
+          "deterministic_algorithms": true,
+          "changed_gradient_elements_across31_comparisons": 0,
+          "maximum_absolute_gradient_difference": 0.0,
+          "loss_range": [
+            1.0014817714691162,
+            1.0014817714691162
+          ]
+        }
+      },
+      "fit": {
+        "recipe": "FULL",
+        "kind": "conditional",
+        "balanced_exposure": true,
+        "profile_weight": 1.0,
+        "hard_targets": false,
+        "width": 32,
+        "steps": 4000,
+        "minimum_steps": 4000,
+        "prefix_warm_start": false,
+        "all_initial_task_probabilities": 0.5,
+        "metrics": {
+          "target_CE": 0.25998380663234705,
+          "target_entropy": 0.25976874938439026,
+          "target_KL": 0.00021505724795678471,
+          "supported_profile_KL": 5.802257139199219e-05,
+          "objective_excess": 0.0002730798193487769
+        },
+        "trace": [
+          {
+            "step": 400,
+            "target_CE": 0.29758760236560095,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.03781885298121068,
+            "supported_profile_KL": 0.013565041925725364,
+            "objective_excess": 0.051383894906936046
+          },
+          {
+            "step": 4000,
+            "target_CE": 0.25998380663234705,
+            "target_entropy": 0.25976874938439026,
+            "target_KL": 0.00021505724795678471,
+            "supported_profile_KL": 5.802257139199219e-05,
+            "objective_excess": 0.0002730798193487769
+          }
+        ],
+        "teacher_risk_continuations": [],
+        "target_fit_gate_pass": true,
+        "no_source_logit_residual": true,
+        "teacher_examples": 1891,
+        "wall_seconds": 67.39397126797121,
+        "target_GT_or_HOTA_used": false,
+        "final_CE_recomputed_from_actual_float32_deployed_head": true
+      },
+      "sample_size": 8192,
+      "no_target_GT_or_current_study_quality_read": true,
+      "GT_open_attempts": 0,
+      "no_new_teacher_or_backbone_calls": true,
+      "no_official_predictions_or_HOTA": true,
+      "cache_aggregate_sha256": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+      "wall_seconds": 70.46895977610257,
+      "not_a_method_quality_or_cold_cost_result": true,
+      "goal_status": "ACTIVE"
+    }
+  },
+  "same_physical_GPU_for_all_four_cases": true,
+  "deterministic_repeatability_observed": true,
+  "no_HOTA_or_teacher_accuracy_inference": true,
+  "no_method_or_primary_promotion": true,
+  "scope": "One real first-video prefix; cannot certify every training path or explain all prior drift",
+  "goal_status": "ACTIVE"
+}
