@@ -1,5 +1,14 @@
 # AGENTS.md
 
+## 最新：真实跨候选反馈与学习头工程结果（2026-11-23）
+
+- 新教师70580/PID3046870已exit0：GPU1分配时0MiB，72case/432真实例/0cache，加载464.915s、前向43.534s。后来本任务C2小头在教师加载时同卡启动，保留并限制显存，不冒称独占成本。144/144合法四选一但与独立二元的Yes均值.192882 vs .476806、AB/BA L1.19365；仅通道偏差诊断，无GT准确率。
+- 跨候选学习头保留h_i并只中心化状态，独立count/utility梯度，full-MLE同前向、普通joint同1101D双context；数值审计pass。拟合67529已exit0，三个目标独立共12fits，171.815s CPU；普通positive/conditional/global KL均过.005，但结构C1全体KL.009076且NoIdentity也能拟合，尚无贡献/HOTA。勿重跑70580/67529。源和收据见cross_candidate_*。
+- VISE/Visual Questioner/VICO/MM-Zero原文已核对，RSI TXT第12-16节新增适用边界及实际负结果；尤其VICO seed结构有监督前提，模糊目标不等于场景不存在。后续保留正常二元教师强对照，不把二元乘积伪分布冒充真实联合反馈。
+- 主质量仍只续38672，采集67909；C1/C6生成完成，C2/C5实际训练，C3/C4待证据；不提前读新HOTA。新analysis脚本仅582全部完成后使用，未读GT。
+- get_goal实际显示blocked，接口无active/正文修改，不能谎称工具ACTIVE；CANON有效RSI目标和授权研究继续，rsi_goal_tool_status_receipt为实证。原目标未完成，不假结项。
+
+
 ## 最新：RSI三视频与条件区分反馈（2026-11-23）
 
 - 66899/PID2993943已exit0，C1首三视频0004/0005/0007，FROZEN/RAW/PRIOR各160问（56/40/64），只seed0；RAW/FROZEN首视频复用原始工程收据。RAW实际换题0/3/1，PRIOR换题0/3/0（对称差是两倍换题数）。普通joint/coarse全部付费信息充分拟合，max KL.000194。没有RMOT预测/HOTA，行为变化不是质量贡献，勿重跑5299或66899。
