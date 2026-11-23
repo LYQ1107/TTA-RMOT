@@ -1,0 +1,11 @@
+{
+  "study": "Query-level relative learning support and exposure normalization",
+  "problem": "Within-bag state contrasts alone have no feedback in four settings; RMOT also needs between-candidate preference for the same query.",
+  "proposed_objective": "Condition on same-video/query/effective-view with at least2observations and an actual teacherYes>=.5; KL between normalized positive teacher evidence and predicted profile, using confidence divided by own bag-view state count.",
+  "safeguards": "No conditional target from allNo strata; teacherYes is not groundtruth. Bernoulli output allows multiple targets. No atom-wise or bag-negative pseudo labels.",
+  "mathematical_checks": "Common prediction-scale invariance given eligibility/weights, exact duplicate-observation mass invariance, allNo zero profile loss, and nonzero between-candidate gradient.",
+  "empirical_checks": "All4 fixedpolicies xall6settings, own actual QA only; counts of supported cross-candidate/within-bag groups and teacher variation, not accuracy.",
+  "future_quality_controls": "Strong unbalanced ordinary; exposure-balanced pointwise; same-context direct model; no-profile and profile-permutation controls. No HOTA/parameter choice in this audit.",
+  "no_GT_or_quality_predictions_or_new_teacher_calls": true,
+  "goal_status": "ACTIVE"
+}

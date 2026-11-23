@@ -1,0 +1,18 @@
+{
+  "status": "HYPOTHESIS_FOR_NEXT_MECHANISM_NOT_YET_EXECUTED",
+  "goal_status": "ACTIVE",
+  "GT_in_design": false,
+  "motivation": "Conservative text equivalence audit found 140 repeated descriptions in SportsMOT and33 in KITTI. Human observers reuse a visual judgement for equivalent requests, then spend saved attention on unseen objects or contradictions.",
+  "candidate_combination": [
+    "semantic-class coverage rather than independent redundant query budgets",
+    "first broad image-feature scan, then additional view only for uncertain or contradictory evidence",
+    "classical view reliability fusion with shared-evidence mean/fixed-reliability controls",
+    "existing task protocol and image-only appearance regularization",
+    "query implication consistency under identical independent decoding"
+  ],
+  "budget": "Keep exactly the registered per-video image teacher call budget; a derived shared label is not a new real call. Extra language/model work and each multi-image view token/wall cost counted separately.",
+  "selection_firewall": "Only already-requested replies enter acquisition; no reading hidden cached alternative answers. Broker cache may serve explicit requests, with cache/new forwards separately reported.",
+  "fairness": "Ordinary learners get the identical actual new QA and visual information. Include original same-budget COVER KD, new-path direct raw distillation, new-path mean/DS teacher-label controls and full-component ablations; do not attribute all new teacher-quality gain to the final graph.",
+  "risk": "Equivalent wording is a linguistic assumption; teacher outputs across views are correlated, DS unsupervised reliability is not guaranteed accuracy. C1 conservative equivalence currently has no duplicates, so acquisition savings there cannot be claimed.",
+  "execution_gate": "Inspect new six-direction transfer and fixed query-consistency results, plus teacher-only actual duplication/contradiction counts, before fixing and executing the new acquisition recipe. No fixed promise of positive HOTA."
+}

@@ -1,0 +1,40 @@
+{
+  "status": "PREREGISTERED_NEW_OBSERVATION_PHYSICAL_TEACHER_PILOT",
+  "registered_unix": 1795346830.433522,
+  "source_sha256": {
+    "scripts/a100_observation_teacher_pilot.py": "d4b4c6bc7ed468a432efaff9f40bf9b4d04602f80fde1db72123fc83dd7e8487",
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "configs/teacher/base_qwen2b.yaml": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2"
+  },
+  "before_new_teacher_answers": true,
+  "inputs": "After full148-video manifests finish; four text-selected queries: C1 first, C2 first absolute-horizontal and first MOTION, C4 first; first video each",
+  "policies": [
+    "DESIGN",
+    "COVERAGE_ONLY",
+    "PRIOR",
+    "UNIFORM"
+  ],
+  "fixed_preflight": {
+    "unique_requests": 59,
+    "requested_views": {
+      "CROP": 20,
+      "FRAME_BOX": 19,
+      "CLIP": 20
+    },
+    "policy_logical_questions_each": 29
+  },
+  "teacher": "Existing frozen Qwen3-VL-2B-Instruct at revision89644892e4d85e24eaac8bacfd4f463576704203; no LoRA; common local A100 backend",
+  "allocation": "One physically idle GPU among0..3 only, internal memory.used<512MiB preflight; one1GiB temporary occupancy reservation while weights load so other queue allocators see occupancy; preserve all running quality jobs",
+  "outputs": "Raw59 answer union/private only and policy-specific asked subsets. Never return unasked or future-video answers to adaptation.",
+  "costs": "Actual teacher load, real forward including I/O, final frozen integrity, context reservation; union evidence preparation only. Source features prepaid, other GPUs running, OS/NAS caches not cleared; not per-policy full cold deployment.",
+  "resumed_answers": "If interrupted reuse completed exact rows/cache and disclose current-session costs and resumed count; no data or seed changes",
+  "no_manual_target_GT": true,
+  "no_neural_adaptation_or_quality_predictions": true,
+  "purpose": "Real GPU request/response and all three effective view input validation; no HOTA or active-policy superiority claim",
+  "goal_status": "ACTIVE"
+}

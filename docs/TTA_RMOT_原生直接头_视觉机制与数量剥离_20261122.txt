@@ -1,0 +1,217 @@
+TTA-RMOT：原生直接教师头的经典视觉机制拆解
+2026-11-22
+
+同一768D直接软均值头，固定源logit为0；所有NN/输入/问答均已封存，0新增教师/编码器调用或小头拟合。
+6条件36新原始+96数量共132输出全部封存后才本研究GT；三神经种子、C4原13视频/C1原25视频。
+图/PAVA/KD/JOINT逐视频概率与掩码必须复现原生直接头已封存结果0差；没有按方向换头。
+COMPLETE只有同总边权，不保持各节点度。若它与真实视觉图打平，不把特定3NN拓扑说成必不可少。
+ROW_SHIFT只保护每句内部排序；互斥解码时跨句胜者仍可能变化，所以它不是数学意义上的纯数量对照。
+
+NATIVE_C4
+三种子平均HOTA：{"ANCHOR_CAL": 67.51099489097155, "ROW_SHIFT": 67.10619164557373, "SHUFFLED": 67.15458560793799, "GLOBAL_SHUFFLED": 67.00833515659075, "QUERY_TEACHER": 66.99085283317713, "COMPLETE": 63.86639181511612, "KD": 67.08293697286213, "GRAPH": 67.12162853453852, "CAL": 67.50143803855421, "JOINT": 67.63874372827331}
+JOINT_vs_KD：+0.555807; parent95%[+0.150633, +0.984118]; parent+seed95%[+0.126540, +1.020584]
+JOINT_vs_GRAPH：+0.517115; parent95%[+0.128493, +0.974225]; parent+seed95%[+0.125670, +0.980773]
+JOINT_vs_CAL：+0.137306; parent95%[-0.170186, +0.404776]; parent+seed95%[-0.193926, +0.412738]
+JOINT_vs_ANCHOR_CAL：+0.127749; parent95%[-0.189228, +0.400451]; parent+seed95%[-0.211345, +0.409369]
+JOINT_vs_ROW_SHIFT：+0.532552; parent95%[+0.271543, +0.820638]; parent+seed95%[+0.270490, +0.827362]
+JOINT_vs_SHUFFLED：+0.484158; parent95%[+0.202978, +0.760090]; parent+seed95%[+0.202390, +0.764706]
+JOINT_vs_GLOBAL_SHUFFLED：+0.630409; parent95%[+0.278684, +1.059163]; parent+seed95%[+0.267412, +1.070132]
+JOINT_vs_QUERY_TEACHER：+0.647891; parent95%[+0.276611, +1.130590]; parent+seed95%[+0.265614, +1.143215]
+JOINT_vs_COMPLETE：+3.772352; parent95%[+2.297823, +5.663956]; parent+seed95%[+2.294714, +5.658310]
+GRAPH_vs_KD：+0.038692; parent95%[-0.286077, +0.397014]; parent+seed95%[-0.313078, +0.424187]
+CAL_vs_KD：+0.418501; parent95%[+0.117504, +0.772433]; parent+seed95%[+0.102323, +0.820727]
+COUNT_OWN_JOINT_vs_KD：+0.423212; parent95%[+0.209107, +0.661076]; parent+seed95%[+0.199568, +0.673947]
+COUNT_BASELINE_JOINT_vs_KD：+0.074926; parent95%[-0.112104, +0.320321]; parent+seed95%[-0.143664, +0.365633]
+COUNT_OWN_JOINT_vs_GRAPH：+0.062903; parent95%[+0.004317, +0.128450]; parent+seed95%[-0.004179, +0.129910]
+COUNT_BASELINE_JOINT_vs_GRAPH：+0.006769; parent95%[-0.016688, +0.040016]; parent+seed95%[-0.023732, +0.046416]
+COUNT_OWN_JOINT_vs_CAL：+0.254216; parent95%[+0.068680, +0.481002]; parent+seed95%[+0.056012, +0.487211]
+COUNT_BASELINE_JOINT_vs_CAL：-0.060426; parent95%[-0.272040, +0.111052]; parent+seed95%[-0.298768, +0.145088]
+COUNT_OWN_JOINT_vs_ANCHOR_CAL：+0.254216; parent95%[+0.068680, +0.481002]; parent+seed95%[+0.056012, +0.487211]
+COUNT_BASELINE_JOINT_vs_ANCHOR_CAL：-0.059862; parent95%[-0.271605, +0.111569]; parent+seed95%[-0.298246, +0.145859]
+COUNT_OWN_JOINT_vs_ROW_SHIFT：+0.062903; parent95%[+0.004317, +0.128450]; parent+seed95%[-0.004179, +0.129910]
+COUNT_BASELINE_JOINT_vs_ROW_SHIFT：+0.000487; parent95%[-0.038056, +0.044648]; parent+seed95%[-0.050022, +0.052487]
+COUNT_OWN_JOINT_vs_COMPLETE：+0.294829; parent95%[+0.038037, +0.651860]; parent+seed95%[+0.023812, +0.663452]
+COUNT_BASELINE_JOINT_vs_COMPLETE：+0.012490; parent95%[-0.039659, +0.053106]; parent+seed95%[-0.060780, +0.087636]
+NATIVE_C1
+三种子平均HOTA：{"ANCHOR_CAL": 33.504103742256184, "ROW_SHIFT": 35.58009950760091, "SHUFFLED": 35.413591759109416, "GLOBAL_SHUFFLED": 34.22198827668424, "QUERY_TEACHER": 34.72222811469319, "COMPLETE": 37.575898058113175, "KD": 32.07409946179218, "GRAPH": 33.87003771220909, "CAL": 33.49346862692297, "JOINT": 35.731536478903585}
+JOINT_vs_KD：+3.657437; parent95%[+0.979811, +7.083777]; parent+seed95%[+0.908978, +7.208643]
+JOINT_vs_GRAPH：+1.861499; parent95%[+0.256916, +4.198438]; parent+seed95%[+0.212621, +4.260851]
+JOINT_vs_CAL：+2.238068; parent95%[+0.494675, +4.522030]; parent+seed95%[+0.398256, +4.662030]
+JOINT_vs_ANCHOR_CAL：+2.227433; parent95%[+0.476134, +4.507109]; parent+seed95%[+0.370487, +4.611168]
+JOINT_vs_ROW_SHIFT：+0.151437; parent95%[-0.770367, +1.270498]; parent+seed95%[-0.892612, +1.324673]
+JOINT_vs_SHUFFLED：+0.317945; parent95%[-0.571012, +1.313561]; parent+seed95%[-0.589038, +1.329643]
+JOINT_vs_GLOBAL_SHUFFLED：+1.509548; parent95%[-0.156962, +4.293455]; parent+seed95%[-0.252357, +4.349536]
+JOINT_vs_QUERY_TEACHER：+1.009308; parent95%[-0.147503, +2.514670]; parent+seed95%[-0.235973, +2.570695]
+JOINT_vs_COMPLETE：-1.844362; parent95%[-3.469808, -0.455902]; parent+seed95%[-3.746349, -0.419302]
+GRAPH_vs_KD：+1.795938; parent95%[+0.190055, +3.710192]; parent+seed95%[+0.009809, +3.807816]
+CAL_vs_KD：+1.419369; parent95%[+0.090177, +3.053435]; parent+seed95%[-0.001629, +3.333388]
+COUNT_OWN_JOINT_vs_KD：+0.375636; parent95%[-0.198040, +1.270513]; parent+seed95%[-0.231958, +1.311330]
+COUNT_BASELINE_JOINT_vs_KD：-0.502811; parent95%[-1.222740, +0.186346]; parent+seed95%[-1.364455, +0.228466]
+COUNT_OWN_JOINT_vs_GRAPH：+0.539450; parent95%[+0.003143, +1.449587]; parent+seed95%[-0.000016, +1.451445]
+COUNT_BASELINE_JOINT_vs_GRAPH：+0.830201; parent95%[-0.050437, +2.697764]; parent+seed95%[-0.055713, +2.861823]
+COUNT_OWN_JOINT_vs_CAL：+0.136622; parent95%[-0.176560, +0.494348]; parent+seed95%[-0.256872, +0.678643]
+COUNT_BASELINE_JOINT_vs_CAL：-0.428718; parent95%[-1.099169, +0.258497]; parent+seed95%[-1.155145, +0.312464]
+COUNT_OWN_JOINT_vs_ANCHOR_CAL：+0.100657; parent95%[-0.206866, +0.464979]; parent+seed95%[-0.306691, +0.641421]
+COUNT_BASELINE_JOINT_vs_ANCHOR_CAL：-0.464860; parent95%[-1.136690, +0.217401]; parent+seed95%[-1.202985, +0.248005]
+COUNT_OWN_JOINT_vs_ROW_SHIFT：+0.539866; parent95%[-0.003639, +1.466845]; parent+seed95%[-0.004891, +1.473326]
+COUNT_BASELINE_JOINT_vs_ROW_SHIFT：+0.198968; parent95%[-0.072893, +0.670875]; parent+seed95%[-0.185002, +0.757351]
+COUNT_OWN_JOINT_vs_COMPLETE：-0.407502; parent95%[-1.170447, +0.050002]; parent+seed95%[-1.209878, +0.122730]
+COUNT_BASELINE_JOINT_vs_COMPLETE：-0.909782; parent95%[-2.559776, +0.000000]; parent+seed95%[-2.677015, +0.000000]
+
+各神经种子原始分数、输入重放及CountSelf：
+{
+  "C4_seed0": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 67.54633089743066,
+      "ROW_SHIFT": 67.18441057192408,
+      "SHUFFLED": 67.15260550325077,
+      "GLOBAL_SHUFFLED": 67.00176513063228,
+      "QUERY_TEACHER": 67.00904270161135,
+      "COMPLETE": 63.85515872875042,
+      "KD": 66.96447023210868,
+      "GRAPH": 67.11639024735014,
+      "CAL": 67.53620618991077,
+      "JOINT": 67.66131319317367
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  },
+  "C1_seed0": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 33.30296455186536,
+      "ROW_SHIFT": 35.618695226191726,
+      "SHUFFLED": 35.52874591920491,
+      "GLOBAL_SHUFFLED": 33.618005695218145,
+      "QUERY_TEACHER": 34.59600618099922,
+      "COMPLETE": 37.456861908541654,
+      "KD": 31.658042039064572,
+      "GRAPH": 33.45865064445375,
+      "CAL": 33.17076720217645,
+      "JOINT": 35.696179810121045
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  },
+  "C4_seed17": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 67.50627204028261,
+      "ROW_SHIFT": 66.99021699751037,
+      "SHUFFLED": 67.05912586970602,
+      "GLOBAL_SHUFFLED": 66.89939307703563,
+      "QUERY_TEACHER": 66.86463076327983,
+      "COMPLETE": 63.79438336363618,
+      "KD": 67.11023336340094,
+      "GRAPH": 67.03344055587043,
+      "CAL": 67.49904559292276,
+      "JOINT": 67.5642833861361
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  },
+  "C1_seed17": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 32.99506537165524,
+      "ROW_SHIFT": 34.79798119141228,
+      "SHUFFLED": 34.55343564789852,
+      "GLOBAL_SHUFFLED": 33.96523103566814,
+      "QUERY_TEACHER": 34.50505696759607,
+      "COMPLETE": 37.544330487876366,
+      "KD": 32.22030095029924,
+      "GRAPH": 33.41309892015035,
+      "CAL": 33.07314716975654,
+      "JOINT": 35.00069447667501
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  },
+  "C4_seed42": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 67.48038173520135,
+      "ROW_SHIFT": 67.14394736728673,
+      "SHUFFLED": 67.25202545085716,
+      "GLOBAL_SHUFFLED": 67.12384726210433,
+      "QUERY_TEACHER": 67.0988850346402,
+      "COMPLETE": 63.94963335296174,
+      "KD": 67.17410732307675,
+      "GRAPH": 67.21505480039497,
+      "CAL": 67.4690623328291,
+      "JOINT": 67.69063460551018
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  },
+  "C1_seed42": {
+    "raw_HOTA": {
+      "ANCHOR_CAL": 34.214281303247965,
+      "ROW_SHIFT": 36.32362210519872,
+      "SHUFFLED": 36.15859371022483,
+      "GLOBAL_SHUFFLED": 35.08272809916645,
+      "QUERY_TEACHER": 35.06562119548427,
+      "COMPLETE": 37.72650177792151,
+      "KD": 32.34395539601272,
+      "GRAPH": 34.73836357202317,
+      "CAL": 34.23649150883591,
+      "JOINT": 36.497735149914696
+    },
+    "CountSelf_changed_query_files": {
+      "ANCHOR_CAL": 0,
+      "CAL": 0,
+      "COMPLETE": 0,
+      "GRAPH": 0,
+      "JOINT": 0,
+      "ROW_SHIFT": 0
+    },
+    "frozen_prediction_max_error": 0.0,
+    "complete_total_edge_weight_max_error": 2.842170943040401e-14,
+    "row_shift_changed_within_query_orders": 0
+  }
+}
+全部逐种子差值与区间仍完整保留在native_factorial_analysis.json，不在TXT中重复相同的机器字段。
+数量收益是合法任务收益，但不等于逐候选语义排序；跨0区间不能改写成稳定正贡献。
+本研究复用已付费特征/问答，不提供新冷启动时间。真实四卡另见native_cold_analysis.json；不能贴旧精度/时间。
+所有数据为开发数据，没有独立盲测；公开统计的算术复现不等于独立泛化验证，Goal不在脚本中自动关闭。

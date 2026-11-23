@@ -1,0 +1,35 @@
+{
+  "scope": "graph specificity, existing sealed actual causal heads and identical QA",
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "targets": [
+    "C4",
+    "C1"
+  ],
+  "label_variants": [
+    "raw",
+    "bounded"
+  ],
+  "fixed_hyperparameters": true,
+  "controls": [
+    "node-permuted isomorphic graph, teacher nodes unchanged",
+    "complete graph, same total edge precision"
+  ],
+  "missing_part_nodes_unchanged": true,
+  "identity_and_CountSelf_must_reproduce_original_decisions": true,
+  "output_counts": [
+    "native",
+    "same FULL per-query/frame counts"
+  ],
+  "C1_fixed_counts_joint_exclusive_assignment": true,
+  "no_target_GT_in_generation": true,
+  "no_new_teacher_calls": true,
+  "no_head_training": true,
+  "all_12_conditions_and_48_outputs_before_GT_evaluation": true,
+  "no_GT_parameter_sweep": true,
+  "cost_scope": "prepaid fixed evidence mechanism audit, not live cold deployment",
+  "all_data_development": true
+}

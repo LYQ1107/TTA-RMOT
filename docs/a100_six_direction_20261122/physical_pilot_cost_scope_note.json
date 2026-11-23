@@ -1,0 +1,21 @@
+{
+  "status": "PHYSICAL_EVIDENCE_PREPARATION_COST_SCOPE_NOTE",
+  "pilot_receipts": [
+    "observation_teacher_physical_pilot.json",
+    "state_teacher_input_physical_pilot.json"
+  ],
+  "only_physical_GPU": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_features_prepaid": true,
+  "quality_jobs_on_shared_host_active": true,
+  "allocation": "Recorded allocator checks memory.used<512MiB. This threshold alone is not proof of exclusive GPU ownership or an atomic reservation across independent allocators.",
+  "costs": "The receipts measure real evidence-preparation phases. Shared teacher loads, warm image caches and fixed input-variant order are explicit. These times are not fair isolated per-policy end-to-end deployment benchmarks.",
+  "nested_time": "Backend forward_seconds is inside service wall time and must not be added again.",
+  "future_retained_method_benchmark": "Match evidence/features/resources and include student+teacher startup/extraction/adaptation/recomputation, inference and output. Capture actual compute-process allocation, then report cold and any justified shared-service/warm scenario separately. Do not replace missing whole-method costs with these pilots.",
+  "quality_metrics_or_probabilities_changed": false,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,122 @@
+{
+  "version": "NATIVE_DIRECT_OPTIMIZED_ORDINARY_KD_COLD_V2",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "registered_after": "Cost-only correction duringmodelstartup; noactualGTopened. Candidate/qualitybaseline/seed/questions unchanged.",
+  "scientific_status": "Old residualJ versus nativeKD C4+.6096CIcrosses0. Same-native-head J-KD C4+.555807CI[.126540,1.020584],C1+3.657437CI[.908978,7.208643]. Graph C4not independently stable; C1conditional graph and calibration incrementspositive. AllDEV, noblindclaim.",
+  "teacher_fraction": 0.1,
+  "query_graph_scope": "extended",
+  "head_query_scope": "pcd",
+  "graph_metric": "combined",
+  "graph_prior": "constant",
+  "set_decoder": "original",
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C4_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_native_kd_fast.py",
+      "reuse_live_v1_process": false,
+      "worker_sha256": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c"
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C4_pcd768_direct_joint_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_full_c4.py",
+      "reuse_live_v1_process": true,
+      "worker_sha256": "af19e7fe5c1d7268318d8eaf621a2567b443cea26210b6c5e02fbcc35d361b23"
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C1_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_native_kd_fast.py",
+      "reuse_live_v1_process": false,
+      "worker_sha256": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c"
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C1_pcd768_direct_joint_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_full_c4.py",
+      "reuse_live_v1_process": true,
+      "worker_sha256": "af19e7fe5c1d7268318d8eaf621a2567b443cea26210b6c5e02fbcc35d361b23"
+    }
+  },
+  "defer_official_evaluation": true,
+  "primary": "Matched nativePCD direct KD versus samehead graph+PAVA in4freshactualsinglemethodprocesses; all4sealsbeforeGT.",
+  "source": "Correct frozen official Dance-best for C4, KITTI-V2 best for C1. Recompute three-observation PCD and RGB with original four-frame context. Fixed official candidate boxes/IDs accepted by human.",
+  "teacher": "Each worker freshly reloads frozen Qwen and starts a private new SQLite.1160 C4 or1103 C1 real questions; expected0cachehits. Never copy evidence between actual workers.",
+  "adaptation": "Native768D direct teacher head, train/predict fixedsourcez=0; same\u5145\u5206softmean400/final; neuralHSVremoved. RGBstillusedbydeclaredgraph/PAVA; allrichRGBdirect/residual/SEMordinarycontrols retained.",
+  "GT": "All4V2completepredictions sealbefore GT. V1canceledKDresearchattempts preservedandreportedseparately, not creditedasdeployments orcachedstartup.",
+  "actual_cost": "Primary external Popen-to-exit wall per single-method worker, including imports, source/teacher loads, true forward, calibration/head fit/output and audits. Official GT excluded. CPU phases separately recorded; no logical-call proxy.",
+  "resource": "GPU1/3 freshJ processescontinue. ReplaceonlyGPU0/2 unoptimizedKD withfreshfastKD; no4..9 use. VRAMmodels/cachefresh; NAS/OS cacheunflushed andstaggeredstartdisclosed; no speedup/Pareto claim.",
+  "disk_preflight": {
+    "free_bytes": 7166775296,
+    "estimated_four_actual_runs_below_one_GB": true
+  },
+  "numerical": "Compareactual inputs/orderedQA/probabilities/headweights/savedscore/masks withinpair andagainstnative direct seed0. No oldquality/newcost splicing; follow up any mismatch.",
+  "code_sha256": {
+    "worker": "af19e7fe5c1d7268318d8eaf621a2567b443cea26210b6c5e02fbcc35d361b23",
+    "runtime": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "calibration": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "graph": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "fast_KD_worker": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c"
+  },
+  "old_3512_second_cost_not_reused": true,
+  "scope_limit": "Official candidate generation remains outside provided-input boundary; no independent blind split exists.",
+  "acceptance": "Keep scientific module limits and all failed controls. Goal only evaluated after actual quality/evidence/cost integrity and lightweight publication, never simply at queue end.",
+  "head_source_logit": "zero",
+  "GPU_preflight": {
+    "0": {
+      "used_MiB": 0,
+      "total_MiB": 40960
+    },
+    "1": {
+      "used_MiB": 0,
+      "total_MiB": 40960
+    },
+    "2": {
+      "used_MiB": 0,
+      "total_MiB": 40960
+    },
+    "3": {
+      "used_MiB": 0,
+      "total_MiB": 40960
+    }
+  },
+  "quality_source": "direct_teacher_nores_pcd/C4|C1/seed0",
+  "original_residual_worker_archive": "scripts/a100_visual_classical_cold_residual_v1_20261122.py",
+  "previous_residual_cold_costs_not_reused": true,
+  "reason": "NativePCD KD never uses handcraftedRGB. Charging it RGBhistogramextraction would biascostcomparison; optimizedordinaryKD skipsit, keepssamePCD/prior/anchors/questions. J stillpaysforRGBandcontinuesitsfreshV1process.",
+  "ordinary_KD_is_optimized_to_skip_unused_RGB": true,
+  "J_processes_continue_unmodified_from_v1": true,
+  "RGB_parity": "KD intentionally storeszeroRGB placeholders. AuditPCD/prior/tracks/anchors/orderedQA/teacherprobabilities andallscore/maskequal; J RGBmustmatchqualitysource. RecordexpectedRGBdifference openly.",
+  "old_plan_preserved": "preregistration_native_direct_cold_v1.json"
+}

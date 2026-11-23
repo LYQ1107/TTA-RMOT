@@ -1,0 +1,105 @@
+{
+  "study": "SHARED_BAG_SUPPORT_VS_GENERIC_LOCAL_TWO_FACTOR_CONTROL",
+  "registered_before_own_fit_and_before_current_parent_HOTA_reads": true,
+  "source_sha256": {
+    "scripts/a100_conditional_shared_control.py": "e652d4a442f6ee01ccbc518a9cf82314c0c21a1f3a00372fac152772ff47b5eb",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "scripts/a100_conditional_six_setting.py": "5d1ddd2b7791fa5931fa0ac57750cafed39903580c1fdf644e4746cad1fe48cb",
+    "scripts/a100_conditional_coarse_baseline.py": "0cc1c000e1954c8c8d03ef503fe2121ee2d9e965b311c9a373bd28bd33773fd2"
+  },
+  "theoretical_question": "Does sharing the first task factor over a provided track bag help beyond a generic product of two current/context factors?",
+  "hypothesis": "Shared support is a restricted learning hypothesis class. Any advantage must survive an adequate nested two-factor control and both quantity donors; factor semantics remain unidentifiable.",
+  "precise_change": "Same encoder/local head/context, replace bag_head(context) with bag_head(current_encoding,context); only32 extra parameters at width32.",
+  "worker_recipe_extension_only": {
+    "LOCAL_TWO_PROFILE": [
+      "local_two_factor",
+      true,
+      true,
+      false
+    ]
+  },
+  "original_numerical_files_or_recipe_entries_changed": false,
+  "math": {
+    "nonzero_shared_function_embedding_max_error": 2.220446049250313e-16,
+    "equal_initial_task_probability_error": 8.051826982935495e-10,
+    "width32_parameter_counts": {
+      "conditional": 41218,
+      "local_two_factor": 41250
+    },
+    "control_nests_shared_function_by_zeroing_only_extra_current_row": true,
+    "no_semantic_factor_identification_or_HOTA_guarantee": true
+  },
+  "matched_inputs": "Same historical full PCD, dense RGB, three anchors, query, provided boxes/TrackID; DESIGN own raw same-anchor view mixtures only.",
+  "optimization": "Original observation_learning_fit.fit unchanged: same teacher-only KL/excess gates,4000/400 minimum,16000AdamW, own-risk continuation, prefix warm start and normalization.",
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "control_primary": "LOCAL_TWO_FINAL",
+  "parent_primary": "FULL_FINAL",
+  "secondary": "LOCAL_TWO_MEAN",
+  "counts": {
+    "conditions": 18,
+    "raw": 36,
+    "dual_CountMatched": 126,
+    "own_total": 162,
+    "shared_parent_raw": 18,
+    "statistical_records": 180
+  },
+  "GPU_schedule": "Wait existing matched coarse ordinary all18 GPU conditions complete and active empty; only then preflight and use free0/1/2/3.",
+  "evaluation_gate": "All own162 and parent1692 raw/count outputs sealed before this study GT; primary recipe cannot change after parent scores.",
+  "saved_float32_task_logits": "Final/early stored privately for this control; original probability CountMatched rule retained for matched comparison.",
+  "failure_interpretation": "If FULL does not beat adequate generic local product, shared support is not an independently supported contributor. Do not invent semantic factor truth.",
+  "no_new_teacher_or_backbone_calls": true,
+  "no_target_GT_for_adaptation": true,
+  "all_data_development": true,
+  "independent_blind_validation": false,
+  "no_new_primary_promotion_or_active_parent_recipe_changes": true,
+  "quality_replay_not_cold_deployment": true,
+  "goal_status": "ACTIVE",
+  "contrasts": {
+    "FULL_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL",
+      "LOCAL_TWO_FINAL"
+    ],
+    "FULL_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL",
+      "LOCAL_TWO_MEAN"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_CONTROL_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_LOCAL_TWO_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_LOCAL_TWO_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_CONTROL_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_LOCAL_TWO_MEAN_COUNT",
+      "LOCAL_TWO_MEAN__AT_LOCAL_TWO_MEAN_COUNT"
+    ]
+  },
+  "analysis_export_metadata": {
+    "derived_from_already_frozen_python_CONTRASTS": true,
+    "prior_registration_sha256": "c47aaf65fd5dc607f76f5919afc1ef0ae113a1dd6b2571caec59e192886078ff",
+    "source_unchanged": true,
+    "no_new_comparison_or_parameter": true,
+    "before_any_own_training_or_current_parent_quality_reads": true
+  }
+}

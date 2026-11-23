@@ -1,0 +1,43 @@
+{
+  "version": "V2_DISTILLED_PRIOR_GRAPH_REFINEMENT",
+  "unix_time": 1795202117.1993484,
+  "registered_after_V1_development_diagnosis": true,
+  "before_any_V2_target_GT": true,
+  "motivation": "V1 strong local graph lowers false positives but misses more positives than a well fitted shared teacher head. Test structural refinement of that SAME head.",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "acquisitions": [
+    "PRIOR",
+    "UNIFORM",
+    "UNCERTAINTY",
+    "COVER"
+  ],
+  "seed": 0,
+  "primary": "COVER__HIDDEN_GRAPH",
+  "secondary": [
+    "RAW_GRAPH",
+    "NO_GRAPH"
+  ],
+  "shared_baseline": "same frozen-PCD soft teacher head,4000 steps; no extra optimizer updates",
+  "classical": {
+    "source_precision_unasked": 1.0,
+    "source_precision_asked": 0.0,
+    "teacher_precision": "1+3*abs(2*p-1)",
+    "graph_strength": 1.0,
+    "neighbours": 3,
+    "source_and_teacher_logit_cap": 4.0,
+    "hyperparameter_search_on_GT": false
+  },
+  "hidden_geometry": "same head first Linear+GELU64; no new learned parameters",
+  "known_node_anchor": "teacher only, avoid fitted classifier/its own teacher double counting at that node",
+  "teacher_budget_unchanged": true,
+  "new_teacher_calls": 0,
+  "target_labels_in_runtime": false,
+  "no_independent_blind_test_claim": true,
+  "code_sha256": {
+    "flex_uda/active/visual_classical.py": "0ff837a5b2d9c734d9daa0ac7f754931e2e54906fb63662de9dc9f84d469281d",
+    "scripts/a100_visual_classical_refine_v2.py": "56abf50b846ef28d65ae946fadc2de2eef0f44a2fefa848d910de9d587e077ed"
+  }
+}

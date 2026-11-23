@@ -1,0 +1,25 @@
+{
+  "study": "CONDITIONAL_PREFIX_PILOT_V1",
+  "source_sha256": {
+    "scripts/a100_conditional_prefix_pilot.py": "d538914460360e282d70d0d2de2d1441709bb6f2c5317c9a420ec834b5ba4a89",
+    "flex_uda/active/anchor_state_inputs.py": "2dd0c3806418c5387b71660268283f45245727df9749481092542fd5ac762941",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "flex_uda/active/fit_capacity.py": "620bb332eeb2f6e304b671a2fbda028e72d8bd384f7903ca7a070536611b84cc",
+    "scripts/a100_anchor_pcd_collect.py": "91d487dee2946f5002b71124be5e92f42c94b362888f5902ba082af827ef9532",
+    "docs/a100_six_direction_20261122/conditional_prefix_pilot_hypothesis.json": "de5700c1f4db1aed032025765fe60dfb3fdf617d14af2b07e08d115e275d7cc7"
+  },
+  "registered_before_real_head_fitting": true,
+  "pair": "C2",
+  "video": "0005",
+  "methods": [
+    "FLAT_ORDINARY",
+    "DIRECT_CONTEXT",
+    "DIRECT_CONTEXT_RELATIVE",
+    "CONDITIONAL_JOINT",
+    "CONDITIONAL_JOINT_RELATIVE"
+  ],
+  "seed": 0,
+  "no_target_GT_or_full_video_quality_outputs": true,
+  "wait_for_source_pending_queue_empty_and_unreserved_GPU": true
+}

@@ -1,0 +1,86 @@
+{
+  "version": "VISUAL_CLASSICAL_V1",
+  "source_commit": "bb67783cc2b90ce67eac016d1d8d1f857e18a30d",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "target_labels_in_method": false,
+  "GT_only_after_all_predictions_sealed": true,
+  "all_datasets_development": true,
+  "independent_blind_validation": false,
+  "scope": "video-transductive target-image/query adaptation; no target labels; frozen source model and frozen teacher",
+  "budget_fraction": 0.3,
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "first_implementation_seed": 0,
+  "sampling": "per-query balanced budget; three frozen PCD observations uniformly spaced per track, largest area among them for teacher",
+  "acquisition": [
+    "PRIOR",
+    "UNIFORM",
+    "UNCERTAINTY",
+    "COVER"
+  ],
+  "teacher_view": "CROP",
+  "teacher_threshold": 0.5,
+  "methods": [
+    "DIRECT_HARD",
+    "DIRECT_SOFT",
+    "KD_HARD",
+    "KD_SOFT",
+    "FULL",
+    "NO_CORRECTION",
+    "NO_GRAPH"
+  ],
+  "same_evidence_controls": true,
+  "cover_ablation": "FULL inference on uniform and uncertainty acquisitions",
+  "classical": {
+    "graph": "symmetric self-tuning cosine kNN, k=min(3,n-1)",
+    "source_precision": 0.1,
+    "teacher_precision": "1+3*abs(2*p-1)",
+    "teacher_logit_cap": 4.0,
+    "teacher_probability_clip": [
+      0.02,
+      0.98
+    ],
+    "source_logit_cap": 2.0,
+    "graph_strength": 1.0,
+    "parameters_selected_using_GT": false
+  },
+  "distillation": {
+    "actual_trainable_head": true,
+    "frozen_PCD_features": true,
+    "architecture": "768 ->64 GELU ->1 residual on source logit",
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.001,
+    "steps": 400,
+    "loss": "BCE hard or raw soft teacher targets",
+    "no_confidence_screening": true,
+    "no_target_GT_selection": true
+  },
+  "protocol": {
+    "C4": "PRESUPPOSED",
+    "C1": "CHECKLIST",
+    "new_early_absence_stop": false
+  },
+  "comparison": {
+    "fixed_evidence": true,
+    "CountMatched": true,
+    "official_HOTA": true,
+    "original_parent_group_bootstrap": 10000,
+    "real_wall_cost_separate": true,
+    "teacher_pool_preparation_not_live_method_cost": true
+  },
+  "acceptance": "full method better than strongest direct-pseudo/KD baseline with transparent module ablations, quantity controls and cross-direction limits",
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "NAS_write": false
+}

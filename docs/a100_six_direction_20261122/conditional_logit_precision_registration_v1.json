@@ -1,0 +1,296 @@
+{
+  "study": "SAME_INFORMATION_ORDINARY_LOGIT_PRECISION_SUPPLEMENT",
+  "registered_before_parent_quality_reads_and_own_training": true,
+  "source_sha256": {
+    "scripts/a100_conditional_logit_precision.py": "b2af47e6ef5ea22a3dc50bcc805416598291d9141b5558a2e60b1f5bf76513fa",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "scripts/a100_conditional_six_setting.py": "5d1ddd2b7791fa5931fa0ac57750cafed39903580c1fdf644e4746cad1fe48cb",
+    "scripts/a100_conditional_coarse_baseline.py": "0cc1c000e1954c8c8d03ef503fe2121ee2d9e965b311c9a373bd28bd33773fd2",
+    "scripts/a100_conditional_shared_control.py": "e652d4a442f6ee01ccbc518a9cf82314c0c21a1f3a00372fac152772ff47b5eb"
+  },
+  "motivation": "Actual seed0 audits found1/0 probability saturation and exact ties at ordinary CountMatched cutoffs; do not count quantization as semantic-learning gain.",
+  "evidence": "docs/a100_six_direction_20261122/conditional_rank_precision.json",
+  "evidence_source_sha256": "ba1d9a337fc923e7bd97326f6da42f30a49581297003fd0acfc363d5dabf6a28",
+  "primary": "FULL_FINAL with unchanged FULL recipe, fresh registered numerical replica; no best-output promotion",
+  "learned_heads": [
+    "FRAME_SOFT",
+    "FRAME_HARD",
+    "FLAT_SOFT",
+    "FLAT_HARD",
+    "FULL",
+    "COARSE_SOFT",
+    "COARSE_HARD"
+  ],
+  "reused_actual_heads": "LOCAL_TWO final/step400 logits from its own already registered current/past-prefix run; no future head replay.",
+  "methods": [
+    "FRAME_SOFT_FINAL",
+    "FRAME_SOFT_MEAN",
+    "FRAME_HARD_FINAL",
+    "FRAME_HARD_MEAN",
+    "FLAT_SOFT_FINAL",
+    "FLAT_SOFT_MEAN",
+    "FLAT_HARD_FINAL",
+    "FLAT_HARD_MEAN",
+    "FULL_FINAL",
+    "FULL_MEAN",
+    "COARSE_SOFT_FINAL",
+    "COARSE_SOFT_MEAN",
+    "COARSE_HARD_FINAL",
+    "COARSE_HARD_MEAN",
+    "LOCAL_TWO_FINAL",
+    "LOCAL_TWO_MEAN"
+  ],
+  "baselines": [
+    "FRAME_SOFT_FINAL",
+    "FRAME_SOFT_MEAN",
+    "FRAME_HARD_FINAL",
+    "FRAME_HARD_MEAN",
+    "FLAT_SOFT_FINAL",
+    "FLAT_SOFT_MEAN",
+    "FLAT_HARD_FINAL",
+    "FLAT_HARD_MEAN",
+    "FULL_MEAN",
+    "COARSE_SOFT_FINAL",
+    "COARSE_SOFT_MEAN",
+    "COARSE_HARD_FINAL",
+    "COARSE_HARD_MEAN",
+    "LOCAL_TWO_FINAL",
+    "LOCAL_TWO_MEAN"
+  ],
+  "scope": "All six settings, seeds0/17/42; source historical fullPCD and denseRGB identical, DESIGN same own actual teacher answers, no source residual.",
+  "numeric_change": "Save pre-sigmoid float32 task logits; order FINAL by logit, MEAN by float64 log-odds computed from both logits and complements; raw mean threshold sign(z_final+z_early).",
+  "numerical_checks": {
+    "mean_equal_logits_identity_max_error": 0.0,
+    "moderate_probability_formula_max_error": 3.3306690738754696e-16,
+    "distinct_large_logits_preserved": [
+      20.0,
+      30.0
+    ],
+    "rounded_float32_probabilities": [
+      1.0,
+      1.0
+    ],
+    "mean_threshold_uses_sign_of_final_plus_early_logit": true,
+    "limitations": "Finite float64 precision still exists; actual remaining cutoff ties are recorded."
+  },
+  "same_optimization": "Original fit helper and all recipe entries unchanged; all ordinary and FULL heads have original teacher-only adequate fitting and warm prefixes.",
+  "old_heads_not_assumed_exactly_recovered": true,
+  "drift_audit": "Separate replay-vs-old rounded probabilities/decisions from pre-sigmoid-vs-own-rounded decisions at each actual video.",
+  "original_studies_not_interrupted_or_overwritten": true,
+  "counts": {
+    "conditions": 18,
+    "raw_per_condition": 16,
+    "counts_per_condition": 46,
+    "raw": 288,
+    "CountMatched": 828,
+    "own_total": 1116,
+    "shared_original_FULL": 18,
+    "statistical_records": 1134
+  },
+  "own_ranking_ties_still_measured": true,
+  "GPU_schedule": "Wait generic control all18 GPU conditions complete and active empty, after primary/coarse, then preflight only0/1/2/3.",
+  "GT_gate": "All own1116 plus primary1692,coarse378,generic162 outputs sealed before this study evaluation.",
+  "no_new_teacher_or_backbone_calls": true,
+  "no_target_GT_in_adaptation_or_selection": true,
+  "no_new_method_innovation_claim": true,
+  "all_data_development": true,
+  "independent_blind_validation": false,
+  "cost_scope": "Shared research replay and numerical repair, not single-method cold wall-clock or a method gain.",
+  "goal_status": "ACTIVE",
+  "contrasts": {
+    "FULL_vs_FRAME_SOFT_FINAL": [
+      "FULL_FINAL",
+      "FRAME_SOFT_FINAL"
+    ],
+    "FULL_vs_FRAME_SOFT_MEAN": [
+      "FULL_FINAL",
+      "FRAME_SOFT_MEAN"
+    ],
+    "FULL_vs_FRAME_HARD_FINAL": [
+      "FULL_FINAL",
+      "FRAME_HARD_FINAL"
+    ],
+    "FULL_vs_FRAME_HARD_MEAN": [
+      "FULL_FINAL",
+      "FRAME_HARD_MEAN"
+    ],
+    "FULL_vs_FLAT_SOFT_FINAL": [
+      "FULL_FINAL",
+      "FLAT_SOFT_FINAL"
+    ],
+    "FULL_vs_FLAT_SOFT_MEAN": [
+      "FULL_FINAL",
+      "FLAT_SOFT_MEAN"
+    ],
+    "FULL_vs_FLAT_HARD_FINAL": [
+      "FULL_FINAL",
+      "FLAT_HARD_FINAL"
+    ],
+    "FULL_vs_FLAT_HARD_MEAN": [
+      "FULL_FINAL",
+      "FLAT_HARD_MEAN"
+    ],
+    "FULL_vs_FULL_MEAN": [
+      "FULL_FINAL",
+      "FULL_MEAN"
+    ],
+    "FULL_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL",
+      "COARSE_SOFT_FINAL"
+    ],
+    "FULL_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL",
+      "COARSE_SOFT_MEAN"
+    ],
+    "FULL_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL",
+      "COARSE_HARD_FINAL"
+    ],
+    "FULL_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL",
+      "COARSE_HARD_MEAN"
+    ],
+    "FULL_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL",
+      "LOCAL_TWO_FINAL"
+    ],
+    "FULL_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL",
+      "LOCAL_TWO_MEAN"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FRAME_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_SOFT_FINAL": [
+      "FULL_FINAL__AT_FRAME_SOFT_FINAL_COUNT",
+      "FRAME_SOFT_FINAL__AT_FRAME_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FRAME_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_SOFT_MEAN": [
+      "FULL_FINAL__AT_FRAME_SOFT_MEAN_COUNT",
+      "FRAME_SOFT_MEAN__AT_FRAME_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FRAME_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_HARD_FINAL": [
+      "FULL_FINAL__AT_FRAME_HARD_FINAL_COUNT",
+      "FRAME_HARD_FINAL__AT_FRAME_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FRAME_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_HARD_MEAN": [
+      "FULL_FINAL__AT_FRAME_HARD_MEAN_COUNT",
+      "FRAME_HARD_MEAN__AT_FRAME_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FLAT_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FLAT_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FLAT_SOFT_FINAL": [
+      "FULL_FINAL__AT_FLAT_SOFT_FINAL_COUNT",
+      "FLAT_SOFT_FINAL__AT_FLAT_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FLAT_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FLAT_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FLAT_SOFT_MEAN": [
+      "FULL_FINAL__AT_FLAT_SOFT_MEAN_COUNT",
+      "FLAT_SOFT_MEAN__AT_FLAT_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FLAT_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FLAT_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FLAT_HARD_FINAL": [
+      "FULL_FINAL__AT_FLAT_HARD_FINAL_COUNT",
+      "FLAT_HARD_FINAL__AT_FLAT_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FLAT_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FLAT_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FLAT_HARD_MEAN": [
+      "FULL_FINAL__AT_FLAT_HARD_MEAN_COUNT",
+      "FLAT_HARD_MEAN__AT_FLAT_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FULL_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "FULL_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FULL_MEAN": [
+      "FULL_FINAL__AT_FULL_MEAN_COUNT",
+      "FULL_MEAN__AT_FULL_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_COARSE_SOFT_FINAL_COUNT",
+      "COARSE_SOFT_FINAL__AT_COARSE_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_COARSE_SOFT_MEAN_COUNT",
+      "COARSE_SOFT_MEAN__AT_COARSE_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_COARSE_HARD_FINAL_COUNT",
+      "COARSE_HARD_FINAL__AT_COARSE_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_COARSE_HARD_MEAN_COUNT",
+      "COARSE_HARD_MEAN__AT_COARSE_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_LOCAL_TWO_FINAL": [
+      "FULL_FINAL__AT_LOCAL_TWO_FINAL_COUNT",
+      "LOCAL_TWO_FINAL__AT_LOCAL_TWO_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "LOCAL_TWO_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_LOCAL_TWO_MEAN": [
+      "FULL_FINAL__AT_LOCAL_TWO_MEAN_COUNT",
+      "LOCAL_TWO_MEAN__AT_LOCAL_TWO_MEAN_COUNT"
+    ],
+    "FULL_REPLICA_vs_ORIGINAL_RAW": [
+      "FULL_FINAL",
+      "ORIGINAL_FULL_FINAL"
+    ]
+  },
+  "analysis_export_metadata": {
+    "derived_from_already_frozen_python_CONTRASTS": true,
+    "prior_registration_sha256": "5eae990a98e4e58d6dd3011489d35d46b4ba820738bad91032f588e64f4e9435",
+    "source_unchanged": true,
+    "no_new_comparison_or_parameter": true,
+    "before_any_own_training_or_current_parent_quality_reads": true
+  }
+}

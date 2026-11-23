@@ -1,0 +1,39 @@
+{
+  "study": "Real first-prefix conditional-observation training prototype",
+  "problem": "Need test a trainable bag/current-observation representation and a relative-observation objective on actual fresh A100 features before launching a quality study.",
+  "fixed_case": {
+    "pair": "C2",
+    "video": "0005",
+    "prefix_videos": 1,
+    "policy": "DESIGN",
+    "seed": 0
+  },
+  "models": [
+    "FLAT_ORDINARY",
+    "DIRECT_CONTEXT",
+    "DIRECT_CONTEXT_RELATIVE",
+    "CONDITIONAL_JOINT",
+    "CONDITIONAL_JOINT_RELATIVE"
+  ],
+  "inputs": "Identical fresh three-anchor PCD, current anchor, normalized box/time metadata and same own actual teacher answers. No future-video statistics or labels.",
+  "model_principle": "A candidate TrackID is a bag, not certified physical identity. Separate support somewhere in the bag from current selection. Frame No is not a bag-negative or per-attribute negative label.",
+  "objective": "Confidence-weighted Bernoulli teacher loss plus optional weight1 conditional-choice KL within same query/bag/effective-view. The common support factor cancels directly; shared context paths can still learn.",
+  "fixed_optimization": {
+    "min_AdamW_steps": 4000,
+    "max_AdamW_steps": 16000,
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "bag_encoder_width": 32,
+    "relative_weight": 1,
+    "teacher_KL_gate": 0.005,
+    "own_total_excess_gate": 0.005,
+    "continued_optimization": "Failed contextual models get up to10blocks x100LBFGS iterations in float64, same architecture; verify deployedfloat32. Ordinary gets its existing teacher-only adequate-capacity continuation."
+  },
+  "fairness": "Flat ordinary receives all three state vectors and current features. Direct-context controls use the same learned pooling/context as the conditional model, both with and without relative loss.",
+  "label_scope": "CLIP responses assigned to requested anchors as a common prototype approximation, not certified frame truth. No language-scope cache consumed yet.",
+  "partial_identification": "Bag support is not uniquely recovered from sparse probabilities; no claim that a learned latent factor is true semantic identity or a clothing attribute.",
+  "measurements": "Actual deployed teacher CE/KL, conditional-choice KL, convergence/remainingfailures, realGPU fitting time and input index handoff.",
+  "no_full_video_decoder_or_HOTA_or_target_GT": true,
+  "scientific_acceptance": "This is an optimization/dataflow pilot only. Completion or teacher-fit PASS is not a module contribution or six-setting success.",
+  "goal_status": "ACTIVE"
+}

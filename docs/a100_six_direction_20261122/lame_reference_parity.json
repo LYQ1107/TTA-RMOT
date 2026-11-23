@@ -1,0 +1,40 @@
+{
+  "status": "PASS_LAME_CPU_ADAPTER_PRIMARY_CODE_PARITY",
+  "cases": [
+    {
+      "case": "random",
+      "samples": 13,
+      "kernel_equal": true,
+      "max_probability_difference": 8.673617379884035e-19,
+      "iterations": 14
+    },
+    {
+      "case": "C1",
+      "samples": 11,
+      "kernel_equal": true,
+      "max_probability_difference": 0.0,
+      "iterations": 4
+    },
+    {
+      "case": "C2",
+      "samples": 32,
+      "kernel_equal": true,
+      "max_probability_difference": 1.3552527156068805e-19,
+      "iterations": 4
+    },
+    {
+      "case": "C4",
+      "samples": 19,
+      "kernel_equal": true,
+      "max_probability_difference": 0.0,
+      "iterations": 4
+    }
+  ],
+  "zero_kernel_preserves_original_eps_normalized_probabilities": true,
+  "GT_open_attempts": 0,
+  "teacher_encoder_GPU_or_head_calls": 0,
+  "scope": "Nondegenerate neighbor kernels and optimizer agree with pinned official code using consistent float64 operands. Exact feature ties use the documented explicit self-exclusion/Track-ID tie rule.",
+  "parity_harness_initial_dtype_issue": "Official kNN creates float32 zeros even with float64 features; cast binary kernel and unary to the same float64 in the isolated test. No production recipe modified.",
+  "source": "fiveai/LAME@d2e5f63090bc1c8129bf7cbd781029a5955e1a67",
+  "goal_status": "ACTIVE"
+}

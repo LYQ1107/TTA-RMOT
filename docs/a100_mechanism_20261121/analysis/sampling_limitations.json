@@ -1,0 +1,85 @@
+{
+  "status": "POST_SELECTION_COVERAGE_AUDIT",
+  "pairs": {
+    "C1": {
+      "calibration": {
+        "locations": 36,
+        "videos": 9,
+        "parents": [
+          "dancetrack0004",
+          "dancetrack0010",
+          "dancetrack0019",
+          "dancetrack0030",
+          "dancetrack0041",
+          "dancetrack0058",
+          "dancetrack0073",
+          "dancetrack0081",
+          "dancetrack0097"
+        ]
+      },
+      "evaluation": {
+        "locations": 64,
+        "videos": 16,
+        "parents": [
+          "dancetrack0005",
+          "dancetrack0007",
+          "dancetrack0014",
+          "dancetrack0018",
+          "dancetrack0025",
+          "dancetrack0026",
+          "dancetrack0034",
+          "dancetrack0035",
+          "dancetrack0043",
+          "dancetrack0047",
+          "dancetrack0063",
+          "dancetrack0065",
+          "dancetrack0077",
+          "dancetrack0079",
+          "dancetrack0090",
+          "dancetrack0094"
+        ]
+      }
+    },
+    "C4": {
+      "calibration": {
+        "locations": 39,
+        "videos": 7,
+        "parents": [
+          "v_00HRwkvvjtQ",
+          "v_4-EmEtrturE"
+        ]
+      },
+      "evaluation": {
+        "locations": 61,
+        "videos": 8,
+        "parents": [
+          "v_0kUtTtmLaJA",
+          "v_2QhNRucNC7E",
+          "v_4r8QL_wglzQ"
+        ]
+      }
+    },
+    "C5": {
+      "calibration": {
+        "locations": 52,
+        "videos": 2,
+        "parents": [
+          "0005",
+          "0019"
+        ]
+      },
+      "evaluation": {
+        "locations": 48,
+        "videos": 2,
+        "parents": [
+          "0011",
+          "0013"
+        ]
+      }
+    }
+  },
+  "reason": "lexicographically ordered video/type/stratum buckets truncated at100; not equal-parent allocation",
+  "no_resampling_after_GT": true,
+  "existing_900_call_cap_unchanged": true,
+  "next_registration": "allocate original-parent quotas before within-parent strata"
+}

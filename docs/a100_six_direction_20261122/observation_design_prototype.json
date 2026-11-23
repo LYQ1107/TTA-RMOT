@@ -1,0 +1,61 @@
+{
+  "status": "OBSERVATION_DESIGN_PROTOTYPE_MATH_AND_REAL_INPUT_CHECKS_PASS",
+  "source_sha256": {
+    "flex_uda/active/observation_design.py": "b1bc3ca239a3ace87a96dddc8993fa0419cbae222d2a5c4f5d85d2549f89a0f2",
+    "tests/test_observation_design.py": "d75dc34e07d2f69cbefb15c2fee29bcbe1a8ee7a9c5919df32b7a081128478cd",
+    "scripts/a100_observation_design_probe.py": "ace2eda2a1fb24f377347fa2411275d5f2a43543cac3fd8701a9c6ae237f5ada"
+  },
+  "tests_passed": 3,
+  "real_probes": [
+    {
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "query_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+      "tracks": 11,
+      "historical_request_count_as_budget": 5,
+      "historical_distinct_requested_tracks": 5,
+      "direction": 0,
+      "paid_anchors": 4,
+      "state_contrasts": 0,
+      "distinct_objects": 5,
+      "new_teacher_GPU_or_GT_calls": 0,
+      "all_planned_frames_are_actual_source_samples": true
+    },
+    {
+      "pair": "C2",
+      "video": "0005",
+      "query_id": "automobiles-are-located-to-the-left",
+      "tracks": 32,
+      "historical_request_count_as_budget": 23,
+      "historical_distinct_requested_tracks": 21,
+      "direction": -1,
+      "paid_anchors": 18,
+      "state_contrasts": 5,
+      "distinct_objects": 18,
+      "new_teacher_GPU_or_GT_calls": 0,
+      "all_planned_frames_are_actual_source_samples": true
+    },
+    {
+      "pair": "C4",
+      "video": "v_00HRwkvvjtQ_c001",
+      "query_id": "basketball-player",
+      "tracks": 19,
+      "historical_request_count_as_budget": 4,
+      "historical_distinct_requested_tracks": 1,
+      "direction": 0,
+      "paid_anchors": 3,
+      "state_contrasts": 0,
+      "distinct_objects": 4,
+      "new_teacher_GPU_or_GT_calls": 0,
+      "all_planned_frames_are_actual_source_samples": true
+    }
+  ],
+  "interpretation": "Geometry-only prototype planning checks, not a collected active-policy experiment. Historical raw QA values are ignored; query/track IDs used only for quota/coverage reference.",
+  "no_new_teacher_or_GPU_calls": true,
+  "manual_GT_open_attempts": 0,
+  "new_candidate_predictions": 0,
+  "theory": "Coverage plus log of summed per-object maximum contrast excitation is conditionally monotone submodular for fixed paid anchors/actions/nonnegative weights and equal one-question costs. Greedy1-1/e concerns conditional proxy gain only.",
+  "not_true_Fisher_information": true,
+  "not_global_two_stage_or_HOTA_or_wall_time_guarantee": true,
+  "goal_status": "ACTIVE"
+}

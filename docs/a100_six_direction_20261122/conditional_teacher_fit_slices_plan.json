@@ -1,0 +1,24 @@
+{
+  "study": "CURRENT_VIDEO_TEACHER_FIT_CLASS_SLICES_NO_GT",
+  "source_sha256": "875ee2399b8d47a47deb6d3f432de7d8331fd743f229b9ad8fe379dfe017c84d",
+  "selection": "First completed C1/seed0; current-video scores evaluated against only their own paid DESIGN answers.",
+  "purpose": "Check whether prefix-global fit gate hides rare high-confidence teacher-positive or negative errors. No semantic GT interpretation.",
+  "diagnostic_positive_threshold": 0.5,
+  "diagnostic_high_confidence_thresholds": [
+    0.1,
+    0.9
+  ],
+  "exact_half_not_a_sign_error": true,
+  "soft_target_clip": [
+    0.02,
+    0.98
+  ],
+  "hard_target_rule": "raw_teacher>=.5 unchanged",
+  "recorded_metrics": [
+    "Sign errors excluding exact ties",
+    "MSE to own soft or hard target",
+    "Per-video counts"
+  ],
+  "new_optimization_or_prediction_or_GT_reads": false,
+  "original_fit_or_quality_gates_unchanged": true
+}

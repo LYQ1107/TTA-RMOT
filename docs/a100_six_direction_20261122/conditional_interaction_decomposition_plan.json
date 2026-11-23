@@ -1,0 +1,29 @@
+{
+  "study": "SECONDARY_FOUR_ARM_COMMON_COUNT_DESCRIPTION",
+  "source_sha256": "b2a778b27ec3e8a9eaf134722eac544aa4a414f3c746d467b70be6a7e027fb91",
+  "fixed_before_current_main_quality_reads": true,
+  "original_registered_primary_raw_interaction_unchanged": true,
+  "inputs": [
+    "conditional_observation_analysis.json",
+    "conditional_observation_parent_statistics.json"
+  ],
+  "methods": [
+    "FULL_FINAL",
+    "CONDITIONAL_BALANCED_FINAL",
+    "DIRECT_PROFILE_FINAL",
+    "DIRECT_BALANCED_FINAL"
+  ],
+  "count_donor": "FULL_FINAL fixed before all quality, same output count per query/frame.",
+  "existing_CountMatched_outputs_only_no_new_GPU_or_predictions": true,
+  "intended_checks": [
+    "Raw four-arm interaction matches original per-seed declaration.",
+    "Describe the same four-arm contrasts with all methods at FULL output count.",
+    "Report the algebraic difference without calling it a unique causal count effect."
+  ],
+  "no_new_interaction_CI": true,
+  "no_GT_adaptation_or_model_selection": true,
+  "quantization_limitation": "Structured comparator cutoff ties have not yet been measured by the ordinary-head seed0 audit. Common counts do not certify unquantized semantic rank.",
+  "scope": "All6settings/3seeds, DEV, secondary descriptive analysis, no best-output selection.",
+  "execute_only_after_full_parent_sealing_and_completed_official_aggregate": true,
+  "goal_status": "ACTIVE"
+}

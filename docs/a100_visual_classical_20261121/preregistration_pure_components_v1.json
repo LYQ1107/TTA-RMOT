@@ -1,0 +1,53 @@
+{
+  "status": "PREREGISTERED_BEFORE_NEW_CONTROL_OUTPUTS_AND_STUDY_GT",
+  "created_UTC": "2026-11-22T06:44:06.451552+00:00",
+  "rationale": "Separate local raw-teacher overwrite from graph coupling and test visual correspondence. Main quality result is already known; posthoc mechanism audit, not new independent validation. Main recipe and all four running cold workers stay frozen.",
+  "controls": {
+    "ANCHOR_ONLY": "Same shared FINAL, raw known-teacher anchors, weak unknown unary and supported queries; zero all graph edges",
+    "ANCHOR_CAL": "Zero-edge anchors followed by original cue/PAVA",
+    "SHUFFLED_CAL": "Permute available cue-to-track pairing using existing fixed video/query hash, then same TrackID-excluding teacher-only prefix PAVA",
+    "SHUFFLED_JOINT": "Same protocol-pooled unary with independently refit permuted-cue PAVA; same cap, folds, QA budget, feature inputs"
+  },
+  "conditions": {
+    "directions": [
+      "C4",
+      "C1"
+    ],
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "QA_seed": 0
+  },
+  "raw_outputs": 24,
+  "CountMatched_outputs": 42,
+  "official_total": 66,
+  "counts_both_directions_vs": [
+    "ANCHOR_CAL",
+    "SHUFFLED_JOINT"
+  ],
+  "all66_sealed_before_new_study_GT": true,
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "new_neural_head_fits": 0,
+  "attribution_checks": {
+    "simple_teacher_overwrite": "Primary vs ANCHOR_ONLY: both directions all three neural seeds positive and parent+seed CI positive for a reliable claim beyond this ordinary hybrid",
+    "graph_edges": "CHECKLIST primary vs ANCHOR_CAL positive parent+seed CI; otherwise do not attribute pooled-module gain purely to edges",
+    "visual_binding": "C4 primary vs SHUFFLED_JOINT positive parent+seed CI for visual-correspondence claim",
+    "failure_policy": "Do not alter primary or running physical recipe, promote a control or hide negatives; narrow claims or continue research if a stronger simple baseline removes advantage"
+  },
+  "all_data_DEV": true,
+  "descriptive_intervals_not_development_or_multiplicity_corrected": true,
+  "protocol_and_domain_confounded": true,
+  "no_adaptation_manual_GT": true,
+  "goal_status": "ACTIVE",
+  "implementation_sha256": {
+    "scripts/a100_visual_classical_pure_components.py": "faf3447d7a81aa43ec0843ee1a8bff94136f84a405fcfcf8a3b19d528e094d92",
+    "scripts/a100_visual_classical_pure_components_launch.py": "e6a66e5329fd174fe1b9f5b3be8d0d5e4af897cad73de1ae3307fdc8eb13d087",
+    "scripts/a100_visual_classical_pure_components_analyze.py": "c2aad78d7dbf75d790b8d7a49329331bd42dc31c5beaaca50b2ab60e66948008",
+    "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "flex_uda/active/visual_classical.py": "5a0aa8a4a97d95fafd8d747d2344d367db542aa6c50c093ba5dcfb344f04c333",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84"
+  }
+}

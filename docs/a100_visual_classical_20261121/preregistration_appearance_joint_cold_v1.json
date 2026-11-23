@@ -1,0 +1,80 @@
+{
+  "version": "APPEARANCE_JOINT_INDEPENDENT_COLD_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "registered_after": "All138 JOINT outputs sealed and official/282HOTA/384effect independent reproduction PASS;420video-method production replay exactly0difference.",
+  "scientific_status": "Main JOINT beats same RGB mean KD on C4/C1, all3seed positive and descriptive intervals positive. C4 all retained ordinary-KD intervals positive; C1 old HARD400 interval barely crosses0. C1 ranking at KD counts is negative: explicitly a calibration/count benefit, not universal ranking learning. C4 some queries regress despite aggregate gains.",
+  "teacher_fraction": 0.1,
+  "query_graph_scope": "extended",
+  "head_query_scope": "extended",
+  "graph_metric": "combined",
+  "graph_prior": "constant",
+  "set_decoder": "original",
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C4_rgb1080_kd_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED"
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C4_rgb1080_joint_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED"
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C1_rgb1080_kd_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST"
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C1_rgb1080_joint_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST"
+    }
+  },
+  "defer_official_evaluation": true,
+  "primary": "Compare truly independent full-target KD and JOINT processes, same model A100 and deterministic10% acquisition within pair.",
+  "source": "Correct frozen official Dance-best for C4, KITTI-V2 best for C1. Recompute three-observation PCD and RGB with original four-frame context. Fixed official candidate boxes/IDs accepted by human.",
+  "teacher": "Each worker freshly reloads frozen Qwen and starts a private new SQLite.1160 C4 or1103 C1 real questions; expected0cachehits. Never copy evidence between actual workers.",
+  "adaptation": "RGB1080 sufficient clipped soft teacher head, fixed400/final mean; JOINT same head plus query-specific graph then fixed TrackID-crossfit PAVA. No target manual labels, no LoRA, no nonempty/positive guard.",
+  "GT": "All4 workers must seal predictions and pass receipts before any official GT evaluation for this study. Clean evaluation children; no feedback to active workers.",
+  "actual_cost": "Primary external Popen-to-exit wall per single-method worker, including imports, source/teacher loads, true forward, calibration/head fit/output and audits. Official GT excluded. CPU phases separately recorded; no logical-call proxy.",
+  "resource": "GPU0,1,2,3 preflight each0MiB/40960MiB; no4..9 allocation. Concurrent A100s share NAS/OS/background IO, so wall differences do not prove algorithmic acceleration.",
+  "disk_preflight": {
+    "free_bytes": 2328842240,
+    "old_C4_single_bytes": 215491051,
+    "old_C1_two_arm_bytes": 123207804,
+    "estimated_four_runs_fit": true
+  },
+  "numerical": "Compare actual features/priors/questions/probabilities within each pair and with quality source; compare expected seed0 masks only if inputs match. If not identical, disclose and perform matched follow-up rather than paste historical precision onto new time.",
+  "code_sha256": {
+    "worker": "a3fc134386a899bb890a553cc43c0a7efc3f8c6a808116582a3ddb191c39bf15",
+    "runtime": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "calibration": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "graph": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81"
+  },
+  "old_3512_second_cost_not_reused": true,
+  "scope_limit": "Official candidate generation remains outside provided-input boundary; no independent blind split exists.",
+  "acceptance": "Keep scientific module limits and all failed controls. Goal only evaluated after actual quality/evidence/cost integrity and lightweight publication, never simply at queue end."
+}

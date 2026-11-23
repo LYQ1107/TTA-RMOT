@@ -1,0 +1,104 @@
+{
+  "study": "CONDITIONAL_COARSE_ORDINARY_SIX_SETTINGS_V1",
+  "source_sha256": {
+    "scripts/a100_conditional_coarse_baseline.py": "0cc1c000e1954c8c8d03ef503fe2121ee2d9e965b311c9a373bd28bd33773fd2",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "scripts/a100_conditional_six_setting.py": "5d1ddd2b7791fa5931fa0ac57750cafed39903580c1fdf644e4746cad1fe48cb",
+    "docs/a100_six_direction_20261122/conditional_coarse_hypothesis.json": "1784081a2913197a9ac144f0b2c8db6a12e6eb320dc966d2cdca88c762d5a628"
+  },
+  "registered_before_any_own_fit_or_quality_read": true,
+  "methods": [
+    "COARSE_SOFT_FINAL",
+    "COARSE_SOFT_MEAN",
+    "COARSE_HARD_FINAL",
+    "COARSE_HARD_MEAN",
+    "COARSE_TEACHER_FILL"
+  ],
+  "primary": "FULL_FINAL",
+  "contrasts": {
+    "FULL_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL",
+      "COARSE_SOFT_FINAL"
+    ],
+    "FULL_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL",
+      "COARSE_SOFT_MEAN"
+    ],
+    "FULL_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL",
+      "COARSE_HARD_FINAL"
+    ],
+    "FULL_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL",
+      "COARSE_HARD_MEAN"
+    ],
+    "FULL_vs_COARSE_TEACHER_FILL": [
+      "FULL_FINAL",
+      "COARSE_TEACHER_FILL"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_COARSE_SOFT_FINAL_COUNT",
+      "COARSE_SOFT_FINAL__AT_COARSE_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_COARSE_SOFT_MEAN_COUNT",
+      "COARSE_SOFT_MEAN__AT_COARSE_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_COARSE_HARD_FINAL_COUNT",
+      "COARSE_HARD_FINAL__AT_COARSE_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_COARSE_HARD_MEAN_COUNT",
+      "COARSE_HARD_MEAN__AT_COARSE_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_TEACHER_FILL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "COARSE_TEACHER_FILL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_TEACHER_FILL": [
+      "FULL_FINAL__AT_COARSE_TEACHER_FILL_COUNT",
+      "COARSE_TEACHER_FILL__AT_COARSE_TEACHER_FILL_COUNT"
+    ]
+  },
+  "conditions": 18,
+  "own_raw_outputs": 90,
+  "own_count_outputs": 288,
+  "total_own_outputs": 378,
+  "shared_primary_statistic_records": 18,
+  "total_statistics_records": 396,
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "allowed_physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "wait_for_all_primary_GPU_conditions_before_allocating": true,
+  "primary_all1692_and_own378_outputs_sealed_before_this_GT": true,
+  "recipe_fixed_without_reading_primary_quality": true,
+  "no_target_GT_in_adaptation": true
+}

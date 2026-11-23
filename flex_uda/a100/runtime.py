@@ -31,9 +31,9 @@ def metadata():
     return m
 
 
-def source_head():
+def source_head(model_name='Dance-best'):
     e = json.loads((ROOT / 'results/presence_active/redesign_v8p/execution.json').read_text())
-    return relocate(e['source_heads']['Dance-best']['checkpoint'])
+    return relocate(e['source_heads'][model_name]['checkpoint'])
 
 
 def sealed_inputs():
@@ -52,19 +52,30 @@ def video_spec(video, bank):
     return original('SportsMOT', video, bank)
 
 
-def load_student(output, device, *, verify_weights=True):
+def load_student(output, device, *, verify_weights=True, model_name='Dance-best', target='SportsMOT'):
     import compat.sitecustomize
     from transformers import RobertaTokenizerFast
     from scripts.multidomain_sports_smoke import config
+    from scripts.multidomain_kitti_scores import config_for
+    from scripts.multidomain_runtime import checkpoint_spec
     from flex_tta.runtime.pf_receipts import file_sha
     begin = time.perf_counter()
     print(json.dumps(dict(event='STUDENT_LOAD_START',device=str(device))),flush=True)
-    checkpoint = ROOT / 'assets/official_checkpoints/refer-dance-best.pth'
-    expected = 'fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c'
+    original_checkpoint, expected = checkpoint_spec(model_name)
+    checkpoint = ROOT / 'assets/official_checkpoints' / original_checkpoint.name
+    if not checkpoint.is_file():
+        # LaMOT was restored as a separate read-only NAS asset, not inside
+        # the directory holding the V2/Dance checkpoints. Resolve the same
+        # registered official weight; do not write into that NAS directory.
+        candidate = relocate(original_checkpoint)
+        if model_name == 'LaMOT-best' and not candidate.is_file():
+            paths = json.loads((ROOT/'configs/a100_paths.json').read_text())
+            candidate = Path(paths['assets']['lamot_checkpoint.pth'])
+        checkpoint = candidate
     if verify_weights and file_sha(checkpoint) != expected:
-        raise ValueError('Changed official Dance-best checkpoint')
+        raise ValueError('Changed official '+model_name+' checkpoint')
     prior_cwd = Path.cwd()
-    cfg = config(checkpoint, output)
+    cfg = config(checkpoint, output) if target == 'SportsMOT' else config_for(checkpoint, output, target)
     cfg.defrost()
     cfg.ROBERTA_PATH = str(ROOT / 'assets/roberta-base')
     # The legacy parser treats a present False argument as enabling these.
@@ -89,6 +100,7 @@ def load_student(output, device, *, verify_weights=True):
     os.chdir(prior_cwd)
     return model, tokenizer, get_transform('test', cfg), dict(
         checkpoint=str(checkpoint), checkpoint_sha256=expected, strict_load=str(strict),
+        source_model=model_name, target=target,
         model_load_seconds=time.perf_counter()-begin, precision='FP32',
         checkpoint_hash_verified_in_this_load=verify_weights,
         fused_window_process=cfg.FUSED_WINDOW_PROCESS, fused_layernorm=cfg.FUSED_LAYERNORM)

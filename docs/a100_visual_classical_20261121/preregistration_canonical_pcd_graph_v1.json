@@ -1,0 +1,23 @@
+{
+  "objective": "Continue the unmet goal with a canonical frozen-PCD teacher learner and separately attributable classical inference; do not call completed prior queues success.",
+  "registered_after": "All114RGB,66null,42zero-HSV official outputs and exact public reproductions. Earlier source/teacher private cold measurements and query diagnostics are complete.",
+  "motivation": "Explicit HSV in the1080D head lowers C4 by.685 on average; graph vs the stronger zero-HSV head has CI crossing0. C1 graph ranking at KD counts is negative and overall3seed interval slightly crosses0. Whole-set null fallback increases FP and lowers HOTA. Neither module is accepted as solved.",
+  "pairs": ["C4","C1"],
+  "seeds": [0,17,42],
+  "source": "Exact actual fresh pools C4_minimal_single_KD_rho0p1_20261122 and C1_key_rho0p1_mean_pair_20261122;1160/1103 shared teacher probabilities, no new teacher or encoder calls",
+  "baseline": "Natural768->64GELU->1 residual teacher head, no padded zeros or handcrafted input; soft clip.02/.98 and hard teacher labels, actual min4000/max16000/KL.005. Keep400/final/softmean. Same optimizer, prefix normalization, current/past-only data, original candidate IDs.",
+  "strong_existing_controls": "All full-RGB soft/hard5checkpoints plus matched zero-HSV soft3checkpoints remain comparisons; do not replace them with only the new baseline. One global primary algorithm, no per-domain best checkpoint.",
+  "graph_geometry": "Same canonical soft-mean head with PCD-only, combinedPCD+HSV, HSV-only, and its final hidden64features. Existing3NN, visibility, degree normalization, teacher precision and logit caps unchanged. No-graph anchors retained.",
+  "primary": "GRAPH_GUARD vs KD_MEAN; shared768head. PCD metric plus one fixed positive-agreement regularizer under original declared PRESUPPOSED contract. CHECKLIST uses original.1precision so guard equals PCD graph.",
+  "positive_guard": "For each unasked node, a=.1+3.9*max(0,2*min(p400,pfinal)-1) under PRESUPPOSED; otherwise.1. Queried-node KD precision remains0. Upper4matches maximum teacher precision. Fixed before this study GT, no threshold sweep; model agreement is a heuristic trust score, not statistical confidence.",
+  "ablation": "GRAPH_PCD without guard, GRAPH_RGB, GRAPH_COLOUR, GRAPH_HIDDEN, ANCHORS. Old singleton/whole-set null fallback not added to the primary; they remain published failures. Do not claim colour routing is necessary.",
+  "seals": "66new raw plus90quantity controls: primary guard vs KD/PCD/RGB/anchors bidirectional13percondition plus PCD/RGB cross-ranks2percondition gives90controls; total156new official outputs. All seal before this study GT.",
+  "quantity": "Both directions for guard versus meanKD,unprotectedPCD,combinedRGB andanchors. Also PCD versus RGB cross-ranks to isolate metric addition. Exact CountSelf0 and existing Dance exclusivity preserved.",
+  "secondary": "Query target retrieval, empty sets, TP/FP/FN. No forced nonempty success criterion and no replacement of official HOTA.",
+  "resources": "GPUs0/1/2/3 all0MiB at preflight; local free10051653632bytes. Dedup immutable completed predictions per condition before quantities. Do not interrupt other tasks.",
+  "cost": "Quality refits measured individually; existing cold time does not belong to new768method. Only after scientific review select one fixed recipe and run matching fresh deployment with all real source/teacher startup/inference included.",
+  "statistics": "3neural seeds share fixed QA;10000original-parent resamples,13C4/25C1parents. All developer data; no blind, multiplicity correction or universal win claim.",
+  "acceptance": "Inspect all strong baselines, count directions and query regressions; never weaken canonical KD, cherry-pick domains/seeds, or close Goal because this queue finishes.",
+  "no_GT_in_adaptation": true,
+  "goal_status": "ACTIVE"
+}

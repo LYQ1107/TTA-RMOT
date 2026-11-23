@@ -1,0 +1,25 @@
+{
+  "problem": "The current conservative grammar fully resolves only17KITTIqueries; bound appearance, reference frames and time scopes need an explicit fallible representation.",
+  "intervention": "Use the same frozen Qwen3-VL-2B on task text only, under two fixed extraction prompts. Preserve literal evidence, ambiguity and the original query. Prompt agreement is not semantic ground truth.",
+  "data": "Only provided task descriptions. No image pixels, image QA, candidate features, predictions or manual target GT. Prompts receive no dataset or video identity.",
+  "prefix": "Precachedtextfunctionoutputsarenotfutureimageevidence.Downstreamlearnerloadsstructuresonlyforcurrent/pastqueriesandneverusesfuturequeriesfornorm/factorvocabfitting.",
+  "fairness": "OrdinaryandfactorizedKDreceiveidenticalstructures,ambiguityflagsandadditionalfeatures.ThispreparationdoesnotitselfshowaccuracygainorI2/I3contribution.",
+  "operations": "Wait for the I1 neural stage to finish all18conditions and release GPUs, then use one idle card among0/1/2/3. No dependency upgrades or changes to live numerical helpers.",
+  "format": "Require at least four valid schemas in the first batch of eight. Keep every raw response; invalid or disagreeing structures retain an opaque whole-query fallback. Do not promote a prompt by GT.",
+  "theory": "Textparsingprovidesamodelskeleton,notidentificationoflatentattributeprobabilities.ANDnegativefeedbackdoesnotlabelallatomsnegative;roles/actionsandreferencescopesremainexplicitassumptions.",
+  "cost": "Realtextgenerationforwardsandtokens,modelcoldloadandfinalweighthashrecordedseparatelyfromimageYesNocalls.PreparationcostnotRMOTdeployment/Paretoclaim.",
+  "goal_status": "ACTIVE",
+  "version": 3,
+  "previous_failed_attempt": "query_scope_teacher_failure_v1.json",
+  "repair": "Generate under the original required-field/class enums plus literal source-text spans. Keep original strict decoder and first8 minimum4 gate.",
+  "no_image_QA_or_target_GT_used_for_prompt_repair": true,
+  "failure_cost_preserved": "V1 retained separately; v2 persists load/generation counters before the format gate.",
+  "previous_failed_attempts": [
+    "query_scope_teacher_failure_v1.json",
+    "query_scope_teacher_failure_v2.json"
+  ],
+  "grammar": "LM Format Enforcer0.11.3 JSON-schema token filtering, shared tokenizer data and per-query literal-span choices.",
+  "generation_limit": "1536 new tokens to accommodate complete at-most12-term structures; not based on target quality.",
+  "no_failed_outputs_promoted_or_reused": true,
+  "syntax_not_semantic_truth": true
+}

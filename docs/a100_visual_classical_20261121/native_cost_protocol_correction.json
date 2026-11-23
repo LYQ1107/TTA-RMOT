@@ -1,0 +1,47 @@
+{
+  "status": "COST_ONLY_BASELINE_OPTIMIZATION_V2_BEFORE_ACTUAL_GT",
+  "reason": "PCD-only KD does not consume handcraftedRGB statistics; the original symmetric feature-support implementation overcharged it. Optimizedbaseline skipsunusedRGB; score,NN,inputPCD,sourceprior,anchors,teacherbudget unchanged.",
+  "original_plan": "preregistration_native_direct_cold_v1.json",
+  "replacement_plan": "preregistration_native_optimized_cold_v2.json",
+  "cancelled_KD": {
+    "C4": {
+      "run_root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_kd_single_rho0p1_20261122",
+      "launcher_pid": 2065351,
+      "worker_pid": 2065385,
+      "committed_videos": 3,
+      "teacher_questions_already_written": 3,
+      "completed_teacher_responses_lower_bound": 40
+    },
+    "C1": {
+      "run_root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_kd_single_rho0p1_20261122",
+      "launcher_pid": 2065353,
+      "worker_pid": 2065392,
+      "committed_videos": 3,
+      "teacher_questions_already_written": 4,
+      "completed_teacher_responses_lower_bound": 75
+    }
+  },
+  "uninterrupted_J": {
+    "C4": {
+      "run_root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_pcd768_direct_joint_single_rho0p1_20261122",
+      "launcher_pid": 2065352,
+      "worker_pid": 2065393,
+      "committed_videos": 3,
+      "teacher_questions_already_written": 3,
+      "completed_teacher_responses_lower_bound": 40
+    },
+    "C1": {
+      "run_root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C1_pcd768_direct_joint_single_rho0p1_20261122",
+      "launcher_pid": 2065354,
+      "worker_pid": 2065387,
+      "committed_videos": 3,
+      "teacher_questions_already_written": 4,
+      "completed_teacher_responses_lower_bound": 75
+    }
+  },
+  "aborted_research_startup_wall_preserved_in_original_worker_receipts": true,
+  "completed_response_counts_are_lower_bounds_if_batch_was_in_flight": true,
+  "no_actual_GT_read_or_metric_based_change": true,
+  "no_J_worker_or_graph_calibration_edited": true,
+  "timing": "Staggered fresh VRAM model initialization, OS/NAS cache unflushed and sharedhost load; no all-budgetPareto or speedup claim."
+}

@@ -1,0 +1,445 @@
+{
+  "status": "PASS_BASELINE_SCOPE_AND_UNCACHED_EVALUATION_AUDIT",
+  "HOTA": {
+    "C4": {
+      "SOURCE_ONLY": 24.578038468471057,
+      "DIRECT_TEACHER": 44.5702716609912,
+      "CURRENT_ONLY": 68.34133466437677,
+      "PREFIX_REPRO": 69.05010333743509,
+      "PAST_ONLY": 63.96423323179189
+    },
+    "C1": {
+      "SOURCE_ONLY": 10.803964852521313,
+      "DIRECT_TEACHER": 23.598668019791315,
+      "CURRENT_ONLY": 39.039722661098466,
+      "PREFIX_REPRO": 39.029949614828865,
+      "PAST_ONLY": 22.24983049724858
+    }
+  },
+  "scope_is_diagnostic_not_matching_different_label_budgets": true,
+  "uncached_HOTA_differences": {
+    "COLD_KD": 0.0,
+    "COLD_GRAPH": 0.0
+  },
+  "uncached_evaluated_queries": {
+    "COLD_KD": 466,
+    "COLD_GRAPH": 466
+  },
+  "prefix_reproduction": {
+    "C4": {
+      "changed_query_prediction_files": 0,
+      "reference_HOTA": 69.05010333743509,
+      "refit_HOTA": 69.05010333743509
+    },
+    "C1": {
+      "changed_query_prediction_files": 0,
+      "reference_HOTA": 39.029949614828865,
+      "refit_HOTA": 39.029949614828865
+    }
+  },
+  "membership": {
+    "C4": {
+      "volume": {
+        "all_pairs": 12056,
+        "asked_pairs": 3508,
+        "eligible_pairs": 11738,
+        "queries": 466,
+        "asked_observation_rows": 746552
+      },
+      "candidate_IoU_membership_counts": {
+        "SOURCE_ONLY": {
+          "asked": {
+            "TP": 31048,
+            "FP": 20310,
+            "FN": 370015,
+            "rows": 746552
+          },
+          "unasked": {
+            "TP": 112673,
+            "FP": 31271,
+            "FN": 992222,
+            "rows": 2221649
+          }
+        },
+        "DIRECT_TEACHER": {
+          "asked": {
+            "TP": 376916,
+            "FP": 107207,
+            "FN": 24147,
+            "rows": 746552
+          },
+          "unasked": {
+            "TP": 112673,
+            "FP": 31271,
+            "FN": 992222,
+            "rows": 2221649
+          }
+        },
+        "CURRENT_ONLY": {
+          "asked": {
+            "TP": 377457,
+            "FP": 108644,
+            "FN": 23606,
+            "rows": 746552
+          },
+          "unasked": {
+            "TP": 1033964,
+            "FP": 360726,
+            "FN": 70931,
+            "rows": 2221649
+          }
+        },
+        "PREFIX_REPRO": {
+          "asked": {
+            "TP": 378921,
+            "FP": 108672,
+            "FN": 22142,
+            "rows": 746552
+          },
+          "unasked": {
+            "TP": 1035555,
+            "FP": 324363,
+            "FN": 69340,
+            "rows": 2221649
+          }
+        },
+        "PAST_ONLY": {
+          "asked": {
+            "TP": 359731,
+            "FP": 168571,
+            "FN": 41332,
+            "rows": 746552
+          },
+          "unasked": {
+            "TP": 1013513,
+            "FP": 524067,
+            "FN": 91382,
+            "rows": 2221649
+          }
+        }
+      },
+      "scope": "Post-seal diagnostic only; candidate-IoU counts are not official HOTA or an additive attribution"
+    },
+    "C1": {
+      "volume": {
+        "all_pairs": 11764,
+        "asked_pairs": 3334,
+        "eligible_pairs": 11152,
+        "queries": 425,
+        "asked_observation_rows": 898366
+      },
+      "candidate_IoU_membership_counts": {
+        "SOURCE_ONLY": {
+          "asked": {
+            "TP": 2471,
+            "FP": 13510,
+            "FN": 47551,
+            "rows": 898366
+          },
+          "unasked": {
+            "TP": 4444,
+            "FP": 27106,
+            "FN": 142919,
+            "rows": 2690079
+          }
+        },
+        "DIRECT_TEACHER": {
+          "asked": {
+            "TP": 36247,
+            "FP": 35097,
+            "FN": 13775,
+            "rows": 898366
+          },
+          "unasked": {
+            "TP": 5139,
+            "FP": 23706,
+            "FN": 142224,
+            "rows": 2690079
+          }
+        },
+        "CURRENT_ONLY": {
+          "asked": {
+            "TP": 34503,
+            "FP": 22141,
+            "FN": 15519,
+            "rows": 898366
+          },
+          "unasked": {
+            "TP": 102208,
+            "FP": 33659,
+            "FN": 45155,
+            "rows": 2690079
+          }
+        },
+        "PREFIX_REPRO": {
+          "asked": {
+            "TP": 35316,
+            "FP": 19797,
+            "FN": 14706,
+            "rows": 898366
+          },
+          "unasked": {
+            "TP": 100907,
+            "FP": 40478,
+            "FN": 46456,
+            "rows": 2690079
+          }
+        },
+        "PAST_ONLY": {
+          "asked": {
+            "TP": 13916,
+            "FP": 28169,
+            "FN": 36106,
+            "rows": 898366
+          },
+          "unasked": {
+            "TP": 34243,
+            "FP": 61262,
+            "FN": 113120,
+            "rows": 2690079
+          }
+        }
+      },
+      "scope": "Post-seal diagnostic only; candidate-IoU counts are not official HOTA or an additive attribution"
+    }
+  },
+  "new_teacher_calls": 0,
+  "all_development_data": true,
+  "prepaid_features_and_feedback": true,
+  "not_a_cold_deployment_benchmark": true,
+  "total_study_wall_seconds": 1288.390706264996,
+  "user_research_goal_still_active": true,
+  "descriptive_scope_comparisons": {
+    "C4": {
+      "DIRECT_TEACHER_vs_SOURCE_ONLY": {
+        "delta_HOTA": 19.992233192520146,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 13,
+          "CI95": [
+            15.111813539618764,
+            28.709161185559005
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 45,
+          "CI95": [
+            17.134089308555023,
+            23.59259207548217
+          ]
+        }
+      },
+      "CURRENT_ONLY_vs_DIRECT_TEACHER": {
+        "delta_HOTA": 23.77106300338557,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 13,
+          "CI95": [
+            19.870332034236775,
+            28.46636845743419
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 45,
+          "CI95": [
+            21.210253288678366,
+            26.488397151600214
+          ]
+        }
+      },
+      "PREFIX_REPRO_vs_CURRENT_ONLY": {
+        "delta_HOTA": 0.7087686730583158,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 13,
+          "CI95": [
+            -0.03365437986561051,
+            1.3771213107881828
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 45,
+          "CI95": [
+            0.10409011650753472,
+            1.3404249534215915
+          ]
+        }
+      },
+      "PREFIX_REPRO_vs_PAST_ONLY": {
+        "delta_HOTA": 5.0858701056432025,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 13,
+          "CI95": [
+            3.4185834835453335,
+            6.832876564928697
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 45,
+          "CI95": [
+            3.2008651342158334,
+            6.966563493548047
+          ]
+        }
+      }
+    },
+    "C1": {
+      "DIRECT_TEACHER_vs_SOURCE_ONLY": {
+        "delta_HOTA": 12.794703167270002,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 25,
+          "CI95": [
+            8.615293586418817,
+            18.851305852237225
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 25,
+          "CI95": [
+            8.615293586418817,
+            18.851305852237225
+          ]
+        }
+      },
+      "CURRENT_ONLY_vs_DIRECT_TEACHER": {
+        "delta_HOTA": 15.44105464130715,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 25,
+          "CI95": [
+            10.82151320233907,
+            19.950225861674618
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 25,
+          "CI95": [
+            10.82151320233907,
+            19.950225861674618
+          ]
+        }
+      },
+      "PREFIX_REPRO_vs_CURRENT_ONLY": {
+        "delta_HOTA": -0.009773046269600627,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 25,
+          "CI95": [
+            -1.4746158485332888,
+            1.549064737451529
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 25,
+          "CI95": [
+            -1.4746158485332888,
+            1.549064737451529
+          ]
+        }
+      },
+      "PREFIX_REPRO_vs_PAST_ONLY": {
+        "delta_HOTA": 16.780119117580284,
+        "samples": 10000,
+        "seed": 0,
+        "original_parent_video": {
+          "clusters": 25,
+          "CI95": [
+            9.028045572243068,
+            24.927752830515747
+          ]
+        },
+        "evaluation_clip": {
+          "clusters": 25,
+          "CI95": [
+            9.028045572243068,
+            24.927752830515747
+          ]
+        }
+      }
+    }
+  },
+  "original_parent_exposure_groups": {
+    "first_clip_per_parent": {
+      "clips": [
+        "v_00HRwkvvjtQ_c001",
+        "v_0kUtTtmLaJA_c004",
+        "v_2QhNRucNC7E_c017",
+        "v_4-EmEtrturE_c009",
+        "v_4r8QL_wglzQ_c001",
+        "v_5ekaksddqrc_c001",
+        "v_9MHDmAMxO5I_c002",
+        "v_BgwzTUxJaeU_c008",
+        "v_G-vNjfx1GGc_c004",
+        "v_ITo3sCnpw_k_c007",
+        "v_cC2mHWqMcjk_c007",
+        "v_dw7LOz17Omg_c053",
+        "v_i2_L4qquVg0_c006"
+      ],
+      "HOTA": {
+        "SOURCE_ONLY": 23.486009721791277,
+        "DIRECT_TEACHER": 43.54898699993489,
+        "CURRENT_ONLY": 68.23743918981498,
+        "PAST_ONLY": 57.61195259628035,
+        "PREFIX_REPRO": 68.19584152650316
+      }
+    },
+    "later_clip_of_seen_parent": {
+      "clips": [
+        "v_00HRwkvvjtQ_c003",
+        "v_00HRwkvvjtQ_c005",
+        "v_00HRwkvvjtQ_c007",
+        "v_00HRwkvvjtQ_c008",
+        "v_00HRwkvvjtQ_c011",
+        "v_0kUtTtmLaJA_c005",
+        "v_0kUtTtmLaJA_c006",
+        "v_0kUtTtmLaJA_c007",
+        "v_0kUtTtmLaJA_c008",
+        "v_0kUtTtmLaJA_c010",
+        "v_5ekaksddqrc_c002",
+        "v_5ekaksddqrc_c003",
+        "v_5ekaksddqrc_c004",
+        "v_5ekaksddqrc_c005",
+        "v_9MHDmAMxO5I_c003",
+        "v_9MHDmAMxO5I_c004",
+        "v_9MHDmAMxO5I_c006",
+        "v_9MHDmAMxO5I_c009",
+        "v_BgwzTUxJaeU_c012",
+        "v_BgwzTUxJaeU_c014",
+        "v_G-vNjfx1GGc_c008",
+        "v_G-vNjfx1GGc_c600",
+        "v_G-vNjfx1GGc_c601",
+        "v_ITo3sCnpw_k_c010",
+        "v_ITo3sCnpw_k_c011",
+        "v_ITo3sCnpw_k_c012",
+        "v_cC2mHWqMcjk_c008",
+        "v_cC2mHWqMcjk_c009",
+        "v_dw7LOz17Omg_c067",
+        "v_i2_L4qquVg0_c007",
+        "v_i2_L4qquVg0_c009",
+        "v_i2_L4qquVg0_c010"
+      ],
+      "HOTA": {
+        "SOURCE_ONLY": 25.065146405461896,
+        "DIRECT_TEACHER": 45.02911464496867,
+        "CURRENT_ONLY": 68.38814519818979,
+        "PAST_ONLY": 67.16985270827053,
+        "PREFIX_REPRO": 69.43702997609714
+      }
+    }
+  },
+  "task_contract": "Official fixed candidates accepted by user; cross-domain referring adaptation only.",
+  "cannot_infer_source_only_frontend": true,
+  "different_feedback_scopes_not_equal_budget_competitors": true,
+  "first_parent_groups_are_descriptive_not_an_independent_split": true,
+  "ordinary_KD_name_correction": "Strong prefix-transductive track KD with query-conditioned features and part colour, not raw teacher replacement.",
+  "goal_status": "ACTIVE; fairness audit is a research step, not completion."
+}
