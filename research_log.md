@@ -367,3 +367,5 @@ NAS历史PCD恢复pilot C2/0005完成，197query×32ID×3×768，显式query/fra
 
 2026-11-23 SIGBUS现场与恢复：原主worker返回-7，main尝试墙钟9000.012s，随后三个依赖控制器退出，65131观察退出1。实验盘3.3TB可用/内存足/无quota，64MiB分配成功、fresh NAS散读正常，无法访问kernel/apport日志，唯一根因未证实。核对13科学源码hash不变，6完整seed0条件及seed17有效视频前缀18/3/27/13保留；先复制备份检查点，未完成视频数组仅移动到SIX/recovery_SIGBUS_20261123，不覆盖NAS。592历史特征文件27.94GB的buffered读+独立本地hash只读缓存2460256/handle65732已启动，当前每视频完整验证后放行原输入函数。显式cached_execute改变进程内I/O路径/子入口并启用faulthandler，不改任何数值recipe；新primary2461922/coarse2461923/generic2461924/precision2461925。唯一45577/PID2462047，旧观察2431876与提前启动在旧registry上退出的2461810都terminal1；0观察器重叠。已实际C1s17从18推进20，本项GT0。CPU字节输入交接27830尚在计算，完整缓存未结束，不声称全核验或冷成本改善。
 交接27830现已exit0：固定首C1视频610929锚点值及139392抽样dense值NAS/local全等，46.893s，0GT/训练/teacher/neuralforward；这不是全缓存完成声明。6原始完整条件的seal哈希和四个检查点备份留recovery目录，后续唯一45577继续观察真实推进。
+
+2026-11-23：独立复算器此前未检查原四臂交互块，现补perseed/mean/parent/无CI检查，不在活跃数值hash范围内。12合成统计正控误差2.84e-14；旧版会放过篡改交互，新版五个错误负控全拒绝且不写PASS，0真实HOTA/GT/Torch/GPU。预先固定次要common-count交互脚本和计划：只读完整主聚合，四臂在FULL自己数量下差分，使用原1692已有输出、0新fit/pred/QA。代数差非唯一数量因果效应，结构头平局未清不能当纯语义排序。原主/raw交互无CI/优化不改。唯一77009实际观察主8/18、GT0，C4s17 23/45，C2s17最后视频9臂通过，cache496/592。

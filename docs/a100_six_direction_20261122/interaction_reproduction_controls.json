@@ -1,0 +1,60 @@
+{
+  "status": "PASS_NUMPY_FOUR_ARM_INTERACTION_REPRODUCTION_CONTROLS",
+  "synthetic_fixture_only": true,
+  "no_actual_current_study_quality_or_GT_read": true,
+  "synthetic_HOTA_records": 12,
+  "synthetic_parent_groups": 4,
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "positive_control": {
+    "status": "PASS_SIX_SETTING_CONDITIONAL_OBSERVATION_EXACT_STATISTICS_REPRODUCED",
+    "HOTA_records": 12,
+    "repeated_mean_records": 4,
+    "paired_effect_records": 0,
+    "maximum_absolute_error": 2.842170943040401e-14,
+    "four_arm_interaction_records": 1,
+    "four_arm_interaction_seed_values": 3,
+    "bootstrap_samples": 10000,
+    "bootstrap_seed": 0,
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "original_parent_not_clip_resampling": true,
+    "KITTI_four_parent_CI_explicitly_not_claimed": true,
+    "no_raw_assets_or_GPU_or_Torch_required": true,
+    "arithmetic_reproduction_is_not_independent_validation": true
+  },
+  "prior_reproducer_accepted_tampered_interaction": true,
+  "prior_source_sha256": "e0c3c3fab3c6ea7e4e8be7cd02d749141c6bfc89b8cc23a8586f20b3ab56dacb",
+  "corrected_source_sha256": "b1e17230572dedb6c6555c152111164886f3f136f170afd457a501722cc7ec5a",
+  "negative_controls": {
+    "wrong_seed_value": {
+      "rejected": true,
+      "message": "('C2/four_arm_interaction/per_seed', 0.2500000000000071)"
+    },
+    "wrong_mean": {
+      "rejected": true,
+      "message": "('C2/four_arm_interaction/mean', 0.250000000000012)"
+    },
+    "missing_interaction": {
+      "rejected": true,
+      "message": "('C2', 'missing registered four-arm interaction')"
+    },
+    "different_parent_groups": {
+      "rejected": true,
+      "message": "('C2', 'interaction parent groups differ')"
+    },
+    "invented_interaction_CI": {
+      "rejected": true,
+      "message": "('C2', 'unregistered interaction CI')"
+    }
+  },
+  "rejected_controls_emit_no_new_PASS_receipt": true,
+  "no_Torch_GPU_or_model_training": true,
+  "goal_status": "ACTIVE"
+}

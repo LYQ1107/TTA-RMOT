@@ -28,6 +28,8 @@ QUERY={
     'TRUE_GRAPH_vs_QUERY_SHUFFLE':('LATTICE_JOINT','SHUFFLED_JOINT'),
     'RANK_AT_FULL_COUNT':('LATTICE_JOINT__AT_LATTICE_JOINT_COUNT','BASE_PROTOCOL__AT_LATTICE_JOINT_COUNT'),
     'RANK_AT_BASE_COUNT':('LATTICE_JOINT__AT_BASE_PROTOCOL_COUNT','BASE_PROTOCOL__AT_BASE_PROTOCOL_COUNT')}
+CONDITIONAL_INTERACTION=(('FULL_FINAL',1),('CONDITIONAL_BALANCED_FINAL',-1),
+    ('DIRECT_PROFILE_FINAL',-1),('DIRECT_BALANCED_FINAL',1))
 
 
 def registered_contrasts(directory,stem):
@@ -72,7 +74,7 @@ def reproduce(directory,stem):
     stats={name:resolve_record(directory,filename,name,cache) for name in payload}
     report=json.loads((directory/(stem+'_analysis.json')).read_text())
     contrasts=registered_contrasts(directory,stem)
-    maximum=0.;effects=0;means=0
+    maximum=0.;effects=0;means=0;interactions=0
     def check(actual,expected,name):
         nonlocal maximum
         error=float(np.max(np.abs(np.asarray(actual)-np.asarray(expected))))
@@ -98,8 +100,26 @@ def reproduce(directory,stem):
                 computed=recompute(left,right)
                 for field,value in computed.items():check(value,published[field],pair+'/'+label+'/'+field)
             effects+=1
+        if stem=='conditional_observation':
+            # This is the pre-registered descriptive factorial interaction,
+            # independently pooled from the public parent aggregates. Valid
+            # ordinary contrasts do not by themselves verify this block.
+            published=row.get('factorization_profile_interaction')
+            assert published is not None,(pair,'missing registered four-arm interaction')
+            parents=stats[keys[0]+'/FULL_FINAL']['parents']
+            values=[]
+            for key in keys:
+                rows=[stats[key+'/'+method] for method,_ in CONDITIONAL_INTERACTION]
+                assert all(r['parents']==parents for r in rows),(pair,'interaction parent groups differ')
+                values.append(sum(coefficient*pooled(r,np.ones(len(parents)))
+                    for r,(_,coefficient) in zip(rows,CONDITIONAL_INTERACTION)))
+            check(values,published['per_seed'],pair+'/four_arm_interaction/per_seed')
+            check(np.mean(values),published['mean'],pair+'/four_arm_interaction/mean')
+            assert published.get('CI95','missing') is None,(pair,'unregistered interaction CI')
+            interactions+=1
     result=dict(status='PASS_SIX_SETTING_'+stem.upper()+'_EXACT_STATISTICS_REPRODUCED',HOTA_records=len(stats),
         repeated_mean_records=means,paired_effect_records=effects,maximum_absolute_error=maximum,
+        four_arm_interaction_records=interactions,four_arm_interaction_seed_values=interactions*len(SEEDS),
         bootstrap_samples=10000,bootstrap_seed=0,neural_seeds=list(SEEDS),
         original_parent_not_clip_resampling=True,KITTI_four_parent_CI_explicitly_not_claimed=True,
         no_raw_assets_or_GPU_or_Torch_required=True,arithmetic_reproduction_is_not_independent_validation=True)
