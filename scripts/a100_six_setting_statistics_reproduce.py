@@ -73,6 +73,7 @@ def reproduce(directory,stem):
     filename=stem+'_parent_statistics.json';payload=json.loads((directory/filename).read_text());cache={}
     stats={name:resolve_record(directory,filename,name,cache) for name in payload}
     report=json.loads((directory/(stem+'_analysis.json')).read_text())
+    seeds=tuple(report.get('neural_seeds',SEEDS))
     contrasts=registered_contrasts(directory,stem)
     maximum=0.;effects=0;means=0;interactions=0
     def check(actual,expected,name):
@@ -83,7 +84,7 @@ def reproduce(directory,stem):
     for slug,row in report.get('conditions',{}).items():
         for method,value in row['raw_HOTA'].items():check(stats[slug+'/'+method]['HOTA'],value,slug+'/'+method)
     for pair,row in report['repeated'].items():
-        keys=[pair+f'_seed{s}' for s in SEEDS]
+        keys=[pair+f'_seed{s}' for s in seeds]
         for method,value in row['mean_HOTA'].items():
             check(np.mean([stats[k+'/'+method]['HOTA'] for k in keys]),value,pair+'/'+method);means+=1
         for label,published in row['comparisons'].items():
@@ -100,7 +101,7 @@ def reproduce(directory,stem):
                 computed=recompute(left,right)
                 for field,value in computed.items():check(value,published[field],pair+'/'+label+'/'+field)
             effects+=1
-        if stem in ('conditional_observation','conditional_deterministic_repair'):
+        if stem in ('conditional_observation','conditional_deterministic_repair','conditional_seed0_scope'):
             # This is the pre-registered descriptive factorial interaction,
             # independently pooled from the public parent aggregates. Valid
             # ordinary contrasts do not by themselves verify this block.
@@ -119,8 +120,8 @@ def reproduce(directory,stem):
             interactions+=1
     result=dict(status='PASS_SIX_SETTING_'+stem.upper()+'_EXACT_STATISTICS_REPRODUCED',HOTA_records=len(stats),
         repeated_mean_records=means,paired_effect_records=effects,maximum_absolute_error=maximum,
-        four_arm_interaction_records=interactions,four_arm_interaction_seed_values=interactions*len(SEEDS),
-        bootstrap_samples=10000,bootstrap_seed=0,neural_seeds=list(SEEDS),
+        four_arm_interaction_records=interactions,four_arm_interaction_seed_values=interactions*len(seeds),
+        bootstrap_samples=10000,bootstrap_seed=0,neural_seeds=list(seeds),
         original_parent_not_clip_resampling=True,KITTI_four_parent_CI_explicitly_not_claimed=True,
         no_raw_assets_or_GPU_or_Torch_required=True,arithmetic_reproduction_is_not_independent_validation=True)
     (directory/(stem+'_statistical_reproduction.json')).write_text(json.dumps(result,separators=(',',':'))+'\n')
