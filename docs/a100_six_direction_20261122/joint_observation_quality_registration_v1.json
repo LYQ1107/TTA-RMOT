@@ -1,0 +1,232 @@
+{
+  "status": "REGISTERED_BEFORE_NEW_QUALITY_GENERATION_AND_GT",
+  "registered_unix": 1795436629.9808376,
+  "neural_seeds": [
+    0
+  ],
+  "primary": "FULL_CONDITIONAL_REFERENCE_DESIGN_FINAL",
+  "recipes": {
+    "FULL_CONDITIONAL_REFERENCE_DESIGN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "policy": "DESIGN"
+    },
+    "FULL_CONDITIONAL_LOCAL_DESIGN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": false,
+      "policy": "DESIGN"
+    },
+    "FULL_LIKELIHOOD_REFERENCE_DESIGN": {
+      "family": "structured",
+      "conditional": false,
+      "reference": true,
+      "policy": "DESIGN"
+    },
+    "FULL_LIKELIHOOD_LOCAL_DESIGN": {
+      "family": "structured",
+      "conditional": false,
+      "reference": false,
+      "policy": "DESIGN"
+    },
+    "JOINT_KD_DESIGN": {
+      "family": "generic",
+      "risk": "joint",
+      "policy": "DESIGN"
+    },
+    "MARGINAL_KD_DESIGN": {
+      "family": "generic",
+      "risk": "marginal",
+      "policy": "DESIGN"
+    },
+    "COARSE_UNIT_SOFT_DESIGN": {
+      "family": "coarse",
+      "confidence": false,
+      "hard": false,
+      "policy": "DESIGN"
+    },
+    "COARSE_UNIT_HARD_DESIGN": {
+      "family": "coarse",
+      "confidence": false,
+      "hard": true,
+      "policy": "DESIGN"
+    },
+    "COARSE_CONF_SOFT_DESIGN": {
+      "family": "coarse",
+      "confidence": true,
+      "hard": false,
+      "policy": "DESIGN"
+    },
+    "COARSE_CONF_HARD_DESIGN": {
+      "family": "coarse",
+      "confidence": true,
+      "hard": true,
+      "policy": "DESIGN"
+    },
+    "FULL_CONDITIONAL_REFERENCE_UNIFORM": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "policy": "UNIFORM"
+    },
+    "FULL_CONDITIONAL_LOCAL_UNIFORM": {
+      "family": "structured",
+      "conditional": true,
+      "reference": false,
+      "policy": "UNIFORM"
+    },
+    "FULL_LIKELIHOOD_REFERENCE_UNIFORM": {
+      "family": "structured",
+      "conditional": false,
+      "reference": true,
+      "policy": "UNIFORM"
+    },
+    "FULL_LIKELIHOOD_LOCAL_UNIFORM": {
+      "family": "structured",
+      "conditional": false,
+      "reference": false,
+      "policy": "UNIFORM"
+    },
+    "JOINT_KD_UNIFORM": {
+      "family": "generic",
+      "risk": "joint",
+      "policy": "UNIFORM"
+    },
+    "MARGINAL_KD_UNIFORM": {
+      "family": "generic",
+      "risk": "marginal",
+      "policy": "UNIFORM"
+    },
+    "COARSE_UNIT_SOFT_UNIFORM": {
+      "family": "coarse",
+      "confidence": false,
+      "hard": false,
+      "policy": "UNIFORM"
+    },
+    "COARSE_UNIT_HARD_UNIFORM": {
+      "family": "coarse",
+      "confidence": false,
+      "hard": true,
+      "policy": "UNIFORM"
+    },
+    "COARSE_CONF_SOFT_UNIFORM": {
+      "family": "coarse",
+      "confidence": true,
+      "hard": false,
+      "policy": "UNIFORM"
+    },
+    "COARSE_CONF_HARD_UNIFORM": {
+      "family": "coarse",
+      "confidence": true,
+      "hard": true,
+      "policy": "UNIFORM"
+    },
+    "BINARY_CONDITIONAL_REFERENCE_DESIGN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "policy": "DESIGN",
+      "binary": true
+    }
+  },
+  "methods": [
+    "FULL_CONDITIONAL_REFERENCE_DESIGN_FINAL",
+    "FULL_CONDITIONAL_LOCAL_DESIGN_FINAL",
+    "FULL_LIKELIHOOD_REFERENCE_DESIGN_FINAL",
+    "FULL_LIKELIHOOD_LOCAL_DESIGN_FINAL",
+    "JOINT_KD_DESIGN_FINAL",
+    "JOINT_KD_DESIGN_MEAN",
+    "MARGINAL_KD_DESIGN_FINAL",
+    "MARGINAL_KD_DESIGN_MEAN",
+    "COARSE_UNIT_SOFT_DESIGN_FINAL",
+    "COARSE_UNIT_SOFT_DESIGN_MEAN",
+    "COARSE_UNIT_HARD_DESIGN_FINAL",
+    "COARSE_UNIT_HARD_DESIGN_MEAN",
+    "COARSE_CONF_SOFT_DESIGN_FINAL",
+    "COARSE_CONF_SOFT_DESIGN_MEAN",
+    "COARSE_CONF_HARD_DESIGN_FINAL",
+    "COARSE_CONF_HARD_DESIGN_MEAN",
+    "FULL_CONDITIONAL_REFERENCE_UNIFORM_FINAL",
+    "FULL_CONDITIONAL_LOCAL_UNIFORM_FINAL",
+    "FULL_LIKELIHOOD_REFERENCE_UNIFORM_FINAL",
+    "FULL_LIKELIHOOD_LOCAL_UNIFORM_FINAL",
+    "JOINT_KD_UNIFORM_FINAL",
+    "JOINT_KD_UNIFORM_MEAN",
+    "MARGINAL_KD_UNIFORM_FINAL",
+    "MARGINAL_KD_UNIFORM_MEAN",
+    "COARSE_UNIT_SOFT_UNIFORM_FINAL",
+    "COARSE_UNIT_SOFT_UNIFORM_MEAN",
+    "COARSE_UNIT_HARD_UNIFORM_FINAL",
+    "COARSE_UNIT_HARD_UNIFORM_MEAN",
+    "COARSE_CONF_SOFT_UNIFORM_FINAL",
+    "COARSE_CONF_SOFT_UNIFORM_MEAN",
+    "COARSE_CONF_HARD_UNIFORM_FINAL",
+    "COARSE_CONF_HARD_UNIFORM_MEAN",
+    "BINARY_CONDITIONAL_REFERENCE_DESIGN_FINAL"
+  ],
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "source_sha256": {
+    "scripts/a100_joint_observation_six_setting.py": "427fd8202dfe52c071894b6aa85e6c80330cb6112d685b9b52202516ad73ae8f",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5",
+    "flex_uda/active/conditional_joint_observation.py": "83c77b605077c2a4214fe655dcebbf516bc120637b3579d9c00eff36e2fa0448",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+    "flex_uda/active/joint_observation_fit.py": "885dca1f154754002975fdd0e7107b231e59f85e15ec6f16dd276a8c67844b1b",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/deterministic_observation_runtime.py": "572e8cd6033a357134debec2c3fab8f1ab957182465942dc1e6c37760a5e8804",
+    "scripts/a100_joint_observation_collect.py": "82e4c8657ae8fe451840bdf3e804bf3d6ba748414c764dcd092c9bc412f9117e",
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/presence/predictions.py": "0a20f10c07f1c00a87ec9776771412cd77bb3943dc84ede46bd6a3b40c599ac9",
+    "scripts/a100_visual_classical_strict_prefix.py": "281464dec9be24baa610760bb8b38f440be8a414653144c9f24968ee47da5cbc"
+  },
+  "GPU_memory_fraction": 0.15,
+  "shared_GPU_preflight_max_MiB": 8192,
+  "GPU_allocation_order": [
+    2,
+    3,
+    0,
+    1
+  ],
+  "shared_GPU_explicit_user_instruction": "\u4f60\u8981\u7528\u56db\u5f20\u53610\uff0c1\uff0c2\uff0c3\uff0c\u53ef\u4ee5\u5e76\u884c\uff0c\u73b0\u5728\u5c31\u53ef\u4ee5\u57282\u548c3\u53f7\u5361\u4e0a\u8dd1\u4e0a\u65b0\u7684\u4efb\u52a1\u6216\u8005\u65b9\u6848\u3002",
+  "foreign_process_policy": "Preserve IR-MFT PIDs; no killing/reset/exclusive allocation. Small-head coexistence only; no deployment cost claim.",
+  "ordinary_adequacy": {
+    "proper_target_KL_gate": 0.005,
+    "minimum_Adam_steps_initial": 1000,
+    "minimum_Adam_steps_warm": 400,
+    "early_step": 400,
+    "maximum_Adam_steps_per_capacity": 4000,
+    "LBFGS_max_100_iter_blocks": 5,
+    "widths": [
+      128,
+      256,
+      512
+    ],
+    "coarse_initial_width": 64,
+    "all_initialization_seed": 0,
+    "GT_or_HOTA_checkpoint_selection": false
+  },
+  "structured_fitting": "Same seed0, width64, min1000 initial/400 warm, max4000; stop at KL gate or four 250-step checks within1e-5 after min+750. Structural teacher inconsistency reported, not called adequate ordinary.",
+  "inputs": "1101D identical common input; own past/current video prefix. Context3 plus disjoint-preferred reference3; ordinary coarse summarizes all distinct context/reference observations. All 33 output paths use stable float64 logits.",
+  "teacher_targets": "AB/BA averaged joint; views at byte-equivalent pair inputs are arithmetic mixtures for all. Exact-input CE coalescence preserves proper weighted CE. Binary control uses same-context binary product, singleton diagonal distribution.",
+  "raw_methods": 198,
+  "unique_official_methods": 582,
+  "CountSelf_aliases": 198,
+  "CountMatched": "Both directions for primary vs every comparator, exactly equal predicted count per query/frame. CountSelf full masks checked; identical official evaluation reused.",
+  "GT_barrier": "All six settings, all raw and dual-count outputs sealed before any new-study official evaluator.",
+  "evaluation_CPU_slots": 8,
+  "all_data_DEV_no_independent_blind_split": true,
+  "uncertainty": "Original parent video bootstrap at seed0; KITTI4 no population CI; no extra neural seeds.",
+  "quality_replay_not_cold_deployment": true,
+  "RSI_scope": "Separate newly authorized research stream; this already defined experiment remains unchanged and must not be relabeled RSI.",
+  "goal_status": "ACTIVE"
+}

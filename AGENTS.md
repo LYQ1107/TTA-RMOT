@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## 最新用户范围与实际执行（2026-11-23：RSI与四卡并行）
+
+- 用户新增RSI/双模型协同进化方向；保留人类视觉方式与经典思想、六个跨域设置、充分同信息蒸馏及目标GT隔离。有效目标已补充research_goal_RSI_amendment_20261123.json与持续目标CANON；Goal工具不支持改正在进行的objective，原Goal保持ACTIVE，不假结项重建。
+- 用户明确允许2/3现在并行新任务，覆盖旧<512MiB独占偏好：保留IR-MFT进程，小头每卡15%显存上限；2/3预检<8192MiB可共用，0/1仍<512MiB才分配新头。共享训练时间不作独立冷部署成本。只用seed0。
+- 新六设置完整入口scripts/a100_joint_observation_six_setting.py及joint_observation_study.py已实现、CPU真实输入/五类微型fit/33推理路径通过并预登记。21配方、198raw、384dualcount=582独立官评；198CountSelf逐query/frame掩码核验后统计别名，不重复官评。全部输出封存后才GT。
+- 实际新controller2928089/session38672；GPU2 C1 worker2928521、GPU3 C6 worker2928523已开始真实prefix训练。其余C2/C3/C4/C5等自己的完整教师输入，GPU0/1教师controller2893257/session67909原样运行。无新观察器；只续实际控制器工具句柄，不改已pin运行源码。
+- 新质量OUT=.../six_direction_20261122/joint_observation_quality_20261123。每视频每arm模型独立checkpoint，可续未完成单元。普通joint/marginal/coarse软硬单位与置信度对照检查proper教师KL<=.005；结构模型固定容量、有限优化、可报告未达教师熵下界，不能当充分普通基线。
+- RSI文献与三条候选方向见docs/TTA_RMOT_RSI协同进化研究计划_20261123.txt；优先学习进展挑战者—解决者闭环，互补双学生与外部证据修正为备选。当前联合观察实验不改名RSI；尚无RSI质量实验或新HOTA提升结论。无标签动作空间审计只读inputs manifests，不读教师答案或GT。
+- 后续先完成在途六设置并归因，同时实现RSI新闭环的预算broker、独立教师probe和停止一方更新等对照；不能只靠写原型/报告收工，也不能在未有结果时保证涨点。Goal继续ACTIVE。
+
 ## 最新用户范围优先（2026-11-23）
 
 - 只用固定训练seed0，禁止追加17/42或多种子网格；保留六个跨域实验设置与必要机制对照。

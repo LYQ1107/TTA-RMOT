@@ -415,3 +415,10 @@ GPU0/C2首0005/三个真实帧0,148,296，原batch64+near-zero隔离/原exporter
 新第二版conditional_joint_observation分离count/state编码器，以条件估计阻断计数梯度到状态；完整似然同架构同前向控制，参照/局部状态同参数控制。非零梯度/负控已过，未执行完整RMOT拟合/HOTA；旧8目标工程fit仅第一版，不混用。三因素新prospective scope已明确，完整prefix/inference/count/eval入口尚待实现。所有新增方案只seed0，不增加17/42。
 
 完整876负结果、第一版物理/拟合原型与精选代码已正常推送5898b3a5b7c7d173be0afab5ba6383e92f8910de，分支codex/rmot-seed0-joint-evidence-20261123，快照98485424/可达92657513B；旧059远端不变。34个历史逐查询/诊断CSV仅移出索引，原文件与059版本保留，恢复清单pre_seed0_per_query_leaves_20261123.json；全部旧scientific provider字节不变。
+
+
+## 2026-11-23 新六设置实际启动与RSI目标补充
+
+用户明确只用seed0，并要求0/1/2/3并行与加入RSI。新增完整joint_observation_six_setting/study入口已CPU集成通过并在输出/GT前登记：21配方、33输出/设置，198raw+384dualcount=582独立官评，CountSelf精确别名198。普通joint/marginal/coarse单位与置信度软硬均给相同1101D/上下文/参考池/已请求Q，自身proper-KL<=.005后才接受；结构模型有有限优化及残余记录。每视频每arm保存可续checkpoint，自己的过去/当前前缀。controller2928089/session38672实际启动GPU2 C1 worker2928521、GPU3 C6 worker2928523；0/1原teacher2893257/session67909继续。用户新指令允许2/3小头共享，保留IR-MFT，每卡15%上限；不将共享训练计时冒充独立cold成本。运行源码pin后不改。
+
+RSI已写入持续有效目标及research_goal_RSI_amendment_20261123.json；Goal工具不能改运行中objective，原Goal仍ACTIVE，未假完成重建。已读用户指定2609.36054原PDF，并另查R-Zero、Absolute Zero、DML、Dual Student与自纠正负结果。优先挑战者—解决者学习进展闭环，互补视觉双学生/新证据修正为备选，详见新的RSI TXT。没有RSI正式质量结果，当前联合实验不改名RSI。无标签动作审计读取74输入manifest、0教师答案/GT；各设置两策略联合题库为单预算1.765–1.885倍，所有query的两集合都不完全相同，可先构造有预算的有限题库broker。大动作空间仅算术上界，不是准确率。旧完整六设置FULL负结果保留；没有新HOTA提升或Goal达成声明。
