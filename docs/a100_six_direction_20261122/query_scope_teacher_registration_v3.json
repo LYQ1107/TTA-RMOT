@@ -1,0 +1,44 @@
+{
+  "status": "REGISTERED_FROZEN_TEACHER_TEXT_ONLY_QUERY_SCOPE",
+  "registered_unix": 1795367895.8149867,
+  "source_sha256": {
+    "scripts/a100_query_scope_teacher.py": "5351ac2a4535f002b157a6b1c0160bffe0ce1536999ea509493a56e86e5b1fc5",
+    "flex_uda/active/query_scope.py": "88022f5f7b522653c867425393f52aaed36e2a02e37017bfabed1350ff82ee81",
+    "flex_uda/active/query_scope_prompts.py": "7ae5d3916677531504698973696c5defaefe8035da9dca8548ff6a52f7c2ed2e",
+    "tests/test_query_scope.py": "b19fcff96232ddb0f610163672cb5ac2cffeb050ad3e15b79ba0f987b00e4d76",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "configs/teacher/base_qwen2b.yaml": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+    "flex_uda/active/query_scope_constraints.py": "e0b593e6fc5b7fdbd963b0d64b07afd32e85533c3af7a0092acc49465aaf410d",
+    "requirements_a100_query_scope.txt": "7bfa67ee10cbfc3e5f2ae2d5a0cc4f886ea2729215d4f76b3451b7a97d110cf6",
+    "docs/a100_six_direction_20261122/query_scope_teacher_hypothesis_v3.json": "622601efed10e90305f54cc191fe2446da10f3338eb39035e3250db34054c81e"
+  },
+  "batch_size": 8,
+  "max_new_tokens": 1536,
+  "first_batch_minimum_valid": 4,
+  "do_sample": false,
+  "use_cache": true,
+  "allowed_physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "teacher_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "teacher_revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+  "installed_transformers": "4.57.1",
+  "official_API_reference": "https://huggingface.co/Qwen/Qwen3-VL-2B-Instruct/blob/main/README.md",
+  "upstream_numerical_workers_unchanged": true,
+  "manual_target_GT_allowed": false,
+  "new_quality_predictions_expected": 0,
+  "version": 3,
+  "previous_failed_registration": "query_scope_teacher_registration_v1.json",
+  "original_schema_and_gate_unchanged": true,
+  "synthetic_examples_have_valid_complete_schema": true,
+  "previous_failed_registrations": [
+    "query_scope_teacher_registration_v1.json",
+    "query_scope_teacher_registration_v2.json"
+  ],
+  "decoding_constraints": "Original strict schema enums and literal spans; no manual target labels.",
+  "shared_environment_unchanged": true,
+  "isolated_vendor": "/var/tmp/liuyeqiang-tta-rmot-a100-20261122/query_scope_vendor_v3"
+}

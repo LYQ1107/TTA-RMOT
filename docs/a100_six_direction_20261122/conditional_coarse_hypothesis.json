@@ -1,0 +1,21 @@
+{
+  "study": "CONDITIONAL_COARSE_ORDINARY_SIX_SETTINGS_V1",
+  "reason": "Prior strong ordinary track/RGB means must remain adequate opponents; beating a local dense head is insufficient.",
+  "exact_features": "Raw three-context PCD mean; sqrt(mean observed part histogram), observed-part fractions, mean geometry/time. Every field is a deterministic function of the same raw three observations offered to the primary learner.",
+  "target": "Own DESIGN unique requested anchor mixture targets, then uniform mean within query/track. No DS, forced source-logit residual, or target GT.",
+  "methods": [
+    "COARSE_SOFT_FINAL",
+    "COARSE_SOFT_MEAN",
+    "COARSE_HARD_FINAL",
+    "COARSE_HARD_MEAN",
+    "COARSE_TEACHER_FILL"
+  ],
+  "training": "Same audited teacher-only zero-residual optimizer and prefix coordinate warm starts; soft and hard losses, final and fixed step400/final means. Direct teacher fill on paid query-track cells.",
+  "no_automatic_empty_or_single_target_gate": true,
+  "all_data_development": true,
+  "original_legacy_numbers_not_reused_as_new_control": true,
+  "all_new_heads_refit_on_same_legacy_PCD_version_as_primary": true,
+  "shared_preparation_not_single_method_cold_cost": true,
+  "not_a_new_innovation": true,
+  "goal_status": "ACTIVE"
+}

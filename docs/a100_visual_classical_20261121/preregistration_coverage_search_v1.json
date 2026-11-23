@@ -1,0 +1,78 @@
+{
+  "status": "PREREGISTERED_BEFORE_NEW_EVIDENCE_PREDICTIONS_AND_STUDY_GT",
+  "created_UTC": "2026-11-22T04:34:19.389402+00:00",
+  "goal_status": "ACTIVE",
+  "primary": "JOINT",
+  "hypothesis": "Originalcoveragegaprequiresnewrequestedanswers;giveunresolvedpromisedpresencequeriesmoreofthesamebudgetinsteadofonlychangingpropagation",
+  "rule": {
+    "within_query_order": "ExactlyfrozenCOVERPCDdistance,threepriorstrata,samehashseedandmaxareaCROPanchor",
+    "initial_floor": "Oneexamperquerywhenbudgetallows",
+    "PRESUPPOSED_priority": "product(1-clip(observed_teacher_p,.02,.98))/(query_calls_including_current_batch+1)",
+    "CHECKLIST": "Noanswerfeedback,equalquerybudgets;exactoriginalCOVERquestionsets",
+    "batch_size": 8,
+    "teacher_p_clip": "Existingcommon.02/.98",
+    "query_cost_penalty": "1/(n+1)fixed;notGTsearched",
+    "search_deficit_proxy_not_calibrated_existence_posterior": true
+  },
+  "budget": {
+    "fraction": 0.1,
+    "C4_logical": 1160,
+    "C1_unchanged_existing_logical": 1103,
+    "same_per_video_total_as_frozen_COVER": true
+  },
+  "teacher_evidence": {
+    "private_local_SQLite_seeded_from_frozen_COVER": true,
+    "selector_sees_only_requested_answers": true,
+    "missing_questions": "RealQwenGPUforward",
+    "new_QA_are_quality_preparation_not_cold_cost": true
+  },
+  "quality": {
+    "pair": "C4",
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "QA_seed": 0,
+    "neural_dimension": 768,
+    "source_logit_zero": true,
+    "heads": "Sameconfidenceweightedsoft/hard,min4000/max16000,KL.005,allcheckpointskept",
+    "fits": 270,
+    "raw": 27,
+    "CountMatched": 57,
+    "official_total": 84
+  },
+  "shared_information": "OrdinaryKD400/final/meanandhard400/finalgetexactlythePRIMARYSEARCHquestionsandanswers;G/PAVAincrementsonsamesoftmeanhead",
+  "controls": [
+    "OriginalequalquerybudgetCOVERordinaryweightedmeanandallstrongsnapshots",
+    "OriginalCOVERplusG/PAVA",
+    "SEARCHGRAPH",
+    "SEARCHCAL",
+    "SEARCHCOMPLETEsame-totaledgeweight",
+    "BothCountMatcheddirections"
+  ],
+  "all84_sealed_before_new_study_manual_GT": true,
+  "adaptation_uses_manual_GT": false,
+  "all_datasets_development": true,
+  "no_independent_blind_test_available": true,
+  "scientific_gate": {
+    "acquisition": "SEARCH_KDmeanvsCOVER_KDmean:all3seedspositiveandparent+seedCIstrictlypositive",
+    "full_method": "JOINTvsexactSEARCHKDmeanandoriginalCOVERKDmean:all3seedpositiveandparent+seedCIstrictlypositive",
+    "mechanisms": "Graph/PAVAandCOMPLETEcontrolsreportedwithoutpromotingcontrol;eachretainedmodulehasexplicitconditionalcontribution",
+    "coverage": "Correctcandidateexaminedcoverageandqueryrecall/FP/FNreportedaftersealing;morequestionsonsomequeryisnotitselfsuccess",
+    "C1": "CHECKLISTquestionsetsunchangedbysanity;recipeinheritsweightedJquality;notnewindependentvalidation",
+    "cost": "Ifretained,performmatchingfreshphysicalcoststudy;neverpasteoldtime"
+  },
+  "uncertainty": "Originalparent+sharedseeddescriptivebootstrap;nodevelopment/multiplicitycorrectionorpipelinerefit",
+  "implementation_sha256": {
+    "flex_uda/active/coverage_search.py": "49144d55188462aa360077627af4a2c0f617294369abfcf35b23d86b60a11fc1",
+    "scripts/a100_visual_classical_search_collect.py": "156b68fa3f6a24f919fcac0302e42871bbc58a4ccd7c9fdeaf09abf60add5004",
+    "scripts/a100_visual_classical_coverage_search.py": "1bee70304e21bcc5c261540ef80d7b5f217f988fbef8e3fbc729688a13d25644",
+    "scripts/a100_visual_classical_coverage_search_launch.py": "b09e239bb44c7380e3b55846d4d55a8f1a2be5737f92f9ca671505466e91c8d9",
+    "scripts/a100_visual_classical_coverage_search_analyze.py": "feedfe5476170dac051692558b02a88a763aeebc079c5caa08446157164cbf8c",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "flex_uda/active/appearance_runtime.py": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "study": "SAVED_CONDITIONAL_GATE_USAGE_NO_GT",
+  "source_sha256": "f079d35807c4caed96089783c57b8cd1778e60338a0682b8c477da7e0e268d08",
+  "selection": "First completed condition C1/seed0; its final video only, with its own final-prefix checkpoint.",
+  "intended_diagnostic": [
+    "Gate distribution and saturation",
+    "Frozen gate-removal numerical sensitivity",
+    "Exact input-version CPU replay against saved GPU anchors"
+  ],
+  "no_target_GT_or_HOTA_reads": true,
+  "no_optimization_or_new_prediction_files": true,
+  "no_HOTA_contribution_or_semantic_identification_claim": true,
+  "live_training_sources_unchanged": true,
+  "initial_selection": "First completed C1/seed0, final own video; no GT.",
+  "additional_selection_before_own_C2_replay": "First completed C2/seed0, final own video. Check whether conditional branch is active when paid teacher states vary; no current unified HOTA seen."
+}

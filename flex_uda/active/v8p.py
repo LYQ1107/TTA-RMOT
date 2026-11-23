@@ -11,20 +11,31 @@ CHECKLIST = 'CHECKLIST'
 PRESUPPOSED = 'PRESUPPOSED'
 
 
-def classify_protocol(video_queries):
-    """Exact sets of raw runtime sentence texts; no labels, scores or GT."""
+def classify_protocol(video_queries, *, task_protocol=None):
+    """Use a declared task contract, or the legacy query-set heuristic.
+
+    A declared PRESUPPOSED contract concerns the video, not every frame.
+    It is supplied by the task/caller, never obtained from target GT.
+    Omitting it preserves all sealed v8P behavior.
+    """
     if not video_queries:
         raise ValueError('Protocol requires at least one video')
     sets = {str(video): tuple(sorted(set(texts)))
             for video, texts in sorted(video_queries.items())}
     unique = set(sets.values())
-    protocol = CHECKLIST if len(unique) == 1 else PRESUPPOSED
-    return dict(protocol=protocol, presence_inference=protocol == CHECKLIST,
+    if task_protocol is not None and task_protocol not in (CHECKLIST, PRESUPPOSED):
+        raise ValueError('Unknown declared task protocol: ' + str(task_protocol))
+    protocol = task_protocol if task_protocol is not None else (CHECKLIST if len(unique) == 1 else PRESUPPOSED)
+    result = dict(protocol=protocol, presence_inference=protocol == CHECKLIST,
                 videos=len(sets), unique_query_sets=len(unique),
                 per_video={v: dict(query_count=len(texts),
                     query_set_sha256=hashlib.sha256(json.dumps(texts, ensure_ascii=False,
                         separators=(',', ':')).encode()).hexdigest())
                            for v, texts in sets.items()})
+    if task_protocol is not None:
+        result['protocol_source'] = 'EXPLICIT_TASK_CONTRACT'
+        result['query_sets_do_not_override_contract'] = True
+    return result
 
 
 class PresupposedBeliefState(BeliefStateV8):

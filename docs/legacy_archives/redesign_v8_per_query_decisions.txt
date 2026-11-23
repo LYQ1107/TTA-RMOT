@@ -1,0 +1,20 @@
+Legacy v8 per-query decisions: archive entry for the lightweight publication.
+
+The new source/receipts alone would increase the snapshot from99,922,169 to100,005,996bytes, before the new theory/log. To keep the required snapshot below100,000,000bytes, only this legacy CSV's Git index entry is removed. Its NAS file is never removed, edited, replaced or written.
+
+The prior public Git CSV version remains byte-exact at:
+https://github.com/LYQ1107/TTA-RMOT/blob/4b8e2c040c1c5486cd8c5cbc3609ce8b48151424/results/presence_active/redesign_v8/presence_decisions.csv
+Git CSV bytes:732710
+Git CSV SHA256:d4aeacb4ac4ba43e545c8259810012b02e18c5dd1072bcf59a792e805f3ee892
+Local byte-exact backup:/var/tmp/liuyeqiang-tta-rmot-a100-20261122/publication_legacy_csv_originals/results/presence_active/redesign_v8/presence_decisions.csv
+
+The read-only NAS holds a DIFFERENT byte version; no semantic-equivalence claim is made and it must not be overwritten with the Git version:
+/data3/liuyeqiang/nas/A800/data2/user/FlexHook-TTA/results/presence_active/redesign_v8/presence_decisions.csv
+NAS bytes:1199315
+NAS SHA256:bab191af1d50e0be65bac2aa8aa2d3efb9ed7b45ea88d94ea31b0e70cb0fe009
+Separate local NAS-version backup:/var/tmp/liuyeqiang-tta-rmot-a100-20261122/publication_legacy_csv_originals/nas_read_only_variant/results/presence_active/redesign_v8/presence_decisions.csv
+
+Restore the prior Git version to a new LOCAL destination, leaving NAS untouched:
+git show 4b8e2c040c1c5486cd8c5cbc3609ce8b48151424:results/presence_active/redesign_v8/presence_decisions.csv > /var/tmp/presence_decisions_v8_git_restored.csv
+
+Current adaptation code does not read this CSV. All current source, registrations, aggregate outcomes, negative results and exact HOTA sufficient statistics remain available. The active research data/weights remain on NAS; no external history or checkpoint is deleted.

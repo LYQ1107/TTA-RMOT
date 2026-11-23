@@ -1,0 +1,28 @@
+{
+  "reason": "The already-running parent retained the old literal shared-prefix metadata flag. Its source receipt and actual process were independently loaded and single-method. Correct only this descriptive flag after the seal.",
+  "source_run": "C4_key_single_CLIP_KD_seed0",
+  "predictions_metrics_costs_and_process_receipt_unchanged": true,
+  "corrections": [
+    {
+      "path": "a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_KD_seed0/official_evaluation.json",
+      "field": "shared_physical_work_not_independent_cold_arms",
+      "old": true,
+      "new": false
+    },
+    {
+      "path": "a100_runs/visual_classical_20261121/analysis/C4_key_single_CLIP_KD_seed0.json",
+      "field": "shared_physical_work_not_independent_cold_arms",
+      "old": true,
+      "new": false
+    },
+    {
+      "path": "a100_runs/visual_classical_20261121/analysis/independent_single_cold_C4.json",
+      "old_field": "only_one_head_and_one_output_per_process",
+      "new_field": "only_one_head_type_per_video_and_one_method_output",
+      "old_value": true,
+      "new_value": true,
+      "reason": "One head TYPE per video and one method output, 45 prefix fits; the running supervisor retained the old ambiguous wording. No prediction, metric or timing changed."
+    }
+  ],
+  "independent_cohort_parent_metadata_already_correct": true
+}

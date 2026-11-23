@@ -1,0 +1,79 @@
+{
+  "status": "PREREGISTERED_BEFORE_NEW_PREDICTIONS_AND_STUDY_GT",
+  "created_UTC": "2026-11-22T04:20:27.458821+00:00",
+  "goal_status": "ACTIVE",
+  "primary": "CONSENSUS_JOINT",
+  "hypothesis": "AfterblanketNoisolationfailure,vetooutwardNoedgesonlywhenleaveTrackIDoutvisualcalibrationstronglycontradictsNo;keepNoanchorlocal",
+  "rule": {
+    "teacher_No_threshold": 0.5,
+    "visual_evidence": "logit(crossfitP)-logit(crossfitbase)>=ln3",
+    "threshold_source": "Existingfrozensemantic_colour.ODDS_CAP;notsearchedusingtargetGT",
+    "PRESUPPOSED": "isolateconflictingNoedges",
+    "CHECKLIST": "fullgraphunchanged",
+    "decoder": "commonplainthreshold.5plusfixedexclusivity"
+  },
+  "shared_ordinary_baseline": "Exactconfidenceteacher768Ddirectsoftmeanhead;noadditionalfits;sourcez0",
+  "controls": {
+    "CONSENSUS_GRAPH": "primarybeforePAVA",
+    "ALL_PROTOCOL_JOINT": "vetoalsoCHECKLIST",
+    "WEAK_JOINT": "uniformperqueryfullgraphweightscaledtoselectivetotal",
+    "RANDOM_JOINT": "samecountqueriedNoisolatedbyfixedhash,edgesrescaledtomatchselectivetotal"
+  },
+  "conditions": {
+    "directions": [
+      "C4",
+      "C1"
+    ],
+    "neural_seeds": [
+      0,
+      17,
+      42
+    ],
+    "QA_seed": 0,
+    "C4_videos": 45,
+    "C4_original_parents": 13,
+    "C4_queries": 466,
+    "C1_videos": 25,
+    "C1_queries": 425
+  },
+  "output_counts": {
+    "raw": 30,
+    "CountMatched": 114,
+    "official_total": 144
+  },
+  "count_both_directions_vs": [
+    "KD",
+    "CAL",
+    "CONSENSUS_GRAPH",
+    "FULL_JOINT",
+    "WEAK_JOINT",
+    "RANDOM_JOINT"
+  ],
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "new_head_fits": 0,
+  "seal_all144_before_study_GT": true,
+  "scientific_gate": {
+    "primary_vs_weighted_and_unweighted_mean": "Bothdirectionsall3seeddeltaspositiveandoriginalparentplusseeddescriptiveCIstrictlypositive",
+    "C4_new_veto_contribution": "VersussharedweightedFULL_JOINT,WEAK_JOINTandRANDOM_JOINT:positiveaverageandoriginalparentplusseedCIstrictlypositive",
+    "C4_correct_query_retrieval": "MeanrescuedminusregressedpositiveversusweightedFULL_JOINT;TPFPFNdisclosed",
+    "module_contribution": "PAVAandgraphexaminedseparately;CountMatchedbothprojectionsrequired;noquietcontrolpromotion",
+    "real_cost": "Anyretainedrecipeanditsprimaryordinarycomparisonrequireownfreshfourarminferenceandcostreceipts;oldtimecannotbepasted"
+  },
+  "adaptation_uses_manual_target_GT": false,
+  "evaluation_manual_GT_after_seal_only": true,
+  "dataset_status": "Alldevelopment;nouseravailableuntoucheddataset;intervalsdescriptive,notmultiplicitycorrectedorpipeline-refit",
+  "frontier": "HumanacceptedofficialfixedMcBytecandidates;adaptreferringmoduleonly;notwholefrontendsource-only",
+  "correlated_evidence_not_independent_Bayes": true,
+  "quality_replay_not_physical_cold_cost": true,
+  "implementation_sha256": {
+    "flex_uda/active/cue_consensus.py": "a34f40f227810b981483c28d3932f6fe9ec7863aabb08a667c7465c7cec6d553",
+    "scripts/a100_visual_classical_cue_consensus.py": "bf3002154d480311d852aacfe42d5723ecc1504e7c18d9e8227001e9778f4d0a",
+    "scripts/a100_visual_classical_cue_consensus_launch.py": "7cae6738b9204b7adc8acc03918df0e4861034ad101811ad05b6c60f3093272b",
+    "scripts/a100_visual_classical_cue_consensus_analyze.py": "b33cc216be7196bfed9529ee4f4d924627bcc43db704ebc62243807a3d78d62d",
+    "flex_uda/active/topology_selection.py": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+    "flex_uda/active/semantic_colour.py": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "flex_uda/active/grounded_graph.py": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87"
+  }
+}

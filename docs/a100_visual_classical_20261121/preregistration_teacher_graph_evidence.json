@@ -1,0 +1,54 @@
+{
+  "scope": "teacher-only graph compatibility plus declared-contract negative-propagation guard",
+  "primary": "BMA_GUARD",
+  "models": [
+    "VISUAL",
+    "GLOBAL same total edge precision",
+    "INDEPENDENT"
+  ],
+  "teacher_model_comparison": "same-scale graph covariance correlation, Gaussian restricted evidence with free query intercept; uniform model prior",
+  "covariance_base_precision": 0.1,
+  "marginal_logit_variance": 16,
+  "variance_origin": "existing logit cap4 squared, fixed without target GT",
+  "measurement_precision": "1+3*abs(2*p-1)",
+  "model_weights": "softmax restricted evidence; fewer than2 observations uses independent",
+  "target_teacher_clip": [
+    0.02,
+    0.98
+  ],
+  "guard": "declared PRESUPPOSED and no requested teacher Yes>=.5: disable propagation, retain local teacher anchors and KD on unqueried nodes; no forced output",
+  "CHECKLIST_unchanged_by_guard": true,
+  "controls": [
+    "VISUAL_GUARD",
+    "BMA without guard",
+    "MAP",
+    "MAP_GUARD",
+    "EQUAL",
+    "EQUAL_GUARD"
+  ],
+  "counts": [
+    "native",
+    "source FULL counts",
+    "primary at KD counts with CountSelf equivalence"
+  ],
+  "teacher_probe": "seed0 outer leave-one-answer-out; held answer excluded from weights and prediction, no KD input in evidence score",
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "labels": [
+    "raw",
+    "bounded"
+  ],
+  "targets": [
+    "C4",
+    "C1"
+  ],
+  "all_predictions_sealed_before_GT": true,
+  "no_new_teacher_calls": true,
+  "no_new_head_training": true,
+  "no_GT_parameter_sweep": true,
+  "all_data_development": true,
+  "not_a_cold_runtime": true
+}

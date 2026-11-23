@@ -1,0 +1,101 @@
+{
+  "version": "SHARED_WEIGHTED_HEAD_FOUR_FRESH_PHYSICAL_V1_CONDITIONAL",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "status_at_registration": "PREPARED_NOT_LAUNCHED",
+  "registration": "Beforeinspectionofanynewshared-weighted-classical78GTmetrics. Confidence54knownC4oldJgapCIcross0;newfoundationisgloballyfixed/shared,notGTbestperdirection.",
+  "quality_plan": "preregistration_weighted_classical_v1.json",
+  "teacher_fraction": 0.1,
+  "query_graph_scope": "extended",
+  "head_query_scope": "pcd",
+  "head_source_logit": "zero",
+  "graph_metric": "combined",
+  "graph_prior": "constant",
+  "set_decoder": "original",
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C4_pcd768_shared_weighted_kd_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_weighted_kd_plain.py",
+      "worker_sha256": "242941e7146069b35d2fe3573c98b4938584e2688145762bcdff976340d7933c",
+      "reuse_previous_fresh_KD": false
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C4_pcd768_shared_weighted_joint_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_weighted_joint_plain.py",
+      "worker_sha256": "ef7ac34aa8741c09d7485927a87fced6b7a6813184343d0377662225ba600a6f",
+      "reuse_previous_fresh_KD": false
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C1_pcd768_shared_weighted_kd_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_weighted_kd_plain.py",
+      "worker_sha256": "242941e7146069b35d2fe3573c98b4938584e2688145762bcdff976340d7933c",
+      "reuse_previous_fresh_KD": false
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C1_pcd768_shared_weighted_joint_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_weighted_joint_plain.py",
+      "worker_sha256": "ef7ac34aa8741c09d7485927a87fced6b7a6813184343d0377662225ba600a6f",
+      "reuse_previous_fresh_KD": false
+    }
+  },
+  "defer_official_evaluation": true,
+  "primary": "Sameconfidenceweightednative768Ddirectsoftmean:baselinealoneversusfixedfull3NNgraph+PAVA. Both useidenticalrawteacherconfidenceCEweights,architecture andprefixdata.",
+  "promotion": [
+    "Weightedclassical78andothercurrentlyregisteredqualityreproductionscompletePASS",
+    "JOINT-KDweightedmeanandJOINT-unweightedmeanpositiveall3seedsandoriginalparent+seedCIabove0bothdomains",
+    "All4otherweightedsoft/hardsnapshotpointcomparisonspositivebothdomains,allintervalsreportedincludingcross0",
+    "GraphaboveCALconditionalCIpositiveatleastonedirection;CALaboveGRAPHconditionalCIpositiveatleastonedirection. Noeach-module-every-domainclaim",
+    "ReviewallCountMatcheddirectionsandqueryretrieval/FP/FN;noforcedpresence,GTthresholdswitchorposthocbestcontrolpromotion"
+  ],
+  "source": "Eachnewworkerreloadsverifiedfrozenofficialsource+Qwenandactuallyrecomputestargetpictures/privateSQLite.4526newQAexpected,0hits.GPU0C4KD/1C4J/2C1KD/3C1J;no4..9.",
+  "decoder": "Plain>.5+sameprovidedexclusivity,matchingsealedqualitymodelsforbothmethods. Legacy source-MOTION-presencegatecomputedfortracebutNOTapplied,explicitlyreported;oldnativeactualhadempiricallyidenticalplainmasks.",
+  "fairness": "Bothmainmethodsretraintheexactsharedconfidenceweightedheadindependently;PCD/prior/TrackIDs/anchors/orderedQA/probabilities/normalization/finalNNweightsmustmatch. KDskipsunusedRGB;J paysRGBrealcost.",
+  "quality_integrity": "Eachactualscore/maskmustmatchitsownconfidence_teacherKD_MEAN orweighted_classicalJOINTseed0,neverpasteunweightedprecision/time.",
+  "expected_new_teacher_calls": 4526,
+  "expected_cache_hits": 0,
+  "all_four_fresh_predictions_before_group_GT": true,
+  "actual_cost": "IndependentPopen-to-exit includesallimports/loads/sourceforward/realteacher/weightedheadfits/RGB/graph/PAVA/output/audits.GTexcluded;phaseledgerseparate. OS/NAScacheunflushed/sharedhostload,nospeedup/all-budgetoptimalityclaim.",
+  "scope": "Humanacceptedfixedofficialcandidates;upstreamgenerationnottimed. TargetmanualGTonlypostseal. Past/currentvideo,currenttransductive,notframeonline;allDEV,noindependentblindsplit;actualrunnotextraNNseed.",
+  "previous_unweighted_native_actual_preserved": true,
+  "failed_strict_and_ONE_SE_physical_followups_never_launched": true,
+  "code_sha256": {
+    "runtime": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "calibration": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "graph": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "weighted_fit": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "visual_graph": "5a0aa8a4a97d95fafd8d747d2344d367db542aa6c50c093ba5dcfb344f04c333"
+  },
+  "no_automatic_goal_close": true
+}

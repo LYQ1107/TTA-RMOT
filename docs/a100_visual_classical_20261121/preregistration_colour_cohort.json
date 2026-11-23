@@ -1,0 +1,45 @@
+{
+  "protocol": "image_colour_cohort_v1",
+  "primary": "COVER__COHORT",
+  "seed": 0,
+  "hypothesis": "A human groups people by relevant clothing/object-part colour. Direct image colour statistics may give a more useful scene relation than source-domain neural geometry.",
+  "target_supervision": "same frozen teacher CROP answers, target images and queries only; no target labels",
+  "features": "mean of up to3 uniform real candidate crops, whole/upper/lower fixed regions,12x8 HS histogram plus8 V, Hellinger square root",
+  "query_parts": "explicit shirt/jersey -> upper; pants/skirt -> lower; dark/light team -> upper; other colour -> whole; dynamic/spatial conjunction -> no colour cohort",
+  "baseline": "Actual video-prefix MLP soft KD on exactly the same normalized PCD + parsed colour features; source logit initialization and teacher-only stopping match prior controls",
+  "geometry": "equal norm source PCD and parsed colour blocks; source PCD only and colour only are separate registered geometry ablations",
+  "energy": "same normalized3NN Laplacian and frozen teacher anchors as V2; unqueried unary precision0.1, queried unary removed, graph weight1",
+  "methods": [
+    "RGB_KD",
+    "NO_GRAPH",
+    "COHORT",
+    "PCD_COHORT",
+    "COLOR_ONLY",
+    "STRONG_PRIOR"
+  ],
+  "ablations": {
+    "graph": "NO_GRAPH",
+    "colour_geometry": "PCD_COHORT",
+    "query_PCD_geometry": "COLOR_ONLY",
+    "source_inertia": "STRONG_PRIOR unary_precision1.0"
+  },
+  "policies": [
+    "COVER",
+    "UNIFORM"
+  ],
+  "teacher_budget": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "new_teacher_calls": 0,
+  "information_scope": "past and current video teacher only; per-row normalization; current full video transductive",
+  "no_target_GT_parameter_sweep": true,
+  "costs": "record real image I/O, colour extraction, teacher-head fit and inference wall; charge these in later live end-to-end comparison",
+  "caveats": [
+    "colour consistency cannot prove identity",
+    "within-track ID mixtures can contaminate means",
+    "non-colour/dynamic queries fall back to matched KD",
+    "all data are development"
+  ],
+  "acceptance": "official HOTA, original-parent intervals, same-feature trained KD, fixed-answer module ablations and CountMatched; no success assumption"
+}

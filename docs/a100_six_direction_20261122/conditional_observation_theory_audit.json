@@ -1,0 +1,83 @@
+{
+  "status": "PASS_SYNTHETIC_CONDITIONAL_OBSERVATION_OBJECTIVE",
+  "instance_No_compatible_bag_states": [
+    {
+      "Y_t": 0,
+      "A": 0
+    },
+    {
+      "Y_t": 0,
+      "A": 1
+    }
+  ],
+  "partial_identification_witnesses": [
+    {
+      "bag_support": 0.6,
+      "conditional_local": [
+        0.33333333333333337,
+        1.0
+      ],
+      "relative_choice": [
+        0.25,
+        0.7499999999999999
+      ]
+    },
+    {
+      "bag_support": 0.8,
+      "conditional_local": [
+        0.25,
+        0.7499999999999999
+      ],
+      "relative_choice": [
+        0.25000000000000006,
+        0.75
+      ]
+    },
+    {
+      "bag_support": 1.0,
+      "conditional_local": [
+        0.2,
+        0.6
+      ],
+      "relative_choice": [
+        0.25,
+        0.7499999999999999
+      ]
+    }
+  ],
+  "chain_scope": "Y_t implies bag A; P(Y_t|I)=P(A|I)P(Y_t|A,I). A is existence of a match in the provided candidate bag, not certified physical identity or a pure clothing attribute.",
+  "relative_choice": "Uniformly sample an observation index (or fixed positive design weights), condition on a positive match: index probabilities are proportional to w_t*q_t. A common positive support factor cancels.",
+  "relative_loss": 0.0026510615020869034,
+  "joint_bernoulli_loss": 0.8156756774439177,
+  "direct_bag_logit_gradient_from_relative_loss": 6.938893903907228e-18,
+  "conditional_local_gradient_L1": 0.014991905213160017,
+  "encoder_checks": [
+    {
+      "kind": "conditional",
+      "initial_task_probability": 0.5,
+      "permutation_and_missing_slot_max_error": 0.0
+    },
+    {
+      "kind": "direct_context",
+      "initial_task_probability": 0.5,
+      "permutation_and_missing_slot_max_error": 0.0
+    },
+    {
+      "kind": "local_two_factor",
+      "initial_task_probability": 0.5,
+      "permutation_and_missing_slot_max_error": 0.0
+    }
+  ],
+  "confidently_wrong_No_finite_gradient_check": {
+    "logits": 200.0,
+    "loss": 199.30685281944005,
+    "gradient": 1.0000000000000018
+  },
+  "gradient_boundary": "Cancellation holds for the direct common bag-logit path with conditional logits held fixed; a conditional head depending on shared context still backpropagates through that context.",
+  "learning_boundary": "Joint frame No is not an atom-wise or bag-negative label, but joint optimization can still choose a bad latent decomposition. The relative term is redundant at exact per-instance fit; benefits under finite data/noisy teacher need actual ablation.",
+  "teacher_boundary": "Raw Qwen probabilities are not proven calibrated or multiplicatively biased. Matching actual views avoids one confound, not all. CLIP temporal scope remains an observation-model assumption, not known frame truth.",
+  "no_target_GT_or_teacher_answers_or_predictions_loaded": true,
+  "new_GPU_or_real_data_fits": 0,
+  "no_RMOT_gain_or_identified_latent_claim": true,
+  "goal_status": "ACTIVE"
+}

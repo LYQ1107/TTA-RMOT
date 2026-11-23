@@ -1,0 +1,11 @@
+{
+  "study": "Historical per-anchor PCD recovery feasibility",
+  "problem": "Current source descriptors store the mean of three observations; state-specific learning may need the original observations.",
+  "hypothesis": "Existing read-only NAS full-candidate frozen PCD may contain those same selected observations, allowing a recovery pilot before spending new student GPU time.",
+  "fixed_case": "C2/0005, first target video by existing order; no target-label choice.",
+  "measurement": "Recover exact query/frame/TrackID entries; compare their float32 three-anchor means with current A100 sparse descriptors.",
+  "boundaries": "Old batch64 plus near-zero isolation differs from current batch8; no equality assumed and no recentering, tolerance selection or automatic promotion.",
+  "fairness": "Any later method using recovered or newly extracted states must offer identical states to ordinary KD.",
+  "costs": "Historical prepaid input read only; not a fresh neural deployment cost.",
+  "goal_status": "ACTIVE"
+}

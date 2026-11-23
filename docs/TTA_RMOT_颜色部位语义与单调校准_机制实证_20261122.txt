@@ -1,0 +1,894 @@
+TTA-RMOT：颜色与衣着部位的语义绑定及经典单调校准
+2026-11-22
+
+用户目标仍是跨域RMOT：官方固定框/ID，目标图片和任务语言，冻结教师指导，适配不读目标人工标签。
+本研究来自上一轮保护机制退步及教师高置信错误的开发诊断；不是独立盲测或无调参历史的新域测试。
+固定HSV模糊原型连接颜色词与身体部位，深浅队伍用相对上身亮度；HS与V边缘分布相乘是假设，未声称光照不变。
+SEM1081普通KD同样得到该标量；ZERO1081同初始化只补0，排除输入维度初始化混杂。全部旧强软/硬KD保留。
+PAVA只拟合过去/当前教师软标签，按当前视频TrackID做5折排除；当前轨迹所有查询都不进入自身校准器。
+修正=logit(KD)+clip(logit(PAVA)-logit(训练教师平均),-ln3,ln3)。它是有界正则，不是独立贝叶斯证据。
+主MONO与SEM_MEAN完全同头/同输入；BIN为非单调分箱替代估计器，SHUFFLED破坏辅助线索的图像对齐，NAIVE_MEAN简单平均，MONO_ONLY/零头作补充。
+BIN还改变分箱与平滑，不能将MONO与BIN的全部差值归因于单调约束本身。
+SHUFFLED只改变辅助校准线索，未重训随机线索头；ZERO控制维度/初始化，未单独排除任意非零额外特征的正则作用。若只保留神经输入增益，须据此限定语义归因。
+84原始+90双向数量全部封存后174官评；0新增教师/源前向，1160/1103同实际回答。
+旧基线充分统计采用已有公开记录的精确引用以控制Git<100MB，引用与官评读取数组逐值相等后才公开。
+所有描述性区间仍未校正多次开发；固定查询预算、种子、原始GT和指标均未改变。
+
+本轮结果应该怎样理解：
+C4：MONO 66.9371970182392，同输入普通SEM均值KD 66.43667023506868。
+单调后处理的独立差：+0.500527; parent95%[+0.215919, +0.869567]; parent+seed95%[+0.188754, +0.917659]；固定预测的开发描述性区间为正；这仍不是独立新域验证。
+三个神经种子的差分别为[0.6810653888859406, 0.4537118834524563, 0.3668030771731736]，共享同一份教师问答。
+语义输入对同初始化零输入：-0.021187; parent95%[-0.104182, +0.072508]; parent+seed95%[-0.140530, +0.117928]。该对照仍未排除任意非零附加特征的正则作用。
+固定MONO数量的排序差：+0.240964; parent95%[+0.132254, +0.364936]; parent+seed95%[+0.104960, +0.402777]。
+固定KD数量的排序差：+0.155348; parent95%[+0.065772, +0.268020]; parent+seed95%[+0.058468, +0.289261]。
+全部预先保留的普通蒸馏控制中，本方向事后最高均值为OLD_ZERO400 66.87456133075415。这是保守对照描述，不是按方向挑选部署方法或checkpoint。
+MONO对此控制的差：+0.062636; parent95%[-0.981816, +0.975542]; parent+seed95%[-1.014104, +1.013631]。
+SEM_MEAN 三种子查询/候选成员计数平均：{"positive_queries_without_correct_output": 58.666666666666664, "positive_queries_empty": 21.0, "no_positive_candidate_queries_with_output": 0.0, "TP": 1364228.0, "FP": 512999.6666666667, "FN": 141730.0}。
+MONO 三种子查询/候选成员计数平均：{"positive_queries_without_correct_output": 63.0, "positive_queries_empty": 28.333333333333332, "no_positive_candidate_queries_with_output": 0.0, "TP": 1370416.0, "FP": 491008.6666666667, "FN": 135542.0}。
+C1：MONO 34.58342533685697，同输入普通SEM均值KD 32.91921816131227。
+单调后处理的独立差：+1.664207; parent95%[+0.436024, +3.362580]; parent+seed95%[+0.325411, +3.552419]；固定预测的开发描述性区间为正；这仍不是独立新域验证。
+三个神经种子的差分别为[1.7034919890334024, 2.0484793835433805, 1.2406501540573132]，共享同一份教师问答。
+语义输入对同初始化零输入：+0.453980; parent95%[-0.295248, +1.386012]; parent+seed95%[-0.366291, +1.658201]。该对照仍未排除任意非零附加特征的正则作用。
+固定MONO数量的排序差：-0.006466; parent95%[-0.016902, +0.000000]; parent+seed95%[-0.136679, +0.114987]。
+固定KD数量的排序差：-0.085136; parent95%[-0.271671, +0.003625]; parent+seed95%[-0.422401, +0.004006]。
+全部预先保留的普通蒸馏控制中，本方向事后最高均值为SEM_MEAN 32.91921816131227。这是保守对照描述，不是按方向挑选部署方法或checkpoint。
+MONO对此控制的差：+1.664207; parent95%[+0.436024, +3.362580]; parent+seed95%[+0.325411, +3.552419]。
+SEM_MEAN 三种子查询/候选成员计数平均：{"positive_queries_without_correct_output": 18.0, "positive_queries_empty": 15.333333333333334, "no_positive_candidate_queries_with_output": 30.666666666666668, "TP": 107029.0, "FP": 67215.66666666667, "FN": 90356.0}。
+MONO 三种子查询/候选成员计数平均：{"positive_queries_without_correct_output": 17.333333333333332, "positive_queries_empty": 16.333333333333332, "no_positive_candidate_queries_with_output": 30.666666666666668, "TP": 119212.66666666667, "FP": 72038.0, "FN": 78172.33333333333}。
+两种数量投影是机制诊断，不可与原始HOTA作线性加减分账。
+教师回答交叉预测的损失只衡量对有噪声教师的拟合，不证明目标语义更准确。
+全部数据属于开发数据；区间不重训整个前缀适配流程，也未修正多次开发。
+任何本轮队列或报告成功都不自动完成用户的科研Goal。
+
+SEMANTIC_C4
+三种子HOTA：{"ZERO400": 66.86148263190573, "ZERO_FINAL": 65.85979880175888, "ZERO_MEAN": 66.45785710814306, "SEM400": 66.85906117497136, "SEM_FINAL": 65.7990870617726, "SEM_MEAN": 66.43667023506868, "SEM_HARD400": 66.35289484929429, "SEM_HARD_FINAL": 65.64338652953357, "MONO": 66.9371970182392, "BIN": 66.87063254122285, "SHUFFLED": 66.33172588381355, "NAIVE_MEAN": 66.88882911730866, "MONO_ONLY": 65.02570285264035, "MONO_ZERO": 66.90010282998963, "OLD_RGB400": 66.54896900366192, "OLD_RGB_FINAL": 65.56625737861224, "OLD_RGB_MEAN": 66.16970756349771, "OLD_RGB_HARD400": 66.27313423130566, "OLD_RGB_HARD_FINAL": 65.57408450383183, "OLD_RGB_GRAPH": 67.35624621940293, "OLD_PCD400": 66.81868271994672, "OLD_PCD_FINAL": 66.06030843060081, "OLD_PCD_MEAN": 66.77347423160707, "OLD_PCD_HARD400": 66.60618780459478, "OLD_PCD_HARD_FINAL": 66.1205870047895, "OLD_ZERO400": 66.87456133075415, "OLD_ZERO_FINAL": 66.27784250744965, "OLD_ZERO_MEAN": 66.85440930797562}
+MONO_vs_ZERO400：+0.075714; parent95%[-0.269401, +0.507653]; parent+seed95%[-0.280247, +0.518674]
+MONO_vs_ZERO_FINAL：+1.077398; parent95%[+0.648814, +1.577910]; parent+seed95%[+0.616462, +1.673623]
+MONO_vs_ZERO_MEAN：+0.479340; parent95%[+0.198820, +0.882190]; parent+seed95%[+0.164797, +0.907494]
+MONO_vs_SEM400：+0.078136; parent95%[-0.244629, +0.495961]; parent+seed95%[-0.262514, +0.513804]
+MONO_vs_SEM_FINAL：+1.138110; parent95%[+0.712285, +1.591871]; parent+seed95%[+0.647888, +1.730574]
+MONO_vs_SEM_MEAN：+0.500527; parent95%[+0.215919, +0.869567]; parent+seed95%[+0.188754, +0.917659]
+MONO_vs_SEM_HARD400：+0.584302; parent95%[-0.184320, +1.453177]; parent+seed95%[-0.218212, +1.519932]
+MONO_vs_SEM_HARD_FINAL：+1.293810; parent95%[+0.456602, +2.274615]; parent+seed95%[+0.429330, +2.319023]
+MONO_vs_BIN：+0.066564; parent95%[-0.113224, +0.303234]; parent+seed95%[-0.132545, +0.326096]
+MONO_vs_SHUFFLED：+0.605471; parent95%[+0.387243, +0.902431]; parent+seed95%[+0.354271, +0.940583]
+MONO_vs_NAIVE_MEAN：+0.048368; parent95%[-0.370506, +0.415926]; parent+seed95%[-0.377558, +0.431085]
+MONO_vs_MONO_ONLY：+1.911494; parent95%[+0.471990, +3.724217]; parent+seed95%[+0.464694, +3.714343]
+MONO_vs_MONO_ZERO：+0.037094; parent95%[-0.028771, +0.120863]; parent+seed95%[-0.058518, +0.148554]
+MONO_vs_OLD_RGB400：+0.388228; parent95%[+0.112876, +0.753262]; parent+seed95%[+0.030529, +0.827256]
+MONO_vs_OLD_RGB_FINAL：+1.370940; parent95%[+1.010829, +1.916702]; parent+seed95%[+0.859605, +1.971332]
+MONO_vs_OLD_RGB_MEAN：+0.767489; parent95%[+0.453185, +1.272733]; parent+seed95%[+0.318103, +1.310791]
+MONO_vs_OLD_RGB_HARD400：+0.664063; parent95%[-0.096110, +1.565533]; parent+seed95%[-0.121341, +1.604321]
+MONO_vs_OLD_RGB_HARD_FINAL：+1.363113; parent95%[+0.651929, +2.228328]; parent+seed95%[+0.583170, +2.290484]
+MONO_vs_OLD_RGB_GRAPH：-0.419049; parent95%[-1.301936, +0.295781]; parent+seed95%[-1.309717, +0.312110]
+MONO_vs_OLD_PCD400：+0.118514; parent95%[-0.895896, +1.056370]; parent+seed95%[-0.927531, +1.073576]
+MONO_vs_OLD_PCD_FINAL：+0.876889; parent95%[-0.065403, +1.907948]; parent+seed95%[-0.073945, +1.936634]
+MONO_vs_OLD_PCD_MEAN：+0.163723; parent95%[-0.829863, +1.111839]; parent+seed95%[-0.838080, +1.112555]
+MONO_vs_OLD_PCD_HARD400：+0.331009; parent95%[-0.721141, +1.497126]; parent+seed95%[-0.720250, +1.506357]
+MONO_vs_OLD_PCD_HARD_FINAL：+0.816610; parent95%[-0.199763, +2.056285]; parent+seed95%[-0.238104, +2.068687]
+MONO_vs_OLD_ZERO400：+0.062636; parent95%[-0.981816, +0.975542]; parent+seed95%[-1.014104, +1.013631]
+MONO_vs_OLD_ZERO_FINAL：+0.659355; parent95%[-0.278080, +1.667530]; parent+seed95%[-0.400712, +1.705361]
+MONO_vs_OLD_ZERO_MEAN：+0.082788; parent95%[-1.013673, +1.062004]; parent+seed95%[-1.053541, +1.078766]
+SEM_MEAN_vs_ZERO_MEAN：-0.021187; parent95%[-0.104182, +0.072508]; parent+seed95%[-0.140530, +0.117928]
+SEM400_vs_ZERO400：-0.002421; parent95%[-0.067582, +0.066362]; parent+seed95%[-0.116474, +0.153966]
+SEM_FINAL_vs_ZERO_FINAL：-0.060712; parent95%[-0.188297, +0.060916]; parent+seed95%[-0.222603, +0.083311]
+ZERO_MEAN_vs_OLD_RGB_MEAN：+0.288150; parent95%[+0.072031, +0.541476]; parent+seed95%[-0.143035, +0.717728]
+MONO_ZERO_vs_ZERO_MEAN：+0.442246; parent95%[+0.174396, +0.816729]; parent+seed95%[+0.153995, +0.832949]
+COUNT_OWN_MONO_vs_SEM_MEAN：+0.240964; parent95%[+0.132254, +0.364936]; parent+seed95%[+0.104960, +0.402777]
+COUNT_BASELINE_MONO_vs_SEM_MEAN：+0.155348; parent95%[+0.065772, +0.268020]; parent+seed95%[+0.058468, +0.289261]
+COUNT_OWN_MONO_vs_ZERO_MEAN：+0.264596; parent95%[+0.151010, +0.399161]; parent+seed95%[+0.139191, +0.427786]
+COUNT_BASELINE_MONO_vs_ZERO_MEAN：+0.142416; parent95%[+0.033654, +0.280597]; parent+seed95%[+0.016683, +0.293928]
+COUNT_OWN_MONO_vs_BIN：+0.034791; parent95%[-0.007947, +0.072571]; parent+seed95%[-0.030520, +0.099685]
+COUNT_BASELINE_MONO_vs_BIN：+0.000291; parent95%[-0.087804, +0.114305]; parent+seed95%[-0.102191, +0.125422]
+COUNT_OWN_MONO_vs_NAIVE_MEAN：-0.055796; parent95%[-0.128663, +0.006359]; parent+seed95%[-0.142037, +0.023518]
+COUNT_BASELINE_MONO_vs_NAIVE_MEAN：-0.234292; parent95%[-0.446195, -0.103164]; parent+seed95%[-0.448994, -0.098701]
+COUNT_OWN_SEM_MEAN_vs_ZERO_MEAN：+0.000051; parent95%[-0.031613, +0.038738]; parent+seed95%[-0.049491, +0.057417]
+COUNT_BASELINE_SEM_MEAN_vs_ZERO_MEAN：-0.047898; parent95%[-0.088018, -0.005336]; parent+seed95%[-0.124884, +0.004421]
+SEMANTIC_C1
+三种子HOTA：{"ZERO400": 32.637080637627285, "ZERO_FINAL": 32.3794999272965, "ZERO_MEAN": 32.46523785633958, "SEM400": 32.581699501152826, "SEM_FINAL": 32.828526914635894, "SEM_MEAN": 32.91921816131227, "SEM_HARD400": 32.636321738150436, "SEM_HARD_FINAL": 32.02336073713493, "MONO": 34.58342533685697, "BIN": 34.35020869626773, "SHUFFLED": 34.48985441639582, "NAIVE_MEAN": 33.42133304985759, "MONO_ONLY": 32.176807073351185, "MONO_ZERO": 34.17578703093717, "OLD_RGB400": 32.51397687316728, "OLD_RGB_FINAL": 32.03241035466079, "OLD_RGB_MEAN": 32.199208253359814, "OLD_RGB_HARD400": 32.52479534545865, "OLD_RGB_HARD_FINAL": 31.67490130411045, "OLD_RGB_GRAPH": 34.1708455884835, "OLD_PCD400": 30.8024115976351, "OLD_PCD_FINAL": 31.096934115342577, "OLD_PCD_MEAN": 30.87933193606288, "OLD_PCD_HARD400": 29.810123638412062, "OLD_PCD_HARD_FINAL": 30.174964144379416, "OLD_ZERO400": 30.590420768952132, "OLD_ZERO_FINAL": 31.50341840552939, "OLD_ZERO_MEAN": 31.10576500684948}
+MONO_vs_ZERO400：+1.946345; parent95%[+0.078285, +4.498086]; parent+seed95%[-0.013987, +4.675825]
+MONO_vs_ZERO_FINAL：+2.203925; parent95%[+0.691010, +4.105086]; parent+seed95%[+0.600541, +4.459896]
+MONO_vs_ZERO_MEAN：+2.118187; parent95%[+0.297531, +4.679811]; parent+seed95%[+0.181523, +4.831232]
+MONO_vs_SEM400：+2.001726; parent95%[+0.162765, +4.486221]; parent+seed95%[+0.065637, +4.595701]
+MONO_vs_SEM_FINAL：+1.754898; parent95%[+0.628371, +3.054904]; parent+seed95%[+0.530554, +3.375657]
+MONO_vs_SEM_MEAN：+1.664207; parent95%[+0.436024, +3.362580]; parent+seed95%[+0.325411, +3.552419]
+MONO_vs_SEM_HARD400：+1.947104; parent95%[-0.640586, +5.111461]; parent+seed95%[-0.789050, +5.284681]
+MONO_vs_SEM_HARD_FINAL：+2.560065; parent95%[-0.075132, +5.605370]; parent+seed95%[-0.302895, +5.877228]
+MONO_vs_BIN：+0.233217; parent95%[-0.073087, +0.751168]; parent+seed95%[-0.214828, +1.146428]
+MONO_vs_SHUFFLED：+0.093571; parent95%[-0.313682, +0.532393]; parent+seed95%[-0.471875, +0.702704]
+MONO_vs_NAIVE_MEAN：+1.162092; parent95%[-0.383148, +3.537225]; parent+seed95%[-0.518219, +3.788494]
+MONO_vs_MONO_ONLY：+2.406618; parent95%[-4.058439, +9.534708]; parent+seed95%[-4.072490, +9.617605]
+MONO_vs_MONO_ZERO：+0.407638; parent95%[-0.427568, +1.723469]; parent+seed95%[-0.501338, +2.034940]
+MONO_vs_OLD_RGB400：+2.069448; parent95%[+0.217769, +4.546774]; parent+seed95%[+0.037738, +4.824280]
+MONO_vs_OLD_RGB_FINAL：+2.551015; parent95%[+0.951792, +4.593089]; parent+seed95%[+0.760197, +4.827426]
+MONO_vs_OLD_RGB_MEAN：+2.384217; parent95%[+0.568455, +4.879847]; parent+seed95%[+0.420924, +5.128434]
+MONO_vs_OLD_RGB_HARD400：+2.058630; parent95%[-0.741287, +5.278845]; parent+seed95%[-1.093854, +5.546821]
+MONO_vs_OLD_RGB_HARD_FINAL：+2.908524; parent95%[+0.452155, +5.897103]; parent+seed95%[+0.157222, +6.135284]
+MONO_vs_OLD_RGB_GRAPH：+0.412580; parent95%[-0.774712, +1.930914]; parent+seed95%[-1.349500, +2.204262]
+MONO_vs_OLD_PCD400：+3.781014; parent95%[+1.088498, +6.822202]; parent+seed95%[+0.886181, +7.173691]
+MONO_vs_OLD_PCD_FINAL：+3.486491; parent95%[+1.292660, +6.033328]; parent+seed95%[+0.921789, +6.454819]
+MONO_vs_OLD_PCD_MEAN：+3.704093; parent95%[+1.196874, +6.519979]; parent+seed95%[+1.015598, +6.816882]
+MONO_vs_OLD_PCD_HARD400：+4.773302; parent95%[+1.985574, +8.262269]; parent+seed95%[+1.761349, +8.467466]
+MONO_vs_OLD_PCD_HARD_FINAL：+4.408461; parent95%[+1.890794, +7.542577]; parent+seed95%[+1.491344, +7.864574]
+MONO_vs_OLD_ZERO400：+3.993005; parent95%[+1.088600, +7.332031]; parent+seed95%[+0.972302, +7.551358]
+MONO_vs_OLD_ZERO_FINAL：+3.080007; parent95%[+0.899010, +5.810092]; parent+seed95%[+0.773248, +5.950719]
+MONO_vs_OLD_ZERO_MEAN：+3.477660; parent95%[+0.936330, +6.464907]; parent+seed95%[+0.847062, +6.816831]
+SEM_MEAN_vs_ZERO_MEAN：+0.453980; parent95%[-0.295248, +1.386012]; parent+seed95%[-0.366291, +1.658201]
+SEM400_vs_ZERO400：-0.055381; parent95%[-0.387836, +0.281177]; parent+seed95%[-0.481701, +0.412866]
+SEM_FINAL_vs_ZERO_FINAL：+0.449027; parent95%[-0.409122, +1.367670]; parent+seed95%[-0.469139, +1.878836]
+ZERO_MEAN_vs_OLD_RGB_MEAN：+0.266030; parent95%[-0.118843, +0.761557]; parent+seed95%[-0.221273, +0.915144]
+MONO_ZERO_vs_ZERO_MEAN：+1.710549; parent95%[+0.417810, +3.423412]; parent+seed95%[+0.322801, +3.634951]
+COUNT_OWN_MONO_vs_SEM_MEAN：-0.006466; parent95%[-0.016902, +0.000000]; parent+seed95%[-0.136679, +0.114987]
+COUNT_BASELINE_MONO_vs_SEM_MEAN：-0.085136; parent95%[-0.271671, +0.003625]; parent+seed95%[-0.422401, +0.004006]
+COUNT_OWN_MONO_vs_ZERO_MEAN：+0.041884; parent95%[-0.004052, +0.104264]; parent+seed95%[-0.038969, +0.175064]
+COUNT_BASELINE_MONO_vs_ZERO_MEAN：+0.020233; parent95%[-0.120988, +0.175941]; parent+seed95%[-0.167885, +0.274129]
+COUNT_OWN_MONO_vs_BIN：+0.220105; parent95%[+0.010765, +0.585002]; parent+seed95%[+0.000635, +0.641716]
+COUNT_BASELINE_MONO_vs_BIN：+0.038000; parent95%[-0.077272, +0.158701]; parent+seed95%[-0.079584, +0.169752]
+COUNT_OWN_MONO_vs_NAIVE_MEAN：+0.237825; parent95%[+0.004992, +0.635936]; parent+seed95%[+0.000308, +0.935601]
+COUNT_BASELINE_MONO_vs_NAIVE_MEAN：-0.044147; parent95%[-0.211053, +0.101268]; parent+seed95%[-0.256613, +0.168940]
+COUNT_OWN_SEM_MEAN_vs_ZERO_MEAN：-0.055628; parent95%[-0.168251, +0.030325]; parent+seed95%[-0.227424, +0.056524]
+COUNT_BASELINE_SEM_MEAN_vs_ZERO_MEAN：-0.038326; parent95%[-0.142651, +0.025102]; parent+seed95%[-0.189092, +0.034694]
+
+检索与FP/FN诊断（非HOTA可加分账）：
+{
+  "conditions": {
+    "C4_seed0": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 17,
+          "positive_queries_without_correct_output": 58,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1354951,
+          "FP": 518881,
+          "FN": 151007
+        },
+        "ZERO_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 56,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1359377,
+          "FP": 520405,
+          "FN": 146581
+        },
+        "MONO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 27,
+          "positive_queries_without_correct_output": 63,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1365804,
+          "FP": 492271,
+          "FN": 140154
+        },
+        "BIN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 25,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1358301,
+          "FP": 488484,
+          "FN": 147657
+        },
+        "SHUFFLED": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 18,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1356083,
+          "FP": 522472,
+          "FN": 149875
+        },
+        "NAIVE_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 23,
+          "positive_queries_without_correct_output": 56,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1385785,
+          "FP": 519135,
+          "FN": 120173
+        },
+        "MONO_ZERO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 24,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1362457,
+          "FP": 492559,
+          "FN": 143501
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 3,
+          "regressed": 1
+        },
+        "MONO": {
+          "rescued": 1,
+          "regressed": 6
+        },
+        "BIN": {
+          "rescued": 4,
+          "regressed": 6
+        },
+        "SHUFFLED": {
+          "rescued": 1,
+          "regressed": 5
+        },
+        "NAIVE_MEAN": {
+          "rescued": 4,
+          "regressed": 2
+        },
+        "MONO_ZERO": {
+          "rescued": 4,
+          "regressed": 6
+        }
+      }
+    },
+    "C1_seed0": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 33,
+          "TP": 106907,
+          "FP": 63272,
+          "FN": 90478
+        },
+        "ZERO_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 105778,
+          "FP": 66475,
+          "FN": 91607
+        },
+        "MONO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 120401,
+          "FP": 69247,
+          "FN": 76984
+        },
+        "BIN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 27,
+          "TP": 120400,
+          "FP": 65934,
+          "FN": 76985
+        },
+        "SHUFFLED": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 12,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 32,
+          "TP": 119723,
+          "FP": 70034,
+          "FN": 77662
+        },
+        "NAIVE_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 20,
+          "no_positive_candidate_queries_with_output": 20,
+          "TP": 101846,
+          "FP": 42459,
+          "FN": 95539
+        },
+        "MONO_ZERO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 14,
+          "no_positive_candidate_queries_with_output": 31,
+          "TP": 117672,
+          "FP": 70834,
+          "FN": 79713
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 2,
+          "regressed": 1
+        },
+        "MONO": {
+          "rescued": 1,
+          "regressed": 0
+        },
+        "BIN": {
+          "rescued": 1,
+          "regressed": 0
+        },
+        "SHUFFLED": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "NAIVE_MEAN": {
+          "rescued": 0,
+          "regressed": 3
+        },
+        "MONO_ZERO": {
+          "rescued": 3,
+          "regressed": 0
+        }
+      }
+    },
+    "C4_seed17": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 22,
+          "positive_queries_without_correct_output": 59,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1369888,
+          "FP": 511479,
+          "FN": 136070
+        },
+        "ZERO_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 22,
+          "positive_queries_without_correct_output": 56,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1368277,
+          "FP": 512293,
+          "FN": 137681
+        },
+        "MONO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 29,
+          "positive_queries_without_correct_output": 64,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1376369,
+          "FP": 493950,
+          "FN": 129589
+        },
+        "BIN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 27,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1367903,
+          "FP": 491568,
+          "FN": 138055
+        },
+        "SHUFFLED": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 24,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1367394,
+          "FP": 516891,
+          "FN": 138564
+        },
+        "NAIVE_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 25,
+          "positive_queries_without_correct_output": 57,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1393400,
+          "FP": 521291,
+          "FN": 112558
+        },
+        "MONO_ZERO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 28,
+          "positive_queries_without_correct_output": 60,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1376376,
+          "FP": 495433,
+          "FN": 129582
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "MONO": {
+          "rescued": 0,
+          "regressed": 5
+        },
+        "BIN": {
+          "rescued": 4,
+          "regressed": 5
+        },
+        "SHUFFLED": {
+          "rescued": 1,
+          "regressed": 4
+        },
+        "NAIVE_MEAN": {
+          "rescued": 4,
+          "regressed": 2
+        },
+        "MONO_ZERO": {
+          "rescued": 4,
+          "regressed": 5
+        }
+      }
+    },
+    "C1_seed17": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 18,
+          "no_positive_candidate_queries_with_output": 28,
+          "TP": 103319,
+          "FP": 67316,
+          "FN": 94066
+        },
+        "ZERO_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 18,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 104810,
+          "FP": 72533,
+          "FN": 92575
+        },
+        "MONO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 32,
+          "TP": 116759,
+          "FP": 75454,
+          "FN": 80626
+        },
+        "BIN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 13,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 29,
+          "TP": 114267,
+          "FP": 73753,
+          "FN": 83118
+        },
+        "SHUFFLED": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 12,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 116934,
+          "FP": 75749,
+          "FN": 80451
+        },
+        "NAIVE_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 20,
+          "no_positive_candidate_queries_with_output": 19,
+          "TP": 99912,
+          "FP": 46834,
+          "FN": 97473
+        },
+        "MONO_ZERO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 31,
+          "TP": 117909,
+          "FP": 75252,
+          "FN": 79476
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 1,
+          "regressed": 1
+        },
+        "MONO": {
+          "rescued": 2,
+          "regressed": 1
+        },
+        "BIN": {
+          "rescued": 2,
+          "regressed": 1
+        },
+        "SHUFFLED": {
+          "rescued": 3,
+          "regressed": 1
+        },
+        "NAIVE_MEAN": {
+          "rescued": 0,
+          "regressed": 2
+        },
+        "MONO_ZERO": {
+          "rescued": 2,
+          "regressed": 1
+        }
+      }
+    },
+    "C4_seed42": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 24,
+          "positive_queries_without_correct_output": 59,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1367845,
+          "FP": 508639,
+          "FN": 138113
+        },
+        "ZERO_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 26,
+          "positive_queries_without_correct_output": 59,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1368418,
+          "FP": 507895,
+          "FN": 137540
+        },
+        "MONO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 29,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1369075,
+          "FP": 486805,
+          "FN": 136883
+        },
+        "BIN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 29,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1367866,
+          "FP": 485342,
+          "FN": 138092
+        },
+        "SHUFFLED": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 26,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1366080,
+          "FP": 511808,
+          "FN": 139878
+        },
+        "NAIVE_MEAN": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 29,
+          "positive_queries_without_correct_output": 59,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1386242,
+          "FP": 518750,
+          "FN": 119716
+        },
+        "MONO_ZERO": {
+          "queries": 466,
+          "recoverable_positive_queries": 466,
+          "positive_queries_empty": 30,
+          "positive_queries_without_correct_output": 62,
+          "no_positive_candidate_queries_with_output": 0,
+          "TP": 1370519,
+          "FP": 487579,
+          "FN": 135439
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 0,
+          "regressed": 0
+        },
+        "MONO": {
+          "rescued": 0,
+          "regressed": 3
+        },
+        "BIN": {
+          "rescued": 0,
+          "regressed": 3
+        },
+        "SHUFFLED": {
+          "rescued": 0,
+          "regressed": 3
+        },
+        "NAIVE_MEAN": {
+          "rescued": 2,
+          "regressed": 2
+        },
+        "MONO_ZERO": {
+          "rescued": 0,
+          "regressed": 3
+        }
+      }
+    },
+    "C1_seed42": {
+      "candidate_membership": {
+        "SEM_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 16,
+          "positive_queries_without_correct_output": 19,
+          "no_positive_candidate_queries_with_output": 31,
+          "TP": 110861,
+          "FP": 71059,
+          "FN": 86524
+        },
+        "ZERO_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 32,
+          "TP": 106079,
+          "FP": 70994,
+          "FN": 91306
+        },
+        "MONO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 17,
+          "positive_queries_without_correct_output": 19,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 120478,
+          "FP": 71413,
+          "FN": 76907
+        },
+        "BIN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 19,
+          "no_positive_candidate_queries_with_output": 26,
+          "TP": 119405,
+          "FP": 69965,
+          "FN": 77980
+        },
+        "SHUFFLED": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 17,
+          "no_positive_candidate_queries_with_output": 29,
+          "TP": 122831,
+          "FP": 71049,
+          "FN": 74554
+        },
+        "NAIVE_MEAN": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 14,
+          "positive_queries_without_correct_output": 19,
+          "no_positive_candidate_queries_with_output": 19,
+          "TP": 107077,
+          "FP": 47244,
+          "FN": 90308
+        },
+        "MONO_ZERO": {
+          "queries": 425,
+          "recoverable_positive_queries": 40,
+          "positive_queries_empty": 15,
+          "positive_queries_without_correct_output": 16,
+          "no_positive_candidate_queries_with_output": 30,
+          "TP": 116169,
+          "FP": 74608,
+          "FN": 81216
+        }
+      },
+      "versus_SEM_KD_retrieval": {
+        "ZERO_MEAN": {
+          "rescued": 3,
+          "regressed": 0
+        },
+        "MONO": {
+          "rescued": 0,
+          "regressed": 0
+        },
+        "BIN": {
+          "rescued": 0,
+          "regressed": 0
+        },
+        "SHUFFLED": {
+          "rescued": 2,
+          "regressed": 0
+        },
+        "NAIVE_MEAN": {
+          "rescued": 1,
+          "regressed": 1
+        },
+        "MONO_ZERO": {
+          "rescued": 3,
+          "regressed": 0
+        }
+      }
+    }
+  },
+  "postseal_GT_only": true,
+  "query_retrieval_is_any_IoU_positive_row_not_full_tracking": true,
+  "positive_presence_means_recoverable_candidate_not_complete_GT": true,
+  "not_additive_HOTA_decomposition": true
+}
+教师回答交叉预测（不是GT准确率，不替代HOTA；BIN另含分箱/平滑差异，不能把差值全归单调约束）：
+{
+  "pairs": {
+    "C4": {
+      "current_teacher_rows_with_common_crossfit_models": 481,
+      "heldout_teacher_soft_CE": {
+        "PAVA": 0.5471392598060643,
+        "BIN": 0.559082406376388,
+        "SHUFFLED": 0.6876556189850435,
+        "CONSTANT": 0.6725575697429441
+      },
+      "replayed_MONO_ONLY_maximum_probability_error": 0.0
+    },
+    "C1": {
+      "current_teacher_rows_with_common_crossfit_models": 1103,
+      "heldout_teacher_soft_CE": {
+        "PAVA": 0.35154451822882915,
+        "BIN": 0.3568991153968517,
+        "SHUFFLED": 0.35276848515675785,
+        "CONSTANT": 0.40769412523462334
+      },
+      "replayed_MONO_ONLY_maximum_probability_error": 0.0
+    }
+  },
+  "teacher_targets_not_GT": true,
+  "not_a_RMOT_accuracy_or_independent_validation_claim": true,
+  "identical_teacher_maps_across_neural_seeds_only_seed0_replayed": true,
+  "BIN_has_fixed_bins_and_smoothing_so_not_a_single_constraint_monotonicity_ablation": true
+}
+拟合收据：
+{
+  "C4_seed0": {
+    "ZERO": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0011442601680755615,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0017982423305511475,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.004953866358846426,
+      "maximum_steps": 7600,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  },
+  "C1_seed0": {
+    "ZERO": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0005618482828140259,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0002831071615219116,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.001026240992359817,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  },
+  "C4_seed17": {
+    "ZERO": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0018216073513031006,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0011700093746185303,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0024518987629562616,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  },
+  "C1_seed17": {
+    "ZERO": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0025824159383773804,
+      "maximum_steps": 4100,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.00048206746578216553,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0028017195872962475,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  },
+  "C4_seed42": {
+    "ZERO": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.001070171594619751,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0013219118118286133,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 45,
+      "maximum_teacher_KL": 0.0024726649280637503,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  },
+  "C1_seed42": {
+    "ZERO": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.00025004148483276367,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "SEM": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0006149113178253174,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    },
+    "HARD": {
+      "fitted_videos": 25,
+      "maximum_teacher_KL": 0.0014464136911556125,
+      "maximum_steps": 4000,
+      "videos_exceeding_registered_KL_tolerance": 0
+    }
+  }
+}
+若新模块不优于同输入强KD或仅某个数量投影为正，就保留失败并继续研究。此报告与队列成功不会关闭Goal。
+新精度不与旧3512秒拼接；若保留最终方法，仍须对应的真实单方法冷启动测量。

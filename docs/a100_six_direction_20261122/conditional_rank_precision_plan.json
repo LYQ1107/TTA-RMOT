@@ -1,0 +1,14 @@
+{
+  "study": "SEALED_PROBABILITY_COUNTMATCHED_RANK_PRECISION",
+  "source_sha256": "7988292a60add0ded7bae54736d268c880bff62daab1373c6a223945282d5684",
+  "selection": "All six first-completed seed0 conditions, fixed before own cutoff results and before any unified-study HOTA.",
+  "comparators": "FULL_FINAL and ordinary FRAME/FLAT soft/hard FINAL/MEAN; both count donors and own-count checks.",
+  "purpose": "Check actual saved float32 probability ties at cross-CountMatched cutoffs before interpreting ranking effects.",
+  "no_GT_or_new_predictions_or_training_or_teacher": true,
+  "nontrivial_cutoff": "0 < donor selected count < number of frame candidates",
+  "exact_tie": "rank score at n-1 equals rank score at n in descending order; no tolerance",
+  "own_count_invariant": "Threshold-generated own count cannot split an equal-score group.",
+  "original_outputs_and_active_numerical_sources_unchanged": true,
+  "limitations": "This is seed0 precision coverage only; ties do not quantify GT errors or recover discarded logit ordering.",
+  "goal_status": "ACTIVE"
+}

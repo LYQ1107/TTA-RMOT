@@ -1,0 +1,19 @@
+{
+  "frozen_before_count_evaluation": true,
+  "primary": "COHORT",
+  "baselines": [
+    "SOFT_KD_400",
+    "SOFT_KD_4000",
+    "SOFT_KD",
+    "HARD_KD_400",
+    "HARD_KD_4000",
+    "HARD_KD"
+  ],
+  "counts_from_methods_only": true,
+  "matched_counts_per_query_frame": true,
+  "GT_not_used_in_generation": true,
+  "count_projection": "descending score then source margin then original ID; no reapplication of exclusivity",
+  "reported_primary": "COVER both C4 and C1; UNIFORM independently reported",
+  "all_results_including_negative": true,
+  "repeated_development_data_not_independent_validation": true
+}

@@ -1,52 +1,128 @@
 # AGENTS.md
 
-## 通用原则
+## 项目与用户约定
 
-1. 我们不是一篇安全攻防论文，你有权力进行校验，但是禁止禁止禁止过度防御。
-2. 禁止为反复出现的基本不可能发生的 case 写防御。
-3. 需要 rubric 的地方不要过度机械化。
-4. 每次任务开始先确认项目身份：当前项目根目录必须是
-   `/data3/liuyeqiang/FlexHook-TTA`（2026-11-20 从 A800 的
-   `/data2/user/FlexHook-TTA` 恢复到 A100），Git remote 必须为 `LYQ1107/TTA-RMOT`。
-   本项目与 `/data2/user/LocateMOT`、`/data2/user/LocateMOT_GroundJEV` 是不同任务；
-   继承的旧文档与代码仅作来源追踪，不从本任务执行其训练命令。若收到的任务/附件指向
-   LocateMOT / GroundJEV 或其它仓库，先提醒用户“这是 TTA-RMOT 任务吗”，避免复制错任务。
-5. A100 恢复记录见 `docs/A100_RESTORE_20261120.md`。大型数据、checkpoint、历史结果
-   保留在 `/data3/liuyeqiang/nas/A800`；`assets/` 和 `results/` 提供本机入口。
-   历史脚本和封存 JSON 内的 `/dataN/user/` 是 A800 原路径，重启实验前按恢复清单适配，
-   不直接执行旧启动队列。旧 v8P 的 66 项正式评测已封存；A100新实证见
-   `docs/A100_三阶段实验完整报告_20261120.txt` 和 `docs/a100_three_stage_20261120/`。
-   LoRA独立增量的区间跨0，固定重算数量的排序差为负；600秒冷启动没有教师反馈。
-   不将这轮工程/实验完成写成LoRA语义贡献或主动选题最优已获证明。
-6. 当前分支按用户要求以轻量历史发布，代码与重要实验记录须小于100,000,000字节。
-   大型checkpoint、原始数据和历史归档留NAS；本轮新回答、完整预测、LoRA状态及日志
-   保存在本地`a100_runs`，不进入Git；只精选小型收据、统计和图表进入docs。
-   发布前运行 tools/check_publication_size.py；NAS清单和历史重建说明见
-   docs/LIGHTWEIGHT_BRANCH_20261120.md，不恢复旧分片上传例外。
+1. 我们不是一篇安全攻防论文。只做结果可信所必需的校验，禁止过度防御、为基本不可能的情况堆测试、把主要精力花在hash/格式/CI而不做研究。
+2. 每次任务先确认根目录 `/data3/liuyeqiang/FlexHook-TTA`，remote `LYQ1107/TTA-RMOT`。这是从A800恢复的TTA-RMOT，不是LocateMOT或GroundJEV；其它项目命令不能照抄。
+3. 用户最新明确范围：沿用官方固定候选框和Track ID，只研究跨域指代适配模块。McByte默认检测器有SportsMOT预训练，但具体候选生成权重未找回；不冒称整套前端source-only，也不擅自重建检测器。
+4. 适配只用目标图片、任务查询、冻结候选和冻结Qwen指导。目标人工GT禁止参与训练、选题及自动阈值/检查点选择，只在方案固定、所有本研究输出封存后，由隔离评估/诊断进程读取。
+5. 用户没有未使用新划分。C4、C1等全是开发数据；多轮开发后的区间只能是描述性证据，不能写成独立盲测或泛化定理。当前视频转导，过去/当前视频前缀可用，未来回答不可用；不称逐帧在线。
+6. 用户科研Goal的验收目标是人类视觉方式与经典算法启发的跨域RMOT，对充分、同信息/同问答/同预算的强普通教师蒸馏有可靠改善，各保留模块贡献明确，并有配套真实成本。不能因几次测试、某个方向涨分、队列/报告完成而结项；负结果如实保留，不保证必然正结果。
+7. 只用GPU0/1/2/3，分配前做一次预检，不影响其它任务；不使用4..9。NAS `/data3/liuyeqiang/nas/A800` 只读，历史results不覆盖。大数据/权重留NAS，新实验写本地 `a100_runs`；部分已完成数据和新CPU研究由原路径软链到本机 `/var/tmp/liuyeqiang-tta-rmot-a100-20261122`，不是NAS写入。
+8. 不启动旧80队列、废弃v9或重复封存v8P66。A100恢复及旧三阶段见docs/A100_RESTORE_20261120.md和docs/A100_三阶段实验完整报告_20261120.txt。
+9. 用户已授权正常Git推送。必要代码、TXT、精选聚合收据进入Git，原始QA/特征/预测/权重不入Git；快照和可达对象必须均<100,000,000字节，发布前运行tools/check_publication_size.py。不得force push或虚构PR。原研究分支已推送到8bc165f。此前轻量分支codex/visual-classical-evidence-20261122保留4b8e2c0；新证据使其正常追加的可达体积100,534,621超过上限，因此本轮从f915e494保留完整当前代码树另建codex/rmot-three-principles-six-settings-20261122，正常推送新分支，不改旧分支历史、不checkout旧文件。废弃v7逐查询CSV只移出Git索引，NAS原文不变，恢复入口docs/legacy_archives/redesign_v7_per_query_decisions.txt。当前HEAD以git为准，新增结果每次重核体积。
 
-## 研究执行原则
+## 当前工作状态（2026-11-22）
 
-1. 先阅读代码 -> 写简短研究计划 -> 开始实现和实验，不要长时间停留在文档规划。
-2. 仅做保证数值结果可信所必需的 sanity checks；不要把主要精力用于单元测试
-   覆盖率、hash、格式化、CI、异常输入防御等。
-3. 维护 `research_log.md`，简洁记录：实验假设、失败现象、原因判断、修改内容、
-   结果变化、是否保留。
+- 最新主18/18原始条件已封存，当前数量对照生成/GT0。唯一77009及原四控制器不变。原coarse三个已登记worker在主pending清空后用释放卡提前完成C1/C2/C3seed0（74视频/148fit/15raw），原coarse控制器自动接收并继续，数值源码/条件锁/GT屏障未改；全部早启工具66638/54379/13506已exit0，不再轮询。完整444前缀/5328fit收据全部原门槛通过，4908实际/420复用、无扩宽；scripts/a100_conditional_learning_cost.py已实际执行35843exit0。拟合阶段总和35155.378s覆盖全部学习器，不是单方法GPU/冷成本。新增TXT《经典理论与现有学习机制的边界_20261123》说明profile核心为已有列表KL思想，DIRECT_PROFILE是同目标普通对手；948原句最长13/19/15token均未截断，无需为不存在的截断加文本模块。新科学文件待实际100MB gate后发布，保留旧分支及全部既有科学提供者。
+- 最新研究进展以本条为准：旧I1已付证据传递诊断完成，scripts/a100_observation_evidence_transfer_diagnose.py；全部六设置/4策略/3种子/2解码，792混淆表完整数值/类型可从公开整数计数精确复原。DESIGN_MEAN在所有六设置三种子已问锚点上修正教师错误多于引入；C2/C5均值压缩净多84/88错误，四其它设置每袋单回答不能检验压缩。不是teacher纯语义准确率/新HOTA/因果分解。TXT《已付教师证据的压缩与泛化诊断_20261123》，新结果不得被用于改活跃配方。主14/18、GT0，唯一77009；C2s42最后0019到10臂、C4到11/45、C5到2/4、C6到1/25。32fb780cbbe6b9eb9cc31441a8da845a66b1a049已实际100MB gate：snapshot98747013/reachable99985368，仅14632B余量，下一科学提交须先测新轻量分支保留原refs/完整当前树/所有负结果，不要提交状态或改已发布提供者。
+- 2026-11-23最新补充：0577af6f30a302861105306dc946acba2233ad24已正常推送/核验，snapshot98622742/reachable99796306（仅203694B余量）。新增统计decoder支持parents_reference及share_identical_parent_groups；只能对新未发布统计在share_identical_statistics之后调用。私有I1副本828记录值/类型与288效应完全相同，1159497→1009072B，11已发布提供者hash不变；public parent_group_sharing_controls.json。不可重写现有科学提供者，不要仅为状态重复提交。主13/18、GT0，C1第三种子完成，唯一77009及四控制器不变。用户最新纠正继续有效：经典思想必须落在任务变量、假设、学习目标和可辨识性，不把算法后处理/改名当三项创新。
+- 最新主12/18、GT0，唯一77009/PID2468773；4科学控制器仍2461922/23/24/25。完整cache592文件/27944801906B已PASS，aggregate d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8，2868.369s共享准备不算单方法冷成本；原65732已exit0，不再轮询。12已完成条件的296视频/3552fit收据全部原门槛通过、3272实际fit、280复用（非18条件最终验收/非GT精度）；私有sup/completed_twelve_condition_fit_audit_20261123.json。交互复算及同数量预定描述已提交c356f2c，完整缓存收据09d5eccb51823ccb7c091f86313d487c7d1454a1已远端核验；snapshot98618582/reachable99715930，余量很小，完整3402统计发布必须先实测精确共享/体积，必要时保留旧分支另建轻量历史，绝不force/删负结果或改已发布统计提供者。剩余主要工作是完整质量+模块+公平logit+真实冷成本，Goal未达成。
+- 独立统计补齐：scripts/a100_six_setting_statistics_reproduce.py现检查原登记四臂交互的每seed/均值、父视频一致及无CI约定；它不在任何活跃数值source hash内。合成12行正控max2.84e-14，原复算器会放过错误交互，新版拒绝5种错误，public interaction_reproduction_controls.json明确synthetic/0真实GT或质量读取。另预先固定conditional_interaction_decompose.py及plan，仅全主1692评估聚合结束后，比较raw四臂与已有FULL同数量四臂的描述性差异，0新预测/训练；不是唯一因果数量分解，structured comparator量化平局尚未核清，不能叫纯语义证据。当前主8/18、GT0、cache496/592，唯一77009不变；以上不改变原主方法或原raw交互无CI约定。
+- 最新仅观察77009/PID2468773：45577/2462047观察进程已收到SIGTERM并确认退出143，四实验控制器和缓存进程仍存活，原因未知；只恢复观察，0实验重启。最新主7/18、GT0，C3s17到36/45、C2s17最后0019六臂通过，cache359/592仍准备。代码与完整比较元数据已正常推送a40103d8df28317a67da85b3432dfd4fb97b2a11，snapshot98604564/reachable99432247；后续3402条main/coarse/generic/precision统计需独立复算/新行精确共享/实际100MB gate，旧科学提供者不改。两个新登记只追加从已冻结Python CONTRASTS导出的分析字段，原字段/学习/比较均不变，可用原NumPy复算器。缓存数值工具65732可留到完成回收；27830交接已成功退出。
+- SIGBUS现场恢复后以本条为准：唯一观察45577/PID2462047；旧65131/2431876及提前启动的2461810都明确退出1，不再使用。原main2409934 worker-7后四控制器均terminal；已用原数值源码不变的显式缓存I/O入口续跑，新primary2461922/coarse2461923/generic2461924/precision2461925。6个seed0完整条件及seed17有效前缀18/3/27/13都保留，未封存3视频数组仅移到SIX/recovery_SIGBUS_20261123。45577已确认C1s17从18推进20，GT仍0。历史特征缓存2460256/数值handle65732正复制592文件27.94GB，逐文件源读hash=独立本地hash且本地只读；每视频4文件verified才进入原ObservationVideo。全缓存尚未完成，不能把它当单方法冷成本；图片/权重/NAS不动。交接27830已exit0：首C1视频610929锚点值+139392抽样dense输入NAS/local逐值全等，非全缓存完成声明。资源盘/配额/可用内存正常，fresh NAS读取正常，SIGBUS唯一根因未证实；新入口faulthandler。所有13科学源码hash保持原登记，无损失/参数变更，勿改活跃wrapper/cache源码。
+- 实际排名公平性问题已核实并安排修复：63164完成exit0(657.617s)。六seed0的FRAME_HARD在FULL数量截断平局比例12.23/7.00/8.51/9.60/.176/4.48%，FLAT_HARD为7.54/.370/6.48/10.43/.099/2.18%；FULL按这8普通donor数量截断均0平局。不能将一侧概率0/1压缩当语义排序收益；自有count不切自己同分组。新2457963 scripts/a100_conditional_logit_precision.py已固定/排队：等generic2453822全部18GPU释放才用0..3；重放同7原recipe(4普通、FULL、2coarse)，复用generic当时真实logits，不加QA/GT。288raw+828count=1116自有、1134含旧FULL参照统计；logit排序/float64均值odds，训练漂移与量化变化分记。原main/coarse/generic数值不变、不重启；唯一65131动态registry已收4个研究，前台数值作业已清空。
+- 新共享约束纯消融2453822已登记并启动等待：scripts/a100_conditional_shared_control.py，待coarse2413456全部18GPU完成且active空才用0..3。LOCAL_TWO_PROFILE同输入/同DESIGN/同profile及曝光/充分fit，仅第一因子允许current依赖；41250参数对共享41218，多32系数，原共享函数嵌入误差2.22e-16。18条件36raw+126counts=162自有，180含共享FULL统计；全自有+主1692封存才本项GT。用进程内新增recipe/原CountMatched逻辑，不改活跃源数值。唯一观察65131已动态登记新行；精度审计63164仍前台活跃，勿重复。
+- 新只读数值作业23909/30586均完成exit0，勿重启。C2最后0019共享门median.999953、85.52%>.99、局部r median.1601，固定去门仅1.18%锚点改决定；C1反而r近1/门主导，不能解释因子为已识别语义。C2状态常数MSE下界.00705010，FRAMEsoft .00122926/FULL .00076080均使用状态；九头102强反转袋内都有两侧预测，但未逐状态核方向。response_graph全部592完成(50.453s)：DESIGN交互维度C1..6=2371/19569/2140/2132/19574/2380，全有环；不是teacher错误率/新学习/质量结论。C3维度比uniform高却I1 HOTA低，代理不保证下游。主六设置最近5/18、GT0，只读唯一65131观察。
+- 最新唯一观察器65131/PID2431876（sup/wait_registered_research_learning_20261123.py），旧58872/PID2366032明确只停止观察器并已退出143后才新启，0实验重启/0数值改动。新增active_learning_stages显示当前video/last_arm，后续以此handle观察，不再用58872。主2409934继续0..3；coarse2413456等主GPU阶段释放。
+- 新无GT机制诊断：完成C1s0 25视频全部300份fit门槛通过/275实际fit。只重放最后0097自己的头，FULL共享门median.0559/std.337，而局部r median.99996；门确实参与，但不能称已学状态/真实存在性。教师拟合分层检查3047训练目标，排除11平局，FRAME_SOFT与teacher符号不一致27/3036、FULL16/3036、FLAT_HARD6/3036；高teacherYes229中各2/1，不能用整体gate声称逐例全会，更不能把ordinary说成未训练好。未读此新研究GT、未改模型。
+- 关键理论假设审计已完成：I1全828封存/官评后对官方原始(frame,ID)集合检查、74视频ID框全等。原固定共识解析KITTI包含关系6482/8653不合GT集合，同图2001/2564 GT不同；去歧义备注仍严重。Sports49/265包含失败、同图159/243不同；Dance4个非空同图对全不同。例子显示漏掉Tshirt/shirt、dark-side team、opposite/left等修饰。不能把此前相对错误解析的raw概率差归为teacher逻辑错率。当前模型不消费解析，保留完整原句；禁止用GT见证生成适配掩码或硬绑定这些图。
+- I1完整828官评/288效应已全部结束，独立NumPy复算在新无损压缩前后均PASS(1.42e-14)。主DESIGN_MEAN C1..6=35.608/37.854/68.157/68.745/38.637/36.178；UNIFORM_MEAN=34.044/36.159/69.381/69.227/37.389/36.426。C3对uniform=-1.224 CI[-1.883,-.477]，其余不是全胜；DESIGN=COVERAGE在四设置完全相同，KITTI增状态配粗均值反而-.437/-.047。双方CountMatched除C1外正负交叉，不能称排序支配。完整TXT为docs/TTA_RMOT_六设置主动观察实证与理论修正_20261123.txt。不要据此改仍活跃FULL_FINAL或称Goal完成。
+- I1封存后的显式事后候选成员诊断已完成（scripts/a100_observation_policy_postseal_diagnose.py）：C4design正确袋397/466对uniform387，却未超过其HOTA；C3 398对387同样不自动胜；C1 40可恢复查询全部问到正确袋仍有5零输出。KITTI为原已核验次序的数值成员，不作新真实ID/一对一oracle；CLIP只查名义锚点，不叫teacherGT准确率。该脚本不改模型或问题，当前活跃研究不消费这些GT统计。新I1统计6109502→1159497bytes，只共享值/类型完全相同的父行；原文SIX/analysis/observation_policy_publication_row_sharing/original，提供者不重写。
+- 文本V3/监督范围审计完整成功：query_scope_teacher_receipt.json（948文本1896生成、624共识、580共同主体外观、33歧义，9687.278s真实成本/75309forward）；scoped_supervision_audit_receipt.json（148视频、0GT/0新GPU）。KITTI同视觉包含关系raw概率正残差约46%但不是GT错率；Sports约20%且严格正含小误差；数十万相关配对不是独立样本。当前模型不消费解析；未来若用须计准备成本并给普通同解析，不能把共识/原始概率当真值。
+- 理论范围已进一步澄清：1/m袋权重对“均匀复制某袋整组观察”不变；不能推出任意只复制异质袋一个成员也不变。新query_profile_duplication_scope.json给出反例（KL .196314→.161147，袋质量2.5→2.8），旧检查只复制单观察袋。准确request_id去重是独立预处理；不称逆倾向无偏。只修理论说明/补充独立数学审计，没有改活跃query_profile或训练helper。最新已推送4a6736f，snapshot96474347/reachable96637026，后续聚合另经复算/体积gate发布。
+- 强同信息轨迹均值普通补充2413456已排队，scripts/a100_conditional_coarse_baseline.py；等主研究18GPU条件全部释放才用0..3。同原3观察的PCD均值、sqrt(mean颜色)、有效比例/几何时间，软硬充分头/早晚均值/原teacher回填共5输出；90raw+288count=378自有，+18共享primary=396统计。自己和主1692全封存才本补充GT；未看主分数固定，不改活跃数值。它是同信息均值对手，不能声称直接复用旧含源先验的数值。当前主研究C1前两视频全部12臂拟合gate通过，仅工程收据、无中途HOTA读取。
+- 最新实际执行：统一条件观测六设置研究2409934（scripts/a100_conditional_six_setting.py），18条件/12学习器/432raw+1260双向数量=1692，全部封存后本项GT。主FULL_FINAL预先固定。充分0源logit逐帧/平铺软硬KD、同上下文直接模型、平衡/偏好/条件结构消融及其它3策略的FULL；当前/过去归一化及所有模型公平warm-start。源码/假设已登记冻结，别改活跃数值helper。新PCD/RGB版本全模型同输入重训，CLIP锚点与实际多视角原始混合投影边界明确，完整质量尚未完成。原有强轨迹均值对手仍须对照，不以只赢局部头结项。
+- 共享逐观察RGB2406266（scripts/a100_dense_rgb_collect.py），74视频/517686候选观察/54496图像、4CPU线程，所有6400旧锚点做逐值一致核验，全部学习器共享；原始派生数组只本地，NAS不变/0GT/0QA/0神经前向。这是准备成本，不是新创新/冷部署。
+- 新鲜A100三状态PCD2376048已全部完成：6设置148视频、三点均值148/148全部与旧A100逐值相同。历史NAS完整PCD的batch64隔离版本仍不等同该新batch8，只能同输入重训公平对照。
+- 五头pilot2386277已完成5/5教师与本目标gate，全部4000步，无LBFGS/扩宽。只是可训练性，未产HOTA；其轨迹内相对目标不能冒充现在的查询级目标。输入交接验证C2/0005共20595168个dense/anchor输入值全等；含缺失padding的四结构坐标变换误差<=2.3e-16。唯一观察仍58872/PID2366032，动态registry已登记新增两控制器。
+- 新增真实源状态采集2376048，scripts/a100_anchor_pcd_collect.py，全部六设置/148视频、保留原3源观察与上下文、batch8，max3空闲0..3卡（Qwen占一张），原始FP16约863MB留本地。C1全部25和C2全部4已经完成，当前逐值mean全部与旧A100完全相同；不等于其它尚未完成设置也已同等核验。后续模型与普通对照均用同一状态输入并按有效前缀核验是否能复用旧强普通输出。NAS/候选ID不变，不跑32刷新/LoRA。
+- 新可训练原型flex_uda/active/conditional_observation.py及anchor_state_inputs.py已冻结给2386277的C2/0005五头优化pilot（scripts/a100_conditional_prefix_pilot.py）。1891真实teacher目标、120个同袋同视角不同状态组，774维单状态/3099维普通flat；0GT/0HOTA/无完整解码。等源采集pending全部分配且有未保留空闲GPU才启动。不要为优化改正在等待/运行的sourcehash recipe；五头完成不算科学贡献。
+- 新查询级相对目标query_profile.py及query_profile_support_audit.json：轨迹内profile在四个设置无重复状态信号，故全方法须进一步比较同video/query/实际view的不同候选；置信度按每袋观察数平衡，至少一个teacherYes才构造偏好，全No不叫空查询。DESIGN可支持组C1..6=98/828/429/433/827/97，均跨多个候选；这是教师反馈可用性，不是GT正确率。共同预测尺度/重复观察不变性数学通过，不宣称完整联合风险、教师噪声或HOTA保证。该查询级目标尚未进入六设置质量研究，当前pilot仍用较小的轨迹内目标。
+- 新说明docs/TTA_RMOT_条件观测学习原型与理论边界_20261123.txt。候选TrackID作为袋，a是袋某处有整句匹配的潜在支持，不是已识别的衣服属性或真实身份；q=a*r的No不拆原子负标签，但优化仍可能学错。mean/max、MIL和条件分布不是创新本身。最终要比同状态/RGB/结构信息的充分软/硬/直接上下文对手强，并过模块/交互/双向数量和实际成本。唯一观察仍58872/PID2366032。
+- 最新观察器58872/PID2366032，原20149、56634因已记录的文本格式失败退出1，2361710因依赖启动竞态退出1，均不再使用。registry已移出失败active行并完整归档。I1全部828输出已封存，2337463正常官评中，不读中途质量选主方法。文本v3控制2368289、监督审计v3控制2368290已登记并启动；v3等同严格decoder/首8至少4，使用lm-format-enforcer0.11.3约束原schema枚举及原句literalspan。依赖只装/var/tmp/.../query_scope_vendor_v3并由该进程PYTHONPATH启用，共享.venv/torch/transformers未改。真实Qwen tokenizer311步正例与两个非法类别/非字面span负控PASS，尚非GPU生成或语义准确率证明。v1/v2各8条生成都失败原格式门槛，raw/source/log保留，v2load473.710s/457实际forward已记收据；不得把它们当可用语义监督或隐藏成本。
+- 新teacher-coarsening审计24setting-policy完成：DESIGN在C2/C5最优常数分数相对原始回答的Bernoulli excess=.018712/.019044 nats/request，来自不同requested-anchor；其它4为0因为没有重复状态/视角，并非教师完美。它量化平均丢弃的教师变化，不是真语义收益。历史PCD三锚点C2/0005索引恢复完成，但均值与当前A100不同(maxabs.00260448,meanabs3.79844e-6,96.60345%exact)；旧batch64/query-isolation与当前batch8不同。不得称逐字一致或用旧头比较新输入归因；后续如用历史锚点则所有普通对照同输入重训，或另取A100新锚点（尚未启动）。
+- 最新I1进度：18个GPU条件全完成，1776份policy-prefix收据全过KL.005，1356实际普通fit、12次同64宽继续优化（实际没有扩宽）。12个真实末prefix保存头CPU独立核验PASS，KL对GPU最大差2.71635e-9，见observation_policy_fit_receipt_audit.json及独立脚本。当前生成CountMatched，828全封存前禁止本项GT；text-only解析已进入独立模型加载，不能重复启动。以唯一observer20149的后续状态为准。
+- 11月23日新增：同冻结2BQwen的text-only查询结构准备2352422已登记，等待I1全部18个GPU条件释放后用一个空闲0..3卡。948唯一任务文本/两个固定提示1896次生成；不看图片/QA/预测/GT。scripts/a100_query_scope_teacher.py及query_scope/prompt源码已冻结，原子因素尚未学得、共识不是真值，普通与后续结构化KD必须拿到同一结构并只读当前/过去查询。不要为等待而重复启动。
+- 11月23日图片可观测性诊断2354561已完成：74视频/2166给定ID/6400观察/4588图片，148个来源均值重构误差0。逐锚点外观保留本地，收据anchor_observability_receipt.json；同ID颜色变化不能当真实串人标签，三锚点不能测全时序。新普通对照须获得相同逐锚点输入。新增scoped-supervision只读审计2356540等待上述固定文本结果，随后148setting-video的DESIGN自己QA做完全同图片/非查询上下文的属性对比与子句约束；没有新伪原子标签、没有新神经头或HOTA贡献声明。
+- 最新理论与三候选验收说明docs/TTA_RMOT_三个候选创新的任务建模与验收_20261123.txt。用户要求借鉴经典思想为任务建模和学习提供理论支撑，不是给判断套现成校准算法；当前三个候选仍未统一验收。唯一观察20149/PID2316456与动态registry不变，text/监督审计都已加入，不要新建第二观察器。
+- 11月23日最新调度：2320838已完成71153真实Qwen输入并集采集；四策略各55019逻辑预算的实际回答已封存，收据observation_design_collection_receipt.json。I1质量现在由2337463接管（scripts/a100_observation_policy_adopt.py，执行私有同字节副本），保留原三条真实训练进程2333162/2333163/2333164，继续0..3的18条件/828屏障。旧2330579只替换控制器；一个被condition.lock阻塞的重复C1启动器2336033在进入优化前清理；所有真正模型/计时0重启。早启动器2333029仍只等待自己的3条件，后续以唯一observer20149/PID2316456及registry为准。禁止再启第二观察器或重复同条件。
+- 普通容量收据元数据已独立核验：helper最终KL/width是实际值，但与旧fit字典合并时CE/entropy/architecture文字留旧；这些旧字段没用于收敛gate或HOTA。scripts/a100_capacity_loss_receipt_audit.py对5个实际checkpointCPU前向重算，全部仍过KL.005，CPU/GPU最大误差1.08046e-9；补充capacity_loss_receipt_audit.json，旧日志/权重/预测/GT均不重写。当前I1的fit_capacity.py及所有numericalhelpers源码继续冻结，不能为修元数据改掉正在执行的recipe；新I1里如触发扩宽，应按最终KL/width解释，继承CE不算新最终CE，后续可补对账。
+- 截至2026-11-23：容量补充162已全部官评，180统计/36效应压缩前后独立复算PASS；444个普通前缀全过原KL.005。参照C2/C5比充分拟合同回退普通头+1.517156/+1.282209，双向CountMatched均正但KITTI仅4视频无总体CI；仍落后最强RAW_RGB/RAW_MEAN，Goal未完成。C2更充分拟合反而HOTA下降，不泛化成所有蒸馏坏。参照C2seed0自己也有一个参照头前缀未达门槛，负分解效应不能独立排除优化影响。
+- I1后续质量已登记并排队2330579，scripts/a100_observation_design_quality.py，等待2320838的71153真实输入全完成后自动四GPU拟合/828输出官评；唯一观察20149/PID2316456不变。四策略各同预算/同自然768D普通学习器，FINAL、固定早期/充分最终MEAN、直接教师回填12方法，主DESIGN_MEAN；18条件216raw+612counts全封存再本项GT。C1真实交接索引检查PASS/GT0。该粗粒度学习器不验证状态辨识交互，也不替代完整I2/I3同QA强软/硬蒸馏消融，不把该I1组件队列当Goal完成。源码及prereg已冻结，不因看到结果改主策略/decoder。
+- 新理论说明docs/TTA_RMOT_经典思想如何支撑任务建模_20261122.txt及合成解析反例已发布ad18addcb078e543a6ff7b78e7e03edfc04f3f29（快照95870852/可达95131093bytes）；最新HEAD以Git为准。经典链式法则不是新定理，需任务观测/机制贡献，不能把教师各提示数字当校准联合概率。当前真实采集只用原prompts，不临时改STATE或追加原子问题。
+- 本轮发布原分支prospective可达体积100116608超过100MB；保留原codex/rmot-three-principles-six-settings-20261122@06145d2与旧全部提交，使用f915e494为父提交、保留当前完整代码/结果树另建codex/rmot-observation-theory-six-settings-20261122，正常推送，不force、不checkout/reset历史文件。两份旧pretty统计仅删除字符串外排版空白，全部token/值/数值类型逐字一致，原文在06145d2和本机备份，详见docs/legacy_archives/whitespace_only_statistics_20261122.json；没有重编码或丢掉科学统计，NAS不变。后续只按实际体积发布。
+- 最新执行：完整容量补充的444个普通视频前缀均达到原teacherKL<=.005（5个失败前缀已修好，3个最终前缀需256宽），162输出全封存并官评中，2316450。新的四策略全六设置真实教师采集2320838已启动，scripts/a100_observation_design_collect.py；74个目标视频组，4策略各55019逻辑请求/相同逐query配额与视角，实际输入并集71153。冻结原提示、不推广STATE、每策略只取自己请求的回答；四GPU分片0..3，NAS只读，本地原始QA不上Git。这是共享预付证据准备，非单策略部署成本，也非I1质量已过。唯一观察仍20149/PID2316456，登记continuation/registry；不要新建并发观察器。
+- 最新覆盖下方旧进度：有界450、参照学习450、同容量普通补充162均完成；新增1080条统计/258效应压缩前后全复算PASS，原始900条/210效应也保留。新TXT为docs/TTA_RMOT_对象关系学习与普通蒸馏充分性_20261122.txt。参照主方法C2/C5为33.3671/35.9672，对粗模型+.7839/+1.2448；但目标分解消融-.2634/-.6086，不支持简单加性logit目标分解。原RAW_RGB/RAW_MEAN强普通仍更高，不能把击败较弱逐帧头当验收。
+- 同容量优化仍有5个C2前缀KL未达.005，C5全部达标；实际float32输入无精确冲突，下界0不保证64头可拟合。新teacher-only最难20955例前缀通过256宽普通头达到KL.0049274（GPU优化18.717s，非冷部署），无GT/新输入。完整容量补充控制器2316450、sole observer20149/PID2316456，scripts/a100_object_reference_capacity.py；只修剩余失败前缀、已过门槛输出逐字复用，162输出全封存才本项GT，不改旧主方法或过去视频头。任何新观察器以前述进程终止和continuation登记为准，不能重复。
+- 新查询因素审计只读任务文本：Dance425条须审dancing角色/动作范围；KITTI仅17条被旧语法完全解析，主要是解析器能力边界，不能称845条标签坏或任务不可学。整句A且R的No不能识别哪项为假；共同出现的因素可按当前查询族合并，不盲目拆问题。候选共享因素方法尚未实现，不能把布尔逻辑或矩阵rank本身包装为创新。
+- 最新Git发布空间：旧v8/v8P两CSV与另8个历史逐查询CSV只移出Git索引，NAS原文不变，两版本分别备份；恢复清单docs/legacy_archives/legacy_v8_query_tables.txt及legacy_raw_experiment_tables_20261122.json。当前工作树按精确已完成产物发布，禁止gitadd物理CSV把NAS文件重新加入。新3组统计共享依赖新4组payload，公开后都只读提供者，不重打包已发布数据。
+- 最新完整固定证据结果：468主研究、90同RGB普通头、90直接教师回填、162LAME均完成，900条HOTA统计/210项配对效应独立复算并在新payload无损共享后再复算，最大误差2.85e-14。主方法HOTA C1..C6为35.979/32.583/67.384/65.365/34.722/38.041；相对普通最高点约+1.616/-1.338/+1.650/+1.293/-2.107/+1.708，但对RAW_LAME C1仅+.690跨0、C6-.228跨0。Sports在FULL数量下排序胜LAME、LAME数量下反而负且CI负，不能称全局排序支配。C1外观条件效应-2.488且CI负；DS相对固定在SportsCI跨0，KITTI负。不能按GT改主方法为RAW_FULL/DS_CONTEXT。详见新六设置多视角TXT；这不是Goal完成。
+- 普通逐帧拟合充分性补充已启动，主控2291608，scripts/a100_object_reference_fit_complete.py；只补原teacherKL未达.005的合法前缀，已达门槛的输出逐字复用，保持64隐藏层/同信息/同QA。180条统计含共享primary，自己36原始+126数量=162输出；自己162和前驱450全封存后才GT，primary统计从自己byte-identicalCountSelf取，不写前驱评估路径。最后视频头只能用于自己的最后视频；其它失败前缀只用过去/当前数据重建，禁止未来头。新增helper数学测试与真实首前缀缓存集成通过；唯一观察仍67637/PID2273833，别启动第二个。
+- 新参照目标学习已实际启动：scripts/a100_object_reference.py，18条件492新GPU头fit/450原始数量输出；当前主控2273461，唯一观察67637/PID2273833。最初主控2265078的C2首视频后target变量覆盖域名，保留首视频checkpoint和另3个完整条件；全部原worker结束后仅改3处变量名，登记源码修复后续跑，已观察C2完成3/4，首视频收据逐字保持。8项数学/控制检查通过；逐证据顺序审计八前缀目标0差，故不另启重复神经研究。新普通直接逐帧首prefix达16000步仍KL.0063925>.005，输入无精确float32碰撞；输出层CPU凸优化降至.0050518仍未通过，保留原门槛，100步全头CPU诊断已将KL降至.00410485通过原门槛，但尚不是全六设置优化后质量对照；必须补齐这一普通对手，不能据未充分拟合对手宣称获胜。当前旧468和有界450仍在官评，不读未封存新研究GT。
+- 发布体积实测新源码/收据会使快照超100MB；仅从Git索引移出legacy v8逐查询CSV，恢复入口docs/legacy_archives/redesign_v8_per_query_decisions.txt。旧Git版本732710bytes和NAS版本1199315bytes并不逐字相同，两版各自完整保留，NAS绝不修改，不声称两者语义等价；当前实验不读取该CSV。
+- 三点的当前操作化名称以scope JSON和对象—关系理论TXT为准：面向覆盖和可辨识性的主动观察；分离稳定干扰与关系变化的对比证据学习；对象—状态分解下的关系化指代。不是把DS/Huber/图传播作为三项创新。新增teacher-only理论适用条件审计复现原参数，C2/C5激励组分别1275/5343、1269/4771；八前缀都有Huber二次区外残差，不可直接套用二次闭式公式或把Gram叫Fisher信息。未读新研究质量输出、未改R3/450，两个独立数学检查通过。新审计并不完成Goal。
+- 最新用户指令覆盖本文件下方的两方向结项/停止加实验说明：科研Goal重新ACTIVE，范围是C1..C6全部六个方向，要求把有根据的视觉本能/经典算法机制组合验证，并超过充分训练、同信息/同预算的普通教师蒸馏。旧C1/C4验收和31项检查仅为两方向中间证据，不代表六方向完成。不得靠削弱蒸馏或只对Native的大涨幅替代相对普通蒸馏的贡献。六方向的新统一实验已获授权，不是盲目重跑旧v8P66。
+- 用户最新术语和结构更正：称“六个跨域实验设置”，以三个候选创新点组成同一框架，在六个设置验证；不是六个独立创新或按设置分别设计方法。最新进一步纠正：学习经典算法的思想，为论文提供理论支撑，不是“用经典算法校准判断”。候选主线为覆盖与疑点共同驱动的主动观察、相关性受控的证据推理、视觉与语言关系约束下的结构化适配。必须从任务问题构造机制、明确假设与数学性质、再做模块与交互实证；不把DS/PAVA/图传播名字或经典定理当成自己的创新，不把代理损失性质写成HOTA必涨。详见docs/TTA_RMOT_视觉本能与经典思想_理论设计与实证边界_20261122.txt，里面新统一目标尚未实现，现有运行只是相关机制证据。模块贡献在适用场景和交互中验证，不要求每个模块在每个设置都单独上涨。已有C1..C6标识、历史文件名和实验数据不改，正在执行的统一矩阵继续。
+- 对象—关系新候选已从KITTI封存后表示诊断推进到实际teacher-only原型：同对象/同视角组内中心化消去固定加性偏置、非负Huber凸标量拟合、按当前框位置迁移关系。详见docs/TTA_RMOT_从经典思想到对象关系机制_理论与实验登记_20261122.txt。246条左右查询是保守适用门控，另四设置回退，不虚称普适。新450输出研究控制器2230493等待RGB阶段释放后运行，普通逐帧对手获得同1087D信息/所有query/所有问答并额外444fit；均值/置乱/参照/数量对照封存后GT。初次外部启动未脱离短命命令进程组，在写状态前退出；只修launcher为新session重启，数值/登记不变，现有GPU工作不动。唯一观察器以supervisor/research_goal_active_continuation.json为准（当前67637/PID2273833；观察器进度升级仅重启自身，未重启任何实验），后续以supervisor/research_goal_active_continuation.json和registry为准，不另启并发监视。理论性质不是质量已证，I1新观察设计尚未完成，Goal ACTIVE。
+- I1已补计划器原型flex_uda/active/observation_design.py：先付费取对象参照，再在固定动作集上权衡覆盖和对象内最大状态激励，不把共享参照差分当独立信息累加。只对固定非负权重/已付参照/单位逻辑成本的条件代理证明单调次模与贪心近似，不称全流程/真实时间/HOTA保证。3项数学与采集约束检查和C1/C2/C4真实输入计划检查已过；整套新策略的教师采集与质量对照尚未完成。C2示例同23调用：旧21对象，新18对象+5对比，明确是覆盖与激励权衡，不虚报全面覆盖优势；C4示例旧1对象/4调用，新4对象/4调用。旧固定QA研究不验证新选题。不能把原型检查、教师预测误差下降或排队完成写作三创新/六设置Goal通过。
+- 新观察全148视频x4策略清单已完成，各策略55,019逻辑请求，同预算/逐query配额/公共route；GT0/未用旧QA概率。真实输入小测试也已完成：GPU2 Qwen3-VL-2B新59前向/0cache，CROP/CLIP/FRAME_BOX实际均走通，权重SHA9a13380...与旧C2实测流一致；teacherload444.669s，服务含IO31.630s，内部forward3.237s，worker507.047s。它是四策略各29请求的共享并集采集，学生特征预付，不能当单策略部署或600秒全启动成功。原始数据本地、聚合收据在docs/a100_six_direction_20261122/observation_teacher_physical_pilot.json。
+- 新输入可观测性审计（无GT/无teacher概率）发现CLIP无显式全局位置/帧偏移；KITTI46条保守明确位置+MOTION查询，旧C2/C5只有9/4条只CLIP，不能称整个KITTI主因。旧CLIP1797/1595条全部>=2不同帧，不支持重复单帧猜测。新公共route会使运动复合查询更多只CLIP，先验证保留状态的输入再全面采集。独立state_teacher_inputs.py保留相同裁剪图像，ORIGINAL/LAST/POSITION/TIME/STATE五控制，3CPU检查+真实12问题60输入构造通过。真实GPU配对已PASS：GPU1新60/0cache、同视觉SHA及400视觉token、同冻结9a13380...，GT0；LAST已改5/12、POSITION/TIME/STATE相对LAST仅各多改1/12，均Yes→No，未证明信息独立贡献或准确率，不推广事后控制，不立即全面采集新提示。需要安慰剂/任务兼容反事实区分措辞/长度与语义信息。继续使用唯一登记观察器，不改R3/RGB/450。几何不等于世界运动，STATE若使用则普通KD同样STATE答案。
+- 无GT能力审计确认旧ln3有界关系原型无法翻转base<.25或>.75：C2约31.08..34.04%、C5约26.52..28.31%的适用观测受此限制；对应有教师跨帧翻转的query-track中仅32..41/322、74..84/438受限。不能说它锁死大多数，也不能把受限视为GT错误。原450实验保持不变，新增普通逐帧baseline仍必要；若失败可研究重新估计稳定成分的部分线性模型，而非按HOTA事后调大cap。尚未实现该新模型，不冒称3创新已成。
+- 先读代码，简短登记假设，然后实现/实验；维护research_log.md。详尽持续报告是docs/TTA_RMOT_视觉本能与经典算法_持续研究综合实证_20261122.txt，生成器scripts/a100_visual_classical_research_synthesis.py。
+- 公开目录docs/a100_visual_classical_20261121的REPRODUCE.txt、各preregistration、analysis、parent_statistics、statistical_reproduction是证据入口。原始输出a100_runs/visual_classical_20261121；不能把工程执行PASS当科学验收。
+- 自然768D无源残差普通头很强：未加权KD均值C4 67.082937/C1 32.074099；固定局部图+PAVA为67.638744/35.731536。旧47分和新67分条件不同，不把差值归为某创新贡献。
+- 未加权最终配方四份实际冷启动完成，4526真实问答/0缓存，特征、回答、头、预测与质量研究0差。seed0 C4 66.964470→67.661313、C1 31.658042→35.696180。单方法wall C4 KD3761.595/J4437.921s，C1 KD3146.512/J3616.019s。J承担真实RGB成本，不称提速/免费/全预算最优。
+- 强普通置信度加权同样使用w=1+3|2p-1|。420fit充分训练，均4000步、KL<=.005。加权普通均值C4 67.102356/C1 32.259906；旧未加权J对它C4+.536388但parent+seedCI[-.010093,1.127430]跨0，不能换窄区间宣布胜出。
+- SAME_WEIGHTED_HEAD78已完成并独立复算：共享完全同一加权头的J为C4 67.580033/C1 35.727657；对KD+.477677/+3.467750，C4CI[-.069102,1.060519]跨0，主验收失败。原有PAVA在C4有独立贡献，图在C1条件贡献明确，不声称每模块每域都显著。
+- CONTRACT_GRAPH138已完成并复算：PRESUPPOSED全面断No图边、保留本地No，C4相对完整J-.384532，CI[-.670867,-.074881]为负；虽净救回一些查询但误报增加，不保留。CHECKLIST原样，未用域名选规则。
+- 教师留轨迹局部/整体选择V1及ONE_SE V2都未晋级。C4区间跨0，C1局部图不及同总边权完全图；不把MEDIAN/TWO_SE等事后最高分对照偷偷升为主方法。已准备的对应额外GPU冷启动均未执行。加权J的额外冷启动也因主门槛失败未启动。
+- CUE144、SEARCH84、OPTIONAL150均执行和算术复算完成，但科学主门槛未通过，均不保留。SEARCH296个新真实回答改善覆盖却未改善总HOTA；OPTIONAL门控没有独立正贡献，不晋级事后STRICT控制。
+- 本轮全部实验、复现、实际收据均完成，31项最终实证检查全过：docs/a100_visual_classical_20261121/protocol_final_scientific_review.json；最小最终配方在minimal_retained_method_card.json，状态ACCEPTED_ON_EXISTING_DEV_DIRECTIONS。
+- 三种子C4 67.151609→67.629222、C1 32.721677→38.429592；C4视觉对应对置乱+.561896、C1纯图边对同回填/PAVA+4.632923，两CI正；两域对简单老师回填也三seed正/CI正。C1排序仍不稳、C4并未救回所有query；全DEV且协议与域重合，非独立泛化证明。
+- 四份0/1/2/3真实冷启已结束：4526新QA/0cache、140软CLIPfit充分4000步。PCD/先验/锚点/QA/教师概率和全部score/mask0差，1782个查询文件0差；末视频头权重/归一化0差。seed0 C4同协议基线66.884538→67.437980，wall3751.854→3909.972s；C1 32.603390→38.123396，3002.593→3147.103s。只对应本配方，不把时间套给三种子均值或宣称提速/全预算最优。
+- 无运行中的本线程实验。控制器2150067已正常结束；唯一监视49896/PID2162819正常0结束，旧71095等待进程143退出并未重启GPU或重置计时。不要启动新监视/新实验或重跑已完成队列；继续工作应依据新用户指令及线程Goal工具状态。
+- 所有失败和归因对照仍保留；11份未执行且已失败门槛的旧冷流原型源码移出tip，逐字保留Git8d6faa1及本机归档，真正实测源码未移除。执行核心精确源码在Gitaf46773及preregistration_protocol_cold_v1.json SHA列表。
+- 当前综合TXT含全部HOTA/效应和历程，重复原始表指向专题TXT/JSON；--full-diagnostics输出本地单一完整逐查询计数版。旧coverage.json仅字符串外空白调整，全部token/值/类型保持，原文Gitaf46773/本机备份。
+- 实证验收已通过，Root仅完成最后<100MB远端发布与线程Goal结项。此前历史日志中的ACTIVE表示当时进度，不代表还需添加新模块。
 
-## Long-running experiment policy
+## 长任务规则
 
 For long training or evaluation jobs, never perform agent-level polling.
-
 Use exactly one blocking shell command to wait for completion. Internal shell
 sleep and process checks are allowed, but do not repeatedly return to the model
 to run ps, tail, wc, ls, date, or nvidia-smi.
 
-After the blocking command returns:
+After the blocking command returns: validate completion/integrity; on failure
+identify the first actionable root cause, apply the smallest justified fix,
+run a targeted check, resume the last valid checkpoint or unfinished unit.
+Never hide failures, skip samples, change metrics/seeds, weaken acceptance, or
+silently alter an experimental protocol. Do not modify running numerical helpers.
 
-1. Validate completion and output integrity.
-2. If the task failed, identify the first actionable root cause.
-3. Apply the smallest justified fix.
-5. Run a targeted regression test.
-6. Resume from the latest valid checkpoint or unfinished unit.
+## 结果归因与发布
 
-Never hide failures, skip samples, change metrics, change seeds, weaken
-acceptance criteria, or silently alter the experimental protocol.
+- 旧LoRA在CountMatched/RECALC剥离后无稳定纯权重增益，不等于所有LoRA普遍无效。600秒冷启动零教师调用，不支持主动政策全预算最优。
+- C4可恢复候选98.193%、旧119查询未问到正确轨迹；稳定片段最终输出翻转0，不据原打分抖动盲加HMM。C1物理轨迹串人须另查，不能靠平滑掩盖。
+- C1多轮改善主要含数量/基率效应；双向CountMatched有负值/跨0，不能包装普遍语义排序突破。教师Yes正匹配不是纯教师语义准确率，GT诊断率不能拿来给教师加权。
+- 全部历史强软/硬、RGB、SEM、零HSV头及失败FIELD/BMA/保护/时序/锚点均保留。CLIP_KD中的CLIP是概率裁剪，不是新视觉模型。
+- 质量回放0新前向不等于部署0成本；若保留配方变了，须配套新实际执行，不拼旧时间和新精度。固定前端生成成本未测，OS/NAS缓存未清理，共享主机负载如实披露。
+- parent_statistics是官方HOTA聚合充分计数，可用脚本NumPy重算；精确引用、float64无损字节编码不改变指标，不是上传特征/权重。新统计payload只压缩新公开产物，原始可读备份本地保留；压缩后重算全部受影响效应。为用户<100MB约束，可仅去掉旧JSON字符串外排版空白，保留全部token/结构/数值/类型并留原文；这不改变统计编码或运行输入。
+- 最小方法卡仍PROVISIONAL、candidate_finally_accepted=false。按预登记科学门槛核验，不能自动让队列PASS关闭Goal。
+
+此前完整执行备忘录归档本地analysis/AGENTS_full_before_continuation_index_20261122.md；既有已发布历史仍在Git8bc165f。研究结果索引保留于research_log.md和各阶段TXT/JSON。
+
+2026-11-22 COVERAGE_SEARCH_V1启动，控制器2118268。这是直接处理未问到正确人的新证据实验：保留原COVER逐query候选顺序，先每query看一次，再按已观察No概率乘积/(query调用数+1)分配PRESUPPOSED剩余预算；CHECKLIST原均匀预算。不是校准存在性后验，不用GT/未请求回答。总1160不变，私有冻结COVER缓存仅broker使用，缺失QA真实GPU0..3推理；随后270强加权软/硬头拟合及84原始/数量对照全封存后GT。普通KD获得完全相同SEARCH回答，以拆选题贡献和后处理贡献。70视频无反馈原COVER问题集合差0，GT0。0..3分配由控制器内部预检，不重复agent级GPU轮询；仍由唯一阻塞监视93426等待。全部DEV，Goal ACTIVE。
+
+2026-11-22 CUE_CONSENSUS144及294HOTA/336效应独立复算PASS，但主科学门槛失败，不保留：C4 67.547497，比完整共享加权J-.032536，CI[-.126173,.085614]跨0；比强加权KD+.445142，CI[-.091387,1.028821]跨0。三个种子相对完整J均无查询净救回（rescue/regress均0），却FP增加4990/5347/7190。比等强度弱化为负，比随机同量隔离的差区间跨0，不支持该选择性规则有效。C1按契约完全不变，不算新贡献。没有运行额外新冷流。COVERAGE_SEARCH新证据45视频已封存：总1160、864缓存、296真实新增Qwen回答/296替换位置，教师权重不变/GT0，教师load474.124s，质量准备总651.908s，不是完整冷部署成本；三种子270fit继续，唯一监视93426，Goal ACTIVE。
+
+2026-11-22 OPTIONAL_TRANSFER_V1启动，控制器2128080，唯一监视93426不变。教师-only旧收据显示C4 36/45视频的局部/全局CV风险均不及中性0.5（C1 1/25），不是GT结论。新IDENTITY选项部署时严格保留强加权KD而非零边原始教师锚点；最佳图须比IDENTITY降低超过一倍配对query SE才用，否则原KD后接PAVA。SE只敏感性正则，不声称独立query置信度。严格3模型最小风险、被迫用图、固定全局及ANCHOR_OPTIONAL局部锚点回填控制全保留，36原始+114数量=150输出全封存后本组GT。70视频sanity旧风险/完整图/IDENTITY→CAL重放全部0差，GT0；教师风险选择C4 44IDENTITY/1LOCAL，C1 5IDENTITY/20GLOBAL，尚无HOTA结论。0新增教师/主干/头拟合，CPU两槽，源码数值冻结。SEARCH三种子原始输出已全封存，正在数量对照，GT尚未本组评分。Goal ACTIVE，不预先宣布获胜，不将两项研究收益相加。
+
+2026-11-22 SEARCH84官评及156HOTA/188效应独立重算PASS，但主科研门槛全部失败，不保留：新KD66.982569对COVERKD67.102356 -.119787（seed0正、17/42负，CI跨0）；新J67.239436，对自身KD+.256867和旧KD+.137080均CI跨0，对更强旧FINAL+.087827也跨0；比旧J67.580033 -.340597、三种子均负。教师真实覆盖改善：未问正确candidate query122→113、未得正确Yes147→134（同QA路径，不把三神经种子算三次覆盖）；J相对旧J净救回13/8/4query，却FP增加34603/33914/31842。只增加正确query不足以赢HOTA。J比CAL低.172124，不能用比坏完全图+4.15包装为图优于强KD的证据。270fit均4000步达KL，非故意欠拟合。没有运行该失败配方额外冷流；OPTIONAL_TRANSFER150继续，Goal ACTIVE。
+
+2026-11-22 OPTIONAL150及300HOTA/344效应独立重算PASS，但不晋级：C4 67.462401对均值KD+.360045、CI[.013207,.763715]正；C1 37.279581对均值+5.019675、CI[1.194417,9.645308]正。然而C4对强收敛FINAL仅+.310792、CI[-.063214,.762190]跨0；门控对被迫图C4+.084777区间跨0、C1-.266020区间上界近0，独立门控贡献未成立。不改用更高的STRICT控制冒称primary通过。C4相对原完整图canonical query净救回18/17/16，但canonical标签是全候选IoU.5一对一匹配，不等同语义真值或各方法实际TP/FP。定性图已确认遮挡、模糊与框定位问题；一个teacherYes的all-black候选实际IoU仅.405，不能把所有不匹配都算语义判断错。唯一监视93426正常0结束，所有已注册研究已终止成功但Goal继续ACTIVE；未启动失败门控配方新冷流。
+
+2026-11-22 PROTOCOL_CALIBRATION114启动，控制器2144506，CPU两槽，0新教师/编码器/头拟合。双方统一强加权收敛FINAL，不以GT选检查点；PRESUPPOSED原KD、CHECKLIST原全局汇聚，再原PAVA。普通KD也有同协议信息的非空Bernoulli条件化基线。旧均值组件结果已知，属于开发后简化非独立盲测。70视频稠密/秩一求解、旧CAL/全局重放及Finalmask校验全部0差。门槛含两域胜强Final与协议对照、模块条件贡献。唯一旧93426已结束，须记录新监视；不启动第二个。Goal ACTIVE。
+
+2026-11-22 协议/视觉校准114已通过预先固定质量门槛：C4 67.629222 vs强FINAL+.477613、CI[.165546,.838314]；C1 38.429592、+5.707914、CI[1.694525,10.591625]。C4PAVA、C1场景汇聚各有条件独立贡献；C1排序跨0、C4query净救回0/1/-3仍是限制。全DEV非盲测。新PROTOCOL_COLD_FINAL控制器2150067，四份独立0/1/2/3冷流，普通Final也给非空/清单协议，组合承担真实RGB和PAVA。旧64759正常0结束；新唯一监视待记录。尚未验收成本/一致性，Goal仍ACTIVE。仅5份从未执行且已失败门槛的旧冷流原型移出tip，逐字保留8d6faa1和/var/tmp归档；真正实测源码未移除。
+
+2026-11-22 PURE_COMPONENTS66已完成，90HOTA/120效应复算PASS、原主配方/CAL0差、所有CountSelf0。纯图边C1+4.632923 CI[1.311040,8.745540]；真cue对置乱C4+.561896 CI[.250933,.913257]；对简单老师回填两域都三seed正/CI正。不要再加新方法或换更高控制，现有质量/模块归因门槛已满足，等待PROTOCOL_COLD_FINAL2150067四份实际运行与一致性/成本，以及<100MB发布。唯一监视71095/2149976继续。Goal ACTIVE；C1排序和视觉单独效应仍不稳定、所有数据DEV且协议/域重合。

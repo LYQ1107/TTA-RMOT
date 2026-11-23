@@ -1,0 +1,32 @@
+{
+  "status": "COMPLETE_HISTORICAL_ANCHOR_PCD_RECOVERY_PILOT_NO_GT",
+  "pair": "C2",
+  "video": "0005",
+  "feature_shape": [
+    197,
+    32,
+    3,
+    768
+  ],
+  "source_dtype": "float16",
+  "current_mean_dtype": "float32",
+  "exact_mean_equal": false,
+  "mean_max_absolute_error": 0.0026044845581054688,
+  "mean_absolute_error": 3.798437512722382e-06,
+  "fraction_exact_mean_elements": 0.9660345035559433,
+  "raw_feature_bytes": 29048832,
+  "selected_observations": 96,
+  "historical_query_batch": 64,
+  "current_A100_query_batch": 8,
+  "historical_near_zero_query_isolation": true,
+  "current_frame_cache_has_no_such_isolation": true,
+  "no_recentring_or_threshold_based_reuse_performed": true,
+  "interpretation": "An exact current-mean match can support further recovery checks; mismatch must stay visible. A mean match alone does not prove every historical anchor equals a fresh A100 forward.",
+  "historical_features_prepaid": true,
+  "costs_not_a_fresh_student_deployment": true,
+  "raw_recovered_features_not_to_Git": true,
+  "manual_GT_or_teacher_answers_or_predictions_read": 0,
+  "new_GPU_forward_calls": 0,
+  "wall_seconds": 129.7775319069624,
+  "goal_status": "ACTIVE"
+}

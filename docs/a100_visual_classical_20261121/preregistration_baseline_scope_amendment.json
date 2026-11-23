@@ -1,0 +1,10 @@
+{
+  "version": "BASELINE_SCOPE_DESCRIPTIVE_AMENDMENT_V1",
+  "before_new_scope_GT_evaluation": true,
+  "reason": "Explain repeated original-parent scenes without altering predictions or evaluation.",
+  "grouping": "C4 sorted clip order; first clip per original parent versus subsequent clips from that parent. Derive parent from official metadata video prefix before _cNNN.",
+  "aggregation": "Unmodified vendor metric combination on fixed groups; report both groups and every method. Descriptive only; no favorable subset selection or blind generalization claim.",
+  "observation_preparation": "Keep the original three observation nodes and verify re-pooled PCD/RGB inputs against existing strong KD. Preparation has no GT, no predictions and no new teacher calls.",
+  "mechanism_preregistered": false,
+  "user_research_goal": "ACTIVE"
+}

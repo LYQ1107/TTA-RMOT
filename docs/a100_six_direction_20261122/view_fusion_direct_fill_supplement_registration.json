@@ -1,0 +1,21 @@
+{
+  "status": "REGISTERED_BEFORE_NEW_VIEW_FUSION_SCORES",
+  "registered_unix": 1795338294.0400832,
+  "reason": "The 13-arm fusion study has ordinary soft/hard/source-residual heads but must also compare direct raw-teacher overwrite on exactly the same larger multiview evidence.",
+  "fixed_method": "RAW_TEACHER_FILL: per query/TrackID mean over observed per-view mean probabilities at legacy actually asked cells, otherwise the existing RAW_FINAL ordinary head; same independent >.5 decoder.",
+  "code_may_not_use": "GT, official scores, future answers, unrequested cache values, a newly fitted head, or any extra teacher call.",
+  "scope": "Six cross-domain experimental settings x seeds0/17/42, CPU-only supplemental sealed predictions using immutable core fusion outputs.",
+  "primary_remains": "DS_FULL from core preregistration; supplement is an additional ordinary baseline, never a post-hoc promoted method.",
+  "count_controls": "Compare full and direct-fill ranking at both per-query/per-frame predicted counts, with exact self-count checks.",
+  "GT_barrier": "All supplemental raw and count outputs sealed before supplemental official evaluation; core468 remains a separate already registered seal/GT group. No claim all combined outputs preceded core GT.",
+  "all_data_development": true,
+  "new_GPU_calls": 0,
+  "new_teacher_encoder_head_fits": 0,
+  "goal_status": "ACTIVE",
+  "source_sha256": "c55f37b09108559040e7a93c46ae96b319a50d27e02e9d891f766e9a34a44e5c",
+  "raw_outputs": 18,
+  "count_outputs": 72,
+  "total_supplement_outputs": 90,
+  "count_variants": "FULL-at-FULL, FILL-at-FULL, FULL-at-FILL, FILL-at-FILL; both self-counts exact.",
+  "analysis": "Core primary vs direct fill, both quantity controls, three neural seeds, same parent grouping; KITTI4 point/sensitivity only."
+}

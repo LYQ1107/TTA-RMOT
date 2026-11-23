@@ -1,0 +1,42 @@
+{
+  "name": "SAME_CONFIDENCE_WEIGHTED_HEAD_CLASSICAL_ATTRIBUTION_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "trigger": "Confidence54/420fitscomplete:oldunweightedJ-weightedKD C4+.536388 CI[-.010093,1.127430]crosses0 thoughall3pointspositive;C1+3.471630CIpositive. Do notdeclarestabletwo-domainwin.",
+  "design": "Bothordinaryandoursusetheexactsamealreadysealedconfidenceweightednative768Ddirectsoft400/finalmean. Addfixedexistinggraph/PAVAonly. No changes tographweights,sourceprecision,teacheranchors,bodycues,PAVA,decoderorNNtraining.",
+  "primary": "JOINT=weightedKDmean+fullfixed3NNgraphthenPAVA;oneglobalfoundationforbothdomains,notper-domainGTbesthead.",
+  "controls": [
+    "KD_mean",
+    "GRAPH",
+    "CAL",
+    "JOINT",
+    "weightedsoft400/final",
+    "weightedhard400/final",
+    "alloldstrongordinaryfamilies",
+    "oldunweightedJ"
+  ],
+  "expected": {
+    "conditions": 6,
+    "raw": 18,
+    "countmatched": 60,
+    "official": 78,
+    "new_teacher_encoder_head_calls": 0
+  },
+  "countmatched": "JOINT versusKD/GRAPH/CAL bothdirections plusCountSelfs;baselineweightedmeanprovidedbyconfidence_teacher source.",
+  "validation": "Per-videomandatoryfrozenoldnativeG/CAL/Jreplay0andweightedKDmask0beforeoutput. Samehead/CNNweightsarenotrefitted.",
+  "acceptance": [
+    "All78outputsealbeforeanynewGT;CountSelf0,frozenreplay0",
+    "JOINT-weightedKDmeanpositiveall3seedsandoriginal-parent+seedCIabove0bothdirections",
+    "Eachretainedclassicmoduleneedsownmatchedconditionalcontributioninexistingdirections;do notclaimallmarginalsonalldomains",
+    "Retainallstrongsoft/hardsnapshots/oldfoundations/countdirections/querydiagnostics;nostatisticalwinnercherrypicking",
+    "Ifretainedfoundationchanges,ownnewmatchedphysicalflow/cost;oldunweightednativecostnotpairedwithnewweightedprecision"
+  ],
+  "scope": "Past/currentvideo,currenttransductive,targetimage/query/frozenteacheronly;manualGTonlyafterseal;fixedofficialcandidatesaccepted. No independentblinddata,bootstrapnorefitordevelopment/multiplicitycorrection.",
+  "worker_sha256": "fe97715ccfbe4b2ca456a7d35d4edc1c1d9b2803bce072afc4e86c6001edf79b",
+  "graph_sha256": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+  "PAVA_sha256": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+  "weighted_source_plan": "preregistration_confidence_teacher_v1.json",
+  "disk_free_bytes": 2605551616,
+  "no_automatic_goal_close": true
+}
