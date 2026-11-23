@@ -153,3 +153,14 @@ PyTorch2.6官方文档明确列举CUDA scatter_add等通常非确定性操作，
   docs/a100_six_direction_20261122/conditional_evidence_stability_seed0_17_42.json
   docs/a100_six_direction_20261122/conditional_logit_precision_fit_drift_allseeds.json
 可执行检查脚本：scripts/a100_conditional_evidence_stability.py --seeds 0 17 42；scripts/a100_conditional_replay_adequacy.py。前者本轮CPU墙钟约34.79秒，后者约0.38秒，均无新拟合、冻结教师/骨干前向、目标标签或当前HOTA读取；不计作部署效率收益。
+
+十三、全部未压缩排序对照封存后的一致性检查
+
+精度补充已经封存全部18条件、288原始输出与828数量对照，共1116份；父研究1692/378/162的预测封存要求也已满足，现正进行隔离官评。这不等于完成质量验收。本节只读取封存和数量对照收据，没有读取目标标签或HOTA。
+
+全部288项CountSelf检查均为0个查询文件变化；自己的数量截断也没有切开同分组。跨方法投影在整个矩阵中只记录到5次精确截断平局，分布于5个“条件—投影”项，单项最高比例约0.000610676%。这些是相关query/frame上的操作计数，不是错误率、HOTA变化率或独立样本显著性；五个位置的具体投影及分母都保留在公开记录中。
+
+这为当前未压缩队列的数量匹配提供了数值一致性依据，不能据此宣布语义排序改善。旧概率队列与新队列的FULL发生了重新拟合漂移，输出数量也不保证相同，因此不能把旧、新平局比例的差直接叫作同一操作点上的纯精度收益。原主研究和原负结果均保留，当前主方法不按GT换成另一个版本。
+
+检查源：scripts/a100_conditional_logit_count_audit.py。
+完整矩阵：docs/a100_six_direction_20261122/conditional_logit_count_audit.json，按condition_order/projection_order提供整数平局与有效截断分母，不删0行；CountSelf总检查数和所有5项非零事件完整保留。元数据检查CPU约0.094秒，0新增模型拟合或冻结前向，不属于冷部署成本。
