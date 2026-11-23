@@ -100,7 +100,7 @@ def reproduce(directory,stem):
                 computed=recompute(left,right)
                 for field,value in computed.items():check(value,published[field],pair+'/'+label+'/'+field)
             effects+=1
-        if stem=='conditional_observation':
+        if stem in ('conditional_observation','conditional_deterministic_repair'):
             # This is the pre-registered descriptive factorial interaction,
             # independently pooled from the public parent aggregates. Valid
             # ordinary contrasts do not by themselves verify this block.
