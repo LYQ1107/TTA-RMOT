@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## 最新：旧582正式结束与RSI完整动作接口（2026-11-24）
+
+- 实际89700/controller3604938已exit0：582官评+576配对效应+84因子/交互复算全部PASS，最大误差1.42e-14；禁止重启或再续该终态句柄。主方法六HOTA18.7536/18.9858/19.9416/22.0436/19.7482/18.0604。同DESIGN固定coarse软KD参照四raw正，但普通参照数量下六差值均负(-2.2218/-2.8404/-4.1990/-5.3453/-2.2894/-1.2376)。条件目标在结构内部固定数量平均+1.33..2.65不等于胜过普通KD；全部24对手/576效应/负结果保留，不能换主方法。
+- 旧同轨迹双时刻联合问答的BINARY通道控制30.7520/33.0194/64.6648/64.3110/34.4607/33.1384，监督意见/目标构造不同，不能冒充对普通二元KD胜利，也不能把旧静态DESIGN当新RSI。详细新TXT《TTA_RMOT_联合问答582项结果与RSI动作空间诊断_20261124.txt》，新Goal第12/执行记录第16节；summary与完整analysis/parent_statistics/reproduction。
+- 当前真正长任务仅14883/native726、1520/TRUST312、99812/修正318，全部实际句柄已确认活跃。TRUST C1/C6 raw已完，2C5 worker3900010、3C4 worker3899217接续；0C2/1C3继续。修正0C5/1C2仍训练第4视频。原native2/3 C1/C6到第16视频。所有既有源pins不改、只seed0、无观察器/agent ps-tail-nvidia轮询。
+- 新action-universe纯元数据诊断20898 exit0：3506设置内query/187348query-track组合仅118732可提问，约57..65%覆盖；68616库外但仍密集预测，不是GT目标漏检率。每query视角固定，预算小于总轨迹数，扩库不等于增加预算或RSI贡献。所有旧动作池仍保持。
+- 新native_binary_live_inputs实现候选/查询/锚点生成完整池及按需冻结教师API。83520 exit0全148 metadata验证routed559386/三视角1678158、原121629全部subset和索引一致；56已完成回答精确接口往返及CLIP fallback缓存requested-view通过。0新GPU/fit/HOTA；仅fixture接线，不是完整fresh质量/冷成本，也未把新池接入在途3研究。最终fresh特征实际有已知版本差异，须从实际同次输出测质量/总成本。
+- 为完整发布新582统计，在新文件内精确共享69记录/317父列表(1.538MB→1.146MB)，582全数组逐值相同且独立复算通过。旧聚合统计providers不改。另33可恢复legacy明细(32CSV+1原始逐候选标签JSON)仅从Git索引移出，释放1522010B，工作文件/NAS不改，3不同工作版本单独备份；恢复清单docs/legacy_archives/legacy_diagnostic_leaves_20261124.json指向已发布a01fbf42d2b3175407541274175d04fc73d71174。
+- Goal持续ACTIVE/未达成；完整正常二元六设置质量、三个贡献与交互、真实匹配fresh成本仍待。发布需snapshot和reachable均<100000000B，AGENTS私有旧段仍不全量stage。
+
 ## 最新：可比probe修正质量已真实启动（2026-11-24）
 
 - 独立修正入口scripts/a100_native_binary_comparable_six_setting.py已实现/预登记并实际运行：session99812/controller3791984，GPU1 C2 worker3792076、GPU0 C5 worker3792077；预检691/1619MiB，仅共享已知本项目PIDs3747711/3747707并完整保留它们，每头原15%显存。27份递归source pins含新三脚本/父协议/数值依赖/conditioning，全部运行期间不可改。
