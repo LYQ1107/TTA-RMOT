@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## 最新：统一二元教师与RSI六设置已运行（2026-11-24）
+
+- 用户已从UI恢复Goal为ACTIVE，get_goal实证active。有效目标继续包含人类视觉方式、经典思想、RSI、六个跨域实验设置、充分同信息蒸馏、模块/交互、双CountMatched和最终真实冷成本；未达成不结项。只seed0，无新种子网格。旧blocked收据是历史，不代表当前状态。
+- 新native_binary四模块与完整入口已实现/预登记并真实运行：session14883/controller3661317，GPU2 C1 worker3661421，GPU3 C6 worker3661422；其余四设置自动接空闲卡。25配方、41raw/设置、726独立官评，CountSelf别名246。正常二元教师来源是原四策略collection，不是新223563联合例。全部输出封存前禁止读取本研究GT/HOTA。
+- 三候选为稳定对象h与参照状态g、数量/utility独立编码器的条件表示学习、可学观察者A↔求解器S。外部教师冻结。奖励只读utility条件风险，同query/请求view不同track的paid probe；只改count参数奖励严格0。首视频C1/C6有正条件teacher-progress信号，但不代表换题或HOTA提升。effective_view回退须完整审计；当前视角一致性只在首循环成立。
+- 所有ordinary同完整锚点/mask/当前输入、全部付费答案，补point soft及同概率LOGIT_KD；原门槛.005，logit是excess MSE而非KL。核心普通头和所有结构回放同三轮前缀+all-paid拟合。真实六类GPU拟合及41密集输出路径已过，非科研验收；不重复工程pilot。
+- 旧联合质量38672/controller2928089已exit1，C1/C2/C5/C6 raw完整保留。C3/C4普通MARGINAL_KD_UNIFORM欠拟合KL约.152718，新增显式优化修复只对未完成ordinary：Adam.001、保留最佳风险后原LBFGS，模型/输入/目标/seed/容量/门槛不变。实际续session89700/controller3604938，GPU0/1 workers3604989/3604990；原失败头已过2.01e-7/1.53e-7，后续继续582项完整研究。
+- 唯一当前长任务句柄89700、14883；直接续实际控制器，禁止新观察器和agent级ps/tail/nvidia轮询。两套source_sha256中的所有数值源/分析/复算均已pin，运行时不得修改。0/1新分配除显存还查无驻留PID；2/3用户许可共享且小头15%显存，不冒称独占部署成本。
+- 输出在SIX下旧joint_observation_quality_20261123与新native_binary_quality_20261124（实际/var/tmp）；NAS只读，大资产不上Git。新TXT《TTA_RMOT_统一二元教师与RSI六设置执行记录_20261124.txt》和native_binary_*_20261124收据为最新。旧V1/V2/V3负结果、已结束432例pilot/联合采集不得重跑或改写。发布需两项真实<100,000,000B，保留AGENTS原私有未提交内容，只加入本节。
+
 ## 最新：V3与内部gauge工程检查结束（2026-11-23）
 
 - 48890/PID3067077已exit0：3视频×3分支，均同paired probe/SGD/seed0，各160问。RAW有9次更新但全部问题完整顺序与FROZEN一致；DISCRIMINATION九轮奖励0、更新0；全部最终S逐tensor byte相同。joint/coarse充分拟合通过；不能宣称RSI获益，勿重跑。

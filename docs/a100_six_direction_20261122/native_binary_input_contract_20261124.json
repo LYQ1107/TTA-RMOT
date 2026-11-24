@@ -1,0 +1,147 @@
+{
+  "status": "PASS_NATIVE_BINARY_REAL_INPUT_CONTRACT",
+  "pair": "C1",
+  "video": "dancetrack0004",
+  "metadata_actions": 104,
+  "paid_library_requests": 22,
+  "budget": 56,
+  "probe_rounds": 3,
+  "record": {
+    "paid_binary_requests": 22,
+    "unique_visual_nodes": 22,
+    "pair_rows": 22,
+    "candidate_identity_pairs": 10,
+    "temporal_same_track_pairs": 0,
+    "singleton_same_event_pairs": 12,
+    "every_unique_node_occurs_once_as_each_endpoint": true,
+    "causal_CLIP_binary_teacher_assigned_to_requested_anchor_approximation": true,
+    "product_targets_are_independence_model_not_observed_joint_answers": true
+  },
+  "models": [
+    {
+      "recipe": {
+        "family": "structured",
+        "conditional": true,
+        "reference": true
+      },
+      "shape": [
+        17,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 17,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 5.960464477539063e-08
+    },
+    {
+      "recipe": {
+        "family": "pair",
+        "risk": "joint"
+      },
+      "shape": [
+        17,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 17,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 5.960464477539063e-08
+    },
+    {
+      "recipe": {
+        "family": "pair",
+        "risk": "marginal"
+      },
+      "shape": [
+        17,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 17,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 1.4901161193847656e-08
+    },
+    {
+      "recipe": {
+        "family": "point"
+      },
+      "shape": [
+        22,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 22,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 2.9802322387695312e-08
+    },
+    {
+      "recipe": {
+        "family": "coarse"
+      },
+      "shape": [
+        22,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 22,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 2.9802322387695312e-08
+    },
+    {
+      "recipe": {
+        "family": "point",
+        "risk": "logit"
+      },
+      "shape": [
+        22,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 22,
+        "exact_orbit_groups": 22,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": false,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 9.5367431640625e-07
+    }
+  ],
+  "new_teacher_GPU_calls": 0,
+  "head_fits_executed": false,
+  "device": "cpu",
+  "GT_open_attempts": 0,
+  "count_only_parameter_updates_have_exactly_zero_semantic_reward": true,
+  "no_RMOT_predictions_or_quality_claim": true
+}
