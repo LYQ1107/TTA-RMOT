@@ -1,0 +1,51 @@
+{
+  "status": "COMPLETED_REAL_PREFIX_READOUT_COUPLING_AUDIT_NO_GT",
+  "rows": [
+    {
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "candidate_query_rows": 74307,
+      "donor_selected_rows": 4302,
+      "CPU_vs_original_GPU_rank_replacements": 0,
+      "CPU_vs_original_GPU_raw_decision_differences": 0,
+      "original_vs_utility_rank_replacements": 32,
+      "ring_ID_order_intervention_rank_replacements": 57,
+      "count_only_zero_intervention_rank_replacements": 32,
+      "pure_utility_unchanged_by_count_and_ring": true,
+      "ring_intervention_is_one_video_global_TrackID_bijection": true,
+      "conditional_set_common_offset_invariance_on_actual_rows": true,
+      "max_ring_margin_change": 8.623394171493839,
+      "original_checkpoint": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C1/seed0/videos/dancetrack0004/policies/LEARNED/closed.pt"
+    },
+    {
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "candidate_query_rows": 74307,
+      "donor_selected_rows": 5324,
+      "CPU_vs_original_GPU_rank_replacements": 0,
+      "CPU_vs_original_GPU_raw_decision_differences": 0,
+      "original_vs_utility_rank_replacements": 461,
+      "ring_ID_order_intervention_rank_replacements": 358,
+      "count_only_zero_intervention_rank_replacements": 591,
+      "pure_utility_unchanged_by_count_and_ring": true,
+      "ring_intervention_is_one_video_global_TrackID_bijection": true,
+      "conditional_set_common_offset_invariance_on_actual_rows": true,
+      "max_ring_margin_change": 9.540770408587653,
+      "original_checkpoint": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C6/seed0/videos/dancetrack0004/policies/LEARNED/closed.pt"
+    }
+  ],
+  "scope": "Fixed first Dance video, C1/C6 Trust LEARNED prefixes; all forward comparisons on CPU2threads.",
+  "interventions_not_learned_or_selected_with_GT": true,
+  "new_fits": 0,
+  "new_teacher_calls": 0,
+  "new_backbone_calls": 0,
+  "manual_GT_open_attempts": 0,
+  "new_HOTA_read": false,
+  "rank_changes_are_not_quality_or_semantic_learning_evidence": true,
+  "all_live_primaries_sources_masks_and_registrations_unchanged": true,
+  "source_sha256": {
+    "flex_uda/active/conditional_set_readout.py": "d6b1a7564bdcf4a78d3e48718df46f897aca86986e65fe1bfa8e114a5438603d",
+    "scripts/a100_native_binary_readout_audit.py": "4303caf2ceae33dc73278bf67812d9577f6e4875a55658d98b5b30fd18a22523"
+  },
+  "goal_status": "ACTIVE"
+}

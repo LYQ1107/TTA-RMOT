@@ -1,5 +1,14 @@
 # AGENTS.md
 
+## 最新：关联诊断与条件集合读出已实际运行（2026-11-24）
+
+- 旧582已完整官评/复算后，stability49271和official-association7973均exit0。旧联合主方法在GT身份/成员两端稳定边翻转率C1..C6约1.013/5.151/2.978/3.373/4.745/.645%；不能套旧v8P的0翻转，也不能冒称在途native已读GT。固定普通coarse每query/frame数量后，六设置ΔAssA为-9.479/-14.281/-29.970/-29.064/-13.078/-6.917，ΔHOTA均负。C3/C6诊断IoU.5命中更多且DetA略高仍HOTA低；翻转非HOTA加法因果解释。
+- 新readout_audit全局TrackID双射v1已完成（32239终态输出从公开收据恢复，勿重跑）：真实TRUST C1/C6首视频/固定权重特征与每帧数量/同CPU，重命名ID改变排名57/358个，count-only零化32/591；utility逐值不变，CPU原排序和实际GPU0差。frame-local旧v0原脚本/收据本地保留且SHA已纠正，不能混为全视频双射。不是质量证据。
+- 新scripts/a100_native_binary_utility_six_setting.py及analysis/repro已预登记/实际85298/controller3976000；GPU0 C1 worker3976072、GPU3 C6 worker3976073，预检857/1557MiB只共享已知原PIDs并保留，头10%显存。0新fit/teacher/backbone，精确原prefix checkpoint和归一化；C2/C5修正、其余四精确TRUST。首视频32/461个utility排序替换，逐query/frame数量检查通过，GT0。120新增+204父引用=324全封存后才该研究GT/官评，318配对效应。31源pins不可改。新条件集合MAP top-K只去排名干扰，K仍原ring数量；非原pair网络MAP/非完整ID不变/非特征创新。
+- 现在四个真实数值句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324。原三套所有代码/主方法/预算/权重/输出保留，旧89700 terminal0不再续。只seed0，无新观察器/agent ps-tail-nvidia轮询。当前native C1/C6第18视频、C2首视频；TRUST C3第37、C4第19、C5第4，C1/C6/C2 raw已完；修正C5 raw已完、C2末视频。后续以工具输出为准。
+- 新Goal TXT13/14、执行TXT17、旧582报告8补齐诊断/理论边界/真实执行；补读Dual Student1909.01804、SEAL2506.10943、SPIN2401.01335原文，互补双学生/有证据自我编辑为备选未启动质量，不将其监督/参考答案保证套到无标签RMOT。RSI Goal ACTIVE；六设置普通KD优势、三个贡献/交互及匹配fresh冷质量成本仍未完成。
+- 发布只必要代码与精选证据，两项100000000B gate；全部原科学providers/负结果/NAS不改。AGENTS工作区更早私有历史仍保留，不全量stage。本轮独立代码和新收据不改三套已pin依赖。
+
 ## 最新：旧582正式结束与RSI完整动作接口（2026-11-24）
 
 - 实际89700/controller3604938已exit0：582官评+576配对效应+84因子/交互复算全部PASS，最大误差1.42e-14；禁止重启或再续该终态句柄。主方法六HOTA18.7536/18.9858/19.9416/22.0436/19.7482/18.0604。同DESIGN固定coarse软KD参照四raw正，但普通参照数量下六差值均负(-2.2218/-2.8404/-4.1990/-5.3453/-2.2894/-1.2376)。条件目标在结构内部固定数量平均+1.33..2.65不等于胜过普通KD；全部24对手/576效应/负结果保留，不能换主方法。

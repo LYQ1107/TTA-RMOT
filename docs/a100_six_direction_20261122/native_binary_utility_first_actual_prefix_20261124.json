@@ -1,0 +1,83 @@
+{
+  "status": "ACTUALLY_RUNNING_ALL_SIX_FROZEN_UTILITY_READOUT_STUDY_NO_GT",
+  "exec_session": 85298,
+  "controller_pid": 3976000,
+  "registration": "native_binary_utility_quality_registration_20261124.json",
+  "registration_sha256": "6cfe22fecd29bec6bc67328f3e59c44c3b69c68f5a6c96ff494189c67b0be675",
+  "initial_assignments": {
+    "0": {
+      "pair": "C1",
+      "pid": 3976072,
+      "physical_GPU": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_utility_quality_20261124/C1/seed0",
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_utility_quality_20261124/supervisor/C1_seed0.log",
+      "preflight_memory_MiB": 857,
+      "preserved_known_resident_PIDs": [
+        3961262
+      ]
+    },
+    "3": {
+      "pair": "C6",
+      "pid": 3976073,
+      "physical_GPU": 3,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_utility_quality_20261124/C6/seed0",
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_utility_quality_20261124/supervisor/C6_seed0.log",
+      "preflight_memory_MiB": 1557,
+      "preserved_known_resident_PIDs": [
+        3661422,
+        3899217
+      ]
+    }
+  },
+  "first_completed_prefixes": {
+    "C1": {
+      "video": "dancetrack0004",
+      "model_checkpoints": {
+        "LEARNED": {
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C1/seed0/videos/dancetrack0004/policies/LEARNED/closed.pt",
+          "sha256": "277520c4d958811153a6fda49e9d7d8869e4399baca9d0714ae6e7e6fb3a1047",
+          "normalization_is_original_past_and_current_prefix": true
+        },
+        "FROZEN": {
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C1/seed0/videos/dancetrack0004/policies/FROZEN/closed.pt",
+          "sha256": "3beaaa8e1e89e7e4d6c27399e1b53a31ec44765382b448920266291ad3393def",
+          "normalization_is_original_past_and_current_prefix": true
+        }
+      },
+      "primary_rank_replacements": 32,
+      "all_counts_equal_per_query_frame": true,
+      "GT_open_attempts": 0,
+      "new_fits": 0,
+      "new_teacher_calls": 0,
+      "new_backbone_calls": 0
+    },
+    "C6": {
+      "video": "dancetrack0004",
+      "model_checkpoints": {
+        "LEARNED": {
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C6/seed0/videos/dancetrack0004/policies/LEARNED/closed.pt",
+          "sha256": "1a07f55382b5edda63977097e0c0369c639a4f90a83ddf73bec25ee1f66a77fb",
+          "normalization_is_original_past_and_current_prefix": true
+        },
+        "FROZEN": {
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_trust_quality_20261124/C6/seed0/videos/dancetrack0004/policies/FROZEN/closed.pt",
+          "sha256": "e5eba21a361125bd340f8ea0fb9e25a28e237cc3f38d38f77d3ecc1ac24eaae6",
+          "normalization_is_original_past_and_current_prefix": true
+        }
+      },
+      "primary_rank_replacements": 461,
+      "all_counts_equal_per_query_frame": true,
+      "GT_open_attempts": 0,
+      "new_fits": 0,
+      "new_teacher_calls": 0,
+      "new_backbone_calls": 0
+    }
+  },
+  "own_new_records": 120,
+  "exact_parent_references": 204,
+  "total_records": 324,
+  "all_native_parent_HOTA_still_unread": true,
+  "quality_gain_not_yet_measured": true,
+  "no_parent_source_method_checkpoint_mask_or_budget_changes": true,
+  "goal_status": "ACTIVE"
+}
