@@ -1,0 +1,244 @@
+{
+  "status": "PASS_ORIGINAL_NATIVE_PARENT_REUSED_EXACT_INPUT_HEADS_AND_GPU_OUTPUTS_MATCH",
+  "pair": "C3",
+  "video": "v_G-vNjfx1GGc_c008",
+  "original_controller_session": 14883,
+  "original_worker_pid": 4134758,
+  "CPU_producer_session": 46679,
+  "CPU_producer_pid": 492158,
+  "original_video_receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C3/seed0/videos/v_G-vNjfx1GGc_c008/receipt.json",
+  "original_parent_reused_heads": 10,
+  "shared_fit_records_not_independent_optimizations": 34,
+  "actual_new_optimizer_calls_in_producer": 0,
+  "raw_method_outputs_compared": 17,
+  "total_compared_score_elements": 825690,
+  "all_scores_and_masks_exact": true,
+  "rows": [
+    {
+      "source_arm": "COARSE_CONF_SOFT_LEARNED",
+      "target_arm": "COARSE_CONF_SOFT_FROZEN",
+      "source_head_sha256": "75619297ddc20c2bbce74ae9033b2b0e85c246dff2e55a71f67784d4452a3c52",
+      "consumed_head_sha256": "8760b690c41bd4175d7ba246aeafec50169d0596b84d168087d36a4e6777e914",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 1,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "ee3643f634701848c014be6bdb37f623e7a162083716eb5abe13a22769fb690a"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "ee3643f634701848c014be6bdb37f623e7a162083716eb5abe13a22769fb690a"
+        }
+      ]
+    },
+    {
+      "source_arm": "COARSE_UNIT_HARD_LEARNED",
+      "target_arm": "COARSE_UNIT_HARD_FROZEN",
+      "source_head_sha256": "7cf7a2d6d0ad62e71485b5ce5c902242dcf76f69b50f9246149b70d95599ad6f",
+      "consumed_head_sha256": "d6ca23c470dbf5c3b090c7f8480670b652cfb56b33d0f1eca4e14142cb3b25ca",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 1,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "f08e6557317b7ba46d39e44a519de8bf0e92988a8451615739aad71207e37fad"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "f08e6557317b7ba46d39e44a519de8bf0e92988a8451615739aad71207e37fad"
+        }
+      ]
+    },
+    {
+      "source_arm": "COARSE_UNIT_SOFT_LEARNED",
+      "target_arm": "COARSE_UNIT_SOFT_FROZEN",
+      "source_head_sha256": "f7b900bb8adb2a1458ade65373c8ab47e6d83c7519f5d9b1e0965ce0db5a243a",
+      "consumed_head_sha256": "79c81143aa86a6bd05360369b7f81633c21cbe6bc40c99b6efe2c9cb43e5eca9",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "513fe0d982a11542933fe704b96473d5190cad677564f0d6c5f65adc2fcabd71"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "513fe0d982a11542933fe704b96473d5190cad677564f0d6c5f65adc2fcabd71"
+        }
+      ]
+    },
+    {
+      "source_arm": "FULL_CONDITIONAL_LOCAL_LEARNED",
+      "target_arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "source_head_sha256": "6657821289108d4e734a188eab6fee4f4d3eb5aa48d79fc7a8ef542512f5c25f",
+      "consumed_head_sha256": "981093dca81ebf6f8b43f5a0ba771c55dc41b0fd2e3029be086f760a430e5e92",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "2fcc366de53a07d88e5b6380a32f3fefe8e43523e4a92d3079ac17c57f53ffc5"
+        }
+      ]
+    },
+    {
+      "source_arm": "FULL_LIKELIHOOD_LOCAL_LEARNED",
+      "target_arm": "FULL_LIKELIHOOD_LOCAL_FROZEN",
+      "source_head_sha256": "520a54e630b80190b886e93b904a00226721b6f2b7aad40f01c69b3c09b1710d",
+      "consumed_head_sha256": "aaeb381b59f1562746b2d6064ef7c37a456d2fecade1b78ddd84d6f2035e84d6",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "edb0ecf60e1c73d39018316a2eab0a5bb2de9aa3e5a2c689800a4f87ef7f566e"
+        }
+      ]
+    },
+    {
+      "source_arm": "FULL_LIKELIHOOD_REFERENCE_LEARNED",
+      "target_arm": "FULL_LIKELIHOOD_REFERENCE_FROZEN",
+      "source_head_sha256": "d4eedce223e71996a28a5779f2df8b606c060f823dfcffeca127ed54b47c8fbc",
+      "consumed_head_sha256": "89223804b064e4f4e6f1eb35e1b45f07c3389c1feb944bffae6e8a139d3cbac5",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "c9e768101410d2668ccce3d4a7402c5e24db43c442ea5dfdc955795a9546b593"
+        }
+      ]
+    },
+    {
+      "source_arm": "JOINT_KD_LEARNED",
+      "target_arm": "JOINT_KD_FROZEN",
+      "source_head_sha256": "3174c880ccf29e304457e768e5059a1ad1f030ac81f55cabbaae0ed917ce789a",
+      "consumed_head_sha256": "13abc61eec19639498349eb7463c889f8c300c9f1f30035db9752659aa6bc0e5",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "f2248b7c858800fac67bc65785dc377ebe03df8a20e2422ebfefd23b60bf2a8d"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "f2248b7c858800fac67bc65785dc377ebe03df8a20e2422ebfefd23b60bf2a8d"
+        }
+      ]
+    },
+    {
+      "source_arm": "LOGIT_KD_LEARNED",
+      "target_arm": "LOGIT_KD_FROZEN",
+      "source_head_sha256": "682028b491831ed8755c7721eec657ae38ec4109d7aaeb06e3e577e8a3afc8cd",
+      "consumed_head_sha256": "53e9c5857297f9cfbb04f8102d608dae162101b7650d656b5fc1291c4ed9a514",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "812702bebdab0ecd7015325fdf5511f2e43a0d60745092837394727f46db897e"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "812702bebdab0ecd7015325fdf5511f2e43a0d60745092837394727f46db897e"
+        }
+      ]
+    },
+    {
+      "source_arm": "MARGINAL_KD_LEARNED",
+      "target_arm": "MARGINAL_KD_FROZEN",
+      "source_head_sha256": "5262525db74287de0f7bc6f92f990c88a06f30eac5eae9f101951249fb53c415",
+      "consumed_head_sha256": "deb1ce589ca920d2eaa855e8be185a5e0fab161e1cf999a5f7d6ea9f9b25250a",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "6829bef5aff9da6eb1288aaf185abd8492d40819b3e1110846446cfb1372feb1"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "6829bef5aff9da6eb1288aaf185abd8492d40819b3e1110846446cfb1372feb1"
+        }
+      ]
+    },
+    {
+      "source_arm": "POINT_KD_LEARNED",
+      "target_arm": "POINT_KD_FROZEN",
+      "source_head_sha256": "1038f3356bd7f376edbc204d74664ae6255444cc792a60d744c770bdecc41e0b",
+      "consumed_head_sha256": "d48c3322502b0bbc5bbdb01b670567a7f15c91480c12d8907025c01d7a8ff4ff",
+      "original_parent_marker_and_binding_verified": true,
+      "final_and_early_weights_exact": true,
+      "shared_fit_records": 4,
+      "actual_parent_reuse_verified": true,
+      "outputs": [
+        {
+          "snapshot": "FINAL",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "25dde89e00a057e73fede362055bc4b423e7f1eed083a5fcef9dab383b752d67"
+        },
+        {
+          "snapshot": "MEAN",
+          "score_elements": 48570,
+          "score_and_mask_dtype_shape_values_exact": true,
+          "target_mask_sha256": "25dde89e00a057e73fede362055bc4b423e7f1eed083a5fcef9dab383b752d67"
+        }
+      ]
+    }
+  ],
+  "GT_open_attempts": 0,
+  "new_quality_conditions_or_neural_seeds": 0,
+  "HOTA_or_measured_deployment_speedup_claim": false,
+  "goal_status": "ACTIVE"
+}
