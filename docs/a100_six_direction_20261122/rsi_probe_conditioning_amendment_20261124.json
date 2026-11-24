@@ -1,0 +1,68 @@
+{
+  "status": "CRITIC_CONDITIONING_RULE_IMPLEMENTED_AND_METADATA_VALIDATED_NOT_IN_LIVE_QUALITY",
+  "motivation": "The query/requested-view null does not condition away actual-view differences after CLIP fallback. Such pairs can confound teacher-relative progress.",
+  "parent_quality_registration": "native_binary_trust_quality_registration_20261124.json",
+  "parent_quality_registration_sha256": "123423282beb446c76ed727bf7f638366813a862eba202cb4b376c9b33f41b79",
+  "complete_metadata_audit": "native_binary_effective_views_20261124.json",
+  "audit_sha256": "c4f28d51684e40ac6966065ae97a9295d911dc835f618d8dd3584d65845c5190",
+  "implemented_rule": "After both paid replies arrive, only same-effective-view pairs enter the before/after utility progress critic. All originally charged replies remain in the final fit and every ordinary replay. No replacement or free extra query.",
+  "affected_settings": [
+    "C2",
+    "C5"
+  ],
+  "unaffected_settings": [
+    "C1",
+    "C3",
+    "C4",
+    "C6"
+  ],
+  "all_setting_probe_pairs": 2783,
+  "excluded_view_mismatch_pairs": 80,
+  "remaining_comparable_pairs": 2703,
+  "setting_pair_counts_are_not_independent_physical_samples": true,
+  "unaffected_probe_input_object_and_pair_order_identity_verified": true,
+  "constructed_counterexample": {
+    "illustrative_not_measured_teacher_probabilities": [
+      0.9,
+      0.1
+    ],
+    "requested_view_for_both": "CLIP",
+    "effective_views": [
+      "CLIP",
+      "CROP"
+    ],
+    "relative_probability": 0.9878048780487805,
+    "weighted_teacher_information": 0.5143747205871431,
+    "reward_if_only_different_view_opinions_learned": 0.7615941559557649,
+    "new_critic_eligible_pairs": 0,
+    "charged_teacher_nodes_unchanged": 2,
+    "not_evidence_that_this_failure_explains_any_measured_HOTA": true
+  },
+  "unchanged_in_live_studies": [
+    "source code",
+    "probe reservations",
+    "reward resolution",
+    "teacher budgets",
+    "fits",
+    "method registrations"
+  ],
+  "quality_trial_status": "NOT_IMPLEMENTED_OR_LAUNCHED; run an explicit prospective amendment, reuse only exact unaffected outputs after parent completion, and compare affected settings without a new seed grid.",
+  "future_acceptance": [
+    "All-six fixed unified recipe, adequate ordinary same-information KD and dual CountMatched",
+    "Keep original 312 study as control; record all reuse provenance and original negatives",
+    "No new HOTA or module-benefit conclusion from this metadata check",
+    "Reassess low-information probes and different-time assumptions separately"
+  ],
+  "source_sha256": {
+    "flex_uda/active/rsi_probe_conditioning.py": "98a0f340ea651d468921c03e52db042ed41758982d3cd883605ac6934c1985af",
+    "scripts/a100_native_binary_effective_views.py": "49ef64cb6343d61fee7e3a8e865151f0dcf8abccc37ffd605f67d35aef19fbf6"
+  },
+  "new_teacher_calls": 0,
+  "new_fits": 0,
+  "new_RMOT_predictions": 0,
+  "manual_GT_used": false,
+  "neural_seeds": [
+    0
+  ],
+  "goal_status": "ACTIVE"
+}

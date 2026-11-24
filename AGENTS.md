@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## 最新：582输出全封存及RSI实际视角修正（2026-11-24）
+
+- 实际89700/controller3604938已进入ALL_582_PREDICTIONS_SEALED_ISOLATED_OFFICIAL_EVALUATION：198raw+384双CountMatched，198CountSelf别名、原1776ordinary门槛全过，封存GT0。582官评/分析/独立复算继续；root尚未读取新HOTA。新joint_all_582_seal_summary_20261124.json。
+- 全148设置内视频/121629可选动作/2783预留探针对的只读元数据核验完成，78136 exit0勿重跑。C2/C5 CLIP→CROP回退1034/964，导致43/37对实际view不匹配，其它四设置0；这些计数含共用物理资料，不是独立样本。2733对来自不同帧。早先C1/C6短前缀view0混配不能外推全六设置。
+- 新flex_uda/active/rsi_probe_conditioning.py在答案付费到达后仅给critic保留实际view一致的2703对，80对不进入奖励但保留全部原付费/最终fit/普通KD，无免费补问。无混配返回原对象/顺序，元数据全范围已验证。数学视角偏差反例不等于实际模型取巧或HOTA结论。新native_binary_effective_views与rsi_probe_conditioning_amendment精选收据。
+- 该修正尚未接入完整质量研究，禁止声称已跑/涨点；后续显式登记，优先准确复用不受影响四设置，重算C2/C5，原312作对照。三个在途源仍pin不变：实际会话89700、14883/controller3661317、1520/controller3701394；只续实际任务工具句柄，无新观察器。TRUST四卡0C2/1C3/2C1/3C6，pendingC4/C5；原native2C1/3C6继续。
+- 实际新RSI Goal仍ACTIVE，完整正文/旧目标继承见20261124新Goal TXT。新TXT第10节/执行TXT第14节为本轮解释；不以metadata修正、行为变化或队列完成宣布三创新/六设置成功。只seed0、NAS只读，发布双100,000,000B gate；AGENTS私有历史仍只留工作区，不全量stage。
+
 ## 最新：旧联合全六设置原始预测与1776普通拟合已封存（2026-11-24）
 
 - 实际89700已进入ALL_RAW_AND_ORDINARY_FITS_SEALED_GENERATING_COUNTS_NO_GT，C1..C6全部25/4/45/45/4/25视频完成，198raw封存GT0。1776ordinary前缀全部原.005过门槛，max KL .004847025459651313，1066用显式优化补充；其它既成拟合保留。精选摘要joint_all_raw_ordinary_gate_summary_20261124.json，0新GT/HOTA读取。这是必要阶段完成，不是质量/Goal验收。
