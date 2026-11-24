@@ -1,5 +1,15 @@
 # AGENTS.md
 
+## 最新：RSI原文/官方代码与三项无GT诊断（2026-11-24）
+
+- 用户点名新综述2607.13104v1、TTRL2504.16084v3、Agent0最新2511.16043v2；已核对方法/奖励及官方实现，并补读Agent0-VL2511.19900v2、Marvo2610.15084v1、SelectTTRL2610.16104v1。5官方repo/20源文件Git-blob复核全同，完整所读代码/原文片段仅本地非Git档案，公开rsi_primary_literature_code_audit与新TXT《TTA_RMOT_RSI原文与代码核验及下一步设计_20261124.txt》。未安装/执行第三方栈。TTRL多数二元伪标签错时奖励全反；Agent0仍用多数答案和工具次数奖励；Marvo反事实工具收益最可借鉴但参照仍为挑战者自造答案；SelectTTRL正确性方向需独立QA。Agent0-VL默认outcome读取ground_truth字段，其实际来源本轮未核定，不指控paper泄漏，也不直接搬入无标签RMOT。
+- paid_pair_information v2实际30850 exit0；固定前min(10,N)视频共48/两策略，C2/C5修正、其余TRUST。精确重建NativeVisual.record，逐前缀拟合行数相同；全部跨轨迹配对且各query-track仅1请求时刻，fresh-or-available硬优先级所致，CLIP仍可含内部历史帧。LEARNED同实际view/frame比例约14.873/.911/10.678/8.624/1.007/13.357%。较大前缀probeI约.106/.182/.170/.195/.180/.095，不能把旧13个Dance对11个低信息推广全六；原.005门槛不改。v1原脚本/报告已私有SHA归档，勿重跑终态。
+- state_probe实际89526 exit0；同48视频第三轮final-all-paid之前，全部当前probe组未fit。相同CPU full CE复现已记GPU误差max3.324e-7；full-minus-identity教师CE在12设置/策略汇总9正3负，C4L等反例保留。是同已学网络删除动态项的描述，非重训NoState消融、非GT/HOTA，不支持全面去状态或加HMM。0新fit/teacher/预测。
+- 新revisit_evidence_audit实际11374 exit0：仅复用原24同轨迹双时刻+72同帧跨轨迹pilot正常INDEPENDENT_A/B，192旧实际二元例。双时刻0/24半阈值翻转、平均p差.03960/JS.007445；跨轨迹11/72、p差.17198/JS.08340，4实际view回退混配明确记账。两样本非配对，不是语义正确率/收益，未重复GPU小试。全3审计GT0、原pins不改；两图JOINT/SHARED回答不冒用正常二元。
+- 文献后候选仍收敛为一个框架的三点：学观察价值的A↔S、可比上下文条件区分学习、有证据支持的身份/状态表示。经典思想对应信息价值/实验设计、条件似然消共同干扰、分层隐变量可辨识性；不是输出校准换名。先完成当前4正式研究，再据完整结果选择新的受控观察或表示研究；不扩新大矩阵/阈值/种子，候选未称涨点。
+- 真正4长句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324继续；最后实际native C1第20/C6第19/C2第2视频，TRUST C3第41/C4第25/C5第4，修正两设置raw完等待父counts，utility四设置掩码完等C3/C4。只续actual工具数值句柄，无观察器或agent ps/tail/nvidia轮询；最新以工具为准。source pins全部不可改，旧89700及上述新诊断终态不再续。seed0、NAS只读、双100MB gate；Goal ACTIVE、六设置KD优势/三贡献/匹配fresh冷成本仍未完成。AGENTS更早私有49行完整留工作区，不全量stage。
+
+
 ## 最新：关联诊断与条件集合读出已实际运行（2026-11-24）
 
 - 旧582已完整官评/复算后，stability49271和official-association7973均exit0。旧联合主方法在GT身份/成员两端稳定边翻转率C1..C6约1.013/5.151/2.978/3.373/4.745/.645%；不能套旧v8P的0翻转，也不能冒称在途native已读GT。固定普通coarse每query/frame数量后，六设置ΔAssA为-9.479/-14.281/-29.970/-29.064/-13.078/-6.917，ΔHOTA均负。C3/C6诊断IoU.5命中更多且DetA略高仍HOTA低；翻转非HOTA加法因果解释。
