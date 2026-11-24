@@ -1,0 +1,116 @@
+{
+  "status": "PASS_C3_TWO_EXISTING_HEADS_ACTUAL_ORIGINAL_PARENT_REUSE",
+  "pair": "C3",
+  "video": "v_ITo3sCnpw_k_c010",
+  "actual_original_controller_session": 14883,
+  "original_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "original_numeric_source_pins_unchanged": true,
+  "helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+  "heads": [
+    {
+      "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+      "producer_pid": 617796,
+      "actual_terminal_session": 48953,
+      "actual_exit_code": 0,
+      "physical_GPU": 0,
+      "fit_records": [
+        {
+          "excess_risk": 4.658177457006474e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 3.51586547352456e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 3.5303757129290236e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 2.7485153712425436e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "wall_seconds": 224.42002045898698,
+      "prepared_sha256": "86a127e47a16714d3efafab2eb641534194e77fc5f40b8205a88ab37c2be190a",
+      "actual_original_parent_reuse_verified": true,
+      "original_report_marker_and_exact_binding_equal": true,
+      "original_prediction_outputs": [
+        {
+          "method": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED_FINAL",
+          "shape": [
+            9,
+            7813
+          ],
+          "mask_sha256": "a758eced3c753c4f88007d8cc71e319c22619c41f73c8766b85148c35d94784f",
+          "score_sha256": "27acac069d3cf0c21e9cdf05c05d1867cd79527462fc0b40c2214a24f0e29319"
+        }
+      ]
+    },
+    {
+      "arm": "COARSE_UNIT_SOFT_FROZEN",
+      "producer_pid": 617797,
+      "actual_terminal_session": 35609,
+      "actual_exit_code": 0,
+      "physical_GPU": 3,
+      "fit_records": [
+        {
+          "excess_risk": 0.00035613758427743836,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.00034734887957782457,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.00032326953359948507,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.00024262714748876646,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "wall_seconds": 55.367422290029936,
+      "prepared_sha256": "4314a1555ee0955d90b4ad82e1335edf9ba51ec2b93195ab977e705c6ab66238",
+      "actual_original_parent_reuse_verified": true,
+      "original_report_marker_and_exact_binding_equal": true,
+      "original_prediction_outputs": [
+        {
+          "method": "COARSE_UNIT_SOFT_FROZEN_FINAL",
+          "shape": [
+            9,
+            7813
+          ],
+          "mask_sha256": "ebb44a4a12f1183491808ee9fa0febbb532a801b200ce37ed5932a982d26c97d",
+          "score_sha256": "04c526dd8e53cdb20e299212caa9742b3e9b0b53ff033105b92bdea0f1c7a10a"
+        },
+        {
+          "method": "COARSE_UNIT_SOFT_FROZEN_MEAN",
+          "shape": [
+            9,
+            7813
+          ],
+          "mask_sha256": "ebb44a4a12f1183491808ee9fa0febbb532a801b200ce37ed5932a982d26c97d",
+          "score_sha256": "963d61a083f98383f1472552c59d18cf80c5c1f94791a249eb15bfd3b851ddf3"
+        }
+      ]
+    }
+  ],
+  "independent_fits": 2,
+  "fit_records": 8,
+  "original_output_variants": 3,
+  "GT_open_attempts": 0,
+  "new_quality_conditions": 0,
+  "new_neural_seeds": 0,
+  "not_a_HOTA_or_primary_deployment_speedup_result": true,
+  "goal_status": "ACTIVE"
+}
