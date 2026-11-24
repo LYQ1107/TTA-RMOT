@@ -113,3 +113,9 @@ proper KD要求超出精确输入/交换等价类可达熵下界的KL<=.005；lo
 这不是证明教师存在某种实际偏差，也不证明小概率差异含有正确语义。若两个对象实际上都不匹配，放大相对差异可能仅仅学习负例之间的排序。假定共同query/view截距能消去，不等于实际全部视觉误差都能消去；当前训练还包含多视角均值和不同时间锚点，不能直接把probe代数性质当成全模型可识别性定理。
 
 因此不修改在途三个研究的奖励门槛、权重或源文件。后续若质量提示闭环无效，优先比较无标签元数据引导的更有信息量探针，以及条件相对学习与完整likelihood/teacher-logit蒸馏的同信息对照；保持教师相对分辨与RMOT真值两层评价。新源scripts/a100_rsi_probe_information.py及精选收据rsi_completed_probe_information_20261124.json可重现上述事实。
+
+十三、旧联合六设置原始生成与充分基线已封存（2026-11-24）
+
+实际session89700报告ALL_RAW_AND_ORDINARY_FITS_SEALED_GENERATING_COUNTS_NO_GT。六设置C1..C6分别25/4/45/45/4/25视频全部完成，共148前缀、198raw方法输出，封存时GT_open_attempts全部0。1776份ordinary前缀收据全过原.005门槛，最大excess KL .004847025459651313；1066份使用已公开的优化补充，其余已有完成拟合原样保留。未改模型、损失、输入、容量、seed或门槛。完整本地门槛账本与六个completion SHA见joint_all_raw_ordinary_gate_summary_20261124.json。
+
+控制器继续双向CountMatched，全部582输出封存后隔离官评并独立复算。目前没有从这份收据推出HOTA提升。原始生成完成不等于完整科研目标完成；记录的运行相位时间也不是整个历史实验或独立冷部署时间。释放的GPU0/1已经由新TRUST研究接续C2/C3，另外C1/C6仍在2/3训练，旧native组合继续。

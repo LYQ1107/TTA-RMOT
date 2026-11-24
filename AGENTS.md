@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## 最新：旧联合全六设置原始预测与1776普通拟合已封存（2026-11-24）
+
+- 实际89700已进入ALL_RAW_AND_ORDINARY_FITS_SEALED_GENERATING_COUNTS_NO_GT，C1..C6全部25/4/45/45/4/25视频完成，198raw封存GT0。1776ordinary前缀全部原.005过门槛，max KL .004847025459651313，1066用显式优化补充；其它既成拟合保留。精选摘要joint_all_raw_ordinary_gate_summary_20261124.json，0新GT/HOTA读取。这是必要阶段完成，不是质量/Goal验收。
+- 89700继续生成双数量对照后582官评与独立统计复算，期间没stdout仍有actual handle存活，不重启。GPU0/1已自动接续新TRUST1520的C2/C3，workers3747707/3747711；2/3原TRUST C1/C6 workers3701425/3701426继续，pending C4/C5。旧native14883 C1/C6照常共享2/3。当前三套真实句柄89700/14883/1520；无新观察器、无数值源修改、只seed0。
+- 下一步先完整582结果，同时继续两套新方案。未来新统计只对新文件精确共享/pack后独立复算及双100MB gate；保留旧科学提供者、负结果、NAS原始与私有AGENTS。Goal ACTIVE，质量、模块、双CountMatched和匹配fresh真实冷成本仍未齐。
+
 ## 最新：已完成前缀RSI反馈瓶颈（2026-11-24）
 
 - scripts/a100_rsi_probe_information.py已实际exit0：只读native C1/C6前三视频、TRUST C1/C6前两视频的已付费闭环，60policy-round仅13不同probe对。11/13加权条件信息<.005，12/13两教师意见均<.5；48回合因门槛0、4回合两技能均低于常量、8回合正反馈（有重复，非独立成功）。8/13相对信息非小但乘exactly-one mass后被抑制。共同teacher logit±2的相对概率差仅1.64e-15；仅代数假设，不能叫真实语义正确或已定位教师实际偏差。
