@@ -1,5 +1,14 @@
 # AGENTS.md
 
+## 最新：实际新RSI Goal与三套六设置执行（2026-11-24）
+
+- 用户先清除旧Goal，再明确要求承接新建。create_goal已真实成功：active/createdAt1795492606，工具正文直接包含人类视觉方式、经典思想、RSI/双模型协同进化和旧六设置全部要求。旧Goal未宣称完成，原文及正负证据保留。实际回执research_goal_RSI_successor_20261124.json；新TXT《TTA_RMOT_旧目标继承与RSI新Goal_20261124.txt》。不再套用“工具正文不能改、只有本地RSI补充”的旧状态。
+- 当前三个真实控制器只续session89700/PID3604938（旧joint修复582，0/1 C3/C4）、14883/PID3661317（native二元组合726，2/3 C1/C6）和1520/PID3701394（新TRUST质量312，2/3 C1/C6 workers3701425/3701426）。新TRUST预检715/713MiB按用户许可共享，小头各15%显存；所有其余设置都在各自控制器内。无新观察器；所有三套source pins中的数值/分析/复算运行时不得修改。NAS只读、只seed0。
+- 新分布策略CPU6677/9558及同CPU分析21982均exit0，禁止重跑。三分支同CPU原SGD/门控SGD/门控TRUST各56+40问，第一视频S逐tensor相同；TRUST更新均值条件KL.00265794，第二视频真实替换2个候选问题，S改变；门控SGD的S仍与原版逐tensor相同。普通joint/coarse max excessKL.00036321。0GT/无RMOT输出，第二视频低信息奖励全0，不能把换题/权重变化当质量。
+- 新native_binary_trust_quality_20261124独立登记/实现并真实启动。复用原pin worker及所有数据/求解器/预算/充分拟合规则，仅在独立进程绑定新A更新及缩减方法范围：完整方法、FROZEN-A、八类同信息KD，10配方18raw/设置、312官评、108CountSelf别名。同名方法必须带cohort区分；此范围不宣称三因素交互已完成，原726组合继续。仍全部该研究输出封存后才隔离GT，当前未读新HOTA。源scripts/a100_native_binary_trust_*与rsi_policy_distribution.py已pin。
+- 新Goal增加三条候选研究路线：A↔S动态课程（已实现）、互补视觉双学生双向互学（候选）、视觉依据约束的自我修正（候选）。用户综述已重新核对，属于自动研发反馈动机，不提供RMOT算法/涨点保证。R-Zero、Visual Questioner、VISE、DML、TRPO原文启发见新TXT，不将多数票/一致性当真值，不包装经典方法名为创新。
+- 未达六设置对充分普通KD的可靠改善、三个贡献/必要交互、双CountMatched及匹配fresh真实冷成本时，新Goal持续ACTIVE。发布保留旧科学源/负结果/私有AGENTS，双100,000,000B gate仍必需，新增记录尚待本轮正常推送。
+
 ## 最新：统一二元教师与RSI六设置已运行（2026-11-24）
 
 - 用户已从UI恢复Goal为ACTIVE，get_goal实证active。有效目标继续包含人类视觉方式、经典思想、RSI、六个跨域实验设置、充分同信息蒸馏、模块/交互、双CountMatched和最终真实冷成本；未达成不结项。只seed0，无新种子网格。旧blocked收据是历史，不代表当前状态。

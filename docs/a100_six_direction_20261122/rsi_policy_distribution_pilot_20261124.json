@@ -1,0 +1,526 @@
+{
+  "status": "ANALYZED_TEACHER_ONLY_POLICY_DISTRIBUTION_PILOT",
+  "rows": [
+    {
+      "video": "dancetrack0004",
+      "policies": {
+        "ORIGINAL_FROZEN": {
+          "budget": 56,
+          "rewards": [
+            0.0,
+            0.0,
+            0.38363878946245883
+          ],
+          "teacher_information": [
+            0.1262725432011636,
+            0.0,
+            0.2717236354792223
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.14240316221708837,
+              "teacher_probe_CE_after": 0.2226958380629306,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.012827649485295243,
+              "teacher_probe_CE_after": 0.015625155762700904,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.38363878946245883,
+              "baseline_before": 0.0,
+              "baseline_after": 0.038363878946245884,
+              "teacher_probe_CE_before": 0.29053494584739464,
+              "teacher_probe_CE_after": 0.18067178964294353,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "ORIGINAL_SGD": {
+          "budget": 56,
+          "rewards": [
+            0.0,
+            0.0,
+            0.38363878946245883
+          ],
+          "teacher_information": [
+            0.1262725432011636,
+            0.0,
+            0.2717236354792223
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.14240316221708837,
+              "teacher_probe_CE_after": 0.2226958380629306,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.012827649485295243,
+              "teacher_probe_CE_after": 0.015625155762700904,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.38363878946245883,
+              "baseline_before": 0.0,
+              "baseline_after": 0.038363878946245884,
+              "teacher_probe_CE_before": 0.29053494584739464,
+              "teacher_probe_CE_after": 0.18067178964294353,
+              "actor_parameter_L2_change": 0.001844153882048441,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "INFO_GATED_SGD": {
+          "budget": 56,
+          "rewards": [
+            0.0,
+            0.0,
+            0.4203521066875283
+          ],
+          "teacher_information": [
+            0.1262725432011636,
+            0.0,
+            0.2717236354792223
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.14240316221708837,
+              "teacher_probe_CE_after": 0.2226958699059937,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": false,
+              "probe_information": 0.1262725432011636,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.012827635617734937,
+              "teacher_probe_CE_after": 0.015627820987660294,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.0,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.4203521066875283,
+              "baseline_before": 0.0,
+              "baseline_after": 0.042035210668752834,
+              "teacher_probe_CE_before": 0.29087624858780675,
+              "teacher_probe_CE_after": 0.16911155582043316,
+              "actor_parameter_L2_change": 0.0020049592651296974,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": false,
+              "probe_information": 0.2717236354792223,
+              "zero_reward_context_independent_of_training_action": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "INFO_GATED_TRUST": {
+          "budget": 56,
+          "rewards": [
+            0.0,
+            0.0,
+            0.4203521066875283
+          ],
+          "teacher_information": [
+            0.1262725432011636,
+            0.0,
+            0.2717236354792223
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.14240316221708837,
+              "teacher_probe_CE_after": 0.2226958699059937,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0,
+              "KL_limit": 0.01,
+              "surrogate_before": 0.0,
+              "surrogate_after": 0.0,
+              "accepted": false,
+              "step_fraction": 0.0,
+              "gradient_norm": 0.0,
+              "CG_steps": 0,
+              "recorded_decision_states": 22,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": false,
+              "probe_information": 0.1262725432011636,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0,
+              "baseline_after": 0.0,
+              "teacher_probe_CE_before": 0.012827635617734937,
+              "teacher_probe_CE_after": 0.015627820987660294,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0,
+              "KL_limit": 0.01,
+              "surrogate_before": 0.0,
+              "surrogate_after": 0.0,
+              "accepted": false,
+              "step_fraction": 0.0,
+              "gradient_norm": 0.0,
+              "CG_steps": 0,
+              "recorded_decision_states": 14,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.0,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.4203521066875283,
+              "baseline_before": 0.0,
+              "baseline_after": 0.042035210668752834,
+              "teacher_probe_CE_before": 0.29087624858780675,
+              "teacher_probe_CE_after": 0.16911155582043316,
+              "actor_parameter_L2_change": 1.2127269075735163,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0026579425378868,
+              "KL_limit": 0.01,
+              "surrogate_before": 0.4203521066875283,
+              "surrogate_after": 0.44512755010128835,
+              "accepted": true,
+              "step_fraction": 1.0,
+              "gradient_norm": 0.02004959248006344,
+              "CG_steps": 10,
+              "recorded_decision_states": 14,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": false,
+              "probe_information": 0.2717236354792223,
+              "zero_reward_context_independent_of_training_action": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        }
+      }
+    },
+    {
+      "video": "dancetrack0005",
+      "policies": {
+        "ORIGINAL_FROZEN": {
+          "budget": 40,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "teacher_information": [
+            0.00012212688010810983,
+            3.348493838368138e-05,
+            0.0014095120290357407
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.038363878946245884,
+              "baseline_after": 0.0345274910516213,
+              "teacher_probe_CE_before": 0.014590936831675531,
+              "teacher_probe_CE_after": 0.013232883504241066,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0345274910516213,
+              "baseline_after": 0.031074741946459167,
+              "teacher_probe_CE_before": 0.0032633106929746505,
+              "teacher_probe_CE_after": 0.004866219560810584,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.031074741946459167,
+              "baseline_after": 0.02796726775181325,
+              "teacher_probe_CE_before": 0.031244832085131916,
+              "teacher_probe_CE_after": 0.03617215043906612,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": true,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "ORIGINAL_SGD": {
+          "budget": 40,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "teacher_information": [
+            0.00012212688010810983,
+            3.348493838368138e-05,
+            0.0014095120290357407
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.038363878946245884,
+              "baseline_after": 0.0345274910516213,
+              "teacher_probe_CE_before": 0.014590936831675531,
+              "teacher_probe_CE_after": 0.013232883504241066,
+              "actor_parameter_L2_change": 0.00010146005652591457,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0345274910516213,
+              "baseline_after": 0.031074741946459167,
+              "teacher_probe_CE_before": 0.0032633106929746505,
+              "teacher_probe_CE_after": 0.004866219560810584,
+              "actor_parameter_L2_change": 9.195759069570637e-05,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.031074741946459167,
+              "baseline_after": 0.02796726775181325,
+              "teacher_probe_CE_before": 0.031244832085131916,
+              "teacher_probe_CE_after": 0.03617215043906612,
+              "actor_parameter_L2_change": 0.0003316949434370481,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "INFO_GATED_SGD": {
+          "budget": 40,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "teacher_information": [
+            0.00012212688010810983,
+            3.348493838368138e-05,
+            0.0014095120290357407
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.042035210668752834,
+              "baseline_after": 0.03783168960187755,
+              "teacher_probe_CE_before": 0.01482938094715994,
+              "teacher_probe_CE_after": 0.01223671987045963,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.00012212688010810983,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.03783168960187755,
+              "baseline_after": 0.0340485206416898,
+              "teacher_probe_CE_before": 0.003284702090183568,
+              "teacher_probe_CE_after": 0.004959853605516884,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": true,
+              "probe_information": 3.348493838368138e-05,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0340485206416898,
+              "baseline_after": 0.03064366857752082,
+              "teacher_probe_CE_before": 0.03085157032836771,
+              "teacher_probe_CE_after": 0.03383580077575993,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.0014095120290357407,
+              "zero_reward_context_independent_of_training_action": true
+            }
+          ],
+          "replaced_vs_original_SGD": 0,
+          "same_order_as_original_SGD": true
+        },
+        "INFO_GATED_TRUST": {
+          "budget": 40,
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "teacher_information": [
+            0.00012212688010810983,
+            3.348493838368138e-05,
+            0.0014095120290357407
+          ],
+          "actor_updates": [
+            {
+              "reward": 0.0,
+              "baseline_before": 0.042035210668752834,
+              "baseline_after": 0.03783168960187755,
+              "teacher_probe_CE_before": 0.01482938094715994,
+              "teacher_probe_CE_after": 0.01223671987045963,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0,
+              "KL_limit": 0.01,
+              "surrogate_before": -0.042035210668752834,
+              "surrogate_after": -0.04203521066875283,
+              "accepted": false,
+              "step_fraction": 0.0,
+              "gradient_norm": 0.0,
+              "CG_steps": 0,
+              "recorded_decision_states": 17,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.00012212688010810983,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.03783168960187755,
+              "baseline_after": 0.0340485206416898,
+              "teacher_probe_CE_before": 0.003284702090183568,
+              "teacher_probe_CE_after": 0.0047109817511775355,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0,
+              "KL_limit": 0.01,
+              "surrogate_before": -0.03783168960187755,
+              "surrogate_after": -0.03783168960187755,
+              "accepted": false,
+              "step_fraction": 0.0,
+              "gradient_norm": 0.0,
+              "CG_steps": 0,
+              "recorded_decision_states": 14,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": true,
+              "probe_information": 3.348493838368138e-05,
+              "zero_reward_context_independent_of_training_action": true
+            },
+            {
+              "reward": 0.0,
+              "baseline_before": 0.0340485206416898,
+              "baseline_after": 0.03064366857752082,
+              "teacher_probe_CE_before": 0.030625736993388355,
+              "teacher_probe_CE_after": 0.031118452511725108,
+              "actor_parameter_L2_change": 0.0,
+              "frozen_actor": false,
+              "fresh_teacher_probe": true,
+              "reward_is_teacher_risk_proxy_not_RMOT_truth": true,
+              "optimizer": "natural_gradient_recorded_state_KL_backtracking",
+              "mean_recorded_state_KL": 0.0,
+              "KL_limit": 0.01,
+              "surrogate_before": -0.0340485206416898,
+              "surrogate_after": -0.0340485206416898,
+              "accepted": false,
+              "step_fraction": 0.0,
+              "gradient_norm": 0.0,
+              "CG_steps": 0,
+              "recorded_decision_states": 3,
+              "trajectory_KL_or_task_return_guarantee": false,
+              "skipped_zero_information_context": true,
+              "probe_information": 0.0014095120290357407,
+              "zero_reward_context_independent_of_training_action": true
+            }
+          ],
+          "replaced_vs_original_SGD": 2,
+          "same_order_as_original_SGD": false
+        }
+      }
+    }
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "all_data_DEVELOPMENT": true,
+  "manual_GT_or_HOTA_used": false,
+  "actual_new_teacher_GPU_calls": 0,
+  "RMOT_quality_claim": false,
+  "original_six_setting_protocol_unchanged": true,
+  "limitations": "Two videos; finite pretrained teacher library; teacher progress and question changes do not establish RMOT quality or positive transfer."
+}

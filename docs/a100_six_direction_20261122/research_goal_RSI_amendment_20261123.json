@@ -1,9 +1,9 @@
 {
-  "status": "ACTIVE_GOAL_RSI_SCOPE_USER_RESUMED_20261124",
+  "status": "SUPERSEDED_BY_USER_REQUESTED_NEW_RSI_GOAL_OLD_REQUIREMENTS_PRESERVED",
   "updated_unix": 1795437370.1279054,
   "effective_goal_objective": "以人类视觉方式、经典算法思想和递归自我改进（RSI）/双模型协同进化为启发，解决官方固定候选框与Track ID上的跨域RMOT指代适配。覆盖V2→Dance、Dance→KITTI-V2、V2→SportsMOT、Dance→SportsMOT、LaMOT→KITTI-V2、LaMOT→Dance六个跨域实验设置。适配及学习奖励只用目标域图片、任务查询和冻结教师；人工GT仅在方案和本研究全部预测封存后隔离评价，现有数据全为DEV，不能冒称独立盲测。以可学习挑战者—解决者闭环、互补视觉学习和有证据的对象/状态表示等方向形成统一方法，最终凝练三个有实际证据的贡献；不把命名的经典后处理或固定教师单向蒸馏换名RSI。建立同信息、同候选、同教师预算且充分优化的普通软/硬及联合蒸馏；持续设计实现实验修正，争取全部六设置可靠改善，以模块及交互消融、每query/frame双向CountMatched、逐轮反馈诊断和匹配实际冷启动墙钟成本约束归因。不削弱对手、不用GT选参数或轮次、不保证尚未获得的数据结论，不因局部正结果、原型、报告或队列结束而结项。只用训练seed0，不追加种子网格；GPU0/1/2/3，用户已允许2/3并行小头任务，保留其他项目进程并限制显存。NAS只读，大资产不上Git，必要代码和精选记录正常推送且快照及可达对象都小于100MB。",
   "RSI_addition": "新增RSI研究方向：在坚持人类视觉方式与经典算法思想启发的同时，研究递归自我改进（RSI）及双模型协同进化，重点包括可学习挑战者—RMOT解决者的闭环课程、互补视觉模型的双向互学和有独立教师锚点的反馈改进。须区分固定教师蒸馏、互学与真正的双向进化，逐轮报告改进及坍塌；不把一致性、多数票或置信度当作语义真值，不承诺智能爆炸或必然涨点。沿用六个跨域实验设置、目标域人工标签只用于封存后评估、充分同信息蒸馏/同预算对照、必要模块及交互消融和真实墙钟成本。只用seed0，GPU0/1/2/3；最终保留统一方案与有证据的贡献。",
-  "original_goal_remains_active": true,
+  "original_goal_remains_active": false,
   "goal_tool_supports_objective_edit": false,
   "goal_tool_UI_objective_unchanged": true,
   "reason": "Available update_goal accepts status only; create_goal rejects unfinished goals. Existing unachieved goal is neither closed nor replaced.",
@@ -12,5 +12,8 @@
   "latest_goal_tool_status": "active",
   "original_goal_remains_unfinished": true,
   "latest_status_receipt": "rsi_goal_tool_active_receipt_20261124.json",
-  "user_resumed_goal_unix": 1795489890.0899737
+  "user_resumed_goal_unix": 1795489890.0899737,
+  "prior_effective_status": "ACTIVE_GOAL_RSI_SCOPE_USER_RESUMED_20261124",
+  "successor_goal_record": "research_goal_RSI_successor_20261124.json",
+  "successor_actual_tool_objective_contains_RSI": true
 }

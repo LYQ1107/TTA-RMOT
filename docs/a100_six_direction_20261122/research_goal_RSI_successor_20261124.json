@@ -1,0 +1,17 @@
+{
+  "status": "ACTIVE_NEW_GOAL_CREATED_WITH_RSI_IN_ACTUAL_OBJECTIVE",
+  "goal": {
+    "threadId": "01a1f6c2-b270-7883-b731-a99ee72f5bae",
+    "objective": "承接并保留旧Goal的跨域RMOT研究目标：沿用官方固定候选框与Track ID，只用目标域图片、任务查询和冻结教师指导进行指代适配，目标人工标签仅在方案固定及本研究全部输出封存后隔离评估。覆盖V2→Dance、Dance→KITTI-V2、V2→SportsMOT、Dance→SportsMOT、LaMOT→KITTI-V2、LaMOT→Dance六个跨域实验设置。以人类视觉方式、经典算法思想和递归自我改进（RSI）/双模型协同进化为启发，持续设计、实现、运行、分析和修正统一方法，最终凝练三个有明确实证贡献的创新点，争取在全部六设置可靠优于同信息、同候选、同教师问答预算且充分训练的普通软/硬教师伪标签及蒸馏。参考“What if automating AI R&D triggers an intelligence explosion?”及RSI原始论文，研究可学习观察者/挑战者↔RMOT求解器的动态课程、互补视觉双学生的双向互学，以及有独立视觉/冻结教师证据约束的反馈改进等方向；明确假设、可检验性质、反馈失效和退化，区别固定教师蒸馏、互学和实际双向改进，不把多数票、置信度或模型一致性当真值，不保证未获数据支持的涨点或智能爆炸。保留旧Goal、旧代码和全部有效正负结果，复用健康在途任务及完成单元，不重启旧80项队列、废弃v9或封存v8P66。以模块及交互消融、逐query/frame双向CountMatched、固定问答回放、错误诊断及真实端到端冷启动/特征/教师推理/适配/输出墙钟成本验证归因，不削弱对手，不用目标GT选参数或检查点，现有数据全部DEV，不冒称独立盲测。只用固定训练seed0，不追加随机种子网格；仅GPU0/1/2/3，可并行且保留其他项目进程；NAS只读、大数据及ckpt保留NAS或本地非Git目录；必要代码与精选实验记录正常推送GitHub LYQ1107/TTA-RMOT，发布快照和可达对象均小于100,000,000字节。不能因少量测试、局部涨点、原型、报告或队列结束而结项；旧目标未达部分在本Goal继续，持续研究直至目标实际达成或出现须用户解决的真实阻塞。",
+    "status": "active",
+    "tokensUsed": 9650,
+    "timeUsedSeconds": 60,
+    "createdAt": 1795492606,
+    "updatedAt": 1795492666
+  },
+  "old_goal_record": "docs/a100_six_direction_20261122/research_goal_RSI_amendment_20261123.json",
+  "old_goal_completion_claim": false,
+  "old_goal_cleared_by_user_before_successor": true,
+  "preserve_old_goal_unfinished_requirements": true,
+  "preserve_existing_jobs_and_all_positive_negative_evidence": true
+}

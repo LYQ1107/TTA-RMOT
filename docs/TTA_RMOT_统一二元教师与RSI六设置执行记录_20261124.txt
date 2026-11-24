@@ -93,3 +93,11 @@ proper KD要求超出精确输入/交换等价类可达熵下界的KL<=.005；lo
 {'family': 'point'} : excess_risk=0.0012322573784689789 ; proper teacher KL in nats
 {'family': 'coarse'} : excess_risk=0.00014585195672366102 ; proper teacher KL in nats
 {'family': 'point', 'risk': 'logit'} : excess_risk=5.17712473151008e-13 ; squared native teacher logit (p clipped1e-6)
+
+十一、后续独立策略分布实验与真实新Goal
+
+用户清除旧Goal后要求承接创建新Goal；工具已于createdAt1795492606实际创建active的新目标，正文直接含RSI、旧六设置与全部验收约束。完整说明见《TTA_RMOT_旧目标继承与RSI新Goal_20261124.txt》，旧目标未宣称达成。
+
+原统一二元教师前两个C1/C6视频，A参数虽改变，全部问题顺序仍与FROZEN一致。独立CPU6677/9558已exit0，同CPU的原SGD/零信息门控SGD/门控TRUST三分支，各56+40问，第一视频S逐tensor相同。新TRUST更新的平均已记录状态KL为.00265794，第二视频替换2个候选查证问题，S也发生变化；仅门控SGD的S仍与原SGD逐tensor相同。联合/coarse普通头最大excess KL.00036321。分析21982已PASS。零GT、无RMOT预测，探针低信息不能支持语义提升结论。原GPU与CPU结果不作纯因果比较。
+
+在原726组合研究继续的同时，新312质量范围已预登记并由1520/controller3701394实际运行：完整方法、冻结A、八类同信息KD；18raw每设置，108raw+204dualcounts=312。GPU2/3经715/713MiB预检启动C1/C6，15%显存上限，之后补全部六设置。原主方法/源/问题记录没有被改写；新cohort为native_binary_trust_quality_20261124，同名方法必须带cohort区分。该缩减范围先回答质量与RSI闭环，三因素/交互仍由独立原组合研究及后续匹配机制验证负责，Goal不结项。
