@@ -1,5 +1,12 @@
 # AGENTS.md
 
+## 最新：同场景比较的全范围支持已核验（2026-11-24）
+
+- 新a100_same_context_comparison_support实际18496 exit0：148设置视频/74物理视频/3506查询，只读候选与请求元数据。完整候选同帧/实际view可比轨迹99.649..100%，旧允许问答库仅4.850..21.906%；这是可提问机会，不是GT召回。所有查询原预算<N轨迹，不能承诺逐个问遍。6400实际PairedViews.clip元数据检查、222全局ID双射拓扑检查通过。静态自由轨迹分数rank=n-components仅理论观测条件，不能当动态RMOT或共享神经模型可辨识保证，更不是输出校准创新。新报告TXT第六节、same_context_comparison_support收据/plan及两脚本。
+- 独立a100_same_context_support_reproduce实际97513 exit0：集合交+NetworkX/NumPy完整复核222全图、3506旧库查询图、222数值秩，所有汇总相同，595输入SHA。原CPU复核87418因已定位重复NAS元数据hash主动SIGINT130，v0源码/原因私有归档；现只hash3份不同文件，范围不缩减。不是因观察超时重启，4原GPU任务未动，勿再续两项终态。
+- 当前4实际句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324继续，18/4/27/31登记源hash全同。无新GT/教师/fit/预测、无新大矩阵或种子。优先待全质量后做有限预算的可比观察与共享表示泛化；不把扩池当RSI增益。Goal ACTIVE；AGENTS旧私有49行保留，双100MB gate。
+
+
 ## 最新：RSI原文/官方代码与三项无GT诊断（2026-11-24）
 
 - 用户点名新综述2607.13104v1、TTRL2504.16084v3、Agent0最新2511.16043v2；已核对方法/奖励及官方实现，并补读Agent0-VL2511.19900v2、Marvo2610.15084v1、SelectTTRL2610.16104v1。5官方repo/20源文件Git-blob复核全同，完整所读代码/原文片段仅本地非Git档案，公开rsi_primary_literature_code_audit与新TXT《TTA_RMOT_RSI原文与代码核验及下一步设计_20261124.txt》。未安装/执行第三方栈。TTRL多数二元伪标签错时奖励全反；Agent0仍用多数答案和工具次数奖励；Marvo反事实工具收益最可借鉴但参照仍为挑战者自造答案；SelectTTRL正确性方向需独立QA。Agent0-VL默认outcome读取ground_truth字段，其实际来源本轮未核定，不指控paper泄漏，也不直接搬入无标签RMOT。
