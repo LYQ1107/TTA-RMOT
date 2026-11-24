@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## 最新：可比probe修正质量已真实启动（2026-11-24）
+
+- 独立修正入口scripts/a100_native_binary_comparable_six_setting.py已实现/预登记并实际运行：session99812/controller3791984，GPU1 C2 worker3792076、GPU0 C5 worker3792077；预检691/1619MiB，仅共享已知本项目PIDs3747711/3747707并完整保留它们，每头原15%显存。27份递归source pins含新三脚本/父协议/数值依赖/conditioning，全部运行期间不可改。
+- 新cohort native_binary_comparable_quality_20261124仅重训受影响C2/C5；C1/C3/C4/C6在全部可能预留probe上过滤为原对象/原顺序，各设置前缀独立，父完成后精确复用四设置raw/count/eval。非HOTA选择/非独立复验。312本方案记录+4修正前后跨cohort数量对照+2父主方法引用=318；108新增官评、210精确复用。所有318输出封存前本研究禁止GT/HOTA。
+- 实际首轮checkpoint接线35721 exit0：C2原64paid probe组成32对，1对混配不计critic，31对保留，broker仍付费64；C5首轮32对全保留。两结构fit门槛过、teacher-progress正值不是质量结论。两策略首视频三轮已经继续，正负reward如实保存；不要重跑首轮或以正值挑checkpoint。公开native_binary_comparable_first_actual_round与quality_registration收据，新Goal TXT第11节/执行TXT第15节。
+- 原三套继续且源不改：89700旧582隔离官评、14883原native726、1520原TRUST312。当前只有这四个实际数值句柄89700/14883/1520/99812，直接续工具；无新观察器、无agent级ps/tail/nvidia轮询。四卡均持续工作，原native2/3 C1/C6、新TRUST0C2/1C3/2C1/3C6及修正0C5/1C2共享。
+- 只seed0，无新阈值/轮数/KL搜索。原.005信息门槛/.01actor KL/普通adequacy与所有问答预算保持；NAS只读。Goal ACTIVE，仍未读新HOTA、未完成全部六设置普通KD优势/三模块与交互/最终匹配fresh冷成本。推送必须snapshot和reachable均<100000000B；AGENTS私有历史只留工作区，不能全量stage。
+
 ## 最新：582输出全封存及RSI实际视角修正（2026-11-24）
 
 - 实际89700/controller3604938已进入ALL_582_PREDICTIONS_SEALED_ISOLATED_OFFICIAL_EVALUATION：198raw+384双CountMatched，198CountSelf别名、原1776ordinary门槛全过，封存GT0。582官评/分析/独立复算继续；root尚未读取新HOTA。新joint_all_582_seal_summary_20261124.json。

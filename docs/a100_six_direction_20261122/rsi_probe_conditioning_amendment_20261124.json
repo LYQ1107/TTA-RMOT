@@ -1,5 +1,5 @@
 {
-  "status": "CRITIC_CONDITIONING_RULE_IMPLEMENTED_AND_METADATA_VALIDATED_NOT_IN_LIVE_QUALITY",
+  "status": "QUALITY_AMENDMENT_IMPLEMENTED_REGISTERED_AND_RUNNING",
   "motivation": "The query/requested-view null does not condition away actual-view differences after CLIP fallback. Such pairs can confound teacher-relative progress.",
   "parent_quality_registration": "native_binary_trust_quality_registration_20261124.json",
   "parent_quality_registration_sha256": "123423282beb446c76ed727bf7f638366813a862eba202cb4b376c9b33f41b79",
@@ -46,7 +46,7 @@
     "fits",
     "method registrations"
   ],
-  "quality_trial_status": "NOT_IMPLEMENTED_OR_LAUNCHED; run an explicit prospective amendment, reuse only exact unaffected outputs after parent completion, and compare affected settings without a new seed grid.",
+  "quality_trial_status": "Implemented, registered and actually running: session99812/controller3791984; C2 GPU1 worker3792076 and C5 GPU0 worker3792077.",
   "future_acceptance": [
     "All-six fixed unified recipe, adequate ordinary same-information KD and dual CountMatched",
     "Keep original 312 study as control; record all reuse provenance and original negatives",
@@ -64,5 +64,10 @@
   "neural_seeds": [
     0
   ],
-  "goal_status": "ACTIVE"
+  "goal_status": "ACTIVE",
+  "historical_status_at_metadata_audit": "CRITIC_CONDITIONING_RULE_IMPLEMENTED_AND_METADATA_VALIDATED_NOT_IN_LIVE_QUALITY",
+  "historical_quality_trial_status": "NOT_IMPLEMENTED_OR_LAUNCHED; run an explicit prospective amendment, reuse only exact unaffected outputs after parent completion, and compare affected settings without a new seed grid.",
+  "superseded_by_quality_registration": "native_binary_comparable_quality_registration_20261124.json",
+  "first_actual_GPU_round_record": "native_binary_comparable_first_actual_round_20261124.json",
+  "zero_cost_field_scope": "Existing new_fits/new_teacher_calls/new_RMOT_predictions fields describe the original metadata-only audit; current quality training is separately registered and receipted."
 }
