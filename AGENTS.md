@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## 最新：已完成前缀RSI反馈瓶颈（2026-11-24）
+
+- scripts/a100_rsi_probe_information.py已实际exit0：只读native C1/C6前三视频、TRUST C1/C6前两视频的已付费闭环，60policy-round仅13不同probe对。11/13加权条件信息<.005，12/13两教师意见均<.5；48回合因门槛0、4回合两技能均低于常量、8回合正反馈（有重复，非独立成功）。8/13相对信息非小但乘exactly-one mass后被抑制。共同teacher logit±2的相对概率差仅1.64e-15；仅代数假设，不能叫真实语义正确或已定位教师实际偏差。
+- 此诊断0新教师/fit/预测/GT，effective_view混配0，原信息重算误差4.12e-18。TXT新Goal第8节/执行报告第12节说明：当前门槛有意拒绝小概率No差异，改成相对信息可能放大负例排序噪声。先完成当前完整质量，再必要对照有信息probe或条件相对学习/普通logit-KD；三套已pin数值源/门槛不改，不增加新队列。新Goal仍ACTIVE。
+- 当前真实长句柄仍89700（旧582修复）、14883（native726）、1520（TRUST312），已再由actual handles确认live；不创建观察器，不用ps/tail/nvidia做agent轮询。旧联合末次34/45，native C1/C6第四视频，TRUST第三视频。此为进度记录，后续以实际句柄输出为准。
+
 ## 最新：实际新RSI Goal与三套六设置执行（2026-11-24）
 
 - 用户先清除旧Goal，再明确要求承接新建。create_goal已真实成功：active/createdAt1795492606，工具正文直接包含人类视觉方式、经典思想、RSI/双模型协同进化和旧六设置全部要求。旧Goal未宣称完成，原文及正负证据保留。实际回执research_goal_RSI_successor_20261124.json；新TXT《TTA_RMOT_旧目标继承与RSI新Goal_20261124.txt》。不再套用“工具正文不能改、只有本地RSI补充”的旧状态。
