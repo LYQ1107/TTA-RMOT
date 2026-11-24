@@ -1,5 +1,7 @@
 # TTA-RMOT 研究日志与完整记录索引
 
+2026-11-24增量：显式真实PCD/RGB输入接口已完成实际CPU集成，session16841退出0；C2/0005三帧、197查询、1182输入行，907776个PCD元素与此前实际导出精确一致，新算真实RGB，原NativeVisual点/成对接口贯通，完整执行入口拒绝部分切片。没有新增神经前向、教师、拟合、预测或GT/HOTA；不是冷启动或精度结论。详见docs/TTA_RMOT_真实特征输入接线_20261124.txt及exported_observation_input_check_20261124收据。原四项正式研究继续，所有输入/数值协议不变，Goal ACTIVE。
+
 本文件记录当前决策和后续增量。为遵守用户要求的发布历史小于100MB，2026-11-22将不断重复发布的长日志整理为索引；没有删除实验或修改任何结果。
 
 - 之前已推送的完整逐步日志：[Git完整历史](https://github.com/LYQ1107/TTA-RMOT/blob/8bc165fa8c3a598babeb9f862efec01252f6b84c/research_log.md)。
