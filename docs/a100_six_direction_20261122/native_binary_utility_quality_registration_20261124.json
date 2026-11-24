@@ -1,0 +1,378 @@
+{
+  "status": "REGISTERED_PROSPECTIVE_FROZEN_UTILITY_READOUT_BEFORE_NATIVE_QUALITY_GT",
+  "cohort": "native_binary_utility_quality_20261124",
+  "parent_registration": "native_binary_comparable_quality_registration_20261124.json",
+  "parent_registration_sha256": "b717a606590c6341ad4a7b1175985721fc8a3ec241a558a531ead77feca97cd5",
+  "primary": "UTILITY_LEARNED__COUNT_LEARNED",
+  "readouts": {
+    "UTILITY_LEARNED__COUNT_LEARNED": [
+      "LEARNED",
+      "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL"
+    ],
+    "UTILITY_FROZEN__COUNT_FROZEN": [
+      "FROZEN",
+      "FULL_CONDITIONAL_REFERENCE_FROZEN_FINAL"
+    ],
+    "UTILITY_FROZEN__COUNT_LEARNED": [
+      "FROZEN",
+      "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_FROZEN": [
+      "LEARNED",
+      "FULL_CONDITIONAL_REFERENCE_FROZEN_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_JOINT_KD_LEARNED_FINAL": [
+      "LEARNED",
+      "JOINT_KD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_JOINT_KD_LEARNED_MEAN": [
+      "LEARNED",
+      "JOINT_KD_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_MARGINAL_KD_LEARNED_FINAL": [
+      "LEARNED",
+      "MARGINAL_KD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_MARGINAL_KD_LEARNED_MEAN": [
+      "LEARNED",
+      "MARGINAL_KD_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_POINT_KD_LEARNED_FINAL": [
+      "LEARNED",
+      "POINT_KD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_POINT_KD_LEARNED_MEAN": [
+      "LEARNED",
+      "POINT_KD_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_LOGIT_KD_LEARNED_FINAL": [
+      "LEARNED",
+      "LOGIT_KD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_LOGIT_KD_LEARNED_MEAN": [
+      "LEARNED",
+      "LOGIT_KD_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_UNIT_SOFT_LEARNED_FINAL": [
+      "LEARNED",
+      "COARSE_UNIT_SOFT_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_UNIT_SOFT_LEARNED_MEAN": [
+      "LEARNED",
+      "COARSE_UNIT_SOFT_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_UNIT_HARD_LEARNED_FINAL": [
+      "LEARNED",
+      "COARSE_UNIT_HARD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_UNIT_HARD_LEARNED_MEAN": [
+      "LEARNED",
+      "COARSE_UNIT_HARD_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_CONF_SOFT_LEARNED_FINAL": [
+      "LEARNED",
+      "COARSE_CONF_SOFT_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_CONF_SOFT_LEARNED_MEAN": [
+      "LEARNED",
+      "COARSE_CONF_SOFT_LEARNED_MEAN"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_CONF_HARD_LEARNED_FINAL": [
+      "LEARNED",
+      "COARSE_CONF_HARD_LEARNED_FINAL"
+    ],
+    "UTILITY_LEARNED__COUNT_COARSE_CONF_HARD_LEARNED_MEAN": [
+      "LEARNED",
+      "COARSE_CONF_HARD_LEARNED_MEAN"
+    ]
+  },
+  "contrasts": {
+    "READOUT_AT_LEARNED_COUNT": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL"
+    ],
+    "READOUT_AT_FROZEN_COUNT": [
+      "UTILITY_FROZEN__COUNT_FROZEN",
+      "PARENT__FULL_CONDITIONAL_REFERENCE_FROZEN_FINAL"
+    ],
+    "RSI_RAW": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "UTILITY_FROZEN__COUNT_FROZEN"
+    ],
+    "RSI_AT_LEARNED_COUNT": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "UTILITY_FROZEN__COUNT_LEARNED"
+    ],
+    "RSI_AT_FROZEN_COUNT": [
+      "UTILITY_LEARNED__COUNT_FROZEN",
+      "UTILITY_FROZEN__COUNT_FROZEN"
+    ],
+    "RAW_vs_JOINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__JOINT_KD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_JOINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__JOINT_KD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_JOINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_JOINT_KD_LEARNED_FINAL",
+      "PARENT__JOINT_KD_LEARNED_FINAL"
+    ],
+    "RAW_vs_JOINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__JOINT_KD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_JOINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__JOINT_KD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_JOINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_JOINT_KD_LEARNED_MEAN",
+      "PARENT__JOINT_KD_LEARNED_MEAN"
+    ],
+    "RAW_vs_MARGINAL_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__MARGINAL_KD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_MARGINAL_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__MARGINAL_KD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_MARGINAL_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_MARGINAL_KD_LEARNED_FINAL",
+      "PARENT__MARGINAL_KD_LEARNED_FINAL"
+    ],
+    "RAW_vs_MARGINAL_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__MARGINAL_KD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_MARGINAL_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__MARGINAL_KD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_MARGINAL_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_MARGINAL_KD_LEARNED_MEAN",
+      "PARENT__MARGINAL_KD_LEARNED_MEAN"
+    ],
+    "RAW_vs_POINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__POINT_KD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_POINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__POINT_KD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_POINT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_POINT_KD_LEARNED_FINAL",
+      "PARENT__POINT_KD_LEARNED_FINAL"
+    ],
+    "RAW_vs_POINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__POINT_KD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_POINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__POINT_KD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_POINT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_POINT_KD_LEARNED_MEAN",
+      "PARENT__POINT_KD_LEARNED_MEAN"
+    ],
+    "RAW_vs_LOGIT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__LOGIT_KD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_LOGIT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__LOGIT_KD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_LOGIT_KD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LOGIT_KD_LEARNED_FINAL",
+      "PARENT__LOGIT_KD_LEARNED_FINAL"
+    ],
+    "RAW_vs_LOGIT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__LOGIT_KD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_LOGIT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__LOGIT_KD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_LOGIT_KD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LOGIT_KD_LEARNED_MEAN",
+      "PARENT__LOGIT_KD_LEARNED_MEAN"
+    ],
+    "RAW_vs_COARSE_UNIT_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_UNIT_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_UNIT_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_COARSE_UNIT_SOFT_LEARNED_FINAL",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_FINAL"
+    ],
+    "RAW_vs_COARSE_UNIT_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_UNIT_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_UNIT_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_COARSE_UNIT_SOFT_LEARNED_MEAN",
+      "PARENT__COARSE_UNIT_SOFT_LEARNED_MEAN"
+    ],
+    "RAW_vs_COARSE_UNIT_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_UNIT_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_UNIT_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_COARSE_UNIT_HARD_LEARNED_FINAL",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_FINAL"
+    ],
+    "RAW_vs_COARSE_UNIT_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_UNIT_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_UNIT_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_COARSE_UNIT_HARD_LEARNED_MEAN",
+      "PARENT__COARSE_UNIT_HARD_LEARNED_MEAN"
+    ],
+    "RAW_vs_COARSE_CONF_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_CONF_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_CONF_SOFT_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_COARSE_CONF_SOFT_LEARNED_FINAL",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_FINAL"
+    ],
+    "RAW_vs_COARSE_CONF_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_CONF_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_CONF_SOFT_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_COARSE_CONF_SOFT_LEARNED_MEAN",
+      "PARENT__COARSE_CONF_SOFT_LEARNED_MEAN"
+    ],
+    "RAW_vs_COARSE_CONF_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_HARD_LEARNED_FINAL"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_CONF_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_HARD_LEARNED_FINAL__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_CONF_HARD_LEARNED_FINAL": [
+      "UTILITY_LEARNED__COUNT_COARSE_CONF_HARD_LEARNED_FINAL",
+      "PARENT__COARSE_CONF_HARD_LEARNED_FINAL"
+    ],
+    "RAW_vs_COARSE_CONF_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_HARD_LEARNED_MEAN"
+    ],
+    "AT_LEARNED_COUNT_vs_COARSE_CONF_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_LEARNED",
+      "PARENT__COARSE_CONF_HARD_LEARNED_MEAN__AT_LEARNED_COUNT"
+    ],
+    "AT_OTHER_COUNT_vs_COARSE_CONF_HARD_LEARNED_MEAN": [
+      "UTILITY_LEARNED__COUNT_COARSE_CONF_HARD_LEARNED_MEAN",
+      "PARENT__COARSE_CONF_HARD_LEARNED_MEAN"
+    ]
+  },
+  "neural_seeds": [
+    0
+  ],
+  "source_sha256": {
+    "scripts/a100_native_binary_six_setting.py": "b1d7e2571ca54b5f326b943fbc6b466758786c0d61d59a49797a7baca905583f",
+    "scripts/a100_native_binary_analyze.py": "d5000e96e26a97e64524e51878b5e562b926c1706fcf101f0da4e63220a3954b",
+    "scripts/a100_native_binary_statistics_reproduce.py": "170cd5e2ea66d55b574d6db5ff38d5570e4c003105fe41f35221aaab71f879ae",
+    "scripts/a100_native_binary_contract.py": "38e3d053995c324e83adceb3a4d0b5a90d009104dd99d50cbf1560e420608bd2",
+    "flex_uda/active/native_binary_inputs.py": "d2eac481bf3d8fa7ccd6900a06b05f46f0ba6839439709d12d3a2387777da820",
+    "flex_uda/active/native_binary_models.py": "42802438f04f6d8542d780f19aa50daa2ef5d75e946b1c6ce88c8e6ed9f510c0",
+    "flex_uda/active/native_binary_fit.py": "3ae3c7abc37f7a555f5d3caff3b6273d306fcc39f1f02e7cae1c01850b553231",
+    "flex_uda/active/native_binary_curriculum.py": "8a5faabacb1848481b8295a4bae3a63fcd9098cbb7aad15bd48e7ee6e77eac64",
+    "flex_uda/active/cross_candidate_gauge.py": "d9c825644a2aef400e247074066a5c3f5467584496e04b232e12fabab5936764",
+    "flex_uda/active/cross_candidate_learning.py": "6dd621d4565e376afb6da2f958f71142f13f6b6b180321c09f3fb96d57d271e0",
+    "flex_uda/active/rsi_curriculum.py": "f7377f56ec673bcc2055e75a4da33682e96a49f2f4b64c3e33184683cd67f49f",
+    "flex_uda/active/rsi_discrimination_feedback.py": "6cb4012eead87cdf6af36b94a793b036041b96bed99572a8343c52eefcf2ae00",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5",
+    "scripts/a100_joint_observation_six_setting.py": "427fd8202dfe52c071894b6aa85e6c80330cb6112d685b9b52202516ad73ae8f",
+    "scripts/a100_observation_design_collect.py": "03dbab66815a7a4b107eb3a5449d7580d4c2056f8955ee32b11790868ac36d59",
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801",
+    "scripts/a100_native_binary_trust_six_setting.py": "faeecc3651a31db92fde3cb0bed8bed8f4f745b43634f35fbafab5a8066e0eda",
+    "scripts/a100_native_binary_trust_analyze.py": "087541ddf67c147527cbdea3790c287a8a70879cf0566756ec77252e8120e1fb",
+    "scripts/a100_native_binary_trust_statistics_reproduce.py": "3eb84a5788f289cfe50057add99429fa104981c27d4bb75ef8f075717b2ed524",
+    "flex_uda/active/rsi_policy_distribution.py": "b91172ea5385d32ebf4b03966ba6cdd63ed5a76189d489371b07006153e3e5c3",
+    "scripts/a100_native_binary_comparable_six_setting.py": "f78420a995d1c74bae05b41cf83ac358abf42d53fa58a42a7b933a9c42dfb947",
+    "scripts/a100_native_binary_comparable_analyze.py": "ee6657a891d7d08ae743eee166aa06bbaa0e97d1dc2730fd15d2a06861f68084",
+    "scripts/a100_native_binary_comparable_statistics_reproduce.py": "5b8aa98f69d8ebf96c6ea9eafcfd5d68221d8407209247c9ccedc7fad3ee39bd",
+    "flex_uda/active/rsi_probe_conditioning.py": "98a0f340ea651d468921c03e52db042ed41758982d3cd883605ac6934c1985af",
+    "scripts/a100_native_binary_effective_views.py": "49ef64cb6343d61fee7e3a8e865151f0dcf8abccc37ffd605f67d35aef19fbf6",
+    "flex_uda/active/conditional_set_readout.py": "d6b1a7564bdcf4a78d3e48718df46f897aca86986e65fe1bfa8e114a5438603d",
+    "scripts/a100_native_binary_utility_six_setting.py": "0c7dcb692ae8f81b70844f2ae25a568aa98ac15684ee63461debef3c6750b05a",
+    "scripts/a100_native_binary_utility_analyze.py": "91f2a24951a7490971d1093ff596b47aef5f9bd12b4b95c4676930dca793f707",
+    "scripts/a100_native_binary_utility_statistics_reproduce.py": "c1cb43dbede4d45e8e6953003a82a821be0b4ec981ff4643370bc1fe3ac43713"
+  },
+  "evidence_audit": "native_binary_readout_coupling_audit_20261124.json",
+  "evidence_audit_sha256": "2ccf224f42effa606f17b05bfda831c62294c91c00310a45d4bd8b9422a252a0",
+  "source_checkpoint_rule": "Exact original LEARNED/FROZEN closed prefix heads, own past/current video normalization; C2/C5 corrected, four other settings exact Trust originals.",
+  "only_change": "Conditional set MAP top-K by the already learned utility; K donated by the fixed original method. No new fit, evidence, teacher or backbone call.",
+  "conditional_set_model": "P(S | |S|=K,X) proportional to exp(sum_i_in_S u_i); MAP top-K; common utility offset cancels.",
+  "theoretical_limits": [
+    "This defines a new conditional set readout, not exact MAP of the original arbitrary pair-interaction network.",
+    "K still comes from original ring marginal decisions; this intervention isolates ranking, not full-pipeline ID invariance.",
+    "TrackID tie-break is deterministic; ID equivariance need not hold for exact utility ties.",
+    "No HOTA improvement guarantee and no new feature learning caused by readout."
+  ],
+  "official_records": 324,
+  "new_official_evaluations": 120,
+  "exactly_reused_records": 204,
+  "paired_effects": 318,
+  "new_fits": 0,
+  "new_teacher_calls": 0,
+  "new_backbone_calls": 0,
+  "all_six_study_outputs_seal_before_own_GT": true,
+  "manual_target_GT_in_adaptation": false,
+  "ordinary_baselines": "All eight adequately optimized parent families, FINAL and MEAN, same inputs and complete paid answers, .005 original adequacy resolution unchanged.",
+  "ranking_comparisons": "Dual per-query/frame CountMatched versus each of sixteen ordinary outputs; own-count learned/frozen readout controls and dual-count RSI controls.",
+  "pooling_or_mask_hyperparameter_search": false,
+  "readout_chosen_without_native_parent_HOTA": true,
+  "at_most_two_new_inference_workers": true,
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "memory_cap_per_worker": 0.1,
+  "shared_assignment_rule": "Single assignment preflight <8192MiB and resident PIDs only known project numerical workers; preserve all residents.",
+  "all_data_DEVELOPMENT": true,
+  "independent_blind_validation": false,
+  "generation_cost_is_not_fresh_cold_deployment": true,
+  "all_parent_primaries_masks_checkpoints_sources_and_negative_results_unchanged": true,
+  "acceptance": "A targeted ranking intervention only. Six-setting superiority, three learned contributions/interactions and matched physical cold quality/cost remain required by active Goal.",
+  "goal_status": "ACTIVE"
+}

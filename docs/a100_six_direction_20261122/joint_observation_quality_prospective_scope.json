@@ -1,5 +1,5 @@
 {
-  "status": "PROSPECTIVE_QUALITY_SCOPE_FIT_AND_INFERENCE_NOT_IMPLEMENTED_OR_LAUNCHED",
+  "status": "IMPLEMENTED_REGISTERED_RUNNING_C1_C6_NO_NEW_HOTA",
   "registered_unix": 1795431427.7410915,
   "settings": {
     "C1": [
@@ -30,24 +30,24 @@
   "seeds": [
     0
   ],
-  "primary": "FULL_JOINT_SHARED_DESIGN_FINAL",
+  "primary": "FULL_CONDITIONAL_REFERENCE_DESIGN_FINAL",
   "candidate_components": {
     "I1": "Matched-budget coverage/contrast paired observation against UNIFORM",
-    "I2": "Real complete-query joint teacher guidance versus same-context binary guidance",
-    "I3": "Reference-centered shared object and local-state prediction with signed interaction"
+    "I2": "Conditional relative-state estimation isolates count-calibration gradients; full likelihood ablation has identical parameters and forward values",
+    "I3": "Multi-observation object reference conditions local state; local-only ablation has identical parameter count"
   },
   "factorial": {
     "policy": [
       "DESIGN",
       "UNIFORM"
     ],
-    "guidance": [
-      "JOINT",
-      "SHARED_BINARY"
+    "estimator": [
+      "CONDITIONAL",
+      "FULL_LIKELIHOOD"
     ],
-    "reference": [
-      "SHARED",
-      "LOCAL"
+    "state_scope": [
+      "OBJECT_REFERENCE",
+      "LOCAL_ONLY"
     ]
   },
   "mandatory_ordinary": [
@@ -67,9 +67,8 @@
   "uncertainty": "Original parent video bootstrap at fixed seed0; KITTI4 no population CI; all DEV no independent blind validation",
   "pass_rule": "Primary must beat adequate ordinary references across six settings, retained components/interaction attributable with dual CountMatched; no switching to posthoc higher controls; no positive result guarantee",
   "cost_rule": "Research union/prepaid features not deployment cost. Actual same-fresh-input quality and full independent cold wall for final retained recipe after quality gate; no cold for rejected previous FULL",
-  "model_prototype_sha256": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+  "model_prototype_sha256": "83c77b605077c2a4214fe655dcebbf516bc120637b3579d9c00eff36e2fa0448",
   "not_a_claim_new_classical_theorem_or_semantic_identification": true,
-  "fit_and_inference_source_not_yet_implemented": true,
   "goal_status": "ACTIVE",
   "common_inputs": {
     "dimensions": 1101,
@@ -80,6 +79,13 @@
   },
   "implementation_status": {
     "new_joint_and_marginal_fit_helper": "IMPLEMENTED; 8-real-C2-target engineering run completed for structured64/generic128, no HOTA",
-    "full_six_setting_prefix_inference_and_official_runner": "NOT_IMPLEMENTED_OR_LAUNCHED"
-  }
+    "full_six_setting_prefix_inference_and_official_runner": "IMPLEMENTED_AND_LAUNCHED; controller2928089, GPU2 C1 and GPU3 C6; own complete teacher evidence required for remaining settings"
+  },
+  "design_revision": "Conditional estimating equations with independent count/state encoders, before any new quality generation or GT",
+  "additional_guidance_control": "Same-context binary guidance for the same reference/conditional learner; joint versus binary channel is not silently conflated with estimator ablation.",
+  "model_prototype": "flex_uda/active/conditional_joint_observation.py",
+  "old_eight_target_engineering_pilot": "Earlier shared-encoder joint.py only; not a fit or quality result for the conditional-estimation architecture.",
+  "full_prefix_fit_inference_runner_not_implemented": false,
+  "gradient_mechanism_receipt": "conditional_joint_gradient_math.json",
+  "execution_registration": "/data3/liuyeqiang/FlexHook-TTA/docs/a100_six_direction_20261122/joint_observation_quality_registration_v1.json"
 }

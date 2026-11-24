@@ -1,0 +1,48 @@
+{
+  "status": "PASS_JOINT_STUDY_CPU_INPUT_FIT_AND_33_PATH_INFERENCE",
+  "real_input_video": "dancetrack0004",
+  "real_input_dimension": 1101,
+  "projection": {
+    "original_risk_rows": 56,
+    "exact_input_groups": 56,
+    "identical_input_risk_preserved": true
+  },
+  "toy_API_fit_metrics": {
+    "FULL_CONDITIONAL_REFERENCE_DESIGN": {
+      "steps": 1000,
+      "excess_KL": 7.611230478987707e-06,
+      "gate": true
+    },
+    "JOINT_KD_DESIGN": {
+      "steps": 1000,
+      "excess_KL": 0.00022429488878517034,
+      "gate": true
+    },
+    "MARGINAL_KD_DESIGN": {
+      "steps": 1000,
+      "excess_KL": 2.55351295663786e-15,
+      "gate": true
+    },
+    "COARSE_UNIT_SOFT_DESIGN": {
+      "steps": 1000,
+      "excess_KL": 3.885780586188048e-16,
+      "gate": true
+    },
+    "COARSE_CONF_HARD_DESIGN": {
+      "steps": 1000,
+      "excess_KL": 7.602959251984916e-06,
+      "gate": true
+    }
+  },
+  "inference_methods": 33,
+  "inference_rows_per_method": 16,
+  "actual_GPU_teacher_backbone_calls": 0,
+  "GT_open_attempts": 0,
+  "new_RMOT_HOTA_or_quality_claim": false,
+  "source_sha256": {
+    "scripts/a100_joint_observation_runner_check.py": "0577ae6f8a2e1f34218524697d490aecab21f4abddc4a29438271ecd0db932b3",
+    "scripts/a100_joint_observation_six_setting.py": "31e5851795c3119aa3febb68eba58a07b2bd27947e525277a73cd33b97505e6a",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5"
+  },
+  "goal_status": "ACTIVE"
+}

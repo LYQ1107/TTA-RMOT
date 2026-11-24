@@ -1,0 +1,60 @@
+{
+  "status": "RSI_ACTION_PATH_CHANGED_NO_TASK_QUALITY_EVIDENCE",
+  "pair": "C1",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007"
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "teacher_budgets": [
+    56,
+    40,
+    64
+  ],
+  "per_branch_total_teacher_budget": 160,
+  "question_replacements": {
+    "dancetrack0004": {
+      "RAW": {
+        "symmetric_difference": 0,
+        "replacements": 0
+      },
+      "PRIOR_CONTROLLED": {
+        "symmetric_difference": 0,
+        "replacements": 0
+      }
+    },
+    "dancetrack0005": {
+      "RAW": {
+        "symmetric_difference": 6,
+        "replacements": 3
+      },
+      "PRIOR_CONTROLLED": {
+        "symmetric_difference": 6,
+        "replacements": 3
+      }
+    },
+    "dancetrack0007": {
+      "RAW": {
+        "symmetric_difference": 2,
+        "replacements": 1
+      },
+      "PRIOR_CONTROLLED": {
+        "symmetric_difference": 0,
+        "replacements": 0
+      }
+    }
+  },
+  "initial_No_reward_raw": 0.8688325335397711,
+  "initial_No_reward_prior_controlled": 0.057424744184855055,
+  "next_video_first_reward_prior_controlled": [
+    0.9770289786997476,
+    0.9869659987415148
+  ],
+  "ordinary_same_all_paid_KL_max": 0.00019366831346123714,
+  "diagnosis": "Prior-control reduces the first No-learning reward, but large catch-up rewards remain on new videos. Learned action changes are behavior, not evidence of higher RMOT accuracy. Need absolute conditional skill beyond a probe-fitted constant, with same-query/view multi-track probes.",
+  "GT_or_RMOT_HOTA_read": false,
+  "goal_status": "ACTIVE"
+}

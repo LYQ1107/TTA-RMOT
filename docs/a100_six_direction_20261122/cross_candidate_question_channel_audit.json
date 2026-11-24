@@ -1,0 +1,68 @@
+{
+  "status": "AUDITED_REAL_CROSS_CANDIDATE_QUESTION_CHANNEL_SHIFT",
+  "overall": {
+    "cases": 72,
+    "mean_independent_yes": 0.4768064684692995,
+    "mean_shared_yes": 0.27687692977128286,
+    "mean_joint_marginal_yes": 0.192882165855988,
+    "independent_minus_joint_mean": 0.28392430261331153,
+    "mean_absolute_independent_candidate_gap": 0.17197648301352172,
+    "mean_absolute_joint_candidate_gap": 0.038958185454955836,
+    "mean_absolute_object_log_odds": 0.2595486185224527,
+    "mean_absolute_display_position_log_odds": 0.818576387497636
+  },
+  "by_target": {
+    "Dance": {
+      "cases": 24,
+      "mean_independent_yes": 0.0006730702077675232,
+      "mean_shared_yes": 0.003580010861696792,
+      "mean_joint_marginal_yes": 0.0028712424971975756,
+      "independent_minus_joint_mean": -0.0021981722894300524,
+      "mean_absolute_independent_candidate_gap": 0.00036586006793489406,
+      "mean_absolute_joint_candidate_gap": 0.0003293826566732605,
+      "mean_absolute_object_log_odds": 0.08333335820651144,
+      "mean_absolute_display_position_log_odds": 1.3281249972541929
+    },
+    "KITTI-V2": {
+      "cases": 24,
+      "mean_independent_yes": 0.582380563217157,
+      "mean_shared_yes": 0.28435472364071757,
+      "mean_joint_marginal_yes": 0.2110274026733047,
+      "independent_minus_joint_mean": 0.3713531605438523,
+      "mean_absolute_independent_candidate_gap": 0.2648241541222281,
+      "mean_absolute_joint_candidate_gap": 0.018446617817971855,
+      "mean_absolute_object_log_odds": 0.2213541674287609,
+      "mean_absolute_display_position_log_odds": 0.8671874888340682
+    },
+    "SportsMOT": {
+      "cases": 24,
+      "mean_independent_yes": 0.847365771982974,
+      "mean_shared_yes": 0.5426960548114342,
+      "mean_joint_marginal_yes": 0.3647478523974617,
+      "independent_minus_joint_mean": 0.4826179195855123,
+      "mean_absolute_independent_candidate_gap": 0.2507394348504022,
+      "mean_absolute_joint_candidate_gap": 0.09809855589022239,
+      "mean_absolute_object_log_odds": 0.4739583299320856,
+      "mean_absolute_display_position_log_odds": 0.2604166764046471
+    }
+  },
+  "all_joint_top1_is_allowed_choice": true,
+  "allowed_choice_mass_quantiles": [
+    0.8826282024383545,
+    0.9350182563066483,
+    0.9540066123008728,
+    0.9966116398572922,
+    0.9998570084571838
+  ],
+  "manual_GT_teacher_accuracy_or_HOTA_not_measured": true,
+  "teacher_channel_shift_does_not_identify_which_answer_is_correct": true,
+  "no_new_teacher_training_models_or_task_outputs": true,
+  "implications": [
+    "Four-way formatting succeeded but semantic probability consistency is not established.",
+    "Do not equate candidate-relative joint querying with better supervision.",
+    "Keep native single-candidate binary teaching as a strong control.",
+    "A factorized pair target built from binary outputs is an explicit independence model, never a measured joint teacher answer."
+  ],
+  "teacher_plan_sha256": "f8b7f4e14bd982a96b0cc5946d9e1c398f450aad924fa3993f628b07efdf8ba7",
+  "audit_source_sha256": "3899e2d5b0a4db5dffc60318eff61cf8acc1c85000d3453d3a398ea021e4bd9f"
+}

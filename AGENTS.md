@@ -1,5 +1,140 @@
 # AGENTS.md
 
+## 最新：三套RSI质量完整结束，当前配方未接受（2026-11-25）
+
+- 实际1520/TRUST312、99812/修正318、85298/utility324均已exit0及独立统计复算PASS，禁止再续这三个终态句柄。原始预测和所有数量对照全封存后才隔离官评，Root现已读取这三套完整结果；不能将其GT读取套到未封存的native研究。
+- 修正主方法六HOTA为31.219352/28.263420/66.470848/65.779369/29.527395/33.360504；同一个MARGINAL_KD_LEARNED_FINAL六设置全部更高。固定coarse soft参照raw五负一微正(+.115857)，两种CountMatched六设置全负。观察者效应混合且随数量条件变号；C3一格+.419730区间正、反向-.603287区间负，不能挑一列宣布RSI成功。
+- utility同权重/同数量纯读出在六设置全部下降(-.704446/-.985871/-.786980/-1.002306/-1.098233/-.584026)。该读出不采用；这不证明原ring的Track ID依赖合理，也不否定所有一致输出模型。视角修正仅C2 raw+.066876、C5-.186210，四设置精确复用不是独立复验。
+- 三表954记录含540新增官评与414父引用。新未发布统计仅trust/修正两provider做无损共享，全部954逐值同；utility原字节保留，旧已发布providers不改。三份完整复算再次PASS，max2.842e-14。完整新TXT《TTA_RMOT_RSI三项完整质量结果与机制结论_20261125.txt》及completed_rsi_quality_review，不能将负结果删掉或晋级事后最高消融。
+- 当前唯一正式活跃句柄14883/native726，GPU0/1/2/3继续C2/C3/C4/C5，C1/C6 raw已完成。数值18源pin不改，先完成其全因子/交互/数量/官评/复算，再决定新受控观察与一致表示方案；不追加大矩阵或神经种子。Goal ACTIVE，六设置充分KD优势/三贡献/实际同次fresh冷成本仍未完成。最新权威状态见supervisor/research_goal_active_continuation.json。
+- 新结果正常发布须snapshot与reachable均<100,000,000B；必要时保留旧远端分支和完整代码树正常另开轻量分支，不force、不删除科学提供者。AGENTS更早私有49行完整保留工作区，发布只stage本新增段与HEAD原文组合，不能全量stage本文件。
+
+## 最新：同场景比较的全范围支持已核验（2026-11-24）
+
+- 新a100_same_context_comparison_support实际18496 exit0：148设置视频/74物理视频/3506查询，只读候选与请求元数据。完整候选同帧/实际view可比轨迹99.649..100%，旧允许问答库仅4.850..21.906%；这是可提问机会，不是GT召回。所有查询原预算<N轨迹，不能承诺逐个问遍。6400实际PairedViews.clip元数据检查、222全局ID双射拓扑检查通过。静态自由轨迹分数rank=n-components仅理论观测条件，不能当动态RMOT或共享神经模型可辨识保证，更不是输出校准创新。新报告TXT第六节、same_context_comparison_support收据/plan及两脚本。
+- 独立a100_same_context_support_reproduce实际97513 exit0：集合交+NetworkX/NumPy完整复核222全图、3506旧库查询图、222数值秩，所有汇总相同，595输入SHA。原CPU复核87418因已定位重复NAS元数据hash主动SIGINT130，v0源码/原因私有归档；现只hash3份不同文件，范围不缩减。不是因观察超时重启，4原GPU任务未动，勿再续两项终态。
+- 当前4实际句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324继续，18/4/27/31登记源hash全同。无新GT/教师/fit/预测、无新大矩阵或种子。优先待全质量后做有限预算的可比观察与共享表示泛化；不把扩池当RSI增益。Goal ACTIVE；AGENTS旧私有49行保留，双100MB gate。
+
+
+## 最新：RSI原文/官方代码与三项无GT诊断（2026-11-24）
+
+- 用户点名新综述2607.13104v1、TTRL2504.16084v3、Agent0最新2511.16043v2；已核对方法/奖励及官方实现，并补读Agent0-VL2511.19900v2、Marvo2610.15084v1、SelectTTRL2610.16104v1。5官方repo/20源文件Git-blob复核全同，完整所读代码/原文片段仅本地非Git档案，公开rsi_primary_literature_code_audit与新TXT《TTA_RMOT_RSI原文与代码核验及下一步设计_20261124.txt》。未安装/执行第三方栈。TTRL多数二元伪标签错时奖励全反；Agent0仍用多数答案和工具次数奖励；Marvo反事实工具收益最可借鉴但参照仍为挑战者自造答案；SelectTTRL正确性方向需独立QA。Agent0-VL默认outcome读取ground_truth字段，其实际来源本轮未核定，不指控paper泄漏，也不直接搬入无标签RMOT。
+- paid_pair_information v2实际30850 exit0；固定前min(10,N)视频共48/两策略，C2/C5修正、其余TRUST。精确重建NativeVisual.record，逐前缀拟合行数相同；全部跨轨迹配对且各query-track仅1请求时刻，fresh-or-available硬优先级所致，CLIP仍可含内部历史帧。LEARNED同实际view/frame比例约14.873/.911/10.678/8.624/1.007/13.357%。较大前缀probeI约.106/.182/.170/.195/.180/.095，不能把旧13个Dance对11个低信息推广全六；原.005门槛不改。v1原脚本/报告已私有SHA归档，勿重跑终态。
+- state_probe实际89526 exit0；同48视频第三轮final-all-paid之前，全部当前probe组未fit。相同CPU full CE复现已记GPU误差max3.324e-7；full-minus-identity教师CE在12设置/策略汇总9正3负，C4L等反例保留。是同已学网络删除动态项的描述，非重训NoState消融、非GT/HOTA，不支持全面去状态或加HMM。0新fit/teacher/预测。
+- 新revisit_evidence_audit实际11374 exit0：仅复用原24同轨迹双时刻+72同帧跨轨迹pilot正常INDEPENDENT_A/B，192旧实际二元例。双时刻0/24半阈值翻转、平均p差.03960/JS.007445；跨轨迹11/72、p差.17198/JS.08340，4实际view回退混配明确记账。两样本非配对，不是语义正确率/收益，未重复GPU小试。全3审计GT0、原pins不改；两图JOINT/SHARED回答不冒用正常二元。
+- 文献后候选仍收敛为一个框架的三点：学观察价值的A↔S、可比上下文条件区分学习、有证据支持的身份/状态表示。经典思想对应信息价值/实验设计、条件似然消共同干扰、分层隐变量可辨识性；不是输出校准换名。先完成当前4正式研究，再据完整结果选择新的受控观察或表示研究；不扩新大矩阵/阈值/种子，候选未称涨点。
+- 真正4长句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324继续；最后实际native C1第20/C6第19/C2第2视频，TRUST C3第41/C4第25/C5第4，修正两设置raw完等待父counts，utility四设置掩码完等C3/C4。只续actual工具数值句柄，无观察器或agent ps/tail/nvidia轮询；最新以工具为准。source pins全部不可改，旧89700及上述新诊断终态不再续。seed0、NAS只读、双100MB gate；Goal ACTIVE、六设置KD优势/三贡献/匹配fresh冷成本仍未完成。AGENTS更早私有49行完整留工作区，不全量stage。
+
+
+## 最新：关联诊断与条件集合读出已实际运行（2026-11-24）
+
+- 旧582已完整官评/复算后，stability49271和official-association7973均exit0。旧联合主方法在GT身份/成员两端稳定边翻转率C1..C6约1.013/5.151/2.978/3.373/4.745/.645%；不能套旧v8P的0翻转，也不能冒称在途native已读GT。固定普通coarse每query/frame数量后，六设置ΔAssA为-9.479/-14.281/-29.970/-29.064/-13.078/-6.917，ΔHOTA均负。C3/C6诊断IoU.5命中更多且DetA略高仍HOTA低；翻转非HOTA加法因果解释。
+- 新readout_audit全局TrackID双射v1已完成（32239终态输出从公开收据恢复，勿重跑）：真实TRUST C1/C6首视频/固定权重特征与每帧数量/同CPU，重命名ID改变排名57/358个，count-only零化32/591；utility逐值不变，CPU原排序和实际GPU0差。frame-local旧v0原脚本/收据本地保留且SHA已纠正，不能混为全视频双射。不是质量证据。
+- 新scripts/a100_native_binary_utility_six_setting.py及analysis/repro已预登记/实际85298/controller3976000；GPU0 C1 worker3976072、GPU3 C6 worker3976073，预检857/1557MiB只共享已知原PIDs并保留，头10%显存。0新fit/teacher/backbone，精确原prefix checkpoint和归一化；C2/C5修正、其余四精确TRUST。首视频32/461个utility排序替换，逐query/frame数量检查通过，GT0。120新增+204父引用=324全封存后才该研究GT/官评，318配对效应。31源pins不可改。新条件集合MAP top-K只去排名干扰，K仍原ring数量；非原pair网络MAP/非完整ID不变/非特征创新。
+- 现在四个真实数值句柄14883/native726、1520/TRUST312、99812/修正318、85298/utility324。原三套所有代码/主方法/预算/权重/输出保留，旧89700 terminal0不再续。只seed0，无新观察器/agent ps-tail-nvidia轮询。当前native C1/C6第18视频、C2首视频；TRUST C3第37、C4第19、C5第4，C1/C6/C2 raw已完；修正C5 raw已完、C2末视频。后续以工具输出为准。
+- 新Goal TXT13/14、执行TXT17、旧582报告8补齐诊断/理论边界/真实执行；补读Dual Student1909.01804、SEAL2506.10943、SPIN2401.01335原文，互补双学生/有证据自我编辑为备选未启动质量，不将其监督/参考答案保证套到无标签RMOT。RSI Goal ACTIVE；六设置普通KD优势、三个贡献/交互及匹配fresh冷质量成本仍未完成。
+- 发布只必要代码与精选证据，两项100000000B gate；全部原科学providers/负结果/NAS不改。AGENTS工作区更早私有历史仍保留，不全量stage。本轮独立代码和新收据不改三套已pin依赖。
+
+## 最新：旧582正式结束与RSI完整动作接口（2026-11-24）
+
+- 实际89700/controller3604938已exit0：582官评+576配对效应+84因子/交互复算全部PASS，最大误差1.42e-14；禁止重启或再续该终态句柄。主方法六HOTA18.7536/18.9858/19.9416/22.0436/19.7482/18.0604。同DESIGN固定coarse软KD参照四raw正，但普通参照数量下六差值均负(-2.2218/-2.8404/-4.1990/-5.3453/-2.2894/-1.2376)。条件目标在结构内部固定数量平均+1.33..2.65不等于胜过普通KD；全部24对手/576效应/负结果保留，不能换主方法。
+- 旧同轨迹双时刻联合问答的BINARY通道控制30.7520/33.0194/64.6648/64.3110/34.4607/33.1384，监督意见/目标构造不同，不能冒充对普通二元KD胜利，也不能把旧静态DESIGN当新RSI。详细新TXT《TTA_RMOT_联合问答582项结果与RSI动作空间诊断_20261124.txt》，新Goal第12/执行记录第16节；summary与完整analysis/parent_statistics/reproduction。
+- 当前真正长任务仅14883/native726、1520/TRUST312、99812/修正318，全部实际句柄已确认活跃。TRUST C1/C6 raw已完，2C5 worker3900010、3C4 worker3899217接续；0C2/1C3继续。修正0C5/1C2仍训练第4视频。原native2/3 C1/C6到第16视频。所有既有源pins不改、只seed0、无观察器/agent ps-tail-nvidia轮询。
+- 新action-universe纯元数据诊断20898 exit0：3506设置内query/187348query-track组合仅118732可提问，约57..65%覆盖；68616库外但仍密集预测，不是GT目标漏检率。每query视角固定，预算小于总轨迹数，扩库不等于增加预算或RSI贡献。所有旧动作池仍保持。
+- 新native_binary_live_inputs实现候选/查询/锚点生成完整池及按需冻结教师API。83520 exit0全148 metadata验证routed559386/三视角1678158、原121629全部subset和索引一致；56已完成回答精确接口往返及CLIP fallback缓存requested-view通过。0新GPU/fit/HOTA；仅fixture接线，不是完整fresh质量/冷成本，也未把新池接入在途3研究。最终fresh特征实际有已知版本差异，须从实际同次输出测质量/总成本。
+- 为完整发布新582统计，在新文件内精确共享69记录/317父列表(1.538MB→1.146MB)，582全数组逐值相同且独立复算通过。旧聚合统计providers不改。另33可恢复legacy明细(32CSV+1原始逐候选标签JSON)仅从Git索引移出，释放1522010B，工作文件/NAS不改，3不同工作版本单独备份；恢复清单docs/legacy_archives/legacy_diagnostic_leaves_20261124.json指向已发布a01fbf42d2b3175407541274175d04fc73d71174。
+- Goal持续ACTIVE/未达成；完整正常二元六设置质量、三个贡献与交互、真实匹配fresh成本仍待。发布需snapshot和reachable均<100000000B，AGENTS私有旧段仍不全量stage。
+
+## 最新：可比probe修正质量已真实启动（2026-11-24）
+
+- 独立修正入口scripts/a100_native_binary_comparable_six_setting.py已实现/预登记并实际运行：session99812/controller3791984，GPU1 C2 worker3792076、GPU0 C5 worker3792077；预检691/1619MiB，仅共享已知本项目PIDs3747711/3747707并完整保留它们，每头原15%显存。27份递归source pins含新三脚本/父协议/数值依赖/conditioning，全部运行期间不可改。
+- 新cohort native_binary_comparable_quality_20261124仅重训受影响C2/C5；C1/C3/C4/C6在全部可能预留probe上过滤为原对象/原顺序，各设置前缀独立，父完成后精确复用四设置raw/count/eval。非HOTA选择/非独立复验。312本方案记录+4修正前后跨cohort数量对照+2父主方法引用=318；108新增官评、210精确复用。所有318输出封存前本研究禁止GT/HOTA。
+- 实际首轮checkpoint接线35721 exit0：C2原64paid probe组成32对，1对混配不计critic，31对保留，broker仍付费64；C5首轮32对全保留。两结构fit门槛过、teacher-progress正值不是质量结论。两策略首视频三轮已经继续，正负reward如实保存；不要重跑首轮或以正值挑checkpoint。公开native_binary_comparable_first_actual_round与quality_registration收据，新Goal TXT第11节/执行TXT第15节。
+- 原三套继续且源不改：89700旧582隔离官评、14883原native726、1520原TRUST312。当前只有这四个实际数值句柄89700/14883/1520/99812，直接续工具；无新观察器、无agent级ps/tail/nvidia轮询。四卡均持续工作，原native2/3 C1/C6、新TRUST0C2/1C3/2C1/3C6及修正0C5/1C2共享。
+- 只seed0，无新阈值/轮数/KL搜索。原.005信息门槛/.01actor KL/普通adequacy与所有问答预算保持；NAS只读。Goal ACTIVE，仍未读新HOTA、未完成全部六设置普通KD优势/三模块与交互/最终匹配fresh冷成本。推送必须snapshot和reachable均<100000000B；AGENTS私有历史只留工作区，不能全量stage。
+
+## 最新：582输出全封存及RSI实际视角修正（2026-11-24）
+
+- 实际89700/controller3604938已进入ALL_582_PREDICTIONS_SEALED_ISOLATED_OFFICIAL_EVALUATION：198raw+384双CountMatched，198CountSelf别名、原1776ordinary门槛全过，封存GT0。582官评/分析/独立复算继续；root尚未读取新HOTA。新joint_all_582_seal_summary_20261124.json。
+- 全148设置内视频/121629可选动作/2783预留探针对的只读元数据核验完成，78136 exit0勿重跑。C2/C5 CLIP→CROP回退1034/964，导致43/37对实际view不匹配，其它四设置0；这些计数含共用物理资料，不是独立样本。2733对来自不同帧。早先C1/C6短前缀view0混配不能外推全六设置。
+- 新flex_uda/active/rsi_probe_conditioning.py在答案付费到达后仅给critic保留实际view一致的2703对，80对不进入奖励但保留全部原付费/最终fit/普通KD，无免费补问。无混配返回原对象/顺序，元数据全范围已验证。数学视角偏差反例不等于实际模型取巧或HOTA结论。新native_binary_effective_views与rsi_probe_conditioning_amendment精选收据。
+- 该修正尚未接入完整质量研究，禁止声称已跑/涨点；后续显式登记，优先准确复用不受影响四设置，重算C2/C5，原312作对照。三个在途源仍pin不变：实际会话89700、14883/controller3661317、1520/controller3701394；只续实际任务工具句柄，无新观察器。TRUST四卡0C2/1C3/2C1/3C6，pendingC4/C5；原native2C1/3C6继续。
+- 实际新RSI Goal仍ACTIVE，完整正文/旧目标继承见20261124新Goal TXT。新TXT第10节/执行TXT第14节为本轮解释；不以metadata修正、行为变化或队列完成宣布三创新/六设置成功。只seed0、NAS只读，发布双100,000,000B gate；AGENTS私有历史仍只留工作区，不全量stage。
+
+## 最新：旧联合全六设置原始预测与1776普通拟合已封存（2026-11-24）
+
+- 实际89700已进入ALL_RAW_AND_ORDINARY_FITS_SEALED_GENERATING_COUNTS_NO_GT，C1..C6全部25/4/45/45/4/25视频完成，198raw封存GT0。1776ordinary前缀全部原.005过门槛，max KL .004847025459651313，1066用显式优化补充；其它既成拟合保留。精选摘要joint_all_raw_ordinary_gate_summary_20261124.json，0新GT/HOTA读取。这是必要阶段完成，不是质量/Goal验收。
+- 89700继续生成双数量对照后582官评与独立统计复算，期间没stdout仍有actual handle存活，不重启。GPU0/1已自动接续新TRUST1520的C2/C3，workers3747707/3747711；2/3原TRUST C1/C6 workers3701425/3701426继续，pending C4/C5。旧native14883 C1/C6照常共享2/3。当前三套真实句柄89700/14883/1520；无新观察器、无数值源修改、只seed0。
+- 下一步先完整582结果，同时继续两套新方案。未来新统计只对新文件精确共享/pack后独立复算及双100MB gate；保留旧科学提供者、负结果、NAS原始与私有AGENTS。Goal ACTIVE，质量、模块、双CountMatched和匹配fresh真实冷成本仍未齐。
+
+## 最新：已完成前缀RSI反馈瓶颈（2026-11-24）
+
+- scripts/a100_rsi_probe_information.py已实际exit0：只读native C1/C6前三视频、TRUST C1/C6前两视频的已付费闭环，60policy-round仅13不同probe对。11/13加权条件信息<.005，12/13两教师意见均<.5；48回合因门槛0、4回合两技能均低于常量、8回合正反馈（有重复，非独立成功）。8/13相对信息非小但乘exactly-one mass后被抑制。共同teacher logit±2的相对概率差仅1.64e-15；仅代数假设，不能叫真实语义正确或已定位教师实际偏差。
+- 此诊断0新教师/fit/预测/GT，effective_view混配0，原信息重算误差4.12e-18。TXT新Goal第8节/执行报告第12节说明：当前门槛有意拒绝小概率No差异，改成相对信息可能放大负例排序噪声。先完成当前完整质量，再必要对照有信息probe或条件相对学习/普通logit-KD；三套已pin数值源/门槛不改，不增加新队列。新Goal仍ACTIVE。
+- 当前真实长句柄仍89700（旧582修复）、14883（native726）、1520（TRUST312），已再由actual handles确认live；不创建观察器，不用ps/tail/nvidia做agent轮询。旧联合末次34/45，native C1/C6第四视频，TRUST第三视频。此为进度记录，后续以实际句柄输出为准。
+
+## 最新：实际新RSI Goal与三套六设置执行（2026-11-24）
+
+- 用户先清除旧Goal，再明确要求承接新建。create_goal已真实成功：active/createdAt1795492606，工具正文直接包含人类视觉方式、经典思想、RSI/双模型协同进化和旧六设置全部要求。旧Goal未宣称完成，原文及正负证据保留。实际回执research_goal_RSI_successor_20261124.json；新TXT《TTA_RMOT_旧目标继承与RSI新Goal_20261124.txt》。不再套用“工具正文不能改、只有本地RSI补充”的旧状态。
+- 当前三个真实控制器只续session89700/PID3604938（旧joint修复582，0/1 C3/C4）、14883/PID3661317（native二元组合726，2/3 C1/C6）和1520/PID3701394（新TRUST质量312，2/3 C1/C6 workers3701425/3701426）。新TRUST预检715/713MiB按用户许可共享，小头各15%显存；所有其余设置都在各自控制器内。无新观察器；所有三套source pins中的数值/分析/复算运行时不得修改。NAS只读、只seed0。
+- 新分布策略CPU6677/9558及同CPU分析21982均exit0，禁止重跑。三分支同CPU原SGD/门控SGD/门控TRUST各56+40问，第一视频S逐tensor相同；TRUST更新均值条件KL.00265794，第二视频真实替换2个候选问题，S改变；门控SGD的S仍与原版逐tensor相同。普通joint/coarse max excessKL.00036321。0GT/无RMOT输出，第二视频低信息奖励全0，不能把换题/权重变化当质量。
+- 新native_binary_trust_quality_20261124独立登记/实现并真实启动。复用原pin worker及所有数据/求解器/预算/充分拟合规则，仅在独立进程绑定新A更新及缩减方法范围：完整方法、FROZEN-A、八类同信息KD，10配方18raw/设置、312官评、108CountSelf别名。同名方法必须带cohort区分；此范围不宣称三因素交互已完成，原726组合继续。仍全部该研究输出封存后才隔离GT，当前未读新HOTA。源scripts/a100_native_binary_trust_*与rsi_policy_distribution.py已pin。
+- 新Goal增加三条候选研究路线：A↔S动态课程（已实现）、互补视觉双学生双向互学（候选）、视觉依据约束的自我修正（候选）。用户综述已重新核对，属于自动研发反馈动机，不提供RMOT算法/涨点保证。R-Zero、Visual Questioner、VISE、DML、TRPO原文启发见新TXT，不将多数票/一致性当真值，不包装经典方法名为创新。
+- 未达六设置对充分普通KD的可靠改善、三个贡献/必要交互、双CountMatched及匹配fresh真实冷成本时，新Goal持续ACTIVE。发布保留旧科学源/负结果/私有AGENTS，双100,000,000B gate仍必需，新增记录尚待本轮正常推送。
+
+## 最新：统一二元教师与RSI六设置已运行（2026-11-24）
+
+- 用户已从UI恢复Goal为ACTIVE，get_goal实证active。有效目标继续包含人类视觉方式、经典思想、RSI、六个跨域实验设置、充分同信息蒸馏、模块/交互、双CountMatched和最终真实冷成本；未达成不结项。只seed0，无新种子网格。旧blocked收据是历史，不代表当前状态。
+- 新native_binary四模块与完整入口已实现/预登记并真实运行：session14883/controller3661317，GPU2 C1 worker3661421，GPU3 C6 worker3661422；其余四设置自动接空闲卡。25配方、41raw/设置、726独立官评，CountSelf别名246。正常二元教师来源是原四策略collection，不是新223563联合例。全部输出封存前禁止读取本研究GT/HOTA。
+- 三候选为稳定对象h与参照状态g、数量/utility独立编码器的条件表示学习、可学观察者A↔求解器S。外部教师冻结。奖励只读utility条件风险，同query/请求view不同track的paid probe；只改count参数奖励严格0。首视频C1/C6有正条件teacher-progress信号，但不代表换题或HOTA提升。effective_view回退须完整审计；当前视角一致性只在首循环成立。
+- 所有ordinary同完整锚点/mask/当前输入、全部付费答案，补point soft及同概率LOGIT_KD；原门槛.005，logit是excess MSE而非KL。核心普通头和所有结构回放同三轮前缀+all-paid拟合。真实六类GPU拟合及41密集输出路径已过，非科研验收；不重复工程pilot。
+- 旧联合质量38672/controller2928089已exit1，C1/C2/C5/C6 raw完整保留。C3/C4普通MARGINAL_KD_UNIFORM欠拟合KL约.152718，新增显式优化修复只对未完成ordinary：Adam.001、保留最佳风险后原LBFGS，模型/输入/目标/seed/容量/门槛不变。实际续session89700/controller3604938，GPU0/1 workers3604989/3604990；原失败头已过2.01e-7/1.53e-7，后续继续582项完整研究。
+- 唯一当前长任务句柄89700、14883；直接续实际控制器，禁止新观察器和agent级ps/tail/nvidia轮询。两套source_sha256中的所有数值源/分析/复算均已pin，运行时不得修改。0/1新分配除显存还查无驻留PID；2/3用户许可共享且小头15%显存，不冒称独占部署成本。
+- 输出在SIX下旧joint_observation_quality_20261123与新native_binary_quality_20261124（实际/var/tmp）；NAS只读，大资产不上Git。新TXT《TTA_RMOT_统一二元教师与RSI六设置执行记录_20261124.txt》和native_binary_*_20261124收据为最新。旧V1/V2/V3负结果、已结束432例pilot/联合采集不得重跑或改写。发布需两项真实<100,000,000B，保留AGENTS原私有未提交内容，只加入本节。
+
+## 最新：V3与内部gauge工程检查结束（2026-11-23）
+
+- 48890/PID3067077已exit0：3视频×3分支，均同paired probe/SGD/seed0，各160问。RAW有9次更新但全部问题完整顺序与FROZEN一致；DISCRIMINATION九轮奖励0、更新0；全部最终S逐tensor byte相同。joint/coarse充分拟合通过；不能宣称RSI获益，勿重跑。
+- 41364已exit0：gauge头只去共同utility均值保留候选差异，经典可识别性参数化。6新fit/93.114s CPU，C1联合KL.009076→.0018768，三目标teacher-fit均过，无任务精度/模块贡献结论。V1源码与原始负结果保留，普通对手复用原样。binary_conditional_learning实现独立二元乘积下的条件目标，明确模型假设，尚未集成统一学习器。
+- 下一统一方案用正常二元教师、对象状态/条件学习/可学观察者三因素，见rsi_unified_binary_prospective_scope；尚未实现/启动新完整质量，不能把各原型合称成品。RSI TXT至第20节为最新。
+- 67909采集terminal0，223563实际新例/0cache/0reuse/冻结不变；不要重启。当前仅主38672还活着：0C4、1C2、2C5、3C3，C1/C6生成封存，582官评及分析/复算未完成，未读新HOTA。所有pin源码不改；collector私有handoff可选性修复等主质量也结束后再做。
+- UI Goal工具仍最后报告blocked，授权研究继续但未完成，不假关闭；不增加训练种子。保留AGENTS先前私有未提交内容。
+
+
+## 最新：真实跨候选反馈与学习头工程结果（2026-11-23）
+
+- 新教师70580/PID3046870已exit0：GPU1分配时0MiB，72case/432真实例/0cache，加载464.915s、前向43.534s。后来本任务C2小头在教师加载时同卡启动，保留并限制显存，不冒称独占成本。144/144合法四选一但与独立二元的Yes均值.192882 vs .476806、AB/BA L1.19365；仅通道偏差诊断，无GT准确率。
+- 跨候选学习头保留h_i并只中心化状态，独立count/utility梯度，full-MLE同前向、普通joint同1101D双context；数值审计pass。拟合67529已exit0，三个目标独立共12fits，171.815s CPU；普通positive/conditional/global KL均过.005，但结构C1全体KL.009076且NoIdentity也能拟合，尚无贡献/HOTA。勿重跑70580/67529。源和收据见cross_candidate_*。
+- VISE/Visual Questioner/VICO/MM-Zero原文已核对，RSI TXT第12-16节新增适用边界及实际负结果；尤其VICO seed结构有监督前提，模糊目标不等于场景不存在。后续保留正常二元教师强对照，不把二元乘积伪分布冒充真实联合反馈。
+- 主质量仍只续38672，采集67909；C1/C6生成完成，C2/C5实际训练，C3/C4待证据；不提前读新HOTA。新analysis脚本仅582全部完成后使用，未读GT。
+- get_goal实际显示blocked，接口无active/正文修改，不能谎称工具ACTIVE；CANON有效RSI目标和授权研究继续，rsi_goal_tool_status_receipt为实证。原目标未完成，不假结项。
+
+
+## 最新：RSI三视频与条件区分反馈（2026-11-23）
+
+- 66899/PID2993943已exit0，C1首三视频0004/0005/0007，FROZEN/RAW/PRIOR各160问（56/40/64），只seed0；RAW/FROZEN首视频复用原始工程收据。RAW实际换题0/3/1，PRIOR换题0/3/0（对称差是两倍换题数）。普通joint/coarse全部付费信息充分拟合，max KL.000194。没有RMOT预测/HOTA，行为变化不是质量贡献，勿重跑5299或66899。
+- 初始No奖励.8688→.0574但新视频catch-up奖励仍大；V2精确源/plan备份rsi_curriculum_prefix_20261123/preserved_prior_control_v2。原始v1在Git72445d862f068e08ecbd42aeb809c3c9054d5337可恢复，不修改历史收据的数值。
+- rsi_discrimination_feedback与73077已exit0：同query/view不同候选配对，条件技能=max(H(mean teacherQ)-CE,0)，受Jensen信息差界定；常量校准/冻结S奖励0。148单元无标签审计140可完整三轮，余8不丢query/视频，只明确缺本地反馈。该新反馈尚未接入训练/无新任务质量，正式RSI六设置入口仍待实现。
+- 新关键训练对齐假设：旧case只有一个track_id、两个时刻，主要监督状态差；下一步先核对任务时间语义，再实现真实跨候选同帧教师pilot（AB/BA、同上下文binary、CROP强对照）。旧缓存不能伪造不同候选的联合回答。条件效用应保留对象稳定h_i，只消query共有b_q，不能把身份也中心化掉。随后同信息充分generic joint-KD与条件utility学习，再集成RSI/SGD。详见RSI TXT第9-11节及prospective scope。
+- 主四卡任务只续实际38672与67909控制器；当前21配方/582官评源码pin不可改，当前未读新HOTA。所有六设置、强对照、双数量及真实fresh冷成本要求保留，Goal ACTIVE。
+
+## RSI首段实际证据优先（2026-11-23）
+
+- rsi_curriculum/inputs/learning及contract已实现，5299 CPU真实三轮工程检查exit0：C1首视频两分支各56问含6probe、86.077s，0新增教师/主干/GT/HOTA。不要再启动此已结束pilot。
+- 真实学习actor更新3次，但与冻结actor的提问UID/完整顺序/最终S权重完全相同；probe NEITHER约.991/.881/.991。普通joint/coarse对手充分拟合。此结果不能证明RSI增益，完整收据和raw_reward_mechanism_review已保留。
+- 全148设置视频支持三轮新probe、每query首轮有训练查证，预算含probe无增加；epsilon策略score identity误差1.39e-17。下一步做teacher-prior进展对照和同seed跨视频累积，不换种子挑正例。原版精确源/plan保存在rsi_curriculum_engineering_20261123/preserved_raw_reward_v1。
+- 四卡主实验仍续38672与67909的实际控制器句柄，不改它们的pin源码；RSI正式质量实验尚未启动，Goal ACTIVE。
+
+## 最新用户范围与实际执行（2026-11-23：RSI与四卡并行）
+
+- 用户新增RSI/双模型协同进化方向；保留人类视觉方式与经典思想、六个跨域设置、充分同信息蒸馏及目标GT隔离。有效目标已补充research_goal_RSI_amendment_20261123.json与持续目标CANON；Goal工具不支持改正在进行的objective，原Goal保持ACTIVE，不假结项重建。
+- 用户明确允许2/3现在并行新任务，覆盖旧<512MiB独占偏好：保留IR-MFT进程，小头每卡15%显存上限；2/3预检<8192MiB可共用，0/1仍<512MiB才分配新头。共享训练时间不作独立冷部署成本。只用seed0。
+- 新六设置完整入口scripts/a100_joint_observation_six_setting.py及joint_observation_study.py已实现、CPU真实输入/五类微型fit/33推理路径通过并预登记。21配方、198raw、384dualcount=582独立官评；198CountSelf逐query/frame掩码核验后统计别名，不重复官评。全部输出封存后才GT。
+- 实际新controller2928089/session38672；GPU2 C1 worker2928521、GPU3 C6 worker2928523已开始真实prefix训练。其余C2/C3/C4/C5等自己的完整教师输入，GPU0/1教师controller2893257/session67909原样运行。无新观察器；只续实际控制器工具句柄，不改已pin运行源码。
+- 新质量OUT=.../six_direction_20261122/joint_observation_quality_20261123。每视频每arm模型独立checkpoint，可续未完成单元。普通joint/marginal/coarse软硬单位与置信度对照检查proper教师KL<=.005；结构模型固定容量、有限优化、可报告未达教师熵下界，不能当充分普通基线。
+- RSI文献与三条候选方向见docs/TTA_RMOT_RSI协同进化研究计划_20261123.txt；优先学习进展挑战者—解决者闭环，互补双学生与外部证据修正为备选。当前联合观察实验不改名RSI；尚无RSI质量实验或新HOTA提升结论。无标签动作空间审计只读inputs manifests，不读教师答案或GT。
+- 后续先完成在途六设置并归因，同时实现RSI新闭环的预算broker、独立教师probe和停止一方更新等对照；不能只靠写原型/报告收工，也不能在未有结果时保证涨点。Goal继续ACTIVE。
+
 ## 最新用户范围优先（2026-11-23）
 
 - 只用固定训练seed0，禁止追加17/42或多种子网格；保留六个跨域实验设置与必要机制对照。

@@ -1,5 +1,7 @@
 # TTA-RMOT 研究日志与完整记录索引
 
+2026-11-24增量：显式真实PCD/RGB输入接口已完成实际CPU集成，session16841退出0；C2/0005三帧、197查询、1182输入行，907776个PCD元素与此前实际导出精确一致，新算真实RGB，原NativeVisual点/成对接口贯通，完整执行入口拒绝部分切片。没有新增神经前向、教师、拟合、预测或GT/HOTA；不是冷启动或精度结论。详见docs/TTA_RMOT_真实特征输入接线_20261124.txt及exported_observation_input_check_20261124收据。原四项正式研究继续，所有输入/数值协议不变，Goal ACTIVE。
+
 本文件记录当前决策和后续增量。为遵守用户要求的发布历史小于100MB，2026-11-22将不断重复发布的长日志整理为索引；没有删除实验或修改任何结果。
 
 - 之前已推送的完整逐步日志：[Git完整历史](https://github.com/LYQ1107/TTA-RMOT/blob/8bc165fa8c3a598babeb9f862efec01252f6b84c/research_log.md)。
@@ -408,3 +410,27 @@ GPU0/C2首0005/三个真实帧0,148,296，原batch64+near-zero隔离/原exporter
 新完整联合/同上下文二元数据采集已登记并开始74视频的无标签输入准备；DESIGN/UNIFORM逐query匹配唯一bundle配额，优先将付费时刻与对象上下文锚点分开，所有新普通对手同输入重训。共同提示补齐实际逐图帧号/归一化中心尺寸，完整原句不拆坏。CPU准备首处scalar query索引不符合旧loader契约已保存并修复为向量，原loader不变，0新GPU/标签。后续只seed0，不增加17/42。
 
 新共同输入加入12维无标签预测轨迹几何：场景相对秩/尺寸、对齐历史的公共平移/尺度残差，同时保留原图像运动和历史mask。普通对手同样获得全部1101D，不将其独占为主方法信息。纯代数/因果前缀检查误差4.44e-16/0，不代表世界运动或相机估计。C2首视频8组已有真实教师联合目标上的工程训练完成：结构64宽107779参数KL1.632e-6、充分一般joint-KD128宽372484参数KL1.974e-5，同1000步门槛.005全部通过。两个wall28.058/19.198s，仅拟合相位；未生成RMOT预测/GT/HOTA，不作为完整六设置质量或最终检查点。完整输入准备21299仍为当前长任务，最终prefix/inference/evaluator尚未实现或启动。
+
+
+2026-11-23：完整74视频取证输入已完成；DESIGN/UNIFORM各55019bundle、共同去重55965案例、预计223563真实新输入。NAS准备卡页等待2051.9秒仅CPU30.72秒，保留25组后正常终止143；新I/O修订仅换已验证592文件缓存并复用完成清单，选题/teacher worker AST不变。主2893257/唯一阻塞session67909，GPU0/1 workers2893425/2893426已真实采集，非全六设置质量完成。2/3其它项目未干预。
+
+新第二版conditional_joint_observation分离count/state编码器，以条件估计阻断计数梯度到状态；完整似然同架构同前向控制，参照/局部状态同参数控制。非零梯度/负控已过，未执行完整RMOT拟合/HOTA；旧8目标工程fit仅第一版，不混用。三因素新prospective scope已明确，完整prefix/inference/count/eval入口尚待实现。所有新增方案只seed0，不增加17/42。
+
+完整876负结果、第一版物理/拟合原型与精选代码已正常推送5898b3a5b7c7d173be0afab5ba6383e92f8910de，分支codex/rmot-seed0-joint-evidence-20261123，快照98485424/可达92657513B；旧059远端不变。34个历史逐查询/诊断CSV仅移出索引，原文件与059版本保留，恢复清单pre_seed0_per_query_leaves_20261123.json；全部旧scientific provider字节不变。
+
+
+## 2026-11-23 新六设置实际启动与RSI目标补充
+
+用户明确只用seed0，并要求0/1/2/3并行与加入RSI。新增完整joint_observation_six_setting/study入口已CPU集成通过并在输出/GT前登记：21配方、33输出/设置，198raw+384dualcount=582独立官评，CountSelf精确别名198。普通joint/marginal/coarse单位与置信度软硬均给相同1101D/上下文/参考池/已请求Q，自身proper-KL<=.005后才接受；结构模型有有限优化及残余记录。每视频每arm保存可续checkpoint，自己的过去/当前前缀。controller2928089/session38672实际启动GPU2 C1 worker2928521、GPU3 C6 worker2928523；0/1原teacher2893257/session67909继续。用户新指令允许2/3小头共享，保留IR-MFT，每卡15%上限；不将共享训练计时冒充独立cold成本。运行源码pin后不改。
+
+RSI已写入持续有效目标及research_goal_RSI_amendment_20261123.json；Goal工具不能改运行中objective，原Goal仍ACTIVE，未假完成重建。已读用户指定2609.36054原PDF，并另查R-Zero、Absolute Zero、DML、Dual Student与自纠正负结果。优先挑战者—解决者学习进展闭环，互补视觉双学生/新证据修正为备选，详见新的RSI TXT。没有RSI正式质量结果，当前联合实验不改名RSI。无标签动作审计读取74输入manifest、0教师答案/GT；各设置两策略联合题库为单预算1.765–1.885倍，所有query的两集合都不完全相同，可先构造有预算的有限题库broker。大动作空间仅算术上界，不是准确率。旧完整六设置FULL负结果保留；没有新HOTA提升或Goal达成声明。
+
+
+## 2026-11-23 RSI首段真实闭环：参数更新不等于选题贡献
+
+新rsi_curriculum/inputs/learning与contract入口实际完成C1首视频三轮，两分支各56问含6probe，86.077s CPU，0新教师/主干/GT/HOTA。学习actor3次更新，但两分支UID集合/顺序/最终S权重完全相同；两充分普通对照KL3.36e-6/7.51e-7，不能宣称RSI增益。teacher probe NEITHER约.991/.881/.991，RAW奖励混有学No基率红利。全148单元三轮probe预算和首轮query覆盖通过，策略score identity误差1.39e-17。原版精确源码/plan已保存OUT/preserved_raw_reward_v1，公开receipt与raw_reward_mechanism_review保留。后续在未读新任务GT前固定null-prior progress控制，且须保证冻结S无正奖励，再沿同seed0前缀继续，不加种子。当前四卡六设置实验继续，Goal未完成。
+
+
+## 2026-11-23 RSI同seed前缀行为变化与条件反馈设计
+
+66899/PID2993943正常exit0，C1固定前三视频、3分支各160付费问答（56/40/64），RAW/FROZEN复用已完成首视频，其余自己的past/current前缀，无新GT/HOTA/教师主干。RAW换题0/3/1、prior-control换题0/3/0，行为变化不等于任务提升；初始No奖励.8688→.0574，但后续catch-up仍.977/.987，不能归因条件语义。V2精确源/plan已备份rsi_curriculum_prefix_20261123/preserved_prior_control_v2。新rsi_discrimination_feedback及73077已exit0：同query/view不同候选配对，proper-logscore技能受Jensen信息差界定，纯常量/冻结S奖励0；全部148无标签预算审核，140可完整3轮，余8单元不丢数据并明确无本地反馈轮。正式RSI集成及全六设置入口仍待实现，不伪称已启动/涨点。旧四卡实验pin未改，Goal ACTIVE。

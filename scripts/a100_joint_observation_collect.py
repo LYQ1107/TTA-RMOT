@@ -116,24 +116,46 @@ def group_inputs(target, video):
 
 def prepare():
     plan = json.loads(PLAN.read_text()); guard = generation_guard()
+    # Use the already completed byte-identical cache, not a fresh feature
+    # version or another copy of images/checkpoints. NAS mmap page waits had
+    # stalled the first CPU preparation after 25 complete video groups.
+    from flex_uda.active import observation_learning_inputs as inputs
+    from scripts.a100_observation_local_cache import CACHE
+    cache = json.loads((CACHE/'completion.json').read_text())
+    assert cache['status'] == 'PASS_BYTE_IDENTICAL_HISTORICAL_OBSERVATION_LOCAL_CACHE' and cache['files'] == 592
+    inputs.HISTORY = CACHE
+    preserved = json.loads((OUT/'NAS_IO_handoff/preserved_inputs.json').read_text())['preserved_group_sha256']
+    assert all(file_sha(OUT/name) == sha for name,sha in preserved.items())
+    reused = 0
     counts = Counter(); groups = []; membership = Counter(); single = Counter()
     for target in sorted({t for _,t in PAIRS.values()}):
         for video in sorted(metadata(target)['videos']):
-            cases,own = group_inputs(target,video)
             path = OUT/'inputs'/target/video/'manifest.json'
-            atomic_json(path,dict(cases=cases,own=own,GT_open_attempts=0))
+            if path.is_file():
+                saved = json.loads(path.read_text());assert saved['GT_open_attempts'] == 0
+                cases,own = saved['cases'],saved['own'];reused += 1
+            else:
+                cases,own = group_inputs(target,video)
+                atomic_json(path,dict(cases=cases,own=own,GT_open_attempts=0))
+            assert all(identity(c) == uid for uid,c in cases.items())
+            assert {r['uid'] for rows in own.values() for r in rows} == set(cases)
             expected = sum(1 if c['frame_A'] == c['frame_B'] else 4 for c in cases.values())
             groups.append(dict(target=target,video=video,cases=len(cases),model_examples=expected,manifest_sha256=file_sha(path)))
             for owner,rows in own.items():
                 counts[owner] += len(rows)
                 membership[owner] += sum(int(r['first_in_context'])+int(r['second_in_context']) for r in rows)
                 single[owner] += sum(cases[r['uid']]['frame_A'] == cases[r['uid']]['frame_B'] for r in rows)
+            if len(groups) % 5 == 0 or len(groups) == 74:
+                progress = dict(status='PREPARING_MATCHED_JOINT_INPUTS_EXACT_LOCAL_IO',pid=os.getpid(),
+                    completed=len(groups),total=74,reused_groups=reused,goal_status='ACTIVE')
+                atomic_json(STATE,progress);print(json.dumps(progress),flush=True)
     assignments = [[] for _ in range(plan['worker_shards'])];loads = [0]*len(assignments)
     for group in sorted(groups,key=lambda g:(-g['model_examples'],g['target'],g['video'])):
         i = min(range(len(loads)),key=lambda i:(loads[i],i));assignments[i].append(group);loads[i] += group['model_examples']
     for i,rows in enumerate(assignments):
         atomic_json(OUT/f'shard{i}/manifest.json',dict(groups=sorted(rows,key=lambda g:(g['target'],g['video'])),expected_model_examples=loads[i]))
     assert len(groups) == 74 and not guard
+    assert all(file_sha(OUT/name) == sha for name,sha in preserved.items())
     for pair in PAIRS:
         assert counts[pair+'/DESIGN'] == counts[pair+'/UNIFORM']
     audit = dict(status='PASS_UNLABELLED_MATCHED_JOINT_COHORT_INPUTS',target_videos=74,
@@ -141,6 +163,9 @@ def prepare():
         per_setting_policy_singleton_bundles=dict(single),unique_cases=sum(g['cases'] for g in groups),
         expected_unique_model_examples=sum(loads),shard_model_examples=loads,
         equal_unique_bundle_quota_per_query=True,singletons_use_one_real_binary_input_not_fake_two_events=True,
+        preserved_pre_handoff_groups=len(preserved),reused_group_manifests=reused,
+        exact_local_historical_feature_cache_SHA=cache['aggregate_sha256'],
+        cache_preparation_not_method_deployment_cost=True,
         no_GT_teacher_answers_or_method_predictions_used=True,new_GPU_or_teacher_or_head_fits=0,
         context_relation_fix_shared_by_all_future_methods=True,goal_status='ACTIVE')
     atomic_json(OUT/'preparation.json',audit)

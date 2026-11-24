@@ -17,6 +17,10 @@
 遵照用户要求，后续仅固定seed0，不追加多种子网格。六个设置876份单种子官方统计全部完成，
 876个HOTA、678项效应和6项交互已独立复算；当前FULL在六个设置均低于同一个充分普通对照COARSE_SOFT_MEAN。
 该配方未通过，三个候选创新尚未成立；继续研究联合观察反馈与对象/状态学习，物理pilot不代表精度成功。
+新一轮74视频输入已准备完成，GPU0/1正在采集联合/同上下文二元反馈，预计223563个真实输入。
+条件估计的count/state梯度隔离与对象参照目前仅完成原型检查，完整六设置质量入口尚待实现；仍只使用seed0。
+[条件学习设计与实际进度（TXT）](docs/TTA_RMOT_联合观察与条件对比学习_候选理论设计_20261123.txt)、
+[新取证输入清单审计](docs/a100_six_direction_20261122/joint_observation_collection_input_audit.json)。
 [六设置完整单种子结论与改进设计（TXT）](docs/TTA_RMOT_六设置单种子负结果与联合观察改进设计_20261123.txt)、
 [科学复核](docs/a100_six_direction_20261122/conditional_seed0_scientific_review.json)、
 [876份可复算统计](docs/a100_six_direction_20261122/conditional_seed0_scope_parent_statistics.json)。
