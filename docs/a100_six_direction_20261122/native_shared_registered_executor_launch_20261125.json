@@ -1,0 +1,48 @@
+{
+  "status": "VALIDATED_EXISTING_SHARED_WORK_EXECUTOR_WITH_GPU2_OWNER_REFUSAL",
+  "entry": "scripts/a100_native_registered_shared_executor.py",
+  "executor_sha256": "458885cb0ba9b52d16c45cfd14a0b848241fd6893bb493eb3154f5c75539a59b",
+  "wrapper_sha256": "a6f99fb9789c5ef46d04113413301c2db1d22e739707a9c91b1bba680c0715be",
+  "numerical_helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+  "original_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "original_numeric_source_pins_unchanged": true,
+  "bootstrap_parent_reuse_proof": "docs/a100_six_direction_20261122/native_project_shared_head_parent_reuse_20261125.json",
+  "control_validation": {
+    "actual_session": 83514,
+    "actual_exit_code": 0,
+    "checks": [
+      "actual_original_parent_integration_proof_and_all_source_pins_verified",
+      "eligible_closed_original_inputs_selected_once_per_video",
+      "existing_heads_private_plans_and_other_executor_reservations_not_duplicated",
+      "whole_study_seal_prevents_new_work",
+      "real_O_EXCL_gpu_slot_reservation",
+      "real_subprocess_terminal_forwarding_refusal_stops_without_retry_and_releases_owned_slot",
+      "real_subprocess_PASS_records_only_actual_selected_unit_and_preserves_other_eligible_work"
+    ]
+  },
+  "GPU1": {
+    "actual_session": 16710,
+    "pid": 716419,
+    "status": "WAITING_ORIGINAL_CLOSED_INPUTS_FOR_REGISTERED_NO_IDENTITY_FITS",
+    "current_child_pid": null,
+    "completed_units": 1,
+    "completed_fits": 0,
+    "requires_future_original_closed_inputs": true
+  },
+  "GPU2": {
+    "actual_terminal_session": 3339,
+    "pid": 716418,
+    "actual_exit_code": 0,
+    "status": "SHARED_EXECUTOR_PREFLIGHT_REFUSED_KEEP_ORIGINAL_WORKERS",
+    "actual_new_fits": 0,
+    "reason": "Resident compute owners are not exactly the registered primary worker",
+    "additional_unregistered_compute_owner_kind": "llama-server",
+    "registered_primary_continues": true,
+    "no_processes_signalled_or_restarted": true,
+    "do_not_resume_terminal_session": true
+  },
+  "new_quality_conditions": 0,
+  "new_teacher_questions_predictions_GT_or_neural_seeds": 0,
+  "not_quality_or_primary_deployment_speedup_evidence": true,
+  "goal_status": "ACTIVE"
+}
