@@ -1,0 +1,40 @@
+{
+  "status": "DESCRIPTIVE_SCENE_REFERENCE_APPLICABILITY_ONLY",
+  "domains": [
+    {
+      "target": "Dance",
+      "pairs": 12,
+      "H_paired_valid": 10,
+      "raw_pair_median": 28.665077209472656,
+      "H_pair_median": 2.28233805879315,
+      "H_worse_than_raw_pairs": 0,
+      "candidate_records_with3points_and_epipolar_model": 13,
+      "candidate_median_epipolar_above_background_p90": 7
+    },
+    {
+      "target": "KITTI-V2",
+      "pairs": 12,
+      "H_paired_valid": 12,
+      "raw_pair_median": 15.723249912261963,
+      "H_pair_median": 8.270632518932844,
+      "H_worse_than_raw_pairs": 3,
+      "candidate_records_with3points_and_epipolar_model": 12,
+      "candidate_median_epipolar_above_background_p90": 1
+    },
+    {
+      "target": "SportsMOT",
+      "pairs": 12,
+      "H_paired_valid": 12,
+      "raw_pair_median": 17.28139591217041,
+      "H_pair_median": 0.6120527898184811,
+      "H_worse_than_raw_pairs": 1,
+      "candidate_records_with3points_and_epipolar_model": 36,
+      "candidate_median_epipolar_above_background_p90": 28
+    }
+  ],
+  "threshold_not_used_for_training": true,
+  "no_gt_or_neural_updates": true,
+  "low_epipolar_not_stationary_and_high_not_certified_moving": true,
+  "matched_pixels_can_still_be_wrong_or_mixed_and_models_unidentified": true,
+  "goal_status": "ACTIVE"
+}
