@@ -1,0 +1,61 @@
+{
+  "status": "COMPLETE_IMAGE_ONLY_SHORT_PIXEL_CONTINUITY_AUDIT",
+  "cases": [
+    {
+      "target": "Dance",
+      "video": "dancetrack0004",
+      "triplets": 12,
+      "source_boxes": 43,
+      "totals": {
+        "points": 2566,
+        "cycle_valid": 1765,
+        "same_ID_supported_points": 952,
+        "other_ID_supported_points": 6,
+        "ambiguous_or_missing_points": 807
+      },
+      "boxes_with_at_least3cycle_points": 43,
+      "boxes_with_at_least3same_ID_points": 34,
+      "boxes_with_more_other_ID_than_same_ID_points": 0
+    },
+    {
+      "target": "KITTI-V2",
+      "video": "0005",
+      "triplets": 12,
+      "source_boxes": 42,
+      "totals": {
+        "points": 701,
+        "cycle_valid": 361,
+        "same_ID_supported_points": 347,
+        "other_ID_supported_points": 0,
+        "ambiguous_or_missing_points": 14
+      },
+      "boxes_with_at_least3cycle_points": 33,
+      "boxes_with_at_least3same_ID_points": 33,
+      "boxes_with_more_other_ID_than_same_ID_points": 0
+    },
+    {
+      "target": "SportsMOT",
+      "video": "v_00HRwkvvjtQ_c001",
+      "triplets": 12,
+      "source_boxes": 111,
+      "totals": {
+        "points": 6223,
+        "cycle_valid": 4732,
+        "same_ID_supported_points": 3135,
+        "other_ID_supported_points": 5,
+        "ambiguous_or_missing_points": 1592
+      },
+      "boxes_with_at_least3cycle_points": 111,
+      "boxes_with_at_least3same_ID_points": 100,
+      "boxes_with_more_other_ID_than_same_ID_points": 0
+    }
+  ],
+  "wall_seconds": 24.830134558025748,
+  "registration_sha256": "e4c09ef50b66f408f8d31b14c5115d1e01e858090fa126067e4af9f9192c3856",
+  "GT_reads": 0,
+  "teacher_calls": 0,
+  "neural_updates": 0,
+  "RMOT_predictions": 0,
+  "no_semantic_truth_or_HOTA_contribution_claim": true,
+  "goal_status": "ACTIVE"
+}
