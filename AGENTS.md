@@ -1,3 +1,10 @@
+## 最新：排除历史帧缺失假设，登记内容路径功能诊断（2026-11-26）
+
+- 实际68022 exit0（d8a542）元数据全74物理/517686观察/148单元：C2/C5各615149可用CLIP可能动作，其teacher历史帧全部在currentPCD名义4观察历史中；缺帧实例0，另四设置0CLIP。0图像/GT/teacher/neural/fit，不是实际问答量或已编码语义证明。不能再以学生无时序或缺teacher帧为前提加模块。
+- 新a100_fullscope_content_usage_audit.py仅prepare实际94417 exit0（2d1a78），自源pin冻结：完整4588/所有teacherattempt及186/180复算后，只有strictfalse才CPU量原S/R分支激活/条件梯度；stricttrue跳过、优先必要贡献验证。0替代预测/mask/HOTA消融。h读全9352含currentDINO，额外app可被hidden零系数绕过，只是结构可能，不是拟合模型实际失效或HOTA归因。
+- 原RMOT公开论文2303.03366v2引言/3.1明确动作区间可变，当前eval恢复器raw_rows亦按frame→IDs映射；本轮仅读源代码/公开任务定义，未调恢复或读目标GT。身份持续不等于整句永久匹配，不能全轨迹硬传播Yes或将所有变化叫闪烁。TXT38-40保存证据和边界。
+- 两实际句柄23947/78495仍四卡活跃，原42源不改。a81ae3确认C1/C6 dancetrack0063各31输出已封存，下一0094到stage2各227独特QA/10522ROI；此前KITTI两设置各3/4视频封存，0019均匀仍在继续。新两T0已load524.826/616.719s，成本保留不作单方法fresh成本。Goal ACTIVE/未六设置新HOTA，先主正证据再必要模块贡献，无新观察器/ps-tail-nvidia轮询、seed0、NAS只读、两100000000B gate；私有49AGENTS及research_log不全stage。
+
 ## 最新：失败状态梯度诊断及12个充分普通头（2026-11-26）
 
 - 实际93103 exit0（3b6a3e）只读原两个失败状态：24循环batch裸梯度都与full同向、均未clip10；C5旧Adam13/24候选delta局部上升且fullAdam也上升，C2无此现象。batch0两例下降，不能称历史半数更新错误或两例同因。初版45204的LURE质量=1错误审计假设已私有保留并修正，仅新CPU审计源码变，42主源不改/0优化/GT/教师。
