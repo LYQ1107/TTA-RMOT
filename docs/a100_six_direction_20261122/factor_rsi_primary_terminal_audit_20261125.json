@@ -1,0 +1,316 @@
+{
+  "status": "PASS_ALL_PRIMARY_ACTUAL_GPU_FITS_FROZEN_TEACHER_AND_WITHHELD_PREFIX_AUDIT",
+  "actual_primary_session": 31423,
+  "actual_primary_exit_code": 0,
+  "cases": [
+    {
+      "pair": "C1",
+      "budget": 56,
+      "modes": {
+        "WHOLE": 32,
+        "STATE": 9,
+        "APPEARANCE": 15
+      },
+      "fit_prefix_lengths": [
+        14,
+        31,
+        50,
+        54,
+        56
+      ],
+      "final_fit": {
+        "steps": 4000,
+        "labels": 56,
+        "roles": {
+          "WHOLE": {
+            "teacher_CE": 0.04940041058755754,
+            "attainable_entropy": 0.04939737292745224,
+            "excess_KL": 3.0376601053011543e-06,
+            "rows": 32
+          },
+          "APPEARANCE": {
+            "teacher_CE": 0.21889792223037857,
+            "attainable_entropy": 0.21889725252536638,
+            "excess_KL": 6.697050121962089e-07,
+            "rows": 15
+          },
+          "STATE": {
+            "teacher_CE": 0.2505170893317559,
+            "attainable_entropy": 0.25048371511706097,
+            "excess_KL": 3.337421469495894e-05,
+            "rows": 9
+          }
+        },
+        "hard": false,
+        "whole_only": false,
+        "wall_seconds": 92.46972498507239,
+        "seed": 0,
+        "manual_GT_selection": false,
+        "risk_units": "proper teacher KL in nats"
+      },
+      "paid_answers_sha256": "e3eb66cbaa6cdcbd41b223a5ff5f52084a0d4ac2589daa8c357e21e5e44f4f24",
+      "feedback": [
+        {
+          "stage": 0,
+          "paid_training_prefix": 31,
+          "probe_positions": [
+            31,
+            32
+          ],
+          "actual_reward": 4.3049299682186645e-06,
+          "actor_parameter_change": 0.8478395917800388,
+          "one_step_conditional_choice_changes": 0
+        },
+        {
+          "stage": 1,
+          "paid_training_prefix": 50,
+          "probe_positions": [
+            50,
+            51
+          ],
+          "actual_reward": -0.00016561395673268152,
+          "actor_parameter_change": 0.6455176959703434,
+          "one_step_conditional_choice_changes": 5
+        },
+        {
+          "stage": 2,
+          "paid_training_prefix": 54,
+          "probe_positions": [
+            54,
+            55
+          ],
+          "actual_reward": 0.0008280328251725426,
+          "actor_parameter_change": 0.5885820447784482,
+          "one_step_conditional_choice_changes": 2
+        }
+      ]
+    },
+    {
+      "pair": "C2",
+      "budget": 1891,
+      "modes": {
+        "WHOLE": 740,
+        "STATE": 612,
+        "APPEARANCE": 539
+      },
+      "fit_prefix_lengths": [
+        194,
+        785,
+        1378,
+        1889,
+        1891
+      ],
+      "final_fit": {
+        "steps": 4000,
+        "labels": 1891,
+        "roles": {
+          "WHOLE": {
+            "teacher_CE": 0.3168088235976768,
+            "attainable_entropy": 0.31680709354902686,
+            "excess_KL": 1.7300486499505219e-06,
+            "rows": 740
+          },
+          "APPEARANCE": {
+            "teacher_CE": 0.5564382937293716,
+            "attainable_entropy": 0.5564285584229224,
+            "excess_KL": 9.735306449210057e-06,
+            "rows": 539
+          },
+          "STATE": {
+            "teacher_CE": 0.5112799645399317,
+            "attainable_entropy": 0.5112671330296538,
+            "excess_KL": 1.2831510277977465e-05,
+            "rows": 612
+          }
+        },
+        "hard": false,
+        "whole_only": false,
+        "wall_seconds": 340.3667529330123,
+        "seed": 0,
+        "manual_GT_selection": false,
+        "risk_units": "proper teacher KL in nats"
+      },
+      "paid_answers_sha256": "29467b1326f24825787ed86a2277bccccdd85506842b02a228c61a7531a43dbb",
+      "feedback": [
+        {
+          "stage": 0,
+          "paid_training_prefix": 785,
+          "probe_positions": [
+            785,
+            786
+          ],
+          "actual_reward": -0.0015952838364894281,
+          "actor_parameter_change": 0.6006826783029525,
+          "one_step_conditional_choice_changes": 0
+        },
+        {
+          "stage": 1,
+          "paid_training_prefix": 1378,
+          "probe_positions": [
+            1378,
+            1379
+          ],
+          "actual_reward": -0.007644619550278817,
+          "actor_parameter_change": 0.47675476546844103,
+          "one_step_conditional_choice_changes": 355
+        },
+        {
+          "stage": 2,
+          "paid_training_prefix": 1889,
+          "probe_positions": [
+            1889,
+            1890
+          ],
+          "actual_reward": 0.002577263788781864,
+          "actor_parameter_change": 0.7250371200965106,
+          "one_step_conditional_choice_changes": 234
+        }
+      ]
+    },
+    {
+      "pair": "C4",
+      "budget": 43,
+      "modes": {
+        "WHOLE": 26,
+        "STATE": 9,
+        "APPEARANCE": 8
+      },
+      "fit_prefix_lengths": [
+        5,
+        21,
+        31,
+        41,
+        43
+      ],
+      "final_fit": {
+        "steps": 4000,
+        "labels": 43,
+        "roles": {
+          "WHOLE": {
+            "teacher_CE": 0.14879548807152995,
+            "attainable_entropy": 0.14879536526138598,
+            "excess_KL": 1.22810143970975e-07,
+            "rows": 26
+          },
+          "APPEARANCE": {
+            "teacher_CE": 0.3252624711872698,
+            "attainable_entropy": 0.3252624235760052,
+            "excess_KL": 4.7611264597513525e-08,
+            "rows": 8
+          },
+          "STATE": {
+            "teacher_CE": 0.21706309607744895,
+            "attainable_entropy": 0.2170628222647035,
+            "excess_KL": 2.738127454493533e-07,
+            "rows": 9
+          }
+        },
+        "hard": false,
+        "whole_only": false,
+        "wall_seconds": 89.91442398400977,
+        "seed": 0,
+        "manual_GT_selection": false,
+        "risk_units": "proper teacher KL in nats"
+      },
+      "paid_answers_sha256": "81afc40adcabd26b41bd4569a22d23d832037e86749185ae4ec00cb41af9eccb",
+      "feedback": [
+        {
+          "stage": 0,
+          "paid_training_prefix": 21,
+          "probe_positions": [
+            21,
+            22
+          ],
+          "actual_reward": 0.00028923994309978387,
+          "actor_parameter_change": 0.46954116501783283,
+          "one_step_conditional_choice_changes": 0
+        },
+        {
+          "stage": 1,
+          "paid_training_prefix": 31,
+          "probe_positions": [
+            31,
+            32
+          ],
+          "actual_reward": -0.0,
+          "actor_parameter_change": 0.0,
+          "one_step_conditional_choice_changes": 3
+        },
+        {
+          "stage": 2,
+          "paid_training_prefix": 41,
+          "probe_positions": [
+            41,
+            42
+          ],
+          "actual_reward": 0.06980656670895626,
+          "actor_parameter_change": 0.7296746530176198,
+          "one_step_conditional_choice_changes": 4
+        }
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "GPU": 0,
+      "pairs": [
+        "C1",
+        "C2"
+      ],
+      "receipt": {
+        "logical_calls": 1947,
+        "new_calls": 1947,
+        "cache_hits": 0,
+        "forward_seconds": 115.63189727510326,
+        "equivalent_forward_seconds": 115.63189727510326,
+        "batches": 494,
+        "cache": {
+          "complete_raw_responses": 1947,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/factor_rsi_primary_pilot_20261125/teacher_gpu0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 545.7795822169865,
+        "peak_allocated_bytes": 5475676160
+      },
+      "worker_wall_seconds": 1544.864183299942
+    },
+    {
+      "GPU": 3,
+      "pairs": [
+        "C4"
+      ],
+      "receipt": {
+        "logical_calls": 43,
+        "new_calls": 43,
+        "cache_hits": 0,
+        "forward_seconds": 4.3236691389465705,
+        "equivalent_forward_seconds": 4.3236691389465705,
+        "batches": 13,
+        "cache": {
+          "complete_raw_responses": 43,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/factor_rsi_primary_pilot_20261125/teacher_gpu3/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 545.9278201679699,
+        "peak_allocated_bytes": 5480209408
+      },
+      "worker_wall_seconds": 721.4616789460415
+    }
+  ],
+  "actual_teacher_calls": 1990,
+  "cache_hits": 0,
+  "current_probe_labels_independently_excluded_from_training_prefixes": true,
+  "teacher_actual_effective_views_matched": true,
+  "no_new_fits_predictions_or_GT": true,
+  "adequate_ordinary_quality_session": 64168,
+  "adequate_ordinary_and_quality_still_required": true,
+  "prepaid_features_not_full_cold_cost": true,
+  "all_DEV": true,
+  "goal_status": "ACTIVE"
+}
