@@ -1,0 +1,87 @@
+{
+  "status": "COMPLETE_ALL6_LAZY_FULL_TEMPORAL_ACTION_METADATA",
+  "settings": {
+    "C1": {
+      "target": "Dance",
+      "videos": 25,
+      "queries": 425,
+      "full_conceptual_actions": 3588445,
+      "historical_union_actions": 6673,
+      "logical_budget": 3047,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 1,
+      "maximum_full_observations_per_track": 2337
+    },
+    "C2": {
+      "target": "KITTI-V2",
+      "videos": 4,
+      "queries": 862,
+      "full_conceptual_actions": 2425382,
+      "historical_union_actions": 46747,
+      "logical_budget": 20955,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 2,
+      "maximum_full_observations_per_track": 373
+    },
+    "C3": {
+      "target": "SportsMOT",
+      "videos": 45,
+      "queries": 466,
+      "full_conceptual_actions": 2968201,
+      "historical_union_actions": 7652,
+      "logical_budget": 3508,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 1,
+      "maximum_full_observations_per_track": 1212
+    },
+    "C4": {
+      "target": "SportsMOT",
+      "videos": 45,
+      "queries": 466,
+      "full_conceptual_actions": 2968201,
+      "historical_union_actions": 7375,
+      "logical_budget": 3508,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 1,
+      "maximum_full_observations_per_track": 1212
+    },
+    "C5": {
+      "target": "KITTI-V2",
+      "videos": 4,
+      "queries": 862,
+      "full_conceptual_actions": 2425382,
+      "historical_union_actions": 46443,
+      "logical_budget": 20955,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 2,
+      "maximum_full_observations_per_track": 373
+    },
+    "C6": {
+      "target": "Dance",
+      "videos": 25,
+      "queries": 425,
+      "full_conceptual_actions": 3588445,
+      "historical_union_actions": 6739,
+      "logical_budget": 3046,
+      "zero_budget_queries": 0,
+      "maximum_old_frames_per_track": 1,
+      "maximum_full_observations_per_track": 2337
+    }
+  },
+  "video_units": 148,
+  "total_conceptual_actions": 17964056,
+  "wall_seconds": 23.176843669964,
+  "detailed_video_units_local_not_Git": true,
+  "raw_9352_tensors_materialized": 0,
+  "new_GPU_teacher_or_neural_calls": 0,
+  "GT_open_attempts": 0,
+  "source_sha256": {
+    "scripts/a100_full_temporal_support.py": "6cd130d61ba07bae36d2018e3a5d8308291c3a2d0e951dd15b10e685917db6a9",
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801",
+    "flex_uda/active/acquisition.py": "26fd5da1de9e1ff38d8e82b04eb7e847ef446cca0372ef2644d4ed106fba0a25",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1"
+  },
+  "no_fresh_teacher_broker_sampler_learning_or_quality_result_yet": true,
+  "goal_status": "ACTIVE"
+}

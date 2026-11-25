@@ -1,0 +1,44 @@
+{
+  "status": "PASS_FULL_SCOPE_INPUT_AND_SAMPLING_CONTRACT_NO_GT",
+  "cases": [
+    {
+      "pair": "C1",
+      "old_point_rows_byte_equal": 104,
+      "all_ROIs": 4371,
+      "old_alignment_ROIs": 11,
+      "full_query_actions": 74307,
+      "unlabeled_sample_normalization": true,
+      "query_independent_content_reduction_exact_on_real_rows": true,
+      "teacher_calls": 0
+    },
+    {
+      "pair": "C2",
+      "old_point_rows_byte_equal": 4068,
+      "all_ROIs": 1064,
+      "old_alignment_ROIs": 44,
+      "full_query_actions": 209608,
+      "unlabeled_sample_normalization": true,
+      "query_independent_content_reduction_exact_on_real_rows": true,
+      "teacher_calls": 0
+    },
+    {
+      "pair": "C4",
+      "old_point_rows_byte_equal": 95,
+      "all_ROIs": 11168,
+      "old_alignment_ROIs": 19,
+      "full_query_actions": 89344,
+      "unlabeled_sample_normalization": true,
+      "query_independent_content_reduction_exact_on_real_rows": true,
+      "teacher_calls": 0
+    }
+  ],
+  "exact_adaptive_no_replacement_paths": 60,
+  "expected_LURE_error": 1.1102230246251565e-16,
+  "bias_variance_identity_error": 2.7755575615628914e-17,
+  "full_image_transfer_reduction": "Query-independent content objective and batchorder can averagephysicalROIs once; fullsemanticqueryscores are never equated.",
+  "no_teacher_model_backbone_calls_optimizer_steps_predictions_or_GT": true,
+  "fixed_model_risk_identity_not_a_fitted_model_or_HOTA_guarantee": true,
+  "LURE_is_credited_prior_work_not_new_theorem": true,
+  "self_source_sha256": "6c80591953aa264e3281bea72acdf1fba8a88eba7dfb13b538ddb465fac4abe3",
+  "goal_status": "ACTIVE"
+}
