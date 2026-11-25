@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## 最新补充：预先固定完整结果后的失败诊断（2026-11-26）
+
+- actual23947仍是唯一数值主任务，四卡原worker和42源pin不改。首批实际C2/C5的0011均stage0封闭：1140独特问题、S内容覆盖2576物理ROI；仅接线/拟合收据，无完整新HOTA，Goal ACTIVE。
+- 新scripts/a100_fullscope_visual_postseal.py已编译并登记，但未读GT/未实际诊断。仅all4588封存、4教师close原权重校验、186HOTA/180效应复算后才逐148视频读取canonical名义锚点；检查官方IoU50漏检/误检、独特问题/时刻/对象覆盖、未问对与误判空、查证前R/S误差、bootstrap/closed/final像素内容变化。不是新拟合/消融/GT选mask，也不把像素MSE或教师一致当真语义。
+- close收据字段按原LocalTeacher.backend_unmodified/teacher_weight_sha256明确，登记前后schema修正留本地v0，无数值主变化/无GT。AGENTS旧私有49行与research_log追加仍不全stage，NAS/历史providers不动。源已正常发布82e70ef（snapshot99905213/reachable98661215）；本新增代码及登记另过体积门槛。
+
 ## 最新实际任务：完整六设置全时间支持新主四卡运行（2026-11-26）
 
 - 唯一actual23947：GPU0/1/2/3worker1347810/1347812/1347814/1347816，42数值源pin不可改。fullscope_visual_six_20261126计划148视频单元、4588raw/双数量封存后本研究GT；186完整设置HOTA/180效应官方充分计数聚合，不平均视频HOTA。原GPU2服务保留。四原Qwen已实际加载（550.75..713.65s），真实新GPU回答在运行；无完整六设置新质量，原Goal ACTIVE。
