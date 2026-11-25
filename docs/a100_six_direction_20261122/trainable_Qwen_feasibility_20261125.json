@@ -1,0 +1,67 @@
+{
+  "status": "PASS_ONE_REAL_IMAGE_QWEN_ADAPTER_FORWARD_AND_BACKWARD",
+  "pair": "C1",
+  "key": [
+    "dancetrack0004",
+    "dacning-person-with-white-Tshirt-and-purple-pants",
+    1,
+    385
+  ],
+  "initial_probability": 0.008577484637498856,
+  "original_reference_probability": 0.008577484637498856,
+  "resampling_probes": [
+    {
+      "downsample_side": 224,
+      "frozen_probability": 0.008577484637498856,
+      "visual_sha256": "bc71041334647e68843e7941063892739723645fd108e0fcc5084ede9053adbe"
+    },
+    {
+      "downsample_side": 160,
+      "frozen_probability": 0.005220125894993544,
+      "visual_sha256": "7d048d40ba93be1c3ddd025b0ee2e363a2e6f10d7bbc320a70811280f4d63375"
+    }
+  ],
+  "selected_external_target": {
+    "downsample_side": 160,
+    "frozen_probability": 0.005220125894993544,
+    "visual_sha256": "7d048d40ba93be1c3ddd025b0ee2e363a2e6f10d7bbc320a70811280f4d63375"
+  },
+  "final_probability": 0.01098694372922182,
+  "adapter_maximum_parameter_change": 9.999990652431734e-06,
+  "step": {
+    "loss": 0.033410072326660156,
+    "proper_teacher_CE": 0.033410072326660156,
+    "proper_binary_reference_KL": 0.0,
+    "gradient_norm": 0.11774281412363052,
+    "adapter_updates": 1,
+    "full_Qwen_base_frozen": true
+  },
+  "adapter_step_wall_seconds": 0.5173361739143729,
+  "model_seal": {
+    "initial_base_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_base_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "original_Qwen_base_weights_unchanged": true,
+    "adapter_trainable_parameters": 1605632,
+    "adapter_optimizer_updates": 1,
+    "forward_batches": 6,
+    "model_load_and_base_hash_wall_seconds": 504.843490383937
+  },
+  "execution": {
+    "deterministic_algorithms": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_initialized_before_configuration": false,
+    "CUDA_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "torch_version": "2.6.0+cu118",
+    "cuda_version": "11.8"
+  },
+  "worker_wall_seconds": 532.0145332179964,
+  "peak_allocated_bytes": 4879315968,
+  "GT_open_attempts": 0,
+  "image_source": "One actual Dance candidate and original task query; resampling only, no synthetic semantic answer.",
+  "adapter_checkpoint_not_to_Git_or_future_main": true,
+  "new_RMOT_predictions_or_HOTA": 0,
+  "not_evidence_of_teacher_accuracy_student_RMOT_or_RSI_improvement": true,
+  "source_PCD_student_training_not_included": true,
+  "goal_status": "ACTIVE"
+}

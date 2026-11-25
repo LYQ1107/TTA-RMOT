@@ -1,0 +1,59 @@
+{
+  "status": "REGISTERED_UNLABELED_APPEARANCE_INPUTS_FOR_ALL_SIX_SETTINGS",
+  "physical_videos": 74,
+  "rows": 517686,
+  "reused_rows": 17399,
+  "role_pending_rows": [
+    126122,
+    125134,
+    124990,
+    124041
+  ],
+  "roles": [
+    "0",
+    "1",
+    "2",
+    "3"
+  ],
+  "batch_size": 16,
+  "source_sha256": {
+    "scripts/a100_dino_appearance_collect.py": "2e6bf0cdada18622ba00b35226131cd42045636c58cd5a2982991648ad139e72",
+    "flex_uda/active/frozen_appearance.py": "84d7629b34d0a6914afdfb452f9b542863961d5b86aace1aaf6b64014f3edf31",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/deterministic_observation_runtime.py": "572e8cd6033a357134debec2c3fab8f1ab957182465942dc1e6c37760a5e8804",
+    "scripts/a100_anchor_observability.py": "13bfe389a8b8ce71532b4dbfebd5e1ea94166f9fb93c90a593d627e3087c5713",
+    "configs/a100_paths.json": "c7bc77307fe4f9fcc2c78c4e01be7bb77bbdb9f3168ac64071f47a1d26e28730",
+    "scripts/a100_dino_fullsix_collect.py": "9669c700089865ff96b5a37fab21924268f1e0198ef594ea0908774c2501d432"
+  },
+  "weight_path": "/data3/liuyeqiang/.cache/torch/hub/checkpoints/dinov2_vitb14_pretrain.pth",
+  "weight_sha256": "0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73",
+  "parent_input_plan_sha256": "d9466fa00e9e0aaa30f35bfad9c68a5a50ae1efc9b0e89a771f90aa20a69e5f7",
+  "extractor": "Unchanged historical extractor; OUT and PLAN rebound only within new worker processes. Historical descriptor files never mutated.",
+  "feature_version": "Old subset descriptors reused exactly; remaining rows get the same frozen encoder/preprocessing/batch-size. Not advertised as identical to a hypothetical one-pass full-video encoding.",
+  "physical_domains": [
+    "Dance",
+    "KITTI-V2",
+    "SportsMOT"
+  ],
+  "cross_domain_settings": [
+    "V2->Dance",
+    "Dance->KITTI-V2",
+    "V2->SportsMOT",
+    "Dance->SportsMOT",
+    "LaMOT->KITTI-V2",
+    "LaMOT->Dance"
+  ],
+  "same_features_for_every_future_ordinary_and_candidate": true,
+  "only_unlabeled_images_and_fixed_candidates_used_for_selection": true,
+  "prior_first_video_strict_screen_still_failed": true,
+  "no_new_main_acceptance_or_module_ablation_claim": true,
+  "new_Qwen_calls_training_predictions_or_GT_reads": 0,
+  "all_data_DEV": true,
+  "seed": 0,
+  "GPU2_fraction": 0.1,
+  "other_GPUs_fraction": 0.35,
+  "arrays_and_weights_not_to_Git": true,
+  "not_single_method_fresh_cost": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,54 @@
+{
+  "status": "COMPLETE_SHARED_DESCRIPTOR_PHYSICAL_PHASE_ACCOUNTING",
+  "units": 44,
+  "ROIs": 17399,
+  "real_forward_batches": 1107,
+  "cached_processed_rows_at_start": 0,
+  "unit_phase_sums": {
+    "image_decode_wall_seconds": 538.7504078093916,
+    "crop_preprocess_wall_seconds": 90.92637955560349,
+    "synchronized_visual_forward_wall_seconds": 87.77027576696128,
+    "unit_wall_seconds": 723.4523128902074
+  },
+  "roles": [
+    {
+      "role": "C1",
+      "model_load_to_GPU_wall_seconds": 3.9948676670901477,
+      "worker_wall_seconds": 235.2909511870239,
+      "rows": 4371,
+      "real_new_forward_batches": 274
+    },
+    {
+      "role": "C2",
+      "model_load_to_GPU_wall_seconds": 3.9893143040826544,
+      "worker_wall_seconds": 93.39639251702465,
+      "rows": 1064,
+      "real_new_forward_batches": 67
+    },
+    {
+      "role": "C4",
+      "model_load_to_GPU_wall_seconds": 3.888961688033305,
+      "worker_wall_seconds": 297.07336532510817,
+      "rows": 11168,
+      "real_new_forward_batches": 698
+    },
+    {
+      "role": "AUX",
+      "model_load_to_GPU_wall_seconds": 4.050398790976033,
+      "worker_wall_seconds": 174.15447318507358,
+      "rows": 796,
+      "real_new_forward_batches": 68
+    }
+  ],
+  "parent_wall_seconds": 304.2932447909843,
+  "parallel_phase_sums_not_equal_parent_critical_path": true,
+  "model_loaded_in_four_distinct_workers": true,
+  "GPU2_shared_with_existing_service": true,
+  "source_PCD_teacher_costs_not_included": true,
+  "not_single_method_fresh_cold_deployment": true,
+  "OS_NAS_caches_not_cleared": true,
+  "neural_seeds": [
+    0
+  ],
+  "new_Qwen_calls": 0
+}

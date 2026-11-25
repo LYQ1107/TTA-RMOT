@@ -1,0 +1,767 @@
+{
+  "status": "COMPLETE_POSTSEAL_VISUAL_CONSTRAINT_ERROR_DIAGNOSIS",
+  "cases": [
+    {
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "methods": {
+        "VISUAL_CONSTRAINT_FEEDBACK": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 109.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 60,
+            "FN": 0,
+            "TN": 69903
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "MEAN_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2140.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2091,
+            "FN": 0,
+            "TN": 67872
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "MAJORITY_HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 3418.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 3369,
+            "FN": 0,
+            "TN": 66594
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "CONFIDENCE_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2086.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2037,
+            "FN": 0,
+            "TN": 67926
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "CROP_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2429.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2380,
+            "FN": 0,
+            "TN": 67583
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "DS_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2226.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2177,
+            "FN": 0,
+            "TN": 67786
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "GAUSSIAN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 17412.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 17363,
+            "FN": 0,
+            "TN": 52600
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 53,
+            "teacher_correct_student_wrong": 3,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "PATTERN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 1530.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 1481,
+            "FN": 0,
+            "TN": 68482
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "MEAN_SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2239.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2190,
+            "FN": 0,
+            "TN": 67773
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        },
+        "MAJORITY_HARD_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 3624.0,
+            "FN": 291.0,
+            "TP_weighted_AssA": 0.3475050037209548
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 3575,
+            "FN": 0,
+            "TN": 66388
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 56,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 0
+          }
+        }
+      },
+      "teacher_nominal_anchor_canonical_membership_counts": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0,
+        "TN": 46
+      },
+      "graph_edges": {
+        "unweighted": {
+          "positive_positive": 35092.0,
+          "positive_negative": 268.0,
+          "negative_negative": 566695.0,
+          "cross_class_mass_fraction": 0.00044514205512785377,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.007579185520361991
+        },
+        "image_state_weight": {
+          "positive_positive": 2470.64704412117,
+          "positive_negative": 0.22188562118916774,
+          "negative_negative": 39696.69875189901,
+          "cross_class_mass_fraction": 5.261997155358116e-06,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 8.980064402376214e-05
+        },
+        "learned_weight": {
+          "positive_positive": 2448.6241992374858,
+          "positive_negative": 0.21997729256499765,
+          "negative_negative": 40026.341305242204,
+          "cross_class_mass_fraction": 5.178960140371804e-06,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 8.982902818941293e-05
+        }
+      },
+      "graph_edge_classes_are_canonical_membership_not_semantic_GT": true,
+      "mean_observer_multiplier": 1.0042246812396436,
+      "observer_parameter_change": 0.0641188770532608,
+      "teacher_targets_unchanged": true,
+      "mean_virtual_probe_CE_change": -3.7852923075358074e-06,
+      "virtual_progress_includes_support_gradient_not_pure_observer_contribution": true
+    },
+    {
+      "pair": "C2",
+      "video": "0005",
+      "methods": {
+        "VISUAL_CONSTRAINT_FEEDBACK": {
+          "official_IoU50_counts": {
+            "TP": 18492.0,
+            "FP": 44710.0,
+            "FN": 25196.0,
+            "TP_weighted_AssA": 0.7463633836727422
+          },
+          "canonical_membership_counts": {
+            "TP": 18508,
+            "FP": 44694,
+            "FN": 19446,
+            "TN": 126960
+          },
+          "canonical_positive_queries_zero_output": 4,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1212,
+            "teacher_correct_student_wrong": 11,
+            "teacher_wrong_student_correct": 4,
+            "both_wrong": 681
+          }
+        },
+        "MEAN_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 17613.0,
+            "FP": 38909.0,
+            "FN": 26075.0,
+            "TP_weighted_AssA": 0.6882027720240611
+          },
+          "canonical_membership_counts": {
+            "TP": 17623,
+            "FP": 38899,
+            "FN": 20331,
+            "TN": 132755
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1222,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 685
+          }
+        },
+        "MAJORITY_HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 20118.0,
+            "FP": 50144.0,
+            "FN": 23570.0,
+            "TP_weighted_AssA": 0.7103561475900302
+          },
+          "canonical_membership_counts": {
+            "TP": 20128,
+            "FP": 50134,
+            "FN": 17826,
+            "TN": 121520
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1196,
+            "teacher_correct_student_wrong": 27,
+            "teacher_wrong_student_correct": 11,
+            "both_wrong": 674
+          }
+        },
+        "CONFIDENCE_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 18639.0,
+            "FP": 45888.0,
+            "FN": 25049.0,
+            "TP_weighted_AssA": 0.7117302399628144
+          },
+          "canonical_membership_counts": {
+            "TP": 18648,
+            "FP": 45879,
+            "FN": 19306,
+            "TN": 125775
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1222,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 685
+          }
+        },
+        "CROP_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 20584.0,
+            "FP": 41234.0,
+            "FN": 23104.0,
+            "TP_weighted_AssA": 0.7162976275211079
+          },
+          "canonical_membership_counts": {
+            "TP": 20593,
+            "FP": 41225,
+            "FN": 17361,
+            "TN": 130429
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1144,
+            "teacher_correct_student_wrong": 79,
+            "teacher_wrong_student_correct": 174,
+            "both_wrong": 511
+          }
+        },
+        "DS_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 23499.0,
+            "FP": 72024.0,
+            "FN": 20189.0,
+            "TP_weighted_AssA": 0.724776235251925
+          },
+          "canonical_membership_counts": {
+            "TP": 23517,
+            "FP": 72006,
+            "FN": 14437,
+            "TN": 99648
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1222,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 685
+          }
+        },
+        "GAUSSIAN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 26137.0,
+            "FP": 73175.0,
+            "FN": 17551.0,
+            "TP_weighted_AssA": 0.7377631565411051
+          },
+          "canonical_membership_counts": {
+            "TP": 26153,
+            "FP": 73159,
+            "FN": 11801,
+            "TN": 98495
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1115,
+            "teacher_correct_student_wrong": 108,
+            "teacher_wrong_student_correct": 88,
+            "both_wrong": 597
+          }
+        },
+        "PATTERN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 24259.0,
+            "FP": 64362.0,
+            "FN": 19429.0,
+            "TP_weighted_AssA": 0.735273668920612
+          },
+          "canonical_membership_counts": {
+            "TP": 24274,
+            "FP": 64347,
+            "FN": 13680,
+            "TN": 107307
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1222,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 685
+          }
+        },
+        "MEAN_SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 17885.0,
+            "FP": 37132.0,
+            "FN": 25803.0,
+            "TP_weighted_AssA": 0.7891175957501047
+          },
+          "canonical_membership_counts": {
+            "TP": 17893,
+            "FP": 37124,
+            "FN": 20061,
+            "TN": 134530
+          },
+          "canonical_positive_queries_zero_output": 22,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1126,
+            "teacher_correct_student_wrong": 97,
+            "teacher_wrong_student_correct": 165,
+            "both_wrong": 520
+          }
+        },
+        "MAJORITY_HARD_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 20205.0,
+            "FP": 49593.0,
+            "FN": 23483.0,
+            "TP_weighted_AssA": 0.7737854738146638
+          },
+          "canonical_membership_counts": {
+            "TP": 20213,
+            "FP": 49585,
+            "FN": 17741,
+            "TN": 122069
+          },
+          "canonical_positive_queries_zero_output": 11,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 1130,
+            "teacher_correct_student_wrong": 93,
+            "teacher_wrong_student_correct": 124,
+            "both_wrong": 561
+          }
+        }
+      },
+      "teacher_nominal_anchor_canonical_membership_counts": {
+        "TP": 335,
+        "FP": 535,
+        "FN": 150,
+        "TN": 888
+      },
+      "graph_edges": {
+        "unweighted": {
+          "positive_positive": 287665.0,
+          "positive_negative": 60642.0,
+          "negative_negative": 1406963.0,
+          "cross_class_mass_fraction": 0.0345485309952315,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.17410502803561226
+        },
+        "image_state_weight": {
+          "positive_positive": 12381.8421575799,
+          "positive_negative": 70.31147778563488,
+          "negative_negative": 70190.30227212394,
+          "cross_class_mass_fraction": 0.0008507912429943033,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.005646531503268821
+        },
+        "learned_weight": {
+          "positive_positive": 16728.775970245308,
+          "positive_negative": 94.9479704678298,
+          "negative_negative": 92816.14109271558,
+          "cross_class_mass_fraction": 0.0008659986077042376,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.005643695224816264
+        }
+      },
+      "graph_edge_classes_are_canonical_membership_not_semantic_GT": true,
+      "mean_observer_multiplier": 1.2258348431448034,
+      "observer_parameter_change": 0.11762784421443939,
+      "teacher_targets_unchanged": true,
+      "mean_virtual_probe_CE_change": -7.301727930704752e-05,
+      "virtual_progress_includes_support_gradient_not_pure_observer_contribution": true
+    },
+    {
+      "pair": "C4",
+      "video": "v_00HRwkvvjtQ_c001",
+      "methods": {
+        "VISUAL_CONSTRAINT_FEEDBACK": {
+          "official_IoU50_counts": {
+            "TP": 54909.0,
+            "FP": 29451.0,
+            "FN": 1471.0,
+            "TP_weighted_AssA": 0.7641666274759527
+          },
+          "canonical_membership_counts": {
+            "TP": 54953,
+            "FP": 29407,
+            "FN": 925,
+            "TN": 4059
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "MEAN_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 54053.0,
+            "FP": 30169.0,
+            "FN": 2327.0,
+            "TP_weighted_AssA": 0.7663633468103455
+          },
+          "canonical_membership_counts": {
+            "TP": 54063,
+            "FP": 30159,
+            "FN": 1815,
+            "TN": 3307
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "MAJORITY_HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 50415.0,
+            "FP": 26416.0,
+            "FN": 5965.0,
+            "TP_weighted_AssA": 0.764570720427259
+          },
+          "canonical_membership_counts": {
+            "TP": 50440,
+            "FP": 26391,
+            "FN": 5438,
+            "TN": 7075
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "CONFIDENCE_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 53969.0,
+            "FP": 30051.0,
+            "FN": 2411.0,
+            "TP_weighted_AssA": 0.7660764225657537
+          },
+          "canonical_membership_counts": {
+            "TP": 53978,
+            "FP": 30042,
+            "FN": 1900,
+            "TN": 3424
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "CROP_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 53791.0,
+            "FP": 28368.0,
+            "FN": 2589.0,
+            "TP_weighted_AssA": 0.765398962528375
+          },
+          "canonical_membership_counts": {
+            "TP": 53812,
+            "FP": 28347,
+            "FN": 2066,
+            "TN": 5119
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "DS_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 50862.0,
+            "FP": 27768.0,
+            "FN": 5518.0,
+            "TP_weighted_AssA": 0.7616453093914866
+          },
+          "canonical_membership_counts": {
+            "TP": 50825,
+            "FP": 27805,
+            "FN": 5053,
+            "TN": 5661
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 34,
+            "teacher_correct_student_wrong": 0,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "GAUSSIAN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 36623.0,
+            "FP": 12210.0,
+            "FN": 19757.0,
+            "TP_weighted_AssA": 0.7793238642391918
+          },
+          "canonical_membership_counts": {
+            "TP": 36590,
+            "FP": 12243,
+            "FN": 19288,
+            "TN": 21223
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 25,
+            "teacher_correct_student_wrong": 9,
+            "teacher_wrong_student_correct": 6,
+            "both_wrong": 3
+          }
+        },
+        "PATTERN_FUSED_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 55829.0,
+            "FP": 33515.0,
+            "FN": 551.0,
+            "TP_weighted_AssA": 0.7653252501630184
+          },
+          "canonical_membership_counts": {
+            "TP": 55878,
+            "FP": 33466,
+            "FN": 0,
+            "TN": 0
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 30,
+            "teacher_correct_student_wrong": 4,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        },
+        "MEAN_SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 54149.0,
+            "FP": 30476.0,
+            "FN": 2231.0,
+            "TP_weighted_AssA": 0.7670456894547171
+          },
+          "canonical_membership_counts": {
+            "TP": 54160,
+            "FP": 30465,
+            "FN": 1718,
+            "TN": 3001
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 33,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 1,
+            "both_wrong": 8
+          }
+        },
+        "MAJORITY_HARD_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 50398.0,
+            "FP": 26204.0,
+            "FN": 5982.0,
+            "TP_weighted_AssA": 0.767565189370376
+          },
+          "canonical_membership_counts": {
+            "TP": 50431,
+            "FP": 26171,
+            "FN": 5447,
+            "TN": 7295
+          },
+          "canonical_positive_queries_zero_output": 0,
+          "paid_nominal_anchor_transition": {
+            "both_correct": 33,
+            "teacher_correct_student_wrong": 1,
+            "teacher_wrong_student_correct": 0,
+            "both_wrong": 9
+          }
+        }
+      },
+      "teacher_nominal_anchor_canonical_membership_counts": {
+        "TP": 30,
+        "FP": 9,
+        "FN": 0,
+        "TN": 4
+      },
+      "graph_edges": {
+        "unweighted": {
+          "positive_positive": 439803.0,
+          "positive_negative": 23412.0,
+          "negative_negative": 258537.0,
+          "cross_class_mass_fraction": 0.03243773484520999,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.05054240471487322
+        },
+        "image_state_weight": {
+          "positive_positive": 30837.974590407663,
+          "positive_negative": 47.459680957135774,
+          "negative_negative": 18906.90843831945,
+          "cross_class_mass_fraction": 0.0009531521992016096,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.0015366363490358194
+        },
+        "learned_weight": {
+          "positive_positive": 30662.89156221166,
+          "positive_negative": 47.24043803866946,
+          "negative_negative": 18805.574713011145,
+          "cross_class_mass_fraction": 0.0009540495566837452,
+          "cross_class_fraction_conditioned_on_a_positive_endpoint": 0.0015382688045197717
+        }
+      },
+      "graph_edge_classes_are_canonical_membership_not_semantic_GT": true,
+      "mean_observer_multiplier": 0.9976773724803263,
+      "observer_parameter_change": 0.04095889627933502,
+      "teacher_targets_unchanged": true,
+      "mean_virtual_probe_CE_change": 6.433327992757161e-07,
+      "virtual_progress_includes_support_gradient_not_pure_observer_contribution": true
+    }
+  ],
+  "scope": "Three first videos, allDEV. Descriptive postseal analysis, no label-based adaptation/checkpoint selection.",
+  "official_counts_single_IoU50_not_additive_decomposition_of_19threshold_HOTA": true,
+  "canonical_teacher_transition_not_pure_teacher_semantic_accuracy": true,
+  "graph_weight_CPU_sigmoid_reconstruction_not_a_new_model_or_RMOT_output": true,
+  "graph_homophily_not_a_module_causal_ablation": true,
+  "new_fits_teacher_or_backbone_calls_predictions_and_neural_seeds": 0,
+  "current_study_outputs_sealed_before_label_access": true,
+  "source_sha256": "0c4451d6ad6df4a8b8094dc52c84a36338b71392627655dfd10acc3c44893ebd",
+  "goal_status": "ACTIVE"
+}
