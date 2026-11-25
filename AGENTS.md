@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## 最新用户优先：先新主方案正证据，后消融（2026-11-25）
+
+- 用户明确要求先找到有提升的新完整方案，再消融；覆盖下文“先完成native726才设计新方案”的旧研究顺序。旧14883/40479/16710已按限定本项目PID主动终止，实际终态143；部分输出完整保留、未完成native未读GT。详见supervisor/native_old_matrix_intentional_stop_for_new_primary_20261125.json，禁止自动重启旧宽矩阵。
+- 新factor-RSI先做C1/C2/C4各首视频，仅主方法与四个充分普通软硬KD，不排新模块消融。分开付费WHOLE/APPEARANCE/STATE指导，外观检索+状态编码，A根据S选题、S的当前未训练教师比较进展反馈A；外部Qwen冻结。三个候选贡献未获质量证明，不将actor更新或教师风险下降当HOTA。
+- 实际主31423：GPU0 worker838415(C1/C2)、GPU3 worker838416(C4)；普通/预测/39隔离官评64168：GPU1 worker841119。GPU2其它项目保留。18份主源pin及4份quality源pin不可在运行期间修改；只续actual工具数值句柄，不另启监视器或agent ps/tail/nvidia轮询。
+- 新online合同30779 exit0、dual-count synthetic38405 exit0。1990逻辑问题包含6个付费probe，原逐query预算不变；普通多任务拿全部同证据同视觉，每角色适当超额KL<=.005。39输出全部封存、普通充分拟合及教师冻结封存后才本cohort GT；旧native不评分。全DEV/同视频transductive锚点/预付历史特征，不声称六设置胜出、模块独立贡献或真实冷成本。
+- 完整新登记TXT《TTA_RMOT_先主方案后消融_Factor_RSI试验登记_20261125.txt》。Goal ACTIVE；仍需六设置可靠普通KD优势、三个贡献及交互、同次fresh质量成本。私有49行保留且不全量stage；两项100,000,000B发布门槛、NAS只读和seed0继续。
+
 ## 最新：三套RSI质量完整结束，当前配方未接受（2026-11-25）
 
 - 实际1520/TRUST312、99812/修正318、85298/utility324均已exit0及独立统计复算PASS，禁止再续这三个终态句柄。原始预测和所有数量对照全封存后才隔离官评，Root现已读取这三套完整结果；不能将其GT读取套到未封存的native研究。

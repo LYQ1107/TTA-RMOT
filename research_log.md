@@ -440,3 +440,6 @@ RSI已写入持续有效目标及research_goal_RSI_amendment_20261123.json；Goa
 2026-11-25：新增显式项目内GPU共享执行入口a100_native_registered_shared_head.py（a6f99fb9），仅在新进程替换free-device检查，原数值helper5e8084ef/模型/初始化/前缀/归一化/拟合门槛/seed0不改。11项进程身份与显存控制通过；实际11687/PID678641在GPU1与原C3 worker4134758共享，两个真实preflight各913MiB、未知owner0。原定C3/c012 NoIdentity四次拟合均过原门槛，236.976s，头参数与原recipe/normalizer/binding/SHA核验一致并提前安装；主任务实际读取仍待该片段收据，不宣称精度或部署提速。原14883/40479继续，Goal ACTIVE；见native_project_shared_head_execution_20261125.json。
 
 2026-11-25：共享GPU1的C3/c012NoIdentity已被原主任务实际使用：producer678641、binding、7f80fc47头SHA与12x10753原score/mask核验一致，四次proper-KL拟合保持原门槛，0GT；见native_project_shared_head_parent_reuse_20261125.json。新增registered_shared_executor（458885cb）通过7项含真实子进程的控制检查，按原closed输入自动尝试已有NoIdentity任务；GPU1实际16710/716419继续等输入。GPU2实际3339/716418因存在额外llama-server CUDA owner在preflight退出0、0新拟合，保留该服务与原C4任务，未放宽owner检查或重启。原14883/40479与GPU1执行器继续；无新科学变体/种子/GT或HOTA结论，Goal ACTIVE。
+
+
+2026-11-25：按用户“先找有提升主方案、再消融”的最新要求，旧native宽矩阵有意终止，终态14883/40479/16710均143；未完成部分保留且未读GT。新factor-RSI主方案先做C1/C2/C4各首视频，固定seed0、原逐query预算，分别付费WHOLE/APPEARANCE/STATE证据。外观检索与状态编码、学习进展驱动A↔S；冻结教师不改。在线合同30779 exit0，真实新主控制器31423启动GPU0 workers838415(C1/C2)、GPU3 worker838416(C4)。未有新质量结果，不把actor更新/teacher-risk改善当HOTA。普通软硬多任务/whole-only基线拿同全部视觉信息和paid答案，全部raw+双CountMatched封存后才隔离评估；不排消融矩阵。
