@@ -1,5 +1,11 @@
 # AGENTS.md
 
+## 最新：全六设置逐视频影响分析登记与发布容量（2026-11-26）
+
+- 新scripts/a100_fullscope_leave_video_out.py仅prepare实际10084 exit0（076ff7），尚未执行质量读取：all4588/4教师封存+186/180复算后，按完整视频剔除并重汇总19阈值充分计数；主对全部10对手/raw与双CountMatched，0新拟合/问题/种子，非CI或盲测、非模块消融。自己的source pin保持，42主源不改。
+- 唯一actual23947继续；3ab402确认C2/C5的0019 closedstage1各5980独特问题/6164ROI；0011均closedstage3各3898/2576。并未完成所有148单元或全六精度。原Goal ACTIVE、先正主后必要模块归因，禁止旧队列或新seed网格；无新观察器/ps-tail-nvidia轮询。
+- 新TXT34节。为必要全六记录，仅6个既有non-provider分析/登记/工程JSON去字符串外空白，全部token/值/类型保留，原文Gitdce3616/私有备份，manifest逐项SHA；不是改统计编码、指标或科学provider，NAS/原results不动。发布仍须实际两100000000B gate。私有49AGENTS与research_log追加保持不全stage。
+
 ## 最新无标签输入审计：排除25-token截断假设（2026-11-26）
 
 - 新scripts/a100_query_tokenization_audit.py实际85458 exit0（021456）：148设置视频/3506查询实例/948不同文本，真实本地RoBERTa tokenizer25限，最长19含特殊token，截断/截断别名六设置全0。0GT/模型/教师/GPU/拟合；不能再以句尾被截断为由加文本模块，也不把PCD无单独rawtoken分支误称没看到完整短句。普通/主9352均同输入，42活跃源不改。
