@@ -1,0 +1,81 @@
+{
+  "status": "NAS_TRANSPORT_OUTAGE_PRESERVED_STATE_AND_REGISTERED_FOUR_GPU_RESUME",
+  "scientific_result": false,
+  "goal_status": "ACTIVE",
+  "actual_terminal_sessions": [
+    {
+      "id": 23947,
+      "exit_code": 1,
+      "chunk": "943690"
+    },
+    {
+      "id": 78495,
+      "exit_code": 1,
+      "chunk": "fded73"
+    }
+  ],
+  "failure": "EIO while decoding NAS Dance/Sports images; direct NAS SSH banner exchange repeatedly timed out. Original healthy0/2 and recovery1/3 stopped; no algorithmic conclusion.",
+  "generation": {
+    "sealed_units": 36,
+    "planned_units": 148,
+    "sealed_outputs": 1116,
+    "planned_outputs": 4588,
+    "per_setting_sealed_units": {
+      "C1": 8,
+      "C2": 4,
+      "C3": 6,
+      "C4": 6,
+      "C5": 4,
+      "C6": 8
+    },
+    "GT_open_attempts": 0
+  },
+  "preservation": {
+    "partial_files_archived": 44,
+    "archived_bytes": 659717170,
+    "all_archive_SHA256_verified": true,
+    "archive_stays_local_non_Git": true,
+    "all36_sealed_receipts_unchanged": true,
+    "teacher_attempt_sessions": 6,
+    "all_teacher_attempt_weights_unchanged": true
+  },
+  "resume": {
+    "entry": "scripts/a100_fullscope_nas_resume.py",
+    "source_sha256": "e57eb7e84201152c437fa29c1bb474d72c73783e460520b7241b63a7a4e99d9a",
+    "registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+    "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+    "numerical_recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee",
+    "incident_sha256": "3fcd52252b81f9ccc47bc0f38eeeda744b40786aec54882b261ceb5cf9032010",
+    "original42numerical_sources_unchanged": true,
+    "GPUs": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "preserved_GPU2_service_PID": 243079,
+    "algorithm_parameters_targets_budgets_seed_unchanged": true,
+    "teacher_gate": 0.005,
+    "seed": 0,
+    "already_sealed_units_skipped": true,
+    "pending_questions_and_optimizers_resumed": true,
+    "retry_scope": "Identical PairedViews.frame only, transient OSError, four tries with2/5/10seconds; no substituted/skipped images. Prior to GPU launch require authenticated SSH, readonly mount and all3failed images fully decoded.",
+    "GPU_resume_started": false
+  },
+  "validation": {
+    "syntax_compile_exit": 0,
+    "prepare_actual_session": 43905,
+    "prepare_exit": 0,
+    "prepare_chunk": "09e718",
+    "negative_preflight_actual_session": 27461,
+    "negative_preflight_exit": 1,
+    "negative_preflight_chunk": "b05549",
+    "negative_preflight_starts_zero_GPU_models": true,
+    "actual_post_repair_GPU_resume_not_yet_verified": true,
+    "local_only_git_head": "0ac12d9afb503ea36c531df650299ee1f48e4762",
+    "local_only_git_reachable_objects": 5496,
+    "local_only_git_missing_objects": 0,
+    "original_NAS_alternates_file_unchanged": true
+  },
+  "cost_scope": "Failed attempts, future reloads and image retries remain billable. No same-execution cold deployment advantage or six-setting HOTA/three-contribution success is claimed."
+}

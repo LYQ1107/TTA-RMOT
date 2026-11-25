@@ -1,3 +1,11 @@
+## 最新：NAS实际I/O故障，36单元保留与四卡续跑准备（2026-11-26）
+
+- 实际23947/943690与78495/fded73均exit1：原健康0/2读Dance0026/000127.png、恢复1/3读Sports v_dw7LOz17Omg_c053/000328或333.jpg发生EIO；SSH24557 banner连续超时。旧两actual已终态，不再wait或声称四卡在跑；原数值失败另留，不归因算法。NAS入口仍ro，不改历史results。
+- 实际43905 exit0（09e718）新scripts/a100_fullscope_nas_resume.py仅transport/scheduling登记；44部分状态659717170B已本地非Git只读副本+SHA核验，36已封存/1116输出保持（C1/2/3/4/5/6=8/4/6/6/4/8），六次教师尝试权重封存未变。原42源及数值恢复OWN固定；新source/INCIDENT也已pin，不得修改已登记文件。
+- 实际27461 exit1（b05549）为预期的负向preflight：NAS不通时0GPUworker。已向用户async请求NAS/隧道恢复或备用只读入口。新入口须认证SSH、ro挂载、3故障图全解码后，才复用原数值worker上0/1/2/3；GPU2原PID243079保留，所有选题/回答/权重/优化器/seed0/.005/预算不改。仅同帧瞬态OSError四次2/5/10s重试，不替代或跳帧，不保证NAS持续离线时成功。
+- Git当前0ac12d9的5496对象已排除NAS alternates只读完整验证missing0；本地对象视图在nas_io_resume_20261126/local_only_git_objects，仅用于读取/size gate/push，不用它写Git对象。原alternates不改。新TXT42及selectedNAS_transport_resume；无新HOTA、主优势/三贡献/fresh成本仍未成，Goal ACTIVE。
+- 先恢复数据，再运行完整四卡续跑入口；全148/4588及所有teacherattempt seal后才GT、186/180复算与已登记诊断。禁止因旧句柄终止而重启原全队列、降低门槛或新增seed。原私有49AGENTS行/research_log追加保留且不全stage，发布双100000000B gate。
+
 ## 最新：KITTI两个完整设置恢复封存与56个充分对手（2026-11-26）
 
 - 实际78495/191712：C2/C5的0019各11937独特问题、31输出已封存；两KITTI设置各4视频/124输出，共248。实际44570 exit0（3296d2）核对8收据/56普通fit全部原.005内，max .004982985378，6头有显式额外恢复；active/uniform逐query预算相等且各设置各20955。0新GT/forward/fit/seed；教师最终权重seal仍等全worker退出，不能提前KITTI官评。42原数值源不改。
