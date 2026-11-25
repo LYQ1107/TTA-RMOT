@@ -1,0 +1,93 @@
+{
+  "status": "COMPLETE_POSTSEAL_PAIRED_CONTEXT_TEACHER_DIAGNOSIS",
+  "cases": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "cases": 12,
+      "canonical_positive_cases": 4,
+      "always_No_agreements": 8,
+      "methods": {
+        "CROP": {
+          "canonical_agreements": 12,
+          "TP": 4,
+          "FP": 0,
+          "FN": 0,
+          "TN": 8,
+          "actual_forward_seconds": 3.0080156821059063,
+          "visual_tokens": 1200
+        },
+        "SCENE_CONTEXT": {
+          "canonical_agreements": 12,
+          "TP": 4,
+          "FP": 0,
+          "FN": 0,
+          "TN": 8,
+          "actual_forward_seconds": 10.036837987136096,
+          "visual_tokens": 16224
+        }
+      }
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "cases": 12,
+      "canonical_positive_cases": 3,
+      "always_No_agreements": 9,
+      "methods": {
+        "CROP": {
+          "canonical_agreements": 8,
+          "TP": 3,
+          "FP": 4,
+          "FN": 0,
+          "TN": 5,
+          "actual_forward_seconds": 2.3214560452615842,
+          "visual_tokens": 1200
+        },
+        "SCENE_CONTEXT": {
+          "canonical_agreements": 6,
+          "TP": 3,
+          "FP": 6,
+          "FN": 0,
+          "TN": 3,
+          "actual_forward_seconds": 4.496468435856514,
+          "visual_tokens": 10080
+        }
+      }
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "cases": 12,
+      "canonical_positive_cases": 4,
+      "always_No_agreements": 8,
+      "methods": {
+        "CROP": {
+          "canonical_agreements": 8,
+          "TP": 4,
+          "FP": 4,
+          "FN": 0,
+          "TN": 4,
+          "actual_forward_seconds": 2.332825693883933,
+          "visual_tokens": 1200
+        },
+        "SCENE_CONTEXT": {
+          "canonical_agreements": 9,
+          "TP": 4,
+          "FP": 3,
+          "FN": 0,
+          "TN": 5,
+          "actual_forward_seconds": 9.426818277104758,
+          "visual_tokens": 15548
+        }
+      }
+    }
+  ],
+  "teacher_measurements": 72,
+  "teacher_unchanged": true,
+  "isolated_GT_only_after_full72seal": true,
+  "teacher_stratified_tiny_DEV_sample_not_pure_semantic_accuracy": true,
+  "more_visual_information_and_cost_than_CROP_not_same_compute": true,
+  "no_RMOT_HOTA_or_main_module_or_RSI_success_claim": true,
+  "goal_status": "ACTIVE"
+}

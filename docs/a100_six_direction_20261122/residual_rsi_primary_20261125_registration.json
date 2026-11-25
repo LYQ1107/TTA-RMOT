@@ -1,0 +1,155 @@
+{
+  "status": "PREREGISTERED_PREDICTABLE_RESIDUAL_RSI_COMPLETE_PRIMARY",
+  "primary": "RESIDUAL_RSI",
+  "comparators": [
+    "SOFT_KD",
+    "HARD_KD",
+    "IPW_KD",
+    "IMPUTED_KD",
+    "R_DIRECT",
+    "SOFT_POOLED",
+    "UNIFORM_SOFT_KD"
+  ],
+  "cases": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "evaluated_video": "dancetrack0004",
+      "pool_folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/residual_rsi_inputs_20261125/C1",
+      "pool_actions": 104,
+      "logical_budget": 56,
+      "queries": 17,
+      "pool_output_sha256": {
+        "features.npy": "5c9220c92fc5dd9706a4350415b1731f9f4903d2ca25605dad36436f2f4f1c72",
+        "query.npy": "ae8b5b33fa711d21b217813d87282abd48b78b1c8ed399a4ed184852fef49aa1",
+        "actions.json": "753a7beb2a854b6c666424278a8a894c9a7fb940b57d3d1f4a861a08624e1afc"
+      },
+      "auxiliary_path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/fullsix_learning_common_20261125/C1/AUX/teacher_inputs.npz",
+      "auxiliary_sha256": "27281d1c39075d11dc9c4a264b8feaa74128ed1c2767c613df4f993833dccb03"
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "evaluated_video": "0005",
+      "pool_folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/residual_rsi_inputs_20261125/C2",
+      "pool_actions": 4068,
+      "logical_budget": 1891,
+      "queries": 197,
+      "pool_output_sha256": {
+        "features.npy": "1e2931dc88d8bc8f57f8160c60b8051b399cde3760e0f24f3f96978c06a73ed8",
+        "query.npy": "52a3cbd81e6305f601fcbba85de78b1e8e0c0e9034ba1038059c288c3a512210",
+        "actions.json": "1c60841a78e6e3a71867f14ed28cd30c6fc97490476eb1a4152cdfe6bf0f45df"
+      },
+      "auxiliary_path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/fullsix_learning_common_20261125/C2/AUX/teacher_inputs.npz",
+      "auxiliary_sha256": "fc6670c67c3d5b91a6ba6f7f74edbdebe123efcc208fd26ec018dbb783b6481a"
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "evaluated_video": "v_00HRwkvvjtQ_c001",
+      "pool_folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/residual_rsi_inputs_20261125/C4",
+      "pool_actions": 95,
+      "logical_budget": 43,
+      "queries": 8,
+      "pool_output_sha256": {
+        "features.npy": "4f520d56441bb0829af6611a52eeeb71eb0035ad8e7c6cb5832258b8e75015ae",
+        "query.npy": "613b092fc113bc124dce6007bfee7bf88d1a9764e8c68a22b5b02e471ed5d293",
+        "actions.json": "9df17c1b552f9740640b8a0884cf3c1cdfe42624dd13728e1ec2bba2712d0e9e"
+      },
+      "auxiliary_path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/fullsix_learning_common_20261125/C4/AUX/teacher_inputs.npz",
+      "auxiliary_sha256": "7af5b76f719770187f2b18de44839f2f7ec871be0a6345004e6be2d7c45a26e0"
+    }
+  ],
+  "source_sha256": {
+    "scripts/a100_residual_rsi_inputs.py": "e91203aafc24458d730d369fbc928e2cc803518695eabdd9f80dfed834e2c928",
+    "flex_uda/active/native_binary_inputs.py": "d2eac481bf3d8fa7ccd6900a06b05f46f0ba6839439709d12d3a2387777da820",
+    "scripts/a100_observation_design_collect.py": "03dbab66815a7a4b107eb3a5449d7580d4c2056f8955ee32b11790868ac36d59",
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801",
+    "scripts/a100_observation_teacher_pilot.py": "d4b4c6bc7ed468a432efaff9f40bf9b4d04602f80fde1db72123fc83dd7e8487",
+    "flex_uda/active/full_appearance_learning_inputs.py": "eed4ea3cdcc52de91ea4f8b2ef84e1ce83d120bc9f3bce015bfb0f6517fd1381",
+    "flex_uda/active/appearance_learning_inputs.py": "d102c110e6d8410f1cdc27e42a3e416de1d583947ba26f8892e1f5b3fceaf68d",
+    "scripts/a100_dino_fullsix_collect.py": "9669c700089865ff96b5a37fab21924268f1e0198ef594ea0908774c2501d432",
+    "scripts/a100_dino_appearance_collect.py": "2e6bf0cdada18622ba00b35226131cd42045636c58cd5a2982991648ad139e72",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/factor_rsi_learning.py": "5113ad9c208329da84172ca8df8032c1c756a8b71f84f1f429410d9752c2c957",
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "scripts/a100_residual_rsi_primary.py": "471440b256ab8ba755bceffa6c245b7b597482909c1bfdfc25d3841917fbed76",
+    "flex_uda/active/residual_rsi_learning.py": "9ec33d40362588a160873e36a1d74e33ffab383020a46b446a950a82fa029bfb",
+    "flex_uda/active/residual_risk.py": "6009c526cc56188a3cf4873ef96ec78cd51ab2bdeaf37f493724fd83b9005cce",
+    "scripts/a100_residual_risk_contract.py": "cb439a01b8e790acde9c5ec08a04d4a8532a06ff2ab369707c7778507b436625",
+    "scripts/a100_factor_rsi_primary_quality.py": "368810d2dbf6220f8f666ec654ef28de529559bd8f53945f8e6ac8e4904601a2",
+    "scripts/a100_primary_statistics_common.py": "1959d782a9c859b1fb75ebc9038ee9b32a806e206d6810735e312c51efe435b2",
+    "scripts/a100_semantic_pattern_teacher_statistics.py": "3bd654bf4547d9919f78b4b23ccdb2ed353b9140d5482f03f6cfdf2eb057ae14",
+    "scripts/a100_joint_teacher_noise_pilot.py": "7e29ad00aae3c3241b5b83c9c6dd39361e57037b6e479d24423e7a4c7a49cdbf",
+    "flex_uda/a100/evaluation_reuse.py": "b32d98475b97c30a219a044ea8da49060ba740543f3fed354ed550bd02ba3419",
+    "flex_uda/presence/predictions.py": "0a20f10c07f1c00a87ec9776771412cd77bb3943dc84ede46bd6a3b40c599ac9",
+    "flex_uda/active/deterministic_observation_runtime.py": "572e8cd6033a357134debec2c3fab8f1ab957182465942dc1e6c37760a5e8804"
+  },
+  "input_plan_sha256": "f1cc48637ac568f0134e8649afd4c6da97b789798dd87ede2e9c523bd95249bc",
+  "input_completion_sha256": "894c2190734ebdd4ec3961f4a4198aa511819a9867e17ef2ae99f84caaf2e7ff",
+  "mathematical_contract_sha256": "ec42de43a51c8a12359065c1ddcc1a0b981b702438ed0cf17fde6845b00d1f71",
+  "hypothesis": "A learned teacher-response forecaster plus actual residual correction and solver-aware acquisition can improve cross-domain RMOT beyond sufficient same-information KD without treating forecaster agreement as truth.",
+  "human_visual_inspiration": "Sweep every query first, then focus on visual hypotheses whose external verification is expected to correct the current understanding.",
+  "classical_ideas": "Predictable augmented importance sampling/control variates and residual-gradient sampling. These are prior ideas, not claimed new estimators or semantic guarantees.",
+  "loop": "ForecasterR predicts original frozen-teacher responses and pre-answer squared residual; solverS changes gradient geometry used byR-guided acquisition. Both neural weights update; external Qwen is frozen, not falsely called a jointly trained Qwen.",
+  "teacher_invariance": "Original answers never rewritten. R gives a control variate; signed residual correction uses requested originalteacher response and its recorded acquisition probability.",
+  "sampling": "WITH replacement within every query; fixed original per-query budgets and four predeclared front-loaded stages. Positive.2uniform mixture on every action, no hard fresh-track/probe exclusion; repeated logical queries are explicit cached replay, not extra unique evidence.",
+  "finite_pool": "104/4068/95 actions in three declared historical policy-union libraries; full support only inside these pools. No claim about outside-pool risk or full dense-target support.",
+  "risk": "Macro-query mean of action losses. Every draw uses R forecast fixed BEFORE answer; proxy-sum plus(y-m)/recordedPi yields signed coefficients. They are not probabilities and are never clipped to[0,1].",
+  "bounded_model": "9352->128SiLU->128SiLU->1,logit8tanh(raw/8), shared unlabelled-pool normalization for ALL heads. Forecaster same hidden capacity with mean/residual2heads.",
+  "training": "seed0/Adam.001/clipgrad10. Everysolver softaux500, then500/500/500/4000 phases; hard baseline hardens both main and auxiliary labels. Ordinary properKL<=.005,min6000,max16000; R softaux500+four500steps. Same optimizer continuity/cyclic batches; no schedule confound hidden as method gain.",
+  "auxiliary": "Same100same-target-collection3view events for all opponents; separately stored, explicit transduction. No clean target validation labels.",
+  "controls": {
+    "SOFT_KD": "All actual primary draws plus sameaux, ordinary soft BCE with query-balanced weights.",
+    "HARD_KD": "Threshold all main/auxiliary teacher probabilities at.5; otherwise same learner.",
+    "IPW_KD": "Same draws with correct within-query with-replacement importance weights; enough optimization.",
+    "IMPUTED_KD": "Same prequential R mean snapshots, same phase path/capacity and full action-pool features, sufficient BCE fit; no residual correction.",
+    "R_DIRECT": "Actual final learnedR mean head itself; never promote it to primary posthoc.",
+    "SOFT_POOLED": "Arithmetic probability mean of adequateSOFT over providedTrackID, strong ordinary comparison even for time-varying tasks.",
+    "UNIFORM_SOFT_KD": "Same perquery budget but distinct uniform actions; can have MORE unique teacher facts than the primary. Separate adequateGPU2head."
+  },
+  "failure_constraints": [
+    "Do not train on new scene-context answers: paired72 did not improveKITTI; oldphysicsF/H residuals are not motion labels.",
+    "No free latent relabeling, no half-main-label split, no GT-dependent per-setting gates or checkpoints.",
+    "Do not apply historical no-replacement LURE with the wrong probability or invent old propensities.",
+    "Expected fixed-model teacher-risk identity does not imply fitted-model generalization, true-semantic risk or HOTA improvement."
+  ],
+  "primary_prior_work": [
+    {
+      "url": "https://arxiv.org/html/2607.08347",
+      "scope": "Fixed-model active testing with LURE/control variates; our declared sampling is a simpler with-replacement learning candidate, no borrowing its CI theorem."
+    },
+    {
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2021/file/09e7655fc1dc8fa7c9d6c4478313d5e6-Paper.pdf",
+      "scope": "Predictable adaptive nuisance estimation; no assumed generic adaptive-training guarantee."
+    }
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "GPU_roles": {
+    "C1": 0,
+    "C2": 1,
+    "C4": 3,
+    "UNIFORM": 2
+  },
+  "GPU2_fraction": 0.1,
+  "all_existing_GPU2_services_preserved": true,
+  "new_Qwen_calls": 0,
+  "source_features_answers_prepaid": true,
+  "not_fresh_cold_cost_or_online_teacher_deployment": true,
+  "all_data_DEV": true,
+  "new_main_raw_records": 24,
+  "new_dual_count_records": 42,
+  "official_statistical_records": 66,
+  "paired_effects": 63,
+  "CountSelf_exact_aliases": 24,
+  "all66sealed_before_current_study_GT": true,
+  "no_module_ablation_matrix": true,
+  "success_screen": "Same strict exploratory screen: raw and BOTH CountMatched effects positive versus ALL7 controls in EVERY one-video case. No posthoc highest-control promotion.",
+  "no_fullsix_threecontributions_or_RSI_success_claim": true,
+  "goal_status": "ACTIVE"
+}
