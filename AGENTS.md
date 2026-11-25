@@ -1,3 +1,9 @@
+## 最新：KITTI两个完整设置恢复封存与56个充分对手（2026-11-26）
+
+- 实际78495/191712：C2/C5的0019各11937独特问题、31输出已封存；两KITTI设置各4视频/124输出，共248。实际44570 exit0（3296d2）核对8收据/56普通fit全部原.005内，max .004982985378，6头有显式额外恢复；active/uniform逐query预算相等且各设置各20955。0新GT/forward/fit/seed；教师最终权重seal仍等全worker退出，不能提前KITTI官评。42原数值源不改。
+- 账单C2 uniform cache11280、C5 10052，active两者cache219；共享缓存/运行顺序使新增GPU调用不可当策略固有部署成本。恢复case wall不含更早失败elapsed，不加成单方法E2E；原失败相位和teacher sessions保留。TXT41与精选two_KITTI_settings_generation_fit_audit是工程/拟合证据，不是HOTA或模块贡献。
+- 23947/56011f又封存C1/C6 Dance0081，已确认至少18单元；78495/9f1e82接续Sports v_i2_L4qquVg0_c010的C3/C4 stage1各110独特问题/8387ROI。原0/2亦接续后续视频。两actual23947/78495继续四卡，无新观察器/ps-tail-nvidia轮询、不为静默重启。全148/4588和所有teacherattempt封存后186/180及已登记postseal/LOO/条件内容路径诊断。六设置优势/三贡献/fresh成本未成，Goal ACTIVE；seed0、NAS只读、两个100000000B gate、私有49AGENTS/research_log不全stage。
+
 ## 最新：排除历史帧缺失假设，登记内容路径功能诊断（2026-11-26）
 
 - 实际68022 exit0（d8a542）元数据全74物理/517686观察/148单元：C2/C5各615149可用CLIP可能动作，其teacher历史帧全部在currentPCD名义4观察历史中；缺帧实例0，另四设置0CLIP。0图像/GT/teacher/neural/fit，不是实际问答量或已编码语义证明。不能再以学生无时序或缺teacher帧为前提加模块。
