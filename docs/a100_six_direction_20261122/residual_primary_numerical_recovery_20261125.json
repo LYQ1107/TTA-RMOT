@@ -1,0 +1,131 @@
+{
+  "status": "PREREGISTERED_C4_ORDINARY_NUMERICAL_RECOVERY_BEFORE_GT",
+  "original_registration_sha256": "74f9c533acea5c062f20d51a202622f27c6a675c8cdcf83f5f11e38708e1d35f",
+  "original26_source_pins_unchanged": true,
+  "source_sha256": {
+    "scripts/a100_residual_primary_recovery.py": "1c184d19ff6d0bc9147caa2b56e6568293a3aafacea36557c374fc0b35ebf8f7"
+  },
+  "preserved_files": {
+    "C1/primary/final.pt": "fae9659011fdb8c770168acd684b329c8a21e764bfc336ebe569e9b91bdc4079",
+    "C1/ordinary/UNIFORM_SOFT_KD.pt": "1fd03e9acf73949fbb3aff54e8041f04898b2fb7a94563300bd7fcce1a97438e",
+    "C1/main_completion.json": "cc58c64c84181bda32810d62698e234e6e63a7f198032d94d2e88f274b8aad4f",
+    "C2/primary/final.pt": "040f23be562c5693410fc6f4705321bfac6588ab527ff4e25ff6f11854042a9d",
+    "C2/ordinary/UNIFORM_SOFT_KD.pt": "cf00ba7ff1c04fbb198be085c486cc62a3d66879b5eafbbfd5c96493a6f05848",
+    "C2/main_completion.json": "b2cff31ec2cb01f0e11ebbcf6599c192f588d0e35011874ff7573b0193446422",
+    "C4/primary/final.pt": "8e4eed843aa101c752a5d32c81f83120d507b8cdc165c34823f8661903c9f901",
+    "C4/ordinary/UNIFORM_SOFT_KD.pt": "32020a5b5a8049acc2e18f3d2dbba7194625f40571ce3c4613c24d7e83a2cb57"
+  },
+  "diagnosed_original_final": {
+    "total_steps": 16000,
+    "proper_teacher_excess_CE": 0.04745238236393415,
+    "raw_logit_min": -140.2950439453125,
+    "raw_logit_max": 389.1772155761719,
+    "numerically_saturated_count": 22,
+    "worst": [
+      {
+        "index": 4,
+        "label": 0.8515625,
+        "logit": 8.0,
+        "raw_logit": 104.10006713867188,
+        "weight": 0.02,
+        "KL": 0.7678462343840525
+      },
+      {
+        "index": 13,
+        "label": 0.0673828125,
+        "logit": -8.0,
+        "raw_logit": -140.2950439453125,
+        "weight": 0.02,
+        "KL": 0.2925820372737437
+      },
+      {
+        "index": 30,
+        "label": 0.93359375,
+        "logit": 8.0,
+        "raw_logit": 105.50000762939453,
+        "weight": 0.02,
+        "KL": 0.2873431797081254
+      },
+      {
+        "index": 27,
+        "label": 0.94140625,
+        "logit": 8.0,
+        "raw_logit": 103.05926513671875,
+        "weight": 0.016666666666666666,
+        "KL": 0.24600489153310307
+      },
+      {
+        "index": 11,
+        "label": 0.94140625,
+        "logit": 8.0,
+        "raw_logit": 114.97764587402344,
+        "weight": 0.016666666666666666,
+        "KL": 0.24600489153310307
+      },
+      {
+        "index": 32,
+        "label": 0.04736328125,
+        "logit": -8.0,
+        "raw_logit": -130.56088256835938,
+        "weight": 0.016666666666666666,
+        "KL": 0.18856450442761752
+      },
+      {
+        "index": 23,
+        "label": 0.0419921875,
+        "logit": -8.0,
+        "raw_logit": -85.13291931152344,
+        "weight": 0.016666666666666666,
+        "KL": 0.1620483544926266
+      },
+      {
+        "index": 25,
+        "label": 0.033203125,
+        "logit": -8.0,
+        "raw_logit": -90.15267944335938,
+        "weight": 0.02,
+        "KL": 0.12025437375615627
+      },
+      {
+        "index": 41,
+        "label": 0.029296875,
+        "logit": -8.0,
+        "raw_logit": -137.71005249023438,
+        "weight": 0.02,
+        "KL": 0.10242092974463338
+      },
+      {
+        "index": 40,
+        "label": 0.98828125,
+        "logit": 8.0,
+        "raw_logit": 159.80577087402344,
+        "weight": 0.016666666666666666,
+        "KL": 0.030327405307657512
+      },
+      {
+        "index": 33,
+        "label": 0.9921875,
+        "logit": 8.0,
+        "raw_logit": 389.1772155761719,
+        "weight": 0.02,
+        "KL": 0.01714701729891234
+      },
+      {
+        "index": 3,
+        "label": 0.9921875,
+        "logit": 8.0,
+        "raw_logit": 118.25405883789062,
+        "weight": 0.02,
+        "KL": 0.01714701729891234
+      }
+    ]
+  },
+  "root_cause": "Reproduced original C4softKL exactly; raw[-140.30,389.18] drives float32 tanh saturation. Exact-input contradictions absent. This is optimization failure, not semantic comparison.",
+  "correction": "Only a failing ordinary fit retries same seed0 and phase schedule with Adam rate.0001 instead of.001. Other ordinary fits first use original rate. Original primary is never refit.",
+  "unchanged": "Same9352D/normalization/model/boundedlogit8/targets/weights/clip10/cyclicbatch512/optimizercontinuity/min6000/max16000/.005 properKL. No targetGT or quality-based checkpoint selection.",
+  "compute": "Original failed attempts and damping retries counted separately; stronger ordinary gets extra optimization, no equal-time claim.",
+  "all66seal_then_isolated_GT": true,
+  "no_new_sampling_or_neural_seed": true,
+  "fullsix_threecontribution_fresh_cost_goal_complete": false,
+  "goal_status": "ACTIVE"
+}
