@@ -1,0 +1,49 @@
+{
+  "version": "QUERY_CONSISTENCY_V1",
+  "scope": "six-direction followup, not a replacement for transfer matrix; fixed while the new transfer matrix has no GT results",
+  "human_visual_motivation": "Treat equivalent descriptions consistently and respect attribute implication; do not assume every clothing description is mutually exclusive.",
+  "hypotheses": [
+    "Fixed 17-query exclusivity may be too restrictive for nested Tshirt/shirt descriptions; relax identically for ordinary and proposed as an engineering/fairness control, not our exclusive innovation.",
+    "Conservative text-derived equivalence/implication links regularize separate KD outputs; this may share sparse evidence across paraphrases without new teachers."
+  ],
+  "primary": "Same protocol/visual JOINT unary followed by least-squares probability projection onto conservative query implication constraints; ordinary independent per-query >.5 decoding for all arms.",
+  "controls": [
+    "KD_FINAL independent decoding",
+    "BASE_PROTOCOL independent decoding",
+    "old JOINT independent decoding",
+    "KD_FINAL plus same query projection",
+    "JOINT plus equivalent-only projection",
+    "JOINT plus full implication projection",
+    "JOINT plus fixed query-permuted implication graph (placebo; same graph edges)",
+    "RAW_TEACHER_FILL with the same independent decoder"
+  ],
+  "fixed_math": "Unweighted min ||p-u||²/2 under p[a]<=p[b], Hildreth dual coordinate updates, tolerance1e-8/max10000; probabilities not multiplied as independent evidence.",
+  "text_assumptions": [
+    "Parsed attributes conservative; other qualifier words remain ordered and opaque.",
+    "Within-video unique sport qualifier can be supplied by query set, not annotations.",
+    "Tshirt implies shirt; no hard mutual colour/identity exclusion added.",
+    "No claim parsed constraints are annotation ground truth."
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "new_encoder_teacher_head_calls": 0,
+  "same_evidence_as_transfer": true,
+  "GT_barrier": "All six directions/three seeds and both-direction CountMatched controls sealed before this followup evaluation. No target GT selects numerical parameters or checkpoint.",
+  "all_data_development": true,
+  "goal_status": "ACTIVE",
+  "acceptance": "Review all six directions against full ordinary family and neutral decoder; module gain must survive same-decoder controls and placebo; negative results preserved.",
+  "outputs": {
+    "conditions": 18,
+    "raw": 180,
+    "countmatched": 72,
+    "total": 252
+  },
+  "implementation_sha256": {
+    "flex_uda/active/query_consistency.py": "d7d01b2d0fed14d2064fe52fc73f17c75a95dde3647f8072c95cc55a80bbf1c9",
+    "scripts/a100_query_consistency.py": "c7c49aeaa8a127e8e26e8d4c981b66896038a96100f06dc7632f1ecee129c38d",
+    "scripts/a100_query_consistency_launch.py": "9c593c0eeb9d238da7783e3db149530d822fec67d7aa5eb05ad90b77bf2c6eaa"
+  }
+}

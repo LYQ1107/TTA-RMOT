@@ -1,0 +1,10 @@
+version: prompts_v1
+official_single: 'The normalized position of the car or person in the picture is <{coord}>.Determine whether this description matches this image: {sentence}. Answer Yes or No.'
+official_video: 'This is a short video clip of a car or person at <{coord}> across frames. The target may include motion cues; consider background and temporal context when deciding if the description matches this target: {sentence}. Answer Yes or No.'
+equivalent_full:
+  - 'Does the depicted target at <{coord}> satisfy the complete description "{sentence}"? Answer Yes or No.'
+  - 'For the target at <{coord}>, are all the conditions in "{sentence}" satisfied? Answer Yes or No.'
+  - 'Is "{sentence}" a correct description of the target at <{coord}>? Answer Yes or No.'
+attribute: 'Consider only the depicted target at <{coord}>. Is this condition visibly supported: {attribute}? Answer Yes or No.'
+no_image_note: 'No visual observation is supplied. Do not assume the description is true.'
+no_target_prompt_search: true

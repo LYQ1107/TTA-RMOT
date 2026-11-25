@@ -1,0 +1,130 @@
+{
+  "status": "PASS_SAVED_CONDITIONAL_GATE_USAGE_DIAGNOSIS_NO_GT",
+  "pair": "C1",
+  "seed": 0,
+  "video": "dancetrack0097",
+  "arms": {
+    "FULL": {
+      "bag_query_units": 119,
+      "actual_anchor_observations": 357,
+      "shared_gate_quantiles": {
+        "0": 0.00027195282746106386,
+        "0.01": 0.0005495268397498876,
+        "0.1": 0.005341293849050999,
+        "0.25": 0.014749674592167139,
+        "0.5": 0.055914390832185745,
+        "0.75": 0.45298877358436584,
+        "0.9": 0.9108501434326172,
+        "0.99": 0.9874279475212097,
+        "1": 0.9973374009132385
+      },
+      "shared_gate_standard_deviation": 0.3374306261539459,
+      "fraction_gate_above_0_99": 0.008403361344537815,
+      "fraction_gate_below_0_5": 0.7563025210084033,
+      "conditional_probability_quantiles": {
+        "0": 0.25046369433403015,
+        "0.01": 0.38999096989631654,
+        "0.1": 0.8364818334579468,
+        "0.25": 0.9891877770423889,
+        "0.5": 0.9999631643295288,
+        "0.75": 1.0,
+        "0.9": 1.0,
+        "0.99": 1.0,
+        "1": 1.0
+      },
+      "joint_probability_quantiles": {
+        "0": 0.00026429654099047184,
+        "0.01": 0.0005115677672438324,
+        "0.1": 0.004860407486557961,
+        "0.25": 0.014323930256068707,
+        "0.5": 0.05591404065489769,
+        "0.75": 0.4616479277610779,
+        "0.9": 0.9129185199737553,
+        "0.99": 0.9882376718521119,
+        "1": 0.997337281703949
+      },
+      "frozen_gate_removal_probability_difference": {
+        "0": 0.0025472640991210938,
+        "0.01": 0.011761102676391601,
+        "0.1": 0.08708148002624513,
+        "0.25": 0.41359883546829224,
+        "0.5": 0.8762774467468262,
+        "0.75": 0.9759975075721741,
+        "0.9": 0.9875770092010498,
+        "0.99": 0.997277536392212,
+        "1": 0.9991997480392456
+      },
+      "frozen_gate_removal_threshold_decision_change_fraction": 0.7394957983193278,
+      "CPU_last_prefix_vs_original_GPU_scores_max_absolute_error": 2.9206275939941406e-06,
+      "actual_model_vs_product_formula_max_absolute_error": 1.8477439880371094e-06,
+      "checkpoint_width": 32,
+      "same_historical_PCD_and_RGB_input_version": true
+    },
+    "CONDITIONAL_BALANCED": {
+      "bag_query_units": 119,
+      "actual_anchor_observations": 357,
+      "shared_gate_quantiles": {
+        "0": 2.040894833044149e-05,
+        "0.01": 5.3018463804619385e-05,
+        "0.1": 0.0003426556417252869,
+        "0.25": 0.0030952421948313713,
+        "0.5": 0.02669885940849781,
+        "0.75": 0.19984573870897293,
+        "0.9": 0.6887540340423587,
+        "0.99": 0.9647424674034117,
+        "1": 0.9802150726318359
+      },
+      "shared_gate_standard_deviation": 0.27335551381111145,
+      "fraction_gate_above_0_99": 0.0,
+      "fraction_gate_below_0_5": 0.8739495798319328,
+      "conditional_probability_quantiles": {
+        "0": 0.09569805860519409,
+        "0.01": 0.421152309179306,
+        "0.1": 0.9983612179756165,
+        "0.25": 0.9999946355819702,
+        "0.5": 1.0,
+        "0.75": 1.0,
+        "0.9": 1.0,
+        "0.99": 1.0,
+        "1": 1.0
+      },
+      "joint_probability_quantiles": {
+        "0": 1.2428990885382518e-05,
+        "0.01": 2.7624191061477178e-05,
+        "0.1": 0.0003301746037323028,
+        "0.25": 0.0030595283024013042,
+        "0.5": 0.026698945090174675,
+        "0.75": 0.199893057346344,
+        "0.9": 0.7096903681755101,
+        "0.99": 0.9670172929763794,
+        "1": 0.9802151918411255
+      },
+      "frozen_gate_removal_probability_difference": {
+        "0": 0.01978480815887451,
+        "0.01": 0.032982707023620605,
+        "0.1": 0.22750020027160645,
+        "0.25": 0.7570149302482605,
+        "0.5": 0.9681071043014526,
+        "0.75": 0.9937392473220825,
+        "0.9": 0.9985403180122375,
+        "0.99": 0.9999205088615417,
+        "1": 0.9999398589134216
+      },
+      "frozen_gate_removal_threshold_decision_change_fraction": 0.8543417366946778,
+      "CPU_last_prefix_vs_original_GPU_scores_max_absolute_error": 1.9073486328125e-06,
+      "actual_model_vs_product_formula_max_absolute_error": 2.115964889526367e-06,
+      "checkpoint_width": 32,
+      "same_historical_PCD_and_RGB_input_version": true
+    }
+  },
+  "last_completed_prefix_only_no_future_head_on_past_videos": true,
+  "no_GT_or_HOTA_or_new_quality_prediction_files": true,
+  "no_neural_training_or_teacher_or_backbone_calls": true,
+  "saved_small_head_evaluated_on_CPU": true,
+  "manual_GT_open_attempts": 0,
+  "wall_seconds": 23.17590080399532,
+  "interpretation": "Nonconstant or influential gates do not prove semantic identity, calibrated bag presence, or HOTA contribution. Near-one gates also do not rule out effects during training.",
+  "gate_removal_not_a_retrained_ablation": true,
+  "live_numerical_sources_not_modified": true,
+  "goal_status": "ACTIVE"
+}

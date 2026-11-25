@@ -1,0 +1,50 @@
+{
+  "format": "locatemot-qcs-asset-audit-v1",
+  "cwd": "/data2/user/LocateMOT",
+  "user": "user",
+  "paths": {
+    "source_root": {
+      "path": "/data2/user/reference_envs/temprmot/source",
+      "exists": true,
+      "is_file": false,
+      "is_dir": true,
+      "git_commit": "6a65640d849fdee4a32bb055945ee34c3b0edeb1"
+    },
+    "checkpoint": {
+      "path": "/data2/user/LocateMOT/data/checkpoints/checkpoint_rk2.pth",
+      "exists": true,
+      "is_file": true,
+      "is_dir": false,
+      "bytes": 1096316824,
+      "sha256": "4953bd2b2966f752b7d5dced94216f0ddacd04158b1c85c3fc3534a333e9581b"
+    },
+    "text_root": {
+      "path": "/data2/user/reference_envs/temprmot/roberta-base",
+      "exists": true,
+      "is_file": false,
+      "is_dir": true
+    },
+    "runtime_manifest": {
+      "path": "/data2/user/LocateMOT/results/manifests/refer_kitti_v2_runtime_manifest.jsonl",
+      "exists": true,
+      "is_file": true,
+      "is_dir": false,
+      "bytes": 120530350,
+      "sha256": "725d31f4f47e66da1959421d3165353a4ffba3203e5ab8768835d5a00598688a"
+    },
+    "evaluation_manifest": {
+      "path": "/data2/user/LocateMOT/results/manifests/refer_kitti_v2_evaluation_manifest.jsonl",
+      "exists": true,
+      "is_file": true,
+      "is_dir": false,
+      "bytes": 197390854,
+      "sha256": "8a284ec11135c7c49be3771f3a623c98d5bca2455fbd1933d1c6f93c998df7ff"
+    }
+  },
+  "data": {
+    "runtime_rows": 457503,
+    "runtime_forbidden_fields_found": [],
+    "runtime_image_missing": 0
+  },
+  "status": "complete"
+}

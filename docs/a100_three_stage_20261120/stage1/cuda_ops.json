@@ -1,0 +1,39 @@
+{
+  "torch": "2.6.0+cu118",
+  "torchvision": "0.21.0+cu118",
+  "torch_cuda": "11.8",
+  "devices": [
+    {
+      "physical_gpu": 2,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "roi_shape": [
+        1,
+        3,
+        4,
+        4
+      ],
+      "gradient_finite": true,
+      "nms_indices": [
+        0
+      ],
+      "wall_seconds": 0.926659895980265
+    },
+    {
+      "physical_gpu": 3,
+      "name": "NVIDIA A100-SXM4-40GB",
+      "roi_shape": [
+        1,
+        3,
+        4,
+        4
+      ],
+      "gradient_finite": true,
+      "nms_indices": [
+        0
+      ],
+      "wall_seconds": 0.2670900900266133
+    }
+  ],
+  "legacy_optional_extension_used": false,
+  "reason": "Current config disables fused window processing and fused layernorm; standard torchvision CUDA ops execute successfully."
+}

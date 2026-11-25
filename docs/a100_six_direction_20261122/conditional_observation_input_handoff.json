@@ -1,0 +1,29 @@
+{
+  "status": "PASS_DENSE_CURRENT_ANCHOR_HANDOFF_AND_PADDING_AWARE_COORDINATE_TRANSFER",
+  "pair": "C2",
+  "video": "0005",
+  "input_dimension": 1089,
+  "target_examples": 1891,
+  "query_groups": 197,
+  "supervision": {
+    "policy": "DESIGN",
+    "logical_requests": 1891,
+    "unique_requests": 1891,
+    "observation_targets": 1891,
+    "multiple_requested_views_at_same_anchor": 0,
+    "raw_view_mixture_shared_by_all_heads": true,
+    "CLIP_anchor_approximation": true
+  },
+  "all_real_dense_current_anchor_inputs_exactly_equal": true,
+  "dense_anchor_values_compared": 20595168,
+  "coordinate_transfer_max_abs_error": {
+    "local": 1.1102230246251565e-16,
+    "flat": 1.1102230246251565e-16,
+    "direct_context": 5.551115123125783e-17,
+    "conditional": 2.220446049250313e-16
+  },
+  "missing_anchor_cases_exercised": true,
+  "manual_GT_open_attempts": 0,
+  "no_neural_training_or_HOTA": true,
+  "full_study_not_yet_executed": true
+}

@@ -1,0 +1,85 @@
+{
+  "status": "COMPLETE_IMAGE_ONLY_SCENE_REFERENCE_DIAGNOSIS",
+  "domains": [
+    {
+      "target": "Dance",
+      "video": "dancetrack0004",
+      "pairs": 12,
+      "H_fitted": 10,
+      "F_fitted": 10,
+      "pair_median_held_pixel_diagnostics": {
+        "raw_displacement": {
+          "p10": 9.685205078125,
+          "median": 37.80509281158447,
+          "p90": 53.99651737213135
+        },
+        "homography": {
+          "p10": 0.7713426587891583,
+          "median": 2.28233805879315,
+          "p90": 7.544180912247936
+        },
+        "epipolar": {
+          "p10": 0.15246374750748218,
+          "median": 0.48857562339961547,
+          "p90": 1.420664700732475
+        }
+      }
+    },
+    {
+      "target": "KITTI-V2",
+      "video": "0005",
+      "pairs": 12,
+      "H_fitted": 12,
+      "F_fitted": 12,
+      "pair_median_held_pixel_diagnostics": {
+        "raw_displacement": {
+          "p10": 7.7150605678558355,
+          "median": 15.723249912261963,
+          "p90": 19.73010492324829
+        },
+        "homography": {
+          "p10": 4.566578850502653,
+          "median": 8.270632518932844,
+          "p90": 24.436112047752374
+        },
+        "epipolar": {
+          "p10": 0.7347684258793622,
+          "median": 1.0753435101767894,
+          "p90": 1.950479431923133
+        }
+      }
+    },
+    {
+      "target": "SportsMOT",
+      "video": "v_00HRwkvvjtQ_c001",
+      "pairs": 12,
+      "H_fitted": 12,
+      "F_fitted": 12,
+      "pair_median_held_pixel_diagnostics": {
+        "raw_displacement": {
+          "p10": 1.1746094405651097,
+          "median": 17.28139591217041,
+          "p90": 59.53175678253175
+        },
+        "homography": {
+          "p10": 0.2269328260456301,
+          "median": 0.6120527898184811,
+          "p90": 4.8001371065646765
+        },
+        "epipolar": {
+          "p10": 0.15814744457425622,
+          "median": 0.27557443701386614,
+          "p90": 0.5050282308098959
+        }
+      }
+    }
+  ],
+  "real_image_pairs": 36,
+  "neural_or_teacher_updates": 0,
+  "GT_reads": 0,
+  "wall_seconds": 27.710710217012092,
+  "source_registration_sha256": "5bea587adb7aed523b8a88139e9b41621e04217319a2bf1fb21020ec9b8a5aee",
+  "background_compensation_not_teacher_or_RMOT_accuracy": true,
+  "raw_points_models_and_track_details_nonGit": true,
+  "goal_status": "ACTIVE"
+}

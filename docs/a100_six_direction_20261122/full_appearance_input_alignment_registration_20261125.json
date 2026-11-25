@@ -1,0 +1,19 @@
+{
+  "status": "REGISTERED_FULL_INPUT_ALIGNMENT_AFTER_COLLECTOR",
+  "source_sha256": {
+    "scripts/a100_full_appearance_input_alignment.py": "36eb155a79485269932e05329d37911813828645071850d33dd7c7437ef693e4",
+    "flex_uda/active/full_appearance_learning_inputs.py": "eed4ea3cdcc52de91ea4f8b2ef84e1ce83d120bc9f3bce015bfb0f6517fd1381",
+    "flex_uda/active/appearance_learning_inputs.py": "d102c110e6d8410f1cdc27e42a3e416de1d583947ba26f8892e1f5b3fceaf68d",
+    "scripts/a100_dino_fullsix_collect.py": "9669c700089865ff96b5a37fab21924268f1e0198ef594ea0908774c2501d432",
+    "scripts/a100_dino_appearance_collect.py": "2e6bf0cdada18622ba00b35226131cd42045636c58cd5a2982991648ad139e72",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1"
+  },
+  "input_plan_sha256": "9678530b29883a06705cdc86d2757cb6a86a1a18d8f7290b59cc3036b353a63f",
+  "coverage": "All74 physical candidate videos, not only the old44 subset videos.",
+  "exact_reuse": "For all44 old units, every old3844D anchor/current/coarse descriptor is compared byte-for-byte through the new full bank.",
+  "no_query_expanded_full_feature_store": true,
+  "new_teacher_or_training_RMOT_predictions_GT_reads": 0,
+  "preserves_live_collector_and_all_old_numerical_helpers": true,
+  "goal_status": "ACTIVE"
+}

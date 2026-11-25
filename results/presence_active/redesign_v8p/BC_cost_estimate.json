@@ -1,0 +1,86 @@
+{
+  "version": "v8P",
+  "jobs": [
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483
+    }
+  ],
+  "dimensions": {
+    "C1": {
+      "target": "Dance",
+      "model": "V2-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    },
+    "C2": {
+      "target": "KITTI-V2",
+      "model": "Dance-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C3": {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C4": {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C5": {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C6": {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    }
+  },
+  "total_GPU_hours_estimate": 1.1502313949995289,
+  "no_cache_discount": true,
+  "LoRA_enabled": false,
+  "rescore_GPU_hours": 0,
+  "data2_available_bytes": 20192665600,
+  "maximum_total_project_GPUs": 2,
+  "original_v8_stage3_unchanged": true
+}

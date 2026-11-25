@@ -1,0 +1,97 @@
+{
+  "status": "COMPLETED_REGISTERED_FITS_AND_EXISTING_FACTORIAL_PARALLEL_EXECUTION",
+  "observed_local_date": "2026-11-25",
+  "C5_JOINT_FROZEN": {
+    "actual_terminal_session": 77808,
+    "actual_exit_code": 0,
+    "producer_pid": 452302,
+    "prepared_sha256": "fbec21b30af379213118206172959845f80ca2445907be69e2857004964656f1",
+    "actual_parent_reuse_verified": false,
+    "original_fit_records": [
+      {
+        "excess_risk": 0.0014264983244363094,
+        "Adam_steps": 400
+      },
+      {
+        "excess_risk": 0.0016533116156713934,
+        "Adam_steps": 400
+      },
+      {
+        "excess_risk": 0.0022224379224933255,
+        "Adam_steps": 500
+      },
+      {
+        "excess_risk": 0.002185145346593309,
+        "Adam_steps": 400
+      }
+    ],
+    "all_original_fit_gates_passed": true,
+    "wall_seconds": 732.7297320190119,
+    "GT_open_attempts": 0
+  },
+  "C4_c004_NO_IDENTITY": {
+    "actual_terminal_session": 10055,
+    "actual_exit_code": 0,
+    "producer_pid": 465385,
+    "prepared_sha256": "1cc2f371e6b8f1bcfec2d6fc1467b98cd833eebf6bf522932ce2b7c652b8400e",
+    "actual_parent_reuse_verified": false,
+    "fit_records": [
+      {
+        "excess_risk": 1.0856910651224627e-05,
+        "teacher_fit_gate_passed": true,
+        "actual_final_Adam_steps": 400
+      },
+      {
+        "excess_risk": 5.545268949080917e-06,
+        "teacher_fit_gate_passed": true,
+        "actual_final_Adam_steps": 400
+      },
+      {
+        "excess_risk": 4.075211620602204e-06,
+        "teacher_fit_gate_passed": true,
+        "actual_final_Adam_steps": 400
+      },
+      {
+        "excess_risk": 3.263124651875504e-06,
+        "teacher_fit_gate_passed": true,
+        "actual_final_Adam_steps": 400
+      }
+    ],
+    "wall_seconds": 150.06227739097085,
+    "GT_open_attempts": 0
+  },
+  "active_execution_only_batch": {
+    "actual_session": 57420,
+    "parent_pid": 469296,
+    "first_numerical_child_pid": 469309,
+    "physical_GPU": 0,
+    "pair": "C5",
+    "video": "0019",
+    "arms": [
+      "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "FULL_LIKELIHOOD_REFERENCE_FROZEN",
+      "FULL_LIKELIHOOD_LOCAL_FROZEN"
+    ],
+    "original_worker_arm_numbers": [
+      14,
+      15,
+      16
+    ],
+    "policy": "FROZEN",
+    "entry": "scripts/a100_native_registered_head_parallel.py",
+    "entry_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+    "original_controller_session": 14883,
+    "new_quality_conditions": 0
+  },
+  "controls": {
+    "original_replay_solver_and_fit_protocol": true,
+    "original_policy_paid_prefix_and_warm_head": true,
+    "exact_original_normalizer": true,
+    "no_original_cache_overwrite": true,
+    "actual_production_parent_reuse_still_requires_its_receipt": true
+  },
+  "new_teacher_actor_question_path_predictions_GT_or_neural_seeds": 0,
+  "new_native_HOTA_read": false,
+  "scientific_contribution_or_deployment_speedup_claim": false,
+  "goal_status": "ACTIVE"
+}

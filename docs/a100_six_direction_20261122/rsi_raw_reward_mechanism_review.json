@@ -1,0 +1,43 @@
+{
+  "status": "RAW_RSI_FEEDBACK_ENGINEERING_PASSED_NO_ACQUISITION_BENEFIT_SHOWN",
+  "selected_question_set_symmetric_difference": 0,
+  "same_question_sequence": true,
+  "same_final_solver_parameters": true,
+  "stages": [
+    {
+      "stage": 0,
+      "probe_questions": 2,
+      "teacher_neither_probability_mean": 0.9909479171037674,
+      "teacher_endpoint_Yes_mean": 0.004863340454903664,
+      "teacher_probe_CE_before": 1.3862943611198908,
+      "teacher_probe_CE_after": 0.05799719883929335,
+      "paired_CE_values_equal_to_frozen_actor": true
+    },
+    {
+      "stage": 1,
+      "probe_questions": 2,
+      "teacher_neither_probability_mean": 0.8809828013181686,
+      "teacher_endpoint_Yes_mean": 0.06267820009816205,
+      "teacher_probe_CE_before": 0.6919672178730412,
+      "teacher_probe_CE_after": 0.41289007155403,
+      "paired_CE_values_equal_to_frozen_actor": true
+    },
+    {
+      "stage": 2,
+      "probe_questions": 2,
+      "teacher_neither_probability_mean": 0.9910094887018204,
+      "teacher_endpoint_Yes_mean": 0.004933993019221816,
+      "teacher_probe_CE_before": 0.06867378376750725,
+      "teacher_probe_CE_after": 0.06396193084129913,
+      "paired_CE_values_equal_to_frozen_actor": true
+    }
+  ],
+  "teacher_budget_per_policy": 56,
+  "actor_updates_adaptive": 3,
+  "actor_updates_frozen": 0,
+  "adequate_same_information_ordinary_fits": true,
+  "GT_or_RMOT_HOTA_read": false,
+  "conclusion": "Both models update, but teacher loss reduction is identical to fixed selection. One video does not demonstrate learned acquisition. Dominant teacher No feedback motivates a teacher-prior progress control; No is not target truth.",
+  "next": "Pre-register a skill-progress reward that cannot be positive merely because a teacher-response-prior predictor learned as much; continue same-seed video prefix before a full RSI quality launch.",
+  "goal_status": "ACTIVE"
+}

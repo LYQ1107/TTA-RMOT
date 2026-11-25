@@ -1,0 +1,47 @@
+Text-only query structure preparation, 2026-11-23
+
+This is shared input preparation for a future scoped learner, not an RMOT
+quality result or one of three accepted innovations. It never reads target
+GT, image teacher answers or quality predictions. All downstream ordinary
+and proposed learners must receive the same structures and obey video-prefix
+access. Two prompts agreeing does not make their interpretation true.
+
+V1 and V2 each stopped after 8 text generations failed the original strict
+schema gate. Receipts query_scope_teacher_failure_v1/v2.json retain the
+failures and available costs. V1 source is commit cadbd7bcb04226290fe94188ca5449761156cd3a.
+Apply query_scope_v2_format_repair.patch with git apply --unidiff-zero
+on that original version to restore V2; registrations retain source digests. Raw failed text and local
+full source backups remain outside Git.
+
+V3 uses the same frozen Qwen, two V2 language prompts and strict decoder.
+LM Format Enforcer constrains the original schema, class enums and spans
+drawn literally from each query. The generation limit is 1536 new tokens;
+the fixed first-8 gate remains at least 4 valid complete structures. This
+does not validate clause completeness, reference binding or semantic truth.
+The common image-teacher prompts and weight are unchanged.
+
+Dependency setup used an isolated target, leaving the registered shared
+.venv, torch and transformers untouched. Recreate with:
+
+uv pip install --target /var/tmp/liuyeqiang-tta-rmot-a100-20261122/query_scope_vendor_v3 -r requirements_a100_query_scope_resolved.txt
+
+The parser controller is:
+
+PYTHONPATH=/var/tmp/liuyeqiang-tta-rmot-a100-20261122/query_scope_vendor_v3 .venv/bin/python -u scripts/a100_query_scope_teacher.py
+
+It waits for all 18 I1 GPU conditions to release, chooses an unused card
+among 0/1/2/3, loads the model and writes phase counters before the first
+format gate. It does not wait for the unrelated CPU official scores.
+
+Do not launch a duplicate while the registered controller is active.
+Use a100_runs/visual_classical_20261121/supervisor/research_goal_active_continuation.json
+for the sole current observer and controller PIDs. V3 outputs are under
+a100_runs/visual_classical_20261121/six_direction_20261122/query_scope_teacher_20261123_v3.
+
+The dependent script a100_scoped_supervision_audit.py waits for that exact
+structure cache, then examines only DESIGN's own image-answer records with
+identical rendered visual and non-query prompt context. Its output measures
+available comparisons, not identified atom labels or target accuracy.
+
+Upstream dependency: https://github.com/noamgat/lm-format-enforcer (MIT).
+The dependency and its constrained-decoding technique are not our novelty.

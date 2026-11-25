@@ -1,0 +1,31 @@
+{
+  "name": "NATIVE_DIRECT_HEAD_VISUAL_MECHANISM_FACTORIAL_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "motivation": "Strong nativePCD direct baseline makes oldresidualC4gap uncertain. NativeJvsnativeKD+.555807/+3.657437 haspositiveprimaryintervalsbothdomains; graphC4independentcontributionuncertain. Verify visual topology/alignment versus generic counts onthissamehead.",
+  "fixed_candidate": "Native768D direct soft400/finalmean(no fixedsourcez)+samegraph+TrackID-crossfitPAVA. Oneglobalrecipe onC4/C1; not independently blindselected.",
+  "controls": [
+    "ANCHOR_CAL: identicalteacheranchors/PAVA, noedges",
+    "ROW_SHIFT: query-wide mean logodds adjustment, withinqueryranking unchanged, exclusiveassignment maychange",
+    "SHUFFLED: colourcue permuted withinquery",
+    "GLOBAL_SHUFFLED: cue permuted acrossavailablequery-trackcells withinfamily/video",
+    "QUERY_TEACHER: teacherquerybase rate withoutcompatibilityvalues",
+    "COMPLETE: allvisiblepairs, same total edgeweight asquery-specific3NN, sameanchor/prior/PAVA"
+  ],
+  "unchanged": "Sameactualsourcecollections and1160C4/1103C1teacherresponses, seeds0/17/42, fixedsourceboxes/IDs. No newneuralfeatures/fits, source/teacherforwardorlabels inadaptation.",
+  "source": "direct_teacher_nores_pcd; eachvideo replayG/CAL/J andmasks mustexactlymatch savednativepredictions before controls seal.",
+  "countmatched": "J versus G/CAL/ANCHOR_CAL/ROW_SHIFT/COMPLETE inbothcountdirections plusCountSelfs; J/KDcountcontrols referencealreadysealed native72study.",
+  "expected": {
+    "conditions": 6,
+    "new_raw": 36,
+    "new_count": 96,
+    "new_official": 132,
+    "new_head_fits": 0,
+    "new_teacher_or_encoder_calls": 0
+  },
+  "GT": "All132newoutputs sealbefore anynewstudyGT. OldGTdiagnosis declaredDEV; noautomaticGTthreshold/checkpointselection.",
+  "cost": "CPUqualityreplayonly; fourfreshnativephysicalarms measured separately underpreregistration_native_direct_cold_v1.json; sharedhost load disclosed.",
+  "acceptance": "Inspectallraw/count/querytradeoffs. IfvisualtopologydoesnotbeatCOMPLETE, do notclaim specific3NNvisualselection established. Negativecontrols remainpublished.",
+  "worker_sha256": "b93c5705a01a8b49732027ac272557809944da432b698329992c5906216bc8d5"
+}

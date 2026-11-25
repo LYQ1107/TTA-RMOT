@@ -1,0 +1,574 @@
+跨域RMOT：人类视觉方式与经典算法——持续研究阶段记录（2026-11-21）
+
+本轮持续研究的实现、实验与证据整理已完成。结果有明确适用范围，不把跑完实验等同于普遍获胜。
+最终自包含报告：docs/TTA_RMOT_无标签跨域方案_完整验证与贡献结论_20261121.txt。
+
+一、始终不变的设定
+源学生主干冻结。适配只用目标域图片、查询、官方候选轨迹和冻结Qwen反馈。
+GT仅用于预测封存后的官评和隔离诊断，生成程序禁止读取GT，审计打开次数为0。
+C4为Dance-best→SportsMOT，45剪辑属于13个原视频；C1为V2-best→Dance，25视频。
+现有数据均参与研发，不是独立盲测。用户已明确先做已有数据的机制诊断。
+NAS历史数据和ckpt只读；新预测、教师回答、训练状态都在本地a100_runs，不进入Git。
+
+二、我们先把普通教师基线做强
+不只比较把教师Yes/No抄回结果；实际训练硬/软残差MLP蒸馏头。
+先400步，再4000步收敛控制；另有逐帧蒸馏和共同解码规则，防止轨迹常值假设掩盖问题。
+本轮共享新证据已封存15009个真实Qwen GPU回答（C4=7724，C1=7285），缓存命中0。
+每个方法只读自己的预算子集：C4=3508，C1=3334。共享池总量不能当成单方法部署调用数。
+
+三、先纠正信息范围，再讨论涨点
+最初整批目标教师回答拟合后回测属于数据集转导，不能称为逐视频TTA。
+新增严格顺序流：预测当前视频只能用过去及当前教师反馈，每视频输出后再推进。
+禁止整批训练checkpoint、未来教师文件和全目标统计；按行归一化。
+当前视频内部仍允许完整视频转导，不宣称逐帧在线。旧批转导结果保留并单列。
+
+四、哪些假设暂时站不住
+普通图传播不足以稳定超过充分训练的KD。慢分支和近似重算的旧结论不变。
+对新逐帧KD加HMM虽能抑制闪烁，但仍弱于强轨迹级KD；不能把加记忆当必然解法。
+用强KD的原框原数量，只在离线用GT修正ID：C4可到78.6646、C1可到59.1578。
+这是关联瓶颈诊断，不是可部署方法，也不是所有IoU阈值下的严格上界。
+保守运动/外观拼接只带来小幅改善，无法修复同一物理ID内部的串人，暂不作为核心卖点。
+
+五、视觉样例库的实际收获与限制
+经典高斯核回归在原视频留出的教师预测检查中，优于小型MLP；该检查不使用GT。
+但教师一致性更好并不自动意味着RMOT更好。严格流实测如下：
+
+C4
+方法及完整官评HOTA：
+exemplar_prefix/COVER__SUPPORT_MIX: 68.68390949
+exemplar_prefix/COVER__KERNEL: 69.22760602
+exemplar_prefix/COVER__MEAN: 69.00451673
+exemplar_prefix/COVER__SUPPORT_GATED: 66.94097627
+exemplar_prefix/COVER__SUPPORT_MIX_GRAPH: 69.49938741
+exemplar_prefix/UNIFORM__KERNEL: 68.91767708
+exemplar_prefix/UNIFORM__MEAN: 68.90517531
+exemplar_prefix/UNIFORM__SUPPORT_GATED: 64.67320986
+exemplar_prefix/UNIFORM__SUPPORT_MIX: 68.64634982
+exemplar_prefix/UNIFORM__SUPPORT_MIX_GRAPH: 69.23513554
+continuity_prefix/EXEMPLAR__VISUAL_SEMANTIC: 69.01409867
+continuity_prefix/EXEMPLAR__VISUAL: 69.01354205
+continuity_prefix/KD__VISUAL: 68.62860665
+continuity_prefix/KD__VISUAL_SEMANTIC: 68.62916541
+prefix_countmatched/FULL__AT_FULL_COUNT: 68.68390949
+prefix_countmatched/ENSEMBLE__AT_FULL_COUNT: 68.16831367
+prefix_countmatched/FULL__AT_KD_STRUCT_COUNT: 65.31828010
+prefix_countmatched/FULL__AT_KD_TRACK_COUNT: 68.30655707
+prefix_countmatched/KD_FRAME__AT_FULL_COUNT: 65.90624890
+prefix_countmatched/KD_STRUCT__AT_FULL_COUNT: 65.90624890
+prefix_countmatched/KD_STRUCT__AT_KD_STRUCT_COUNT: 63.95595461
+prefix_countmatched/KD_TRACK__AT_FULL_COUNT: 68.67304710
+prefix_countmatched/KD_TRACK__AT_KD_TRACK_COUNT: 68.31397003
+prefix_countmatched/KERNEL__AT_FULL_COUNT: 68.60986771
+prefix_countmatched/MEAN__AT_FULL_COUNT: 68.66710265
+prefix_countmatched/NO_MEMORY__AT_FULL_COUNT: 68.62051478
+frame_convergence/COVER__FRAME_KD_SOFT_4000_STRUCTURED: 66.18424147
+frame_convergence/COVER__FRAME_KD_HARD_4000: 66.46029673
+frame_convergence/COVER__FRAME_KD_HARD_4000_STRUCTURED: 66.46029673
+frame_convergence/COVER__FRAME_KD_SOFT_4000: 66.18424147
+frame_convergence/PRIOR__FRAME_KD_HARD_4000: 65.28070037
+frame_convergence/PRIOR__FRAME_KD_SOFT_4000: 65.45330877
+frame_convergence/UNCERTAINTY__FRAME_KD_HARD_4000: 65.89836291
+frame_convergence/UNCERTAINTY__FRAME_KD_SOFT_4000: 65.69317819
+frame_convergence/UNIFORM__FRAME_KD_HARD_4000: 66.43604895
+frame_convergence/UNIFORM__FRAME_KD_SOFT_4000: 66.41779541
+strict_prefix/COVER__GRAPH_MEMORY_HMM: 67.18240907
+strict_prefix/COVER__TRACK_SOFT: 68.31397003
+strict_prefix/COVER__FRAME_SOFT: 63.95595461
+strict_prefix/COVER__ENSEMBLE: 67.50209011
+strict_prefix/COVER__RESET_MEMORY_HMM: 66.99268924
+strict_prefix/COVER__GRAPH_ENSEMBLE: 67.60749256
+strict_prefix/COVER__GRAPH_NO_RESET_HMM: 68.13354132
+strict_prefix/UNIFORM__TRACK_SOFT: 68.29384428
+strict_prefix/UNIFORM__GRAPH_MEMORY_HMM: 67.29837218
+strict_prefix/COVER__FRAME_STRUCTURED: 63.95595461
+strict_prefix/COVER__DIRECT_NATIVE: 42.32606214
+strict_prefix/COVER__LOCAL_GRAPH: 69.11452312
+convergence/COVER__KD_HARD_4000: 69.01556451
+convergence/COVER__KD_SOFT_4000: 69.77660488
+
+关键配对差及原视频描述性95%区间：
+FULL_vs_TRACK_SOFT: Δ=0.36993946; clusters=13; CI95=[0.10330847977592904, 0.6045862335786466]
+FULL_vs_MEAN: Δ=-0.32060724; clusters=13; CI95=[-0.6072237321487677, -0.15299925286620358]
+FULL_vs_SUPPORT_GATED: Δ=1.74293322; clusters=13; CI95=[0.791963472733746, 2.7993039021538486]
+COUNT_FULL__FULL_vs_KD_TRACK: Δ=0.01086239; clusters=13; CI95=[-0.07211557421313941, 0.08629308039909703]
+COVER_vs_UNIFORM: Δ=0.03755967; clusters=13; CI95=[-0.6156088693222969, 0.8615293621140186]
+FULL_vs_KD_same_associations: Δ=0.38493326; clusters=13; CI95=[0.10518190100804077, 0.6307078035744598]
+
+C1
+方法及完整官评HOTA：
+exemplar_prefix/COVER__SUPPORT_MIX: 36.65691737
+exemplar_prefix/COVER__KERNEL: 37.33006121
+exemplar_prefix/COVER__MEAN: 36.84520363
+exemplar_prefix/COVER__SUPPORT_GATED: 34.73068697
+exemplar_prefix/COVER__SUPPORT_MIX_GRAPH: 38.00424522
+exemplar_prefix/UNIFORM__KERNEL: 36.22911420
+exemplar_prefix/UNIFORM__MEAN: 35.14009741
+exemplar_prefix/UNIFORM__SUPPORT_GATED: 32.70885882
+exemplar_prefix/UNIFORM__SUPPORT_MIX: 35.10410954
+exemplar_prefix/UNIFORM__SUPPORT_MIX_GRAPH: 36.94546005
+continuity_prefix/EXEMPLAR__VISUAL_SEMANTIC: 36.83726625
+continuity_prefix/EXEMPLAR__VISUAL: 36.84482558
+continuity_prefix/KD__VISUAL: 36.03089113
+continuity_prefix/KD__VISUAL_SEMANTIC: 36.02324860
+prefix_countmatched/FULL__AT_FULL_COUNT: 36.38361618
+prefix_countmatched/ENSEMBLE__AT_FULL_COUNT: 35.50421783
+prefix_countmatched/FULL__AT_KD_STRUCT_COUNT: 30.73185308
+prefix_countmatched/FULL__AT_KD_TRACK_COUNT: 35.90190866
+prefix_countmatched/KD_FRAME__AT_FULL_COUNT: 34.67456055
+prefix_countmatched/KD_STRUCT__AT_FULL_COUNT: 34.67456055
+prefix_countmatched/KD_STRUCT__AT_KD_STRUCT_COUNT: 29.40012817
+prefix_countmatched/KD_TRACK__AT_FULL_COUNT: 36.34811157
+prefix_countmatched/KD_TRACK__AT_KD_TRACK_COUNT: 35.87980483
+prefix_countmatched/KERNEL__AT_FULL_COUNT: 36.54564703
+prefix_countmatched/MEAN__AT_FULL_COUNT: 36.32785884
+prefix_countmatched/NO_MEMORY__AT_FULL_COUNT: 36.12005820
+frame_convergence/COVER__FRAME_KD_SOFT_4000_STRUCTURED: 31.38583596
+frame_convergence/COVER__FRAME_KD_HARD_4000: 24.14708095
+frame_convergence/COVER__FRAME_KD_HARD_4000_STRUCTURED: 27.25103260
+frame_convergence/COVER__FRAME_KD_SOFT_4000: 26.80624832
+frame_convergence/PRIOR__FRAME_KD_HARD_4000: 25.25309727
+frame_convergence/PRIOR__FRAME_KD_SOFT_4000: 26.73408615
+frame_convergence/UNCERTAINTY__FRAME_KD_HARD_4000: 24.40533297
+frame_convergence/UNCERTAINTY__FRAME_KD_SOFT_4000: 26.71893485
+frame_convergence/UNIFORM__FRAME_KD_HARD_4000: 23.75843875
+frame_convergence/UNIFORM__FRAME_KD_SOFT_4000: 25.67633270
+strict_prefix/COVER__GRAPH_MEMORY_HMM: 35.88859685
+strict_prefix/COVER__TRACK_SOFT: 35.83373118
+strict_prefix/COVER__FRAME_SOFT: 24.38557912
+strict_prefix/COVER__ENSEMBLE: 34.56725745
+strict_prefix/COVER__RESET_MEMORY_HMM: 35.29552302
+strict_prefix/COVER__GRAPH_ENSEMBLE: 34.96409606
+strict_prefix/COVER__GRAPH_NO_RESET_HMM: 36.11797712
+strict_prefix/UNIFORM__TRACK_SOFT: 34.42836265
+strict_prefix/UNIFORM__GRAPH_MEMORY_HMM: 35.02258173
+strict_prefix/COVER__FRAME_STRUCTURED: 29.40218084
+strict_prefix/COVER__DIRECT_NATIVE: 21.82170894
+strict_prefix/COVER__LOCAL_GRAPH: 37.71213382
+convergence/COVER__KD_HARD_4000: 36.86021950
+convergence/COVER__KD_SOFT_4000: 38.09209122
+
+关键配对差及原视频描述性95%区间：
+FULL_vs_TRACK_SOFT: Δ=0.82318619; clusters=25; CI95=[0.06164778512294449, 1.6825601315776313]
+FULL_vs_MEAN: Δ=-0.18828627; clusters=25; CI95=[-0.7911204122986646, 0.5566727605695428]
+FULL_vs_SUPPORT_GATED: Δ=1.92623039; clusters=25; CI95=[0.4205021556218035, 3.6190340372606045]
+COUNT_FULL__FULL_vs_KD_TRACK: Δ=0.03550462; clusters=25; CI95=[-0.13398799165477904, 0.21977887886847253]
+COVER_vs_UNIFORM: Δ=1.55280782; clusters=25; CI95=[-1.0492101832112561, 4.234001082804009]
+FULL_vs_KD_same_associations: Δ=0.81401765; clusters=25; CI95=[0.05770993526439413, 1.66740118364005]
+
+解释：样例库混合相对直接KD有小幅总HOTA改善，但固定数量后的排序差接近0。
+因此主要是集合输出/数量校准，不能写成语义排序或神经特征学习的铁证。
+自适应不确定性混合也没有超过简单平均；复杂统筹必须接受简单基线的考验。
+
+六、真实颜色与场景群体一致性：已经完成的结果
+真实图像提取整体/上身/下身HSV；KD和图方法获得完全相同的RGB+PCD输入和教师回答。
+图按查询的静态衣着属性在外观相似候选间传播证据；动态/方位查询保留同一KD回退。
+边缘遮挡空部位按缺失证据处理，未删除候选或视频；历史全可见结果逐位不变。
+C4，原LayerNorm头版本：
+colour_prefix/COVER__RGB_KD: 68.48777797
+colour_prefix/COVER__COHORT: 69.15803752
+colour_prefix/COVER__NO_GRAPH: 68.48350180
+colour_prefix/COVER__PCD_COHORT: 69.27368348
+colour_prefix/UNIFORM__COHORT: 69.02654491
+facility_prefix/FACILITY__COHORT: 68.74774721
+COVER__COHORT_vs_RGB_KD: delta=0.67025954; parentCI=[0.3016661488049056, 1.1440953476835911]
+COVER__COHORT_vs_NO_GRAPH: delta=0.67453571; parentCI=[0.31644459082324977, 1.1368234549248686]
+COVER__COUNT_FULL_vs_KD: delta=0.40779627; parentCI=[0.2137674831431262, 0.766298945663169]
+C1，原LayerNorm头版本：
+colour_prefix/COVER__RGB_KD: 36.81692757
+colour_prefix/COVER__COHORT: 38.49069282
+colour_prefix/COVER__NO_GRAPH: 37.30519002
+colour_prefix/COVER__PCD_COHORT: 38.38409810
+colour_prefix/UNIFORM__COHORT: 39.69022282
+facility_prefix/FACILITY__COHORT: 39.26943086
+COVER__COHORT_vs_RGB_KD: delta=1.67376525; parentCI=[-0.39579455576625544, 4.323318778679008]
+COVER__COHORT_vs_NO_GRAPH: delta=1.18550280; parentCI=[-0.1934390411623946, 2.6692156860791854]
+COVER__COUNT_FULL_vs_KD: delta=0.70702356; parentCI=[-0.047038117585119464, 1.7007438877406242]
+额外RGB几何未得到独立稳定贡献；不能把它吹成所有增益来源。
+FACILITY真实新增教师3508(C4)/3334(C1)，零缓存，但完整方法没有超过UNIFORM；不宣称主动覆盖最优。
+C1下方采用更严格的互斥数量对照，较上述独立逐查询投影更符合任务契约。
+
+七、进一步加强：逐视频因果、前缀通道归一化、真实充分训练的KD
+每个视频只读当前及过去图像/教师；当前视频内允许转导，不能称为逐帧在线。
+归一化统计仅用过去+当前无标签候选；残差MLP真实训练，软/硬BCE最少4000、最多16000步。
+保存400、4000和最终检查点，停止依据教师拟合KL而非目标GT；所有检查点均作为基线报告。
+图的已查询节点取消其拟合分类器自身的一元锚，避免把同一教师回答当独立证据计两次。
+固定边界/先验常数没有按目标GT网格搜索；所有数据均为开发数据，区间仅描述性。
+C4，强控制seed0：
+strong_cover_seed0/SOFT_KD_400: 68.64082386
+strong_cover_seed0/SOFT_KD: 68.31206366
+strong_cover_seed0/HARD_KD_400: 68.54093419
+strong_cover_seed0/HARD_KD: 68.08876300
+strong_cover_seed0/NO_GRAPH: 68.29964116
+strong_cover_seed0/COHORT: 68.98140692
+strong_cover_seed0/STRONG_PRIOR: 68.75494933
+strong_uniform_seed0/SOFT_KD_400: 68.50808968
+strong_uniform_seed0/SOFT_KD: 68.28877019
+strong_uniform_seed0/HARD_KD_400: 68.44544546
+strong_uniform_seed0/HARD_KD: 68.23258081
+strong_uniform_seed0/NO_GRAPH: 68.28377499
+strong_uniform_seed0/COHORT: 68.83050224
+strong_uniform_seed0/STRONG_PRIOR: 68.61038996
+strong_cover_seed0/FULL_vs_SOFT_KD: delta=0.66934326; parentCI=[0.04430988276661731, 1.366022833249655]
+strong_cover_seed0/FULL_vs_HARD_KD_400: delta=0.44047273; parentCI=[-0.2904507574182432, 1.242692349623868]
+strong_cover_seed0/FULL_vs_NO_GRAPH: delta=0.68176575; parentCI=[0.056282187260034186, 1.3791324621720125]
+strong_cover_seed0/COUNT_FULL_vs_SOFT_KD: delta=0.74266850; parentCI=[0.4506075681201381, 1.246482175571553]
+C1，强控制seed0：
+strong_cover_seed0/SOFT_KD_400: 37.08617973
+strong_cover_seed0/SOFT_KD: 38.38670985
+strong_cover_seed0/HARD_KD_400: 39.93764747
+strong_cover_seed0/HARD_KD: 39.05771657
+strong_cover_seed0/NO_GRAPH: 38.51894444
+strong_cover_seed0/COHORT: 39.71842001
+strong_cover_seed0/STRONG_PRIOR: 39.27235817
+strong_uniform_seed0/SOFT_KD_400: 37.58531996
+strong_uniform_seed0/SOFT_KD: 38.83454182
+strong_uniform_seed0/HARD_KD_400: 37.18864689
+strong_uniform_seed0/HARD_KD: 36.99905155
+strong_uniform_seed0/NO_GRAPH: 38.86171101
+strong_uniform_seed0/COHORT: 40.52987911
+strong_uniform_seed0/STRONG_PRIOR: 39.93871400
+strong_cover_seed0/FULL_vs_SOFT_KD: delta=1.33171016; parentCI=[-0.9836058330352224, 4.170636478677135]
+strong_cover_seed0/FULL_vs_HARD_KD_400: delta=-0.21922746; parentCI=[-6.094173805325308, 5.307215576429884]
+strong_cover_seed0/FULL_vs_NO_GRAPH: delta=1.19947558; parentCI=[-0.352749532504445, 3.014724431494779]
+strong_cover_seed0/COUNT_FULL_vs_SOFT_KD: delta=-0.16353454; parentCI=[-0.8876629686958113, 0.3829976892605648]
+C4相对最终软KD的总增益约0.669，固定数量排序增益约0.743；有真实正信号。
+C1主方法39.718，最终软KD38.387，但硬KD的400步检查点39.938；不能宣称已经打败全部强基线。
+
+八、C1严格互斥CountMatched
+每句查询每帧的数量来自方法自身预测，目标GT数量从不进入方法。
+采用联合线性分配，每框至多分给一句互斥描述；原独立查询投影另行保留。
+FULL CountSelf改变的查询文件数：0/425。
+COUNT_FULL_vs_SOFT_KD: delta=-0.01077851; parentCI=[-0.7484192464189462, 0.7009180161452828]
+COUNT_FULL_vs_HARD_KD: delta=0.65666730; parentCI=[-0.1615883282263196, 1.7005877678002816]
+COUNT_FULL_vs_SOFT_KD_400: delta=0.62912314; parentCI=[0.020783225974026823, 1.4170760964542848]
+COUNT_FULL_vs_HARD_KD_400: delta=1.06766692; parentCI=[0.12017852889747704, 2.301502158192613]
+COUNT_FULL_vs_NO_GRAPH: delta=0.05183749; parentCI=[-0.582711123362308, 0.707574254305198]
+COUNT_FULL_vs_STRONG_PRIOR: delta=-0.02325865; parentCI=[-0.39923881201829836, 0.35943858872918116]
+COUNT_SOFT_KD: delta=-0.86781038; parentCI=[-2.6145289898843824, 0.24562615915032243]
+COUNT_HARD_KD: delta=-0.63431083; parentCI=[-1.7287651294839048, 0.1477377198580331]
+COUNT_SOFT_KD_400: delta=0.13333365; parentCI=[-0.4728849544504753, 0.9243591576264886]
+COUNT_HARD_KD_400: delta=-1.23958748; parentCI=[-3.8329938141005333, 0.559759073972702]
+此口径下C1对最终软KD的固定数量排序差约-0.011，不能声称C1语义排序已获证明。
+交换数量来源时结论也会变化，不能把HOTA差硬拆成可相加的“数量贡献+排序贡献”。
+
+九、真实冷启动完整片段：已跑通，保留负结果
+固定首个C4视频v_00HRwkvvjtQ_c001，1162帧、8句查询，未根据GT选择片段。
+学生权重真实加载及全帧前向；仅保留每轨迹三个均匀PCD样本，避免保存巨型全量PCD。
+冻结Qwen重新加载，43次真实新调用、0缓存；方法生成阶段GT打开次数0。
+共同冷启动前缀物理执行一次，每个分支独立进行同种子KD拟合和输出；不是三次独立冷启动。
+student_load_including_weight_verification: 408.263386s
+all_source_forward_text_and_initial_head: 443.959132s
+real_RGB_part_features: 7.811583s
+image_only_input_assembly_and_acquisition: 0.041140s
+teacher_load_including_weight_verification: 488.724773s
+real_teacher_service_including_image_IO: 5.042845s
+teacher_final_frozen_weight_audit: 17.651610s
+SOFT_KD: measured_common_plus_own_branch=1396.275687s; HOTA=67.72894813
+COHORT: measured_common_plus_own_branch=1398.332285s; HOTA=66.98477497
+HARD_KD: measured_common_plus_own_branch=1396.569867s; HOTA=67.21555488
+该片段图方法66.985低于软KD67.729；不换片段、不删负结果，也不拿全C4分数冒充此冷启动片段的精度。
+源margin与封存A100初始margin逐位相同；历史PCD样本的归一化均值/标准差存在约3.82e-5/7.10e-5差异。
+43/43教师请求键完全相同，但原始软概率最大相差0.01953125；不能把两次软KD的HOTA变化全归于教师，因PCD也存在数值差别。
+OS缓存未清空，主机有其它研究作业；这是实际共享资源下测量，不是独占GPU吞吐积分。
+此成本只覆盖一条完整片段，不外推整套C4时间或声称全预算下帕累托最优。
+
+十、未获得贡献的模块与正在完成的验收
+HMM/复杂记忆、额外RGB路由、facility选题、同伴可靠性审计均未取得稳定独立优势，不作为核心功臣。
+同伴审计只降权少数回答，C4/C1主策略增益仅+0.0045/+0.0000 HOTA。
+固定recipe的17、42种子重复正在运行：同时重复选题与头初始化，双方同样证据和预算。
+旧冻结回答仅在问题、图像帧、候选完全相同时复用；缺失的1066(C4)/913(C1)个问题已真实重新询问，未使用目标GT。
+新增同等概率截断的实际KD控制：将图已用的[.02,.98]边界同样给软蒸馏；不是搜索更好的目标GT参数。
+新增显式任务契约解码控制：只对PRESUPPOSED下的全空静态查询检查非空MAP；所有蒸馏基线享有相同规则。
+CHECKLIST保留判空；不把视频级存在性承诺滥用为逐帧必有目标。该控制收益只能算解码/数量，不能算神经语义学习。
+上述新增控制和重复完成前，持续Goal保持active，未宣布解决方案全面优于强教师基线。
+
+十一、实现与评价的隔离
+目标标签只在独立官评/错误诊断进程读取；生成进程的GT读保护和未来教师分片保护持续启用。
+为了完成大量同证据消融，对相同视频+查询+完全相同预测字节复用官方逐查询充分统计，再使用原TrackEval公式合并。
+C4全部466查询、C1全部425查询及合并后的275个指标字段与原官评逐值相同，最大绝对误差0；另从原始GT重新核验一条完整C4查询。
+该缓存位于offline_GT，适配读取保护会拒绝访问；它只加速评价，不改变方法、匹配或指标。
+
+原始收据：/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121
+公共轻量收据：docs/a100_visual_classical_20261121；原始问答、全量预测、权重不进入Git。
+数据均属于已有开发集；没有独立盲测，不做跨全部未知域的保证。
+
+十二、三随机种子与同等软标签平滑：新增完成的证据
+种子0、17、42同时改变采集随机次序与实际神经头初始化；每个方法仍只看自己的当前/过去证据。
+不将三种子当三个独立数据集；C4的主要抽样单位始终为13个原视频，C1为25视频。
+以下为每个种子先做完整官方HOTA、再取三者均值，不是重复拼接GT后的池化分数。
+
+原始软教师概率：
+C4：SOFT_KD_400=68.385708, HARD_KD_400=68.440806, SOFT_KD=68.263106, HARD_KD=68.117482, NO_GRAPH=68.263295, COHORT=69.018978, STRONG_PRIOR=68.701334
+FULL_vs_SOFT_KD: meanΔ=0.755872; seedΔ=[0.6693432575766991, 0.78602922831017, 0.8122433902658344]; parent95%=[0.22739802190203992, 1.4226818364938663]; parent+seed敏感性95%=[0.21348867203822872, 1.4324872238849427]
+FULL_vs_NO_GRAPH: meanΔ=0.755683; seedΔ=[0.6817657535477082, 0.7834145702649522, 0.8018679819383152]; parent95%=[0.23004321857835353, 1.4173032112465824]; parent+seed敏感性95%=[0.2171263422036031, 1.4295868097698763]
+COUNT_FULL_vs_SOFT_KD: meanΔ=0.699646; seedΔ=[0.7426684961281182, 0.7115660744922252, 0.6447038745344855]; parent95%=[0.37408767103380264, 1.2667345083738413]; parent+seed敏感性95%=[0.36287862574827257, 1.2792138851032286]
+C1：SOFT_KD_400=37.454175, HARD_KD_400=38.683766, SOFT_KD=38.677485, HARD_KD=38.271243, NO_GRAPH=38.716608, COHORT=40.156449, STRONG_PRIOR=39.611389
+FULL_vs_SOFT_KD: meanΔ=1.478964; seedΔ=[1.3317101627700865, 1.7105740389738315, 1.394608277081538]; parent95%=[-0.35987584280972534, 3.7449184779842155]; parent+seed敏感性95%=[-0.7419145469840398, 3.779263751132898]
+FULL_vs_NO_GRAPH: meanΔ=1.439842; seedΔ=[1.199475577155475, 2.19505672062985, 0.9249928556299167]; parent95%=[0.43238543218922504, 2.6305374425942913]; parent+seed敏感性95%=[-0.07936122497518505, 3.080699894861549]
+COUNT_FULL_vs_SOFT_KD: meanΔ=0.474429; seedΔ=[-0.01077851483442771, 0.28085796386669415, 1.1532074766191371]; parent95%=[-0.08578537858863668, 1.2769790225924795]; parent+seed敏感性95%=[-0.23062946099167725, 1.7291534978035563]
+
+给软KD与图相同的[.02,.98]概率边界：
+C4：SOFT_KD_400=68.612772, HARD_KD_400=68.440806, SOFT_KD=68.701359, HARD_KD=68.117482, NO_GRAPH=68.707523, COHORT=69.229304, STRONG_PRIOR=69.157511
+FULL_vs_SOFT_KD: meanΔ=0.527945; seedΔ=[0.38839065011687524, 0.6462376830003791, 0.5492062108793476]; parent95%=[0.0038233214585795742, 1.123206110810545]; parent+seed敏感性95%=[-0.023727440446080536, 1.1463148974807225]
+FULL_vs_NO_GRAPH: meanΔ=0.521781; seedΔ=[0.3816596181986114, 0.632088209913988, 0.5515945238130513]; parent95%=[-0.0005975647480445956, 1.1190459336093683]; parent+seed敏感性95%=[-0.030276080586592848, 1.1398467797343559]
+COUNT_FULL_vs_SOFT_KD: meanΔ=0.729766; seedΔ=[0.8360997324060833, 0.7399062645363159, 0.6132906519437853]; parent95%=[0.4396447308259656, 1.2182105098998615]; parent+seed敏感性95%=[0.4107744940151875, 1.2452934104158233]
+C1：SOFT_KD_400=37.738270, HARD_KD_400=38.683766, SOFT_KD=38.927709, HARD_KD=38.271243, NO_GRAPH=39.252660, COHORT=40.001013, STRONG_PRIOR=40.036882
+FULL_vs_SOFT_KD: meanΔ=1.073304; seedΔ=[1.3482671865065115, 0.9647980818967952, 0.9068461539474981]; parent95%=[-0.15875431144944674, 2.562328823501908]; parent+seed敏感性95%=[-0.287362297925789, 2.612721657645482]
+FULL_vs_NO_GRAPH: meanΔ=0.748353; seedΔ=[1.3698383613049998, 0.5463506660351882, 0.32887087534518145]; parent95%=[-0.1984749687439272, 1.7989194252640281]; parent+seed敏感性95%=[-0.3624919168147911, 2.018024007677609]
+COUNT_FULL_vs_SOFT_KD: meanΔ=0.364379; seedΔ=[0.5331874233552085, 0.524287894286033, 0.03566147431151023]; parent95%=[-0.08300016069194745, 0.9268628235305235]; parent+seed敏感性95%=[-0.1323732631340819, 1.236644632112411]
+
+解释：即使充分拟合、同样平滑标签，C4固定FULL数量的排序差仍为+0.729766，两个描述性区间均为正。
+这排除了全部收益仅由输出数量变化或图独享概率截断造成的解释。总HOTA差+0.527945；
+更保守的原视频+种子敏感性区间[-0.023727,1.146315]跨0，不能写成对所有强基线都有显著优势。
+C1平滑版本平均+1.073304，但区间跨0，固定数量差+0.364379亦跨0。未取得全面跨域的强证据。
+弱先验相对强先验的额外贡献在平滑标签控制下未确立，不能把它独立宣传为已证明模块。
+
+十三、主动疑点查证的反例与原因
+C4：COVER COHORT=68.981407, UNIFORM COHORT=68.830502, FIELD_STATIC COHORT=68.427744, FIELD COHORT=66.579758
+FIELD_vs_FIELD_STATIC/COHORT: Δ=-1.847986; parent95%=[-3.806997044418781, -0.25454154379705596]
+FIELD_vs_UNIFORM/COHORT: Δ=-2.250745; parent95%=[-3.743526418182114, -0.928476967299283]
+FIELD/FULL_vs_NO_GRAPH: Δ=1.049749; parent95%=[0.5371354630287251, 1.6524772302734352]
+FIELD/COUNT_FULL_vs_SOFT_KD: Δ=0.280164; parent95%=[0.06372326006575975, 0.53136457078784]
+真实补采新Qwen前向=1474，其余是仅按请求返回的旧冻结回答；这不是冷启动成本实验。
+C1：COVER COHORT=39.718420, UNIFORM COHORT=40.529879, FIELD_STATIC COHORT=38.202106, FIELD COHORT=40.237414
+FIELD_vs_FIELD_STATIC/COHORT: Δ=2.035308; parent95%=[-0.3663430916688764, 4.999594876738044]
+FIELD_vs_UNIFORM/COHORT: Δ=-0.292465; parent95%=[-8.07584863516507, 4.432478958983258]
+FIELD/FULL_vs_NO_GRAPH: Δ=2.055058; parent95%=[-1.4583099363379617, 5.178661463555326]
+FIELD/COUNT_FULL_vs_SOFT_KD: Δ=-0.031054; parent95%=[-0.6719491883432399, 0.3802754015690483]
+真实补采新Qwen前向=1242，其余是仅按请求返回的旧冻结回答；这不是冷启动成本实验。
+离线原因账单：C4 FIELD仅一次提问的查询97条，未问到正确轨迹130条、正确锚帧142条；
+FIELD_STATIC对应38/60/66，UNIFORM对应0/79/85，原COVER未问到正确轨迹40、正确锚44。
+FIELD在有限预算下把注意力集中到少数疑点，牺牲其余查询；不能把不确定性采样称为覆盖保障。
+C1 FIELD把641次问题用于实际有目标的查询，STATIC仅339次，但这只是封存后的GT诊断，
+不能当作适配可见信息，也不能据此逐域挑选策略。
+C4四种采集下图相对同问答软KD都为正，说明图的局部收益并非只来自一条特殊选题路径。
+但任何某个采集策略全局最优、复杂主动查证必然胜均匀的说法均不成立。
+
+十四、仍在做的真正物理闭环
+完整C4的全新流已在GPU1启动：重载冻结学生与教师、逐视频真实全帧前向、重新抽取
+PCD与RGB、全新SQLite真实Qwen回答，比较原始软/同边界软/硬KD的400、4000、最终头，
+并保留固定400/最终预测平均这一普通强基线，再对同头施加图与去图。
+全部分支使用同一个实际源特征和教师流；共同工作实测一次、各分支拟合与输出单独计时。
+不能称为多次独立冷启动，OS页缓存不清空，机器存在其它研究任务。
+在全部预测封存后，另做29个只用方法数量的CountMatched，GT仅进入隔离官评。
+当前尚无完整C4的新鲜流最终结果，不将单片段成本外推成全套成本，也不提前写Goal完成。
+
+十五、第二个待验证模块：少量关键观察与原始轨迹上下文
+代码审计发现，现有语义输入每轨迹只聚合三次PCD/RGB观察；全帧源推理主要额外提供
+初始选择比例和逐帧存在性。新方案只在每轨迹三次均匀观察的帧并集处做候选判分，
+保留原学生完整的四观测历史上下文，不能直接删掉episode历史。
+C4无标签预清点：26970个全帧判分位置降到2324，候选-查询判分2968201降到293129；
+但仍需7419个不同的历史上下文图像。上述是工作量清点，尚不是实测加速倍数。
+初始选择比例只由实测稀疏帧产生，动作查询的存在性只由这些帧的logit做线性插值。
+全图候选框与原TrackID仍照常输出；不读取未观察帧的神经分数，不新增目标GT。
+GPU0已启动独立全新SQLite的完整C4稀疏冷流，各KD/图分支共享相同稀疏输入和问题。
+GPU1继续原全帧真实流；两者均为A100-SXM4-40GB，但并发共享主机/NAS且不清OS缓存，
+因此会同时报告实际源前向相位、总组件成本及这些限制，不把耗时差写成硬件无关常数。
+GPU2另跑固定问答干预：使用完全相同的全帧参考PCD/RGB、同一批实际新教师回答，
+只把源选择比例与存在性替换为稀疏推断，固定三种标签损失及400/最终检查点，
+单独测抽样本身的质量影响。该回放复用预付特征/问答，只用于归因，绝不冒充冷部署成本。
+三个真实流/回放都按当前及过去视频推进，所有方案参数已预登记，负结果同样保留。
+
+十六、反向固定数量：不能只展示对主方法有利的数量来源
+除固定FULL数量外，新增汇总原有蒸馏自身数量的反向CountMatched，不新增问答或模型训练。
+C4原始软标签：相同软KD数量下排序差+0.163076，原视频95%[0.047683,0.317509]；
+C4相同边界软标签：相同软KD数量下+0.200844，原视频95%[0.067972,0.389773]，
+原视频+种子敏感性区间[0.050740,0.410640]。C4的正排序信号并非只存在于FULL数量。
+C1则相反：原始软KD数量下-0.356063，区间跨0；同边界软KD数量下-0.825450，
+原视频95%[-1.805009,-0.026739]，原视频+种子敏感性95%[-2.131330,0.018000]。
+这说明C1的总收益更偏向误报/数量结构，不能把它包装成稳健语义排序改善。
+C4换成硬KD400步的数量，差约-0.006947、区间跨0；排序效果仍取决于具体数量条件。
+HOTA不可做简单相加分解，所有数量来源与负结果均已保留在three_seed_reverse_counts.json。
+该统计可只用Git中发布的父视频充分统计复现：
+  python scripts/a100_visual_classical_reverse_counts.py --published
+
+十七、外观关系的特异性验证（运行中）
+仅去掉图还不能证明外观相似性本身关键。新增固定教师/固定实际KD的两种控制：
+(1) 随机置换候选与图节点的对应，保留完整边权分布、教师锚及缺失部位掩码；
+(2) 所有人连接、总边精度与原图相同。
+每种都保留自然输出和相同FULL数量；C1数量投影仍保持每框至多一个互斥查询。
+三种子、原始/同边界软标签、C4/C1共12条件、48输出先完整封存，再隔离GT官评。
+原图通过新接口重算及CountSelf必须逐行重现原输出；不新增教师调用或蒸馏训练。
+当前仍等全部结果，不预先宣布视觉关系胜过任意平滑。
+
+十八、图关系特异性实证已经完成
+C4原始软标签：真实外观图69.018978，随机对应64.016992，完全图64.455732；
+相同FULL数量下随机对应64.229705、完全图68.365296。真实外观相对完全图的
+固定数量差+0.653681，原视频95%[0.375315,1.132592]，原视频+种子敏感性亦为正。
+C4同边界软标签：真实图69.229304，随机对应63.935420，完全图64.532468；
+相同FULL数量下随机对应64.222705、完全图68.520796。固定数量差+0.708507，
+原视频95%[0.430772,1.167514]，原视频+种子敏感性95%[0.388813,1.199932]。
+这说明C4不是任意平滑都有效：真实外观对应关系本身具有可复现的作用。
+但不能把相对故意打乱图的约5分差写成相对强KD的5分收益；后者仍只有约0.5分。
+C1则没有同等证据：同边界真实图40.001013，完全图40.325913，真实图未超过
+这个更简单的全局关系基线；固定数量差+0.303734，置信区间跨0。原始软标签结论相同。
+因此不能宣称外观小群体传播已经解决所有跨域场景，也不能逐域用GT挑选最好的图。
+所有12条件原图接口回归和CountSelf均逐行重现原始输出；本组未增加教师问答或KD训练。
+
+十九、基于教师证据的关系可靠性与协议保护（新假设，尚待结果）
+为应对上述C1反例，比较视觉图、等总边精度的全局图、独立节点三种模型。
+只用已请求教师反馈计算模型兼容性：同方差的图相关核，保留自由查询截距，使用
+高斯logit模型的受限证据。方差16来自原logit上限4的平方，源精度0.1及教师
+精度1+3|2p-1|沿用已有常数，不按GT网格搜索。softmax权重不是教师正确率的标定概率。
+模型评分不读已经用这些教师回答拟合过的KD输出；另做真正的留一教师回答诊断，
+该回答既不进入自己的模型权重，也不进入自己的预测。教师一致性仍不等于RMOT准确率。
+主方案预登记为BMA_GUARD。对原任务声明PRESUPPOSED且本轮尚无教师Yes的查询，
+关闭广泛负传播，保留局部教师锚以及未问节点的KD判断，不强行猜一个输出。
+CHECKLIST不使用这条保护。固定视觉图+同保护、无保护BMA、MAP、等权平均均作为控制。
+三种子、两种标签、两方向全部预测与数量对照先封存，再评估，负结果仍保留。
+这些是新的轻量经典算法检验，尚未形成正结论；真实冷流仍继续使用事先冻结的原图方案。
+本报告的GPU真实适配链路成本以给定的官方冻结候选为输入；候选检测/物理跟踪
+原始生成成本并未重新测量，不能称为从裸视频重跑检测器开始的整套系统成本。
+
+二十、自适应图权重与负传播保护：未形成新增核心贡献
+原始软标签C4：BMA_GUARD68.632364，原视觉图69.018978；差-0.386613，
+原视频95%[-0.596004,-0.154894]。同边界软标签亦低于视觉图0.370333。
+它虽然优于等权混合，却没有超过更简单的固定视觉图，不能作为新增涨点模块。
+C1同边界：BMA40.527567，等权平均40.541015，二者没有稳定差异；相对原图
+增量区间也跨0。其相对KD的较大均值仍主要和数量结构有关，反向KD数量差为负。
+固定视觉图增加保护规则：C4原始-0.010934、同边界+0.021451，区间均跨0；
+CHECKLIST全然不变。保护规则没有证据成为独立核心贡献，不强行保留复杂度。
+教师留一诊断也符合边界：C4视觉图CE0.541008，BMA0.591697；C1的BMA
+CE0.207343比视觉0.212076略好，却没有因此稳定超过简单等权RMOT。
+原图及CountSelf回归全通过；全部结果与代码保留，最终主实验仍用原先冻结的视觉图。
+
+二十一、独立单方法冷启动验证已启动
+为把共享前缀组件账本进一步变成真正单方法进程收据，预登记在同一物理GPU3上
+顺序运行CLIP_KD与CLIP_COHORT。每次新进程、新模型加载、新SQLite、3508次
+实际Qwen预算，每视频只拟合一个CLIP类型的头，只输出这一种方法。
+两次都采用同样三观察感知、同样教师概率边界[.02,.98]与seed0；不是把另外两个头
+的训练开销先做掉，再用逻辑账本相减。方法实际耗时直接取Popen到工作进程退出，
+GT评估在进程外单独执行。将核对两者的原始特征、初始先验、提问对象与概率是否相同。
+固定顺序未反向平衡，不清OS缓存，主机与NAS仍共享，结果只代表本机实测，不宣称
+任意硬件、所有冷缓存状态或所有时间预算下最优。原全帧/抽样多臂实验继续，均不重跑旧队列。
+
+二十二、全新真实抽样C4流：首个完整物理结果
+45/45视频、466查询完整封存与官评，学生/教师均真实重载；无历史神经特征或研究
+问答输入，GT打开0，3508条新问答、SQLite缓存命中0，分为456个实际批次。
+new_calls是问答条数，不等于torch.forward批次数；总相位墙钟与backend前向时间另记。
+原始软KD68.604187，原始视觉图69.241305，增量+0.637118，
+13原视频描述性95%[0.214504,1.290955]。
+更强的同边界软KD69.050103，同边界视觉图69.279862，增量+0.229759，
+13原视频95%[-0.248615,0.835756]，不能声称显著大幅超过最强蒸馏。
+400/最终简单预测均值CLIP_MEAN69.051978，相同均值加图69.316260；
+增量+0.264282，区间亦跨0。全部22方法已保留，不挑选单张图或只展示弱基线。
+实际相位：学生加载317.858秒、教师加载546.156秒、稀疏学生前向/初始头1858.388秒、
+RGB及调度357.008秒、教师服务含I/O397.153秒、教师末次冻结核验14.314秒。
+教师纯backend forward为82.488秒，明显不能替代含图像读取和准备的397.153秒服务墙钟。
+CLIP头45次前缀拟合及保存共536.445秒。
+组件账本：同边界KD4088.166秒，视觉图4088.766秒，额外图/输出差约0.600秒。
+这是同一真实前缀与同一实际头的组件对照，不是两次独立冷启动；
+整个三种标签/22输出的实验工作进程实际5205.535秒，不能冒充单方法的完整实测时间。
+独立单方法两进程对照已在GPU3运行，将直接报告外部进程墙钟而不靠组件相减。
+全帧版本及固定问答干预尚在运行，当前不能宣称已经得到整套抽样相对全帧的实测加速比。
+
+
+二十三、全C4抽样感知的新鲜固定数量审计，以及单独冷启动蒸馏基线
+
+所有29个固定数量预测均封存后官评，数量来自方法自身，不读取GT数量。
+7个CountSelf投影的逐查询预测字节变化全部为0。
+在CLIP_COHORT自己的数量下，图对CLIP_KD为+0.696282 HOTA，
+13原视频描述性95%区间[0.358862,1.261220]。
+在CLIP_KD自己的数量下，图对CLIP_KD仅+0.033803，区间[-0.104571,0.197259]。
+相对CLIP_MEAN，图在自己的数量下+0.385476，但在MEAN数量下为-0.014849，均不应省略。
+RAW在图数量下对KD为+0.684504，区间[0.341433,1.258906]；
+反向固定KD数量后仅+0.097971，区间[-0.024930,0.266782]。
+因此新鲜抽样结果支持“数量与排序共同作用”，不支持与数量无关的普遍排序提升。
+双向CountMatched是不同干预，不能将差值直接相加当作HOTA可加分解。
+
+独立CLIP_KD进程现已完成45视频/466查询，HOTA=69.0501033374；
+同一物理GPU3上，源工作进程外部Popen-to-exit实测3721.308634秒（62.021811分钟）。
+真实Qwen问题3508、批次456、缓存命中0；教师权重未修改。
+仅拟合CLIP类型头、每视频重拟合，生成一种方法输出；GT官评不计入部署时间。
+这与此前22方法共同执行的组件分摊不是同一种时间测量。
+CLIP_COHORT正在同GPU3独立重载模型、重建私有SQLite并完整运行。
+两进程顺序固定KD在前，未反向平衡；共享主机/NAS和OS缓存均保留。
+
+收据文字修正：已启动的KD父进程仍携带“共享多臂”的旧literal标志，
+但原始源收据已正确记录独立加载、单方法、单头类型。
+现只将两处shared_physical_work_not_independent_cold_arms从true改为false，
+原JSON备份于本地metadata_audit；预测、官评分数、墙钟和工作进程收据均未改变。
+精确改动见single_cold_metadata_audit.json。
+
+
+二十四、完整45视频的全帧真实前向、抽样感知以及固定问答干预均已完成
+
+完整全帧分支实际重载学生和冻结Qwen，3508新问题、456批次、缓存命中0；
+一轮无中断，GT读取0，无预付神经特征/问答读取。全帧官评：
+RAW_KD=68.286446，RAW_COHORT=68.922275，增量+0.635829，
+13原视频描述性95%区间[0.027931,1.372473]；
+对同头、保留本地教师锚点的NO_GRAPH为+0.626503，区间[0.023214,1.350934]。
+CLIP_KD=68.655443，CLIP_COHORT=69.103202，增量+0.447760，区间[-0.186160,1.168807]；
+CLIP_MEAN=68.951219，CLIP_MEAN_COHORT=69.114966，差+0.163747，区间跨0。
+CLIP_STRONG_PRIOR=69.160391，略高于弱先验图；不能说弱先验旋钮普遍必要。
+CLIP在此表示教师概率裁剪到[0.02,0.98]，不代表新视觉编码器或新的时序教师视角。
+
+真实学生前向与初始头：全帧7686.826064秒，关键观察1858.388176秒，
+约4.14倍前向速度比，实际节约约75.82%；运行在不同的同型A100 GPU0/1，
+主机/NAS并发、OS缓存保留，不能视为跨硬件常数。
+神经decoder帧位置26970→2324，候选×查询位置2968201→293129；
+抽样仍需原4观察上下文，必要不同上下文图像7419，2324不是backbone总图像数。
+全帧22方法共同实验外部工作进程11067.513818秒，抽样22方法5205.535485秒。
+这两个是多方法实验总账，不是单一方法部署时间。
+共享前缀+自身分支分摊：全帧CLIP_KD=9951.319078秒、CLIP_COHORT=9952.049603秒；
+抽样CLIP_KD=4088.165936秒、CLIP_COHORT=4088.765627秒。
+组件分摊与后续独立单方法Popen-to-exit实测分别报告，绝不互换。
+这些时间均以已提供的冻结候选框和ID为前提，不含其上游检测/物理跟踪生成。
+
+固定问答干预：45视频、全部3508参考回答，实际完整/关键观察PCD最大差=0、RGB最大差=0。
+使用相同参考特征和真实教师回答，只稀疏化源先验及存在门控；不是冷启动成本测量。
+RAW_KD从68.286446变68.293291（+0.006846，区间[-0.334544,0.302363]）；
+RAW_COHORT从68.922275变68.948368（+0.026094，区间[-0.183630,0.207917]）；
+CLIP_KD从68.655443变68.572175（-0.083268，区间[-0.358072,0.140362]）；
+CLIP_COHORT从69.103202变69.172730（+0.069527，区间[-0.009518,0.177403]）。
+因此当前未观测到明确精度损失，但区间跨0不等于已证明严格等效或非劣。
+真正新鲜抽样流还改变选题，不能将它与全帧流的全部分差归为采样或视觉图。
+图的因果精度比较只在各自条件内部、同问答同头下解释。
+冷启动学生+教师依然在数百秒量级，尚未解决600秒冷启动总预算问题。
+
+
+二十五、全帧完整C4双向固定数量对照完成
+
+29个投影方法和7个CountSelf检查全部完成，CountSelf逐查询预测字节变化均为0。
+CLIP图对KD在图自己的数量下+0.836146 HOTA，13原视频95%区间[0.489106,1.378081]；
+在KD自己的数量下+0.231133，区间[0.071189,0.484149]。
+RAW图对KD在图数量下+0.801587，区间[0.496866,1.336528]；
+在KD数量下+0.110261，原视频区间[0.033999,0.229140]，但45剪辑区间跨0。
+对更强CLIP_MEAN，在图数量下+0.597623，区间[0.322674,0.902726]；
+在MEAN数量下仅+0.051793，区间[-0.078230,0.226102]。
+所以完整源输入下存在小幅排序证据，但不能扩大为对所有基线/所有感知模式的稳定纯排序获益。
+关键观察版的反向固定KD数量效应接近0，与全帧结果并列保留。
+以上都是隔离的因果诊断，不增加部署教师预算，也不计入部署方法耗时。
+
+
+二十六、两个完整独立冷启动进程最终封存，输入与教师反馈完全一致
+
+同一物理GPU3顺序运行CLIP_KD、CLIP_COHORT。两进程各自重载源模型与Qwen、
+各自私有新SQLite、各3508真实新问题/456批次/0缓存，一轮无中断，目标GT读取0。
+只拟合CLIP这一类型的头，每视频拟合一次前缀，共45次；每进程只生成一个方法输出。
+CLIP_KD：69.0501033374 HOTA，Popen-to-exit=3721.308634秒（62.021811分钟）。
+CLIP_COHORT：69.2798618466 HOTA，Popen-to-exit=3453.921498秒（57.565358分钟）。
+精度差+0.229759，13原视频区间[-0.248615,0.835756]；不能写成显著全面胜过强KD。
+源PCD逐位相同、源先验逐位相同、问题列表完全相同，原始教师概率最大差=0。
+真实时间覆盖工作进程加载、前向、教师、拟合、序列化和退出，官评在进程外另计。
+图这次更快约267秒，但顺序没有反向平衡、OS缓存和共享主机/NAS并发仍存在；
+不能把两次外部时差都归为图加速。相同共享前缀下图额外后处理约0.6秒才是对应组件差。
+旧父进程共享多臂标志及旧master“一头”文字均做了透明描述性修正，
+原JSON在本地metadata_audit备份，指标/预测/成本未改。公开audit列出精确改动。
+
+二十七、本轮验收结果与代码发布范围
+
+保留：充分训练的真实KD基线、固定教师锚定视觉图、关键观察的执行路径。
+视觉图在C4原始软KD三种子及两种真实全C4执行中均有正增量，
+C4真实几何相对同精度完全图的固定数量控制也有贡献，达到可复现的模块证据要求。
+同概率裁剪及均值对照更强，图的独立总增量较小且多处区间跨0；C1证据更弱。
+关键观察学生前向约4.14倍提速，固定问答PCD/RGB无差异，质量未见明确损失，
+但不宣称严格非劣、未测上游检测总成本、600秒冷启动已解决或所有预算最优。
+动态FIELD、HMM、自适应BMA/保护等未获明确独立收益，不列为最终有效创新。
+当前数据均属于开发集，没有独立未见域；不因用户没有新划分而伪造盲测结论。
+
+公开轻量统计已复核127个效应与原视频聚类区间，最大绝对误差2.842170943040401e-14。
+该复核只需Git中的父视频充分统计，不需要原图、GT、原始教师回答、checkpoint或GPU。
+完整结果、负结果、因果对照、实际成本、复现步骤和新增图表均已整理。
+原始问答、预测、数组、状态保留本地a100_runs；NAS大资产/历史保持只读，不进入Git。
+完整解读以本轮最终报告为准，不将历史试错时的阶段性猜测当作最终结论。

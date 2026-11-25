@@ -1,0 +1,88 @@
+{
+  "status": "PASS_FROZEN_CONTROL_NEURAL_AND_OUTPUT_IDENTITY",
+  "settings": {
+    "C2": {
+      "LEARNED": {
+        "videos": 4,
+        "paid_requests_per_cohort": 20955,
+        "common_paid_UIDs": 19780,
+        "ordered_paid_UID_equal_videos": 3,
+        "sequence_equal_videos": 3,
+        "solver_bit_equal_videos": 3,
+        "actor_bit_equal_videos": 0,
+        "normalizer_equal_videos": 4,
+        "sampling_generator_equal_videos": 4,
+        "dense_score_bit_equal_videos": 3,
+        "changed_mask_entries": 257467,
+        "baseline_changed_videos": 4,
+        "selected_UID_symmetric_difference": 2350,
+        "solver_maximum_absolute_difference": 0.6491511464118958,
+        "dense_score_maximum_absolute_difference": 12.9101469183124
+      },
+      "FROZEN": {
+        "videos": 4,
+        "paid_requests_per_cohort": 20955,
+        "common_paid_UIDs": 20955,
+        "ordered_paid_UID_equal_videos": 4,
+        "sequence_equal_videos": 4,
+        "solver_bit_equal_videos": 4,
+        "actor_bit_equal_videos": 4,
+        "normalizer_equal_videos": 4,
+        "sampling_generator_equal_videos": 4,
+        "dense_score_bit_equal_videos": 4,
+        "changed_mask_entries": 0,
+        "baseline_changed_videos": 4,
+        "selected_UID_symmetric_difference": 0,
+        "solver_maximum_absolute_difference": 0.0,
+        "dense_score_maximum_absolute_difference": 0.0
+      }
+    },
+    "C5": {
+      "LEARNED": {
+        "videos": 4,
+        "paid_requests_per_cohort": 20955,
+        "common_paid_UIDs": 20479,
+        "ordered_paid_UID_equal_videos": 3,
+        "sequence_equal_videos": 3,
+        "solver_bit_equal_videos": 3,
+        "actor_bit_equal_videos": 0,
+        "normalizer_equal_videos": 4,
+        "sampling_generator_equal_videos": 4,
+        "dense_score_bit_equal_videos": 3,
+        "changed_mask_entries": 183957,
+        "baseline_changed_videos": 4,
+        "selected_UID_symmetric_difference": 952,
+        "solver_maximum_absolute_difference": 0.4311743229627609,
+        "dense_score_maximum_absolute_difference": 10.419898125368373
+      },
+      "FROZEN": {
+        "videos": 4,
+        "paid_requests_per_cohort": 20955,
+        "common_paid_UIDs": 20955,
+        "ordered_paid_UID_equal_videos": 4,
+        "sequence_equal_videos": 4,
+        "solver_bit_equal_videos": 4,
+        "actor_bit_equal_videos": 4,
+        "normalizer_equal_videos": 4,
+        "sampling_generator_equal_videos": 4,
+        "dense_score_bit_equal_videos": 4,
+        "changed_mask_entries": 0,
+        "baseline_changed_videos": 4,
+        "selected_UID_symmetric_difference": 0,
+        "solver_maximum_absolute_difference": 0.0,
+        "dense_score_maximum_absolute_difference": 0.0
+      }
+    }
+  },
+  "scope": "All4 completed videos in each affected C2/C5, both observers, before any study GT/HOTA.",
+  "only_common_already_requested_teacher_replies_compared": true,
+  "reward_and_baseline_are_diagnostics_not_frozen_neural_parameters": true,
+  "neither_mask_differences_nor_parameter_updates_imply_better_semantics": true,
+  "no_model_forward_fit_or_new_teacher_or_task_prediction": true,
+  "manual_GT_open_attempts": 0,
+  "local_details": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/comparable_frozen_control_check_20261124/details.json",
+  "local_details_sha256": "0c0620c7f188ab487ff9e3d548e777b5de93e55f63b3d6973de6ade2250b7b25",
+  "source_sha256": "8fe489a39525a539a6ae932befe571446c7fe88a6fa59e59cfd434148661becb",
+  "all_registered_study_sources_primaries_budgets_and_predictions_preserved": true,
+  "goal_status": "ACTIVE"
+}

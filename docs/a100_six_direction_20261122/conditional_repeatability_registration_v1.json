@@ -1,0 +1,95 @@
+{
+  "study": "GT_FREE_CONTROLLED_FULL_REPEATABILITY_DIAGNOSIS",
+  "registered_unix": 1795404588.9235365,
+  "motivation": "All six seed0 ordinary dense replicas exact, FULL same-seed refits differ3.16%-19.79% of raw decisions; all own teacher risks pass. Isolate execution repeatability before interpreting model factors.",
+  "evidence": {
+    "C1": {
+      "candidate_query_rows": 3588445,
+      "FULL_refit_changed_decisions": 137859,
+      "FULL_refit_changed_fraction": 0.03841747609340536,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    },
+    "C2": {
+      "candidate_query_rows": 2425382,
+      "FULL_refit_changed_decisions": 480084,
+      "FULL_refit_changed_fraction": 0.19794160260115726,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    },
+    "C3": {
+      "candidate_query_rows": 2968201,
+      "FULL_refit_changed_decisions": 248983,
+      "FULL_refit_changed_fraction": 0.0838834701558284,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    },
+    "C4": {
+      "candidate_query_rows": 2968201,
+      "FULL_refit_changed_decisions": 296047,
+      "FULL_refit_changed_fraction": 0.09973953920236533,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    },
+    "C5": {
+      "candidate_query_rows": 2425382,
+      "FULL_refit_changed_decisions": 433123,
+      "FULL_refit_changed_fraction": 0.1785792918393886,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    },
+    "C6": {
+      "candidate_query_rows": 3588445,
+      "FULL_refit_changed_decisions": 113410,
+      "FULL_refit_changed_fraction": 0.031604218540342684,
+      "FULL_own_precision_changed_decisions": 0,
+      "all_eight_dense_ordinary_outputs_exact_probability_replica": true
+    }
+  },
+  "first_divergence_receipt": "supervisor/logit_replica_first_divergence_20261123.json",
+  "source_sha256": {
+    "scripts/a100_conditional_repeatability.py": "75a925495110299f01477a481aaf9c3f8d9da79ab8e3463b2f396913db81d01a",
+    "scripts/a100_conditional_standard_kd.py": "59706e7e0a7894ea90ee33c3df404575f534a40aeabf45d59dc86f1e2f57317f",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353"
+  },
+  "case_selection": "C2 first video0005/seed0 selected only from completed GT-free drift, no current HOTA read",
+  "cases": [
+    "DEFAULT_0",
+    "DEFAULT_1",
+    "DETERMINISTIC_0",
+    "DETERMINISTIC_1"
+  ],
+  "same_physical_GPU_all_cases": true,
+  "only_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "optimization": "Original FULL/fit helper; no changed target/optimizer/stopping rule; original adequate risk gate required",
+  "controlled_change": "torch.use_deterministic_algorithms(False versus True,warn_only=False)",
+  "fixed_common_environment": {
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+  },
+  "comparison_not_assumed_to_reconstruct_the_old_unconfigured_CUBLAS_environment": true,
+  "kernel_probe": "32 identical fixed-logit loss+gradient repeats for FULL point term alone and point+profile on actual teacher examples; no model fit or random data replacing answers",
+  "prediction_probe": "Up to8192 fixed evenly spaced actual dense candidate-query rows; compare unlabelled logits and raw decisions, no GT quality inference",
+  "prior_fits_or_outputs_not_overwritten": true,
+  "no_live_scientific_sources_modified": true,
+  "unsupported_deterministic_operation": "Fail and preserve actionable cause; no warning-only fallback or silent operation replacement",
+  "scheduling": "Wait standardKD all18 GPU conditions complete/active empty; preflight freeGPU0..3 and retain same GPU, recheck between cases",
+  "no_new_teacher_or_backbone_calls": true,
+  "no_official_predictions_or_HOTA": true,
+  "no_target_GT_read": true,
+  "not_a_fourth_innovation_or_primary_promotion": true,
+  "not_a_cold_deployment_benchmark": true,
+  "scope_limit": "One real first prefix cannot establish global repeatability or explain all historical drift",
+  "official_PyTorch26_references": [
+    "https://docs.pytorch.org/docs/2.6/generated/torch.use_deterministic_algorithms.html"
+  ],
+  "goal_status": "ACTIVE"
+}

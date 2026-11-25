@@ -1,0 +1,90 @@
+{
+  "protocol": "OFFLINE_GT_DIAGNOSTIC_ONLY",
+  "target_GT_read_after_all_four425_predictions_sealed": true,
+  "target_GT_used_in_training": false,
+  "target_GT_used_for_threshold_or_checkpoint": false,
+  "methods": {
+    "MEAN_TEACHER_UDA": {
+      "exposures": {
+        "UNKNOWN_NO_GT_MATCH": 70820,
+        "UNKNOWN_GT_MATCH": 4140,
+        "POS_NO_GT_MATCH": 874,
+        "NEG_NO_GT_MATCH": 717,
+        "NEG_GT_MATCH": 42,
+        "POS_GT_MATCH": 84
+      },
+      "unique_candidate_state_events": {
+        "UNKNOWN_NO_GT_MATCH": 10191,
+        "UNKNOWN_GT_MATCH": 590,
+        "POS_NO_GT_MATCH": 139,
+        "NEG_NO_GT_MATCH": 136,
+        "NEG_GT_MATCH": 6,
+        "POS_GT_MATCH": 12
+      },
+      "groups": {
+        "Query-Present": {
+          "UNKNOWN_GT_MATCH": 4140,
+          "UNKNOWN_NO_GT_MATCH": 2745,
+          "NEG_NO_GT_MATCH": 36,
+          "POS_NO_GT_MATCH": 12,
+          "NEG_GT_MATCH": 42,
+          "POS_GT_MATCH": 84
+        },
+        "Query-Empty": {
+          "UNKNOWN_NO_GT_MATCH": 68075,
+          "POS_NO_GT_MATCH": 862,
+          "NEG_NO_GT_MATCH": 681
+        }
+      },
+      "pseudo_POS_precision": 0.08768267223382047,
+      "pseudo_NEG_correct_fraction": 0.9446640316205533,
+      "unknown_GT_positive_exposures": 4140,
+      "unknown_is_not_negative": true,
+      "unique_event_key": "video,query,frame,track,pseudo_state; state may change through training",
+      "precision_definition": "IoU>=0.5 to an official scored GT for this query; not one-to-one tracking precision",
+      "correlation_warning": "repeated training exposures are not independent samples; no frame-level confidence intervals",
+      "selection_warning": "quality of all historical training evidence, not GT-based selection of the final checkpoint"
+    },
+    "COMBINED_UDA": {
+      "exposures": {
+        "UNKNOWN_NO_GT_MATCH": 70955,
+        "UNKNOWN_GT_MATCH": 4140,
+        "POS_NO_GT_MATCH": 794,
+        "NEG_NO_GT_MATCH": 662,
+        "NEG_GT_MATCH": 42,
+        "POS_GT_MATCH": 84
+      },
+      "unique_candidate_state_events": {
+        "UNKNOWN_NO_GT_MATCH": 10193,
+        "UNKNOWN_GT_MATCH": 590,
+        "POS_NO_GT_MATCH": 139,
+        "NEG_NO_GT_MATCH": 138,
+        "NEG_GT_MATCH": 6,
+        "POS_GT_MATCH": 12
+      },
+      "groups": {
+        "Query-Present": {
+          "UNKNOWN_GT_MATCH": 4140,
+          "UNKNOWN_NO_GT_MATCH": 2749,
+          "NEG_NO_GT_MATCH": 36,
+          "POS_NO_GT_MATCH": 8,
+          "NEG_GT_MATCH": 42,
+          "POS_GT_MATCH": 84
+        },
+        "Query-Empty": {
+          "UNKNOWN_NO_GT_MATCH": 68206,
+          "POS_NO_GT_MATCH": 786,
+          "NEG_NO_GT_MATCH": 626
+        }
+      },
+      "pseudo_POS_precision": 0.09567198177676538,
+      "pseudo_NEG_correct_fraction": 0.9403409090909091,
+      "unknown_GT_positive_exposures": 4140,
+      "unknown_is_not_negative": true,
+      "unique_event_key": "video,query,frame,track,pseudo_state; state may change through training",
+      "precision_definition": "IoU>=0.5 to an official scored GT for this query; not one-to-one tracking precision",
+      "correlation_warning": "repeated training exposures are not independent samples; no frame-level confidence intervals",
+      "selection_warning": "quality of all historical training evidence, not GT-based selection of the final checkpoint"
+    }
+  }
+}

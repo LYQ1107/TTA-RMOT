@@ -1,0 +1,29 @@
+{
+  "status": "REGISTERED_FULL_SCOPE_POSTSEAL_FAILURE_DIAGNOSIS",
+  "numerical_parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "source_sha256": "554c2c64f02da580f0fc54c762436efd58794ea687758fd9af8e1a448de3ebcc",
+  "video_units": 148,
+  "parent_outputs": 4588,
+  "parent_statistics": 186,
+  "parent_effects": 180,
+  "diagnostics": [
+    "Official IoU50 TP/FP/FN for the fixed main and all ordinary controls.",
+    "Unique teacher questions, track/frame coverage, teacher-confirmed positives and pre-answer R/S errors.",
+    "After whole-study completion only: canonical nominal-anchor coverage and false-empty-query diagnosis.",
+    "Pixel-pair agreement of bootstrap, closed-round, and final content representations; projection may undo content learning."
+  ],
+  "same_frame_CLIP_anchor_canonical_labels_not_pure_teacher_semantic_accuracy": true,
+  "acquired_sample_risk_not_unbiased_population_calibration": true,
+  "pixel_MSE_not_semantic_quality_or_module_ablation": true,
+  "no_new_GPU_fits_teacher_predictions_seeds_or_parameter_search": true,
+  "no_GT_selected_masks_queries_or_checkpoints": true,
+  "fixed_primary_and_all_comparators_preserved": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE",
+  "source_schema_correction_before_execution": {
+    "previous_source_sha256": "b156d270cf3d191df16af7223792b0f2a6134720cd2e389867241e2989e13dab",
+    "reason": "Use actual LocalTeacher.close backend_unmodified and teacher_weight_sha256 fields. Original close performs full seal_frozen hashing before returning.",
+    "GT_reads": 0,
+    "numerical_main_change": false
+  }
+}

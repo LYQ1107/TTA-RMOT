@@ -1,0 +1,17 @@
+{
+  "protocol": "GT_INDEPENDENT_FIXED_SAMPLING_FROZEN_DIAGNOSIS",
+  "quantiles": [
+    0.1,
+    0.5,
+    0.9
+  ],
+  "total_videos": 25,
+  "total_frames": 75,
+  "real_expressions_per_frame": 17,
+  "extra_generic_control": "person",
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "uses_target_annotations": false,
+  "uses_gt_to_select_frames": false,
+  "selection": "round(q*(N_active_MOT_frames-1)), all candidates; source score references do NOT select frames",
+  "interpretation": "Internal feature availability does not imply source-free learnability; no cross-modal cosine between unaligned visual/RoBERTa spaces"
+}

@@ -1,0 +1,295 @@
+{
+  "status": "PASS_FIRST_BALANCER_C4_ORIGINAL_PARENT_REUSE_AND_LATE_CACHE_ISOLATION",
+  "pair": "C4",
+  "video": "v_G-vNjfx1GGc_c600",
+  "original_controller_session": 14883,
+  "balancer_session": 40479,
+  "balancer_pid": 629225,
+  "balancer_source_sha256": "4843bf5ffbcbbabbb1ddf938ce75b58466ee3f84a7777eb6ad3c3666b3f0fa50",
+  "original_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "original_numeric_source_pins_unchanged": true,
+  "used_registered_heads": [
+    {
+      "arm": "COARSE_UNIT_SOFT_LEARNED",
+      "producer_pid": 634885,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "8325471632798815e3210dc68b04862290828fb3a557afc597e0fcb08b54bd1d",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 0.00014647252911517694,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.00016699635194528106,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.0002175838157079113,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 0.00018778425144916344,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "COARSE_UNIT_SOFT_LEARNED_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "a5af7f4493e8a515f6e4ee576ed0a7734b06ff980541cbbfe2e76935a85c0578",
+          "score_sha256": "49f4c1d24d3aa4e98dc15660b430e41cdf8fc577220da0fc85748f6706834dee"
+        },
+        {
+          "method": "COARSE_UNIT_SOFT_LEARNED_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "a5af7f4493e8a515f6e4ee576ed0a7734b06ff980541cbbfe2e76935a85c0578",
+          "score_sha256": "8be292c1cb55d8f13fa7a0c7754188261f057568f390e678434cbf1882224f44"
+        }
+      ]
+    },
+    {
+      "arm": "LOGIT_KD_LEARNED",
+      "producer_pid": 634876,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "b38bccb17f0c3fa377e7f4163f234672ce3eaa7e85a3344b4e448874cfc322c5",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 1.7535091923448447e-13,
+          "risk_units": "squared native teacher logit (p clipped1e-6)",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 1.251509715319824e-12,
+          "risk_units": "squared native teacher logit (p clipped1e-6)",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 4.940248044110423e-13,
+          "risk_units": "squared native teacher logit (p clipped1e-6)",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 3.964735863233773e-11,
+          "risk_units": "squared native teacher logit (p clipped1e-6)",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "LOGIT_KD_LEARNED_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "ce4b05e02cdab112a3f6c1ed6f78ea742f549ca77164ff128cd091d9d19ebf40",
+          "score_sha256": "677e1f094f5f09ab927bfe4dc4f03f3ff539e4af3b9c27c63c9e895424ae2faa"
+        },
+        {
+          "method": "LOGIT_KD_LEARNED_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "ce4b05e02cdab112a3f6c1ed6f78ea742f549ca77164ff128cd091d9d19ebf40",
+          "score_sha256": "fca07a854920adff36a2cfc105f16937ff3cc5aed5c5744898e9af2086b0905f"
+        }
+      ]
+    },
+    {
+      "arm": "COARSE_UNIT_HARD_LEARNED",
+      "producer_pid": 635505,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "b136e608209cdb9e775e12d70666e84d89a2d1dce9c22601eea403e2cac48489",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 1.851229420340171e-05,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "COARSE_UNIT_HARD_LEARNED_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "07523cf5309fd04b37fe7fba827d993ab7db9e8c4f0c0a85c134f3a81fac8a36",
+          "score_sha256": "f73ad9e7cea5c2f8ffbdfb89adebc926c97ed40479319ed57088bd949acefced"
+        },
+        {
+          "method": "COARSE_UNIT_HARD_LEARNED_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "07523cf5309fd04b37fe7fba827d993ab7db9e8c4f0c0a85c134f3a81fac8a36",
+          "score_sha256": "a8d844ac3d787248f32aaacd13d67caee83d5622d16dc23600df38f9c35be740"
+        }
+      ]
+    },
+    {
+      "arm": "COARSE_CONF_SOFT_LEARNED",
+      "producer_pid": 635873,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "36369c7bf877a976464d2acf66f8d91ffc9a6d756d3db7e49d28388f50c9954c",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 9.132657813085143e-05,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "COARSE_CONF_SOFT_LEARNED_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "affcd47b8b4f8077e805cc092c7475a3a0fffb6dfeccde74f108970504501b8c",
+          "score_sha256": "df3dd428df4d352bf281298e0081f45ec24f25c8e68d30b5768aa975e1c369a8"
+        },
+        {
+          "method": "COARSE_CONF_SOFT_LEARNED_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "affcd47b8b4f8077e805cc092c7475a3a0fffb6dfeccde74f108970504501b8c",
+          "score_sha256": "09d12da42e546924e074e916dbb82c753278eaa50893733379bae5244397ebd2"
+        }
+      ]
+    },
+    {
+      "arm": "COARSE_CONF_HARD_LEARNED",
+      "producer_pid": 635925,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "b97cec754245e51253010f8aa56aa4aa7145fadc60d72a7fde89b910bc4b29ec",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 1.4017380984253546e-05,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "COARSE_CONF_HARD_LEARNED_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "9fffd749a3afb648fd1e23f18c7d227e5fad28ef37cb76b4593db0019e9e8b43",
+          "score_sha256": "53c568d2a106b97a515458639f2e15ad26ab8f2503a245af2b7c27f41dc296a0"
+        },
+        {
+          "method": "COARSE_CONF_HARD_LEARNED_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "9fffd749a3afb648fd1e23f18c7d227e5fad28ef37cb76b4593db0019e9e8b43",
+          "score_sha256": "53c568d2a106b97a515458639f2e15ad26ab8f2503a245af2b7c27f41dc296a0"
+        }
+      ]
+    },
+    {
+      "arm": "MARGINAL_KD_FROZEN",
+      "producer_pid": 636273,
+      "actual_helper_exit_code": 0,
+      "prepared_sha256": "ce363fb2b2a2607b44ca48c4b02a52d2dbd318787118b03cb23f7b5891b433da",
+      "original_parent_marker_binding_and_head_SHA_verified": true,
+      "fit_records": [
+        {
+          "excess_risk": 1.5636143371466904e-06,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 2.010140438546415e-06,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 1.8771185537336255e-06,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 1.8886620682667665e-06,
+          "risk_units": "proper teacher KL in nats",
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "original_outputs": [
+        {
+          "method": "MARGINAL_KD_FROZEN_FINAL",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "8cfb2f44a1120d0c6455ce7389507fedc13c1cbf889fd99dcd3f3779cb0ad637",
+          "score_sha256": "be1319136722c9ccafdee64375e81ff9e58ea7f2140678529a92290d1b44ab25"
+        },
+        {
+          "method": "MARGINAL_KD_FROZEN_MEAN",
+          "shape": [
+            7,
+            5770
+          ],
+          "mask_sha256": "8cfb2f44a1120d0c6455ce7389507fedc13c1cbf889fd99dcd3f3779cb0ad637",
+          "score_sha256": "7fa6102d7e19e8d1620338242ac7f79c6245e897df738fc7a9457609de78578d"
+        }
+      ]
+    }
+  ],
+  "unused_private_heads": [
+    {
+      "arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "producer_pid": 636198,
+      "wall_seconds": 149.33643807005137,
+      "prepared_sha256": "fbce1009b86fc2e53dd5d37698dc31d0ba957e1962af8bcccd7c5febad115005",
+      "not_installed": true,
+      "original_parent_did_not_consume_this_copy": true
+    }
+  ],
+  "used_heads": 6,
+  "used_fit_records": 15,
+  "original_output_variants": 12,
+  "GT_open_attempts": 0,
+  "new_quality_conditions": 0,
+  "new_neural_seeds": 0,
+  "not_a_new_HOTA_or_primary_deployment_speedup_result": true,
+  "goal_status": "ACTIVE"
+}

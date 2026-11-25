@@ -1,0 +1,63 @@
+{
+  "status": "RESUMED_REGISTERED_GPU_PREFIX_WITH_LOCAL_IO_CACHE_PREPARING",
+  "old_failure": {
+    "worker_signal": "SIGBUS",
+    "exit_code": -7,
+    "attempt_controller_wall_seconds": 9000.011892348994
+  },
+  "root_cause_not_uniquely_established": true,
+  "local_disk_quota_and_available_memory_do_not_explain_failure": true,
+  "fresh_NAS_reads_passed": true,
+  "complete_seed0_conditions_preserved": 6,
+  "seed17_completed_video_prefixes_preserved": {
+    "C1": 18,
+    "C2": 3,
+    "C3": 27,
+    "C4": 13
+  },
+  "verified_new_progress": "C1/seed17 completed20 after cached resume, before current unified GT.",
+  "original_registered_sources_all_unchanged": {
+    "scripts/a100_conditional_six_setting.py": "5d1ddd2b7791fa5931fa0ac57750cafed39903580c1fdf644e4746cad1fe48cb",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "flex_uda/active/color_cohort.py": "e16d8a9e71b6fe387e09bca9400d00447e063e3abdce3fae5751ce39b4af946b",
+    "scripts/a100_six_direction.py": "dbe6d2cc6143bfef5d0aaee552b2cee35eeec9b58ebde3ecdf6db298d51f5bc7",
+    "docs/a100_six_direction_20261122/conditional_observation_hypothesis.json": "1a81af3beaac1f05c8f08cbdfab4762dfb07fc863d12a73c61d5371f211b25f7",
+    "scripts/a100_conditional_coarse_baseline.py": "0cc1c000e1954c8c8d03ef503fe2121ee2d9e965b311c9a373bd28bd33773fd2",
+    "docs/a100_six_direction_20261122/conditional_coarse_hypothesis.json": "1784081a2913197a9ac144f0b2c8db6a12e6eb320dc966d2cdca88c762d5a628",
+    "scripts/a100_conditional_shared_control.py": "e652d4a442f6ee01ccbc518a9cf82314c0c21a1f3a00372fac152772ff47b5eb",
+    "scripts/a100_conditional_logit_precision.py": "b2af47e6ef5ea22a3dc50bcc805416598291d9141b5558a2e60b1f5bf76513fa"
+  },
+  "runtime_sources": {
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353",
+    "scripts/a100_observation_cached_execute.py": "8b47016d002820dca60aef9e5804cc9ec321e2c7a455e400625bec6537305a89"
+  },
+  "cache": {
+    "files": 592,
+    "setting_videos": 148,
+    "bytes": 27944801906,
+    "status": "PREPARING",
+    "per_file_source_hash_vs_independent_local_hash": true,
+    "local_files_read_only_after_verification": true,
+    "per_video_four_verified_files_gate": true
+  },
+  "no_images_or_ckpt_or_GT_copied": true,
+  "no_new_teacher_or_learning_recipe_changes": true,
+  "original_NAS_results_not_written": true,
+  "only_unsealed_current_arrays_archived_locally": true,
+  "new_controller_pids": {
+    "primary": 2461922,
+    "coarse": 2461923,
+    "generic": 2461924,
+    "precision": 2461925
+  },
+  "sole_observer": {
+    "session": 45577,
+    "pid": 2462047
+  },
+  "recovery_preparation_not_single_method_cold_cost": true,
+  "goal_status": "ACTIVE"
+}

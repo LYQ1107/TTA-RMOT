@@ -1,0 +1,111 @@
+{
+  "status": "PASS_CONDITIONAL_SKILL_MATH_AND_UNLABELLED_PAIRED_PROBE_AUDIT",
+  "reward_contract": {
+    "LEARN_NO_ONLY": {
+      "reward": 0.0,
+      "conditional_skill_before": 0.0,
+      "conditional_skill_after": 0.0,
+      "teacher_conditional_information": 0.0,
+      "best_constant_CE": 0.0,
+      "teacher_entropy_floor": 0.0,
+      "reward_basis": "GAIN_IN_CONDITIONAL_TEACHER_SKILL",
+      "pure_query_constant_predictor_positive_skill_is_impossible": true,
+      "not_a_claim_of_true_RMOT_semantic_gain": true
+    },
+    "LEARN_OPTIMAL_CONSTANT_ONLY": {
+      "reward": 0.0,
+      "conditional_skill_before": 0.0,
+      "conditional_skill_after": 0.0,
+      "teacher_conditional_information": 0.6931471805599453,
+      "best_constant_CE": 0.6931471805599453,
+      "teacher_entropy_floor": 0.0,
+      "reward_basis": "GAIN_IN_CONDITIONAL_TEACHER_SKILL",
+      "pure_query_constant_predictor_positive_skill_is_impossible": true,
+      "not_a_claim_of_true_RMOT_semantic_gain": true
+    },
+    "FROZEN_ALREADY_DISCRIMINATIVE": {
+      "reward": 0.0,
+      "conditional_skill_before": 0.5931471805599453,
+      "conditional_skill_after": 0.5931471805599453,
+      "teacher_conditional_information": 0.6931471805599453,
+      "best_constant_CE": 0.6931471805599453,
+      "teacher_entropy_floor": 0.0,
+      "reward_basis": "GAIN_IN_CONDITIONAL_TEACHER_SKILL",
+      "pure_query_constant_predictor_positive_skill_is_impossible": true,
+      "not_a_claim_of_true_RMOT_semantic_gain": true
+    },
+    "LEARN_ACTUAL_TEACHER_DISCRIMINATION": {
+      "reward": 0.5935615841171349,
+      "conditional_skill_before": 0.0,
+      "conditional_skill_after": 0.6831471805599453,
+      "teacher_conditional_information": 0.6931471805599453,
+      "best_constant_CE": 0.6931471805599453,
+      "teacher_entropy_floor": 0.0,
+      "reward_basis": "GAIN_IN_CONDITIONAL_TEACHER_SKILL",
+      "pure_query_constant_predictor_positive_skill_is_impossible": true,
+      "not_a_claim_of_true_RMOT_semantic_gain": true
+    }
+  },
+  "settings": {
+    "C1": {
+      "videos": 25,
+      "teacher_budget": 3047,
+      "paid_probe_bundles": 300,
+      "min_fresh_probe_rounds": 0,
+      "videos_with_all_three_paired_rounds": 21,
+      "all_queries_keep_first_round_training": true
+    },
+    "C2": {
+      "videos": 4,
+      "teacher_budget": 20955,
+      "paid_probe_bundles": 2096,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 4,
+      "all_queries_keep_first_round_training": true
+    },
+    "C3": {
+      "videos": 45,
+      "teacher_budget": 3508,
+      "paid_probe_bundles": 388,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 45,
+      "all_queries_keep_first_round_training": true
+    },
+    "C4": {
+      "videos": 45,
+      "teacher_budget": 3508,
+      "paid_probe_bundles": 388,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 45,
+      "all_queries_keep_first_round_training": true
+    },
+    "C5": {
+      "videos": 4,
+      "teacher_budget": 20955,
+      "paid_probe_bundles": 2096,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 4,
+      "all_queries_keep_first_round_training": true
+    },
+    "C6": {
+      "videos": 25,
+      "teacher_budget": 3046,
+      "paid_probe_bundles": 298,
+      "min_fresh_probe_rounds": 0,
+      "videos_with_all_three_paired_rounds": 21,
+      "all_queries_keep_first_round_training": true
+    }
+  },
+  "real_teacher_answers_read": 0,
+  "GT_open_attempts": 0,
+  "model_fits": 0,
+  "semantic_or_HOTA_improvement_proven": false,
+  "classical_support": "Proper log scoring: best query/view constant risk H(mean Q); conditional skill bounded by H(mean Q)-mean H(Q). Fixed probe null cannot manufacture frozen-solver progress.",
+  "null_is_fitted_to_paid_teacher_probe_only_for_feedback_not_deployed": true,
+  "future_actor_optimization": "Reward magnitude must matter; use an explicitly registered SGD policy update rather than Adam amplifying tiny teacher-probability differences.",
+  "source_sha256": {
+    "scripts/a100_rsi_discrimination_audit.py": "a2172bf63071a9ec3c075f653ad38374c30015beed9aa8f7a34a08a32d992072",
+    "flex_uda/active/rsi_discrimination_feedback.py": "6cb4012eead87cdf6af36b94a793b036041b96bed99572a8343c52eefcf2ae00"
+  },
+  "goal_status": "ACTIVE"
+}

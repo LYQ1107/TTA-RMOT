@@ -1,0 +1,37 @@
+{
+  "status": "POST_HOC_GT_FREE_FINAL_VIDEO_WEIGHT_CHECK",
+  "scope": "end-of-video values from all 45 sealed SportsMOT videos, not every intermediate round",
+  "pair": "C3",
+  "source_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/active/C3",
+  "source_fields": ["belief.npz:slope", "belief.npz:temperature", "belief.npz:bias"],
+  "methods": [
+    {
+      "method": "FULL",
+      "videos": 45,
+      "w_first": 1.0,
+      "w_last": 1.0,
+      "w_min": 1.0,
+      "w_max": 1.0,
+      "final_w_zero_videos": 0,
+      "final_w_one_videos": 45,
+      "final_temperature": 0.6802519257592233,
+      "final_bias": 0.39962283711888397
+    },
+    {
+      "method": "MINUS_SLOW",
+      "videos": 45,
+      "w_first": 1.0,
+      "w_last": 0.5464730889086082,
+      "w_min": 0.012321809302432608,
+      "w_max": 1.0,
+      "final_w_zero_videos": 0,
+      "final_w_one_videos": 22,
+      "final_temperature": 2.6698733783902244,
+      "final_bias": 0.18572988684619396
+    }
+  ],
+  "GT_open_attempts": 0,
+  "model_teacher_or_GPU_called": false,
+  "inference_rules_or_parameters_changed": false,
+  "interpretation": "C3 FULL's absent HOTA improvement cannot be explained by final w being zero; this does not isolate all other LoRA downstream effects or prove that the prior never saturated."
+}

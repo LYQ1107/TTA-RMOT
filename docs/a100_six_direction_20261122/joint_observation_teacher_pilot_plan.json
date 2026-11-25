@@ -1,0 +1,63 @@
+{
+  "status": "REGISTERED_UNLABELLED_JOINT_OBSERVATION_PHYSICAL_TEACHER_PILOT",
+  "registered_unix": 1795429875.2724905,
+  "source_sha256": {
+    "scripts/a100_joint_observation_teacher_pilot.py": "fb3491d956a0641a74d462cc96bfde9d2566e3bb555ca4a516e7d80c3c81f69b",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "scripts/a100_anchor_observability.py": "13bfe389a8b8ce71532b4dbfebd5e1ea94166f9fb93c90a593d627e3087c5713",
+    "scripts/a100_observation_design_collect.py": "03dbab66815a7a4b107eb3a5449d7580d4c2056f8955ee32b11790868ac36d59",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
+    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2"
+  },
+  "cases_sha256": "a2cb22bb893e1670c36eef73cee9dd9cae611bf86f675ca1ae5aca9fadbcbffe",
+  "case_selection": "First video; first task query per available CROP/FRAME_BOX/CLIP route, then metadata-order fill to four; first two TrackIDs with three anchors; middle and last anchor",
+  "cases": 24,
+  "targets": [
+    "Dance",
+    "KITTI-V2",
+    "SportsMOT"
+  ],
+  "expected_new_model_examples": 144,
+  "expected_cache_hits": 0,
+  "allowed_physical_GPU": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "physical_GPU": 0,
+  "preflight_memory_MiB": {
+    "0": 0,
+    "1": 0,
+    "2": 3031,
+    "3": 3251
+  },
+  "future_ordinary_comparators": [
+    "adequate marginal KD",
+    "adequate unconstrained four-class joint KD"
+  ],
+  "controls": [
+    "JOINT_AB",
+    "JOINT_BA",
+    "INDEPENDENT_A",
+    "INDEPENDENT_B",
+    "SHARED_A",
+    "SHARED_B"
+  ],
+  "assumptions": [
+    "Teacher choices are not calibrated semantic posteriors",
+    "Common-support latent family excludes negative association and degenerate cases; all cases retained",
+    "Same TrackID is an observation group, not certified same physical identity"
+  ],
+  "purpose": "Test real new joint guidance observability, format adherence, order symmetry and common-support model compatibility; no HOTA, accuracy or new algorithm contribution claimed",
+  "no_GT_or_method_outputs_for_selection": true,
+  "no_training_or_quality_prediction": true,
+  "neural_seeds": [],
+  "goal_status": "ACTIVE",
+  "execution_attempt": 2,
+  "previous_failed_attempt": "joint_observation_teacher_pilot_failed_attempt01.json",
+  "receipt_only_repair": true
+}

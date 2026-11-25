@@ -1,0 +1,110 @@
+{
+  "status": "COMPLETE_OFFLINE_EXISTENCE_DIAGNOSIS",
+  "pairs": {
+    "C1": {
+      "counts": {
+        "queries": 425,
+        "query_present": 40,
+        "query_empty": 385,
+        "false_absent": 11,
+        "empty_rejected": 347,
+        "evidence_stop_false_absent": 10,
+        "tentative_output_false_absent": 1
+      },
+      "false_absent_queries": [
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-dressed-all-in-purple",
+          "presence_probability": 0.07425019113300613,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-dressed-all-in-white",
+          "presence_probability": 0.003252239448117845,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-with-blue-Tshirt-and-white-pants",
+          "presence_probability": 0.03187401271514372,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-with-blue-Tshirt-and-white-skirt",
+          "presence_probability": 0.0019751104008930514,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-with-white-Tshirt-and-blue-pants",
+          "presence_probability": 0.03236046517790665,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0014",
+          "query": "dancing-person-with-white-Tshirt-and-purple-skirt",
+          "presence_probability": 0.05145562784436201,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0058",
+          "query": "dancing-person-dressed-all-in-black",
+          "presence_probability": 0.07030418539859241,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0058",
+          "query": "dancing-person-with-black-shirt-and-blue-pants",
+          "presence_probability": 0.0012084924871231108,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0065",
+          "query": "dancing-person-dressed-all-in-green",
+          "presence_probability": 0.05889997785705478,
+          "evidence_stop": false
+        },
+        {
+          "video": "dancetrack0079",
+          "query": "dancing-person-dressed-all-in-black",
+          "presence_probability": 0.059930875246714074,
+          "evidence_stop": true
+        },
+        {
+          "video": "dancetrack0094",
+          "query": "dancing-person-dressed-all-in-black",
+          "presence_probability": 0.030339293557003516,
+          "evidence_stop": true
+        }
+      ]
+    },
+    "C4": {
+      "counts": {
+        "queries": 466,
+        "query_present": 466,
+        "query_empty": 0,
+        "false_absent": 0,
+        "empty_rejected": 0,
+        "evidence_stop_false_absent": 0,
+        "tentative_output_false_absent": 0
+      },
+      "false_absent_queries": []
+    },
+    "C5": {
+      "counts": {
+        "queries": 862,
+        "query_present": 862,
+        "query_empty": 0,
+        "false_absent": 0,
+        "empty_rejected": 0,
+        "evidence_stop_false_absent": 0,
+        "tentative_output_false_absent": 0
+      },
+      "false_absent_queries": []
+    }
+  },
+  "note": "PRESUPPOSED absence0 follows task guarantee; a non-rejected query can still output zero tracks",
+  "GT_used_only_offline": true
+}

@@ -1,0 +1,39 @@
+{
+  "protocol": "strong_prefix_channel_KD_control_v1",
+  "primary": "COVER seed0 COHORT",
+  "purpose": "Strengthen actual teacher distillation before accepting a classical-method claim, without using future target statistics or labels.",
+  "input": "raw frozen query-PCD plus identical parsed colour descriptors",
+  "normalization": "channel mean/std over all past+current image/query candidate features only; std floor1e-3 matches original batch KD",
+  "learner": "same D->64 GELU->1 residual MLP; restart same seed for each prefix, replay all past/current teacher examples",
+  "fit": "hard and soft; minimum4000, maximum16000, teacher CE minus entropy <=0.005; save actual400 and4000 baseline predictions too",
+  "classic_controls": [
+    "same converged soft head, no graph anchors",
+    "same original image-cohort graph",
+    "whitened-input graph geometry",
+    "stronger unary precision1",
+    "peer-consistency precision",
+    "uniform total-precision matched"
+  ],
+  "fixed_source_precision": 0.1,
+  "graph_strength": 1,
+  "policies": [
+    "COVER",
+    "UNIFORM"
+  ],
+  "first_seed": 0,
+  "future_repeats": "17/42 only after fixed final method is selected through mechanistic evidence, without target-GT hyperparameter grids",
+  "target_GT_in_adaptation": false,
+  "no_future_teacher_or_normalization": true,
+  "teacher_budget": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "new_teacher_calls": 0,
+  "evaluation": "all predictions sealed first, official metrics and parent-video intervals, quantity controls if useful",
+  "caveats": [
+    "fresh prefix fitting has additional real calibration cost",
+    "all data development",
+    "channel normalization need not improve target GT performance",
+    "no guaranteed success"
+  ]
+}

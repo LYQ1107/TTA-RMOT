@@ -1,0 +1,31 @@
+{
+  "status": "FAILED_QUERY_SCOPE_V2_FIRST_BATCH_ENUM_GATE",
+  "new_text_generation_requests": 8,
+  "actual_model_forward_calls": 457,
+  "valid_schema_outputs": 0,
+  "required_minimum_of8": 4,
+  "failure": "All free-form subject values violate fixed class enum; some term enums or literal spans also violate original strict schema.",
+  "costs": {
+    "worker_pid": 2361750,
+    "started_unix": 1795370219.2579684,
+    "physical_GPU": "0",
+    "phases": [
+      {
+        "phase": "teacher_load_and_integrity",
+        "seconds": 473.71011085109785
+      }
+    ],
+    "actual_new_generation_prompts": 8,
+    "actual_model_forward_calls": 457,
+    "worker_wall_seconds_to_checkpoint": 493.4687476719264,
+    "language_input_tokens": 8470,
+    "nonpadding_generated_tokens": 1946,
+    "padded_generation_token_slots": 3656,
+    "text_generation_wall_seconds_to_checkpoint": 19.242037649964914
+  },
+  "raw_outputs_logs_registration_and_source_preserved_local": true,
+  "no_target_GT_images_image_QA_or_quality_predictions": true,
+  "first_batch_gate_not_weakened": true,
+  "proposed_repair": "Generate under the same JSON enums/required fields and literal-span constraints; no model weight or teacher image prompt change.",
+  "goal_status": "ACTIVE"
+}

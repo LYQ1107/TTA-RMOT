@@ -1,0 +1,26 @@
+{
+  "status": "STATE_PRESERVING_TEMPORAL_INPUT_CANDIDATE_DESIGN",
+  "registered_unix": 1795347823.25615,
+  "source_sha256": {
+    "flex_uda/active/state_teacher_inputs.py": "15d585bb97256b5308daa78c856e65e1522b225726282fc512c16d03723a0ebe",
+    "tests/test_state_teacher_inputs.py": "7c22b3a04c85b0bd6affbaf3659e1251b5a30e67be4620324ff6776192bfa1e0"
+  },
+  "before_new_variant_GPU_queries": true,
+  "variants": [
+    "ORIGINAL",
+    "LAST",
+    "POSITION",
+    "TIME",
+    "STATE"
+  ],
+  "candidate_primary": "STATE",
+  "idea": "Task observation invariances must not erase distinctions needed by the query. Preserve current-time semantics and measured position/time channels without changing images or neural weights.",
+  "inputs": "Exactly the same causal CLIP crops; derived current/previous frame box geometry and source-frame offsets only. No GT, assumed FPS, extra image or network update.",
+  "immutable_controls": "ORIGINAL exact raster/prompt/key; LAST wording/current-time; POSITION only geometry; TIME only offsets; STATE both. Non-CLIP/fallback exactly original.",
+  "evidence_so_far": "3 CPU metadata/control tests; actual historical input audit only. No new-variant teacher or HOTA data.",
+  "hypothesis_scope": "May resolve reference-frame information discarded by crop-only CLIP. Geometry is not world motion; moving-camera or hidden-reference semantics remain possible failures.",
+  "future_test": "Paired same-question/image/frozen-model five-arm physical input test before whole-policy collection. If STATE used in adaptation, adequate ordinary KD gets identical STATE answers.",
+  "no_current_quality_or_teacher_protocol_changed": true,
+  "not_a_semantic_accuracy_or_HOTA_guarantee": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,142 @@
+{
+  "method": "PSR_GEOMETRY",
+  "development_only_gt_used": true,
+  "threshold_selection_from_gt": false,
+  "definition": "offline framewise max-cardinality IoU>=0.5 assignment; official HOTA remains authoritative",
+  "gt_definition": "nonzero mark and pedestrian class 1, following official MOT GT filtering",
+  "added_fp_definition": "newly selected rows unmatched after adaptation; existing-row matching status can also change",
+  "net_gt_recovery": 761,
+  "net_false_positive_change": -67328,
+  "gt_observations": 212541,
+  "candidate_retrievable_gt": 203906,
+  "baseline_matched_gt": 10337,
+  "adapted_matched_gt": 11098,
+  "recovered_gt": 8788,
+  "lost_gt": 8027,
+  "new_false_positive_rows": 18392,
+  "removed_false_positive_rows": 85728,
+  "baseline_false_positive_rows": 89367,
+  "adapted_false_positive_rows": 22039,
+  "ranking_valid_frames": 42657,
+  "ranking": {
+    "baseline": {
+      "1": 0.6147877253440233,
+      "3": 0.7719248892327167,
+      "5": 0.8803947769416508
+    },
+    "adapted": {
+      "1": 0.6158895374733337,
+      "3": 0.7764024661837448,
+      "5": 0.8800900203952458
+    },
+    "random_null": {
+      "1": 0.578298754863467,
+      "3": 0.7684882828959461,
+      "5": 0.8750817538347491
+    }
+  },
+  "source_auroc": 0.650203661381795,
+  "adapted_auroc": 0.7559711436712109,
+  "conditional_candidate_recall": 0.9593725445913965,
+  "baseline_conditional_gate_recall": 0.05069492805508421,
+  "adapted_conditional_gate_recall": 0.054427039910547016,
+  "query_presence": {
+    "query_present": {
+      "gt_observations": 212541,
+      "baseline_matched_gt": 10337,
+      "adapted_matched_gt": 11098,
+      "baseline_false_positive_rows": 1996,
+      "adapted_false_positive_rows": 1931,
+      "recovered_gt": 8788,
+      "lost_gt": 8027,
+      "new_false_positive_rows": 1635,
+      "removed_false_positive_rows": 1708,
+      "baseline_selected_rows": 12333,
+      "adapted_selected_rows": 13029,
+      "episodes": 40,
+      "baseline_GT_recall": 0.04863532212608391,
+      "baseline_nonempty_prediction_episodes": 32,
+      "baseline_nonempty_prediction_rate": 0.8,
+      "adapted_GT_recall": 0.052215807773558984,
+      "adapted_nonempty_prediction_episodes": 27,
+      "adapted_nonempty_prediction_rate": 0.675,
+      "net_false_positive_change": -65
+    },
+    "query_empty": {
+      "gt_observations": 0,
+      "baseline_matched_gt": 0,
+      "adapted_matched_gt": 0,
+      "baseline_false_positive_rows": 87371,
+      "adapted_false_positive_rows": 20108,
+      "recovered_gt": 0,
+      "lost_gt": 0,
+      "new_false_positive_rows": 16757,
+      "removed_false_positive_rows": 84020,
+      "baseline_selected_rows": 87371,
+      "adapted_selected_rows": 20108,
+      "episodes": 385,
+      "baseline_GT_recall": null,
+      "baseline_nonempty_prediction_episodes": 154,
+      "baseline_nonempty_prediction_rate": 0.4,
+      "adapted_GT_recall": null,
+      "adapted_nonempty_prediction_episodes": 88,
+      "adapted_nonempty_prediction_rate": 0.22857142857142856,
+      "net_false_positive_change": -67263
+    }
+  },
+  "query_present_episodes": 40,
+  "query_empty_episodes": 385,
+  "query_present_GT_recall": 0.052215807773558984,
+  "query_present_FP": 1931,
+  "query_empty_FP": 20108,
+  "query_empty_nonempty_prediction_rate": 0.22857142857142856,
+  "source_Recall_at_1_3_5": {
+    "1": 0.15799892839200189,
+    "3": 0.4474210017458549,
+    "5": 0.697658203365092
+  },
+  "adapted_Recall_at_1_3_5": {
+    "1": 0.156529986392115,
+    "3": 0.4531589955795571,
+    "5": 0.6948035058064027
+  },
+  "recall_at_k_definition": "macro over target-retrievable frames: fraction of IoU>=0.5-positive candidates in top K; distinct from any-hit TopK",
+  "query_group_definition": "episode has any official scored GT; offline only, never provided to model",
+  "identity_switch_diagnostic": {
+    "query_gt_visible_transitions": 193842,
+    "query_gt_visible_switches": 1575,
+    "eligible_update_frames_with_visible_switch": 335,
+    "limitation": "query-GT-observable transitions only; misses unannotated people/gaps, and counts possible evidence conflicts, not proven accepted optimizer steps; the online ID memory cannot independently detect swaps within max_gap=2"
+  },
+  "temporal_selection_quartiles": [
+    {
+      "candidates": 846651,
+      "baseline_selected": 27365,
+      "adapted_selected": 8783,
+      "baseline_negative_fraction": 0.9676785357839298,
+      "adapted_negative_fraction": 0.9896261859963551
+    },
+    {
+      "candidates": 927333,
+      "baseline_selected": 25599,
+      "adapted_selected": 9257,
+      "baseline_negative_fraction": 0.9723950296171925,
+      "adapted_negative_fraction": 0.9900176096396871
+    },
+    {
+      "candidates": 921757,
+      "baseline_selected": 26154,
+      "adapted_selected": 8542,
+      "baseline_negative_fraction": 0.9716259274407463,
+      "adapted_negative_fraction": 0.9907329155081003
+    },
+    {
+      "candidates": 892704,
+      "baseline_selected": 20586,
+      "adapted_selected": 6555,
+      "baseline_negative_fraction": 0.9769397247015809,
+      "adapted_negative_fraction": 0.9926571405527476
+    }
+  ],
+  "temporal_definition": "four equal active-frame-index parts per episode; candidate-weighted negative fractions, not a causal trend test"
+}

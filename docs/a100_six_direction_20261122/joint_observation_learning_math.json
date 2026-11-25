@@ -1,0 +1,47 @@
+{
+  "status": "PASS_CANDIDATE_JOINT_LEARNING_ALGEBRA_AND_NONZERO_ARCHITECTURE",
+  "source_sha256": {
+    "scripts/a100_joint_observation_learning_probe.py": "9d34dff2ebf8ec511323e1c34b6f2734430fff64b8e481fa81c9109efbdff1ef",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff"
+  },
+  "potential_recovery_error": 6.661338147750939e-16,
+  "marginal_error": 1.1102230246251565e-16,
+  "count_conditional_KL_chain_error": 1.6653345369377348e-16,
+  "shared_shift_and_coupling_cancellation_gradient": 5.551115123125783e-17,
+  "factorized_joint_KD_equals_marginal_KD_plus_target_information_error": 1.942890293094024e-16,
+  "permits_positive_and_negative_association": true,
+  "architecture_checks": [
+    {
+      "configuration": {},
+      "nonzero_weight_symmetry_error": 0.0,
+      "finite_gradient": true
+    },
+    {
+      "configuration": {
+        "shared": false
+      },
+      "nonzero_weight_symmetry_error": 0.0,
+      "finite_gradient": true
+    },
+    {
+      "configuration": {
+        "coupled": false
+      },
+      "nonzero_weight_symmetry_error": 0.0,
+      "finite_gradient": true
+    },
+    {
+      "configuration": {
+        "generic": true
+      },
+      "nonzero_weight_symmetry_error": 0.0,
+      "finite_gradient": true
+    }
+  ],
+  "neural_initialization_seed": 0,
+  "no_empirical_RMOT_training_or_GPU_teacher_GT_HOTA": true,
+  "not_a_new_classical_theorem": true,
+  "potentials_not_ground_truth_identity_or_existence": true,
+  "candidate_not_accepted": true,
+  "goal_status": "ACTIVE"
+}

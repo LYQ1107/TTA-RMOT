@@ -1,0 +1,1904 @@
+{
+  "status": "COMPLETED_PREFIX_RSI_PROBE_INFORMATION_DIAGNOSIS_NO_GT",
+  "scope": {
+    "native_binary_quality_20261124": [
+      "dancetrack0004",
+      "dancetrack0005",
+      "dancetrack0007"
+    ],
+    "native_binary_trust_quality_20261124": [
+      "dancetrack0004",
+      "dancetrack0005"
+    ]
+  },
+  "summary": {
+    "policy_rounds": 60,
+    "categories": {
+      "ZERO_BOTH_SKILLS_BELOW_CONSTANT": 4,
+      "ZERO_BY_INFORMATION_RESOLUTION": 48,
+      "POSITIVE_SKILL_PROGRESS": 8
+    },
+    "distinct_paid_probe_pair_UIDs": 13,
+    "distinct_pairs_below_weighted_information_resolution": 11,
+    "distinct_low_absolute_but_nontrivial_relative_pairs": 8,
+    "distinct_both_teacher_opinions_below_half": 12,
+    "low_absolute_but_nontrivial_relative_information_rounds": 34,
+    "teacher_yes_opinions_at_half": 16,
+    "paid_probe_node_occurrences": 120,
+    "effective_view_mismatch_occurrences": 0,
+    "max_existing_information_reproduction_error": 4.119968255444917e-18,
+    "shared_teacher_logit_shift_relative_probability_max_error": 1.6375789613221059e-15
+  },
+  "rounds": [
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BOTH_SKILLS_BELOW_CONSTANT",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.38363878946245883,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.438873291015625,
+      "current_weighted_information": 0.2717236354792223,
+      "unweighted_relative_information": 0.6191391479996632,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.05971679138143117
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.49433177408603907
+        }
+      ],
+      "actual_actor_parameter_change": 0.001844153882048441,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BOTH_SKILLS_BELOW_CONSTANT",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.38363878946245883,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.438873291015625,
+      "current_weighted_information": 0.2717236354792223,
+      "unweighted_relative_information": 0.6191391479996632,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.05971679138143117
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.49433177408603907
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.00010146005652591457,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0043926178477704525,
+      "current_weighted_information": 3.3484938383681665e-05,
+      "unweighted_relative_information": 0.007623002852542138,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 4.548992646344021e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00024060796944188985
+        }
+      ],
+      "actual_actor_parameter_change": 9.195759069570637e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0003316949434370481,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0043926178477704525,
+      "current_weighted_information": 3.3484938383681665e-05,
+      "unweighted_relative_information": 0.007623002852542138,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 4.548992646344021e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00024060796944188985
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0003613782500906382,
+      "current_weighted_information": 2.786909636520819e-06,
+      "unweighted_relative_information": 0.00771189089498836,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 3.7728510758712517e-07
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 2.0545160215075616e-05
+        }
+      ],
+      "actual_actor_parameter_change": 5.0353071744374e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0038530220044776797,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 8.422006921311261e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0030014634830877185,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 4.647686734881247e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0003613782500906382,
+      "current_weighted_information": 2.786909636520819e-06,
+      "unweighted_relative_information": 0.00771189089498836,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 3.7728510758712517e-07
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 2.0545160215075616e-05
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0038530220044776797,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0030014634830877185,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.02663039352321767,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 4.868540386801609e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 8.539940211451106e-06,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0026667792117223144,
+      "current_weighted_information": 2.118464517701541e-05,
+      "unweighted_relative_information": 0.007943906673598788,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 2.8736611934402863e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00015389791614186244
+        }
+      ],
+      "actual_actor_parameter_change": 1.5771253623710014e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.02663039352321767,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0026667792117223144,
+      "current_weighted_information": 2.118464517701541e-05,
+      "unweighted_relative_information": 0.007943906673598788,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 2.8736611934402863e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00015389791614186244
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 1.4970414864757084e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 1.0998683032396285e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 4.115637628847409e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0004195339643047191,
+      "current_weighted_information": 1.2773179605559115e-05,
+      "unweighted_relative_information": 0.03044611567201172,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.7292892604057126e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 9.412922553544517e-05
+        }
+      ],
+      "actual_actor_parameter_change": 4.721336829063205e-06,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 6.803266228004107e-06,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0030014634830877185,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 1.3056668191292983e-05,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0004195339643047191,
+      "current_weighted_information": 1.2773179605559115e-05,
+      "unweighted_relative_information": 0.03044611567201172,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.7292892604057126e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 9.412922553544517e-05
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0007",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0030014634830877185,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BOTH_SKILLS_BELOW_CONSTANT",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.38363878946245883,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.438873291015625,
+      "current_weighted_information": 0.2717236354792223,
+      "unweighted_relative_information": 0.6191391479996632,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.05971679138143117
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.49433177408603907
+        }
+      ],
+      "actual_actor_parameter_change": 1.2138278376966176,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BOTH_SKILLS_BELOW_CONSTANT",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.38363878946245883,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.438873291015625,
+      "current_weighted_information": 0.2717236354792223,
+      "unweighted_relative_information": 0.6191391479996632,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.05971679138143117
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.49433177408603907
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 0,
+      "complete_question_order_matches_FROZEN": true
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0043926178477704525,
+      "current_weighted_information": 3.3484938383681665e-05,
+      "unweighted_relative_information": 0.007623002852542138,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 4.548992646344021e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00024060796944188985
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0043926178477704525,
+      "current_weighted_information": 3.3484938383681665e-05,
+      "unweighted_relative_information": 0.007623002852542138,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 4.548992646344021e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00024060796944188985
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C1",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.02663039352321767,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 1.2704024655352064,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0026667792117223144,
+      "current_weighted_information": 2.118464517701541e-05,
+      "unweighted_relative_information": 0.007943906673598788,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 2.8736611934402863e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00015389791614186244
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.02663039352321767,
+      "category": "POSITIVE_SKILL_PROGRESS",
+      "conditional_exactly_one_mass": 0.2054443359375,
+      "current_weighted_information": 0.1262725432011636,
+      "unweighted_relative_information": 0.6146314164610411,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 2,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.39617243757101633
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.020800308882066736
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.017063789069652557,
+      "current_weighted_information": 0.0,
+      "unweighted_relative_information": 0.0,
+      "relative_information_exceeds_resolution_but_absolute_does_not": false,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.0
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0004",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.0026667792117223144,
+      "current_weighted_information": 2.118464517701541e-05,
+      "unweighted_relative_information": 0.007943906673598788,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 2.8736611934402863e-06
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.00015389791614186244
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 1,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "LEARNED",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 0,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.015174273401498795,
+      "current_weighted_information": 0.00012212688010810918,
+      "unweighted_relative_information": 0.008048285204617867,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 1.6748776582253578e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.0008203418738475885
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 1,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.005973405670374632,
+      "current_weighted_information": 0.00038772396542094666,
+      "unweighted_relative_information": 0.06490835995684685,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 5.274556884561667e-05
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.002758480002161014
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    },
+    {
+      "cohort": "native_binary_trust_quality_20261124",
+      "pair": "C6",
+      "video": "dancetrack0005",
+      "policy": "FROZEN",
+      "stage": 2,
+      "reward": 0.0,
+      "category": "ZERO_BY_INFORMATION_RESOLUTION",
+      "conditional_exactly_one_mass": 0.04618978500366211,
+      "current_weighted_information": 0.0014095120290357366,
+      "unweighted_relative_information": 0.030515665507513945,
+      "relative_information_exceeds_resolution_but_absolute_does_not": true,
+      "teacher_yes_at_half": 0,
+      "paid_probe_nodes": 2,
+      "effective_view_mismatches": 0,
+      "different_frame_pairs": 1,
+      "boundary_probability_pairs_not_shifted": 0,
+      "shifted_pair_weighted_information": [
+        {
+          "shared_logit_shift": -2.0,
+          "weighted_information": 0.00019879907901602025
+        },
+        {
+          "shared_logit_shift": 2.0,
+          "weighted_information": 0.007870528776156505
+        }
+      ],
+      "actual_actor_parameter_change": 0.0,
+      "replaced_questions_vs_FROZEN": 2,
+      "complete_question_order_matches_FROZEN": false
+    }
+  ],
+  "new_teacher_calls": 0,
+  "new_fits": 0,
+  "manual_GT_or_RMOT_quality_read": false,
+  "repeated_cohort_source_policy_probes_are_not_independent_samples": true,
+  "interpretation": "Current credit suppresses tiny exactly-one mass as intended. Relative odds can retain teacher contrast under common logit shifts, but amplifying such contrast may amplify rankings among true negatives. Neither implies semantic truth or recommends changing the live protocol.",
+  "shared_query_view_intercept_is_modelling_assumption_not_verified_teacher_bias": true,
+  "all_live_sources_and_reward_resolution_unchanged": true,
+  "neural_seeds": [
+    0
+  ]
+}

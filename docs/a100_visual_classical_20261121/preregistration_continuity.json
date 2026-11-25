@@ -1,0 +1,26 @@
+{
+  "protocol": "conservative_visual_continuity_v1",
+  "primary": "EXEMPLAR__VISUAL_SEMANTIC",
+  "motivation": "Same-mask GT ID diagnostic shows a large association gap; use visual object continuity rather than another neural adaptation module.",
+  "selection": "exactly preserved sealed KD / exemplar selected boxes; only output IDs may change",
+  "candidate_connections": "nonoverlapping source tracks with gap1..30, constant-velocity error <= one mean box-height, endpoint visual distance <= image-only90th percentile same-track start/end distance",
+  "assignment": "maximum-benefit bipartite matching with dummy zero-cost successor and a temporal DAG",
+  "benefit": "1 - 0.5*(normalized_motion + normalized_appearance) - optional semantic_JS",
+  "features": "six endpoint frozen query0 PCD descriptors per source track; semantic endpoints from exact current-prefix frozen-feature frame KD",
+  "controls": [
+    "original IDs for exact same mask",
+    "no semantic term",
+    "apply same associations to ordinary KD and exemplar masks"
+  ],
+  "adaptation_supervision": "images, queries and frozen teacher only; no target GT",
+  "seed": 0,
+  "no_GT_parameter_grid": true,
+  "caveats": [
+    "stitching does not repair switches inside a source track",
+    "semantic cue may be wrong",
+    "same boxes isolate association from count/ranking",
+    "all data are development"
+  ],
+  "costs": "actual endpoint read/matching wall recorded; upstream frame KD cue cost must also be charged; no live cold-time claim",
+  "evaluation": "official complete C4/C1 HOTA and original-parent bootstrap after sealing; keep negatives"
+}

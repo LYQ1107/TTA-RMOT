@@ -1,0 +1,24 @@
+{
+  "status": "REGISTERED_WITHOUT_INSPECTING_NEW_CORE_HOTA",
+  "registered_unix": 1795339776.477406,
+  "source_sha256": "293d2c55cc663346c7b851adf60d7f8d31ef482284c37630e6b43183bedbdab3",
+  "reason": "Core ordinary heads share768D PCD; full inference also consumes RGB/appearance cues. Add an adequate ordinary flat head with those same available image/query cues before attributing gains to structured inference.",
+  "ordinary_method": "RAW_RGB_FINAL:768PCD+312query-conditionedRGB+1sameappearancecue, direct raw-teacher soft MLP1081->64GELU->1, source residual zero, no DS/PAVA/graph/projection.",
+  "training": "Same raw per-view-mean targets and confidence weights1+3abs(2raw-1), same prefix normalization/current-video transduction, AdamW.001, min4000/max16000/KL<=.005, Final fixed canonical, seeds0/17/42.",
+  "information_scope": "All actually requested old multiview answers, fixed source features/TrackIDs/query text. Same appearance_spec and cue construction available to full; no new observations, teacher, encoder or manual labels.",
+  "physical_execution": "Only GPU0/1/2/3 after immutable core multiview GPU stage releases, with internal memory preflight; one extra ordinary head per video/seed,444 new fits.",
+  "primary": "Existing DS_FULL unchanged; RGB baseline is a supplemental opponent, never an alternative primary chosen by GT.",
+  "outputs": {
+    "raw": 18,
+    "count_controls": 72,
+    "total": 90
+  },
+  "GT_barrier": "Own90outputs sealed before any supplement GT; wait core analysis before evaluation. Core468 remains separate, do not claim combined558 preceded core GT.",
+  "count_controls": "FULL-at-FULL, RGB-at-FULL, FULL-at-RGB, RGB-at-RGB; shared independent per-query decoder; self-count exact.",
+  "count_implementation": "Reuse immutable core independent count algorithm in new isolated count process with local method-name constants only; no file or other process state mutation.",
+  "evaluation": "Compare FULL vs ordinary RGB and both CountMatched rankings, all3seeds and original parent grouping; KITTI4 no population CI. Full source/cost gate still required for retained final method.",
+  "all_data_development": true,
+  "running_numeric_helpers_unchanged": true,
+  "goal_status": "ACTIVE",
+  "timing_scope": "The fixed core was already registered; its raw predictions may be in progress. This added opponent is motivated by source-code information audit, without inspecting its new HOTA, never by choosing a winning baseline or changing the primary."
+}

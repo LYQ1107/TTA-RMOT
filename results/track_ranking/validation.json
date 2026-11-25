@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "role": "ORACLE_GT_ONLY_DIAGNOSTIC_NOT_A_METHOD",
+  "tests_passed": 30,
+  "compileall_passed": true,
+  "videos": 74,
+  "sequences": 1753,
+  "model_sequence_rows": 5259,
+  "frame_AUROC_rows": 3441897,
+  "raw_machine_rows": {
+    "units.csv": 92744,
+    "auroc_frame.csv": 3441897,
+    "auroc_segment.csv": 5259,
+    "auroc_track.csv": 21036,
+    "prefix_ceiling.csv": 10518,
+    "bisect_track.csv": 21036,
+    "presence_scores.csv": 21036,
+    "sequence_metrics.csv": 5259,
+    "presence_auc.csv": 300
+  },
+  "all_nine_margin_SHAs_unchanged": true,
+  "all_granularities_share_track_filter": true,
+  "segments_conserve_observations": true,
+  "track_labels_and_temporal_mixing_exact": true,
+  "common_q_is_model_independent": true,
+  "perfect_dense_F1_is_one": true,
+  "noisy_dense_answers_shared_across_models": true,
+  "all_binary_search_bounds_pass": true,
+  "prefix_upper_bounds_pass": true,
+  "new_teacher_calls": 0,
+  "new_model_calls": 0,
+  "GPU_hours": 0,
+  "optimizer_updates": 0,
+  "CPU_wall_seconds": 8.973725429968908,
+  "logs": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/validation/pytest.log",
+      "sha256": "37f2ac74a41a4dce24667fa38924593535ad09c81b0242200e849bd1b11fce3d",
+      "bytes": 99
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/track_ranking_20261102/validation/compileall.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

@@ -1,0 +1,863 @@
+{
+  "status": "COMPLETE_POSTSEAL_RESIDUAL_RSI_DIAGNOSIS",
+  "cases": [
+    {
+      "pair": "C1",
+      "video": "dancetrack0004",
+      "methods": {
+        "RESIDUAL_RSI": {
+          "official_IoU50_counts": {
+            "TP": 4256.0,
+            "FP": 958.0,
+            "FN": 330.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4305,
+            "FP": 909,
+            "FN": 39,
+            "TN": 69054
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.20360513881312325
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.0279667220962039
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.3952948695358066
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 53,
+          "signed_training_risk": -0.6908438170665074,
+          "pool_logit_at_cap_count": 42
+        },
+        "SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 1458.0,
+            "FN": 291.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 1409,
+            "FN": 0,
+            "TN": 68554
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.3505870163512047
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.00042502232747504003
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.7327497549957324
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 54,
+          "signed_training_risk": -0.23329622900834185,
+          "pool_logit_at_cap_count": 24
+        },
+        "HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 4193.0,
+            "FP": 1595.0,
+            "FN": 393.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4237,
+            "FP": 1551,
+            "FN": 107,
+            "TN": 68412
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.39046671905808766
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.024400545270454543
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.7899870950196347
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 54,
+          "signed_training_risk": -0.33661557562497324,
+          "pool_logit_at_cap_count": 95
+        },
+        "IPW_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 555.0,
+            "FN": 291.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 506,
+            "FN": 0,
+            "TN": 69457
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.2572087474893772
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.001356176630331505
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.5364432756149791
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 54,
+          "signed_training_risk": -0.3650868625875231,
+          "pool_logit_at_cap_count": 43
+        },
+        "IMPUTED_KD": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 2956.0,
+            "FN": 291.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 2907,
+            "FN": 0,
+            "TN": 67056
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.24675210664804484
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.12812818134825843
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.3762168827660894
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 50,
+          "signed_training_risk": 0.18123863033211438,
+          "pool_logit_at_cap_count": 0
+        },
+        "R_DIRECT": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 426.0,
+            "FN": 291.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 377,
+            "FN": 0,
+            "TN": 69586
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.20808219613175138
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.00018333855325336701
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.43498059781232645
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 54,
+          "signed_training_risk": -0.39365649140549924,
+          "pool_logit_at_cap_count": 0
+        },
+        "SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 4295.0,
+            "FP": 1250.0,
+            "FN": 291.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4344,
+            "FP": 1201,
+            "FN": 0,
+            "TN": 68762
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.22605884493018896
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.0032222804671330155
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.4692600866376718
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 54,
+          "signed_training_risk": -0.35056149150234117,
+          "pool_logit_at_cap_count": 24
+        },
+        "UNIFORM_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 4255.0,
+            "FP": 2187.0,
+            "FN": 331.0
+          },
+          "canonical_membership_counts": {
+            "TP": 4304,
+            "FP": 2138,
+            "FN": 40,
+            "TN": 67825
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 104,
+              "macroquery_weighted_teacher_KL": 0.10641381496887475
+            },
+            "primary_queried": {
+              "actions": 54,
+              "macroquery_weighted_teacher_KL": 0.021448891129740185
+            },
+            "primary_unqueried": {
+              "actions": 50,
+              "macroquery_weighted_teacher_KL": 0.19914354731351896
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 53,
+          "signed_training_risk": -0.2524443571818774,
+          "pool_logit_at_cap_count": 28
+        }
+      },
+      "coverage": {
+        "primary": {
+          "unique_actions": 54,
+          "positive_pool_queries": 1,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_outside_declared_action_pool": 0
+        },
+        "uniform": {
+          "unique_actions": 56,
+          "positive_pool_queries": 1,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_outside_declared_action_pool": 0
+        }
+      },
+      "signed_risk_coefficients": {
+        "minimum": -4.788656839447145,
+        "maximum": 1.0343549418286508,
+        "outside_probability_interval": 21,
+        "queried_coefficient_class_disagrees_with_original_teacher": 1,
+        "macroquery_absolute_correction": 0.1417622759901516
+      },
+      "original_teacher_canonical_pool_counts": {
+        "TP": 7,
+        "FP": 4,
+        "FN": 0,
+        "TN": 93
+      },
+      "mean_preanswer_squared_error": 0.10887570362586406,
+      "policy_support": "Only declared historical union, not full dense target pool."
+    },
+    {
+      "pair": "C2",
+      "video": "0005",
+      "methods": {
+        "RESIDUAL_RSI": {
+          "official_IoU50_counts": {
+            "TP": 21173.0,
+            "FP": 51966.0,
+            "FN": 22515.0
+          },
+          "canonical_membership_counts": {
+            "TP": 21183,
+            "FP": 51956,
+            "FN": 16771,
+            "TN": 119698
+          },
+          "positive_queries_zero_output": 1,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.39419824353006966
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.36470450924553033
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.4180794487164339
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1611,
+          "signed_training_risk": -0.6257790879537125,
+          "pool_logit_at_cap_count": 11
+        },
+        "SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 24352.0,
+            "FP": 49145.0,
+            "FN": 19336.0
+          },
+          "canonical_membership_counts": {
+            "TP": 24365,
+            "FP": 49132,
+            "FN": 13589,
+            "TN": 122522
+          },
+          "positive_queries_zero_output": 2,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.17315218136618019
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.000616760076599014
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.3128548639082206
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1802,
+          "signed_training_risk": 0.1588836459646108,
+          "pool_logit_at_cap_count": 0
+        },
+        "HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 25727.0,
+            "FP": 58460.0,
+            "FN": 17961.0
+          },
+          "canonical_membership_counts": {
+            "TP": 25742,
+            "FP": 58445,
+            "FN": 12212,
+            "TN": 113209
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 1.124583705714417
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.7454013390145617
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 1.4316093205399116
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1787,
+          "signed_training_risk": 0.672599150661763,
+          "pool_logit_at_cap_count": 572
+        },
+        "IPW_KD": {
+          "official_IoU50_counts": {
+            "TP": 23917.0,
+            "FP": 49336.0,
+            "FN": 19771.0
+          },
+          "canonical_membership_counts": {
+            "TP": 23926,
+            "FP": 49327,
+            "FN": 14028,
+            "TN": 122327
+          },
+          "positive_queries_zero_output": 3,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.1735511102401835
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.0007174070058880695
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.3134953129727968
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1800,
+          "signed_training_risk": 0.15351701826657127,
+          "pool_logit_at_cap_count": 0
+        },
+        "IMPUTED_KD": {
+          "official_IoU50_counts": {
+            "TP": 25564.0,
+            "FP": 57329.0,
+            "FN": 18124.0
+          },
+          "canonical_membership_counts": {
+            "TP": 25576,
+            "FP": 57317,
+            "FN": 12378,
+            "TN": 114337
+          },
+          "positive_queries_zero_output": 1,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.24271891425272382
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.1605453543577698
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.30925520381894833
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1583,
+          "signed_training_risk": 0.3734564606809341,
+          "pool_logit_at_cap_count": 0
+        },
+        "R_DIRECT": {
+          "official_IoU50_counts": {
+            "TP": 24280.0,
+            "FP": 50957.0,
+            "FN": 19408.0
+          },
+          "canonical_membership_counts": {
+            "TP": 24292,
+            "FP": 50945,
+            "FN": 13662,
+            "TN": 120709
+          },
+          "positive_queries_zero_output": 3,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.18479699452651366
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.001763352301415745
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.3330001323121711
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1796,
+          "signed_training_risk": 0.14609285241977066,
+          "pool_logit_at_cap_count": 0
+        },
+        "SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 24340.0,
+            "FP": 49277.0,
+            "FN": 19348.0
+          },
+          "canonical_membership_counts": {
+            "TP": 24351,
+            "FP": 49266,
+            "FN": 13603,
+            "TN": 122388
+          },
+          "positive_queries_zero_output": 5,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.18051395746667992
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.03871869967133595
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.2953261956592204
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1681,
+          "signed_training_risk": 0.23464290876740035,
+          "pool_logit_at_cap_count": 0
+        },
+        "UNIFORM_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 24906.0,
+            "FP": 54255.0,
+            "FN": 18782.0
+          },
+          "canonical_membership_counts": {
+            "TP": 24918,
+            "FP": 54243,
+            "FN": 13036,
+            "TN": 117411
+          },
+          "positive_queries_zero_output": 3,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 4068,
+              "macroquery_weighted_teacher_KL": 0.161886229828608
+            },
+            "primary_queried": {
+              "actions": 1811,
+              "macroquery_weighted_teacher_KL": 0.17090515158402297
+            },
+            "primary_unqueried": {
+              "actions": 2257,
+              "macroquery_weighted_teacher_KL": 0.15458356957802952
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 1568,
+          "signed_training_risk": 0.47438397990584524,
+          "pool_logit_at_cap_count": 0
+        }
+      },
+      "coverage": {
+        "primary": {
+          "unique_actions": 1811,
+          "positive_pool_queries": 180,
+          "positive_pool_queries_never_asked_correct": 30,
+          "positive_queries_outside_declared_action_pool": 17
+        },
+        "uniform": {
+          "unique_actions": 1891,
+          "positive_pool_queries": 180,
+          "positive_pool_queries_never_asked_correct": 34,
+          "positive_queries_outside_declared_action_pool": 17
+        }
+      },
+      "signed_risk_coefficients": {
+        "minimum": -3.902972319855288,
+        "maximum": 7.1889362212240115,
+        "outside_probability_interval": 884,
+        "queried_coefficient_class_disagrees_with_original_teacher": 203,
+        "macroquery_absolute_correction": 0.24064491180399392
+      },
+      "original_teacher_canonical_pool_counts": {
+        "TP": 593,
+        "FP": 945,
+        "FN": 267,
+        "TN": 2263
+      },
+      "mean_preanswer_squared_error": 0.15901185778831511,
+      "policy_support": "Only declared historical union, not full dense target pool."
+    },
+    {
+      "pair": "C4",
+      "video": "v_00HRwkvvjtQ_c001",
+      "methods": {
+        "RESIDUAL_RSI": {
+          "official_IoU50_counts": {
+            "TP": 50537.0,
+            "FP": 21177.0,
+            "FN": 5843.0
+          },
+          "canonical_membership_counts": {
+            "TP": 50534,
+            "FP": 21180,
+            "FN": 5344,
+            "TN": 12286
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.3023464226374904
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 0.3172262229728343
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.29191683524148815
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 36,
+          "signed_training_risk": -0.5026056306989526,
+          "pool_logit_at_cap_count": 29
+        },
+        "SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 55604.0,
+            "FP": 23190.0,
+            "FN": 776.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55643,
+            "FP": 23151,
+            "FN": 235,
+            "TN": 10315
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.2841616623718859
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 3.709530683347368e-05
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.48331097464575173
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 39,
+          "signed_training_risk": 0.20379741680394722,
+          "pool_logit_at_cap_count": 0
+        },
+        "HARD_KD": {
+          "official_IoU50_counts": {
+            "TP": 55046.0,
+            "FP": 24476.0,
+            "FN": 1334.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55084,
+            "FP": 24438,
+            "FN": 794,
+            "TN": 9028
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.633419870412328
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 0.2482420545623256
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.9033996821619921
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 39,
+          "signed_training_risk": 0.30557379580877564,
+          "pool_logit_at_cap_count": 7
+        },
+        "IPW_KD": {
+          "official_IoU50_counts": {
+            "TP": 55683.0,
+            "FP": 23526.0,
+            "FN": 697.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55723,
+            "FP": 23486,
+            "FN": 155,
+            "TN": 9980
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.22229759758709133
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 4.247563441485947e-05
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.3780812214512171
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 39,
+          "signed_training_risk": 0.16561646656937754,
+          "pool_logit_at_cap_count": 0
+        },
+        "IMPUTED_KD": {
+          "official_IoU50_counts": {
+            "TP": 54961.0,
+            "FP": 26817.0,
+            "FN": 1419.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55005,
+            "FP": 26773,
+            "FN": 873,
+            "TN": 6693
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.23880435341983286
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 0.20337363445418366
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.263638542832824
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 35,
+          "signed_training_risk": 0.2945121062237457,
+          "pool_logit_at_cap_count": 0
+        },
+        "R_DIRECT": {
+          "official_IoU50_counts": {
+            "TP": 55288.0,
+            "FP": 22975.0,
+            "FN": 1092.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55320,
+            "FP": 22943,
+            "FN": 558,
+            "TN": 10523
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.19474424609932234
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 6.261284938282428e-05
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.33120099031743705
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 39,
+          "signed_training_risk": 0.22345064517614274,
+          "pool_logit_at_cap_count": 0
+        },
+        "SOFT_POOLED": {
+          "official_IoU50_counts": {
+            "TP": 55512.0,
+            "FP": 22941.0,
+            "FN": 868.0
+          },
+          "canonical_membership_counts": {
+            "TP": 55550,
+            "FP": 22903,
+            "FN": 328,
+            "TN": 10563
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.24753630806944005
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 0.008642150986258002
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.41498260664476816
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 39,
+          "signed_training_risk": 0.2561398769456182,
+          "pool_logit_at_cap_count": 0
+        },
+        "UNIFORM_SOFT_KD": {
+          "official_IoU50_counts": {
+            "TP": 51185.0,
+            "FP": 27803.0,
+            "FN": 5195.0
+          },
+          "canonical_membership_counts": {
+            "TP": 51078,
+            "FP": 27910,
+            "FN": 4800,
+            "TN": 5556
+          },
+          "positive_queries_zero_output": 0,
+          "full_pool_teacher_fit": {
+            "all_pool": {
+              "actions": 95,
+              "macroquery_weighted_teacher_KL": 0.7930463862581905
+            },
+            "primary_queried": {
+              "actions": 39,
+              "macroquery_weighted_teacher_KL": 1.2081891827960312
+            },
+            "primary_unqueried": {
+              "actions": 56,
+              "macroquery_weighted_teacher_KL": 0.5020634442339216
+            }
+          },
+          "teacher_class_agreement_on_primary_queried": 29,
+          "signed_training_risk": 1.1622321826936477,
+          "pool_logit_at_cap_count": 0
+        }
+      },
+      "coverage": {
+        "primary": {
+          "unique_actions": 39,
+          "positive_pool_queries": 8,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_outside_declared_action_pool": 0
+        },
+        "uniform": {
+          "unique_actions": 43,
+          "positive_pool_queries": 8,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_outside_declared_action_pool": 0
+        }
+      },
+      "signed_risk_coefficients": {
+        "minimum": -3.6312513833853353,
+        "maximum": 1.7806343264498192,
+        "outside_probability_interval": 21,
+        "queried_coefficient_class_disagrees_with_original_teacher": 4,
+        "macroquery_absolute_correction": 0.18375798124721296
+      },
+      "original_teacher_canonical_pool_counts": {
+        "TP": 60,
+        "FP": 21,
+        "FN": 0,
+        "TN": 14
+      },
+      "mean_preanswer_squared_error": 0.1523469009596064,
+      "policy_support": "Only declared historical union, not full dense target pool."
+    }
+  ],
+  "source_sha256": "9d72bb706f27ef35ee08ee2879e320d1c3dbdc2d02a7ae774048279b281b73c4",
+  "all66_and_reproduction_precede_label_access": true,
+  "new_models_teacher_or_backbone_calls": 0,
+  "no_feedback_of_diagnostic_values_to_learners": true,
+  "canonical_membership_not_pure_semantic_truth": true,
+  "fixed_model_expected_unbiasedness_not_fitted_model_generalization": true,
+  "official_IoU50_counts_not_additive_19threshold_HOTA_decomposition": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

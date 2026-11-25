@@ -1,0 +1,748 @@
+{
+  "status": "ALL_PREREGISTERED_A_AND_B_DIAGNOSTICS_COMPLETE",
+  "prereg_sha256": "457c068a5d2587ac8b6eeceda5514ac98115d56fb736eb0dec612e1880c20b8d",
+  "expression_taxonomy_sha256": "ad0d700c27544eaf9d976d03953f616aeba3be939c4c6b8288f75d76a69f6b89",
+  "margins_verified": [
+    {
+      "target": "KITTI-V2",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/Dance-best/complete.npy",
+      "sha256": "0afa3a08e3f6e7ba85338a16325bf65a017852a1cd79a195337531e98f3f01c5",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/V2-best/complete.npy",
+      "sha256": "ecf1d8469a1f0e648bdc3fe7888350910885e1afa1714f2847b239c554c5c120",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/LaMOT-best/complete.npy",
+      "sha256": "2e3f28066a74f079888967a7d103d75c71458d3d922c800eb5ee7748f39f286d",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/V2-best/complete.npy",
+      "sha256": "9b710eafe6e05df47599af0db6b55869b348248972bc6295186ed421b08afddd",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/LaMOT-best/complete.npy",
+      "sha256": "cc78b7b479eb6c51906275a16a736022b93fcd7cbbe07a120f9a2135cc678e3d",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/Dance-best/complete.npy",
+      "sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/FROZEN.npy",
+      "sha256": "fd57998fa49760c65d5a458dc4656514ffdd8dcad8db4c586a98a6d17db9bbaa",
+      "bytes": 28707688,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/OFFICIAL_DANCE_COMPLETE.npy",
+      "sha256": "b82fd2e6e8e0f7fe37fa904cd5a62c19d642969a82e5f0f9fee2b50479e4ef0b",
+      "bytes": 28707688,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/dance/LaMOT-best/complete.npy",
+      "sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517",
+      "bytes": 28707688,
+      "coverage": "complete"
+    }
+  ],
+  "paired_teacher_entries": 87438,
+  "GT_free_decoder_attempts": 0,
+  "teacher_GT_open_attempts": 0,
+  "new_prediction_configurations": 72,
+  "all_prediction_seals": [
+    {
+      "combo": "C1",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/G0_GLOBAL/predictions_seal.json",
+      "sha256": "45c2337a55c3ac938a8071bbbbb378ecc5a42c5782538d7569a27c1706a4f776",
+      "rows": 212541
+    },
+    {
+      "combo": "C1",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/G1_QUERY/predictions_seal.json",
+      "sha256": "257b6555d8800898f1bbcd4850314f6c9029196c92c49cee9f656e59bdea5b7a",
+      "rows": 201812
+    },
+    {
+      "combo": "C1",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/G2_V_MEAN/predictions_seal.json",
+      "sha256": "84df734bff6e9db24708b70c5a105b9d5b70a667625190c0266d2aa84a17cacf",
+      "rows": 203488
+    },
+    {
+      "combo": "C1",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/G3_F_MEAN/predictions_seal.json",
+      "sha256": "c97e644d48eed2022fe3bacfac495115da82b2fa8b1aadc72e56f64b4719af19",
+      "rows": 201154
+    },
+    {
+      "combo": "C1",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/G4_F_FRAME/predictions_seal.json",
+      "sha256": "0e1c9fb2b931dca502fd832d5cf1b325f45274c15bdf9c8ee246c88a7c5e482b",
+      "rows": 201009
+    },
+    {
+      "combo": "C1",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "7c4815ee9cb7345e439e23e381acb80acf25955f0bd72b8a0a239fa8faeee140",
+      "rows": 197673
+    },
+    {
+      "combo": "C1",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "f20ca4cea3902bf63475bad478404b4c54f82e022ba41b8d50900e211acb151e",
+      "rows": 1147940
+    },
+    {
+      "combo": "C1",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "02dfa0cfdc17438e609c17c510f662f51e31e599b9c596840489b20eab457436",
+      "rows": 1147959
+    },
+    {
+      "combo": "C1",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "f013a21c461ffa8845da6aa8312a40c425e0baee66d80c0996a90b30603af93e",
+      "rows": 280456
+    },
+    {
+      "combo": "C1",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "1494104dc023a59ba9574d9fa4d8dee6224b9b950fe642268c81aa7f3543de93",
+      "rows": 294349
+    },
+    {
+      "combo": "C1",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "ff272c54f68eeff5a0858fa559ad11e0a2532edd003c0b122a9a61e34ed363b2",
+      "rows": 23668
+    },
+    {
+      "combo": "C1",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C1/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "a7d55c2bfbfa5cc8c87623820f102c2d6aa1f925527a1f84f3ae73b6489cf74b",
+      "rows": 59247
+    },
+    {
+      "combo": "C2",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/G0_GLOBAL/predictions_seal.json",
+      "sha256": "0f060ac79fc12e673e3af160422e7d4960b439c700ac025ae6c42df68dbe94ba",
+      "rows": 491286
+    },
+    {
+      "combo": "C2",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/G1_QUERY/predictions_seal.json",
+      "sha256": "2bbe20e8a586cc67732e40de4a20f04fbcbcf8ee78553884266ec417d858fc41",
+      "rows": 490906
+    },
+    {
+      "combo": "C2",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/G2_V_MEAN/predictions_seal.json",
+      "sha256": "b6c54f99357a554f3d219284a0b72b88282cabab68d333491ba1ddda9ef2fa04",
+      "rows": 751885
+    },
+    {
+      "combo": "C2",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/G3_F_MEAN/predictions_seal.json",
+      "sha256": "c0fbf89c815279967869fabf930020d9fadec140292fdd4bbc44a3fb81c827de",
+      "rows": 457826
+    },
+    {
+      "combo": "C2",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/G4_F_FRAME/predictions_seal.json",
+      "sha256": "74cd357dc90c4ee1200a47b10e176439896588468214f7c50910b57232341553",
+      "rows": 480848
+    },
+    {
+      "combo": "C2",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "2e38de8cb2945e52a3dc5e1a3a79cac1e777595e4b4d305c4fc9225b9c98934c",
+      "rows": 375730
+    },
+    {
+      "combo": "C2",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "481134d58c72fdef9996d64dad2ceef347b5f3d4e99d1c9fdea9e240eed5906f",
+      "rows": 172290
+    },
+    {
+      "combo": "C2",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "4093a1d3294ec8dd3572f2a6fa25afbd2ee16c291e7afc4be599277cbfbe6b0f",
+      "rows": 172340
+    },
+    {
+      "combo": "C2",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "8d420f32d66998fded762b612d3bef687bc5be9ef36f00d169f74b16481c5261",
+      "rows": 0
+    },
+    {
+      "combo": "C2",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "e3e24d2f81bdd88958f0b66870740583684bfd63053f3639d2b64d22c50bdca6",
+      "rows": 14550
+    },
+    {
+      "combo": "C2",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "6fdda5babfe47da712b3f2de560774cd2c5281eaa275bbd075647b02188ace29",
+      "rows": 904
+    },
+    {
+      "combo": "C2",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C2/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "2786f884ee2bbe75d2a0536d7790827150bb75d228dcd20ce5c820967cfb1630",
+      "rows": 87599
+    },
+    {
+      "combo": "C3",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/G0_GLOBAL/predictions_seal.json",
+      "sha256": "5ee9aa623f98af4c42e86f771605287ebe3cae557c79f616ac5586d30cabcd46",
+      "rows": 1533675
+    },
+    {
+      "combo": "C3",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/G1_QUERY/predictions_seal.json",
+      "sha256": "aa80c0948f5ea1ff40b5fe90b4cd0597e05da3254dc02c4e8942e4b821c53da3",
+      "rows": 1529039
+    },
+    {
+      "combo": "C3",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/G2_V_MEAN/predictions_seal.json",
+      "sha256": "3b5d8d74dc5ccb36984f10f362e088dffd1888f9ed8275fc7585d29155bbeaa0",
+      "rows": 1538804
+    },
+    {
+      "combo": "C3",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/G3_F_MEAN/predictions_seal.json",
+      "sha256": "1d2274ee0815b08c3724185dd5c62cc7705c050d67c22f0fb1199e98142d041e",
+      "rows": 1513484
+    },
+    {
+      "combo": "C3",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/G4_F_FRAME/predictions_seal.json",
+      "sha256": "8d202ae6efced922a80112a48e90897fd388f6aed959801039fa418155ad7623",
+      "rows": 1524493
+    },
+    {
+      "combo": "C3",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "5870b19247bad40e4329f3f43b67c68a7542ce37be4bbe025362e1491292b1b3",
+      "rows": 1507774
+    },
+    {
+      "combo": "C3",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "ee79232acfcf152890a8e2686033ec6164c9d2ec9a5dd5b4f42e8e6811b5f05d",
+      "rows": 949524
+    },
+    {
+      "combo": "C3",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "667bad559f55c52343ce709adb65799b6e49d577c4bf7e07bf64a755120f1afa",
+      "rows": 949538
+    },
+    {
+      "combo": "C3",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "eb5f28d1c1c95308a8e1981c1758c423f4ef2f4cfa32f76cf78512bf3d6bc695",
+      "rows": 128893
+    },
+    {
+      "combo": "C3",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "a0faadff0d4f520ef37b107167f33bef00f01784c1531869c7a40549a4531b73",
+      "rows": 496025
+    },
+    {
+      "combo": "C3",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "335e9d0aa1255249892d5e5d5b0e5c8078ed1ad10c27e974a8a2a2e523d201c6",
+      "rows": 138779
+    },
+    {
+      "combo": "C3",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C3/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "6684047efdbe4c7ca23c66d9b292a67182e22c39b5909003f05e13ea8ba9ae09",
+      "rows": 1120509
+    },
+    {
+      "combo": "C4",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/G0_GLOBAL/predictions_seal.json",
+      "sha256": "b3fb4fbc4ac418d4cfda8b23ad1ab4d13752068ae6b0f3e96a391d5c8173521a",
+      "rows": 1533675
+    },
+    {
+      "combo": "C4",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/G1_QUERY/predictions_seal.json",
+      "sha256": "1401b18610971dbce7ea3ed81966420e115889919f64ed6a852f69c5e6159e76",
+      "rows": 1529039
+    },
+    {
+      "combo": "C4",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/G2_V_MEAN/predictions_seal.json",
+      "sha256": "86a4cd499b3e282f7ed769028bdec0f7c561b2360a8e6d7b03a6f07b75c880fc",
+      "rows": 1538804
+    },
+    {
+      "combo": "C4",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/G3_F_MEAN/predictions_seal.json",
+      "sha256": "fbffa995c56ecbf42d129c4cfc99d2caf9ef4076367ddd7a41af053f15560e1e",
+      "rows": 1513484
+    },
+    {
+      "combo": "C4",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/G4_F_FRAME/predictions_seal.json",
+      "sha256": "263c5bb7c7e22999a265db1a08af6bec597dcda4520fdbf6487ada55f6f273e3",
+      "rows": 1524493
+    },
+    {
+      "combo": "C4",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "eab4e57fbfe314bb1298d54dd6e1ba8d7a9597165b2f30f6824694ff9ba8e933",
+      "rows": 1507774
+    },
+    {
+      "combo": "C4",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "df19824b5edc300db0d0bcaac1744903ea8c8ace25cc79bcbf0eb1a77f08eaca",
+      "rows": 210850
+    },
+    {
+      "combo": "C4",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "36a41fe7af178efbf846224dd39727db69e18054a02f34dc21ea4c0e5596bdf0",
+      "rows": 210850
+    },
+    {
+      "combo": "C4",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "968683bd2cf22a06bd88e16ad1f12b36b2867242cd9f4999cc512c0fdcb10260",
+      "rows": 0
+    },
+    {
+      "combo": "C4",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "e189d6dbe667bcb6ac2a4768b97a75748f0788f7bbbbe02b7ab8a7a4dd06db85",
+      "rows": 77849
+    },
+    {
+      "combo": "C4",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "8359f673000595d6bdfbb355591447fce44c9e8a126067d8115a14ddf0806ff4",
+      "rows": 12722
+    },
+    {
+      "combo": "C4",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C4/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "5731b4c8c4fbdfb45b771bc4142285b633831519f6bebbb606aef1fc304e4628",
+      "rows": 174877
+    },
+    {
+      "combo": "C5",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/G0_GLOBAL/predictions_seal.json",
+      "sha256": "530f18da0361dae9131da35192e82482c8e4d5672a28cde19d8c65c749c0cf38",
+      "rows": 491286
+    },
+    {
+      "combo": "C5",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/G1_QUERY/predictions_seal.json",
+      "sha256": "c202a1ca342abaaa87b239f025757368e476f2834bb69881e8fbb9144dd3206e",
+      "rows": 490906
+    },
+    {
+      "combo": "C5",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/G2_V_MEAN/predictions_seal.json",
+      "sha256": "67cd9496c6017aae04b4eaac00b0f9c4c6a272963fe220071c94aee34ca788dc",
+      "rows": 751885
+    },
+    {
+      "combo": "C5",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/G3_F_MEAN/predictions_seal.json",
+      "sha256": "8948bc56fb23a550df312f725159c99ce00f632d18491c77b786f715b5525597",
+      "rows": 457826
+    },
+    {
+      "combo": "C5",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/G4_F_FRAME/predictions_seal.json",
+      "sha256": "7f36a1148d877298b7e178e2c3590b16fe5633bb7f68f8a58b1158f199ac6c03",
+      "rows": 480848
+    },
+    {
+      "combo": "C5",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "5d50fd6df50013f52ef4b34b05e265b09ccedc5d47fc8feb50e70913d249a68d",
+      "rows": 375730
+    },
+    {
+      "combo": "C5",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "32e4b4ca38b04d885c734e004dc3b5713dbb07b2607077fa21df6cf90c9708f7",
+      "rows": 1275052
+    },
+    {
+      "combo": "C5",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "2aac68bfb9b23b8def527f6634af6fbd1b2f9d2ef9055d81ce407309252004c6",
+      "rows": 1274780
+    },
+    {
+      "combo": "C5",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "397ec5f10ca7480e8e09b7c86aeb081184e4939d8110318442071cbfe5f03fce",
+      "rows": 2112593
+    },
+    {
+      "combo": "C5",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "0b2ebac0c6ae57dc3130124a9e6d97871bd9a43840af749678784203709d3349",
+      "rows": 962563
+    },
+    {
+      "combo": "C5",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "c5f9246e623d5ef71eef89cdb0445d60e352b784d89987671a0a6db5d55e362d",
+      "rows": 925636
+    },
+    {
+      "combo": "C5",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C5/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "6b5699cc84d05bd3f16488d05e0f20d1cdd065fd84468e108a43ffb342245134",
+      "rows": 220726
+    },
+    {
+      "combo": "C6",
+      "method": "G0_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/G0_GLOBAL/predictions_seal.json",
+      "sha256": "a3a0ecb14c805f0f45cdb22a788cf636b2cacc26a471f7ea8fbd85c284abcb59",
+      "rows": 212541
+    },
+    {
+      "combo": "C6",
+      "method": "G1_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/G1_QUERY/predictions_seal.json",
+      "sha256": "5c5b6f6dd9b1e1b854836b22ed56da75d6d5f4732385b6c43048326755899963",
+      "rows": 201812
+    },
+    {
+      "combo": "C6",
+      "method": "G2_V_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/G2_V_MEAN/predictions_seal.json",
+      "sha256": "22be9d94ff21bd396f1f3ee78ab131065dcb1f5fe1e315c51e62e973d0c36837",
+      "rows": 203488
+    },
+    {
+      "combo": "C6",
+      "method": "G3_F_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/G3_F_MEAN/predictions_seal.json",
+      "sha256": "b0235f4072d5de2a50f6450954dbf1a63105f8769411e198c4199964afcb8f69",
+      "rows": 201154
+    },
+    {
+      "combo": "C6",
+      "method": "G4_F_FRAME",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/G4_F_FRAME/predictions_seal.json",
+      "sha256": "b1520bfe5b6a5b37550be0f362977f63c2e13c9599693db87e8419bbe5e01fdf",
+      "rows": 201009
+    },
+    {
+      "combo": "C6",
+      "method": "TRACK_ORACLE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/TRACK_ORACLE/predictions_seal.json",
+      "sha256": "bb944e57dd4fd071a8748a220a771be9f2cae32d21025047d672f199154c8898",
+      "rows": 197673
+    },
+    {
+      "combo": "C6",
+      "method": "B1_SRC_RATE_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/B1_SRC_RATE_GLOBAL/predictions_seal.json",
+      "sha256": "ac5d7236d245e64705c808fceb95cd37c8397e5debc0a40703a1130edb9e3e39",
+      "rows": 1886488
+    },
+    {
+      "combo": "C6",
+      "method": "B1_SRC_RATE_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/B1_SRC_RATE_QUERY/predictions_seal.json",
+      "sha256": "d037b017db27aac5cbb632a0963278664fa17595fe575dad5b32ea774799953d",
+      "rows": 1886490
+    },
+    {
+      "combo": "C6",
+      "method": "B2_Z_OFFLINE",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/B2_Z_OFFLINE/predictions_seal.json",
+      "sha256": "641a438d60212ab6e30f16f9b2629a2c0ea0b397acb1f20372d2babe7cdd80e3",
+      "rows": 3120883
+    },
+    {
+      "combo": "C6",
+      "method": "B3_MEAN_GLOBAL",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/B3_MEAN_GLOBAL/predictions_seal.json",
+      "sha256": "7888199da210797f7009485872d1883abce35495e9598e9d1a1bb78a885fc0db",
+      "rows": 1393853
+    },
+    {
+      "combo": "C6",
+      "method": "B3_MEAN_QUERY",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/B3_MEAN_QUERY/predictions_seal.json",
+      "sha256": "ed9880e7a976e58796e8bb20eb0690b525eb6386d3b9d92a9c40b6508eda6835",
+      "rows": 1202518
+    },
+    {
+      "combo": "C6",
+      "method": "C1_TRACK_MEAN",
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/predictions/C6/C1_TRACK_MEAN/predictions_seal.json",
+      "sha256": "1e31df21da0cb83fe9231337930ceb7cffcaef4e03b03cac3f0337c6051026c0",
+      "rows": 292154
+    }
+  ],
+  "mandatory_G4_checks": [
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/R_SxK_ORACLE",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      },
+      {
+        "method": "G2_V_MEAN",
+        "old": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/evaluation/ORACLE__V_MEAN",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      },
+      {
+        "method": "G3_F_MEAN",
+        "old": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/evaluation/ORACLE__F_MEAN",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      },
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/evaluation/ORACLE__F_FRAME",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      },
+      {
+        "method": "TRACK_ORACLE",
+        "old": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/evaluation/ORACLE__TRACK_ORACLE",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      }
+    ],
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/R_SxK_ORACLE",
+        "episodes": 862,
+        "raw_bytes_equal": true
+      }
+    ],
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/V2-best/R_SxK_ORACLE",
+        "episodes": 466,
+        "raw_bytes_equal": true
+      }
+    ],
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/SportsMOT/Dance-best/R_SxK_ORACLE",
+        "episodes": 466,
+        "raw_bytes_equal": true
+      }
+    ],
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/KITTI-V2/LaMOT-best/R_SxK_ORACLE",
+        "episodes": 862,
+        "raw_bytes_equal": true
+      }
+    ],
+    [
+      {
+        "method": "G4_F_FRAME",
+        "old": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/diagnostics/Dance/LaMOT-best/R_SxK_ORACLE",
+        "episodes": 425,
+        "raw_bytes_equal": true
+      }
+    ]
+  ],
+  "teacher_best_verdicts": [
+    {
+      "target": "KITTI-V2",
+      "metric": "GT_R_at_1",
+      "best_input_modes": [
+        "CROP",
+        "CLIP",
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u90e8\u5206\u4fee\u6392\u5e8f"
+    },
+    {
+      "target": "SportsMOT",
+      "metric": "GT_R_at_1",
+      "best_input_modes": [
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u53ef\u4ee5\u4fee\u6392\u5e8f"
+    },
+    {
+      "target": "Dance",
+      "metric": "GT_R_at_1",
+      "best_input_modes": [
+        "CROP",
+        "CLIP",
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u53ef\u4ee5\u4fee\u6392\u5e8f"
+    },
+    {
+      "target": "KITTI-V2",
+      "metric": "Hit_at_1",
+      "best_input_modes": [
+        "CROP",
+        "CLIP",
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u90e8\u5206\u4fee\u6392\u5e8f"
+    },
+    {
+      "target": "SportsMOT",
+      "metric": "Hit_at_1",
+      "best_input_modes": [
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u53ef\u4ee5\u4fee\u6392\u5e8f"
+    },
+    {
+      "target": "Dance",
+      "metric": "Hit_at_1",
+      "best_input_modes": [
+        "CROP",
+        "CLIP",
+        "FRAME_BOX"
+      ],
+      "best_verdict": "\u53ef\u4ee5\u4fee\u6392\u5e8f"
+    }
+  ],
+  "all_variants_reported": true,
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "no_new_methods_queued": true,
+  "GT_feedback": false,
+  "strictly_diagnostic_not_TTA_training": true,
+  "calibrator_audits": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/calibrator_audit/C2_C3_C4_C5_C6.json",
+      "sha256": "de191def29176efd95c500dd9375e52cfc5f59c8da4c25cd029f99c37159f637",
+      "GT_open_attempts": 0,
+      "kernel_whitelist": true
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/calibrator_audit/C1.json",
+      "sha256": "744dbe9e078b86a26d56cd48ca4d2aad48d4f32566f803dd9dcdc853d8662545",
+      "GT_open_attempts": 0,
+      "kernel_whitelist": true
+    }
+  ],
+  "expression_types_sealed_before_any_evaluation": {
+    "path": "/data2/user/FlexHook-TTA/results/decompose/expression_types.csv",
+    "sha256": "ad0d700c27544eaf9d976d03953f616aeba3be939c4c6b8288f75d76a69f6b89",
+    "rows": 1753,
+    "before_any_new_evaluation": true,
+    "uses_only_text": true
+  }
+}

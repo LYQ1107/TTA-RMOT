@@ -1,0 +1,54 @@
+{
+  "status": "REGISTERED_INDEPENDENT_POLICY_DISTRIBUTION_PILOT_BEFORE_EXECUTION",
+  "pair": "C1",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005"
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "branches": [
+    "INFO_GATED_SGD",
+    "INFO_GATED_TRUST"
+  ],
+  "existing_comparators": [
+    "ORIGINAL_FROZEN",
+    "ORIGINAL_SGD"
+  ],
+  "parent_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "source_sha256": {
+    "flex_uda/active/rsi_policy_distribution.py": "b91172ea5385d32ebf4b03966ba6cdd63ed5a76189d489371b07006153e3e5c3",
+    "scripts/a100_rsi_policy_distribution_pilot.py": "3af9982da5d0680988809fb1322451cb73f40996cc04125a925b6300b5407a8c"
+  },
+  "teacher_budget_per_branch": [
+    56,
+    40
+  ],
+  "teacher_probe_included": true,
+  "teacher_and_solver_same_as_registered_parent": true,
+  "KL_limit": 0.01,
+  "Fisher_damping": 0.01,
+  "CG_max_steps": 10,
+  "backtracking_max_steps": 10,
+  "gate": "When fixed paid probe teacher information <.005 nats, reward identically zero independent of selected training questions; remove zero-mean baseline score-function noise. Preserve baseline recursion.",
+  "trust_objective": "Likelihood-ratio surrogate and exact mean old-to-new conditional KL over recorded decision states; epsilon.2 finite mixture and coverage eligibility unchanged.",
+  "references": [
+    "https://arxiv.org/abs/1502.05477",
+    "https://arxiv.org/html/2508.05004v1"
+  ],
+  "no_task_return_or_monotonic_quality_guarantee": true,
+  "objective": "Observe real future question/path changes and teacher-relative conditional utility progress, never claim RMOT from pilot.",
+  "resource": "Independent CPU two threads; existing GPUs0..3 untouched; sequential two branches.",
+  "new_teacher_GPU_calls": 0,
+  "prepaid_broker_replay": true,
+  "manual_GT_or_RMOT_predictions": false,
+  "ordinary_all_paid_controls": [
+    "JOINT_KD",
+    "COARSE_UNIT_SOFT"
+  ],
+  "ordinary_gate": 0.005,
+  "all_data_DEVELOPMENT": true,
+  "original_six_setting_primary_or_sources_modified": false,
+  "goal_remains_ACTIVE": true
+}

@@ -1,0 +1,41 @@
+{
+  "status": "REGISTERED_WITHOUT_INSPECTING_NEW_CORE_HOTA",
+  "registered_unix": 1795340855.0497878,
+  "source_sha256": "51cf5bde96c0f7766fb87ba5c71f7fcfce73f8e6769c33070bce5c609961d06f",
+  "adapter_sha256": "1e789ba1da35a390ffe48b4cfa1252e1ff4a7bdd90b159f8613518ded1cfa49f",
+  "reason": "Published LAME already performs output-level graph adaptation without network updates. Generic graph smoothing is a relevant external comparator, not our novel mechanism.",
+  "primary_paper": "https://openaccess.thecvf.com/content/CVPR2022/html/Boudiaf_Parameter-Free_Online_Test-Time_Adaptation_CVPR_2022_paper.html",
+  "pinned_code": "https://github.com/fiveai/LAME/blob/d2e5f63090bc1c8129bf7cbd781029a5955e1a67/src/adaptation/lame.py",
+  "code_license": "CC BY-NC-SA4.0; attribution/license URL retained in the adapter; NumPy/SciPy CPU port and tie changes explicitly marked.",
+  "method_settings": {
+    "neighbors": 5,
+    "lambda": 1.0,
+    "max_steps": 100,
+    "relative_energy_tolerance": 1e-08,
+    "probability_eps": 1e-10,
+    "affinity": "directed kNN",
+    "symmetrize": false
+  },
+  "hyperparameter_origin": "Published AppendixC.1 and official overall_best k=5; no target GT or core HOTA tuning.",
+  "task_adapter": "For each current-video query, candidates form a binary member/nonmember batch. Track IDs/boxes preserved, independent per-query decoder. CPU float64; explicit self exclusion/stable Track-ID ties.",
+  "comparators": {
+    "RAW_LAME_KNN5": "RAW_FINAL ordinary teacher head,768D sourcePCD kernel.",
+    "DS_RGB_LAME_KNN5": "DS_FINAL same evidence head,1081D PCD+query-conditionedRGB+sameappearancecue kernel; stronger explicit visual information comparator."
+  },
+  "interpretation": "Compare FULL separately to each; differences between the two baselines change both head and feature map, so are not reliability/feature-only attribution. Original classification benchmark is not reproduced.",
+  "outputs": {
+    "raw": 36,
+    "count_controls": 126,
+    "total": 162
+  },
+  "GT_barrier": "All162supplement predictions sealed before supplement GT; wait core analysis first. Core468 remains a separate GT group.",
+  "reused_count_algorithm": "Immutable core independent count algorithm with local constants in isolated processes;7variants including allself-controls.",
+  "actual_new_teacher_encoder_head_calls": 0,
+  "new_GPU_calls": 0,
+  "CPU_generation_slots": 2,
+  "evaluation": "All6settings x seeds0/17/42, unchanged official HOTA and both CountMatched rankings; KITTI4 no populationCI. No posthoc comparator promotion or suppression of negative results.",
+  "no_new_innovation_claim_for_LAME_or_generic_graph_adaptation": true,
+  "original_primary_unchanged": true,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,83 @@
+{
+  "status": "PASS_REAL_TEACHER_ONLY_JOINT_FIT_ENGINEERING_PILOT",
+  "pair": "C2",
+  "video": "0005",
+  "targets": 8,
+  "neural_seeds": [
+    0
+  ],
+  "feature_dimensions": 1101,
+  "extra_geometry_dimensions": 12,
+  "models": [
+    {
+      "name": "STRUCTURED",
+      "width": 64,
+      "parameters": 107779,
+      "kind": "joint",
+      "steps": 1000,
+      "target_rows": 8,
+      "minimum_steps": 1000,
+      "maximum_steps": 4000,
+      "teacher_excess_gate": 0.005,
+      "teacher_fit_gate_passed": true,
+      "milestones": [
+        {
+          "steps": 1000,
+          "teacher_cross_entropy": 0.9001088382440275,
+          "teacher_entropy_floor": 0.9001072062474285,
+          "excess_KL": 1.6319965990829743e-06
+        }
+      ],
+      "wall_seconds": 28.057621922926046,
+      "manual_GT_or_quality_checkpoint_selection": false,
+      "risk_units": "nats per joint pair"
+    },
+    {
+      "name": "GENERIC_JOINT",
+      "width": 128,
+      "parameters": 372484,
+      "kind": "joint",
+      "steps": 1000,
+      "target_rows": 8,
+      "minimum_steps": 1000,
+      "maximum_steps": 4000,
+      "teacher_excess_gate": 0.005,
+      "teacher_fit_gate_passed": true,
+      "milestones": [
+        {
+          "steps": 1000,
+          "teacher_cross_entropy": 0.9001269473698882,
+          "teacher_entropy_floor": 0.9001072062474285,
+          "excess_KL": 1.974112245972659e-05
+        }
+      ],
+      "wall_seconds": 19.197627407032996,
+      "manual_GT_or_quality_checkpoint_selection": false,
+      "risk_units": "nats per joint pair"
+    }
+  ],
+  "source_sha256": {
+    "scripts/a100_joint_observation_real_fit_pilot.py": "66be61972ff16f33f4d7f9bf5656a9108bf3e89fae56012f3fc53d3bc44dd1b1",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+    "flex_uda/active/joint_observation_fit.py": "885dca1f154754002975fdd0e7107b231e59f85e15ec6f16dd276a8c67844b1b",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3"
+  },
+  "execution": {
+    "deterministic_algorithms": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_initialized_before_configuration": false,
+    "CUDA_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "torch_version": "2.6.0+cu118",
+    "cuda_version": "11.8"
+  },
+  "exact_context_dense_alignment_error": 0.0,
+  "physical_GPU": "0",
+  "local_feature_cache_aggregate_SHA": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+  "raw_teacher_source": "joint_observation_teacher_pilot_20261123",
+  "no_new_teacher_or_student_backbone_calls": true,
+  "GT_open_attempts": 0,
+  "no_RMOT_predictions_HOTA_or_accuracy": true,
+  "engineering_fits_not_full_study_prefixes_or_cold_deployment": true,
+  "goal_status": "ACTIVE"
+}

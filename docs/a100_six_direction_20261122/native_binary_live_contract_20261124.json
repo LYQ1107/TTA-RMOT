@@ -1,0 +1,67 @@
+{
+  "status": "PASS_FULL_METADATA_SPACE_AND_RECORDED_LIVE_BROKER_CONTRACT_NOT_GPU",
+  "settings": {
+    "C1": {
+      "videos": 25,
+      "old_library_actions": 6673,
+      "full_routed_actions": 34442,
+      "full_three_view_actions": 103326
+    },
+    "C2": {
+      "videos": 4,
+      "old_library_actions": 46747,
+      "full_routed_actions": 209562,
+      "full_three_view_actions": 628686
+    },
+    "C3": {
+      "videos": 45,
+      "old_library_actions": 7652,
+      "full_routed_actions": 35689,
+      "full_three_view_actions": 107067
+    },
+    "C4": {
+      "videos": 45,
+      "old_library_actions": 7375,
+      "full_routed_actions": 35689,
+      "full_three_view_actions": 107067
+    },
+    "C5": {
+      "videos": 4,
+      "old_library_actions": 46443,
+      "full_routed_actions": 209562,
+      "full_three_view_actions": 628686
+    },
+    "C6": {
+      "videos": 25,
+      "old_library_actions": 6739,
+      "full_routed_actions": 34442,
+      "full_three_view_actions": 103326
+    }
+  },
+  "totals": {
+    "videos": 148,
+    "old_library_actions": 121629,
+    "full_routed_actions": 559386,
+    "full_three_view_actions": 1678158
+  },
+  "source_policy": "Completed fixed first C1/LEARNED",
+  "roundtrip_paid_requests": 56,
+  "roundtrip_rows_and_sequence_exact": true,
+  "invalid_requests_rejected_before_client_call": true,
+  "cached_CLIP_fallback_current_request_identity_preserved": true,
+  "historical_answer_libraries_opened": 0,
+  "source_paid_checkpoints_read": true,
+  "actual_new_teacher_GPU_calls": 0,
+  "new_fits": 0,
+  "manual_GT_open_attempts": 0,
+  "new_HOTA_read": false,
+  "full_pool_quality_or_frozen_teacher_GPU_inference_tested": false,
+  "live_sources_or_action_spaces_modified": false,
+  "fixture_cost_is_not_physical_inference_or_cold_cost": true,
+  "source_sha256": {
+    "flex_uda/active/native_binary_live_inputs.py": "2fa19431799e16f25528788de99cf6ffc8e2145cce3b09ba093fc74f92c7d1c1",
+    "scripts/a100_native_binary_live_contract.py": "d9d6be0d5e3b67171643f0d429f3f9193beccd6f13c9a28594c6ebdebd136e57"
+  },
+  "remaining": "Fresh feature generation, fresh teacher load/cache and final retained learner must be integrated and physically tested in one newly registered matched quality/cost cohort.",
+  "goal_status": "ACTIVE"
+}

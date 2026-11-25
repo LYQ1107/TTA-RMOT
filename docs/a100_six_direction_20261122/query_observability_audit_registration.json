@@ -1,0 +1,14 @@
+{
+  "status": "PREREGISTERED_TEACHER_INPUT_OBSERVABILITY_AUDIT",
+  "registered_unix": 1795347273.2522798,
+  "source_sha256": "e2d236f78f43757c0c1be1fed4c54d3f4462354a91324fd00f04f965779f39b9",
+  "before_aggregate_input_counts": true,
+  "motivation": "Existing CLIP renderer crops each object and its common temporal prompt omits normalized positions/frame indices. Absolute-position or time predicates may require cues removed by this invariance.",
+  "query_labels": "Existing overlapping lexical types plus conservative explicit on/at-left/right phrases, excluding trailing of/lane/road/street/team/hand; these are not verified annotation semantics",
+  "data": "Actual paid historical question input prompts/effective views/clip frame bookkeeping plus task queries only; no teacher probabilities, old posteriors or manual GT",
+  "outputs": "Aggregate input-channel counts and at most4 illustrative task queries per setting; no parameters/predictions/HOTA",
+  "theoretical_scope": "Observation equivalence counterexample under interior integer crop translation, not a guarantee of actual dataset ambiguity or teacher failure",
+  "running_protocols_unchanged": true,
+  "new_GPU_or_teacher_or_neural_calls": 0,
+  "goal_status": "ACTIVE"
+}

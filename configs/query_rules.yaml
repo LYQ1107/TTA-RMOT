@@ -1,0 +1,12 @@
+version: 1
+description: conservative rule-only Refer-KITTI query subset
+equivalent:
+  - canonical_spacing
+mutually_exclusive:
+  - image_left_vs_right
+  - image_right_vs_left
+  - ego_same_vs_counter_direction
+  - ego_counter_vs_same_direction
+unsupported:
+  - logical_or_negation_or_comparison_not_in_safe_subset
+  - no_supported_slot

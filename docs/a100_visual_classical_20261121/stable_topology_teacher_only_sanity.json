@@ -1,0 +1,32 @@
+{
+  "status": "PASS_ONE_SE_NEUTRAL_CROSSFIT_SANITY_ALL70_VIDEOS",
+  "pairs": {
+    "C4": {
+      "videos": 45,
+      "global_selection_counts": {
+        "ONE_SE": 1,
+        "TWO_SE": 0,
+        "MEDIAN": 0,
+        "DELETE_ONE": 2
+      },
+      "changed_choices_from_strict": 1,
+      "strict_validation_losses_and_BCE_BALANCED_choices_exact": true
+    },
+    "C1": {
+      "videos": 25,
+      "global_selection_counts": {
+        "ONE_SE": 17,
+        "TWO_SE": 12,
+        "MEDIAN": 13,
+        "DELETE_ONE": 18
+      },
+      "changed_choices_from_strict": 3,
+      "strict_validation_losses_and_BCE_BALANCED_choices_exact": true
+    }
+  },
+  "manual_GT_open_attempts": 0,
+  "new_teacher_encoder_head_calls": 0,
+  "primary_rule_fixed_ONE_SE_before_any_new_prediction_GT": true,
+  "SE_is_loss_sensitivity_regularizer_not_calibrated_CI": true,
+  "selector_sha256": "b2095915fe3a6b11fef70406068ed0378635fa6eb22775fe444611766a404aaa"
+}

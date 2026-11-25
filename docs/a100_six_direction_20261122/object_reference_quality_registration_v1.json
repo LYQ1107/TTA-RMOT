@@ -1,0 +1,253 @@
+{
+  "status": "REGISTERED_OBJECT_REFERENCE_SIX_SETTING_QUALITY_STUDY_V1",
+  "registered_unix": 1795352324.6776657,
+  "source_sha256": {
+    "scripts/a100_object_reference.py": "dd2a477d2c35d50333254f9763bd4e4c3b39173a374197a31548bba22b41b885",
+    "scripts/a100_object_reference_prepare.py": "b08d43dbdded083f5b394a735691742f1c6a09e6c8dc7c5ba627931650327a79",
+    "flex_uda/active/object_reference.py": "4a05e4c80c65a2bc886a1ff65b397d53cc549057ae9f28ff26325b8c5b7d597f",
+    "tests/test_object_reference.py": "769e4a81c67595d1408170100d7290f247cdac88177b90e85be2a3709c62e723",
+    "tests/test_object_reference_fields.py": "0618e351dc66962d01afbb429f10949293d4f0475f6221a64387cdbdf5bb184b",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "flex_uda/active/relational_transport.py": "2de093190983e680b35246ee19ef1edb64ccf9ffc5c2338403666c785c490736",
+    "scripts/a100_relation_transport.py": "33e70d7258baad1cfee291265bbdcf4a0f22292405e7e93aebef0fdb8cb0c12c",
+    "docs/a100_six_direction_20261122/object_reference_hypothesis_v1.json": "bfdd18d7e44e68dd01f878140c9dee6d4624c5337db6029ccb707fe1008a1a14"
+  },
+  "hypothesis": "object_reference_hypothesis_v1.json",
+  "stage": "After teacher-only target preparation and6mathematical/control checks, before any new reference/direct-frame head fit or this study quality output. Predecessor450raw outputs have sealed but its quality has not been inspected.",
+  "methods": [
+    "COARSE_DS",
+    "FRAME_DIRECT",
+    "FRAME_RESIDUAL",
+    "FRAME_DIRECT_HYBRID",
+    "REFERENCE_FULL",
+    "REFERENCE_UNSHIFTED",
+    "REFERENCE_TIME_AVERAGE",
+    "REFERENCE_SHUFFLED",
+    "REFERENCE_AT_CENTER"
+  ],
+  "baselines": [
+    "COARSE_DS",
+    "FRAME_DIRECT",
+    "FRAME_RESIDUAL",
+    "FRAME_DIRECT_HYBRID",
+    "REFERENCE_TIME_AVERAGE"
+  ],
+  "primary": "REFERENCE_FULL",
+  "contrasts": {
+    "FULL_vs_COARSE_DS": [
+      "REFERENCE_FULL",
+      "COARSE_DS"
+    ],
+    "FULL_vs_FRAME_DIRECT": [
+      "REFERENCE_FULL",
+      "FRAME_DIRECT"
+    ],
+    "FULL_vs_FRAME_RESIDUAL": [
+      "REFERENCE_FULL",
+      "FRAME_RESIDUAL"
+    ],
+    "FULL_vs_FRAME_DIRECT_HYBRID": [
+      "REFERENCE_FULL",
+      "FRAME_DIRECT_HYBRID"
+    ],
+    "FULL_vs_REFERENCE_TIME_AVERAGE": [
+      "REFERENCE_FULL",
+      "REFERENCE_TIME_AVERAGE"
+    ],
+    "TARGET_DECOMPOSITION": [
+      "REFERENCE_FULL",
+      "REFERENCE_UNSHIFTED"
+    ],
+    "DYNAMIC_vs_AT_CENTER": [
+      "REFERENCE_FULL",
+      "REFERENCE_AT_CENTER"
+    ],
+    "CURRENT_STATE_vs_SHUFFLE": [
+      "REFERENCE_FULL",
+      "REFERENCE_SHUFFLED"
+    ],
+    "RANK_AT_FULL_COUNT_vs_COARSE_DS": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "COARSE_DS__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_COARSE_DS": [
+      "REFERENCE_FULL__AT_COARSE_DS_COUNT",
+      "COARSE_DS__AT_COARSE_DS_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_DIRECT": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "FRAME_DIRECT__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_DIRECT": [
+      "REFERENCE_FULL__AT_FRAME_DIRECT_COUNT",
+      "FRAME_DIRECT__AT_FRAME_DIRECT_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_RESIDUAL": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "FRAME_RESIDUAL__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_RESIDUAL": [
+      "REFERENCE_FULL__AT_FRAME_RESIDUAL_COUNT",
+      "FRAME_RESIDUAL__AT_FRAME_RESIDUAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FRAME_DIRECT_HYBRID": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "FRAME_DIRECT_HYBRID__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FRAME_DIRECT_HYBRID": [
+      "REFERENCE_FULL__AT_FRAME_DIRECT_HYBRID_COUNT",
+      "FRAME_DIRECT_HYBRID__AT_FRAME_DIRECT_HYBRID_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_REFERENCE_TIME_AVERAGE": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "REFERENCE_TIME_AVERAGE__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_REFERENCE_TIME_AVERAGE": [
+      "REFERENCE_FULL__AT_REFERENCE_TIME_AVERAGE_COUNT",
+      "REFERENCE_TIME_AVERAGE__AT_REFERENCE_TIME_AVERAGE_COUNT"
+    ]
+  },
+  "conditions": [
+    {
+      "pair": "C1",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C1/seed0"
+    },
+    {
+      "pair": "C2",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C2/seed0"
+    },
+    {
+      "pair": "C3",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C3/seed0"
+    },
+    {
+      "pair": "C4",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C4/seed0"
+    },
+    {
+      "pair": "C5",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C5/seed0"
+    },
+    {
+      "pair": "C6",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C6/seed0"
+    },
+    {
+      "pair": "C1",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C1/seed17"
+    },
+    {
+      "pair": "C2",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C2/seed17"
+    },
+    {
+      "pair": "C3",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C3/seed17"
+    },
+    {
+      "pair": "C4",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C4/seed17"
+    },
+    {
+      "pair": "C5",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C5/seed17"
+    },
+    {
+      "pair": "C6",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C6/seed17"
+    },
+    {
+      "pair": "C1",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C1/seed42"
+    },
+    {
+      "pair": "C2",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C2/seed42"
+    },
+    {
+      "pair": "C3",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C3/seed42"
+    },
+    {
+      "pair": "C4",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C4/seed42"
+    },
+    {
+      "pair": "C5",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C5/seed42"
+    },
+    {
+      "pair": "C6",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/C6/seed42"
+    }
+  ],
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "raw_outputs": 162,
+  "count_outputs": 288,
+  "total_outputs": 450,
+  "actual_neural_fits": 492,
+  "neural_fit_breakdown": {
+    "all_setting_ordinary_direct_frame_fits": 444,
+    "reference_head_fits": 24,
+    "same_architecture_unshifted_target_control_fits": 24
+  },
+  "exact_ordinary_information": "All paid raw view answers, task queries, provided candidates, frozen PCD/RGB/query cues plus normalizedxywh/orientedx/gate. Existing adequate residual frame comparator is retained; a new zero-residual direct ordinary frame head is trained in every setting.",
+  "reference_fit": "Direct1081D->64GELU->1; current-prefix reference targets, no reclipping after transport; raw confidence-weight group sums; all prefix queries",
+  "ordinary_frame_fit": "Direct1087D->64GELU->1, fixed zero-source logit; same min4000,max16000,teacherKL<=.005 recipe; no GT checkpoint choice",
+  "no_future_video_teacher_heads_or_normalization": true,
+  "all_data_development": true,
+  "candidate_generator_scope": "Official fixedMcByte boxes/TrackIDs; no claim of whole frontend source-only training",
+  "teacher": "Same frozenQwen3-VL-2B-Instruct paid evidence as fixed-view core; no new teacher or encoder calls",
+  "current_video_transductive_not_frame_online": true,
+  "no_target_manual_labels_in_adaptation": true,
+  "all450raw_and_counts_seal_before_this_GT": true,
+  "count_controls": "Both per-query/per-frame count directions against5baselines and sixCountSelfidentities; counts neverfromGT",
+  "uncertainty": "Same original-video parent/bootstrap routine,13Sports parent groups; KITTI4videos have no population CI; all comparisons descriptiveDEV",
+  "cost": "Fixed-evidence quality replay only. New492headfit walls recorded, but no fresh cold-start end-to-end cost claim.",
+  "eligibility": "Same conservative language rule in all settings; inactive/zero-slope predictions retainDS_FULLexactly. Current reference applicability onlyC2/C5, not itself completion of six-setting or three-innovation goal.",
+  "preserve_predecessor": "Wait predecessorGPUstagecomplete, preserve all its workers/predictions, keep original450study protocol/results unchanged",
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "no_posthoc_primary_promotion": true,
+  "goal_status": "ACTIVE",
+  "execution_source_fix_history": [
+    {
+      "kind": "IO_DOMAIN_NAME_SHADOWING_FIX",
+      "unix": 1795353392.702263,
+      "source": "scripts/a100_object_reference.py",
+      "original_sha256": "4cc6ff93b0b2af8e8335d35e98248949c1fe50828196f84152fed574f35b11eb",
+      "new_sha256": "dd2a477d2c35d50333254f9763bd4e4c3b39173a374197a31548bba22b41b885",
+      "original_recipe_and_all_numerical_values_unchanged": true,
+      "affected_workers_all_terminal_before_source_edit": true,
+      "exact_change": "Rename the pseudo-target array to reference_target at its binding and two uses, preserving the target dataset string.",
+      "diff": "--- original_entry\n+++ fixed_entry\n@@ -161,7 +161,7 @@\n             preparation = json.loads((prepared/'completion.json').read_text())\n             beta = preparation['beta']\n             with np.load(prepared/'prefix_targets.npz') as a:\n-                target,control,weight,cell_q,cell_t,cell_v = [a[k] for k in\n+                reference_target,control,weight,cell_q,cell_t,cell_v = [a[k] for k in\n                     ('reference_target','unshifted_target','sample_weight','cell_query','cell_track','cell_video')]\n             current_cells = cell_v == len(preparation['ordered_videos'])-1\n             reference_x.append(raw[cell_q[current_cells],cell_t[current_cells]])\n@@ -172,9 +172,9 @@\n             ref_mean = reference_total/reference_rows\n             ref_std = np.maximum(np.sqrt(np.maximum(reference_square/reference_rows-ref_mean**2,0)),1e-3)\n             ref_x = np.concatenate(reference_x)\n-            assert len(ref_x) == len(target) == preparation['prefix_reference_groups']\n+            assert len(ref_x) == len(reference_target) == preparation['prefix_reference_groups']\n             fields = {}\n-            for name,label in (('REFERENCE',target),('UNSHIFTED',control)):\n+            for name,label in (('REFERENCE',reference_target),('UNSHIFTED',control)):\n                 predictions,receipt,head = fit_head(ref_x,np.zeros(len(ref_x)),label,current,np.zeros(prior.size),\n                     ref_mean,ref_std,sample_weight=weight,soft=True,seed=seed)\n                 receipt.update(architecture='1081->64 GELU->1 direct reference head; all prefix queries',\n"
+    }
+  ]
+}

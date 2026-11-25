@@ -1,0 +1,44 @@
+{
+  "status": "PREREGISTERED_PAIRED_STATE_PRESERVING_TEACHER_INPUT_PILOT",
+  "registered_unix": 1795348410.1344686,
+  "before_new_variant_teacher_answers": true,
+  "source_sha256": {
+    "scripts/a100_state_teacher_input_pilot.py": "23e71d85b4cfed9cb1951d942cee2bc501ade55e9eb58616edaee42c98f6e5dc",
+    "flex_uda/active/state_teacher_inputs.py": "15d585bb97256b5308daa78c856e65e1522b225726282fc512c16d03723a0ebe",
+    "tests/test_state_teacher_inputs.py": "7c22b3a04c85b0bd6affbaf3659e1251b5a30e67be4620324ff6776192bfa1e0",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703"
+  },
+  "question_manifest_sha256": "2928042bacf75615a4ca28e45219acafc04c1c58c6057f3ea6172cff09b83cfd",
+  "fixed_questions": [
+    "automobiles-moving-in-the-opposite-direction-on-the-left",
+    "autos-going-in-the-opposite-direction-on-the-left",
+    "automobiles-in-white-are-headed-in-the-opposite-direction-from-the-ego-car"
+  ],
+  "source_video": "0005",
+  "question_count": 12,
+  "variant_count": 5,
+  "expected_fresh_physical_calls": 60,
+  "variants": [
+    "ORIGINAL",
+    "LAST",
+    "POSITION",
+    "TIME",
+    "STATE"
+  ],
+  "primary_fixed_before_teacher_answers": "STATE",
+  "source_rule": "First two explicit on/at-left/right MOTION queries plus first other MOTION query in firstKITTI video; first4 genuine>=2unique-frameCLIP requests from fixed4policy manifest union each. No teacher probability or GT choice.",
+  "image_control": "All5 variants have identical actual visual SHA and must retain equal visual-token count per question; CROP/FRAME_BOX untouched",
+  "changes": "LAST fixes current decision reference; POSITION adds normalizedglobalbbox only; TIME adds actual sourceframe offsets only; STATE both. Original pixels/teacher weights unchanged.",
+  "expected_frozen_teacher_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "resource": "One idle physicalGPU0..3 with<512MiB internal preflight; temporary1GiB reservation during load; no running task restarted",
+  "costs": "One sharedteacherload/warmcache/fixed variant order; actual data preparation/forward costs only, not full pervariant deployment or Pareto",
+  "interpretation": "Teacher response sensitivity and protocol only; no manual truth, no claim improved accuracy. Retain all controls, no posthoc best variant selection.",
+  "future_baseline": "Adequate ordinary KD gets exactly the same STATE evidence if main adaptation uses STATE; no information privilege.",
+  "manual_GT_in_any_step": false,
+  "new_adaptation_fits_or_quality_predictions": 0,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

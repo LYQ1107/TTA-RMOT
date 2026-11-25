@@ -1,0 +1,169 @@
+{
+  "methods": {
+    "FROZEN": {
+      "valid_frames": 42657,
+      "mixed_frames": 26352,
+      "disjoint_frames": 42657,
+      "hard_disjoint_frames": 23008,
+      "correct_top1": 0.6147877253440233,
+      "random_top1": 0.5782987548633602,
+      "visual_top1": 0.5761305295731064,
+      "correct_recall_at1": 0.15799892839200172,
+      "correct_positive_rank_percentile": 0.5202005269595346,
+      "all_other_top1": 0.5737847832712099,
+      "all_other_positive_rank_percentile": 0.5017833142357534,
+      "disjoint_top1": 0.5737630568086264,
+      "disjoint_correct_top1": 0.6147877253440233,
+      "disjoint_random_top1": 0.5782987548633602,
+      "hard_disjoint_top1": 0.23699624147294573,
+      "hard_disjoint_correct_top1": 0.32136648122392214,
+      "hard_disjoint_random_top1": 0.267061896807197,
+      "mixed_correct_top1": 0.37644201578627806,
+      "mixed_random_top1": 0.31737591022328016,
+      "mixed_visual_top1": 0.31386612021857924,
+      "mixed_source_AUROC": 0.5597045760372272,
+      "mixed_visual_AUROC": 0.504818843001205,
+      "mixed_other_AUROC": 0.500283668783072
+    },
+    "SOURCE_REHEARSAL": {
+      "valid_frames": 42657,
+      "mixed_frames": 26352,
+      "disjoint_frames": 42657,
+      "hard_disjoint_frames": 23008,
+      "correct_top1": 0.6106383477506623,
+      "random_top1": 0.5782987548633602,
+      "visual_top1": 0.5776543123051316,
+      "correct_recall_at1": 0.15259130771245255,
+      "correct_positive_rank_percentile": 0.5142754229788447,
+      "all_other_top1": 0.5755400637644467,
+      "all_other_positive_rank_percentile": 0.5016633183478622,
+      "disjoint_top1": 0.5754880108482651,
+      "disjoint_correct_top1": 0.6106383477506623,
+      "disjoint_random_top1": 0.5782987548633602,
+      "hard_disjoint_top1": 0.23808126779919195,
+      "hard_disjoint_correct_top1": 0.31263038942976357,
+      "hard_disjoint_random_top1": 0.267061896807197,
+      "mixed_correct_top1": 0.36972525804493017,
+      "mixed_random_top1": 0.31737591022328016,
+      "mixed_visual_top1": 0.31633272616879177,
+      "mixed_source_AUROC": 0.5530642938239037,
+      "mixed_visual_AUROC": 0.503855452794807,
+      "mixed_other_AUROC": 0.5029650273095281
+    },
+    "MLLM_DISTILL": {
+      "valid_frames": 42657,
+      "mixed_frames": 26352,
+      "disjoint_frames": 42657,
+      "hard_disjoint_frames": 23008,
+      "correct_top1": 0.6130764001219026,
+      "random_top1": 0.5782987548633602,
+      "visual_top1": 0.5790139953583233,
+      "correct_recall_at1": 0.15315487503648198,
+      "correct_positive_rank_percentile": 0.5205767775873631,
+      "all_other_top1": 0.5762609302107509,
+      "all_other_positive_rank_percentile": 0.5008881735127723,
+      "disjoint_top1": 0.5762689140765994,
+      "disjoint_correct_top1": 0.6130764001219026,
+      "disjoint_random_top1": 0.5782987548633602,
+      "hard_disjoint_top1": 0.22829616199748481,
+      "hard_disjoint_correct_top1": 0.31862830319888735,
+      "hard_disjoint_random_top1": 0.267061896807197,
+      "mixed_correct_top1": 0.3736718275652702,
+      "mixed_random_top1": 0.31737591022328016,
+      "mixed_visual_top1": 0.3185336976320583,
+      "mixed_source_AUROC": 0.5642594979085112,
+      "mixed_visual_AUROC": 0.5076430097458041,
+      "mixed_other_AUROC": 0.5015638280424807
+    }
+  },
+  "comparisons": {
+    "SOURCE_REHEARSAL_vs_FROZEN": {
+      "correct_top1": {
+        "delta": -0.004149377593360981,
+        "video_cluster_CI95": [
+          -0.00861377762757423,
+          0.0026293360804806737
+        ],
+        "valid_resamples": 2000
+      },
+      "correct_top1_minus_all_other_top1": {
+        "delta": -0.00590465808659775,
+        "video_cluster_CI95": [
+          -0.01066748328778125,
+          0.0009872421794394374
+        ],
+        "valid_resamples": 2000
+      },
+      "mixed_source_AUROC_minus_mixed_visual_AUROC": {
+        "delta": -0.005676892006924721,
+        "video_cluster_CI95": [
+          -0.015046966961826029,
+          0.0025617611139566597
+        ],
+        "valid_resamples": 2000
+      },
+      "mixed_source_AUROC_minus_mixed_other_AUROC": {
+        "delta": -0.009321640739775684,
+        "video_cluster_CI95": [
+          -0.019067710955674538,
+          0.0001272880503580911
+        ],
+        "valid_resamples": 2000
+      },
+      "hard_disjoint_correct_top1_minus_hard_disjoint_top1": {
+        "delta": -0.009821118120405412,
+        "video_cluster_CI95": [
+          -0.019547759932375328,
+          0.016003024193548376
+        ],
+        "valid_resamples": 1998
+      }
+    },
+    "MLLM_DISTILL_vs_FROZEN": {
+      "correct_top1": {
+        "delta": -0.0017113252221206965,
+        "video_cluster_CI95": [
+          -0.020189725299121684,
+          0.017259601456890962
+        ],
+        "valid_resamples": 2000
+      },
+      "correct_top1_minus_all_other_top1": {
+        "delta": -0.004187472161661626,
+        "video_cluster_CI95": [
+          -0.021460654319126953,
+          0.01412466107930346
+        ],
+        "valid_resamples": 2000
+      },
+      "mixed_source_AUROC_minus_mixed_visual_AUROC": {
+        "delta": 0.001730755126689812,
+        "video_cluster_CI95": [
+          -0.020806843758798634,
+          0.03461650540174756
+        ],
+        "valid_resamples": 2000
+      },
+      "mixed_source_AUROC_minus_mixed_other_AUROC": {
+        "delta": 0.0032747626118857995,
+        "video_cluster_CI95": [
+          -0.023402490737529844,
+          0.031582253159674445
+        ],
+        "valid_resamples": 2000
+      },
+      "hard_disjoint_correct_top1_minus_hard_disjoint_top1": {
+        "delta": 0.005961901450427201,
+        "video_cluster_CI95": [
+          -0.027834338627491365,
+          0.08295886079162403
+        ],
+        "valid_resamples": 1998
+      }
+    }
+  },
+  "visual_control": "mean over17 real-query scores for each candidate, not an independent visual network",
+  "text_swap": "real other expressions can match the same person; disjoint and nonempty-disjoint controls are separately reported",
+  "uncertainty": "25-video paired bootstrap2000 seed0; descriptive same-Val diagnosis, not frame-independent inference",
+  "GT_used_only_after_complete_prediction_seal": true
+}

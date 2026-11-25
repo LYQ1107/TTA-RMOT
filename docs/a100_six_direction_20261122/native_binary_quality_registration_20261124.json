@@ -1,0 +1,258 @@
+{
+  "status": "REGISTERED_UNIFIED_NATIVE_BINARY_ALL_SIX_BEFORE_RMOT_GENERATION_OR_GT",
+  "registered_unix": 1795489890.0811765,
+  "neural_seeds": [
+    0
+  ],
+  "primary": "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL",
+  "recipes": {
+    "FULL_CONDITIONAL_REFERENCE_LEARNED": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "identity": true,
+      "policy": "LEARNED"
+    },
+    "FULL_CONDITIONAL_LOCAL_LEARNED": {
+      "family": "structured",
+      "conditional": true,
+      "reference": false,
+      "identity": true,
+      "policy": "LEARNED"
+    },
+    "FULL_LIKELIHOOD_REFERENCE_LEARNED": {
+      "family": "structured",
+      "conditional": false,
+      "reference": true,
+      "identity": true,
+      "policy": "LEARNED"
+    },
+    "FULL_LIKELIHOOD_LOCAL_LEARNED": {
+      "family": "structured",
+      "conditional": false,
+      "reference": false,
+      "identity": true,
+      "policy": "LEARNED"
+    },
+    "JOINT_KD_LEARNED": {
+      "family": "pair",
+      "risk": "joint",
+      "policy": "LEARNED"
+    },
+    "MARGINAL_KD_LEARNED": {
+      "family": "pair",
+      "risk": "marginal",
+      "policy": "LEARNED"
+    },
+    "POINT_KD_LEARNED": {
+      "family": "point",
+      "risk": "joint",
+      "policy": "LEARNED"
+    },
+    "LOGIT_KD_LEARNED": {
+      "family": "point",
+      "risk": "logit",
+      "policy": "LEARNED"
+    },
+    "COARSE_UNIT_SOFT_LEARNED": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": false,
+      "policy": "LEARNED"
+    },
+    "COARSE_UNIT_HARD_LEARNED": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": false,
+      "policy": "LEARNED"
+    },
+    "COARSE_CONF_SOFT_LEARNED": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": true,
+      "policy": "LEARNED"
+    },
+    "COARSE_CONF_HARD_LEARNED": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": true,
+      "policy": "LEARNED"
+    },
+    "FULL_CONDITIONAL_REFERENCE_FROZEN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "identity": true,
+      "policy": "FROZEN"
+    },
+    "FULL_CONDITIONAL_LOCAL_FROZEN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": false,
+      "identity": true,
+      "policy": "FROZEN"
+    },
+    "FULL_LIKELIHOOD_REFERENCE_FROZEN": {
+      "family": "structured",
+      "conditional": false,
+      "reference": true,
+      "identity": true,
+      "policy": "FROZEN"
+    },
+    "FULL_LIKELIHOOD_LOCAL_FROZEN": {
+      "family": "structured",
+      "conditional": false,
+      "reference": false,
+      "identity": true,
+      "policy": "FROZEN"
+    },
+    "JOINT_KD_FROZEN": {
+      "family": "pair",
+      "risk": "joint",
+      "policy": "FROZEN"
+    },
+    "MARGINAL_KD_FROZEN": {
+      "family": "pair",
+      "risk": "marginal",
+      "policy": "FROZEN"
+    },
+    "POINT_KD_FROZEN": {
+      "family": "point",
+      "risk": "joint",
+      "policy": "FROZEN"
+    },
+    "LOGIT_KD_FROZEN": {
+      "family": "point",
+      "risk": "logit",
+      "policy": "FROZEN"
+    },
+    "COARSE_UNIT_SOFT_FROZEN": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": false,
+      "policy": "FROZEN"
+    },
+    "COARSE_UNIT_HARD_FROZEN": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": false,
+      "policy": "FROZEN"
+    },
+    "COARSE_CONF_SOFT_FROZEN": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": true,
+      "policy": "FROZEN"
+    },
+    "COARSE_CONF_HARD_FROZEN": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": true,
+      "policy": "FROZEN"
+    },
+    "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "identity": false,
+      "policy": "LEARNED"
+    }
+  },
+  "methods": [
+    "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL",
+    "FULL_CONDITIONAL_LOCAL_LEARNED_FINAL",
+    "FULL_LIKELIHOOD_REFERENCE_LEARNED_FINAL",
+    "FULL_LIKELIHOOD_LOCAL_LEARNED_FINAL",
+    "JOINT_KD_LEARNED_FINAL",
+    "JOINT_KD_LEARNED_MEAN",
+    "MARGINAL_KD_LEARNED_FINAL",
+    "MARGINAL_KD_LEARNED_MEAN",
+    "POINT_KD_LEARNED_FINAL",
+    "POINT_KD_LEARNED_MEAN",
+    "LOGIT_KD_LEARNED_FINAL",
+    "LOGIT_KD_LEARNED_MEAN",
+    "COARSE_UNIT_SOFT_LEARNED_FINAL",
+    "COARSE_UNIT_SOFT_LEARNED_MEAN",
+    "COARSE_UNIT_HARD_LEARNED_FINAL",
+    "COARSE_UNIT_HARD_LEARNED_MEAN",
+    "COARSE_CONF_SOFT_LEARNED_FINAL",
+    "COARSE_CONF_SOFT_LEARNED_MEAN",
+    "COARSE_CONF_HARD_LEARNED_FINAL",
+    "COARSE_CONF_HARD_LEARNED_MEAN",
+    "FULL_CONDITIONAL_REFERENCE_FROZEN_FINAL",
+    "FULL_CONDITIONAL_LOCAL_FROZEN_FINAL",
+    "FULL_LIKELIHOOD_REFERENCE_FROZEN_FINAL",
+    "FULL_LIKELIHOOD_LOCAL_FROZEN_FINAL",
+    "JOINT_KD_FROZEN_FINAL",
+    "JOINT_KD_FROZEN_MEAN",
+    "MARGINAL_KD_FROZEN_FINAL",
+    "MARGINAL_KD_FROZEN_MEAN",
+    "POINT_KD_FROZEN_FINAL",
+    "POINT_KD_FROZEN_MEAN",
+    "LOGIT_KD_FROZEN_FINAL",
+    "LOGIT_KD_FROZEN_MEAN",
+    "COARSE_UNIT_SOFT_FROZEN_FINAL",
+    "COARSE_UNIT_SOFT_FROZEN_MEAN",
+    "COARSE_UNIT_HARD_FROZEN_FINAL",
+    "COARSE_UNIT_HARD_FROZEN_MEAN",
+    "COARSE_CONF_SOFT_FROZEN_FINAL",
+    "COARSE_CONF_SOFT_FROZEN_MEAN",
+    "COARSE_CONF_HARD_FROZEN_FINAL",
+    "COARSE_CONF_HARD_FROZEN_MEAN",
+    "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED_FINAL"
+  ],
+  "source_sha256": {
+    "scripts/a100_native_binary_six_setting.py": "b1d7e2571ca54b5f326b943fbc6b466758786c0d61d59a49797a7baca905583f",
+    "scripts/a100_native_binary_analyze.py": "d5000e96e26a97e64524e51878b5e562b926c1706fcf101f0da4e63220a3954b",
+    "scripts/a100_native_binary_statistics_reproduce.py": "170cd5e2ea66d55b574d6db5ff38d5570e4c003105fe41f35221aaab71f879ae",
+    "scripts/a100_native_binary_contract.py": "38e3d053995c324e83adceb3a4d0b5a90d009104dd99d50cbf1560e420608bd2",
+    "flex_uda/active/native_binary_inputs.py": "d2eac481bf3d8fa7ccd6900a06b05f46f0ba6839439709d12d3a2387777da820",
+    "flex_uda/active/native_binary_models.py": "42802438f04f6d8542d780f19aa50daa2ef5d75e946b1c6ce88c8e6ed9f510c0",
+    "flex_uda/active/native_binary_fit.py": "3ae3c7abc37f7a555f5d3caff3b6273d306fcc39f1f02e7cae1c01850b553231",
+    "flex_uda/active/native_binary_curriculum.py": "8a5faabacb1848481b8295a4bae3a63fcd9098cbb7aad15bd48e7ee6e77eac64",
+    "flex_uda/active/cross_candidate_gauge.py": "d9c825644a2aef400e247074066a5c3f5467584496e04b232e12fabab5936764",
+    "flex_uda/active/cross_candidate_learning.py": "6dd621d4565e376afb6da2f958f71142f13f6b6b180321c09f3fb96d57d271e0",
+    "flex_uda/active/rsi_curriculum.py": "f7377f56ec673bcc2055e75a4da33682e96a49f2f4b64c3e33184683cd67f49f",
+    "flex_uda/active/rsi_discrimination_feedback.py": "6cb4012eead87cdf6af36b94a793b036041b96bed99572a8343c52eefcf2ae00",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5",
+    "scripts/a100_joint_observation_six_setting.py": "427fd8202dfe52c071894b6aa85e6c80330cb6112d685b9b52202516ad73ae8f",
+    "scripts/a100_observation_design_collect.py": "03dbab66815a7a4b107eb3a5449d7580d4c2056f8955ee32b11790868ac36d59",
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801"
+  },
+  "fixed_candidates_and_source_models": "Same official McByte candidates and V2/Dance/LaMOT source PCD; common 1101D PCD/HSV/trajectory inputs.",
+  "current_video_transductive": true,
+  "future_video_teacher_answers_and_normalizers_forbidden": true,
+  "all_data_DEV_no_independent_blind_split": true,
+  "manual_target_GT_only_after_all_own_raw_and_dual_counts_seal": true,
+  "teacher_signal": "Unchanged stored native Yes/No probability from frozen9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956. Four original policy metadata libraries define finite actions; values accessible only through paid broker.",
+  "binary_teacher_library_replay_not_new_GPU_or_cold_deployment": true,
+  "budget": "Same original per-video/per-query count for every observer; fresh paired probes from all three rounds are paid inside it; all queries retained.",
+  "curriculum_rounds": 3,
+  "observer": "18x32 MLP, SGD lr.1 momentum0, .2 uniform exploration, own-prefix state carry; learned vs frozen actor.",
+  "solver": "Stable identity h_i plus reference-centered local state, pair-common gauge fixed; independent count encoder and conditional utility gradients.",
+  "pair_target": "Factorized product of two independently asked binary opinions is a MODELLING ASSUMPTION. A singleton is one repeated event (both/neither), not two independent copies. Every unique point appears once per endpoint in deterministic query-wise ring.",
+  "critic": "Fresh same-query/view different-track paid probes; teacher exactly-one mass times conditional pair CE; AB/BA scored analytically without more teacher calls; macro query. Best constant after orientation symmetry is .5; weighted information floor. Reward tanh(delta positive conditional utility skill / information) only if information>=.005. Count parameters do not enter the reward.",
+  "ordinary": "Same complete raw contexts and paid data. Full joint KD, direct marginal/binary KD, complete-point soft KD, clipped-teacher-logit regression and pooled unit/confidence soft/hard. Required .005 excess proper KL or explicitly labelled .005 excess MSE for logit regression.",
+  "optimization": "All seed0, Adam .001 minimum1000 initial/400 warm, maximum4000, full-batch gradient streamed1024; ordinary best-risk continuation and float64 LBFGS, capacities128/256/512 if needed; structured64 finite/plateau. No task metrics select checkpoints.",
+  "matched_optimization": "All structural replay and complete pair/point/logit and unit-soft pooled baselines match all three paid training rounds and final all-paid fit; remaining pooled hard/confidence controls final-only.",
+  "factorial": "2x2x2 conditional-vs-full likelihood, reference-vs-local state, learned-vs-frozen observer paths. Two full loops generate paths; six other structural cells use fixed-question replay. Extra NoIdentity at full path.",
+  "snapshots": "Structured FINAL; all ordinary FINAL and arithmetic-probability MEAN of early400 and final, with stable float64 marginal logs.",
+  "raw_paths_per_setting": 41,
+  "unique_official_scope": 726,
+  "CountSelf": "Every query/frame exact mask audit; aliases only, no redundant officials. Dual counts per comparator.",
+  "engineering": "Real unlabelled input/gradient, count-only zero-reward and all41 dense slice paths passed; six GPU head-fit families passed with same seed0 and separate durable receipt; metadata148 units,140 full fresh-probe rounds.",
+  "GPU_memory_fraction": 0.15,
+  "GPU_scope": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "shared2_3_preflight_max_MiB": 8192,
+  "GPU0_1_require_no_resident_compute_PID": true,
+  "no_old80_queue_v9_or_archived_v8P66_repeats": true,
+  "no_current_quality_or_module_gain_claim": true,
+  "goal_status": "ACTIVE"
+}

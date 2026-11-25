@@ -1,0 +1,44 @@
+{
+  "status": "PASS_EXACT_ADAPTIVE_RESIDUAL_RISK_AND_GRADIENT_IDENTITY",
+  "synthetic_teacher_action_units": 5,
+  "adaptive_complete_paths": 36,
+  "with_replacement_draws_per_query": 2,
+  "fixed_query_schedule": [
+    0,
+    1,
+    0,
+    1
+  ],
+  "path_probability_sum": 1.0,
+  "maximum_coefficient_expectation_error": 1.1102230246251565e-16,
+  "fixed_model_teacher_risk": 0.9827995980882657,
+  "expected_residual_risk": 0.982799598088266,
+  "expected_gradient_maximum_error": 5.551115123125783e-17,
+  "proxy_only_risk": 0.5298308061136219,
+  "probability_clipping_breaks_identity_maximum_bias": 0.427173360131834,
+  "signed_coefficients_not_teacher_probabilities": true,
+  "no_unbiased_claim_for_the_fitted_model_semantics_HOTA_or_outside_pool": true,
+  "support_and_prelabel_prediction_required": true,
+  "no_estimated_or_reconstructed_old_propensities": true,
+  "no_random_draws_neural_training_new_teacher_data_GT_or_HOTA": true,
+  "classical_augmented_importance_sampling_not_claimed_original": true,
+  "primary_references": [
+    {
+      "url": "https://arxiv.org/html/2607.08347",
+      "read": "Fixed-model setup and control-variate/LURE formulation; our with-replacement illustration is not its full theorem."
+    },
+    {
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2021/file/09e7655fc1dc8fa7c9d6c4478313d5e6-Paper.pdf",
+      "read": "Adaptive-fitting assumptions, introduction and estimator context; no import of its asymptotic CI guarantees."
+    },
+    {
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2022/file/9b9cfd5428153ccfbd4ba34b7e007305-Paper-Conference.pdf",
+      "read": "Abstract/setup: active surrogate is model evaluation, not an automatic guarantee for training."
+    }
+  ],
+  "source_sha256": {
+    "scripts/a100_residual_risk_contract.py": "cb439a01b8e790acde9c5ec08a04d4a8532a06ff2ab369707c7778507b436625",
+    "flex_uda/active/residual_risk.py": "6009c526cc56188a3cf4873ef96ec78cd51ab2bdeaf37f493724fd83b9005cce"
+  },
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,28 @@
+{
+  "status": "PASS_CROSS_CANDIDATE_LEARNING_NUMERICAL_CONTRACTS",
+  "errors": {
+    "conditional_swap": 0.0,
+    "conditional_normalization": 2.220446049250313e-16,
+    "conditional_full_forward": 0.0,
+    "prefix_coordinate_change": 6.661338147750939e-16,
+    "ordinary_swap": 0.0,
+    "ordinary_normalization": 2.220446049250313e-16,
+    "common_intercept_cancellation": 0.0
+  },
+  "gradients": {
+    "conditional_No_only_utility": 0.0,
+    "full_No_only_utility": 233.22474195305156,
+    "exactly_one_identity": 32.20587196420352
+  },
+  "only_seed0": true,
+  "synthetic_only": true,
+  "no_teacher_or_GPU_or_GT_or_quality_runs": true,
+  "candidate_identity_receives_conditional_discrimination_gradients": true,
+  "No_only_count_supervision_cannot_update_conditional_utility": true,
+  "common_intercept_cancellation_is_classical_not_new_theorem": true,
+  "no_guarantee_of_cross_domain_HOTA_or_teacher_accuracy": true,
+  "sources": {
+    "flex_uda/active/cross_candidate_learning.py": "6dd621d4565e376afb6da2f958f71142f13f6b6b180321c09f3fb96d57d271e0",
+    "scripts/a100_cross_candidate_contract.py": "1a1cbb70681110145b161043a3b6489f6554fa569fc247a0b10e4c7fc0fd1c4a"
+  }
+}
