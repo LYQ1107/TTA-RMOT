@@ -1,0 +1,68 @@
+{
+  "status": "REGISTERED_SHARED_IMAGE_ONLY_FROZEN_APPEARANCE_INPUTS",
+  "cases": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "evaluated_video": "dancetrack0004",
+      "source_row_keys": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/joint_teacher_noise_primary_20261125/C1/row_keys.json",
+      "row_keys_sha256": "819e544f2e036ecde90c646a596d129eacb31dcce11abf7bda6f634968955af6",
+      "data_sha256": "3d58a426966aaf333d0975a2d2e7ae07bca362e4a8f6863ca2ad7fdfad5cdbc9"
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "evaluated_video": "0005",
+      "source_row_keys": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/joint_teacher_noise_primary_20261125/C2/row_keys.json",
+      "row_keys_sha256": "cc775923c3f410f7cff1e96e4f0849b5bf47486cd85f2b390e060a1ee8763829",
+      "data_sha256": "441b5786cb780b638d16f74d27d5613fbd0fc0ad96d134b6e54e38a51aa09669"
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "evaluated_video": "v_00HRwkvvjtQ_c001",
+      "source_row_keys": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/joint_teacher_noise_primary_20261125/C4/row_keys.json",
+      "row_keys_sha256": "f3b6edf3bf5055e028156e1193e8ec249f4b313dfa66bc2ae7edfc28c5068ce7",
+      "data_sha256": "56b338b5035da909a54a9a93944dae1f1218d8180d36346c05d3c0e1b039e43f"
+    }
+  ],
+  "rows": 17399,
+  "roles": [
+    "C1",
+    "C2",
+    "C4",
+    "AUX"
+  ],
+  "batch_size": 16,
+  "descriptor": "Frozen official-compatible DINOv2 ViT-B/14 CLS768; full candidate ROI clipped, bicubic resize224square, ImageNet mean/std, float32, no text/query input.",
+  "invalid_crop_rule": "Retain observation with zero descriptor and explicit validity=False; never fabricate a semantic No.",
+  "source_sha256": {
+    "scripts/a100_dino_appearance_collect.py": "2e6bf0cdada18622ba00b35226131cd42045636c58cd5a2982991648ad139e72",
+    "flex_uda/active/frozen_appearance.py": "84d7629b34d0a6914afdfb452f9b542863961d5b86aace1aaf6b64014f3edf31",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/deterministic_observation_runtime.py": "572e8cd6033a357134debec2c3fab8f1ab957182465942dc1e6c37760a5e8804",
+    "scripts/a100_anchor_observability.py": "13bfe389a8b8ce71532b4dbfebd5e1ea94166f9fb93c90a593d627e3087c5713",
+    "configs/a100_paths.json": "c7bc77307fe4f9fcc2c78c4e01be7bb77bbdb9f3168ac64071f47a1d26e28730"
+  },
+  "asset_sha256": "b2433e9959c57ecb363560402e0666795c70f09d2d412a60c48336abdac19a61",
+  "weight_path": "/data3/liuyeqiang/.cache/torch/hub/checkpoints/dinov2_vitb14_pretrain.pth",
+  "weight_sha256": "0b8b82f85de91b424aded121c7e1dcc2b7bc6d0adeea651bf73a13307fad8c73",
+  "source_parent_registration_sha256": "38cff0b8f41228ec294ec7b5edcaa5909f5dd9e9e9b3ad9f6c5c93e9e257f05c",
+  "supplied_identically_to_all_future_ordinary_and_candidate_methods": true,
+  "all_data_DEV": true,
+  "pretraining_target_overlap_unknown": true,
+  "no_manual_target_GT_teacher_answer_or_model_quality_used_in_ROI_selection": true,
+  "dense_scope": "All official candidate observations in each of the three current first videos; auxiliary paid-event crops and their same-track anchors in other videos.",
+  "new_Qwen_answer_calls": 0,
+  "neural_training_or_RMOT_predictions": 0,
+  "GPU_roles": {
+    "C1": 0,
+    "C2": 1,
+    "C4": 3,
+    "AUX": 2
+  },
+  "GPU2_shared_existing_services_preserved": true,
+  "visual_forward_cost_measured_but_not_a_fresh_single_method_deployment": true,
+  "goal_status": "ACTIVE"
+}
