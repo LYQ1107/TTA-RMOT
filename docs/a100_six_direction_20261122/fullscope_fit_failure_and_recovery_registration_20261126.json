@@ -1,0 +1,328 @@
+{
+  "status": "DIAGNOSED_ORIGINAL_FIT_FAILURES_RECOVERY_REGISTERED_NO_HOTA",
+  "original_teacher_fit_gate": 0.005,
+  "original_Adam_max_steps": 16000,
+  "cases": [
+    {
+      "pair": "C2",
+      "video": "0019",
+      "feasibility": {
+        "rows": 12037,
+        "unique_exact_inputs": 12037,
+        "conflicting_groups": 0,
+        "maximum_same_input_target_span": 0.0,
+        "irreducible_individual_teacher_KL": {
+          "positive_LURE": 3.294490594696073e-20,
+          "ordinary": 6.315020269156839e-18
+        },
+        "zero_floor_does_not_prove_neural_capacity_or_optimization": true
+      },
+      "primary_measurements": {
+        "bootstrap": {
+          "teacher_KL": {
+            "positive_LURE": 0.4142507951801108,
+            "ordinary": 0.43338002740249987
+          },
+          "raw_logit_quantiles": [
+            -15.653756141662598,
+            -5.674588642120361,
+            -0.6066343188285828,
+            4.516985969543457,
+            11.18216609954834
+          ],
+          "raw_absolute_over": {
+            "8": 37,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            1.462221622467041,
+            1.957659320831299,
+            4.725434303283691,
+            16.136198425292907,
+            26.735713958740234
+          ],
+          "known_teacher_class_disagreements": 5293,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        },
+        "closed6000": {
+          "teacher_KL": {
+            "positive_LURE": 0.02276678644657262,
+            "ordinary": 0.02480092115812615
+          },
+          "raw_logit_quantiles": [
+            -17.26358413696289,
+            -11.016059532165528,
+            -1.8816149234771729,
+            7.585071430206296,
+            12.368093490600586
+          ],
+          "raw_absolute_over": {
+            "8": 766,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            3.5109894275665283,
+            4.95343427658081,
+            11.190019607543945,
+            29.09674011230468,
+            43.16781997680664
+          ],
+          "known_teacher_class_disagreements": 563,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        },
+        "failed16000": {
+          "teacher_KL": {
+            "positive_LURE": 0.025550544247676464,
+            "ordinary": 0.028716919768399303
+          },
+          "raw_logit_quantiles": [
+            -26.112855911254883,
+            -15.57130599975586,
+            -1.6146464347839355,
+            10.660699729919429,
+            17.889623641967773
+          ],
+          "raw_absolute_over": {
+            "8": 1884,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            2.4118499755859375,
+            3.6085001373291017,
+            8.000861167907715,
+            23.43819000244138,
+            36.30896759033203
+          ],
+          "known_teacher_class_disagreements": 669,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        }
+      },
+      "original_primary_failed_teacher_KL": 0.02871692033619938,
+      "same_arch_ordinary": {
+        "adequate": false,
+        "exception": "('C2', 'SOFT_KD', 0.029037945630428524)",
+        "original_gate_not_weakened": true,
+        "original_partial_checkpoint_preserved": true,
+        "primary_not_replaced": true
+      }
+    },
+    {
+      "pair": "C5",
+      "video": "0019",
+      "feasibility": {
+        "rows": 12037,
+        "unique_exact_inputs": 12037,
+        "conflicting_groups": 0,
+        "maximum_same_input_target_span": 0.0,
+        "irreducible_individual_teacher_KL": {
+          "positive_LURE": 4.52507147003968e-19,
+          "ordinary": 5.9420145637170606e-18
+        },
+        "zero_floor_does_not_prove_neural_capacity_or_optimization": true
+      },
+      "primary_measurements": {
+        "bootstrap": {
+          "teacher_KL": {
+            "positive_LURE": 0.39455767528655505,
+            "ordinary": 0.4138661139226513
+          },
+          "raw_logit_quantiles": [
+            -14.199882507324219,
+            -5.538898811340332,
+            -0.018876533955335617,
+            3.5830474662780682,
+            11.555228233337402
+          ],
+          "raw_absolute_over": {
+            "8": 33,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            1.3098993301391602,
+            1.6178072261810303,
+            3.9344470500946045,
+            7.818554019927976,
+            21.451595306396484
+          ],
+          "known_teacher_class_disagreements": 5641,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        },
+        "closed6000": {
+          "teacher_KL": {
+            "positive_LURE": 0.021048248210770622,
+            "ordinary": 0.024772628655655694
+          },
+          "raw_logit_quantiles": [
+            -19.942529678344727,
+            -12.282704200744629,
+            -1.5135307312011719,
+            8.49943351745602,
+            14.187037467956543
+          ],
+          "raw_absolute_over": {
+            "8": 1028,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            3.537526845932007,
+            4.408517608642578,
+            9.182437896728516,
+            22.737779922485352,
+            33.69868850708008
+          ],
+          "known_teacher_class_disagreements": 595,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        },
+        "failed16000": {
+          "teacher_KL": {
+            "positive_LURE": 0.015469616718619947,
+            "ordinary": 0.01790303453385083
+          },
+          "raw_logit_quantiles": [
+            -32.56895065307617,
+            -18.460602645874022,
+            -1.7977409362792969,
+            10.572969551086423,
+            23.520132064819336
+          ],
+          "raw_absolute_over": {
+            "8": 2343,
+            "64": 0,
+            "256": 0,
+            "1024": 0
+          },
+          "last_layer_jacobian_quantiles": [
+            2.1414060592651367,
+            3.130350046157837,
+            6.481551647186279,
+            17.821501998901358,
+            25.323293685913086
+          ],
+          "known_teacher_class_disagreements": 508,
+          "scope": "CPU descriptive teacher fit; not GT semantic accuracy or HOTA."
+        }
+      },
+      "original_primary_failed_teacher_KL": 0.017903034302345897,
+      "same_arch_ordinary": {
+        "adequate": false,
+        "exception": "('C5', 'SOFT_KD', 0.011430364931993326)",
+        "original_gate_not_weakened": true,
+        "original_partial_checkpoint_preserved": true,
+        "primary_not_replaced": true
+      }
+    }
+  ],
+  "gradient_contract": {
+    "status": "PASS_REAL_INPUT_FULL_OBJECTIVE_STREAMED_GRADIENT_CONTRACT",
+    "rows": 128,
+    "maximum_parameter_gradient_error": 6.938893903907228e-17,
+    "loss_error": 5.551115123125783e-17,
+    "GT_open_attempts": 0,
+    "new_teacher_calls": 0,
+    "optimized_steps": 0,
+    "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+    "recovery_source_sha256": "30e48ca6f1b74819174d57e60a698cafd183d07c13b000cdaf8c5cca4d37cf8c",
+    "not_HOTA_or_capacity_proof": true
+  },
+  "recovery": {
+    "registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee",
+    "source": "scripts/a100_fullscope_fit_recovery.py",
+    "source_sha256": "30e48ca6f1b74819174d57e60a698cafd183d07c13b000cdaf8c5cca4d37cf8c",
+    "fullbatch_LBFGS_max_outer_iterations": 400,
+    "additional_optimizer_work_and_wall_billed_separately": true,
+    "same_recovery_opportunity_for_failed_primary_and_ordinary": true,
+    "original_question_sequence_targets_architecture_and_gate_preserved": true
+  },
+  "no_new_GT_or_teacher_in_diagnosis": true,
+  "healthy_original_GPU0_and2_preserved": true,
+  "goal_status": "ACTIVE",
+  "verified_two_primary_recoveries": {
+    "status": "PASS_TWO_PRIMARY_RECOVERIES_ORIGINAL_GATE_AND_DRAW_IDENTITY",
+    "cases": [
+      {
+        "pair": "C2",
+        "video": "0019",
+        "final_max_teacher_KL": 0.004549503080841684,
+        "weighted_teacher_KL": 0.004092108195044791,
+        "ordinary_teacher_KL": 0.004549503080841684,
+        "draws_and_rounds_unchanged": true,
+        "observer_state_unchanged": true,
+        "solver_numerically_refined": true,
+        "original_failed_Adam_steps": 16000,
+        "extra_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "positive_LURE": 0.025550545478336503,
+            "ordinary": 0.02871692033619938
+          },
+          "final_teacher_KL": {
+            "positive_LURE": 0.004092108195044791,
+            "ordinary": 0.004549503080841684
+          },
+          "fullbatch_outer_iterations": 20,
+          "full_dataset_closure_calls": 44,
+          "equivalent_row_forward_backward_passes": 529628,
+          "additional_wall_seconds": 14.756182624027133,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "original_closed_sha256": "b96305c3afcb2c6a79d4abb355be139c8a1fb9b7cff5bf7a175fd4418ac9b6de",
+        "original_failed_projection_sha256": "ba9aeec514360d4f028ec66c39833bebcce8a9f5aeb287ddc435a51992a04a50",
+        "final_checkpoint_sha256": "600b7973c2166bb803ce9353e588605925cfaf4df17668a38d4175df3f7654a2"
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "final_max_teacher_KL": 0.004092328678294838,
+        "weighted_teacher_KL": 0.003487986763992654,
+        "ordinary_teacher_KL": 0.004092328678294838,
+        "draws_and_rounds_unchanged": true,
+        "observer_state_unchanged": true,
+        "solver_numerically_refined": true,
+        "original_failed_Adam_steps": 16000,
+        "extra_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "positive_LURE": 0.015469617233453662,
+            "ordinary": 0.017903034302345897
+          },
+          "final_teacher_KL": {
+            "positive_LURE": 0.003487986763992654,
+            "ordinary": 0.004092328678294838
+          },
+          "fullbatch_outer_iterations": 10,
+          "full_dataset_closure_calls": 21,
+          "equivalent_row_forward_backward_passes": 252777,
+          "additional_wall_seconds": 7.54378813598305,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "original_closed_sha256": "1851c97951ee0a90a374c60117162bfab8ea919a58c1533f13f893543d2ab241",
+        "original_failed_projection_sha256": "6c479b8fb8c7a606056d44db3a32f57884178f2fda025c1925c40bdeb0e56cbf",
+        "final_checkpoint_sha256": "e857e1a2c40e2ac8fbab7f5be323c3d8a86fdcdb98590b7d7eee54967b7f8f5a"
+      }
+    ],
+    "all42_original_sources_unchanged": true,
+    "GT_open_attempts": 0,
+    "new_teacher_questions": 0,
+    "HOTA_not_read": true,
+    "not_RMOT_innovation_evidence": true,
+    "goal_status": "ACTIVE"
+  }
+}
