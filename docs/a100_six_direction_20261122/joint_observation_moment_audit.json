@@ -1,0 +1,34 @@
+{
+  "status": "PASS_SYNTHETIC_SHARED_SUPPORT_MOMENT_IDENTIFICATION",
+  "synthetic_cases": 4,
+  "maximum_parameter_error": 1.1102230246251565e-16,
+  "identical_marginals_different_joint_examples": [
+    {
+      "marginal_A": 0.5,
+      "marginal_B": 0.5,
+      "covariance": 0.0,
+      "common_support_family_admissible": true,
+      "common_support": 1.0,
+      "conditional_A": 0.5,
+      "conditional_B": 0.5
+    },
+    {
+      "marginal_A": 0.5,
+      "marginal_B": 0.5,
+      "covariance": 0.25,
+      "common_support_family_admissible": true,
+      "common_support": 0.5,
+      "conditional_A": 1.0,
+      "conditional_B": 1.0
+    }
+  ],
+  "assumptions": [
+    "Same conditioning information for all factors",
+    "One structural-zero common Bernoulli support and conditionally independent local Bernoulli states",
+    "Nonzero marginals and joint-positive mass; negative covariance is outside this family"
+  ],
+  "not_a_new_theorem_or_ground_truth_semantic_identification": true,
+  "teacher_probability_calibration_not_established": true,
+  "no_accuracy_HOTA_or_full_algorithm_claim": true,
+  "no_GPU_teacher_or_training_calls": true
+}

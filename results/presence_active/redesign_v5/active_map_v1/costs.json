@@ -1,0 +1,38 @@
+{
+  "new_teacher_calls": 59,
+  "logical_calls": 99,
+  "cache_hits": 40,
+  "new_teacher_forward_seconds": 2.6134593300521374,
+  "teacher_equivalent_forward_seconds": 5.058356592734343,
+  "LoRA_seconds": 550.6224582330324,
+  "rescore_seconds": 85.30413341312669,
+  "workers": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C1/FULL/rho_0.3/worker_attempts/1793638889277350326.json",
+      "status": "RETURNED_SUCCESSFULLY",
+      "phase": "pilot",
+      "pid": 2161603,
+      "physical_gpu": "1",
+      "gpu_uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+      "wall_time_is_not_utilization_integral": true,
+      "wall_seconds": 207.29914348199964,
+      "parent_peak_allocated_bytes": 4223456768,
+      "teacher_peak_is_reported_in_its_separate_receipt": true
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1/C3/FULL/rho_0.3/worker_attempts/1793638889271774667.json",
+      "status": "RETURNED_SUCCESSFULLY",
+      "phase": "pilot",
+      "pid": 2161604,
+      "physical_gpu": "4",
+      "gpu_uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "wall_time_is_not_utilization_integral": true,
+      "wall_seconds": 499.1620398859959,
+      "parent_peak_allocated_bytes": 4572250624,
+      "teacher_peak_is_reported_in_its_separate_receipt": true
+    }
+  ],
+  "meaning": "shared-device elapsed phase timing, not utilization integral; teacher cache is not a zero-cost independent system",
+  "measured_GPU_phase_hours": 0.1773722363822809,
+  "assigned_worker_wall_hours": 0.196239217602221
+}

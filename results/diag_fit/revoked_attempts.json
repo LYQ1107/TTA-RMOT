@@ -1,0 +1,31 @@
+{
+  "status": "RETAINED_IMPLEMENTATION_FAILURES_NOT_VALID_NUMERICAL_ABLATION_RESULTS",
+  "all_checkpoints_from_these_attempts_excluded_from_final_RMOT": true,
+  "failures": [
+    {
+      "name": "legacy trainer provenance source permission",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/validation/legacy_K1_failed_v1",
+      "action": "allow only the exact archived source file; restart failed validation, preserve successful parity"
+    },
+    {
+      "name": "CAP JSON head_lr parsed as YAML1.1 string",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/smoke/DIAG_FIT_CAP_json_lr_v1",
+      "action": "use JSON parser for generated JSON launch configs; preserve intended numeric head_lr=0.00005; restart CAP from source initialization"
+    },
+    {
+      "name": "premature FP16 gradient overflow abort, original dynamic scaler recovery was accidentally removed",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/retained_code_failures/premature_amp_abort",
+      "affected": ["DIAG_FIT_OPT_POS", "DIAG_FIT_CAP"],
+      "action": "restore exact legacy eight same-batch AMP retries and scale-halving; no optimizer step or sample skipping during retry; restart affected arms per user section6.3",
+      "registered_lr_fallback_budget_for_valid_code": "one fallback only if unrecoverable numerical failure remains; revoked implementation attempts are not evidence of untrainability"
+    },
+    {
+      "name": "relative validation output path after vendor loader chdir",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/validation/real_full_capacity_parity",
+      "action": "resolve output before vendor loader; v2 real full-capacity parity passed"
+    }
+  ],
+  "original_D1_200_step_smoke_preserved": true,
+  "no_model_hyperparameters_changed_by_fixes": true,
+  "no_target_GT_used": true
+}

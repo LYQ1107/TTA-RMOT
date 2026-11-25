@@ -1,0 +1,24 @@
+{
+  "status": "SOURCE_HEAD_RECORDS_MATCH_CROSS_DOMAIN_CONTRACT",
+  "pairs": {
+    "C4": {
+      "source_model": "Dance-best",
+      "source_head_training_domain": "Dance",
+      "target": "SportsMOT",
+      "source_head_checkpoint_sha256": "b742ce3cf5a4184aaba28d48f5eb7d96af3c8b00da818ef3657f10db8b2657e6",
+      "source_training_receipt_sha256": "263564a169a530c31df980c9ebe931b198a4a070da823f7863ff4da87353862d"
+    },
+    "C1": {
+      "source_model": "V2-best",
+      "source_head_training_domain": "KITTI-V2",
+      "target": "Dance",
+      "source_head_checkpoint_sha256": "62cf4fcaffa72dc5df8cbbc2c18e5a4f62ef59128c2ffdeda748e8b72bf8f490",
+      "source_training_receipt_sha256": "3b62c6436c6caf3465c240b6cf8cb040f65f0475f920b7c2e233e011075e1a3e"
+    }
+  },
+  "source_execution_record_sha256": "a5c26d6a60e99c0fee2abed2ffa4f17e02774865088c759a055bd7cb40e6b979",
+  "no_new_training_or_teacher_calls": true,
+  "fixed_official_frontend_accepted_by_user": true,
+  "actual_new_cold_student_loader_is_C4_only": true,
+  "C1_future_cold_run_must_explicitly_select_V2_student_and_V2_source_head": true
+}

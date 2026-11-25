@@ -1,0 +1,19 @@
+{
+  "format": "flexhook-v2-dance-diagnostics-summary-v1",
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "target": "Refer-Dance validation",
+  "videos": 25,
+  "expressions": 425,
+  "gt_records": 212541,
+  "fixed_tracker_rows": 211085,
+  "gt_used_only_in_offline_diagnostic": true,
+  "candidate_recall_iou_0.5": 0.9574905547635515,
+  "candidate_recall_iou_0.75": 0.8507111569061969,
+  "source_selected_recall_iou_0.5": 0.05046085225909354,
+  "tracker_links": 203254,
+  "tracker_switches": 4894,
+  "tracker_switch_rate": 0.02407824692256979,
+  "source_selected_rows": 12209,
+  "candidate_rows_repeated_per_expression": 352404,
+  "interpretation": "The fixed MOT bank covers most GT targets; the dominant early loss is the V2 referring score gate rather than missing boxes."
+}

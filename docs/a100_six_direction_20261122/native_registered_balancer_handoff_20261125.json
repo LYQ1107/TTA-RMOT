@@ -1,0 +1,159 @@
+{
+  "status": "PASS_IDLE_EXECUTOR_HANDOFF_AND_ACTUAL_REGISTERED_FITS_STARTED",
+  "entry": "scripts/a100_native_registered_work_balancer.py",
+  "entry_sha256": "4843bf5ffbcbbabbb1ddf938ce75b58466ee3f84a7777eb6ad3c3666b3f0fa50",
+  "actual_session": 40479,
+  "pid": 629225,
+  "helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+  "original_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "original_numeric_source_pins_unchanged": true,
+  "original_controller_session": 14883,
+  "original_workers_preserved": [
+    4134758,
+    113767
+  ],
+  "retired_idle_executors": [
+    {
+      "pid": 533666,
+      "physical_GPU": 0,
+      "actual_terminal_session": 48322,
+      "actual_tool_exit_code": 143,
+      "intentional_owned_idle_executor_retirement": true,
+      "actual_numeric_children_interrupted": 0,
+      "verified_no_children_while_stopped": true,
+      "completed_helper_jobs": 31,
+      "source_sha256": "10d00f88bd479b8151dfa40288ffe29a2947d2e6b40256488f9c1cb1d6a11170",
+      "do_not_resume_terminal_session": true
+    },
+    {
+      "pid": 535564,
+      "physical_GPU": 3,
+      "actual_terminal_session": 18804,
+      "actual_tool_exit_code": 143,
+      "intentional_owned_idle_executor_retirement": true,
+      "actual_numeric_children_interrupted": 0,
+      "verified_no_children_while_stopped": true,
+      "completed_helper_jobs": 29,
+      "source_sha256": "10d00f88bd479b8151dfa40288ffe29a2947d2e6b40256488f9c1cb1d6a11170",
+      "do_not_resume_terminal_session": true
+    }
+  ],
+  "control_validation": {
+    "actual_session": 32414,
+    "actual_exit_code": 0,
+    "checks": [
+      "only_existing_nonmain_recipes_with_closed_policy",
+      "exclusive_reservation_across_two_spare_GPUs",
+      "reserved_head_not_selected_twice",
+      "cached_intermediate_heads_do_not_create_false_execution_lead",
+      "whole_study_seal_stops_new_fits",
+      "completed_settings_never_restarted"
+    ]
+  },
+  "real_process_safety_validation": {
+    "actual_session": 13944,
+    "actual_exit_code": 0,
+    "status": "PASS_REAL_PROCESS_HANDOFF_CONTROL_FIXTURES",
+    "checks": [
+      "real_owned_idle_process_only_stopped_then_terminated",
+      "real_child_preserved_even_with_stale_idle_status",
+      "mismatched_real_process_identity_refused_without_signals"
+    ],
+    "source_sha256": "4843bf5ffbcbbabbb1ddf938ce75b58466ee3f84a7777eb6ad3c3666b3f0fa50",
+    "real_experiment_or_GPU_processes_signalled": 0,
+    "new_models_teacher_GT_or_GPU_or_neural_seeds": 0
+  },
+  "completed_registered_helpers": [
+    {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "COARSE_UNIT_SOFT_LEARNED",
+      "remaining": 15,
+      "gpu": 3,
+      "child_pid": 634885,
+      "actual_exit_code": 0,
+      "actual_parent_reuse_verified": false,
+      "receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0/videos/v_G-vNjfx1GGc_c600/parallel_registered_heads/COARSE_UNIT_SOFT_LEARNED/receipt.json",
+      "installed": true,
+      "prepared_sha256": "8325471632798815e3210dc68b04862290828fb3a557afc597e0fcb08b54bd1d",
+      "wall_seconds": 39.657370282919146
+    },
+    {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "LOGIT_KD_LEARNED",
+      "remaining": 15,
+      "gpu": 0,
+      "child_pid": 634876,
+      "actual_exit_code": 0,
+      "actual_parent_reuse_verified": false,
+      "receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0/videos/v_G-vNjfx1GGc_c600/parallel_registered_heads/LOGIT_KD_LEARNED/receipt.json",
+      "installed": true,
+      "prepared_sha256": "b38bccb17f0c3fa377e7f4163f234672ce3eaa7e85a3344b4e448874cfc322c5",
+      "wall_seconds": 62.98145645298064
+    },
+    {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "COARSE_UNIT_HARD_LEARNED",
+      "remaining": 15,
+      "gpu": 3,
+      "child_pid": 635505,
+      "actual_exit_code": 0,
+      "actual_parent_reuse_verified": false,
+      "receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0/videos/v_G-vNjfx1GGc_c600/parallel_registered_heads/COARSE_UNIT_HARD_LEARNED/receipt.json",
+      "installed": true,
+      "prepared_sha256": "b136e608209cdb9e775e12d70666e84d89a2d1dce9c22601eea403e2cac48489",
+      "wall_seconds": 22.73131905309856
+    },
+    {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "COARSE_CONF_SOFT_LEARNED",
+      "remaining": 15,
+      "gpu": 0,
+      "child_pid": 635873,
+      "actual_exit_code": 0,
+      "actual_parent_reuse_verified": false,
+      "receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0/videos/v_G-vNjfx1GGc_c600/parallel_registered_heads/COARSE_CONF_SOFT_LEARNED/receipt.json",
+      "installed": true,
+      "prepared_sha256": "36369c7bf877a976464d2acf66f8d91ffc9a6d756d3db7e49d28388f50c9954c",
+      "wall_seconds": 25.31756542401854
+    },
+    {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "COARSE_CONF_HARD_LEARNED",
+      "remaining": 15,
+      "gpu": 3,
+      "child_pid": 635925,
+      "actual_exit_code": 0,
+      "actual_parent_reuse_verified": false,
+      "receipt": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0/videos/v_G-vNjfx1GGc_c600/parallel_registered_heads/COARSE_CONF_HARD_LEARNED/receipt.json",
+      "installed": true,
+      "prepared_sha256": "b97cec754245e51253010f8aa56aa4aa7145fadc60d72a7fde89b910bc4b29ec",
+      "wall_seconds": 22.453653112985194
+    }
+  ],
+  "active_registered_helpers": {
+    "0": {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "remaining": 15,
+      "child_pid": 636198
+    },
+    "3": {
+      "pair": "C4",
+      "video": "v_G-vNjfx1GGc_c600",
+      "arm": "MARGINAL_KD_FROZEN",
+      "remaining": 15,
+      "child_pid": 636273
+    }
+  },
+  "companion_verified_parent_reuse": "docs/a100_six_direction_20261122/native_C3_c010_two_head_parent_reuse_20261125.json",
+  "full_study_quality_not_yet_available": true,
+  "new_study_or_teacher_questions_or_predictions_or_GT_or_neural_seeds": 0,
+  "not_a_measured_HOTA_or_primary_deployment_speedup_result": true,
+  "goal_status": "ACTIVE"
+}

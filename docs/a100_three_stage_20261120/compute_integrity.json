@@ -1,0 +1,156 @@
+{
+  "status": "PASS",
+  "completed_units": [
+    {
+      "stage": 2,
+      "method": "MINUS",
+      "status": "COMPLETE",
+      "videos": 45,
+      "episodes": 466,
+      "questions": 3508,
+      "optimizer_steps": 0
+    },
+    {
+      "stage": 2,
+      "method": "MINUS_RECALC_ONLY",
+      "status": "COMPLETE",
+      "videos": 45,
+      "episodes": 466,
+      "questions": 3508,
+      "optimizer_steps": 0
+    },
+    {
+      "stage": 2,
+      "method": "SLOW_REPLAY_MATCHED",
+      "status": "COMPLETE",
+      "videos": 45,
+      "episodes": 466,
+      "questions": 3508,
+      "optimizer_steps": 1150
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 0,
+      "method": "MINUS_v8P",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 2,
+      "wall_seconds": 600.4017985169776,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 0,
+      "method": "YT_PRIOR",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 3,
+      "wall_seconds": 600.5427893040469,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 0,
+      "method": "UNIFORM_K",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 2,
+      "wall_seconds": 600.2842007190338,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 1,
+      "method": "MINUS_v8P",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 3,
+      "wall_seconds": 600.4454578770092,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 1,
+      "method": "YT_PRIOR",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 3,
+      "wall_seconds": 600.3558538209763,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 1,
+      "method": "UNIFORM_K",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 2,
+      "wall_seconds": 600.2659949509543,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 2,
+      "method": "MINUS_v8P",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 3,
+      "wall_seconds": 600.3667436550022,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 2,
+      "method": "YT_PRIOR",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 2,
+      "wall_seconds": 600.4553742049611,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "short",
+      "repeat": 2,
+      "method": "UNIFORM_K",
+      "status": "BUDGET_EXHAUSTED",
+      "physical_GPU": 2,
+      "wall_seconds": 600.2484832620248,
+      "snapshots": 2
+    },
+    {
+      "stage": 3,
+      "scope": "full",
+      "repeat": 0,
+      "method": "MINUS_v8P",
+      "status": "COMPLETE",
+      "physical_GPU": 3,
+      "wall_seconds": 11229.13426472497,
+      "snapshots": 758
+    },
+    {
+      "stage": 3,
+      "scope": "full",
+      "repeat": 0,
+      "method": "YT_PRIOR",
+      "status": "COMPLETE",
+      "physical_GPU": 2,
+      "wall_seconds": 10837.495065680996,
+      "snapshots": 503
+    },
+    {
+      "stage": 3,
+      "scope": "full",
+      "repeat": 0,
+      "method": "UNIFORM_K",
+      "status": "COMPLETE",
+      "physical_GPU": 0,
+      "wall_seconds": 1266.149113897991,
+      "snapshots": 503
+    }
+  ],
+  "unit_count": 15,
+  "original_supervisor_exit_code": 1,
+  "original_supervisor_exit_reason": "Retained deliberate interruption of old causal workers during the checkpoint-safe exact-cache handoff; resumed units separately validated complete.",
+  "all_final_data_complete": true
+}

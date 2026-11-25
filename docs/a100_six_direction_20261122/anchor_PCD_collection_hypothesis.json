@@ -1,0 +1,39 @@
+{
+  "study": "Fresh three-observation PCD representation for six cross-domain settings",
+  "problem": "The current mean PCD discards state-specific features. Historical state recovery has a nonzero mean mismatch and cannot simply replace current inputs under old heads.",
+  "hypothesis": "Retaining each of the identical three source observations permits a fair future test of state-conditioned learning versus equally informed ordinary KD.",
+  "intervention": "Fresh frozen source student, same query/candidate batch8 and original context; retain per-observation FP16-roundtrip PCD and its mean.",
+  "controls": "For any later comparison every ordinary/proposed learner uses the same fresh states/means and is refit; previous I1 outputs remain unchanged.",
+  "fixed_design": {
+    "settings": [
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6"
+    ],
+    "setting_videos": 148,
+    "max_concurrent_workers": 3,
+    "allowed_physical_GPUs": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "source_model_seeds": [
+      0
+    ],
+    "changed_candidate_IDs": 0,
+    "new_teacher_QA": 0,
+    "slow32_refreshes": 0,
+    "LoRA_updates": 0
+  },
+  "measurements": "Actual student loading, inference/IO and save wall phases; exact/error comparisons with previous A100 means, without choosing a numerical acceptance threshold from target labels.",
+  "images_and_task_queries_only": true,
+  "no_target_GT_or_teacher_QA_or_quality_prediction_inputs": true,
+  "prefix_rule": "Feature preparation is shared/offline; every subsequent adaptation head may read only current/past videos.",
+  "costs": "Shared neural input preparation; cannot be charged as a single-method cold deployment result or counted as an innovation gain.",
+  "no_new_state_learner_or_HOTA_benefit_claim": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,388 @@
+{
+  "status": "COMPLETE_PRIMARY_AND_MATCHED_CONTROLS",
+  "student_methods": [
+    "NAIVE_PAIRED",
+    "PSR",
+    "UNIFORM_PAIRED",
+    "CONFIDENCE_PAIRED",
+    "PSR_DISCOVERY",
+    "PSR_GEOMETRY",
+    "NAIVE_TEMPORAL",
+    "MEAN_TEACHER_MATCHED"
+  ],
+  "episodes_each": 425,
+  "videos": 25,
+  "protocol": "USER_AUTHORIZED25VAL_SAME_SET_NOT_TRAIN_TO_VAL",
+  "stages": [
+    {
+      "phase": "controls",
+      "status": "COMPLETE",
+      "exit_code": 0,
+      "seconds": 40.131764997961,
+      "GPU_calls": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/cpu_pipeline/controls/stdout.txt"
+    },
+    {
+      "phase": "official",
+      "status": "COMPLETE",
+      "exit_code": 0,
+      "seconds": 186.6133374958299,
+      "GPU_calls": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/cpu_pipeline/official/stdout.txt"
+    },
+    {
+      "phase": "analysis",
+      "status": "COMPLETE",
+      "exit_code": 0,
+      "seconds": 836.3614024459384,
+      "GPU_calls": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/cpu_pipeline/analysis/stdout.txt"
+    },
+    {
+      "phase": "tables",
+      "status": "COMPLETE",
+      "exit_code": 0,
+      "seconds": 0.07869687397032976,
+      "GPU_calls": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/cpu_pipeline/tables/stdout.txt"
+    },
+    {
+      "phase": "export",
+      "status": "COMPLETE",
+      "exit_code": 0,
+      "seconds": 30.9760111970827,
+      "GPU_calls": 0,
+      "stdout": "/data2/user/FlexHook-TTA/results/runs/psr_val_20261029_v1/cpu_pipeline/export/stdout.txt"
+    }
+  ],
+  "launcher_history": {
+    "1793285359521492080": {
+      "status": "COMPLETE",
+      "methods": [
+        "MEAN_TEACHER_MATCHED"
+      ],
+      "results": [
+        {
+          "method": "MEAN_TEACHER_MATCHED",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "MEAN_TEACHER_MATCHED",
+              "phase": "training",
+              "physical_gpu": 6,
+              "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+              "pid": 3264581,
+              "start_epoch": 1793285359.5233622,
+              "exit_code": 0,
+              "elapsed_seconds": 3471.8598042740487,
+              "end_epoch": 1793288831.3826532
+            },
+            {
+              "method": "MEAN_TEACHER_MATCHED",
+              "phase": "inference",
+              "physical_gpu": 6,
+              "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+              "pid": 3400379,
+              "start_epoch": 1793288833.775992,
+              "exit_code": 0,
+              "elapsed_seconds": 2310.7120370981283,
+              "end_epoch": 1793291144.4873037
+            }
+          ]
+        }
+      ],
+      "preserved": [],
+      "pending": [],
+      "actual_matrix_wall_seconds": 5785.017923797015,
+      "registered_physical_GPUs": [
+        6
+      ],
+      "target_GT_opened": false,
+      "scientific_metrics": "NOT_COMPUTED_BEFORE_ALL_PREDICTIONS_SEALED"
+    },
+    "1793277671556873655": {
+      "status": "FAILED_UNITS_RETAINED",
+      "methods": [
+        "NAIVE_PAIRED",
+        "PSR",
+        "UNIFORM_PAIRED",
+        "CONFIDENCE_PAIRED",
+        "PSR_DISCOVERY",
+        "PSR_GEOMETRY",
+        "NAIVE_TEMPORAL",
+        "MEAN_TEACHER_MATCHED"
+      ],
+      "results": [
+        {
+          "method": "NAIVE_PAIRED",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "NAIVE_PAIRED",
+              "phase": "inference",
+              "physical_gpu": 2,
+              "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+              "pid": 3022682,
+              "start_epoch": 1793277672.9216268,
+              "exit_code": 0,
+              "elapsed_seconds": 1851.466702545993,
+              "end_epoch": 1793279524.3877633
+            }
+          ]
+        },
+        {
+          "method": "PSR_DISCOVERY",
+          "status": "FAILED_TRAINING_RETAINED",
+          "phases": [
+            {
+              "method": "PSR_DISCOVERY",
+              "phase": "training",
+              "physical_gpu": 2,
+              "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+              "pid": 3075427,
+              "start_epoch": 1793279524.441657,
+              "exit_code": 1,
+              "elapsed_seconds": 0.5069662479218096,
+              "end_epoch": 1793279524.9478984
+            }
+          ]
+        },
+        {
+          "method": "PSR",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "PSR",
+              "phase": "inference",
+              "physical_gpu": 0,
+              "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+              "pid": 3022681,
+              "start_epoch": 1793277672.886799,
+              "exit_code": 0,
+              "elapsed_seconds": 2021.7236365838908,
+              "end_epoch": 1793279694.6095421
+            }
+          ]
+        },
+        {
+          "method": "PSR_GEOMETRY",
+          "status": "FAILED_TRAINING_RETAINED",
+          "phases": [
+            {
+              "method": "PSR_GEOMETRY",
+              "phase": "training",
+              "physical_gpu": 0,
+              "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+              "pid": 3081151,
+              "start_epoch": 1793279694.6619594,
+              "exit_code": 1,
+              "elapsed_seconds": 0.5071041730698198,
+              "end_epoch": 1793279695.1683664
+            }
+          ]
+        },
+        {
+          "method": "CONFIDENCE_PAIRED",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "CONFIDENCE_PAIRED",
+              "phase": "training",
+              "physical_gpu": 5,
+              "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+              "pid": 3022625,
+              "start_epoch": 1793277671.5656776,
+              "exit_code": 0,
+              "elapsed_seconds": 6530.276156866923,
+              "end_epoch": 1793284201.838805
+            },
+            {
+              "method": "CONFIDENCE_PAIRED",
+              "phase": "inference",
+              "physical_gpu": 5,
+              "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+              "pid": 3215667,
+              "start_epoch": 1793284203.0628726,
+              "exit_code": 0,
+              "elapsed_seconds": 2896.822927607922,
+              "end_epoch": 1793287099.8849754
+            }
+          ]
+        },
+        {
+          "method": "MEAN_TEACHER_MATCHED",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "MEAN_TEACHER_MATCHED",
+              "phase": "training",
+              "physical_gpu": 5,
+              "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+              "pid": 3332223,
+              "start_epoch": 1793287099.921965,
+              "exit_code": 0,
+              "elapsed_seconds": 1730.1512498799711,
+              "end_epoch": 1793288830.0726976
+            },
+            {
+              "method": "MEAN_TEACHER_MATCHED",
+              "phase": "inference",
+              "physical_gpu": 5,
+              "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+              "pid": 3400322,
+              "start_epoch": 1793288832.561089,
+              "exit_code": 0,
+              "elapsed_seconds": 2310.1939250070136,
+              "end_epoch": 1793291142.7542067
+            }
+          ]
+        },
+        {
+          "method": "UNIFORM_PAIRED",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "UNIFORM_PAIRED",
+              "phase": "training",
+              "physical_gpu": 1,
+              "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+              "pid": 3022624,
+              "start_epoch": 1793277671.5645154,
+              "exit_code": 0,
+              "elapsed_seconds": 4201.134371120017,
+              "end_epoch": 1793281872.6953108
+            },
+            {
+              "method": "UNIFORM_PAIRED",
+              "phase": "inference",
+              "physical_gpu": 1,
+              "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+              "pid": 3140416,
+              "start_epoch": 1793281873.9132338,
+              "exit_code": 0,
+              "elapsed_seconds": 3275.7816957719624,
+              "end_epoch": 1793285149.6937194
+            }
+          ]
+        },
+        {
+          "method": "NAIVE_TEMPORAL",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "NAIVE_TEMPORAL",
+              "phase": "training",
+              "physical_gpu": 1,
+              "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+              "pid": 3256288,
+              "start_epoch": 1793285149.7474852,
+              "exit_code": 0,
+              "elapsed_seconds": 3825.7735654630233,
+              "end_epoch": 1793288975.5204103
+            },
+            {
+              "method": "NAIVE_TEMPORAL",
+              "phase": "inference",
+              "physical_gpu": 1,
+              "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+              "pid": 3405790,
+              "start_epoch": 1793288976.8701143,
+              "exit_code": 0,
+              "elapsed_seconds": 3292.9901893730275,
+              "end_epoch": 1793292269.8594925
+            }
+          ]
+        }
+      ],
+      "preserved": [],
+      "pending": [],
+      "actual_matrix_wall_seconds": 14598.341411592206,
+      "registered_physical_GPUs": [
+        2,
+        0,
+        1,
+        5
+      ],
+      "target_GT_opened": false,
+      "scientific_metrics": "NOT_COMPUTED_BEFORE_ALL_PREDICTIONS_SEALED"
+    },
+    "1793279859907348112": {
+      "status": "COMPLETE",
+      "methods": [
+        "PSR_DISCOVERY",
+        "PSR_GEOMETRY"
+      ],
+      "results": [
+        {
+          "method": "PSR_DISCOVERY",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "PSR_DISCOVERY",
+              "phase": "training",
+              "physical_gpu": 6,
+              "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+              "pid": 3086791,
+              "start_epoch": 1793279859.9126105,
+              "exit_code": 0,
+              "elapsed_seconds": 2613.11180120497,
+              "end_epoch": 1793282473.0225463
+            },
+            {
+              "method": "PSR_DISCOVERY",
+              "phase": "inference",
+              "physical_gpu": 6,
+              "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+              "pid": 3154824,
+              "start_epoch": 1793282474.265716,
+              "exit_code": 0,
+              "elapsed_seconds": 2883.4855971210636,
+              "end_epoch": 1793285357.7504983
+            }
+          ]
+        },
+        {
+          "method": "PSR_GEOMETRY",
+          "status": "COMPLETE",
+          "phases": [
+            {
+              "method": "PSR_GEOMETRY",
+              "phase": "training",
+              "physical_gpu": 4,
+              "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+              "pid": 3086792,
+              "start_epoch": 1793279859.9136293,
+              "exit_code": 0,
+              "elapsed_seconds": 4744.814445235068,
+              "end_epoch": 1793284604.7258108
+            },
+            {
+              "method": "PSR_GEOMETRY",
+              "phase": "inference",
+              "physical_gpu": 4,
+              "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+              "pid": 3233665,
+              "start_epoch": 1793284605.97277,
+              "exit_code": 0,
+              "elapsed_seconds": 3507.3436836639885,
+              "end_epoch": 1793288113.3151462
+            }
+          ]
+        }
+      ],
+      "preserved": [],
+      "pending": [],
+      "actual_matrix_wall_seconds": 8253.442059037043,
+      "registered_physical_GPUs": [
+        6,
+        4
+      ],
+      "target_GT_opened": false,
+      "scientific_metrics": "NOT_COMPUTED_BEFORE_ALL_PREDICTIONS_SEALED"
+    }
+  },
+  "recovered_resource_failures_retained": true,
+  "target_GT_used_only_in_independent_CPU_evaluation": true,
+  "scientific_success": "NOT_IMPLIED_BY_PIPELINE_COMPLETION",
+  "conditional_multiseed_confirmation": "decide only from registered main comparison; no threshold changes"
+}

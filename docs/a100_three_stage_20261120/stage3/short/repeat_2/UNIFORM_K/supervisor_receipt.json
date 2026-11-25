@@ -1,0 +1,25 @@
+{
+  "status": "BUDGET_EXHAUSTED",
+  "returncode": -9,
+  "wall_seconds": 600.2484832620248,
+  "budget_seconds": 600,
+  "physical_GPU": 2,
+  "process_started": 442166.241910811,
+  "hard_deadline_terminated": true,
+  "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/three_stage_20261120/stage3/short/repeat_2/UNIFORM_K/process_00.log",
+  "command": [
+    "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+    "-u",
+    "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_wallclock.py",
+    "--method",
+    "UNIFORM_K",
+    "--scope",
+    "short",
+    "--repeat",
+    "2",
+    "--budget",
+    "600",
+    "--start",
+    "442166.241910811"
+  ]
+}

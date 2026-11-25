@@ -1,0 +1,90 @@
+{
+  "status": "PARITY_ONLY",
+  "method": "SOURCE_REHEARSAL",
+  "checkpoint": "/data2/user/FlexHook-TTA/results/runs/uda_val_full_20261026_v1/SOURCE_REHEARSAL/checkpoint_best_source_selected.pt",
+  "checkpoint_sha256": "5bc677c2b945f45b08ad961a4e8a3da724826d95619396d77988806d0a00d6c4",
+  "selected_step": 7750,
+  "source_val_CE": 0.9631536888555274,
+  "selection": "SOURCE_VAL_CE_ONLY",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "experiment_commit": "b3b9c01ed0a697122f8a7ab9200bfb40ffb0acfc",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007",
+    "dancetrack0010",
+    "dancetrack0014",
+    "dancetrack0018",
+    "dancetrack0019",
+    "dancetrack0025",
+    "dancetrack0026",
+    "dancetrack0030",
+    "dancetrack0034",
+    "dancetrack0035",
+    "dancetrack0041",
+    "dancetrack0043",
+    "dancetrack0047",
+    "dancetrack0058",
+    "dancetrack0063",
+    "dancetrack0065",
+    "dancetrack0073",
+    "dancetrack0077",
+    "dancetrack0079",
+    "dancetrack0081",
+    "dancetrack0090",
+    "dancetrack0094",
+    "dancetrack0097"
+  ],
+  "valid_episodes": 0,
+  "episodes": [],
+  "parities": [
+    {
+      "status": "PASS",
+      "video": "dancetrack0004",
+      "fixed_frame_rule": "first/middle/last MOT-active frame",
+      "precision": "FP32",
+      "records": [
+        {
+          "frame": 1,
+          "candidates": 3,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 602,
+          "candidates": 2,
+          "queries": 17,
+          "max_abs_margin_error": 1.1444091796875e-05,
+          "selection_mismatches": 0
+        },
+        {
+          "frame": 1203,
+          "candidates": 4,
+          "queries": 17,
+          "max_abs_margin_error": 9.5367431640625e-06,
+          "selection_mismatches": 0
+        }
+      ]
+    }
+  ],
+  "target_GT_open_attempts": [],
+  "optimizer_steps": 0,
+  "test_time_updates": 0,
+  "precision": "FP32",
+  "threshold": 0,
+  "query_batch_near_zero_fallbacks": 0,
+  "cache_stats": [],
+  "wall_seconds": 12.254984769970179,
+  "physical_gpu": "3",
+  "gpu_uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+  "peak_allocated_bytes": 1299603456
+}

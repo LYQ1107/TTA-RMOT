@@ -1,0 +1,17 @@
+{
+  "status": "TARGETED_CPU_REGRESSIONS_AND_PROTECTED_SOURCE_CHECKS_PASSED",
+  "passed": 46,
+  "seconds": 9.65,
+  "command": "CUDA_VISIBLE_DEVICES='' python -m pytest -q tests/test_active_v6.py tests/test_active_v6_report.py tests/test_map_calibration.py tests/test_presence_active.py tests/test_active_teacher_concurrency.py tests/test_active_execution.py tests/test_active_presence_decisions.py tests/test_active_archive.py",
+  "tested_local_head": "cfb683cdfeef1d8ab3cf3ae49b26abc7a4c7fda7",
+  "tested_identical_public_head": "3b5fb6323b7b63af02a8fceef255ad26744bc66c",
+  "compileall_passed": true,
+  "git_diff_check_passed": true,
+  "runtime_numerical_code_unchanged_since_compatibility_fix": true,
+  "runtime_compare_command": "git diff --exit-code bdbe655 HEAD -- flex_uda/active/adapt.py flex_uda/active/v6.py flex_uda/active/v6_frames.py scripts/active_v6_run.py scripts/active_run.py scripts/active_launch.py scripts/active_baseline_run.py flex_uda/teacher/yestrack_backend.py flex_uda/teacher/visual_input_builder.py",
+  "v5_vendor_teacher_tracked_paths_unchanged": true,
+  "protected_compare_command": "git diff --exit-code bdd506f^ HEAD -- vendor/FlexHook flex_uda/teacher/yestrack_backend.py flex_uda/teacher/visual_input_builder.py results/presence_active/redesign_v5",
+  "GPU_or_teacher_calls_by_checks": 0,
+  "new_target_GT_evaluation_by_checks": false,
+  "experiment_completion_claimed": false
+}

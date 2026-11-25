@@ -1,0 +1,102 @@
+{
+  "status": "PASS_EIGHT_GT_FREE_CONFIRMATION_COUNT_CONTROLS",
+  "GPU_calls": 0,
+  "target_GT_open_attempts": [],
+  "GT_evaluation_authorized": false,
+  "models_or_teachers_rerun": false,
+  "legacy_remaining_list_note": "precompute helper lists primary8 defaults; confirmation roots register only NAIVE_PAIRED and PSR. No extra methods are queued.",
+  "seeds": {
+    "0": {
+      "registered_student_methods": [
+        "NAIVE_PAIRED",
+        "PSR"
+      ],
+      "controls": {
+        "FROZEN_AT_NAIVE_PAIRED_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 22239,
+          "score_source": "FROZEN",
+          "count_source": "NAIVE_PAIRED",
+          "first_precompute_CPU_seconds": 7.738407640019432,
+          "total_cost_includes_parent_models": true
+        },
+        "NAIVE_PAIRED_AT_FROZEN_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 99704,
+          "score_source": "NAIVE_PAIRED",
+          "count_source": "FROZEN",
+          "first_precompute_CPU_seconds": 7.95219069509767,
+          "total_cost_includes_parent_models": true
+        },
+        "FROZEN_AT_PSR_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 37218,
+          "score_source": "FROZEN",
+          "count_source": "PSR",
+          "first_precompute_CPU_seconds": 8.07298921002075,
+          "total_cost_includes_parent_models": true
+        },
+        "PSR_AT_FROZEN_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 99704,
+          "score_source": "PSR",
+          "count_source": "FROZEN",
+          "first_precompute_CPU_seconds": 7.9445602998603135,
+          "total_cost_includes_parent_models": true
+        }
+      },
+      "private_prefill_receipt": "results/runs/psr_confirm_20261030_v1/seed0/evaluation/merged/control_prefills/1793303525969400218.json",
+      "final_GT_seal_absent": true
+    },
+    "42": {
+      "registered_student_methods": [
+        "NAIVE_PAIRED",
+        "PSR"
+      ],
+      "controls": {
+        "FROZEN_AT_NAIVE_PAIRED_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 22523,
+          "score_source": "FROZEN",
+          "count_source": "NAIVE_PAIRED",
+          "first_precompute_CPU_seconds": 7.922417026013136,
+          "total_cost_includes_parent_models": true
+        },
+        "NAIVE_PAIRED_AT_FROZEN_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 99704,
+          "score_source": "NAIVE_PAIRED",
+          "count_source": "FROZEN",
+          "first_precompute_CPU_seconds": 8.12115863384679,
+          "total_cost_includes_parent_models": true
+        },
+        "FROZEN_AT_PSR_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 37239,
+          "score_source": "FROZEN",
+          "count_source": "PSR",
+          "first_precompute_CPU_seconds": 7.835666483035311,
+          "total_cost_includes_parent_models": true
+        },
+        "PSR_AT_FROZEN_COUNT": {
+          "episodes": 425,
+          "videos": 25,
+          "selected_rows": 99704,
+          "score_source": "PSR",
+          "count_source": "FROZEN",
+          "first_precompute_CPU_seconds": 7.775620080996305,
+          "total_cost_includes_parent_models": true
+        }
+      },
+      "private_prefill_receipt": "results/runs/psr_confirm_20261030_v1/seed42/evaluation/merged/control_prefills/1793303565626641848.json",
+      "final_GT_seal_absent": true
+    }
+  }
+}

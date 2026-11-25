@@ -1,0 +1,23 @@
+{
+  "study": "POSTSEAL_COMPLETED_I1_EVIDENCE_TRANSFER_ONLY",
+  "posthoc_completed_I1_only": true,
+  "source_sha256": "f9c52b12584c74e382bd73dc1558b02fd6e9c8b1bc77f9b849fc9c4e43aca45c",
+  "source_study_required": {
+    "all_predictions_sealed": 828,
+    "official_complete": 828
+  },
+  "reads": [
+    "completed I1 own-policy frozen answers",
+    "I1 saved same-prefix coarse scores",
+    "isolated canonical candidate-membership labels"
+  ],
+  "current_conditional_study_quality_or_GT_read": false,
+  "new_teacher_or_neural_calls": 0,
+  "comparisons": "Same nominal-anchor teacher / stored query-track mean / learned decision; explicit CLIP scope and mean-storage threshold rounding; all6settings/4policies/3seeds/2decoders.",
+  "threshold": ".5 fixed, strict > matches original plain decoder; not selected by labels",
+  "theoretical_diagnostic": "For any bag-constant binary predictor, canonical membership row errors >=sum_b min(P_b,N_b). Not an HOTA bound, novel theorem, or teacher semantic accuracy.",
+  "adaptation_change": false,
+  "all_data_development": true,
+  "goal_status": "ACTIVE",
+  "publication": "Every count/pattern retained; omit only exactly derivable rate fields, with verified full value/type roundtrip via --expand-public."
+}

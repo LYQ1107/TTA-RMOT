@@ -1,0 +1,56 @@
+{
+  "name": "DIRECT_TEACHER_NO_SOURCE_RESIDUAL_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "reason": "Existing strong teacher controls are source-logit residual classifiers. A conventional direct teacher classifier must also be tested: structured gains might otherwise compensate a fixed shifted source prior. This is a principal baseline parameterization audit, not a new target model or an excuse to weaken KD.",
+  "task": "Same human-accepted official boxes/IDs; target images/task queries/frozen teacher only; no manual targetGT in adaptation.",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "QA_seed": 0,
+  "input": "Exactly existing1080D full-query RGB/PCD, same initialization and channel moments. Source prior remains common image-only acquisition/tie-break information, but the direct classifier receives train/current z=0.",
+  "head": "Same1080→64 GELU→1, same AdamW.001/wd.001, clipped teacher soft[.02,.98] and hard>=.5,4000min/16000max,teacherKL<=.005. Both train and prediction source-logit residual are exactly zero, not a lower prior weight.",
+  "snapshots": [
+    "soft400",
+    "soft sufficient final",
+    "soft400/final mean",
+    "hard400",
+    "hard sufficient final"
+  ],
+  "methods": [
+    "KD400",
+    "KD_FINAL",
+    "KD_MEAN",
+    "HARD400",
+    "HARD_FINAL",
+    "GRAPH",
+    "CAL",
+    "JOINT"
+  ],
+  "factorial": "GRAPH/CAL/JOINT use the very same direct soft mean head. Same fixed graph and PAVA as previous studies, no parameter/teacher/view/source updates.",
+  "primary": "Compare current retained residual JOINT against all5 conventional direct teacher baselines; also test whether graph/calibration improvements survive on direct mean KD.",
+  "countmatched": "JOINT vs KD_MEAN, both count directions plus both CountSelf:4percondition; scores from exact in-memory coarse expansion.",
+  "expected": {
+    "conditions": 6,
+    "head_fits": 420,
+    "raw_outputs": 48,
+    "count_outputs": 24,
+    "official_outputs": 72
+  },
+  "new_teacher_calls": 0,
+  "new_encoder_calls": 0,
+  "teacher_source": "Same existing fresh source/QA collection as strictRGB/joint studies,1160C4/1103C1; prefix past/current only. No future teacher partition in learner normalization or training.",
+  "generation": "All72outputs and quantities seal before this studyGT; same official HOTA/original-parent shared-seed descriptive statistics, no metric/seed/threshold changes.",
+  "GPU": "Wait until all4 current physical cold workers have exited successfully and sealed. Then use free GPU0..3 only. No supplementary training perturbs current physical worker wall times.",
+  "statistics": "Bootstrap fixed predictions, not refitted prefix pipelines; no correction for repeated development. Ordinary direct model includes a real teacher-supervised head, not point-label copy.",
+  "cost": "Additional head fits are measured quality replay components, not new physical cold-time points. If this changes retained recipe/strong primary comparator, require corresponding physical follow-up.",
+  "acceptance": "Do not finish original research goal solely on residual-KD victories if direct teacher controls remove them. Preserve all outcomes; no claim of guaranteed win.",
+  "no_active_numerical_files_modified": true
+}

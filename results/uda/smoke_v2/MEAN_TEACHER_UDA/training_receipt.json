@@ -1,0 +1,175 @@
+{
+  "status": "SMOKE_PASS",
+  "method": "MEAN_TEACHER_UDA",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_DIAGNOSTIC",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "steps": 20,
+  "steps_per_coverage_cycle": 8973,
+  "coverage_cycles": 0.0022289089490694306,
+  "source_videos_seen": 1,
+  "source_query_pairs_seen": 20,
+  "target_videos_seen": 1,
+  "target_query_pairs_seen": 7,
+  "actual_source_coverage": [
+    {
+      "video_id": "0000",
+      "provided_expressions": 596,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0001",
+      "provided_expressions": 614,
+      "eligible_GT_tracks": 93,
+      "sampled_GT_tracks": 93,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0002",
+      "provided_expressions": 449,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 8
+    },
+    {
+      "video_id": "0003",
+      "provided_expressions": 442,
+      "eligible_GT_tracks": 8,
+      "sampled_GT_tracks": 8,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0004",
+      "provided_expressions": 541,
+      "eligible_GT_tracks": 31,
+      "sampled_GT_tracks": 31,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0006",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 11,
+      "sampled_GT_tracks": 11,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0007",
+      "provided_expressions": 711,
+      "eligible_GT_tracks": 55,
+      "sampled_GT_tracks": 55,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0008",
+      "provided_expressions": 620,
+      "eligible_GT_tracks": 21,
+      "sampled_GT_tracks": 21,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0009",
+      "provided_expressions": 605,
+      "eligible_GT_tracks": 80,
+      "sampled_GT_tracks": 80,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0010",
+      "provided_expressions": 572,
+      "eligible_GT_tracks": 15,
+      "sampled_GT_tracks": 15,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0012",
+      "provided_expressions": 339,
+      "eligible_GT_tracks": 3,
+      "sampled_GT_tracks": 3,
+      "queries_without_retrievable_source_positive": 9
+    },
+    {
+      "video_id": "0014",
+      "provided_expressions": 361,
+      "eligible_GT_tracks": 16,
+      "sampled_GT_tracks": 16,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0015",
+      "provided_expressions": 478,
+      "eligible_GT_tracks": 19,
+      "sampled_GT_tracks": 19,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0016",
+      "provided_expressions": 505,
+      "eligible_GT_tracks": 22,
+      "sampled_GT_tracks": 22,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0017",
+      "provided_expressions": 353,
+      "eligible_GT_tracks": 9,
+      "sampled_GT_tracks": 9,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0018",
+      "provided_expressions": 618,
+      "eligible_GT_tracks": 18,
+      "sampled_GT_tracks": 18,
+      "queries_without_retrievable_source_positive": 0
+    },
+    {
+      "video_id": "0020",
+      "provided_expressions": 474,
+      "eligible_GT_tracks": 113,
+      "sampled_GT_tracks": 113,
+      "queries_without_retrievable_source_positive": 0
+    }
+  ],
+  "source_plan_windows": 8973,
+  "target_plan_windows": 1275,
+  "trainable_parameters": 24576,
+  "adapter_delta_L2": 0.06535955396034268,
+  "finite_nonzero_gradient_steps": 20,
+  "target_smoke_gradient_norms": [
+    0.01018797455156864,
+    0.003546201594110819,
+    0.020305986865127235,
+    0.007151280419534447
+  ],
+  "frozen_source_unchanged": true,
+  "target_GT_open_attempts": [],
+  "target_presence_supported_positive": 0,
+  "target_presence_supported_negative": 0,
+  "target_presence_UNKNOWN": true,
+  "presence_loss_coverage": 0,
+  "external_semantic_teacher": false,
+  "wall_seconds": 54.33258562698029,
+  "peak_allocated_bytes": 5008869376,
+  "counters": {
+    "inapplicable_single_query_frozen_regularizer": 20,
+    "pseudo_positive": 0,
+    "pseudo_negative": 0,
+    "pseudo_unknown": 66,
+    "proposed_negative": 63,
+    "teacher_student_disagreement": 0.03323480583671079,
+    "effective_consistency_candidates": 66,
+    "optimizer_updates": 20,
+    "EMA_updates": 20,
+    "source_candidate_rows": 135,
+    "target_candidate_rows": 66
+  },
+  "test_time_updates": 0
+}

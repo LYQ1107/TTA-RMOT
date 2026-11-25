@@ -1,0 +1,78 @@
+{
+  "methods": {
+    "FROZEN": {
+      "offline_FP": 89367,
+      "new_FP_rows": 0,
+      "removed_FP_rows": 0,
+      "Recovered_GT": 0,
+      "Lost_GT": 0,
+      "matched_GT": 10337
+    },
+    "SAME_SET_D1": {
+      "offline_FP": 208944,
+      "new_FP_rows": 206808,
+      "removed_FP_rows": 87246,
+      "Recovered_GT": 129802,
+      "Lost_GT": 3781,
+      "matched_GT": 136358
+    },
+    "SAME_SET_D3": {
+      "offline_FP": 520950,
+      "new_FP_rows": 507169,
+      "removed_FP_rows": 75609,
+      "Recovered_GT": 164341,
+      "Lost_GT": 480,
+      "matched_GT": 174198
+    },
+    "B1_SRC_RATE_GLOBAL": {
+      "offline_FP": 1043687,
+      "new_FP_rows": 954287,
+      "removed_FP_rows": 0,
+      "Recovered_GT": 89807,
+      "Lost_GT": 0,
+      "matched_GT": 100144
+    },
+    "OFFICIAL_DANCE_COMPLETE": {
+      "offline_FP": 142562,
+      "new_FP_rows": 138244,
+      "removed_FP_rows": 85072,
+      "Recovered_GT": 106521,
+      "Lost_GT": 4510,
+      "matched_GT": 112348
+    },
+    "T2V_D1_s17": {
+      "offline_FP": 2565,
+      "new_FP_rows": 2141,
+      "removed_FP_rows": 88949,
+      "Recovered_GT": 11094,
+      "Lost_GT": 6956,
+      "matched_GT": 14475
+    },
+    "T2V_D1_s23": {
+      "offline_FP": 2697,
+      "new_FP_rows": 2511,
+      "removed_FP_rows": 89184,
+      "Recovered_GT": 11570,
+      "Lost_GT": 8551,
+      "matched_GT": 13356
+    },
+    "T2V_D1_s42": {
+      "offline_FP": 3394,
+      "new_FP_rows": 2807,
+      "removed_FP_rows": 88784,
+      "Recovered_GT": 10783,
+      "Lost_GT": 7613,
+      "matched_GT": 13507
+    },
+    "T2V_D3_s17": {
+      "offline_FP": 66313,
+      "new_FP_rows": 64248,
+      "removed_FP_rows": 87308,
+      "Recovered_GT": 24652,
+      "Lost_GT": 6739,
+      "matched_GT": 28250
+    }
+  },
+  "definition": "independent IoU>=.5 max-cardinality frame assignment; new/removed rows distinguished from official CLEAR matching reassignment",
+  "threshold_or_training_feedback": false
+}

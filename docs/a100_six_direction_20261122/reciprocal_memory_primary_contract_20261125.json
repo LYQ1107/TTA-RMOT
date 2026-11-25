@@ -1,0 +1,66 @@
+{
+  "status": "PASS_RECIPROCAL_GRADIENT_INPUT_AND_TEACHER_FOLD_CONTROLS",
+  "real_cases": [
+    {
+      "pair": "C1",
+      "heldout_rows": [
+        3,
+        3,
+        3
+      ],
+      "initial_teacher_rows": 47,
+      "physical_edges": 4360,
+      "memory_shape": [
+        17,
+        11,
+        2202
+      ]
+    },
+    {
+      "pair": "C2",
+      "heldout_rows": [
+        96,
+        94,
+        96
+      ],
+      "initial_teacher_rows": 1605,
+      "physical_edges": 1032,
+      "memory_shape": [
+        197,
+        32,
+        2202
+      ]
+    },
+    {
+      "pair": "C4",
+      "heldout_rows": [
+        3,
+        3,
+        3
+      ],
+      "initial_teacher_rows": 34,
+      "physical_edges": 11149,
+      "memory_shape": [
+        8,
+        19,
+        2202
+      ]
+    }
+  ],
+  "both_students_differ_from_independent_teacher_training": [
+    0.003993821796029806,
+    0.003989515360444784
+  ],
+  "full_ordered_anchor_state_effect": [
+    0.002589024603366852,
+    0.002856910228729248
+  ],
+  "external_teacher_weights_update_correct_direction": true,
+  "current_and_future_probe_groups_not_trained": true,
+  "ordinary_architectures_initial_states_identical": true,
+  "exact_conflict_floor_changes_when_memory_makes_inputs_distinct": true,
+  "convex_teacher_logloss_mixture_check": true,
+  "no_HOTA_fits_evaluation_or_manual_GT": true,
+  "tiny_synthetic_fits_only": true,
+  "goal_status": "ACTIVE"
+}

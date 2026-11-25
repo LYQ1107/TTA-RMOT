@@ -1,0 +1,42 @@
+{
+  "name": "TEACHER_PREDICTIVE_ONE_SE_TOPOLOGY_V2",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "motive": "StrictminimumV1C1+5.4195butC4+0.3304CIcrosses0;twononrobustC4globalchoiceslost.2254versuslocalJ. V1failedregisteredactualpromotion; no extraactualworkerlaunched.",
+  "primary_rule": "ONE_SE fixedbeforeanynewprediction/GT: pairedper-queryteacherpredictiverisk meanimprovementmustexceedoneSE;otherwiseLOCAL. NotGTthresholdselection.",
+  "uncertainty": "SEisasensitivityregularizeronly;queries/crossfitpredictionssharetracks. ItisNOTacalibratedconfidenceintervalorindependentquerysamplingclaim.",
+  "controls": [
+    "TWO_SE_JOINT",
+    "MEDIAN_JOINT",
+    "DELETE_ONE_JOINT",
+    "oldstrictJ",
+    "fixedlocalJ",
+    "completeJ",
+    "fixedmeanJ",
+    "CAL",
+    "strongordinaryKD"
+  ],
+  "heldout": "SamefrozenTrackID5fold,noheldtrackanswersacrossqueries,neutral.5unaries,nofittedKD inriskvalidation.",
+  "scope": "Imagegeometry/currentteacher/given taskcontractonly. No domainname or manualGTinselector, nofutureteacher. Past/currentPAVAunchanged.",
+  "methods": [
+    "SELECTED_GRAPH",
+    "SELECTED_JOINT",
+    "TWO_SE_JOINT",
+    "MEDIAN_JOINT",
+    "DELETE_ONE_JOINT"
+  ],
+  "expected": {
+    "conditions": 6,
+    "new_raw": 30,
+    "new_counts": 114,
+    "new_official": 144,
+    "new_teacher_encoder_head_calls": 0
+  },
+  "acceptance": "All144outputssealbeforethisstudyGT. PrimaryONE_SEdoesnotchangeafterunlabeledchoicereceipt. ControlsnotGT-bestfinalselection. SamequalitypromotionasV1 beforeanynewactualcost.",
+  "selector_sha256": "b2095915fe3a6b11fef70406068ed0378635fa6eb22775fe444611766a404aaa",
+  "worker_sha256": "bcf6aa05c56e33dc6e41f7bfc4e60923b1b01baa694b7192bafb6d8725e79676",
+  "frozen_strict_selector_sha256": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9",
+  "preregistered_sanity": "All70strictvalidationlosses/BCE/BALANCEDchoicesexact;GT0. OneSEglobal1/45C4,17/25C1. No GTmetricseenfornewONE_SE/TWO_SE/MEDIAN/DELETE_ONE predictions.",
+  "no_automatic_goal_close": true
+}

@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE_STOP_NO_TRAINING_NO_NEW_DANCE_TEACHER",
+  "verdict": {
+    "confirmation": "\u8de8\u53e5\u7ade\u4e89\u89e3\u7801\u5728 Train\u2192Val \u4e0b\u53ef\u590d\u73b0",
+    "debias": "\u672a\u6062\u590d",
+    "X2_D1_unseen_HOTA_mean": 6.155188475376145,
+    "fixed_unseen_threshold": 14.229,
+    "causal": "\u53ea\u62a5\u544a\u5404\u6a21\u578bX1\u2212X0\u3001X3\u2212X2\u3001X5\u2212X4\u53caCI\uff1b\u4e0d\u505a\u5224\u5b9a",
+    "rejection": "\u53ea\u62a5\u544aX4\u2212X2\u53caCI\u3001Query-Empty\u884c\u6570\u53d8\u5316\uff1b\u4e0d\u505a\u5224\u5b9a",
+    "default_offline": "X0_C3",
+    "default_causal": "X1_C3_CAUSAL",
+    "default_is_rule_result_not_authorization_to_run_next_experiment": true
+  },
+  "decoder_sets": 36,
+  "target_reference_sets": 3,
+  "source_boundary_sets": 8,
+  "target_GT_open_attempts_in_generators": 0,
+  "student_updates": 0,
+  "new_teacher_calls": 0,
+  "report_sha256": "7b37fb523c77714444441f35870d230c1a72e339f872bc3e009a6f70d0df8187",
+  "CPU_report_seconds": 15.108638291014358
+}

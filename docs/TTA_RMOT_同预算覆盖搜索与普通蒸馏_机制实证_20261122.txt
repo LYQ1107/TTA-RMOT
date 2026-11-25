@@ -1,0 +1,63 @@
+TTA-RMOT：同预算、教师反馈驱动的覆盖搜索
+2026-11-22
+
+同原有COVER逐查询候选顺序，先每查询检查一次；PRESUPPOSED剩余预算按已观察No概率乘积/(已用query预算+1)重新分配。CHECKLIST保持原均匀query预算。
+这是搜索优先级代理，不是经校准的存在性后验或独立教师证据定理。不得借低置信度声称目标不存在。
+总预算C4仍1160，新增缺失问题真实Qwen前向；私有缓存复用是质量证据准备，不是零成本冷启动。普通充分软/硬KD也取得完全相同新回答。
+三个神经种子、270头拟合、27原始+57双向数量共84新输出封存后本组GT。
+
+COVERAGE_SEARCH_C4
+三种子平均HOTA：{"KD400": 66.99505038228101, "KD_FINAL": 66.91256252055052, "KD_MEAN": 66.98256850529884, "HARD400": 66.37485946692857, "HARD_FINAL": 66.16784039820855, "GRAPH": 66.72408654459866, "CAL": 67.4115602358641, "JOINT": 67.23943586097636, "COMPLETE": 63.087772005578735, "COVER_KD": 67.10235563516557, "COVER_KD400": 67.02918334179726, "COVER_KD_FINAL": 67.15160893254868, "COVER_HARD400": 66.92955737001431, "COVER_HARD_FINAL": 66.76096489937851, "COVER_GRAPH": 67.07196854933224, "COVER_CAL": 67.4949142295024, "COVER_JOINT": 67.58003292973349, "RES_KD": 66.16970756349771, "RES_KD400": 66.54896900366192, "RES_KD_FINAL": 65.56625737861224, "RES_HARD400": 66.27313423130566, "RES_HARD_FINAL": 65.57408450383183, "RES_PCD_KD_MEAN": 66.77347423160707, "RES_ZERO_HSV_MEAN": 66.85440930797562, "RES_SEM_MEAN": 66.43667023506868, "RES_SEM400": 66.85906117497136, "RES_SEM_HARD400": 66.35289484929429, "RGB_KD400": 66.55600625425171, "RGB_KD_FINAL": 66.4442686834001, "RGB_KD_MEAN": 66.51872225883601, "RGB_HARD400": 66.79328865905732, "RGB_HARD_FINAL": 66.61780878638491, "UNWEIGHTED_KD": 67.08293697286213}
+JOINT_vs_KD_MEAN：+0.256867; parent95%[-0.427151, +0.818567]; parent+seed95%[-0.441842, +0.825754]
+JOINT_vs_KD400：+0.244385; parent95%[-0.344239, +0.731569]; parent+seed95%[-0.371557, +0.742254]
+JOINT_vs_KD_FINAL：+0.326873; parent95%[-0.368136, +0.951689]; parent+seed95%[-0.381440, +0.959755]
+JOINT_vs_HARD400：+0.864576; parent95%[+0.285156, +1.591894]; parent+seed95%[+0.264371, +1.614923]
+JOINT_vs_HARD_FINAL：+1.071595; parent95%[+0.455236, +1.888988]; parent+seed95%[+0.426650, +1.905522]
+JOINT_vs_GRAPH：+0.515349; parent95%[+0.075624, +0.917905]; parent+seed95%[+0.075119, +0.944683]
+JOINT_vs_CAL：-0.172124; parent95%[-0.608276, +0.345497]; parent+seed95%[-0.621115, +0.373114]
+JOINT_vs_COMPLETE：+4.151664; parent95%[+2.578605, +6.292818]; parent+seed95%[+2.583351, +6.286240]
+JOINT_vs_COVER_KD：+0.137080; parent95%[-0.906775, +1.317440]; parent+seed95%[-0.946435, +1.349147]
+JOINT_vs_COVER_KD400：+0.210253; parent95%[-0.814609, +1.367284]; parent+seed95%[-0.832826, +1.382169]
+JOINT_vs_COVER_KD_FINAL：+0.087827; parent95%[-1.037630, +1.359131]; parent+seed95%[-1.070839, +1.396740]
+JOINT_vs_COVER_HARD400：+0.309878; parent95%[-0.991851, +1.713136]; parent+seed95%[-0.995175, +1.730842]
+JOINT_vs_COVER_HARD_FINAL：+0.478471; parent95%[-0.874569, +1.940937]; parent+seed95%[-0.870972, +1.955277]
+JOINT_vs_COVER_GRAPH：+0.167467; parent95%[-0.824242, +1.317335]; parent+seed95%[-0.830186, +1.333554]
+JOINT_vs_COVER_CAL：-0.255478; parent95%[-1.238249, +0.853442]; parent+seed95%[-1.243295, +0.893928]
+JOINT_vs_COVER_JOINT：-0.340597; parent95%[-1.269913, +0.745508]; parent+seed95%[-1.276548, +0.767953]
+JOINT_vs_RES_KD：+1.069728; parent95%[-0.340340, +2.804661]; parent+seed95%[-0.370563, +2.797716]
+JOINT_vs_RES_KD400：+0.690467; parent95%[-0.707439, +2.396451]; parent+seed95%[-0.728178, +2.396481]
+JOINT_vs_RES_KD_FINAL：+1.673178; parent95%[+0.179311, +3.521102]; parent+seed95%[+0.147226, +3.517075]
+JOINT_vs_RES_HARD400：+0.966302; parent95%[-0.323011, +2.507098]; parent+seed95%[-0.334989, +2.540144]
+JOINT_vs_RES_HARD_FINAL：+1.665351; parent95%[+0.284845, +3.252844]; parent+seed95%[+0.281232, +3.305346]
+JOINT_vs_RES_PCD_KD_MEAN：+0.465962; parent95%[-0.906783, +2.040813]; parent+seed95%[-0.911514, +2.042918]
+JOINT_vs_RES_ZERO_HSV_MEAN：+0.385027; parent95%[-0.893463, +1.818975]; parent+seed95%[-0.902360, +1.842342]
+JOINT_vs_RES_SEM_MEAN：+0.802766; parent95%[-0.701802, +2.616859]; parent+seed95%[-0.717548, +2.647302]
+JOINT_vs_RES_SEM400：+0.380375; parent95%[-0.984133, +2.033020]; parent+seed95%[-1.013245, +2.047708]
+JOINT_vs_RES_SEM_HARD400：+0.886541; parent95%[-0.536770, +2.535720]; parent+seed95%[-0.560038, +2.596284]
+JOINT_vs_RGB_KD400：+0.683430; parent95%[-0.401734, +2.013530]; parent+seed95%[-0.440071, +2.048595]
+JOINT_vs_RGB_KD_FINAL：+0.795167; parent95%[-0.352670, +2.253055]; parent+seed95%[-0.363548, +2.253670]
+JOINT_vs_RGB_KD_MEAN：+0.720714; parent95%[-0.375013, +2.117975]; parent+seed95%[-0.397900, +2.133860]
+JOINT_vs_RGB_HARD400：+0.446147; parent95%[-0.834438, +1.894910]; parent+seed95%[-0.841203, +1.900328]
+JOINT_vs_RGB_HARD_FINAL：+0.621627; parent95%[-0.679506, +2.069795]; parent+seed95%[-0.683070, +2.078875]
+JOINT_vs_UNWEIGHTED_KD：+0.156499; parent95%[-0.908381, +1.327836]; parent+seed95%[-0.918043, +1.330348]
+KD_MEAN_vs_COVER_KD：-0.119787; parent95%[-1.219384, +1.082416]; parent+seed95%[-1.245027, +1.116475]
+GRAPH_vs_KD_MEAN：-0.258482; parent95%[-0.869715, +0.352435]; parent+seed95%[-0.871258, +0.367649]
+CAL_vs_KD_MEAN：+0.428992; parent95%[+0.010540, +0.788283]; parent+seed95%[+0.000624, +0.797319]
+COUNT_OWN_JOINT_vs_KD_MEAN：+0.404706; parent95%[+0.177773, +0.676024]; parent+seed95%[+0.168883, +0.680323]
+COUNT_BASELINE_JOINT_vs_KD_MEAN：+0.092198; parent95%[-0.111462, +0.330791]; parent+seed95%[-0.127014, +0.365629]
+COUNT_OWN_JOINT_vs_GRAPH：+0.098657; parent95%[+0.030811, +0.194704]; parent+seed95%[+0.029671, +0.200659]
+COUNT_BASELINE_JOINT_vs_GRAPH：+0.019209; parent95%[-0.009663, +0.062817]; parent+seed95%[-0.012403, +0.066954]
+COUNT_OWN_JOINT_vs_CAL：+0.230495; parent95%[+0.046195, +0.517390]; parent+seed95%[+0.030946, +0.520787]
+COUNT_BASELINE_JOINT_vs_CAL：-0.026522; parent95%[-0.262578, +0.243902]; parent+seed95%[-0.280255, +0.260279]
+COUNT_OWN_JOINT_vs_COVER_KD：+0.782789; parent95%[+0.301304, +1.374432]; parent+seed95%[+0.296143, +1.374113]
+COUNT_BASELINE_JOINT_vs_COVER_KD：+0.255532; parent95%[-0.103424, +0.733707]; parent+seed95%[-0.133226, +0.769782]
+COUNT_OWN_JOINT_vs_COVER_JOINT：+0.154880; parent95%[-0.029975, +0.389767]; parent+seed95%[-0.037445, +0.413901]
+COUNT_BASELINE_JOINT_vs_COVER_JOINT：+0.114777; parent95%[-0.096360, +0.393913]; parent+seed95%[-0.137664, +0.413324]
+COUNT_OWN_JOINT_vs_COMPLETE：+0.307817; parent95%[+0.073128, +0.700140]; parent+seed95%[+0.062718, +0.702734]
+COUNT_BASELINE_JOINT_vs_COMPLETE：-0.034698; parent95%[-0.121731, +0.029469]; parent+seed95%[-0.121729, +0.029923]
+封存后覆盖/检索/TPFPFN：{"conditions":{"C4_seed0":{"candidate_membership":{"KD_MEAN":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":19,"positive_queries_without_correct_output":46,"TP":1398226,"FP":533257,"FN":107732},"GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":53,"positive_queries_without_correct_output":69,"TP":1389352,"FP":526038,"FN":116606},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":20,"positive_queries_without_correct_output":44,"TP":1402310,"FP":515900,"FN":103648},"JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":52,"positive_queries_without_correct_output":65,"TP":1403406,"FP":519963,"FN":102552},"COMPLETE":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":65,"positive_queries_without_correct_output":82,"TP":1297557,"FP":636909,"FN":208401},"COVER_KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":24,"positive_queries_without_correct_output":56,"TP":1388099,"FP":521773,"FN":117859},"COVER_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":60,"positive_queries_without_correct_output":78,"TP":1393887,"FP":485360,"FN":112071}},"J_retrieval_versus":{"KD_MEAN":{"rescued":4,"regressed":23},"COVER_KD":{"rescued":12,"regressed":21},"COVER_JOINT":{"rescued":18,"regressed":5}},"teacher_candidate_coverage":{"SEARCH":{"queries":466,"positive_queries_unasked_correct":113,"positive_queries_without_correct_Yes":134,"logical_calls":1160},"COVER":{"queries":466,"positive_queries_unasked_correct":122,"positive_queries_without_correct_Yes":147,"logical_calls":1160}}},"C4_seed17":{"candidate_membership":{"KD_MEAN":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":20,"positive_queries_without_correct_output":47,"TP":1399575,"FP":538303,"FN":106383},"GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":54,"positive_queries_without_correct_output":71,"TP":1389723,"FP":533591,"FN":116235},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":22,"positive_queries_without_correct_output":47,"TP":1400315,"FP":517155,"FN":105643},"JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":53,"positive_queries_without_correct_output":67,"TP":1398999,"FP":517714,"FN":106959},"COMPLETE":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":64,"positive_queries_without_correct_output":81,"TP":1304481,"FP":645376,"FN":201477},"COVER_KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":25,"positive_queries_without_correct_output":56,"TP":1397980,"FP":511602,"FN":107978},"COVER_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":75,"TP":1396304,"FP":483800,"FN":109654}},"J_retrieval_versus":{"KD_MEAN":{"rescued":3,"regressed":23},"COVER_KD":{"rescued":11,"regressed":22},"COVER_JOINT":{"rescued":18,"regressed":10}},"teacher_candidate_coverage":{"SEARCH":{"queries":466,"positive_queries_unasked_correct":113,"positive_queries_without_correct_Yes":134,"logical_calls":1160},"COVER":{"queries":466,"positive_queries_unasked_correct":122,"positive_queries_without_correct_Yes":147,"logical_calls":1160}}},"C4_seed42":{"candidate_membership":{"KD_MEAN":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":17,"positive_queries_without_correct_output":44,"TP":1403624,"FP":540742,"FN":102334},"GRAPH":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":55,"positive_queries_without_correct_output":72,"TP":1394194,"FP":537211,"FN":111764},"CAL":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":21,"positive_queries_without_correct_output":45,"TP":1409750,"FP":521143,"FN":96208},"JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":54,"positive_queries_without_correct_output":68,"TP":1405299,"FP":520926,"FN":100659},"COMPLETE":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":65,"positive_queries_without_correct_output":81,"TP":1303461,"FP":645648,"FN":202497},"COVER_KD":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":24,"positive_queries_without_correct_output":53,"TP":1402479,"FP":520499,"FN":103479},"COVER_JOINT":{"queries":466,"recoverable_positive_queries":466,"positive_queries_empty":58,"positive_queries_without_correct_output":72,"TP":1401501,"FP":489084,"FN":104457}},"J_retrieval_versus":{"KD_MEAN":{"rescued":1,"regressed":25},"COVER_KD":{"rescued":11,"regressed":26},"COVER_JOINT":{"rescued":15,"regressed":11}},"teacher_candidate_coverage":{"SEARCH":{"queries":466,"positive_queries_unasked_correct":113,"positive_queries_without_correct_Yes":134,"logical_calls":1160},"COVER":{"queries":466,"positive_queries_unasked_correct":122,"positive_queries_without_correct_Yes":147,"logical_calls":1160}}}},"postseal_manual_GT_only":true,"not_additive_HOTA_attribution":true,"coverage_does_not_guarantee_full_GT_track_quality":true}
+搜到正确候选不保证正确传播；需要同时检验普通头下选题贡献、同问答经典模块贡献和双向数量效应。
+C1按任务契约未改变，复用原同头质量结果不是新增独立验证。所有数据均为开发数据。
+如新配方保留，需自己的真实端到端成本，不能拼接旧wall。Goal不自动完成。
+
+根代理最终科学复核：主门槛失败，不保留。新增真实问答让正确候选覆盖净增加9query、正确Yes增加13query，却没有提高HOTA。J67.239436低于旧J67.580033，且多出约3.2—3.5万误报观测；对自身软KD、旧强软KD/FINAL均没有可靠正增益。所有270fit充分，不能归为对手未训练好；比完全图高4.15也不是超越强普通KD的证明。详见coverage_search_scientific_review.json。Goal仍ACTIVE，正在核验已预登记OPTIONAL_TRANSFER。

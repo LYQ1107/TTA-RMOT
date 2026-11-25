@@ -1,0 +1,108 @@
+{
+  "status": "PASS_EXISTING_REGISTERED_HEAD_SHARED_DEVICE_EXECUTION_AND_ORIGINAL_BINDING",
+  "entry": "scripts/a100_native_registered_shared_head.py",
+  "entry_sha256": "a6f99fb9789c5ef46d04113413301c2db1d22e739707a9c91b1bba680c0715be",
+  "original_helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+  "original_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "original_numeric_source_pins_unchanged": true,
+  "actual_session": 11687,
+  "actual_pid": 678641,
+  "actual_exit_code": 0,
+  "do_not_resume_terminal_session": true,
+  "pair": "C3",
+  "video": "v_ITo3sCnpw_k_c012",
+  "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+  "physical_GPU": 1,
+  "execution_amendment": "Only the free-device preflight is replaced in this new process with explicit current-native-owner/memory checks. Model, original solver, initialization, own paid prefixes, normalizer, fit gates, seed0 and exclusive cache install are unchanged.",
+  "control_validation": {
+    "actual_session": 64337,
+    "actual_exit_code": 0,
+    "checks": [
+      "only_known_native_owner_on_same_device_accepted",
+      "unknown_owner_refused_before_CUDA",
+      "additional_owner_refused_before_CUDA",
+      "duplicate_owner_refused_before_CUDA",
+      "no_owner_refused_before_CUDA",
+      "wrong_command_pair_refused_before_CUDA",
+      "wrong_source_entry_refused_before_CUDA",
+      "not_current_study_refused_before_CUDA",
+      "insufficient_total_memory_refused_before_CUDA",
+      "excess_resident_memory_refused_before_CUDA",
+      "invalid_negative_memory_refused_before_CUDA"
+    ]
+  },
+  "actual_preflights": [
+    {
+      "physical_GPU": 1,
+      "used_MiB": 913,
+      "total_MiB": 40960,
+      "resident_registered_worker_pid": 4134758,
+      "resident_pair": "C3",
+      "original_per_process_memory_fraction": 0.15,
+      "unknown_compute_owners": 0,
+      "execution_preflight_amendment": "PROJECT_ONLY_SHARED_DEVICE",
+      "no_model_input_fit_gate_or_seed_change": true,
+      "runtime_entry_sha256": "a6f99fb9789c5ef46d04113413301c2db1d22e739707a9c91b1bba680c0715be",
+      "numerical_helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0"
+    },
+    {
+      "physical_GPU": 1,
+      "used_MiB": 913,
+      "total_MiB": 40960,
+      "resident_registered_worker_pid": 4134758,
+      "resident_pair": "C3",
+      "original_per_process_memory_fraction": 0.15,
+      "unknown_compute_owners": 0,
+      "execution_preflight_amendment": "PROJECT_ONLY_SHARED_DEVICE",
+      "no_model_input_fit_gate_or_seed_change": true,
+      "runtime_entry_sha256": "a6f99fb9789c5ef46d04113413301c2db1d22e739707a9c91b1bba680c0715be",
+      "numerical_helper_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0"
+    }
+  ],
+  "original_helper_plan_records_same_amendment": true,
+  "original_checkpoint_recipe_and_normalizer_verified": true,
+  "prepared_sha256": "7f80fc47d446cb23f2b115999c4810c2367098f555f90ec9a7b29b57c69107cd",
+  "installed_before_original_arm": true,
+  "original_progress_at_install": {
+    "stage": "FITTING_MATCHED_REPLAY_AND_ADEQUATE_KD_NO_GT",
+    "video": "v_ITo3sCnpw_k_c012",
+    "completed_videos": 35,
+    "total_videos": 45,
+    "completed_arms": 3,
+    "last_arm": "FULL_CONDITIONAL_LOCAL_LEARNED",
+    "excess_risk": 2.838380248670891e-05
+  },
+  "actual_parent_reuse_verified": false,
+  "parent_reuse_requires_original_per_video_marker": true,
+  "fit_records": [
+    {
+      "excess_risk": 4.928734930043088e-05,
+      "risk_units": "proper teacher KL in nats",
+      "teacher_fit_gate_passed": true,
+      "actual_final_Adam_steps": 400
+    },
+    {
+      "excess_risk": 5.543280653841354e-05,
+      "risk_units": "proper teacher KL in nats",
+      "teacher_fit_gate_passed": true,
+      "actual_final_Adam_steps": 400
+    },
+    {
+      "excess_risk": 5.348984845660043e-05,
+      "risk_units": "proper teacher KL in nats",
+      "teacher_fit_gate_passed": true,
+      "actual_final_Adam_steps": 400
+    },
+    {
+      "excess_risk": 5.045568182138194e-05,
+      "risk_units": "proper teacher KL in nats",
+      "teacher_fit_gate_passed": true,
+      "actual_final_Adam_steps": 400
+    }
+  ],
+  "original_helper_wall_seconds": 236.97613317298237,
+  "new_quality_conditions": 0,
+  "new_teacher_questions_predictions_GT_or_neural_seeds": 0,
+  "not_a_quality_or_primary_deployment_speedup_result": true,
+  "goal_status": "ACTIVE"
+}

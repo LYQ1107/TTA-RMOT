@@ -1,0 +1,33 @@
+{
+  "scope": "whole C4 truly independent single-method cold deployment comparison, provided frozen candidates",
+  "methods": [
+    "CLIP_KD",
+    "CLIP_COHORT"
+  ],
+  "source_perception": "same3 observations per provided track with original4-observation context",
+  "teacher_target_bounds": [
+    0.02,
+    0.98
+  ],
+  "bounds_inherited_not_new_GT_tuning": true,
+  "seed": 0,
+  "physical_GPU": 3,
+  "order": [
+    "CLIP_KD",
+    "CLIP_COHORT"
+  ],
+  "order_not_counterbalanced": true,
+  "new_process_and_both_models_loaded_each": true,
+  "private_new_SQLite_each": true,
+  "real_Qwen_budget_each": 3508,
+  "cache_hits_expected_each": 0,
+  "only_one_actual_head_label_type_each": "CLIP",
+  "only_one_prediction_method_each": true,
+  "cost": "external child process Popen-to-exit wall, includes startup and final serialization/teardown; isolated GT evaluation outside worker cost",
+  "shared_prefix_between_the_two_processes": false,
+  "OS_cache_retained": true,
+  "host_and_NAS_shared": true,
+  "QA_and_source_features_checked_after_seals": true,
+  "no_target_GT_in_adaptation": true,
+  "all_development_data": true
+}

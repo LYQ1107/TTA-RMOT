@@ -1,0 +1,47 @@
+{
+  "groups": {
+    "no_official_GT_at_anchor": {
+      "candidate_pairs": 7620,
+      "min_score_kind_APPEARANCE": 7457,
+      "below_source_POS_gate_APPEARANCE": 5916,
+      "C_state_SUPPORT_NEG": 7054,
+      "nonbinary_original_answer_pairs": 0,
+      "below_source_POS_gate_ACTION_AND_APPEARANCE": 1587,
+      "C_state_UNKNOWN": 491,
+      "min_score_kind_ACTION": 150,
+      "below_source_POS_gate_NONE": 75,
+      "C_state_SUPPORT_POS": 75,
+      "min_score_kind_ACTION_AND_APPEARANCE": 13,
+      "below_source_POS_gate_ACTION": 42
+    },
+    "official_complete_query_MATCHED": {
+      "candidate_pairs": 485,
+      "min_score_kind_ACTION": 214,
+      "below_source_POS_gate_ACTION_AND_APPEARANCE": 39,
+      "C_state_UNKNOWN": 204,
+      "nonbinary_original_answer_pairs": 0,
+      "below_source_POS_gate_NONE": 224,
+      "C_state_SUPPORT_POS": 224,
+      "below_source_POS_gate_ACTION": 64,
+      "min_score_kind_APPEARANCE": 249,
+      "min_score_kind_ACTION_AND_APPEARANCE": 22,
+      "C_state_SUPPORT_NEG": 57,
+      "below_source_POS_gate_APPEARANCE": 158
+    },
+    "official_complete_query_UNMATCHED_at_GT_present_anchor": {
+      "candidate_pairs": 276,
+      "min_score_kind_APPEARANCE": 253,
+      "below_source_POS_gate_APPEARANCE": 216,
+      "C_state_UNKNOWN": 85,
+      "nonbinary_original_answer_pairs": 0,
+      "C_state_SUPPORT_NEG": 168,
+      "below_source_POS_gate_ACTION_AND_APPEARANCE": 32,
+      "below_source_POS_gate_NONE": 23,
+      "C_state_SUPPORT_POS": 23,
+      "min_score_kind_ACTION_AND_APPEARANCE": 1,
+      "min_score_kind_ACTION": 22,
+      "below_source_POS_gate_ACTION": 5
+    }
+  },
+  "interpretation": "score bottleneck of the complete expression on matched/unmatched candidate pairs; NOT independent clause accuracy or per-attribute GT; no threshold/rule change"
+}

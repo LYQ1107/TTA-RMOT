@@ -1,0 +1,44 @@
+{
+  "experiment": "flexhook_official_refer_kitti_v2",
+  "accepted": true,
+  "vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+  "checkpoint": {
+    "path": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+    "bytes": 995768450,
+    "sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613"
+  },
+  "dataset": {
+    "name": "Refer-KITTI-V2",
+    "videos": ["0005", "0011", "0013", "0019"],
+    "expressions": 862
+  },
+  "resources_external": true,
+  "physical_gpus": [1, 4],
+  "distributed_processes": 2,
+  "metrics": {
+    "HOTA": 42.526,
+    "DetA": 30.629,
+    "AssA": 59.186,
+    "DetRe": 58.55,
+    "DetPr": 38.31,
+    "AssRe": 64.69,
+    "AssPr": 85.048,
+    "LocA": 89.088,
+    "RHOTA": 58.841,
+    "HOTA(0)": 48.332,
+    "LocA(0)": 84.486,
+    "HOTALocA(0)": 40.833,
+    "Dets": 750834,
+    "GT_Dets": 491286,
+    "IDs": 30871,
+    "GT_IDs": 8043
+  },
+  "result_root": "/data2/user/FlexHook-TTA/results/runs/official_refer_kitti_v2_2gpu",
+  "rank_merge": {
+    "rank0_leaf_scores": 1177280,
+    "rank1_leaf_scores": 1178248,
+    "merged_leaf_scores": 2355528,
+    "rank_overlap": 0
+  },
+  "metric_note": "Matches the official README HOTA 42.526; remaining decimals differ only slightly from the README summary."
+}

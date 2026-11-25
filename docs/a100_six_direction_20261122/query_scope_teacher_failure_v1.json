@@ -1,0 +1,77 @@
+{
+  "status": "FAILED_QUERY_SCOPE_V1_FIRST_BATCH_FORMAT_GATE",
+  "preserved_source_commit": "cadbd7bcb04226290fe94188ca5449761156cd3a",
+  "new_text_generation_requests": 8,
+  "actual_generate_batches": 1,
+  "valid_schema_outputs": 0,
+  "required_minimum_of8": 4,
+  "fixed_gate_not_weakened": true,
+  "all8_raw_responses_are_complete_JSON": true,
+  "failure": "Prompt schema placeholders copied; all output terms omitted required span/negated; entity-name enum misuse.",
+  "issues": [
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": true,
+      "missing_term_span": 3,
+      "missing_term_negated": 3,
+      "invalid_entity_name": 1
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": false,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 2
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": false,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 1
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": true,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 1
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": true,
+      "missing_term_span": 3,
+      "missing_term_negated": 3,
+      "invalid_entity_name": 3
+    },
+    {
+      "missing_subject_span": true,
+      "copied_span_placeholder": false,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 2
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": true,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 1
+    },
+    {
+      "missing_subject_span": false,
+      "copied_span_placeholder": true,
+      "missing_term_span": 2,
+      "missing_term_negated": 2,
+      "invalid_entity_name": 2
+    }
+  ],
+  "first_batch_generation_wall_seconds": 5.025830069906078,
+  "cost_limitation": "Teacher was loaded, but its failed-run load phase and total forward/token counters were not persisted before the assertion. These costs are not claimed zero or reused as a cold-deployment measurement.",
+  "frozen_weight_SHA": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "raw_outputs_and_failed_logs_preserved_local": true,
+  "no_manual_GT_or_image_answers_or_predictions": true,
+  "no_target_quality_conclusion": true,
+  "dependency_audit_stopped_before_reading_teacher_image_answers": true,
+  "goal_status": "ACTIVE"
+}

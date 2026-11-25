@@ -1,0 +1,49 @@
+{
+  "version": "A100_WALL_V1",
+  "methods": [
+    "MINUS_v8P",
+    "YT_PRIOR",
+    "UNIFORM_K"
+  ],
+  "budget_seconds": 600,
+  "time_grid": [
+    0,
+    60,
+    120,
+    180,
+    240,
+    300,
+    450,
+    600
+  ],
+  "seed": 0,
+  "short_videos": {
+    "v_00HRwkvvjtQ_c001": {
+      "first_frame": 1,
+      "last_frame": 128,
+      "observations": 1125,
+      "queries": 8
+    },
+    "v_00HRwkvvjtQ_c003": {
+      "first_frame": 1,
+      "last_frame": 128,
+      "observations": 1280,
+      "queries": 8
+    }
+  },
+  "selection": "first two lexically sorted videos; first128 observed frames each; all their real query texts; no GT",
+  "resources": "one A100 40GB per arm, student and teacher share the device; no cross-arm answer cache",
+  "rotation": "three repeats, alternation of physical GPUs2 and3; GPUs0/1 dedicated to ordered causal streams",
+  "cold": "new process and newly loaded required models; shared server OS page cache not flushed",
+  "budget_includes": "process import, student/teacher load, initial parameter fingerprint, image IO, real features/teacher forwards, fitting, prediction snapshot IO",
+  "cutoff": "only atomically committed snapshots completed by deadline count; late or unfinished work receives no prediction credit",
+  "unprocessed": "empty predictions over remaining samples; all query-frame sequences remain in evaluation",
+  "short_call_cap": "rho=1, one nominal question per eligible pair total for all methods; active distributes the same cap over four inherited rounds",
+  "full_call_cap": "rho=.3 with the fixed metadata-derived per-video cap; all45 videos, actual total wall reported",
+  "MINUS": "inherited information gain/routing/recheck and evidence-only fast fit; zero LoRA",
+  "YT_PRIOR": "query-round-robin descending native mean score; first observation crop; YesTrack>=.4; unasked Native fallback",
+  "UNIFORM_K": "seed0 uniform query-track pairs; midpoint routed view; Yes>=.5; unasked UNKNOWN omitted",
+  "required_preprocessing": "MINUS and YT load live student; UNIFORM appearance-only slice can skip unused student; full motion gates require live presence features",
+  "scientific_limit": "600-second score is measured, not preselected to show active strategy wins; short slice is not evidence of full-domain generalization",
+  "registration_before_GT": true
+}

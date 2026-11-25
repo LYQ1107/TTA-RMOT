@@ -1,0 +1,25 @@
+method,group,episodes,sampled_pairs,accepted_POS,official_unmatched_POS,episodes_with_any_POS,nonempty_prediction_rate,note,presence_AUROC,presence_AUPRC
+FROZEN_FLEXHOOK,Query-Present,40,779,46,6,16,0.4,Query-Empty official-unmatched is not proven semantic false,,
+FROZEN_FLEXHOOK,Query-Empty,385,7602,406,406,72,0.18701298701298702,Query-Empty official-unmatched is not proven semantic false,,
+FROZEN_FLEXHOOK,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.6805194805194805,0.17705204354494866
+YES_FULL,Query-Present,40,779,408,42,38,0.95,Query-Empty official-unmatched is not proven semantic false,,
+YES_FULL,Query-Empty,385,7602,224,224,50,0.12987012987012986,Query-Empty official-unmatched is not proven semantic false,,
+YES_FULL,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9596103896103896,0.611904794291082
+YES_ENSEMBLE_BUDGET_MATCHED,Query-Present,40,779,151,10,26,0.65,Query-Empty official-unmatched is not proven semantic false,,
+YES_ENSEMBLE_BUDGET_MATCHED,Query-Empty,385,7602,53,53,20,0.05194805194805195,Query-Empty official-unmatched is not proven semantic false,,
+YES_ENSEMBLE_BUDGET_MATCHED,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.953051948051948,0.6584517102579984
+STRUCTURED_EVIDENCE,Query-Present,40,779,248,24,32,0.8,Query-Empty official-unmatched is not proven semantic false,,
+STRUCTURED_EVIDENCE,Query-Empty,385,7602,74,74,21,0.05454545454545454,Query-Empty official-unmatched is not proven semantic false,,
+STRUCTURED_EVIDENCE,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9662662337662338,0.661061772870254
+EVIDENCE_VERIFIED,Query-Present,40,779,183,15,29,0.725,Query-Empty official-unmatched is not proven semantic false,,
+EVIDENCE_VERIFIED,Query-Empty,385,7602,40,40,15,0.03896103896103896,Query-Empty official-unmatched is not proven semantic false,,
+EVIDENCE_VERIFIED,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9662662337662338,0.661061772870254
+YES_ENSEMBLE_B_PLUS,Query-Present,40,779,66,4,15,0.375,Query-Empty official-unmatched is not proven semantic false,,
+YES_ENSEMBLE_B_PLUS,Query-Empty,385,7602,14,14,8,0.02077922077922078,Query-Empty official-unmatched is not proven semantic false,,
+YES_ENSEMBLE_B_PLUS,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9575649350649351,0.6895177495103973
+YESTRACK_TCP_TRP,Query-Present,40,779,482,78,39,0.975,Query-Empty official-unmatched is not proven semantic false,,
+YESTRACK_TCP_TRP,Query-Empty,385,7602,349,349,68,0.17662337662337663,Query-Empty official-unmatched is not proven semantic false,,
+YESTRACK_TCP_TRP,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9148376623376623,0.380858633776091
+SOFTMATCH_WEIGHTED,Query-Present,40,779,408,42,38,0.95,Query-Empty official-unmatched is not proven semantic false,,
+SOFTMATCH_WEIGHTED,Query-Empty,385,7602,224,224,50,0.12987012987012986,Query-Empty official-unmatched is not proven semantic false,,
+SOFTMATCH_WEIGHTED,episode_max_sampled_score_presence,425,,,,,,five anchors and sampled candidates only; GT grouping offline,0.9596103896103896,0.611904794291082

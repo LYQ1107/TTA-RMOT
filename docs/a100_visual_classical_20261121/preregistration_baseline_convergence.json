@@ -1,0 +1,33 @@
+{
+  "version": "TEACHER_FIT_CONVERGENCE_BASELINE_CHECK",
+  "registered_before_any_new_target_GT": true,
+  "unix_time": 1795200185.0682707,
+  "reason": "Teacher-only fit diagnostics: C4 soft KD CE approx.35 vs teacher entropy approx.22; exclude a short-training weak-baseline explanation.",
+  "target_GT_used_for_decision": false,
+  "original_400_step_results_retained": true,
+  "extra_steps": 4000,
+  "architectures_unchanged": true,
+  "source_features_and_teacher_questions_unchanged": true,
+  "acquisitions": [
+    "PRIOR",
+    "UNIFORM",
+    "UNCERTAINTY",
+    "COVER"
+  ],
+  "supervision": [
+    "HARD",
+    "SOFT"
+  ],
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "new_teacher_calls": 0,
+  "does_not_select_proposed_method_parameters": true,
+  "evaluation_after_all_first_round_predictions_sealed": true,
+  "frame_level_long_KD_and_actual_backbone_KD_still_distinct_possible_followups": true,
+  "code_sha256": {
+    "scripts/a100_visual_classical_long_kd.py": "cd48fa513bdc73bf32ffb5cc643429069fc0635d086557ec7a5e531f9d3dd8fe",
+    "scripts/a100_visual_classical_generate.py": "bb2078bef8953a2e892c9177d2a856e31b2f32cf62d2974dda79f9cf16d27668"
+  }
+}

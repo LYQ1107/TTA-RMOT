@@ -1,0 +1,629 @@
+{
+  "status": "PASS_NATIVE_BINARY_REAL_INPUT_CONTRACT",
+  "pair": "C1",
+  "video": "dancetrack0004",
+  "metadata_actions": 104,
+  "paid_library_requests": 56,
+  "budget": 56,
+  "probe_rounds": 3,
+  "record": {
+    "paid_binary_requests": 56,
+    "unique_visual_nodes": 56,
+    "pair_rows": 56,
+    "candidate_identity_pairs": 56,
+    "temporal_same_track_pairs": 0,
+    "singleton_same_event_pairs": 0,
+    "every_unique_node_occurs_once_as_each_endpoint": true,
+    "causal_CLIP_binary_teacher_assigned_to_requested_anchor_approximation": true,
+    "product_targets_are_independence_model_not_observed_joint_answers": true
+  },
+  "models": [
+    {
+      "recipe": {
+        "family": "structured",
+        "conditional": true,
+        "reference": true
+      },
+      "shape": [
+        56,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 5.960464477539063e-08,
+      "fit": {
+        "recipe": {
+          "family": "structured",
+          "conditional": true,
+          "reference": true
+        },
+        "width": 64,
+        "metrics": {
+          "width": 64,
+          "steps": 1000,
+          "teacher_CE": 0.09728021933953042,
+          "attainable_exact_orbit_entropy": 0.09689648352266757,
+          "excess_KL": 0.0003837358168628513,
+          "optimizer": "Adam_lr.001"
+        },
+        "trace": [
+          {
+            "width": 64,
+            "steps": 250,
+            "teacher_CE": 0.10545667901341978,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.00856019549075221,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 400,
+            "teacher_CE": 0.10035295174066623,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.003456468217998665,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 500,
+            "teacher_CE": 0.0990380395271471,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0021415560044795307,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 750,
+            "teacher_CE": 0.09763542356155011,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0007389400388825434,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 1000,
+            "teacher_CE": 0.09728021933953042,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0003837358168628513,
+            "optimizer": "Adam_lr.001"
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": false,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": true,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 46.393350656027906,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "proper teacher KL in nats",
+        "excess_risk": 0.0003837358168628513
+      }
+    },
+    {
+      "recipe": {
+        "family": "pair",
+        "risk": "joint"
+      },
+      "shape": [
+        56,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 5.960464477539063e-08,
+      "fit": {
+        "recipe": {
+          "family": "pair",
+          "risk": "joint"
+        },
+        "width": 128,
+        "metrics": {
+          "width": 128,
+          "steps": 1000,
+          "teacher_CE": 0.09724274660404487,
+          "attainable_exact_orbit_entropy": 0.09689648352266757,
+          "excess_KL": 0.0003462630813773071,
+          "optimizer": "Adam_lr.001"
+        },
+        "trace": [
+          {
+            "width": 128,
+            "steps": 250,
+            "teacher_CE": 0.13498721141933415,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.03809072789666658,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 400,
+            "teacher_CE": 0.11755332943844354,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.020656845915775976,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 500,
+            "teacher_CE": 0.09840146255857905,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0015049790359114856,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 750,
+            "teacher_CE": 0.09739249716268708,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0004960136400195131,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 1000,
+            "teacher_CE": 0.09724274660404487,
+            "attainable_exact_orbit_entropy": 0.09689648352266757,
+            "excess_KL": 0.0003462630813773071,
+            "optimizer": "Adam_lr.001"
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": true,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": false,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 25.461982081993483,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "proper teacher KL in nats",
+        "excess_risk": 0.0003462630813773071
+      }
+    },
+    {
+      "recipe": {
+        "family": "pair",
+        "risk": "marginal"
+      },
+      "shape": [
+        56,
+        4
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 1.4901161193847656e-08,
+      "fit": {
+        "recipe": {
+          "family": "pair",
+          "risk": "marginal"
+        },
+        "width": 128,
+        "metrics": {
+          "width": 128,
+          "steps": 1000,
+          "teacher_CE": 0.04865264105875276,
+          "attainable_exact_orbit_entropy": 0.04844824176133378,
+          "excess_KL": 0.00020439929741898621,
+          "optimizer": "Adam_lr.001"
+        },
+        "trace": [
+          {
+            "width": 128,
+            "steps": 250,
+            "teacher_CE": 0.08162010934677011,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.03317186758543633,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 400,
+            "teacher_CE": 0.08131267990543098,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0328644381440972,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 500,
+            "teacher_CE": 0.08105795815968946,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.03260971639835568,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 750,
+            "teacher_CE": 0.0487991475749104,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0003509058135766213,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 1000,
+            "teacher_CE": 0.04865264105875276,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.00020439929741898621,
+            "optimizer": "Adam_lr.001"
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": true,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": false,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": true,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 31.875577604980208,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "proper teacher KL in nats",
+        "excess_risk": 0.00020439929741898621
+      }
+    },
+    {
+      "recipe": {
+        "family": "point"
+      },
+      "shape": [
+        56,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 2.9802322387695312e-08,
+      "fit": {
+        "recipe": {
+          "family": "point"
+        },
+        "width": 128,
+        "metrics": {
+          "width": 128,
+          "steps": 1000,
+          "teacher_CE": 0.049680499139802756,
+          "attainable_exact_orbit_entropy": 0.04844824176133378,
+          "excess_KL": 0.0012322573784689789,
+          "optimizer": "Adam_lr.001"
+        },
+        "trace": [
+          {
+            "width": 128,
+            "steps": 250,
+            "teacher_CE": 0.08687762248972339,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.03842938072838961,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 400,
+            "teacher_CE": 0.08665957490404293,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.03821133314270915,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 500,
+            "teacher_CE": 0.08616500001104979,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.037716758249716015,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 750,
+            "teacher_CE": 0.049894155004642574,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0014459132433087968,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 128,
+            "steps": 1000,
+            "teacher_CE": 0.049680499139802756,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0012322573784689789,
+            "optimizer": "Adam_lr.001"
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": true,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": false,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 14.379406547057442,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "proper teacher KL in nats",
+        "excess_risk": 0.0012322573784689789
+      }
+    },
+    {
+      "recipe": {
+        "family": "coarse"
+      },
+      "shape": [
+        56,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 2.9802322387695312e-08,
+      "fit": {
+        "recipe": {
+          "family": "coarse"
+        },
+        "width": 64,
+        "metrics": {
+          "width": 64,
+          "steps": 1000,
+          "teacher_CE": 0.04859409371805744,
+          "attainable_exact_orbit_entropy": 0.04844824176133378,
+          "excess_KL": 0.00014585195672366102,
+          "optimizer": "Adam_lr.001"
+        },
+        "trace": [
+          {
+            "width": 64,
+            "steps": 250,
+            "teacher_CE": 0.04908784381189644,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0006396020505626612,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 400,
+            "teacher_CE": 0.048887499591904325,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.0004392578305705483,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 500,
+            "teacher_CE": 0.048806003645482834,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.00035776188414905763,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 750,
+            "teacher_CE": 0.048667998771620605,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.00021975701028682793,
+            "optimizer": "Adam_lr.001"
+          },
+          {
+            "width": 64,
+            "steps": 1000,
+            "teacher_CE": 0.04859409371805744,
+            "attainable_exact_orbit_entropy": 0.04844824176133378,
+            "excess_KL": 0.00014585195672366102,
+            "optimizer": "Adam_lr.001"
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": true,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": false,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": true,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 7.22225792997051,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "proper teacher KL in nats",
+        "excess_risk": 0.00014585195672366102
+      }
+    },
+    {
+      "recipe": {
+        "family": "point",
+        "risk": "logit"
+      },
+      "shape": [
+        56,
+        2
+      ],
+      "projection": {
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": false,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true
+      },
+      "streamed_gradient_max_error": 5.960464477539062e-07,
+      "fit": {
+        "recipe": {
+          "family": "point",
+          "risk": "logit"
+        },
+        "width": 128,
+        "metrics": {
+          "width": 128,
+          "steps": 750,
+          "optimizer": "Adam_lr.001",
+          "projected_teacher_MSE_logit": 5.17712473151008e-13,
+          "excess_MSE_logit": 5.17712473151008e-13,
+          "projected_MSE_logit_floor": 0.0
+        },
+        "trace": [
+          {
+            "width": 128,
+            "steps": 250,
+            "optimizer": "Adam_lr.001",
+            "projected_teacher_MSE_logit": 1.5611618545588657e-06,
+            "excess_MSE_logit": 1.5611618545588657e-06,
+            "projected_MSE_logit_floor": 0.0
+          },
+          {
+            "width": 128,
+            "steps": 400,
+            "optimizer": "Adam_lr.001",
+            "projected_teacher_MSE_logit": 9.582169403541309e-05,
+            "excess_MSE_logit": 9.582169403541309e-05,
+            "projected_MSE_logit_floor": 0.0
+          },
+          {
+            "width": 128,
+            "steps": 500,
+            "optimizer": "Adam_lr.001",
+            "projected_teacher_MSE_logit": 3.4511660516397716e-09,
+            "excess_MSE_logit": 3.4511660516397716e-09,
+            "projected_MSE_logit_floor": 0.0
+          },
+          {
+            "width": 128,
+            "steps": 750,
+            "optimizer": "Adam_lr.001",
+            "projected_teacher_MSE_logit": 5.17712473151008e-13,
+            "excess_MSE_logit": 5.17712473151008e-13,
+            "projected_MSE_logit_floor": 0.0
+          },
+          {
+            "width": 128,
+            "steps": 1000,
+            "optimizer": "Adam_lr.001",
+            "projected_teacher_MSE_logit": 2.4795148919800443e-10,
+            "excess_MSE_logit": 2.4795148919800443e-10,
+            "projected_MSE_logit_floor": 0.0
+          }
+        ],
+        "capacity_and_LBFGS_attempts": [],
+        "minimum_Adam_steps": 1000,
+        "actual_final_Adam_steps": 1000,
+        "early_step": 400,
+        "ordinary_required": true,
+        "teacher_fit_gate_passed": true,
+        "structural_residual_is_not_ordinary_adequacy": false,
+        "neural_seed": 0,
+        "prefix_warm_start": false,
+        "GT_or_task_metric_selection": false,
+        "original_risk_rows": 56,
+        "exact_orbit_groups": 56,
+        "architecture_equivariance_projected": false,
+        "proper_teacher_CE_preserved": false,
+        "excess_teacher_risk_preserved": true,
+        "irreducible_input_MSE_logit": 0.0,
+        "identical_input_target_conflicts_are_not_fit_as_separate_labels": true,
+        "wall_seconds": 14.899175832048059,
+        "activation_batch_limit": 1024,
+        "full_batch_weighted_risk_and_gradient_preserved": true,
+        "risk_units": "squared native teacher logit (p clipped1e-6)",
+        "excess_risk": 5.17712473151008e-13
+      }
+    }
+  ],
+  "new_teacher_GPU_calls": 0,
+  "head_fits_executed": true,
+  "device": "cuda:0",
+  "GT_open_attempts": 0,
+  "count_only_parameter_updates_have_exactly_zero_semantic_reward": true,
+  "execution": {
+    "deterministic_algorithms": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_initialized_before_configuration": false,
+    "CUDA_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "torch_version": "2.6.0+cu118",
+    "cuda_version": "11.8"
+  },
+  "no_RMOT_predictions_or_quality_claim": true
+}

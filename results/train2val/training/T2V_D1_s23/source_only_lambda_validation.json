@@ -1,0 +1,49 @@
+{
+  "lambda_KD": 1.0,
+  "selection": "PRE_FIXED_EQUAL_DOMAIN_MEAN_WEIGHTS_RETAINED_AFTER_SOURCE_ONLY_FINITE_SCALE_CHECK",
+  "optimized_on_target_GT": false,
+  "source_video_count": 4,
+  "records": [
+    {
+      "video": "0005",
+      "frame": 143,
+      "track_id": 41,
+      "source_CE": 0.0006867203628644347,
+      "source_dev_teacher_KD": 1.0846531391143799,
+      "source_grad_norm": 0.000250998692444047,
+      "KD_grad_norm": 0.15399329509354207,
+      "source_teacher_view": "P1 legal source-dev original four-observation question; scale sanity only, not target inference"
+    },
+    {
+      "video": "0011",
+      "frame": 132,
+      "track_id": 34,
+      "source_CE": 0.0013696795795112848,
+      "source_dev_teacher_KD": 1.5523072481155396,
+      "source_grad_norm": 0.0007177588715963242,
+      "KD_grad_norm": 0.31584229513699275,
+      "source_teacher_view": "P1 legal source-dev original four-observation question; scale sanity only, not target inference"
+    },
+    {
+      "video": "0013",
+      "frame": 321,
+      "track_id": 141,
+      "source_CE": 7.160228729248047,
+      "source_dev_teacher_KD": 6.587847709655762,
+      "source_grad_norm": 1.9370708444532259,
+      "KD_grad_norm": 3.511959674450539,
+      "source_teacher_view": "P1 legal source-dev original four-observation question; scale sanity only, not target inference"
+    },
+    {
+      "video": "0019",
+      "frame": 440,
+      "track_id": 114,
+      "source_CE": 0.005491100251674652,
+      "source_dev_teacher_KD": 4.199149131774902,
+      "source_grad_norm": 0.0021903813694237606,
+      "KD_grad_norm": 0.72411529579851,
+      "source_teacher_view": "P1 legal source-dev original four-observation question; scale sanity only, not target inference"
+    }
+  ],
+  "limitation": "Not an optimized lambda search; source teacher calibration uses its already frozen four-observation source view."
+}

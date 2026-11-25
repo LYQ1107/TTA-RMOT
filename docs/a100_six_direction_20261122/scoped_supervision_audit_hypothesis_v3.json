@@ -1,0 +1,16 @@
+{
+  "study": "Scope-matched whole-query supervision observability",
+  "problem": "A whole-query No cannot identify which clause fails; language factorization alone does not supply missing supervision.",
+  "hypothesis": "Only some available query pairs may provide a controlled predicate contrast or subset/conjunction comparison on the identical visual observation.",
+  "intervention": "Use the two fixed teacher text interpretations and DESIGN own answers; enumerate exact image/context matched query contrasts without learning atom targets.",
+  "fixed_controls": "Hold rendered visual digest, ID, frame, actual view, bbox, residual prompt, and all accepted nonchanged clauses fixed.",
+  "measurements": "Report available query relationships, actually observed matched pairs, raw teacher contrast magnitude, and conjunction/subset monotonicity residuals.",
+  "no_semantic_truth_claim": "Text consensus and teacher probabilities can both be wrong; violations are not target error labels, and matching does not prove factor identifiability.",
+  "fairness": "Any later full and ordinary KD receive the same language structures, paid answers and visual features.",
+  "no_quality_threshold_or_best_policy_selection": true,
+  "goal_status": "ACTIVE",
+  "research_goal_complete": false,
+  "version": 3,
+  "reason_for_new_dependency": "V1 text parser failed format gate before the dependent audit read any image answers; v2 changes only language instructions and cost persistence.",
+  "dependency_repair": "Both free-form text versions failed strict format gates; v3 uses constrained generation. Identical visual/context matching and no pseudo-atom target creation remain unchanged."
+}

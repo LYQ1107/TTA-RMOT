@@ -1,0 +1,431 @@
+{
+  "status": "ALL_ACTUAL_TEACHER_COSTS_ACCOUNTED",
+  "methods": [
+    {
+      "new_logical_calls": 22720,
+      "forward_batches": 2878,
+      "forward_seconds": 850.9737012025435,
+      "input": "CROP",
+      "planned_paired_judgments": 29146,
+      "peak_allocated_bytes": 4693312512,
+      "original_Dance_CROP_reused_calls": 6426,
+      "inherited_original_CROP_forward_seconds": 100.42831114586443,
+      "CLIP_fallbacks": 0,
+      "effective_forward_GPU_hours_new_lower_bound": 0.2363815836673732,
+      "forward_seconds_exact": false,
+      "forward_seconds_lower_bound": 850.9737012025435,
+      "forward_seconds_upper_bound": 907.4025255038869,
+      "upper_bound_is_shared_not_additive_across_views": true,
+      "peak_memory_scope": "observed committed/successful batches; allocation budget bounds any discarded batch"
+    },
+    {
+      "new_logical_calls": 27635,
+      "forward_batches": 3517,
+      "forward_seconds": 2417.6679912384134,
+      "input": "CLIP",
+      "planned_paired_judgments": 29146,
+      "peak_allocated_bytes": 5479137792,
+      "original_Dance_CROP_reused_calls": 0,
+      "inherited_original_CROP_forward_seconds": 0.0,
+      "CLIP_fallbacks": 1511,
+      "effective_forward_GPU_hours_new_lower_bound": 0.6715744420106704,
+      "forward_seconds_exact": false,
+      "forward_seconds_lower_bound": 2417.6679912384134,
+      "forward_seconds_upper_bound": 2474.096815539757,
+      "upper_bound_is_shared_not_additive_across_views": true,
+      "peak_memory_scope": "observed committed/successful batches; allocation budget bounds any discarded batch"
+    },
+    {
+      "new_logical_calls": 29146,
+      "forward_batches": 3705,
+      "forward_seconds": 2355.493726773886,
+      "input": "FRAME_BOX",
+      "planned_paired_judgments": 29146,
+      "peak_allocated_bytes": 5906798592,
+      "original_Dance_CROP_reused_calls": 0,
+      "inherited_original_CROP_forward_seconds": 0.0,
+      "CLIP_fallbacks": 0,
+      "effective_forward_GPU_hours_new_lower_bound": 0.6543038129927461,
+      "forward_seconds_exact": false,
+      "forward_seconds_lower_bound": 2355.493726773886,
+      "forward_seconds_upper_bound": 2411.9225510752294,
+      "upper_bound_is_shared_not_additive_across_views": true,
+      "peak_memory_scope": "observed committed/successful batches; allocation budget bounds any discarded batch"
+    }
+  ],
+  "attempts": [
+    {
+      "tag": "shard0_smoke",
+      "physical_gpu": 2,
+      "pid": 1400972,
+      "exit_code": 0,
+      "worker_seconds": 26.74741714890115,
+      "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/shard0_smoke.log",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/0/smoke_receipt.json",
+      "receipt_sha256": "f5139e13bfac8ed067c45f0ce26005dcc0176a7d1be28c9e830a4ad5c962c683"
+    },
+    {
+      "tag": "shard0_full",
+      "physical_gpu": 2,
+      "pid": 1406765,
+      "exit_code": 0,
+      "worker_seconds": 1838.389871655032,
+      "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/shard0_full.log",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/0/receipt.json",
+      "receipt_sha256": "02f3c6d0bb7c90eed3521160077c0efb2c8f1ea96f23ada2258af05b665965b0"
+    },
+    {
+      "tag": "shard1_smoke",
+      "physical_gpu": 7,
+      "pid": 1400974,
+      "exit_code": 0,
+      "worker_seconds": 29.03240577597171,
+      "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/shard1_smoke.log",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/1/smoke_receipt.json",
+      "receipt_sha256": "2585b92c63876d5be35e2cdb1c0de7424fbdf1a43e1457696bbd7c2462a0f46b"
+    },
+    {
+      "tag": "shard1_full",
+      "physical_gpu": 7,
+      "pid": 1407433,
+      "exit_code": -2,
+      "worker_seconds": 2821.2941661509685,
+      "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/shard1_full.log",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793554739173537703/interrupted_receipt.json",
+      "receipt_sha256": "2098abdb0faade34515641692473ea62bd3e632bb56e08562d615c6b140feb04"
+    },
+    {
+      "tag": "shard1_full",
+      "physical_gpu": 2,
+      "pid": 2312811,
+      "exit_code": 0,
+      "worker_seconds": 1294.9173051619437,
+      "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793554739173537703/shard1_full.log",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/1/receipt.json",
+      "receipt_sha256": "f5bfa626321a712b6c07f5a6025d52ebc847ed64e6eb9abd84c4acd78cca25f2"
+    }
+  ],
+  "admissions": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/admission.json",
+      "sha256": "a89caaaad654b549c75fe107cd4efd0de19c0d930a2ac15f063bbf4ed56db225",
+      "record": {
+        "selected": [
+          {
+            "physical_gpu": 2,
+            "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          },
+          {
+            "physical_gpu": 7,
+            "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          }
+        ],
+        "all_gpus": [
+          {
+            "physical_gpu": 0,
+            "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 76529,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 1,
+            "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 65119,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 2,
+            "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          },
+          {
+            "physical_gpu": 3,
+            "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 59237,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 4,
+            "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 64447,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 5,
+            "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 61935,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 6,
+            "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 44532,
+            "total_mib": 81920,
+            "processes": 2
+          },
+          {
+            "physical_gpu": 7,
+            "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          }
+        ],
+        "processes": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 687189, 4616\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 2267953, 16026\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 690615, 21908\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 690616, 16698\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 690617, 19208\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 499953, 16086\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 690618, 20522\n",
+        "sharing_authorized": true,
+        "max_physical_GPUs": 2,
+        "allocator_budget_GiB": 20,
+        "admission_headroom_GiB": 4
+      }
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793554739173537703/admission.json",
+      "sha256": "fb952e9fb1f729c39d29ef50947a8666468f774a927ed694a87dfda7e071d82d",
+      "record": {
+        "selected": [
+          {
+            "physical_gpu": 2,
+            "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          }
+        ],
+        "all_gpus": [
+          {
+            "physical_gpu": 0,
+            "uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 76273,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 1,
+            "uuid": "GPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 65119,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 2,
+            "uuid": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 81154,
+            "total_mib": 81920,
+            "processes": 0
+          },
+          {
+            "physical_gpu": 3,
+            "uuid": "GPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 59237,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 4,
+            "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 60469,
+            "total_mib": 81920,
+            "processes": 1
+          },
+          {
+            "physical_gpu": 5,
+            "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 40008,
+            "total_mib": 81920,
+            "processes": 3
+          },
+          {
+            "physical_gpu": 6,
+            "uuid": "GPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 44530,
+            "total_mib": 81920,
+            "processes": 2
+          },
+          {
+            "physical_gpu": 7,
+            "uuid": "GPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9",
+            "name": "NVIDIA A800-SXM4-80GB",
+            "free_mib": 47234,
+            "total_mib": 81920,
+            "processes": 3
+          }
+        ],
+        "processes": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536, 687189, 4872\nGPU-f35654b3-bbf5-7303-cfcb-9bd5d3e16e69, 2267953, 16026\nGPU-6cb11599-704e-c3aa-9e28-5f15faa25c7c, 690615, 21908\nGPU-44f62835-4095-23ec-d3dd-5af16a00705c, 690616, 20676\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 690617, 19208\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 1430853, 13436\nGPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6, 1430852, 8480\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 499953, 16086\nGPU-883c8be3-25b0-3d19-6fa8-4c2e335e67d2, 690618, 20524\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 1407433, 11984\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 1430855, 13436\nGPU-0322c0e7-ffbf-e068-5bdd-587b8216a9d9, 1430854, 8480\n",
+        "sharing_authorized": true,
+        "max_physical_GPUs": 2,
+        "allocator_budget_GiB": 20,
+        "resume_reason": "GPU7 now3 processes; GPU2 idle. Only exact owned cached worker is interrupted.",
+        "old_pid": 1407433,
+        "verified_owned_command": [
+          "/data2/user/TTA-RMOT-assets/teacher-p1/env/bin/python",
+          "/data2/user/FlexHook-TTA/scripts/decompose_teacher.py",
+          "--shard",
+          "1"
+        ],
+        "no_other_process_signalled": true
+      }
+    }
+  ],
+  "max_physical_GPUs": 2,
+  "actual_teacher_scheduler_wall_seconds": 4146.677211107,
+  "new_GPU_process_hours": 1.6695503238591158,
+  "new_teacher_forward_GPU_hours_lower_bound": 1.5622598386707898,
+  "new_teacher_forward_GPU_hours_upper_bound": 1.5779345120878294,
+  "exact_forward_seconds_available": false,
+  "successful_teacher_call_conservation_pass": true,
+  "shared_unassigned_inflight_forward_seconds_upper_bound": 56.42882430134341,
+  "possible_discarded_inflight_judgments_upper_bound": 8,
+  "observed_new_judgments_lower_bound": 79501,
+  "observed_new_judgments_upper_bound": 79509,
+  "resource_resume_registry": {
+    "receipt_overrides": {
+      "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793551889976369066/shard1_full.log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793554739173537703/interrupted_receipt.json"
+    },
+    "partial_attempts": [
+      "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/launchers/1793554739173537703/interrupted_receipt.json"
+    ],
+    "migration_gpu_from": 7,
+    "migration_gpu_to": 2,
+    "original_backend_unchanged": true,
+    "original_crop_unchanged": true,
+    "cache_rows_verified": 14118
+  },
+  "original_Dance_CROP_inherited_forward_seconds": 100.42831114586443,
+  "original_Dance_CROP_inherited_calls": 6426,
+  "source_and_in_domain_margin_inference_costs_inherited_not_zero": "/data2/user/FlexHook-TTA/results/multidomain_generality/costs.json",
+  "estimates_registered_before_calls": {
+    "logical_calls": {
+      "CROP": 29146,
+      "CLIP": 29146,
+      "FRAME_BOX": 29146
+    },
+    "estimated_forward_GPU_hours": {
+      "CROP": 0.12493791395010248,
+      "CLIP": 0.4997516558004099,
+      "FRAME_BOX": 0.6145746826554324
+    },
+    "total_estimated_forward_GPU_hours": 1.2392642524059447
+  },
+  "cost_definitions": "GPU-process hours include load/hash/CPU/IO/shared-GPU waiting; forward seconds synchronize CUDA; neither is device utilization integral",
+  "raw_outputs": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/0/outputs.jsonl",
+      "sha256": "acc506f5a7c2959e8322ee568d5d0e249f401e5a343b662effb24a2eb34a01f7",
+      "pairs": 43728,
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/0/receipt.json",
+      "receipt_sha256": "02f3c6d0bb7c90eed3521160077c0efb2c8f1ea96f23ada2258af05b665965b0"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/1/outputs.jsonl",
+      "sha256": "c1448ce28167c0edd325b278794814e877e43528cfc9ec38292ca42eba686a97",
+      "pairs": 43710,
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/workers/1/receipt.json",
+      "receipt_sha256": "f5bfa626321a712b6c07f5a6025d52ebc847ed64e6eb9abd84c4acd78cca25f2"
+    }
+  ],
+  "cpu_offline_launchers": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552508312373296/completion.json",
+      "sha256": "905b7042225381f37066daff1c1e06bc99b61e6a72e21265466df6e048ecab0f",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "tag": "oracle_C1",
+          "pid": 1547501,
+          "exit_code": 0,
+          "wall_seconds": 11.845953986048698,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552508312373296/oracle_C1.log"
+        },
+        {
+          "tag": "official",
+          "pid": 1549852,
+          "exit_code": 0,
+          "wall_seconds": 63.480850394116715,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552508312373296/official.log"
+        }
+      ]
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/completion.json",
+      "sha256": "7ec0c0e8a463f105e5173e6b42c557ced0b41c1e2f547f60ce0dea1fe2890719",
+      "status": "COMPLETE",
+      "workers": [
+        {
+          "tag": "oracle_C2",
+          "pid": 1464232,
+          "exit_code": 0,
+          "wall_seconds": 22.72821202594787,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/oracle_C2.log"
+        },
+        {
+          "tag": "oracle_C3",
+          "pid": 1464233,
+          "exit_code": 0,
+          "wall_seconds": 29.390818275976926,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/oracle_C3.log"
+        },
+        {
+          "tag": "oracle_C4",
+          "pid": 1468966,
+          "exit_code": 0,
+          "wall_seconds": 29.294596046907827,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/oracle_C4.log"
+        },
+        {
+          "tag": "oracle_C5",
+          "pid": 1470448,
+          "exit_code": 0,
+          "wall_seconds": 23.089706965954974,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/oracle_C5.log"
+        },
+        {
+          "tag": "oracle_C6",
+          "pid": 1475740,
+          "exit_code": 0,
+          "wall_seconds": 11.724986474961042,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/oracle_C6.log"
+        },
+        {
+          "tag": "official",
+          "pid": 1478105,
+          "exit_code": 0,
+          "wall_seconds": 875.6352742740419,
+          "log": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/offline_launchers/1793552142511336971/official.log"
+        }
+      ]
+    }
+  ],
+  "student_updates": 0,
+  "teacher_updates": 0
+}

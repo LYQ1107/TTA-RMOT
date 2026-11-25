@@ -1,0 +1,97 @@
+{
+  "status": "POSTSEAL_FRESH_QUERY_TYPE_TRADEOFF_DIAGNOSIS",
+  "counts": {
+    "fallback_other": {
+      "queries": 105,
+      "KD_empty": 0,
+      "GRAPH_empty": 0,
+      "KD_no_correct": 0,
+      "GRAPH_no_correct": 0,
+      "rescued": 0,
+      "regressed": 0,
+      "KD_TP": 686901,
+      "GRAPH_TP": 686901,
+      "KD_FP": 16963,
+      "GRAPH_FP": 16963
+    },
+    "static_clothing": {
+      "queries": 256,
+      "KD_empty": 8,
+      "GRAPH_empty": 32,
+      "KD_no_correct": 21,
+      "GRAPH_no_correct": 35,
+      "rescued": 1,
+      "regressed": 15,
+      "KD_TP": 588479,
+      "GRAPH_TP": 613681,
+      "KD_FP": 351812,
+      "GRAPH_FP": 354663
+    },
+    "fallback_spatial": {
+      "queries": 78,
+      "KD_empty": 11,
+      "GRAPH_empty": 26,
+      "KD_no_correct": 34,
+      "GRAPH_no_correct": 36,
+      "rescued": 3,
+      "regressed": 5,
+      "KD_TP": 54192,
+      "GRAPH_TP": 59900,
+      "KD_FP": 90157,
+      "GRAPH_FP": 89219
+    },
+    "fallback_role": {
+      "queries": 27,
+      "KD_empty": 0,
+      "GRAPH_empty": 3,
+      "KD_no_correct": 4,
+      "GRAPH_no_correct": 7,
+      "rescued": 0,
+      "regressed": 3,
+      "KD_TP": 35987,
+      "GRAPH_TP": 37148,
+      "KD_FP": 60584,
+      "GRAPH_FP": 48676
+    }
+  },
+  "HOTA_input_defined_groups": {
+    "static_clothing": {
+      "queries": 256,
+      "original_parents": 13,
+      "HOTA": {
+        "KD": 61.60414152275816,
+        "GRAPH": 62.611338650107164
+      }
+    },
+    "fallback_spatial": {
+      "queries": 78,
+      "original_parents": 4,
+      "HOTA": {
+        "KD": 48.607987258582554,
+        "GRAPH": 50.99439105246406
+      }
+    },
+    "fallback_role": {
+      "queries": 27,
+      "original_parents": 6,
+      "HOTA": {
+        "KD": 42.7894806288471,
+        "GRAPH": 45.86207021861742
+      }
+    },
+    "fallback_other": {
+      "queries": 105,
+      "original_parents": 13,
+      "HOTA": {
+        "KD": 78.41235022655736,
+        "GRAPH": 78.41235022655736
+      }
+    }
+  },
+  "no_new_forward_or_fitting": true,
+  "provisional_original_head_candidate_with_RGB_asymmetry": true,
+  "query_retrieval_means_at_least_one_IoU_positive_candidate_row_not_complete_tracking": true,
+  "after_null_safeguard_preregistration_no_parameters_changed": true,
+  "GT_only_after_this_physical_study_seals": true,
+  "small_group_HOTA_points_not_independent_domain_validation": true
+}

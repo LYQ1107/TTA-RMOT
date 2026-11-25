@@ -1,0 +1,44 @@
+TTA-RMOT：2026-11-22轻量持续研究发布
+
+发布分支：codex/visual-classical-evidence-20261122
+仓库：https://github.com/LYQ1107/TTA-RMOT
+
+原研究分支codex/presence-active-v8p-20261106保留在8bc165fa8c3a598babeb9f862efec01252f6b84c。
+本分支以f915e49490bcddd7661d9650cca373e1c453a172为父提交基础，带入当前完整代码树与精选结果，
+省去中间反复更新报告/统计所积累的历史对象。原中间提交仍可通过旧分支追踪，不强推或改写旧分支。
+这是Git发布整理，不是重跑、改分数或隐藏失败。各已完成实验的数值源码SHA与本地原始收据仍保留。
+
+为何另建分支：
+本次同一代码树预检：若接在8bc165f后，可达对象约102.26MB，超过用户上限；
+接在f915e494后，快照约98.63MB、可达对象约93.45MB。最终数字以对实际发布提交运行
+python tools/check_publication_size.py --ref HEAD为准，快照和可达对象都必须<100,000,000字节。
+这些数字是Git未压缩对象/树的口径，不是模型大小、实验显存或原始数据大小。
+
+只发布必要源码、预登记、TXT、官方HOTA聚合充分统计、独立重算收据和小型图表。
+checkpoint、原始图片/特征、SQLite、全量预测、训练状态和逐批日志仍留NAS或本地a100_runs，
+不通过扩展名改名或分片绕过大小限制。大历史资产的NAS入口只读。
+本机/var/tmp只是新输出/已完成结果的本地存储，不是向NAS回写。
+
+研究状态：
+完整科研Goal继续ACTIVE，最小方法卡PROVISIONAL。普通蒸馏很强，已有稳定改善及不稳定/失败部分分别保留。
+共享强加权头的C4置信区间仍跨0，全面No隔离失败，V1/ONE_SE拓扑选择也未晋级。
+留轨迹视觉冲突144项与同预算覆盖搜索84项按预登记继续；提交时若无完整结果，报告明确标为进行中。
+不能把发布完成、控制器PASS或某个方向涨分当作科研目标已完成。
+
+用户明确任务边界为沿用官方固定候选，研究跨域指代适配。适配仅使用目标图片、任务语言和冻结教师指导。
+人工目标GT只在本研究预测与数量对照封存后隔离评估。所有现有数据为开发数据，没有未使用新划分。
+详细说明见TTA_RMOT_官方固定候选与普通蒸馏公平对比说明_20261122.txt，
+完整证据见a100_visual_classical_20261121/REPRODUCE.txt与各analysis/parent_statistics/reproduction。
+
+只克隆本轻量发布历史：
+git clone --single-branch --branch codex/visual-classical-evidence-20261122 https://github.com/LYQ1107/TTA-RMOT.git
+
+最新续跑：SEARCH84、OPTIONAL150已完成并独立复算，科学门槛均未通过，失败保留；共享收敛FINAL的协议/视觉校准114正在执行。它是根据开发结果做的简化，不是盲测。新的四卡真实成本代码仅有条件准备，未执行，不能引用成收据。原分支及已推送历史保留，无force push。
+
+为100MB快照限制，仅从最新代码树移出5份未执行且质量门槛已失败的旧冷流worker，未删除任何真实测量所用冻结源码或实验结果。原文逐字保留在Git 8d6faa1616599a87aa25d4aad8e244a82b535074，以及本机/var/tmp归档。恢复任一文件可用 git show 8d6faa1616599a87aa25d4aad8e244a82b535074:脚本路径。清单及hash见unexecuted_cold_prototype_retirement.json；这些历史条件计划不能当作实际成本。
+
+同一归档进一步包含这5个未执行worker的6份未执行调度/分析脚本，共11份；均逐字保留Git 8d6faa1及本机归档，真正测量的冻结源码仍在最新树。当前综合TXT保留全部HOTA/效应和历程，重复原始计数/审计表引用专题TXT/JSON；含全部重复表的单一完整TXT由--full-diagnostics生成到本地a100_runs，未删除任何实验数据。
+
+为后续必要收据预留<100MB空间，仅将旧coverage.json的字符串外排版空白去掉，保留全部token（含数字原文、字符串空白和转义）、结构、数值与类型，节省326827字节。原文保留Git af46773及本地备份；没有重新编码、舍入或删任何实验记录。核验见publication_display_whitespace_receipt.json。
+
+最终实证：PROTOCOL_CALIBRATION114、PURE_COMPONENTS新66控制、4份真实冷启全部完成，31项最终检查通过。4526真实QA/0cache、全部分数/1782查询文件0差。没有仍在运行的本线程GPU实验。保留最终协议约束+PAVA配方，完整方法/边界/时间见最终方法卡与protocol_final_scientific_review.json。发布结束后Root更新线程Goal；不得因旧进度日志ACTIVE误启动新任务。

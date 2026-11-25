@@ -1,0 +1,76 @@
+{
+  "study": "CONDITIONAL_OBSERVATION_LEARNING_SIX_SETTINGS_V1",
+  "goal_status": "ACTIVE",
+  "user_scope": "Learn classical ideas for task modeling, learning objectives and theory; inserting a named classical calibrator is not the objective.",
+  "hypotheses": [
+    "Shared context for a provided track and conditional current-observation prediction can generalize sparse teacher guidance more effectively than a flat or directly context-conditioned ordinary teacher head.",
+    "Supported query-level comparison with exposure balancing can preserve relative evidence without forcing single-target RMOT or interpreting all-No sampled evidence as certified scene absence.",
+    "Coverage and state-excitation observation design can interact with this learned observation representation; test against coverage-only, prior, and uniform under each policy own fixed answers."
+  ],
+  "classical_ideas": {
+    "observation_design": "Experimental design: cover hypotheses and observe changing states, not merely rescore a final output.",
+    "conditional_representation": "Conditional event modeling and permutation-invariant sets: local match implies some match in the provided observation bag. Chain-rule identities and existing set pooling are not novel theorems.",
+    "supported_comparison": "Conditional-choice invariance and balanced empirical risk: common positive prediction scale cancels in an eligible query profile; repeated observations must not automatically multiply a bag influence."
+  },
+  "theoretical_limits": [
+    "Bag support is latent and only partially identified. It is not a certified physical identity, clothing label, or calibrated presence posterior.",
+    "A joint No is not manufactured into separate attribute No labels, but joint-loss gradients can still incorrectly lower shared support.",
+    "Relative risk contains no extra teacher information and is redundant at exact proper instance fitting; improved generalization is an empirical hypothesis.",
+    "All-No teacher observations are excluded only from the preference term; pointwise negative evidence is still learned. There is no fixed 30% exploration or blanket never-empty rule.",
+    "Teacher view outputs are averaged only at an identical requested anchor, shared by all comparators. The query profile is over this explicit mixture protocol, not an assertion that raw view reliabilities or temporal scopes coincide.",
+    "CLIP answers are assigned to their requested anchors for every comparator; this common approximation is not true per-frame labeling.",
+    "Warm starts, dense RGB preparation, exact coordinate transfer, and adequate fitting are shared engineering, not retained scientific innovations."
+  ],
+  "fair_inputs": "All heads refit on the same historical dense full-frame PCD version, three selected context observations, identical part-colour descriptors/observed masks, normalized boxes/video phase/track age. Local ordinary controls deliberately omit bag context; flat/direct controls receive it.",
+  "strong_ordinary": "Zero fixed source-logit residual; soft AND hard current-frame and flattened-context heads, plus direct learned bag context. Include fixed step400/final probability means for every arm.",
+  "feature_provenance": "Historical batch64/nearly-zero-query isolation differs from fresh A100 batch8. Do not call them byte-identical, reuse old fitted heads, or claim a cold A100 feature cost from this quality replay.",
+  "adaptation": "Current-video transductive; only past/current image features, queries and own-policy frozen Qwen answers. No future normalization or answers. No manual target GT.",
+  "training": "First prefix min4000 AdamW steps, warm prefixes min400, max16000; continue only by registered empirical teacher-risk gate <=0.005. Same coordinate-preserving warm starts for ordinary and structured heads. Same final0.5 decoder; no GT selects checkpoints/widths.",
+  "capacity": "Ordinary hidden64 then registered128/256/512; structured width32 then64/128. Float64 LBFGS on original normalized float32 inputs, verify actual deployed float32 head; unresolved fits remain explicit and preclude superiority claims over a failed opponent.",
+  "primary": "FULL_FINAL",
+  "methods": [
+    "FRAME_SOFT_FINAL",
+    "FRAME_SOFT_MEAN",
+    "FRAME_HARD_FINAL",
+    "FRAME_HARD_MEAN",
+    "FLAT_SOFT_FINAL",
+    "FLAT_SOFT_MEAN",
+    "FLAT_HARD_FINAL",
+    "FLAT_HARD_MEAN",
+    "DIRECT_POINT_FINAL",
+    "DIRECT_POINT_MEAN",
+    "DIRECT_BALANCED_FINAL",
+    "DIRECT_BALANCED_MEAN",
+    "DIRECT_PROFILE_FINAL",
+    "DIRECT_PROFILE_MEAN",
+    "CONDITIONAL_BALANCED_FINAL",
+    "CONDITIONAL_BALANCED_MEAN",
+    "FULL_FINAL",
+    "FULL_MEAN",
+    "FULL_PRIOR_FINAL",
+    "FULL_PRIOR_MEAN",
+    "FULL_UNIFORM_FINAL",
+    "FULL_UNIFORM_MEAN",
+    "FULL_COVERAGE_FINAL",
+    "FULL_COVERAGE_MEAN"
+  ],
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "no_posthoc_primary_promotion": true,
+  "all_data_development": true,
+  "independent_holdout": false,
+  "quality_replay_not_single_method_deployment_cost": true,
+  "language_scope_cache_not_consumed": true,
+  "theory_or_pilot_does_not_complete_goal": true
+}

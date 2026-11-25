@@ -1,0 +1,109 @@
+{
+  "status": "THREE_REAL_SOURCE_HEAD_OPTIMIZER_SMOKES_PASS",
+  "records": [
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "steps": [
+        {
+          "step": 1,
+          "loss": 2.2275784015655518,
+          "count_CE": 2.33951997756958,
+          "gradient_norm": 7.734472274780273,
+          "positive_units": 69
+        },
+        {
+          "step": 2,
+          "loss": 1.4876976013183594,
+          "count_CE": 1.379804253578186,
+          "gradient_norm": 5.030527114868164,
+          "positive_units": 71
+        },
+        {
+          "step": 3,
+          "loss": 1.143887996673584,
+          "count_CE": 1.0634379386901855,
+          "gradient_norm": 2.409803867340088,
+          "positive_units": 69
+        }
+      ],
+      "seconds": 0.9688661550171673,
+      "parameters": 1521676,
+      "batch_size": 256,
+      "source_smoke_seal_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/features/source_train/KITTI-V2/V2-best/smoke_receipt.json",
+      "source_smoke_seal_sha256": "e573e74a317ff8ee47788eff19e65057f01f335c00f45701becb79d7cc9ac4d8"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "steps": [
+        {
+          "step": 1,
+          "loss": 2.536428689956665,
+          "count_CE": 3.352617025375366,
+          "gradient_norm": 16.692371368408203,
+          "positive_units": 7
+        },
+        {
+          "step": 2,
+          "loss": 1.2273814678192139,
+          "count_CE": 2.0986602306365967,
+          "gradient_norm": 8.587882041931152,
+          "positive_units": 7
+        },
+        {
+          "step": 3,
+          "loss": 0.5789883136749268,
+          "count_CE": 1.025706171989441,
+          "gradient_norm": 6.405330657958984,
+          "positive_units": 7
+        }
+      ],
+      "seconds": 0.34520649211481214,
+      "parameters": 1521676,
+      "batch_size": 256,
+      "source_smoke_seal_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/features/source_train/Dance/Dance-best/smoke_receipt.json",
+      "source_smoke_seal_sha256": "48092267831be75e0e84c6a919a716210deb903997f6cbdf9ed5569358d1a6ac"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "steps": [
+        {
+          "step": 1,
+          "loss": 1.3172630071640015,
+          "count_CE": 2.634526014328003,
+          "gradient_norm": 4.645543575286865,
+          "positive_units": 256
+        },
+        {
+          "step": 2,
+          "loss": 0.8249909281730652,
+          "count_CE": 1.6499818563461304,
+          "gradient_norm": 1.8914581537246704,
+          "positive_units": 256
+        },
+        {
+          "step": 3,
+          "loss": 0.6767417192459106,
+          "count_CE": 1.3534834384918213,
+          "gradient_norm": 1.2606502771377563,
+          "positive_units": 256
+        }
+      ],
+      "seconds": 0.35288610588759184,
+      "parameters": 1521676,
+      "batch_size": 256,
+      "source_smoke_seal_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/features/source_train/SportsMOT/LaMOT-best/smoke_receipt.json",
+      "source_smoke_seal_sha256": "10bd55cf2fc33137342c57cad040941cad1a3c6d5cfc3cc12b8aaf24d51075cc"
+    }
+  ],
+  "total_seconds": 2.000038234051317,
+  "physical_gpu": 6,
+  "peak_allocated_bytes": 156459520,
+  "target_GT_open_attempts": 0,
+  "numerical_labels_are_own_source_train_only": true,
+  "official_heads_changed": false,
+  "teacher_calls": 0,
+  "full_training_or_RMOT_result": false
+}

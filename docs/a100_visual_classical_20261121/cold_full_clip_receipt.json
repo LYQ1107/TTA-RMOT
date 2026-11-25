@@ -1,0 +1,172 @@
+{
+  "status": "PASS_REAL_COLD_FULL_CLIP",
+  "protocol": {
+    "name": "C4_first_full_clip_seed0",
+    "pair": "C4",
+    "video": "v_00HRwkvvjtQ_c001",
+    "frames": 1162,
+    "observations": 11168,
+    "queries": 8,
+    "sample_rule": "first lexicographic C4 clip, full frames and all its provided queries; no GT selection",
+    "weights_and_features_cold": true,
+    "teacher_fresh_SQLite": true,
+    "physical_gpu": "1",
+    "target_GT_used": false,
+    "teacher": "same inherited frozen binary CROP interface",
+    "source_feature_FP16_samples_then_FP32_mean": true,
+    "shared_measured_prefix": true,
+    "independent_same_seed_KD_fits_per_arm": true,
+    "no_whole_C4_cost_extrapolation": true,
+    "no_OS_cache_flushing": true
+  },
+  "phases": {
+    "student_load_including_weight_verification": 408.2633863129886,
+    "all_source_forward_text_and_initial_head": 443.9591316949809,
+    "real_RGB_part_features": 7.8115829799789935,
+    "image_only_input_assembly_and_acquisition": 0.04113992099883035,
+    "teacher_load_including_weight_verification": 488.72477295197314,
+    "real_teacher_service_including_image_IO": 5.042844895971939,
+    "teacher_final_frozen_weight_audit": 17.651609911990818
+  },
+  "common_wall_seconds": 1386.6219648239785,
+  "arms": {
+    "SOFT_KD": {
+      "train_seconds": 9.576801870018244,
+      "postprocess_including_output_seal_seconds": 0.07692051795311272,
+      "total_shared_prefix_plus_own_branch_seconds": 1396.2756872119498,
+      "fit": {
+        "status": "PREFIX_CHANNEL_NORMALIZED_ACTUAL_KD",
+        "soft": true,
+        "steps": 4000,
+        "seed": 0,
+        "teacher_examples": 43,
+        "teacher_entropy": 0.14421577751636505,
+        "teacher_CE": 0.1442495882511139,
+        "teacher_KL": 3.381073474884033e-05,
+        "teacher_fit_within_0_005": true,
+        "trace": [
+          {
+            "step": 400,
+            "teacher_CE": 0.14507123827934265,
+            "teacher_KL": 0.0008554607629776001
+          },
+          {
+            "step": 4000,
+            "teacher_CE": 0.1442495882511139,
+            "teacher_KL": 3.381073474884033e-05
+          }
+        ],
+        "wall_seconds": 9.576134156959597,
+        "no_future_normalization": true,
+        "no_target_GT_used": true,
+        "raw_feature_dimension": 1080,
+        "architecture": "D->64 GELU->1, source-logit residual",
+        "restart_from_same_seed_each_video": true
+      }
+    },
+    "COHORT": {
+      "train_seconds": 11.609939910005778,
+      "postprocess_including_output_seal_seconds": 0.10038020898355171,
+      "total_shared_prefix_plus_own_branch_seconds": 1398.3322849429678,
+      "fit": {
+        "status": "PREFIX_CHANNEL_NORMALIZED_ACTUAL_KD",
+        "soft": true,
+        "steps": 4000,
+        "seed": 0,
+        "teacher_examples": 43,
+        "teacher_entropy": 0.14421577751636505,
+        "teacher_CE": 0.1442495882511139,
+        "teacher_KL": 3.381073474884033e-05,
+        "teacher_fit_within_0_005": true,
+        "trace": [
+          {
+            "step": 400,
+            "teacher_CE": 0.14507123827934265,
+            "teacher_KL": 0.0008554607629776001
+          },
+          {
+            "step": 4000,
+            "teacher_CE": 0.1442495882511139,
+            "teacher_KL": 3.381073474884033e-05
+          }
+        ],
+        "wall_seconds": 11.608597267011646,
+        "no_future_normalization": true,
+        "no_target_GT_used": true,
+        "raw_feature_dimension": 1080,
+        "architecture": "D->64 GELU->1, source-logit residual",
+        "restart_from_same_seed_each_video": true
+      }
+    },
+    "HARD_KD": {
+      "train_seconds": 9.869075155991595,
+      "postprocess_including_output_seal_seconds": 0.07882751000579447,
+      "total_shared_prefix_plus_own_branch_seconds": 1396.5698674899759,
+      "fit": {
+        "status": "PREFIX_CHANNEL_NORMALIZED_ACTUAL_KD",
+        "soft": false,
+        "steps": 4000,
+        "seed": 0,
+        "teacher_examples": 43,
+        "teacher_entropy": 0.0,
+        "teacher_CE": 2.9139121124899248e-06,
+        "teacher_KL": 2.9139121124899248e-06,
+        "teacher_fit_within_0_005": true,
+        "trace": [
+          {
+            "step": 400,
+            "teacher_CE": 0.00027317513013258576,
+            "teacher_KL": 0.00027317513013258576
+          },
+          {
+            "step": 4000,
+            "teacher_CE": 2.9139121124899248e-06,
+            "teacher_KL": 2.9139121124899248e-06
+          }
+        ],
+        "wall_seconds": 9.868155883974396,
+        "no_future_normalization": true,
+        "no_target_GT_used": true,
+        "raw_feature_dimension": 1080,
+        "architecture": "D->64 GELU->1, source-logit residual",
+        "restart_from_same_seed_each_video": true
+      }
+    }
+  },
+  "teacher": {
+    "logical_calls": 43,
+    "new_calls": 43,
+    "cache_hits": 0,
+    "forward_seconds": 1.2640346760163084,
+    "equivalent_forward_seconds": 1.2640346760163084,
+    "batches": 6,
+    "cache": {
+      "complete_raw_responses": 43,
+      "pending_leases": 0,
+      "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_live/C4_first_full_clip_seed0/raw.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 487.4081436250126,
+    "peak_allocated_bytes": 4667289600
+  },
+  "GT_open_attempts": 0,
+  "prepaid_artifact_read_attempts": 0,
+  "accounting": "one physically measured common prefix + own independently fitted arm; no synthetic kernel extrapolation",
+  "all_development_data": true,
+  "no_whole_C4_cost_claim": true,
+  "official_HOTA": {
+    "SOFT_KD": 67.728948126798,
+    "COHORT": 66.98477496897893,
+    "HARD_KD": 67.21555487716535
+  },
+  "source_margin_bitwise_equal_to_frozen_A100_initial": true,
+  "feature_normalization_max_abs_difference_to_historical_samples": {
+    "mean": 3.820118543362838e-05,
+    "std": 7.098273255712328e-05
+  },
+  "same_teacher_request_keys": 43,
+  "maximum_same_input_teacher_probability_difference": 0.01953125,
+  "do_not_attribute_cold_vs_bank_HOTA_drift_to_teacher_alone": true
+}

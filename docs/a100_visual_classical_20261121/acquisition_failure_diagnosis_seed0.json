@@ -1,0 +1,584 @@
+{
+  "field": {
+    "C4": {
+      "seed": 0,
+      "policy": "FIELD",
+      "acquisition": {
+        "queries": 466,
+        "query_present": 466,
+        "positive_candidate_query": 466,
+        "questions": 3508,
+        "questions_on_present_queries": 3508,
+        "questions_on_empty_queries": 0,
+        "queries_with_only_one_question": 97,
+        "no_positive_track_asked": 130,
+        "no_positive_anchor_asked": 142,
+        "positive_track_seen_but_not_at_queried_anchor": 12,
+        "source_zero_present_query": 122,
+        "static_queries": 256,
+        "static_queried_anchors": 1351,
+        "static_anchor_sign_differs_from_track_majority": 26
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 1393060,
+          "negative_selected_rows": 551242,
+          "missed_positive_rows": 112898,
+          "selected_rows": 1944302,
+          "present_zero_output": 26,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 84,
+          "no_positive_anchor_but_now_has_matched_positive": 94
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 1371844,
+          "negative_selected_rows": 593418,
+          "missed_positive_rows": 134114,
+          "selected_rows": 1965262,
+          "present_zero_output": 4,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 95,
+          "no_positive_anchor_but_now_has_matched_positive": 114
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 1352799,
+          "negative_selected_rows": 621071,
+          "missed_positive_rows": 153159,
+          "selected_rows": 1973870,
+          "present_zero_output": 1,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 108,
+          "no_positive_anchor_but_now_has_matched_positive": 128
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 1365913,
+          "negative_selected_rows": 528919,
+          "missed_positive_rows": 140045,
+          "selected_rows": 1894832,
+          "present_zero_output": 15,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 88,
+          "no_positive_anchor_but_now_has_matched_positive": 99
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 1340504,
+          "negative_selected_rows": 553743,
+          "missed_positive_rows": 165454,
+          "selected_rows": 1894247,
+          "present_zero_output": 10,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 95,
+          "no_positive_anchor_but_now_has_matched_positive": 110
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 1371473,
+          "negative_selected_rows": 592401,
+          "missed_positive_rows": 134485,
+          "selected_rows": 1963874,
+          "present_zero_output": 5,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 95,
+          "no_positive_anchor_but_now_has_matched_positive": 114
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 1387319,
+          "negative_selected_rows": 590283,
+          "missed_positive_rows": 118639,
+          "selected_rows": 1977602,
+          "present_zero_output": 8,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 92,
+          "no_positive_anchor_but_now_has_matched_positive": 110
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    },
+    "C1": {
+      "seed": 0,
+      "policy": "FIELD",
+      "acquisition": {
+        "queries": 425,
+        "query_present": 40,
+        "positive_candidate_query": 40,
+        "questions": 3334,
+        "questions_on_present_queries": 641,
+        "questions_on_empty_queries": 2693,
+        "queries_with_only_one_question": 52,
+        "no_positive_track_asked": 2,
+        "no_positive_anchor_asked": 3,
+        "positive_track_seen_but_not_at_queried_anchor": 1,
+        "source_zero_present_query": 15,
+        "static_queries": 425,
+        "static_queried_anchors": 3334,
+        "static_anchor_sign_differs_from_track_majority": 58
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 139005,
+          "negative_selected_rows": 58939,
+          "missed_positive_rows": 58380,
+          "selected_rows": 197944,
+          "present_zero_output": 9,
+          "empty_query_output": 17,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 129669,
+          "negative_selected_rows": 67084,
+          "missed_positive_rows": 67716,
+          "selected_rows": 196753,
+          "present_zero_output": 9,
+          "empty_query_output": 33,
+          "old_zero_now_has_matched_positive": 7,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 135265,
+          "negative_selected_rows": 61121,
+          "missed_positive_rows": 62120,
+          "selected_rows": 196386,
+          "present_zero_output": 8,
+          "empty_query_output": 26,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 131821,
+          "negative_selected_rows": 63900,
+          "missed_positive_rows": 65564,
+          "selected_rows": 195721,
+          "present_zero_output": 9,
+          "empty_query_output": 23,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 130567,
+          "negative_selected_rows": 65785,
+          "missed_positive_rows": 66818,
+          "selected_rows": 196352,
+          "present_zero_output": 9,
+          "empty_query_output": 24,
+          "old_zero_now_has_matched_positive": 7,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 129899,
+          "negative_selected_rows": 66854,
+          "missed_positive_rows": 67486,
+          "selected_rows": 196753,
+          "present_zero_output": 6,
+          "empty_query_output": 38,
+          "old_zero_now_has_matched_positive": 6,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 134814,
+          "negative_selected_rows": 63988,
+          "missed_positive_rows": 62571,
+          "selected_rows": 198802,
+          "present_zero_output": 11,
+          "empty_query_output": 27,
+          "old_zero_now_has_matched_positive": 6,
+          "no_positive_anchor_but_now_has_matched_positive": 0
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    }
+  },
+  "field_static": {
+    "C4": {
+      "seed": 0,
+      "policy": "FIELD_STATIC",
+      "acquisition": {
+        "queries": 466,
+        "query_present": 466,
+        "positive_candidate_query": 466,
+        "questions": 3508,
+        "questions_on_present_queries": 3508,
+        "questions_on_empty_queries": 0,
+        "queries_with_only_one_question": 38,
+        "no_positive_track_asked": 60,
+        "no_positive_anchor_asked": 66,
+        "positive_track_seen_but_not_at_queried_anchor": 6,
+        "source_zero_present_query": 122,
+        "static_queries": 256,
+        "static_queried_anchors": 2041,
+        "static_anchor_sign_differs_from_track_majority": 25
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 1404592,
+          "negative_selected_rows": 452001,
+          "missed_positive_rows": 101366,
+          "selected_rows": 1856593,
+          "present_zero_output": 14,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 92,
+          "no_positive_anchor_but_now_has_matched_positive": 40
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 1381430,
+          "negative_selected_rows": 464737,
+          "missed_positive_rows": 124528,
+          "selected_rows": 1846167,
+          "present_zero_output": 4,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 97,
+          "no_positive_anchor_but_now_has_matched_positive": 46
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 1411384,
+          "negative_selected_rows": 525516,
+          "missed_positive_rows": 94574,
+          "selected_rows": 1936900,
+          "present_zero_output": 4,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 103,
+          "no_positive_anchor_but_now_has_matched_positive": 51
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 1396888,
+          "negative_selected_rows": 469779,
+          "missed_positive_rows": 109070,
+          "selected_rows": 1866667,
+          "present_zero_output": 9,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 88,
+          "no_positive_anchor_but_now_has_matched_positive": 42
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 1412749,
+          "negative_selected_rows": 499624,
+          "missed_positive_rows": 93209,
+          "selected_rows": 1912373,
+          "present_zero_output": 9,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 90,
+          "no_positive_anchor_but_now_has_matched_positive": 43
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 1381374,
+          "negative_selected_rows": 464029,
+          "missed_positive_rows": 124584,
+          "selected_rows": 1845403,
+          "present_zero_output": 4,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 97,
+          "no_positive_anchor_but_now_has_matched_positive": 46
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 1392390,
+          "negative_selected_rows": 464325,
+          "missed_positive_rows": 113568,
+          "selected_rows": 1856715,
+          "present_zero_output": 8,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 95,
+          "no_positive_anchor_but_now_has_matched_positive": 43
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    },
+    "C1": {
+      "seed": 0,
+      "policy": "FIELD_STATIC",
+      "acquisition": {
+        "queries": 425,
+        "query_present": 40,
+        "positive_candidate_query": 40,
+        "questions": 3334,
+        "questions_on_present_queries": 339,
+        "questions_on_empty_queries": 2995,
+        "queries_with_only_one_question": 43,
+        "no_positive_track_asked": 1,
+        "no_positive_anchor_asked": 5,
+        "positive_track_seen_but_not_at_queried_anchor": 4,
+        "source_zero_present_query": 15,
+        "static_queries": 425,
+        "static_queried_anchors": 3334,
+        "static_anchor_sign_differs_from_track_majority": 13
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 139827,
+          "negative_selected_rows": 66029,
+          "missed_positive_rows": 57558,
+          "selected_rows": 205856,
+          "present_zero_output": 7,
+          "empty_query_output": 18,
+          "old_zero_now_has_matched_positive": 10,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 132144,
+          "negative_selected_rows": 64022,
+          "missed_positive_rows": 65241,
+          "selected_rows": 196166,
+          "present_zero_output": 7,
+          "empty_query_output": 27,
+          "old_zero_now_has_matched_positive": 10,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 122518,
+          "negative_selected_rows": 70511,
+          "missed_positive_rows": 74867,
+          "selected_rows": 193029,
+          "present_zero_output": 7,
+          "empty_query_output": 27,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 1
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 124449,
+          "negative_selected_rows": 69655,
+          "missed_positive_rows": 72936,
+          "selected_rows": 194104,
+          "present_zero_output": 6,
+          "empty_query_output": 19,
+          "old_zero_now_has_matched_positive": 10,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 122372,
+          "negative_selected_rows": 69420,
+          "missed_positive_rows": 75013,
+          "selected_rows": 191792,
+          "present_zero_output": 7,
+          "empty_query_output": 25,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 1
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 129196,
+          "negative_selected_rows": 66977,
+          "missed_positive_rows": 68189,
+          "selected_rows": 196173,
+          "present_zero_output": 8,
+          "empty_query_output": 30,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 138968,
+          "negative_selected_rows": 64317,
+          "missed_positive_rows": 58417,
+          "selected_rows": 203285,
+          "present_zero_output": 8,
+          "empty_query_output": 21,
+          "old_zero_now_has_matched_positive": 9,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    }
+  },
+  "uniform": {
+    "C4": {
+      "seed": 0,
+      "policy": "UNIFORM",
+      "acquisition": {
+        "queries": 466,
+        "query_present": 466,
+        "positive_candidate_query": 466,
+        "questions": 3508,
+        "questions_on_present_queries": 3508,
+        "questions_on_empty_queries": 0,
+        "queries_with_only_one_question": 0,
+        "no_positive_track_asked": 79,
+        "no_positive_anchor_asked": 85,
+        "positive_track_seen_but_not_at_queried_anchor": 6,
+        "source_zero_present_query": 122,
+        "static_queries": 256,
+        "static_queried_anchors": 1920,
+        "static_anchor_sign_differs_from_track_majority": 27
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 1415232,
+          "negative_selected_rows": 445343,
+          "missed_positive_rows": 90726,
+          "selected_rows": 1860575,
+          "present_zero_output": 38,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 70,
+          "no_positive_anchor_but_now_has_matched_positive": 26
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 1407894,
+          "negative_selected_rows": 470286,
+          "missed_positive_rows": 98064,
+          "selected_rows": 1878180,
+          "present_zero_output": 9,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 78,
+          "no_positive_anchor_but_now_has_matched_positive": 41
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 1417822,
+          "negative_selected_rows": 482000,
+          "missed_positive_rows": 88136,
+          "selected_rows": 1899822,
+          "present_zero_output": 17,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 78,
+          "no_positive_anchor_but_now_has_matched_positive": 42
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 1425642,
+          "negative_selected_rows": 476364,
+          "missed_positive_rows": 80316,
+          "selected_rows": 1902006,
+          "present_zero_output": 19,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 67,
+          "no_positive_anchor_but_now_has_matched_positive": 35
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 1421824,
+          "negative_selected_rows": 472470,
+          "missed_positive_rows": 84134,
+          "selected_rows": 1894294,
+          "present_zero_output": 24,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 71,
+          "no_positive_anchor_but_now_has_matched_positive": 37
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 1407795,
+          "negative_selected_rows": 470327,
+          "missed_positive_rows": 98163,
+          "selected_rows": 1878122,
+          "present_zero_output": 9,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 78,
+          "no_positive_anchor_but_now_has_matched_positive": 41
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 1418282,
+          "negative_selected_rows": 463361,
+          "missed_positive_rows": 87676,
+          "selected_rows": 1881643,
+          "present_zero_output": 18,
+          "empty_query_output": 0,
+          "old_zero_now_has_matched_positive": 72,
+          "no_positive_anchor_but_now_has_matched_positive": 35
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    },
+    "C1": {
+      "seed": 0,
+      "policy": "UNIFORM",
+      "acquisition": {
+        "queries": 425,
+        "query_present": 40,
+        "positive_candidate_query": 40,
+        "questions": 3334,
+        "questions_on_present_queries": 311,
+        "questions_on_empty_queries": 3023,
+        "queries_with_only_one_question": 9,
+        "no_positive_track_asked": 2,
+        "no_positive_anchor_asked": 6,
+        "positive_track_seen_but_not_at_queried_anchor": 4,
+        "source_zero_present_query": 15,
+        "static_queries": 425,
+        "static_queried_anchors": 3334,
+        "static_anchor_sign_differs_from_track_majority": 35
+      },
+      "outputs": {
+        "COHORT": {
+          "positive_selected_rows": 138498,
+          "negative_selected_rows": 61097,
+          "missed_positive_rows": 58887,
+          "selected_rows": 199595,
+          "present_zero_output": 7,
+          "empty_query_output": 23,
+          "old_zero_now_has_matched_positive": 10,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "SOFT_KD": {
+          "positive_selected_rows": 123094,
+          "negative_selected_rows": 67453,
+          "missed_positive_rows": 74291,
+          "selected_rows": 190547,
+          "present_zero_output": 6,
+          "empty_query_output": 36,
+          "old_zero_now_has_matched_positive": 9,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "HARD_KD": {
+          "positive_selected_rows": 109480,
+          "negative_selected_rows": 65408,
+          "missed_positive_rows": 87905,
+          "selected_rows": 174888,
+          "present_zero_output": 6,
+          "empty_query_output": 31,
+          "old_zero_now_has_matched_positive": 6,
+          "no_positive_anchor_but_now_has_matched_positive": 1
+        },
+        "SOFT_KD_400": {
+          "positive_selected_rows": 119883,
+          "negative_selected_rows": 65878,
+          "missed_positive_rows": 77502,
+          "selected_rows": 185761,
+          "present_zero_output": 7,
+          "empty_query_output": 27,
+          "old_zero_now_has_matched_positive": 8,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "HARD_KD_400": {
+          "positive_selected_rows": 114913,
+          "negative_selected_rows": 63692,
+          "missed_positive_rows": 82472,
+          "selected_rows": 178605,
+          "present_zero_output": 8,
+          "empty_query_output": 25,
+          "old_zero_now_has_matched_positive": 7,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "NO_GRAPH": {
+          "positive_selected_rows": 122813,
+          "negative_selected_rows": 67161,
+          "missed_positive_rows": 74572,
+          "selected_rows": 189974,
+          "present_zero_output": 6,
+          "empty_query_output": 33,
+          "old_zero_now_has_matched_positive": 9,
+          "no_positive_anchor_but_now_has_matched_positive": 2
+        },
+        "STRONG_PRIOR": {
+          "positive_selected_rows": 130999,
+          "negative_selected_rows": 63227,
+          "missed_positive_rows": 66386,
+          "selected_rows": 194226,
+          "present_zero_output": 7,
+          "empty_query_output": 22,
+          "old_zero_now_has_matched_positive": 9,
+          "no_positive_anchor_but_now_has_matched_positive": 3
+        }
+      },
+      "GT_only_after_this_seed_predictions_sealed": true,
+      "labels": "IoU>=0.5 matched candidate observations, not an oracle of pure semantic correctness",
+      "anchor": "actual frame shown to Qwen; a correct track at some other frame is not counted as a correct anchor",
+      "all_development_data": true
+    }
+  }
+}

@@ -1,0 +1,21 @@
+历史 PNG 导出恢复说明（2026-11-24）
+
+25 张历史 PNG 已从轻量分支的当前快照归档，共 3,293,497 字节。
+同名 PDF、全部数值统计、绘图代码、正负结果及本地原图均保留。
+原 PNG 可由固定已发布提交逐字节恢复；没有修改图像内容。
+
+清单：legacy_raster_figures_20261124.json
+实际恢复核验：legacy_raster_restore_receipt_20261124.json
+原始提交：90e982391387aaae88407001622a0c342cbceac1
+https://github.com/LYQ1107/TTA-RMOT/commit/90e982391387aaae88407001622a0c342cbceac1
+
+在项目根目录恢复到新的本地目录：
+python tools/restore_legacy_raster_figures.py --destination /var/tmp/TTA_RMOT_history_figures
+
+恢复工具校验每张图的长度和 SHA256；遇到不同的已有文件会拒绝覆盖，
+也拒绝 NAS 目的地。25 张图已实际恢复并与备份逐字节比较；幂等、冲突保护和
+NAS 写入禁止均已检查通过。浅克隆若缺少该原始提交，可先执行：
+git fetch origin 90e982391387aaae88407001622a0c342cbceac1
+
+移出当前索引只释放快照空间，历史可达对象体积不因此减少。
+后续发布仍须分别通过快照和可达对象均小于 100,000,000 字节的检查。

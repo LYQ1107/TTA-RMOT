@@ -1,0 +1,59 @@
+{
+  "status": "REGISTERED_ORDINARY_OPTIMIZATION_REPAIR_BEFORE_ANY_GT",
+  "registered_unix": 1795486266.8790894,
+  "original_registration_sha256": "9afa1ee31721f9545c32a1950ab1325dd6599442fd9dd05194c19bad014c3234",
+  "source_sha256": {
+    "flex_uda/active/joint_ordinary_optimizer_repair.py": "749ef520a19a2c9a29ce159398fd0335ab9ee99ddfcdacadd8bc78058360fdba",
+    "scripts/a100_joint_ordinary_resume.py": "c403a960074e401f1e63eb8cc7cc8bdadcbddca7ce253f93e07a55d4c708749b"
+  },
+  "observed_failures": [
+    {
+      "pair": "C3",
+      "recipe": {
+        "family": "generic",
+        "risk": "marginal",
+        "policy": "UNIFORM"
+      },
+      "metrics": {
+        "width": 512,
+        "LBFGS_blocks": 5,
+        "teacher_CE": 0.6931471807013041,
+        "attainable_exact_input_entropy": 0.5404287321928357,
+        "excess_KL": 0.15271844850846839,
+        "optimizer": "LBFGS_float64_checked_in_float32"
+      },
+      "risk_rows": 43
+    },
+    {
+      "pair": "C4",
+      "recipe": {
+        "family": "generic",
+        "risk": "marginal",
+        "policy": "UNIFORM"
+      },
+      "metrics": {
+        "width": 512,
+        "LBFGS_blocks": 5,
+        "teacher_CE": 0.6931471806378181,
+        "attainable_exact_input_entropy": 0.5404287321928357,
+        "excess_KL": 0.1527184484449824,
+        "optimizer": "LBFGS_float64_checked_in_float32"
+      },
+      "risk_rows": 43
+    }
+  ],
+  "unchanged": [
+    "All heads and capacities",
+    "All teacher data, exact-input projection and proper losses",
+    "seed0",
+    "teacher excess KL <=.005",
+    "Completed fits and all sealed outputs",
+    "All structured fit behavior",
+    "All582 prediction/evaluation scope and dual CountMatched"
+  ],
+  "remaining_ordinary_optimizer": "Adam lr .001 instead of .01; best paid teacher-training-risk iterate, followed by same float64 LBFGS and capacities128/256/512 if needed. No GT/task metric selected iterates.",
+  "resume_scope": "Only missing prefix fits/videos in C3/C4; original failure and sources retained; all-six ordinary gate audit before GT.",
+  "automatic_after_seal": "582 officials, unified analysis and independent NumPy aggregate reproduction",
+  "not_a_new_RMOT_innovation": true,
+  "goal_status": "ACTIVE"
+}

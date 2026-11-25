@@ -1,0 +1,55 @@
+{
+  "protocol": "strict_video_prefix_v1",
+  "target_labels_in_adaptation": false,
+  "information_scope": "Past and current videos only; current full video is transductive, not frame-causal.",
+  "video_order": "lexicographically sorted frozen metadata IDs; no GT ordering",
+  "sources": [
+    "frozen source PCD and margins for current video",
+    "past/current frozen teacher CROP probabilities"
+  ],
+  "forbidden": [
+    "future teacher answers",
+    "batch-trained target heads",
+    "target GT",
+    "global target feature normalization"
+  ],
+  "normalization": "per-row LayerNorm without learned statistics",
+  "teacher_fit": {
+    "min_steps": 400,
+    "max_steps": 4000,
+    "stop": "teacher BCE minus teacher entropy <= 0.005, checked every 100 steps",
+    "lr": 0.001,
+    "weight_decay": 0.001,
+    "batch_size": 512,
+    "selection_uses_GT": false
+  },
+  "baselines": [
+    "actual prefix-trained track soft KD",
+    "actual prefix-trained frame soft KD",
+    "same two-head logit average",
+    "direct teacher results with source fallback"
+  ],
+  "primary": "COVER__GRAPH_MEMORY_HMM",
+  "ablations": [
+    "remove graph propagation: RESET_MEMORY_HMM",
+    "remove temporal inference: GRAPH_ENSEMBLE",
+    "remove contradiction reset: GRAPH_NO_RESET_HMM",
+    "frame HMM without track memory: FRAME_HMM"
+  ],
+  "all_policies": [
+    "PRIOR",
+    "UNIFORM",
+    "UNCERTAINTY",
+    "COVER"
+  ],
+  "parameters": "Same fixed graph, hazard, reset and ensemble constants as registered V2/V3; no GT sweep.",
+  "teacher_budget": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "seed": 0,
+  "evaluation": "sealed full official HOTA; paired bootstrap by original video, C4=13 parent videos, C1=25; all development data",
+  "costs": "Current experiment uses prepaid answer recording and historical frozen source features. Not cold live end-to-end timing.",
+  "reason": "Correct previous batch-transductive KD scope and test human-inspired classical components against matched causal prefix distillation.",
+  "no_guaranteed_positive_result": true
+}

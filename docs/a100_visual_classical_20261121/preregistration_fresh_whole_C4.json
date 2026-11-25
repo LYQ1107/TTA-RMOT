@@ -1,0 +1,43 @@
+{
+  "scope": "whole C4 fresh video stream, 45 clips/13 original parents/466 queries",
+  "seed": 0,
+  "logical_teacher_budget": 3508,
+  "source_model_really_loaded": true,
+  "all_source_frames_recomputed": true,
+  "no_historical_neural_feature_payloads_read": true,
+  "teacher_frozen_really_loaded": true,
+  "fresh_SQLite": true,
+  "new_teacher_GPU_answers": true,
+  "same_source_and_teacher_evidence_shared_by_all_methods": true,
+  "actual_head_targets": [
+    "raw soft",
+    "same [.02,.98] bounded soft",
+    "hard"
+  ],
+  "head_checkpoints": [
+    400,
+    4000,
+    "KL stopping final"
+  ],
+  "common_normalization": "past+current unlabeled feature rows only",
+  "same_prefix_teacher_examples": true,
+  "classic_controls": [
+    "COHORT",
+    "NO_GRAPH",
+    "STRONG_PRIOR"
+  ],
+  "additional_competent_baseline": "uniform 400/final prediction average, no extra teacher calls/updates, same trajectory budget; graph applied equally",
+  "no_target_GT_until_all_methods_sealed": true,
+  "no_GT_hyperparameter_sweep": true,
+  "cost": "physically measured common source+teacher work, own actual head fit/checkpoint time, own decoder/output time",
+  "no_independent_repeated_cold_arm_claim": true,
+  "host_OS_cache_not_flushed": true,
+  "queue_wait_for_own_GPU1_jobs_separately_reported": true,
+  "all_data_development": true,
+  "name": "C4_fresh_full_stream_seed0",
+  "primary": [
+    "RAW_COHORT vs RAW_KD",
+    "CLIP_COHORT vs CLIP_KD"
+  ],
+  "all_baselines_and_negative_results_retained": true
+}

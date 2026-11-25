@@ -1,0 +1,67 @@
+{
+  "status": "PASS_PRIOR_CONTROLLED_PROGRESS_BOUNDARY_CONTRACT",
+  "cases": {
+    "FROZEN_SOLVER_NULL_IMPROVES": {
+      "reward": 0.0,
+      "student_gain": 0.0,
+      "teacher_prior_gain": 0.9,
+      "supported_gain": 0.0,
+      "null_CE_before": 1.0,
+      "null_CE_after": 0.1,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    },
+    "FROZEN_SOLVER_NULL_WORSENS": {
+      "reward": 0.0,
+      "student_gain": 0.0,
+      "teacher_prior_gain": -1.0,
+      "supported_gain": 0.0,
+      "null_CE_before": 1.0,
+      "null_CE_after": 2.0,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    },
+    "SAME_PRIOR_ONLY_GAIN": {
+      "reward": 0.0,
+      "student_gain": 0.6,
+      "teacher_prior_gain": 0.6,
+      "supported_gain": 0.0,
+      "null_CE_before": 1.0,
+      "null_CE_after": 0.4,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    },
+    "LESS_THAN_PRIOR_GAIN": {
+      "reward": 0.0,
+      "student_gain": 0.30000000000000004,
+      "teacher_prior_gain": 0.6,
+      "supported_gain": 0.0,
+      "null_CE_before": 1.0,
+      "null_CE_after": 0.4,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    },
+    "BEYOND_PRIOR_GAIN": {
+      "reward": 0.3799489622552249,
+      "student_gain": 0.6,
+      "teacher_prior_gain": 0.19999999999999996,
+      "supported_gain": 0.4,
+      "null_CE_before": 1.0,
+      "null_CE_after": 0.8,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    },
+    "SOLVER_REGRESSION_BAD_NULL": {
+      "reward": -0.19737532022490398,
+      "student_gain": -0.19999999999999996,
+      "teacher_prior_gain": -1.0,
+      "supported_gain": -0.19999999999999996,
+      "null_CE_before": 1.0,
+      "null_CE_after": 2.0,
+      "reward_basis": "PROGRESS_BEYOND_TEACHER_PRIOR",
+      "not_a_HOTA_or_semantic_gain_guarantee": true
+    }
+  },
+  "teacher_or_GT_data_used": false,
+  "source_sha256": "01f1abeb8d4afa592163e73f199abd4517536f318a3b1091be44bc4a0ba999cb"
+}

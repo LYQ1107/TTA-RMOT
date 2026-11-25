@@ -1,0 +1,260 @@
+{
+  "status": "EXACT_REGISTERED_TARGET_COMPLETED_THEN_REDUNDANT_SPARE_CANCELLED_AND_GPU_REASSIGNED",
+  "existing_original_native_controller_session": 14883,
+  "C5": {
+    "video": "0019",
+    "target_arm": "FULL_LIKELIHOOD_LOCAL_FROZEN",
+    "source_arm": "FULL_LIKELIHOOD_LOCAL_LEARNED",
+    "exact_prepared_target_sha256": "38307097942eaf0cd7df278cd548febe2cd8827d25d7cd57f11b7eb208fb433b",
+    "exact_producer_pid": 518612,
+    "all_prefix_inputs_previous_tensors_normalizers_recipe_math_final_early_weights_verified": true,
+    "actual_parent_reuse_verified": true
+  },
+  "spare_batch": {
+    "session": 57420,
+    "parent_pid": 469296,
+    "actual_exit_code": 1,
+    "intentional_interrupted_only_child_pid": 508414,
+    "cause": "After equivalent complete target was independently checked, stop only redundant spare computation; preserve original numerical workers",
+    "completed_independent_arms": [
+      "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "FULL_LIKELIHOOD_REFERENCE_FROZEN"
+    ],
+    "third_independent_fit_not_claimed": true,
+    "do_not_resume": true
+  },
+  "GPU0_reassigned": {
+    "actual_session": 31950,
+    "pid": 520565,
+    "pair": "C4",
+    "video": "v_9MHDmAMxO5I_c009",
+    "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+    "entry": "scripts/a100_native_registered_head_parallel.py",
+    "entry_sha256": "5e8084ef546190363ab5814f14745e04e5d6759f62415e07cc10e8da6b79f6b0",
+    "only_existing_registered_work": true
+  },
+  "original_workers_preserved": [
+    4134758,
+    113767,
+    126881
+  ],
+  "new_quality_condition_teacher_question_prediction_GT_or_neural_seed": 0,
+  "measured_deployment_speedup_or_HOTA_claim": false,
+  "goal_status": "ACTIVE",
+  "completed_registered_C4_heads": [
+    {
+      "actual_terminal_session": 31950,
+      "pid": 520565,
+      "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+      "prepared_sha256": "7a48194795bcddfbd50f0f9180a2de180eb7391925daf4756e8e14a272fb8814",
+      "fit_records": [
+        {
+          "excess_risk": 6.726433806503174e-06,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 4.830051155202408e-06,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 4.746194869342801e-06,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 5.707358447903932e-06,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "wall_seconds": 146.76499524898827,
+      "actual_parent_reuse_verified": true
+    },
+    {
+      "actual_terminal_session": 31957,
+      "pid": 525440,
+      "arm": "COARSE_UNIT_SOFT_FROZEN",
+      "prepared_sha256": "e7885f0395970eced760ee4127cbbb0acca2c01189daf7342915c826532a9a2f",
+      "fit_records": [
+        {
+          "excess_risk": 8.5883244076157e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 8.136076519554836e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 5.1375785367513416e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        },
+        {
+          "excess_risk": 5.1954865113140736e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "wall_seconds": 38.67173565493431,
+      "actual_parent_reuse_verified": true
+    },
+    {
+      "actual_terminal_session": 30528,
+      "pid": 526554,
+      "arm": "COARSE_CONF_HARD_FROZEN",
+      "prepared_sha256": "8961e04d710215b7952d90a4e4bea2d84670a4a8f147215310db146cdcc64172",
+      "fit_records": [
+        {
+          "excess_risk": 3.272531585124116e-05,
+          "teacher_fit_gate_passed": true,
+          "actual_final_Adam_steps": 400
+        }
+      ],
+      "wall_seconds": 22.222626539994963,
+      "actual_parent_reuse_verified": true
+    }
+  ],
+  "actual_original_parent_handoffs_verified": {
+    "status": "PASS_ORIGINAL_PARENTS_CONSUMED_COMPLETED_REGISTERED_EXTERNAL_HEADS",
+    "C4_c009": {
+      "heads": [
+        {
+          "arm": "COARSE_CONF_HARD_FROZEN",
+          "producer_pid": 526554,
+          "head_sha256": "8961e04d710215b7952d90a4e4bea2d84670a4a8f147215310db146cdcc64172",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "COARSE_UNIT_SOFT_FROZEN",
+          "producer_pid": 525440,
+          "head_sha256": "e7885f0395970eced760ee4127cbbb0acca2c01189daf7342915c826532a9a2f",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+          "producer_pid": 520565,
+          "head_sha256": "7a48194795bcddfbd50f0f9180a2de180eb7391925daf4756e8e14a272fb8814",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 1
+        }
+      ],
+      "reused_heads": 3,
+      "raw_method_variants": 5,
+      "shared_fit_records_not_independent": 0,
+      "shared_score_mask_variants_exact": 0,
+      "GT_open_attempts": 0
+    },
+    "C5_0019_independently_fitted": {
+      "heads": [
+        {
+          "arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+          "producer_pid": 469309,
+          "head_sha256": "1efed12cd917c3268a501974278d745d767f5949ae1b21b5c267c58056954c72",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 1
+        },
+        {
+          "arm": "FULL_LIKELIHOOD_REFERENCE_FROZEN",
+          "producer_pid": 488689,
+          "head_sha256": "776160d3670de858a98d70a81e1bea5747ea6e982002b2a41309263207ffaffc",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 1
+        },
+        {
+          "arm": "JOINT_KD_FROZEN",
+          "producer_pid": 452302,
+          "head_sha256": "fbec21b30af379213118206172959845f80ca2445907be69e2857004964656f1",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "MARGINAL_KD_FROZEN",
+          "producer_pid": 437838,
+          "head_sha256": "ba00b2f50dea409ae9d9398592f15dedf20bf2edd95545e2430ab149cda5004f",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "NO_IDENTITY_CONDITIONAL_REFERENCE_LEARNED",
+          "producer_pid": 408826,
+          "head_sha256": "8e5ef08c8942658e4a131f58b998749bd83b40e1873e781de82c36af74cfa8b9",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 1
+        }
+      ],
+      "reused_heads": 5,
+      "raw_method_variants": 7,
+      "shared_fit_records_not_independent": 0,
+      "shared_score_mask_variants_exact": 0,
+      "GT_open_attempts": 0
+    },
+    "C5_0019_exact_input_shared": {
+      "heads": [
+        {
+          "arm": "COARSE_CONF_HARD_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "e86cd022addcf990924bd3772e7f2725d424d083d058d09ea1ed2259e92be1af",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "COARSE_CONF_SOFT_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "bd03bfa3b05c321ae606a0ad269d1b6cd495723b7c750d84625351cc1b07fb0e",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "COARSE_UNIT_HARD_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "00d713a5a4b5c1330984eaf41a05906f805d55fc7083f73d4b4d4398d1a13335",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "COARSE_UNIT_SOFT_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "70baaeacfd349df93f34d5b73cbcf135f7131c1e4ca02d568dc9a87591d11405",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "FULL_LIKELIHOOD_LOCAL_FROZEN",
+          "producer_pid": 518612,
+          "head_sha256": "38307097942eaf0cd7df278cd548febe2cd8827d25d7cd57f11b7eb208fb433b",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 1
+        },
+        {
+          "arm": "LOGIT_KD_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "f391c262cd609d4a7eb08b3b4f0a7e938979c45f8690e2ba92c4078c57822101",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        },
+        {
+          "arm": "POINT_KD_FROZEN",
+          "producer_pid": 492158,
+          "head_sha256": "2f065a6e564eab4b410eb040afdea899f0b98b1c48ef0661dfa5fb099d129f6b",
+          "actual_original_parent_reuse_verified": true,
+          "raw_method_variants": 2
+        }
+      ],
+      "reused_heads": 7,
+      "raw_method_variants": 13,
+      "shared_fit_records_not_independent": 19,
+      "shared_score_mask_variants_exact": 13,
+      "GT_open_attempts": 0
+    },
+    "original_native_source_pins_unchanged": 18,
+    "new_GT_HOTA_or_neural_seeds": 0,
+    "HOTA_or_measured_deployment_speedup_claim": false,
+    "goal_status": "ACTIVE"
+  }
+}

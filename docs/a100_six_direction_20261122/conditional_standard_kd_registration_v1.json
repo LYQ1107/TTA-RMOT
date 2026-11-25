@@ -1,0 +1,225 @@
+{
+  "study": "STANDARD_UNWEIGHTED_RAW_TEACHER_DISTILLATION_SIX_SETTINGS",
+  "registered_unix": 1795403513.6916938,
+  "registered_before_own_training_and_root_current_study_quality_reads": true,
+  "source_sha256": {
+    "scripts/a100_conditional_logit_precision.py": "b2af47e6ef5ea22a3dc50bcc805416598291d9141b5558a2e60b1f5bf76513fa",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/observation_learning_fit.py": "be6cf76ac4e40205bd945049fcb44ad97be8f64b2dcc1753b91de44ba24b7c3e",
+    "flex_uda/active/conditional_observation.py": "020b84d985f70169dae9150c128c78175bbb2adc915a6dadd08ee50b48c016ba",
+    "flex_uda/active/query_profile.py": "205e983ad77fdd8585aad2b7cccca3a771dd3b5bd88023d956a431c3ce2b9235",
+    "scripts/a100_conditional_six_setting.py": "5d1ddd2b7791fa5931fa0ac57750cafed39903580c1fdf644e4746cad1fe48cb",
+    "scripts/a100_conditional_coarse_baseline.py": "0cc1c000e1954c8c8d03ef503fe2121ee2d9e965b311c9a373bd28bd33773fd2",
+    "scripts/a100_conditional_shared_control.py": "e652d4a442f6ee01ccbc518a9cf82314c0c21a1f3a00372fac152772ff47b5eb",
+    "scripts/a100_conditional_standard_kd.py": "59706e7e0a7894ea90ee33c3df404575f534a40aeabf45d59dc86f1e2f57317f",
+    "scripts/a100_observation_local_cache.py": "12b3e71acf8fa4ee162f47fe9fced32fe95fc2dd02ce2ffbdb3a2dbdff45d353"
+  },
+  "motivation": "Confidence weighting and soft-target clipping are not guaranteed to improve ordinary distillation; include basic raw-probability/unit-weight and hard-label/unit-weight comparators.",
+  "same_information": "Same historical PCD, dense RGB, three anchors, DESIGN paid teacher answers, raw same-anchor view mixture, current/past normalization prefixes and official fixed candidates/IDs.",
+  "variants": {
+    "soft": "BCE on raw float32 teacher targets, no probability clipping, all example weights one",
+    "hard": "BCE on raw teacher probability >= .5, all example weights one",
+    "frame": "Current-observation vector",
+    "flat": "Same three context vectors and current observation concatenated",
+    "coarse": "Original three-observation mean features and raw per-bag target mean"
+  },
+  "all_original_numerical_recipes_unchanged": true,
+  "source_residual": false,
+  "standard_variant_not_a_pure_confidence_ablation": true,
+  "basic_KD_not_assumed_weaker_or_stronger_than_weighted_variant": true,
+  "primary": "FULL_FINAL",
+  "primary_cohort": "Existing logit-precision FULL_FINAL, fixed before any root current-study quality; no choose-between-original-and-replica by GT",
+  "learned_heads": [
+    "STD_FRAME_SOFT",
+    "STD_FRAME_HARD",
+    "STD_FLAT_SOFT",
+    "STD_FLAT_HARD",
+    "STD_COARSE_SOFT",
+    "STD_COARSE_HARD"
+  ],
+  "methods": [
+    "STD_FRAME_SOFT_FINAL",
+    "STD_FRAME_SOFT_MEAN",
+    "STD_FRAME_HARD_FINAL",
+    "STD_FRAME_HARD_MEAN",
+    "STD_FLAT_SOFT_FINAL",
+    "STD_FLAT_SOFT_MEAN",
+    "STD_FLAT_HARD_FINAL",
+    "STD_FLAT_HARD_MEAN",
+    "STD_COARSE_SOFT_FINAL",
+    "STD_COARSE_SOFT_MEAN",
+    "STD_COARSE_HARD_FINAL",
+    "STD_COARSE_HARD_MEAN"
+  ],
+  "contrasts": {
+    "FULL_vs_STD_FRAME_SOFT_FINAL": [
+      "FULL_FINAL",
+      "STD_FRAME_SOFT_FINAL"
+    ],
+    "FULL_vs_STD_FRAME_SOFT_MEAN": [
+      "FULL_FINAL",
+      "STD_FRAME_SOFT_MEAN"
+    ],
+    "FULL_vs_STD_FRAME_HARD_FINAL": [
+      "FULL_FINAL",
+      "STD_FRAME_HARD_FINAL"
+    ],
+    "FULL_vs_STD_FRAME_HARD_MEAN": [
+      "FULL_FINAL",
+      "STD_FRAME_HARD_MEAN"
+    ],
+    "FULL_vs_STD_FLAT_SOFT_FINAL": [
+      "FULL_FINAL",
+      "STD_FLAT_SOFT_FINAL"
+    ],
+    "FULL_vs_STD_FLAT_SOFT_MEAN": [
+      "FULL_FINAL",
+      "STD_FLAT_SOFT_MEAN"
+    ],
+    "FULL_vs_STD_FLAT_HARD_FINAL": [
+      "FULL_FINAL",
+      "STD_FLAT_HARD_FINAL"
+    ],
+    "FULL_vs_STD_FLAT_HARD_MEAN": [
+      "FULL_FINAL",
+      "STD_FLAT_HARD_MEAN"
+    ],
+    "FULL_vs_STD_COARSE_SOFT_FINAL": [
+      "FULL_FINAL",
+      "STD_COARSE_SOFT_FINAL"
+    ],
+    "FULL_vs_STD_COARSE_SOFT_MEAN": [
+      "FULL_FINAL",
+      "STD_COARSE_SOFT_MEAN"
+    ],
+    "FULL_vs_STD_COARSE_HARD_FINAL": [
+      "FULL_FINAL",
+      "STD_COARSE_HARD_FINAL"
+    ],
+    "FULL_vs_STD_COARSE_HARD_MEAN": [
+      "FULL_FINAL",
+      "STD_COARSE_HARD_MEAN"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FRAME_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FRAME_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FRAME_SOFT_FINAL": [
+      "FULL_FINAL__AT_STD_FRAME_SOFT_FINAL_COUNT",
+      "STD_FRAME_SOFT_FINAL__AT_STD_FRAME_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FRAME_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FRAME_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FRAME_SOFT_MEAN": [
+      "FULL_FINAL__AT_STD_FRAME_SOFT_MEAN_COUNT",
+      "STD_FRAME_SOFT_MEAN__AT_STD_FRAME_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FRAME_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FRAME_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FRAME_HARD_FINAL": [
+      "FULL_FINAL__AT_STD_FRAME_HARD_FINAL_COUNT",
+      "STD_FRAME_HARD_FINAL__AT_STD_FRAME_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FRAME_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FRAME_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FRAME_HARD_MEAN": [
+      "FULL_FINAL__AT_STD_FRAME_HARD_MEAN_COUNT",
+      "STD_FRAME_HARD_MEAN__AT_STD_FRAME_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FLAT_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FLAT_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FLAT_SOFT_FINAL": [
+      "FULL_FINAL__AT_STD_FLAT_SOFT_FINAL_COUNT",
+      "STD_FLAT_SOFT_FINAL__AT_STD_FLAT_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FLAT_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FLAT_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FLAT_SOFT_MEAN": [
+      "FULL_FINAL__AT_STD_FLAT_SOFT_MEAN_COUNT",
+      "STD_FLAT_SOFT_MEAN__AT_STD_FLAT_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FLAT_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FLAT_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FLAT_HARD_FINAL": [
+      "FULL_FINAL__AT_STD_FLAT_HARD_FINAL_COUNT",
+      "STD_FLAT_HARD_FINAL__AT_STD_FLAT_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_FLAT_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_FLAT_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_FLAT_HARD_MEAN": [
+      "FULL_FINAL__AT_STD_FLAT_HARD_MEAN_COUNT",
+      "STD_FLAT_HARD_MEAN__AT_STD_FLAT_HARD_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_COARSE_SOFT_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_COARSE_SOFT_FINAL": [
+      "FULL_FINAL__AT_STD_COARSE_SOFT_FINAL_COUNT",
+      "STD_COARSE_SOFT_FINAL__AT_STD_COARSE_SOFT_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_COARSE_SOFT_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_COARSE_SOFT_MEAN": [
+      "FULL_FINAL__AT_STD_COARSE_SOFT_MEAN_COUNT",
+      "STD_COARSE_SOFT_MEAN__AT_STD_COARSE_SOFT_MEAN_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_COARSE_HARD_FINAL__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_COARSE_HARD_FINAL": [
+      "FULL_FINAL__AT_STD_COARSE_HARD_FINAL_COUNT",
+      "STD_COARSE_HARD_FINAL__AT_STD_COARSE_HARD_FINAL_COUNT"
+    ],
+    "RANK_AT_FULL_COUNT_vs_STD_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_FULL_FINAL_COUNT",
+      "STD_COARSE_HARD_MEAN__AT_FULL_FINAL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_STD_COARSE_HARD_MEAN": [
+      "FULL_FINAL__AT_STD_COARSE_HARD_MEAN_COUNT",
+      "STD_COARSE_HARD_MEAN__AT_STD_COARSE_HARD_MEAN_COUNT"
+    ]
+  },
+  "adequate_fit": "Original helper: min4000 steps for first prefix/400 thereafter, max16000 AdamW then own-risk LBFGS and width continuation, deployed-FP32 risk excess <= .005; FINAL adequate and step400/FINAL MEAN both fixed",
+  "threshold": "FINAL unrounded task logit > 0; MEAN mathematical mean of early/final probabilities > .5; order MEAN by stable float64 log odds",
+  "CountMatched": "Both donor counts, sorted pre-sigmoid; record remaining exact ties, CountSelf query files must be unchanged",
+  "counts": {
+    "conditions": 18,
+    "raw_per_condition": 12,
+    "counts_per_condition": 37,
+    "raw": 216,
+    "CountMatched": 666,
+    "own_total": 882,
+    "borrowed_fixed_FULL": 18,
+    "statistical_records": 900
+  },
+  "GPU_schedule": "After logit-precision all18 raw GPU conditions complete and active empty; preflight only0/1/2/3 with <512MiB usage",
+  "GT_gate": "All own882 and original1692/coarse378/generic162/precision1116 outputs sealed before this study isolated evaluation",
+  "no_new_teacher_or_backbone_calls": true,
+  "target_GT_used_for_adaptation_or_selection": false,
+  "no_new_innovation_claim": true,
+  "original_studies_not_modified_or_interrupted": true,
+  "exact_feature_cache_aggregate_sha256": "d21792b9ac72fd1574a54b2dfc8e76481ddb054b38d79de91cef78d217cc4ae8",
+  "process_local_IO_override_only": true,
+  "shared_research_replay_not_cold_deployment": true,
+  "all_data_development": true,
+  "independent_blind_validation": false,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,44 @@
+{
+  "status": "REGISTERED_PRIOR_CONTROLLED_RSI_PREFIX_BEFORE_NEW_REQUESTS",
+  "registered_unix": 1795440181.617601,
+  "pair": "C1",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005",
+    "dancetrack0007"
+  ],
+  "device": "cpu",
+  "neural_seeds": [
+    0
+  ],
+  "primary": "PRIOR_CONTROLLED",
+  "branches": [
+    "FROZEN",
+    "RAW",
+    "PRIOR_CONTROLLED"
+  ],
+  "rounds_per_video": 3,
+  "raw_source_commit": "72445d862f068e08ecbd42aeb809c3c9054d5337",
+  "reuse": "Completed RAW/FROZEN first-video exact teacher answers and final checkpoints; future predictions never reuse current-video full-data heads for earlier rounds",
+  "prior_control": "Only previously requested supervised teacher replies; per-current-query mean with past/current global fallback, support floor1e-6. No probe label is a null-training example.",
+  "reward": "tanh(max(gS-max(gNull,0),0)+min(gS,0)); frozen S exactly0, null worsening cannot create positive S gain, S regression stays negative",
+  "actor": "Same 18x32 challenger, epsilon.2, one Adam.03 policy-gradient step per round, EMA past-reward baseline, onlyseed0",
+  "solver": "Same conditional-reference64 shared fit helper; final all-paid proper data, no GT",
+  "adequate_ordinary": "Unrestricted joint128 and unit soft coarse, same paid data, proper teacher-KL<=.005 and own-prefix warm starts",
+  "no_RMOT_predictions_or_GT_or_HOTA": true,
+  "source_sha256": {
+    "scripts/a100_rsi_curriculum_prefix_probe.py": "6deeea09893eb9dfecf0cda6e5a62d0b7cfc389179cfaf99ae1b61f2fbe1a3f7",
+    "flex_uda/active/rsi_curriculum.py": "f7377f56ec673bcc2055e75a4da33682e96a49f2f4b64c3e33184683cd67f49f",
+    "flex_uda/active/rsi_observation_inputs.py": "2e8a5751b896d4bfa4632b1c107f70e0eac9b3e25cd6eced3477e9e014ebd02a",
+    "flex_uda/active/rsi_curriculum_learning.py": "c909eb1b281c128e13daea300ac18127bcde7d29068fd0ff442a465918a74a6e",
+    "flex_uda/active/rsi_progress_reward.py": "01f1abeb8d4afa592163e73f199abd4517536f318a3b1091be44bc4a0ba999cb",
+    "flex_uda/active/joint_observation_study.py": "fc89d8e58b994126f4cebf27a47ed6bbcdc7e7074f0c70d880d7e2e174dd46e5",
+    "flex_uda/active/conditional_joint_observation.py": "83c77b605077c2a4214fe655dcebbf516bc120637b3579d9c00eff36e2fa0448",
+    "flex_uda/active/joint_observation_inputs.py": "5131f6aaddc4a18375ac2d572c17b027ccafff95a47089122f87f35637f484f3",
+    "flex_uda/active/joint_observation.py": "897ae290da685e3c28d0df866406bd01db628fdca9a52e90f3bcc2c5379fe4ff",
+    "flex_uda/active/joint_observation_fit.py": "885dca1f154754002975fdd0e7107b231e59f85e15ec6f16dd276a8c67844b1b",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "scripts/a100_joint_observation_collect.py": "82e4c8657ae8fe451840bdf3e804bf3d6ba748414c764dcd092c9bc412f9117e"
+  },
+  "goal_status": "ACTIVE"
+}

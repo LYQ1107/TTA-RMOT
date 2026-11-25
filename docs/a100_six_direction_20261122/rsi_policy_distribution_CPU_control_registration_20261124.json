@@ -1,0 +1,27 @@
+{
+  "status": "REGISTERED_SAME_CPU_ORIGINAL_SGD_CONTROL_BEFORE_EXECUTION",
+  "pair": "C1",
+  "videos": [
+    "dancetrack0004",
+    "dancetrack0005"
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "teacher_budget": [
+    56,
+    40
+  ],
+  "device": "CPU_two_threads",
+  "reason": "The existing original SGD/FROZEN loops use GPU fits. An optimizer causal contrast requires the original SGD learner on the same CPU execution as the independent new gated/Trust branches.",
+  "execution": "Runtime binding only inside this independent process: retain original SGD update and original baseline updates for every context; original selector plus passive exact likelihood trace; no source mutation.",
+  "parent_registration": "rsi_policy_distribution_registration_20261124.json",
+  "source_sha256": {
+    "scripts/a100_rsi_policy_distribution_cpu_control.py": "4428f496a21c88d865c771200b1cd71c4fc440fdf57964bd4bae8b4d38c9264d"
+  },
+  "manual_GT_or_RMOT_predictions": false,
+  "new_teacher_GPU_calls": 0,
+  "prepaid_same_native_binary_broker": true,
+  "original_live_protocols_changed": false,
+  "goal_remains_ACTIVE": true
+}

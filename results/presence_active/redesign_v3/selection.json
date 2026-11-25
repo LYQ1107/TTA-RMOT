@@ -1,0 +1,77 @@
+{
+  "models": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "35622b1f21aef00a76aad6b63f391cbe10218ba20d2829682eb3e5b0f91991a3",
+      "best_source_loss": 1.2433399571650998,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/V2-best/training_receipt.json",
+      "receipt_sha256": "7dd23203e5bf522049f77b89ee6caa6fa0c6686a52f0408ae0006eb6ba4a3732",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 4.173163972455134,
+          "count_NLL": 4.173163972455134,
+          "native_KL": 0.0,
+          "units": 457503,
+          "positive_units": 195480,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 1.0146600131583836,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "aac5b19437c48e24316381a3bcf06e4bff0102dd11a9f08ba35eada5734bbc19",
+      "best_source_loss": 2.3242440803091866,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/Dance-best/training_receipt.json",
+      "receipt_sha256": "648a4d029cc031c31509284f9f795af42899f01c27429912d636c7f5ea876059",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 3.2005178883761927,
+          "count_NLL": 3.2005178883761927,
+          "native_KL": 0.0,
+          "units": 433636,
+          "positive_units": 42657,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 0.5225926814194394,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v3/heads/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "1d925cc849c803e73e9641b0a5f9c814a001e53ffb3670fd5c788b55a4df6d6e",
+      "best_source_loss": 2.080513968194971,
+      "architecture": "residual_prefix_v3",
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v3/heads/LaMOT-best/training_receipt.json",
+      "receipt_sha256": "fb638959d060e900e68d8a753f9531bad497abf7ff4c73adff7a89731bcbff3e",
+      "initial_metrics": {
+        "metrics": {
+          "loss": 4.537000801380502,
+          "count_NLL": 4.537000801380502,
+          "native_KL": 0.0,
+          "units": 266786,
+          "positive_units": 242022,
+          "native_MAP_changed_units": 0,
+          "MAP_count_MAE": 1.0349718500970815,
+          "first_real_batch_gradient_norm": null
+        },
+        "selected": false,
+        "reason": "initialization reference only; checkpoint selection begins after epoch1"
+      }
+    }
+  },
+  "selection": "minimum own-source validation count_NLL+.1_KL",
+  "source_validation_only": true,
+  "new_HOTA_not_computed_at_selection": true,
+  "prereg_sha256": "3e7ab1483fd27ab07be144b8d567d43acdd25d508a0fca0917c866daedf23cde"
+}

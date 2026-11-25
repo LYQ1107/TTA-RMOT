@@ -1,0 +1,8 @@
+{
+  "status": "FAILED_AND_INTERRUPTED",
+  "passed": 13,
+  "failed": 1,
+  "returncode": 2,
+  "reason": "Legacy synthetic test defaults to NAS-linked results; Errno30 read-only file system. Interrupted remaining synthetic case. NAS remained unchanged.",
+  "fix": "Set V8_SYNTHETIC_RESULT_ROOT to a fresh local verification directory; rerun the same four test files without excluding cases."
+}

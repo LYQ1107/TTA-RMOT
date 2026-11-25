@@ -1,0 +1,317 @@
+{
+  "status": "PASS_STUDY_COST_AND_SOURCE_AUDIT",
+  "gpu": {
+    "evidence": {
+      "physical_GPU": 0,
+      "attempts": [
+        {
+          "status": "FAILED",
+          "returncode": 1,
+          "wall_seconds": 1287.8913996210322,
+          "budget_seconds": 0,
+          "physical_GPU": 0,
+          "process_started": 459516.573409792,
+          "hard_deadline_terminated": false,
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/evidence/process_00.log",
+          "command": [
+            "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+            "-u",
+            "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_collect.py"
+          ]
+        },
+        {
+          "status": "COMPLETE",
+          "returncode": 0,
+          "wall_seconds": 784.7175620449707,
+          "budget_seconds": 0,
+          "physical_GPU": 0,
+          "process_started": 461082.396060221,
+          "hard_deadline_terminated": false,
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/evidence/process_01.log",
+          "command": [
+            "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+            "-u",
+            "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_collect.py"
+          ]
+        }
+      ],
+      "sum_process_wall_seconds": 2072.608961666003,
+      "definition": "device-assigned process elapsed time, includes IO/load/verification/CPU; not GPU-kernel integral"
+    },
+    "profile": {
+      "physical_GPU": 1,
+      "attempts": [
+        {
+          "status": "COMPLETE",
+          "returncode": 0,
+          "wall_seconds": 1046.637776974996,
+          "budget_seconds": 0,
+          "physical_GPU": 1,
+          "process_started": 459583.335742259,
+          "hard_deadline_terminated": false,
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/profile/process_00.log",
+          "command": [
+            "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+            "-u",
+            "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_profile.py"
+          ]
+        }
+      ],
+      "sum_process_wall_seconds": 1046.637776974996,
+      "definition": "device-assigned process elapsed time, includes IO/load/verification/CPU; not GPU-kernel integral"
+    }
+  },
+  "teacher": {
+    "responses": 900,
+    "unique_request_ids": 900,
+    "new_calls": 900,
+    "cache_hits": 0,
+    "actual_forward_seconds_from_returned_batch_shares": 50.59194254560862,
+    "new_call_cap": 900,
+    "preparation_not_deployment": true
+  },
+  "historical_original_view_input_parity": {
+    "positions": 300,
+    "identical_inputs": 300,
+    "teacher_binary_changed": 1,
+    "differences": []
+  },
+  "CPU_children": {
+    "DS__EXPLICIT_TASK__BANK_CROP_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 133.02655840397347,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "bank",
+        "--name",
+        "DS__EXPLICIT_TASK__BANK_CROP"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/DS__EXPLICIT_TASK__BANK_CROP_evaluate_attempt00.log"
+    },
+    "DS__EXPLICIT_TASK__BANK_CROP_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 66.10156455496326,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "replay",
+        "--pair",
+        "C4",
+        "--fusion",
+        "DS",
+        "--protocol",
+        "EXPLICIT_TASK",
+        "--bank-routing",
+        "CROP"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/DS__EXPLICIT_TASK__BANK_CROP_generate_attempt00.log"
+    },
+    "DS__EXPLICIT_TASK__BANK_ORIGINAL_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 135.06811145303072,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "bank",
+        "--name",
+        "DS__EXPLICIT_TASK__BANK_ORIGINAL"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/DS__EXPLICIT_TASK__BANK_ORIGINAL_evaluate_attempt00.log"
+    },
+    "DS__EXPLICIT_TASK__BANK_ORIGINAL_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 65.95273180201184,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "replay",
+        "--pair",
+        "C4",
+        "--fusion",
+        "DS",
+        "--protocol",
+        "EXPLICIT_TASK",
+        "--bank-routing",
+        "ORIGINAL"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/DS__EXPLICIT_TASK__BANK_ORIGINAL_generate_attempt00.log"
+    },
+    "FIXED__EXPLICIT_TASK__BANK_CROP_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 138.0660229770001,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "bank",
+        "--name",
+        "FIXED__EXPLICIT_TASK__BANK_CROP"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/FIXED__EXPLICIT_TASK__BANK_CROP_evaluate_attempt00.log"
+    },
+    "FIXED__EXPLICIT_TASK__BANK_CROP_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 47.675845037039835,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "replay",
+        "--pair",
+        "C4",
+        "--fusion",
+        "FIXED",
+        "--protocol",
+        "EXPLICIT_TASK",
+        "--bank-routing",
+        "CROP"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/FIXED__EXPLICIT_TASK__BANK_CROP_generate_attempt00.log"
+    },
+    "FIXED__EXPLICIT_TASK__BANK_ORIGINAL_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 135.535028985003,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "bank",
+        "--name",
+        "FIXED__EXPLICIT_TASK__BANK_ORIGINAL"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/FIXED__EXPLICIT_TASK__BANK_ORIGINAL_evaluate_attempt00.log"
+    },
+    "FIXED__EXPLICIT_TASK__BANK_ORIGINAL_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 50.238073504995555,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "replay",
+        "--pair",
+        "C4",
+        "--fusion",
+        "FIXED",
+        "--protocol",
+        "EXPLICIT_TASK",
+        "--bank-routing",
+        "ORIGINAL"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/FIXED__EXPLICIT_TASK__BANK_ORIGINAL_generate_attempt00.log"
+    },
+    "bank_decisions_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 54.83598155900836,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_bank.py"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/bank_decisions_generate_attempt00.log"
+    },
+    "oracle_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 625.9969521030434,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_offline.py",
+        "--pair",
+        "C4",
+        "--phase",
+        "oracles"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/oracle_evaluate_attempt00.log"
+    },
+    "protocol_unified_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 209.1139175799908,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "protocol"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/protocol_unified_evaluate_attempt00.log"
+    },
+    "protocol_unified_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 66.98059847403783,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "replay",
+        "--pair",
+        "C4",
+        "--fusion",
+        "DS",
+        "--protocol",
+        "UNIFIED_CHECKLIST"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/protocol_unified_generate_attempt00.log"
+    },
+    "temporal_evaluate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 652.1855761829647,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_evaluate_controls.py",
+        "--group",
+        "temporal"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/temporal_evaluate_attempt00.log"
+    },
+    "temporal_generate": {
+      "status": "COMPLETE",
+      "returncode": 0,
+      "wall_seconds": 41.168314669979736,
+      "command": [
+        "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+        "-u",
+        "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_mechanism_replay.py",
+        "--phase",
+        "temporal",
+        "--pair",
+        "C4"
+      ],
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/mechanism_20261121/cpu_supervisor/temporal_generate_attempt00.log"
+    }
+  },
+  "sum_CPU_child_process_wall_seconds": 2421.9452772870427,
+  "CPU_cost_not_additive_overall_elapsed": true,
+  "first_failed_CPU_audit_wall_unavailable": true,
+  "original_failed_GPU_session_terminal_weight_hash_available": false,
+  "final_session_terminal_weight_seal_verified": true,
+  "no_online_GPU_speedup_claim_from_replay": true
+}

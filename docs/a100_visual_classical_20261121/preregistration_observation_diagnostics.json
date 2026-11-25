@@ -1,0 +1,16 @@
+{
+  "version": "POST_SEAL_SEMANTIC_GRANULARITY_DIAGNOSIS_V1",
+  "before_new_GT_evaluation": true,
+  "reason": "Physical ID impurity need not change the clothing predicate, e.g. two differently identified dancers in the same clothes.",
+  "statistics": [
+    "Physical identity purity on union-IoU-visible rows",
+    "Query membership mixture within supplied Track ID, all queries and static-clothing queries separately",
+    "Fraction of full-track mixed predicates observed by the same three nodes",
+    "Actual teacher anchor predicate versus visible-track majority",
+    "Seed0 pooled KD / aligned KD / full errors on stable, mixed and union-unmatched rows"
+  ],
+  "GT_only_after_all_registered_predictions_and_counterfactuals_sealed": true,
+  "new_predictions": false,
+  "counts_are_not_additive_HOTA_attribution": true,
+  "no_parameters_or_thresholds_selected_from_these_GT_groups": true
+}

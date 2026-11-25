@@ -1,0 +1,179 @@
+{
+  "old_intentional_stop": {
+    "status": "PASS_OLD_UNPROVEN_MATRIX_INTENTIONALLY_STOPPED_PARTIAL_NOT_SCORED",
+    "user_steering": "Why run old controls without a clear improvement? Try new innovations now.",
+    "goal_status": "ACTIVE",
+    "old_study_complete": false,
+    "old_native_GT_or_HOTA_read": false,
+    "original_outputs_and_checkpoints_preserved": true,
+    "controllers": {
+      "3661317": {
+        "argv": [
+          ".venv/bin/python",
+          "-u",
+          "scripts/a100_native_binary_six_setting.py"
+        ]
+      },
+      "716419": {
+        "argv": [
+          ".venv/bin/python",
+          "-u",
+          "scripts/a100_native_registered_shared_executor.py",
+          "--gpu",
+          "1"
+        ]
+      },
+      "629225": {
+        "argv": [
+          ".venv/bin/python",
+          "-u",
+          "scripts/a100_native_registered_work_balancer.py",
+          "--old-gpu0-pid",
+          "533666",
+          "--old-gpu3-pid",
+          "535564"
+        ]
+      }
+    },
+    "workers": {
+      "4134758": {
+        "argv": [
+          "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+          "-u",
+          "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_native_binary_six_setting.py",
+          "--pair",
+          "C3"
+        ],
+        "actual_exit_code": 1
+      },
+      "113767": {
+        "argv": [
+          "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+          "-u",
+          "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_native_binary_six_setting.py",
+          "--pair",
+          "C4"
+        ],
+        "actual_exit_code": 1
+      }
+    },
+    "no_other_project_processes_signalled": true,
+    "naturally_finishing_auxiliary_fits": [
+      {
+        "pid": 815835,
+        "parent": 716419,
+        "argv": [
+          "/data3/liuyeqiang/FlexHook-TTA/.venv/bin/python",
+          "-u",
+          "/data3/liuyeqiang/FlexHook-TTA/scripts/a100_native_registered_shared_head.py",
+          "--gpu",
+          "1"
+        ],
+        "actual_exit_code": 0
+      }
+    ],
+    "old_native_supervisor_state_preserved": {
+      "status": "RUNNING_UNIFIED_NATIVE_BINARY_SIX_SETTINGS_NO_GT",
+      "pid": 3661317,
+      "active": {
+        "1": {
+          "pair": "C3",
+          "pid": 4134758,
+          "physical_GPU": 1,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C3/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C3_seed0.log",
+          "preflight_memory_MiB": 0,
+          "progress": {
+            "stage": "FITTING_MATCHED_REPLAY_AND_ADEQUATE_KD_NO_GT",
+            "video": "v_dw7LOz17Omg_c053",
+            "completed_videos": 39,
+            "total_videos": 45,
+            "completed_arms": 13,
+            "last_arm": "COARSE_CONF_HARD_LEARNED",
+            "excess_risk": 6.948218601461403e-05
+          }
+        },
+        "2": {
+          "pair": "C4",
+          "pid": 113767,
+          "physical_GPU": 2,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C4/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C4_seed0.log",
+          "preflight_memory_MiB": 0,
+          "progress": {
+            "stage": "CLOSED_OBSERVER_SOLVER_LOOP_NO_GT",
+            "video": "v_cC2mHWqMcjk_c009",
+            "completed_videos": 38,
+            "total_videos": 45,
+            "completed_arms": 1,
+            "policy": "FROZEN",
+            "round": 1,
+            "actor_reward": 0.39745038176726144
+          }
+        }
+      },
+      "pending": [],
+      "finished": [
+        {
+          "pair": "C1",
+          "pid": 3661421,
+          "physical_GPU": 2,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C1/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C1_seed0.log",
+          "preflight_memory_MiB": 0
+        },
+        {
+          "pair": "C6",
+          "pid": 3661422,
+          "physical_GPU": 3,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C6/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C6_seed0.log",
+          "preflight_memory_MiB": 0
+        },
+        {
+          "pair": "C2",
+          "pid": 3961262,
+          "physical_GPU": 0,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C2/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C2_seed0.log",
+          "preflight_memory_MiB": 0
+        },
+        {
+          "pair": "C5",
+          "pid": 126881,
+          "physical_GPU": 3,
+          "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/C5/seed0",
+          "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/native_binary_quality_20261124/supervisor/C5_seed0.log",
+          "preflight_memory_MiB": 903
+        }
+      ],
+      "failure": null,
+      "wall_seconds": 84651.38610226999,
+      "neural_seeds": [
+        0
+      ],
+      "goal_status": "ACTIVE"
+    },
+    "subsequent_work": "New factor-supervised neural main versus same-evidence adequate ordinary soft/hard multi-task KD pilot, no new ablation matrix."
+  },
+  "new_actual_launch": {
+    "status": "ACTUAL_NEW_PRIMARY_AND_ADEQUATE_ORDINARY_ACTIVE",
+    "primary_actual_session": 31423,
+    "quality_actual_session": 64168,
+    "quality_worker": {
+      "pid": 841119,
+      "GPU": 1,
+      "log": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/factor_rsi_primary_pilot_20261125/supervisor/adequate_ordinary_quality_gpu1.log",
+      "source_sha256": "368810d2dbf6220f8f666ec654ef28de529559bd8f53945f8e6ac8e4904601a2"
+    },
+    "quality_registration_sha256": "64a546ab3bd15715c756a8ea29a45df0f44a2af69442e5dc4f1eb1c62ce27a03",
+    "numerical_work": "GPU0/3 new frozen factor teacher and primary; GPU1 same-evidence ordinary then 39 sealed-output evaluations.",
+    "GPU2_other_project_preserved": true,
+    "old_native_matrix_intentionally_stopped_and_not_evaluated": true,
+    "no_new_module_ablation_matrix": true,
+    "no_new_HOTA_available": true,
+    "all_data_DEV": true,
+    "goal_status": "ACTIVE"
+  },
+  "no_new_quality_claim": true
+}

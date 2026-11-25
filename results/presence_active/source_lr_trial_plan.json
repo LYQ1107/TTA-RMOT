@@ -1,0 +1,14 @@
+{
+  "status": "FIXED_SOURCE_ONLY_ONE_LR_TRIAL",
+  "lr": 1e-05,
+  "default_lr": 0.0003,
+  "architecture_and_other_hyperparameters_unchanged": true,
+  "seed": 0,
+  "max_epochs": 20,
+  "patience": 3,
+  "reason": "all default heads choose epoch1 by own-source loss and deteriorate on later epochs",
+  "selection": "minimum own-source validation BCE+0.5 conditional count CE; tie=default",
+  "no_target_HOTA_for_selection": true,
+  "default_outputs_not_overwritten": true,
+  "maximum_physical_GPUs": 2
+}

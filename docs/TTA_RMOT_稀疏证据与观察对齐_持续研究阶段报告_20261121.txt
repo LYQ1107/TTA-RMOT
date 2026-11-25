@@ -1,0 +1,482 @@
+TTA-RMOT：稀疏教师证据与三观察对齐——持续研究阶段报告
+研究批次：2026-11-21；阶段汇总：2026-11-22
+
+持续科研Goal仍为ACTIVE。本报告展示全部固定条件，不自动将队列完成视为科研目标达成。
+
+一、任务合同与为什么继续实验
+用户确认沿用官方固定候选框和Track ID，只研究跨域指代适配。适配只用目标域图像、任务语言及冻结教师，不用目标人工标签。
+当前视频允许转导；视频间只用过去和当前的教师反馈，不读取未来答案。全部现有数据均为开发数据。
+前次核验：C4直接回填教师44.570，仅当前视频充分拟合KD68.341，历史+当前KD69.050；无缓存官评完整复现。
+所以69分是应该保留的强对照；不能通过减少其训练、拿走其合法输入来制造创新优势。
+
+本轮结果判断（2026-11-22，全部预测封存并完成404组官评后）：
+1. 10%预算下，固定均值KD加视觉图：C4三种子66.883对66.276，+0.608；原视频+种子区间[-0.028,1.269]，仍不能宣布稳健全面胜出。
+2. 同条件C1为36.816对34.305，+2.510，原视频+种子区间[0.743,4.769]，支持该方向稀疏证据下的系统收益。
+3. C1固定KD数量后该差仅+0.00037且区间跨0，故主要是数量/选择校准收益，不称为普遍纯排序突破。
+4. 5%预算C4视觉图63.487低于硬KD400步64.721；不能声称教师越少图越占优。
+5. anchor对齐头比同特征POOLED软KD，C4低1.510、C1低2.092；完整观察图也没有超过POOLED图，不保留这条新机制。
+6. 外观衰减时序边比恒定边，C4低0.188、C1低0.882；同总边权控制亦无正贡献，不能包装为有效身份切换保护。
+7. 教师锚点真值与整轨迹可见多数仅21/3095（C4）、5/2510（C1）不一致；物理串ID不等于衣着语义改变。
+8. C4输入定义的空间/角色组seed0 HOTA约49.43/48.05，当前时序机制原样回退这些查询。它们是后续场景关系假设的依据，尚不是关系模块有效的证明。
+
+二、两个固定假设
+假设A：同样减少教师监督后，图算法是否比普通充分训练的KD更能利用稀疏证据？主预算10%，5%/20%为辅助曲线。
+假设B：一次教师只看一帧，却用该标签监督三次观察的均值并广播整轨迹，可能存在粒度错配。用真实anchor训练对齐小头，并按实际外观一致性传播。
+保留相同三次观察、源主干、教师、候选框及ID；不增加教师，不引入HMM/LoRA。
+对齐机制仅改静态衣着查询，其它查询用同一个POOLED小头。比较视觉边、时序边、恒定时序及同总边权控制。
+所有头均真正拟合：残差MLP，至少4000步最多16000步，教师KL停止；保留硬标签400步、充分软蒸馏和固定400/最终均值。
+
+三、输入与证据范围
+{
+  "C4": {
+    "videos": 45,
+    "nodes": 3432,
+    "pooled_PCD_max_abs_difference": 0.0052089691162109375,
+    "pooled_RGB_max_abs_difference": 2.9793567835056933e-08,
+    "GT_open_attempts": 0
+  },
+  "C1": {
+    "videos": 25,
+    "nodes": 2026,
+    "pooled_PCD_max_abs_difference": 0.0,
+    "pooled_RGB_max_abs_difference": 0.0,
+    "GT_open_attempts": 0
+  }
+}
+C4历史逐观察特征有数值漂移，观察机制只与同历史特征重新拟合的POOLED KD归因；预算曲线仍用原新鲜特征。
+C4曲线30%终点来自原新鲜整流；没有把历史观察研究的30%点拼进该曲线。
+三种子共享seed0实际冻结问答，仅重复神经初始化，不是三个测试域，也没有改变选题以挑选答案。
+本轮新增教师前向为0，重用神经特征和冻结问答；本轮运行时间不是冷启动部署成本。
+
+观察FULL与ANCHOR_KD共享对齐头和提供非衣着回退的POOLED软头；与单POOLED头的训练工作量不同。
+不能因教师预算相同就称总算力完全相同；各头实际拟合时间另列，后续保留方案再核算真实新鲜部署成本。
+
+四、每一个固定条件的原始HOTA
+budget0.1_seed0_C4; 问答=1160
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 477.20971665671095, "HARD": 481.13806941267103}
+  SOFT_400=66.475743, SOFT_FINAL=65.768231, SOFT_MEAN_400_FINAL=66.353559, HARD_400=66.327833, HARD_FINAL=65.269176, NO_GRAPH=65.760184, GRAPH=66.544872, MEAN_GRAPH=66.937025
+budget0.1_seed0_C1; 问答=1103
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 265.9938690146664, "HARD": 260.4760403394466}
+  SOFT_400=34.640584, SOFT_FINAL=33.557996, SOFT_MEAN_400_FINAL=33.910900, HARD_400=32.772704, HARD_FINAL=32.605729, NO_GRAPH=33.600919, GRAPH=36.833875, MEAN_GRAPH=37.053673
+observation_seed0_C4; 问答=3508
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 452.8101256643422, "POOLED_HARD": 440.43718040105887, "ANCHOR": 457.9643661300652}
+  POOLED_SOFT=69.066437, POOLED_SOFT400=68.783310, POOLED_MEAN=69.026209, POOLED_HARD400=68.711584, POOLED_HARD_FINAL=68.191517, POOLED_GRAPH=69.322362, POOLED_MEAN_GRAPH=69.306161, ANCHOR_KD=67.721235, ANCHOR_MEAN=68.066816, ANCHOR_NO_GRAPH=67.751114, ANCHOR_VISUAL_ONLY=68.255341, ANCHOR_TEMPORAL_ONLY=68.472992, ANCHOR_FULL=68.504732, CONSTANT_TEMPORAL=68.698468, MASS_MATCHED_CONSTANT_TEMPORAL=68.575497, ANCHOR_MEAN_FULL=68.562909
+observation_seed0_C1; 问答=3334
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 269.39685736841056, "POOLED_HARD": 274.6744728529593, "ANCHOR": 264.2947502208408}
+  POOLED_SOFT=39.029950, POOLED_SOFT400=36.825966, POOLED_MEAN=37.767254, POOLED_HARD400=39.937647, POOLED_HARD_FINAL=39.057717, POOLED_GRAPH=40.378217, POOLED_MEAN_GRAPH=40.011529, ANCHOR_KD=36.784903, ANCHOR_MEAN=37.065052, ANCHOR_NO_GRAPH=36.716580, ANCHOR_VISUAL_ONLY=38.758925, ANCHOR_TEMPORAL_ONLY=38.249851, ANCHOR_FULL=39.469909, CONSTANT_TEMPORAL=40.652979, MASS_MATCHED_CONSTANT_TEMPORAL=39.920715, ANCHOR_MEAN_FULL=39.155977
+budget0.05_seed0_C4; 问答=570
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 457.04862227418926, "HARD": 443.5396650240291}
+  SOFT_400=64.012602, SOFT_FINAL=63.198384, SOFT_MEAN_400_FINAL=63.594450, HARD_400=64.720535, HARD_FINAL=64.163923, NO_GRAPH=63.186094, GRAPH=63.486724, MEAN_GRAPH=63.905388
+budget0.05_seed0_C1; 问答=545
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 275.86461696389597, "HARD": 276.43758046848234}
+  SOFT_400=29.542378, SOFT_FINAL=28.801882, SOFT_MEAN_400_FINAL=28.768842, HARD_400=29.514703, HARD_FINAL=29.984107, NO_GRAPH=28.898783, GRAPH=32.716305, MEAN_GRAPH=33.261352
+budget0.2_seed0_C4; 问答=2333
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 469.4046281912597, "HARD": 455.8327617518371}
+  SOFT_400=68.298105, SOFT_FINAL=68.038554, SOFT_MEAN_400_FINAL=68.292774, HARD_400=68.121958, HARD_FINAL=67.578917, NO_GRAPH=68.030748, GRAPH=68.722761, MEAN_GRAPH=68.782221
+budget0.2_seed0_C1; 问答=2221
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 273.9308389207581, "HARD": 285.39858983806334}
+  SOFT_400=36.335977, SOFT_FINAL=39.225936, SOFT_MEAN_400_FINAL=37.171047, HARD_400=35.910635, HARD_FINAL=33.823506, NO_GRAPH=39.458541, GRAPH=40.675159, MEAN_GRAPH=39.596391
+budget0.1_seed17_C4; 问答=1160
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 444.53630516608246, "HARD": 453.33983166888356}
+  SOFT_400=66.590035, SOFT_FINAL=65.947092, SOFT_MEAN_400_FINAL=66.410302, HARD_400=66.329598, HARD_FINAL=65.290073, NO_GRAPH=65.951287, GRAPH=66.501664, MEAN_GRAPH=66.821577
+observation_seed17_C4; 问答=3508
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 485.0091373688774, "POOLED_HARD": 484.0198493737262, "ANCHOR": 483.1620542901801}
+  POOLED_SOFT=69.062252, POOLED_SOFT400=68.953428, POOLED_MEAN=69.084609, POOLED_HARD400=68.592140, POOLED_HARD_FINAL=68.232313, POOLED_GRAPH=69.424659, POOLED_MEAN_GRAPH=69.426470, ANCHOR_KD=67.430307, ANCHOR_MEAN=67.865030, ANCHOR_NO_GRAPH=67.458608, ANCHOR_VISUAL_ONLY=68.227016, ANCHOR_TEMPORAL_ONLY=68.323763, ANCHOR_FULL=68.463605, CONSTANT_TEMPORAL=68.671299, MASS_MATCHED_CONSTANT_TEMPORAL=68.536000, ANCHOR_MEAN_FULL=68.542005
+budget0.1_seed17_C1; 问答=1103
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 253.07857490889728, "HARD": 255.8990236383397}
+  SOFT_400=35.009673, SOFT_FINAL=34.450807, SOFT_MEAN_400_FINAL=34.275344, HARD_400=33.957371, HARD_FINAL=32.867353, NO_GRAPH=34.491327, GRAPH=36.685252, MEAN_GRAPH=36.776517
+observation_seed17_C1; 问答=3334
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 261.77987888548523, "POOLED_HARD": 256.2045584541047, "ANCHOR": 253.37862030172255}
+  POOLED_SOFT=37.709987, POOLED_SOFT400=37.771565, POOLED_MEAN=38.418565, POOLED_HARD400=40.615335, POOLED_HARD_FINAL=39.087883, POOLED_GRAPH=40.487112, POOLED_MEAN_GRAPH=40.224808, ANCHOR_KD=35.571585, ANCHOR_MEAN=36.444132, ANCHOR_NO_GRAPH=35.736842, ANCHOR_VISUAL_ONLY=37.828884, ANCHOR_TEMPORAL_ONLY=37.505781, ANCHOR_FULL=39.102822, CONSTANT_TEMPORAL=39.705446, MASS_MATCHED_CONSTANT_TEMPORAL=39.245195, ANCHOR_MEAN_FULL=38.451162
+budget0.1_seed42_C4; 问答=1160
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 497.9895720463246, "HARD": 485.17120824032463}
+  SOFT_400=66.084316, SOFT_FINAL=65.296521, SOFT_MEAN_400_FINAL=66.063099, HARD_400=66.442647, HARD_FINAL=65.431648, NO_GRAPH=65.283936, GRAPH=66.252307, MEAN_GRAPH=66.890902
+observation_seed42_C4; 问答=3508
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 466.5220204287907, "POOLED_HARD": 475.0687792537501, "ANCHOR": 484.29677375091705}
+  POOLED_SOFT=69.120794, POOLED_SOFT400=68.913480, POOLED_MEAN=69.095070, POOLED_HARD400=68.663291, POOLED_HARD_FINAL=68.280359, POOLED_GRAPH=69.397148, POOLED_MEAN_GRAPH=69.395086, ANCHOR_KD=67.567947, ANCHOR_MEAN=67.958503, ANCHOR_NO_GRAPH=67.594124, ANCHOR_VISUAL_ONLY=68.332701, ANCHOR_TEMPORAL_ONLY=68.463438, ANCHOR_FULL=68.576934, CONSTANT_TEMPORAL=68.738428, MASS_MATCHED_CONSTANT_TEMPORAL=68.628239, ANCHOR_MEAN_FULL=68.629491
+budget0.1_seed42_C1; 问答=1103
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"SOFT": 271.23087555379607, "HARD": 270.8095718359109}
+  SOFT_400=34.663087, SOFT_FINAL=33.091036, SOFT_MEAN_400_FINAL=34.730253, HARD_400=34.302934, HARD_FINAL=33.892292, NO_GRAPH=33.092727, GRAPH=36.691943, MEAN_GRAPH=36.617567
+observation_seed42_C1; 问答=3334
+  实际头拟合秒数（共享实验流，非独立冷部署）：{"POOLED_SOFT": 279.9371925126761, "POOLED_HARD": 275.70837845874485, "ANCHOR": 258.8085145460209}
+  POOLED_SOFT=37.961138, POOLED_SOFT400=36.941608, POOLED_MEAN=38.239536, POOLED_HARD400=39.505397, POOLED_HARD_FINAL=38.605605, POOLED_GRAPH=40.714542, POOLED_MEAN_GRAPH=40.287679, ANCHOR_KD=36.068329, ANCHOR_MEAN=36.735908, ANCHOR_NO_GRAPH=36.025570, ANCHOR_VISUAL_ONLY=38.270681, ANCHOR_TEMPORAL_ONLY=38.125437, ANCHOR_FULL=39.319770, CONSTANT_TEMPORAL=40.179965, MASS_MATCHED_CONSTANT_TEMPORAL=39.483583, ANCHOR_MEAN_FULL=38.681781
+
+五、三种子聚合与模块归因（全部对照）
+BUDGET_C4
+均值HOTA：SOFT_400=66.383365, SOFT_FINAL=65.670614, SOFT_MEAN_400_FINAL=66.275653, HARD_400=66.366693, HARD_FINAL=65.330299, NO_GRAPH=65.665136, GRAPH=66.432948, MEAN_GRAPH=66.883168
+  GRAPH_vs_SOFT_FINAL: +0.762333; parent95%[+0.169429, +1.444736]; parent+seed95%[+0.112290, +1.464998]
+  GRAPH_vs_SOFT_MEAN_400_FINAL: +0.157295; parent95%[-0.258260, +0.659255]; parent+seed95%[-0.285423, +0.666663]
+  GRAPH_vs_HARD_400: +0.066255; parent95%[-0.681043, +0.777949]; parent+seed95%[-0.738764, +0.802417]
+  GRAPH_vs_HARD_FINAL: +1.102649; parent95%[+0.348243, +1.963569]; parent+seed95%[+0.273680, +1.995963]
+  GRAPH_vs_NO_GRAPH: +0.767812; parent95%[+0.169118, +1.452338]; parent+seed95%[+0.109933, +1.473744]
+  MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.607515; parent95%[+0.024273, +1.258334]; parent+seed95%[-0.028395, +1.269470]
+  COUNT_OWN_GRAPH_vs_SOFT_FINAL: +0.932738; parent95%[+0.540331, +1.412586]; parent+seed95%[+0.528559, +1.422881]
+  COUNT_OWN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.718546; parent95%[+0.394110, +1.140955]; parent+seed95%[+0.371245, +1.146049]
+  COUNT_OWN_GRAPH_vs_HARD_400: +0.784006; parent95%[+0.381389, +1.287736]; parent+seed95%[+0.351515, +1.298784]
+  COUNT_OWN_GRAPH_vs_NO_GRAPH: +0.919067; parent95%[+0.514145, +1.408733]; parent+seed95%[+0.495317, +1.420536]
+  COUNT_OWN_MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.913874; parent95%[+0.489784, +1.474784]; parent+seed95%[+0.479852, +1.480485]
+  COUNT_BASELINE_GRAPH_vs_SOFT_FINAL: +0.476625; parent95%[+0.138323, +0.817143]; parent+seed95%[+0.107567, +0.869001]
+  COUNT_BASELINE_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.226705; parent95%[-0.059900, +0.509807]; parent+seed95%[-0.091906, +0.527514]
+  COUNT_BASELINE_GRAPH_vs_HARD_400: +0.095787; parent95%[-0.203830, +0.328169]; parent+seed95%[-0.217594, +0.363987]
+  COUNT_BASELINE_MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.301309; parent95%[-0.025596, +0.623428]; parent+seed95%[-0.039395, +0.630044]
+BUDGET_C1
+均值HOTA：SOFT_400=34.771115, SOFT_FINAL=33.699946, SOFT_MEAN_400_FINAL=34.305499, HARD_400=33.677670, HARD_FINAL=33.121792, NO_GRAPH=33.728324, GRAPH=36.737023, MEAN_GRAPH=36.815919
+  GRAPH_vs_SOFT_FINAL: +3.037077; parent95%[+1.203390, +5.381322]; parent+seed95%[+1.121650, +5.638976]
+  GRAPH_vs_SOFT_MEAN_400_FINAL: +2.431524; parent95%[+0.819787, +4.414735]; parent+seed95%[+0.790045, +4.552998]
+  GRAPH_vs_HARD_400: +3.059354; parent95%[+0.528932, +6.547889]; parent+seed95%[+0.414632, +6.812564]
+  GRAPH_vs_HARD_FINAL: +3.615232; parent95%[+0.800449, +7.586825]; parent+seed95%[+0.725812, +7.677547]
+  GRAPH_vs_NO_GRAPH: +3.008699; parent95%[+1.165516, +5.350626]; parent+seed95%[+1.073356, +5.617975]
+  MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +2.510420; parent95%[+0.831130, +4.587971]; parent+seed95%[+0.743403, +4.768982]
+  COUNT_OWN_GRAPH_vs_SOFT_FINAL: +0.854272; parent95%[+0.046834, +2.166338]; parent+seed95%[+0.055974, +2.263349]
+  COUNT_OWN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.636391; parent95%[+0.045545, +1.485503]; parent+seed95%[+0.032790, +1.779691]
+  COUNT_OWN_GRAPH_vs_HARD_400: +0.549919; parent95%[+0.084870, +1.181713]; parent+seed95%[+0.067947, +1.275974]
+  COUNT_OWN_GRAPH_vs_NO_GRAPH: +0.851654; parent95%[+0.043337, +2.163671]; parent+seed95%[+0.052805, +2.261633]
+  COUNT_OWN_MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.562069; parent95%[+0.046081, +1.286773]; parent+seed95%[+0.027959, +1.579924]
+  COUNT_BASELINE_GRAPH_vs_SOFT_FINAL: -0.205882; parent95%[-1.214885, +0.609060]; parent+seed95%[-1.292599, +0.779701]
+  COUNT_BASELINE_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.013167; parent95%[-0.925149, +0.733667]; parent+seed95%[-0.963891, +0.958465]
+  COUNT_BASELINE_GRAPH_vs_HARD_400: +0.245218; parent95%[-0.204627, +0.893615]; parent+seed95%[-0.268821, +1.339034]
+  COUNT_BASELINE_MEAN_GRAPH_vs_SOFT_MEAN_400_FINAL: +0.000367; parent95%[-0.928116, +0.703176]; parent+seed95%[-0.965190, +0.903312]
+OBSERVATION_C4
+均值HOTA：POOLED_SOFT=69.083161, POOLED_SOFT400=68.883406, POOLED_MEAN=69.068629, POOLED_HARD400=68.655672, POOLED_HARD_FINAL=68.234730, POOLED_GRAPH=69.381390, POOLED_MEAN_GRAPH=69.375906, ANCHOR_KD=67.573163, ANCHOR_MEAN=67.963450, ANCHOR_NO_GRAPH=67.601282, ANCHOR_VISUAL_ONLY=68.271686, ANCHOR_TEMPORAL_ONLY=68.420064, ANCHOR_FULL=68.515090, CONSTANT_TEMPORAL=68.702732, MASS_MATCHED_CONSTANT_TEMPORAL=68.579912, ANCHOR_MEAN_FULL=68.578135
+  ANCHOR_FULL_vs_POOLED_SOFT: -0.568071; parent95%[-1.345757, +0.215881]; parent+seed95%[-1.353977, +0.224811]
+  ANCHOR_FULL_vs_POOLED_MEAN: -0.553539; parent95%[-1.343464, +0.200433]; parent+seed95%[-1.348146, +0.209412]
+  ANCHOR_FULL_vs_POOLED_HARD400: -0.140582; parent95%[-0.928323, +0.729456]; parent+seed95%[-0.930044, +0.733832]
+  ANCHOR_FULL_vs_POOLED_HARD_FINAL: +0.280361; parent95%[-0.322523, +1.042022]; parent+seed95%[-0.334295, +1.067805]
+  ANCHOR_FULL_vs_POOLED_GRAPH: -0.866299; parent95%[-1.361827, -0.375210]; parent+seed95%[-1.375017, -0.372562]
+  ANCHOR_FULL_vs_ANCHOR_KD: +0.941927; parent95%[+0.508824, +1.502937]; parent+seed95%[+0.484627, +1.516301]
+  ANCHOR_FULL_vs_ANCHOR_MEAN: +0.551641; parent95%[+0.038178, +1.125668]; parent+seed95%[+0.021835, +1.141390]
+  ANCHOR_FULL_vs_ANCHOR_NO_GRAPH: +0.913808; parent95%[+0.479469, +1.471079]; parent+seed95%[+0.457155, +1.488808]
+  ANCHOR_FULL_vs_ANCHOR_VISUAL_ONLY: +0.243404; parent95%[+0.116347, +0.367501]; parent+seed95%[+0.115215, +0.370805]
+  ANCHOR_FULL_vs_ANCHOR_TEMPORAL_ONLY: +0.095026; parent95%[-0.350908, +0.649106]; parent+seed95%[-0.359174, +0.659624]
+  ANCHOR_FULL_vs_CONSTANT_TEMPORAL: -0.187642; parent95%[-0.352452, -0.043349]; parent+seed95%[-0.354195, -0.041292]
+  ANCHOR_FULL_vs_MASS_MATCHED_CONSTANT_TEMPORAL: -0.064822; parent95%[-0.172959, +0.008932]; parent+seed95%[-0.175681, +0.009851]
+  ANCHOR_KD_vs_POOLED_SOFT: -1.509998; parent95%[-2.111210, -0.863761]; parent+seed95%[-2.140194, -0.836203]
+  ANCHOR_MEAN_FULL_vs_POOLED_MEAN: -0.490495; parent95%[-1.264874, +0.378609]; parent+seed95%[-1.267629, +0.383487]
+  ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: +0.614685; parent95%[+0.156382, +1.177856]; parent+seed95%[+0.141107, +1.183528]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_SOFT: +0.400678; parent95%[+0.077245, +0.859007]; parent+seed95%[+0.074445, +0.873559]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_MEAN: +0.163665; parent95%[-0.057661, +0.452491]; parent+seed95%[-0.065094, +0.469850]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_HARD400: +0.196740; parent95%[-0.063573, +0.529709]; parent+seed95%[-0.074847, +0.539656]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_KD: +0.898537; parent95%[+0.620925, +1.226824]; parent+seed95%[+0.598035, +1.261008]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_NO_GRAPH: +0.819954; parent95%[+0.569923, +1.121800]; parent+seed95%[+0.541434, +1.152663]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_VISUAL_ONLY: +0.095815; parent95%[+0.056297, +0.137845]; parent+seed95%[+0.054697, +0.144189]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_TEMPORAL_ONLY: +0.259087; parent95%[+0.063116, +0.489464]; parent+seed95%[+0.058026, +0.506161]
+  COUNT_OWN_ANCHOR_FULL_vs_CONSTANT_TEMPORAL: -0.089317; parent95%[-0.155741, -0.034636]; parent+seed95%[-0.157679, -0.033847]
+  COUNT_OWN_ANCHOR_FULL_vs_MASS_MATCHED_CONSTANT_TEMPORAL: -0.025566; parent95%[-0.041272, -0.010622]; parent+seed95%[-0.042854, -0.010374]
+  COUNT_OWN_ANCHOR_MEAN_FULL_vs_POOLED_MEAN: +0.133847; parent95%[-0.082934, +0.434162]; parent+seed95%[-0.091267, +0.438799]
+  COUNT_OWN_ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: +0.519580; parent95%[+0.363105, +0.720953]; parent+seed95%[+0.354469, +0.724522]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_SOFT: -0.430447; parent95%[-0.649064, -0.170422]; parent+seed95%[-0.664686, -0.163824]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_MEAN: -0.399557; parent95%[-0.612954, -0.118032]; parent+seed95%[-0.629345, -0.076085]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_HARD400: -0.393671; parent95%[-0.646356, -0.094093]; parent+seed95%[-0.656176, -0.090194]
+  COUNT_BASELINE_ANCHOR_FULL_vs_ANCHOR_KD: +0.449908; parent95%[+0.315679, +0.608889]; parent+seed95%[+0.299755, +0.616190]
+  COUNT_BASELINE_ANCHOR_MEAN_FULL_vs_POOLED_MEAN: -0.357545; parent95%[-0.577178, -0.061158]; parent+seed95%[-0.589035, -0.027773]
+  COUNT_BASELINE_ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: +0.262763; parent95%[+0.153503, +0.375670]; parent+seed95%[+0.144908, +0.380011]
+OBSERVATION_C1
+均值HOTA：POOLED_SOFT=38.233691, POOLED_SOFT400=37.179713, POOLED_MEAN=38.141785, POOLED_HARD400=40.019460, POOLED_HARD_FINAL=38.917068, POOLED_GRAPH=40.526624, POOLED_MEAN_GRAPH=40.174672, ANCHOR_KD=36.141606, ANCHOR_MEAN=36.748364, ANCHOR_NO_GRAPH=36.159664, ANCHOR_VISUAL_ONLY=38.286163, ANCHOR_TEMPORAL_ONLY=37.960356, ANCHOR_FULL=39.297500, CONSTANT_TEMPORAL=40.179463, MASS_MATCHED_CONSTANT_TEMPORAL=39.549831, ANCHOR_MEAN_FULL=38.762973
+  ANCHOR_FULL_vs_POOLED_SOFT: +1.063809; parent95%[+0.059879, +2.261504]; parent+seed95%[-0.199451, +2.483997]
+  ANCHOR_FULL_vs_POOLED_MEAN: +1.155715; parent95%[-0.574083, +3.540134]; parent+seed95%[-0.654807, +3.761545]
+  ANCHOR_FULL_vs_POOLED_HARD400: -0.721959; parent95%[-6.241174, +4.017918]; parent+seed95%[-6.443005, +4.138480]
+  ANCHOR_FULL_vs_POOLED_HARD_FINAL: +0.380432; parent95%[-5.029790, +4.793432]; parent+seed95%[-5.082232, +5.013367]
+  ANCHOR_FULL_vs_POOLED_GRAPH: -1.229123; parent95%[-2.756403, +0.032101]; parent+seed95%[-2.827857, +0.105305]
+  ANCHOR_FULL_vs_ANCHOR_KD: +3.155895; parent95%[+1.567660, +5.061837]; parent+seed95%[+1.477380, +5.206202]
+  ANCHOR_FULL_vs_ANCHOR_MEAN: +2.549136; parent95%[+0.221772, +5.410030]; parent+seed95%[+0.185078, +5.417376]
+  ANCHOR_FULL_vs_ANCHOR_NO_GRAPH: +3.137837; parent95%[+1.578180, +5.028388]; parent+seed95%[+1.497238, +5.110774]
+  ANCHOR_FULL_vs_ANCHOR_VISUAL_ONLY: +1.011337; parent95%[+0.297312, +1.912465]; parent+seed95%[+0.261968, +1.995811]
+  ANCHOR_FULL_vs_ANCHOR_TEMPORAL_ONLY: +1.337144; parent95%[+0.165997, +2.740112]; parent+seed95%[+0.113939, +2.868969]
+  ANCHOR_FULL_vs_CONSTANT_TEMPORAL: -0.881963; parent95%[-1.770839, -0.224017]; parent+seed95%[-1.847471, -0.136282]
+  ANCHOR_FULL_vs_MASS_MATCHED_CONSTANT_TEMPORAL: -0.252331; parent95%[-0.510784, -0.044124]; parent+seed95%[-0.623755, -0.019909]
+  ANCHOR_KD_vs_POOLED_SOFT: -2.092086; parent95%[-3.823600, -0.712536]; parent+seed95%[-3.888516, -0.619065]
+  ANCHOR_MEAN_FULL_vs_POOLED_MEAN: +0.621188; parent95%[-0.643499, +2.118974]; parent+seed95%[-0.745484, +2.419498]
+  ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: +2.014609; parent95%[+0.114580, +4.063161]; parent+seed95%[+0.086775, +4.054989]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_SOFT: +0.456254; parent95%[-0.301075, +1.632508]; parent+seed95%[-0.474332, +1.643028]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_MEAN: +0.612451; parent95%[-0.189070, +1.804777]; parent+seed95%[-0.227499, +1.812860]
+  COUNT_OWN_ANCHOR_FULL_vs_POOLED_HARD400: +1.020349; parent95%[+0.180991, +2.157123]; parent+seed95%[+0.143860, +2.232238]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_KD: +0.432566; parent95%[-0.207984, +1.104507]; parent+seed95%[-0.345503, +1.196511]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_NO_GRAPH: +0.426923; parent95%[-0.237155, +1.122640]; parent+seed95%[-0.371653, +1.184430]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_VISUAL_ONLY: +0.099402; parent95%[+0.008843, +0.204770]; parent+seed95%[-0.003880, +0.215943]
+  COUNT_OWN_ANCHOR_FULL_vs_ANCHOR_TEMPORAL_ONLY: +0.092541; parent95%[-0.530345, +0.660671]; parent+seed95%[-0.639003, +0.701948]
+  COUNT_OWN_ANCHOR_FULL_vs_CONSTANT_TEMPORAL: +0.032833; parent95%[-0.045344, +0.124367]; parent+seed95%[-0.111990, +0.176308]
+  COUNT_OWN_ANCHOR_FULL_vs_MASS_MATCHED_CONSTANT_TEMPORAL: +0.044652; parent95%[+0.000106, +0.106850]; parent+seed95%[-0.015544, +0.146938]
+  COUNT_OWN_ANCHOR_MEAN_FULL_vs_POOLED_MEAN: +0.599932; parent95%[-0.170968, +1.777198]; parent+seed95%[-0.175981, +1.802012]
+  COUNT_OWN_ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: +0.410337; parent95%[-0.005791, +0.920715]; parent+seed95%[-0.068468, +0.946551]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_SOFT: -1.266714; parent95%[-2.096127, -0.582413]; parent+seed95%[-2.265692, -0.435469]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_MEAN: -0.812151; parent95%[-1.371962, -0.391917]; parent+seed95%[-1.635714, -0.146979]
+  COUNT_BASELINE_ANCHOR_FULL_vs_POOLED_HARD400: -0.555945; parent95%[-1.415580, +0.078163]; parent+seed95%[-1.492435, +0.115666]
+  COUNT_BASELINE_ANCHOR_FULL_vs_ANCHOR_KD: -0.496915; parent95%[-1.237389, +0.138657]; parent+seed95%[-1.511590, +0.176283]
+  COUNT_BASELINE_ANCHOR_MEAN_FULL_vs_POOLED_MEAN: -0.692311; parent95%[-1.261732, -0.295535]; parent+seed95%[-1.475745, +0.000335]
+  COUNT_BASELINE_ANCHOR_MEAN_FULL_vs_ANCHOR_MEAN: -0.391929; parent95%[-1.177969, +0.211108]; parent+seed95%[-1.257378, +0.244475]
+
+六、数量与排序应怎样区分
+所有CountMatched都使用方法自身的逐查询逐帧数量，不使用GT数量。
+同时报告以完整方法数量和以基线数量为目标的两种方向；Dance保留联合互斥约束，全部CountSelf必须逐文件复现。
+一侧数量投影有正差不等于普遍排序提升；总收益、数量校准和排序必须分别解释。
+
+七、物理串ID与语义变化的诊断
+{
+  "C4": {
+    "semantic_membership": {
+      "all_queries": {
+        "query_track_pairs_with_GT_visible_rows": 11219,
+        "pairs_with_any_positive_row": 6137,
+        "membership_mixed_pairs": 902,
+        "membership_mixed_pairs_seen_by_three_nodes": 185,
+        "GT_visible_rows": 2905193,
+        "minority_semantic_membership_rows": 13700,
+        "positive_rows_in_mixed_pairs": 204787
+      },
+      "static_clothing": {
+        "query_track_pairs_with_GT_visible_rows": 6224,
+        "pairs_with_any_positive_row": 2758,
+        "membership_mixed_pairs": 796,
+        "membership_mixed_pairs_seen_by_three_nodes": 152,
+        "GT_visible_rows": 1693789,
+        "minority_semantic_membership_rows": 11936,
+        "positive_rows_in_mixed_pairs": 188154
+      }
+    },
+    "physical_identity": {
+      "tracks_with_GT_visible_rows": 1075,
+      "tracks_with_multiple_GT_ids": 209,
+      "GT_visible_rows": 289707,
+      "majority_identity_rows": 282888
+    },
+    "teacher_anchor": {
+      "asked_pairs": 3508,
+      "anchor_GT_union_visible": 3095,
+      "binary_teacher_agrees_with_anchor_IoU_membership": 2826,
+      "visible_anchor_pairs_with_valid_track_majority": 3095,
+      "anchor_truth_differs_from_valid_track_majority": 21
+    },
+    "input_defined_query_groups_seed0": {
+      "static_clothing_branch": {
+        "queries": 256,
+        "parents": 13,
+        "HOTA": {
+          "POOLED_SOFT": 66.63833639604802,
+          "ANCHOR_KD": 63.94238963409663,
+          "ANCHOR_FULL": 65.55951108511015
+        }
+      },
+      "fallback_spatial": {
+        "queries": 78,
+        "parents": 4,
+        "HOTA": {
+          "POOLED_SOFT": 49.43047995202684,
+          "ANCHOR_KD": 49.43047995202684,
+          "ANCHOR_FULL": 49.43047995202684
+        }
+      },
+      "fallback_role": {
+        "queries": 27,
+        "parents": 6,
+        "HOTA": {
+          "POOLED_SOFT": 48.04535061155697,
+          "ANCHOR_KD": 48.04535061155697,
+          "ANCHOR_FULL": 48.04535061155697
+        }
+      },
+      "fallback_other": {
+        "queries": 105,
+        "parents": 13,
+        "HOTA": {
+          "POOLED_SOFT": 78.135903449385,
+          "ANCHOR_KD": 78.135903449385,
+          "ANCHOR_FULL": 78.135903449385
+        }
+      }
+    },
+    "seed0_candidate_membership_errors": {
+      "POOLED_SOFT": {
+        "stable_membership": {
+          "TP": 1228599,
+          "FP": 269439,
+          "FN": 72572,
+          "rows": 2431103
+        },
+        "mixed_membership": {
+          "TP": 185416,
+          "FP": 134610,
+          "FN": 19371,
+          "rows": 474090
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 27391,
+          "FN": 0,
+          "rows": 63008
+        }
+      },
+      "ANCHOR_KD": {
+        "stable_membership": {
+          "TP": 1225836,
+          "FP": 298500,
+          "FN": 75335,
+          "rows": 2431103
+        },
+        "mixed_membership": {
+          "TP": 185705,
+          "FP": 154308,
+          "FN": 19082,
+          "rows": 474090
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 27622,
+          "FN": 0,
+          "rows": 63008
+        }
+      },
+      "ANCHOR_FULL": {
+        "stable_membership": {
+          "TP": 1235651,
+          "FP": 284208,
+          "FN": 65520,
+          "rows": 2431103
+        },
+        "mixed_membership": {
+          "TP": 191154,
+          "FP": 158055,
+          "FN": 13633,
+          "rows": 474090
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 26807,
+          "FN": 0,
+          "rows": 63008
+        }
+      }
+    }
+  },
+  "C1": {
+    "semantic_membership": {
+      "all_queries": {
+        "query_track_pairs_with_GT_visible_rows": 10353,
+        "pairs_with_any_positive_row": 721,
+        "membership_mixed_pairs": 161,
+        "membership_mixed_pairs_seen_by_three_nodes": 58,
+        "GT_visible_rows": 3342761,
+        "minority_semantic_membership_rows": 12055,
+        "positive_rows_in_mixed_pairs": 28442
+      },
+      "static_clothing": {
+        "query_track_pairs_with_GT_visible_rows": 10353,
+        "pairs_with_any_positive_row": 721,
+        "membership_mixed_pairs": 161,
+        "membership_mixed_pairs_seen_by_three_nodes": 58,
+        "GT_visible_rows": 3342761,
+        "minority_semantic_membership_rows": 12055,
+        "positive_rows_in_mixed_pairs": 28442
+      }
+    },
+    "physical_identity": {
+      "tracks_with_GT_visible_rows": 609,
+      "tracks_with_multiple_GT_ids": 420,
+      "GT_visible_rows": 196633,
+      "majority_identity_rows": 143943
+    },
+    "teacher_anchor": {
+      "asked_pairs": 3334,
+      "anchor_GT_union_visible": 2510,
+      "binary_teacher_agrees_with_anchor_IoU_membership": 3052,
+      "visible_anchor_pairs_with_valid_track_majority": 2510,
+      "anchor_truth_differs_from_valid_track_majority": 5
+    },
+    "input_defined_query_groups_seed0": {
+      "static_clothing_branch": {
+        "queries": 425,
+        "parents": 25,
+        "HOTA": {
+          "POOLED_SOFT": 39.029949614828865,
+          "ANCHOR_KD": 36.78490274009846,
+          "ANCHOR_FULL": 39.469909108113946
+        }
+      },
+      "fallback_spatial": {
+        "queries": 0,
+        "parents": 0,
+        "HOTA": {}
+      },
+      "fallback_role": {
+        "queries": 0,
+        "parents": 0,
+        "HOTA": {}
+      },
+      "fallback_other": {
+        "queries": 0,
+        "parents": 0,
+        "HOTA": {}
+      }
+    },
+    "seed0_candidate_membership_errors": {
+      "POOLED_SOFT": {
+        "stable_membership": {
+          "TP": 127857,
+          "FP": 36957,
+          "FN": 41086,
+          "rows": 3247510
+        },
+        "mixed_membership": {
+          "TP": 8366,
+          "FP": 11289,
+          "FN": 20076,
+          "rows": 95251
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 12029,
+          "FN": 0,
+          "rows": 245684
+        }
+      },
+      "ANCHOR_KD": {
+        "stable_membership": {
+          "TP": 121031,
+          "FP": 37364,
+          "FN": 47912,
+          "rows": 3247510
+        },
+        "mixed_membership": {
+          "TP": 6951,
+          "FP": 8379,
+          "FN": 21491,
+          "rows": 95251
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 9101,
+          "FN": 0,
+          "rows": 245684
+        }
+      },
+      "ANCHOR_FULL": {
+        "stable_membership": {
+          "TP": 133489,
+          "FP": 30970,
+          "FN": 35454,
+          "rows": 3247510
+        },
+        "mixed_membership": {
+          "TP": 8359,
+          "FP": 10096,
+          "FN": 20083,
+          "rows": 95251
+        },
+        "unmatched_union": {
+          "TP": 0,
+          "FP": 11224,
+          "FN": 0,
+          "rows": 245684
+        }
+      }
+    }
+  }
+}
+教师同GT的协议一致性是候选IoU成员诊断，还混有定位/标注影响，不称作纯语义准确率。
+这些TP/FP/FN不是HOTA损失的可加拆账，也不进入方法的参数、阈值或训练。
+
+八、证据边界与继续条件
+所有结果均完整保留，包括负结果；没有按目标域逐格选择获胜方法。
+区间为固定输出的原视频聚类描述：C4的45片段来自13个原视频；神经种子敏感性另报。
+开发迭代与多重比较的偏差不能靠bootstrap消除，没有独立新划分就不能称作独立盲测或泛化定论。
+根代理需依据总分、强均值/硬标签对照、模块删除、数量双向与实际新鲜执行逐条判断哪些机制可保留。
+尚未完成的验收继续推进，不能因写完本报告或跑完本队列而宣称整个科研Goal完成。

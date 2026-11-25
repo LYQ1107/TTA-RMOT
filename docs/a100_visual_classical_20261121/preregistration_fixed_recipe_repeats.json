@@ -1,0 +1,26 @@
+{
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "policy": "COVER",
+  "teacher_budget_per_seed": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "head_and_acquisition_seeds_matched_within_each_comparison": true,
+  "recipe": "same strong prefix-normalized 1080d teacher KD and static appearance cohort",
+  "minimum_fit_steps": 4000,
+  "maximum_fit_steps": 16000,
+  "teacher_KL_stop": 0.005,
+  "teacher_global_threshold": 0.5,
+  "no_target_GT_for_hyperparameters_or_adaptation": true,
+  "no_new_HOTA_selection_of_recipe": true,
+  "exact_old_frozen_QA_reused_only_where_query_track_frame_identical": true,
+  "missing_positions_really_asked_on_GPU": true,
+  "collection_union_and_reuse_not_claimed_as_live_method_cost": true,
+  "controls": "all actual soft/hard 400/4000/final fits; no-graph; original-vs-whitened geometry; strong prior; peer reliability",
+  "countmatched": "per-query frame exact same method counts; no GT counts",
+  "limitations": "existing development data; seed repeats not new unseen target domains; descriptive parent-cluster intervals"
+}
