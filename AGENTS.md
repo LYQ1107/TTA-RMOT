@@ -1,3 +1,10 @@
+## 最新：NAS恢复实像核验与四卡检查点续跑（2026-11-26）
+
+- 用户确认NAS已修复后，11421/ab18c6旧preflight exit1不再是SSH超时：exec看/home/Valadmin/A800，而同端SFTP实际/home/A800有效。三故障图完整解码，fresh SSH端SHA逐一一致；原FUSE保持ro，无重挂载/NAS写入。不要再将exec与SFTP路径差异当网络离线。
+- 新scripts/a100_fullscope_nas_namespace_resume.py显式自源pin登记，复用原transport worker与42数值源；48122/c1e4a5 prepare、53639/8f74dc真实预检均exit0。唯一在途actual86841，0/1/2/3 PID1973005/1973007/1973009/1973011已启动，初始36/148单元、1116/4588输出保留；旧23947/78495终态不续。原GPU2服务243079保留。
+- 同检查点/Adam/RNG/已选问题/回答/配额/seed0/.005，新增注册仅连接预检与出处，不改科学方法。所有失败attempt和659717170B只读归档保留，额外加载/重试计费。四卡启动还不是新HOTA；原全4588与所有教师attempt权重seal后才186/180官评复算及登记诊断。Goal工具active，NAS blocker已解决；六设置胜充分KD/三贡献/fresh成本仍未完成。
+- 只续actual86841，不启新观察器或ps/tail/nvidia轮询、不因静默重启；旧模型离线内容诊断仅曾读可行性，尚未实现/执行，当前优先完整原研究。selected NAS_verified_namespace_resume与TXT43记录。发布仍双100000000B gate，私有49AGENTS行/research_log不全stage。
+
 ## 最新：NAS实际I/O故障，36单元保留与四卡续跑准备（2026-11-26）
 
 - 实际23947/943690与78495/fded73均exit1：原健康0/2读Dance0026/000127.png、恢复1/3读Sports v_dw7LOz17Omg_c053/000328或333.jpg发生EIO；SSH24557 banner连续超时。旧两actual已终态，不再wait或声称四卡在跑；原数值失败另留，不归因算法。NAS入口仍ro，不改历史results。

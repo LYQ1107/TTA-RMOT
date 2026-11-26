@@ -1,0 +1,143 @@
+{
+  "status": "NAS_RESTORED_AND_FOUR_GPU_ORIGINAL_CHECKPOINT_RESUME_STARTED",
+  "original_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "namespace_registration": {
+    "status": "REGISTERED_SSH_EXEC_NAMESPACE_PREFLIGHT_CORRECTION_ONLY",
+    "source_sha256": "e22615effa21f9dd3633743df4ceb6d30fb4dcce9ab1bec52e46fa5f3aa53d49",
+    "original_transport_source_sha256": "e57eb7e84201152c437fa29c1bb474d72c73783e460520b7241b63a7a4e99d9a",
+    "original_transport_registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+    "SSH_exec_root": "/home/Valadmin/A800",
+    "SFTP_mount_root": "/home/A800",
+    "reason": "Authenticated SSH exec uses /home/Valadmin/A800; the same authenticated SFTP endpoint exposes /home/A800. All three formerly failing mounted images decode and exactly match fresh SSH-side SHA256. No remount is needed.",
+    "preflight": "Require the existing exact read-only FUSE mount, authenticated fresh SSH hashes of all three failed images, and bounded mounted-image decoding with matching content hashes.",
+    "numerical_worker": "scripts/a100_fullscope_nas_resume.py --worker",
+    "original42sources_and_numerical_recovery_unchanged": true,
+    "questions_answers_checkpoints_optimizer_RNG_budgets_gate_seed_unchanged": true,
+    "GPU_workers": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "preserve_GPU2_service_PID": 243079,
+    "archive_and_all_failed_attempts_retained": true,
+    "no_new_scientific_arm_or_module_ablation": true,
+    "no_GT_before_original4588_and_all_teacher_attempt_seals": true,
+    "extra_reload_preflight_retry_cost_not_free": true,
+    "goal_status": "ACTIVE"
+  },
+  "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1",
+  "successful_preflight": {
+    "GPU_workers_started": 0,
+    "target_GT_opened": false,
+    "SSH_exec_root": "/home/Valadmin/A800",
+    "SFTP_mount_root": "/home/A800",
+    "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1",
+    "image_results": [
+      {
+        "path": "/data3/liuyeqiang/nas/A800/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0026/000127.png",
+        "returncode": 0,
+        "decoded": {
+          "path": "/data3/liuyeqiang/nas/A800/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0026/000127.png",
+          "bytes": 95447,
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "a06ee74c348e93af994cdfb979c0ffa9f21a0a0c5d6daf2c1315404f1165f1c4"
+        },
+        "stderr": ""
+      },
+      {
+        "path": "/data3/liuyeqiang/nas/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000328.jpg",
+        "returncode": 0,
+        "decoded": {
+          "path": "/data3/liuyeqiang/nas/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000328.jpg",
+          "bytes": 286272,
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "39e6f631c7180cb1465645d35624de9781b13d0267756f144726499b90134db9"
+        },
+        "stderr": ""
+      },
+      {
+        "path": "/data3/liuyeqiang/nas/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000333.jpg",
+        "returncode": 0,
+        "decoded": {
+          "path": "/data3/liuyeqiang/nas/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000333.jpg",
+          "bytes": 266336,
+          "size": [
+            1280,
+            720
+          ],
+          "sha256": "555f1c566d86789bab7b1c5cb282cbed056d5be87a9a3503b221c1987ffdc61f"
+        },
+        "stderr": ""
+      }
+    ],
+    "mount": {
+      "target": "/data3/liuyeqiang/nas/A800",
+      "source": "Valadmin@127.0.0.1:/home/A800",
+      "fstype": "fuse.sshfs",
+      "options": "ro,nosuid,nodev,relatime,user_id=1002,group_id=1002,default_permissions"
+    },
+    "ssh": {
+      "returncode": 0,
+      "stderr": "",
+      "fresh_image_hashes": "a06ee74c348e93af994cdfb979c0ffa9f21a0a0c5d6daf2c1315404f1165f1c4  /home/Valadmin/A800/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0026/000127.png\n39e6f631c7180cb1465645d35624de9781b13d0267756f144726499b90134db9  /home/Valadmin/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000328.jpg\n555f1c566d86789bab7b1c5cb282cbed056d5be87a9a3503b221c1987ffdc61f  /home/Valadmin/A800/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1/000333.jpg\n"
+    },
+    "status": "PASS_AUTHENTICATED_FRESH_REMOTE_HASHES_MATCH_READONLY_MOUNTED_PIXELS",
+    "wall_seconds": 0.5133585929870605
+  },
+  "launches": [
+    {
+      "GPU": 0,
+      "pid": 1973005,
+      "previous_owners_preserved": "",
+      "NAS_resume_registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+      "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1"
+    },
+    {
+      "GPU": 1,
+      "pid": 1973007,
+      "previous_owners_preserved": "",
+      "NAS_resume_registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+      "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1"
+    },
+    {
+      "GPU": 2,
+      "pid": 1973009,
+      "previous_owners_preserved": "243079, /var/tmp/liweiran-standard-converter-20261124/llama-build/bin/llama-server",
+      "NAS_resume_registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+      "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1"
+    },
+    {
+      "GPU": 3,
+      "pid": 1973011,
+      "previous_owners_preserved": "",
+      "NAS_resume_registration_sha256": "cdc9d98cbe27d51da76746dcb3e479c521196f4f9ca74c7e63bc3f8a400010e1",
+      "namespace_registration_sha256": "0841a52fe6ee5e42b78681f24c736a3809df4651909835137b14d4c3c976edf1"
+    }
+  ],
+  "actual_session_id": 86841,
+  "actual_launch_output_chunk": "20df3c",
+  "old_terminal_sessions_retained": [
+    23947,
+    78495
+  ],
+  "last_pre_outage_sealed_units": 36,
+  "last_pre_outage_outputs": 1116,
+  "planned_units": 148,
+  "planned_outputs": 4588,
+  "current_GT_reads": 0,
+  "all_six_quality_and_three_contributions_still_unmet": true,
+  "original_mount_not_modified": true,
+  "SFTP_namespace_verified_exact_file_path": true,
+  "GOAL_status_tool_observed": "active",
+  "seed": 0,
+  "scientific_sources_not_modified": true,
+  "large_checkpoints_not_in_Git": true,
+  "failed_costs_and_archive_retained": true
+}
