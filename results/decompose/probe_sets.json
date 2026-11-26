@@ -1,0 +1,973 @@
+{
+  "status": "FIXED_PROBE_AND_TAXONOMY_SEALED_BEFORE_NEW_CALLS",
+  "prereg_publication": {
+    "remote_commit": "52c9cd258c5368cf604c80396d9115d14cbb9ea3",
+    "remote_verified": true,
+    "prereg_sha256": "457c068a5d2587ac8b6eeceda5514ac98115d56fb736eb0dec612e1880c20b8d",
+    "branch": "research/decompose-rank-select-20261102",
+    "publication_verified_before_new_computation": true
+  },
+  "expression_types": {
+    "path": "/data2/user/FlexHook-TTA/results/decompose/expression_types.csv",
+    "sha256": "ad0d700c27544eaf9d976d03953f616aeba3be939c4c6b8288f75d76a69f6b89",
+    "rows": 1753,
+    "before_any_new_evaluation": true,
+    "uses_only_text": true
+  },
+  "margin_banks": [
+    {
+      "target": "KITTI-V2",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/Dance-best/complete.npy",
+      "sha256": "0afa3a08e3f6e7ba85338a16325bf65a017852a1cd79a195337531e98f3f01c5",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/V2-best/complete.npy",
+      "sha256": "ecf1d8469a1f0e648bdc3fe7888350910885e1afa1714f2847b239c554c5c120",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/kitti/LaMOT-best/complete.npy",
+      "sha256": "2e3f28066a74f079888967a7d103d75c71458d3d922c800eb5ee7748f39f286d",
+      "bytes": 19403184,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/V2-best/complete.npy",
+      "sha256": "9b710eafe6e05df47599af0db6b55869b348248972bc6295186ed421b08afddd",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/LaMOT-best/complete.npy",
+      "sha256": "cc78b7b479eb6c51906275a16a736022b93fcd7cbbe07a120f9a2135cc678e3d",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/sports/Dance-best/complete.npy",
+      "sha256": "f4880bc94d23b842cd8d79d5734555025207b8c81e2ebbd7b1c0e82cd97bde54",
+      "bytes": 23745736,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "V2-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/FROZEN.npy",
+      "sha256": "fd57998fa49760c65d5a458dc4656514ffdd8dcad8db4c586a98a6d17db9bbaa",
+      "bytes": 28707688,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "Dance-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v2/score_bank/OFFICIAL_DANCE_COMPLETE.npy",
+      "sha256": "b82fd2e6e8e0f7fe37fa904cd5a62c19d642969a82e5f0f9fee2b50479e4ef0b",
+      "bytes": 28707688,
+      "coverage": "complete"
+    },
+    {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "path": "/data2/user/FlexHook-TTA/results/runs/multidomain_generality_20261101/dance/LaMOT-best/complete.npy",
+      "sha256": "4306983da84b6c359f744e87e0e0ca8b14d4ac689a92f3bda3561314a18fe517",
+      "bytes": 28707688,
+      "coverage": "complete"
+    }
+  ],
+  "manifest_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/manifest.jsonl",
+  "manifest_sha256": "035e8e0a5e69675e789140661e231eefe27eed907028c9c94dfff7e9ecd35e0a",
+  "videos_path": "/data2/user/FlexHook-TTA/results/runs/decompose_20261102/probe/videos.json",
+  "videos_sha256": "94417bfe236e98e235ef1393409824a9afeb5d89e3faeac77069c47eced4be06",
+  "fps": {
+    "KITTI-V2/0005": {
+      "fps": 10,
+      "delta": 3,
+      "source": {
+        "fps": 10,
+        "source": "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+        "note": "Native synchronized camera rate; local Refer-KITTI conversion omitted seqinfo."
+      }
+    },
+    "KITTI-V2/0011": {
+      "fps": 10,
+      "delta": 3,
+      "source": {
+        "fps": 10,
+        "source": "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+        "note": "Native synchronized camera rate; local Refer-KITTI conversion omitted seqinfo."
+      }
+    },
+    "KITTI-V2/0013": {
+      "fps": 10,
+      "delta": 3,
+      "source": {
+        "fps": 10,
+        "source": "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+        "note": "Native synchronized camera rate; local Refer-KITTI conversion omitted seqinfo."
+      }
+    },
+    "KITTI-V2/0019": {
+      "fps": 10,
+      "delta": 3,
+      "source": {
+        "fps": 10,
+        "source": "https://www.cvlibs.net/datasets/kitti/raw_data.php",
+        "note": "Native synchronized camera rate; local Refer-KITTI conversion omitted seqinfo."
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c001": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c001/seqinfo.ini",
+        "sha256": "627f87224514088ff4f61585b96b50df76f46a35ce552e60d8414f5ec075e2bd",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c003": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c003/seqinfo.ini",
+        "sha256": "6bbac9ace10b52d06c526895f2a097a2ab9e0557aec90dc8120d60ff27e295c9",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c005": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c005/seqinfo.ini",
+        "sha256": "569961c82b1b8e6034ca91994c81e5bc12d49f404bbbf7263e3f9184362d18e3",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c007": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c007/seqinfo.ini",
+        "sha256": "c10ada73e30c59eddc5fed7102232aa822dd41ce9ed5e1daee5a95d893fa8fbd",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c008": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c008/seqinfo.ini",
+        "sha256": "41d547e792e4baa861119ae39595212743df79a91e7922ce0b3bdf735e7c2ad2",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_00HRwkvvjtQ_c011": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c011/seqinfo.ini",
+        "sha256": "e501d1b955e2ef640d23305c2c5d9c7715525c3a02c1d93065997e87005142cd",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c004": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c004/seqinfo.ini",
+        "sha256": "ddf6cc72f7165d83bf23da8f487480e12b99dd321cd013f4e5a888933ddebdde",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c005": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c005/seqinfo.ini",
+        "sha256": "0997ea63035c330825017230226e6e6f5ed1134744c1949cea588bf135151c3c",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c006": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c006/seqinfo.ini",
+        "sha256": "5d789bed42e88dcbeca45a24e0e0ab72faf546c19d8f24293578c90102f7b325",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c007": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c007/seqinfo.ini",
+        "sha256": "6b0e57f4afd8700f77cb8ac36a48a8d8737aca36fb3b768e3038a177079cb05c",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c008": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c008/seqinfo.ini",
+        "sha256": "639fb625c153a97e551b273ed3f2890422629dca6791f14baee9cbc918000262",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_0kUtTtmLaJA_c010": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c010/seqinfo.ini",
+        "sha256": "39e9e1cbfcd4fca5f2e8a080ca99c7ea4c38c0079256ecbcbed373f7664ebecb",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_2QhNRucNC7E_c017": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_2QhNRucNC7E_c017/seqinfo.ini",
+        "sha256": "9f528bbeac8edf7eb6a69a7664cbb73ba25f797c9a04331c5c94d57e469e6929",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_4-EmEtrturE_c009": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4-EmEtrturE_c009/seqinfo.ini",
+        "sha256": "19395baade784bf3eb1a036c103c4892b85f44c2cd4ac4b6e13448c190e838cc",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_4r8QL_wglzQ_c001": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4r8QL_wglzQ_c001/seqinfo.ini",
+        "sha256": "7bdfcd5224831f42e4badfccc0a8adbbd9f6868d525253cefff387e7ee7d14cb",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_5ekaksddqrc_c001": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c001/seqinfo.ini",
+        "sha256": "8346719fba1c7b3eed335bae8c33cb8efe0de397003bf0ea97eebe72d717d021",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_5ekaksddqrc_c002": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c002/seqinfo.ini",
+        "sha256": "6acbbef6f7b9885b7921d9be41aa9bcb245db8c3ba744729117eb13a1d705db0",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_5ekaksddqrc_c003": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c003/seqinfo.ini",
+        "sha256": "5682c5b726cc37bffd57f1a62faef2e09bb07ec492b2b8397eb2e55b417a717d",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_5ekaksddqrc_c004": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c004/seqinfo.ini",
+        "sha256": "69adac4c5e2e279d92bf08bdfd371ec7633d0a33c3649175bb6f1b01c968e448",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_5ekaksddqrc_c005": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c005/seqinfo.ini",
+        "sha256": "e7e4c0f6050fbd749b1d5f921b68a2f4a3b06ca736e5587a83474520546d4114",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_9MHDmAMxO5I_c002": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c002/seqinfo.ini",
+        "sha256": "485c5cc2653bc64be258f3db72da7e27bd6418eab89d8a7bfeec0fb29abeb545",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_9MHDmAMxO5I_c003": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c003/seqinfo.ini",
+        "sha256": "b6f23303ba93249faffb396bf45a419ebdc0807325f176ea486c2f7c9d3dc744",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_9MHDmAMxO5I_c004": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c004/seqinfo.ini",
+        "sha256": "8fbbd64bb94a23843e513a4a2d7e47a01f118248f821084336391d935bfdcfd0",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_9MHDmAMxO5I_c006": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c006/seqinfo.ini",
+        "sha256": "41deaa629e6b0335a5ce6f089e979e4c72a3920db87346391bd77f28bc752bd1",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_9MHDmAMxO5I_c009": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c009/seqinfo.ini",
+        "sha256": "275705820edc5871cb902572a63a49d9909e8991409a868c295b43cde25b1070",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_BgwzTUxJaeU_c008": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c008/seqinfo.ini",
+        "sha256": "3f70f12defc0bacfb36559d0b8680291bd25a9ad06da239d2e4fe90a58cec4b9",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_BgwzTUxJaeU_c012": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c012/seqinfo.ini",
+        "sha256": "67a55430fd3044a13c2bfe38076a04c663df2d4b15870d28b445f9dade6f4ef1",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_BgwzTUxJaeU_c014": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c014/seqinfo.ini",
+        "sha256": "90b843949999fb82454f0ffacec3fdc377a88879058823ca1ee891d713d44e84",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_G-vNjfx1GGc_c004": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c004/seqinfo.ini",
+        "sha256": "12cd5143885b23b090822876ed28de7ca22ebd89d9e0d2439323f5da6780cf15",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_G-vNjfx1GGc_c008": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c008/seqinfo.ini",
+        "sha256": "5f19abe50762215b61f0922ad5c57f42a4d48c7384e19355fbc9bff4074bee5f",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_G-vNjfx1GGc_c600": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c600/seqinfo.ini",
+        "sha256": "53258f219b8b6e193587523ea6a724e4be6ee5bb6e111e3b539154d5a6e52506",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_G-vNjfx1GGc_c601": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c601/seqinfo.ini",
+        "sha256": "d16d4f13ea854d2be6ab7e01ebb5b135df7e959c899e13cacf9c4e00505e27df",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_ITo3sCnpw_k_c007": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c007/seqinfo.ini",
+        "sha256": "ca121320b3a76f9b8b41b45b2fe6f59000cee47450b37add004fff03813d5d47",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_ITo3sCnpw_k_c010": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c010/seqinfo.ini",
+        "sha256": "625cd87fdc55bb9178156aeb8df7408527063c230ae0863dc12a480cb8ae36d8",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_ITo3sCnpw_k_c011": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c011/seqinfo.ini",
+        "sha256": "9b2a4b7bad9eba392452150ddc4e51097ac59e9f74c1f80062cad0deba7395cf",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_ITo3sCnpw_k_c012": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c012/seqinfo.ini",
+        "sha256": "76a73c8558fc49c22cd151d05096d67f8ba9b4b7dc6c04babb865dc02b9724c0",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_cC2mHWqMcjk_c007": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c007/seqinfo.ini",
+        "sha256": "db786da993d3428a4518ce1a69476db7006f369ef13ebf01b883738fc149707e",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_cC2mHWqMcjk_c008": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c008/seqinfo.ini",
+        "sha256": "92d963634341e1f25766c5c017878dab491dbe5eb7fb906bbc85a6d0fb2e8bc0",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_cC2mHWqMcjk_c009": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c009/seqinfo.ini",
+        "sha256": "9d0c06a0d39541b8d3f078f2758447a592ebbe90d7612e02f974e35672901a99",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_dw7LOz17Omg_c053": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/seqinfo.ini",
+        "sha256": "eb65168333c73ff6b3eb55564fce01ad61b88ae42f19e1112248273e23d8fa9b",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_dw7LOz17Omg_c067": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c067/seqinfo.ini",
+        "sha256": "dc52e1fea99a195f7758ceee5d823f16993c88d8e46d413d1a112e37e0918f4a",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_i2_L4qquVg0_c006": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c006/seqinfo.ini",
+        "sha256": "0f83d92f419e9f7b4934e25ca202e6847f001d39faf41820a4b03c91aa743426",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_i2_L4qquVg0_c007": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c007/seqinfo.ini",
+        "sha256": "cdf64a61c0cdf2979026fa3fcc7f620676f38fa1e2dc5fc6cc48c9888493705b",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_i2_L4qquVg0_c009": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c009/seqinfo.ini",
+        "sha256": "6c059ca666087f8968336d87ad2da8e691edf8ef0f0c59bc000258d9bf38becf",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "SportsMOT/v_i2_L4qquVg0_c010": {
+      "fps": 25.0,
+      "delta": 6,
+      "source": {
+        "path": "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c010/seqinfo.ini",
+        "sha256": "57d415760f1fa94730ac45565e9b226866059387a94e03307c8971933589f595",
+        "field": "Sequence.frameRate"
+      }
+    },
+    "Dance/dancetrack0004": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0005": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0007": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0010": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0014": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0018": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0019": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0025": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0026": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0030": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0034": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0035": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0041": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0043": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0047": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0058": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0063": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0065": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0073": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0077": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0079": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0081": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0090": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0094": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    },
+    "Dance/dancetrack0097": {
+      "fps": 20,
+      "delta": 5,
+      "source": {
+        "fps": 20,
+        "source": "https://github.com/DanceTrack/DanceTrack/blob/main/tools/txt2video_dance.py#L53",
+        "note": "Official dataset video rendering configuration; local Refer-Dance conversion omitted seqinfo."
+      }
+    }
+  },
+  "stratified_sampling": [
+    {
+      "video": "0005",
+      "available": {
+        "car": 197,
+        "pedestrian": 0
+      },
+      "quota": {
+        "car": 60,
+        "pedestrian": 0
+      }
+    },
+    {
+      "video": "0011",
+      "available": {
+        "car": 198,
+        "pedestrian": 30
+      },
+      "quota": {
+        "car": 52,
+        "pedestrian": 8
+      }
+    },
+    {
+      "video": "0013",
+      "available": {
+        "car": 25,
+        "pedestrian": 182
+      },
+      "quota": {
+        "car": 7,
+        "pedestrian": 53
+      }
+    },
+    {
+      "video": "0019",
+      "available": {
+        "car": 61,
+        "pedestrian": 169
+      },
+      "quota": {
+        "car": 16,
+        "pedestrian": 44
+      }
+    }
+  ],
+  "numpy_seed": 0,
+  "anchor_rounding": "floor(x+.5); nearest active frame, ties earlier",
+  "dataset_counts": {
+    "KITTI-V2": {
+      "videos": 4,
+      "frames": 32,
+      "candidate_query_pairs": 9180
+    },
+    "SportsMOT": {
+      "videos": 15,
+      "frames": 120,
+      "candidate_query_pairs": 13540
+    },
+    "Dance": {
+      "videos": 5,
+      "frames": 50,
+      "candidate_query_pairs": 6426
+    }
+  },
+  "initial_budget": {
+    "logical_calls": {
+      "CROP": 29146,
+      "CLIP": 29146,
+      "FRAME_BOX": 29146
+    },
+    "estimated_forward_GPU_hours": {
+      "CROP": 0.12493791395010248,
+      "CLIP": 0.4997516558004099,
+      "FRAME_BOX": 0.6145746826554324
+    },
+    "total_estimated_forward_GPU_hours": 1.2392642524059447
+  },
+  "final_budget": {
+    "logical_calls": {
+      "CROP": 29146,
+      "CLIP": 29146,
+      "FRAME_BOX": 29146
+    },
+    "estimated_forward_GPU_hours": {
+      "CROP": 0.12493791395010248,
+      "CLIP": 0.4997516558004099,
+      "FRAME_BOX": 0.6145746826554324
+    },
+    "total_estimated_forward_GPU_hours": 1.2392642524059447
+  },
+  "reduce_8_to_4": false,
+  "estimate_basis": {
+    "old_receipt": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/receipt.json",
+    "seconds_per_CROP_pair": 0.015431842799024547,
+    "CLIP_multiplier": 4,
+    "FRAME_BOX_multiplier": "resized RGB area / 320**2; estimated visual-token work, not a measured new forward",
+    "includes_reused_Dance_CROP_equivalent": true
+  },
+  "dance_reused_CROP": {
+    "outputs_path": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/outputs.jsonl",
+    "outputs_sha256": "4593daa55db1a432f81d64ef8bcb50cd572bb1aa9b5b5798123e85cf5f9257fd",
+    "original_receipt_path": "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/receipt.json",
+    "calls": 6426
+  },
+  "original_backend_sha256": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+  "original_visual_builder_sha256": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+  "GT_open_attempts": [],
+  "isolation": {
+    "landlock_abi": 1,
+    "kernel_read_whitelist": true,
+    "kernel_stage_write_denied": true,
+    "read_roots": [
+      "/data2/user/FlexHook-TTA/scripts",
+      "/data2/user/FlexHook-TTA/flex_tta",
+      "/data2/user/FlexHook-TTA/flex_uda",
+      "/data2/user/FlexHook-TTA/configs",
+      "/home/szgx/anaconda3/envs/dfot",
+      "/usr",
+      "/usr/lib",
+      "/usr/lib64",
+      "/usr/bin",
+      "/etc",
+      "/proc",
+      "/sys",
+      "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0005",
+      "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0011",
+      "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0013",
+      "/data2/user/LocateMOT/data/kitti_tracking/training/image_02/0019",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c001/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c003/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c005/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c007/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c008/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_00HRwkvvjtQ_c011/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c004/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c005/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c006/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c007/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c008/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_0kUtTtmLaJA_c010/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_2QhNRucNC7E_c017/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4-EmEtrturE_c009/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_4r8QL_wglzQ_c001/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c001/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c002/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c003/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c004/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_5ekaksddqrc_c005/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c002/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c003/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c004/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c006/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_9MHDmAMxO5I_c009/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c008/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c012/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_BgwzTUxJaeU_c014/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c004/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c008/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c600/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_G-vNjfx1GGc_c601/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c007/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c010/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c011/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_ITo3sCnpw_k_c012/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c007/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c008/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_cC2mHWqMcjk_c009/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c053/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_dw7LOz17Omg_c067/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c006/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c007/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c009/img1",
+      "/data2/user/LocateMOT_FullDataV2_spill/datasets/SportsMOT/val/v_i2_L4qquVg0_c010/img1",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0004",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0005",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0007",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0010",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0014",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0018",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0019",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0025",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0026",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0030",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0034",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0035",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0041",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0043",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0047",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0058",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0063",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0065",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0073",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0077",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0079",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0081",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0090",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0094",
+      "/data2/user/TTA-RMOT-assets/flexhook/refer-dance-official/Refer-Dance/DanceTrack/training/image_02/dancetrack0097",
+      "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/2B/outputs.jsonl",
+      "/data2/user/FlexHook-TTA/results/runs/count_structure_20261031/probe/manifest.jsonl",
+      "/data2/user/FlexHook-TTA/results/runs/decompose_20261102",
+      "/data2/user/FlexHook-TTA/results/decompose",
+      "/dev",
+      "/tmp"
+    ],
+    "handled_filesystem_access": 8191
+  },
+  "student_updates": 0,
+  "teacher_updates": 0
+}

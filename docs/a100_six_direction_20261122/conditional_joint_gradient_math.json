@@ -1,0 +1,27 @@
+{
+  "status": "PASS_CONDITIONAL_JOINT_COUNT_STATE_GRADIENT_ISOLATION",
+  "source_sha256": {
+    "scripts/a100_conditional_joint_gradient_probe.py": "e4fa86628175cb5cdc11798ce66ffb10138ebf93def625ceb3674f1d50cbe410",
+    "flex_uda/active/conditional_joint_observation.py": "83c77b605077c2a4214fe655dcebbf516bc120637b3579d9c00eff36e2fa0448"
+  },
+  "identical_parameter_forward_error": 0.0,
+  "conditional_count_loss_state_gradient": 1.85168322117233e-18,
+  "full_likelihood_negative_control_state_gradient": 0.0008213197754604338,
+  "count_branch_learning_signal": 0.15389001254363976,
+  "conditional_relative_loss_count_parameter_gradient": 8.320395000030515e-18,
+  "relative_branch_learning_signal": 0.0008033912662426753,
+  "swap_equivariance_error": 0.0,
+  "two_encoder_normalization_function_error": 2.220446049250313e-16,
+  "identical_architecture_parameter_count_for_estimator_ablation": true,
+  "identical_parameter_count_for_reference_scope_ablation": true,
+  "no_reference_state_context_sensitivity": 0.0,
+  "reference_state_context_sensitivity": 0.00019491424987780337,
+  "not_universal_robustness_HOTA_or_better_efficiency_guarantee": true,
+  "conditional_sample_weights_can_still_change_empirical_optimum": true,
+  "no_GT_GPU_teacher_RMOT_fits_or_HOTA": true,
+  "seeds": [
+    0
+  ],
+  "candidate_not_accepted": true,
+  "goal_status": "ACTIVE"
+}

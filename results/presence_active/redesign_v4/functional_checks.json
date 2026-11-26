@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "tests_passed": 26,
+  "command": "python -m pytest -q tests/test_presence_cardinality.py tests/test_presence_residual.py tests/test_presence_active.py",
+  "compileall": "PASS",
+  "v4_checks": [
+    "exact small-set enumeration equals dynamic-programming cardinality distribution",
+    "normalization, marginal presence and expected count are consistent",
+    "empty sets, padding, permutation invariance and counts above ten",
+    "monotonic candidate ranking and sign preservation",
+    "cardinality MAP can remove a native-positive candidate: no hidden native floor",
+    "strict checkpoint reload and finite nonzero probability gradient"
+  ],
+  "existing_GT_guard_and_source_label_identity_checks_retained": true,
+  "new_FlexHook_or_teacher_GPU_calls": 0,
+  "engineering_tests_are_not_scientific_success": true
+}

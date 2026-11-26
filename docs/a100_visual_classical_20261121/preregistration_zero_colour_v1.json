@@ -1,0 +1,20 @@
+{
+  "purpose": "Separate the existing classical body-part HSV feature contribution from the already high strong augmented KD. This does not replace or weaken the full-RGB soft/hard teacher baselines used for the graph's primary comparison.",
+  "registered_after": "Fresh physical query diagnosis; strict RGB1080 and null-set studies remain pending; no strict RGB GT results inspected",
+  "source": "Same actual fresh C4 independent KD and C1 paired source/QA pools as strict RGB study",
+  "pairs": ["C4","C1"],
+  "seeds": [0,17,42],
+  "ablation": "Replace all312HSV channels by exact zeros, retain1080dimensions and identical seeded architecture. Raw frozen768PCD, source logits, teacher soft targets, prefix normalization protocol, min4000/max16000/KL.005 and400/final/mean are unchanged.",
+  "label_loss": "Matched soft KD feature ablation only; all full-RGB hard baselines remain in the main strict study. A zero312 padded1080 head isolates the feature effect; do not mislabel it as an independent natural768-dimensional architecture baseline.",
+  "acquisition": "Held fixed to the already paid schedule, which itself can use RGB. This isolates the head's colour channels, not an entire end-to-end colour-free system.",
+  "teacher": "Exact shared frozen teacher probabilities clipped.02/.98; no extra teacher or encoder calls; source/teacher not loaded or updated",
+  "primary": "RGB_MEAN vs ZERO_MEAN on same source/QA/prefix/1080dimension/initialization. Also matched400 andfinal. Same-RGB graph comparison remains the harder main victory criterion.",
+  "counts": "Two donor directions for full RGB mean vs zero RGB mean; exact CountSelf0, same Dance exclusivity",
+  "outputs": "18new raw plus24quantity outputs=42officials, all seal before this study GT; no feedback read by fitting workers",
+  "resources": "GPUs0/3 initially (both1MiB free at preflight); additionally GPUs1/2 only after our RGB-release helper terminal PASS. No other tasks interrupted.",
+  "checkpointing": "Each video commits its prefix state; retain failed max-step fits and report them, do not discard a colour ablation because it fits less well",
+  "cost": "Quality ablation reuses paid assets; actual head-fit receipts only, not another cold-run time. Local free11503722496bytes before launch, lossless dedup after completed conditions.",
+  "statistics": "13/25original parents and3neural seeds, fixed actual QA,10000resamples; all developer data, no blind or multiple-testing-corrected claim",
+  "no_GT_in_adaptation": true,
+  "goal_status": "ACTIVE"
+}

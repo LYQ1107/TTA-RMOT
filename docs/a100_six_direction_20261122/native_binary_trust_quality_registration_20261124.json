@@ -1,0 +1,161 @@
+{
+  "status": "REGISTERED_INDEPENDENT_RSI_TRUST_SIX_SETTING_QUALITY_BEFORE_GENERATION_OR_GT",
+  "cohort": "native_binary_trust_quality_20261124",
+  "primary": "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL",
+  "neural_seeds": [
+    0
+  ],
+  "recipes": {
+    "FULL_CONDITIONAL_REFERENCE_LEARNED": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "identity": true,
+      "policy": "LEARNED"
+    },
+    "JOINT_KD_LEARNED": {
+      "family": "pair",
+      "risk": "joint",
+      "policy": "LEARNED"
+    },
+    "MARGINAL_KD_LEARNED": {
+      "family": "pair",
+      "risk": "marginal",
+      "policy": "LEARNED"
+    },
+    "POINT_KD_LEARNED": {
+      "family": "point",
+      "risk": "joint",
+      "policy": "LEARNED"
+    },
+    "LOGIT_KD_LEARNED": {
+      "family": "point",
+      "risk": "logit",
+      "policy": "LEARNED"
+    },
+    "COARSE_UNIT_SOFT_LEARNED": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": false,
+      "policy": "LEARNED"
+    },
+    "COARSE_UNIT_HARD_LEARNED": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": false,
+      "policy": "LEARNED"
+    },
+    "COARSE_CONF_SOFT_LEARNED": {
+      "family": "coarse",
+      "hard": false,
+      "confidence": true,
+      "policy": "LEARNED"
+    },
+    "COARSE_CONF_HARD_LEARNED": {
+      "family": "coarse",
+      "hard": true,
+      "confidence": true,
+      "policy": "LEARNED"
+    },
+    "FULL_CONDITIONAL_REFERENCE_FROZEN": {
+      "family": "structured",
+      "conditional": true,
+      "reference": true,
+      "identity": true,
+      "policy": "FROZEN"
+    }
+  },
+  "methods": [
+    "FULL_CONDITIONAL_REFERENCE_LEARNED_FINAL",
+    "JOINT_KD_LEARNED_FINAL",
+    "JOINT_KD_LEARNED_MEAN",
+    "MARGINAL_KD_LEARNED_FINAL",
+    "MARGINAL_KD_LEARNED_MEAN",
+    "POINT_KD_LEARNED_FINAL",
+    "POINT_KD_LEARNED_MEAN",
+    "LOGIT_KD_LEARNED_FINAL",
+    "LOGIT_KD_LEARNED_MEAN",
+    "COARSE_UNIT_SOFT_LEARNED_FINAL",
+    "COARSE_UNIT_SOFT_LEARNED_MEAN",
+    "COARSE_UNIT_HARD_LEARNED_FINAL",
+    "COARSE_UNIT_HARD_LEARNED_MEAN",
+    "COARSE_CONF_SOFT_LEARNED_FINAL",
+    "COARSE_CONF_SOFT_LEARNED_MEAN",
+    "COARSE_CONF_HARD_LEARNED_FINAL",
+    "COARSE_CONF_HARD_LEARNED_MEAN",
+    "FULL_CONDITIONAL_REFERENCE_FROZEN_FINAL"
+  ],
+  "official_unique_evaluations": 312,
+  "raw_outputs": 108,
+  "dual_count_outputs": 204,
+  "CountSelf_aliases": 108,
+  "settings": {
+    "C1": [
+      "V2-best",
+      "Dance"
+    ],
+    "C2": [
+      "Dance-best",
+      "KITTI-V2"
+    ],
+    "C3": [
+      "V2-best",
+      "SportsMOT"
+    ],
+    "C4": [
+      "Dance-best",
+      "SportsMOT"
+    ],
+    "C5": [
+      "LaMOT-best",
+      "KITTI-V2"
+    ],
+    "C6": [
+      "LaMOT-best",
+      "Dance"
+    ]
+  },
+  "teacher_budget_per_observer_all_six": 55019,
+  "parent_registration": "native_binary_quality_registration_20261124.json",
+  "parent_registration_sha256": "9a19d1643c9c6a51ad92f723f558edcbbc496cafcb05e1e2a2f7161186ad28ec",
+  "source_sha256": {
+    "scripts/a100_native_binary_trust_six_setting.py": "faeecc3651a31db92fde3cb0bed8bed8f4f745b43634f35fbafab5a8066e0eda",
+    "scripts/a100_native_binary_trust_analyze.py": "087541ddf67c147527cbdea3790c287a8a70879cf0566756ec77252e8120e1fb",
+    "scripts/a100_native_binary_trust_statistics_reproduce.py": "3eb84a5788f289cfe50057add99429fa104981c27d4bb75ef8f075717b2ed524",
+    "flex_uda/active/rsi_policy_distribution.py": "b91172ea5385d32ebf4b03966ba6cdd63ed5a76189d489371b07006153e3e5c3"
+  },
+  "initialization_seed0_only": true,
+  "target_GT_never_adaptation_reward_selection": true,
+  "all_outputs_before_isolated_GT": true,
+  "observed_pilot": "rsi_policy_distribution_same_CPU_analysis_20261124.json",
+  "algorithm": "Same object/state and conditional solver; actor natural-gradient likelihood-ratio surrogate, mean recorded-state conditional KL<=.01, damping.01, CG10/backtracking10; skip baseline score noise in independently fixed probe contexts with information<.005 where reward is identically zero.",
+  "unchanged": "Inputs, teacher probabilities, finite metadata action space, per-query quotas, probe reservations and risk, solver/fitting recipes, Adam/LBFGS and adequacy .005, normalization, boxes/IDs, score thresholds, seed0.",
+  "ordinary_all_information": true,
+  "ordinary_families": [
+    "JOINT_KD",
+    "MARGINAL_KD",
+    "POINT_KD",
+    "LOGIT_KD",
+    "COARSE_UNIT_SOFT",
+    "COARSE_UNIT_HARD",
+    "COARSE_CONF_SOFT",
+    "COARSE_CONF_HARD"
+  ],
+  "final_and_early400_probability_mean_for_ordinary": true,
+  "logit_KD_excess_is_MSE_not_KL": true,
+  "core_ordinary_same_three_training_rounds_and_all_paid_fit": true,
+  "extra_hard_conf_controls_final_only": true,
+  "full_FROZEN_observer_control": true,
+  "reduced_scope_no_three_factor_interaction_claim": true,
+  "original_726_study_unchanged_and_continues": true,
+  "no_historical_HOTA_table_merge": true,
+  "generation_hardware": "Only0/1/2/3; 2/3 shared authorized, preflight<8192MiB; 0/1 <512MiB and no resident compute owner. Each head worker memory cap15%; overlapping fits not cold-deployment costs.",
+  "quality_not_cold_deployment": true,
+  "actual_new_teacher_GPU_calls_in_quality": 0,
+  "prepaid_teacher_budget_charged_including_probes": true,
+  "full_three_contributions_and_fresh_cold_remain_required": true,
+  "all_data_DEVELOPMENT": true,
+  "independent_blind_validation": false,
+  "goal_remains_ACTIVE": true,
+  "publication_snapshot_and_reachable_bytes_both_below": 100000000
+}

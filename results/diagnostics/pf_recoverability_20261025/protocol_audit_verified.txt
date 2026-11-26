@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "videos": 25,
+  "episodes": 425,
+  "query_present": 40,
+  "query_empty": 385,
+  "gt_observations": 212541,
+  "original_archive": "/data2/user/TTA-RMOT-assets/flexhook/Refer-Dance.zip",
+  "archive_metadata_crc_verified_files": 852,
+  "gt_marks": {
+    "1": 212541
+  },
+  "gt_classes": {
+    "1": 212541
+  },
+  "labels_bbox_format": "normalized top-left xywh; not center xywh",
+  "frame_convention": "images/tracker/GT all one-based, no offset; exact frame-ID + GT-ID membership and normalized boxes checked",
+  "filtering": "official evaluator: nonzero mark, pedestrian class1; distractor preprocessing exists but actual GT classes audited",
+  "source_links": [
+    "https://github.com/dyhBUPT/iKUN",
+    "https://github.com/buptLwz/FlexHook/blob/bd1acc38634b28525d54dc6e0fcb38335f0029f9/datasets/DATASET.md"
+  ],
+  "official_vendor_commit": "bd1acc38634b28525d54dc6e0fcb38335f0029f9",
+  "history_modified": false,
+  "issues": []
+}

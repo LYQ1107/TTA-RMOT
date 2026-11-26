@@ -1,0 +1,64 @@
+{
+  "status": "PASS_GT_FREE_NEW_VISUAL_LEARNING_CONTRACT",
+  "records": [
+    {
+      "pair": "C1",
+      "real_current_image_coordinates_exact": true,
+      "teacher_targets_exact": true,
+      "nonnegative_weights": true,
+      "independent_image_pretext_finite": true,
+      "actual_cpu_backward_two_models": true,
+      "optimizer_steps": 0,
+      "parameter_counts": [
+        1336961,
+        1337090,
+        2777185
+      ],
+      "synthetic_teacher_term": 0.6908460855484009,
+      "image_pretext": 0.45721662044525146
+    },
+    {
+      "pair": "C2",
+      "real_current_image_coordinates_exact": true,
+      "teacher_targets_exact": true,
+      "nonnegative_weights": true,
+      "independent_image_pretext_finite": true,
+      "actual_cpu_backward_two_models": true,
+      "optimizer_steps": 0,
+      "parameter_counts": [
+        1336961,
+        1337090,
+        2777185
+      ],
+      "synthetic_teacher_term": 0.6931436657905579,
+      "image_pretext": 0.44792070984840393
+    },
+    {
+      "pair": "C4",
+      "real_current_image_coordinates_exact": true,
+      "teacher_targets_exact": true,
+      "nonnegative_weights": true,
+      "independent_image_pretext_finite": true,
+      "actual_cpu_backward_two_models": true,
+      "optimizer_steps": 0,
+      "parameter_counts": [
+        1336961,
+        1337090,
+        2777185
+      ],
+      "synthetic_teacher_term": 0.6953930854797363,
+      "image_pretext": 0.45572400093078613
+    }
+  ],
+  "polynomialcap_derivative_at_real_failure_scale": [
+    0.000406067818403244,
+    0.002921842038631439,
+    1.0,
+    0.002921842038631439,
+    0.000406067818403244
+  ],
+  "no_GT_neural_optimizer_teacher_or_backbone_calls": true,
+  "backward_checks_not_semantic_quality_or_RSI_success": true,
+  "self_source_sha256": "652076f3329edba5fc08b795305abe4c8586f5169d1c7125b6ae7b0ed5e011bb",
+  "goal_status": "ACTIVE"
+}

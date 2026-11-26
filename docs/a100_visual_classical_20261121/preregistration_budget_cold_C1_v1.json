@@ -1,0 +1,23 @@
+{
+  "version": "FRESH_C1_10_PERCENT_MEAN_PAIR_V1",
+  "registered_after": "Sparse study404outputs complete; scene-context96output study still generating, no new context GT observed",
+  "reason": "C1 sparse mean+graph improvement needs actual fresh image/student/teacher/fit verification; historical PCD is not free deployment compute",
+  "pair": "C1",
+  "run_name": "C1_key_rho0p1_mean_pair_20261122",
+  "physical_GPU": 0,
+  "start_after": "Context controller leaves GPU generation phase and releases its child GPUs; internal scheduler wait, no user job termination",
+  "teacher_fraction": 0.1,
+  "expected_questions": 1103,
+  "methods": ["CLIP_MEAN", "CLIP_MEAN_COHORT"],
+  "source": "Official frozen V2-best71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613; KITTI-V2 source quantity head; Dance target inference config, PNG inputs",
+  "perception": "Three uniform observations per original supplied TrackID; all candidates at those frames; original four-observation context preserved",
+  "decoder": "Original Dance task exclusivity, no modification of boxes or Track IDs",
+  "teacher": "Frozen Qwen CROP, max-area anchor; private fresh SQLite,0 expected hits",
+  "shared_inputs": "One truly new source/teacher stream and one actually fitted bounded-soft KD head per video shared by both methods; fixed400/final mean",
+  "cost": "External Popen-to-exit two-branch worker plus measured common/own phases; not independent cold-arm repeats; source generation within boundary, upstream physical proposals/tracking excluded",
+  "concurrency": "C4 physical stream may run onGPU3; shared CPU/NAS/OS cache and other host jobs disclosed, no universal speed/Pareto claim",
+  "GT": "No target manual labels in worker. Both outputs sealed before isolated original official evaluation",
+  "comparison": "Report new measured HOTA and parent effect, not historical quality with new wall receipts. Compare source inputs/QA to replay as a numerical audit, not a demand to preserve historical predictions",
+  "all_development_data": true,
+  "goal_status": "ACTIVE"
+}

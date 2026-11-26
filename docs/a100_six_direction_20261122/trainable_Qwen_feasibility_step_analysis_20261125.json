@@ -1,0 +1,22 @@
+{
+  "status": "QWEN_ADAPTER_FEASIBILITY_PASSED_NO_IMPROVEMENT_CLAIM",
+  "actual_session": 25323,
+  "actual_exit_code": 0,
+  "actual_terminal_chunk": "82c6ca",
+  "base_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "adapter_parameters": 1605632,
+  "actual_optimizer_updates": 1,
+  "physical_forward_batches": 6,
+  "frozen_reference_forwards": 3,
+  "adapter_forward_batches_including_training": 3,
+  "manual_GT_reads": 0,
+  "initial_target_CE": 0.0334100814569446,
+  "final_target_CE": 0.034538311959117995,
+  "target_CE_improved": false,
+  "final_binary_reference_KL": 0.00031347506581591274,
+  "model_load_and_base_hash_seconds": 504.843490383937,
+  "gradient_step_seconds": 0.5173361739143729,
+  "lesson": "One Adam update in a BF16 network did not reduce this actual soft-evidence objective. This is not a semantic quality failure test, but future teacher training needs actual post-update objective/appropriate precision/trust checks rather than equating gradient nonzero with improvement.",
+  "isolated_adapter_must_not_seed_future_main": true,
+  "goal_status": "ACTIVE"
+}

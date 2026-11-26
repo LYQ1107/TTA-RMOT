@@ -1,0 +1,556 @@
+{
+  "status": "COMPLETE_ALL6_SETTING_REAL_INPUT_ENGINEERING",
+  "cases": [
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C1",
+      "GPU": 0,
+      "physical_observations": 4371,
+      "queries": 17,
+      "events": 56,
+      "protocol": "CHECKLIST",
+      "initial_KD_reconstruction_max_error": 1.430511474609375e-06,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.2965092088678357,
+          "objective_after": 0.29278636814994824,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.29278636814994824
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.7588370223727039,
+            "observer": 0.03278240900745285
+          },
+          "channel": [
+            [
+              0.8023146390914917,
+              0.8023174405097961
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ]
+          ],
+          "protocol": "CHECKLIST",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 56,
+          "all_provided_observations": 4371,
+          "all_queries": 17
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.29278636814994824,
+          "objective_after": 0.2922909128597649,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.2922909128597649
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.1174777082477159,
+            "observer": 0.03142457432809958
+          },
+          "channel": [
+            [
+              0.8046185970306396,
+              0.8046240210533142
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ]
+          ],
+          "protocol": "CHECKLIST",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 56,
+          "all_provided_observations": 4371,
+          "all_queries": 17
+        }
+      ],
+      "wall_seconds": 76.59732040204108,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    },
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C2",
+      "GPU": 1,
+      "physical_observations": 1064,
+      "queries": 197,
+      "events": 1891,
+      "protocol": "PRESUPPOSED",
+      "initial_KD_reconstruction_max_error": 2.1457672119140625e-06,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.5568297619316959,
+          "objective_after": 0.5531572151900005,
+          "accepted_fraction": 0.5,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.5569932894122058
+            },
+            {
+              "fraction": 0.5,
+              "objective": 0.5531572151900005
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.49940195171311924,
+            "observer": 0.026754464776445788
+          },
+          "channel": [
+            [
+              0.8011305928230286,
+              0.8011586666107178
+            ],
+            [
+              0.8011554479598999,
+              0.801158607006073
+            ],
+            [
+              0.801154375076294,
+              0.8011549711227417
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 1891,
+          "all_provided_observations": 1064,
+          "all_queries": 197
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.5531572151900005,
+          "objective_after": 0.5526183256321097,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.5526183256321097
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.0108990001210008,
+            "observer": 0.05961583145944694
+          },
+          "channel": [
+            [
+              0.8033897280693054,
+              0.8034682273864746
+            ],
+            [
+              0.8034590482711792,
+              0.8034676313400269
+            ],
+            [
+              0.8034560680389404,
+              0.8034579157829285
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 1891,
+          "all_provided_observations": 1064,
+          "all_queries": 197
+        }
+      ],
+      "wall_seconds": 141.04791289905552,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    },
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C3",
+      "GPU": 2,
+      "physical_observations": 11168,
+      "queries": 8,
+      "events": 43,
+      "protocol": "PRESUPPOSED",
+      "initial_KD_reconstruction_max_error": 0.0,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.3531848746885821,
+          "objective_after": 0.34987475750006497,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.34987475750006497
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.069738157022771,
+            "observer": 0.04012455541785748
+          },
+          "channel": [
+            [
+              0.8023166656494141,
+              0.8023132681846619
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.8023163080215454,
+              0.7976820468902588
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 43,
+          "all_provided_observations": 11168,
+          "all_queries": 8
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.34987475750006497,
+          "objective_after": 0.3403729335795991,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.3403729335795991
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.9336761431193021,
+            "observer": 0.04547688825159915
+          },
+          "channel": [
+            [
+              0.8046222925186157,
+              0.8046157956123352
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.8046218156814575,
+              0.795355498790741
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 43,
+          "all_provided_observations": 11168,
+          "all_queries": 8
+        }
+      ],
+      "wall_seconds": 87.69866745907348,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    },
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C4",
+      "GPU": 3,
+      "physical_observations": 11168,
+      "queries": 8,
+      "events": 43,
+      "protocol": "PRESUPPOSED",
+      "initial_KD_reconstruction_max_error": 0.0,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.34724661124440087,
+          "objective_after": 0.33414972061457854,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.33414972061457854
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.7128043153085231,
+            "observer": 0.040260970803372674
+          },
+          "channel": [
+            [
+              0.8023165464401245,
+              0.8023149967193604
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.8023163080215454,
+              0.7976791858673096
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 43,
+          "all_provided_observations": 11168,
+          "all_queries": 8
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.33414972061457854,
+          "objective_after": 0.324435716732734,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.324435716732734
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.9219240760467583,
+            "observer": 0.04007535645022189
+          },
+          "channel": [
+            [
+              0.8046222925186157,
+              0.804619312286377
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.8046217560768127,
+              0.7953511476516724
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 43,
+          "all_provided_observations": 11168,
+          "all_queries": 8
+        }
+      ],
+      "wall_seconds": 75.21085987694096,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    },
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C5",
+      "GPU": 0,
+      "physical_observations": 1064,
+      "queries": 197,
+      "events": 1891,
+      "protocol": "PRESUPPOSED",
+      "initial_KD_reconstruction_max_error": 2.0563602447509766e-06,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.515980374992532,
+          "objective_after": 0.5105935700786451,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.5105935700786451
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.1895795060433083,
+            "observer": 0.055677577495026546
+          },
+          "channel": [
+            [
+              0.8023072481155396,
+              0.8023149967193604
+            ],
+            [
+              0.8023117184638977,
+              0.802315354347229
+            ],
+            [
+              0.8023121953010559,
+              0.8023108839988708
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 1891,
+          "all_provided_observations": 1064,
+          "all_queries": 197
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.5105935700786451,
+          "objective_after": 0.5038934544509971,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.5038934544509971
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.111003583927145,
+            "observer": 0.06988666562589516
+          },
+          "channel": [
+            [
+              0.8046064376831055,
+              0.8046190142631531
+            ],
+            [
+              0.8046143054962158,
+              0.804619550704956
+            ],
+            [
+              0.8046139478683472,
+              0.8046107292175293
+            ]
+          ],
+          "protocol": "PRESUPPOSED",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 1891,
+          "all_provided_observations": 1064,
+          "all_queries": 197
+        }
+      ],
+      "wall_seconds": 96.46640846296214,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    },
+    {
+      "status": "COMPLETE_REAL_INPUT_CONDITIONAL_STATE_ENGINEERING",
+      "pair": "C6",
+      "GPU": 1,
+      "physical_observations": 4371,
+      "queries": 17,
+      "events": 56,
+      "protocol": "CHECKLIST",
+      "initial_KD_reconstruction_max_error": 9.5367431640625e-07,
+      "rounds": [
+        {
+          "stage": 0,
+          "objective_before": 0.29352949923694915,
+          "objective_after": 0.28990928890515627,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.28990928890515627
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 0.9146347916258737,
+            "observer": 0.029493431338113472
+          },
+          "channel": [
+            [
+              0.8023150563240051,
+              0.8023175001144409
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ]
+          ],
+          "protocol": "CHECKLIST",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 56,
+          "all_provided_observations": 4371,
+          "all_queries": 17
+        },
+        {
+          "stage": 1,
+          "objective_before": 0.28990928890515627,
+          "objective_after": 0.2880744655417621,
+          "accepted_fraction": 1.0,
+          "line_search": [
+            {
+              "fraction": 1.0,
+              "objective": 0.2880744655417621
+            }
+          ],
+          "parameter_L2_change": {
+            "solver": 1.3467343482040544,
+            "observer": 0.029468741442237607
+          },
+          "channel": [
+            [
+              0.8046194314956665,
+              0.804624080657959
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ],
+            [
+              0.800000011920929,
+              0.800000011920929
+            ]
+          ],
+          "protocol": "CHECKLIST",
+          "mc_rows": 8192,
+          "paid_anchor_rows": 56,
+          "all_provided_observations": 4371,
+          "all_queries": 17
+        }
+      ],
+      "wall_seconds": 48.74500126601197,
+      "GT_opens": 0,
+      "new_teacher_calls": 0,
+      "new_masks": 0,
+      "HOTA_evaluations": 0,
+      "not_sufficient_primary_training": true,
+      "not_RSI_causal_quality_evidence": true,
+      "teacher_inputs_and_features_prepaid_not_fresh_cost": true
+    }
+  ],
+  "source_sha256": {
+    "scripts/a100_conditional_state_engineering.py": "3a90daf953b3f2cbe5f41ebb47cd0fea73d06ff08a0bbcd437e7fa84d25a9441",
+    "flex_uda/active/conditional_state_learning.py": "6d4bfdb311fe3609642e8ff81efc5c83c7de481010ae4e94296147324fbaa392"
+  },
+  "no_GT_teacher_or_HOTA": true,
+  "goal_complete": false,
+  "next": "Implement/register the complete adequately trained six-setting primary and matched controls; no module ablation matrix."
+}

@@ -1,0 +1,29 @@
+{
+  "status": "REGISTERED_SMALL_LEGACY_FEATURE_COLD_REPLAY_NO_GT",
+  "registered_at": "2026-11-23T15:43:46.496313+08:00",
+  "pair": "C2",
+  "video": "0005",
+  "source_sha256": {
+    "scripts/a100_historical_feature_cold_pilot.py": "0868a936975c77f01451b1bb87fb9c01294776e13faeb4827d338bcf9175b1fa",
+    "scripts/presence_export_target.py": "7ab71f8e72048e9326baefb769fabd8ff200ad27dd1b657b7462e428878f9ff8",
+    "flex_uda/presence/features.py": "42f3e0c7d8f8e11f57fca9226dedcf6dd9cd935be0876b82fdba11d86b7c9daa",
+    "flex_uda/presence/runtime.py": "81d1f8fd321f7764c3a840764a398655daafa27c4ed235fb991ab08d127adc67",
+    "flex_uda/model/flexhook_uda.py": "90e74c08cff9cdb4fb42b6bf817ae7cad35b485824e79691e1a3d0e4bd103202",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1"
+  },
+  "question": "Can current A100/PyTorch2.6 recreate actual stored historical FP16 PCD using original64query batching and <=1e-3 query-isolation policy?",
+  "selection": "FirstKITTI video, originalexporter smoke first/middle/last candidate frames; no GT/source-margin/teacher/method-quality selection",
+  "query_batch": 64,
+  "source_margin_reference": null,
+  "no_feature_tolerance_or_acceptance_tuning": true,
+  "no_new_teacher_or_adaptation_fits": true,
+  "not_full_six_setting_feature_or_end_to_end_cost_acceptance": true,
+  "independent_method_cost_not_claimed": true,
+  "allowed_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "goal_status": "ACTIVE"
+}

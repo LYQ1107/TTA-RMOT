@@ -1,0 +1,22 @@
+{
+  "hypothesis": "Fresh provisional C4 graph raises HOTA but increases positive-query empty outputs19->61 and regresses23 query retrievals while rescuing4. Sparse negative anchors can erase entire target sets. Test a narrowly triggered video-presence safeguard rather than treating total HOTA as complete repair.",
+  "registered_after": "Independent fresh C4/C1 physical predictions and postseal error diagnosis; strict RGB1080 study still generating and no strict RGB official results inspected",
+  "existing_negative_evidence": "Old30% static-only singleton decoder yielded near-zero gains; old broad no-Yes guard/BMA was worse than visual graph. Preserve those findings; this study changes neither the old results nor their interpretation.",
+  "contract_source": "Unchanged initial visual_classical preregistration: C4 PRESUPPOSED, C1 CHECKLIST; caller-supplied task contract, never inferred from the new GT labels or the query batch",
+  "source": "All completed strict_rgb_parity C4 seeds0/17/42, exact fresh source/features/QA; no new encoder, teacher or head fit",
+  "heads": ["MEAN", "400", "FINAL", "HARD400", "HARD_FINAL"],
+  "common_reference": "Actual RGB soft mean from each same prefix/seed; identical reference for every arm. Primary mean KD/graph already has this head. Supplemental hard controls get the stronger two-head hybrid; disclose extra head use rather than claim equal head compute.",
+  "presence_control": "If an entire query output is empty under PRESUPPOSED, select one provided track by common reference score, then source prior, then original Track ID. No per-frame presence or invented boxes. For any nonempty original output leave it unchanged.",
+  "graph_presence_control": "Apply the identical singleton fallback to raw graph; fallback ranks use the common reference. This isolates mere nonempty forcing from retaining a multi-person set.",
+  "new_NULLSAFE": "When raw graph output is wholly empty under PRESUPPOSED, retain its matched presence-controlled KD's entire set. Otherwise preserve raw graph exactly. No Yes threshold, exploration threshold or GT-tuned parameter.",
+  "CHECKLIST": "Every intervention is an exact no-op; use existing sealed C1 results, do not force a target into absent queries",
+  "primary": "SAFE_MEAN versus KD_MEAN_PRESENCE; independent safeguard contribution versus GRAPH_MEAN_PRESENCE and raw RGB_GRAPH_MEAN. Compare against all5 strong teacher checkpoints, with the same common presence fallback.",
+  "seals": "45new C4 raw plus21bidirectional quantity controls seal before this study's GT; later use original vendor evaluation. Strict RGB study may evaluate separately; this generation never reads its metrics or labels.",
+  "quantity": "SAFE_MEAN vs KD_MEAN_PRESENCE and GRAPH_MEAN_PRESENCE, both count donor directions; CountSelf0",
+  "statistics": "3fixed neural seeds/share QA,13original parents,10000resamples; descriptive developer-data study, not blind or multiplicity corrected",
+  "secondary_diagnosis": "Correct-target query retrieval, rescued/regressed queries, candidate TP/FP/FN. Forced nonempty0 is a construction property, not proof of correct retrieval; do not change primary official HOTA metric.",
+  "scope": "Output selection only, source/teacher frozen, same official candidates/IDs, target manual labels only postseal; no new GPU fit and no new cold-time claim",
+  "acceptance": "Retain only if independent contribution survives the equally protected strong KD controls without pretending one forced output means the right target. If negative, preserve it and continue diagnosis.",
+  "all_development_data": true,
+  "goal_status": "ACTIVE"
+}

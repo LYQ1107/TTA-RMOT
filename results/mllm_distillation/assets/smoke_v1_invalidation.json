@@ -1,0 +1,14 @@
+{
+  "status": "REVOKED_INCOMPLETE_SOURCE_SCHEDULE_NO_FORMAL_USE",
+  "run": "/data2/user/FlexHook-TTA/results/runs/mllm_val_distill_20261028_v1/smoke",
+  "actual_optimizer_updates": 6,
+  "actual_target_KD_nonzero_gradient_steps": 6,
+  "source_expressions_loaded": 0,
+  "expected_source_expressions": 8896,
+  "source_validation_CE": "NONFINITE_EMPTY_PLAN",
+  "cause": "Legitimate source expression symlink target absent from runtime read whitelist; glob silently returned no expression files",
+  "formal_training_started": false,
+  "checkpoint_must_not_initialize_formal_training": true,
+  "original_logs_checkpoints_and_receipt_preserved": true,
+  "replacement": "smoke_v2 with full source schedule assertions before optimizer steps"
+}

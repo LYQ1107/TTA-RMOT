@@ -1,0 +1,40 @@
+{
+  "status": "PASS_EXACT_PUBLIC_STATISTIC_SHARING",
+  "records": 213,
+  "all_numeric_payloads_preserved": true,
+  "existing_baseline_references": 57,
+  "internal_identical_references": 48,
+  "previous_bytes": 1948165,
+  "current_bytes": 969632,
+  "saved_bytes": 978533,
+  "raw_official_or_predictions_changed": false,
+  "unpacked_local_backup": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/analysis/canonical_pcd_parent_statistics_unpacked.json",
+  "not_new_scientific_results": true,
+  "parent_row_sharing": {
+    "format": "Numeric record may replace numerator/denominator with parent_rows; each entry is [numeratorRow,denominatorRow] or {reference:{record,row}}, same-file by default.",
+    "preserves": "Parent ordering, every floating-point value, HOTA and all method keys are unchanged.",
+    "resolver": "scripts/a100_visual_classical_sparse_statistics_reproduce.py resolves both legacy whole-record and new parent-row references.",
+    "selection": "Only used when serialized file is smaller; no rounding, pruning, metric or bootstrap changes."
+  },
+  "aggregate_encoding": {
+    "field": "parent_rows_zlib_base64",
+    "meaning": "Lossless zlib+base64 encoding of the exact compact-JSON parent_rows field. No numeric rounding; same references and all methods retained.",
+    "decode": "json.loads(zlib.decompress(base64.b64decode(value)))",
+    "scope": "Aggregated official sufficient counts only, not checkpoints/raw features/QA. HOTA and parent names remain directly readable.",
+    "validation": "aggregate_encoding_regression.json plus full NumPy HOTA/effect reproduction for each study"
+  },
+  "shared_aggregate_archive": {
+    "owner_field": "parent_rows_archive_owner",
+    "payload_field": "parent_rows_archive_zlib_base64",
+    "meaning": "One numeric record owns zlib+base64 of compactJSON {recordName:parent_rows}. Every numeric method keeps HOTA/parents readable; record list unchanged. Old plain/per-row/per-record formats still supported.",
+    "decoder": "expand_statistic_archive in sparse_statistics_reproduce.py; standard-library JSON/zlib/base64 only",
+    "validation": "aggregate_shared_archive_regression.json and complete NumPy effect reproduction; no numeric rounding or experiment removal"
+  },
+  "aggregate_float64_row_codec": {
+    "tag": "float64_le_shuffled",
+    "meaning": "ExactIEEE754little-endianfloat64 count rowpair, byte-shuffled reversibly; no numeric quantization. References/HOTA/parents stay readable.",
+    "scope": "Aggregatedofficialsufficientstatistics only; not rawfeaturearraysormodelweights.",
+    "validation": "aggregate_float64_encoding_regression.json andfullNumPyreproduction",
+    "original_JSON_backups": "Localanalysis/json_numeric_archive_before_float64_20261122; allrawexperimentsremainlocal/NAS"
+  }
+}

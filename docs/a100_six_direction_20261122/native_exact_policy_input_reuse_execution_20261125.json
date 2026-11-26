@@ -1,0 +1,71 @@
+{
+  "status": "PASS_INDEPENDENT_VALIDATION_AND_ACTUAL_EQUIVALENT_REGISTERED_CHECKPOINT_PREPARED",
+  "entry": "scripts/a100_native_exact_policy_reuse.py",
+  "entry_sha256": "8d7d9a89924f46b71137b59d5a6b8f3cf785902b389494f1944fa95d40801d89",
+  "actual_session": 46679,
+  "producer_pid": 492158,
+  "scope": "Execution aid for original native726 only; no new method or quality condition",
+  "independent_actual_fit_validation": {
+    "status": "PASS_INDEPENDENT_ACTUAL_FITS_AND_NONIDENTICAL_INPUT_REFUSAL",
+    "pair": "C5",
+    "video": "0019",
+    "independent_training_cases": [
+      {
+        "source_arm": "JOINT_KD_LEARNED",
+        "independently_trained_target_arm": "JOINT_KD_FROZEN",
+        "final_early_weights_and_all_four_fit_traces_metrics_exact": true
+      },
+      {
+        "source_arm": "FULL_CONDITIONAL_LOCAL_LEARNED",
+        "independently_trained_target_arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+        "final_early_weights_and_all_four_fit_traces_metrics_exact": true
+      }
+    ],
+    "negative_case": {
+      "status": "NONIDENTICAL_POLICY_PREFIX_KEEP_ORIGINAL_FITS",
+      "pair": "C4",
+      "video": "v_9MHDmAMxO5I_c006",
+      "first_different_video": "v_9MHDmAMxO5I_c004",
+      "field": "paid"
+    },
+    "original_sources_unchanged": true,
+    "new_fits_or_GPU_teacher_predictions_GT": 0,
+    "entry_sha256": "8d7d9a89924f46b71137b59d5a6b8f3cf785902b389494f1944fa95d40801d89",
+    "goal_status": "ACTIVE"
+  },
+  "first_actual_prepared_head": {
+    "pair": "C5",
+    "video": "0019",
+    "source_arm": "POINT_KD_LEARNED",
+    "target_arm": "POINT_KD_FROZEN",
+    "source_head_sha256": "60b0f18f3a305b03035c599f12e91096e09034b933b37edd5bcbc3311ca2b45b",
+    "prepared_sha256": "2f065a6e564eab4b410eb040afdea899f0b98b1c48ef0661dfa5fb099d129f6b",
+    "full_paid_schedule_prefix_and_previous_dtype_weight_normalizer_identity_verified": true,
+    "final_and_early_tensors_exact": true,
+    "original_ordinary_fit_gates_passed": 4,
+    "actual_parent_reuse_verified": false
+  },
+  "exclusions": {
+    "C4": "Actual paid/schedule prefix differs; independent original fits retained",
+    "C5_reserved_GPU0_batch": [
+      "FULL_CONDITIONAL_LOCAL_FROZEN",
+      "FULL_LIKELIHOOD_REFERENCE_FROZEN",
+      "FULL_LIKELIHOOD_LOCAL_FROZEN"
+    ]
+  },
+  "original_source_pins_unchanged": 18,
+  "reporting": "Shared fit records are explicitly marked; not independent optimizations or measured deployment cost",
+  "new_independent_fits_GPU_teacher_actor_questions_predictions_GT_or_neural_seeds": 0,
+  "scientific_contribution_or_HOTA_gain_claim": false,
+  "goal_status": "ACTIVE",
+  "additional_actual_prepared_head": {
+    "pair": "C3",
+    "video": "v_G-vNjfx1GGc_c008",
+    "source_arm": "FULL_CONDITIONAL_LOCAL_LEARNED",
+    "target_arm": "FULL_CONDITIONAL_LOCAL_FROZEN",
+    "prepared_sha256": "981093dca81ebf6f8b43f5a0ba771c55dc41b0fd2e3029be086f760a430e5e92",
+    "prefix_video_count": 30,
+    "final_and_early_tensors_exact": true,
+    "actual_parent_reuse_verified": false
+  }
+}

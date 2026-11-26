@@ -1,0 +1,131 @@
+{
+  "version": "v8",
+  "jobs": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.07558182035028144
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.499533877149483
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 0.046584426671702206
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.273432985797895
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.232830324035758
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.273432985797895
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 11.226848559126193
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3,
+      "total_GPU_hours_estimate": 13.157248503685476
+    }
+  ],
+  "total_GPU_hours_estimate": 61.40719360678615,
+  "dimensions": {
+    "C1": {
+      "target": "Dance",
+      "model": "V2-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    },
+    "C2": {
+      "target": "KITTI-V2",
+      "model": "Dance-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C3": {
+      "target": "SportsMOT",
+      "model": "V2-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C4": {
+      "target": "SportsMOT",
+      "model": "Dance-best",
+      "videos": 45,
+      "episodes": 466,
+      "candidate_query_rows": 2968201,
+      "teacher_budget": 3508
+    },
+    "C5": {
+      "target": "KITTI-V2",
+      "model": "LaMOT-best",
+      "videos": 4,
+      "episodes": 862,
+      "candidate_query_rows": 2425382,
+      "teacher_budget": 20955
+    },
+    "C6": {
+      "target": "Dance",
+      "model": "LaMOT-best",
+      "videos": 25,
+      "episodes": 425,
+      "candidate_query_rows": 3588445,
+      "teacher_budget": 3334
+    }
+  },
+  "frame_cache_bytes_estimate": 51374543012,
+  "data1_available_bytes": 153752436736,
+  "data2_available_bytes": 20249280512,
+  "cache_root": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v8",
+  "scope": "six MINUS, FULL C1/C4/C6, REPLAY C1/C4; no discount for cache/skip/pilots",
+  "maximum_GPUs": 2,
+  "GT_open_attempts": 0,
+  "GPU_or_teacher_calls": 0,
+  "stage4_not_authorized_until_main_gate_passes": true
+}

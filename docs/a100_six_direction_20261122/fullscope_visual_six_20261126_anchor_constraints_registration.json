@@ -1,0 +1,45 @@
+{
+  "status": "REGISTERED_POSTSEAL_CANONICAL_ANCHOR_CONSTRAINT_DIAGNOSIS",
+  "source_sha256": "3e9da7cc79fcefc916d012f694163b26eb1030d6ee8d5e4a1208132dfdf7ac49",
+  "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "reader_source_sha256": {
+    "scripts/a100_fullscope_visual_postseal.py": "554c2c64f02da580f0fc54c762436efd58794ea687758fd9af8e1a448de3ebcc",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "scripts/a100_observation_evidence_transfer_diagnose.py": "f9c52b12584c74e382bd73dc1558b02fd6e9c8b1bc77f9b849fc9c4e43aca45c"
+  },
+  "postseal_registration_sha256": "28ce0dd97b8d7d817e442519b3d2694241a839a0f1fcb48a3fb8df981c800d22",
+  "original_sources_verified": 42,
+  "video_units": 148,
+  "trigger": "Only after all4588/allteacherattempt seals,186HOTA/180effects reproduction and originalpostseal diagnosis; only if the fixedprimary strictscreen is false. Otherwise skip before readingGT.",
+  "hypothesis": "A strong rawteacher-fit gate may limit correction at some paidanchors. Determine canonical paid/unasked error locations and a necessary lowerbound, without claiming this caused the current result.",
+  "math": "For each wrongly classified teacherprobabilityp, the infimum KL to any corrected thresholdside is KL(Ber(p)||Ber(.5)). Multiply by the originalplain paidweight1/(1.25*nqueries*nquestions_for_query). Otheranchors and auxiliary losses are optimistically zero.",
+  "gate": 0.005,
+  "math_check": {
+    "status": "PASS_DATA_FREE_BOUNDARY_AND_QUERY_WEIGHT_CHECKS",
+    "high_confidence_wrong_anchor_probability": 0.9,
+    "example_weight": 0.016,
+    "example_correction_infimum": 0.005889027314695953,
+    "unchanged_gate": 0.005,
+    "gate_anchor_mean_absolute_probability_deviation_bound": 0.05,
+    "GT_GPU_teacher_fits_predictions_or_training_seeds": 0
+  },
+  "scopes": [
+    "Originalcanonical matching labels and masks; not pureteacher semantic accuracy.",
+    "Primarypolicy floor constrainsPRIMARY; uniformpolicy floor constrainsUNIFORM_SOFT_KD288, notPRIMARY.",
+    "Floor abovegate rules out correcting allthose anchors underthat rawfit gate. Floor belowgate doesnot prove neural orjointfeasibility.",
+    "Auxiliary lossrelaxedtozero, featurecoupling ignored, plain gate only; LUREgate can impose furtherconstraints.",
+    "No pervideoHOTA averaging, newHOTA, candidatepromotion, GTparameterselection or prepositive moduleablation."
+  ],
+  "no_neural_checkpoint_or_prediction_score_values": true,
+  "primary_and_all10ordinary_binary_masks_only_after_barrier": true,
+  "no_new_training_teacher_GPU_seeds_or_predictions": true,
+  "original42numerical_sources_unchanged": true,
+  "current_GT_reads": 0,
+  "references": [
+    "https://www.jmlr.org/papers/v11/raykar10a.html",
+    "https://arxiv.org/abs/2012.13052"
+  ],
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE",
+  "scientific_goal_met": false
+}

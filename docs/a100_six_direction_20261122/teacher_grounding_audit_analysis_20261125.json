@@ -1,0 +1,45 @@
+{
+  "status": "REPRODUCED_ALL144_REAL_TEACHER_MEASUREMENTS",
+  "domains": {
+    "Dance": {
+      "geometry_inputs": 32,
+      "TP": 11,
+      "FP": 0,
+      "FN": 5,
+      "TN": 16,
+      "complement_inconsistent_image_pairs": 5,
+      "complement_pairs": 16,
+      "original_task_CROP_FRAME_answer_disagreements": 0,
+      "original_task_pairs": 8
+    },
+    "KITTI-V2": {
+      "geometry_inputs": 32,
+      "TP": 16,
+      "FP": 0,
+      "FN": 0,
+      "TN": 16,
+      "complement_inconsistent_image_pairs": 0,
+      "complement_pairs": 16,
+      "original_task_CROP_FRAME_answer_disagreements": 3,
+      "original_task_pairs": 8
+    },
+    "SportsMOT": {
+      "geometry_inputs": 32,
+      "TP": 16,
+      "FP": 8,
+      "FN": 0,
+      "TN": 8,
+      "complement_inconsistent_image_pairs": 8,
+      "complement_pairs": 16,
+      "original_task_CROP_FRAME_answer_disagreements": 1,
+      "original_task_pairs": 8
+    }
+  },
+  "source_answers_sha256": "4bce44d2c754c89e42c752ecfa5073a3ddb698cbd6d0881424476869077e3271",
+  "original_Qwen_reference_unchanged": true,
+  "GT_reads": 0,
+  "neural_or_teacher_updates": 0,
+  "conclusion": "KITTI0/32 explicit rectangle errors does not support a general inability to locate red boxes as its main failure cause. Dance errors are falseNo; Sports errors falseYes. Tiny first-video geometry proxy, not actual task semantic accuracy or a reason to train a universal attention module.",
+  "no_HOTA_or_RSImethod_success": true,
+  "goal_status": "ACTIVE"
+}

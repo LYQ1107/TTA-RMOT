@@ -1,0 +1,368 @@
+{
+  "status": "PASS_SPARSE_SOURCE_FIXED_QA_CONTROL",
+  "HOTA": {
+    "RAW_KD_400": 68.5350089372825,
+    "RAW_KD": 68.29329143396045,
+    "RAW_COHORT": 68.94836845610372,
+    "CLIP_KD_400": 68.65651320317806,
+    "CLIP_KD": 68.57217487201848,
+    "CLIP_COHORT": 69.17272952604522,
+    "HARD_KD_400": 68.57969202554047,
+    "HARD_KD": 68.0924235261366
+  },
+  "comparisons": {
+    "RAW_KD_400_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": -0.04729401456877724,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.2214316466896115,
+          0.11874109172321104
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.21739585780061396,
+          0.11690253528774366
+        ]
+      }
+    },
+    "RAW_KD_400_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.0901920986686946,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.3203422454557994,
+          0.4990412557734348
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.2508966664955977,
+          0.44039444143275686
+        ]
+      }
+    },
+    "RAW_KD_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": 0.006845671602860648,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.33454445380565795,
+          0.30236340026681635
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.24619680557723492,
+          0.24126852595370207
+        ]
+      }
+    },
+    "RAW_KD_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.3108952098212967,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.11649712525079749,
+          0.8067517539299824
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.08968144010996966,
+          0.7629159400750147
+        ]
+      }
+    },
+    "RAW_COHORT_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": 0.026093765234293187,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.18363005660069867,
+          0.20791723674246965
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.14829156515145492,
+          0.19680970501429298
+        ]
+      }
+    },
+    "RAW_COHORT_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.29293660117633635,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.1974023244963554,
+          0.876714845692561
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.1237946869740007,
+          0.7469987455803229
+        ]
+      }
+    },
+    "CLIP_KD_400_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": -0.11438774185705824,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.2578303920574889,
+          0.027494988092052346
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.2734773531877817,
+          0.030754105730131744
+        ]
+      }
+    },
+    "CLIP_KD_400_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.12679717492781606,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.20521248819397792,
+          0.40720048230749023
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.2020422391853394,
+          0.4614449759756858
+        ]
+      }
+    },
+    "CLIP_KD_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": -0.0832677567435951,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.3580716554980558,
+          0.1403621203971116
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.3293526951347129,
+          0.1310329584921908
+        ]
+      }
+    },
+    "CLIP_KD_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.4779284654166105,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          0.02524043413961863,
+          0.932065178891942
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          0.07219718114027389,
+          0.911763628880703
+        ]
+      }
+    },
+    "CLIP_COHORT_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": 0.06952737801914566,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.00951813672801798,
+          0.17740258747315885
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.03948159554391175,
+          0.18624233054219982
+        ]
+      }
+    },
+    "CLIP_COHORT_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.10713232051546129,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.2998682088455261,
+          0.46621831327804153
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.29814076037712983,
+          0.5052390951650778
+        ]
+      }
+    },
+    "HARD_KD_400_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": -0.07903475974956109,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.20560020638003138,
+          0.030230788708204743
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.19265427960117307,
+          0.01784859474633044
+        ]
+      }
+    },
+    "HARD_KD_400_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.13189206780798202,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.1707673231703321,
+          0.41255189437298334
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.15174426263591592,
+          0.4169185093523146
+        ]
+      }
+    },
+    "HARD_KD_sparse_source_vs_full_FIXED_QA": {
+      "delta_HOTA": -0.0294721861585856,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.09132483482130667,
+          0.028022937679188325
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.16363893694020992,
+          0.10539699907448713
+        ]
+      }
+    },
+    "HARD_KD_actual_sparse_vs_fixed_QA_sparse": {
+      "delta_HOTA": 0.09909302599015746,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.2775127226894217,
+          0.5609161344972792
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.258763000112296,
+          0.5010884088565141
+        ]
+      }
+    },
+    "RAW_same_QA_COHORT_vs_KD": {
+      "delta_HOTA": 0.6550770221432742,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          0.14033654370084325,
+          1.3727634252101097
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          0.12016437883584069,
+          1.2114426737372292
+        ]
+      }
+    },
+    "CLIP_same_QA_COHORT_vs_KD": {
+      "delta_HOTA": 0.6005546540267375,
+      "samples": 10000,
+      "seed": 0,
+      "original_parent_video": {
+        "clusters": 13,
+        "CI95": [
+          -0.09166626057818944,
+          1.3940566524955789
+        ]
+      },
+      "evaluation_clip": {
+        "clusters": 45,
+        "CI95": [
+          -0.02026252996131709,
+          1.2034044611258985
+        ]
+      }
+    }
+  },
+  "logical_teacher_examples": 3508,
+  "new_teacher_calls": 0,
+  "same_reference_features_and_teacher_answers": true,
+  "only_source_prior_and_presence_sparsified": true,
+  "actual_full_vs_sparse_PCD_max_delta": 0.0,
+  "actual_full_vs_sparse_RGB_max_delta": 0.0,
+  "quality_only_not_a_cold_runtime": true,
+  "generation_GT_open_attempts": 0,
+  "all_development_data": true,
+  "supervisor_wall_includes_wait_for_actual_streams": 9543.602693403023,
+  "actual_sparse_vs_fixed_control_also_changes_questions_and_actual_numeric_execution": true
+}

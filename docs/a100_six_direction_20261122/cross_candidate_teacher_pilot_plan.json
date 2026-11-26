@@ -1,0 +1,41 @@
+{
+  "status": "PROSPECTIVE_CROSS_CANDIDATE_TEACHER_PILOT",
+  "cases": 72,
+  "physical_teacher_examples": 432,
+  "modes": [
+    "JOINT_AB",
+    "JOINT_BA",
+    "SHARED_A",
+    "SHARED_B",
+    "INDEPENDENT_A",
+    "INDEPENDENT_B"
+  ],
+  "source_sha256": {
+    "scripts/a100_cross_candidate_teacher_pilot.py": "721d1260614424c00107dc800747bc698948413c72ba051699911f5a76e8c817",
+    "scripts/a100_joint_observation_collect.py": "82e4c8657ae8fe451840bdf3e804bf3d6ba748414c764dcd092c9bc412f9117e",
+    "scripts/active_run.py": "c73255ccec2a49bc1307b8ad7c47e30a30e59c69d780c4cd833ffcc2bcf8e9fb",
+    "flex_uda/a100/mechanism.py": "63e51414c01b6703fa497a11b149aa7ac5cc6af83d77bc4022a5b330f452bb8e",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/teacher_client.py": "6f4e62655eeb0ac2214d795216c6d2f414dbf47195b4197f439715417c639e21",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703"
+  },
+  "cases_sha256": "b8c5f691b69cb4279ecb97822d739c04a3db557fffa7468b2c944c4044498c2d",
+  "teacher_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "fixed_teacher_external_evidence": true,
+  "no_teacher_or_task_training": true,
+  "no_manual_GT_no_HOTA_no_task_predictions": true,
+  "independent_binary_same_object_images": true,
+  "shared_binary_identical_joint_context": true,
+  "compare_CROP_FRAME_BOX_causal_CLIP": true,
+  "condition_on_exactly_one_only_for_diagnostic_not_as_task_constraint": true,
+  "count_all_AB_BA_and_binary_calls_and_model_load": true,
+  "task_contract": {
+    "reference": "https://arxiv.org/pdf/2303.03366",
+    "arbitrary_referent_count_and_temporally_varying_membership": true,
+    "same_requested_frame_both_candidates": true,
+    "CLIP_uses_past_and_current_only": true
+  },
+  "learning_hypothesis": "Retain candidate-specific stable identity h_i; conditionalize out query-shared b_q, never identity itself.",
+  "no_full_six_setting_or_RSI_quality_claim": true
+}

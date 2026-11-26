@@ -1,0 +1,12 @@
+{
+  "status": "FAIL_SAME_DOMAIN_INVESTIGATE_BEFORE_BC",
+  "failed_targets": [
+    "KITTI-V2",
+    "Dance",
+    "SportsMOT"
+  ],
+  "criterion": "Each own-source PRES_TOPK HOTA >= native HOTA -1",
+  "metrics_path": "/data2/user/FlexHook-TTA/results/presence_active/stage_A_same_domain.csv",
+  "published_commit": null,
+  "target_GT_is_not_runtime_supervision": true
+}

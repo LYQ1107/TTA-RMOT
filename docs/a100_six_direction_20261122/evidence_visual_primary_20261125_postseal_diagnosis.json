@@ -1,0 +1,1051 @@
+{
+  "status": "COMPLETE_NEW_VISUAL_PRIMARY_AND_CAPACITY_POSTSEAL_DIAGNOSIS",
+  "cases": [
+    {
+      "pair": "C1",
+      "methods": {
+        "EVIDENCE_VISUAL_RSI": {
+          "canonical": {
+            "TP": 2437,
+            "FP": 1072,
+            "FN": 1907,
+            "TN": 68891
+          },
+          "official_IoU50": {
+            "TP": 2428.0,
+            "FP": 1081.0,
+            "FN": 2158.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SOFT_KD": {
+          "canonical": {
+            "TP": 3173,
+            "FP": 2392,
+            "FN": 1171,
+            "TN": 67571
+          },
+          "official_IoU50": {
+            "TP": 3136.0,
+            "FP": 2429.0,
+            "FN": 1450.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "HARD_KD": {
+          "canonical": {
+            "TP": 2642,
+            "FP": 2787,
+            "FN": 1702,
+            "TN": 67176
+          },
+          "official_IoU50": {
+            "TP": 2635.0,
+            "FP": 2794.0,
+            "FN": 1951.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "IPW_KD": {
+          "canonical": {
+            "TP": 3183,
+            "FP": 1368,
+            "FN": 1161,
+            "TN": 68595
+          },
+          "official_IoU50": {
+            "TP": 3146.0,
+            "FP": 1405.0,
+            "FN": 1440.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SSL_KD": {
+          "canonical": {
+            "TP": 3184,
+            "FP": 1212,
+            "FN": 1160,
+            "TN": 68751
+          },
+          "official_IoU50": {
+            "TP": 3147.0,
+            "FP": 1249.0,
+            "FN": 1439.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "R_DIRECT": {
+          "canonical": {
+            "TP": 3170,
+            "FP": 1866,
+            "FN": 1174,
+            "TN": 68097
+          },
+          "official_IoU50": {
+            "TP": 3133.0,
+            "FP": 1903.0,
+            "FN": 1453.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SOFT_POOLED": {
+          "canonical": {
+            "TP": 3184,
+            "FP": 2705,
+            "FN": 1160,
+            "TN": 67258
+          },
+          "official_IoU50": {
+            "TP": 3147.0,
+            "FP": 2742.0,
+            "FN": 1439.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "UNIFORM_SOFT_KD": {
+          "canonical": {
+            "TP": 3752,
+            "FP": 1953,
+            "FN": 592,
+            "TN": 68010
+          },
+          "official_IoU50": {
+            "TP": 3699.0,
+            "FP": 2006.0,
+            "FN": 887.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "UNIFORM_POOLED": {
+          "canonical": {
+            "TP": 3752,
+            "FP": 2292,
+            "FN": 592,
+            "TN": 67671
+          },
+          "official_IoU50": {
+            "TP": 3699.0,
+            "FP": 2345.0,
+            "FN": 887.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "FLAT_KD128": {
+          "canonical": {
+            "TP": 3184,
+            "FP": 1850,
+            "FN": 1160,
+            "TN": 68113
+          },
+          "official_IoU50": {
+            "TP": 3147.0,
+            "FP": 1887.0,
+            "FN": 1439.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SAME_ARCH_KD128": {
+          "canonical": {
+            "TP": 3011,
+            "FP": 2160,
+            "FN": 1333,
+            "TN": 67803
+          },
+          "official_IoU50": {
+            "TP": 2974.0,
+            "FP": 2197.0,
+            "FN": 1612.0
+          },
+          "positive_queries_zero_output": 0
+        }
+      },
+      "coverage": {
+        "primary": {
+          "logical_draws": 56,
+          "unique_actions": 49,
+          "repeated_logical_cache_actions": 7,
+          "teacher_nominal_anchor_counts": {
+            "TP": 3,
+            "FP": 4,
+            "FN": 0,
+            "TN": 42
+          },
+          "known_teacher_class_disagreements": 0,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_without_correct_action_in_old_pool": 0
+        },
+        "uniform": {
+          "logical_draws": 56,
+          "unique_actions": 56,
+          "repeated_logical_cache_actions": 0,
+          "teacher_nominal_anchor_counts": {
+            "TP": 3,
+            "FP": 3,
+            "FN": 0,
+            "TN": 50
+          },
+          "known_teacher_class_disagreements": null,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_without_correct_action_in_old_pool": 0
+        }
+      },
+      "content_diagnostics": {
+        "S_bootstrap": {
+          "image_pretext": 0.391043484210968,
+          "positive_pair_MSE": 0.04278150200843811,
+          "mean_content_std": 0.30672919750213623
+        },
+        "R_bootstrap": {
+          "image_pretext": 0.10237379372119904,
+          "positive_pair_MSE": 0.009212980046868324,
+          "mean_content_std": 0.9984484314918518
+        },
+        "S_final": {
+          "image_pretext": 0.3962049186229706,
+          "positive_pair_MSE": 0.1458379626274109,
+          "mean_content_std": 0.5159671902656555
+        },
+        "R_final": {
+          "image_pretext": 0.06697189807891846,
+          "positive_pair_MSE": 0.0003278556396253407,
+          "mean_content_std": 0.9999235272407532
+        }
+      },
+      "worst_primary_minus_uniform_FP_queries": [
+        {
+          "query_id": "dancing-person-with-blue-Tshirt-and-white-pants",
+          "query_text": "dancing person with blue Tshirt and white pants",
+          "canonical_positive_observations": 0,
+          "unique_paid": 3,
+          "teacher_Yes_count": 2,
+          "paid_teacher_Yes_without_canonical_match": 2,
+          "primary": {
+            "TP": 0,
+            "FP": 816,
+            "FN": 0,
+            "TN": 3555
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 1155,
+            "FN": 0,
+            "TN": 3216
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 647,
+            "FN": 0,
+            "TN": 3724
+          }
+        },
+        {
+          "query_id": "dancing-person-with-blue-Tshirt-and-white-skirt",
+          "query_text": "dancing person with blue Tshirt and white skirt",
+          "canonical_positive_observations": 0,
+          "unique_paid": 2,
+          "teacher_Yes_count": 0,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 0,
+            "FP": 91,
+            "FN": 0,
+            "TN": 4280
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 592,
+            "FN": 0,
+            "TN": 3779
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 24,
+            "FN": 0,
+            "TN": 4347
+          }
+        },
+        {
+          "query_id": "dancing-person-with-yellow-Tshirt-and-black-pants",
+          "query_text": "dancing person with yellow Tshirt and black pants",
+          "canonical_positive_observations": 0,
+          "unique_paid": 3,
+          "teacher_Yes_count": 0,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 0,
+            "FP": 10,
+            "FN": 0,
+            "TN": 4361
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 6,
+            "FN": 0,
+            "TN": 4365
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 2,
+            "FN": 0,
+            "TN": 4369
+          }
+        },
+        {
+          "query_id": "dacning-person-with-white-Tshirt-and-purple-pants",
+          "query_text": "dacning person with white Tshirt and purple pants",
+          "canonical_positive_observations": 0,
+          "unique_paid": 3,
+          "teacher_Yes_count": 0,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 0,
+            "FP": 13,
+            "FN": 0,
+            "TN": 4358
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 15,
+            "FN": 0,
+            "TN": 4356
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 7,
+            "FN": 0,
+            "TN": 4364
+          }
+        },
+        {
+          "query_id": "dancing-person-dressed-all-in-purple",
+          "query_text": "dancing person dressed all in purple",
+          "canonical_positive_observations": 0,
+          "unique_paid": 3,
+          "teacher_Yes_count": 0,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 0,
+            "FP": 11,
+            "FN": 0,
+            "TN": 4360
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 12,
+            "FN": 0,
+            "TN": 4359
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 6,
+            "FN": 0,
+            "TN": 4365
+          }
+        }
+      ],
+      "primary_teacher_KL": 0.00022177671763145125,
+      "all_original_targets_preserved": true,
+      "no_signed_semantic_targets": true
+    },
+    {
+      "pair": "C2",
+      "methods": {
+        "EVIDENCE_VISUAL_RSI": {
+          "canonical": {
+            "TP": 25989,
+            "FP": 55067,
+            "FN": 11965,
+            "TN": 116587
+          },
+          "official_IoU50": {
+            "TP": 25973.0,
+            "FP": 55083.0,
+            "FN": 17715.0
+          },
+          "positive_queries_zero_output": 1
+        },
+        "SOFT_KD": {
+          "canonical": {
+            "TP": 25280,
+            "FP": 50589,
+            "FN": 12674,
+            "TN": 121065
+          },
+          "official_IoU50": {
+            "TP": 25270.0,
+            "FP": 50599.0,
+            "FN": 18418.0
+          },
+          "positive_queries_zero_output": 3
+        },
+        "HARD_KD": {
+          "canonical": {
+            "TP": 27847,
+            "FP": 66827,
+            "FN": 10107,
+            "TN": 104827
+          },
+          "official_IoU50": {
+            "TP": 27835.0,
+            "FP": 66839.0,
+            "FN": 15853.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "IPW_KD": {
+          "canonical": {
+            "TP": 26069,
+            "FP": 53932,
+            "FN": 11885,
+            "TN": 117722
+          },
+          "official_IoU50": {
+            "TP": 26058.0,
+            "FP": 53943.0,
+            "FN": 17630.0
+          },
+          "positive_queries_zero_output": 2
+        },
+        "SSL_KD": {
+          "canonical": {
+            "TP": 26477,
+            "FP": 54261,
+            "FN": 11477,
+            "TN": 117393
+          },
+          "official_IoU50": {
+            "TP": 26468.0,
+            "FP": 54270.0,
+            "FN": 17220.0
+          },
+          "positive_queries_zero_output": 1
+        },
+        "R_DIRECT": {
+          "canonical": {
+            "TP": 24286,
+            "FP": 49932,
+            "FN": 13668,
+            "TN": 121722
+          },
+          "official_IoU50": {
+            "TP": 24273.0,
+            "FP": 49945.0,
+            "FN": 19415.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SOFT_POOLED": {
+          "canonical": {
+            "TP": 25471,
+            "FP": 49667,
+            "FN": 12483,
+            "TN": 121987
+          },
+          "official_IoU50": {
+            "TP": 25461.0,
+            "FP": 49677.0,
+            "FN": 18227.0
+          },
+          "positive_queries_zero_output": 9
+        },
+        "UNIFORM_SOFT_KD": {
+          "canonical": {
+            "TP": 27069,
+            "FP": 60369,
+            "FN": 10885,
+            "TN": 111285
+          },
+          "official_IoU50": {
+            "TP": 27056.0,
+            "FP": 60382.0,
+            "FN": 16632.0
+          },
+          "positive_queries_zero_output": 1
+        },
+        "UNIFORM_POOLED": {
+          "canonical": {
+            "TP": 27388,
+            "FP": 60513,
+            "FN": 10566,
+            "TN": 111141
+          },
+          "official_IoU50": {
+            "TP": 27375.0,
+            "FP": 60526.0,
+            "FN": 16313.0
+          },
+          "positive_queries_zero_output": 6
+        },
+        "FLAT_KD128": {
+          "canonical": {
+            "TP": 26605,
+            "FP": 55568,
+            "FN": 11349,
+            "TN": 116086
+          },
+          "official_IoU50": {
+            "TP": 26592.0,
+            "FP": 55581.0,
+            "FN": 17096.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SAME_ARCH_KD128": {
+          "canonical": {
+            "TP": 25740,
+            "FP": 53163,
+            "FN": 12214,
+            "TN": 118491
+          },
+          "official_IoU50": {
+            "TP": 25729.0,
+            "FP": 53174.0,
+            "FN": 17959.0
+          },
+          "positive_queries_zero_output": 1
+        }
+      },
+      "coverage": {
+        "primary": {
+          "logical_draws": 1891,
+          "unique_actions": 1819,
+          "repeated_logical_cache_actions": 72,
+          "teacher_nominal_anchor_counts": {
+            "TP": 255,
+            "FP": 409,
+            "FN": 132,
+            "TN": 1023
+          },
+          "known_teacher_class_disagreements": 24,
+          "positive_pool_queries_never_asked_correct": 25,
+          "positive_queries_without_correct_action_in_old_pool": 17
+        },
+        "uniform": {
+          "logical_draws": 1891,
+          "unique_actions": 1891,
+          "repeated_logical_cache_actions": 0,
+          "teacher_nominal_anchor_counts": {
+            "TP": 276,
+            "FP": 448,
+            "FN": 135,
+            "TN": 1032
+          },
+          "known_teacher_class_disagreements": null,
+          "positive_pool_queries_never_asked_correct": 34,
+          "positive_queries_without_correct_action_in_old_pool": 17
+        }
+      },
+      "content_diagnostics": {
+        "S_bootstrap": {
+          "image_pretext": 0.4237079918384552,
+          "positive_pair_MSE": 0.012780265882611275,
+          "mean_content_std": 0.16095180809497833
+        },
+        "R_bootstrap": {
+          "image_pretext": 0.09740007668733597,
+          "positive_pair_MSE": 0.008402201347053051,
+          "mean_content_std": 0.9986764788627625
+        },
+        "S_final": {
+          "image_pretext": 0.37928998470306396,
+          "positive_pair_MSE": 0.21217623353004456,
+          "mean_content_std": 0.6911523938179016
+        },
+        "R_final": {
+          "image_pretext": 0.060418348759412766,
+          "positive_pair_MSE": 0.0028225197456777096,
+          "mean_content_std": 0.9998182058334351
+        }
+      },
+      "worst_primary_minus_uniform_FP_queries": [
+        {
+          "query_id": "silver-cars-on-the-right",
+          "query_text": "silver cars on the right",
+          "canonical_positive_observations": 27,
+          "unique_paid": 9,
+          "teacher_Yes_count": 0,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 11,
+            "FP": 326,
+            "FN": 16,
+            "TN": 711
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 280,
+            "FN": 27,
+            "TN": 757
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 87,
+            "FN": 27,
+            "TN": 950
+          }
+        },
+        {
+          "query_id": "the-black-cars-were-left",
+          "query_text": "the black cars were left",
+          "canonical_positive_observations": 244,
+          "unique_paid": 10,
+          "teacher_Yes_count": 4,
+          "paid_teacher_Yes_without_canonical_match": 4,
+          "primary": {
+            "TP": 227,
+            "FP": 512,
+            "FN": 17,
+            "TN": 308
+          },
+          "soft": {
+            "TP": 222,
+            "FP": 465,
+            "FN": 22,
+            "TN": 355
+          },
+          "uniform": {
+            "TP": 187,
+            "FP": 282,
+            "FN": 57,
+            "TN": 538
+          }
+        },
+        {
+          "query_id": "left-cars-in-the-opposite-direction-of-ours",
+          "query_text": "left cars in the opposite direction of ours",
+          "canonical_positive_observations": 409,
+          "unique_paid": 10,
+          "teacher_Yes_count": 7,
+          "paid_teacher_Yes_without_canonical_match": 4,
+          "primary": {
+            "TP": 203,
+            "FP": 470,
+            "FN": 206,
+            "TN": 185
+          },
+          "soft": {
+            "TP": 181,
+            "FP": 435,
+            "FN": 228,
+            "TN": 220
+          },
+          "uniform": {
+            "TP": 184,
+            "FP": 257,
+            "FN": 225,
+            "TN": 398
+          }
+        },
+        {
+          "query_id": "silver-cars-can-be-seen-on-the-right",
+          "query_text": "silver cars can be seen on the right",
+          "canonical_positive_observations": 27,
+          "unique_paid": 9,
+          "teacher_Yes_count": 1,
+          "paid_teacher_Yes_without_canonical_match": 1,
+          "primary": {
+            "TP": 0,
+            "FP": 361,
+            "FN": 27,
+            "TN": 676
+          },
+          "soft": {
+            "TP": 0,
+            "FP": 213,
+            "FN": 27,
+            "TN": 824
+          },
+          "uniform": {
+            "TP": 0,
+            "FP": 164,
+            "FN": 27,
+            "TN": 873
+          }
+        },
+        {
+          "query_id": "cars-on-the-left-are-traveling-in-the-opposite-direction",
+          "query_text": "cars on the left are traveling in the opposite direction",
+          "canonical_positive_observations": 409,
+          "unique_paid": 10,
+          "teacher_Yes_count": 7,
+          "paid_teacher_Yes_without_canonical_match": 3,
+          "primary": {
+            "TP": 238,
+            "FP": 357,
+            "FN": 171,
+            "TN": 298
+          },
+          "soft": {
+            "TP": 189,
+            "FP": 233,
+            "FN": 220,
+            "TN": 422
+          },
+          "uniform": {
+            "TP": 171,
+            "FP": 214,
+            "FN": 238,
+            "TN": 441
+          }
+        }
+      ],
+      "primary_teacher_KL": 0.002939282051401087,
+      "all_original_targets_preserved": true,
+      "no_signed_semantic_targets": true
+    },
+    {
+      "pair": "C4",
+      "methods": {
+        "EVIDENCE_VISUAL_RSI": {
+          "canonical": {
+            "TP": 54427,
+            "FP": 18370,
+            "FN": 1451,
+            "TN": 15096
+          },
+          "official_IoU50": {
+            "TP": 54409.0,
+            "FP": 18388.0,
+            "FN": 1971.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SOFT_KD": {
+          "canonical": {
+            "TP": 53669,
+            "FP": 20579,
+            "FN": 2209,
+            "TN": 12887
+          },
+          "official_IoU50": {
+            "TP": 53717.0,
+            "FP": 20531.0,
+            "FN": 2663.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "HARD_KD": {
+          "canonical": {
+            "TP": 55841,
+            "FP": 22155,
+            "FN": 37,
+            "TN": 11311
+          },
+          "official_IoU50": {
+            "TP": 55803.0,
+            "FP": 22193.0,
+            "FN": 577.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "IPW_KD": {
+          "canonical": {
+            "TP": 54396,
+            "FP": 22343,
+            "FN": 1482,
+            "TN": 11123
+          },
+          "official_IoU50": {
+            "TP": 54401.0,
+            "FP": 22338.0,
+            "FN": 1979.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SSL_KD": {
+          "canonical": {
+            "TP": 53720,
+            "FP": 19409,
+            "FN": 2158,
+            "TN": 14057
+          },
+          "official_IoU50": {
+            "TP": 53750.0,
+            "FP": 19379.0,
+            "FN": 2630.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "R_DIRECT": {
+          "canonical": {
+            "TP": 54771,
+            "FP": 19291,
+            "FN": 1107,
+            "TN": 14175
+          },
+          "official_IoU50": {
+            "TP": 54738.0,
+            "FP": 19324.0,
+            "FN": 1642.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SOFT_POOLED": {
+          "canonical": {
+            "TP": 53633,
+            "FP": 20127,
+            "FN": 2245,
+            "TN": 13339
+          },
+          "official_IoU50": {
+            "TP": 53682.0,
+            "FP": 20078.0,
+            "FN": 2698.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "UNIFORM_SOFT_KD": {
+          "canonical": {
+            "TP": 52903,
+            "FP": 27328,
+            "FN": 2975,
+            "TN": 6138
+          },
+          "official_IoU50": {
+            "TP": 53022.0,
+            "FP": 27209.0,
+            "FN": 3358.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "UNIFORM_POOLED": {
+          "canonical": {
+            "TP": 52889,
+            "FP": 27813,
+            "FN": 2989,
+            "TN": 5653
+          },
+          "official_IoU50": {
+            "TP": 53014.0,
+            "FP": 27688.0,
+            "FN": 3366.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "FLAT_KD128": {
+          "canonical": {
+            "TP": 53731,
+            "FP": 21217,
+            "FN": 2147,
+            "TN": 12249
+          },
+          "official_IoU50": {
+            "TP": 53761.0,
+            "FP": 21187.0,
+            "FN": 2619.0
+          },
+          "positive_queries_zero_output": 0
+        },
+        "SAME_ARCH_KD128": {
+          "canonical": {
+            "TP": 55469,
+            "FP": 18822,
+            "FN": 409,
+            "TN": 14644
+          },
+          "official_IoU50": {
+            "TP": 55432.0,
+            "FP": 18859.0,
+            "FN": 948.0
+          },
+          "positive_queries_zero_output": 0
+        }
+      },
+      "coverage": {
+        "primary": {
+          "logical_draws": 43,
+          "unique_actions": 42,
+          "repeated_logical_cache_actions": 1,
+          "teacher_nominal_anchor_counts": {
+            "TP": 25,
+            "FP": 10,
+            "FN": 0,
+            "TN": 7
+          },
+          "known_teacher_class_disagreements": 0,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_without_correct_action_in_old_pool": 0
+        },
+        "uniform": {
+          "logical_draws": 43,
+          "unique_actions": 43,
+          "repeated_logical_cache_actions": 0,
+          "teacher_nominal_anchor_counts": {
+            "TP": 29,
+            "FP": 10,
+            "FN": 0,
+            "TN": 4
+          },
+          "known_teacher_class_disagreements": null,
+          "positive_pool_queries_never_asked_correct": 0,
+          "positive_queries_without_correct_action_in_old_pool": 0
+        }
+      },
+      "content_diagnostics": {
+        "S_bootstrap": {
+          "image_pretext": 0.4128362238407135,
+          "positive_pair_MSE": 0.010823511518537998,
+          "mean_content_std": 0.18904662132263184
+        },
+        "R_bootstrap": {
+          "image_pretext": 0.12300034612417221,
+          "positive_pair_MSE": 0.0282952431589365,
+          "mean_content_std": 0.9836379885673523
+        },
+        "S_final": {
+          "image_pretext": 0.2960110604763031,
+          "positive_pair_MSE": 0.04309322312474251,
+          "mean_content_std": 0.48588138818740845
+        },
+        "R_final": {
+          "image_pretext": 0.04280185326933861,
+          "positive_pair_MSE": 0.007052029948681593,
+          "mean_content_std": 1.000262975692749
+        }
+      },
+      "worst_primary_minus_uniform_FP_queries": [
+        {
+          "query_id": "light-side-team-player",
+          "query_text": "light-side team player",
+          "canonical_positive_observations": 5522,
+          "unique_paid": 5,
+          "teacher_Yes_count": 5,
+          "paid_teacher_Yes_without_canonical_match": 3,
+          "primary": {
+            "TP": 5519,
+            "FP": 5436,
+            "FN": 3,
+            "TN": 210
+          },
+          "soft": {
+            "TP": 5489,
+            "FP": 4154,
+            "FN": 33,
+            "TN": 1492
+          },
+          "uniform": {
+            "TP": 5446,
+            "FP": 3265,
+            "FN": 76,
+            "TN": 2381
+          }
+        },
+        {
+          "query_id": "basketball-player",
+          "query_text": "basketball player",
+          "canonical_positive_observations": 11154,
+          "unique_paid": 6,
+          "teacher_Yes_count": 6,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 11154,
+            "FP": 14,
+            "FN": 0,
+            "TN": 0
+          },
+          "soft": {
+            "TP": 11154,
+            "FP": 14,
+            "FN": 0,
+            "TN": 0
+          },
+          "uniform": {
+            "TP": 10926,
+            "FP": 11,
+            "FN": 228,
+            "TN": 3
+          }
+        },
+        {
+          "query_id": "player",
+          "query_text": "player",
+          "canonical_positive_observations": 11154,
+          "unique_paid": 6,
+          "teacher_Yes_count": 6,
+          "paid_teacher_Yes_without_canonical_match": 0,
+          "primary": {
+            "TP": 11154,
+            "FP": 14,
+            "FN": 0,
+            "TN": 0
+          },
+          "soft": {
+            "TP": 11154,
+            "FP": 14,
+            "FN": 0,
+            "TN": 0
+          },
+          "uniform": {
+            "TP": 10994,
+            "FP": 14,
+            "FN": 160,
+            "TN": 0
+          }
+        },
+        {
+          "query_id": "dark-side-team-player",
+          "query_text": "dark-side team player",
+          "canonical_positive_observations": 5668,
+          "unique_paid": 5,
+          "teacher_Yes_count": 5,
+          "paid_teacher_Yes_without_canonical_match": 4,
+          "primary": {
+            "TP": 4705,
+            "FP": 5440,
+            "FN": 963,
+            "TN": 60
+          },
+          "soft": {
+            "TP": 3543,
+            "FP": 4979,
+            "FN": 2125,
+            "TN": 521
+          },
+          "uniform": {
+            "TP": 3190,
+            "FP": 5491,
+            "FN": 2478,
+            "TN": 9
+          }
+        },
+        {
+          "query_id": "basketball-player-in-white-clothes",
+          "query_text": "basketball player in white clothes",
+          "canonical_positive_observations": 5522,
+          "unique_paid": 4,
+          "teacher_Yes_count": 3,
+          "paid_teacher_Yes_without_canonical_match": 1,
+          "primary": {
+            "TP": 5070,
+            "FP": 1354,
+            "FN": 452,
+            "TN": 4292
+          },
+          "soft": {
+            "TP": 5490,
+            "FP": 1478,
+            "FN": 32,
+            "TN": 4168
+          },
+          "uniform": {
+            "TP": 5490,
+            "FP": 2876,
+            "FN": 32,
+            "TN": 2770
+          }
+        }
+      ],
+      "primary_teacher_KL": 0.00011083702605688683,
+      "all_original_targets_preserved": true,
+      "no_signed_semantic_targets": true
+    }
+  ],
+  "source_sha256": "a7dc59ed70864356aac720d35069b2bdd86ddcdec81507860eb75510b2e6b3dd",
+  "new_fits_teacher_backbone_predictions_or_seeds": 0,
+  "GT_only_after_both_studies_complete": true,
+  "canonical_not_pure_teacher_semantic_accuracy": true,
+  "content_pretext_change_not_a_module_quality_ablation": true,
+  "official_IoU50_not_additive_decomposition_of19threshold_HOTA": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

@@ -1,0 +1,12 @@
+{
+  "status": "REGISTERED_TEACHER_ONLY_ORDINARY_HEAD_CONVERGENCE_PROBE",
+  "registered_unix": 1795353845.3072004,
+  "source_sha256": "9eb34f9ddd1cbb40b14c2bae318f6795555b5ae94925496345929317ff30a5cd",
+  "motivation": "First C2ordinarydirectprefix exhausted16000steps atKL0.0063925 above fixed0.005gate, with0exactfloat32inputaliases. Diagnose ordinary optimization before any task-quality claim.",
+  "frozen_inputs": "Archived prefix1 stream and ordinary direct checkpoint from the initialIO-failureattempt; all inputs/targets/hidden weights are causal and fixed before this probe",
+  "predefined_solver": "Convex last-layer weightedBCE,unregularized L-BFGS-B max1000iterations,gtol1e-10,ftol1e-14,maxls50,maxcor30,CPU1thread. Fixed learned hidden basis and raw confidence weights.",
+  "no_current_study_modification": true,
+  "no_quality_prediction_or_GT": true,
+  "decision": "Report fixed-iteration optimum/gradient and whether registeredKL0.005is reached. Do not loosen the oldgate or promote from HOTA; quality requires a separate full comparator.",
+  "goal_status": "ACTIVE"
+}

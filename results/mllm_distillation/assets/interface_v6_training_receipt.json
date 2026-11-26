@@ -1,0 +1,150 @@
+{
+  "status": "INTERFACE_PASS_NO_OPTIMIZER_STEP",
+  "checks": [
+    {
+      "video": "dancetrack0004",
+      "frame": 121,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.33360886573791504,
+      "KD_gradient_norm": 0.005267648316113739,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0010",
+      "frame": 842,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.035920143127441406,
+      "KD_gradient_norm": 0.0007388729092336383,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0025",
+      "frame": 242,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 14.182323455810547,
+      "KD_gradient_norm": 0.199994662379401,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0034",
+      "frame": 93,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.7030298709869385,
+      "KD_gradient_norm": 0.08673743318436489,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0047",
+      "frame": 842,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.016875267028808594,
+      "KD_gradient_norm": 0.0003121652506087851,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0065",
+      "frame": 351,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 3.316647529602051,
+      "KD_gradient_norm": 0.13815343261430083,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0081",
+      "frame": 99,
+      "candidates": 4,
+      "valid": 4,
+      "logits_shape": [
+        4,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.19011282920837402,
+      "KD_gradient_norm": 0.0024398241945137885,
+      "optimizer_step_called": false
+    },
+    {
+      "video": "dancetrack0097",
+      "frame": 1083,
+      "candidates": 3,
+      "valid": 3,
+      "logits_shape": [
+        3,
+        4,
+        1,
+        2
+      ],
+      "loss": 0.010181109420955181,
+      "KD_gradient_norm": 0.00014446438040862617,
+      "optimizer_step_called": false
+    }
+  ],
+  "optimizer_updates": 0,
+  "adapter_delta_L2": 0.0,
+  "temporary_checkpoint_roundtrip": true,
+  "temporary_checkpoint_sha256": "aa388a85a41c4f8ba8679246050a429906524183e0d57c367988cadf16d112ea",
+  "temporary_checkpoint_deleted": true,
+  "method": "MLLM_DISTILL",
+  "scope": "interface",
+  "protocol": {
+    "name": "TRANSDUCTIVE_VAL_MLLM_DISTILL_DIAGNOSTIC",
+    "source_domain": "refer_kitti_v2",
+    "target_domain": "refer_dance",
+    "target_split": "val",
+    "evaluation_split": "same_val_development_only_not_Train_to_Val",
+    "seed": 17,
+    "test_time_update": false
+  },
+  "trainable_parameters": 24576,
+  "frozen_parameters_unchanged": true,
+  "target_GT_open_attempts": [],
+  "wall_seconds": 13.376679309876636,
+  "peak_allocated_bytes": 1363040768,
+  "source_checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "pseudo_seal_sha256": "73494a2d79ea4560c9f9d6ddb2d48e25027766b9f5e562516af11966d42eeb93",
+  "optimizer_at_test_time": false,
+  "student_calls_MLLM": false
+}

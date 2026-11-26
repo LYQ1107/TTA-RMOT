@@ -1,0 +1,112 @@
+{
+  "status": "PASS_REAL_CROSS_CANDIDATE_TEACHER_PILOT_NOT_TASK_QUALITY",
+  "overall": {
+    "cases": 72,
+    "joint_class_mean": [
+      0.1311485849713184,
+      0.11508632173253217,
+      0.06976471250406273,
+      0.6840003840625286
+    ],
+    "mean_exactly_one_mass": 0.24623490670385056,
+    "mean_candidate_marginal_gap": 0.038958185454955836,
+    "mean_order_swap_L1": 0.1936507819888599,
+    "mean_shared_binary_joint_L1": 0.2178304100583167,
+    "mean_independent_binary_joint_L1": 0.6360954260611733
+  },
+  "by_view": {
+    "CROP": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.10395670778386072,
+        0.07170433041634776,
+        0.041586533421953696,
+        0.7827524213741223
+      ],
+      "mean_exactly_one_mass": 0.17566103820020848,
+      "mean_candidate_marginal_gap": 0.0521543407791493,
+      "mean_order_swap_L1": 0.1438189049210147,
+      "mean_shared_binary_joint_L1": 0.24406325930279613,
+      "mean_independent_binary_joint_L1": 0.6798307939737546
+    },
+    "FRAME_BOX": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.1901510287431544,
+        0.1996208697637485,
+        0.07326301062463851,
+        0.536965104440848
+      ],
+      "mean_exactly_one_mass": 0.3897718985069029,
+      "mean_candidate_marginal_gap": 0.03220606663489889,
+      "mean_order_swap_L1": 0.2858600304965269,
+      "mean_shared_binary_joint_L1": 0.26688129328128224,
+      "mean_independent_binary_joint_L1": 0.568680004560368
+    },
+    "CLIP": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.09933801838694005,
+        0.07393376501750026,
+        0.09444459346559597,
+        0.7322836263726155
+      ],
+      "mean_exactly_one_mass": 0.1732717834044403,
+      "mean_candidate_marginal_gap": 0.03251414895081931,
+      "mean_order_swap_L1": 0.1512734105490381,
+      "mean_shared_binary_joint_L1": 0.1425466775908717,
+      "mean_independent_binary_joint_L1": 0.6597754796493973
+    }
+  },
+  "by_target": {
+    "Dance": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.0021312063766648257,
+        0.0018496287539164769,
+        0.0008808249319069242,
+        0.9951383483906587
+      ],
+      "mean_exactly_one_mass": 0.003980835130581302,
+      "mean_candidate_marginal_gap": 0.0003293826566732605,
+      "mean_order_swap_L1": 0.005489387889610953,
+      "mean_shared_binary_joint_L1": 0.0029458730887199636,
+      "mean_independent_binary_joint_L1": 0.004629905562524073
+    },
+    "KITTI-V2": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.1478896745829843,
+        0.15479724058726183,
+        0.059683945088181645,
+        0.6376291296134392
+      ],
+      "mean_exactly_one_mass": 0.3026869151702461,
+      "mean_candidate_marginal_gap": 0.018446617817971855,
+      "mean_order_swap_L1": 0.3005746850588669,
+      "mean_shared_binary_joint_L1": 0.22355659416643903,
+      "mean_independent_binary_joint_L1": 0.8451344510685885
+    },
+    "SportsMOT": {
+      "cases": 24,
+      "joint_class_mean": [
+        0.24342487395430604,
+        0.18861209585641822,
+        0.1487293674920996,
+        0.4192336741834879
+      ],
+      "mean_exactly_one_mass": 0.43203696981072426,
+      "mean_candidate_marginal_gap": 0.09809855589022239,
+      "mean_order_swap_L1": 0.27488827301810187,
+      "mean_shared_binary_joint_L1": 0.42698876291979104,
+      "mean_independent_binary_joint_L1": 1.0585219215524073
+    }
+  },
+  "physical_examples": 432,
+  "cache_hits": 0,
+  "distinct_candidate_same_requested_frame": true,
+  "no_GT_or_task_accuracy_claim": true,
+  "no_trained_RSI_or_six_setting_quality_claim": true,
+  "teacher_distribution_contrast_is_not_semantic_truth": true,
+  "receipt_path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/cross_candidate_teacher_pilot_20261123/worker_receipt.json"
+}

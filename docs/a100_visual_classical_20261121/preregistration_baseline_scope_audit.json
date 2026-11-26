@@ -1,0 +1,37 @@
+{
+  "version": "BASELINE_SCOPE_AUDIT_V1",
+  "reason": "User questions surprisingly high ordinary KD and rejects prior goal completion. Audit before new mechanism optimization.",
+  "source_commit": "d5e63d6f02888806da3c1ebc96b2eaf402af17e5",
+  "pairs": [
+    "C4",
+    "C1"
+  ],
+  "seed": 0,
+  "GT_in_adaptation": false,
+  "teacher_feedback": "Frozen actual C4 key single CLIP_KD answers; C1 COVER seed0 actual teacher records",
+  "new_teacher_calls": 0,
+  "features_and_feedback_prepaid_quality_diagnostic": true,
+  "normalization": "same prefix unlabeled image rows including current video in all scopes",
+  "scopes": [
+    "SOURCE_ONLY common track decoder",
+    "DIRECT_TEACHER known answers else source",
+    "CURRENT_ONLY bounded-soft head on only current teacher labels",
+    "PREFIX_REPRO bounded-soft head on past+current teacher labels",
+    "PAST_ONLY output before opening current answers; different information contract"
+  ],
+  "head": "unchanged strong_prefix_teacher.fit_head;1080->64->1;4000min16000max;teacher_KLstop.005;seed0",
+  "current_video_transductive": true,
+  "different_scopes_are_diagnostic_not_a_matched_budget_superiority_claim": true,
+  "primary_regression": "PREFIX_REPRO against existing bounded KD; record all changed files and scores without silently replacing them",
+  "uncached_metric_audit": "Fresh output folders with exactly same466 query predictions as C4 independent KD/cohort; vendor TrackEval evaluator, no episode cache or formula changes",
+  "four_GPUs": {
+    "0": "C4 CURRENT_ONLY+PREFIX_REPRO",
+    "1": "C4 PAST_ONLY",
+    "2": "C1 CURRENT_ONLY+PREFIX_REPRO",
+    "3": "C1 PAST_ONLY"
+  },
+  "all_outputs_sealed_before_any_new_GT_evaluation": true,
+  "all_development_data": true,
+  "next_mechanism_not_selected_until_scope_audit": "identity/association consistency is a hypothesis, not yet an implemented claimed contribution",
+  "goal_status": "ACTIVE; no completion based on audit alone"
+}

@@ -1,0 +1,265 @@
+{
+  "version": "v8",
+  "published_commit": "3b163bf2b7be2a2c5051225a20b3388f1ff65732",
+  "gate_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/gate.json",
+  "gate_sha256": "ae3a5d3ba7e9b1f66cc78a80fc731b5f72265a4cf4d62b294286ff861e61201f",
+  "artifacts_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/artifacts.json",
+  "artifacts_sha256": "3128e4239ab06f3792f95f56bdca0f806bce5223c7f9118d08df5d74857f4790",
+  "active_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/active",
+  "stage_A_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/stage_A",
+  "public_root": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v8",
+  "launcher_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v8/launchers",
+  "source_heads": {
+    "V2-best": {
+      "source_domain": "KITTI-V2",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/V2-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "62cf4fcaffa72dc5df8cbbc2c18e5a4f62ef59128c2ffdeda748e8b72bf8f490",
+      "best_source_loss": 0.4316636254415038,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 3640240,
+          "alpha": 0.43374232273536323,
+          "temperature": 2.305516311374863,
+          "initial_NLL": 0.04207300769303678,
+          "fitted_NLL": 0.025815951618867104,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 894062,
+          "alpha": 0.39101595902882,
+          "temperature": 2.557440372724773,
+          "initial_NLL": 0.4259241125112647,
+          "fitted_NLL": 0.24428571223281775,
+          "iterations": 17,
+          "evaluations": 17
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/heads/V2-best/training_receipt.json",
+      "receipt_sha256": "3b62c6436c6caf3465c240b6cf8cb040f65f0475f920b7c2e233e011075e1a3e"
+    },
+    "Dance-best": {
+      "source_domain": "Dance",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/Dance-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "b742ce3cf5a4184aaba28d48f5eb7d96af3c8b00da818ef3657f10db8b2657e6",
+      "best_source_loss": 0.7640061539552644,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 1315579,
+          "alpha": 3.3301250131978732,
+          "temperature": 0.3002890269995341,
+          "initial_NLL": 0.00185488386706274,
+          "fitted_NLL": 0.0008576596475693539,
+          "iterations": 15,
+          "evaluations": 15
+        },
+        {
+          "sign": "positive",
+          "rows": 56207,
+          "alpha": 0.16429269230065535,
+          "temperature": 6.086697990011642,
+          "initial_NLL": 1.474067941743942,
+          "fitted_NLL": 0.5804062501824159,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/heads/Dance-best/training_receipt.json",
+      "receipt_sha256": "263564a169a530c31df980c9ebe931b198a4a070da823f7863ff4da87353862d"
+    },
+    "LaMOT-best": {
+      "source_domain": "SportsMOT",
+      "checkpoint": "/data1/user/TTA-RMOT-assets/presence_active_20261102/redesign_v4/heads/LaMOT-best/checkpoint_best_source.pt",
+      "checkpoint_sha256": "5c951f1aa750728973657c0e8f3524c78c951022b6154b099751ce2751831e89",
+      "best_source_loss": 0.4474509250425922,
+      "architecture": "bernoulli_cardinality_v4",
+      "fits": [
+        {
+          "sign": "negative",
+          "rows": 136599,
+          "alpha": 0.4532202773070258,
+          "temperature": 2.2064326114044723,
+          "initial_NLL": 0.06932951044936478,
+          "fitted_NLL": 0.04545339515330955,
+          "iterations": 19,
+          "evaluations": 19
+        },
+        {
+          "sign": "positive",
+          "rows": 198647,
+          "alpha": 0.6801548741543022,
+          "temperature": 1.4702533761055379,
+          "initial_NLL": 0.05282092606801226,
+          "fitted_NLL": 0.044668359035109156,
+          "iterations": 18,
+          "evaluations": 18
+        }
+      ],
+      "receipt_path": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/heads/LaMOT-best/training_receipt.json",
+      "receipt_sha256": "229f40e115863544b6ae7f77ed9bf820b837b92138e0b33a19e755dc829fdab8"
+    }
+  },
+  "probability_rule": "unchanged source-calibrated multi-Bernoulli posterior",
+  "count_decision": "expected IoU, not the probabilities used in the B/C prior",
+  "old_stage_A_gate_unchanged": true,
+  "teacher_revision_unchanged": true,
+  "original_BC_hyperparameters_unchanged": false,
+  "first_jobs": "all six MINUS_SLOW, then registered FULL and fixed-question SLOW_REPLAY",
+  "maximum_GPUs": 2,
+  "matrix_GPU_hour_gate": 20,
+  "fast_mode": "presence_em_v8",
+  "pilot_only": false,
+  "maximum_pilot_videos": null,
+  "prereg_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v8/PREREG.md",
+  "prereg_sha256": "dbffdf0e0fce393609980e2e852493d00ee764095e478109997dee0ac86cd9ef",
+  "registered_change": "final v7 EB presence, asked-only .85/.15, positive rechecks, balanced v6 LoRA and fixed-evidence replay",
+  "original_teacher_source_head_and_LoRA_unchanged": true,
+  "full_matrix_authorized": false,
+  "continuation_of": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v6/execution.json",
+  "registered_tier": "V8_STAGE2_3_ELEVEN_JOBS",
+  "allowed_registered_jobs": [
+    {
+      "pair": "C1",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C2",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C3",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C5",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C6",
+      "method": "MINUS_SLOW",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C6",
+      "method": "FULL",
+      "rho": 0.3
+    },
+    {
+      "pair": "C1",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3
+    },
+    {
+      "pair": "C4",
+      "method": "SLOW_REPLAY",
+      "rho": 0.3
+    }
+  ],
+  "resume_completed_pilot_videos": true,
+  "user_authorization": "v8 original stages0-3 plus pre-real-data A1/A2/A3; stage4 only if registered main gate passes",
+  "prior_ten_results_immutable": true,
+  "conditional_YT_PRIOR_call_change_threshold": 0.05,
+  "prior_v5_active_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v5/active_map_v1",
+  "prior_v5_public_root": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/active_map_v1_critical28",
+  "coordinator_script": "scripts/active_v8_continue.py",
+  "report_script": "scripts/active_v8_report.py",
+  "frame_refresh": "video-start full current-model cache; fixed32 after LoRA; cached re-decode after fast",
+  "launcher_script": "scripts/active_v8_launch.py",
+  "prior_v6_public_root": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v6",
+  "prior_v6_active_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v6/active",
+  "presence_logLR_cap": 2.0,
+  "pi_soft_count_likelihood_unclipped": true,
+  "student_frozen_only_for_MINUS_SLOW": true,
+  "single_answer_identity_log_odds_cap": 2.0,
+  "none_class_weight_floor": 0.2,
+  "registration_path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v8/manifest.json",
+  "registration_sha256": "6cf99e497abfb5763f8d720c3298a2fd78c864da56a53ad17d8d997d7db871f9",
+  "amendments": [
+    {
+      "id": "A1",
+      "date": "2026-11-06",
+      "reason": "\u622a\u65ad\u8fb9\u754c\u4e0e\u5408\u6210\u771f\u503c\u51b2\u7a81\uff0c\u5728\u4efb\u4f55\u5b9e\u9a8c\u7ed3\u679c\u4ea7\u751f\u4e4b\u524d\u4fee\u6539",
+      "user_authorized": true,
+      "section": "2.5.1",
+      "rho_1_assertion": "rho_hat >= 0.95 - 1e-9",
+      "rho_01_assertion": "abs(rho_hat - 0.1) < 0.05",
+      "pi_assertion": "max(abs(pi_hat_k - pi_k)) < 0.07",
+      "old_v7_assertion": "abs(pi0_old - 0.8) > 0.1",
+      "other_acceptance_criteria_unchanged": true,
+      "interpretation": "rho=1.0 reaches the designed clipping ceiling, not an estimation error"
+    },
+    {
+      "id": "A2",
+      "date": "2026-11-06",
+      "user_authorized": true,
+      "registered_before_any_real_v8_data_results": true,
+      "reason": "5122e3a \u540c\u4e00\u56fa\u5b9a\u5408\u6210\u6d41\u65e9\u671f\u4ec5\u670985\u53e5\uff0c\u89c2\u6d4b\u4f3c\u7136\u5e73\u5766\u5bfc\u81f4EM\u7ebf\u6027\u6536\u655b\uff1b\u7528\u6237\u590d\u73b0\u62a5\u544a\u8868\u660e\u539f200\u6b21\u4e0a\u9650\u4e0d\u8db3\uff0c\u5e76\u975e\u632f\u8361\u3002\u7528\u6237\u7ed9\u51fa\u7684\u590d\u73b0\u6570\u5b57\u4ec5\u4f5c\u4fee\u8ba2\u4f9d\u636e\uff0c\u987b\u7531\u672c\u8f6e\u91cd\u65b0\u9a8c\u8bc1\uff0c\u4e0d\u5f53\u4f5c\u672c\u8f6e\u7ed3\u679c\u3002",
+      "iters_before": 200,
+      "iters_after": 5000,
+      "tol_unchanged": 1e-07,
+      "objective_trace_monotone": "Unclipped observed-data log posterior, including Beta(2,2) priors; record whether every iteration is nondecreasing within 1e-10; diagnostic only, never an acceptance gate.",
+      "contraction_rate": "last_delta / previous_delta; null if fewer than two deltas or previous_delta is zero",
+      "stop_if_not_converged_at_5000": true,
+      "other_acceptance_criteria_unchanged": true
+    },
+    {
+      "id": "A3",
+      "date": "2026-11-06",
+      "user_authorized": true,
+      "registered_before_any_real_v8_data_results": true,
+      "reason": "\u5728\u7528\u6237\u62a5\u544a\u7684rho=1.0\u5408\u6210\u6d41\u4e2d\uff0c\u5b58\u5728\u6027\u786e\u5b9a\u540e\u6781\u5c11\u8be2\u95ee\u7b2c2\u6863\uff0c200\u89c6\u9891\u4ec53\u4e2a\u5df2\u56de\u7b54\u8f68\u8ff9\u5bf9\uff0cpi_2\u7f3a\u5c11\u53ef\u8bc6\u522b\u6570\u636e\uff1b\u5df2\u56de\u7b54\u8f68\u8ff9\u4e0d\u8db3\u4e0d\u5e94\u5f53\u4f5c\u4f30\u8ba1\u504f\u5dee\uff0c\u672a\u95ee\u6863\u4f4d\u4e0d\u8fdb\u5165\u5224\u5b9a\u4f3c\u7136\u3002",
+      "minimum_answered_track_pairs_per_stratum": 200,
+      "pi_precision_gate": "abs(pi_hat_k - pi_k) < 0.07 only if answered_track_pairs_k >= 200",
+      "insufficient_data_label": "UNIDENTIFIED_INSUFFICIENT_DATA",
+      "rho_acceptance_including_A1_unchanged": true,
+      "v7_regression_unchanged": true,
+      "real_phase0_tables_apply_same_identification_rule": true,
+      "required_counts": [
+        "unique answered (video,query,track) pairs per stratum",
+        "track-term evaluations in sentence-presence likelihood computations per stratum"
+      ],
+      "likelihood_counter_definition": "One count each time an answered pair contributes its track term to a sentence-presence recomputation; EM E-step term evaluations are recorded separately, not mixed with decisions."
+    }
+  ],
+  "prior_v7_public_root": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v7",
+  "prior_v7_active_root": "/data2/user/FlexHook-TTA/results/runs/presence_active_20261102/redesign_v7/active",
+  "original_v8_registration_remote_commit": "c22d9fbda8d1a71e1a85163cf3ff29acf6d52d41",
+  "EM": {
+    "iters": 5000,
+    "tol": 1e-07,
+    "Beta_prior": [
+      2,
+      2
+    ],
+    "clip": [
+      0.05,
+      0.95
+    ],
+    "track_cap": 2
+  },
+  "pi_identification_minimum_answered_pairs": 200
+}

@@ -1,0 +1,39 @@
+{
+  "hypothesis": "static acquisition leaves40/466 C4 queries without a correct queried track; conditional-on-presence forced guessing adds only .012 HOTA, motivating adaptive examination rather than forced output",
+  "policies": [
+    "FIELD",
+    "FIELD_STATIC"
+  ],
+  "same_geometry_prior_budget_head_fit_and_decoder": true,
+  "primary_acquisition_contrast": "FIELD vs FIELD_STATIC under identical COHORT inference",
+  "fixed_policy": "first one examination per supplied query when feasible, then maximum 2*sqrt(graph covariance diagonal)-abs(posterior logit)",
+  "source_precision": 0.1,
+  "source_logit_cap": 2.0,
+  "teacher_precision": "1+3*abs(2*p-1)",
+  "teacher_logit_clip": [
+    0.02,
+    0.98
+  ],
+  "batch_size": 8,
+  "within_batch": "variance-only minimum-precision fantasy increment .9; no invented training answers",
+  "STATIC": "entire schedule sealed from images before loading teacher; posterior means do not use returned answers",
+  "ADAPTIVE": "means and variances update using only already requested answers, then choose next batch",
+  "per_method_logical_budget": {
+    "C4": 3508,
+    "C1": 3334
+  },
+  "no_early_absence_stop": true,
+  "teacher_backend_revision_and_input_prompts_unchanged": true,
+  "copied_old_cache_is_opaque_broker": true,
+  "only_selected_questions_return_answers": true,
+  "missing_questions_really_computed_on_GPU": true,
+  "union_collection_cost_not_deployment_wall": true,
+  "inference": "same raw-target strong prefix-only fully fitted hard/soft KD, COHORT and module controls",
+  "CountMatched": "query/frame counts from methods only; joint assignment for exclusive C1; independent for nonexclusive C4",
+  "target_GT_never_used_in_selection_or_inference": true,
+  "all_data_development": true,
+  "no_GT_hyperparameter_search": true,
+  "covariance_is_proxy_not_calibrated_95_percent_interval": true,
+  "all_negative_results_retained": true,
+  "baseline_anchor_commit": "eff7ed53dd74a3f3d999e41ca7732dc521a91f33"
+}

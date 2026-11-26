@@ -1,0 +1,175 @@
+{
+  "status": "REGISTERED_ORDINARY_FRAME_FIT_COMPLETION_SIX_SETTINGS",
+  "registered_unix": 1795356147.8244665,
+  "source_sha256": {
+    "scripts/a100_object_reference_fit_complete.py": "c91aca07fa4522adebb4d103698933ec24ae02e0f8f1c6c63357fd3db82baa0a",
+    "flex_uda/active/fit_completion.py": "86c206bcd7e4ddf8172b36579f1df1c81a857ded1a0a087a37de2c3f3274beea",
+    "tests/test_fit_completion.py": "8f0d7ada48dfba873617964c52b7ed071d3167a55b6b64ee8857e7baf5c3d9c6",
+    "scripts/a100_object_reference.py": "dd2a477d2c35d50333254f9763bd4e4c3b39173a374197a31548bba22b41b885",
+    "scripts/a100_relation_transport.py": "33e70d7258baad1cfee291265bbdcf4a0f22292405e7e93aebef0fdb8cb0c12c",
+    "flex_uda/active/confidence_teacher.py": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "docs/a100_six_direction_20261122/object_reference_fit_complete_hypothesis.json": "9227de40137d35515154968b937278865622e2a49deb1b27f99366cc26795885"
+  },
+  "primary": "REFERENCE_FULL",
+  "baselines": [
+    "FIT_COMPLETE_FRAME",
+    "FIT_COMPLETE_HYBRID"
+  ],
+  "contrasts": {
+    "FULL_vs_FIT_COMPLETE_FRAME": [
+      "REFERENCE_FULL",
+      "FIT_COMPLETE_FRAME"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FIT_COMPLETE_FRAME": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "FIT_COMPLETE_FRAME__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FIT_COMPLETE_FRAME": [
+      "REFERENCE_FULL__AT_FIT_COMPLETE_FRAME_COUNT",
+      "FIT_COMPLETE_FRAME__AT_FIT_COMPLETE_FRAME_COUNT"
+    ],
+    "FULL_vs_FIT_COMPLETE_HYBRID": [
+      "REFERENCE_FULL",
+      "FIT_COMPLETE_HYBRID"
+    ],
+    "RANK_AT_FULL_COUNT_vs_FIT_COMPLETE_HYBRID": [
+      "REFERENCE_FULL__AT_REFERENCE_FULL_COUNT",
+      "FIT_COMPLETE_HYBRID__AT_REFERENCE_FULL_COUNT"
+    ],
+    "RANK_AT_BASE_COUNT_vs_FIT_COMPLETE_HYBRID": [
+      "REFERENCE_FULL__AT_FIT_COMPLETE_HYBRID_COUNT",
+      "FIT_COMPLETE_HYBRID__AT_FIT_COMPLETE_HYBRID_COUNT"
+    ]
+  },
+  "conditions": [
+    {
+      "pair": "C1",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C1/seed0"
+    },
+    {
+      "pair": "C2",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C2/seed0"
+    },
+    {
+      "pair": "C3",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C3/seed0"
+    },
+    {
+      "pair": "C4",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C4/seed0"
+    },
+    {
+      "pair": "C5",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C5/seed0"
+    },
+    {
+      "pair": "C6",
+      "seed": 0,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C6/seed0"
+    },
+    {
+      "pair": "C1",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C1/seed17"
+    },
+    {
+      "pair": "C2",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C2/seed17"
+    },
+    {
+      "pair": "C3",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C3/seed17"
+    },
+    {
+      "pair": "C4",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C4/seed17"
+    },
+    {
+      "pair": "C5",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C5/seed17"
+    },
+    {
+      "pair": "C6",
+      "seed": 17,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C6/seed17"
+    },
+    {
+      "pair": "C1",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C1/seed42"
+    },
+    {
+      "pair": "C2",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C2/seed42"
+    },
+    {
+      "pair": "C3",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C3/seed42"
+    },
+    {
+      "pair": "C4",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C4/seed42"
+    },
+    {
+      "pair": "C5",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C5/seed42"
+    },
+    {
+      "pair": "C6",
+      "seed": 42,
+      "folder": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/fit_complete_supplement/C6/seed42"
+    }
+  ],
+  "seeds": [
+    0,
+    17,
+    42
+  ],
+  "new_raw_outputs": 36,
+  "count_outputs": 126,
+  "total_own_outputs": 162,
+  "borrowed_primary_raw_outputs": 18,
+  "gate": "OriginalteacherKL<=.005unchanged. Reuse exactpassedprefixoutputs; only failedprefixes refit/polish using ownpast/current data.",
+  "optimization": "Same64hiddenarchitecture; convex65parameter outputlayer L-BFGS-B max1000,then up to10x100 fullheadLBFGS withfixedlimits fromfit_completion.py; stoponlybyteacherfitcriterion, noGT",
+  "causal_probe_caches": [
+    {
+      "pair": "C2",
+      "seed": 0,
+      "video": "0005",
+      "prefix_videos": 1,
+      "teacher_examples": 1891,
+      "head_path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/six_direction_20261122/object_reference/quality_study/supervisor/baseline_full_head_probe/polished_head.pt",
+      "proof": "frame_kd_full_head_probe.json; archivedprefix1only,teacherKL0.00410485,no newquality orfutureweights"
+    }
+  ],
+  "source_head_reuse": "An original finalhead is reused only at its ownfinalvideo; intermediatefailedprefixes withoutcache are reconstructed frompast/current inputs,notfuturecheckpoints.",
+  "reference_method_unchanged": true,
+  "source_reference_fit_gate_failures_also_reported": true,
+  "primary_statistics": "Own CountSelf is proven byteidentical to the borrowedprimary; own result used without writing predecessorGT paths",
+  "all162own_and450predecessor_outputs_seal_before_supplement_GT": true,
+  "no_manual_target_GT_in_adaptation": true,
+  "new_teacher_encoder_calls": 0,
+  "all_data_development": true,
+  "physical_GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "quality_replay_not_deployment_cost": true,
+  "goal_status": "ACTIVE"
+}

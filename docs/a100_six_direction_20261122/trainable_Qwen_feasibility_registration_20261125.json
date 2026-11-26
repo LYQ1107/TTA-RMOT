@@ -1,0 +1,30 @@
+{
+  "status": "REGISTERED_ONE_REAL_IMAGE_QWEN_ADAPTER_FEASIBILITY",
+  "pair": "C1",
+  "key": [
+    "dancetrack0004",
+    "dacning-person-with-white-Tshirt-and-purple-pants",
+    1,
+    385
+  ],
+  "expected_original_base_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "source_sha256": {
+    "flex_uda/active/trainable_qwen.py": "91d47eef4c1a793baa66e3b14fc4a4e3a33fff02812fbbc62539f3956ecca72e",
+    "scripts/a100_trainable_qwen_pilot.py": "3be3005f4f81c1bb8f246a57f03dba370073b1bec3ba670028f136408b13de8f",
+    "flex_uda/teacher/yestrack_backend.py": "9a30982019c5f17e9f1d6a147af4d8e888c1ebcb499003836c7e17584be38703",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "flex_uda/teacher/visual_input_builder.py": "c06e87550e61081e7a7ad6d7b883a5ad73b4299ae74d966abf4a2df4c64c89c3",
+    "flex_uda/a100/runtime.py": "595c0b1ca3e1efefc6b6a9c70be9c4997d045c864282dcda39a687849cd057d1",
+    "flex_uda/active/deterministic_observation_runtime.py": "572e8cd6033a357134debec2c3fab8f1ab957182465942dc1e6c37760a5e8804",
+    "configs/teacher/base_qwen2b.yaml": "bc113aef9a9cbcadaad6879deaf927507810ded1c093379cafa3c1f2a2677d7c",
+    "configs/teacher/prompts_v1.yaml": "c9a913356f5e1a28c0c9cc36b04d662aca67dfc29305660bcbdd554b854510e2"
+  },
+  "adapter": "Only language-decoder q_proj/v_proj LoRA r8/alpha16/dropout0; base and vision frozen.",
+  "target": "Frozen original-model Yes probability on the downsample224or160->restore320 ROI with larger nonzero response difference. Engineering signal only, not a semantic correctness criterion.",
+  "fitting": "Exactly one AdamW lr1e-5 step, original-view soft BCE plus.1 proper binary KL to frozen original. Seed0, no GT or HOTA.",
+  "outputs": "Isolated pilot adapter only; do not reuse for a future research main or claim RSI/HOTA improvement.",
+  "physical_GPU": 0,
+  "existing_processes_preserved": true,
+  "new_RMOT_predictions": 0,
+  "goal_status": "ACTIVE"
+}

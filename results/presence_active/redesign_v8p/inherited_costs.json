@@ -1,0 +1,134 @@
+{
+  "classification": "HISTORICAL_MEASURED_PROCESS_TIME_NOT_MATCHED_COLD_START_BENCHMARK",
+  "inputs": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/multidomain_generality/costs.json",
+      "sha256": "ad5e04e47243a140378f949a4f4f12145a10c07091e54232f98e111e898b3b4a"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/presence_active/redesign_v5/active_map_v1_full/common_preparation_costs.json",
+      "sha256": "7654e6a2cd41461c50ddafe8acfbd20f9ad9a8c2f9bf62d89cb2c59fc40b13e9"
+    }
+  ],
+  "earlier_margin_inference": [
+    {
+      "model": "V2-best",
+      "target": "KITTI-V2",
+      "complete_rows": 2425382,
+      "known_GPU_process_hours": 0.10366349118690575,
+      "total_GPU_process_hours_lower_bound": 0.10366349118690575,
+      "total_GPU_process_hours_upper_bound": 0.10366349118690575,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "Dance-best",
+      "target": "KITTI-V2",
+      "complete_rows": 2425382,
+      "known_GPU_process_hours": 0.33994815069108475,
+      "total_GPU_process_hours_lower_bound": 0.5736652831902029,
+      "total_GPU_process_hours_upper_bound": 0.6282520905236662,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": false
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "KITTI-V2",
+      "known_GPU_process_hours": 0.7546878355400016,
+      "total_GPU_process_hours_lower_bound": 0.7546878355400016,
+      "total_GPU_process_hours_upper_bound": 0.7546878355400016,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "Dance",
+      "known_GPU_process_hours": 1.231397202841472,
+      "total_GPU_process_hours_lower_bound": 1.231397202841472,
+      "total_GPU_process_hours_upper_bound": 1.231397202841472,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "V2-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 1.2506753815138816,
+      "total_GPU_process_hours_lower_bound": 1.2506753815138816,
+      "total_GPU_process_hours_upper_bound": 1.2506753815138816,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "Dance-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 0.9549812918733288,
+      "total_GPU_process_hours_lower_bound": 0.9549812918733288,
+      "total_GPU_process_hours_upper_bound": 0.9549812918733288,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    },
+    {
+      "model": "LaMOT-best",
+      "target": "SportsMOT",
+      "known_GPU_process_hours": 0.9794095837574504,
+      "total_GPU_process_hours_lower_bound": 0.9794095837574504,
+      "total_GPU_process_hours_upper_bound": 0.9794095837574504,
+      "includes_smoke_and_failed_attempts": true,
+      "exact_total_available": true
+    }
+  ],
+  "earlier_reused_inferences": {
+    "C1_V2_to_Dance": "No new GPU call; inherited frozen full-bank inference cost not remeasured, not a zero-cost independent system",
+    "Dance_to_Dance": "Existing sealed official scores; no new GPU call; inherited inference cost not remeasured"
+  },
+  "shared_preparation": {
+    "status": "MEASURED_HISTORICAL_PREPARATION_NOT_MINIMAL_DEPLOYMENT_COST",
+    "shared_feature_exports": {
+      "successful_process_hours": 9.41318129438674,
+      "target_9_exports_hours": 5.77613538557476,
+      "source_3_exports_hours": 3.637045908811981
+    },
+    "discarded_source_head_research": {
+      "original_and_learning_rate_and_label_fix_8_runs_hours": 1.2759519301646571,
+      "redesign_v3_3_runs_hours": 0.6729425210466918
+    },
+    "known_successful_pre_BC_process_hours_including_discarded_heads": 11.362075745598089,
+    "original_canonical_v2_successful_process_hours": 10.689133224551398,
+    "canonical_v2_rule": "feature-only rows from stage_A_costs + all6 source_lr_trial_costs +2 source_label_fix_v2_costs; default head runs are not counted twice",
+    "current_v5_source_fit": {
+      "inherited_from_v4": true,
+      "parameters_per_source": 2,
+      "v4_CPU_fit_seconds_total": 5.375467942794785,
+      "v4_GPU_hours": 0,
+      "v5_additional_source_fit_GPU_hours": 0
+    },
+    "inputs": [
+      "results/presence_active/stage_A_costs.csv",
+      "results/presence_active/source_lr_trial_costs.csv",
+      "results/presence_active/source_label_fix_v2_costs.csv",
+      "results/presence_active/cost_accounting_v2.json",
+      "results/presence_active/redesign_v3/training_costs.csv",
+      "results/presence_active/redesign_v4/training_costs.csv",
+      "results/presence_active/redesign_v5/training_costs.csv"
+    ],
+    "limits": [
+      "shared-device elapsed process time, not a GPU-utilization integral",
+      "failed preparation attempts and initial loading overhead are not fully timed and are not assumed zero",
+      "not a complete lifetime project bill; earlier legacy calibration pilots have separate preserved ledgers",
+      "v5 reuses existing margins/metadata; exported PCD tensors and discarded heads are historical research expenditure, not all necessary for a minimal deployment",
+      "official checkpoint pretraining and fixed tracker generation cost not measured here",
+      "MAP first videos reused by current FULL are already included in per-method costs and must not be added again"
+    ],
+    "BC_40h_gate_scope": "unchanged original B/C full-matrix gate; no new matrix authorization derived from this accounting",
+    "new_model_or_teacher_calls_for_cost_calculation": 0,
+    "cost_calculation_inputs": "cost CSV / JSON only; independent GT diagnostics are reported separately"
+  },
+  "notes": [
+    "Do not sum duplicate historical margin/feature passes as minimal required deployment.",
+    "Discarded source heads and all PCD exports are not all necessary for frozen MINUS.",
+    "Fixed detector/tracker generation and official checkpoint pretraining are unmeasured, not zero.",
+    "UNIFORM_K does not consume identity ranking; only MOTION queries optionally use frame_presence.",
+    "Equal logical calls are not equal view cost, GPU time, or end-to-end cold-start latency.",
+    "New/cache/equivalent teacher phase durations and shared-device worker wall time are separate ledgers."
+  ]
+}

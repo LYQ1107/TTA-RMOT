@@ -1,0 +1,308 @@
+{
+  "status": "PASS_SAME_CPU_POLICY_INTERVENTION_FACTS_REPRODUCED_NOT_RMOT_QUALITY",
+  "rows": [
+    {
+      "video": "dancetrack0004",
+      "branches": {
+        "CPU_ORIGINAL_SGD": {
+          "budget": 56,
+          "replacement_questions": 0,
+          "same_question_order": true,
+          "changed_query_track_pairs": 0,
+          "changed_visual_nodes": 0,
+          "added": [],
+          "removed": [],
+          "solver_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.2226958699059937,
+            0.015627820987660294,
+            0.16911155582043316
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.4203521066875283
+          ],
+          "zero_information_skipped": [
+            false,
+            false,
+            false
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0,
+          "actual_parameter_changes": [
+            0.0,
+            0.0,
+            0.0020049592651296974
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0003231168259402034,
+            "COARSE_UNIT_SOFT": 0.00036320980481692466
+          }
+        },
+        "INFO_GATED_SGD": {
+          "budget": 56,
+          "replacement_questions": 0,
+          "same_question_order": true,
+          "changed_query_track_pairs": 0,
+          "changed_visual_nodes": 0,
+          "added": [],
+          "removed": [],
+          "solver_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.2226958699059937,
+            0.015627820987660294,
+            0.16911155582043316
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.4203521066875283
+          ],
+          "zero_information_skipped": [
+            false,
+            true,
+            false
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0,
+          "actual_parameter_changes": [
+            0.0,
+            0.0,
+            0.0020049592651296974
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0003231168259402034,
+            "COARSE_UNIT_SOFT": 0.00036320980481692466
+          }
+        },
+        "INFO_GATED_TRUST": {
+          "budget": 56,
+          "replacement_questions": 0,
+          "same_question_order": true,
+          "changed_query_track_pairs": 0,
+          "changed_visual_nodes": 0,
+          "added": [],
+          "removed": [],
+          "solver_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": false,
+            "parameter_L2": 1.2107443104046467
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.2226958699059937,
+            0.015627820987660294,
+            0.16911155582043316
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.4203521066875283
+          ],
+          "zero_information_skipped": [
+            false,
+            true,
+            false
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0026579425378868,
+          "actual_parameter_changes": [
+            0.0,
+            0.0,
+            1.2127269075735163
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0003231168259402034,
+            "COARSE_UNIT_SOFT": 0.00036320980481692466
+          }
+        }
+      }
+    },
+    {
+      "video": "dancetrack0005",
+      "branches": {
+        "CPU_ORIGINAL_SGD": {
+          "budget": 40,
+          "replacement_questions": 0,
+          "same_question_order": true,
+          "changed_query_track_pairs": 0,
+          "changed_visual_nodes": 0,
+          "added": [],
+          "removed": [],
+          "solver_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.01223671987045963,
+            0.004959853605516884,
+            0.03383580077575993
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "zero_information_skipped": [
+            false,
+            false,
+            false
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0,
+          "actual_parameter_changes": [
+            9.938651448141385e-05,
+            9.886924634453553e-05,
+            0.0002889746836422091
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0002057406817912999,
+            "COARSE_UNIT_SOFT": 0.00026993334309091677
+          }
+        },
+        "INFO_GATED_SGD": {
+          "budget": 40,
+          "replacement_questions": 0,
+          "same_question_order": true,
+          "changed_query_track_pairs": 0,
+          "changed_visual_nodes": 0,
+          "added": [],
+          "removed": [],
+          "solver_vs_original_CPU": {
+            "byte_identical": true,
+            "parameter_L2": 0.0
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": false,
+            "parameter_L2": 0.0003210562693817591
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.01223671987045963,
+            0.004959853605516884,
+            0.03383580077575993
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "zero_information_skipped": [
+            true,
+            true,
+            true
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0,
+          "actual_parameter_changes": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0002057406817912999,
+            "COARSE_UNIT_SOFT": 0.00026993334309091677
+          }
+        },
+        "INFO_GATED_TRUST": {
+          "budget": 40,
+          "replacement_questions": 2,
+          "same_question_order": false,
+          "changed_query_track_pairs": 4,
+          "changed_visual_nodes": 4,
+          "added": [
+            {
+              "query_id": "dancing-person-with-yellow-Tshirt-and-black-pants",
+              "track_id": 19,
+              "frame_id": 1203,
+              "view": "CROP"
+            },
+            {
+              "query_id": "dancing-person-dressed-all-in-white",
+              "track_id": 20,
+              "frame_id": 292,
+              "view": "CROP"
+            }
+          ],
+          "removed": [
+            {
+              "query_id": "dancing-person-dressed-all-in-white",
+              "track_id": 23,
+              "frame_id": 716,
+              "view": "CROP"
+            },
+            {
+              "query_id": "dancing-person-with-yellow-Tshirt-and-black-pants",
+              "track_id": 20,
+              "frame_id": 292,
+              "view": "CROP"
+            }
+          ],
+          "solver_vs_original_CPU": {
+            "byte_identical": false,
+            "parameter_L2": 5.215585251807698
+          },
+          "observer_vs_original_CPU": {
+            "byte_identical": false,
+            "parameter_L2": 1.2106523825029825
+          },
+          "conditional_teacher_probe_CE_after": [
+            0.01223671987045963,
+            0.0047109817511775355,
+            0.031118452511725108
+          ],
+          "rewards": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "zero_information_skipped": [
+            true,
+            true,
+            true
+          ],
+          "max_mean_recorded_decision_state_KL": 0.0,
+          "actual_parameter_changes": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "ordinary_teacher_excess_KL": {
+            "JOINT": 0.0001859731256181607,
+            "COARSE_UNIT_SOFT": 0.00024085633379355986
+          }
+        }
+      }
+    }
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "same_CPU_and_two_threads": true,
+  "same_inputs_normalization_budget_fixed_probes": true,
+  "maximum_ordinary_teacher_excess_KL": 0.00036320980481692466,
+  "maximum_observer_recorded_state_KL": 0.0026579425378868,
+  "target_manual_GT_or_HOTA_read": false,
+  "RMOT_predictions_generated": false,
+  "actual_new_teacher_GPU_calls": 0,
+  "existing_GPU_original_pilot_comparisons_context_only_not_pure_causal": true,
+  "interpretation": "Bounded policy update can change future observations; zero-information baseline noise can be removed. Two videos do not establish RMOT benefit or RSI success.",
+  "all_data_DEVELOPMENT": true,
+  "goal_complete": false,
+  "original_live_six_setting_primary_unchanged": true
+}

@@ -1,0 +1,35 @@
+{
+  "selected": [
+    {
+      "physical_gpu": 4,
+      "uuid": "GPU-44f62835-4095-23ec-d3dd-5af16a00705c",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 2296,
+      "total_mib": 81920,
+      "processes": 3,
+      "preserved_existing_healthy_workers": [
+        948408,
+        948422
+      ]
+    },
+    {
+      "physical_gpu": 5,
+      "uuid": "GPU-c6523d98-cb2d-95ed-4cb2-a84936acceb6",
+      "name": "NVIDIA A800-SXM4-80GB",
+      "free_mib": 77923,
+      "total_mib": 81920,
+      "processes": 1,
+      "new_admission_minimum_free_mib": 20480
+    }
+  ],
+  "maximum_physical_GPUs": 2,
+  "previous_physical_GPUs": [
+    4,
+    6
+  ],
+  "retired_idle_GPU": 6,
+  "verification": "GPU6 had no TTA-RMOT CUDA processes; GPU4 healthy workers are preserved. Every new target/head CUDA context checks this assignment.",
+  "reason": "Shared GPU6 received other processes using about56.75GiB and caused an export OOM. Select the lower-process memory-fit GPU5; stop no foreign process.",
+  "time_UTC": "2026-11-02 11:01:24 UTC",
+  "registered_card_change_not_hyperparameter_change": true
+}

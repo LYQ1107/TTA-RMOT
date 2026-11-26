@@ -1,0 +1,183 @@
+{
+  "status": "PASS_INDEPENDENT_SINGLE_METHOD_COLD_COMPARISON",
+  "methods": {
+    "CLIP_KD": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_KD_seed0",
+      "HOTA": 69.05010333743509,
+      "actual_worker_process_seconds": 3721.3086336600827,
+      "actual_internal_worker_seconds": 3714.8507419360103,
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 82.02924394770525,
+        "equivalent_forward_seconds": 82.02924394770528,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_KD_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 465.3034152499167,
+        "peak_allocated_bytes": 6280584192
+      },
+      "method_cost": {
+        "common_wall_seconds": 3194.9417003892595,
+        "own_head_training_seconds": 516.7748557865852,
+        "own_postprocess_and_output_seconds": 3.1341857601655647,
+        "shared_common_plus_own_branch_seconds": 3714.8507419360103
+      },
+      "protocol": {
+        "name": "C4_key_single_CLIP_KD_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_KD"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ]
+      }
+    },
+    "CLIP_COHORT": {
+      "root": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_COHORT_seed0",
+      "HOTA": 69.27986184656068,
+      "actual_worker_process_seconds": 3453.921497729956,
+      "actual_internal_worker_seconds": 3451.5323735540733,
+      "teacher": {
+        "logical_calls": 3508,
+        "new_calls": 3508,
+        "cache_hits": 0,
+        "forward_seconds": 81.97767399961594,
+        "equivalent_forward_seconds": 81.97767399961594,
+        "batches": 456,
+        "cache": {
+          "complete_raw_responses": 3508,
+          "pending_leases": 0,
+          "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/visual_classical_20261121/cold_full_c4/C4_key_single_CLIP_COHORT_seed0/raw.sqlite"
+        },
+        "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+        "backend_unmodified": true,
+        "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+        "model_load_seconds": 450.31298385898117,
+        "peak_allocated_bytes": 6278275584
+      },
+      "method_cost": {
+        "common_wall_seconds": 2943.1895113610663,
+        "own_head_training_seconds": 505.39145980845205,
+        "own_postprocess_and_output_seconds": 2.9514023845549673,
+        "shared_common_plus_own_branch_seconds": 3451.5323735540733
+      },
+      "protocol": {
+        "name": "C4_key_single_CLIP_COHORT_seed0",
+        "pair": "C4",
+        "videos": 45,
+        "queries": 466,
+        "seed": 0,
+        "source": "frozen official Dance-best",
+        "acquisition": "COVER .3 query-balanced, three uniform observations and max-area anchor",
+        "teacher": "frozen original Qwen CROP interface",
+        "source_features_actually_recomputed": true,
+        "initial_cache_prepaid": false,
+        "source_perception_mode": "track-three",
+        "all_source_frames_recomputed": false,
+        "sparse_rule": "union of three uniformly spaced observations per provided TrackID; all candidates at selected frames",
+        "original_four_observation_context_preserved": true,
+        "sparse_frame_count_means_decoder_positions_not_all_backbone_context_images": true,
+        "sparse_motion_gate": "linearly interpolate sampled source presence logits; nearest boundaries",
+        "shared_physical_source_and_teacher_stream": false,
+        "independent_cold_arms": true,
+        "raw_soft_bounded_soft_and_hard_actual_training": false,
+        "bounds": [
+          0.02,
+          0.98
+        ],
+        "video_stream_causal": true,
+        "current_video_transductive": true,
+        "no_target_GT": true,
+        "restart_attempt": 0,
+        "OS_cache_not_flushed": true,
+        "host_has_other_research_jobs": true,
+        "requested_methods": [
+          "CLIP_COHORT"
+        ],
+        "single_method_execution": true,
+        "actual_trained_label_types": [
+          "CLIP"
+        ]
+      }
+    }
+  },
+  "comparison": {
+    "delta_HOTA": 0.22975850912558826,
+    "samples": 10000,
+    "seed": 0,
+    "original_parent_video": {
+      "clusters": 13,
+      "CI95": [
+        -0.24861540115075798,
+        0.8357560975288624
+      ]
+    },
+    "evaluation_clip": {
+      "clusters": 45,
+      "CI95": [
+        -0.2553112462010581,
+        0.6938643411758689
+      ]
+    }
+  },
+  "same_physical_GPU": 3,
+  "source_features_bitwise_equal": true,
+  "source_priors_bitwise_equal": true,
+  "same_requested_questions": true,
+  "maximum_raw_teacher_probability_difference": 0.0,
+  "exact_same_teacher_probabilities": true,
+  "each_method_really_loaded_both_models": true,
+  "budget_per_method": 3508,
+  "cache_hits_each": 0,
+  "teacher_and_feature_payloads_not_prepaid": true,
+  "observed_process_wall_not_component_estimate": true,
+  "order": [
+    "CLIP_KD",
+    "CLIP_COHORT"
+  ],
+  "order_not_counterbalanced": true,
+  "OS_cache_retained": true,
+  "shared_host_NAS_concurrent_work": true,
+  "all_development_data": true,
+  "candidates_provided_upstream_generation_not_remeasured": true,
+  "total_supervisor_wall_includes_separate_GT_evaluations": 7218.744462559931,
+  "only_one_head_type_per_video_and_one_method_output": true,
+  "head_refit_for_each_video_with_only_its_available_prefix": true
+}

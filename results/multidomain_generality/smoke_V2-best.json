@@ -1,0 +1,67 @@
+{
+  "status": "SMOKE_PASS",
+  "model": "V2-best",
+  "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "strict_load": "<All keys matched successfully>",
+  "target_config": "/data2/user/FlexHook-TTA/vendor/FlexHook/configs/infer/kitti2.yaml",
+  "target_config_sha256": "aeb40a9bb6811435d3dfd550f68051a9b101caf5b3c4e4482acea6884e5051bb",
+  "official_cli_overrides": {
+    "visual": "rope-swin-tiny",
+    "text": "roberta"
+  },
+  "category_tokens": "No added class token; vendor KITTI parser retains car/ped track ID merge; all expressions scored on all candidates",
+  "precision": "FP32",
+  "tf32": false,
+  "optimizer_updates": 0,
+  "teacher_calls": 0,
+  "GT_open_attempts": 0,
+  "physical_gpu": "2",
+  "GPU_UUID": "GPU-c2484ded-5f87-237c-bbf0-d23fcb74fdb2",
+  "wall_seconds": 188.67059593298472,
+  "peak_allocated_bytes": 4602386944,
+  "new_margin_computations": 209608,
+  "videos": [
+    {
+      "video": "0005",
+      "model": "V2-best",
+      "full_candidate_query_rows": 209608,
+      "newly_computed_margin_count": 209608,
+      "historical_values_written": 0,
+      "historical_recompute_max_abs_error": 0.001082301139831543,
+      "compute_seconds": 178.14854215783998,
+      "wall_seconds": 180.30938553297892,
+      "cache": {
+        "backbone_calls": 297,
+        "backbone_images": 297,
+        "text_encoder_calls": 197,
+        "visual_hits": 897,
+        "visual_misses": 297,
+        "peak_cache_bytes": 535127040
+      },
+      "complete_values_finite": true
+    }
+  ],
+  "official_loader_parity": [
+    {
+      "video": "0005",
+      "frame": 0,
+      "vendor_forward_max_error": 1.9073486328125e-05,
+      "sign_flips": 0,
+      "grid_error": 0.0,
+      "box_error": 0.0
+    },
+    {
+      "video": "0005",
+      "frame": 148,
+      "vendor_forward_max_error": 5.7220458984375e-06,
+      "sign_flips": 0,
+      "grid_error": 0.0,
+      "box_error": 0.0
+    }
+  ],
+  "estimated_full_scoring_GPU_hours": 0.5726009549517118,
+  "smoke_video_complete": true,
+  "cost_gate_pass": true,
+  "remaining_source_tails": 69854
+}

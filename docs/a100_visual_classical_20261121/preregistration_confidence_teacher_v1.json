@@ -1,0 +1,45 @@
+{
+  "name": "CONFIDENCE_WEIGHTED_ORDINARY_NATIVE_DIRECT_TEACHER_V1",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "all_development_data": true,
+  "motive": "Graphanchorsusew=1+3abs(2p-1). GiveordinaryKDsameconfidenceweighting,ratherthanattributeteacherreliabilityweightstooursalone.",
+  "weight": "1+3*abs(2*raw_teacher_probability-1),samefixedformulaasgraphprecision;nonnegativeweightedCEdividedbysumweights;fullweightedentropy/KLforstopping.",
+  "held_fixed": "Native768D direct2layer64GELU;train/predictsourcez=0,prefiximagestatistics,AdamW.001/.001,seedresetpervideo,min4000/max16000/KL.005;softclip.02/.98 andhard.",
+  "outputs": [
+    "KD400",
+    "KD_FINAL",
+    "KD_MEAN",
+    "HARD400",
+    "HARD_FINAL"
+  ],
+  "neural_seeds": [
+    0,
+    17,
+    42
+  ],
+  "teacher_QA_seed": 0,
+  "expected": {
+    "conditions": 6,
+    "new_head_fits": 420,
+    "raw": 30,
+    "counts": 24,
+    "official": 54,
+    "new_teacher_calls": 0,
+    "new_encoder_calls": 0
+  },
+  "primary": "FrozenpreviousnativeJOINT versusweightedordinarymean plusallsoft/hardcheckpoints. Weightedmean versusunweightednativeKD diagnosesbaselineeffect. Failedstrictselectorreferencealsoincluded.",
+  "countmatched": "BothdirectionsJOINTversusweightedKD_MEAN plusCountSelfs;existingJOINTcoarsealiasonlyaftertrainingforcounterfactuals,neverusedasinput/target.",
+  "decision": "Keepall54 andbothdomains/seeds;allpredictionsealsbeforethisstudyGT. Ifnewordinarybaselineerasesgains,recordandcontinueno weakbaseline substitution.",
+  "resource": "OnlyreleasedGPU0/1/2/3 afterallnativephysicalrunsandNumPyreproductionPASS;memorycheckinternally. StableCPUreplaymaycontinue,sharedhostloadnotanindependentcoldtimingclaim.",
+  "disk_free_bytes": 4118036480,
+  "local_completed_raw_output_storage": "completed_direct_RGB_local_storage_relocation.json;checksum0;32076symboliclinksresolve;NASuntouched",
+  "helper_sha256": "523f89c5cf9584a175c30ace88c0486587528de19cf13118935e6840b7ce9d87",
+  "worker_sha256": "895c82643a5551c74c74494dbd265804aa9159be37045ebaa28cde9d7e5d14fc",
+  "no_target_manual_GT_in_adaptation": true,
+  "current_video_transductive": true,
+  "no_future_teacher": true,
+  "no_independent_blind_validation": true,
+  "matching_actual_cost_rule": "Thisisprepaidinputqualityrefit;componentfittimenotafullcoldwall. Currentnative_coldonlymatchesactualunweightedKD/fixedJ. Newfinalprimarychangesneedmatchingactualfollowup.",
+  "no_automatic_goal_close": true
+}

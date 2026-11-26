@@ -1,0 +1,33 @@
+{
+  "purpose": "Reproduce server execution with publicly reachable, identical-code snapshots; private/public commit IDs are not the same Git objects.",
+  "training_source_snapshot": {
+    "server_execution_commit": "a67f4adaec718d38133feecc6760621bbcb18c11",
+    "public_equivalent_commit": "2259228b1f5e47af88a4795f82cf1172e0edf265",
+    "identical_snapshot_git_tree": "98831e0d223e34e0f520cc3f32006ad153ebc904",
+    "current_training_core_diff_empty": true,
+    "checked_current_local_commit": "6dc3d5216550f05813db483ac6b9db05b1bff2c3"
+  },
+  "checked_training_core_scopes": [
+    "flex_tta",
+    "flex_uda",
+    "compat",
+    "scripts/train_psr.py",
+    "scripts/run_diag_fit_training.py",
+    "configs/uda/diag_fit_opt.yaml",
+    "configs/uda/diag_fit_opt_pos.yaml",
+    "configs/uda/diag_fit_cap.yaml"
+  ],
+  "evidence_origin": "Prepared execution snapshot and immutable publication journal; empty tracked-core diff against the current public-equivalent snapshot. Not a claim that every per-model provenance contains a Git revision field.",
+  "private_to_public_snapshot_map": {
+    "6c81f4c8c4dccb87fc0a7358c5f141ee754cdb09": "4a0ce2ca352a9bdc61660dc0634e999328dc0971",
+    "1d3b645ea7e237a9e35e119b5d2ebfb33016f786": "3f8a2d895b24ea1da95ac31b8a7ff2d19f20453f",
+    "a67f4adaec718d38133feecc6760621bbcb18c11": "2259228b1f5e47af88a4795f82cf1172e0edf265",
+    "0f76277545bc02692de79072da0013ac93ff4eba": "81406004941055b39a7197201d1a62bc53a03acf",
+    "5d64abb5738ae6c1108596c0cbdce2da603f94d3": "bc5d70b3b2d4defcf37bd77233cd32adf9451d85",
+    "67b8b85f99791da4b6573db9db109d0620bcfb63": "c910cfe48241a63c847d388efdaff4f1c0068db8",
+    "94aa818a89a218382725c944529b6411a7983f40": "c7f22b82d95c74829a086b33021126e2c120ec67",
+    "6dc3d5216550f05813db483ac6b9db05b1bff2c3": "e0286f8fb8dd84224ac0a70fb05eefb23b499904"
+  },
+  "current_published_reference_before_this_record": "e0286f8fb8dd84224ac0a70fb05eefb23b499904",
+  "target_GT_used_for_this_code_comparison": false
+}

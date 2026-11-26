@@ -1,0 +1,75 @@
+{
+  "status": "PRIMARY_PAPER_AND_OFFICIAL_SOURCE_LIMITED_REVIEW",
+  "papers": [
+    {
+      "url": "https://arxiv.org/html/2606.27373",
+      "read_scope": "Method geometric/semantic reward, optimization, frozen vision/LoRA and selected supplementary checks; not all experimental data independently reproduced."
+    },
+    {
+      "url": "https://arxiv.org/html/2608.09931",
+      "read_scope": "Method three counterfactual gates and EMA crop/ghost/reference objective; no official implementation audited yet."
+    },
+    {
+      "url": "https://arxiv.org/html/2511.16672v4",
+      "read_scope": "Continuous self-consistency rewards and entropy-guided proposer; not copied as truth reward."
+    },
+    {
+      "url": "https://arxiv.org/html/2603.21289v2",
+      "read_scope": "Judge fixed during training and bounded modulation; incorrect-consensus limitation in appendix."
+    }
+  ],
+  "VISE_source_files": [
+    {
+      "path": "trainer.py",
+      "official_Git_blob_sha1": "fae689c02fa6939a0401bff729cef35abcf418c1",
+      "bytes": 17137
+    },
+    {
+      "path": "utils.py",
+      "official_Git_blob_sha1": "eaeb60cea3caada274d8f0906c84d57856da0297",
+      "bytes": 9496
+    },
+    {
+      "path": "model.py",
+      "official_Git_blob_sha1": "e8eb025c08eb77fe13d484987b8dae70ad5800e8",
+      "bytes": 9039
+    }
+  ],
+  "external_code_installed_or_launched": false,
+  "source_math_examples": [
+    {
+      "kind": "Identical valid boxes",
+      "actual_official_compute_giou": 0.0,
+      "mathematically_expected_GIoU": 1.0,
+      "official_normalized_reward": 0.5,
+      "expected_reward": 1.0
+    },
+    {
+      "kind": "Normalized box0..1000 with pixel-space horizontal-flip matrix at width640",
+      "official_projected": [
+        140.0,
+        100.0,
+        540.0,
+        500.0
+      ],
+      "correct_projected": [
+        500.0,
+        100.0,
+        900.0,
+        500.0
+      ]
+    }
+  ],
+  "implementation_limit": "These examples concern the inspected public source only; the historical code used for paper experiments has not been established, so they do not invalidate reported paper results.",
+  "transfer_constraints": [
+    "Use one consistent coordinate system and correct IoU/GIoU arithmetic.",
+    "Answer invariance alone does not prove semantic correctness; whole-image/constant-box degeneracy remains possible.",
+    "Blurring an object does not guarantee that its colour, position, or presence becomes false; do not use all ghosted inputs as semanticNo.",
+    "A crop can destroy relative-position or motion context; preserve the task when using privileged views.",
+    "Use a proper distributional divergence and actual multimodal prompt boundary for teacher adapter learning.",
+    "Preserve T0 reference and give same observations to all KD controls; verify teacher and RMOT task outcomes after output sealing."
+  ],
+  "current_live_study": "actual73195 unchanged; this is prospective literature/design evidence, not a new teacher training or quality result.",
+  "GT_reads": 0,
+  "goal_status": "ACTIVE"
+}

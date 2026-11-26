@@ -1,0 +1,66 @@
+# Execution record
+
+- Identity: `/data2/user/FlexHook-TTA`, LYQ1107/TTA-RMOT. Clean base
+  ecf57122; independent requested research branch; no LocateMOT work.
+- Fixed protocol first published at dbd701e75a34dfbb34da0ad4545485ffd0cebe50.
+  User clarified E denominator zero: empty output, separately reported.
+- Six source score banks audited (2,550 original target margin files);
+  X0/X1 exact byte reproduction: all six margins, 12 sets, 5,100 files PASS.
+  Existing KITTI banks reused, no source model scoring/GT calibration.
+- Frozen teacher manifest: 432 frame-contexts, 89,961 logical requests:
+  Dance normal 29,410; early 27,693; KITTI normal 32,858. Repeated physical
+  frames/requests use content cache; distinct-frame voting does not count
+  duplicate slots twice. Source call caps not triggered in any video.
+- Initial new CPU tests: 7 passed, 2 failed because sklearn absent.
+  Installed scikit-learn 1.7.2, joblib 1.5.2, threadpoolctl 3.6.0 into
+  this task's `results/runs/gated_decode_20261101/deps`, without modifying
+  the shared environment. All nine new tests then passed (1.46 s).
+- Real frozen T1 smoke PASS on Dance and KITTI image paths (6 calls).
+  GPU 2 admitted with 81,154 MiB free, zero compute processes. Unchanged
+  backend and crop builder, 320/margin .2; kernel whitelist + annotation
+  audit. Full frozen sparse teacher job follows smoke, max one GPU.
+- No student/teacher training, no changing thresholds/seeds, no foreign
+  process interruption. All target/source gates and outputs must seal
+  before new GT evaluation. Full results and final costs follow on completion.
+- Integration regression: 32 passed (new 9 + prior Xquery/count_structure/v2
+  tests), 1.38 s. Seven new scripts compile; git diff --check PASS. Frozen
+  teacher backend, crop builder, and vendor tree unchanged.
+- Audited teacher parameter SHA matches the prior sealed 2B teacher exactly:
+  9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956.
+  New gate generator checks this before producing any decoder predictions.
+  Version inventory is in environment.json; T1 is the single-frame prompt
+  arm, not a YesTrack/Dance-trained adapter (base config condition T0).
+- Offline evaluation/report runner is queued behind successful complete
+  teacher sealing. It has no GPU, streams child logs, and aborts on a
+  failed teacher launcher. No repeated agent shell process polling.
+- Complete frozen teacher succeeded: 432 frame-contexts, 89,961 requested
+  judgements, 86,663 actual unique cached forward judgements. Final full
+  worker 1,443.454533 seconds; total GPU-process cost including smoke and
+  startup 0.409427706 hours. Peak allocation 4.370987892 GiB. GT open
+  attempts zero; initial/final parameter SHA identical to the prior teacher.
+  No retry, crop failure, dropped request, parameter or protocol change.
+- Final pre-evaluation regression rerun: 32 passed in 1.39 s, compile and
+  diff checks passed. Whole-dataset gates sealed before CPU predictions;
+  CPU official evaluation runs only after all 60 target/4 source sets seal.
+- All work completed successfully: 60 target decoder sets + 3 references,
+  25 videos/425 episodes each; 4 source sets/862 episodes each. 47 new
+  target TrackEval jobs, 16 exact-equivalent target reuses; source SA and
+  native sets all exactly reproduce old native predictions (zero new source
+  TrackEval jobs, not partial evaluation). 201 video-cluster comparisons,
+  2000 draws, seed0. Existing query-presence labels verified against every
+  new official per-sequence GT_Dets count, not silently assumed.
+- CPU children all exited 0: generate 40.780425 s, official 334.976781 s,
+  report 27.774756 s. Parent total includes teacher waiting. Raw teacher
+  output/cache and prediction masks remain server-side with SHA; full
+  official CSVs and completed logs archived for GitHub. No GT/raw MOT
+  files were placed inside the logs archive.
+- Criteria: stable TG_X0 gain PASS; TG_X0 and global-z unseen restoration
+  FAIL; GMM FAIL; dual-domain SA fixed floor PASS. Detailed qualification,
+  TP/FP changes and non-selection of best-looking variants in INTERPRETATION.md.
+  No protocol repair or threshold change after seeing evaluation results.
+- Post-completion integrity PASS: all 30,223 prediction SHA entries,
+  134 complete official metric files (including archive payload hashes),
+  104 completed archived logs and 56 server artifacts verified. Gates and
+  E files still match their pre-GT seals; report SHA matches completion.
+  Historical result directories, original teacher/crop code and vendor
+  tree have no diff from ecf57122. All parents/children completed; stop.

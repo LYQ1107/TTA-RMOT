@@ -1,0 +1,12 @@
+{
+  "status": "RUNNING_WORKER_SCOPE_CLARIFICATION_NO_MODIFICATION",
+  "worker_script": "scripts/a100_visual_classical_cold_protocol_final.py",
+  "legacy_field": "raw_soft_bounded_soft_and_hard_actual_training",
+  "interpretation": "Legacy expression labels_needed==set(LABELS) means all requested label types. This single-method worker defines LABELS=(CLIP,), so True does not mean RAW and HARD were also trained.",
+  "authoritative_field": "protocol.actual_trained_label_types=[CLIP]; ledger.head_fits[].label=CLIP",
+  "actual_plan": "Both methods use the same probability-clipped soft teacher targets and converged confidence-weighted FINAL head; earlier quality studies retain real soft/hard baselines.",
+  "expected_neural_fits": 140,
+  "numerical_protocol_unchanged": true,
+  "no_running_source_modified": true,
+  "goal_status": "ACTIVE"
+}

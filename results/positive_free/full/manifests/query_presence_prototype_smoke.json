@@ -1,0 +1,602 @@
+{
+  "status": "PASS_FROZEN_DIAGNOSTIC_ONLY",
+  "formal_method_seven": false,
+  "experiment_commit": "e6d2d744509bf3a89b9e68e8f3ef80351c6c2e74",
+  "physical_gpu": "0",
+  "gpu_uuid": "GPU-bf21a95d-d96d-9ec5-cb15-b0fb7ad50536",
+  "resource_admission": {
+    "free_mib": "81151",
+    "process_count": "0",
+    "allocator_budget_mib": 12288,
+    "headroom_mib": 4096,
+    "shared_gpu_authorized": true,
+    "not_a_memory_reservation": true
+  },
+  "video": "dancetrack0004",
+  "expression": "dacning-person-with-white-Tshirt-and-purple-pants",
+  "sentence": "dacning person with white Tshirt and purple pants",
+  "reference_sentence": "person",
+  "frames": 12,
+  "expressions": 1,
+  "source_checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-kitti-v2-best.pth",
+  "checkpoint_sha256": "71dbd691e7633a3d20facb1ebc405908863aff786e5af30899d4cb666250d613",
+  "checkpoint_strict_load": true,
+  "person_token_ids": [
+    5970
+  ],
+  "precision": "FP32",
+  "parameter_versions_unchanged": true,
+  "trainable_parameters": 0,
+  "optimizer_steps": 0,
+  "no_target_gt_opened": true,
+  "file_access_audit": {
+    "target_gt_open_attempts": [],
+    "target_file_opens": 30
+  },
+  "source_branch_check": {
+    "frame": 1,
+    "source_sign_mismatches": 0,
+    "max_abs_error": 6.961822509765625e-05,
+    "ids_equal": true
+  },
+  "cache_stats": {
+    "backbone_calls": 12,
+    "backbone_images": 12,
+    "text_encoder_calls": 2,
+    "visual_hits": 30,
+    "visual_misses": 12,
+    "peak_cache_bytes": 81285120
+  },
+  "wall_seconds": 5.8612584609072655,
+  "peak_allocated_bytes": 1695552000,
+  "episode_reset_pass": true,
+  "presence_predictions": "UNKNOWN, including stable interactions; no calibrated semantic absence/presence signal",
+  "prediction_override": null,
+  "no_new_loss": true,
+  "traces": [
+    {
+      "frame": 1,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -12.385150909423828,
+        -1.656846046447754,
+        -11.247191429138184
+      ],
+      "past_history_latest_frame": null,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 1,
+      "branch_margins": {
+        "real_query": [
+          -12.476822853088379,
+          -11.358860969543457,
+          -13.837202072143555
+        ],
+        "real_reference": [
+          4.151758670806885,
+          -1.218339443206787,
+          1.2874054908752441
+        ],
+        "null_query": [
+          -10.92387580871582,
+          -13.815437316894531,
+          -12.373289108276367
+        ],
+        "null_reference": [
+          -6.680444717407227,
+          -5.331761360168457,
+          -8.49587345123291
+        ]
+      },
+      "additive_offset_cancellation_max_error": 0.0
+    },
+    {
+      "frame": 2,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -11.610734939575195,
+        -1.6024365425109863,
+        -11.856622695922852
+      ],
+      "past_history_latest_frame": 1,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 2,
+      "branch_margins": {
+        "real_query": [
+          -11.981772422790527,
+          -11.10430908203125,
+          -13.430569648742676
+        ],
+        "real_reference": [
+          3.9076569080352783,
+          -1.0436044931411743,
+          2.094611167907715
+        ],
+        "null_query": [
+          -10.660202026367188,
+          -13.831911087036133,
+          -11.803102493286133
+        ],
+        "null_reference": [
+          -6.381507873535156,
+          -5.373643398284912,
+          -8.134544372558594
+        ]
+      },
+      "additive_offset_cancellation_max_error": 1.430511474609375e-06
+    },
+    {
+      "frame": 3,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -10.840633392333984,
+        -2.3919034004211426,
+        -11.796453475952148
+      ],
+      "past_history_latest_frame": 2,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 3,
+      "branch_margins": {
+        "real_query": [
+          -11.276193618774414,
+          -10.820257186889648,
+          -13.624776840209961
+        ],
+        "real_reference": [
+          4.162521839141846,
+          -0.07436718046665192,
+          2.6046948432922363
+        ],
+        "null_query": [
+          -11.23733901977539,
+          -13.668769836425781,
+          -12.08502197265625
+        ],
+        "null_reference": [
+          -6.639257431030273,
+          -5.314783573150635,
+          -7.652004718780518
+        ]
+      },
+      "additive_offset_cancellation_max_error": 4.76837158203125e-07
+    },
+    {
+      "frame": 4,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -10.680322647094727,
+        -3.4471511840820312,
+        -12.658523559570312
+      ],
+      "past_history_latest_frame": 3,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 4,
+      "branch_margins": {
+        "real_query": [
+          -11.487078666687012,
+          -10.765501022338867,
+          -14.198400497436523
+        ],
+        "real_reference": [
+          3.9189682006835938,
+          0.8782339692115784,
+          2.5042724609375
+        ],
+        "null_query": [
+          -11.063238143920898,
+          -13.664346694946289,
+          -11.225988388061523
+        ],
+        "null_reference": [
+          -6.3375139236450195,
+          -5.4677629470825195,
+          -7.1818389892578125
+        ]
+      },
+      "additive_offset_cancellation_max_error": 0.0
+    },
+    {
+      "frame": 5,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -11.274683952331543,
+        -4.983428955078125,
+        -11.940746307373047
+      ],
+      "past_history_latest_frame": 4,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 5,
+      "branch_margins": {
+        "real_query": [
+          -12.613582611083984,
+          -11.775307655334473,
+          -15.571563720703125
+        ],
+        "real_reference": [
+          3.5245773792266846,
+          0.7907974720001221,
+          2.056999444961548
+        ],
+        "null_query": [
+          -10.060070037841797,
+          -12.878311157226562,
+          -11.952006340026855
+        ],
+        "null_reference": [
+          -5.196593284606934,
+          -5.295635223388672,
+          -6.26418924331665
+        ]
+      },
+      "additive_offset_cancellation_max_error": 9.5367431640625e-07
+    },
+    {
+      "frame": 6,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -10.911225318908691,
+        -9.321732521057129,
+        -11.279321670532227
+      ],
+      "past_history_latest_frame": 5,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 6,
+      "branch_margins": {
+        "real_query": [
+          -13.42344856262207,
+          -14.32464599609375,
+          -15.59266471862793
+        ],
+        "real_reference": [
+          3.1780471801757812,
+          -0.5568904876708984,
+          2.210045337677002
+        ],
+        "null_query": [
+          -9.804617881774902,
+          -11.682638168334961,
+          -11.859556198120117
+        ],
+        "null_reference": [
+          -4.114347457885742,
+          -7.236615180969238,
+          -5.3361687660217285
+        ]
+      },
+      "additive_offset_cancellation_max_error": 0.0
+    },
+    {
+      "frame": 7,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -11.331785202026367,
+        -7.103068828582764,
+        -10.126768112182617
+      ],
+      "past_history_latest_frame": 6,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 7,
+      "branch_margins": {
+        "real_query": [
+          -14.146472930908203,
+          -14.358758926391602,
+          -15.310555458068848
+        ],
+        "real_reference": [
+          2.794887065887451,
+          -3.370077610015869,
+          0.20937949419021606
+        ],
+        "null_query": [
+          -10.129758834838867,
+          -10.495757102966309,
+          -10.56922721862793
+        ],
+        "null_reference": [
+          -4.52018404006958,
+          -6.610144138336182,
+          -5.176060676574707
+        ]
+      },
+      "additive_offset_cancellation_max_error": 9.5367431640625e-07
+    },
+    {
+      "frame": 8,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -11.530043601989746,
+        0.751255989074707,
+        -10.062979698181152
+      ],
+      "past_history_latest_frame": 7,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 8,
+      "branch_margins": {
+        "real_query": [
+          -15.481081008911133,
+          -14.88039779663086,
+          -14.340365409851074
+        ],
+        "real_reference": [
+          1.5714850425720215,
+          -12.612848281860352,
+          1.2449504137039185
+        ],
+        "null_query": [
+          -10.49495792388916,
+          -11.296086311340332,
+          -10.867197036743164
+        ],
+        "null_reference": [
+          -4.972434997558594,
+          -8.277280807495117,
+          -5.344861030578613
+        ]
+      },
+      "additive_offset_cancellation_max_error": 0.0
+    },
+    {
+      "frame": 9,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -11.93663215637207,
+        0.9756755828857422,
+        -8.027997970581055
+      ],
+      "past_history_latest_frame": 8,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 9,
+      "branch_margins": {
+        "real_query": [
+          -15.049922943115234,
+          -15.371780395507812,
+          -14.757787704467773
+        ],
+        "real_reference": [
+          1.4457757472991943,
+          -14.008584976196289,
+          -0.1739729791879654
+        ],
+        "null_query": [
+          -9.157697677612305,
+          -11.87005615234375,
+          -11.040802001953125
+        ],
+        "null_reference": [
+          -4.598630905151367,
+          -9.531185150146484,
+          -4.4849853515625
+        ]
+      },
+      "additive_offset_cancellation_max_error": 0.0
+    },
+    {
+      "frame": 10,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -12.440967559814453,
+        1.4894943237304688,
+        -8.46021842956543
+      ],
+      "past_history_latest_frame": 9,
+      "provisional_interaction_support_ids": [],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 10,
+      "branch_margins": {
+        "real_query": [
+          -15.530817031860352,
+          -15.880487442016602,
+          -14.214231491088867
+        ],
+        "real_reference": [
+          0.7947490215301514,
+          -15.501680374145508,
+          1.9468059539794922
+        ],
+        "null_query": [
+          -8.574945449829102,
+          -11.812698364257812,
+          -13.179693222045898
+        ],
+        "null_reference": [
+          -4.690347671508789,
+          -9.94439697265625,
+          -5.478874206542969
+        ]
+      },
+      "additive_offset_cancellation_max_error": 9.5367431640625e-07
+    },
+    {
+      "frame": 11,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -8.527956008911133,
+        1.4669733047485352,
+        -9.666461944580078
+      ],
+      "past_history_latest_frame": 10,
+      "provisional_interaction_support_ids": [
+        2
+      ],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 11,
+      "branch_margins": {
+        "real_query": [
+          -14.034878730773926,
+          -16.63098907470703,
+          -14.290102005004883
+        ],
+        "real_reference": [
+          -3.6694416999816895,
+          -15.972724914550781,
+          1.461412787437439
+        ],
+        "null_query": [
+          -7.174441337585449,
+          -11.877272605895996,
+          -11.50745964050293
+        ],
+        "null_reference": [
+          -5.336960315704346,
+          -9.752035140991211,
+          -5.422407150268555
+        ]
+      },
+      "additive_offset_cancellation_max_error": 9.5367431640625e-07
+    },
+    {
+      "frame": 12,
+      "ids": [
+        1,
+        2,
+        3
+      ],
+      "interaction": [
+        -2.7112221717834473,
+        2.3807754516601562,
+        -10.737380981445312
+      ],
+      "past_history_latest_frame": 11,
+      "provisional_interaction_support_ids": [
+        2
+      ],
+      "source_selected_ids": [],
+      "presence_status": "UNKNOWN",
+      "reason": "UNCALIBRATED_INTERACTION",
+      "support_is_semantic_positive": false,
+      "prediction_override": null,
+      "optimizer_update_allowed": false,
+      "max_image_history_frame": 12,
+      "branch_margins": {
+        "real_query": [
+          -14.331939697265625,
+          -15.844223022460938,
+          -14.830243110656738
+        ],
+        "real_reference": [
+          -12.064546585083008,
+          -16.190523147583008,
+          1.8056304454803467
+        ],
+        "null_query": [
+          -6.928457736968994,
+          -11.769586563110352,
+          -11.226446151733398
+        ],
+        "null_reference": [
+          -7.372286796569824,
+          -9.735111236572266,
+          -5.327953338623047
+        ]
+      },
+      "additive_offset_cancellation_max_error": 4.76837158203125e-07
+    }
+  ]
+}

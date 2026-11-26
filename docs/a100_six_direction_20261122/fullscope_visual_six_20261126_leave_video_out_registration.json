@@ -1,0 +1,28 @@
+{
+  "status": "PREREGISTERED_DETERMINISTIC_LEAVE_VIDEO_OUT_ANALYSIS",
+  "source_sha256": "acc29cab6613a322a9cb98dca76939cd9153da208d90e13d2727bf5f20b52f96",
+  "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "video_units": 148,
+  "settings": 6,
+  "controls": [
+    "SOFT_KD288",
+    "HARD_KD288",
+    "LURE_KD288",
+    "SSL_KD288",
+    "R_DIRECT",
+    "SOFT_POOLED",
+    "UNIFORM_SOFT_KD288",
+    "UNIFORM_POOLED",
+    "FLAT_KD128",
+    "SAME_ARCH_KD128"
+  ],
+  "scope": "After all4588 seal and186/180 reproduction, remove each whole video with all its query sequences. Recompute TPweightedAssA and TP/FP/FN totals, never average videoHOTAs.",
+  "contrasts": "Same fixed primary versus all10controls, raw and both original CountMatched effects; no primary reselection or changed acceptance threshold.",
+  "outputs": "Public full/min/max/positive counts for all60 comparisons; complete per-omitted-video values private.",
+  "interpretation": "Exact finite-cohort influence; no probability interval, no IID assumption or heldoutgeneralization claim. Four KITTIvideos remain a small cohort.",
+  "new_training_seeds_GPU_teacher_fits_or_predictions": 0,
+  "GT_reads": 0,
+  "no_prepositive_module_ablation_matrix": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

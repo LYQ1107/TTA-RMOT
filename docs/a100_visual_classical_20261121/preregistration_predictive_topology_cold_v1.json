@@ -1,0 +1,99 @@
+{
+  "version": "PREDICTIVE_TOPOLOGY_PHYSICAL_SINGLE_METHOD_COLD_V1_CONDITIONAL",
+  "date": "2026-11-22",
+  "goal_status": "ACTIVE",
+  "execution_status": "PREPARED_NOT_LAUNCHED_REQUIRES_REGISTERED_QUALITY_PROMOTION",
+  "promotion_rule": "preregistration_predictive_topology_actual_followup_v1.json",
+  "quality_plan": "preregistration_predictive_topology_v1.json",
+  "quality_source": "predictive_topology/C4|C1/seed0",
+  "teacher_fraction": 0.1,
+  "query_graph_scope": "extended",
+  "head_query_scope": "pcd",
+  "head_source_logit": "zero",
+  "graph_metric": "combined",
+  "graph_prior": "constant",
+  "set_decoder": "original",
+  "jobs": {
+    "C4_KD": {
+      "pair": "C4",
+      "physical_GPU": 0,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C4_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_native_kd_fast.py",
+      "worker_sha256": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c",
+      "reuse_previous_fresh_KD": true,
+      "previous_cost_plan": "preregistration_native_optimized_cold_v2.json"
+    },
+    "C4_JOINT": {
+      "pair": "C4",
+      "physical_GPU": 1,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C4_pcd768_direct_predictive_topology_single_rho0p1_20261122",
+      "expected_questions": 1160,
+      "task_protocol": "PRESUPPOSED",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_predictive_topology.py",
+      "worker_sha256": "4ca314815baa3472e0da04e929a639ee9406344cbee81f1e9fb7ed68e9d236cf",
+      "reuse_previous_fresh_KD": false
+    },
+    "C1_KD": {
+      "pair": "C1",
+      "physical_GPU": 2,
+      "methods": [
+        "CLIP_MEAN"
+      ],
+      "run_name": "C1_pcd768_direct_fast_kd_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": false,
+      "worker_script": "scripts/a100_visual_classical_cold_native_kd_fast.py",
+      "worker_sha256": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c",
+      "reuse_previous_fresh_KD": true,
+      "previous_cost_plan": "preregistration_native_optimized_cold_v2.json"
+    },
+    "C1_JOINT": {
+      "pair": "C1",
+      "physical_GPU": 3,
+      "methods": [
+        "CLIP_MEAN_COHORT_CAL"
+      ],
+      "run_name": "C1_pcd768_direct_predictive_topology_single_rho0p1_20261122",
+      "expected_questions": 1103,
+      "task_protocol": "CHECKLIST",
+      "compute_RGB_statistics": true,
+      "worker_script": "scripts/a100_visual_classical_cold_predictive_topology.py",
+      "worker_sha256": "4ca314815baa3472e0da04e929a639ee9406344cbee81f1e9fb7ed68e9d236cf",
+      "reuse_previous_fresh_KD": false
+    }
+  },
+  "defer_official_evaluation": true,
+  "code_sha256": {
+    "worker": "af19e7fe5c1d7268318d8eaf621a2567b443cea26210b6c5e02fbcc35d361b23",
+    "runtime": "a4c7fba83b5e47acb751b4d2bb3828aefe69897571fa40df08680d7b6040b060",
+    "calibration": "160874fcc23fbafcf4f26e7ce9ebf26ce26d0ab5c6a066c3718d58e2b5db6f84",
+    "graph": "2d5635a6c79e59ffccfe1591e94cd482e61fcc36224e367b5dbec4f85af78c81",
+    "fast_KD_worker": "02e6e3c43ec6ac644f8a117301cfab624f0a8c6cb09030095b7dfbb14b959d4c",
+    "selected_worker": "4ca314815baa3472e0da04e929a639ee9406344cbee81f1e9fb7ed68e9d236cf",
+    "selector": "a842cba6aa6fc28f0f199e794a63df985470e101783275b766d1357eb0bd4bd9"
+  },
+  "expected_new_selected_teacher_calls": 2263,
+  "expected_total_final_four_records_teacher_calls": 4526,
+  "baseline_reuse": "OnlyalreadyfreshphysicalrecordsofoptimizedKD; selectedworkersneverreadtheirfeatures,questions,answersorheads. SameQAidentity/probabilitieswill beauditedafterfreshselectedrun.",
+  "quality_integrity": "Deploymentglue70/70videos exactgraph,savedfloat32joint,decisionmasksandselectorreceipts;manualGT0. Allsource/teacherweightsfrozen;currentvideotransductive.",
+  "cost": "TrueexternalPopen-to-exitincludingimports,loads,initialscores,realteacherforwards,NNfitting,RGBstatistics,selection/calibration,output/audits. IndependentSQLite pernewworker,0cache expected.",
+  "ordering": "WaitoriginalfixedlocalGPU1/3workerscompletebeforeallocation;leaveoriginal4armsunchanged. BothnewselectedpredictionssealbeforethisfollowupGT. Baselinealreadysealedandpossiblyevaluatedindependently.",
+  "resource": "GPU1C4and3C1only;0/2previousoptimizedKDreferences. ModelsVRAMfresh;OS/NAScacheunflushed,staggeredstartsanddifferentsharedhostloadreportedaslimitations. Noalgorithmic speedup/Pareto claim.",
+  "frontend": "Humanacceptedfixedofficialboxes/TrackIDs;upstreamgenerationnotrecomputedortimed.",
+  "all_development_data": true,
+  "no_target_manual_GT_in_adaptation": true,
+  "no_independent_blind_split": true,
+  "not_a_fourth_neural_seed": true,
+  "no_automatic_goal_close": true
+}

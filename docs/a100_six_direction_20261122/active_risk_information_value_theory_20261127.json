@@ -1,0 +1,89 @@
+{
+  "status": "PASS_DATA_FREE_GRADIENT_RISK_AND_INFORMATION_VALUE_SCOPE_CHECK",
+  "current_source_sha256": {
+    "flex_uda/active/fullscope_visual_runtime.py": "ce65e95f390567c3e1cc5ebfcf694c5ac2c37516d6d47bf4fca6acf8a0941594",
+    "flex_uda/active/evidence_visual_learning.py": "6be3676dbd0494426832b59652d7b9ea99d417bb84359177750853d7bbf0fdfe"
+  },
+  "gradient_identity": {
+    "assumptions": "Fixed x and its logit Jacobian; a hypothetical bounded soft-response distribution with calibrated mean and variance; unweighted BCE.",
+    "expected_gradient_norm_squared": 0.19533609239240443,
+    "conditional_risk_times_jacobian_norm_squared": 0.19533609239240443,
+    "absolute_error": 0.0,
+    "current_R_prequential_residual_is_not_certified_conditional_variance": true
+  },
+  "scalar_Gaussian_counterexample": {
+    "assumptions": "Independent scalar Gaussian latent parameters, known independent Gaussian observation noise, posterior means equal student predictions. This is not a model of Qwen response probabilities.",
+    "epistemic_variance": [
+      0.005,
+      0.05
+    ],
+    "observation_noise_variance": [
+      0.2,
+      0.002
+    ],
+    "predictive_squared_error": [
+      0.20500000000000002,
+      0.052000000000000005
+    ],
+    "posterior_variance_reduction": [
+      0.00012195121951219523,
+      0.04807692307692308
+    ],
+    "mutual_information_nats": [
+      0.012346306295185749,
+      1.629048269010741
+    ],
+    "risk_prefers": "A",
+    "learning_information_prefers": "B"
+  },
+  "frozen_batch_direction_counterexample": {
+    "assumptions": "Fixed pre-batch equal priorities and norm-one features; distinct candidate IDs; Gaussian linear model with identity covariance and noise variance .1.",
+    "features": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "first_observation": "A",
+    "current_proposal_probability_B": 0.5,
+    "current_proposal_probability_C": 0.5,
+    "additional_information_B_nats": 0.3233135824625263,
+    "additional_information_C_nats": 1.1989476363991853,
+    "not_actual_RSI_gradient_geometry_or_measured_HOTA": true
+  },
+  "primary_sources": [
+    {
+      "title": "Bayesian Active Learning for Classification and Preference Learning",
+      "url": "https://arxiv.org/html/1112.5745v1",
+      "sections": "2 equations1-2;4 maximum entropy discussion",
+      "scope": "Information about model parameters distinguishes model uncertainty from conditional observation uncertainty; requires a specified posterior and likelihood."
+    },
+    {
+      "title": "Deep Batch Active Learning by Diverse, Uncertain Gradient Lower Bounds",
+      "url": "https://arxiv.org/html/1906.03671v2",
+      "sections": "3 Algorithm1 and Proposition1",
+      "scope": "Uses predicted-label final-layer gradient vectors and k-means++ batch diversity; this is prior art and not an RMOT/noisy-Qwen guarantee."
+    }
+  ],
+  "boundaries": [
+    "The gradient identity is a conditional mathematical identity, not proof that R estimates the required moments.",
+    "Magnitude of expected local training gradients is not expected held-out risk reduction, semantic correctness, or HOTA gain.",
+    "Actual R/S changes between rounds; only priorities within a selected batch are frozen. The direction example is hypothetical, not a diagnosis of learned real features.",
+    "Gaussian posterior information requires known probabilistic assumptions absent from the current deterministic Qwen/R/S setup.",
+    "Classic information gain and gradient diversity are not new inventions. Do not rename BALD/BADGE or the existing object-uniform control as our contribution.",
+    "No algorithm is changed or selected here. Wait for full186/180 reproduction and registered postseal evidence before a new primary experiment."
+  ],
+  "current_study_GT_predictions_or_neural_parameters_read": 0,
+  "new_GPU_teacher_or_training_operations": 0,
+  "new_sampling_or_training_seeds": 0,
+  "source_sha256": "7fff385b54b93fc4b345a015c5350c9085bfb0e8d5d43758ab762f589f8afc72",
+  "goal_achieved": false
+}

@@ -1,0 +1,175 @@
+__pycache__/
+results/pf_four_gpu/gpu_locks/
+results/positive_free/full/manifests/*model_log/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+*.egg-info/
+.venv/
+
+# model weights and large caches are never committed
+weights/
+/models/
+cache/
+*.safetensors
+*.bin
+*.pth
+*.ckpt
+*.pt
+*.onnx
+
+outputs/*
+!outputs/stage_l0/
+!outputs/l0_b_token_debug/
+outputs/l0_b_token_debug/images/
+!outputs/l0_c/
+outputs/l0_c/precomputed/
+outputs/l0_c/checkpoints/
+!outputs/l0_d/
+outputs/l0_d/precomputed/
+outputs/l0_d/checkpoints/
+outputs/l0_d/trackeval/*.npz
+
+# dataset symlinks and local artifacts are never committed
+data/
+!locatemot/unified/data/
+!locatemot/unified/data/**
+locatemot/unified/data/**/__pycache__/
+# The ShiftRMOT implementation is source code, not a dataset cache.
+!rmot_tta/data/
+!rmot_tta/data/**
+rmot_tta/data/**/__pycache__/
+!flex_uda/data/
+!flex_uda/data/**
+flex_uda/data/**/__pycache__/
+runs/
+vendor/
+results/flexhook_help.txt
+third_party/
+outputs/stage_l0/*
+!outputs/stage_l0/state.json
+!outputs/stage_l0/final_status.json
+!outputs/stage_l0/checkpoint_manifest.json
+!outputs/stage_l0/object_token_cache_manifest.json
+!outputs/stage_l0/pair_manifest_statistics.csv
+!outputs/stage_l0/training_curves.csv
+!outputs/stage_l0/baseline_results.csv
+!outputs/stage_l0/ablation_results.csv
+!outputs/stage_l0/per_gap_results.csv
+!outputs/stage_l0/per_dataset_results.csv
+!outputs/stage_l0/per_target_count_results.csv
+
+third_party/Eagle/
+references/
+
+# local logs
+*.log
+run.log
+events.log
+
+# Local download clients, browser sessions, and administrator helpers.
+/.tools/
+
+# Refer-BDD manifests contain absolute local data paths and are regenerated
+# from the audited external asset copy; publish only their compact metadata.
+results/manifests/refer_bdd_runtime_manifest.jsonl
+results/manifests/refer_bdd_evaluation_manifest.jsonl
+
+# Recoverability diagnostics: full predictions and feature arrays stay on server.
+results/diagnostics/pf_recoverability_20261025/countmatched/COUNT_MATCHED_FROZEN/
+results/diagnostics/pf_recoverability_20261025/features/cache/
+results/diagnostics/pf_recoverability_20261025/features/model_logs/
+
+# Current active-stage log archive exceeds GitHub's create-blob request limit.
+# Preserve the original on server; publish byte-exact parts and their manifest.
+/results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz
+!/results/presence_active/redesign_v5/active_map_v1_full/experiment_logs.tar.gz.parts/part_*.bin
+
+# Next authorized critical tier uses the same byte-exact log transport.
+/results/presence_active/redesign_v5/active_map_v1_critical28/experiment_logs.tar.gz
+!/results/presence_active/redesign_v5/active_map_v1_critical28/experiment_logs.tar.gz.parts/part_*.bin
+/results/presence_active/redesign_v5/active_map_v1_critical28/teacher_responses.jsonl.gz
+!/results/presence_active/redesign_v5/active_map_v1_critical28/teacher_responses.jsonl.gz.parts/part_*.bin
+
+# v7 closed records use the same byte-exact transport; keep the original local.
+/results/presence_active/redesign_v7/experiment_logs.tar.gz
+!/results/presence_active/redesign_v7/experiment_logs.tar.gz.parts/part_*.bin
+
+# Lightweight publication: complete archives, weights and raw caches stay on NAS.
+# These rules override the historical binary-part exceptions above.
+/assets/
+/a100_runs/
+*.bin
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.tar
+*.tar.gz
+*.tgz
+*.gz
+*.zip
+*.7z
+*.parts/
+*.part-*
+*.part_*
+/results/**/*.jsonl
+/results/**/*.npy
+/results/**/*.npz
+/results/**/*.sqlite*
+/results/**/*.db
+/results/**/frame_cache/
+/results/**/model_logs/
+/results/**/cache/
+
+# Older row-level diagnostic CSVs: preserved locally and at immutable Git059c7b8.
+/results/diagnostics/pf_recoverability_20261025/query_information/episode_presence_scores.csv
+/results/gated_decode/gate_offline_labels.csv
+/results/gated_decode/gates.csv
+/results/mllm_distillation/full/MLLM_DISTILL/episode_presence.csv
+/results/mllm_distillation/full/SOURCE_REHEARSAL/episode_presence.csv
+/results/presence_active/redesign_v5/active_map_v1_critical28/behavior_round.csv
+/results/presence_active/redesign_v5/active_map_v1_critical28/behavior_video.csv
+/results/presence_active/redesign_v5/active_map_v1_critical28/video_differences.csv
+/results/presence_active/redesign_v6/reliability_vs_GT.csv
+/results/presence_active/redesign_v8/reliability_vs_GT.csv
+/results/presence_active/redesign_v8p/glance_hits.csv
+/results/presence_active/redesign_v8p/reliability_vs_GT.csv
+/results/psr/confirmations/seed0/FROZEN/episode_presence.csv
+/results/psr/confirmations/seed0/NAIVE_PAIRED/episode_presence.csv
+/results/psr/confirmations/seed0/PSR/episode_presence.csv
+/results/psr/confirmations/seed0/SOURCE_REHEARSAL/episode_presence.csv
+/results/psr/confirmations/seed42/FROZEN/episode_presence.csv
+/results/psr/confirmations/seed42/NAIVE_PAIRED/episode_presence.csv
+/results/psr/confirmations/seed42/PSR/episode_presence.csv
+/results/psr/confirmations/seed42/SOURCE_REHEARSAL/episode_presence.csv
+/results/psr/full/CONFIDENCE_PAIRED/episode_presence.csv
+/results/psr/full/FROZEN/episode_presence.csv
+/results/psr/full/MEAN_TEACHER_MATCHED/episode_presence.csv
+/results/psr/full/NAIVE_PAIRED/episode_presence.csv
+/results/psr/full/NAIVE_TEMPORAL/episode_presence.csv
+/results/psr/full/PSR/episode_presence.csv
+/results/psr/full/PSR_DISCOVERY/episode_presence.csv
+/results/psr/full/PSR_GEOMETRY/episode_presence.csv
+/results/psr/full/SOURCE_REHEARSAL/episode_presence.csv
+/results/psr/full/UNIFORM_PAIRED/episode_presence.csv
+/results/uda/full/COMBINED_UDA/episode_presence_scores.csv
+/results/uda/full/MEAN_TEACHER_UDA/episode_presence_scores.csv
+/results/uda/full/SOURCE_REHEARSAL/episode_presence_scores.csv
+/results/uda/full/WEAK_MIL_UDA/episode_presence_scores.csv
+
+# Byte-preserving legacy narrative archives; restore with tools/restore_legacy_research_reports.py
+/docs/TTA_RMOT_视觉本能与经典算法_持续研究综合实证_20261122.txt
+/docs/TTA_RMOT_同维度同RGB_严格教师对照_20261122.txt
+/docs/TTA_RMOT_视觉图与外观校准_联合归因_20261122.txt
+/docs/TTA_RMOT_颜色部位语义与单调校准_机制实证_20261122.txt
+/docs/TTA_RMOT_教师预测选择局部整体参照_20261122.txt
+/docs/TTA_RMOT_条件观测学习原型与理论边界_20261123.txt
+/docs/a100_six_direction_20261122/fullscope_visual_six_20261126_postseal_diagnosis.json
+
+/docs/TTA_RMOT_经典理论与现有学习机制的边界_20261123.txt
+/docs/TTA_RMOT_RSI协同进化研究计划_20261123.txt
+/docs/TTA_RMOT_旧目标继承与RSI新Goal_20261124.txt
+/docs/TTA_RMOT_统一二元教师与RSI六设置执行记录_20261124.txt
+/docs/TTA_RMOT_教师置信度加权蒸馏_公平性补查_20261122.txt

@@ -1,0 +1,144 @@
+{
+  "base_episode_count": 862,
+  "base_frame_count": 2069,
+  "complete_source_video_manifest": [
+    "0005",
+    "0011",
+    "0013",
+    "0019"
+  ],
+  "condition_count": 4540,
+  "condition_counts": {
+    "A0": 862,
+    "A1": 3448,
+    "A2": 46,
+    "A3": 184
+  },
+  "dataset_root": "/data2/user/TTA-RMOT/data/ShiftRMOT-v1",
+  "format": "shift-rmot-v1-audit",
+  "language_variant_count": 46,
+  "protocol_note": "A0/A1/A2/A3 are compact condition rows; images are shared symlink targets and shifts are generated online.",
+  "raw_image_copy_check": {
+    "image_roots_are_symlinks": [
+      "/data2/user/TTA-RMOT/data/ShiftRMOT-v1/images/0005",
+      "/data2/user/TTA-RMOT/data/ShiftRMOT-v1/images/0011",
+      "/data2/user/TTA-RMOT/data/ShiftRMOT-v1/images/0013",
+      "/data2/user/TTA-RMOT/data/ShiftRMOT-v1/images/0019"
+    ],
+    "passed": true
+  },
+  "runtime_contains_ground_truth_fields": false,
+  "runtime_evaluation_condition_ids_equal": true,
+  "status": "PASS",
+  "unsafe_language_rows": [],
+  "visual_shift_checks": [
+    {
+      "description": "original RGB image",
+      "deterministic": true,
+      "family": "A0",
+      "severity": "identity",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "identity"
+    },
+    {
+      "description": "white veil and reduced contrast",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "light",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "fog_reduced_contrast"
+    },
+    {
+      "description": "stronger white veil and reduced contrast",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "medium",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "fog_reduced_contrast"
+    },
+    {
+      "description": "underexposure with sensor noise",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "light",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "low_light_sensor_noise"
+    },
+    {
+      "description": "strong underexposure with sensor noise",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "medium",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "low_light_sensor_noise"
+    },
+    {
+      "description": "horizontal motion blur",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "light",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "motion_blur"
+    },
+    {
+      "description": "strong horizontal motion blur",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "medium",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "motion_blur"
+    },
+    {
+      "description": "moderate JPEG recompression",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "light",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "jpeg_compression"
+    },
+    {
+      "description": "strong JPEG recompression",
+      "deterministic": true,
+      "family": "visual",
+      "severity": "medium",
+      "shape": [
+        375,
+        1242,
+        3
+      ],
+      "shift_id": "jpeg_compression"
+    }
+  ]
+}

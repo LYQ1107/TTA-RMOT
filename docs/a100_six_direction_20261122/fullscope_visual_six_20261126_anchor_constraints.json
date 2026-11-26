@@ -1,0 +1,1995 @@
+{
+  "status": "COMPLETE_POSTSEAL_CANONICAL_ANCHOR_CONSTRAINTS",
+  "aggregate": {
+    "C1": {
+      "primary": {
+        "videos": 25,
+        "teacher_wrong_canonical_anchors": 261,
+        "videos_all_wrong_anchor_corrections_ruled_out": 17,
+        "individually_ruled_out_canonical_anchor_count": 39,
+        "minimum_video_correction_infimum": 0.0,
+        "maximum_video_correction_infimum": 0.1345749334738817,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 139,
+              "FP": 237,
+              "FN": 27,
+              "TN": 2644
+            },
+            "unasked": {
+              "TP": 142384,
+              "FP": 279680,
+              "FN": 54835,
+              "TN": 3108499
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 139,
+              "FP": 239,
+              "FN": 27,
+              "TN": 2642
+            },
+            "unasked": {
+              "TP": 144462,
+              "FP": 293034,
+              "FN": 52757,
+              "TN": 3095145
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 139,
+              "FP": 242,
+              "FN": 27,
+              "TN": 2639
+            },
+            "unasked": {
+              "TP": 133189,
+              "FP": 253566,
+              "FN": 64030,
+              "TN": 3134613
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 139,
+              "FP": 241,
+              "FN": 27,
+              "TN": 2640
+            },
+            "unasked": {
+              "TP": 142392,
+              "FP": 289472,
+              "FN": 54827,
+              "TN": 3098707
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 139,
+              "FP": 240,
+              "FN": 27,
+              "TN": 2641
+            },
+            "unasked": {
+              "TP": 143932,
+              "FP": 282987,
+              "FN": 53287,
+              "TN": 3105192
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 139,
+              "FP": 238,
+              "FN": 27,
+              "TN": 2643
+            },
+            "unasked": {
+              "TP": 140061,
+              "FP": 264080,
+              "FN": 57158,
+              "TN": 3124099
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 144,
+              "FP": 209,
+              "FN": 22,
+              "TN": 2672
+            },
+            "unasked": {
+              "TP": 144280,
+              "FP": 266747,
+              "FN": 52939,
+              "TN": 3121432
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 123,
+              "FP": 259,
+              "FN": 43,
+              "TN": 2622
+            },
+            "unasked": {
+              "TP": 148577,
+              "FP": 326608,
+              "FN": 48642,
+              "TN": 3061571
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 117,
+              "FP": 259,
+              "FN": 49,
+              "TN": 2622
+            },
+            "unasked": {
+              "TP": 148812,
+              "FP": 308771,
+              "FN": 48407,
+              "TN": 3079408
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 139,
+              "FP": 239,
+              "FN": 27,
+              "TN": 2642
+            },
+            "unasked": {
+              "TP": 142563,
+              "FP": 280588,
+              "FN": 54656,
+              "TN": 3107591
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 139,
+              "FP": 237,
+              "FN": 27,
+              "TN": 2644
+            },
+            "unasked": {
+              "TP": 145382,
+              "FP": 284690,
+              "FN": 51837,
+              "TN": 3103489
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 25,
+        "teacher_wrong_canonical_anchors": 256,
+        "videos_all_wrong_anchor_corrections_ruled_out": 18,
+        "individually_ruled_out_canonical_anchor_count": 29,
+        "minimum_video_correction_infimum": 0.0,
+        "maximum_video_correction_infimum": 0.08461784837252205,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 108,
+              "FP": 249,
+              "FN": 47,
+              "TN": 2643
+            },
+            "unasked": {
+              "TP": 142415,
+              "FP": 279668,
+              "FN": 54815,
+              "TN": 3108500
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 111,
+              "FP": 272,
+              "FN": 44,
+              "TN": 2620
+            },
+            "unasked": {
+              "TP": 144490,
+              "FP": 293001,
+              "FN": 52740,
+              "TN": 3095167
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 107,
+              "FP": 256,
+              "FN": 48,
+              "TN": 2636
+            },
+            "unasked": {
+              "TP": 133221,
+              "FP": 253552,
+              "FN": 64009,
+              "TN": 3134616
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 114,
+              "FP": 265,
+              "FN": 41,
+              "TN": 2627
+            },
+            "unasked": {
+              "TP": 142417,
+              "FP": 289448,
+              "FN": 54813,
+              "TN": 3098720
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 110,
+              "FP": 264,
+              "FN": 45,
+              "TN": 2628
+            },
+            "unasked": {
+              "TP": 143961,
+              "FP": 282963,
+              "FN": 53269,
+              "TN": 3105205
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 111,
+              "FP": 239,
+              "FN": 44,
+              "TN": 2653
+            },
+            "unasked": {
+              "TP": 140089,
+              "FP": 264079,
+              "FN": 57141,
+              "TN": 3124089
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 112,
+              "FP": 253,
+              "FN": 43,
+              "TN": 2639
+            },
+            "unasked": {
+              "TP": 144312,
+              "FP": 266703,
+              "FN": 52918,
+              "TN": 3121465
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 126,
+              "FP": 227,
+              "FN": 29,
+              "TN": 2665
+            },
+            "unasked": {
+              "TP": 148574,
+              "FP": 326640,
+              "FN": 48656,
+              "TN": 3061528
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 122,
+              "FP": 235,
+              "FN": 33,
+              "TN": 2657
+            },
+            "unasked": {
+              "TP": 148807,
+              "FP": 308795,
+              "FN": 48423,
+              "TN": 3079373
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 111,
+              "FP": 254,
+              "FN": 44,
+              "TN": 2638
+            },
+            "unasked": {
+              "TP": 142591,
+              "FP": 280573,
+              "FN": 54639,
+              "TN": 3107595
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 112,
+              "FP": 269,
+              "FN": 43,
+              "TN": 2623
+            },
+            "unasked": {
+              "TP": 145409,
+              "FP": 284658,
+              "FN": 51821,
+              "TN": 3103510
+            }
+          }
+        }
+      }
+    },
+    "C2": {
+      "primary": {
+        "videos": 4,
+        "teacher_wrong_canonical_anchors": 5322,
+        "videos_all_wrong_anchor_corrections_ruled_out": 4,
+        "individually_ruled_out_canonical_anchor_count": 0,
+        "minimum_video_correction_infimum": 0.04863758597578705,
+        "maximum_video_correction_infimum": 0.06812524891818178,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 2480,
+              "FP": 4661,
+              "FN": 743,
+              "TN": 13071
+            },
+            "unasked": {
+              "TP": 244724,
+              "FP": 516253,
+              "FN": 114372,
+              "TN": 1529078
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 2498,
+              "FP": 4689,
+              "FN": 725,
+              "TN": 13043
+            },
+            "unasked": {
+              "TP": 244499,
+              "FP": 502019,
+              "FN": 114597,
+              "TN": 1543312
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 2504,
+              "FP": 4783,
+              "FN": 719,
+              "TN": 12949
+            },
+            "unasked": {
+              "TP": 236506,
+              "FP": 509062,
+              "FN": 122590,
+              "TN": 1536269
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 2485,
+              "FP": 4682,
+              "FN": 738,
+              "TN": 13050
+            },
+            "unasked": {
+              "TP": 244596,
+              "FP": 502002,
+              "FN": 114500,
+              "TN": 1543329
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 2480,
+              "FP": 4633,
+              "FN": 743,
+              "TN": 13099
+            },
+            "unasked": {
+              "TP": 244224,
+              "FP": 492551,
+              "FN": 114872,
+              "TN": 1552780
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 2441,
+              "FP": 4651,
+              "FN": 782,
+              "TN": 13081
+            },
+            "unasked": {
+              "TP": 236547,
+              "FP": 511664,
+              "FN": 122549,
+              "TN": 1533667
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 2421,
+              "FP": 4211,
+              "FN": 802,
+              "TN": 13521
+            },
+            "unasked": {
+              "TP": 248828,
+              "FP": 463902,
+              "FN": 110268,
+              "TN": 1581429
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1993,
+              "FP": 4488,
+              "FN": 1230,
+              "TN": 13244
+            },
+            "unasked": {
+              "TP": 225393,
+              "FP": 493931,
+              "FN": 133703,
+              "TN": 1551400
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 2009,
+              "FP": 4178,
+              "FN": 1214,
+              "TN": 13554
+            },
+            "unasked": {
+              "TP": 226291,
+              "FP": 460277,
+              "FN": 132805,
+              "TN": 1585054
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 2498,
+              "FP": 4734,
+              "FN": 725,
+              "TN": 12998
+            },
+            "unasked": {
+              "TP": 247272,
+              "FP": 521490,
+              "FN": 111824,
+              "TN": 1523841
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 2491,
+              "FP": 4699,
+              "FN": 732,
+              "TN": 13033
+            },
+            "unasked": {
+              "TP": 245615,
+              "FP": 526962,
+              "FN": 113481,
+              "TN": 1518369
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 4,
+        "teacher_wrong_canonical_anchors": 5267,
+        "videos_all_wrong_anchor_corrections_ruled_out": 4,
+        "individually_ruled_out_canonical_anchor_count": 0,
+        "minimum_video_correction_infimum": 0.04618839703101843,
+        "maximum_video_correction_infimum": 0.07738908496383462,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1533,
+              "FP": 4566,
+              "FN": 906,
+              "TN": 13950
+            },
+            "unasked": {
+              "TP": 245671,
+              "FP": 516348,
+              "FN": 114209,
+              "TN": 1528199
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1546,
+              "FP": 4355,
+              "FN": 893,
+              "TN": 14161
+            },
+            "unasked": {
+              "TP": 245451,
+              "FP": 502353,
+              "FN": 114429,
+              "TN": 1542194
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1479,
+              "FP": 4366,
+              "FN": 960,
+              "TN": 14150
+            },
+            "unasked": {
+              "TP": 237531,
+              "FP": 509479,
+              "FN": 122349,
+              "TN": 1535068
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1539,
+              "FP": 4347,
+              "FN": 900,
+              "TN": 14169
+            },
+            "unasked": {
+              "TP": 245542,
+              "FP": 502337,
+              "FN": 114338,
+              "TN": 1542210
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1533,
+              "FP": 4278,
+              "FN": 906,
+              "TN": 14238
+            },
+            "unasked": {
+              "TP": 245171,
+              "FP": 492906,
+              "FN": 114709,
+              "TN": 1551641
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1483,
+              "FP": 4396,
+              "FN": 956,
+              "TN": 14120
+            },
+            "unasked": {
+              "TP": 237505,
+              "FP": 511919,
+              "FN": 122375,
+              "TN": 1532628
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1562,
+              "FP": 4162,
+              "FN": 877,
+              "TN": 14354
+            },
+            "unasked": {
+              "TP": 249687,
+              "FP": 463951,
+              "FN": 110193,
+              "TN": 1580596
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1765,
+              "FP": 4643,
+              "FN": 674,
+              "TN": 13873
+            },
+            "unasked": {
+              "TP": 225621,
+              "FP": 493776,
+              "FN": 134259,
+              "TN": 1550771
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1687,
+              "FP": 4145,
+              "FN": 752,
+              "TN": 14371
+            },
+            "unasked": {
+              "TP": 226613,
+              "FP": 460310,
+              "FN": 133267,
+              "TN": 1584237
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1566,
+              "FP": 4577,
+              "FN": 873,
+              "TN": 13939
+            },
+            "unasked": {
+              "TP": 248204,
+              "FP": 521647,
+              "FN": 111676,
+              "TN": 1522900
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1553,
+              "FP": 4696,
+              "FN": 886,
+              "TN": 13820
+            },
+            "unasked": {
+              "TP": 246553,
+              "FP": 526965,
+              "FN": 113327,
+              "TN": 1517582
+            }
+          }
+        }
+      }
+    },
+    "C3": {
+      "primary": {
+        "videos": 45,
+        "teacher_wrong_canonical_anchors": 550,
+        "videos_all_wrong_anchor_corrections_ruled_out": 43,
+        "individually_ruled_out_canonical_anchor_count": 206,
+        "minimum_video_correction_infimum": 0.0,
+        "maximum_video_correction_infimum": 0.2004020836937444,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1546,
+              "FP": 477,
+              "FN": 75,
+              "TN": 1410
+            },
+            "unasked": {
+              "TP": 1407054,
+              "FP": 550600,
+              "FN": 97283,
+              "TN": 909756
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1543,
+              "FP": 481,
+              "FN": 78,
+              "TN": 1406
+            },
+            "unasked": {
+              "TP": 1404675,
+              "FP": 544001,
+              "FN": 99662,
+              "TN": 916355
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1547,
+              "FP": 484,
+              "FN": 74,
+              "TN": 1403
+            },
+            "unasked": {
+              "TP": 1407141,
+              "FP": 559421,
+              "FN": 97196,
+              "TN": 900935
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1543,
+              "FP": 479,
+              "FN": 78,
+              "TN": 1408
+            },
+            "unasked": {
+              "TP": 1406378,
+              "FP": 554748,
+              "FN": 97959,
+              "TN": 905608
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1544,
+              "FP": 479,
+              "FN": 77,
+              "TN": 1408
+            },
+            "unasked": {
+              "TP": 1406930,
+              "FP": 552251,
+              "FN": 97407,
+              "TN": 908105
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1544,
+              "FP": 478,
+              "FN": 77,
+              "TN": 1409
+            },
+            "unasked": {
+              "TP": 1414243,
+              "FP": 541157,
+              "FN": 90094,
+              "TN": 919199
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1564,
+              "FP": 502,
+              "FN": 57,
+              "TN": 1385
+            },
+            "unasked": {
+              "TP": 1418290,
+              "FP": 540368,
+              "FN": 86047,
+              "TN": 919988
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1491,
+              "FP": 630,
+              "FN": 130,
+              "TN": 1257
+            },
+            "unasked": {
+              "TP": 1395436,
+              "FP": 556614,
+              "FN": 108901,
+              "TN": 903742
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1510,
+              "FP": 629,
+              "FN": 111,
+              "TN": 1258
+            },
+            "unasked": {
+              "TP": 1409542,
+              "FP": 559396,
+              "FN": 94795,
+              "TN": 900960
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1543,
+              "FP": 480,
+              "FN": 78,
+              "TN": 1407
+            },
+            "unasked": {
+              "TP": 1397863,
+              "FP": 531627,
+              "FN": 106474,
+              "TN": 928729
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1544,
+              "FP": 478,
+              "FN": 77,
+              "TN": 1409
+            },
+            "unasked": {
+              "TP": 1403289,
+              "FP": 545491,
+              "FN": 101048,
+              "TN": 914865
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 45,
+        "teacher_wrong_canonical_anchors": 620,
+        "videos_all_wrong_anchor_corrections_ruled_out": 45,
+        "individually_ruled_out_canonical_anchor_count": 232,
+        "minimum_video_correction_infimum": 0.012252409058476773,
+        "maximum_video_correction_infimum": 0.2209122992859297,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1466,
+              "FP": 648,
+              "FN": 143,
+              "TN": 1251
+            },
+            "unasked": {
+              "TP": 1407134,
+              "FP": 550429,
+              "FN": 97215,
+              "TN": 909915
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1442,
+              "FP": 636,
+              "FN": 167,
+              "TN": 1263
+            },
+            "unasked": {
+              "TP": 1404776,
+              "FP": 543846,
+              "FN": 99573,
+              "TN": 916498
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1465,
+              "FP": 664,
+              "FN": 144,
+              "TN": 1235
+            },
+            "unasked": {
+              "TP": 1407223,
+              "FP": 559241,
+              "FN": 97126,
+              "TN": 901103
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1444,
+              "FP": 631,
+              "FN": 165,
+              "TN": 1268
+            },
+            "unasked": {
+              "TP": 1406477,
+              "FP": 554596,
+              "FN": 97872,
+              "TN": 905748
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1450,
+              "FP": 647,
+              "FN": 159,
+              "TN": 1252
+            },
+            "unasked": {
+              "TP": 1407024,
+              "FP": 552083,
+              "FN": 97325,
+              "TN": 908261
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1470,
+              "FP": 641,
+              "FN": 139,
+              "TN": 1258
+            },
+            "unasked": {
+              "TP": 1414317,
+              "FP": 540994,
+              "FN": 90032,
+              "TN": 919350
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1455,
+              "FP": 628,
+              "FN": 154,
+              "TN": 1271
+            },
+            "unasked": {
+              "TP": 1418399,
+              "FP": 540242,
+              "FN": 85950,
+              "TN": 920102
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1487,
+              "FP": 507,
+              "FN": 122,
+              "TN": 1392
+            },
+            "unasked": {
+              "TP": 1395440,
+              "FP": 556737,
+              "FN": 108909,
+              "TN": 903607
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1510,
+              "FP": 551,
+              "FN": 99,
+              "TN": 1348
+            },
+            "unasked": {
+              "TP": 1409542,
+              "FP": 559474,
+              "FN": 94807,
+              "TN": 900870
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1453,
+              "FP": 597,
+              "FN": 156,
+              "TN": 1302
+            },
+            "unasked": {
+              "TP": 1397953,
+              "FP": 531510,
+              "FN": 106396,
+              "TN": 928834
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1445,
+              "FP": 644,
+              "FN": 164,
+              "TN": 1255
+            },
+            "unasked": {
+              "TP": 1403388,
+              "FP": 545325,
+              "FN": 100961,
+              "TN": 915019
+            }
+          }
+        }
+      }
+    },
+    "C4": {
+      "primary": {
+        "videos": 45,
+        "teacher_wrong_canonical_anchors": 551,
+        "videos_all_wrong_anchor_corrections_ruled_out": 44,
+        "individually_ruled_out_canonical_anchor_count": 200,
+        "minimum_video_correction_infimum": 0.001897807760411111,
+        "maximum_video_correction_infimum": 0.19464575404936535,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1483,
+              "FP": 458,
+              "FN": 99,
+              "TN": 1468
+            },
+            "unasked": {
+              "TP": 1359244,
+              "FP": 540615,
+              "FN": 145132,
+              "TN": 919702
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1487,
+              "FP": 462,
+              "FN": 95,
+              "TN": 1464
+            },
+            "unasked": {
+              "TP": 1361301,
+              "FP": 542061,
+              "FN": 143075,
+              "TN": 918256
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1487,
+              "FP": 467,
+              "FN": 95,
+              "TN": 1459
+            },
+            "unasked": {
+              "TP": 1370777,
+              "FP": 543841,
+              "FN": 133599,
+              "TN": 916476
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1485,
+              "FP": 460,
+              "FN": 97,
+              "TN": 1466
+            },
+            "unasked": {
+              "TP": 1358735,
+              "FP": 550102,
+              "FN": 145641,
+              "TN": 910215
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1487,
+              "FP": 463,
+              "FN": 95,
+              "TN": 1463
+            },
+            "unasked": {
+              "TP": 1357110,
+              "FP": 541616,
+              "FN": 147266,
+              "TN": 918701
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1483,
+              "FP": 458,
+              "FN": 99,
+              "TN": 1468
+            },
+            "unasked": {
+              "TP": 1377255,
+              "FP": 530453,
+              "FN": 127121,
+              "TN": 929864
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1493,
+              "FP": 468,
+              "FN": 89,
+              "TN": 1458
+            },
+            "unasked": {
+              "TP": 1371547,
+              "FP": 540275,
+              "FN": 132829,
+              "TN": 920042
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1386,
+              "FP": 660,
+              "FN": 196,
+              "TN": 1266
+            },
+            "unasked": {
+              "TP": 1354647,
+              "FP": 585009,
+              "FN": 149729,
+              "TN": 875308
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1405,
+              "FP": 673,
+              "FN": 177,
+              "TN": 1253
+            },
+            "unasked": {
+              "TP": 1365189,
+              "FP": 585730,
+              "FN": 139187,
+              "TN": 874587
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1483,
+              "FP": 458,
+              "FN": 99,
+              "TN": 1468
+            },
+            "unasked": {
+              "TP": 1350363,
+              "FP": 521643,
+              "FN": 154013,
+              "TN": 938674
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1485,
+              "FP": 455,
+              "FN": 97,
+              "TN": 1471
+            },
+            "unasked": {
+              "TP": 1359580,
+              "FP": 536614,
+              "FN": 144796,
+              "TN": 923703
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 45,
+        "teacher_wrong_canonical_anchors": 620,
+        "videos_all_wrong_anchor_corrections_ruled_out": 45,
+        "individually_ruled_out_canonical_anchor_count": 232,
+        "minimum_video_correction_infimum": 0.012252409058476773,
+        "maximum_video_correction_infimum": 0.2209122992859297,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1437,
+              "FP": 648,
+              "FN": 172,
+              "TN": 1251
+            },
+            "unasked": {
+              "TP": 1359290,
+              "FP": 540425,
+              "FN": 145059,
+              "TN": 919919
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1438,
+              "FP": 647,
+              "FN": 171,
+              "TN": 1252
+            },
+            "unasked": {
+              "TP": 1361350,
+              "FP": 541876,
+              "FN": 142999,
+              "TN": 918468
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1435,
+              "FP": 653,
+              "FN": 174,
+              "TN": 1246
+            },
+            "unasked": {
+              "TP": 1370829,
+              "FP": 543655,
+              "FN": 133520,
+              "TN": 916689
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1429,
+              "FP": 650,
+              "FN": 180,
+              "TN": 1249
+            },
+            "unasked": {
+              "TP": 1358791,
+              "FP": 549912,
+              "FN": 145558,
+              "TN": 910432
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1430,
+              "FP": 642,
+              "FN": 179,
+              "TN": 1257
+            },
+            "unasked": {
+              "TP": 1357167,
+              "FP": 541437,
+              "FN": 147182,
+              "TN": 918907
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1452,
+              "FP": 645,
+              "FN": 157,
+              "TN": 1254
+            },
+            "unasked": {
+              "TP": 1377286,
+              "FP": 530266,
+              "FN": 127063,
+              "TN": 930078
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1453,
+              "FP": 642,
+              "FN": 156,
+              "TN": 1257
+            },
+            "unasked": {
+              "TP": 1371587,
+              "FP": 540101,
+              "FN": 132762,
+              "TN": 920243
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1487,
+              "FP": 504,
+              "FN": 122,
+              "TN": 1395
+            },
+            "unasked": {
+              "TP": 1354546,
+              "FP": 585165,
+              "FN": 149803,
+              "TN": 875179
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1506,
+              "FP": 536,
+              "FN": 103,
+              "TN": 1363
+            },
+            "unasked": {
+              "TP": 1365088,
+              "FP": 585867,
+              "FN": 139261,
+              "TN": 874477
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1427,
+              "FP": 615,
+              "FN": 182,
+              "TN": 1284
+            },
+            "unasked": {
+              "TP": 1350419,
+              "FP": 521486,
+              "FN": 153930,
+              "TN": 938858
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1436,
+              "FP": 645,
+              "FN": 173,
+              "TN": 1254
+            },
+            "unasked": {
+              "TP": 1359629,
+              "FP": 536424,
+              "FN": 144720,
+              "TN": 923920
+            }
+          }
+        }
+      }
+    },
+    "C5": {
+      "primary": {
+        "videos": 4,
+        "teacher_wrong_canonical_anchors": 5344,
+        "videos_all_wrong_anchor_corrections_ruled_out": 4,
+        "individually_ruled_out_canonical_anchor_count": 0,
+        "minimum_video_correction_infimum": 0.0457179652300642,
+        "maximum_video_correction_infimum": 0.0688819586954264,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 2361,
+              "FP": 4684,
+              "FN": 702,
+              "TN": 13208
+            },
+            "unasked": {
+              "TP": 262969,
+              "FP": 500907,
+              "FN": 96287,
+              "TN": 1544264
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 2376,
+              "FP": 4784,
+              "FN": 687,
+              "TN": 13108
+            },
+            "unasked": {
+              "TP": 266951,
+              "FP": 501276,
+              "FN": 92305,
+              "TN": 1543895
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 2393,
+              "FP": 4817,
+              "FN": 670,
+              "TN": 13075
+            },
+            "unasked": {
+              "TP": 258238,
+              "FP": 509530,
+              "FN": 101018,
+              "TN": 1535641
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 2373,
+              "FP": 4736,
+              "FN": 690,
+              "TN": 13156
+            },
+            "unasked": {
+              "TP": 266673,
+              "FP": 495925,
+              "FN": 92583,
+              "TN": 1549246
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 2351,
+              "FP": 4519,
+              "FN": 712,
+              "TN": 13373
+            },
+            "unasked": {
+              "TP": 259966,
+              "FP": 461674,
+              "FN": 99290,
+              "TN": 1583497
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 2385,
+              "FP": 4946,
+              "FN": 678,
+              "TN": 12946
+            },
+            "unasked": {
+              "TP": 267804,
+              "FP": 564786,
+              "FN": 91452,
+              "TN": 1480385
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 2366,
+              "FP": 4289,
+              "FN": 697,
+              "TN": 13603
+            },
+            "unasked": {
+              "TP": 268509,
+              "FP": 476792,
+              "FN": 90747,
+              "TN": 1568379
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 2049,
+              "FP": 4441,
+              "FN": 1014,
+              "TN": 13451
+            },
+            "unasked": {
+              "TP": 246704,
+              "FP": 492082,
+              "FN": 112552,
+              "TN": 1553089
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 2067,
+              "FP": 4282,
+              "FN": 996,
+              "TN": 13610
+            },
+            "unasked": {
+              "TP": 247663,
+              "FP": 472076,
+              "FN": 111593,
+              "TN": 1573095
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 2364,
+              "FP": 4703,
+              "FN": 699,
+              "TN": 13189
+            },
+            "unasked": {
+              "TP": 261749,
+              "FP": 502568,
+              "FN": 97507,
+              "TN": 1542603
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 2368,
+              "FP": 4743,
+              "FN": 695,
+              "TN": 13149
+            },
+            "unasked": {
+              "TP": 264767,
+              "FP": 516712,
+              "FN": 94489,
+              "TN": 1528459
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 4,
+        "teacher_wrong_canonical_anchors": 5267,
+        "videos_all_wrong_anchor_corrections_ruled_out": 4,
+        "individually_ruled_out_canonical_anchor_count": 0,
+        "minimum_video_correction_infimum": 0.04618839703101843,
+        "maximum_video_correction_infimum": 0.07738908496383462,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 1679,
+              "FP": 4494,
+              "FN": 760,
+              "TN": 14022
+            },
+            "unasked": {
+              "TP": 263651,
+              "FP": 501097,
+              "FN": 96229,
+              "TN": 1543450
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 1721,
+              "FP": 4375,
+              "FN": 718,
+              "TN": 14141
+            },
+            "unasked": {
+              "TP": 267606,
+              "FP": 501685,
+              "FN": 92274,
+              "TN": 1542862
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 1646,
+              "FP": 4398,
+              "FN": 793,
+              "TN": 14118
+            },
+            "unasked": {
+              "TP": 258985,
+              "FP": 509949,
+              "FN": 100895,
+              "TN": 1534598
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 1701,
+              "FP": 4320,
+              "FN": 738,
+              "TN": 14196
+            },
+            "unasked": {
+              "TP": 267345,
+              "FP": 496341,
+              "FN": 92535,
+              "TN": 1548206
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 1646,
+              "FP": 4013,
+              "FN": 793,
+              "TN": 14503
+            },
+            "unasked": {
+              "TP": 260671,
+              "FP": 462180,
+              "FN": 99209,
+              "TN": 1582367
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 1698,
+              "FP": 5092,
+              "FN": 741,
+              "TN": 13424
+            },
+            "unasked": {
+              "TP": 268491,
+              "FP": 564640,
+              "FN": 91389,
+              "TN": 1479907
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 1694,
+              "FP": 4273,
+              "FN": 745,
+              "TN": 14243
+            },
+            "unasked": {
+              "TP": 269181,
+              "FP": 476808,
+              "FN": 90699,
+              "TN": 1567739
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 1760,
+              "FP": 4693,
+              "FN": 679,
+              "TN": 13823
+            },
+            "unasked": {
+              "TP": 246993,
+              "FP": 491830,
+              "FN": 112887,
+              "TN": 1552717
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 1759,
+              "FP": 4355,
+              "FN": 680,
+              "TN": 14161
+            },
+            "unasked": {
+              "TP": 247971,
+              "FP": 472003,
+              "FN": 111909,
+              "TN": 1572544
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 1657,
+              "FP": 4467,
+              "FN": 782,
+              "TN": 14049
+            },
+            "unasked": {
+              "TP": 262456,
+              "FP": 502804,
+              "FN": 97424,
+              "TN": 1541743
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 1698,
+              "FP": 4542,
+              "FN": 741,
+              "TN": 13974
+            },
+            "unasked": {
+              "TP": 265437,
+              "FP": 516913,
+              "FN": 94443,
+              "TN": 1527634
+            }
+          }
+        }
+      }
+    },
+    "C6": {
+      "primary": {
+        "videos": 25,
+        "teacher_wrong_canonical_anchors": 252,
+        "videos_all_wrong_anchor_corrections_ruled_out": 17,
+        "individually_ruled_out_canonical_anchor_count": 27,
+        "minimum_video_correction_infimum": 0.0,
+        "maximum_video_correction_infimum": 0.12319028506264419,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 144,
+              "FP": 221,
+              "FN": 32,
+              "TN": 2649
+            },
+            "unasked": {
+              "TP": 144548,
+              "FP": 266751,
+              "FN": 52661,
+              "TN": 3121439
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 143,
+              "FP": 220,
+              "FN": 33,
+              "TN": 2650
+            },
+            "unasked": {
+              "TP": 141424,
+              "FP": 281326,
+              "FN": 55785,
+              "TN": 3106864
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 144,
+              "FP": 224,
+              "FN": 32,
+              "TN": 2646
+            },
+            "unasked": {
+              "TP": 126829,
+              "FP": 239674,
+              "FN": 70380,
+              "TN": 3148516
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 144,
+              "FP": 221,
+              "FN": 32,
+              "TN": 2649
+            },
+            "unasked": {
+              "TP": 140638,
+              "FP": 282343,
+              "FN": 56571,
+              "TN": 3105847
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 144,
+              "FP": 222,
+              "FN": 32,
+              "TN": 2648
+            },
+            "unasked": {
+              "TP": 146131,
+              "FP": 270887,
+              "FN": 51078,
+              "TN": 3117303
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 144,
+              "FP": 219,
+              "FN": 32,
+              "TN": 2651
+            },
+            "unasked": {
+              "TP": 147140,
+              "FP": 248402,
+              "FN": 50069,
+              "TN": 3139788
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 141,
+              "FP": 182,
+              "FN": 35,
+              "TN": 2688
+            },
+            "unasked": {
+              "TP": 142971,
+              "FP": 253980,
+              "FN": 54238,
+              "TN": 3134210
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 121,
+              "FP": 241,
+              "FN": 55,
+              "TN": 2629
+            },
+            "unasked": {
+              "TP": 140275,
+              "FP": 298949,
+              "FN": 56934,
+              "TN": 3089241
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 122,
+              "FP": 224,
+              "FN": 54,
+              "TN": 2646
+            },
+            "unasked": {
+              "TP": 140227,
+              "FP": 276098,
+              "FN": 56982,
+              "TN": 3112092
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 144,
+              "FP": 222,
+              "FN": 32,
+              "TN": 2648
+            },
+            "unasked": {
+              "TP": 136798,
+              "FP": 263365,
+              "FN": 60411,
+              "TN": 3124825
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 143,
+              "FP": 223,
+              "FN": 33,
+              "TN": 2647
+            },
+            "unasked": {
+              "TP": 147233,
+              "FP": 256665,
+              "FN": 49976,
+              "TN": 3131525
+            }
+          }
+        }
+      },
+      "uniform": {
+        "videos": 25,
+        "teacher_wrong_canonical_anchors": 265,
+        "videos_all_wrong_anchor_corrections_ruled_out": 18,
+        "individually_ruled_out_canonical_anchor_count": 29,
+        "minimum_video_correction_infimum": 0.0,
+        "maximum_video_correction_infimum": 0.08461784837252205,
+        "models": {
+          "FULL_SCOPE_VISUAL_RSI": {
+            "paid": {
+              "TP": 108,
+              "FP": 271,
+              "FN": 47,
+              "TN": 2620
+            },
+            "unasked": {
+              "TP": 144584,
+              "FP": 266701,
+              "FN": 52646,
+              "TN": 3121468
+            }
+          },
+          "SOFT_KD288": {
+            "paid": {
+              "TP": 108,
+              "FP": 284,
+              "FN": 47,
+              "TN": 2607
+            },
+            "unasked": {
+              "TP": 141459,
+              "FP": 281262,
+              "FN": 55771,
+              "TN": 3106907
+            }
+          },
+          "HARD_KD288": {
+            "paid": {
+              "TP": 108,
+              "FP": 241,
+              "FN": 47,
+              "TN": 2650
+            },
+            "unasked": {
+              "TP": 126865,
+              "FP": 239657,
+              "FN": 70365,
+              "TN": 3148512
+            }
+          },
+          "LURE_KD288": {
+            "paid": {
+              "TP": 113,
+              "FP": 283,
+              "FN": 42,
+              "TN": 2608
+            },
+            "unasked": {
+              "TP": 140669,
+              "FP": 282281,
+              "FN": 56561,
+              "TN": 3105888
+            }
+          },
+          "SSL_KD288": {
+            "paid": {
+              "TP": 112,
+              "FP": 269,
+              "FN": 43,
+              "TN": 2622
+            },
+            "unasked": {
+              "TP": 146163,
+              "FP": 270840,
+              "FN": 51067,
+              "TN": 3117329
+            }
+          },
+          "R_DIRECT": {
+            "paid": {
+              "TP": 117,
+              "FP": 243,
+              "FN": 38,
+              "TN": 2648
+            },
+            "unasked": {
+              "TP": 147167,
+              "FP": 248378,
+              "FN": 50063,
+              "TN": 3139791
+            }
+          },
+          "SOFT_POOLED": {
+            "paid": {
+              "TP": 109,
+              "FP": 252,
+              "FN": 46,
+              "TN": 2639
+            },
+            "unasked": {
+              "TP": 143003,
+              "FP": 253910,
+              "FN": 54227,
+              "TN": 3134259
+            }
+          },
+          "UNIFORM_SOFT_KD288": {
+            "paid": {
+              "TP": 121,
+              "FP": 233,
+              "FN": 34,
+              "TN": 2658
+            },
+            "unasked": {
+              "TP": 140275,
+              "FP": 298957,
+              "FN": 56955,
+              "TN": 3089212
+            }
+          },
+          "UNIFORM_POOLED": {
+            "paid": {
+              "TP": 123,
+              "FP": 225,
+              "FN": 32,
+              "TN": 2666
+            },
+            "unasked": {
+              "TP": 140226,
+              "FP": 276097,
+              "FN": 57004,
+              "TN": 3112072
+            }
+          },
+          "FLAT_KD128": {
+            "paid": {
+              "TP": 105,
+              "FP": 268,
+              "FN": 50,
+              "TN": 2623
+            },
+            "unasked": {
+              "TP": 136837,
+              "FP": 263319,
+              "FN": 60393,
+              "TN": 3124850
+            }
+          },
+          "SAME_ARCH_KD128": {
+            "paid": {
+              "TP": 111,
+              "FP": 260,
+              "FN": 44,
+              "TN": 2631
+            },
+            "unasked": {
+              "TP": 147265,
+              "FP": 256628,
+              "FN": 49965,
+              "TN": 3131541
+            }
+          }
+        }
+      }
+    }
+  },
+  "source_sha256": "3e9da7cc79fcefc916d012f694163b26eb1030d6ee8d5e4a1208132dfdf7ac49",
+  "registration_sha256": "9e5dd189080769655d650329b7b8188ea62a50502c1d2421e16964666397a697",
+  "video_units": 148,
+  "original_gate": 0.005,
+  "only_necessary_relaxed_bound_not_feasibility": true,
+  "canonical_matching_not_pure_teacher_semantic_accuracy": true,
+  "no_new_HOTA_fits_teacher_GPU_predictions_or_training_seeds": true,
+  "not_an_additive_HOTA_decomposition": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

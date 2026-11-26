@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "tests_passed": 30,
+  "wall_seconds": 5.12,
+  "command": "python -m pytest -q tests/test_active_execution.py tests/test_presence_cardinality.py tests/test_presence_residual.py tests/test_presence_active.py",
+  "compileall": "PASS",
+  "targeted_changes": [
+    "incomplete nine-cell Stage A cannot authorize B/C",
+    "published Stage A selects isolated outputs without modifying the old gate",
+    "conditional count mean correctly supports counts greater than ten"
+  ],
+  "real_teacher_and_LoRA_not_yet_validated": true
+}

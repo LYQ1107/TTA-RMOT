@@ -1,0 +1,31 @@
+.........F
+=================================== FAILURES ===================================
+______________ test_registered_synthetic_200_video_recovery[0.1] _______________
+
+rho = 0.1
+
+    @pytest.mark.parametrize('rho', [.1, 1.])
+    def test_registered_synthetic_200_video_recovery(rho):
+        from scripts.active_v8_stage0 import synthetic_recovery, PUBLIC
+        from flex_tta.runtime.pf_receipts import atomic_json, file_sha
+        result = synthetic_recovery(rho)
+        atomic_json(PUBLIC/f'stage0_synthetic_rho_{rho}.json', dict(result,
+            prereg_sha256=file_sha(PUBLIC/'PREREG.md'), manifest_sha256=file_sha(PUBLIC/'manifest.json')))
+>       assert result['status'] == 'PASS', json.dumps({k: v for k, v in result.items() if k != 'stream'})
+E       AssertionError: {"status": "STOP_EM_NONCONVERGENCE", "true_rho": 0.1, "true_pi": [0.8, 0.3, 0.05], "completed_videos": 5, "EM": {"version": "v8", "rho_hat": 0.23273205643681252, "pi_strata": [0.43335323219726707, 0.15119714931447706, 0.5567154949779427], "iterations": 200, "converged": false, "last_delta": 8.198819538840496e-07, "records": 85, "tracks_per_stratum": [108, 477, 48], "Beta_prior": [2.0, 2.0], "clip": [0.05, 0.95], "tolerance": 1e-07, "maximum_iterations": 200, "track_logLR_cap": 2.0, "outcome_filtered_sentence_selection": false}, "question_counts": {"GLANCE": 85, "PRESENCE": 104, "POSITIVE_RECHECK": 87, "IDENTITY": 486, "PRESENCE_COVER": 3}, "GT_open_attempts": 0, "GPU_calls": 0, "teacher_calls": 0}
+E       assert 'STOP_EM_NONCONVERGENCE' == 'PASS'
+E         
+E         - PASS
+E         + STOP_EM_NONCONVERGENCE
+
+tests/test_active_v8.py:157: AssertionError
+=============================== warnings summary ===============================
+../../../home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345
+  /home/user/.local/lib/python3.10/site-packages/_pytest/config/__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_active_v8.py::test_registered_synthetic_200_video_recovery[0.1]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 9 passed, 1 warning in 7.59s

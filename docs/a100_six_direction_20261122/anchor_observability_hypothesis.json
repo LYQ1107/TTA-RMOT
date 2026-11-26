@@ -1,0 +1,26 @@
+{
+  "study": "Three-anchor image-only appearance observability audit",
+  "problem": "Existing query/TrackID descriptors average three sparse observations and cannot reveal their internal appearance variation.",
+  "hypothesis": "Per-anchor descriptors can expose variation hidden by the mean; this is a representation audit, not a claim of identity switches or improved RMOT.",
+  "intervention": "Retain the identical three source row indices, compute the existing three-part HSV histograms per anchor, and exactly reconstruct both source-pair means.",
+  "controls": "First/last and adjacent anchors within a provided ID; deterministic same-frame cyclic neighboring different provided IDs. No control is verified by target GT.",
+  "fixed_design": {
+    "videos": 74,
+    "parts": [
+      "whole",
+      "upper",
+      "lower"
+    ],
+    "descriptor": "Existing 104-dimensional normalized HSV histogram per part",
+    "distance": "Hellinger on observed normalized histograms",
+    "CPU_workers": 2,
+    "new_images_beyond_registered_anchors": 0,
+    "threshold_selection": "None; report fixed quantiles only"
+  },
+  "inputs": "Target images, fixed candidate rows and existing image-only mean descriptors; no image QA, prediction, target GT or source model forward.",
+  "fairness": "All future ordinary and structured KD methods must receive identical per-anchor inputs.",
+  "boundaries": "Three anchors cannot detect all interior changes. Color variation does not establish semantic errors, physical ID purity or a gain from temporal memory.",
+  "costs": "Record image decoding, histogram processing and controller wall. This is shared preparation, not a complete cold method cost.",
+  "goal_status": "ACTIVE",
+  "research_goal_complete": false
+}

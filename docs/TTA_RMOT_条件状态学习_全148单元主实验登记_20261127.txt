@@ -1,0 +1,15 @@
+TTA-RMOT：条件状态学习——完整148单元主实验登记与启动
+2026-11-27
+
+承接《TTA_RMOT_条件状态学习_六设置工程闭环_20261127.txt》。本报告记录完整主研究的固定协议与真实启动，不含尚未产生的HOTA或贡献结论。
+
+65. 完整148单元主研究已登记并实际四卡启动（2026-11-27，尚无当前HOTA）
+完成新的完整训练runtime、充分普通对照、3256封存入口和独立全设置统计脚本；不就地改旧工程/核心/42个原数值源码。actual79495正常exit0，10项CPU恢复、实际接受分数与拒绝proposal隔离、跨登记拒绝、RNG、原子失败保护、CountMatched和全设置统计合同通过；不是质量结果。
+prepare15714 exit0，固定148视频单元、3256输出、48数值源和1194直接输入。主S/观察者R各四轮1500步，在原充分uniform软KD上初始化；三个普通头也从相同初始权重开始，各至少额外6000步并满足原proper excessKL<=.005。没有增加随机种子。融合KD目标来自无信息solver prior.5加相同最终R和原教师证据，故明确不是独立纯教师；共享记忆对手更直接拿到主方法最终R/协议/证据，排除只因多了记忆后处理而涨点的解释。
+七个固定对手为SOFT_KD、HARD_KD、SOFT_POOLED、SOFT_SHARED_MEMORY、HARD_SHARED_MEMORY、FUSED_KD、FUSED_SHARED_MEMORY。固定主CONDITIONAL_STATE_MEMORY；原始和双向逐query/frame数量投影共22输出/单元。只有固定主在完整六设置对全部7对手的raw及双数量效应均正，才进入必要贡献和交互验证；不事后晋级最佳对手。
+新runtime保存实际接受分数、S/R和NumPy/Torch/CUDA RNG，支持从最后完成轮次恢复；未完成轮次按同状态重新执行，保存失败attempt成本。普通Adam每500步保存。元数据初始query-set协议仍是开发启发，CLIP潜在时刻/教师信道朝向及误差条件独立仍是模型假设。优化目标下降不保证HOTA或RSI因果收益。
+actual90232已真实启动GPU0/1/2/3 PID2976085/2976087/2976089/2976091，每卡.20上限，保护原2号卡其他服务。复用原固定对象均衡UNIFORM问答与完整9352D输入，0新Qwen/0新主动选题收益声称，人工GT不用于学习。所有3256预测和原教师封存引用完成且worker退出后，才隔离官评并汇总132HOTA/126效应和公共JSON/NumPy复算。实际拟合/组装/推断/封存相位记账；特征、问答和初始KD均预付，不能当fresh端到端或同时间部署证明。Goal继续ACTIVE，未有本轮HOTA或三贡献成立结果。
+
+为给必要代码及后续完整数值统计保留100MB内空间，另五份已被替代的阶段叙述按不可变已发布提交232a58282fedb312ecaf3b540dcf9ff2896f7e09和SHA归档；本机原文不删除。共11份旧TXT已用tools/restore_legacy_research_reports.py逐字节往返复原。旧数值JSON、所有负结果、点名Nov20/Nov21及最新报告保持，未修改运行中的48数值源。
+
+旧分支可达历史对象的预发布检查已接近100MB，无法容纳随后完整统计。新发布分支codex/rmot-conditional-state-six-settings-20261127采用当前完整科学快照，旧已推送分支codex/rmot-fullscope-six-settings-20261126保留在232a58282fedb312ecaf3b540dcf9ff2896f7e09，不force push、不删除或覆盖旧历史。全部原数值JSON保留；旧叙述仍按不可变提交/SHA恢复。若新检出缺少历史对象，先运行git fetch origin codex/rmot-fullscope-six-settings-20261126，再运行原恢复工具。A100本机原文及当前四卡任务不受分支整理影响。

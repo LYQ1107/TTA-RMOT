@@ -1,0 +1,3509 @@
+{
+  "status": "SOURCE_ONLY_PLATT_FROZEN",
+  "a": 0.24036048418637937,
+  "b": -1.436609828865091,
+  "pi_s": 0.15056411980668452,
+  "source_candidate_rows": 2355528,
+  "source_queries": 862,
+  "positive_rows": 354658,
+  "source_mean": -8.394860413379645,
+  "source_unscaled_NLL": 0.8845572452890216,
+  "source_Platt_NLL": 0.2643715032677141,
+  "optimizer": "L-BFGS-B two scalar source calibration only; no student or teacher updates",
+  "iterations": 14,
+  "source_model": "official frozen KITTI-V2; same calibration reused for all four margin libraries",
+  "labels": "IoU>=.5 one-to-one max-cardinality; source query GT boxes; normalized-coordinate IoU is pixel-coordinate invariant",
+  "source_candidates": "official Temp-NeuralSORT car/pedestrian; pedestrian offset=max(car ID), frame=raw_frame-1; never equate predicted ID with GT ID",
+  "source_GT": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/labels.json",
+  "source_GT_sha256": "fab22e1f8911285ec9933d3b4a6212333f00f384351a8fe9302e8ba13a61f67d",
+  "inputs": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/official_refer_kitti_v2_2gpu/result.json",
+      "sha256": "d6fdc6dff6d6bece1961e3b888ba15a31a88bfddf8557f8a34fc0eae44de5e46"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/car/predict.txt",
+      "sha256": "432eb81faec0b38dd23a0b70a0bb35381ec7a240470510991eda08ead01302ec"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0005/pedestrian/predict.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-are-located-to-the-left.json",
+      "sha256": "a95c04832e75ab2ac020ef075ab21680ec228d670385faebdade63db1a0ef52d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-in-a-light-shade-going-in-opposite-paths.json",
+      "sha256": "8edd21d11edf9663cf15594af9849b1956e1c3b810fc969ed158635f65889f5d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-in-light-hues-can-be-found-on-the-left.json",
+      "sha256": "012c15c2202c3b69880f0d386e2cc890f5c2888af45292bff1aa06c95380097e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-in-silver-are-on-the-left.json",
+      "sha256": "d388654df6b942b4e9a4191383766d19e763248c4a6809216483a17ba1476e5d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-in-transit.json",
+      "sha256": "1d329f14b15f077f091886340824933d27f5e172c28ccf45b1907e79a0550b52"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-in-white-are-headed-in-the-opposite-direction-from-the-ego-car.json",
+      "sha256": "44b4641c65b8f95b01a6c5b9d9f39570112ab386ebcd3816bc0512629e325b96"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-moving-in-the-opposite-direction-of-our-own.json",
+      "sha256": "9b61e5da3b0b636216a91e6ddab65bd91be8c9262c9e9fae64cb671a3fcc8939"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-moving-in-the-opposite-direction-on-the-left.json",
+      "sha256": "a0145eecc46ba1626d88ec5db897b0f380d6dba223e5d73f4e9153cb5109562d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-positioned-on-the-right.json",
+      "sha256": "ee5c95ef67b956177f11a4deb96f49a4c156bd06956d700b53413557ab2c73b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/automobiles-which-are-white-are-going-in-the-same-direction-as-our-vehicle.json",
+      "sha256": "18c4a8ec29abd867560025dda6d2ed02c15696c062bb8ad119bcac3457d54ea9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-are-traveling-in-the-opposite-direction-and-are-light-in-color.json",
+      "sha256": "6a8225a2bf74942de2b8aeef9f7851b9901363302f7c8a9205ac08ec29e8913e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-facing-the-opposite-way-are-black.json",
+      "sha256": "6eb0cdaf34eaf9935e81e67b0a208c517131be361e2fa08719effa79564606b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-going-in-the-opposite-direction-on-the-left.json",
+      "sha256": "e8d12eb8902670072ec22d32657d531a531ed02d63dba7d41adb8e25ca08373d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-going-in-the-same-direction-are-located-on-the-left-side.json",
+      "sha256": "f1eebae724d72b705bbe329448f176b4f18c9e7d7394235dc530f931054e2c7a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-a-light-color-are-located-on-the-right.json",
+      "sha256": "74a9dda3896c6653fd9af41cab1a360239a06f9100251aba4b38bd237219ce52"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-black-were-abandoned.json",
+      "sha256": "b91ef2c0f0670cf9e0895691e08d944a930306ce29616dbd08fbd4593a72e3b7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-light-color-moving-in-the-opposite-direction.json",
+      "sha256": "bfdacea48d45c3ca206add6c587e9193314958da4290b408034d8ce378d9688c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-light-color-were-left.json",
+      "sha256": "68db16e6bfc701a0932cca22e01c89b81fd248143ca14e454f23fe2eb81b759a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-red-are-moving-in-the-opposite-direction-as-ours.json",
+      "sha256": "201b544ccc463bf77138342f2ae67235d6c4720a3e4b00faad44aec65318e8b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-red-moving-in-the-opposite-direction.json",
+      "sha256": "fcc3a7c3a6464c01ea10cddc324b690ffb3c8e620847a92ab4f42ef8907544bc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-silver-moving-in-the-opposite-direction.json",
+      "sha256": "0ebe03dca21e2aba6ce5f35df74d03fcde7231da7bb005adc9f6b36ff14da2c7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-the-direction-opposite-of-black.json",
+      "sha256": "220953e476d824853b6cb6dd4560075dda8f2a472e21e5c5bc7065188c65cd37"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-the-opposite-direction-are-red.json",
+      "sha256": "885c544b08c5d994c5b863678250265e4067071e2901ec194b0cccd8fd52e363"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-in-the-same-direction-are-black.json",
+      "sha256": "fe304d7a9f4bc56d73fad1f340736c05e0f15a4d4d5a9ae4bf8f99d8379ab78e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-located-to-the-right.json",
+      "sha256": "d11af1ca981145b8279236538952956e73e50393dbd53a48c74e846e7e03f9c7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-moving-in-the-opposite-direction-are-black.json",
+      "sha256": "8d4b0a3309fce0d6e1800b9fee2224eb7525f7877e99ddcf85099144238fd8fe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-of-light-color-positioned-on-the-right.json",
+      "sha256": "ab34f2907f32c59d81aac27c786375decee7da89be6bc10ebb1a50a051aded6f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-of-white-color-were-left.json",
+      "sha256": "ac614f70396e30db9ca2c3160224108bf5a13595d1c47043767891ec922a926a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-on-the-left-are-moving-in-the-same-direction-as-our-vehicle.json",
+      "sha256": "dc83decc2f6313a50508f5036e80871814ce3d6cef2fdd220f1f293260e59353"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-on-the-left-side-are-moving-in-the-same-direction.json",
+      "sha256": "566cdc98bde0f364f04327f982226c4d3eade56730c501fb5e6c4b630ee7ea31"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-that-are-black-are-situated-on-the-left.json",
+      "sha256": "65bd5eb9281c9a738e0068bb167183fc5ee1859a035845df4ec2cef61624b77f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-that-are-light-in-color.json",
+      "sha256": "ec54878f85c34e1a9caeaffd04bbba670bcc65bf5d9c752a9c5bf7e0dcca77e2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-that-are-on-the-left-side-are-going-in-the-same-direction.json",
+      "sha256": "1e4daa3d055e4f0054e852b7e5c7a17da50f1ddcf5f7f5bda89ef32d12b19f4b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-that-are-parked-are-red.json",
+      "sha256": "a434ac8304e727cee5b55cfea172f11c2066913ea067cfbea35d4c44843646f7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/autos-that-are-red-are-located-on-the-left.json",
+      "sha256": "9bdb616278834f8d65cdb709bd289c2a8b8c5fb557011d59f9554596961e1bee"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars-can-be-seen-on-the-left.json",
+      "sha256": "18169de7ca231030f351888c993e2d41eb467023d89b4bd83182070e0151908f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars-heading-in-the-same-direction.json",
+      "sha256": "a67fe88fd2c016709bee06a37a75e24d02c49a757e2a081262903bbe7f0937ad"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars-moving-in-the-opposite-direction.json",
+      "sha256": "3c880613ec24af01466fe13e1b54538b5bdbfbb10f9819083e897af968d55182"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars-moving-in-the-same-direction.json",
+      "sha256": "45554058e64ac8c72a6b452d9f034a234d1a892ae2b5ed31ca9355627a8618b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars-on-the-left.json",
+      "sha256": "ec015ee7c0053d073b934fc33d38a31dcb35e3bc1effeb0540ff16f9f4e7a12e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-cars.json",
+      "sha256": "e0f6894be18bcf94616d98906496f7c779959042b5ddd9ea49b0b02d82631a9c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-opposite-direction-autos.json",
+      "sha256": "a4686663192600c46d7ad366b5a00475582101cdf19c84b525c16bd5386bef38"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-same-direction-cars.json",
+      "sha256": "a12387e9ad0a7e90ed21a2fb9a463ad4b4abfd007c85a9e8f0f35733426f8e6b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/black-vehicles-moving-in-the-opposite-direction.json",
+      "sha256": "6fc7023d124fac0168928d581bcb683aba695342fa9ba3256e9270359e5de9af"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-coming-from-the-opposite-direction-as-ours.json",
+      "sha256": "49efe471db0c3fd27c521d81ae0e1de37d951063b30b4cfd139ea1a1a2b852be"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-black.json",
+      "sha256": "756b594e5f1a7aefc7a196c6cedcf99a4ebde63648f89d183f4146d2d4d5d023"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-front-of-ours.json",
+      "sha256": "175c91583922390f16b05149e217df4ec7dc7b1f6d60ee78ab2327eb6bc9406c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-light-color.json",
+      "sha256": "fefbe1d1d3f95e58a3d3dc1e0666b283cc107be5dd1442bef91fe0b1b34cfdae"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-motion.json",
+      "sha256": "c39ce70047a454331833530fe164b37a094ad75592db6cd5130ebef06b326ef4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-red.json",
+      "sha256": "eb0b57e91da1e43d700d597e42326d2a1df851e51b21a367dacd275d4f87af48"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-silver.json",
+      "sha256": "6fe7e1ed6f4751c7a95ad3d2c518dadae961e72531c35a8d429963dda93c1849"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-the-opposite-direction-of-ours.json",
+      "sha256": "fac7304fdc29eac220a5a90443b580833d0684958f8ed93aede1045455410ada"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-the-same-direction-of-ours.json",
+      "sha256": "e0b60130743b0c3e300ef965cbd8e04f1ddf14f60efd1c2543d9de5582ce0c22"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-white-color.json",
+      "sha256": "b8bbfa6cc5e42d8545245ccf56e2e887a67897620acbc7bb14509edaba7ec775"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-in-white.json",
+      "sha256": "578f31d2f5d02309b57a526983c4b7c48a93fcc389507654f41feae40f795974"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-moving-in-the-opposite-direction-are-red.json",
+      "sha256": "2c65316e3d68b8c96adacf8753ced3e67c6611db406a509d6c903ce6bee3fe05"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-moving-in-the-same-direction-are-black.json",
+      "sha256": "59d5adedd353ce0958a88a71706a4e21d7f860aeb0b51a49d973015369b61af8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-of-the-color-black-can-be-seen-on-the-left-side.json",
+      "sha256": "8dc9a915a02f4d94bd09a6c853b96d7cff17a50532858e97689aaf46baeb42d8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-on-our-left-are-driving-in-the-same-direction-as-we-are.json",
+      "sha256": "54e9ffedb33ad4605d28d66bfe76a696977467532c7974c6011058a347d4cd71"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-on-the-left-are-traveling-in-the-opposite-direction.json",
+      "sha256": "ab66e30a9edc3a992bff01bf9c7229444831d893379bc18403af3f5904f18c18"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-on-the-left.json",
+      "sha256": "25c902d2075f89420231e0a749949873681456548aa4ba73545b06666c78a482"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-on-the-right.json",
+      "sha256": "8edc9ae158c22d0b42e2a182dd560393a1ab354abea2439394e8a35f282e0e8d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-positioned-to-the-left-are-silver.json",
+      "sha256": "4c3dd2170dc7d1e5e6185f67793351c23b24e7e1984b04031ce908945d89c3a2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-that-are-red-are-traveling-in-the-opposite-direction-compared-to-our-own.json",
+      "sha256": "ca33749aeef29b080627d1fade42a76fe4d5f6887e23abab885c0bc18a564a5f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-that-are-situated-on-the-right.json",
+      "sha256": "21094606b23aafc29b5abf47866afc33c2169dffab93c108d8668f64d7b82bd4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-that-are-stationary.json",
+      "sha256": "a5e45cafc3df69ed442059b6a242b70fcaccf9307272c87d9e8a73b027e6673a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-that-are-white-and-moving.json",
+      "sha256": "3293ab67f8cb3fd92dff1a4970fead5c8784729200dd610c98f03097c1ee3b47"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-that-are-white-and-parked.json",
+      "sha256": "012361775146f8b027077d0bca64e0c8cba666b43b2b266baed6b1241778a807"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-were-left-in-silver.json",
+      "sha256": "e3a513fdbfc2d71f3ab66dddeb5e6ba3ffc6f23211331626874ae6ef76b1df05"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/cars-which-are-parked.json",
+      "sha256": "0de14487ff162baac5fe0537cee2d329d42661fc1406929228a88dc68dc8a420"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/in-the-opposite-direction,-cars-in-black.json",
+      "sha256": "c4ac07a5a414fe70ab0da754a88a0d8f4b349fc92094e23069c572c3ce62a87a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-in-black.json",
+      "sha256": "57f85d491239ebc2e11405b370e353a9ccdb2dfa2414e57ceba69f8dfc5bd0d8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-in-light-color.json",
+      "sha256": "cc6bb78c3713877c375424aa670d576ad162be5e875a1d9f991a94f44ec1a3e4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-in-silver.json",
+      "sha256": "764dd7fd0b52f307deb5f0b43637df01adfd6816da675af08c7b5ef276891780"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-in-the-opposite-direction-of-ours.json",
+      "sha256": "edec34a850e4ac8224709bcbac31aae2907b91f26875ec117be36f658041ca17"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-in-the-same-direction-of-ours.json",
+      "sha256": "c063cc148bb0ec49eafc387ddedc5897071cabe33c64a2510527553e38975590"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-cars-which-are-parking.json",
+      "sha256": "9f750893b714e78008ad92524ef8ae2ed52ac2043a482ac421d3f2c98b607747"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-red-cars.json",
+      "sha256": "8656b4fdda4c09342438b03f4d7c40bb11a067f5e5da810ef8749f86f0c58b87"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/left-were-cars-in-light-color.json",
+      "sha256": "9bffe9c99bc74dd47e2c77b82d065a7eb52f0b2b8220ebe091559f39ff409b05"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-color-autos-on-the-left.json",
+      "sha256": "ca9edc0c13592b56a53db64365a2efc932294d2b2e008a247d36232693b60cf1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-color-cars-on-the-right.json",
+      "sha256": "e6942a4919b74b325c5e90917ad578674936363c75bcf95d24d1f2785e6b75e7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-color-cars-were-left.json",
+      "sha256": "f9c738a381b4a6a024353b21e878642ba806dc515a13d2b54cce1e6524029364"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-colored-cars-are-going-in-the-opposite-direction.json",
+      "sha256": "b687ae7322de7db133a3e2380325c1fb1fa780307c382f6d33fef72cb00700b9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-colored-cars-are-on-the-left.json",
+      "sha256": "3cdb019d48f5a0c82dba3e9a86c58c604438587530654c51fb12f048814afcbe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-colored-cars.json",
+      "sha256": "11d6a483f2dd78f4972361846ade8682e7a6e98091edbdddd156bbbe500e3813"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/light-colored-vehicles-moving-in-the-opposite-direction.json",
+      "sha256": "0c09165df8503d784a6fdff2ed435c0cfcd22d72875a368b41604033dd741f2d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/motor-vehicles-in-white.json",
+      "sha256": "075bc5831b58acdb2a383c069a04f03cd8c39cc82d439ef0ee5f8e691f114b77"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/motor-vehicles-that-are-parked.json",
+      "sha256": "6d74d18cba44911b04bebf595e62ec77b62eddb5df9cfc15e1637d2fb6332380"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/moving-autos.json",
+      "sha256": "0093f0cdb1f4f0f1ed146ca3102af9b884e6143f2fdd2dc37706244a05561ad5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/moving-cars-are-white.json",
+      "sha256": "8342ce4c2967fea0a617122d60f242364e250d6b241403f1ad1fa3e70731f1f0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/moving-cars.json",
+      "sha256": "92cd0be41ab3dafd1c5540ce8b662d574059705ac60c2352bee6a9e2b0a2a9f3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/moving-white-cars.json",
+      "sha256": "222995b4140f7f6998cbb48eeb35bb5b41c39c716b600a2fb6d6de00be15c545"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/on-the-right,-silver-cars-are-located.json",
+      "sha256": "0da9c8d67b766a52de4dd083e98fea049852dd99160700b87f833f0b07406ad1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-in-black.json",
+      "sha256": "0716dbf5a9b7449312e74916f1db941e93b371165f2d41b84b796c71934cb2a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-in-light-color.json",
+      "sha256": "5a3045899a6504d2fb67ceafbb1a63a7fbb9bdf549c9052e9c535004b5e28303"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-in-red.json",
+      "sha256": "b433d92dce0528b2327c6a3f3ceb045ab26a3caf5acfb3e9ebf34b1e6ebdb219"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-in-silver.json",
+      "sha256": "4d50bdf5f233e3408bb04c6f899bb609daa7bfffb76cdc0d700006464e52487f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-on-the-left.json",
+      "sha256": "cfddd279ff2710f0799ff3b8411ca9f19801e3b5176ad04a29e749de1f8d9e9d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-autos-that-are-black.json",
+      "sha256": "64c29256ee79e65af7366f97e919757879a49951564a9029bad04e5ef362ed52"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-black-cars.json",
+      "sha256": "12f4be46004cf113b00a38558aab9c95b37a42e319f2e9819edb5501a0cc5579"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/opposite-direction-red-cars.json",
+      "sha256": "c312824ad982ae43985cee12f659a87b2a98aaf39fdb7f9503eb10cfdb708725"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/parked-autos-are-white.json",
+      "sha256": "914ea2c437b03db268c301b9be725dae4c568ee4598458e4912ff87749c7456a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/parked-autos.json",
+      "sha256": "4b6cc1d7875e37708f00130496dee057979ecb064cb2b1f59850b05a0b863d4f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/parked-red-cars.json",
+      "sha256": "3103b44520e67dd898dc1533b9d73855b6c754fdf8a52c2785697e05f7012b72"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/parked-white-cars.json",
+      "sha256": "63beded2a2d56e3adc0f083fb7129b26b016d44eaf9b8dc7a39a4d4f277375d1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/positioned-on-the-left-are-autos-that-are-white.json",
+      "sha256": "55466ef2a9b3b4d5887adeb53aef2d3d660ae6b62e56c8864ba9c6e4cd9b3b40"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/positioned-on-the-left-are-cars-that-are-silver.json",
+      "sha256": "63d230b1ce70f011ad9ea3d88f55f846dd3fbc0220ef269c7e8cfb10ca378795"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/positioned-to-the-left-are-automobiles-that-are-black.json",
+      "sha256": "ce722ce887aaa066cabb03f50ce97b58c64735966e06e36cff4a093de97e9f80"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-automobiles-are-moving-in-the-opposite-direction-of-the-car-being-driven-by-the-ego.json",
+      "sha256": "551b96a30b07c125347e25417aa273d3cdb2a1235006a1cc44056e9380b645b9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-are-going-in-the-opposite-direction.json",
+      "sha256": "68de8d12ab47b0bf9f3224953100934c0f955401e3994f51b6b0596e0399201a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-going-in-the-opposite-direction-of-ours.json",
+      "sha256": "97e172e897ea578eb0ae5a9bdfae313ebafe1731274fc6017eb963188cb57851"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-going-in-the-opposite-direction-of-the-ego-car.json",
+      "sha256": "b3ac694c414c1bc69f7cc16440e947c23573171fdaa3d237a535aaf0acad12bf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-on-the-left.json",
+      "sha256": "dc7d4984febd447942d54c1d0018ebc8cbbc5b5ac28f0b2125cc716595046243"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-that-are-parked.json",
+      "sha256": "ddf4af4def551ba936dc92a84477682a097463ce9a190574a8660b3e5f848a82"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-autos-which-are-parked.json",
+      "sha256": "55bdf6ec88051811e05d348d4a6d822aec8804fea6489b51eadb98386de2db62"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-colored-vehicles.json",
+      "sha256": "5098fdd183656ca669f74ea8f8c79adc8ed1ca9923a0f75ec5b69b2924b79e38"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-painted-cars.json",
+      "sha256": "88bebe460568f6dd5d67234838f7ae9f9257ed8452beeca3c29c3ffc734c668c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-parked-autos.json",
+      "sha256": "92f28d96992cc7a2e204f1d095fbf34a7986bdcb416d6405baa07c1a11fde5fd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/red-parked-cars.json",
+      "sha256": "f4709712728303d10297f35bb3b6864f5633a26245142b072ebac278483f7143"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/right-autos-in-light-color.json",
+      "sha256": "8199d4fea6001069e28a1b71d5f99271833932bb8d5561381889185b3aa401dc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/right-autos-in-silver.json",
+      "sha256": "58512c54c48729817faea81aac4bc4c32d265e4ca9976b36279c04ffa96359eb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/right-cars-in-light-color.json",
+      "sha256": "690810c1b00aff41c098f4da727fbbafd07b376c444b4fc6465dd5701d3b741d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/right-cars-in-silver.json",
+      "sha256": "c038bf5b801217dfdfe4a9876861baf59b032f2866eb3b4baf4b3c70b6355a1b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/same-direction-autos-in-black.json",
+      "sha256": "f3b7db2838680f3303993a45fbeaba173ba7b7a05be7075d4bb000e88d48cd6f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/same-direction-autos-on-the-left.json",
+      "sha256": "e28f08bb7563e202d348ef7ada136ddb61d9390f215258d1df517d20592287bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/same-direction-cars-in-black.json",
+      "sha256": "0b845afef23116c320be5740657abb90604a8a05ce11d0084eeb24a2824a1333"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/same-direction-cars-on-the-left.json",
+      "sha256": "970f316c84f589b29a126bed09586507939f69f9ff5f63579be04311292480db"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-automobiles.json",
+      "sha256": "b7bcf0e3e94e3181d13c963bf3bbb291e8a01b19f172fd2bd0fc3fcf175ee9a9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-autos-on-the-left.json",
+      "sha256": "67428ed6e7d5f6db8c61db972b16642e1250e1b96ea1b5173d793ca7b987023f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-autos-on-the-right.json",
+      "sha256": "157e7c4244f83f483d1ff690b4094ab8b11808e156ff3df186c74a0d992c8a9e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-are-going-in-the-opposite-direction.json",
+      "sha256": "fdc3449df445355a015c70aa8e525d867de6a7d280744172d874ceb3dba096d1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-are-on-the-left.json",
+      "sha256": "81654ae62c65457e66999bdbb7ac0311cf5216dd541920ff4836d3c70bc1e03e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-are-situated-on-the-left.json",
+      "sha256": "35d620b5979767c945426da8ea3e1c5136978e039683299d295c1399c627655a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-can-be-seen-on-the-right.json",
+      "sha256": "7dd89df06a44fac91f0d18ac33709d5af2473d583bf3ae0517d9fa227be457fe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-on-the-left.json",
+      "sha256": "074ee4a63c74e5ffc5f4e64cbb4dae4b7c7d59d1df2572a82d1836a20ba747d8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars-on-the-right.json",
+      "sha256": "db41aa0e593d64665de9e2abc1b0752dcd1d34ba2a59d68502a1465202a5a149"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-cars.json",
+      "sha256": "8b8c2d69b59df27fd3b2791c69b2ef73082173bae2d0597717a5e9cc690358c3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-colored-cars.json",
+      "sha256": "781a2e5ff472b4755f3edd1906fdff4f36a5dc3961fc176e7facdbdd7fe1efd7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-vehicles-are-located-to-the-right.json",
+      "sha256": "0ff542bbfc457b1eedbe6bbb740e46ed537162f36e80e5eda59a20314ab00d9b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/silver-vehicles-going-in-opposite-directions.json",
+      "sha256": "c782b1132dc308c30481f7a20e104bd9a9e290fa19866b28c204db4ce5f4cdd2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-automobiles-ahead-of-ours.json",
+      "sha256": "10e334601e5ae9d4e8380aa1ef6d68af5e9989d8f3c31f4836d2a32aa520f7be"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-automobiles-are-moving-opposite-to-the-way-our-vehicle-is-traveling.json",
+      "sha256": "59ba255e51e0900a71e743c50829c4693bc303ba0d859a50f1e4094f2c18ad49"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-automobiles-in-front-of-ours.json",
+      "sha256": "005eda877605f5d563e72077ad0b27709bda0e68f18b2283390f0a9ec12285b1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-autos,-which-are-white,-are-parked.json",
+      "sha256": "ae98d299796d1aedbc5d24d92ea530284c321fb4adf58600295cf8341d67b897"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-autos-that-are-parked-are-white.json",
+      "sha256": "c187070fa6c7dfc52b15df9fd661de082374cb0463dc16ec458f9fcbfc47fb7c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-black-cars-were-left.json",
+      "sha256": "70a5ec4b5a4e7667c0fd48cb4acf5ea69a101fb756834260be398c421ace3d8f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-are-heading-in-the-direction-of-our-car.json",
+      "sha256": "535a626c1ab32e1fa99cb4620c860b927bd94c5528aba4194867a76d8f8e1bb3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-are-to-the-left.json",
+      "sha256": "fb3eecdc960670bb7dc99989677b4b39dd05fa04f7bfafdfbb46bbff86cf4e0c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-are-traveling-in-the-same-direction-as-ours.json",
+      "sha256": "9b491c8252a6f5550cd34a467bc81686b18cba28cf3ee4d79d48030e08f1d705"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-before-ours.json",
+      "sha256": "f5eb7fcf27bb901c50a26b9db2d4b564512e9b5f0440d54de7aadfc83609dfd5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-in-red-are-traveling-in-the-opposite-direction.json",
+      "sha256": "3a1d0b9d4e143db179fd3b97b55ba775c3e08045c0bbe22852bb7e73e22856bb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-left-are-the-ones-that-are-currently-parked.json",
+      "sha256": "ed7abdbe03add0b6ba03d3f585070b97e4c89b7f739d14a463ce144ea8215f13"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-on-the-right-are-silver.json",
+      "sha256": "211f58087fdf17e9146e2f3c518871ca0537dae94801bd52ef92057ca095e0ca"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-that-are-parking-have-been-left-behind.json",
+      "sha256": "53d012c1a58d575f4d98d963b508022d84f2c18a6eb26f25c173576db5206401"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-cars-that-are-red-and-parked.json",
+      "sha256": "ada04d9297192a0743c482c7f0e32e775bdd4cfc27159809821bcf1e6cbb382c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-left-side-has-cars-in-light-colors.json",
+      "sha256": "8a6f77d89fd898a73809e626ee649a5c8f72f358ff0da6d582f317fc50f245bc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-left-side-has-silver-automobiles.json",
+      "sha256": "0f6fc457695b5d22a7aeae9e627726143a2ace11a5e530e10990c86b29b697ba"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-red-autos-that-are-parked.json",
+      "sha256": "b5645bcd31c3d1e42640531cca3e82d8e35876a4634dfdd40b40429de1b66049"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-red-cars-on-the-left.json",
+      "sha256": "bf6be57e189bdc79c9ffe1766abdbac85c10a56689aa2dad766b295d384ca193"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-vehicles-ahead-of-ours.json",
+      "sha256": "8007b069fed6c138f38d643ca298a73fa3402842e2d2ee6c952d9bc45de5fbcb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-vehicles-are-driving-in-the-opposite-direction-from-the-one-we-are-going.json",
+      "sha256": "1a0e334a01d635fc68a7905b30840918d185bcb7feac33bf90bbce801db5b251"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-vehicles-before-ours.json",
+      "sha256": "0f33cbf5938a03fc553c4bae79738b52f12dfc7c0ebe571e6a0542014f636363"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-vehicles-to-the-left-are-headed-in-the-same-direction-as-our-car.json",
+      "sha256": "2554778d156bc5e66e50553b42098dd734946cc4ffe0dc846be4d381f36c03b3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-vehicles-were-going-opposite-to-ours.json",
+      "sha256": "80c7b81cba0648eb3be0bc915282e82fce6e27f1e00a393cbd5389429a0ad127"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-white-cars-are-following-the-same-direction-as-the-ego-car.json",
+      "sha256": "6d07c008ea7f0499cebdb16e2c4e38fe6edf60a30a899469bc53d9f9600cceca"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/the-white-cars-were-left.json",
+      "sha256": "775bf5014d5e558fbef6ef1893e777c59c425c42d295540e88c0c1d422222fee"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/there-are-black-cars-positioned-on-the-left.json",
+      "sha256": "01f5a0e07f583e43c93be65c9b99049b317cd6709f71f8f24eb0b88578c845e0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/there-are-cars-parked-in-the-same-direction-as-our-car-on-the-left-side.json",
+      "sha256": "ce2fbbdb333e36a9b44f95ec97e2a53798303eeac00258b4cc3e934d23cfeb51"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/there-are-silver-vehicles-on-the-left.json",
+      "sha256": "a172e04ddb1d7bb740f610769a04d09375aa2d53633e53c1c8336fd9c251d983"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/these-white-autos-are-parked.json",
+      "sha256": "398ddbc06ee2106d826a2aac188d59f52fcdbb1f5801dce0c64dffdfc9bd75b9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/those-automobiles-turned-in-the-opposite-direction-of-ours.json",
+      "sha256": "5edb9eaa5863649feda57ed3efd350abc069074d777af8f99527b3c9e5e0e181"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/those-on-the-right-are-silver-autos.json",
+      "sha256": "37bd5a04b51775cbfdffbc4ba285394e645abf35c601399d49c3977273d4d988"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/those-red-cars-are-parked.json",
+      "sha256": "9cecbeaeff4d3de0e38c97adc7e51694bac72f00b7a17fc7cf78038bf6ba15fc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/to-the-left-are-red-cars.json",
+      "sha256": "2a7f83b0f2e45c9822e011085377c26d8e4bd86ea3a1d45be27bd27b2b9ca42d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/to-the-right-are-autos-in-light-colors.json",
+      "sha256": "ac88d8aceec6c289502f217d28da55d53822501f30c2bfcd4b9c5e18efe9941e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-are-positioned-on-the-left.json",
+      "sha256": "19a7ec730bd2889f787bd3e525c0b4b336dc8d3696a1925449a1821c1e4a7170"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-driving-in-the-same-direction-as-ours.json",
+      "sha256": "53d272e95371a21a40a0cf20b28a428cb3d0310ea2ce6655e1570353ef2c5997"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-going-in-the-opposite-direction-are-on-the-left.json",
+      "sha256": "f2a9f3ecc210cec385f4b9a948a03f2aa0e2d138a215b9381ed029ff10f26608"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-in-light-hues-traveling-in-the-opposite-direction.json",
+      "sha256": "ea86d455d344479bcb9319ee0e3d83fd0c5b0d5724fc056715d5b0ca813a9461"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-in-white-are-driving-in-the-opposite-direction-from-the-ego-car.json",
+      "sha256": "e879dfbd85922745e8ccbfdac21cd2de16df17d67e4f0814ef3178ec4452ee31"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-moving-in-the-opposite-direction-are-of-a-light-color.json",
+      "sha256": "2f1d4f6be37b25a00df74ee6da723efa892d74752647e7a64ce619761ca1ad74"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-of-a-light-hue-driving-in-opposite-directions.json",
+      "sha256": "226a804619dd155ce97f87fa2c502cf3c942efedd3f39fa2e5e9ee16e7fc11bf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-of-the-color-white-are-moving-in-the-opposite-direction-compared-to-the-ego-car.json",
+      "sha256": "cfa49980e45d2997203a8f55c4afd7ccfa19ea24d6f17065b01884b4e0b0d32b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-opposite-to-ours-were-left-there.json",
+      "sha256": "225f2c3fb4c587246e7c927809af6fea92489853ae02dc50bbb46958d6081c2b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-painted-in-red.json",
+      "sha256": "9da4ab3cb68cfb9895f815d2f2891ecfcc39e5b2a8f5d2db6786d95609fa1bb8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-painted-red-on-the-left-side.json",
+      "sha256": "252e98a95ba96175919ae23b92ba222abe1e7012b0c5a20d8400f2ea9760ff9f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-light-colored-are-on-the-right-side.json",
+      "sha256": "00a46d950f2e87153ec8830d4e7237823fdd865c54f48e183e9062d3cbaf01c3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-red-and-moving-in-the-opposite-direction-of-the-ego-car.json",
+      "sha256": "96fe909bf22eee147246184845320efa7406e2a3a6b8d528d81b4ade7f7c4c97"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-red-are-traveling-in-the-opposite-direction-of-the-car-with-the-ego.json",
+      "sha256": "4e05f49a941982bc81e5965bf0dfe03c5a66cc9a0d0542d049acda7ba5213b2d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-white-are-moving-in-the-opposite-direction-that-we-are-driving.json",
+      "sha256": "80119de403d97cc27093f5adbe66f9f916dbba4bf3861a014b008e9884b76a27"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-white-are-traveling-in-a-direction-opposite-to-ours.json",
+      "sha256": "4bf48e24e94b0d7721a4870b79fe82831f3e89dfa6b3a2b65eca75b61ed520b8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/vehicles-that-are-white-in-color-are-moving-in-the-same-direction-as-us.json",
+      "sha256": "90a04c81375c691fafddd0982c91196239dcd8b98fa105e0dbb54ac1103ff9af"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/white-automobiles-are-headed-in-the-opposite-direction-of-the-ego-car.json",
+      "sha256": "1f06b92de2479271e83b3df98c8d364dd0f09c550536f664e114a9c855b1889f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/white-autos.json",
+      "sha256": "5533c2e005a62029369b6f50fb1f47883e848786a2ee075814e3b069259c039b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/white-cars-are-going-in-the-opposite-direction-from-where-we-are-heading.json",
+      "sha256": "8762504a7cb98f7dd5d5bb519b5986a6f482e31ec59c61f6e2d66ae707ac6b6f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/white-cars-are-in-motion.json",
+      "sha256": "7a00afb7b02a810d34040c2f86867a25837fa73324d86a82748446d2112b2215"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0005/white-cars-are-moving-in-the-direction-of-the-ego-car.json",
+      "sha256": "c5105d4c0ac7a47adee4fbcc84eae8dff3b0fe8cf570c135ec49a2692d8356d8"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/car/predict.txt",
+      "sha256": "1d0cc7faa4351d522b80c3f2c6bb3e878de325a39b1791eddcb0bd4fb1a4d026"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0011/pedestrian/predict.txt",
+      "sha256": "0e79b9348d62bc0af39f0a562489423198b30937c956ed5d2687fcb6da09970c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/abandoned-autos-were-white.json",
+      "sha256": "d4211ae27b1e77f5cec111ba5f74d8c85faec21ff853c2921908cd917222170a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-directly-in-front.json",
+      "sha256": "407bd2a168bc93b50a4d20db4a2ab24a503c105fd2798de697bee7290b2cf015"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-headed-in-the-reverse-direction-of-ours.json",
+      "sha256": "6665c0ec811eb1f4d299e0593c49e5de321aa489323ff70bfbbe41bf9ad17e8f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-heading-in-the-opposite-direction-of-our-vehicles.json",
+      "sha256": "77bb2047452b8c8d238319e39fed25e912da10758fd609a8fddbbba92c9806a2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-moving-in-the-contrary-direction-to-ours.json",
+      "sha256": "4dcc7c38b5ed33fdc88b79584bed2df63e1742f5628817ca76de9543a994a6ac"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-on-the-right-side.json",
+      "sha256": "9af4ecd1b75df3b99c777035fe02eb5e5e08d616d405b0d04c569a17014684fa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-parked.json",
+      "sha256": "d4eac37a50899be4af128505190250adfd3ba45553cdaf61d8131b591f909737"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-situated-on-the-left.json",
+      "sha256": "1aa67869ea7170650a63f06e9397f33f49f4753fd250e31823163ee933ba88f5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-that-are-blue-and-moving.json",
+      "sha256": "593347a2f887c1c9498ab0d3ca4c058c2df90434e5f077d3d2683c17408bb6ef"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-that-are-faster-than-the-self-centered-car-and-are-painted-red.json",
+      "sha256": "9945aca22c9fff684fd9d3381e57ce3438f2e62c76ce6b217abcfbac64c01927"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-that-used-their-brakes-to-stop.json",
+      "sha256": "af79486238e5a33b41e8f0498c0cd3b09ed30c5a3e59d8c681a4d20e11193dd0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/automobiles-to-the-left.json",
+      "sha256": "0fdad274d6a9fd41f3241eee8ff903bc1bbaa0c0214cdafabb3a63d5cfc3433b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-black.json",
+      "sha256": "1c97bbaf74ace0c7f32eaf4a81f688b2bba35bf5e2a02d0658247bc4f045ab00"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-front-of-ours.json",
+      "sha256": "63b5d9460f7236ec1f0ba541714512e66c9c89a016afdffe7dffddf7953d83f5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-front-of-the-ego-car.json",
+      "sha256": "373636b7394e9ba86eed8066e64364ced3a766fac3dcc8f9b1a6b52a33743c96"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-light-color-are-left.json",
+      "sha256": "aba9bcc219e4715912d5b8d044aa7fa9fa0e403d81f092942a83b293c7c59582"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-the-same-direction-of-ours.json",
+      "sha256": "0e364454bb1edec6d8cb6c3d86998a8b67861c28c6ea57ee1b0ecba87cca8436"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-white-are-the-right-ones.json",
+      "sha256": "c381268744e8442b8b66d29ff212c1982dcd67cafeb8d1bdae1438ee2f268c03"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-in-white.json",
+      "sha256": "1ed7916192c2865b5526e03af02c0b643cf6666b0ad3b46206efc934832f4727"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-left-were-in-white.json",
+      "sha256": "43e6b6cb9f1360b6eb2661bd139b2439e220155b46f0b3e76e4b74e77b9d412c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-made-of-silver-were-left-behind.json",
+      "sha256": "47e884a38a3ca6990432bf3ed0fbea362bceb0c283607d247bc2d4426e4a3f48"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-of-a-light-color-are-located-on-the-left.json",
+      "sha256": "550005a1a2b6e492a2d9471a0aa78671252e05aa7d0cc81cba70016d4a9695f7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-of-a-light-color-in-motion.json",
+      "sha256": "38c78da1786b9bf91899fd3dbaae6e1d5369df64baf94999612cb36c10d615fb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-of-black-color-are-on-the-left.json",
+      "sha256": "93e01957487726a24cd9c3a3b291cccb2ee3e3ef89c43c5130561f3cde24e954"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-on-the-left.json",
+      "sha256": "eec3a31c366da7d392d6c615d401d10771b1baf7d14218a14a3d7c6b2bd7a9fe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-on-the-right.json",
+      "sha256": "73fef02a8f3b47a0dd04cc0558450d5aeaae6a3f5fd107062e8b3e5dd96d61ce"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-painted-blue-are-situated-on-the-left-side.json",
+      "sha256": "59f4e325e77229e7206ce199241ce0b0e12744a40c248044f48d99e61800f1fa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-that-are-on-the-left-side-are-white.json",
+      "sha256": "56f2d9d56e21065ea7c0f60c08981cdf2c0b349731b2787ad76b5b7923717200"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-that-are-red-and-moving.json",
+      "sha256": "496c9b2725760bc4c63396cdfd166d11db08136716813d5973fe339649ca82e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-that-are-red-on-the-left-side.json",
+      "sha256": "e65d6cb10b82c7f7d044a01d819d915be0659cb3775efac4424b547ef027e54d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-turning.json",
+      "sha256": "bd6e7f0e3fa310a611b8b05aa1ab671a06d6687add1076a6b4b48fc43d5b00c2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/autos-which-are-faster-than-ours.json",
+      "sha256": "1972e245ad55e886119f705ac7ca1cf5e35ed26905f340c8ce88ba54469372b0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/black-automobiles-are-on-the-left.json",
+      "sha256": "005b90c7bd430ed5d74170a942655a2eb145f51178fed2d3050ddbb84f6a99ae"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/black-automobiles-on-the-left-side.json",
+      "sha256": "ef3a16f3bc636c6b8766c28237def1d8d93b04242dae012fede119bfd102117b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-cars-in-motion.json",
+      "sha256": "c0c5a58d2bef021dc2e06056548b1337eff8d1c546731e27701cb0c06c606e83"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-cars-that-are-in-motion.json",
+      "sha256": "256e986b51345e2663301109794292d08722a1b0213ba0cf47924894426d575b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-cars-that-are-moving.json",
+      "sha256": "d7edd93f13cd3f7bdcc30f56135ea45bdc78f389da215418cbb72b130f9bb515"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-cars-which-are-moving.json",
+      "sha256": "b54c740a8dbcf5ad92c652d0a9f39b791c506bc0123c3d29643f6350f1d43cf2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-moving-autos.json",
+      "sha256": "bd4bb2e487a028d9614fcb1ef5ff31bf19a34675ba21b24b8b68050ffa1b5b3b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-moving-cars.json",
+      "sha256": "424533c3d36dcb58503e12689495f2da0c05bfbd1012c1705aebaabf0d5e2952"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/blue-vehicles-that-are-in-motion.json",
+      "sha256": "90d333f6c001b9c42dfdc281b2a7b0bdce1a1e9501de8a937ba10fba408aa1d5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-are-being-parked.json",
+      "sha256": "25c9dda546b01cb3c9b88b43dafb0c6386086ec109fcdad9bfc36cb526584111"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-are-moving-that-are-colored-red.json",
+      "sha256": "26bfd77a5ce92cfd1592f55c85a6f78660a9b6f9ddc703d93949285b3abe6343"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-motion-that-are-black.json",
+      "sha256": "7d42cb18c908ecd56d7f2b7111418a258a604cf7fb4ef25ff77847127a03967b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-motion-to-the-left.json",
+      "sha256": "17d2e7e17e046d28b994bbcda7bc9054c1e57fad1660d37c536d099cd78db401"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-movement-with-a-light-color.json",
+      "sha256": "cb96296c87b949befb83cfb0758ad54fddb1aeabaa0ab5d50c7de74f70e888de"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-silver.json",
+      "sha256": "62736adeb9064c286c9b0bcfd9429efce16bd957a614b34b3e6d67c011343a35"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-the-opposite-direction-of-ours.json",
+      "sha256": "f1b98016a886809617d7340c679dc7bc5c797b31c501559276290185009795cc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-the-same-direction-of-ours.json",
+      "sha256": "3ec0b934d154cc0ec6acae71e1eba7b152df4630ffcb78d06527358fb994a386"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-in-white.json",
+      "sha256": "443e8fcfc46d5f6f6f7618e555c7a066fe99be163e1369921ebbfe0693d6c919"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-making-turns.json",
+      "sha256": "a45f27113cc31b76e954d48e4706e4df6e6119e2982f6407d709ddfe3c53357f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-moving-have-a-light-color.json",
+      "sha256": "0f5972502000eb67e409b330e4c3b810b3002cda08b6c81b30e585064c646cdf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-moving-have-light-colors.json",
+      "sha256": "98873a3590ffaa4dc00ced9ee2b8931f672061043a2b1401465f9eaa7fb972b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-moving-parallel-to-our-direction.json",
+      "sha256": "ce4a3e53255d0ee4a8e2c8ef4dd7351aa22a63e75bb0cc242353c500822aefcc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-of-a-light-color-are-located-on-the-left.json",
+      "sha256": "3d5734eb39ea56616b38f84a66672784b3b0a6f4616d2d9ebd4f4c0e1a1558b5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-on-the-right.json",
+      "sha256": "7aaeb3214f7224856324130163dac3c17cfc6b931c6de664a4f4b77631bc7a4c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-painted-in-light-shades.json",
+      "sha256": "cb2b96d55f715eee021ca5dbfe3da94d303d35b4e0c1419084de50f83e6da256"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-positioned-to-the-left.json",
+      "sha256": "a755c146ce66b53c25916566fa9a116ca79c9e375f250a79f3d16f57813c4ff4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-right-in-front.json",
+      "sha256": "c2dd5e7c18c3f3135a13d6e8692cb9a65f11880d7598c7894048b5411d701a92"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-applied-brakes.json",
+      "sha256": "25b0cd69281a3b8cdaeb6e28f23a954ede986284c410d7720b991c5c286375c1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-black-and-on-the-left.json",
+      "sha256": "78657910331b1042d8af105da8888a2632a625f6665a6527875cf46bc539c407"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-black-are-on-the-right.json",
+      "sha256": "e5166825a7b182d8334b9d1c9640808eb09b84a3dd1b649c821ac107520c0eeb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-black-are-situated-on-the-right-side.json",
+      "sha256": "78ba63e25b4da08e8e5d1270ff105f79a2c99e637069315f9ec6d281e5119d8e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-black-can-be-found-on-the-left.json",
+      "sha256": "26adb93ff1d0932e4f337c32f181a31a1b8ad00dd317c58751e7f627e58c03f9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-blue-and-are-on-the-left-side.json",
+      "sha256": "b4c7f9d714c03978d44f0e8499ec3100ac4f2dd17e061d60ac2baece7167ec08"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-blue-and-moving.json",
+      "sha256": "c0b1ecad571983138faeb9a3509c984322e4f7dd13def0c8a713ea382f612e65"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-silver.json",
+      "sha256": "6bc1e2a69f0a4c164e0845a6931bbc75b8f2d1add68893db48fbd63e1d3e5ece"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-are-traveling.json",
+      "sha256": "2b6bfec4a8da88ebcc0e0b6727a4e6b0349c8ee31416992f006c0c89468ff319"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-came-to-a-stop.json",
+      "sha256": "59723af74f66e9c602592fa6ea741b1b66f0ab93855e8ab7c520641f4b4e9cab"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-exceed-the-speed-of-our-own.json",
+      "sha256": "72f0be738707d18edfc2eab7ce69635487ac6abf3ccd66c9ae22ed1318e1db8d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-outpace-ours.json",
+      "sha256": "7677451a36db299a03a47c9e53e76ddaa3115b86a14d6b40ddf3fc033b57b42c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-slowed-down-using-the-brakes.json",
+      "sha256": "46b37e23a1f23c0f7597b607e182c9b44e080ce68365f86e31d7b564a3e898eb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-were-silver-and-to-the-left.json",
+      "sha256": "84815221d6a466bd214a990f3cc86d27929195d3beed8509014074bd8a5ad3dd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-that-were-silver-left.json",
+      "sha256": "2ebfd2e9e3eb4f2819c1b04c9fc48ba9ac0828052f2f1a95ed88c602c7a11208"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-traveling-in-the-opposite-direction-of-our-vehicles.json",
+      "sha256": "b3beac03270649c377aa302b37af018e28d31ebe9dee6e4c6d2d47760e6fdf3b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-with-light-colors-are-moving.json",
+      "sha256": "3159e72869b7261d5e2d4732d549362d73ead3934a86844318d4d911c5fc5217"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/cars-with-light-colors-are-situated-on-the-right.json",
+      "sha256": "71595c16aa30b665d3551d3135441ed5cdc56eff927bdb7a749efd4fe557ff9b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-autos-in-red.json",
+      "sha256": "166fd5a841e86adf48417df0996188584d7b96f67d52b6b48b6da25dad047e6e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-cars-in-red.json",
+      "sha256": "cecada69334351fbc163f673c582fe7daa3209f02362358b7253e5dde41ec56f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-red-cars-than-ours.json",
+      "sha256": "fbd87e6c2bbed33306081818fe095da757ae2dbf047a83c8fa0bfd212ede1244"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-red-cars-than-the-ones-we-have.json",
+      "sha256": "37d56b4d40c4675f7d8b4ad394b1394914ca37c43a98f8e7bb7fb71363403568"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-than-the-ego-car,-red-cars-speed-ahead.json",
+      "sha256": "056965014da9092180949ad9ffd4e8b2206790fe6d7cf6d80c30afa56b228ec9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/faster-than-the-ego-car-are-red-cars.json",
+      "sha256": "0ecc39c04242a8089f633d3e206c4652c2904415134f19295778b76fe70ec749"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/folks-in-t-shirts.json",
+      "sha256": "f3e048c95880934ce329063da50c455511d31f94d24254ad59c58a5ce93de76f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/folks-with-a-bicycle.json",
+      "sha256": "15d6bcd3b3fbf8e2fa36c9c5e87538308fd9d046dddd8a4873b0e1a66795916a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/folks.json",
+      "sha256": "55c85f5aee9ee85ccb0e7ead327c38dd33a9f9c7d26fdc085c7ae396f919a303"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/human-beings.json",
+      "sha256": "8f5e8c9221934b477fc7b878c8ebe1d9785f2b8fa5e4ccc66f1bb4b65ad633cd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/humans.json",
+      "sha256": "6b598c71ac0f0afc5cc9704cd1fb141f40060d566fd1cbf7735bc9d4262aeed3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/individuals-on-foot-standing.json",
+      "sha256": "b1bc56ac00132073172595677f36a7361a61ce67c8f27b443735b78c82c45901"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/individuals-on-foot-with-a-bicycle.json",
+      "sha256": "1824929163d31db5b993148bbe8cd185b7ea91a0fec4e2e07c098cb6cd49ba15"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-color-autos-on-the-left.json",
+      "sha256": "d25d3e74bd7fff046c70765c7bb104ab49e68d03656bc3426392ea6d1a9d9edf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-color-autos-on-the-right.json",
+      "sha256": "91b0bf5e0a85c3b020e34ffabd8379825b33794fbfcbebbab729125d3e568fc9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-colored-cars-are-moving.json",
+      "sha256": "058db0253973b16e350147517d52548c4cbc05d017212adcc657e0b66a2ed45a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-colored-cars-are-on-the-left.json",
+      "sha256": "66c6e7ae7d9c1ea509c0266e1751a9bc2465f2ec57ca0135b911fe7e4a575109"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-colored-cars-on-the-right.json",
+      "sha256": "0f431b23703adf80ff60bb5a3ee7974daacf08e48be8da6cc1289fc608f2abd2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-colored-cars-were-placed-on-the-left.json",
+      "sha256": "87fc6b940a7c4d91e1324affff79e2583d720a8ed27e7e129aa0e43cf46e17e3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-colored-vehicles-were-left-behind.json",
+      "sha256": "3f1f53f99034aa30b3f2d9d7e50cb329ef8504bc5af6f6b98fbd97b5303839c2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/light-hued-cars-that-are-currently-moving.json",
+      "sha256": "d10f9f2898f90da064378dee3f9de341646cd00e576368dc277676c28a71aa63"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/motor-vehicles-traveling-in-the-opposite-direction-from-us.json",
+      "sha256": "1070e9ac58e4aff9a02300b74ace8a2d81f59f01380f4ccf27c8a9ce2463fd9e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-automobiles-with-silver-hue.json",
+      "sha256": "a3c981a4efb6d17a22138effc93e30b2e80f2b43be72cb9e62c54e7abb342eca"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-autos-are-blue.json",
+      "sha256": "175382a3a7cc96a9d7097b5009fdb34bf87afc14c0f5348144b05a52eaf81dee"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-autos-of-a-red-color.json",
+      "sha256": "05ce9bcb4cf3ed8fe3475a39776c45b9af9f019aebac1ab59cccf2a8d3565b61"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-autos-that-are-light-colored.json",
+      "sha256": "5d2bf649e68b67c22e72e74f5b8af173e16010caa1a0b21e09a335aa89fdd570"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-cars-are-of-light-color.json",
+      "sha256": "980d244931022b60a643c296577cc1d6aa095b7d32191487ca7a55628c00daa6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-cars-painted-in-black.json",
+      "sha256": "5237ab75fd0b633f1635d4a38021c62959af2ed7ac8902df8233aed9f6bdc375"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-cars-towards-the-left.json",
+      "sha256": "65ea436b3fa7917e299534f39c4b3907946200092e00d6da747acd804d78367b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-cars.json",
+      "sha256": "f0d084d48c2eef3c180352b22ca2020ac785b0a3b00c9970b0f1204e6c20920f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-pedestrians.json",
+      "sha256": "34fbbd0dbe5a481a8f7ef55ee935012dd3d44ff85d5719967c1680b80daecb5e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-vehicles-are-silver.json",
+      "sha256": "252f6592c5c987f53bd85b3b69f43b5c051cf293dbe4859c4565fba7009042dd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/moving-vehicles-of-a-light-color.json",
+      "sha256": "5085aac83c3437d7100aab37034c82c183c88772f872aeaed05bddb1635fb185"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/on-the-right-are-black-cars.json",
+      "sha256": "e717db7d5a536a1b46ad6d274c94cea1c8e0d92b20a51970a322a7b423622844"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/on-the-right-side,-there-are-light-colored-automobiles.json",
+      "sha256": "0898f8e637c38cf57765fb5d8b43b3659fdc42a050c7fcc6207317ec857958c7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/on-the-right-side,-there-are-white-cars.json",
+      "sha256": "2dace89cff10d2c99e63692f6d894397b4d05df29c433d5714ad2eb68b3d022d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/on-the-right-side-are-cars-with-light-colors.json",
+      "sha256": "795fdbcfc5818a7acd28f06787480e861710bb097aa45fdab5d2c0f5684720fa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/opposite-direction-autos-on-the-left.json",
+      "sha256": "9d0623da623ffad91f2abeff3e0588c88b813ea7a4b1af9dd40ceb45e20b1daa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/opposite-direction-cars-on-the-left.json",
+      "sha256": "7ded3e843f21e7b69bdca91f454f7de1330d3b92bdca3115ee9e971084e03d70"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/opposite-direction-vehicles-are-to-the-left.json",
+      "sha256": "d4b9a451c73f90fd1f950824e77fbb9deaffe2796fdc9a4ed90bbff763240502"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/our-left-hand-side-has-cars-going-in-the-opposite-direction.json",
+      "sha256": "1d92d6923d4937edcfbf1200aeabce20777756c8ebfc47fd3dbbc21c2e80492e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/parking-autos.json",
+      "sha256": "f78e424eef4a192e0c780b700ba953b9c431c6548d8d65c42b5362e68b7e8099"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/parking-cars.json",
+      "sha256": "e98bda7ce200dd78d39f6bb6f574bab4ec43f974b9b861959ac4781f0f3de39e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-in-motion.json",
+      "sha256": "166fdb843e9d97a46b554b9f18b853988414e5511a9ca4551961b2c361fcd0bf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-in-yellow-t-shirts-walking.json",
+      "sha256": "74986f71c93134e6ecb20adba0571bb7c8467edd7e9e8668eb2498133912110c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-on-foot.json",
+      "sha256": "e981514d233e3e906034c5846c93821765c915f0822628424217b8fc42c0c89d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-standing.json",
+      "sha256": "cf24d4e9af50ff1016f6819eb2890e9955941f590434f57739d705d74b8f680a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-walking.json",
+      "sha256": "f6dc3e51fe2834019d674d9671a07e96b6239833067f64e2b245179aed69d95f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians-who-are-walking.json",
+      "sha256": "c957ef0020ed8838336ab45e3b5996cbc82c5a1fafd00b6cfb603c92e317981b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/pedestrians.json",
+      "sha256": "e87aced4826825d2508dc019bf007110ac2b4572ec46cc04e3f9a6b11990d3f3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/positioned-on-the-left-are-cars-that-are-light-in-color.json",
+      "sha256": "daf32051702b77cb0a10c6fce3e1d823c50663b941bccd76d446efb49fcd1b2a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/positioned-on-the-left-are-cars-that-are-white.json",
+      "sha256": "4d57370c3f285c0d55addac286fe963a4fe15653e4d31cf777390a98c9d5964c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/positioned-on-the-right-are-black-cars.json",
+      "sha256": "6ee8aab6a587e20005ced90c25266178fa7de44ee1cb27231303b0ec4e2f2fab"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/rapid-red-cars.json",
+      "sha256": "484e15577ea6bd7c73b6a6fae01ab1474d68465ae5e2d3f587a9344c63aee7b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/rapid-vehicles-colored-red.json",
+      "sha256": "f2631b9d02f3390f9639b2da0b53c371792c6be2ca68a1c4cd42533d5cdbee49"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/relocating-automobiles.json",
+      "sha256": "2afc909f982745d4b792dd21c0d388ccc40b247817db9b3d690000a5889238b4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/right-autos-in-black.json",
+      "sha256": "2c223ef1f65a112f6dfd54f14cd46b536768edd14360be9662ef2b01f0764195"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/right-autos-in-light-color.json",
+      "sha256": "a24dc42b07a7a2b6a8248290e005a1119e559458dea88aa4c6cb38fed65e4161"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/right-autos-in-white.json",
+      "sha256": "ac995dc7960067ddd9fade0241b540977b123f64ffeed615e98f1b060309bd99"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/right-cars-in-white.json",
+      "sha256": "6b20724ea018a580d89e172ea795642ccb0d11c765e675be6ee307035cbef7a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/right-cars-which-are-parking.json",
+      "sha256": "edf9c68a43f2de444c72795d889e3c31ea19c6ffff7fe8d96892b5474785b4b0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-automobiles-are-on-the-move.json",
+      "sha256": "e72a77223231c3c3aca4c2cb7bc85ad9fe910b03409a091f8565bc0490b5de9f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-automobiles-were-abandoned-on-the-left-side.json",
+      "sha256": "e81bbb69b89f649de5f36efd82db4791fd0beb9b499ebd93cf1ec50b883b2c8c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-automobiles.json",
+      "sha256": "0f47ea58691a856be1a4bf44f3b6d321a6a16fb6d37340b7de0f70264107da50"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-cars-left.json",
+      "sha256": "9561f4660138083a931ef9318d2b56bd4dd3694a92709e4ba5e01e1aa4565752"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-cars-that-were-on-the-left.json",
+      "sha256": "f50ebbeba77dcd2816f4039a384ff82331140f8eb03f4cd13f658d9a21524aca"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-cars.json",
+      "sha256": "f26248d5aa133ee1cc4928fcea728c7fe8e7272520505db7325b9004daa8b3ae"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-moving-autos.json",
+      "sha256": "ecef2798d0227dc4d55d6c11b6cb54b11b62a6502d22a60cd68583d49956478c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-moving-cars.json",
+      "sha256": "c41fc332d5e64625a4d70a1cc8bf780d52fdaf3e8ab47069b5aa500f1e3e2f85"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/silver-vehicles-were-left-on-the-left.json",
+      "sha256": "25dbd0338f07d139baabd4a92d2d01f0ade0cb227396b162c375f29ed3c386db"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/someone-on-foot-is-sporting-a-t-shirt.json",
+      "sha256": "bbef8b30f68f20fe7a028b0b309e86953c066389525b585275d4aca993d08518"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/speedier-automobiles-in-a-red-hue.json",
+      "sha256": "7e2725e876b8999b9aa0d74773c6aa7306c2ecbc97789f54aa83e396fa910428"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/standing-pedestrians.json",
+      "sha256": "9b4f3dae784fa3657a81f3d50f10a6703fd78b053f97cca3e265a7a5710152ef"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/standing-people.json",
+      "sha256": "3cf4c89de4205cb83e556d12d8bdaf5075f65ef1a08180ae1866245e4a2b9242"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/standing-persons.json",
+      "sha256": "7f3dffcf8f567b66dcbfa930167e468f699c94f484cc1589038addf7ad86c6e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/swift-red-autos.json",
+      "sha256": "1877ef07a675f63a4a291fa2f852ec122428290ce74f379d3bb4e97b72cb26d9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/t-shirt-wearing-individuals.json",
+      "sha256": "11706261284cfda693a3c1be266c865e945b7fa6b2f1aa8294fb9b627bcdba4c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-are-heading-in-the-same-direction-as-ours.json",
+      "sha256": "fd1e11f2d0a14a437b91c387d96ca3c8a19c55ec963d97e82fefef1f585a433a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-are-white.json",
+      "sha256": "a50f6308900dece02285e2369da84eb59843145b3e1ca037bdfecfc192091931"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-colored-red-that-are-leading-ours.json",
+      "sha256": "17fecd0c7d6b42aea61955f4344de5f9a7f7d27241d9242b331ffdc69e8d1aa8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-in-front-of-our-car.json",
+      "sha256": "fe4cac28a7ca8d5891643086ba524e7ad4bcbeaf4250bb1056f304dc39848945"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-in-front-of-ours.json",
+      "sha256": "617c39b92669432f1a51453fd9268ba7bc4dafc01d64786afe05314e863727a7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-automobiles-that-are-blue-are-in-motion.json",
+      "sha256": "cbbb3d8da6e9b2ce0db7722a7a341b0574d612151ac1e0bbc7d1344cf1118df5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos,-which-are-parked,-are-on-the-right.json",
+      "sha256": "93771d87288b5cb1b2a603585090344c7fa05e44359e978f2e73f2ed894c8197"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos-are-in-front-of-the-car-that-has-an-ego.json",
+      "sha256": "501842c1e6399e0a6aba19b7d96b995e794373c1fa4a0ba1eac6432ff2f34e31"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos-moving-are-a-light-color.json",
+      "sha256": "9f00325fbfdff90d206812f2c0ca94d228d86cf28988b99ca310a3d798d2dfe1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos-of-a-light-color-are-moving.json",
+      "sha256": "9564f5ebecd4713df3b99e1e714314cd8c1e94234694f85eb67acadcba8987a0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos-that-are-currently-parked-are-on-the-right.json",
+      "sha256": "723ae33b003d9a0807679b05e2057bfa5c9a024f45a6f364cfaafa133a3e5857"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-autos-that-are-parking-are-on-the-right.json",
+      "sha256": "c89b8653364e776f937b0737c6abc58e157f872746c75a78bea89df0020efcaf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-car-with-an-ego-has-red-cars-in-front-of-it.json",
+      "sha256": "8784631ee2091598af50944af4c2e029768b989a71b96c453a398777ee94beb6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-are-moving-in-the-same-direction-as-ours.json",
+      "sha256": "fe03f5508b77590d0ce3653264cf3e142c5d907124f2ca40b25f43c19d7cde2b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-are-positioned-ahead-of-the-ego-car.json",
+      "sha256": "47ba11d83a50229a2d4607384028584fc286300f684ed144057782dada810b2d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-are-white.json",
+      "sha256": "59b8ab4efff6494673563817c14281f45f1318873a49bd3b37344d984630e928"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-in-front-of-our-car.json",
+      "sha256": "b5b0e361a2c157676a60446c1b3321c1102c09ea9a6a154fe2c8b5620048c8bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-in-red-ahead-of-ours.json",
+      "sha256": "386368759f92ae49355614bccb71bc80ae0b7f2bf4c4ee9629e6899693f207fe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-on-our-left-are-traveling-in-the-opposite-direction.json",
+      "sha256": "c87b204307de954037893c0b10bbd45690900f986e98bf437a970249f0ff3130"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-on-the-left-are-black.json",
+      "sha256": "74e25cd3a58da2ca8ca2d4034a34a2d0ae7fe2ee3295627be54b59c5a6568480"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-on-the-left-are-parking.json",
+      "sha256": "026d2405de79c133aba495ae02d12c5d4a02b91e9c96866e80a5e03d0e952e00"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-that-are-faster-than-our-own-and-are-red.json",
+      "sha256": "905c728237302e4b9a08594429ed0af0db3c81a4b57121b83934198c9378034e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-that-are-parked-are-on-the-left.json",
+      "sha256": "2267dd661a81727a33b11f1ef4dc2d865d09c9feb7eba39e655aa5e3ddb8de6d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-that-are-parked-on-the-right.json",
+      "sha256": "6ff6210a752e3e93289713a44b3209e17009e429a652a9fe1d947c854bb792d1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-that-are-quicker-than-ours.json",
+      "sha256": "2598ce069a1e3e516992470d1a4fb9ef677a4fa658cfdabf3e105ff76193b25b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-that-outpace-ours.json",
+      "sha256": "273f5cd7fd18d9647740c549ea99aa91ad7be4c7c192389d540d9118d2cacc61"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-were-left-in-black.json",
+      "sha256": "151f72f42d53e7b5ba5f4c5e5c0a442dc0f9dd8199552149874060fa2eff5d7f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-were-left-with-a-white-paint-job.json",
+      "sha256": "dce4faffad324c68f5d22b54b049ac074cc0362edb54f77a2f1897785dabd197"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-cars-which-are-faster-than-our-own-and-are-red.json",
+      "sha256": "92f84ba4cffb00b88aa7860648475f9f8fc0d113a9419a76e93ffce34c672161"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-left-side-features-automobiles-in-light-shades.json",
+      "sha256": "eff735510561d981569f421d0ac7da7677eb8d1e21e29278e8f0df1e5e937651"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-light-colored-autos-are-moving.json",
+      "sha256": "fa31de1acad7237020029f8f6e2aeffe80e69488a2d323d7939626c2c2558942"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-moving-autos-are-of-a-light-color.json",
+      "sha256": "50e7fadf06730eef1a9079e1d07d8599120c265cdaacc8386b0e0af5e387fb47"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-moving-cars-are-blue.json",
+      "sha256": "dc39afdf9d27454c072586db55084c1e072cbc5219efeb30479aad397de72426"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-parked-cars-are-on-the-left.json",
+      "sha256": "5ab8ee885ca3686604644ae65ef046273fd2cebe6c4749474422e966b19aa7d5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-pedestrians-has-a-yellow-t-shirt.json",
+      "sha256": "7ea023bacf077229c0638eb8617af6f96a556de7f85fbfa2c3fa835b32e0b509"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-automobiles-are-faster-than-our-car.json",
+      "sha256": "aac37650a3a33dc55bd0d6fa4bdce7aec4adb94149b29e14a50364eeed1e7037"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-automobiles-are-quicker-than-the-ego-vehicle.json",
+      "sha256": "a421277706b61ee8aaa979e92359f3e5eed5610af15d9be386e6786da4465565"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-autos-that-are-stopping.json",
+      "sha256": "e5207537e153920eb1758bc18422a519219735fa8bc75b63f517fe0eb7fd13ab"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-cars-are-faster-than-the-ego-car.json",
+      "sha256": "9bf7d82c29e7af49a9d068a0e03d6a7fc9325ae1c47a60b038f6817bce3d098c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-cars-are-slowing-down.json",
+      "sha256": "e802117e2f41242ba0d68e8a76cfd75ac54cbc0ff804eb3f2089cb542f1490f2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-cars-outpace-the-ego-car.json",
+      "sha256": "2bbc155c88750bb32af0de933ce55f220f4d1de9f16c881dc17043916e20ec6c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-vehicles-that-are-decelerating.json",
+      "sha256": "1840afbf857fe27cfde8a86161733e80f4cd23643fc847acd97e20603bf0502f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-red-vehicles-that-are-in-front-of-ours.json",
+      "sha256": "bdad31793a4df47552c75437fa960dbad124909c1abd6b81fd0a5da90762acbc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-right-side-features-black-automobiles.json",
+      "sha256": "54fa040c6cb7d0dfec1d4e530a716371eefd81cae3f7f049fd0bd1f351c6a9f4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-vehicles-in-front-of-ours.json",
+      "sha256": "efe9e8df2a34209882cb8af12fae71dbd2cb0b2becb647300fe010d3e65c8be1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-vehicles-in-motion-are-blue.json",
+      "sha256": "ed4e9e5a17ef391d5b09bb76a2571712cb484c86904e2b2b552b136f25b966c7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-vehicles-that-are-faster-than-ours.json",
+      "sha256": "d3af4070daec04251c53a5e5d7e60b9ee448213fa521992f171b6bf41941f4b6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-white-cars-on-the-left.json",
+      "sha256": "750ef5ba684f47c46c4749fa3f7fd4d99108f33454cdb3c479d33fa64e4c396a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-white-cars-were-left.json",
+      "sha256": "6d5eef0a44b1281747a5699407f65ceee8b0097942d71ef04a6e2856c8f1d6aa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/the-yellow-t-shirt-belongs-to-that-persons.json",
+      "sha256": "cd7dff52d8170c2ebee9121d825027f91c02577ccdda8783c2d82770c72bb40d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/there-are-cars-colored-black.json",
+      "sha256": "92c0ff7d9e85f18e55228101a490754c20bc06371f672bb571d6d8cac5f6c51f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/there-are-cars-on-the-right.json",
+      "sha256": "5b9d29715fb9f53666dc5b2857a0f357b9e841145b4e43627c9b72ebf81d59b8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-cars-which-are-parked-are-on-the-left.json",
+      "sha256": "5dbc8527a318168e93fe88c4eb815e23499e896b58ae444db5cb44edf2a45c30"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-faster-red-cars-outpace-ours.json",
+      "sha256": "d9ab354ebbe1cfafc167c53df15d03f8a58980398f1912d1eab91013f7ff8e81"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-individuals-walking.json",
+      "sha256": "79070582c2f2f44675b4d05d44fcacc029a0ee5f98541a60484055a76a334f89"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-individuals.json",
+      "sha256": "15213c35eed9fcf91f42d1255eca6f26e3dbdc3071f2f935dbcee68e14bcbdae"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-people-with-yellow-t-shirts.json",
+      "sha256": "10fe4664bdf16d9c0372289058e2300c21cc2b26d01a8ff42d4ed3743048ce95"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-red-cars-positioned-in-front-of-ours.json",
+      "sha256": "78c561b922164afc044aa7821ea61db1c2e40d0e5578b5d69aa7fad922072a18"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-who-are-walking-are-pedestrians.json",
+      "sha256": "c226f1fe2cd6cf49be57dc7dccba6b498f4015763d6c77043026d93a40af7b2f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-who-wear-t-shirts.json",
+      "sha256": "2f491cc8bca83e4197db69e6f52c7309decd895d3c23e820041e8aa800d720d6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-with-a-yellow-t-shirt.json",
+      "sha256": "70691db73fb9e6fdeaf6e6d8741ed584121261e8349195762768b9a4eb5e0671"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/those-with-yellow-t-shirts.json",
+      "sha256": "6755377910a4adf1846fe0daffc4b100b663e07da11cf11267f90b168532fff3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/to-the-left-are-light-colored-vehicles.json",
+      "sha256": "0f67e063b3e9c7ae81c41cfaebe02f80dd8c620b410d4b5b603e1482a9b41330"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/transferring-vehicles.json",
+      "sha256": "f4444a42bf407cc2e40a4da10afc765bc509cbc275cf59b26033192390bb1898"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/turning-autos.json",
+      "sha256": "339c5be59280dfe280256766058f449d7f4c37a347abd219f593f1015852418e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/turning-cars.json",
+      "sha256": "39c69e7721a1a553fe4c474480071a126cfd6656f09d854c8530d3767c761db8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles,-black-in-color,-positioned-to-the-left.json",
+      "sha256": "32f3f76f07ab3ac91a92a2bd12863784ec9990f795c7ec46c3ea59bbbda8e3b2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-are-being-parked.json",
+      "sha256": "c16a9249b73aa6d1880cfe2a0797548eb099cdcae143dacf60c2d5617b7d8734"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-are-positioned-to-the-right.json",
+      "sha256": "53720e544bba927c999a34c622a90f970ed2461bbea6ef449dedc09761d554da"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-changing-direction.json",
+      "sha256": "361d0d827d5964120b8f9d41e419b50b1d7663eaf567e44d527cff64cdd9f79c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-directly-in-front-of-you.json",
+      "sha256": "fa011cbebbd19ed2f993084c2ed83c78356356ae649a05d5d528df796907abc9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-directly-in-front.json",
+      "sha256": "0f634bf1d42b99b0a9dba8fcc5e7209f3a2353c774a16b3e798f631d508a0c2a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/vehicles-driving-in-the-same-direction-as-ours.json",
+      "sha256": "0e5892da5263188a6ad82b5741639ee4a5ccdca58d14fea0965cfb195927e52c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0011/walkers-who-are-pedestrians.json",
+      "sha256": "0ec042fac922a1675bb27efcaa6e1a8bf8e980133836a83d9980cd39c5019c38"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/car/predict.txt",
+      "sha256": "aa3fd9eef861ed60dc12fdb3b07d12f85f6007cca8958339e27337a8bb28ac3c"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0013/pedestrian/predict.txt",
+      "sha256": "944bf08a9a622b4a1b83d2a471f980efbcf6cd86e2889df0f519a68d95664dc3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/a-green-t-shirt-is-being-worn-by-the-pedestrians.json",
+      "sha256": "ca81f8275d6e5c58095781dc14590d07fb9bf06fcb7ffe23a1270f9462b95cd9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/automobiles-are-located-on-the-right.json",
+      "sha256": "afa4c4f5d819f7104a92dcbf52a4cd22e6ddcdd2b98425f5f00d67af1843962f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/automobiles-on-the-left-hand-side.json",
+      "sha256": "97f8cede07f36bc1b0be6ee2d3f96192d8eaa380f6134b94d7abd48e6a777fa2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/automobiles-positioned-on-the-right-hand-side.json",
+      "sha256": "c2973f2166c67abc80b54b49ff96e5e382e3e64ba6f7d83879ec1efab7f7d200"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/autos-are-positioned-on-the-right.json",
+      "sha256": "35711126db50a9d54f1b102566b49957e8f1781624413c88cec6dd817057925b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/autos-in-black-parked-on-the-right.json",
+      "sha256": "e3fbc8535aeaed0db9dca60ab11acf9729a184c88099d2097e1131aca1a755c5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/autos-were-left-parked-in-silver.json",
+      "sha256": "7a6f17c191526561c8f39e02de97f262887a95559760a4734e5c346cd2cd44f9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/cars-are-positioned-to-the-left.json",
+      "sha256": "8a9652a8be0d7a24c2401085e01f8595494b05c15289ed4dd644c2fed5e850c6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/cars-positioned-to-the-left.json",
+      "sha256": "7b88735db6fa5fcda4a5932d2257bb9d327760d00b5361a234177142540dc7c3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/cars-were-parked-in-silver.json",
+      "sha256": "036355eb85e869405807e0dcc401e6b985802effbd3362e8a0fcf80b0634390a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/cars-were-parked-with-a-silver-hue.json",
+      "sha256": "5f00ae3fe5238db553cb2ec2e100b6f93b5d6fa0e071495694168ab02269a45e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/female-with-a-bag.json",
+      "sha256": "d71bd7926e55fede40fabef92acdea230237dcaf19ad99c2b8bc6e2758ccc530"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-back-to-the-camera.json",
+      "sha256": "6abd2a1712a4259e54c2da26a61e13ffe70c37efd9261907010be0a7b55d4043"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-in-a-white-t-shirt.json",
+      "sha256": "1a8e9aec22d3ca1d8261f44bfbea96748f9447d248b204f15f5dfa0a6668d948"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-located-on-the-right-side.json",
+      "sha256": "b864801f6233a798c2ef6e0012094073901d596e30b6fdef779e54c4cd22ceb8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-on-the-left.json",
+      "sha256": "2fa43dda63b30224fb6f18a3ebe1f288dc9cd8c2847dafcf88be7606975891b8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-on-the-right.json",
+      "sha256": "044cfc1fcccd3d084537911360e57f6846a2b8b9d10036c092791ab8affa846e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females-that-are-upright.json",
+      "sha256": "57b99e9aefc68487c772078f3bccd7b3d502ef6c583aee576cbbe60eb5a2f9bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/females.json",
+      "sha256": "0ac743f86229b345fe05f4bb7615cf83c9980e60e96a6545caf14ba748fa8673"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/feminine-individuals-on-the-right-side.json",
+      "sha256": "dce295024e48a6ee241d1fba9919ab2669b18bb2391e012f29b665cd09d27b23"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/folks-positioned-to-the-right.json",
+      "sha256": "3c68971c086b0a477ff236a16c3a0dbba5e239777d8a055d0ebd8f3891d34175"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/gentlemen.json",
+      "sha256": "8680f60cdb21337758bee74d692ae73222da4869ffca479daf40d641310cdfc1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/green-t-shirt-wearing-men.json",
+      "sha256": "b97645f8f7bc93cb6d2b8ba8cca01abece5782778ea1ca36e7b4ed0742ec902a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/guys-sporting-a-green-tee.json",
+      "sha256": "efdb611e3885b0ead2370c0856d505352cb4c9ed1cbaecf9ea8934b876fd29e5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/guys-stand-on-the-right-side.json",
+      "sha256": "378f3feab9f350430bf9ac4bdd5c99caf25c935ab56929e2ed5967a313e7a9a4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/guys-wearing-white-t-shirts.json",
+      "sha256": "3f2964828b04f7df8ef1c0452cd8b21dc7ba0d785831f21fa7710641a60cd5d0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/guys.json",
+      "sha256": "d8a9851063d0803768e9902eb039aacbd7f1ed85a8694e397c0d90d6fc04da6d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/in-silver,-cars-were-parked.json",
+      "sha256": "03769225641925e6e94fbf2fc2d71dba18524bdebc27412f5ed00ce3421f64b5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/individuals-are-standing-on-the-right.json",
+      "sha256": "ca86636d8e0b11aea60d6c847ef67eeb8a948467778e3c03108720fa4e9db828"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/individuals-clothed-in-white-t-shirts.json",
+      "sha256": "7791968ec7600182e9f28a3dc02188665068e6ded1f4db83d81ce6a9d0bc3d1b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/individuals-in-green-t-shirts.json",
+      "sha256": "d234d48daf227a5b1a1b0a0dc2893e005aeb431cffe591241b73ec95d0311b99"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/individuals-wearing-white-t-shirts.json",
+      "sha256": "7deec343ad5686147fab450c3ae49eda26d26b239831a0bbc911735a386cbc5a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/individuals-who-have-a-white-t-shirt.json",
+      "sha256": "619b6c8f57ac5e7df3ce2f3008d7ee21561bb01585722f4219acd384b0b72805"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/ladies.json",
+      "sha256": "f51138fda28130298f83078d6b77db2fcef5cea44c5d2bb674c72f8fe634b1ee"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-are-on-the-left-side.json",
+      "sha256": "66b2961eac1842ec41af8fd57d980b3007580f8f1ef40355706bf4f330d2877b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-are-situated-to-the-right.json",
+      "sha256": "80955e0cedf839ddcb331ecaa0bd89d9c4c727818bc39372c5520ffc7a9e5240"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-back-to-the-camera.json",
+      "sha256": "20472f2cda5106859ec6184d92718a6151d8f5b1dda0cf144bf7a5798906bef9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-dressed-in-white-t-shirts.json",
+      "sha256": "5409181167584705ec931bd74c050eb6c76c342baed38f4ab09248cbc2e3ccc1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-on-the-left.json",
+      "sha256": "731fa94c68a293e3c9231b382576905e2df4761cd07282c2880101ff4ceef2c8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-on-the-right.json",
+      "sha256": "1ed5b2ae4e35c02874fba412579a6773d6ea41b8e9ceb9061dd0d74f2a69ea71"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-standing.json",
+      "sha256": "f4f9cd559eef9aac4fa81692b1c8854c971fb461306876ed41654af42dfc2266"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-with-a-green-t-shirt.json",
+      "sha256": "1a64dab80cd9d254d92456507cf243ff93945e3cdde460c403261e925fd79d68"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-with-a-green-top.json",
+      "sha256": "b33c7f832b6b66efa2fd35610541153f4eca279ed50382b6c2408b9b7ae47c06"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males-with-their-backs-to-the-camera.json",
+      "sha256": "6c11ddf7fd188ff5853446a3325b24fed24301c8ad8b508a0904e2bf8a543f76"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/males.json",
+      "sha256": "2d643d235af46ff497fe6dc65d121a81c5a55ada1fdd8ec1226cf5d68b955aa2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/members-of-the-fairer-sex.json",
+      "sha256": "388873633a7ccf61d3082e8de9bfa90d4e2f28d9789c0d752f3656e053aa608d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-are-in-possession-of-a-green-t-shirt.json",
+      "sha256": "2f09b6c087f657d324a4fc4e69ef6feed738b2d057763f038e5b3d30eb07fc27"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-are-positioned-to-the-left.json",
+      "sha256": "25fbd5bbf4ef0256599c7e26588b5b5d2a295ca508d4532424a3f4b029c64d36"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-are-situated-on-the-left.json",
+      "sha256": "4b17c5496b23e13c49418f631cd79f78b5d9fc1c6a30d186d9dde6a2c417e70d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-back-to-the-camera.json",
+      "sha256": "dbde5442d460fa448189106023083001e00daa05b59723cdc536e6e87b8a17a1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-walking.json",
+      "sha256": "cbde99a8d5c9c0de8dfee5ebbe0cb50e83c22abeb3c87a09fed6b1144505bf96"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-wearing-a-green-t-shirt.json",
+      "sha256": "b9d08c7e58661bf64ecfda9dc0550dc0b24da4cd40c2aba183a58a16ba17e6bb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-wearing-a-white-t-shirt.json",
+      "sha256": "4025855df10e77c43f5c5d2ecf402becb945c96dc705b0b4d102086c14c5f14e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-wearing-green-t-shirt.json",
+      "sha256": "d881e3f64b1fb69998769159e9b465894139bac7236b0ea6fa974b49298a48c8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-wearing-white-t-shirt.json",
+      "sha256": "ac19b61bfdfbf47323a2d3f4d235624ff6acd4d2ff23080984116645838620a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-wearing-white-t-shirts.json",
+      "sha256": "b8fb6d51ebda92bb544a6f49464b161d9cfab156d6e52ee2f4a78e30bc05bc09"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-who-have-white-t-shirts-on.json",
+      "sha256": "254002343ffefab1ac465b24c1082701889f6e503e307a46e3b0ce019efb6c62"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-who-walk.json",
+      "sha256": "a77181806fb55f7a156b608c855602e14cc8c2c746b860da290df656c332cd20"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men-whose-t-shirt-is-green.json",
+      "sha256": "a99b7c61016dd82b0232a9502a394de2dee834fc785397480879020a5384d345"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/men.json",
+      "sha256": "61b6820290070daddfb231b5c2cee831ad96351808d6bae7270865a258371636"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/moving-right-pedestrians.json",
+      "sha256": "5ca58c6fd4c18377d50951090368d52f19175ea79985b9e7d6b702f00eb83422"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/on-the-left,-there-are-silver-autos.json",
+      "sha256": "4c851e61467ceea4c3c18631b7e12d0b1c3e2b618fd0522d5a732c07af3df007"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/on-the-left-are-females.json",
+      "sha256": "205ef8cd9c05b7036e971f30fc2c082b76df868034d5014df26086f90ce6889d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/on-the-right-are-men.json",
+      "sha256": "6b17bc312c8641361f0433e10d7be623caa0f7925bd25c7a0c30b596e6ce8544"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/parked-cars-that-are-silver-were-left-behind.json",
+      "sha256": "e8744304c7d2cb6f7dc9e103441251da1e47c96db7b7e341ec59a2db648b941a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-located-on-the-right.json",
+      "sha256": "31a62d6dc85950926c67114f78cb5966b00f9eb241da3235724ee94247a489cd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-on-the-left.json",
+      "sha256": "00de1c96f1a17e5a52b114cdcfb677e49af09307424a4f083e0024c8cea1bbee"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-on-the-right.json",
+      "sha256": "45d3d28e474d5c3c9fe269ea88abf2004f0aaebf73efac521bcded78bb8ed305"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-positioned-to-the-right.json",
+      "sha256": "7e2d4000972c84c73c4cb9013819525508c71e11114cabdf425036fcb1851cf7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-wearing-green-t-shirt.json",
+      "sha256": "6e1e88f91dc4b384936bf83af204a648b84ac334415b54e0c6725df7ee8fa49b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-wearing-white-t-shirt.json",
+      "sha256": "0e2c916af72737c2b147021cd529b7dd292647f01bdb86289dc07a53f79b7bc6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-whose-t-shirt-is-green.json",
+      "sha256": "e1673c5d619cf9f518e40cb0e8bb394e942f3d0f047b7fbc1f878cde1fb5a535"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-whose-t-shirt-is-white.json",
+      "sha256": "4939408e08eb223db1dc9ee6491abecd91fd17d8243da7794a5bbdcc8d027893"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/pedestrians-with-a-bike.json",
+      "sha256": "deeab727726d2f30c036b9fa4cafc3f590ac26ab43191fb0f8b67f23f8dbfe96"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-are-standing-on-the-right-side.json",
+      "sha256": "097861ae634a821b9c5d92715e77fa3faeb5b0abb41e724dcdd1dd4ee9fc756e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-donning-green-shirts.json",
+      "sha256": "feda9129c16cf223960809f3dafa1801ccfe806661e371807efbba66110cd205"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-in-white-t-shirts.json",
+      "sha256": "bd086c879af34b505ac658ae55185c755080bc7c582bd695d71b951a319cf5ac"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-on-the-left.json",
+      "sha256": "d83912078400e3f63dcec87a2f9d049dead442106d69a364a7a26940e790faca"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-on-the-right.json",
+      "sha256": "e158c547f6cb8dcc109c84469eb0ee50d5378b5b0a2b06e0931c9b80ab680f4b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-situated-on-the-left.json",
+      "sha256": "27a258407026d4210ce528c1cfab489cc9bc7e8fb2e63ec0bcfe96aaf402bbd9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-sporting-a-green-t-shirt.json",
+      "sha256": "d519f07b45b0d445185c6173b11edfc3f45a1b17c6bfd59b5e66546ded35d7b6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-to-the-right.json",
+      "sha256": "d04d2828185bce890660555181423b396ca17c22370269e9b0df72596cedd1e0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-wearing-green-t-shirt.json",
+      "sha256": "7c2f55bfacc811a7b86daf2aa0537bcf4d772d2300ebd26e694a781189d38a42"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-wearing-white-t-shirt.json",
+      "sha256": "963976c091f24f551ea8c10d4048182798033434d12be56524d775b88ce5c03d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-who-have-green-t-shirts.json",
+      "sha256": "c10d073dbbb21a992407221ee132ad377a298e98b2d348ad38d93add6c88e6f6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-who-have-white-t-shirts.json",
+      "sha256": "4ccd001da326ad9634a5ac3a57e951c99e44ff661dc6373e7c89461998650e65"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-whose-t-shirt-is-green.json",
+      "sha256": "9e57992ebabe7740bce224359cbf19ff4ce9f2f51f224bc538a9e42fddd33ae4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-whose-t-shirt-is-white.json",
+      "sha256": "87ca893c9dda7d0ac7ebacae7b8508252d3972d20221a0d77c7de71540540e94"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/people-with-a-white-t-shirt.json",
+      "sha256": "faab34ff6529564904a9e367bf9c68284c938975d7a7b117f3846e081e3ca464"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-on-the-left.json",
+      "sha256": "346eda3b329b59e580bb857eb4ea64b11eccd9bb3e386dba0881be9689670b8b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-on-the-right-side.json",
+      "sha256": "766a10aa05d2674c5f0e71ea02d21dd4e487192246377de20d40a8820ac19696"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-on-the-right.json",
+      "sha256": "8bcc3cd63ef72a2a95739036939f08fea8a1effe226aa54ef4029d60e93fa62c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-wearing-green-colored-tees.json",
+      "sha256": "683dab9d56184e4eec73861358a8d279b9413f04cb2f58ac3860ac86fa57a3f1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-wearing-green-t-shirt.json",
+      "sha256": "bc86e914d6e0c9d524d1de5aa6ba4ffe84376adbdf603b0e92e066ad101e61e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-wearing-white-t-shirt.json",
+      "sha256": "6934e7b84fbcc594a4a06bbc293a2653d0869efdaeedddf80730ac0567f5e033"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-who-are-standing-are-on-the-right.json",
+      "sha256": "00c203b7325391520d56c77f3e9fc0065a0d205afba10baef3f6e4261340645c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-who-are-walking-were-left.json",
+      "sha256": "17223772cf7d24e7f10b0ee16b52ac70b8c811ed4c2fd5362c03ca8edfb5fb35"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-whose-t-shirt-is-green.json",
+      "sha256": "f4be1591b6b68fae4b6de7f794074824067264779cbc007fe10a1ddcb7d8b791"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/persons-whose-t-shirt-is-white.json",
+      "sha256": "cf1654cd2365e218adc935f9b79f4d818ee211f5fc2f2bfa3400d91140f298bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/positioned-on-the-left-are-vehicles.json",
+      "sha256": "08e4ecbfbf7d1f55a4c8fea41cf251ace739fb5d9b3aa13be47d65008059a0e6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-autos-in-black.json",
+      "sha256": "e4754a999714e2ef2b5c19319ef8df140ee1a94cac67d6f62a9d28fa1b32044f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-cars-in-black.json",
+      "sha256": "dc71d20e93ad032a2333eca49ab0b2c4963466da751f2bc51644ebd072476231"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-parked-autos-in-black.json",
+      "sha256": "6f8b6a5461dc5714c20151252e515c9f2365a93b29c1115bd56e1a987da00e8d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-parked-cars-in-black.json",
+      "sha256": "eb6ed8ca9a0718ca47f87d9577fca77646a1561179c95a7f895bbc4630876c04"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-pedestrians-who-are-walking.json",
+      "sha256": "0b8eee1f1fe27a3fa049ac4a41006a516f3cbca3b02f8f7732192f2ade4ff4ac"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-people-who-are-walking.json",
+      "sha256": "613c9855171176af9654944b4dd032d4cea3bc112a7f5260dcafabafb23b9f37"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-persons-who-are-walking.json",
+      "sha256": "295428d059a1d4bb4db894fa0534217fa59c64fd442650429ea91b6c45d0b995"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/right-side-black-cars.json",
+      "sha256": "3e8f406abea28da2c538f0cfbef57c5d4d29adbdc808076d595a53bb1ccbdfa9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/rightward-pedestrians-movement.json",
+      "sha256": "6f1617b46cd3dea249118480fcefcf0877e6d3e3609b29450549e08183a3dfcf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/silver-autos-were-parked-and-left.json",
+      "sha256": "1ffae75082874e049d3c0289b05f0cce462eab214d78c13fae47f0f843542237"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/silver-cars-were-left-parked.json",
+      "sha256": "598108b9015a5f45c064e7c1a8d043cbb8c9d2e61941cac5c03516bb102acac6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/silver-parked-autos-were-left.json",
+      "sha256": "ca506953b3d0d83ec2281f42f9c20f10d150df28bc805cb5441d71e931038fd2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/silver-vehicles-were-left-parked.json",
+      "sha256": "3e55f4d45a88d7440e59619fde4ff274066a287d3fa92f5b50a320b884eb69e5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/someone-is-standing-on-the-left.json",
+      "sha256": "6464fb4a613b6473781836d73682f8e7994a8524028ddb76918819e92fc7dfd2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-females.json",
+      "sha256": "d52d23453bda7c4990a611bafce5ef9a53600c33ba46d52229537f75a6a1fa65"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-males.json",
+      "sha256": "eabd27a8ba9e1f0c2e83407f3d4bf56ce9cbd4abadf79d31ae7303c57780d23a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-men.json",
+      "sha256": "886dc46399200a098d1d13adb4f4b607b4c51eb34e8eb88010624f97d2a82642"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-pedestrians-on-the-left.json",
+      "sha256": "4a352baf869b01026c14d44325690c6777df15db3e03a543068e2b0fc5df8b5f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-pedestrians-on-the-right.json",
+      "sha256": "315e86fa459884412ae4aeb311ed2fc74171a069440683a980fb9318fc5c8117"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-people-on-the-left.json",
+      "sha256": "371f27678ea3e65ab29e3a5df14883b1c28ca7c4aff5d89af5bf6b22b6f81218"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-people-on-the-right.json",
+      "sha256": "ca21fc9e5aa76eed90a8cad26a00cc491f9b117b0c151ea6c06a4de1f961df44"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-persons-on-the-left.json",
+      "sha256": "703026f6a1657b94dffff44f6f2f650ea20ad6446ac5289ba299fe803a6973ab"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-persons-on-the-right.json",
+      "sha256": "a25bda82c09f87b51f423fb2329a6de1b0e7eb161e3502aaf6c1a7557d2bb6dc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/standing-women.json",
+      "sha256": "7c772d939253b98b0542bccab129a3c4e211e943b3acdcc37c7a5a0c66c48d42"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-attire-of-the-men-is-a-green-t-shirt.json",
+      "sha256": "20e7aa31de5aadc68b145a71dcb53ce4d00a23089c840599ce584f1158102676"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-cars-parked-on-the-right-are-black.json",
+      "sha256": "0bd3d5743f9e481ef647992c6569f46b3b738ad7fa62199514490af9d6bda063"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-color-of-the-t-shirt-worn-by-the-pedestrians-is-white.json",
+      "sha256": "21df9cbe7b261661466c681e9a39a913a686d7ec96bc6a7a41f2727aa66c79d9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-color-of-the-t-shirt-worn-by-the-women-is-white.json",
+      "sha256": "7caa8ef20e843173106a93fbb4b2337216b6f695d20881d65ef4e11274e71140"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-fairer-sex.json",
+      "sha256": "9566c88856a8057798a7bdddb80e38b2280d52dd981908a2da3f7190f5ef3145"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-females-are-located-to-the-left.json",
+      "sha256": "008675ea411959a8532210e8c52d974b4382fceaaacf6306bfb3004db86aaff2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-females-are-oriented-in-a-way-that-their-backs-are-visible-to-the-camera.json",
+      "sha256": "db1e4b3bb8b2030c27b378785e3c7339b60c9dd05eca65f033301fb13d70e568"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-females-t-shirt-is-white.json",
+      "sha256": "f55ad5caa1698daabb04b50184a5f50910e9aed4b229672c06c049c0ca02d36d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-green-t-shirt-belongs-to-the-pedestrians.json",
+      "sha256": "e393b4a1eff1d39a7a942d40f98dd66dca45e78f5e04c73f13a363899d5a553e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-green-t-shirt-is-worn-by-the-people.json",
+      "sha256": "bc172209eedc51350312007b3c8604b2cd92dfad8dd33d579b1f2f6cc7947918"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-green-t-shirt-of-the-persons.json",
+      "sha256": "3772f0aa29264e9d9d3516ea1543b68930b26c660a4604cd5fa61ebca49f339e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-are-wearing-a-white-shirt.json",
+      "sha256": "601cc7e1961ea344269a5793ff490c09aac837cb308a4693fcdac43f27c41c5c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-on-the-right-are-standing.json",
+      "sha256": "9e97ebde62c4baae5d0370fe89c69336a78fb940ee9f602c3afc24d66349fce8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-walking-are-dressed-in-a-green-t-shirt.json",
+      "sha256": "1a418763a13d8ce157c17f731f981d632ba2ca1f875145f25e1908ad3ae6d6bc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-walking-are-situated-to-the-left.json",
+      "sha256": "060b9bb8af152bcfc5ad1f0c5b9dce9076d74c98ea009eecf0498a20631fe7b9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-who-are-walking-are-right-persons.json",
+      "sha256": "fcb5d0acbaf33192830ab038f5a7f7d6626d37d963c61dc489d505aad2dae08f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-individuals-with-the-bike-are-wearing-a-white-t-shirt.json",
+      "sha256": "57020b10659c3d4ea5591a888bf2bb53e0c225fb2fc600bf2d5c2fd8a1cb2361"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-ladies-that-are-on-the-left-side.json",
+      "sha256": "ea6cd2c52e6a685e39c00eb2a4aed756beceea922ecbece8ca49a95bee70eb16"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-men-are-facing-in-the-opposite-direction-of-the-camera.json",
+      "sha256": "4ecd24ddd0f57df1384f555ef58d9f7cb95ec0d6f2fe7dbaf9273e721b59d2ab"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-men-are-situated-on-the-right.json",
+      "sha256": "4aa3a77e6a46183345ef33c67e500ef0df543779c1a939a70e957eec3be9e7c3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-men-are-wearing-a-green-t-shirt.json",
+      "sha256": "9005715dffd9075cda232b6aa7172ed65bfdb5f34220fa995b1037a652e48095"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-parked-cars-to-the-right-are-black.json",
+      "sha256": "4ffbab97a43dd4973b8e8d991212130e08e0442c15a78f8347f2c6d1e39da143"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-are-wearing-a-green-t-shirt.json",
+      "sha256": "3cb44f504f6ec8a5ccae618d04f1c4516f65408793d72688b6e2d7a416de6830"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-are-wearing-a-white-t-shirt-and-are-accompanied-by-a-bicycle.json",
+      "sha256": "d812537d8cb60aa297822b852432c5a0922befad35ed59110ad8869a38e79971"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-are-wearing-a-white-t-shirt.json",
+      "sha256": "80395bdaae44e1e193fd7b3ee0116eca886b036ba9c2ebd0077905b2d051da91"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-has-a-green-t-shirt.json",
+      "sha256": "ee378db0a83b0704d0afa501e62cf88b4b241ab589200cecc53e29b6768c066e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-on-the-right-who-are-walking.json",
+      "sha256": "cca573054417bfb1bcb69d673897694cf4bf2190d0e63c0f1061760293bcdcd3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-shirt-is-white.json",
+      "sha256": "f1b83780ed2e5dd37b9943e7bdf8228194818636029574991d380ebbe872075a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-t-shirt-is-white.json",
+      "sha256": "21f3b04aadb6d9752ca790dd94e4da15f55cc47950f3f8f13859b5a4163ab979"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-who-are-on-the-right-and-walking.json",
+      "sha256": "36d87378631540a70caf5c402f873f566480f2142318750927be4214484dbde2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-who-are-walking-on-the-left.json",
+      "sha256": "b9cc76c1edcaaf0e14e5d09e90f468d4d2d518b510246cad534dd814a6390f13"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-pedestrians-who-are-walking-on-the-right.json",
+      "sha256": "da768803e482c86e7ab8cd57e630fbed7626a6711abcab5c03a1a945739ae4a4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-people-are-wearing-a-green-t-shirt.json",
+      "sha256": "99d0473f26ca9f160ec692fe148257e8cdb6dca7f5fb7756586c91fbdffe3225"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-people-own-a-green-t-shirt.json",
+      "sha256": "e80e327435939d18dcefd97ca75fb15e63bca47241624683db098a448be567a3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-people-walking-are-the-right-ones.json",
+      "sha256": "ec12bcf7ca3da869134ab52915d0f31da0718234290afcdc3684850d712706e4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/the-people-who-are-standing-are-positioned-on-the-left.json",
+      "sha256": "4ec0bc787bd7e175203664e06fceb04435ebadfead615839b4c9f4f8b95ab32e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/there-are-men-situated-on-the-left.json",
+      "sha256": "b86a86729115aec2eae5d0fda6b4860364c4559899a115724e0de88f5281a7c6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-dressed-in-white-t-shirts.json",
+      "sha256": "7548b246591afcc548afd6af638edc161cb2c750ee6238b666da0f3aa1fbee68"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-in-green-tops.json",
+      "sha256": "aa918b17cf3a7dc8ea03392f2f8aeb3d51ef6c2c7b965370abb646cb2d3bc19e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-in-possession-of-a-green-t-shirt.json",
+      "sha256": "4a26ec5e28188c86f4879a98d1b7af351faf133d2a10588c2055aa2c2b41cd86"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-located-to-the-left.json",
+      "sha256": "8bb812ba41cec7f6f80c2f866003e908822f3efedaf93ebff74d829f1f40cc08"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-of-the-female-gender-are-positioned-towards-the-left.json",
+      "sha256": "93d4383ba82f6fdb6209db3055f7030a772320aa5dbc89bf0c35b9f366d29fed"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-on-the-left-side.json",
+      "sha256": "5129b25cd71bc4509946a81cc880292665f3136144e357098694825f55a84e86"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-on-the-right-are-men.json",
+      "sha256": "4543cfca3be41bf87e84fc4b762a773b475decfe0e0d81b828845f296480a957"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-standing-on-the-right.json",
+      "sha256": "2371e12d301b12080311b6865a7dbca30b0b418b26f3330a8171b764236171c3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-to-the-left.json",
+      "sha256": "f5d7df077f71d86240dd678b3d021a4b20808439728c2b1a32af3f701bfd193a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-walking-are-the-right-people.json",
+      "sha256": "03e59f7c47ed8105ad0b260fc75085893948ee8ed3a3978b97084681d5d98d8e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-walking-were-left.json",
+      "sha256": "117ff25e263ad0abd376561e3ceb44ff89ed7d83a1584c1c3c23d730350be5f5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-walking.json",
+      "sha256": "490b3ad1ed0dc4fe1b96f7422e37b7f03ebf4250c14b9f612147af2cd125d406"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-wearing-a-green-t-shirt.json",
+      "sha256": "cf8e5d635499c51fabe29dae8f15ed6f74adbf3f5403c185913061bf930cea81"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-wearing-green-t-shirts.json",
+      "sha256": "16104c50ef0b8c9367e10a56be41e59c6febbcd6ddd92534b8d0a2ab477a28c0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-who-are-females-in-white-t-shirt.json",
+      "sha256": "b5ac6ce387da7f3f9818d545c674b7868aa36a79e28ee0b0e978e2cc0c7dd7ea"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-whose-t-shirt-is-white.json",
+      "sha256": "ac1b7cfd34f3d78f58a65bd7f39f70cedc907cd5f18e82267d51e50d2b340d5e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-with-white-t-shirts.json",
+      "sha256": "acd051e97ad2d611aedd3da74ea491c9746301d4eac0e88015616159700fce92"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-women-that-are-on-the-right.json",
+      "sha256": "b719cfe9754216620ee9ab3b7576c0e3570f703a77b6d07b3c9bfaadca25143d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/those-women-who-are-wearing-a-white-t-shirt.json",
+      "sha256": "71cdfee7a2a236796ca2bf338f11e30e49397ae16141c6121cd7efb6d2ce6d5b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walker-with-a-bicycle.json",
+      "sha256": "294bbf86378beaa9f91ca49e856df353285fe0bcfee038b34fb9ffdbe8d7c75c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walkers-were-left-behind.json",
+      "sha256": "c77568556ce91f1413268b304391d26891769f0d4f72ada75b734dca054fce9a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walkers-were-left.json",
+      "sha256": "ead335897f08f00f4426d0cbf86092eed664ac6169341f5d9fc529018ccdec11"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walking-females.json",
+      "sha256": "e449ffcb2747f5d1db0cf8d2fc18d622bee6a9557c2b2f5db328b81a992581bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walking-males.json",
+      "sha256": "e58ccec9a332d1bf595644a07199d0890e560b10c176dfaab8b1b04306c04aa8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walking-men.json",
+      "sha256": "bc1b3725abc179d4c887ae163f6254b0797254a8570c7d90fba1b9320ddf82e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/walking-women.json",
+      "sha256": "d9de8ddd0a9bb20746d19e66f702e59498599a10072976d258ab61bddae5fe08"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/white-t-shirt-wearing-females.json",
+      "sha256": "7b83925c6e76f0cd6981ebf1b38835a5cdd1d85cc4fda27164c516cd37b6134d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/white-t-shirt-wearing-men.json",
+      "sha256": "c6b34cd5c4aa4a3f1c8b3cabc33598bc643b66a3a014603ec2df03eac0acda71"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/whose-t-shirt-is-white.json",
+      "sha256": "56687950bad1bac66f70fb1b876bb94d0e741d434a9a4cf16dbb4af95ea8b68d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-back-to-the-camera.json",
+      "sha256": "e8acb2fbc2fc830f0eef3f7db6c37123c660f12802623c8fbe0a8fc77deba967"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-carrying-a-bag.json",
+      "sha256": "18fdb8f82d8967b9642d7d3058aea5bb154090f9c114c5693115830d59a4148f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-dressed-in-a-white-t-shirt.json",
+      "sha256": "2bdbc853a7bccd436df805cc0c8fad187159c816709e35eead360b59f709d8a2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-facing-away-from-the-camera.json",
+      "sha256": "7e056a0f07f4dfa2faddfbdf9c357d2931b97eecb1dede8022e566940abf56ad"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-holding-a-bag.json",
+      "sha256": "4449857d9980f7e90df6b43417e86ba8b4adbf1e7577ec5d98435d95c68b2783"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-in-a-white-t-shirt.json",
+      "sha256": "4920cb55d7d9da5527035afa340358502362aa8851754d63632fd3c99fec3270"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-located-on-the-right-side.json",
+      "sha256": "cf9797b0d956d04790c62a7ef9a745e6f6d04d9bbb6d60ad25002db74986aa90"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-on-the-left.json",
+      "sha256": "c5efa569aebf396b6169d00cc77e2f795d9bce924ce25113264d9be8a2b45a9a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-on-the-right.json",
+      "sha256": "fc53cc6d8647482d69458fc93757b7a847ad04c9a4d57c3db90f201dc3fb5d7f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-situated-on-the-right-side.json",
+      "sha256": "3a7b7ef3855b55d4540f82b736d9870742ad4c2089dcd2e6865897fea4e2170b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-standing-up.json",
+      "sha256": "e86378dd386b4b22cf424102d082e3c6857d58d15ccc5151bdd11875d4e0c97c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-with-a-bike.json",
+      "sha256": "c8726b1627eaea3b71a818325bf4a24604ace76a60070a2af004925f40d62f1a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-with-a-white-shirt.json",
+      "sha256": "195ee75f2a886d504b351673a97b4dbc7aa143eac288592f1f337e48f665f707"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-with-a-white-t-shirt.json",
+      "sha256": "f6c9ff8356a4ac6dc4b6db5484933c0971e675dd6f2d9321a89cd76397e8ed7e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women-with-their-backs-facing-the-camera.json",
+      "sha256": "cd2abedf889a7acf956c63a3407ca1bf18148b9f4ab42cdbe1752e0153117625"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/women.json",
+      "sha256": "4564200905f224e434d8a4e3c15a32076352065a5c53964e48830c483d0e4545"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0013/womenfolk.json",
+      "sha256": "e90e59e6998014ff5d849ce203e3f1a70a8a7e3cf805a9d95b95457c83a970ac"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/car/predict.txt",
+      "sha256": "81c20fa7ad62ce4afaec621ba5b5dccb2d5d363ea49ed8c9fe105031c0c31a10"
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/vendor/FlexHook/tracker_outputs/Temp-NeuralSORT-kitti2/0019/pedestrian/predict.txt",
+      "sha256": "6a6eae3beea86cbdeb16d9dd4252d32c9522bd9068b0b5a1ceedaeea37bd6af4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/a-group-of-females-are-dressed-in-t-shirts.json",
+      "sha256": "ef33cbd553eef1c71b145f62c1f41252612ddd261e522c5c0c871cf126f6ccfa"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/adult-males.json",
+      "sha256": "87003baac7318f3a46bce0413c07d9e78549283dbef7b4178d3ac2f0c0e5e12c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/automobiles-in-light-colors.json",
+      "sha256": "f0b6341bd53e4bb5a02e59a095c20746ba15b37f1e824db423cd9bdc7aab734b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/automobiles-that-are-black.json",
+      "sha256": "945e37652526fc5aa63f14aafddbdf963cb40c8fca63e2ae40b4d5202889f900"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/automobiles-that-are-light-in-color.json",
+      "sha256": "a65f5ff0ac75618ab4d9a3369a18b88aec8151ba666a197b6ec6f2496c3e80c4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/autos-on-the-go.json",
+      "sha256": "7c9ecbe8bc31464849f1ba09dd2c17aed2e7bc2f832157d0db04911803b60997"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/autos-on-the-left.json",
+      "sha256": "9ff7495da6ccebd7196aef3a9e59ee6d04b4c3cf0fc0c0e7dc032e42f42ec1be"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/autos-parked-are-black.json",
+      "sha256": "92977d2775ab810d13299f75b85961a40613222135e090417b7b344f26d98e5e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/autos-parked-on-the-left.json",
+      "sha256": "e1f8cba5dd9090f2a4f95d56f36ee94e454ab64b8dc979b0c13e2487b0212f51"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/autos-that-are-black-are-in-motion.json",
+      "sha256": "3d6969acdf333600d8c6fafff6d298c59bd5acb085414ab3ee893ec010d7c531"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/black-autos-are-parked-on-the-left.json",
+      "sha256": "d189476ec1f8a827d89ec425d39ee4897ee77817bbe259073d8efa484d60d087"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/black-parked-autos.json",
+      "sha256": "8c50c92ba1242a58a5392d22576f91b4a30cffbf2368a8727247a097026d231c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/black-parked-cars.json",
+      "sha256": "9a418c3452ddf99ace9fbbeb96d50c880f74af61f38822c6cf298a6be25deb6b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/cars-are-located-on-the-left.json",
+      "sha256": "2920e82fd681890d7e208979af97aebeab25a52156c67606747210bcf1605c69"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/cars-in-motion-with-light-color.json",
+      "sha256": "24d97df3262828c875f8ecb36486fe472c51874fa0321fdfaf14fccdd859798b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/cars-in-motion.json",
+      "sha256": "e271a8e31f703fe1827a363175bcfe825d9ca5e02ca4197a0ddb992b0e93e50b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/cars-in-transit.json",
+      "sha256": "5115addbb1962c2010e62242fe48562db1da098e8eba7f7d16aa5ee68180dba5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/cars-moving-in-the-color-black.json",
+      "sha256": "0168a05ca594216896f57fb57a0b2cfa3e15d4c8657a001f0cf5e7007d8e484a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/coat-wearing-females.json",
+      "sha256": "79debfb931c0a2504ff22992934e979fb90d2f20212524f99834993659984a77"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/dark-automobiles.json",
+      "sha256": "2b97d10bee09c16329b06c22a046e80b90ae7cd4521ad2098397c0017e1ad560"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/dark-colored-automobiles.json",
+      "sha256": "b41825c34b4bd04e6a7994944f0403a857e08dff2a853b23532e0ef5533a154b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-are-attired-in-t-shirts.json",
+      "sha256": "7d37d8c0eec94de0e75dee4a953d2589392b6e1eda1ff12b0ac437e71eaef05d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-are-on-the-left-and-wearing-a-t-shirt.json",
+      "sha256": "d7e96398253e6365f845618564f629a4f8f472f75e7f6d58ecebe3e0d6679ec4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-holding-a-handbag.json",
+      "sha256": "37e451777206c07a683a558ac83bb3524f3822d171bb8acd39d9bc3229a68c3f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-in-coats.json",
+      "sha256": "e1f10336916ae68466a94fab67e9ffeb5564832b6c6f2e98bf64f5e2b06709d1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-on-the-left-are-wearing-jeans.json",
+      "sha256": "33cae0f1384d8eca80e9f02f957bf112f5ad0f1b3d71de6fc2427b10c2761a23"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-on-the-right-are-wearing-pants.json",
+      "sha256": "5c737d7842c37d3aeda9f98b3b408ce80e1ef30765a10fa33ea7c774014f8b94"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-on-the-right-wearing-pants.json",
+      "sha256": "51083235a9b6f368fae4be9ae477fb718d640239cd22d7e9048ac2899bb0d886"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-that-have-skirts-on.json",
+      "sha256": "21ef476a91f675b3188a9edb0e935abba89058a569aebb7ae1816752ea72d309"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females-with-pants-on.json",
+      "sha256": "8bf162a4d351fcd80863aca9e689fda32fa343bb4dd7a5ed7302a27f7ccd4462"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/females.json",
+      "sha256": "08d45eca3877fc6ab9f11139bf1d98e1b31e66ecd8686bfbddb34bbe511ed55c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/feminine-individuals-in-jeans-on-the-right.json",
+      "sha256": "9f04eb866c9de4f1f8bdff4e5812f2bd3429cdf859d1e99da68b0c943536ff4c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-are-attired-in-a-t-shirt-and-pants.json",
+      "sha256": "2e79aabff59d581b084a95a148f801be092b1166c0a2e02b39378a8ada1e2f2c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-in-a-t-shirt-and-pants.json",
+      "sha256": "0fbfea66c4626a9f02cc3a4b0f236c11a4710a216bd32f13e3a27fe6f73fb7cb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-in-t-shirt-and-jeans.json",
+      "sha256": "1ad261ad50c48123a40e816db7e41be64daaae8cf7a6cbfa3c8c1646d9f11af7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-on-the-port-side.json",
+      "sha256": "e61affbda263b376d90c573477348380988dcd6b037eea9a266545139efdf0a4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-wearing-a-coat-and-jeans.json",
+      "sha256": "3ae852b09cd0e795f4d8d5306c7f3c89a01c3415ff99a01466ae12fa1f50863f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/folks-with-a-t-shirt-on-the-right.json",
+      "sha256": "700431246716c0b6fcf7901726c8046af0bb6b830fb9a8361a79ffb709cfbe17"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/gentlemen-holding-a-bag.json",
+      "sha256": "b188d4a191c5691d78b0870ee5192c190a21069d0438ce4e0f557dcafb3ef0e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/gentlemen-wearing-denim-bottoms.json",
+      "sha256": "8a75a37f7c3fffa708582498a4f5638313360ed2bb47c1ff09f6f364631c5183"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/gentlemen-wearing-pants-on-the-left.json",
+      "sha256": "11aecdcf2aec0dc2162c132d6387a921b56f3c34ddbc6721a661ee444d7a3ceb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/group-wearing-a-coat-and-pants.json",
+      "sha256": "400af8d030a0bc25f49556d186d27d4687789b34106fc2ff6d6d3c4df47b11f3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/guys-are-in-a-coat.json",
+      "sha256": "793298ceb3acfba06cb32214a8c6e5c72582d9457bb43cd514265791a24bde66"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/guys-wearing-jeans.json",
+      "sha256": "e4c747a7c114e9bd72b5735dd3a355050bba8ea8f8ba1cd58a5d46c58a1da60b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/guys-wearing-pants.json",
+      "sha256": "723258f870e013a0588d2d84d37620b19163d4a9a0b4ad7adecab31aa360f300"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/guys-with-a-bag.json",
+      "sha256": "73e4878d6d0f03ab7f23d920e55cc1beeb4b76e6281446398822a901de185cb7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/human-dressed-in-a-tee-and-trousers.json",
+      "sha256": "e2fe3caeae7b03cc4d246538320e15370782d77d9e30de12036d36e2dc02541e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/humans-on-the-left-hand-side.json",
+      "sha256": "ada5fa7b947344149ef91a15bfb29025d86c6e7547e5b4f5591b222eac03a3f0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/humans.json",
+      "sha256": "d6b1bd039e75fff61aed729b4ba73ae03cc814d7497e79259dfe05b0d454b4a0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-are-sporting-a-t-shirt-and-pants.json",
+      "sha256": "c8f70a85140ab9335f490ff1e9da5ef6ced51c18c685343710b732e407b3a8e2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-in-a-t-shirt-and-pants.json",
+      "sha256": "580e766421f8450e3e9b289773613ac128a481a4769219b2460c7ad77acddbe9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-in-pants-walking.json",
+      "sha256": "85226431bf21597f483cf8cb2724d6ce25c7f8ddd64510235ba7db445777bbc9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-on-foot.json",
+      "sha256": "9be95ca63df26d1555a0da8c8dff34dfd2063c63ba5086c97c1f89648ceda88f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-to-the-right.json",
+      "sha256": "53c4d90a7dae836926951ea96ad7b6241d54c685aa24e8d274004a7fe70f4771"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals-wearing-a-jacket.json",
+      "sha256": "db111c0cb191dc69f73c69abad335ac569ee025239d005e98da9307deaa4de87"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/individuals.json",
+      "sha256": "fb7dc77c0606118c3b23e7ebe175f1a521bd95902ce5d6ef1fe97a5892deb044"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/jeans-are-being-worn-by-people-on-the-right-side.json",
+      "sha256": "c951fa1fd6bbc89c2e11467eb7b72a8b828974e23e748b053ba24a8577eb1203"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/jeans-are-worn-by-females-on-the-left.json",
+      "sha256": "b779ab08b8035bfe55702ed0b9222e1e9113c6d869cd4dcf6260a01ca903d5e7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/jeans-are-worn-by-males-on-the-right.json",
+      "sha256": "485be0b0adf062470e9bd4910dfbb223ead498fdb5fe0c19e8d5ff50ca29eacd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/jeans-wearing-men-are-to-the-left.json",
+      "sha256": "e9309fd084417e02bf09b6c5f08fcb638a5f0371ab469c6204cb5bbf54e7d440"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-dressed-in-skirts.json",
+      "sha256": "cf73edfba094f29c534fc4dd8ec05571fa7ff9d6904754231439add0b6deb9b8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-holding-a-handbag.json",
+      "sha256": "3485f12b7f6b1e3f0d6a1fe7f0e0f05704ff3c463e33f1dbd6f0487eefb097f7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-in-jeans.json",
+      "sha256": "dcd274df10c514e47e8848e9862fde0e70b279a6374337c3cc8c426ac00754cc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-in-skirts.json",
+      "sha256": "7d2af60ac17a65ff8cd5eac415f17e3e997a210b3cc9300eb1558eebb589c8c4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-in-t-shirts.json",
+      "sha256": "464057f2875165eb333f7dc8df7ad36fb2ec7e031281945c39a0cb921588573c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-wearing-jeans.json",
+      "sha256": "ad34c487c759af90bf8521209fe16978825926509e6c7c6925cd1d2539bb8c3f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies-with-a-tote.json",
+      "sha256": "38bd217e92366e5f95dad42b6881f733bf0bfa1877ab378728005554dc7d7546"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/ladies.json",
+      "sha256": "fe79863ca9885efca64266ff6a8c4d9b4d6fbe28d10af2ca783bef66b18eed93"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-black-cars-moving.json",
+      "sha256": "2fa0d3cadbaf3a40011f2b66f0c0427ec50b80bbbfd88b794865bb624ceece22"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-moving-autos-in-black.json",
+      "sha256": "dc33cff74cc69a2368181cbca58504d893d76071ce9f31d60c0436c89bc7807d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-moving-autos-in-light-color.json",
+      "sha256": "7de24ad4c32a6284de7ad8790633130ee20542969abac1d704cddb0d8ffb9aa4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-moving-cars.json",
+      "sha256": "0c7134bcec18ec70c3a26e5662c275771f014b971190733b41932430c9a15c17"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-parked-autos-in-black.json",
+      "sha256": "82f53234a54a2534489a6ad4d20b3ca863cc51f8fb2c28bc397d06f958dfe238"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/left-parked-autos-in-light-color.json",
+      "sha256": "a7fdd87185fe016f541dc42173edf27ef5b8f447ec27aba4d78d95ffc3f49960"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-color-autos.json",
+      "sha256": "a3832b18618a0dfa9ef88802c82184496464baaacfe101686c50cb7e96e38aa6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-color-cars.json",
+      "sha256": "62a15efb3e7f916ddc39b03701be5f30bc90524448b22a49123c3750465552f9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-color-moving-autos.json",
+      "sha256": "f2304da93b9ab25a6535eee87922f33a212dc6554c54ab3995ed82414204dff3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-color-moving-cars.json",
+      "sha256": "02dedeeaa29d7955fd706da57da1e2119a74363a060612d820067e3914316dbe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-colored-autos-are-parked.json",
+      "sha256": "a258c4d7e17d01d19ee2a94a2cf0d5128df3cb4e7017c3d1651797365dc29c80"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-colored-cars-are-being-moved.json",
+      "sha256": "411d67f19659ce52c8959d9b990cd930b78338e1323701feaba6e5569090cb89"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-colored-cars-are-parked.json",
+      "sha256": "63b174085da5bed2e105b0e0ae2e1475fcedb627ba51071fac80558ee21ed012"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-colored-vehicles-are-parked.json",
+      "sha256": "fc72cc9fcba8ea82e40fcc7e7a0c7bba6c1775338e3cca5af4dc5c6bd921da71"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/light-hued-cars.json",
+      "sha256": "7befea58b8c488c40109a4c514bf3508e65d5483577958ae9ed6be56c931d21e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/male-individuals.json",
+      "sha256": "99afa6980ff4c9b830b991fb4eed490b140f2c23530f066390131cd0dcb75163"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males,-who-are-wearing-a-t-shirt,-are-on-the-right.json",
+      "sha256": "ac3e4dae4528822ac2bdef414bb7d4303e7068094de947ca00f8cad9b1bc4bf1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-are-dressed-in-a-coat.json",
+      "sha256": "e2fe30650d55e8a11a407eeaf589b1376dd8713621d331549dc5db6cf97677b5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-bearing-a-backpack.json",
+      "sha256": "2aec79ef523f7fc7a18c90ee04526920d3f82ec4d58a5b693f39b91910fa593f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-dressed-in-jeans.json",
+      "sha256": "7b267760274b175bde8237170d574cb10d969a8bcaf1c6bcba2820e4cc38c355"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-dressed-in-pants.json",
+      "sha256": "dbf8dc56b77198bf7a8113733d19b3ad1a5bbba1709408dd29349a7d6bdf9a52"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-in-pants-on-the-left.json",
+      "sha256": "e7d5e1db23970c0e6d285c27b469ee6368281d36cbe1dd470a8a75e8d15d71f9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-wearing-t-shirt.json",
+      "sha256": "509e5493968d0b3471b53927fa5ffebcdc58d7da2b609f27c315a507ed1d16f3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-who-are-wearing-jeans-are-positioned-to-the-left.json",
+      "sha256": "845ba22dcb9fc09b455650f37b1ef5b416dd7d4d6b28b2906ff95674214d2c3e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-who-wear-jeans-are-on-the-right.json",
+      "sha256": "d08dc462220a7ce85000f614b98076b3c4fb32d18887be08cbc31442fbdd85da"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-with-a-bag.json",
+      "sha256": "5d4a9c9d6e4b1342af8b49de5c9ac61545160708f2094ada8ba27132fa258078"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males-with-t-shirts.json",
+      "sha256": "d023e903ac0c0753587a3e670d34297f723e053979670b0162a16ddf8c6101cf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/males.json",
+      "sha256": "57809775cfeead6dc19d9a4b508dce40e4accbda6f0b2c059e19ae1b27ded997"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-are-dressed-in-t-shirts.json",
+      "sha256": "955837fdeab732bd346060ab8dc66263f0be67ea3737dd44c77361e9154bb3d3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-are-located-on-the-right.json",
+      "sha256": "b9f50d84938aa0142404ca5f27305bb5b11b1f27912a1eda9a0ddadb9d140c12"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-are-wearing-a-coat.json",
+      "sha256": "4ff34cc7835a4e18e1b80da93198325572fa14a9c654d6590f70a52baf96a938"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-are-wearing-t-shirts.json",
+      "sha256": "d842a0222bdd1fd6a2689684ec206fde2c6bf63b3d8aefe999f580b895964047"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-who-are-dressed-in-denim-pants.json",
+      "sha256": "12d89b4f2ee094bb7fe603cfb8bc5731b2b4bd3c21866e5fbf136bc47d30a556"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-who-are-wearing-jeans-can-be-seen-on-the-right.json",
+      "sha256": "d23d0d1cdbe5b5139ea54ef2fa0d498ac966703ea49b547de6cd26cd46a902e9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-who-are-wearing-pants-on-the-right-side.json",
+      "sha256": "75f5088dc3d2719673bb7f483622eaa627ef10c6726a09502d5fb72a607e27a7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-who-have-jeans-on.json",
+      "sha256": "907bdca6cc4dbc18e10364cf2943f21f348c7590943848af237b1efe7c1fb7a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men-with-pants-specifically-positioned-on-the-left-side.json",
+      "sha256": "46c2ade24954106f55637edbe462c60280cb3f35606b75315f86f98ad8b5fcf8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/men.json",
+      "sha256": "85b3179f915a351664740f7d5c11f0ad993028da77f7c7cb85b10c6ac99861bd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/motor-vehicles-in-light-shades.json",
+      "sha256": "3554d115009c8175fde1978791d2ad15435532e1b5795aba5556cc6efb8137d1"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-autos-are-black.json",
+      "sha256": "46b538b5f18f9cbf3f424bfaa24da8a3ffab725e28a223a1090cdc2a88fba75a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-autos-in-black.json",
+      "sha256": "f28ac72141c74300bc57f5c1266ea720e7b32216143e2ee609b8e560e179f6a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-autos-in-light-color.json",
+      "sha256": "e678be99a02a82abcf29ca9d8e8d37ed04d5bc1b8619045fee875deab02f965c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-autos.json",
+      "sha256": "2adcde692fbbae939c243b18094412de2827496ae079d06bc45a3e90fad40e13"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-cars-are-on-the-left-side.json",
+      "sha256": "cebe00ea204aa3deedd7ffd6a56ce9a2fad9b85a3254d32381ef67daf9681f3a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/moving-cars-in-black.json",
+      "sha256": "3b7255b40b2fb50867028c885e1513d96026b16e06d546b601b5874793dbbb14"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/observers-can-see-people-who-are-wearing-t-shirts-on-the-right.json",
+      "sha256": "da46275df24bc362870744cca553bf0c6de8797ef0f843b86f5baee960655fb8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-left,-females-are-dressed-in-jeans.json",
+      "sha256": "c8ccedad2d11b99d146903d4e85ca0c8a7ac6de9ffb7023c90937e4740ee1256"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-left,-females-are-wearing-a-t-shirt.json",
+      "sha256": "c7867281fff2775498a8aca478d04403b8b7d8732145bded84925f9bd1ef63ad"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-left,-there-are-individuals-adorned-in-t-shirts.json",
+      "sha256": "3e8aca25cf75ff16ff90b480d5baf02f2c05c41555a228f2b4f5e071288430ed"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-right-are-women-who-are-dressed-in-jeans.json",
+      "sha256": "771c5d20a1584d510945cd3f81aad3624d0f6136226d427f6013c30c63f1a012"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-right-side,-there-are-females-wearing-jeans.json",
+      "sha256": "e657cb4486b68d560f96abf9e19da130bdf89959a3fa16ee9c78d414b50aab30"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/on-the-right-side-are-males-wearing-jeans.json",
+      "sha256": "26a1092b1777d249742d3d48673e9cfd5dd9cb185a7fdd3ab3ff483b02c99e78"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/over-on-the-right-side,-one-can-spot-people-in-t-shirts.json",
+      "sha256": "72339880ef9c129bc844b2c4ebd89712b3ca6e0f2b451db391192381ee463cbc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-are-autos-in-a-light-color.json",
+      "sha256": "a682dddf4183b35d0473e2935809e90c4a3a187c3e32a9e18345be05afce1281"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-autos-are-black.json",
+      "sha256": "787914493a3e0b49062a6426f859df07113145bae6e3f3e2110efbba49ec1667"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-autos-are-of-a-light-color.json",
+      "sha256": "19688fd0acefe14a2ec37e9b04f270bbe8704a8c318cc0088403db54abdd0768"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-autos-in-black.json",
+      "sha256": "e3a95524a317b041b307e0813d06cc52cf095fb91e803c62152c3dee5b6363ed"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-autos.json",
+      "sha256": "7590628825bdcd833efdbf60bf0f5da9f19a163b58951c1d28eeeb47b5bd2a3c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-black-autos-in.json",
+      "sha256": "bed225ac51f4e148b9667b23377de78752086b7d4386bf13dc7ec374620104f7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-cars-that-are-black.json",
+      "sha256": "38a16ae9f888113697a695bf79cca58b0b111f61fd7014cb8429631045c68942"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-cars-that-are-light-in-color.json",
+      "sha256": "076505f1823d82b4cb7ba6580e8e488989dea519cc5257be3a1329a301fe4acf"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-cars.json",
+      "sha256": "194d80003c2446d7df3d928afd933d79493ae95c320f50a91e6b50f2899bdb39"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/parked-vehicles.json",
+      "sha256": "ebf79bca8c6a8a2160493784942948fd9a74e2d32c00932f313974f561fed848"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/pedestrians-jeans.json",
+      "sha256": "d6caa4f3c6b54ac1b330c16cd1f09256388851a5ded4d80d6fae2a849e0f61a8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/pedestrians-wearing-coat-and-jeans.json",
+      "sha256": "89e7d45181432227c4707a4b2a200efca5da0681f52eb092d3d59eab63963506"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/pedestrians-wearing-coat-and-pants.json",
+      "sha256": "80790b99ed67dcddd3951228639d82529ebb1943e65b3d0b9f36496274fbb21e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-are-dressed-in-a-t-shirt-and-pants.json",
+      "sha256": "771638107e4dc4eeec9076eb8bb555acef22707358a3c4d073f3e7cfe290d0a3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-donning-coats-and-jeans.json",
+      "sha256": "d0c04e3fb789236cbcd5d35885d7213dc7500a70150ccfb5aa58d7c47a8ed893"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-dressed-in-a-coat-and-jeans.json",
+      "sha256": "e5a7eb510c14af2e979a42e43388cc71f16f01eec02d4b16c25a194c77c3a309"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-on-the-left.json",
+      "sha256": "3b6248e7faeb84830072ab5293d31c1a384beb48a40191e73e158e1706bb95cc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-on-the-right.json",
+      "sha256": "55ba373f8d5d57dd44cb4d5979f0ac5af8ba34c65215f939fb36a36be625055d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-wearing-t-shirt-and-jeans.json",
+      "sha256": "a6052700e465d0611c34ccbb490468c084165df032183b15c9dbf53bba403bbe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people-wearing-t-shirt-and-pants.json",
+      "sha256": "c89f55afc6c753972af06823016e225df25ab4beb30f6c93f977053c8d4b0527"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/people.json",
+      "sha256": "9d4d204fdb460c863197f84b6763613fe5e2177eff8a7f21021571293f3de4eb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons-wearing-coat-and-pants.json",
+      "sha256": "dd7e1e8e1a143b4db2b68f152b408625ada73add8ebcd59b9f865c3c7c3843b5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons-wearing-coat.json",
+      "sha256": "1f71b7f70e0e3ee305f8ef1cf1654e17142d22a5fb60ea5eec4b8f9fcddb3c03"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons-wearing-jeans-on-the-left.json",
+      "sha256": "22c5bbda1e79ee924855226d8e04243e417cc393c8dc1dc8da8ce39a7c43f0c9"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons-wearing-pants.json",
+      "sha256": "888924f56390ed94ec40260ea5e298785fb130a9d6ce14c03c010c1bfe26dd77"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons-wearing-skirts.json",
+      "sha256": "c87fc41df4895a7cdfc969f4fa0e4ce4899c84ca23cfc53054adfdd393010820"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/persons.json",
+      "sha256": "55bf41dd5ba1ceaf39374131ee2839b4e6303085e2cba97310f4db0bbc680a85"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/positioned-on-the-left-are-males-wearing-a-t-shirt.json",
+      "sha256": "e4cfc739f6000598fca4cf30f58563ac02544724dc1c4cc911a5755c406ed471"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/positioned-on-the-left-are-men-in-t-shirts.json",
+      "sha256": "bf6d8c508fc27a811707318ee902c79cc8cbb43cc93867892bbc7288a96ef1da"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/positioned-to-the-right-are-individuals-clad-in-jeans.json",
+      "sha256": "5eb2c556d2d84925ac472bdb894d56297c467e9afbba56a91077e6ed9b370198"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/positioned-to-the-right-are-women-wearing-jeans.json",
+      "sha256": "d6cea356e2978cf08f745dacf1a517f8b440bc97a38602c6e5c060492d2e3259"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/skirt-wearing-individuals.json",
+      "sha256": "84ab0a683d85d66e375ae6b903ad9da2fd4ea8c651a75cacaece89c9cdd7d4a8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/skirt-wearing-women.json",
+      "sha256": "44193bae1eddd633a85144a4f9a1991b3fe5f17f4c2db98ed9c500e1afd80c66"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/someone-in-a-coat-and-jeans-walking-on-the-sidewalk.json",
+      "sha256": "84e3b60a4077df095f60129597e71045cbdc506efed02bf9e552549384fa0f9e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/someone-in-a-skirt.json",
+      "sha256": "992e03bfa6529e483985d7705490e1fce9e895d5ab56f4e1268f71ea3761d1b8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/someone-on-the-right.json",
+      "sha256": "eebcc98b67e25c0c44ed236094fee1a2ca77409ce837bee5cb4844071f2c7df2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/someone-strolling.json",
+      "sha256": "175360e083a2e3f39cd3ff0cc88f84a367673c1a30554183ff6793ea0d0d750a"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/stationary-automobiles.json",
+      "sha256": "0b20caff44f40f32551c5b105e3532fefd39c5dfb82127840846145f51b3f127"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/t-shirt-is-being-worn-by-females-on-the-left.json",
+      "sha256": "c5ccfbf165f44596ab973c6280d2ad2ba4202e29d60ef12f75a3595645940a19"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/t-shirt-wearing-men-are-situated-on-the-left.json",
+      "sha256": "84156dde30b9289d6922fded9cfb07a8b09de905ca1dd6dea08cec7e9cf4e4dd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/t-shirt-wearing-men-are-situated-on-the-right-side.json",
+      "sha256": "033013486a4435d9df15ea8a85f696cd6e82882f5818b21d5dc005699955d492"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/t-shirt-wearing-men.json",
+      "sha256": "3803f1c09218e4a03bd9d19a01a49194093c02732242141c6acc53990d3899da"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/t-shirt-wearing-pedestrians.json",
+      "sha256": "b23bd62955faea0781174a84908b9cc3c9a6c92226fad9d1c8b4c418b854e7ba"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-automobiles-positioned-on-the-left.json",
+      "sha256": "ddc81f1894b6f5d2a18901162a00763ef7f0daa8ff2b601b522162b754123c2b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-autos-that-are-moving-are-black.json",
+      "sha256": "4596d731cb28a20f072c32abc0f420b28def0a1c4c5ed6817d919f4cd7e379db"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-bag-is-being-transported-by-men.json",
+      "sha256": "cf1e60a1c28793af9ee34fd8032ff9dbd92fede0d7991523333144fc5c2255cc"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-cars-are-positioned-on-the-left.json",
+      "sha256": "b3fdf00845f7ccb6c00eea58b2cb5bead73888a6016da54a00d04c6626840836"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-cars-in-light-color-are-moving.json",
+      "sha256": "f5dbbcb13086e9dcadeb0427a401a45b24fcfa3b4cd51044cd3c58aa2845f1b2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-cars-located-on-the-left.json",
+      "sha256": "3d3a42fa64a1617a65245aef4aba63d7d0bad380d1e5db2aac535b5fdce2d48b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-fairer-sex.json",
+      "sha256": "fcfd34a17e1ad99cf04eb2f2db5c81f732ef43f1dbcbe41966f9a9dd66915a92"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-female-gender.json",
+      "sha256": "ebbe0e5fdbb82ed7d515327c54d37bf97b3505fc5406613fa8a40d23bf48be96"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-individuals-on-the-right-are-females-dressed-in-t-shirts.json",
+      "sha256": "e4ea6319846e8a3c76bfb54b4ea909a17aaa438c56ea1a6d824adcce336dabd7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-individuals-on-the-right-side-are-female-and-wearing-a-t-shirt.json",
+      "sha256": "ae145f0b9078082ef3093c6587e81b4684500bcb2ea5b9bc24c525b7c7f3665c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-individuals-on-the-right-side-are-men.json",
+      "sha256": "23a11701647950370fdcafa1bb07190024e15bf0bc7ce41bab704d62e865f0a5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-left-side-features-individuals-wearing-t-shirts.json",
+      "sha256": "b9077c5000b74bb0842ee23ccacaa581809029324a43e3fc09c7ca7bdd6164eb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-men-are-on-the-right-side-and-they-have-t-shirts-on.json",
+      "sha256": "d5a33bec2004dd17978fcb2ad561883797a36bb025fcc92f7b09fe43267e1f2e"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-men-are-positioned-to-the-right.json",
+      "sha256": "19ba991f635dafc4091d101346c65ba08d567cfb73a8588866772e5cf68bfa6f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-parked-autos-can-be-found-on-the-left.json",
+      "sha256": "7fab54544e6e87efb597ceeb0811856a025ab9aec50bbbc8d44fbaf1d77c2e57"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/the-vehicles-situated-on-the-left.json",
+      "sha256": "f58448f53a8ceb75175569768d67aec15b5fe6ce130a2548e1ff6d8c2e61e851"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/there-are-automobiles-on-the-left.json",
+      "sha256": "ff07cdbc423e670a6caecbee23b7f1f092557414b488ea925a457de77d0e4fd5"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/there-are-females-wearing-t-shirts-located-on-the-right.json",
+      "sha256": "c7b4d84c5c5c3e57d28a955e32c39fea558a43604fe770420721b7ec78b99825"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/there-are-people-who-are-on-the-left-wearing-t-shirts.json",
+      "sha256": "7bd0f3d48f8f98940bc08e0b85238382c735a34a4945753795ad184def8f5ffd"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/these-are-women-holding-a-bag.json",
+      "sha256": "cf79ebcee68b8902469f885cbc9b36f25edf00b065a5175dbeb2a14bbd6ea820"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-identified-as-males-are-located-on-the-left.json",
+      "sha256": "3240155d7ec933f24a1370434b6b9ef57ba448c8097fa1f49e31e98f1cbb6060"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-in-skirts.json",
+      "sha256": "f76faa288cb0332f4c95891217a14caa380973e14653cb73a6777266630cee5f"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-located-on-the-right.json",
+      "sha256": "4861f879395ef168d1514f19d08a67037dd4be3d4f2fc0238d5f711c0dd0f983"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-on-the-left-are-clad-in-denim-bottoms.json",
+      "sha256": "f1a20b64f2e115407c928c45ae047fee55a7f347f606bdaef24d7c1d3e03c9b7"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-on-the-left-are-dressed-in-t-shirts.json",
+      "sha256": "11416f94131bfa255e614fc10d52e3fa604e1997e6c11b0bdc6381f34ed73c9c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-on-the-left-are-individuals-wearing-jeans.json",
+      "sha256": "70a938daeb6bef8ef0f0cb97cad6cf0e2bf3af9446f2c7839a9b09471e1342ff"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-positioned-on-the-right-are-females-wearing-a-t-shirt.json",
+      "sha256": "8313e0b0c62ab33e875cd77f75ad224c57c2757517171aa5d6e7a65229aae115"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-positioned-to-the-left.json",
+      "sha256": "351f50cf8c25ce7fa7bdb746e41cb9200ec7dbbd2c39309cb65758d687b99624"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-to-the-left-side.json",
+      "sha256": "f71859e783668ea3ff983dc27e7450f3eeea4a84462cb56a1074698b7d9ebe81"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-wearing-a-coat.json",
+      "sha256": "be6df0a789424d4c6d6020e591bdeff3774fc11a062b5c0e2eeb64c10fd33b7b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-wearing-a-t-shirt-and-pants.json",
+      "sha256": "a23db225c1d90602728cca0c92772f192e46bbec84e699906bc1509c8b3c9215"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-wearing-t-shirts.json",
+      "sha256": "b40a51a7efb1b2551c5208c604e7c7fb017c3d216f377d609a029a1ebc15d0d2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-who-are-dressed-in-pants.json",
+      "sha256": "0af39cff209af941eeda56dedaeb877d3eed0c521cd47717769526fccd92d2f3"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-who-have-put-on-a-t-shirt-and-jeans.json",
+      "sha256": "c357af3f448cf6885c24304965ee5e567eae9b979411d10dc83d9f965f9944df"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-who-have-skirts-on.json",
+      "sha256": "e95f0a6ccf91bfc2d2e4d5a90ef2b768d891ecb771676185c48919b825697892"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-with-coats.json",
+      "sha256": "c7cc44b1dc2de6432e03a3020d911599add53f56e041d4b3790202c628400ca6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-with-pants-on-the-left.json",
+      "sha256": "1f71f80bda6493454d7e76be209770e9c64a96be383576d5b1b7773a2b94e56d"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/those-with-trousers-on-the-right-side.json",
+      "sha256": "c969f75d10720625efb8c7f16acddc635a45c733427e8a910d2e79012700a082"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/to-the-left,-males-can-be-seen-wearing-jeans.json",
+      "sha256": "ec928d08818ac1a049ba88bbabd577097538e2d8ac4021511fa1bf686ef429f8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/to-the-right,-there-are-individuals-wearing-t-shirts.json",
+      "sha256": "a786adcf86cc543d8fda0ad572fe7dcd80ae2178ae225fab16b40e2fb0a1c9c8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/to-the-right-are-males.json",
+      "sha256": "530cb8fd88e1139bdba62d5ad42b7b9f3683b0d967eb1ab9f498a9c0b4e722fe"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/towards-the-left-side,-men-are-wearing-jeans.json",
+      "sha256": "66e45785b2b895ac54ac6c31d03300975d3df63b938e04dd5230adf9d738b7a0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/vehicles-colored-black.json",
+      "sha256": "96a826f0895f0a68b34b296a43e8ae23fcdbe954158634dfd93df8962496e4bb"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/vehicles-on-the-left.json",
+      "sha256": "5b6830810ef9db46c0dae6c38729a99bdc10b1900cc576eb3bc63813dbd9c2a6"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/wearing-jeans-are-females-on-the-right.json",
+      "sha256": "ae701b1f11ef7f1d5eced8cfc3357582ac44cb27e2af6a418914db4c15093d47"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-are-dressed-in-a-t-shirt-positioned-on-the-right.json",
+      "sha256": "cf98d9c1744bac72c72796b5c45da4f82589540c3cda25ac9f392d357d9a8427"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-are-wearing-pants-on-the-right.json",
+      "sha256": "05de5cae64c59bcd400fadc0997f4f20aba2039f47077cdd00c63f50d883dba4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-are-wearing-t-shirts.json",
+      "sha256": "2eefe83be5914a64e853330760fdba4c7bb8752da1d01934875c67dc3065f3d2"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-carrying-a-bag.json",
+      "sha256": "d568e4527b58ad50d6a96ddb63025690524fe35d7be0e1a28783a9218b1d4eb4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-dressed-in-pants.json",
+      "sha256": "b52c0bb488ac36b0249dadfe3a706d8caed2fd12083a29656d269996942d8468"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-holding-a-bag.json",
+      "sha256": "068bdfc2d4c1b41eba0aa629cb2774b370b1eca258797c14f5195654de9a1d5b"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-on-the-left-are-dressed-in-jeans.json",
+      "sha256": "30ee41a041fa7f4d2aa6fe307c72c831fc13209994e96d57043236b0c30e7320"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-on-the-left-are-wearing-a-t-shirt.json",
+      "sha256": "70fd32a7cf61236db7d656fffbf5131c00f27f34f637880b38815aa73019d4ad"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-on-the-left-are-wearing-pants.json",
+      "sha256": "00ebe403bb0a804a70f5cf324f3f92ee72eec1e9c06e566f46f419b77d7b2cc0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-on-the-left-have-pants.json",
+      "sha256": "2569c2808f4789d1a62d353ab0e3feb3a3e97a551df5b2bc69e65da1581e9775"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-on-the-right-are-wearing-pants.json",
+      "sha256": "d04f389550d60f182690c1d6f89c52c641fb0485740ba213736756c254bed3ef"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-carrying-a-bag.json",
+      "sha256": "5481c6eb81f803b8793f492f7aa9003bd924e115a2022cac38903411c253ade8"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-donning-jeans-are-situated-on-the-right.json",
+      "sha256": "4817ecfd13cf95b4abdbb74d46cfc7381960597f00b4621ea2348366797a4c74"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-dressed-in-coats.json",
+      "sha256": "d4aa5219b785936337e078ef1ef8daf106e9494ff0eb71e481460dee775ccc43"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-dressed-in-denim-pants.json",
+      "sha256": "5b1f377d695c679654d3389b3ea4910829b175473fa3482930583bdd39e2d618"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-holding-a-bag.json",
+      "sha256": "4f44ba6c62f9a73ee3e3e4b21e522c835385ed10fabaa3c6cc4f335c76a1ae0c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-are-in-coats.json",
+      "sha256": "402eb70411ae3324153aa568b4b22eb44d9771687d9bdb39e1acd9e1cc61d485"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-who-have-coats.json",
+      "sha256": "0797537ffac0c0bdc55303fba62a26a7652f31590e144d524f4eba77b7c8fce4"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women-with-t-shirts.json",
+      "sha256": "d41506261458ef04886e86af991673ece720d21dc24ca0ddf849e8518c3675d0"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/women.json",
+      "sha256": "ce66d65fad812566bb9ff98f06f3cb00401c2acdbbce409c7a3ba8868f79048c"
+    },
+    {
+      "path": "/data3/user/TTA-RMOT-assets/flexhook/refer-kitti-v2/expression/0019/you-can-spot-men-with-jeans-on-the-right.json",
+      "sha256": "a37f78d4551aa1546375d9556c06f95339cf93bedd861df21137113345a26735"
+    }
+  ],
+  "target_GT_open_attempts": 0,
+  "student_updates": 0,
+  "teacher_updates": 0,
+  "CPU_wall_seconds": 23.718235776992515
+}

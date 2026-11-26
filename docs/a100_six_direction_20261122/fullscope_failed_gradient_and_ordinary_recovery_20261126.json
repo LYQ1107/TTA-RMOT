@@ -1,0 +1,342 @@
+{
+  "status": "COMPLETE_TWO_PRESERVED_FAILED_OPTIMIZER_CPU_AUDITS",
+  "cases": [
+    {
+      "pair": "C2",
+      "video": "0019",
+      "rows": 12037,
+      "full_objective_gradient_norm": 0.41288331151008606,
+      "actual_weight_mass": 1.0010726509436074,
+      "auxiliary_weight_fraction": 0.19978569968071827,
+      "auxiliary_rows": 100,
+      "auxiliary_total_weight": 0.20000000000000007,
+      "first24cyclic_batches_count": 24,
+      "batch_weight_mass_minmax": [
+        0.03361933305859566,
+        0.22780215740203857
+      ],
+      "batch_gradient_norm_quantiles": [
+        0.18797171115875244,
+        0.5451081991195679,
+        0.7859064340591431
+      ],
+      "batch_gradient_cosine_quantiles": [
+        0.5857491405640647,
+        0.8015909428030441,
+        0.8649426179883984
+      ],
+      "batches_with_gradient_opposite_full": 0,
+      "batches_whose_next_Adam_delta_is_full_objective_ascent": 0,
+      "full_gradient_dot_next_fullbatch_Adam_delta": -0.004196484107524157,
+      "full_gradient_dot_negative_full_gradient": -0.17047262892353476,
+      "actual_next_original_phase_batch_would_be_batch0": {
+        "batch": 0,
+        "weight_mass": 0.03422117233276367,
+        "auxiliary_rows": 0,
+        "gradient_norm": 0.2926534116268158,
+        "gradient_cosine_with_full": 0.8020137162010974,
+        "gradient_dot_full": 0.09690868854522705,
+        "full_gradient_dot_next_Adam_delta": -0.0029261596500873566,
+        "original_clip10_would_activate": false
+      },
+      "gradient_clipping_batch_count": 0,
+      "original_failed_checkpoint_sha256": "ba9aeec514360d4f028ec66c39833bebcce8a9f5aeb287ddc435a51992a04a50",
+      "interpretation": "Positive gradient-dot-parameter-delta is local first-order ascent; not a measured finite-step loss increase or proof of the entire historical failure cause. These are24overlapping cyclic512row windows, not independent samples."
+    },
+    {
+      "pair": "C5",
+      "video": "0019",
+      "rows": 12037,
+      "full_objective_gradient_norm": 0.3382214307785034,
+      "actual_weight_mass": 0.9982924881212107,
+      "auxiliary_weight_fraction": 0.20034208649250745,
+      "auxiliary_rows": 100,
+      "auxiliary_total_weight": 0.20000000000000007,
+      "first24cyclic_batches_count": 24,
+      "batch_weight_mass_minmax": [
+        0.033579759299755096,
+        0.22727836668491364
+      ],
+      "batch_gradient_norm_quantiles": [
+        0.1615096628665924,
+        0.3970344811677933,
+        0.7404338717460632
+      ],
+      "batch_gradient_cosine_quantiles": [
+        0.6617279239825284,
+        0.8614388847663049,
+        0.9137402722371173
+      ],
+      "batches_with_gradient_opposite_full": 0,
+      "batches_whose_next_Adam_delta_is_full_objective_ascent": 13,
+      "full_gradient_dot_next_fullbatch_Adam_delta": 0.00021649275731761009,
+      "full_gradient_dot_negative_full_gradient": -0.11439373623785798,
+      "actual_next_original_phase_batch_would_be_batch0": {
+        "batch": 0,
+        "weight_mass": 0.033920105546712875,
+        "auxiliary_rows": 0,
+        "gradient_norm": 0.4830823540687561,
+        "gradient_cosine_with_full": 0.8617665652885925,
+        "gradient_dot_full": 0.1408030092716217,
+        "full_gradient_dot_next_Adam_delta": -0.0005303205689415336,
+        "original_clip10_would_activate": false
+      },
+      "gradient_clipping_batch_count": 0,
+      "original_failed_checkpoint_sha256": "6c479b8fb8c7a606056d44db3a32f57884178f2fda025c1925c40bdeb0e56cbf",
+      "interpretation": "Positive gradient-dot-parameter-delta is local first-order ascent; not a measured finite-step loss increase or proof of the entire historical failure cause. These are24overlapping cyclic512row windows, not independent samples."
+    }
+  ],
+  "wall_seconds": 31.846729165059514,
+  "source_sha256": "afd97f435069a4446d3d7aad139762e70af0c13807a3ad1dd03edff5eb4a43f7",
+  "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "GT_open_attempts": 0,
+  "new_teacher_calls": 0,
+  "optimizer_steps": 0,
+  "live42sources_unchanged": true,
+  "not_RMOT_HOTA_or_isolated_causal_proof": true,
+  "goal_status": "ACTIVE",
+  "v0_audit_error_retained": {
+    "actual_session": 45204,
+    "exit_code": 1,
+    "error_chunk": "bbee71",
+    "source_sha256": "db0672b50879046eb8f755b19bfeb93d3785d7c85aa23ba834cead7bc0d9318b",
+    "error": "Audit incorrectly assumed realized LURE weight mass is exactly1. LURE mass is not required to be exactly1. Original live training is unchanged.",
+    "correction": "Measure and report actual positive weight mass; use the unnormalized summed weighted gradient to match original minibatch objective. No change to actual training or acceptance."
+  },
+  "all12_ordinary_fits": {
+    "status": "PASS_ALL12_ACTIVE_EVIDENCE_ORDINARY_HEADS_IN_ORIGINALLY_FAILED_UNITS",
+    "rows": [
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "SOFT_KD288",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.002812428754705001,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.011563083386448755
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.002812428754705001
+          },
+          "fullbatch_outer_iterations": 10,
+          "full_dataset_closure_calls": 21,
+          "equivalent_row_forward_backward_passes": 252777,
+          "additional_wall_seconds": 4.541938990005292,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "bf5a3d02548ea6261807400410b36234ac14857580411fdc8637936c6555583a",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "HARD_KD288",
+        "original_Adam_steps": 7000,
+        "teacher_KL": 0.0030943932515246396,
+        "additional_recovery": null,
+        "checkpoint_sha256": "c5465600936de3db95d41bb753d6f6ba2b7a686038546aaa54fd58c567edfbae",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "LURE_KD288",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.0024041895091086616,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.012868488013446498
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.0024041895091086616
+          },
+          "fullbatch_outer_iterations": 10,
+          "full_dataset_closure_calls": 21,
+          "equivalent_row_forward_backward_passes": 252777,
+          "additional_wall_seconds": 4.271920785889961,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "d57f55897b2b46acb05e63f1200a81a599251fb67d8da59d496ed7c1a73f9ce5",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "SSL_KD288",
+        "original_Adam_steps": 13000,
+        "teacher_KL": 0.004274065272430308,
+        "additional_recovery": null,
+        "checkpoint_sha256": "e7c5abce38dffa9f434b1c08a3d1a5cd4ae5e267b6bfc83a12d60b435de4cf09",
+        "parameter_count": 2920801
+      },
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "FLAT_KD128",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.004863394169489001,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.019704456341876356
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.004863394169489001
+          },
+          "fullbatch_outer_iterations": 20,
+          "full_dataset_closure_calls": 42,
+          "equivalent_row_forward_backward_passes": 505554,
+          "additional_wall_seconds": 8.471045547979884,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "23b8a93176e31344b549d9659aea8ea70c0822a2a1a8781dab5a68b19efb75ef",
+        "parameter_count": 1213825
+      },
+      {
+        "pair": "C2",
+        "video": "0019",
+        "method": "SAME_ARCH_KD128",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.004550544293973852,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.029037945630428524
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.004550544293973852
+          },
+          "fullbatch_outer_iterations": 20,
+          "full_dataset_closure_calls": 43,
+          "equivalent_row_forward_backward_passes": 517591,
+          "additional_wall_seconds": 13.486751316930167,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "ede9e2620b8b5803c585c452049dfb60ba003f371075c24b5a077ce29768403c",
+        "parameter_count": 1336961
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "SOFT_KD288",
+        "original_Adam_steps": 13500,
+        "teacher_KL": 0.0037711156863509277,
+        "additional_recovery": null,
+        "checkpoint_sha256": "f5549dd7f1d4291f324848566889493be929f356f6f6cd3af337aaad3906f56c",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "HARD_KD288",
+        "original_Adam_steps": 6000,
+        "teacher_KL": 0.002878311359284811,
+        "additional_recovery": null,
+        "checkpoint_sha256": "c8785a9ce63d1bdf1d796d67e82b6f2fcfbe59cd998c81de150a79b71928485b",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "LURE_KD288",
+        "original_Adam_steps": 13500,
+        "teacher_KL": 0.003977158687212652,
+        "additional_recovery": null,
+        "checkpoint_sha256": "7d1ce0ec00b0e65eb887c4112e1237779da42aad5d92217c5bf085e3bee22cec",
+        "parameter_count": 2777185
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "SSL_KD288",
+        "original_Adam_steps": 13000,
+        "teacher_KL": 0.0046132571316912846,
+        "additional_recovery": null,
+        "checkpoint_sha256": "23b8496f61ac92fd7a551dc174dde8cb4c591e5511dd0e660b8f7da1834f943b",
+        "parameter_count": 2920801
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "FLAT_KD128",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.004077426878569414,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.01522766033431728
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.004077426878569414
+          },
+          "fullbatch_outer_iterations": 10,
+          "full_dataset_closure_calls": 22,
+          "equivalent_row_forward_backward_passes": 264814,
+          "additional_wall_seconds": 4.5081872320733964,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "d25b097fe22d109da190857195227540f766fee8e061a3c4e1894ff931187f23",
+        "parameter_count": 1213825
+      },
+      {
+        "pair": "C5",
+        "video": "0019",
+        "method": "SAME_ARCH_KD128",
+        "original_Adam_steps": 16000,
+        "teacher_KL": 0.0025690936031792537,
+        "additional_recovery": {
+          "status": "ADEQUATE",
+          "original_gate": 0.005,
+          "before_teacher_KL": {
+            "original_teacher_risk": 0.011430364931993326
+          },
+          "final_teacher_KL": {
+            "original_teacher_risk": 0.0025690936031792537
+          },
+          "fullbatch_outer_iterations": 10,
+          "full_dataset_closure_calls": 21,
+          "equivalent_row_forward_backward_passes": 252777,
+          "additional_wall_seconds": 7.317909607081674,
+          "original_teacher_targets_architecture_and_draws_unchanged": true,
+          "full_objective_optimizer_is_not_a_scientific_module": true,
+          "no_new_GT_teacher_or_seeds": true,
+          "recovery_registration_sha256": "681c0dfcff980954536846069ce50e2fae4e5f6a914117ad87c6d4be98fc56ee"
+        },
+        "checkpoint_sha256": "ef3aaa8e6e3255a52d41e5776d6de126f6196d2c4819e16488a475bfb9ba3e31",
+        "parameter_count": 1336961
+      }
+    ],
+    "ordinary_heads": 12,
+    "maximum_teacher_KL": 0.004863394169489001,
+    "neural_heads_with_explicit_extra_recovery": 6,
+    "original_threshold_unchanged": true,
+    "source42_unchanged": true,
+    "GT_open_attempts": 0,
+    "current_study_HOTA_not_read": true,
+    "uniform_policy_and_complete_video_outputs_still_pending": true,
+    "goal_status": "ACTIVE"
+  }
+}

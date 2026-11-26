@@ -1,0 +1,782 @@
+{
+  "status": "STOP_OFFICIAL_COMPLETEBANK_CANNOT_REPRODUCE_HISTORICAL_NATIVE",
+  "prereg": {
+    "branch": "research/v2dance-diag-attrib-20261031",
+    "base_commit": "958e1d7c6165bdc257d420562d94d66916f67ddb",
+    "published_commit": "0daa63a5b47d4450366fa5b0cdb6c7b1673aac71",
+    "published_tree": "d7096d2f1e67f52008d09d69e1bfe31159ef9b28",
+    "local_snapshot_commit": "3d09fdfaf12a6a5364ee3de719b2d0ffef4ddea9",
+    "prereg_sha256": "d064ca9e7762fa5ff5701fc4c66f033d64ce680a617bac1980b6153ec9a589b6",
+    "remote_verified": true,
+    "verification": "GitHub branch read-back and exact local/remote Git tree equality before any new score computation or evaluation",
+    "new_evaluation_started_before_publication": false,
+    "new_training_authorized": false
+  },
+  "original_score_sha256": "de8ff46428818cbd1ee0dd2b6ea1a7692eae2b7e0133c521c1470b67b58da110",
+  "checkpoint": "/data3/user/TTA-RMOT-assets/flexhook/SOTA_ckpts/refer-dance-best.pth",
+  "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+  "missing_MOT_observations": 692,
+  "recovered_candidate_query_scores": 11764,
+  "added_positive_rows": 792,
+  "changed_episodes": 56,
+  "historical_prediction_rows": 254118,
+  "completebank_native_prediction_rows": 254910,
+  "official_historical_HOTA": 32.134,
+  "completebank_HOTA": null,
+  "completebank_HOTA_not_evaluated": "stop immediately on row reproduction failure; no GT opened",
+  "new_positive_examples": [
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 138,
+      "track_id": 4,
+      "logits": [
+        -3.814162254333496,
+        4.174429893493652
+      ],
+      "margin": 7.988592147827148
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 146,
+      "track_id": 6,
+      "logits": [
+        -2.581458568572998,
+        3.2306244373321533
+      ],
+      "margin": 5.812083005905151
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 294,
+      "track_id": 7,
+      "logits": [
+        -1.9880772829055786,
+        2.6568992137908936
+      ],
+      "margin": 4.644976496696472
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 592,
+      "track_id": 3,
+      "logits": [
+        -1.8911947011947632,
+        2.4259071350097656
+      ],
+      "margin": 4.317101836204529
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 668,
+      "track_id": 10,
+      "logits": [
+        -1.5073771476745605,
+        1.8211572170257568
+      ],
+      "margin": 3.3285343647003174
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 722,
+      "track_id": 12,
+      "logits": [
+        -2.3949761390686035,
+        3.094931125640869
+      ],
+      "margin": 5.489907264709473
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 725,
+      "track_id": 1,
+      "logits": [
+        -2.346165180206299,
+        3.080216646194458
+      ],
+      "margin": 5.426381826400757
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 1203,
+      "track_id": 2,
+      "logits": [
+        0.13787299394607544,
+        0.5162456631660461
+      ],
+      "margin": 0.3783726692199707
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 1203,
+      "track_id": 2,
+      "logits": [
+        -1.3626987934112549,
+        1.1889142990112305
+      ],
+      "margin": 2.5516130924224854
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 1203,
+      "track_id": 11,
+      "logits": [
+        -1.6925617456436157,
+        1.802222728729248
+      ],
+      "margin": 3.4947844743728638
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 1203,
+      "track_id": 15,
+      "logits": [
+        -2.191842794418335,
+        2.752735137939453
+      ],
+      "margin": 4.944577932357788
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "query_text": "dancing person dressed all in white",
+      "frame": 1203,
+      "track_id": 16,
+      "logits": [
+        -2.349761724472046,
+        2.728637456893921
+      ],
+      "margin": 5.078399181365967
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 556,
+      "track_id": 21,
+      "logits": [
+        -0.8976066708564758,
+        0.6412668824195862
+      ],
+      "margin": 1.538873553276062
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 586,
+      "track_id": 20,
+      "logits": [
+        -2.7587437629699707,
+        3.1711926460266113
+      ],
+      "margin": 5.929936408996582
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 632,
+      "track_id": 27,
+      "logits": [
+        -3.80212664604187,
+        3.8544845581054688
+      ],
+      "margin": 7.656611204147339
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 716,
+      "track_id": 23,
+      "logits": [
+        -1.986234188079834,
+        2.1903648376464844
+      ],
+      "margin": 4.176599025726318
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 848,
+      "track_id": 29,
+      "logits": [
+        -3.7587852478027344,
+        4.384715557098389
+      ],
+      "margin": 8.143500804901123
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 1203,
+      "track_id": 19,
+      "logits": [
+        -2.0585036277770996,
+        2.0903775691986084
+      ],
+      "margin": 4.148881196975708
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 1203,
+      "track_id": 24,
+      "logits": [
+        -2.0369656085968018,
+        2.4995436668395996
+      ],
+      "margin": 4.536509275436401
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "query_text": "dancing person dressed all in black",
+      "frame": 1203,
+      "track_id": 26,
+      "logits": [
+        -3.3627681732177734,
+        3.6341936588287354
+      ],
+      "margin": 6.996961832046509
+    }
+  ],
+  "added_rows_per_episode": [
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0004",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 11
+    },
+    {
+      "video": "dancetrack0005",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 9
+    },
+    {
+      "video": "dancetrack0007",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 13
+    },
+    {
+      "video": "dancetrack0010",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 13
+    },
+    {
+      "video": "dancetrack0014",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 37
+    },
+    {
+      "video": "dancetrack0018",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 6
+    },
+    {
+      "video": "dancetrack0018",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0019",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 22
+    },
+    {
+      "video": "dancetrack0025",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 15
+    },
+    {
+      "video": "dancetrack0025",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0026",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 31
+    },
+    {
+      "video": "dancetrack0030",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 6
+    },
+    {
+      "video": "dancetrack0030",
+      "expression": "dancing-person-with-black-shirt-and-brown-pants",
+      "added_rows": 2
+    },
+    {
+      "video": "dancetrack0034",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 34
+    },
+    {
+      "video": "dancetrack0034",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0034",
+      "expression": "dancing-person-dressed-all-in-green",
+      "added_rows": 19
+    },
+    {
+      "video": "dancetrack0034",
+      "expression": "dancing-person-dressed-all-in-purple",
+      "added_rows": 28
+    },
+    {
+      "video": "dancetrack0034",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 29
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 17
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-dressed-all-in-green",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-dressed-all-in-purple",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-with-black-shirt-and-blue-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-with-gray-shirt-and-black-pants",
+      "added_rows": 14
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0035",
+      "expression": "dancing-person-with-yellow-Tshirt-and-black-pants",
+      "added_rows": 17
+    },
+    {
+      "video": "dancetrack0041",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 38
+    },
+    {
+      "video": "dancetrack0041",
+      "expression": "dancing-person-with-black-shirt-and-brown-pants",
+      "added_rows": 13
+    },
+    {
+      "video": "dancetrack0043",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0043",
+      "expression": "dancing-person-with-white-Tshirt-and-black-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0043",
+      "expression": "dancing-person-with-white-Tshirt-and-blue-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0047",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 23
+    },
+    {
+      "video": "dancetrack0047",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 4
+    },
+    {
+      "video": "dancetrack0058",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 12
+    },
+    {
+      "video": "dancetrack0058",
+      "expression": "dancing-person-with-white-Tshirt-and-black-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0063",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 84
+    },
+    {
+      "video": "dancetrack0063",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 3
+    },
+    {
+      "video": "dancetrack0073",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 31
+    },
+    {
+      "video": "dancetrack0073",
+      "expression": "dancing-person-dressed-all-in-green",
+      "added_rows": 16
+    },
+    {
+      "video": "dancetrack0073",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 19
+    },
+    {
+      "video": "dancetrack0077",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 13
+    },
+    {
+      "video": "dancetrack0077",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 3
+    },
+    {
+      "video": "dancetrack0079",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 26
+    },
+    {
+      "video": "dancetrack0079",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 5
+    },
+    {
+      "video": "dancetrack0081",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 50
+    },
+    {
+      "video": "dancetrack0081",
+      "expression": "dancing-person-with-black-shirt-and-blue-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0081",
+      "expression": "dancing-person-with-white-Tshirt-and-black-pants",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0090",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 39
+    },
+    {
+      "video": "dancetrack0090",
+      "expression": "dancing-person-dressed-all-in-brown",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0090",
+      "expression": "dancing-person-dressed-all-in-white",
+      "added_rows": 2
+    },
+    {
+      "video": "dancetrack0090",
+      "expression": "dancing-person-with-purple-shirt-and-white-skirt",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0094",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 3
+    },
+    {
+      "video": "dancetrack0094",
+      "expression": "dancing-person-dressed-all-in-purple",
+      "added_rows": 1
+    },
+    {
+      "video": "dancetrack0094",
+      "expression": "dancing-person-with-black-shirt-and-brown-pants",
+      "added_rows": 45
+    },
+    {
+      "video": "dancetrack0097",
+      "expression": "dancing-person-dressed-all-in-black",
+      "added_rows": 7
+    }
+  ],
+  "supplements": [
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0004.json",
+      "sha256": "4834246be48fbdbea3f7c0b307c4905680d4084b83b2d0b02a9c026253330be3",
+      "entries": 187,
+      "positive_entries": 12
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0005.json",
+      "sha256": "190c0e1759c158ebbacde6740c85b6c1a15f68bae14c2dff9ce5e766b0288e8f",
+      "entries": 153,
+      "positive_entries": 9
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0007.json",
+      "sha256": "56e3aa97c1df8c065d5abcb449b8bc34a2279030fa5557793b4c9ad3a223017f",
+      "entries": 221,
+      "positive_entries": 13
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0010.json",
+      "sha256": "5c952b03750474e1eca3074ef01117a630d1210f930cad8a31d9c4fcc05154ae",
+      "entries": 221,
+      "positive_entries": 13
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0014.json",
+      "sha256": "31bcd3fc58cb7d3b09c2d759dcca8a18a70c91e6ca9ad65c2032dfc7b46c6a80",
+      "entries": 629,
+      "positive_entries": 37
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0018.json",
+      "sha256": "2b1da93b1d033eecf3a97fd4abb023c2d776fc931ce3cd1f80521ea49e2bcd7f",
+      "entries": 119,
+      "positive_entries": 10
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0019.json",
+      "sha256": "4e1e21d02d1f6516e5be3e23543a4262776935a320389f8f0c1451a79da6bc36",
+      "entries": 374,
+      "positive_entries": 22
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0025.json",
+      "sha256": "6848055a5788d0b3627e3855f25a4b376e6415c4a2925d4d93ce6f618f1e2098",
+      "entries": 374,
+      "positive_entries": 16
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0026.json",
+      "sha256": "653ca9ad7c6738dcd645f549d328c50da46f601fc919642eb01516e2c853ec81",
+      "entries": 527,
+      "positive_entries": 31
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0030.json",
+      "sha256": "4d5de7ebf123a91e25b3e6111dc7f866bace50c4a89e2f114c86559f12a80969",
+      "entries": 119,
+      "positive_entries": 8
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0034.json",
+      "sha256": "d8610ebb71801f3956e2db80aca457b9a59a653b95f1801621cbcc72132db64f",
+      "entries": 629,
+      "positive_entries": 111
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0035.json",
+      "sha256": "1b9cdbe2cfcf190f5f6f5e35fba83c14d816287fe5d69cc7d4b3a8cff76caa7d",
+      "entries": 289,
+      "positive_entries": 65
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0041.json",
+      "sha256": "bc33f2a3f40dea6fb98b196e421884873bbbbb2f323ec1d3c5bf125d1d0ef82d",
+      "entries": 1224,
+      "positive_entries": 51
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0043.json",
+      "sha256": "786fd1692240f886c159a2839ce6ced1ee2b2d2af61f37cfa275271ad91dbb84",
+      "entries": 255,
+      "positive_entries": 3
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0047.json",
+      "sha256": "bdf35949efe93d8a94e9abd4d83d42d8cbf39a3ac5312cf63e5c3c2d3cbd4430",
+      "entries": 391,
+      "positive_entries": 27
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0058.json",
+      "sha256": "c2cc698d42b9c424ee6367ae7a7662c0c387ceffb78aa34d057c8aebb17c0118",
+      "entries": 204,
+      "positive_entries": 13
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0063.json",
+      "sha256": "469d988491806965ce2615460a6e1c78de1ff7d570ca913c3cf2c7680ea4ffc4",
+      "entries": 1802,
+      "positive_entries": 87
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0065.json",
+      "sha256": "ad5554a1eb8443b47f0398810d19b6a8a88deafcf2cc4e91e0a815349c0de7df",
+      "entries": 119,
+      "positive_entries": 0
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0073.json",
+      "sha256": "abd6f0ac4dd8d97715d5f757539f52b917d73fb16d55f3dcc49104f18d48e560",
+      "entries": 527,
+      "positive_entries": 66
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0077.json",
+      "sha256": "98b4035884a0deb7cda839fe24a022ac8eda2fb2fa2be780ce2cf0086a3b9975",
+      "entries": 255,
+      "positive_entries": 16
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0079.json",
+      "sha256": "ea3cc8887bc261001d6943dd2a1e8679d758cf74ea9286956d89d2b6850a24b2",
+      "entries": 442,
+      "positive_entries": 31
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0081.json",
+      "sha256": "3836534c85c41c931b5d88857b35dae7b13aa407ac23c94e688c011530118940",
+      "entries": 884,
+      "positive_entries": 52
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0090.json",
+      "sha256": "9b94c1d0767c792c3b6c9ef65aa1d90964eeba49cce73145e54cf3612aa6e726",
+      "entries": 663,
+      "positive_entries": 43
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0094.json",
+      "sha256": "c41a17029d942ac3fb632ec70c412878a482bbb15ceaad556898785382ade3be",
+      "entries": 1037,
+      "positive_entries": 49
+    },
+    {
+      "path": "/data2/user/FlexHook-TTA/results/runs/diag_attrib_20261031_v1/official_supplement/dancetrack0097.json",
+      "sha256": "d286705b664208731b51762fb0735d37021333be8fc2ecd03504011ae92d8fd1",
+      "entries": 119,
+      "positive_entries": 7
+    }
+  ],
+  "parity": [
+    {
+      "video": "dancetrack0004",
+      "frame": 1,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 7.62939453125e-06,
+      "cache_vs_historical_max_error": 2.86102294921875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 2,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.049041748046875e-05,
+      "cache_vs_historical_max_error": 2.574920654296875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 3,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.049041748046875e-05,
+      "cache_vs_historical_max_error": 5.435943603515625e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 4,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 9.5367431640625e-06,
+      "cache_vs_historical_max_error": 3.528594970703125e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 5,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 8.58306884765625e-06,
+      "cache_vs_historical_max_error": 7.2479248046875e-05,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 6,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 4.76837158203125e-06,
+      "cache_vs_historical_max_error": 0.000118255615234375,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 7,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 4.76837158203125e-06,
+      "cache_vs_historical_max_error": 0.00013256072998046875,
+      "historical_selection_mismatches": 0
+    },
+    {
+      "video": "dancetrack0004",
+      "frame": 8,
+      "candidates": 3,
+      "cache_vs_original_forward_max_error": 1.9073486328125e-06,
+      "cache_vs_historical_max_error": 8.20159912109375e-05,
+      "historical_selection_mismatches": 0
+    }
+  ],
+  "physical_GPU": 4,
+  "precision": "FP32",
+  "tokenizer_person": [
+    5970
+  ],
+  "optimizer_steps": 0,
+  "trainable_parameters": 0,
+  "target_GT_open_attempts": [],
+  "original_files_written": 0,
+  "GPU_worker_seconds": 186.15458437497728,
+  "GPU_worker_hours": 0.05170960677082702,
+  "peak_allocated_bytes": 4269847040,
+  "total_wall_seconds": 196.4307841078844
+}

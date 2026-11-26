@@ -1,0 +1,53 @@
+{
+  "status": "COMPLETE_LABEL_FREE_SPECIFIED_RECTANGLE_GROUNDING_AUDIT",
+  "cases": 24,
+  "real_inputs": 144,
+  "cache_hits": 0,
+  "geometry_by_domain": {
+    "Dance": {
+      "inputs": 32,
+      "errors": 5,
+      "mean_proper_binary_CE": 0.38418990785710294
+    },
+    "KITTI-V2": {
+      "inputs": 32,
+      "errors": 0,
+      "mean_proper_binary_CE": 0.17058354891231894
+    },
+    "SportsMOT": {
+      "inputs": 32,
+      "errors": 8,
+      "mean_proper_binary_CE": 0.4324946703911158
+    }
+  },
+  "original_task_inputs": 48,
+  "original_task_semantic_quality_unknown": true,
+  "exact_answers_sha256": "4bce44d2c754c89e42c752ecfa5073a3ddb698cbd6d0881424476869077e3271",
+  "registration_sha256": "9a3c1e8b46b6f951d924e45e2ba087f796c84088071b2d66152067898c4cc308",
+  "teacher": {
+    "initial_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "final_parameter_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "frozen_parameters_unchanged": true,
+    "optimizer_updates": 0,
+    "forward_batches": 144,
+    "model_load_and_initial_hash_seconds": 601.0712150050094
+  },
+  "synchronized_forward_seconds": 46.78419885644689,
+  "worker_wall_seconds": 704.1924331199843,
+  "execution": {
+    "deterministic_algorithms": true,
+    "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+    "CUDA_initialized_before_configuration": false,
+    "CUDA_matmul_allow_tf32": false,
+    "cudnn_allow_tf32": false,
+    "torch_version": "2.6.0+cu118",
+    "cuda_version": "11.8"
+  },
+  "peak_allocated_bytes": 5165153280,
+  "GT_open_attempts": 0,
+  "no_adapter_training_or_new_RMOT_predictions": true,
+  "not_single_method_fresh_cost": true,
+  "geometric_proxy_not_semantic_accuracy_or_causal_attention": true,
+  "no_automatic_main_promotion_or_accuracy_claim": true,
+  "goal_status": "ACTIVE"
+}

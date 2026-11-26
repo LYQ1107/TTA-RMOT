@@ -1,0 +1,12 @@
+{
+  "format": "temprmot-independent-tta-failure-v1",
+  "status": "FAILED_DURING_STRICT_CHECKPOINT_LOAD",
+  "run_root": "/data3/user/TTA-RMOT-runs/shift_rmot_v2_official_release_smoke_gpu7",
+  "physical_gpu": 7,
+  "checkpoint": "/data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth",
+  "scope": "one target-test base expression, max 10 frames",
+  "observed_exception": "RuntimeError: TempRMOT checkpoint load mismatch",
+  "first_actionable_cause": "extra_track_attn=true creates 36 decoder parameters absent from the released checkpoint.",
+  "protocol_effect": "No TTA prediction or metric is accepted from this smoke run.",
+  "minimal_fix": "Disable extra_track_attn and align hist_len/sampler_lengths with the checkpoint source-training configuration before retrying."
+}

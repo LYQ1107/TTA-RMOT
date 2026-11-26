@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE_PACKAGING_ONLY_RECOVERY",
+  "original_offline_parent_exit_code": 1,
+  "original_failure": "All official evaluations, dense attribution, bootstrap and tables completed; final packaging glob also matched derived count controls without a method key.",
+  "original_failure_log": "/data2/user/FlexHook-TTA/results/runs/diag_fit_20261030_v1/logs/offline/main.txt",
+  "fixed_source_local": "1b24a5795c9a7e42ccc6b3b0104b9f4b856450e2",
+  "fixed_source_public": "f17ec79d05abd1b5e9d5f1c0b777cd1c72d4ad9a",
+  "targeted_regression": {
+    "passed": 18,
+    "seconds": 4.33
+  },
+  "recovery_command": "CUDA_VISIBLE_DEVICES='' /home/szgx/anaconda3/envs/dfot/bin/python -c 'from scripts.report_diag_fit import package; package()'",
+  "recovery_exit_code": 0,
+  "rerun_GPU_training": false,
+  "rerun_GPU_inference": false,
+  "rerun_official_TrackEval": false,
+  "rerun_dense_attribution": false,
+  "original_seals_verified_after_GT_and_packaging": true,
+  "table_A_sha256": "d6cb3b5b0092f9579bb8743209676b9a2655d062cf3f188512022809c4f7c61f",
+  "table_B_sha256": "30846aa052d8e62cd563f2c97ced578d856abfa67bd7da8bcec2d7630bbfc7e4",
+  "prediction_manifest_sha256": "3b4a91d0481c0b67e88574c5c492724369457edf7b7d91f0e6ed8e1de784fcb9"
+}

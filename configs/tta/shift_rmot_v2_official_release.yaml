@@ -1,0 +1,87 @@
+protocol:
+  source_free_at_adaptation: true
+  online: true
+  predict_then_adapt: true
+  reset_unit: video_expression_condition
+  allow_future_frames: false
+  seed: 20261021
+
+model:
+  baseline: temprmot
+  source_root: /data2/user/reference_envs/temprmot/source
+  checkpoint: /data3/user/TTA-RMOT-assets/checkpoints/temprmot_refer_kitti_v2_official_checkpoint_rk2.pth
+  checkpoint_role: official_released_checkpoint_compatible_baseline
+  text_root: /data2/user/reference_envs/temprmot/roberta-base
+  # The released state dict contains the source-training architecture.  The
+  # upstream test shell enables extra_track_attn, but that adds 36 untrained
+  # decoder parameter tensors to this checkpoint; keep it disabled here so a
+  # fast baseline is fully checkpoint-backed.
+  hist_len: 5
+  sampler_steps: [60, 80, 90]
+  sampler_lengths: [5, 5, 5, 5]
+  extra_track_attn: false
+  freeze_backbone: true
+  freeze_text_encoder: true
+  freeze_tracker: true
+
+data:
+  dataset: shift_rmot_v2
+  compact_shift_manifest: true
+  runtime_manifest: data/ShiftRMOT-v2/manifests/paired_conditions.jsonl
+  evaluation_manifest: data/ShiftRMOT-v2/manifests/paired_conditions_evaluation.jsonl
+
+inference:
+  objectness_threshold: 0.6
+  area_threshold: 100
+  referring_threshold: 0.4
+  selection:
+    mode: relative_margin
+    relative_logit_margin: 0.75
+    max_candidates_per_frame: 16
+
+probe:
+  enabled: true
+  every_n_frames: 16
+  max_query_count: 3
+  static_history_frames: 1
+  dynamic_history_frames: 4
+  min_match_iou: 0.6
+  ambiguity_iou_margin: 0.05
+
+evidence:
+  positive_threshold: 0.8
+  negative_threshold: 0.2
+  equivalent_tolerance: 0.1
+  contrast_margin: 0.3
+  allow_forced_top1: false
+  missing_probe_is_negative: false
+
+memory:
+  capacity: 512
+  per_track_capacity: 16
+  fixed_ttl_frames: 16
+
+adaptation:
+  optimizer: adamw
+  lr: 0.0005
+  weight_decay: 0.0001
+  update_every_n_frames: 4
+  steps_per_update: 1
+  batch_size: 32
+  minimum_distinct_track_time_samples: 2
+  grad_clip: 1.0
+  max_abs_residual: 6.0
+  hidden_dim: 32
+  cache_similarity_threshold: 0.92
+  cache_momentum: 0.8
+
+methods:
+  - FROZEN
+  - TDA_RMOT
+  - VISUAL_TTA
+  - LANGUAGE_TTA
+  - FUSION_TTA
+  - VISUAL_LANGUAGE_TTA
+  - VISUAL_FUSION_TTA
+  - LANGUAGE_FUSION_TTA
+  - ALL_TTA

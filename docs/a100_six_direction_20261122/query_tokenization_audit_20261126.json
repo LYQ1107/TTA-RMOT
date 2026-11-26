@@ -1,0 +1,171 @@
+{
+  "status": "COMPLETE_SOURCE_QUERY_TOKEN_BOUNDARY_AUDIT_NO_GT",
+  "source_sha256": {
+    "scripts/a100_query_tokenization_audit.py": "e5302215fe58e5fb615139a892129a959565bce013f0d1f8a02e75ce9c394f34",
+    "flex_tta/runtime/frozen_features.py": "2da16b1774bb4a7c1bff2c7e58d98048fb0999a229e908d08475999e43c1e536",
+    "flex_uda/presence/runtime.py": "81d1f8fd321f7764c3a840764a398655daafa27c4ed235fb991ab08d127adc67",
+    "scripts/presence_export_target.py": "7ab71f8e72048e9326baefb769fabd8ff200ad27dd1b657b7462e428878f9ff8",
+    "flex_uda/active/observation_learning_inputs.py": "362b14844a73604ae1edce8a8dd7c00f93d616022a306a3d46b77ebe3306cd8b",
+    "flex_uda/active/factor_rsi_learning.py": "5113ad9c208329da84172ca8df8032c1c756a8b71f84f1f429410d9752c2c957",
+    "flex_uda/active/fullscope_visual_runtime.py": "ce65e95f390567c3e1cc5ebfcf694c5ac2c37516d6d47bf4fca6acf8a0941594"
+  },
+  "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "tokenizer_options": {
+    "padding": "max_length",
+    "truncation": true,
+    "max_length": 25
+  },
+  "tokenizer_person_ids": [
+    5970
+  ],
+  "unique_task_texts": 948,
+  "unique_texts_truncated": 0,
+  "video_units": 148,
+  "query_episodes": 3506,
+  "settings": {
+    "C1": {
+      "videos": 25,
+      "queries": 425,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "9": 125,
+        "11": 125,
+        "12": 150,
+        "13": 25
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    },
+    "C2": {
+      "videos": 4,
+      "queries": 862,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "3": 7,
+        "4": 38,
+        "5": 49,
+        "6": 90,
+        "7": 121,
+        "8": 130,
+        "9": 138,
+        "10": 92,
+        "11": 64,
+        "12": 47,
+        "13": 32,
+        "14": 21,
+        "15": 10,
+        "16": 9,
+        "17": 10,
+        "18": 2,
+        "19": 2
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    },
+    "C3": {
+      "videos": 45,
+      "queries": 466,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "3": 45,
+        "4": 43,
+        "5": 69,
+        "6": 76,
+        "7": 99,
+        "8": 35,
+        "9": 32,
+        "10": 13,
+        "11": 6,
+        "12": 24,
+        "14": 12,
+        "15": 12
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    },
+    "C4": {
+      "videos": 45,
+      "queries": 466,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "3": 45,
+        "4": 43,
+        "5": 69,
+        "6": 76,
+        "7": 99,
+        "8": 35,
+        "9": 32,
+        "10": 13,
+        "11": 6,
+        "12": 24,
+        "14": 12,
+        "15": 12
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    },
+    "C5": {
+      "videos": 4,
+      "queries": 862,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "3": 7,
+        "4": 38,
+        "5": 49,
+        "6": 90,
+        "7": 121,
+        "8": 130,
+        "9": 138,
+        "10": 92,
+        "11": 64,
+        "12": 47,
+        "13": 32,
+        "14": 21,
+        "15": 10,
+        "16": 9,
+        "17": 10,
+        "18": 2,
+        "19": 2
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    },
+    "C6": {
+      "videos": 25,
+      "queries": 425,
+      "truncated_queries": 0,
+      "truncated_fraction": 0.0,
+      "full_token_length_histogram": {
+        "9": 125,
+        "11": 125,
+        "12": 150,
+        "13": 25
+      },
+      "within_video_truncation_alias_groups": 0,
+      "within_video_truncation_aliased_queries": 0,
+      "examples": []
+    }
+  },
+  "actual_historical_source": "presence_export_target.export_video -> presence.runtime.cache_for -> FrozenFeatureCache._text",
+  "current_student_query_channel": "Historical query-conditioned PCD for three anchors/current/coarse; geometry, RGB and DINO are query-independent. No separate untruncated token representation is added by the9352D runtime.",
+  "original_teacher_receives_full_query_text": true,
+  "truncation_does_not_prove_semantic_error_or_HOTA_loss": true,
+  "token_alias_does_not_assert_byte_identical_PCD_under_all_batch_numerics": true,
+  "GT_open_attempts": 0,
+  "model_or_teacher_forwards": 0,
+  "fits": 0,
+  "GPU_calls": 0,
+  "main_numerical_sources_questions_weights_or_thresholds_changed": false,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

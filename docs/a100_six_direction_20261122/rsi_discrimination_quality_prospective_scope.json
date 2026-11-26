@@ -1,0 +1,92 @@
+{
+  "status": "PROSPECTIVE_CONDITIONAL_DISCRIMINATION_RSI_NOT_INTEGRATED_OR_LAUNCHED",
+  "registered_unix": 1795441574.0071557,
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "neural_seeds": [
+    0
+  ],
+  "primary_reward": "GAIN_IN_CONDITIONAL_TEACHER_SKILL",
+  "candidate_framework": "Learned challenger and conditional/object-reference solver, anchored by frozen Qwen",
+  "probe_rule": "Same original query and requested view; >=2 distinct candidate Track IDs; whole probe query-track groups excluded from current training. Metadata-only reservation; probes charged within original per-query quota.",
+  "null_rule": "Best constant teacher distribution within each paid probe query/view, fitted to that probe only as a reward control. It is never a student input or deployed classifier.",
+  "classic_support": "H(mean Q)-mean H(Q) is the maximum available conditional teacher information. Skill=max(H(mean Q)-CE(S),0) is bounded by this gap. Reward=tanh(skill_after-skill_before) with the same probe/null both times.",
+  "not_a_new_entropy_theorem": true,
+  "not_a_RMOT_improvement_guarantee": true,
+  "actor_optimizer": "Proposed fixed SGD lr.1, momentum0; one update per round, epsilon.2 policy; retain reward magnitude instead of Adam normalizing tiny teacher-confidence differences",
+  "mandatory_controls": [
+    "learned vs frozen actor, identical paired-probe rules and budget",
+    "raw progress vs conditional-skill progress with matched SGD and probes",
+    "conditional vs full likelihood learner, fixed same QA paths and matched three-round optimization",
+    "object reference vs local-only learner, fixed same QA paths and matched optimization",
+    "fully fit generic joint/marginal and coarse unit/confidence soft/hard ordinary references with all same paid answers including probes"
+  ],
+  "ordinary_KL_gate": 0.005,
+  "prefix": "Own past/current video only; own actor and solver snapshots; no future QA or normalization",
+  "small_budget_fallback": "Do not manufacture a reward when no valid pair exists; retain the learned policy/solver, fit all paid training answers, produce every query/video prediction, report no local actor feedback. Never drop a sample.",
+  "probe_budget_feasibility": {
+    "C1": {
+      "videos": 25,
+      "teacher_budget": 3047,
+      "paid_probe_bundles": 300,
+      "min_fresh_probe_rounds": 0,
+      "videos_with_all_three_paired_rounds": 21,
+      "all_queries_keep_first_round_training": true
+    },
+    "C2": {
+      "videos": 4,
+      "teacher_budget": 20955,
+      "paid_probe_bundles": 2096,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 4,
+      "all_queries_keep_first_round_training": true
+    },
+    "C3": {
+      "videos": 45,
+      "teacher_budget": 3508,
+      "paid_probe_bundles": 388,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 45,
+      "all_queries_keep_first_round_training": true
+    },
+    "C4": {
+      "videos": 45,
+      "teacher_budget": 3508,
+      "paid_probe_bundles": 388,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 45,
+      "all_queries_keep_first_round_training": true
+    },
+    "C5": {
+      "videos": 4,
+      "teacher_budget": 20955,
+      "paid_probe_bundles": 2096,
+      "min_fresh_probe_rounds": 3,
+      "videos_with_all_three_paired_rounds": 4,
+      "all_queries_keep_first_round_training": true
+    },
+    "C6": {
+      "videos": 25,
+      "teacher_budget": 3046,
+      "paid_probe_bundles": 298,
+      "min_fresh_probe_rounds": 0,
+      "videos_with_all_three_paired_rounds": 21,
+      "all_queries_keep_first_round_training": true
+    }
+  },
+  "prediction_rule": "All full-study raw and per-query/frame dual CountMatched outputs sealed before isolated official GT. Existing data DEV, no independent blind validation.",
+  "cost": "Offline finite QA pool is research preparation, not deployment; real matched fresh independent cold cost only for a retained quality recipe.",
+  "source_implementation": "Paired reservation and conditional-skill scoring plus all148 audit implemented. Integration into resumable actor/solver and full six-setting runner pending.",
+  "goal_status": "ACTIVE",
+  "training_target_alignment_hypothesis": "Existing collector pairs two times of one candidate; directly comparing different candidates is a distinct learning task. Inspect task time semantics, then new real cross-candidate teacher pilot before new mass collection. Old paired-time QA is not a joint comparison of different people.",
+  "cross_candidate_teacher_pilot_status": "NOT_IMPLEMENTED_OR_LAUNCHED",
+  "proposed_conditional_utility": "Two candidate utilities b_query+f_i and b_query+f_j; conditioning on exactly one removes shared b_query, leaving f_i-f_j. Both/none remain permitted in the joint model.",
+  "retain_semantic_identity_in_contrast": "Eliminate query-shared nuisance b_query, retain candidate-specific stable h_i in f_i-f_j. Within-track centering of transient g alone does not teach between-candidate identity discrimination.",
+  "ordinary_fit_followup": "For any future positive learner claim, audit teacher-only rare positive/argmax and exactly-one conditional fit as well as global proper KL; class imbalance can hide subgroup underfit. Existing running study gates and outputs remain unchanged; any needed completion is a separately preserved supplement, never a weaker opponent."
+}

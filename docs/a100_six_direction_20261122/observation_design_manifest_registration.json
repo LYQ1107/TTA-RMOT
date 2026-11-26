@@ -1,0 +1,42 @@
+{
+  "status": "PREREGISTERED_SIX_SETTING_OBSERVATION_MANIFEST_PREPARATION",
+  "registered_unix": 1795346234.5104795,
+  "source_sha256": {
+    "scripts/a100_observation_design_prepare.py": "fa1a4ae232cda25150806d0d36f88f9f643379c9baaab921f899768a44030801",
+    "flex_uda/active/observation_design.py": "b1bc3ca239a3ace87a96dddc8993fa0419cbae222d2a5c4f5d85d2549f89a0f2",
+    "flex_uda/active/acquisition.py": "26fd5da1de9e1ff38d8e82b04eb7e847ef446cca0372ef2644d4ed106fba0a25",
+    "flex_uda/active/relational_transport.py": "2de093190983e680b35246ee19ef1edb64ccf9ffc5c2338403666c785c490736",
+    "flex_uda/active/relational_features.py": "0c2d2770ca961c2efc86ef6f63cf7f196f2e5005ee07230b8279a09233a8a4af",
+    "scripts/a100_relation_transport.py": "33e70d7258baad1cfee291265bbdcf4a0f22292405e7e93aebef0fdb8cb0c12c"
+  },
+  "registered_before_all_six_full_manifest_generation": true,
+  "prior_information": "Prototype three-case geometry-only probes, prior DEV diagnostics and teacher-only relation fits known; no new active-policy answers",
+  "settings": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6"
+  ],
+  "policies": [
+    "DESIGN",
+    "COVERAGE_ONLY",
+    "PRIOR",
+    "UNIFORM"
+  ],
+  "budget": "Exact historical actual question count per video, probabilities/old beliefs ignored. Equal per-query quotas with hash remainder allocation, common to all policies.",
+  "samples": "Same actual uniformly spaced up-to-three source observations and maximum-area anchor per providedTrackID",
+  "common_routing": "Existing acquisition.route: MOTION CLIP, SPATIAL/ROLE FRAME_BOX, else CROP. Identical policy view quotas; not our new routing contribution.",
+  "design": "Two-stage .75 paid anchors then frozen coverage+log maximum within-object contrast excitation with eta=.25,ridge=.01; no teacher answers in planning.",
+  "controls": "Pure coverage removes state excitation; PRIOR/UNIFORM first visit distinct object anchors, then actual extra states only if quota exceeds objects.",
+  "temporal_scope": "Current video only, no future video feature/teacher; not frame-online",
+  "manual_target_GT_used": false,
+  "new_teacher_encoder_GPU_or_neural_calls": 0,
+  "new_candidate_predictions": 0,
+  "purpose": "Prepare immutable local request manifests and verify all6 budget/input compatibility before any actual collection; not a completed active-policy experiment",
+  "future_evidence_rules": "If executed, no old QA probabilities or old adapted heads in new fit unless explicitly charged equally. Same acquired answers to adequate ordinary KD; raw/count before GT; real wall costs separately measured.",
+  "all_raw_request_manifests_local_not_Git": true,
+  "all_data_development": true,
+  "goal_status": "ACTIVE"
+}

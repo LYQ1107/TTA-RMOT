@@ -1,0 +1,340 @@
+{
+  "status": "PASS_QUERY_PROFILE_CLASSICAL_CHAIN_RULE_AUDIT",
+  "scope": "Algebraic loss decomposition using actual paid teacher targets/weights/groups and hypothetical score vectors; not actual model quality",
+  "video_prefixes": 592,
+  "numerical_cases": 1776,
+  "score_families": [
+    "TEACHER_EXACT",
+    "GROUP_SCALE",
+    "CONTRAST_PERTURBATION"
+  ],
+  "maximum_identity_error": 4.163336342344337e-16,
+  "maximum_code_error": 2.19833367132194e-16,
+  "maximum_bound_violation": 6.436723697321768e-17,
+  "numerical_tolerance": 5e-12,
+  "same_pointwise_and_profile_weights_required": true,
+  "equal_targets_and_disjoint_fixed_groups_required": true,
+  "bounds": "K_eligible=mass_KL+profile_KL+negative_KL; 0<=profile_KL<=K_all/f, f=eligible_weight/all_weight>0",
+  "no_teacher_accuracy_or_HOTA_guarantee": true,
+  "not_a_new_theorem": true,
+  "no_registered_method_or_primary_changed": true,
+  "no_task_prediction_or_current_quality_read": true,
+  "no_new_fits_teacher_or_backbone_forwards": true,
+  "GT_open_attempts": 0,
+  "summaries": {
+    "C1_DESIGN": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.048432863357914205,
+      "maximum_identity_error": 2.706168622523819e-16,
+      "maximum_code_error": 1.2641797331180982e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.02273139867602209,
+        0.07922063210237262
+      ],
+      "maximum_group_scale_profile_magnitude": 6.967901026371272e-17
+    },
+    "C1_PRIOR": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.09856440216769526,
+      "maximum_identity_error": 1.3877787807814457e-16,
+      "maximum_code_error": 6.364266752489911e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.02691023398022527,
+        0.08624549076990011
+      ],
+      "maximum_group_scale_profile_magnitude": 5.862308543659071e-17
+    },
+    "C1_UNIFORM": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.1755885994237201,
+      "maximum_identity_error": 1.249000902703301e-16,
+      "maximum_code_error": 3.209238430557093e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.05151814352707021,
+        0.0809919708103605
+      ],
+      "maximum_group_scale_profile_magnitude": 5.781444621681447e-17
+    },
+    "C1_COVERAGE_ONLY": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.048432863357914205,
+      "maximum_identity_error": 2.706168622523819e-16,
+      "maximum_code_error": 1.2641797331180982e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.02273139867602209,
+        0.07922063210237262
+      ],
+      "maximum_group_scale_profile_magnitude": 6.967901026371272e-17
+    },
+    "C2_DESIGN": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8695905151473047,
+      "maximum_identity_error": 8.326672684688674e-17,
+      "maximum_code_error": 1.6925560559132376e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.16080234058645346,
+        0.19306867257577615
+      ],
+      "maximum_group_scale_profile_magnitude": 1.4191293308854262e-17
+    },
+    "C2_PRIOR": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.7731726650951156,
+      "maximum_identity_error": 2.1510571102112408e-16,
+      "maximum_code_error": 1.604109905110316e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.14505178353075776,
+        0.18004668694525242
+      ],
+      "maximum_group_scale_profile_magnitude": 1.657424139688498e-17
+    },
+    "C2_UNIFORM": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8288692418551145,
+      "maximum_identity_error": 6.938893903907228e-17,
+      "maximum_code_error": 2.2404810872280617e-17,
+      "maximum_bound_violation": 7.845055453940248e-18,
+      "group_scale_point_KL_range": [
+        0.15989574324323866,
+        0.20074194293856631
+      ],
+      "maximum_group_scale_profile_magnitude": 9.263917663388324e-18
+    },
+    "C2_COVERAGE_ONLY": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.870441854499007,
+      "maximum_identity_error": 6.938893903907228e-17,
+      "maximum_code_error": 2.0557904354118356e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.16538388457973013,
+        0.19932691990644114
+      ],
+      "maximum_group_scale_profile_magnitude": 1.1493767588213413e-17
+    },
+    "C3_DESIGN": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8857880284658859,
+      "maximum_identity_error": 3.0531133177191805e-16,
+      "maximum_code_error": 6.704257500386544e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.3463734417208866,
+        0.57434816884561
+      ],
+      "maximum_group_scale_profile_magnitude": 5.563348056029254e-17
+    },
+    "C3_PRIOR": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8892222485790966,
+      "maximum_identity_error": 4.0245584642661925e-16,
+      "maximum_code_error": 2.19833367132194e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.3915964699328106,
+        0.6106198693068507
+      ],
+      "maximum_group_scale_profile_magnitude": 9.099466149234659e-17
+    },
+    "C3_UNIFORM": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8924825880529332,
+      "maximum_identity_error": 2.498001805406602e-16,
+      "maximum_code_error": 5.963111948670274e-17,
+      "maximum_bound_violation": 3.5985598710054997e-17,
+      "group_scale_point_KL_range": [
+        0.3233639622656954,
+        0.4934856941017995
+      ],
+      "maximum_group_scale_profile_magnitude": 5.003925581350198e-17
+    },
+    "C3_COVERAGE_ONLY": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8857880284658859,
+      "maximum_identity_error": 3.0531133177191805e-16,
+      "maximum_code_error": 6.704257500386544e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.3463734417208866,
+        0.57434816884561
+      ],
+      "maximum_group_scale_profile_magnitude": 5.563348056029254e-17
+    },
+    "C4_DESIGN": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8952267032339373,
+      "maximum_identity_error": 3.7470027081099033e-16,
+      "maximum_code_error": 8.261620554339544e-17,
+      "maximum_bound_violation": 6.436723697321768e-17,
+      "group_scale_point_KL_range": [
+        0.34451961614479765,
+        0.5028763866960385
+      ],
+      "maximum_group_scale_profile_magnitude": 5.902590311834508e-17
+    },
+    "C4_PRIOR": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8886089477895711,
+      "maximum_identity_error": 4.163336342344337e-16,
+      "maximum_code_error": 2.032434376231076e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.36693940843509326,
+        0.5802378618390159
+      ],
+      "maximum_group_scale_profile_magnitude": 1.6420101124878893e-16
+    },
+    "C4_UNIFORM": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8924825880529332,
+      "maximum_identity_error": 2.498001805406602e-16,
+      "maximum_code_error": 5.963111948670274e-17,
+      "maximum_bound_violation": 3.5985598710054997e-17,
+      "group_scale_point_KL_range": [
+        0.3233639622656954,
+        0.4934856941017995
+      ],
+      "maximum_group_scale_profile_magnitude": 5.003925581350198e-17
+    },
+    "C4_COVERAGE_ONLY": {
+      "video_prefixes": 45,
+      "numerical_cases": 135,
+      "minimum_selected_weight_fraction": 0.8952267032339373,
+      "maximum_identity_error": 3.7470027081099033e-16,
+      "maximum_code_error": 8.261620554339544e-17,
+      "maximum_bound_violation": 6.436723697321768e-17,
+      "group_scale_point_KL_range": [
+        0.34451961614479765,
+        0.5028763866960385
+      ],
+      "maximum_group_scale_profile_magnitude": 5.902590311834508e-17
+    },
+    "C5_DESIGN": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8755568082243672,
+      "maximum_identity_error": 6.938893903907228e-17,
+      "maximum_code_error": 2.0024538949744643e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.16842270050817476,
+        0.20823137022748744
+      ],
+      "maximum_group_scale_profile_magnitude": 1.0255899977956514e-17
+    },
+    "C5_PRIOR": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8364087831042355,
+      "maximum_identity_error": 6.938893903907228e-17,
+      "maximum_code_error": 1.969496031483021e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.18388800902017446,
+        0.2291902827085452
+      ],
+      "maximum_group_scale_profile_magnitude": 1.1521219115269223e-17
+    },
+    "C5_UNIFORM": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8288692418551145,
+      "maximum_identity_error": 6.938893903907228e-17,
+      "maximum_code_error": 2.2404810872280617e-17,
+      "maximum_bound_violation": 7.845055453940248e-18,
+      "group_scale_point_KL_range": [
+        0.15989574324323866,
+        0.20074194293856631
+      ],
+      "maximum_group_scale_profile_magnitude": 9.263917663388324e-18
+    },
+    "C5_COVERAGE_ONLY": {
+      "video_prefixes": 4,
+      "numerical_cases": 12,
+      "minimum_selected_weight_fraction": 0.8865395243412209,
+      "maximum_identity_error": 1.249000902703301e-16,
+      "maximum_code_error": 2.6244386936876016e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.17372961384629332,
+        0.21672898941990815
+      ],
+      "maximum_group_scale_profile_magnitude": 3.623091053118029e-18
+    },
+    "C6_DESIGN": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.14296513700261013,
+      "maximum_identity_error": 8.326672684688674e-17,
+      "maximum_code_error": 1.5021621099786664e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.03555307379847275,
+        0.07864497520875148
+      ],
+      "maximum_group_scale_profile_magnitude": 6.578522138298303e-17
+    },
+    "C6_PRIOR": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.1442296903112672,
+      "maximum_identity_error": 1.3183898417423734e-16,
+      "maximum_code_error": 1.4310440772649367e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.030440690807578,
+        0.08326663433931467
+      ],
+      "maximum_group_scale_profile_magnitude": 1.0886897793637937e-16
+    },
+    "C6_UNIFORM": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.17336754429503964,
+      "maximum_identity_error": 1.249000902703301e-16,
+      "maximum_code_error": 7.589415207398531e-17,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.05151814352707021,
+        0.08062658464926932
+      ],
+      "maximum_group_scale_profile_magnitude": 5.781444621681447e-17
+    },
+    "C6_COVERAGE_ONLY": {
+      "video_prefixes": 25,
+      "numerical_cases": 75,
+      "minimum_selected_weight_fraction": 0.14296513700261013,
+      "maximum_identity_error": 8.326672684688674e-17,
+      "maximum_code_error": 1.5021621099786664e-16,
+      "maximum_bound_violation": 0.0,
+      "group_scale_point_KL_range": [
+        0.03555307379847275,
+        0.07864497520875148
+      ],
+      "maximum_group_scale_profile_magnitude": 6.578522138298303e-17
+    }
+  },
+  "CPU_wall_seconds": 14.129635422956198,
+  "goal_status": "ACTIVE"
+}

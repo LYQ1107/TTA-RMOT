@@ -1,0 +1,28 @@
+{
+  "status": "PASS_FULL_PRIMARY_RECOVERY_COUNT_AND_STATISTICS_CONTRACT",
+  "checks": [
+    "accepted_scores_not_last_rejected_proposal",
+    "exact_numpy_and_torch_rng_round_recovery",
+    "exact_neural_parameter_round_recovery",
+    "different_registration_rejected",
+    "failed_atomic_write_preserves_last_complete_checkpoint",
+    "CountMatched_preserves_each_query_frame_count_and_ranking",
+    "finite_probability_readout_keeps_extreme_probability_order",
+    "all148_outputs_and7_comparators_registered_consistently",
+    "whole_setting_TP_weighted_statistic_known_answer",
+    "ordinary_target_array_integrity_digest"
+  ],
+  "original42sources_unchanged": true,
+  "source_sha256": {
+    "scripts/a100_conditional_state_primary_contract.py": "a381015331d5c34e6eadccd637e013df1ec31dfed182b4f86d3f86227082da9a",
+    "scripts/a100_conditional_state_primary.py": "2aeeca979571594cfc402840669710de6263894fd6bc7050c7d6992a34b2a198",
+    "flex_uda/active/conditional_state_runtime.py": "3ea0c012285c07cad88e5841e2c652d6af53dad14acedaefc6727ff95acfcf7b",
+    "scripts/a100_conditional_state_statistics.py": "8eb8ff3e2634f92765e972f0c38fee2e89ba313b69a7b1c04ee61c6049e5c42a",
+    "flex_uda/active/conditional_state_learning.py": "6d4bfdb311fe3609642e8ff81efc5c83c7de481010ae4e94296147324fbaa392",
+    "scripts/a100_conditional_state_engineering.py": "3a90daf953b3f2cbe5f41ebb47cd0fea73d06ff08a0bbcd437e7fa84d25a9441"
+  },
+  "synthetic_CPU_only": true,
+  "no_target_GT_teacher_images_GPU_or_HOTA": true,
+  "not_six_setting_quality": true,
+  "goal_status": "ACTIVE"
+}

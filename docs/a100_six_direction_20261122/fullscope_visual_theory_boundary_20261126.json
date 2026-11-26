@@ -1,0 +1,38 @@
+{
+  "status": "DERIVED_RISK_PROXY_BOUNDARY_SYNTHETIC_NOT_QUALITY",
+  "exact_identity": "E[(Y-s)^2|x] = E[(Y-r)^2|x] + (r-s)^2 + 2*(r-s)*E[Y-r|x]",
+  "ideal_mean_variance_identity": "E[(Y-s)^2|x] = Var(Y|x) + (E[Y|x]-s)^2",
+  "implemented_R_residual": "Historical pre-answer observer squared errors. Not certified conditional variance, and not refreshed to currentR for all inputs.",
+  "counterexample": [
+    {
+      "action": "A",
+      "teacher_soft_value": 0.9,
+      "observer_mean": 0.1,
+      "current_student": 0.8,
+      "current_observer_squared_error": 0.6400000000000001,
+      "implemented_style_proxy": 1.1300000000000003,
+      "actual_student_squared_error": 0.009999999999999995,
+      "omitted_cross_term": -1.12
+    },
+    {
+      "action": "B",
+      "teacher_soft_value": 0.9,
+      "observer_mean": 0.9,
+      "current_student": 0.5,
+      "current_observer_squared_error": 0.0,
+      "implemented_style_proxy": 0.16000000000000003,
+      "actual_student_squared_error": 0.16000000000000003,
+      "omitted_cross_term": 0.0
+    }
+  ],
+  "proxy_ranking_can_be_wrong_even_with_exact_current_observer_squared_error": true,
+  "known_original_LURE_training_warning": "Statistical bias correction may harm overparameterized-network generalization; unbiased risk estimation is not a HOTA or training improvement theorem.",
+  "primary_source": "https://arxiv.org/abs/2101.11665",
+  "lure_formula_primary_reference": "https://openreview.net/pdf?id=uIXyp4Ip9fG",
+  "live_numerical_sources_or_questions_or_weights_changed": false,
+  "current_actual_main_handle": 23947,
+  "manual_GT_real_teacher_GPU_fits_or_seeds": 0,
+  "next_action": "Keep healthy main and its ten preregistered controls running. Use complete postseal risk and ordinary-LURE comparisons to judge empirical value, never promote the ideal identity into a guarantee.",
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

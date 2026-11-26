@@ -1,0 +1,31 @@
+{
+  "status": "SOURCE_DEFINITION_AND_EXACT_RATIONAL_STALENESS_EXAMPLE",
+  "runtime_source_sha256": "ce65e95f390567c3e1cc5ebfcf694c5ac2c37516d6d47bf4fca6acf8a0941594",
+  "runtime_evidence_lines": [
+    {
+      "line": 260,
+      "text": "p=1/(1+np.exp(-core.logits(s,c.auxiliary,device).astype('float64')));auxerror=(p-c.ay)**2"
+    },
+    {
+      "line": 294,
+      "text": "observer_squared_error=(d['observer_mean_BEFORE_answer']-answer['probability'])**2,"
+    },
+    {
+      "line": 296,
+      "text": "x,y,w=teacher_table(c,draws,'IPW_KD');error=np.r_[[d['observer_squared_error'] for d in draws],auxerror]"
+    }
+  ],
+  "example": {
+    "old_R_prediction": 0.1,
+    "fixed_teacher_target": 0.9,
+    "updated_R_prediction": 0.9,
+    "current_S_prediction": 0.9,
+    "stored_old_R_squared_error": 0.64,
+    "actual_updated_R_error": 0.0,
+    "hypothetical_proxy_if_residual_head_fits_old_target": 0.64
+  },
+  "actual_fitted_R_residual_or_HOTA_not_asserted": true,
+  "auxiliary_prior_declared_in_original_registration": true,
+  "interpretation": "Historical prediction error can remain positive after the mean learner changes. Recomputing in-sample errors alone would instead introduce optimism; neither construction by itself identifies conditional variance or information value.",
+  "new_models_GT_or_sampling_operations": 0
+}

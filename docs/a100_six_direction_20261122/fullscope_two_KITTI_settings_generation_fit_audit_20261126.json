@@ -1,0 +1,281 @@
+{
+  "status": "PASS_TWO_COMPLETE_KITTI_SETTING_GENERATION_AND_ALL56_ORDINARY_FITS_NO_GT",
+  "settings": [
+    {
+      "pair": "C2",
+      "complete_videos": 4,
+      "sealed_outputs": 124,
+      "logical_active": 20955,
+      "logical_uniform": 20955,
+      "active_new_GPU_calls": 20736,
+      "uniform_new_GPU_calls": 9675,
+      "active_cache_hits": 219,
+      "uniform_cache_hits": 11280
+    },
+    {
+      "pair": "C5",
+      "complete_videos": 4,
+      "sealed_outputs": 124,
+      "logical_active": 20955,
+      "logical_uniform": 20955,
+      "active_new_GPU_calls": 20736,
+      "uniform_new_GPU_calls": 10903,
+      "active_cache_hits": 219,
+      "uniform_cache_hits": 10052
+    }
+  ],
+  "maximum_ordinary_teacher_KL": 0.00498298537816523,
+  "extra_recovered_ordinary_heads": 6,
+  "GT_open_attempts": 0,
+  "new_teacher_calls_for_this_audit": 0,
+  "new_optimized_steps": 0,
+  "all42main_sources_unchanged": true,
+  "parent_registration_sha256": "d159ed56af4d614edd68c991ab752f6341074752c648650cd61d336d5a68ba12",
+  "current_HOTA_not_read": true,
+  "teacher_weight_final_seals_still_deferred_until_all_workers_close": true,
+  "cost_scope": "Shared cohort receipts, not per-method cold deployment. Resumed case wall excludes earlier failed elapsed; failed phases and original teacher-session receipts remain separately preserved. Cache hits do not erase original GPU inference or shared preparation costs.",
+  "goal_status": "ACTIVE",
+  "units": [
+    {
+      "pair": "C2",
+      "video": "0005",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.0019359131191471046,
+      "questions": {
+        "active": {
+          "logical_questions": 1891,
+          "new_GPU_calls": 1856,
+          "exact_cache_hits": 35
+        },
+        "uniform": {
+          "logical_questions": 1891,
+          "new_GPU_calls": 900,
+          "exact_cache_hits": 991
+        }
+      },
+      "receipt_sha256": "3ebe6e853592505d5101b83b994f06f5f7a74ef821ae421e4fdb7f40c2eaa04f",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.0018655605742249589,
+        "HARD_KD288": 0.001149395870830587,
+        "LURE_KD288": 0.0019098670951097864,
+        "SSL_KD288": 0.0015187306326821756,
+        "FLAT_KD128": 0.0023611731733324173,
+        "SAME_ARCH_KD128": 0.001591314607660702,
+        "UNIFORM_SOFT_KD288": 0.0014026372417604185
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C2",
+      "video": "0011",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.003832767150325088,
+      "questions": {
+        "active": {
+          "logical_questions": 3898,
+          "new_GPU_calls": 3838,
+          "exact_cache_hits": 60
+        },
+        "uniform": {
+          "logical_questions": 3898,
+          "new_GPU_calls": 1097,
+          "exact_cache_hits": 2801
+        }
+      },
+      "receipt_sha256": "e6cfe7dae5a291db6103927ebcb4385d22c1f33845ffa2267a5aae190260137e",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.004794141972065946,
+        "HARD_KD288": 0.0017869752669210206,
+        "LURE_KD288": 0.003209627713485872,
+        "SSL_KD288": 0.003814089241151792,
+        "FLAT_KD128": 0.00498298537816523,
+        "SAME_ARCH_KD128": 0.004512984192740704,
+        "UNIFORM_SOFT_KD288": 0.003290102148731699
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C2",
+      "video": "0013",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.0048984926995145955,
+      "questions": {
+        "active": {
+          "logical_questions": 3229,
+          "new_GPU_calls": 3206,
+          "exact_cache_hits": 23
+        },
+        "uniform": {
+          "logical_questions": 3229,
+          "new_GPU_calls": 1296,
+          "exact_cache_hits": 1933
+        }
+      },
+      "receipt_sha256": "2450d346c4e6898a8363cf79496e0289f3044f62ad11bb00a8f0cb911d015b76",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.0020725937580687638,
+        "HARD_KD288": 0.0012630186276805886,
+        "LURE_KD288": 0.0025025678159103274,
+        "SSL_KD288": 0.0026253896322760355,
+        "FLAT_KD128": 0.004237124009232988,
+        "SAME_ARCH_KD128": 0.004875643691707468,
+        "UNIFORM_SOFT_KD288": 0.002475241563658895
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C2",
+      "video": "0019",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.004549503080841684,
+      "questions": {
+        "active": {
+          "logical_questions": 11937,
+          "new_GPU_calls": 11836,
+          "exact_cache_hits": 101
+        },
+        "uniform": {
+          "logical_questions": 11937,
+          "new_GPU_calls": 6382,
+          "exact_cache_hits": 5555
+        }
+      },
+      "receipt_sha256": "980e412489d962b655915d3eb06acd952fe3edf41f041ad8749d683eb40c5a17",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.002812428754705001,
+        "HARD_KD288": 0.0030943932515246396,
+        "LURE_KD288": 0.0024041895091086616,
+        "SSL_KD288": 0.004274065272430308,
+        "FLAT_KD128": 0.004863394169489001,
+        "SAME_ARCH_KD128": 0.004550544293973852,
+        "UNIFORM_SOFT_KD288": 0.00465541022632893
+      },
+      "methods_with_extra_recovery": [
+        "SOFT_KD288",
+        "LURE_KD288",
+        "FLAT_KD128",
+        "SAME_ARCH_KD128"
+      ]
+    },
+    {
+      "pair": "C5",
+      "video": "0005",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.0008512203125145426,
+      "questions": {
+        "active": {
+          "logical_questions": 1891,
+          "new_GPU_calls": 1868,
+          "exact_cache_hits": 23
+        },
+        "uniform": {
+          "logical_questions": 1891,
+          "new_GPU_calls": 951,
+          "exact_cache_hits": 940
+        }
+      },
+      "receipt_sha256": "b1af5a046c13a9b227ae81f120f77959b6887cb88d3b4e148842888ed5d1c887",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.0012893006246670834,
+        "HARD_KD288": 0.0009509727841622139,
+        "LURE_KD288": 0.0008375453344927148,
+        "SSL_KD288": 0.0010904182381946807,
+        "FLAT_KD128": 0.001424586038573328,
+        "SAME_ARCH_KD128": 0.0009568721225109631,
+        "UNIFORM_SOFT_KD288": 0.0009008697475079252
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C5",
+      "video": "0011",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.003583393020713423,
+      "questions": {
+        "active": {
+          "logical_questions": 3898,
+          "new_GPU_calls": 3884,
+          "exact_cache_hits": 14
+        },
+        "uniform": {
+          "logical_questions": 3898,
+          "new_GPU_calls": 2747,
+          "exact_cache_hits": 1151
+        }
+      },
+      "receipt_sha256": "f180e99b36fcf1f0661c5770d6b7df2c99da055b869b1e9215c74718dd394984",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.004647842110107731,
+        "HARD_KD288": 0.0011941854855628306,
+        "LURE_KD288": 0.0023547976178392178,
+        "SSL_KD288": 0.0025073834759637686,
+        "FLAT_KD128": 0.0039506639600653225,
+        "SAME_ARCH_KD128": 0.0027065621395062915,
+        "UNIFORM_SOFT_KD288": 0.002239562376167392
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C5",
+      "video": "0013",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.0019273892844474654,
+      "questions": {
+        "active": {
+          "logical_questions": 3229,
+          "new_GPU_calls": 3121,
+          "exact_cache_hits": 108
+        },
+        "uniform": {
+          "logical_questions": 3229,
+          "new_GPU_calls": 1835,
+          "exact_cache_hits": 1394
+        }
+      },
+      "receipt_sha256": "00dc5e588c23caecafc2eb701174163271976f5d5dd2bfd13f5a9850451ea282",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.0013960258161427827,
+        "HARD_KD288": 0.0009480311947736781,
+        "LURE_KD288": 0.0013569991048329017,
+        "SSL_KD288": 0.0015772052198600671,
+        "FLAT_KD128": 0.0017619570244387962,
+        "SAME_ARCH_KD128": 0.0023023829315647537,
+        "UNIFORM_SOFT_KD288": 0.0017514988231010832
+      },
+      "methods_with_extra_recovery": []
+    },
+    {
+      "pair": "C5",
+      "video": "0019",
+      "sealed_outputs": 31,
+      "primary_teacher_KL": 0.004092328678294838,
+      "questions": {
+        "active": {
+          "logical_questions": 11937,
+          "new_GPU_calls": 11863,
+          "exact_cache_hits": 74
+        },
+        "uniform": {
+          "logical_questions": 11937,
+          "new_GPU_calls": 5370,
+          "exact_cache_hits": 6567
+        }
+      },
+      "receipt_sha256": "b132a7bcf8765bb9aa94df648ad36028a1f81aac6d76e96488e8ad23d2e66fc5",
+      "teacher_KL_by_method": {
+        "SOFT_KD288": 0.0037711156863509277,
+        "HARD_KD288": 0.002878311359284811,
+        "LURE_KD288": 0.003977158687212652,
+        "SSL_KD288": 0.0046132571316912846,
+        "FLAT_KD128": 0.004077426878569414,
+        "SAME_ARCH_KD128": 0.0025690936031792537,
+        "UNIFORM_SOFT_KD288": 0.003639295478869478
+      },
+      "methods_with_extra_recovery": [
+        "FLAT_KD128",
+        "SAME_ARCH_KD128"
+      ]
+    }
+  ],
+  "private_full_receipt_sha256": "1adffd6b349c28474aa12fbfd17baaf5163a63a9ae08caa25b79d70b62f60034"
+}

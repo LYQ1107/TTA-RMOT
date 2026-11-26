@@ -1,0 +1,123 @@
+{
+  "status": "PASS",
+  "student": {
+    "checkpoint": "/data3/liuyeqiang/FlexHook-TTA/assets/official_checkpoints/refer-dance-best.pth",
+    "checkpoint_sha256": "fbb5df7339a1201f34300c105df81e893a5edbb8ef939b7f6eaf8780348eac6c",
+    "strict_load": "<All keys matched successfully>",
+    "model_load_seconds": 308.64200916700065,
+    "precision": "FP32",
+    "checkpoint_hash_verified_in_this_load": true,
+    "fused_window_process": false,
+    "fused_layernorm": false,
+    "config_parser_raw_fused_window_process": true,
+    "config_parser_raw_fused_layernorm": true
+  },
+  "student_feature_seconds": 1.568839120969642,
+  "student_margin_shape": [
+    1,
+    9
+  ],
+  "student_pcd_shape": [
+    9,
+    1,
+    768
+  ],
+  "teacher": {
+    "logical_calls": 27,
+    "new_calls": 27,
+    "cache_hits": 0,
+    "forward_seconds": 1.882148551987484,
+    "equivalent_forward_seconds": 1.882148551987484,
+    "batches": 4,
+    "cache": {
+      "complete_raw_responses": 27,
+      "pending_leases": 0,
+      "path": "/data3/liuyeqiang/FlexHook-TTA/a100_runs/three_stage_20261120/stage1/teacher.sqlite"
+    },
+    "teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+    "backend_unmodified": true,
+    "revision": "89644892e4d85e24eaac8bacfd4f463576704203",
+    "model_load_seconds": 475.22973237902625,
+    "peak_allocated_bytes": 5854893056,
+    "peak_allocated_bytes_reported_default_device": 1407391744
+  },
+  "teacher_initialization_seconds": 476.4479071869864,
+  "teacher_request_wall_seconds": 3.4924773859675042,
+  "teacher_final_seal_seconds": 14.204341352044139,
+  "fast": {
+    "status": "V6_MAP_UPDATED",
+    "identity": {
+      "status": "MAP_UPDATED",
+      "positive": 4,
+      "negative": 3,
+      "unqueried_confident_excluded": 0,
+      "queried_confident_without_agreeing_evidence": 0,
+      "queries": [
+        0
+      ],
+      "objective_before": 8.888496077300807,
+      "objective_after": 4.806535824096953,
+      "optimizer_iterations": 6,
+      "optimizer": "FP64 L-BFGS-B for the registered exact [0,1] box",
+      "optimizer_success": true,
+      "optimizer_message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+      "a_L2_coefficient": 1.0,
+      "w_bounds": [
+        0.0,
+        1.0
+      ]
+    },
+    "presence": {
+      "status": "SKIP_INSUFFICIENT_CONFIRMED_CLASSES",
+      "positive": 1,
+      "negative": 0,
+      "conflicting_queries": 0
+    },
+    "temperature": 1.0,
+    "bias": 0.0,
+    "slope": 0.0,
+    "w": 0.0,
+    "teacher_evidence_not_reapplied": true,
+    "support_uses_target_GT": false,
+    "version": "v8",
+    "presence_support_only_stratified_answers": true,
+    "presence_support_all_answer_kinds": true
+  },
+  "fast_fit_seconds": 0.01444334100233391,
+  "params_before": {
+    "intercept": [
+      0.0
+    ],
+    "slope": 1.0
+  },
+  "params_after": {
+    "intercept": [
+      0.18213685391743167
+    ],
+    "slope": 0.0
+  },
+  "max_belief_change": 0.8679412637720987,
+  "logical_calls": 27,
+  "actual_teacher_calls": 27,
+  "cache_hits": 0,
+  "views": {
+    "CROP": 9,
+    "CLIP": 9,
+    "FRAME_BOX": 9
+  },
+  "GT_open_attempts": 0,
+  "physical_GPUs": [
+    0,
+    1
+  ],
+  "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+  "process_wall_seconds": 818.094797643018,
+  "cold_definition": "new process/model load; shared OS page cache not flushed",
+  "cost_audit_notes": [
+    "Teacher GPU1 peak corrected from device-specific per-response records; original close() used default device0.",
+    "Legacy parser flags are True for present False args; build_model does not pass them to the executed RoPE blocks, whose actual defaults are False. Future A100 config makes flags agree."
+  ],
+  "cost_receipt_audit": "PASS",
+  "cost_audit_raw_forward_sum_seconds": 1.882148551987484,
+  "student_peak_allocated_bytes": 1407391744
+}

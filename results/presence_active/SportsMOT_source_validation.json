@@ -1,0 +1,369 @@
+{
+  "target": "SportsMOT",
+  "legal_source_validation_only": true,
+  "candidate_matching": "IoU>=0.5 one-to-one existing v2 matcher",
+  "validation_loss_count": "sum of matched positive candidates; same label definition as GT-candidate train and dropout",
+  "GT_counts_npy": "total official GT per frame; offline diagnostics only, not loss targets",
+  "videos": [
+    {
+      "video": "v_00HRwkvvjtQ_c001",
+      "units": 9296,
+      "GT_detections": 56380,
+      "candidate_positive_rows": 55878,
+      "labels_sha256": "96fceb647057eeda727eea25f07aa5e838696dba224d1cb26cdae4027f396e02",
+      "counts_sha256": "79d4b6f3648166f9bf57ab683d216bcb39850e9d1cf9490452f6aec5f67c7db2"
+    },
+    {
+      "video": "v_00HRwkvvjtQ_c003",
+      "units": 9288,
+      "GT_detections": 55915,
+      "candidate_positive_rows": 55813,
+      "labels_sha256": "eb21c11f6300d0c2e8cb44c82445708d3fd658a8710130e2924d037e40e6c35e",
+      "counts_sha256": "498a73afc8a6d05e7458c63498450c49c0332447ae4c743c055543477d4d05d3"
+    },
+    {
+      "video": "v_00HRwkvvjtQ_c005",
+      "units": 4752,
+      "GT_detections": 27210,
+      "candidate_positive_rows": 26840,
+      "labels_sha256": "895469c99994f53a174517433a097dbccea90337af5215b252910f9ad8149387",
+      "counts_sha256": "218d99470c2f9424f11f12bd10e2554c04f6967678e8cb133b5076c7c0c20398"
+    },
+    {
+      "video": "v_00HRwkvvjtQ_c007",
+      "units": 5656,
+      "GT_detections": 32290,
+      "candidate_positive_rows": 31552,
+      "labels_sha256": "96799da713b7ba375ffd5e44b5a6ce372b308ce7fa5acc1655ca592054237311",
+      "counts_sha256": "4b479c5461b5ad67e5aad3ecbc41262a8baad4210008c6ca235a8fd9456b8651"
+    },
+    {
+      "video": "v_00HRwkvvjtQ_c008",
+      "units": 7776,
+      "GT_detections": 47690,
+      "candidate_positive_rows": 47360,
+      "labels_sha256": "bea1a4e0f77357aa785c3f28c3e2b8749be0b758b06627f123e342c0bde3b7d5",
+      "counts_sha256": "552c4f2dec869dbd79b0373ba2a522c3e69b3f2c4a358078fad4e4a8811694a4"
+    },
+    {
+      "video": "v_00HRwkvvjtQ_c011",
+      "units": 5872,
+      "GT_detections": 34905,
+      "candidate_positive_rows": 34360,
+      "labels_sha256": "668eec8335ff710999f1c63a9c011a348ae4e5f80c7d2458e841bc0e7bed4c69",
+      "counts_sha256": "1d0b546f14ba20ba21436b4fed27df4fff5f13d2eace54683bde182933ec5fff"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c004",
+      "units": 7588,
+      "GT_detections": 33439,
+      "candidate_positive_rows": 32695,
+      "labels_sha256": "d76f65bac9343c4a83120eac3f35467cb9dcda653a3fead8a0c01516cfe21fcb",
+      "counts_sha256": "748541ef3851e596f96cc644dfabef12a3fb803c97046029066af78a37589f72"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c005",
+      "units": 4886,
+      "GT_detections": 20661,
+      "candidate_positive_rows": 19751,
+      "labels_sha256": "f85db923080f445bba5a1267eb274a781730268de8eed388f4fb3428130fd75a",
+      "counts_sha256": "c8a4af7a5e39afd856dd75f2c473f000631af1afd0bac00bffb0c48a9aaecd5c"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c006",
+      "units": 4844,
+      "GT_detections": 19729,
+      "candidate_positive_rows": 19138,
+      "labels_sha256": "fdd1047e811b5e284b60b2b082d858c23f6637a23056413cca36f876c5372b4a",
+      "counts_sha256": "c27a3930725adcce545c7f2e8a7057e94123b9dd6ecb0e5d4c6bf27143f0ca6c"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c007",
+      "units": 3794,
+      "GT_detections": 15388,
+      "candidate_positive_rows": 14880,
+      "labels_sha256": "0f30de35f7ed89a7d86a50c6ef7d93e5195c496267429915d75222c2c88cd439",
+      "counts_sha256": "0acc73e804650f18bd02f9e62e834c1fe20ada947ce448dba0b0b5f21ef40c28"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c008",
+      "units": 3724,
+      "GT_detections": 16071,
+      "candidate_positive_rows": 15824,
+      "labels_sha256": "01cbd76d61470778c95c25fe59059b52db1a66f13d5b2968a45da2987b87ccfa",
+      "counts_sha256": "8b75e13a5283b2d5fa15f5b27e1f47453c90e7c37964ac145ce1eb3c93ef5f35"
+    },
+    {
+      "video": "v_0kUtTtmLaJA_c010",
+      "units": 3780,
+      "GT_detections": 16272,
+      "candidate_positive_rows": 16038,
+      "labels_sha256": "790ee448bf358b758f3336eab14f29f0eeb60eb07af558a6282a5150c57f32e4",
+      "counts_sha256": "01597e16b64df61eda7845e79c45fcd0347666323895bb26674a702ecc07f882"
+    },
+    {
+      "video": "v_2QhNRucNC7E_c017",
+      "units": 3600,
+      "GT_detections": 33112,
+      "candidate_positive_rows": 32719,
+      "labels_sha256": "b45c586ace2a617ad479507d7b93133cea39e63d9ae86c17bc8a1ecf8df02352",
+      "counts_sha256": "f57b66d0404fb97ea062e4894b947534ce1b6535f5ee316a01fa5633ff88c9db"
+    },
+    {
+      "video": "v_4-EmEtrturE_c009",
+      "units": 3500,
+      "GT_detections": 14825,
+      "candidate_positive_rows": 14785,
+      "labels_sha256": "1914348d1af7036f9f0877640fce48db184f3303309d4a012103b36c8e95cb88",
+      "counts_sha256": "322207fe43dda8af14405a2b5c254a2fe03e81333b1343bbbe3b00aea0a7fdbc"
+    },
+    {
+      "video": "v_4r8QL_wglzQ_c001",
+      "units": 7088,
+      "GT_detections": 40915,
+      "candidate_positive_rows": 40746,
+      "labels_sha256": "657dd3e8cbe11fd89f167d68df2ad6fcd5786d6481ea9341b3f6054544d84b4a",
+      "counts_sha256": "323049162468ba5592b6fac92774d07ba2bad06f4b1fce816577a26b905c2c03"
+    },
+    {
+      "video": "v_5ekaksddqrc_c001",
+      "units": 4400,
+      "GT_detections": 25575,
+      "candidate_positive_rows": 25291,
+      "labels_sha256": "522fb0f593f02814881b700a82067d13ea6137bd68442cce42296615e007ce1f",
+      "counts_sha256": "561b0a6378c1ecc59f3ac472acd1ff77c97de589984d038bc692ae7f375eee52"
+    },
+    {
+      "video": "v_5ekaksddqrc_c002",
+      "units": 5056,
+      "GT_detections": 28685,
+      "candidate_positive_rows": 28545,
+      "labels_sha256": "9b77ed69ee91c755e7cc8676ca9823ca25ddc72220585dceab75d58b2227b3a2",
+      "counts_sha256": "2bd148669a65c5a831fc0967f20ac19ab436aaa356c6a695345e654a84a3a508"
+    },
+    {
+      "video": "v_5ekaksddqrc_c003",
+      "units": 9720,
+      "GT_detections": 59000,
+      "candidate_positive_rows": 58600,
+      "labels_sha256": "d1bda3c86df0b7cf63476893b39efdc53328dbc480d88454b93bff0b4aae8d75",
+      "counts_sha256": "648f9dc7cf8d1becee6d6c7a7b08e43d6aa1bb774d1bbc0a8d720bfe0e65cbc9"
+    },
+    {
+      "video": "v_5ekaksddqrc_c004",
+      "units": 6592,
+      "GT_detections": 38765,
+      "candidate_positive_rows": 38631,
+      "labels_sha256": "a33da61756a7f2afc3f4bf3c62bdd15fe4af261fb9d75b26b26b54408bf8831d",
+      "counts_sha256": "e9d7758d65c55c1db787fdbe40e665609c6c2dfb565acab689fbba087348b709"
+    },
+    {
+      "video": "v_5ekaksddqrc_c005",
+      "units": 8000,
+      "GT_detections": 46915,
+      "candidate_positive_rows": 46576,
+      "labels_sha256": "4abc83573bed466578fd3d64b58aa65cfc241d5df2812a879518a46028911009",
+      "counts_sha256": "c30241b374caf9e4364b3004e6ce8272e4e44b066be666d2c45fdf86c65db0b3"
+    },
+    {
+      "video": "v_9MHDmAMxO5I_c002",
+      "units": 2390,
+      "GT_detections": 13638,
+      "candidate_positive_rows": 13226,
+      "labels_sha256": "9f0406ddcaf6b3c6a6f9a857c58e77832fe1da9f7821de155390d6d216278e93",
+      "counts_sha256": "7c0d266fc0bd41b6086f513a794c8a7be3fd22ff1dd4ccdee22eb3c12e28023f"
+    },
+    {
+      "video": "v_9MHDmAMxO5I_c003",
+      "units": 2260,
+      "GT_detections": 12581,
+      "candidate_positive_rows": 12357,
+      "labels_sha256": "5ddb2353bcf1dd0c7b4e0b2d655633f92144cb331fdd6dae5a8de931a6b04663",
+      "counts_sha256": "197bf2233e197e76fab856667b6f0ea5a1036aa5653473ef53cd27127d77b312"
+    },
+    {
+      "video": "v_9MHDmAMxO5I_c004",
+      "units": 4550,
+      "GT_detections": 26373,
+      "candidate_positive_rows": 24159,
+      "labels_sha256": "55fc008cccc64062e075636f03aaba1afa64f2046220aa297f14fd7037210011",
+      "counts_sha256": "1901ed8d9304bac74c1d81792894c34567e6d7b32485b7ae85bfce42326c7a8b"
+    },
+    {
+      "video": "v_9MHDmAMxO5I_c006",
+      "units": 3497,
+      "GT_detections": 13837,
+      "candidate_positive_rows": 13222,
+      "labels_sha256": "c7d87b2b0b38eda2bf62511fed97c41363376e4ca3cef592517449198d9a16c9",
+      "counts_sha256": "b08e47eb151bbf1506a134411d984fe331368569f38b9158620ed3ff745443b0"
+    },
+    {
+      "video": "v_9MHDmAMxO5I_c009",
+      "units": 5070,
+      "GT_detections": 28770,
+      "candidate_positive_rows": 27804,
+      "labels_sha256": "014ba3db7d0767bbffad4cb3dee5613d53eaa3e6b556f1e6ada6bb46780b9508",
+      "counts_sha256": "2d1600aacd58cd86ecb16e821cbfdf14874bf61a72bf61bb2fd71ae30f52f4ac"
+    },
+    {
+      "video": "v_BgwzTUxJaeU_c008",
+      "units": 5000,
+      "GT_detections": 26850,
+      "candidate_positive_rows": 26538,
+      "labels_sha256": "e4385c303045479c937d3d87afa9935ea2984b6635c9d66a79749b9b5e02530b",
+      "counts_sha256": "d14a00634a3569b899b2655b7a0a1f31389cf2ab418730922dd04747e41682fc"
+    },
+    {
+      "video": "v_BgwzTUxJaeU_c012",
+      "units": 6200,
+      "GT_detections": 34806,
+      "candidate_positive_rows": 34376,
+      "labels_sha256": "1f0fef221099e03acda7e8a87fe5ecccb63925bcbde2cac93f3f3ad37c1a218e",
+      "counts_sha256": "b3c653e31192dcbbe0603d8af3bbd63018d11933257c261de0145c5b4958ff2f"
+    },
+    {
+      "video": "v_BgwzTUxJaeU_c014",
+      "units": 10000,
+      "GT_detections": 58200,
+      "candidate_positive_rows": 57906,
+      "labels_sha256": "565b11577b64569f144e34db88fa59c69202eeeff860b9520acf3a1a485dbbad",
+      "counts_sha256": "decfc02176f466e2250ae01f1b1434ea029652eaabff9eab73fab8ddd1d7bc45"
+    },
+    {
+      "video": "v_G-vNjfx1GGc_c004",
+      "units": 6750,
+      "GT_detections": 40884,
+      "candidate_positive_rows": 40015,
+      "labels_sha256": "ef1b8d4cce7f309f983a778769b4c13bb5bf5305e2190e8beae8c175cd312d62",
+      "counts_sha256": "199bbb414b7603934ce84f7372e1a07c9d693024575efd31b18d909889118517"
+    },
+    {
+      "video": "v_G-vNjfx1GGc_c008",
+      "units": 4800,
+      "GT_detections": 22835,
+      "candidate_positive_rows": 22449,
+      "labels_sha256": "dce38a89c93a0c25a131f0ff05c1eddbd22b83b734df5846d6622370aa3f1104",
+      "counts_sha256": "3b34febaf6c7ddc671c88614654d4e863f611bdbb031cc3b017610a59a2bd2f0"
+    },
+    {
+      "video": "v_G-vNjfx1GGc_c600",
+      "units": 3500,
+      "GT_detections": 27310,
+      "candidate_positive_rows": 26990,
+      "labels_sha256": "b08dedbe4b75cb805fdd22d8b2baa1cc5ac57c0b06b5505c18582f6121da1a8d",
+      "counts_sha256": "62c5b42b830960ede19884ceb393fde2f5d826ceb3d1b69caf08adddaf6d73cb"
+    },
+    {
+      "video": "v_G-vNjfx1GGc_c601",
+      "units": 4810,
+      "GT_detections": 27824,
+      "candidate_positive_rows": 26963,
+      "labels_sha256": "8989406b2798644a7a9b2b26ca4e580356d6c02a111f997915062a52aaa5834a",
+      "counts_sha256": "a0d3e1517ef124e0ca35f9fdb22afb08e67eead20fc1ef7d41ca37b0629a3313"
+    },
+    {
+      "video": "v_ITo3sCnpw_k_c007",
+      "units": 8412,
+      "GT_detections": 58680,
+      "candidate_positive_rows": 56655,
+      "labels_sha256": "577839280d3753b36cedd56ef27c75bc083157fd1f252bd5a46df208eab74b77",
+      "counts_sha256": "b806dbd686e3f8d63362b973740a5fbe02bea941991414e7e7c188df34b16569"
+    },
+    {
+      "video": "v_ITo3sCnpw_k_c010",
+      "units": 5040,
+      "GT_detections": 46230,
+      "candidate_positive_rows": 45546,
+      "labels_sha256": "5c46f2bc9917ece5dbf708ef1ca559562e0155f01ea8a6dbbb45c9c75b8d9aa2",
+      "counts_sha256": "49650c303c25d16841a03964354631994711e295af32e15d6ac429c614e83383"
+    },
+    {
+      "video": "v_ITo3sCnpw_k_c011",
+      "units": 10864,
+      "GT_detections": 58416,
+      "candidate_positive_rows": 57744,
+      "labels_sha256": "d7d3ac367f4889e4865d384fa652af6b35c11df1d93bf8c869325f1ef56453dc",
+      "counts_sha256": "4ea5b6c5f8b553527bc77e209ba544ded205dbdb65261a09f82f93c0367c767a"
+    },
+    {
+      "video": "v_ITo3sCnpw_k_c012",
+      "units": 10200,
+      "GT_detections": 64992,
+      "candidate_positive_rows": 63213,
+      "labels_sha256": "aff2716f6905d6cb32a72ac75b718582211addbad808bd358db0b4806441d03c",
+      "counts_sha256": "ac6ceaffe0cd35879fd0b2631b1e25ec5f1efc6dcd4709d2fddba6b2022f3b1c"
+    },
+    {
+      "video": "v_cC2mHWqMcjk_c007",
+      "units": 9534,
+      "GT_detections": 39756,
+      "candidate_positive_rows": 39518,
+      "labels_sha256": "877b589e9abb933dfa2f4ddd89c327d546320ca2cf02223e2cf06e4ce96783d7",
+      "counts_sha256": "7aaad0b76dc7b71afc48140eea98735e9223c3b6accaf4f04f30a45329441ca9"
+    },
+    {
+      "video": "v_cC2mHWqMcjk_c008",
+      "units": 2590,
+      "GT_detections": 14405,
+      "candidate_positive_rows": 14176,
+      "labels_sha256": "263314ae34a2ab99ad90031f80834bb9ba22b12e40aced05e5c3bac416756594",
+      "counts_sha256": "6d449e47f18fe99017eb581709f73084f6a84de4db98be51c4859147df939c96"
+    },
+    {
+      "video": "v_cC2mHWqMcjk_c009",
+      "units": 5100,
+      "GT_detections": 23960,
+      "candidate_positive_rows": 23821,
+      "labels_sha256": "e111f3c497676edb09e741a10b7bff32c62e8c7b22b257b0958cef9d8390b42f",
+      "counts_sha256": "45a03f3ec8525e871e77f99b1e4ab296d2243b60427702b5e60aa442440f1d6f"
+    },
+    {
+      "video": "v_dw7LOz17Omg_c053",
+      "units": 5500,
+      "GT_detections": 44189,
+      "candidate_positive_rows": 43890,
+      "labels_sha256": "dbd74b603427aaced28cc1508c2a2649975f9f0dc6236168de4c5aa5683d5706",
+      "counts_sha256": "229136eae20f0242202969468f177c36089956f888adf58f9aedd3180f6a2e56"
+    },
+    {
+      "video": "v_dw7LOz17Omg_c067",
+      "units": 4950,
+      "GT_detections": 34846,
+      "candidate_positive_rows": 34749,
+      "labels_sha256": "6b6958fb172f148e1d32b57766db8d8d9bd1b7646a2240f714a725ed2eb30b2c",
+      "counts_sha256": "2cd61ee38b66a750e46034244fd3e811c9490551097c5b976dc74fea1a5fcddf"
+    },
+    {
+      "video": "v_i2_L4qquVg0_c006",
+      "units": 9768,
+      "GT_detections": 54078,
+      "candidate_positive_rows": 50294,
+      "labels_sha256": "25ef55b22d085d32c972f12519095710acfa063ed6017b402b06d14f3f2ca646",
+      "counts_sha256": "54022978b5c7aa8f3ab2ee74e59fb9bd82b0f26b693837394fcae7b69e318da8"
+    },
+    {
+      "video": "v_i2_L4qquVg0_c007",
+      "units": 4059,
+      "GT_detections": 21606,
+      "candidate_positive_rows": 21530,
+      "labels_sha256": "18acb553693782be7eea8808f08c61f80c1e3191ce42afc51c72a237141d9c07",
+      "counts_sha256": "d892e154d2154e0e9fe85b905d31c28cff17d0542e5e2435f251c1c32848c47e"
+    },
+    {
+      "video": "v_i2_L4qquVg0_c009",
+      "units": 4392,
+      "GT_detections": 37067,
+      "candidate_positive_rows": 36428,
+      "labels_sha256": "bd303f1b8d601d5ca74c8cfcabc1c6a6e871d82667f93d19bbc6b38c5ce04227",
+      "counts_sha256": "d981e29cdd911c5983e266f001e9fec9da90ea6de5df414225842f6ae858abd1"
+    },
+    {
+      "video": "v_i2_L4qquVg0_c010",
+      "units": 8338,
+      "GT_detections": 37800,
+      "candidate_positive_rows": 36367,
+      "labels_sha256": "7f27b1b7d4128bb4e0a8067527feca9e1a2d568f490e37a2ff77cc48ef4a141b",
+      "counts_sha256": "86ac331b1dba01d9f1c70f0c63e272264fa141ba0303a8296921f09758b5686c"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "status": "COMPLETE_SHARED_IMAGE_SUPPORTED_CONTENT_PAIRS",
+  "cases": [
+    {
+      "pair": "C1",
+      "target": "Dance",
+      "video": "dancetrack0004",
+      "pairs": 50,
+      "pair_sha256": "1fe6ceb90809cb1c49f3e31a2a49b9e31e9f097a09494160a25d2672c1113cd9",
+      "keys_sha256": "361ffa66f6c4025699835be3ddc9583e5aab16729545dc8e4870a448422bf01d",
+      "rule": ">=3same-IDcyclepoints and>=halfvalidpoints; confidenceweight=same/valid. No semantic truth, hard negative, fullscore equality, GT or teacher-dependent pair selection.",
+      "source_file_sha256": "55fff7b27b670c329f49d0528da54fb80b9afeddab974f129e60ad1257a7522d"
+    },
+    {
+      "pair": "C2",
+      "target": "KITTI-V2",
+      "video": "0005",
+      "pairs": 64,
+      "pair_sha256": "87c21d69b72d08e245ee1bf80b742dd65734a30cde9a3edf4849a7ea3107abe0",
+      "keys_sha256": "c6762db07c42e9d4a94143d96797b1ec9520e621dc859d5d693351600de24f4b",
+      "rule": ">=3same-IDcyclepoints and>=halfvalidpoints; confidenceweight=same/valid. No semantic truth, hard negative, fullscore equality, GT or teacher-dependent pair selection.",
+      "source_file_sha256": "3d05db43a11da6cda9aa5b01e52df12c0d32a80e730467d3f092e60c4a2304a7"
+    },
+    {
+      "pair": "C4",
+      "target": "SportsMOT",
+      "video": "v_00HRwkvvjtQ_c001",
+      "pairs": 136,
+      "pair_sha256": "75b0cf70d69e24fc12fcb820904e1fa31921e5423ad05b29f03290f9281c214f",
+      "keys_sha256": "34327ebaecc3921adbfb4b64151706afd993bdb8b81d680536126d1bc78d9da4",
+      "rule": ">=3same-IDcyclepoints and>=halfvalidpoints; confidenceweight=same/valid. No semantic truth, hard negative, fullscore equality, GT or teacher-dependent pair selection.",
+      "source_file_sha256": "1dcbd01bb11586bbc4ee256914dbe1ce5a0bf6a81df2349bd129783587ae33f4"
+    }
+  ],
+  "self_source_sha256": "bfa06d040e5805286e9bffb44576cb562c03dbd24d91c8e76022041ceec9f6dc",
+  "pixel_plan_sha256": "e4c09ef50b66f408f8d31b14c5115d1e01e858090fa126067e4af9f9192c3856",
+  "GT_open_attempts": 0,
+  "new_teacher_backbone_or_neural_calls": 0,
+  "pairs_not_certified_physical_identity_or_semantic_membership": true,
+  "all_data_DEV": true,
+  "goal_status": "ACTIVE"
+}

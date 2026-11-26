@@ -1,0 +1,25 @@
+{
+  "status": "REGISTERED_CPU_EXECUTION_ONLY_AMENDMENT",
+  "registered_at": "2026-11-23T16:17:28.939955+08:00",
+  "neural_seeds": [
+    0
+  ],
+  "max_concurrent_methods": 8,
+  "unchanged_official_methods": 876,
+  "source_sha256": {
+    "scripts/a100_conditional_seed0_evaluation_resume.py": "c0d4d6743268d2df3d76d7f608037b7fa0711a3d8447a32b8bf13e43cc1f2e19",
+    "scripts/a100_visual_classical_sparse_observation_evaluate.py": "3061066876a4c910bf5542ef6f55113a56f9f964693351a40a62e2598b39bf45",
+    "flex_uda/a100/evaluation_reuse.py": "b32d98475b97c30a219a044ea8da49060ba740543f3fed354ed550bd02ba3419"
+  },
+  "resource_preflight": {
+    "allowed_CPUs": 40,
+    "loadavg1": 11.5,
+    "available_memory_GiB": 104.16738891601562
+  },
+  "scientific_methods_predictions_metric_analysis_unchanged": true,
+  "preserve_current_isolated_evaluators_and_completed_statistics": true,
+  "no_neural_training_teacher_calls_new_predictions_or_parameter_changes": true,
+  "reason": "Four dispatchers used roughly8CPUcores on40CPUhost with>100GiBavailable; eight total active methods including preserved jobs fits remaining headroom",
+  "not_a_method_deployment_cost_or_scientific_innovation": true,
+  "goal_status": "ACTIVE"
+}

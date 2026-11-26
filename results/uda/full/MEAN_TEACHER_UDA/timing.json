@@ -1,0 +1,28 @@
+{
+  "training_GPU_hours": 0.807551479750287,
+  "inference_GPU_hours": 0.4968119714889003,
+  "total_GPU_hours": 1.3043634512391873,
+  "actual_worker_training_wall_seconds": 2907.185327101033,
+  "actual_worker_inference_wall_seconds": 1788.523097360041,
+  "per_worker_query_frame_FPS": 242.4547944838234,
+  "per_worker_MOT_active_video_frame_FPS": 14.262046734342553,
+  "peak_training_allocated_bytes": 8521772032,
+  "peak_inference_allocated_bytes": 5278034432,
+  "inference_allocator_budget_bytes": 25769803776,
+  "trainable_parameters": 24576,
+  "optimizer_updates": 8973,
+  "target_candidate_exposures": 76677,
+  "pseudo_POS_exposures": 958,
+  "pseudo_NEG_exposures": 759,
+  "target_presence_supported_positive": 0,
+  "target_presence_supported_negative": 0,
+  "target_presence_UNKNOWN": true,
+  "temporal_valid_candidates": 0,
+  "effective_relation_candidates": {
+    "equivalent": 0,
+    "exclusive": 0
+  },
+  "exposure_warning": "repeated training exposures, not unique verified semantic labels",
+  "peak_scope": "allocator peak in the successful/resumed process; initial failed-process peak was not recorded separately",
+  "timing_warning": "shared-GPU process elapsed; not exclusive-device utilization or standalone source-asset preparation"
+}

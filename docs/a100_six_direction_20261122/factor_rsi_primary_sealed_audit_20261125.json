@@ -1,0 +1,120 @@
+{
+  "status": "PASS_ALL39_SEALS_60_ORDINARY_PREFIX_GATES_AND_TEXT_LEVEL_COUNTS",
+  "cases": [
+    {
+      "pair": "C1",
+      "methods": 13,
+      "ordinary": {
+        "ORDINARY_SOFT_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 5.1294911960292344e-05,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "973f706e9e1663360822ebce74b94e2cf3014dc4e5eabc0dc4a52d5b1b65db9e"
+        },
+        "ORDINARY_HARD_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 9.581260392849996e-06,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "677814002bba0458742d0d4e24e01f60eb637233eb55ff2efec6f1ff834d136f"
+        },
+        "ORDINARY_SOFT_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 1.8628346232230086e-07,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "091779c46a6d1cf29aeac142b81a1f1f73160d5c52470bc0b84c2c2c70e3c080"
+        },
+        "ORDINARY_HARD_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 4.299580439777411e-06,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "a342161654bc6330c7c5acfe64040323ec736daba55e17a7c47145aeb8957b07"
+        }
+      },
+      "projected_query_files_checked": 136
+    },
+    {
+      "pair": "C2",
+      "methods": 13,
+      "ordinary": {
+        "ORDINARY_SOFT_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 0.0002821900307330427,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "45fb7ada81a8d8f1c9fc98459ae8454340f9e9e457b1826e223b1405523027a0"
+        },
+        "ORDINARY_HARD_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 0.0001928457711270655,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "d7573898054d25e9f09f147edd3c8b8843122dcb355565421e750ef735214ce5"
+        },
+        "ORDINARY_SOFT_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 0.00023012374553860182,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "d88060e49d87b83f377bd575cc2f52e2a963e1e9489dc39e7337b11b12a95be8"
+        },
+        "ORDINARY_HARD_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 4.9173051495318336e-05,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "499dfbf47734236e999a7f4df9fe5f1c062aba862c3683778d59676d68a482af"
+        }
+      },
+      "projected_query_files_checked": 1576
+    },
+    {
+      "pair": "C4",
+      "methods": 13,
+      "ordinary": {
+        "ORDINARY_SOFT_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 3.507294412341544e-06,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "14d551ac5318aa6d493560166542897be70d2cd74d26a6edd73dd9539527d19a"
+        },
+        "ORDINARY_HARD_MULTITASK_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 7.314547063400652e-06,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "66550060da2eede4273fffb9205db0a44bf50734f8ed5cfb492623e28d03b749"
+        },
+        "ORDINARY_SOFT_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 8.611350846565724e-07,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "8be8848a07d1672d416bea9472abd8f81835a3b927ad863af73d53f2c75ec1f2"
+        },
+        "ORDINARY_HARD_WHOLE_KD": {
+          "width": 128,
+          "prefixes": 5,
+          "maximum_excess_KL": 2.915049153833539e-06,
+          "total_registered_optimizer_steps": 6000,
+          "checkpoint_sha256": "917e417a7dce9b1a7c07496564f0a0aa34b8e12181b5ef1d6b50b3a9cf60c749"
+        }
+      },
+      "projected_query_files_checked": 64
+    }
+  ],
+  "actual_prediction_seals": 39,
+  "ordinary_final_heads": 12,
+  "ordinary_prefix_gates": 60,
+  "exact_projected_query_files": 1776,
+  "no_GT_reads": true,
+  "no_new_models_teacher_calls_fits_predictions_or_seeds": true,
+  "CountSelf_all_masks_exact": true,
+  "target_GT_not_used_for_model_selection": true,
+  "no_HOTA_quality_claim": true,
+  "source_sha256": "801d450b8ad8d810d240a5a2383c1d7aefd9048c3dc2cd720d7efcd296bab679"
+}
