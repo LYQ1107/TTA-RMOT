@@ -1,3 +1,11 @@
+## 最新：全六设置完整官评与失败定位已完成（2026-11-27）
+
+- 原actual86841已exit0（d5c749），186HOTA/180效应复算PASS/max0，主方法严格条件false，禁止继续wait该句柄或扩失败模块矩阵。六HOTA为28.611391/34.805905/66.487272/65.189146/36.929002/30.277068；软KD五负一正，轨迹概率平均六设置更高。
+- 原postseal26954、leave-video-out63919、锚点26344、内容路径88635全部exit0。129/148单元在原.005普通KL门槛内不能改正全部canonical冲突锚点；这是乐观必要下界，非纯教师语义准确率或HOTA因果分账。图像路径确有计算敏感性。
+- 已问uniform事件隔离诊断actual47761及独立复核53909也exit0，54067事件/3506查询、2772标量单元/max4.44e-16。原/最终预测教师有改善，不证明RSI因果或HOTA优势。两次IO库别名失败与一次复核失败保留。无新fit/教师/GPU。
+- 当前无在途本项目数值任务，权威状态见supervisor/research_goal_active_continuation.json。下一步先完成当前时序/重访/零canonical正观测错误定位，再据证据登记新旧统一学习主方案；不把零canonical匹配等同真实不存在，不把R残差叫信息价值。任务协议/证据去重/视角相关性/充分KD公平继续。
+- Goal仍ACTIVE，六设置优势/三个贡献/fresh成本未成；仅seed0、0..3、NAS只读，保护其他服务。发布双100000000B gate。六份旧非数值TXT按不可变Git提交归档，tools/restore_legacy_research_reports.py按SHA恢复，本地TXT保留；旧数值providers完全不改。原私有AGENTS及research_log不全stage。
+
 ## 最新：70单元与490充分对手复核，新旧组合要求保留（2026-11-26）
 
 - 已观察70/148单元、2170/4588输出；只读全部70完成收据复核490普通fit均>=6000步且原.005内（max .004982985378），active/uniform逐query预算相同，GT0。此为生成/拟合完整性，尚无当前六设置HOTA、三贡献或fresh成本成功。42数值源保持固定，actual86841继续0..3，当前权威状态仍看supervisor/research_goal_active_continuation.json。
