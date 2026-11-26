@@ -1,0 +1,668 @@
+{
+  "status": "PASS_ALL148_GLOBAL_PAIR_GROUP_REPRODUCTION_AND_OFFICIAL_ERROR_SYNTHESIS",
+  "verified_integer_cells": 22790,
+  "integer_max_difference": 0,
+  "units": 148,
+  "aggregate": {
+    "C1": {
+      "videos": 25,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 209810,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 137809,
+            "FP": 74821,
+            "FN": 74732
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 221079,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 139921,
+            "FP": 76874,
+            "FN": 72620
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 195191,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 139878,
+            "FP": 76311,
+            "FN": 72663
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 259675,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 144160,
+            "FP": 71732,
+            "FN": 68381
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 241402,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 144279,
+            "FP": 72278,
+            "FN": 68262
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 112184,
+          "canonical_errors_corrected": 69162,
+          "canonical_errors_introduced": 43022
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 120656,
+          "canonical_errors_corrected": 69361,
+          "canonical_errors_introduced": 51295
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 2040,
+        "SOFT_KD288": 2114,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 1902,
+        "UNIFORM_POOLED": 0
+      }
+    },
+    "C2": {
+      "videos": 4,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 307,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 246702,
+            "FP": 521109,
+            "FN": 244239
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 312,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 246456,
+            "FP": 506937,
+            "FN": 244485
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 289,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 250709,
+            "FP": 468364,
+            "FN": 240232
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 384,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 226841,
+            "FP": 498580,
+            "FN": 264100
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 279,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 227791,
+            "FP": 464685,
+            "FN": 263150
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 256921,
+          "canonical_errors_corrected": 149884,
+          "canonical_errors_introduced": 107037
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 233474,
+          "canonical_errors_corrected": 134176,
+          "canonical_errors_introduced": 99298
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 29349,
+        "SOFT_KD288": 27968,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 27825,
+        "UNIFORM_POOLED": 0
+      }
+    },
+    "C3": {
+      "videos": 45,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1406481,
+            "FP": 553196,
+            "FN": 127194
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1404162,
+            "FP": 546538,
+            "FN": 129513
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1417810,
+            "FP": 542914,
+            "FN": 115865
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1394815,
+            "FP": 559356,
+            "FN": 138860
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1408999,
+            "FP": 562078,
+            "FN": 124676
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 108214,
+          "canonical_errors_corrected": 62731,
+          "canonical_errors_introduced": 45483
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 122910,
+          "canonical_errors_corrected": 67127,
+          "canonical_errors_introduced": 55783
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 3140,
+        "SOFT_KD288": 3088,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 3145,
+        "UNIFORM_POOLED": 0
+      }
+    },
+    "C4": {
+      "videos": 45,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1359125,
+            "FP": 542675,
+            "FN": 174550
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1361266,
+            "FP": 544045,
+            "FN": 172409
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1371743,
+            "FP": 542040,
+            "FN": 161932
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1354718,
+            "FP": 586984,
+            "FN": 178957
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 1365416,
+            "FP": 587581,
+            "FN": 168259
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 132302,
+          "canonical_errors_corrected": 72167,
+          "canonical_errors_introduced": 60135
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 119773,
+          "canonical_errors_corrected": 64800,
+          "canonical_errors_introduced": 54973
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 3221,
+        "SOFT_KD288": 3095,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 2963,
+        "UNIFORM_POOLED": 0
+      }
+    },
+    "C5": {
+      "videos": 4,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 522,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 264668,
+            "FP": 505731,
+            "FN": 226273
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 529,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 268593,
+            "FP": 506265,
+            "FN": 222348
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 449,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 270229,
+            "FP": 481278,
+            "FN": 220712
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 404,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 248198,
+            "FP": 496674,
+            "FN": 242743
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 427,
+            "FN": 345
+          },
+          "canonical_positive_support": {
+            "TP": 249218,
+            "FP": 476443,
+            "FN": 241723
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 215817,
+          "canonical_errors_corrected": 121172,
+          "canonical_errors_introduced": 94645
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 195302,
+          "canonical_errors_corrected": 108222,
+          "canonical_errors_introduced": 87080
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 25688,
+        "SOFT_KD288": 23543,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 22816,
+        "UNIFORM_POOLED": 0
+      }
+    },
+    "C6": {
+      "videos": 25,
+      "official_IoU50_by_presence": {
+        "FULL_SCOPE_VISUAL_RSI": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 196577,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 140426,
+            "FP": 74661,
+            "FN": 72115
+          }
+        },
+        "SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 211778,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 137291,
+            "FP": 74044,
+            "FN": 75250
+          }
+        },
+        "SOFT_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 183741,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 138861,
+            "FP": 74672,
+            "FN": 73680
+          }
+        },
+        "UNIFORM_SOFT_KD288": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 242996,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 136566,
+            "FP": 60024,
+            "FN": 75975
+          }
+        },
+        "UNIFORM_POOLED": {
+          "official_GT_absent": {
+            "TP": 0,
+            "FP": 222064,
+            "FN": 0
+          },
+          "official_GT_present_but_canonical_zero": {
+            "TP": 0,
+            "FP": 0,
+            "FN": 0
+          },
+          "canonical_positive_support": {
+            "TP": 136265,
+            "FP": 58342,
+            "FN": 76276
+          }
+        }
+      },
+      "pooling_row_changes": {
+        "SOFT_KD288": {
+          "changed_rows": 111991,
+          "canonical_errors_corrected": 70460,
+          "canonical_errors_introduced": 41531
+        },
+        "UNIFORM_SOFT_KD288": {
+          "changed_rows": 112467,
+          "canonical_errors_corrected": 67644,
+          "canonical_errors_introduced": 44823
+        }
+      },
+      "nonconstant_query_candidate_ID_groups": {
+        "FULL_SCOPE_VISUAL_RSI": 1907,
+        "SOFT_KD288": 1908,
+        "SOFT_POOLED": 0,
+        "UNIFORM_SOFT_KD288": 1811,
+        "UNIFORM_POOLED": 0
+      }
+    }
+  },
+  "registration_sha256": "c51541e79749c8d0c0c8f490844a4e7a06f8427e90c38a23e8032987aa0b869b",
+  "source_sha256": "4eea3c7ada5664a7823d8a8cd0847689ff8c7d18acde7227e068fb29e005b28e",
+  "no_training_predictions_teacher_GPU_or_new_seeds": true,
+  "rejected_IO": [],
+  "boundary": "OfficialIoU50 category errors are exact count summaries, not additive HOTA attribution; pooling row corrections use canonical membership only. No new memory model has been evaluated.",
+  "time_unix": 1795733696.7609682
+}
