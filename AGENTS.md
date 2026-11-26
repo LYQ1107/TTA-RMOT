@@ -1,3 +1,10 @@
+## 最新：旧负结果的原始打分与选题内容路径诊断完成（2026-11-26）
+
+- 新a100_legacy_visual_path_diagnose.py先登记18429/24d3da、实际56358 exit0（d1b01e），只读旧已完成75/72及21/18的C1/C2/C4缓存与bootstrap/closed/final，不触当前全六checkpoint/预测/GT，0GPU/fit/教师/新HOTA。两小池104/95全查，C2确定性972/4068样本；所有原始forward/Jacobian复算差0，42当前源前后pin不变。
+- S分数、S选题Jacobian、R均值、R残差及其sqrt原信号在所有抽样行的app条件梯度非零；不能再以旧模型图像支路完全没接上解释失败。GI份额是坐标依赖描述，不是语义/精度/因果贡献。三例closed/final均S6000步、额外teacherprojection0、全部参数组逐值相同，排除末尾projection抹掉内容的归因。
+- S原始配对MSE增大同时方差增大；复合pretext在C2/C4反而下降，不从rawMSE单独断言学坏不变性。旧顺序S先R后、旧稀疏池和当前R先S后/全支持不同，不能提前否定当前。TXT44/精选legacy_visual_all_used_paths_diagnosis留全部边界。
+- 唯一GPU在途仍actual86841（最近7896ec仍live、无新stdout），四卡原检查点续跑；旧36/148为已确认下限，不提前GT。原源码不改、无新观察器/ps-tail-nvidia轮询/种子，Goal ACTIVE/六设置优势与三贡献及fresh成本未成。发布双100000000B gate，私有49AGENTS/research_log不全stage。
+
 ## 最新：NAS恢复实像核验与四卡检查点续跑（2026-11-26）
 
 - 用户确认NAS已修复后，11421/ab18c6旧preflight exit1不再是SSH超时：exec看/home/Valadmin/A800，而同端SFTP实际/home/A800有效。三故障图完整解码，fresh SSH端SHA逐一一致；原FUSE保持ro，无重挂载/NAS写入。不要再将exec与SFTP路径差异当网络离线。
