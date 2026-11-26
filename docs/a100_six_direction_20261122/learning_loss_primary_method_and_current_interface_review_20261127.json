@@ -1,0 +1,82 @@
+{
+  "status": "PRIMARY_METHOD_READ_AND_CURRENT_INTERFACE_REVIEW_COMPLETE",
+  "paper": {
+    "title": "Learning Loss for Active Learning",
+    "authors": [
+      "Donggeun Yoo",
+      "In So Kweon"
+    ],
+    "venue": "CVPR2019",
+    "primary_url": "https://arxiv.org/html/1905.03677v1",
+    "official_landing": "https://openaccess.thecvf.com/content_CVPR_2019/html/Yoo_Learning_Loss_for_Active_Learning_CVPR_2019_paper.html",
+    "read_sections": [
+      "3.1",
+      "3.2",
+      "3.3",
+      "5"
+    ],
+    "brief_method_paraphrase": "Joint task/loss training uses current hidden features and current annotated losses. Pairwise ranking addresses changing loss scale. Experiments obtain human labels; diversity is a stated limitation. These results do not establish noisy-teacher RMOT performance.",
+    "retrieval": "CVF PDF open returned403; arXiv primary full PDF/HTML method sections were read successfully. No third-party summary or code was used."
+  },
+  "current_registered_source_sha256": {
+    "flex_uda/active/fullscope_visual_runtime.py": "ce65e95f390567c3e1cc5ebfcf694c5ac2c37516d6d47bf4fca6acf8a0941594",
+    "flex_uda/active/evidence_visual_learning.py": "6be3676dbd0494426832b59652d7b9ea99d417bb84359177750853d7bbf0fdfe"
+  },
+  "current_runtime_lines": [
+    {
+      "line": 35,
+      "text": "class LazyFeatures:"
+    },
+    {
+      "line": 230,
+      "text": "def predicted_student_risk(mean,residual,student):"
+    },
+    {
+      "line": 241,
+      "text": "s=core.make(c.mean,c.std,device);r=core.make(c.mean,c.std,device,outputs=2)"
+    },
+    {
+      "line": 259,
+      "text": "so,sfit=fit(c,s,c.auxiliary,c.ay,np.full(len(c.ay),1/len(c.ay)),500,device,so);fits.append(sfit)"
+    },
+    {
+      "line": 275,
+      "text": "student[sl]=s(x).sigmoid().cpu().numpy();rz=r(x).sigmoid()"
+    },
+    {
+      "line": 296,
+      "text": "x,y,w=teacher_table(c,draws,'IPW_KD');error=np.r_[[d['observer_squared_error'] for d in draws],auxerror]"
+    },
+    {
+      "line": 299,
+      "text": "ro,rfit=fit(c,r,x,y,w,500,device,ro,pixel=pixel,residual=error)"
+    },
+    {
+      "line": 300,
+      "text": "so,sfit=fit(c,s,x,y,w,core.STEPS[stage],device,so,align=r);fits.append(sfit)"
+    },
+    {
+      "line": 313,
+      "text": "so,sfit=fit(c,s,x,y,(w+ordinary_w)/2,500,device,so);fits.append(sfit);total+=500"
+    }
+  ],
+  "current_interface_observations": [
+    "R consumes the9352D action features separately from S, not a module attached to current S hidden layers.",
+    "Its residual targets retain preanswer R prediction errors; the auxiliary bootstrap error prior is separately declared.",
+    "Acquisition also uses current S probability/Jacobian and coverage, so this is not a faithful reproduction of Learning Loss.",
+    "R-to-S image-content alignment and data-selection feedback exist, but alone do not identify a causal RSI gain."
+  ],
+  "future_design_constraints": [
+    "If a current-student-conditioned loss observer is pursued, learned loss prediction must be recognized as prior art and considered as an appropriate baseline.",
+    "Changing mean loss scale, ranking usefulness, current conditional risk, and reducible learning information are distinct.",
+    "Do not use a mean-calibration diagnostic alone to declare acquisition failure or success.",
+    "Any project version must derive supervision from actually requested teacher probabilities, not target manual labels.",
+    "Preserve adequate same-information KD, fixed seed0, count-matched attribution and the original full primary evaluation before selecting another study."
+  ],
+  "new_GPU_teacher_models_seeds_or_algorithm_changes": 0,
+  "current_GT_HOTA_or_neural_parameter_reads": 0,
+  "new_direction_selected_or_executed": false,
+  "current_primary_study_unchanged": true,
+  "goal_achieved": false,
+  "time_unix": 1795715193.1555483
+}

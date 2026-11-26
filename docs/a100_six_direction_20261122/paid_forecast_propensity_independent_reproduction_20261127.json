@@ -1,0 +1,18 @@
+{
+  "status": "PASS_ALL768_MEANS_AND150_COUNTS_WEIGHTS_INDEPENDENT_FSUM_RECOMPUTATION",
+  "source_sha256": "4d7db2dff7f80a42836069a11c419884cb14f15fb2d04140daf6d5716a7abd3d",
+  "result_sha256": "669deb8e77b7144497e3d5bc767c4aaae06535a1d4d4d70c28de78d26d3cae0a",
+  "registration_sha256": "eb84372a6fee4925c414ab0a9cac19cc5cf34d64285d0ec00c44554dabb96834",
+  "checks": {
+    "metric_means": 720,
+    "event_counts": 30,
+    "weight_summaries": 120,
+    "query_macro_means": 48
+  },
+  "maximum_absolute_error": 9.094947017729282e-13,
+  "difference_from_primary": "Uses query-document action count, scalar Python arithmetic, math.fsum, and cross-term reconstruction instead of NumPy vector means.",
+  "GT_HOTA_models_unrequested_answers_or_sampling_operations": 0,
+  "rejected_IO": [],
+  "all_registered_inputs_unchanged": true,
+  "goal_achieved": false
+}
