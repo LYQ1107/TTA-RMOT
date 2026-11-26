@@ -1,0 +1,32 @@
+{
+  "status": "PASS_DATA_FREE_HARD_LABEL_BOUND_DOES_NOT_EXTEND_TO_ARBITRARY_SOFT_TARGETS",
+  "source": "https://arxiv.org/html/1906.03671v2",
+  "source_scope": "Section3 Proposition1 has hard class labels. This counterexample changes the supervision domain to probability-vector targets.",
+  "model_probabilities": [
+    0.2,
+    0.8
+  ],
+  "soft_teacher_target": [
+    0.2,
+    0.8
+  ],
+  "argmax_hard_target": [
+    0.0,
+    1.0
+  ],
+  "unit_representation_feature": 1,
+  "soft_crossentropy_output_gradient": [
+    0.0,
+    0.0
+  ],
+  "hallucinated_hard_output_gradient": [
+    0.2,
+    -0.19999999999999996
+  ],
+  "soft_gradient_norm": 0.0,
+  "hallucinated_hard_gradient_norm": 0.282842712474619,
+  "proposed_hard_gradient_lower_bound_invalid_for_this_soft_target": true,
+  "does_not_refute_BADGE_original_proposition": true,
+  "no_actual_model_teacher_predictions_or_GT_read": true,
+  "no_algorithm_change_or_RMOT_quality_claim": true
+}
