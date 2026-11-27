@@ -1,3 +1,10 @@
+## 最新：新旧框架部分结合，29主收据/28保留对照及真实成本边界（2026-11-27）
+
+- 原actual90232在322ce7仍live，GPU0/1/2/3继续、C3已开始；已核验29/148完成收据、638/3256输出、87充分普通fit，48/51源SHA不变，未读本轮HOTA/GT。该审计不是全部预测文件的再次哈希。先完成固定主方案，再据完整结果做必要贡献验证。
+- actual73518/1aee50和72987/5398e0均exit0，保留对照现28视频/196输出；终态不再wait。仅新ready源足够成批时继续冻结generate-ready，不起观察器、不重启原任务。
+- 原框架保留，当前已接任务协议/真实教师证据/可学习观测通道和copy-reset状态学习，未完整接旧主动选题/原DS/LoRA；不能称完整组合或Qwen本体RSI。详见docs/TTA_RMOT_新旧快慢框架如何结合_20261127.txt。下一完整组合考虑覆盖观察+有范围状态学习+外部证据约束反馈，同证据不可重复当独立似然。
+- actual91360/ff2440 exit0：27完成收据只读成本相位核对，非fresh部署/纯GPU/并行总历时；新代码和精选收据待正常push。Goal ACTIVE，全六优势/三贡献/fresh成本未成，seed0/0..3/NAS只读/保护原服务/双100000000B gate/用户私有改动保护继续。
+
 ## Latest: retained adequate parent controls implemented, first14/98 sealed, 2026-11-27
 
 Original actual90232 remains the sole four-GPU TRAINING controller, original48 source bytes unchanged. The independent retained-parent supplement is implemented and preregistered before current HOTA: parent softKD, parent pool, parent soft plus SAME final primaryR/protocol/scoped answers. It generates7 new masks/video,1036 total, with60 whole-setting HOTA/54effects including18 exact immutable provider references. No neural refits, new teacher answers, seeds or candidate changes. This is an additional sufficient baseline check, not a module ablation or an original-criterion relaxation.

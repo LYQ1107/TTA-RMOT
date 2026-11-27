@@ -1,0 +1,67 @@
+{
+  "status": "COMPLETE_READ_ONLY_PREFIX_PHASE_RECEIPT_RECONCILIATION",
+  "units": 27,
+  "settings": {
+    "C1": {
+      "units": 25,
+      "additive_consistent_units": 25,
+      "median_recorded_unit_seconds": 462.6393651809776,
+      "sum_parallel_unit_wall_seconds_not_total_elapsed": 11776.245446921093,
+      "phase_accounting_seconds": {
+        "solver_loop_seconds": 2116.403419461916,
+        "observer_loop_seconds": 1883.459421208594,
+        "primary_other_seconds": 2991.170032964903,
+        "ordinary_loop_seconds": 3835.6504908438073,
+        "ordinary_other_seconds": 92.42822232586332,
+        "prediction_and_all22_seals_seconds": 731.1941209570505,
+        "between_phase_other_seconds": 125.93973915895913
+      },
+      "phase_fraction_of_summed_unit_wall": {
+        "solver_loop_seconds": 0.17971801190805267,
+        "observer_loop_seconds": 0.15993717434796043,
+        "primary_other_seconds": 0.25400031329569017,
+        "ordinary_loop_seconds": 0.32571081403934565,
+        "ordinary_other_seconds": 0.007848700397971812,
+        "prediction_and_all22_seals_seconds": 0.062090597911936496,
+        "between_phase_other_seconds": 0.010694388099042735
+      }
+    },
+    "C2": {
+      "units": 2,
+      "additive_consistent_units": 2,
+      "median_recorded_unit_seconds": 544.4381846310571,
+      "sum_parallel_unit_wall_seconds_not_total_elapsed": 1088.8763692621142,
+      "phase_accounting_seconds": {
+        "solver_loop_seconds": 167.13694676780142,
+        "observer_loop_seconds": 140.72354324592743,
+        "primary_other_seconds": 331.614018893335,
+        "ordinary_loop_seconds": 307.04836718947627,
+        "ordinary_other_seconds": 20.14654154854361,
+        "prediction_and_all22_seals_seconds": 96.78972597699612,
+        "between_phase_other_seconds": 25.417225640034303
+      },
+      "phase_fraction_of_summed_unit_wall": {
+        "solver_loop_seconds": 0.15349487920383753,
+        "observer_loop_seconds": 0.12923739298455883,
+        "primary_other_seconds": 0.3045469883032322,
+        "ordinary_loop_seconds": 0.2819864365295668,
+        "ordinary_other_seconds": 0.018502138642420972,
+        "prediction_and_all22_seals_seconds": 0.08888954587432774,
+        "between_phase_other_seconds": 0.023342618462055972
+      }
+    }
+  },
+  "registration_sha256": "8bbaed90adcc2ba9afbab70121e3f7129fdef8cce70b16ef6585bd7117f36d75",
+  "result_sha256": "77ad0065d15ac434649fa83d34129eb24bed0b3bee9be8cb455d2596cb9c6e47",
+  "code_sha256": "1f08ef5bd4ee95d0ab336d22c581387c6cd8d3abd12f7a8c6058bde368be603e",
+  "scope": "Current recorded phase wall time, NOT pure GPU, fresh deployment, equal-time accuracy, or total elapsed time of concurrent units.",
+  "prepaid_scope": "All original source/PCD/DINO extraction, frozenQwen loading/paid QA and inherited6k KD are prepaid; no claim that their full deployment cost is zero.",
+  "remainder": "Includes model/feature IO and assembly, repeated neural scoring, HMM/ELBO inference, source checks and checkpointing; cannot label it pure NAS time.",
+  "prediction_scope": "Three ordinary head inference, pooling, shared-memory inference, CountMatched and22-output serialization, not a single deployed method.",
+  "input_receipts_unchanged": true,
+  "original48sources_unchanged": true,
+  "new_teacher_calls": 0,
+  "new_neural_fits_or_predictions": 0,
+  "GT_open_attempts": 0,
+  "goal_status": "ACTIVE"
+}
