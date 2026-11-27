@@ -1,0 +1,147 @@
+{
+  "status": "COMPLETE148_MODEL_FREE_TEACHER_SCOPE_FOOTPRINT",
+  "units": 148,
+  "settings": {
+    "C1": {
+      "queries": 425,
+      "active_events": 3047,
+      "uniform_training_events": 3047,
+      "retained_events": 3027,
+      "supported_queries": 425,
+      "empty_queries": 0,
+      "videos": 25,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 10,
+        "same_teacher_request": 5,
+        "AUX_actual_physical_scope_any_query": 5
+      }
+    },
+    "C2": {
+      "queries": 862,
+      "active_events": 20955,
+      "uniform_training_events": 20955,
+      "retained_events": 1492,
+      "supported_queries": 534,
+      "empty_queries": 328,
+      "videos": 4,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 18299,
+        "AUX_actual_physical_scope_any_query": 751,
+        "same_literal_query_track_any_scope_overlap": 230,
+        "same_teacher_request": 183
+      }
+    },
+    "C3": {
+      "queries": 466,
+      "active_events": 3508,
+      "uniform_training_events": 3508,
+      "retained_events": 3328,
+      "supported_queries": 466,
+      "empty_queries": 0,
+      "videos": 45,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 175,
+        "AUX_actual_physical_scope_any_query": 3,
+        "same_teacher_request": 2
+      }
+    },
+    "C4": {
+      "queries": 466,
+      "active_events": 3508,
+      "uniform_training_events": 3508,
+      "retained_events": 3322,
+      "supported_queries": 466,
+      "empty_queries": 0,
+      "videos": 45,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 176,
+        "AUX_actual_physical_scope_any_query": 5,
+        "same_teacher_request": 5
+      }
+    },
+    "C5": {
+      "queries": 862,
+      "active_events": 20955,
+      "uniform_training_events": 20955,
+      "retained_events": 1491,
+      "supported_queries": 553,
+      "empty_queries": 309,
+      "videos": 4,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 18309,
+        "AUX_actual_physical_scope_any_query": 710,
+        "same_teacher_request": 197,
+        "same_literal_query_track_any_scope_overlap": 248
+      }
+    },
+    "C6": {
+      "queries": 425,
+      "active_events": 3046,
+      "uniform_training_events": 3046,
+      "retained_events": 3031,
+      "supported_queries": 425,
+      "empty_queries": 0,
+      "videos": 25,
+      "rejections": {
+        "training_or_AUX_full_frame_image_overlap": 9,
+        "same_teacher_request": 1,
+        "AUX_actual_physical_scope_any_query": 5
+      }
+    }
+  },
+  "registration_sha256": "52153bbe33d0046656a3a797f14b9b8fe8b788a88aa9e2ebe6d4a4887e48f563",
+  "no_RMOT_model_prediction_GT_or_quality_read": true,
+  "new_fits_teacher_GPU_or_seeds": 0,
+  "completed_provenance_units_verified": 35,
+  "strict_declared_data_IO": true,
+  "opened_files": 982,
+  "source_sha256": {
+    "scripts/a100_conditional_state_teacher_forecast.py": "d32e63bbe0ed8900319b4905c74276ff31184177cb8a5234bb8d97ab43e46fbd",
+    "scripts/a100_conditional_state_forecast_inventory_verify.py": "3a429299cc5885cd889e8f5ee317ddba193c7f7d204c09dc088e2299ca0e048e"
+  },
+  "inventory_sha256": "05f608f6fe053627c4c8df6197c12ba78957071e55eb2294b5bccd91c4b1153e",
+  "contract": {
+    "status": "PASS_SCOPE_ALIAS_AUX_CONTEXT_CHANNEL_AND_ACTIVATION_CONTRACT",
+    "checks": 11,
+    "no_target_inputs_models_GT_GPU_or_teacher": true
+  },
+  "independent_verification": {
+    "status": "PASS_INDEPENDENT_ALL148_SCOPE_EXCLUSIONS_AND_SUPPORT_COUNTS",
+    "totals": {
+      "videos": 148,
+      "queries": 3506,
+      "active_events": 55019,
+      "uniform_training_events": 55019,
+      "retained_events": 15691,
+      "supported_queries": 2869,
+      "empty_queries": 637
+    },
+    "source_sha256": "3a429299cc5885cd889e8f5ee317ddba193c7f7d204c09dc088e2299ca0e048e",
+    "inventory_sha256": "05f608f6fe053627c4c8df6197c12ba78957071e55eb2294b5bccd91c4b1153e",
+    "source_forecaster_not_imported": true,
+    "raw_AUX_frame_traces_and_Python_bisect": true,
+    "no_RMOT_scores_quality_GT_new_neural_teacher_or_GPU": true
+  },
+  "exclusions": "Exclude same request, normalized literal-query/same-track ANY actual scope overlap across views; AUX actual crop/CLIP physical scope regardless of query; and any image frame used by training or AUX FRAME_BOX regardless of track/query. These conservative exclusions are fixed, not chosen for favorable performance.",
+  "activation": "Evaluate only after main3256 and supplement1036 barriers, both complete official analyses and independent reproductions, and at least one fixed primary condition fails. A successful primary proceeds to contribution validation instead.",
+  "roles": [
+    "PRIMARY_CHANNEL_SCOPE",
+    "SOFT_KD_ANCHOR",
+    "SOFT_KD_SCOPE",
+    "SOFT_SHARED_CHANNEL_SCOPE",
+    "PARENT_SOFT_KD_ANCHOR",
+    "PARENT_SOFT_KD_SCOPE",
+    "PARENT_SOFT_SHARED_CHANNEL_SCOPE"
+  ],
+  "limitations": [
+    "Same-video transductive DEV, not a new independent semantic or image split.",
+    "All images/features and other teacher questions were available to adaptation; different queries can be semantically dependent.",
+    "Teacher forecasting is not semantic accuracy, HOTA, teacher calibration or proof of causal RSI.",
+    "Uniform-time CLIP and noisy decision channel are explicit unverified observation assumptions.",
+    "Parent soft/shared controls and continued soft/shared controls distinguish extra fitting from memory readout; no new methods or checkpoints are chosen.",
+    "Old ACTIVE questions were selected adaptively using their history; this footprint is not IID or an unbiased sample of every possible question."
+  ],
+  "forecast_metrics_executed": false,
+  "primary_adaptation_changed": false,
+  "goal_status": "ACTIVE"
+}
