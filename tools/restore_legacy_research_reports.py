@@ -18,7 +18,7 @@ def restore(output_root):
     for entry in manifest['reports']:
         relative = PurePosixPath(entry['original_path'])
         assert not relative.is_absolute() and '..' not in relative.parts
-        assert relative.parts[0] == 'docs' and relative.suffix == '.txt'
+        assert relative.parts[0] == 'docs' and relative.suffix in ('.txt', '.md')
         ref = entry['original_published_ref']
         assert re.fullmatch('[0-9a-f]{40}', ref)
         data = subprocess.check_output(['git','show',ref+':'+str(relative)], cwd=ROOT)
