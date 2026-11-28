@@ -1,0 +1,71 @@
+{
+  "status": "PREREGISTERED_ALL148_2X2X2_FACTORIAL_ABLATION",
+  "new_raw_methods": [
+    "I2_ONLY_UNIFORM",
+    "I2_PLUS_I3_ACTIVE",
+    "NO_EXISTENCE_ACTIVE"
+  ],
+  "cm_comparators": [
+    "I2_ONLY_UNIFORM",
+    "I2_PLUS_I3_ACTIVE"
+  ],
+  "providers": {
+    "fullscope": {
+      "file": "fullscope_visual_six_20261126_statistics.json",
+      "sha256": "933cbc5716e97732aa9904c2db6622d4bb77d7672d507d253f04d5150f9031de"
+    },
+    "v3": {
+      "file": "dual_transduct_v3_primary_20261127_statistics.json",
+      "sha256": "9e8775fdecfa6b7f23ae42363e152cd289614a8262e8a122d499ad206c7c1cda"
+    },
+    "u1": {
+      "file": "unified_rsi_rmot_20261128_statistics.json",
+      "sha256": "6ae087b163b184ad37b788df45e2c6b7b802b7938764cd7c790a1407c514e30a"
+    }
+  },
+  "source_sha256": {
+    "flex_uda/active/dual_transduct_coevol.py": "342be7f2114c75f5140a4f731b9b6660aca7d0043b928ebb6e0ed0c6051ca6ba",
+    "flex_uda/active/dual_transduct_runtime.py": "f1fbce0e9f2c97370bfee8904d6d4227ccd337b461729ada265f4b256bdc8dc6",
+    "flex_uda/active/dual_transduct_v2.py": "fedaa61b38dc98ecf3a35677434d5972a844458337322113fa0ad391e98c5fcc",
+    "flex_uda/active/dual_transduct_v3.py": "92f52905bc9d2b1238bbdadc38f6e0aacb8a2e87f2b2fcd5200b96f8603dc201",
+    "flex_uda/active/dual_transduct_v3_runtime.py": "d902f5739579133b24e673524ac97811a8e03725ac45aa7f97e36f4caf942970",
+    "flex_uda/active/unified_rsi_core.py": "6cdef5e286fce3abd7c75aadc3e2bc479f0aa05bc6cb3888b595e7774baf38c5",
+    "flex_uda/active/unified_rsi_runtime.py": "940abf42bdcda33102f5811180d869ad0ff60e66d9647039add29dedb8e75155",
+    "scripts/a100_unified_rsi_factorial_ablation.py": "192672a222c2dd68ad67cae2f2e22d1267f274f90dc4d493841c9f693592cbc0",
+    "scripts/a100_unified_rsi_factorial_statistics.py": "003ce948b4a1ff7c96d718bc35b4efeaf36c3794243777602b8511c098311b43",
+    "scripts/a100_factor_rsi_primary_quality.py": "368810d2dbf6220f8f666ec654ef28de529559bd8f53945f8e6ac8e4904601a2",
+    "flex_uda/presence/predictions.py": "0a20f10c07f1c00a87ec9776771412cd77bb3943dc84ede46bd6a3b40c599ac9",
+    "flex_uda/a100/fast_evaluation_reuse.py": "37bd382be7e055c550b82443c8152f732f24137d8148edf3f72527b9f73121a3"
+  },
+  "width": 256,
+  "dropout": 0.1,
+  "learning_rate": 0.0008,
+  "weight_decay": 0.001,
+  "max_steps": 4800,
+  "target_excess_ce": 0.01,
+  "kappa": 6.0,
+  "base_decay": 0.94,
+  "seed": 0,
+  "GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "GPU_memory_fraction": 0.2,
+  "new_outputs_per_unit": 7,
+  "total_new_outputs": 1036,
+  "eval_workers": 20,
+  "all_data_DEV": true,
+  "manual_GT_never_used_for_adaptation": true,
+  "goal_status": "ACTIVE",
+  "video_units": 148,
+  "setting_video_counts": {
+    "C1": 25,
+    "C2": 4,
+    "C3": 45,
+    "C4": 45,
+    "C5": 4,
+    "C6": 25
+  }
+}

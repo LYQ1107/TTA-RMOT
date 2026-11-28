@@ -1,0 +1,109 @@
+{
+  "status": "PREREGISTERED_ALL148_UNIFIED_RSI_RMOT_PRIMARY_BEFORE_FITS",
+  "primary": "UNIFIED_RSI_RMOT",
+  "uniform_ordinary_controls": [
+    "UNIFORM_PARENT_SOFT_KD",
+    "UNIFORM_PARENT_POOLED"
+  ],
+  "active_ordinary_controls": [
+    "ACTIVE_SOFT_KD",
+    "ACTIVE_HARD_KD",
+    "ACTIVE_SOFT_POOLED"
+  ],
+  "ordinary_controls": [
+    "UNIFORM_PARENT_SOFT_KD",
+    "UNIFORM_PARENT_POOLED",
+    "ACTIVE_SOFT_KD",
+    "ACTIVE_HARD_KD",
+    "ACTIVE_SOFT_POOLED"
+  ],
+  "shared_controls": [
+    "ACTIVE_SHARED_TRANSDUCT"
+  ],
+  "comparators": [
+    "UNIFORM_PARENT_SOFT_KD",
+    "UNIFORM_PARENT_POOLED",
+    "ACTIVE_SOFT_KD",
+    "ACTIVE_HARD_KD",
+    "ACTIVE_SOFT_POOLED",
+    "ACTIVE_SHARED_TRANSDUCT"
+  ],
+  "new_raw_methods": [
+    "UNIFIED_RSI_RMOT",
+    "ACTIVE_SOFT_KD",
+    "ACTIVE_HARD_KD",
+    "ACTIVE_SOFT_POOLED",
+    "ACTIVE_SHARED_TRANSDUCT"
+  ],
+  "old_statistics_provider": "fullscope_visual_six_20261126_statistics.json",
+  "old_statistics_provider_sha256": "933cbc5716e97732aa9904c2db6622d4bb77d7672d507d253f04d5150f9031de",
+  "frozen_teacher_weight_sha256": "9a13380b4279bc98f4680bd083ff4995fdcfec120cfded459513be90d041a956",
+  "source_sha256": {
+    "flex_uda/active/dual_transduct_coevol.py": "342be7f2114c75f5140a4f731b9b6660aca7d0043b928ebb6e0ed0c6051ca6ba",
+    "flex_uda/active/dual_transduct_runtime.py": "f1fbce0e9f2c97370bfee8904d6d4227ccd337b461729ada265f4b256bdc8dc6",
+    "flex_uda/active/dual_transduct_v2.py": "fedaa61b38dc98ecf3a35677434d5972a844458337322113fa0ad391e98c5fcc",
+    "flex_uda/active/dual_transduct_v3.py": "92f52905bc9d2b1238bbdadc38f6e0aacb8a2e87f2b2fcd5200b96f8603dc201",
+    "flex_uda/active/dual_transduct_v3_runtime.py": "d902f5739579133b24e673524ac97811a8e03725ac45aa7f97e36f4caf942970",
+    "flex_uda/active/unified_rsi_core.py": "6cdef5e286fce3abd7c75aadc3e2bc479f0aa05bc6cb3888b595e7774baf38c5",
+    "flex_uda/active/unified_rsi_runtime.py": "940abf42bdcda33102f5811180d869ad0ff60e66d9647039add29dedb8e75155",
+    "flex_uda/active/fullscope_visual_runtime.py": "ce65e95f390567c3e1cc5ebfcf694c5ac2c37516d6d47bf4fca6acf8a0941594",
+    "flex_uda/teacher/teacher_cache.py": "1422dfbee8905fbf9daa293c7896280fc0b7bc7fe3bb487411f33575b9bfcc3f",
+    "flex_uda/teacher/decompose_inputs.py": "e15a7a0d42449353923dd4560b78a04aff9226b6a1ee52b62ab699f4b292a20e",
+    "scripts/a100_unified_rsi_contract.py": "76f376faa749fefd2e8a62f9c60f7593dba92d44c63586f89e238e3d77fde7a0",
+    "scripts/a100_unified_rsi_primary.py": "7e23df15106249020ceb50dcc15d954816c3d8f7df7c08c45c021bb588c3be2f",
+    "scripts/a100_unified_rsi_statistics.py": "5eda31baa4c0b11eb6c00e0dfae60e25396e54c294aa1e006716fba8ff2a712e",
+    "scripts/a100_factor_rsi_primary_quality.py": "368810d2dbf6220f8f666ec654ef28de529559bd8f53945f8e6ac8e4904601a2",
+    "flex_uda/presence/predictions.py": "0a20f10c07f1c00a87ec9776771412cd77bb3943dc84ede46bd6a3b40c599ac9",
+    "flex_uda/a100/fast_evaluation_reuse.py": "37bd382be7e055c550b82443c8152f732f24137d8148edf3f72527b9f73121a3"
+  },
+  "contract_sha256": "bba38128d79ae01c3c7b6888775b0c9b974331af4c6111ddf484ab051d3d6b99",
+  "width": 256,
+  "dropout": 0.1,
+  "learning_rate": 0.0008,
+  "weight_decay": 0.001,
+  "rounds": 3,
+  "oof_max_steps": 2400,
+  "r0_max_steps": 4800,
+  "coevol_max_steps": 1200,
+  "ordinary_max_steps": 4800,
+  "target_excess_ce": 0.01,
+  "k_nn": 3,
+  "dist_gate_grid": [
+    0.4,
+    0.55,
+    0.75,
+    1.0
+  ],
+  "leverage_threshold": 0.12,
+  "correction_delta_threshold": 0.05,
+  "transduced_weight": 0.25,
+  "kappa": 6.0,
+  "base_decay": 0.94,
+  "seed": 0,
+  "GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "GPU_memory_fraction": 0.35,
+  "existing_GPU2_service_preserved": true,
+  "new_outputs_per_unit": 17,
+  "total_new_outputs": 2516,
+  "whole_setting_HOTA_records": 114,
+  "paired_effects": 108,
+  "eval_workers": 20,
+  "all_data_DEV": true,
+  "manual_GT_never_used_for_adaptation": true,
+  "goal_status": "ACTIVE",
+  "goal_complete": false,
+  "video_units": 148,
+  "setting_video_counts": {
+    "C1": 25,
+    "C2": 4,
+    "C3": 45,
+    "C4": 45,
+    "C5": 4,
+    "C6": 25
+  }
+}

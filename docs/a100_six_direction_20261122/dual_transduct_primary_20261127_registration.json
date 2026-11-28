@@ -1,0 +1,90 @@
+{
+  "status": "PREREGISTERED_ALL148_DUAL_TRANSDUCT_COEVOL_PRIMARY_BEFORE_FITS",
+  "primary": "DUAL_TRANSDUCT_COEVOL",
+  "ordinary_controls": [
+    "PARENT_SOFT_KD",
+    "PARENT_POOLED",
+    "REG_SOFT_KD",
+    "REG_HARD_KD",
+    "REG_SOFT_POOLED"
+  ],
+  "shared_controls": [
+    "PARENT_SHARED_TRANSDUCT",
+    "REG_SHARED_TRANSDUCT"
+  ],
+  "comparators": [
+    "PARENT_SOFT_KD",
+    "PARENT_POOLED",
+    "REG_SOFT_KD",
+    "REG_HARD_KD",
+    "REG_SOFT_POOLED",
+    "PARENT_SHARED_TRANSDUCT",
+    "REG_SHARED_TRANSDUCT"
+  ],
+  "new_raw_methods": [
+    "DUAL_TRANSDUCT_COEVOL",
+    "REG_SOFT_KD",
+    "REG_HARD_KD",
+    "REG_SOFT_POOLED",
+    "PARENT_SHARED_TRANSDUCT",
+    "REG_SHARED_TRANSDUCT"
+  ],
+  "old_statistics_provider": "fullscope_visual_six_20261126_statistics.json",
+  "old_statistics_provider_sha256": "933cbc5716e97732aa9904c2db6622d4bb77d7672d507d253f04d5150f9031de",
+  "source_sha256": {
+    "flex_uda/active/dual_transduct_coevol.py": "342be7f2114c75f5140a4f731b9b6660aca7d0043b928ebb6e0ed0c6051ca6ba",
+    "flex_uda/active/dual_transduct_runtime.py": "f1fbce0e9f2c97370bfee8904d6d4227ccd337b461729ada265f4b256bdc8dc6",
+    "scripts/a100_dual_transduct_contract.py": "4c08428bb88e14fdf788b8dc78f0c044854918285536c71e2d2e69155b4e7e9b",
+    "scripts/a100_dual_transduct_engineering.py": "3bca9f54dfdc2e92bb16ac3288937547bce598d3323d5b978a645e360d5099bf",
+    "scripts/a100_dual_transduct_primary.py": "c1dfadcb335c3e8e0b2b2fcc75a66ca388e012ef9d7b62aa43255268f9ad4230",
+    "scripts/a100_dual_transduct_statistics.py": "97ff6ae9dd14a716277f9e55724c37356eeb7c1195bd53feb56102a244994fff",
+    "scripts/a100_conditional_state_engineering.py": "3a90daf953b3f2cbe5f41ebb47cd0fea73d06ff08a0bbcd437e7fa84d25a9441",
+    "scripts/a100_factor_rsi_primary_quality.py": "368810d2dbf6220f8f666ec654ef28de529559bd8f53945f8e6ac8e4904601a2",
+    "flex_uda/presence/predictions.py": "0a20f10c07f1c00a87ec9776771412cd77bb3943dc84ede46bd6a3b40c599ac9",
+    "flex_uda/a100/evaluation_reuse.py": "b32d98475b97c30a219a044ea8da49060ba740543f3fed354ed550bd02ba3419"
+  },
+  "contract_sha256": "88b69d55c05062a5e52ad0bb6ed57abcce4b74ddec1422b2b071382816805e43",
+  "engineering_sha256": "4e61730603057f4634eb53478f2eaeebd8a709a44558a5f420852708dd239d3e",
+  "width": 256,
+  "dropout": 0.2,
+  "learning_rate": 0.0003,
+  "weight_decay": 0.02,
+  "rounds": 3,
+  "steps_per_round": [
+    500,
+    300,
+    300
+  ],
+  "k_nn": 5,
+  "kappa": 4.0,
+  "base_decay": 0.85,
+  "seed": 0,
+  "GPUs": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "GPU_memory_fraction": 0.2,
+  "existing_GPU2_service_preserved": true,
+  "new_outputs_per_unit": 20,
+  "total_new_outputs": 2960,
+  "whole_setting_HOTA_records": 132,
+  "paired_effects": 126,
+  "hypothesis": "Hierarchical E_q x slow persistent track identity U_{q,k} x fast zero-mean dynamic residual + OOF-LOTO learned predicate-aware cross-track visual-spatial graph + regularized complementary dual-student co-evolution (S_id, S_dyn) with M-matrix leverage filtering and ABSENT_NEG beats adequate ordinary and pooled KD across all 6 settings (raw & dual CountMatched).",
+  "success_ordinary": "Primary raw and BOTH CountMatched summary effects positive vs all 5 ordinary controls (including PARENT_POOLED and REG_SOFT_POOLED) in all 6 settings.",
+  "success_all7": "Primary raw and BOTH CountMatched summary effects positive vs all 7 controls (including privileged shared-readout controls) in all 6 settings.",
+  "all_data_DEV": true,
+  "manual_GT_never_used_for_adaptation": true,
+  "goal_status": "ACTIVE",
+  "goal_complete": false,
+  "video_units": 148,
+  "setting_video_counts": {
+    "C1": 25,
+    "C2": 4,
+    "C3": 45,
+    "C4": 45,
+    "C5": 4,
+    "C6": 25
+  }
+}
